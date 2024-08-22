@@ -1,11 +1,11 @@
-# 🏭 2: Full Stack
+# 🏭 Full Stack
 
 ## Learning Objectives
 
 1. Learn how the internet works
 2. Learn how to use React with Firebase to build apps that persist data and authenticate users
 3. Learn how to use React Hooks, React Router, and AJAX requests to build modern React apps with rich functionality and connectivity to 3rd-party APIs
-4. Become more confident in reading documentation to learn new technologies
+4. Be able to read documentation to learn new technologies
 
 ## Introduction
 

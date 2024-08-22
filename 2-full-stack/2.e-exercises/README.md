@@ -1,2 +1,2 @@
-# 2.E: Exercises
+# Full-Stack Exercises
 

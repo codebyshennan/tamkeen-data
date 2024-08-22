@@ -1,2 +1,2 @@
-# 1.E: Exercises
+# Front-End Exercises
 

@@ -1,10 +1,9 @@
-# 2.1: Internet 101
+# Internet 101
 
 ## Learning Objectives
 
-1. The internet is wires that connect computers
-2. The internet uses protocols such as HTTP to transmit data reliably
-3. DNS translates human-readable URLs to IP addresses that identify computers on the network
+1. Know internet protocols such as HTTP and understand their uses.
+3. Explain terms such as DNS, URLs, and IP addresses 
 
 ## Introduction
 
