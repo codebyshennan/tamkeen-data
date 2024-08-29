@@ -125,7 +125,7 @@ In order to have TextInput component working, the `useState` hook is needed.
 Add the TextInput component, as well as the useState component in the imports
 
 ```js
-import {useState} from "react";
+import React, {useState} from "react";
 import { Text, View, Image, TextInput } from "react-native";
 ...
 const [text, setText] = useState(null);
