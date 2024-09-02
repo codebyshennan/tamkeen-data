@@ -1,5 +1,5 @@
 theme: jekyll-theme-primer
 exclude:
   - 0-foundations
-  include:
+include:
   - .gitbook
