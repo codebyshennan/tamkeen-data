@@ -1,5 +1,4 @@
 theme: jekyll-theme-primer
 exclude:
-  - _old_0-foundations
 include:
-  - .gitbook
+  - .assets
