@@ -1,4 +1,4 @@
-# 0.2.1: Branches
+# Branches
 
 ## Learning Objectives
 

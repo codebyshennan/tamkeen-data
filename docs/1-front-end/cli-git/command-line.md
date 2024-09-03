@@ -1,4 +1,4 @@
-# 0.1: Command Line
+# Command Line
 
 ## Learning Objectives
 

@@ -1,4 +1,4 @@
-# 0.3.1: Pull Requests
+# Pull Requests
 
 ## Learning Objectives
 

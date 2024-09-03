@@ -1,4 +1,4 @@
-# 0.3: GitHub
+# GitHub
 
 ## Learning Objectives
 
