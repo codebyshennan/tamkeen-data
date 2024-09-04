@@ -1,11 +1,11 @@
-# 0.5.1: Node Modules
+# Node Modules
 
 ## Learning Objectives
 
-1. Node Modules define code that can be grouped together and imported from other files
-2. How to import and export functions from Node Modules
-3. We can only access imported variables and variables defined in the current module
-4. Understand the difference between named and default exports
+1. Understand and explain the purpose, benefits, and implementation of Node Modules in JavaScript development
+2. Set up a Node.js environment and configure it for module usage
+3. Create and use both named and default exports in Node Modules, and understand the differences between them
+4. Comprehend the concept of module scope and its implications for variable accessibility across different modules
 
 ## Introduction
 

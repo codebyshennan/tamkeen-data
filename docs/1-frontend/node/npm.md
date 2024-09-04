@@ -1,10 +1,11 @@
-# 0.5.2: NPM
+# NPM
 
 ## Learning Objectives
 
-1. NPM is a package manager that allows us to install and use 3rd-party Node libraries in our apps
-2. Know how to install packages in an NPM project
-3. Know what role the files `package.json`, `package-lock.json`, and the folder `node_modules` play with NPM
+1. Explain the purpose of NPM and initialize a new NPM project using the command line
+2. Understand the structure and importance of the package.json file in managing project dependencies
+3. Demonstrate how to install, use, and manage third-party packages in a Node.js application
+4. Identify best practices for version control in NPM projects, including which files to commit and which to ignore
 
 ## Introduction
 

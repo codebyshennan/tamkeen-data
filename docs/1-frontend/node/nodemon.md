@@ -1,8 +1,9 @@
-# 0.5.3: Nodemon
+# Nodemon
 
 ## Learning Objectives
 
-1. Nodemon auto-refreshes Node applications on code changes, helpful for development
+1. Demonstrate how to install Nodemon globally using npm
+2. Show how to use Nodemon to automatically restart a Node.js application when file changes are detected
 
 ## Introduction
 

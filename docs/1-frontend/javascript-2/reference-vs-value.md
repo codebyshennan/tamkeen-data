@@ -1,4 +1,4 @@
-# 0.4.3: Reference vs Value
+# Reference vs Value
 
 ## Learning Objectives
 

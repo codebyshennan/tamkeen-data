@@ -1,4 +1,4 @@
-# 0.4.5: Destructuring and Spread Operator
+# Destructuring and Spread Operator
 
 ## Learning Objectives
 
