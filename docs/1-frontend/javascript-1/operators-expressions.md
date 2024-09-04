@@ -32,18 +32,6 @@ An example of the second type expression type is this: `a = 3` . This expression
 
 We will look into these expressions in greater detail within the sub-modules. At this point we want to first have a space to experiment with code...
 
-## Using Chrome DevTools Console
-
-The reason we ask every student to use Google Chrome for this course is to both standardise the tools everyone uses and, in our current context, this functionality we are exploring to begin our foray into programming.
-
-Feel free to read up more on [Google's own documentation](https://developer.chrome.com/docs/devtools/console/)!
-
-#### **Setup**
-
-1. Open a new tab in the Chrome browser by clicking File > New Tab; or pressing `Cmd+T` for Mac, and `Ctrl+T` for Windows.
-2. Open Chrome Developer Tools by clicking View > Developer > JavaScript Console; or pressing `Cmd+Option+I` for Mac or `Ctrl+Shift+I` for Windows; or `F12`; or right-clicking anywhere in Chrome and clicking Inspect.
-3. Select the `Console` tab in Chrome Dev Tools.
-
 ## Try
 
 The JavaScript language is capable of performing math operations. Enter the following calculations into the Chrome DevTools Console, followed by the `Enter` key.
