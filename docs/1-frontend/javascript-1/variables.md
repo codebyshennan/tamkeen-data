@@ -46,13 +46,13 @@ Note: You may have seen `let` and `const` syntax being used to declare variables
 
 ## **The Importance of Abstraction** <a href="#the-importance-of-abstraction" id="the-importance-of-abstraction"></a>
 
-If we wanted the same result we could also write the following.1var x = 3.14 \* 4 \* 4;Copied!But this would not be as _meaningful_ as our previous example.Our programs must not only _calculate_ values correctly, they must also accurately _represent_ the operations we are performing, in this case calculating the area of a circle. **The names of our variables give meaning to the data our code contains.**
+If we wanted the same result we could also write the following.`var x = 3.14 * 4 * 4;`. But this would not be as _meaningful_ as our previous example. Our programs must not only _calculate_ values correctly, they must also accurately _represent_ the operations we are performing, in this case calculating the area of a circle. **The names of our variables give meaning to the data our code contains.**
 
 ![Drake is not known for his programming skills. Don't be like Drake.](https://miro.medium.com/max/717/1*7LO7JEAZbo6YmN8feAVCwg.png)
 
 ## **Variable Naming Convention**
 
-In JavaScript convention, ordinary variables are named with [lower camel case](<https://en.wikipedia.org/wiki/Naming_convention_(programming)#Examples_of_multiple-word_identifier_formats>). The name starts with a lowercase letter and every subsequent word starts with uppercase. For example, `bananaCount` or `firstDiceRoll`. This is _convention_, and will not affect code _functionality_. Different languages and communities have different conventions. Similar to driving conventions: in some countries, cars are driven on the left side, and on the right side in other countries.
+In JavaScript convention, ordinary variables are named with [lower camel case](https://en.wikipedia.org/wiki/Naming_convention_(programming)#Examples_of_multiple-word_identifier_formats). The name starts with a lowercase letter and every subsequent word starts with uppercase. For example, `bananaCount` or `firstDiceRoll`. This is _convention_, and will not affect code _functionality_. Different languages and communities have different conventions. Similar to driving conventions: in some countries, cars are driven on the left side, and on the right side in other countries.
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/CamelCase_new.svg/1200px-CamelCase_new.svg.png)
 

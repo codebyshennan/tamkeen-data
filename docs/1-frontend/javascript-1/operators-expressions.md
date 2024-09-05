@@ -32,7 +32,7 @@ An example of the second type expression type is this: `a = 3` . This expression
 
 We will look into these expressions in greater detail within the sub-modules. At this point we want to first have a space to experiment with code...
 
-## Try
+## Try it out
 
 The JavaScript language is capable of performing math operations. Enter the following calculations into the Chrome DevTools Console, followed by the `Enter` key.
 

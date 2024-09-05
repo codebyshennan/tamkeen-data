@@ -32,7 +32,7 @@ Functions sometimes do not take in input, and sometimes do not return an output,
 
 ![](https://cloudreports.net/wp-content/uploads/2019/06/Function_machine2.png)
 
-## Why We Use Functions
+## Why Use Functions
 
 Functions are necessary to abstract complexity away from the main logic of our applications. This allows us to break problems down into ever-smaller sub-problems, simplifying the process of coding complex applications. In this module we will see 2 use-cases of functions.
 
