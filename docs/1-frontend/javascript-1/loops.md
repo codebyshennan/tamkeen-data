@@ -15,7 +15,7 @@ By the end of this lesson, you should be able to:
 
 We've defined an array, added values to it, and inspected those values individually, but haven't yet learned how to systematically manipulate each element in the array, no matter how long the array is. To do this we will learn 1 more control structure: "**loops"**.
 
-In SWE Fundamentals we will mostly use loops to iterate over array elements. Loops can also be used without arrays, for example to perform an action until a condition is no longer `true`, but we will not see this often in SWE Fundamentals.
+We will mostly use loops to iterate over array elements. Loops can also be used without arrays, for example to perform an action until a condition is no longer `true`.
 
 A loop defines a **code block** (with curly braces) that runs until the loop condition is no longer met. We'll look at loops in isolation first, then see them in the context of arrays.
 

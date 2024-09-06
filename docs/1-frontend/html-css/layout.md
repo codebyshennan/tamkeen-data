@@ -2,7 +2,7 @@
 
 ## Learning Objectives
 
-1. Understand what CSS layout is about
+1. Understand what CSS layout is
 2. Use the CSS box model determines the size of each element on screen
 3. Use the CSS `display` property to control the manner in which elements appear on screen, e.g. in horizontal or vertical order
 4. Use the CSS `position` property to position elements outside of the normal document flow, e.g. a fixed navbar or chat window
@@ -57,7 +57,7 @@ p {
 }
 ```
 
-<a href="https://www.w3schools.com/cssref/css_units.asp" target="_blank">W3Schools documents</a> all ways to specify box size.
+<a href="https://www.w3schools.com/cssref/css_units.asp" target="_blank">W3Schools documents</a> contains all ways to specify box dimensions.
 
 ### Debugging CSS boxes
 
@@ -144,7 +144,7 @@ Max-width layout allows our element to occupy 100% of screen width at smaller sc
 
 ## CSS `position` Property
 
-The CSS `position` property allows us to position HTML elements outside the normal "flow" of an HTML document. We can use `position: fixed` to fix a navbar to the top of a screen even when we scroll down; We can use `position: absolute` to position a counter at the top right corner of a notification icon.&#x20;
+The CSS `position` property allows us to position HTML elements outside the normal "flow" of an HTML document. We can use `position: fixed` to fix a navbar to the top of a screen even when we scroll down; We can use `position: absolute` to position a counter at the top right corner of a notification icon.
 
 ### Position Offset Properties
 
@@ -162,7 +162,7 @@ There are 5 `position` property values: `static`, `relative`, `fixed`, `absolute
 
 >**`z-index`**
 >
->When playing with `position` values its possible we will have elements in front of and behind each other on screen. By default the overlapping element mentioned last in the HTML document will be in front. To alter elements' relative forward and backward positions on screen, use the <a href="https://www.w3schools.com/css/css_z-index.asp" target="_blank">CSS `z-index` property</a>.&#x20;
+>When playing with `position` values its possible we will have elements in front of and behind each other on screen. By default the overlapping element mentioned last in the HTML document will be in front. To alter elements' relative forward and backward positions on screen, use the <a href="https://www.w3schools.com/css/css_z-index.asp" target="_blank">CSS `z-index` property</a>.
 >
 
 ## Flexbox
@@ -171,7 +171,7 @@ Flexbox allows simple and robust layout of collections of HTML elements. Without
 
 To use flexbox we need to set "flex properties" on both containers of the elements we wish to position and and the elements themselves. The containers are known as "flex containers" and the elements they contain are known as "flex items".
 
-There are some common flex patterns that we should become aware of as developers as well as some key flex properties that should be explored before to applying flex onto our websites. Generally the properties `flex`, `flexDirection`, `alignItems` and `justifyContent` are utilised to achieve the desired layout. &#x20;
+There are some common flex patterns that we should become aware of as developers as well as some key flex properties that should be explored before to applying flex onto our websites. Generally the properties `flex`, `flexDirection`, `alignItems` and `justifyContent` are utilised to achieve the desired layout. 
 
 Say we had this CSS classes and code block:
 
@@ -226,7 +226,7 @@ By adding the class `flexContainer` to the parent element and applying the `disp
 
 <figure><img src="../../.gitbook/assets/Screenshot 2023-10-25 at 10.59.42 AM.png" alt=""><figcaption><p>Example with just flex</p></figcaption></figure>
 
-The next flex property that we will explore is `flexDirection`, this specifies to the direction the container should stack the "flex items", as a `column` or `row`, you can even alter the order of the "flex items"  with the `row-reverse` or `column-reverse` value. Below we alter the last element in the container to appear as a sqaure, but we will alter the elements order and make it a column again.&#x20;
+The next flex property that we will explore is `flexDirection`, this specifies to the direction the container should stack the "flex items", as a `column` or `row`, you can even alter the order of the "flex items"  with the `row-reverse` or `column-reverse` value. Below we alter the last element in the container to appear as a sqaure, but we will alter the elements order and make it a column again.
 
 ```html
 <div class="flexContainer">
@@ -361,7 +361,7 @@ As you can see the "flex elements" have been centered within the container, and 
 | space-around  | Items will have space before, between, and after them                 |
 | space-evenly  | Items will have equal space around them                               |
 
-To get truly centered content, we need to align the items to the center vertically as well as horizontally. To do this we can use the `align-items` property, just be aware that you need to specify a `height` to the "flex-container", or this may not work correctly. This property will align the content vertically to the container.&#x20;
+To get truly centered content, we need to align the items to the center vertically as well as horizontally. To do this we can use the `align-items` property, just be aware that you need to specify a `height` to the "flex-container", or this may not work correctly. This property will align the content vertically to the container.
 
 ```css
 .circle {
@@ -416,11 +416,11 @@ You should note that you can apply other values than center, similar to `justify
 | flex-end   | Items are positioned at the end of the container                                                                 |
 | baseline   | Items are positioned at the baseline of the container                                                            |
 
-As you can see from the image below the "flex-items" are centered horizontally and vertically within the image. This is a common pattern that is used when applying flex onto websites.&#x20;
+As you can see from the image below the "flex-items" are centered horizontally and vertically within the image. This is a common pattern that is used when applying flex onto websites.
 
 <figure><img src="../../.gitbook/assets/Screenshot 2023-10-25 at 11.52.34 AM.png" alt=""><figcaption><p>flex, flex-direction, flex-wrap, justify-content, align-items</p></figcaption></figure>
 
-To truly become great at flex, please go through the exercises below, this will help you greatly when considering your user interfaces, which is what you users will ultimately see.&#x20;
+To truly become great at flex, please go through the exercises below, this will help you greatly when considering your user interfaces, which is what you users will ultimately see.
 
 ### Exercises
 

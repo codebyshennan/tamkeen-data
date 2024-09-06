@@ -39,7 +39,7 @@ We can use arrays in 2 conceptual ways: to store static-length data and to store
 
 ### Arrays as Static Data Collections
 
-1 way we can use arrays is to store data that will never change. Examples of this are names of days of the week, and letters in the English alphabet. After we initialise these arrays, we will most likely only read from them, and not edit the values inside the arrays.
+One way we can use arrays is to store data that will never change. Examples of this are names of days of the week, and letters in the English alphabet. After we initialise these arrays, we will most likely only read from them, and not edit the values inside the arrays.
 
 #### Example: Array Containing Names of Days of the Week
 
@@ -93,7 +93,7 @@ Arrays have unique properties that allow us to represent data in new ways: **Pos
 
 ### Position
 
-We access elements in an array through **"indexes"** that represent the position of each array element. In the following example, element 1 is at index 0, element 2 at index 1, and element 3 at index 2. Arrays are 0-indexed, meaning the first element is always at index 0. Index 0 is always the left-most array position, and the last index is the right-most array position.
+We access elements in an array through **"indexes"** that represent the position of each array element. In the following example, element 1 is at index 0, element 2 at index 1, and element 3 at index 2. Arrays in JavaScript are **0-indexed**, meaning the first element is always at index 0. Index 0 is always the left-most array position, and the last index is the right-most array position.
 
 ```
   0    1    2
@@ -163,7 +163,7 @@ temperatures[0] = 99;
 
 ### Inserting and Removing New Elements from Arrays
 
-There are 2 methods we will use often in SWE Fundamentals to add and remove elements from arrays: `push` and `pop`.
+There are 2 methods we will use often to add and remove elements from arrays: `push` and `pop`.
 
 #### `push`
 
@@ -189,7 +189,7 @@ var lastElement = temperatures.pop();
 
 ### Example: Add User Input to Array
 
-The following is an example dice game that records and outputs all prior user guesses.
+The following is an example dice game that records and outputs all prior user guesses. We will learn how to create functions in the next lessons.
 
 ```javascript
 // Store guesses in a global array that persists across Submits.

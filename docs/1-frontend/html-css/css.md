@@ -23,7 +23,13 @@ p {
 
 CSS consists of **rules** like the example above, where rules consist of **selectors** (`p` tag above) and **declarations** (`text-align` and `color` declarations above).
 
-CSS "selectors" can be HTML tags, CSS "classes", CSS "IDs", or any combination of tags, classes and IDs. CSS classes and IDs are typically kebab-case strings that we label HTML elements with to apply styles to those elements with CSS. Classes are reusable across multiple elements; IDs are meant for only 1 element. Class selectors are prefixed with `.` and ID selectors are prefixed with `#`. When developing applications, it is imperative that one utilises CSS "classes" to preserve style that is consistent across multiple pages or elements, this makes maintenance and alterations of these commonly styled elements straightforward and easy.&#x20;
+CSS "selectors" can be HTML tags, CSS "classes", CSS "IDs", or any combination of tags, classes and IDs. 
+
+
+CSS classes and IDs are typically kebab-case strings that we label HTML elements with to apply styles to those elements with CSS. Classes are reusable across multiple elements; IDs are meant for only 1 element. Class selectors are prefixed with `.` and ID selectors are prefixed with `#`. 
+
+
+When developing applications, it is imperative that one utilises CSS "classes" to preserve style that is consistent across multiple pages or elements, this makes maintenance and alterations of these commonly styled elements straightforward and easy.
 
 ```css
 .my-class {
@@ -41,7 +47,7 @@ CSS "selectors" can be HTML tags, CSS "classes", CSS "IDs", or any combination o
 
 We can tag HTML elements with classes and IDs by adding `class` and `id` attributes to HTML tags like in the following example.
 
-```markup
+```html
 <p class="my-class" id="my-id">I have both a class and an ID!</p>
 ```
 
@@ -55,7 +61,7 @@ selector {
 
 ## Common CSS properties
 
-If you would like to explore the endless styling and presentation possibilities that CSS offers please have a <a href="https://www.w3schools.com/css/" target="_blank">look here</a>. Otherwise here are some common CSS properties that you should become aware of.
+If you would like to explore the endless styling and presentation possibilities that CSS offers please have a <a href="https://www.w3schools.com/css/" target="_blank">look here</a>. Otherwise here are some common CSS properties that you should become familiar with.
 
 | CSS property     | Description                                                                                                                                                                                                                                   | Example usage                                                                |
 | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
@@ -69,9 +75,9 @@ If you would like to explore the endless styling and presentation possibilities 
 | width            | Set the `width` of the element. Commonly this is set with `length`, `%` or `inherit`. Note that this does not include margins, borders or padding.                                                                                            | <p>div { </p><p>    width: 200px;</p><p>}</p>                                |
 | overflow         | The `overflow` property informs the browser whether it should add scrollbars or clip the content when its too larger to fit in its specified area.                                                                                            | <p>div {<br>    overflow: scroll;<br>}</p>                                   |
 
-## Using CSS classes&#x20;
+## Using CSS classes
 
-When styling our HTML elements it is possible to apply multiple class names to the element, to do so just add the whatever class names within the class property separated by a space. Note that the last class takes precedence in terms of applied style.&#x20;
+When styling our HTML elements it is possible to apply multiple class names to the element, to do so just add the whatever class names within the class property separated by a space. Note that the last class takes precedence in terms of applied style.
 
 ```html
     <p class="bordered centered red">Style me!</p>
@@ -83,7 +89,7 @@ The word "cascading" in CSS refers to the hierarchy that CSS uses to apply style
 
 ### Example 1: Selector hierarchy
 
-Generally, styles applied to ID selectors take precedence over styles applied to class selectors, which take precedence over styles applied to HTML tag selectors (aka type selectors).
+Generally, styles applied to ID selectors take precedence over styles applied to class selectors, which take precedence over styles applied to HTML tag selectors (aka "type" selectors).
 
 In the following example, the 1st paragraph will have colour red, the 2nd green, the 3rd blue. This is because styles applied to CSS IDs take precedence over styles applied to CSS classes, which take precedence over styles applied to HTML tags.
 

@@ -8,7 +8,7 @@
 
 ## Introduction
 
-```markup
+```html
 <!DOCTYPE html>
 <html>
   <head>
@@ -23,7 +23,7 @@
 
 HTML (HyperText Markup Language) defines elements on web pages. All web pages, even the most complex ones rely on HTML to represent their elements. In upcoming modules we will learn how to use CSS and JS to apply styling and interactivity to HTML elements.
 
-HTML comprises tags and content between them. Web browsers read HTML and render content between tags based on tag specifications. For example, browsers will render content between "Header 1" (`h1`) opening (`<h1>`) and closing (`</h1>`) tags as large headers, and content between opening and closing "Paragraph" tags (`p`) in paragraph format.&#x20;
+HTML comprises tags and content between them. Web browsers read HTML and render content between tags based on tag specifications. For example, browsers will render content between "Header 1" (`h1`) opening (`<h1>`) and closing (`</h1>`) tags as large headers, and content between opening and closing "Paragraph" tags (`p`) in paragraph format.
 
 ```html
 <h1>My First Heading</h1>
@@ -95,16 +95,16 @@ The following are common HTML tags we are most likely to use and encounter. Bloc
 
 ### Anchor Tags (`a`)
 
-Anchor tags link to other webpages and require an `href` parameter that contains a URL.&#x20;
+Anchor tags link to other webpages and require an `href` parameter that contains a URL.
 
 ```html
-<a href="rocketacademy.co">Best Coding Bootcamp</a>
+<a href="google.com">Google</a>
 ```
 
 To make the link open in a new tab, include the parameter `target="_blank"`.
 
-```markup
-<a href="rocketacademy.co" target="_blank">Best Coding Bootcamp</a>
+```html
+<a href="google.com" target="_blank">Google</a>
 ```
 
 ### Image Tags (`img`)
@@ -112,14 +112,14 @@ To make the link open in a new tab, include the parameter `target="_blank"`.
 Image tags are self-closing and do not have separate opening and closing tags. They require `src` and `alt` parameters representing the source of the image and alternate text describing the image for accessibility, SEO and to display if the image is not available. `src` can be either a file path or a URL.
 
 ```html
-<img src="images/rocketrocks.png" alt="Rocket rocks!" />
+<img src="images/googlelogo.png" alt="Google logo!" />
 ```
 
 We can wrap tags in each other to combine their functionality. For example, we can make an image a link by wrapping an `img` tag with an `a` tag.
 
-```markup
-<a href="rocketacademy.co" target="_blank">
-  <img src="images/rocketrocks.png" alt="Rocket rocks!" />
+```html
+<a href="google.com" target="_blank">
+  <img src="images/googlelogo.png" alt="Google logo!" />
 </a>
 ```
 
@@ -171,51 +171,51 @@ Wrap tables with `table`, table rows with `tr`, table headers in the 1st row wit
 </table>
 ```
 
-### Basic HTML Document&#x20;
+### Basic HTML Document
 
-<pre class="language-html"><code class="lang-html">&#x3C;!DOCTYPE html>
-&#x3C;html>
-  &#x3C;head>
-    &#x3C;title>Rocket Academy&#x3C;/title>
-  &#x3C;/head>
-  &#x3C;body>
-    &#x3C;h1>Welcome to Coding Bootcamp!&#x3C;/h1>
-    &#x3C;a href="rocketacademy.co" target="_blank">
-      &#x3C;img src="images/rocketrocks.png" alt="Rocket rocks!" />
-    &#x3C;/a>
-    &#x3C;ol>
-      &#x3C;li>Study&#x3C;/li>
-      &#x3C;li>Practise&#x3C;/li>
-      &#x3C;li>Success&#x3C;/li>
-    &#x3C;/ol>
-    &#x3C;h2>What are we going to learn? &#x3C;/h2>
-    &#x3C;table>
-      &#x3C;tr>
-        &#x3C;th>Topic&#x3C;/th>
-        &#x3C;th>Module&#x3C;/th>
-        &#x3C;th>Difficulty&#x3C;/th>
-      &#x3C;/tr>
-      &#x3C;tr>
-        &#x3C;td>React&#x3C;/td>
-        &#x3C;td>One&#x3C;/td>
-        &#x3C;td>Easy&#x3C;/td>
-      &#x3C;/tr>
-      &#x3C;tr>
-        &#x3C;td>Firebase&#x3C;/td>
-        &#x3C;td>Two&#x3C;/td>
-        &#x3C;td>Intermediate&#x3C;/td>
-<strong>      &#x3C;/tr>
-</strong>      &#x3C;tr>
-        &#x3C;td>ExpressJs&#x3C;/td>
-        &#x3C;td>Three&#x3C;/td>
-        &#x3C;td>Advanced&#x3C;/td>
-      &#x3C;/tr>
-    &#x3C;/table>
-  &#x3C;/body>
-&#x3C;/html>
+<pre class="language-html"><code class="lang-html"><!DOCTYPE html>
+<html>
+  <head>
+    <title>Coding Bootcamp</title>
+  </head>
+  <body>
+    <h1>Welcome to Coding Bootcamp!</h1>
+    <a href="google.com" target="_blank">
+      <img src="images/googlelogo.png" alt="Google Logo!" />
+    </a>
+    <ol>
+      <li>Study</li>
+      <li>Practise</li>
+      <li>Success</li>
+    </ol>
+    <h2>What are we going to learn? </h2>
+    <table>
+      <tr>
+        <th>Topic</th>
+        <th>Module</th>
+        <th>Difficulty</th>
+      </tr>
+      <tr>
+        <td>React</td>
+        <td>One</td>
+        <td>Easy</td>
+      </tr>
+      <tr>
+        <td>Firebase</td>
+        <td>Two</td>
+        <td>Intermediate</td>
+<strong>      </tr>
+</strong>      <tr>
+        <td>ExpressJs</td>
+        <td>Three</td>
+        <td>Advanced</td>
+      </tr>
+    </table>
+  </body>
+</html>
 </code></pre>
 
-Notice how this html document is composed of a single `html` tag, which contains the `head` and `body` tags. The as stated above, the head tag contains the required meta data for SEO, but it also provides the browser with key information concerning what it should display. Above we have used a title tag such that the tab in the browser would read 'Rocket Academy'. With this in mind the `head` allows us to insert stylesheets which would inform the browser of how to display and render out html content. In the next section will cover how you can style and how you amend the `head` tag to link required CSS. &#x20;
+Notice how this html document is composed of a single `html` tag, which contains the `head` and `body` tags. The as stated above, the head tag contains the required meta data for SEO, but it also provides the browser with key information concerning what it should display. Above we have used a title tag such that the tab in the browser would read 'Coding Bootcamp'. With this in mind the `head` allows us to insert stylesheets which would inform the browser of how to display and render out html content. In the next section will cover how you can style and how you amend the `head` tag to link required CSS. 
 
-Note that there is also only one body tag, this is where all of the html markup should be placed. Think of html as the structure of your website, developers use html elements to render information onto the browser, choosing the specific tag for the information type.&#x20;
+Note that there is also only one body tag, this is where all of the html markup should be placed. Think of html as the structure of your website, developers use html elements to render information onto the browser, choosing the specific tag for the information type.
 
