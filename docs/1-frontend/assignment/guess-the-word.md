@@ -11,10 +11,9 @@ Guess The Word (aka Hangman) is a single-player game where a user tries to guess
 
 ## Starter Code
 
-Fork and clone <a href="https://github.com/rocketacademy/guess-the-word-3.2" target="_blank">Rocket's Guess The Word repo</a> (Rocket-themed React ViteJs Application). Understand the following starter code in `App.jsx` before creating GTW, and feel free to change anything you would like in `App.jsx`. Run `npm install` to install packages and `npm run dev` to start the app, next open your browser and navigate to <a href="http://localhost:5173/" target="_blank">http://localhost:5173</a>.
+Fork and clone the <a href="https://github.com/SkillsUnion/guess-the-word" target="_blank"> Guess The Word repo</a>. Understand the following starter code in `App.jsx` before creating GTW, and feel free to change anything you would like in `App.jsx`. Run `npm install` to install packages and `npm run dev` to start the app, next open your browser and navigate to <a href="http://localhost:5173/" target="_blank">http://localhost:5173</a>.
 
 ```jsx
-import logo from "/logo.png";
 import "./App.css";
 import { getRandomWord } from "./utils";
 import { useState } from "react";
@@ -44,11 +43,8 @@ function App() {
 
   return (
     <>
-      <div>
-        <img src={logo} className="logo" alt="Rocket logo" />
-      </div>
       <div className="card">
-        <h1>Guess The Word 🚀</h1>
+        <h1>Guess The Word</h1>
         <h3>Word Display</h3>
         {generateWordDisplay()}
         <h3>Guessed Letters</h3>
@@ -66,9 +62,9 @@ export default App;
 
 ## Base
 
-Add a form HTML element in `App.jsx` as per what we learned in [React Forms](../1.3-react/#9-forms-input-select-textarea) to allow the user to input guesses. Each guess can only consist of 1 letter at a time. Control form input using component state as per the React Guide.
+Add a form HTML element in `App.jsx` as per what we learned in React Forms to allow the user to input guesses. Each guess can only consist of 1 letter at a time. Control form input using component state as per the React Guide.
 
-When the user guesses a letter, add that letter to the `App` component's `guessedLetters` state. Consider using the [spread operator](../../0-foundations/0.4-javascript/0.4.5-destructuring-and-spread-operator.md#spread-operator) when adding the new letter to trigger React to re-render. The existing starter code logic will read `guessedLetters` and render correctly-guessed letters in the Word Display section and render all guessed letters in the Guessed Letters section.
+When the user guesses a letter, add that letter to the `App` component's `guessedLetters` state. Consider using the spread operator when adding the new letter to trigger React to re-render. The existing starter code logic will read `guessedLetters` and render correctly-guessed letters in the Word Display section and render all guessed letters in the Guessed Letters section.
 
 Add logic and state to track whether the user has guessed all letters of the word and how many guesses the user has left (can start with 10). If the user guesses all letters correctly, tell them they have won. If the user runs out of guesses, reveal the word and tell them they have lost. When the round ends, give the user an option to play again.
 

@@ -13,7 +13,7 @@ High Card is a turn-based game between 2 or more players where each player draws
 
 ### Clone starter code
 
-Fork and clone Rocket's <a href="https://github.com/rocketacademy/high-card-3.2" target="_blank">High Card repo</a> (Rocket-themed Create React App) and understand the following starter code before creating High Card. Run `npm install` to install default packages our app needs to run, and run `npm run dev` to start the app next open your browser and navigate to <a href="http://localhost:5173/" target="_blank">http://localhost:5173</a>.
+Fork and clone the <a href="https://github.com/SkillsUnion/high-card" target="_blank">High Card repo</a> and understand the following starter code before creating High Card. Run `npm install` to install default packages our app needs to run, and run `npm run dev` to start the app next open your browser and navigate to <a href="http://localhost:5173/" target="_blank">http://localhost:5173</a>.
 
 ### Understand starter code
 
@@ -125,7 +125,7 @@ function App(props) {
   return (
     <div className="App">
       <header className="App-header">
-        <h2>React High Card 🚀</h2>
+        <h2>React High Card</h2>
         {currCardElems}
         <br />
         <button onClick={dealCards}>Deal</button>

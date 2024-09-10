@@ -17,7 +17,7 @@ We will build a collection of clocks with different time zones to demonstrate th
 
 ### Clone starter code
 
-Fork and clone <a href="https://github.com/rocketacademy/world-clock-3.2" target="_blank">Rocket's World Clock repo</a> (Rocket-themed React Vite application). Run `npm install` to install default packages our app needs to run, and run `npm run dev` to start the app next open your browser and navigate to <a href="http://localhost:5173/" target="_blank">http://localhost:5173</a>.
+Fork and clone <a href="https://github.com/SkillsUnion/world-clock" target="_blank">World Clock repo</a> (Rocket-themed React Vite application). Run `npm install` to install default packages our app needs to run, and run `npm run dev` to start the app next open your browser and navigate to <a href="http://localhost:5173/" target="_blank">http://localhost:5173</a>.
 
 ### Understand starter code
 
@@ -37,16 +37,13 @@ Fork and clone <a href="https://github.com/rocketacademy/world-clock-3.2" target
 
 ### Mix JavaScript and HTML syntax in JSX
 
-`src/App.jsx` contains the `App Component`, the root React element, in our React app and we will write our clock app logic there.&#x20;
+`src/App.jsx` contains the `App Component`, the root React element, in our React app and we will write our clock app logic there.
 
 Notice the starter code in `App.jsx` contains mostly HTML. Let's add JavaScript to it to render a date. Replace the `return` statement with the following code.
 
 ```jsx
   return (
     <>
-      <div>
-        <img src={logo} className="logo" alt="Rocket logo" />
-      </div>
       <h1>World Clock</h1>
       <div className="card">
         <p>
@@ -93,13 +90,13 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 Notice our app now displays a digital timestamp that updates every second within the browser.
 
-`setInterval` calls the function in its 1st parameter at the interval specified by the number of milliseconds in its 2nd parameter. In this case it is re-assigning the data and time via the `new Date()` method and re-rendering the UI every second.&#x20;
+`setInterval` calls the function in its 1st parameter at the interval specified by the number of milliseconds in its 2nd parameter. In this case it is re-assigning the data and time via the `new Date()` method and re-rendering the UI every second.
 
-We should also consider how we have altered the original render method. We assign the `ReactDom.createRoot(document.getElementById('root'))` to a variable named root, such that we can call the render method within the `tick` function.&#x20;
+We should also consider how we have altered the original render method. We assign the `ReactDom.createRoot(document.getElementById('root'))` to a variable named root, such that we can call the render method within the `tick` function.
 
 Notice the value of `element` in `tick` looks similar to the element returned in the `return` statement within the `App.jsx`, that being, HTML with a JavaScript date inserted using curly braces `{}` in JSX.
 
-The difference between `main.jsx` and `App.jsx` is the `setInterval` in `main.jsx` that calls `tick` and hence `root.render` method every second.&#x20;
+The difference between `main.jsx` and `App.jsx` is the `setInterval` in `main.jsx` that calls `tick` and hence `root.render` method every second.
 
 ## Comfortable (Second day)
 
@@ -129,7 +126,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 Add state to our `App` component that will store the date and time that we will update every second in a state variable named `date`. Add the `date` state using the useState method from React, instead of calling `new Date()` in our `return` statement, update the JSX to read date from `date` variable instead. `date` will contain the current value of the `date` variable in component state. When calling the `useState` function pass new Date() as the intial value. Our `App` component should look like the following.
 
 ```jsx
-import logo from "/logo.png";
 import "./App.css";
 import {useState} from 'react'
 
@@ -137,9 +133,6 @@ export default function App() {
   const [date, setDate] = useState(new Date())
   return (
     <>
-      <div>
-        <img src={logo} className="logo" alt="Rocket logo" />
-      </div>
       <h1>World Clock</h1>
       <div className="card">
         {/* Render date value that is stored in state */}
@@ -156,11 +149,11 @@ You may notice that the date is still static and doesn't change at this stage. W
 
 Import the `useEffect` hook from `React`,  we can implement this method above the `return` statement inside the `App` Component in `App.jsx`. Add a `setInterval` function call inside the `useEffect` method that updates the `date` variable in local state to a new date with `setDate` every second. Save the timer ID returned by `setInterval` variable such as `timerId`, and call `clearInterval` on that `timerId` within the teardown function that can be implemented in useEffect.
 
-The clock in our UI should now automatically update every second! <a href="https://github.com/rocketacademy/world-clock-3.2" target="_blank">Here</a> is a reference solution for this section.
+The clock in our UI should now automatically update every second! <a href="https://github.com/SkillsUnion/world-clock/blob/setInterval_app_logic/src/App.jsx" target="_blank">Here</a> is a reference solution for this section.
 
 >**Full reference solution at bottom of page**
 >
->Rocket exercises will typically have a reference solution at the bottom of each exercise page. We will provide code examples inline for explanation, but otherwise we hope you will attempt the exercises on your own and review reference solutions afterward.
+>Exercises will typically have a reference solution at the bottom of each exercise page. We will provide code examples inline for explanation, but otherwise we hope you will attempt the exercises on your own and review reference solutions afterward.
 
 ### Refactor clock display logic into its own Component
 
@@ -191,9 +184,6 @@ Use the `Clock` Component in the `return` statement of `App` where we used to ha
 ```jsx
   return (
    <>
-      <div>
-        <img src={logo} className="logo" alt="Rocket logo" />
-      </div>
       <h1>World Clock</h1>
       <div className="card">
         <Clock />
@@ -202,7 +192,7 @@ Use the `Clock` Component in the `return` statement of `App` where we used to ha
   );
 ```
 
-We now have a clock that we can re-use in anywhere in our app with a single line of code! <a href="https://github.com/rocketacademy/world-clock-3.2/commit/7d5d46e54968058770bfd720ce97a0f86b5ba4f1" target="_blank">Here</a> is a reference solution for this section
+We now have a clock that we can re-use in anywhere in our app with a single line of code! <a href="https://github.com/SkillsUnion/world-clock/blob/clock_component_seperated/src/App.jsx" target="_blank">Here</a> is a reference solution for this section
 
 ### Add timezone data to `Clock` via props
 
@@ -235,7 +225,7 @@ In `App.jsx`, update our `App` component to render 3 clocks, each with a differe
 
 To make it clearer which time zone each clock is rendering, add a time zone label next to the date string in `Clock`'s `return` statement. This can be any string that represents the time zone.
 
-Great job on making a clock app that shows multiple time zones! <a href="https://github.com/rocketacademy/world-clock-3.2/tree/clock_component_prop/src" target="_blank">Here </a>is a reference solution for this section. Don't forget to review the reference solution at the bottom of the page to see how Rocket implemented our full app. Coding is like writing an essay and there are many right answers, so don't fret if yours looks different.
+Great job on making a clock app that shows multiple time zones! <a href="https://github.com/SkillsUnion/world-clock/blob/clock_component_prop" target="_blank">Here </a>is a reference solution for this section. Don't forget to review the reference solution at the bottom of the page to see how Rocket implemented our full app. Coding is like writing an essay and there are many right answers, so don't fret if yours looks different.
 
 ## Improve clock UI with React Bootstrap grid system
 
@@ -255,5 +245,5 @@ Refactor our world clock UI into its own component `WorldClock` in its own file 
 
 ## Submission
 
-Submit a pull request to the `main` branch of Rocket's World Clock repo and share your PR link in your discussion channel.
+Submit a pull request to the `main` branch of World Clock repo.
 
