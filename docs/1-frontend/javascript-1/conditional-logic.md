@@ -28,7 +28,7 @@ An "**if statement**" is a control-flow "**code block**" that runs if a conditio
 
 ### Simple Conditional Example: Secret Phrase
 
-Let's write a program in our console that changes the output value of `"hello world"` if we type in a particular phrase.
+Let's write a program in our [starter code](https://github.com/SkillsUnion/fundamentals-starter-code) that changes the output value of `"hello world"` if we type in a particular phrase.
 
 ```javascript
   // Set a default value for myOutputValue

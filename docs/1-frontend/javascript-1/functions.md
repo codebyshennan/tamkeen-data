@@ -16,7 +16,7 @@ By the end of this lesson, you should be able to do the following:
 
 {% include youtube.html id="VUcdDK1hSoE" %}
 
-We can now start to group the code we're working with into "functions" and use functions to write more realistic, complex programs. Let's explore how functions work.
+We can group the code we're working with into "functions" and use functions to write more realistic, complex programs. Let's explore how functions work.
 
 ## What Functions Are
 
@@ -41,7 +41,7 @@ Functions are necessary to abstract complexity away from the main logic of our a
 
 ## Define a Function
 
-Define a function that "abstracts" the km-to-miles conversion we did in [2.3: Our First Program](../2-basic-data-manipulation/2.3-our-first-program.md#metric-conversion-program).
+Define a function that "abstracts" the km-to-miles conversion in our [starter code](https://github.com/SkillsUnion/fundamentals-starter-code).
 
 1. Start at the top of `script.js`
 2. Create a variable for our function: `var convertKmToMiles`. **Note that function variable names start with a verb by convention, to distinguish them from variables storing other data types. With few exceptions such as the `main` function, function names should almost always start with a verb.**
