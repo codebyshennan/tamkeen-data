@@ -253,21 +253,21 @@ Share your work with your section: save the code you write into another file. Na
 
 ### **Juice Wedding**
 
-It takes 4 oranges to make a 90ml glass of orange juice. When planning your wedding, you need to know how many oranges to buy so all your guests have 1 glass of juice. The user will enter a number of guests and the app will say how many oranges are needed and how many litres of orange juice you would get. ([Ref Solution](https://github.com/rocketacademy/fundamentals-starter-code/tree/5.1-refSolns-juiceWedding))
+It takes 4 oranges to make a 90ml glass of orange juice. When planning your wedding, you need to know how many oranges to buy so all your guests have 1 glass of juice. The user will enter a number of guests and the app will say how many oranges are needed and how many litres of orange juice you would get. ([Ref Solution](https://github.com/SkillsUnion/fundamentals-starter-code/tree/juiceWedding))
 
 ### **SG Hugs**
 
-Everyone has a different gauge for how long they like to hug. The user can enter a number of seconds they like to hug on average, and the app will calculate how many years it will take to hug everyone in Singapore. You are allowed 9 hours a day to sleep and eat. ([Ref Solution](https://github.com/rocketacademy/fundamentals-starter-code/tree/5.1-refSolns-sgHugs))
+Everyone has a different gauge for how long they like to hug. The user can enter a number of seconds they like to hug on average, and the app will calculate how many years it will take to hug everyone in Singapore. You are allowed 9 hours a day to sleep and eat. ([Ref Solution](https://github.com/SkillsUnion/fundamentals-starter-code/tree/sgHugs))
 
 ### **House Paint**
 
 Estimate the price of painting the interior of your home. The user will enter a dollar amount of paint per litre and the app will calculate how much it will cost.
 
-Each room in your 6-room house has the same area to be painted: 3m x 3m. There are 6 windows and 8 doors in your designer home. Coincidentally, windows and doors all of the same size: 90cm x 150cm. Paint will cover 300 square meters per litre. You want to apply 2 coats of paint. ([Ref Solution](https://github.com/rocketacademy/fundamentals-starter-code/tree/5.1-refSolns-housePaint))
+Each room in your 6-room house has the same area to be painted: 3m x 3m. There are 6 windows and 8 doors in your designer home. Coincidentally, windows and doors all of the same size: 90cm x 150cm. Paint will cover 300 square meters per litre. You want to apply 2 coats of paint. ([Ref Solution](https://github.com/SkillsUnion/fundamentals-starter-code/tree/housePaint))
 
 ### **Train Speed**
 
-Two trains are leaving to Tokyo. Train 1 is traveling 200kph, and will reach Tokyo in 2 hours. Train 2 is newer and can travel faster, but is delayed due to a signalling fault. Build an app for Train 2's conductor calculate how fast Train 2 needs to travel to arrive at Tokyo at the same time as Train 1, based on how long it was delayed. Output the speed in kph. ([Ref Solution](https://github.com/rocketacademy/fundamentals-starter-code/tree/5.1-refSolns-trainSpeed))
+Two trains are leaving to Tokyo. Train 1 is traveling 200kph, and will reach Tokyo in 2 hours. Train 2 is newer and can travel faster, but is delayed due to a signalling fault. Build an app for Train 2's conductor calculate how fast Train 2 needs to travel to arrive at Tokyo at the same time as Train 1, based on how long it was delayed. Output the speed in kph. ([Ref Solution](https://github.com/SkillsUnion/fundamentals-starter-code/tree/trainSpeed))
 
 ## **Exercises (More Comfortable)**
 

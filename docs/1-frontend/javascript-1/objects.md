@@ -497,10 +497,6 @@ var deck = [
 
 Implement the High Card code above to get a working High Card game.
 
-### Highest of 2 Cards
-
-Change the High Card program so that the player and computer each draw 2 cards instead of 1. The player with the highest of any of the cards wins.
-
 ## Reference
 
 ### Object Dereferencing: `myObj.name` vs `myObj[name]` vs `myObj['name']`

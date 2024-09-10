@@ -205,7 +205,7 @@ To solidify understanding of loops, we suggest using while loops until you are c
 In other code examples you may see the incrementation step replaced by `counter++`. This adds 1 to `counter`. At Rocket we prefer ESLint's recommendation of `counter += 1` syntax. See ESLint's reasons against `++` syntax [here](https://eslint.org/docs/rules/no-plusplus).
 
 
-## Base Exercises
+## Exercises
 
 ### Follow Along
 
