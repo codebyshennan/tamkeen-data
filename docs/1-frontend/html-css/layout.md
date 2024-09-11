@@ -24,7 +24,7 @@ The CSS box model controls how much space an element takes on screen with CSS pr
 
 ### 3 common ways to specify box dimensions
 
-**1) Pixel count**
+**1 - Pixel count**
 
 Only works for block display elements. Generally less recommended because difficult to create responsive (mobile and desktop-friendly) layouts with fixed pixel sizes.
 
@@ -35,7 +35,7 @@ p {
 }
 ```
 
-**2) Percent of parent container**
+**2 - Percent of parent container**
 
 Percentage is relative to the parent container, allows responsive sizing. Percentage height does not work unless parent has fixed size.
 
@@ -46,7 +46,7 @@ p {
 }
 ```
 
-**3) Percent of viewport (window)**
+**3 - Percent of viewport (window)**
 
 Viewport sizing allows for most responsive sizing based on screen size, but needs to be coordinated with other elements on screen since sizing is not relative to other elements.
 

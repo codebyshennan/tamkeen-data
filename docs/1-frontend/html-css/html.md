@@ -115,7 +115,9 @@ Image tags are self-closing and do not have separate opening and closing tags. T
 <img src="images/googlelogo.png" alt="Google logo!" />
 ```
 
-We can wrap tags in each other to combine their functionality. For example, we can make an image a link by wrapping an `img` tag with an `a` tag.
+In this scenarion, the `src` of the image is a path to a folder called `images` and it looks for the file `googlelogo.png` in the said folder.
+
+We can also wrap tags in each other to combine their functionality. For example, we can make an image a link by wrapping an `img` tag with an `a` tag.
 
 ```html
 <a href="google.com" target="_blank">
@@ -137,7 +139,6 @@ Wrap lists with `ol` (ordered) or `ul` (unordered) and wrap each list item with 
 ```
 
 
-
 ```html
 <ul>
   <li>Great students</li>
@@ -151,7 +152,7 @@ Wrap lists with `ol` (ordered) or `ul` (unordered) and wrap each list item with 
 
 Wrap tables with `table`, table rows with `tr`, table headers in the 1st row with `th` and table data in subsequent rows with `td`.
 
-```markup
+```html
 <table>
   <tr>
     <th>Company</th>
@@ -173,6 +174,8 @@ Wrap tables with `table`, table rows with `tr`, table headers in the 1st row wit
 
 ### Basic HTML Document
 
+
+```html
 <pre class="language-html"><code class="lang-html"><!DOCTYPE html>
 <html>
   <head>
@@ -214,8 +217,23 @@ Wrap tables with `table`, table rows with `tr`, table headers in the 1st row wit
   </body>
 </html>
 </code></pre>
+```
 
-Notice how this html document is composed of a single `html` tag, which contains the `head` and `body` tags. The as stated above, the head tag contains the required meta data for SEO, but it also provides the browser with key information concerning what it should display. Above we have used a title tag such that the tab in the browser would read 'Coding Bootcamp'. With this in mind the `head` allows us to insert stylesheets which would inform the browser of how to display and render out html content. In the next section will cover how you can style and how you amend the `head` tag to link required CSS. 
+Notice how this html document is composed of a single `html` tag, which contains the `head` and `body` tags. Then as stated above, the head tag contains the required meta data for SEO (Search Engine Optimization), but it also provides the browser with key information concerning what it should display. We have used a title tag such that the tab in the browser would read 'Coding Bootcamp'. With this in mind the `head` allows us to insert stylesheets which would inform the browser of how to display and render out html content. In the next section will cover how you can style and how you amend the `head` tag to link required CSS. 
 
-Note that there is also only one body tag, this is where all of the html markup should be placed. Think of html as the structure of your website, developers use html elements to render information onto the browser, choosing the specific tag for the information type.
+Note that there is also only one body tag, this is where all of the html markup should be placed. Think of html as the structure of your website.  Developers use html elements to render information onto the browser, choosing the specific tag for the information type.
 
+### Semantic HTML
+
+[Semantic HTML tags](https://www.w3schools.com/html/html5_semantic_elements.asp) are part of a feature in HTML5 that provides context and meaning to both the browser and the developer.
+
+Many web sites have divs with ids like: `<div id="nav">` `<div class="header">` and `<div id="footer">` to indicate different parts of a page such as navigation, header, and footer.
+
+Using semantic elements, we can define different parts of a web page, here are some of them: 
+- `<article>`
+- `<aside>`
+- `<footer>`
+- `<header>`
+- `<nav>`
+
+The use of semantic tags help developers identify different parts of the page but are optional.
