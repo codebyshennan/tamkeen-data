@@ -12,7 +12,7 @@
 
 Node.js (Node for short) is a JavaScript "runtime" that runs JS on our computers (as opposed to a user's browser). Node is popular because it enables SWEs to build both frontends and backends in JS, which has simplified feature development, attracted more developers to JS, and resulted in a large number of JS libraries available for both frontend and backend.
 
-During Coding Bootcamp we will use Node for both frontend and backend applications. We will use it with Create React App on the frontend to generate static HTML, CSS and JS files for browsers through React, and we will use it with Express.js on the backend to create API servers that serve data for our apps.
+You can download npm in its [official website](https://nodejs.org/en/download/prebuilt-installer).
 
 ## Warmup: Node console in command line
 

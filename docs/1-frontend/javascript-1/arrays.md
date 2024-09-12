@@ -13,7 +13,7 @@ By the end of this lesson, you should be able to:
 
 {% include youtube.html id="CI09j_aHLE0" %}
 
-We've built relatively complex programs using functions and conditionals with global state. In this module we will learn a new data type, or "data structure", to be precise: dynamic-length data "**arrays"**. We'll then learn how to manipulate arrays using a syntax called "**loops**". Just like each concept we've learned previously, the mechanic of the individual concepts will be relatively simple, but when we combine these concepts with previous concepts, the complexity of our apps can increase greatly.
+We've built relatively complex programs using conditional statements. In this module we will learn a new data type, or "data structure", to be precise: dynamic-length data "**arrays"**. We'll then learn how to manipulate arrays using a syntax called "**loops**". Just like each concept we've learned previously, the mechanic of the individual concepts will be relatively simple, but when we combine these concepts with previous concepts, the complexity of our apps can increase greatly.
 
 ## Arrays are a Type of Data Collection
 
@@ -21,16 +21,16 @@ Values of each data type we have seen so far can be stored inside variables, e.g
 
 ## Arrays Only Store 1 "Kind" of Data at a Time
 
-Arrays are data structures that store 0 or more values of the same kind. By "kind" we don't just mean the same data type, e.g. numbers, strings, or booleans. By "kind" we also mean the same conceptual kind of data. For example, we might store computer-generated dice rolls in an array, or user guesses in an array, where both dice rolls and user guesses are numbers, but we would likely not store both dice rolls and user guesses in the same array, because each is a different "kind" of data.
+Arrays are data structures that store values of the same kind. By "kind" we don't just mean the same data type, e.g. numbers, strings, or booleans. By "kind" we also mean the same conceptual kind of data. For example, we might store computer-generated dice rolls in an array, or user guesses in an array, where both dice rolls and user guesses are numbers, but we would likely not store both dice rolls and user guesses in the same array, because each is a different "kind" of data.
 
 
-JavaScript lets us add any data type into any array, regardless of what's already inside. The following would be considered valid JavaScript syntax.
+JavaScript lets us add any data type into an array, regardless of what's already inside. The following would be considered valid JavaScript syntax.
 
 ```javascript
 var myValues = [23, 'rocks', true, 0.345, 'awesome'];
 ```
 
-However, the **concept** of the array is for holding data of the same kind, e.g. numerical dice rolls, and this almost always means the data is of the same JavaScript data type. Please do not deviate from this in SWE Fundamentals.
+However, the **concept** of the array is for holding data of the same kind, e.g. numerical dice rolls, and this almost always means the data is of the same JavaScript data type. 
 
 
 ## 2 Conceptual Types of Arrays
@@ -89,18 +89,21 @@ var salesThisMonth = [34, 23, 12, 78, 56];
 
 ## Array Properties
 
-Arrays have unique properties that allow us to represent data in new ways: **Position** and **order**.
+Arrays have unique properties that allow us to represent data in new ways: **Position** and **Order**.
 
 ### Position
 
-We access elements in an array through **"indexes"** that represent the position of each array element. In the following example, element 1 is at index 0, element 2 at index 1, and element 3 at index 2. Arrays in JavaScript are **0-indexed**, meaning the first element is always at index 0. Index 0 is always the left-most array position, and the last index is the right-most array position.
+We access elements in an array through **"indexes"** that represent the position of each array element. In the following example, element 1 is at index 0, element 2 at index 1, and element 3 at index 2. 
+
+
+Arrays in JavaScript are **0-indexed**, meaning the first element is always at index 0. Index 0 is always the left-most array position, and the last index is the right-most array position.
 
 ```
   0    1    2
 ['a', 'b', 'c']
 ```
 
-We can use square-bracket (`[]`) syntax to retrieve any element in an array by specifying that element's index in the square brackets.
+We use square-bracket (`[]`) syntax to retrieve any element in an array by specifying that element's index in the square brackets.
 
 ```javascript
 var letters = ['a', 'b', 'c'];

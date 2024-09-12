@@ -12,8 +12,6 @@
 
 ## Introduction
 
-This module is the beginning of our programming journey!
-
 Programming is the act of writing code (instructions) for the computer to execute sequentially. It is the same as written instructions for a cooking recipe!
 
 We will first start with learning how to write single lines of code before stringing them together into a bigger whole. Before long, you will be creating multi-line programs of your own!

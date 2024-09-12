@@ -13,7 +13,7 @@ By the end of this lesson, you should be able to:
 
 {% include youtube.html id="wn3G_OO32kg" %}
 
-We've defined an array, added values to it, and inspected those values individually, but haven't yet learned how to systematically manipulate each element in the array, no matter how long the array is. To do this we will learn 1 more control structure: "**loops"**.
+We've defined an array, added values to it, and inspected those values individually, but haven't yet learned how to systematically manipulate each element in the array, no matter how long the array is. To do this we will learn another control structure: "**loops"**.
 
 We will mostly use loops to iterate over array elements. Loops can also be used without arrays, for example to perform an action until a condition is no longer `true`.
 
@@ -202,7 +202,7 @@ The key difference in for loop syntax is that **all loop management code is cons
 To solidify understanding of loops, we suggest using while loops until you are comfortable with loop mechanics.
 
 
-In other code examples you may see the incrementation step replaced by `counter++`. This adds 1 to `counter`. At Rocket we prefer ESLint's recommendation of `counter += 1` syntax. See ESLint's reasons against `++` syntax [here](https://eslint.org/docs/rules/no-plusplus).
+In other code examples you may see the incrementation step replaced by `counter++`. This adds 1 to `counter`. We prefer ESLint's recommendation of `counter += 1` syntax. See ESLint's reasons against `++` syntax [here](https://eslint.org/docs/rules/no-plusplus).
 
 
 ## Exercises

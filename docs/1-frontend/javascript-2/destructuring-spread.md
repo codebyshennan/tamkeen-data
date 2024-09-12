@@ -39,18 +39,18 @@ Occasionally we may need to return multiple values from a function. If we wrap t
 
 ```javascript
 const conversions = (temperatureInFahrenheit) => {
-  let temperatureInCelcius = 123; // calculation goes here
+  let temperatureInCelsius = 123; // calculation goes here
   let temperatureInKelvin = 456; // calculation goes here
 
   return {
     kelvin: temperatureInKelvin,
-    celcius: temperatureInCelcius,
+    celsius: temperatureInCelcius,
   };
 };
 
-const { kelvin, celcius } = conversions(20);
+const { kelvin, celsius } = conversions(20);
 console.log(kelvin);
-console.log(celcius);
+console.log(celsius);
 ```
 
 ### Example: Import Multiple Named Exports
@@ -88,7 +88,7 @@ console.log(kilogramsToPounds(3));
 
 ## Spread Operator
 
-Return a [shallow copy](https://medium.com/@manjuladube/understanding-deep-and-shallow-copy-in-javascript-13438bad941c) of the elements or key-value pairs inside an array or object respectively.
+Returns a [shallow copy](https://medium.com/@manjuladube/understanding-deep-and-shallow-copy-in-javascript-13438bad941c) of the elements or key-value pairs inside an array or object respectively.
 
 ### Example: Make Shallow Copy of Array
 

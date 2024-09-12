@@ -139,11 +139,11 @@ The above `require` statement can be translated to the below `import` statement.
 import cows from "cows";
 ```
 
-`import` statements work out of the box in Create React App, but to use them with NPM we will need to add `"type": "module"` key value pair to `package.json`.
+`import` statements work out of the box in Create React App, but to use them with NPM we will need to add `"type": "module"` key value pair to `package.json`. You can see it here in the [documentation](https://nodejs.org/api/packages.html#type)
 
-When you are trying to implement the Cows package it will be very helpful if you visit the [documentation](https://github.com/sindresorhus/cows) so you know the conventional usage of this package.&#x20;
+When you are trying to implement the Cows package it will be very helpful if you visit the [documentation](https://github.com/sindresorhus/cows) so you know the conventional usage of this package.
 
-First you will need to import (or require) the package and then invoke the cows() function to output the ASCII Cows. You may need to console.log the output of the function.&#x20;
+First you will need to import (or require) the package and then invoke the cows() function to output the ASCII Cows. You may need to console.log the output of the function.
 
 ## What to Commit to Git
 
@@ -157,4 +157,4 @@ We should avoid committing `node_modules` to Git, because `node_modules` can get
 
 ## How to Find NPM Packages
 
-NPM packages are typically discovered via Google Search and tutorials. During Rocket's Bootcamp we will direct you to all packages we need, although Rocket encourages you to independently find new packages to enhance your projects, especially for your capstone.
+NPM packages are typically discovered via Google Search and tutorials. We will direct you to all packages we need, although we encourage you to independently find new packages to enhance your projects.

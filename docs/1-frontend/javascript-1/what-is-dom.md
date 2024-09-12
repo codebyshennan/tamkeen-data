@@ -37,7 +37,7 @@ When we want our JavaScript to take in any inputs from the user or display any o
 
 When the document is processed by the browser, a set of objects are created that represents the document, along with pre-defined methods and functions that we can use.
 
-We've already seen one: `console.log()`. To be specific, `console` is an _object_ of the DOM created by the browser, which has a pre-defined `.log()` _method._ Other `console` methods include \*\* `.clear()` \*\* or `.table()`_._
+We've already seen one: `console.log()`. To be specific, `console` is an _object_ of the DOM created by the browser, which has a pre-defined `.log()` _method._ Other `console` methods include `.clear()`  or `.table()`.
 
 Besides `console,` the other major objects that represent the DOM are `window` and `document`. We will next explore the `document` object and the `document.querySelector()` method.
 

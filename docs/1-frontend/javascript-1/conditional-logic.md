@@ -290,3 +290,5 @@ Change the dice game so that it's easier. If the user guess is within 2 of the d
 ## Further Reading
 
 Past students have found this [slide deck](https://www.cs.cmu.edu/~mrmiller/15-110/Handouts/boolean.pdf) helpful in understanding Boolean logic.
+
+Another way to introduce logic is via the use of [Switch Statements](https://www.w3schools.com/js/js_switch.asp).

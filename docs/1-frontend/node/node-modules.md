@@ -15,7 +15,7 @@ Setting up the environment:
 
 1. Create a new directory named `npm_modules`
 2. Change directory to `npm_modules`
-3. Run the command `npm init -y` to initialise an npm directory&#x20;
+3. Run the command `npm init -y` to initialise an npm directory
 4. You should see a new file has been generated, the package.json
 5.  To run the scripts you will need to alter this file as below:
 
@@ -86,7 +86,7 @@ export const kmToMiles = (numKm) => {
   // Convert KM to miles and return value in miles
 };
 
-export const celciusToFahrenheit = (tempInCelsius) => {
+export const celsiusToFahrenheit = (tempInCelsius) => {
   // Convert Celsius to Fahrenheit and return value in Fahrenheit
 };
 
@@ -99,12 +99,12 @@ export const kgToPounds = (numKg) => {
 ```javascript
 import {
   kmToMiles,
-  celciusToFahrenheit,
+  celsiusToFahrenheit,
   kgToPounds,
 } from "./conversion.js";
 
 console.log(kmToMiles(3));
-console.log(celciusToFahrenheit(3));
+console.log(celsiusToFahrenheit(3));
 console.log(kgToPounds(3));
 ```
 

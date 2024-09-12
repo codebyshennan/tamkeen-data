@@ -54,11 +54,9 @@ If we wanted the same result we could also write the following.`var x = 3.14 * 4
 
 In JavaScript convention, ordinary variables are named with [lower camel case](https://en.wikipedia.org/wiki/Naming_convention_(programming)#Examples_of_multiple-word_identifier_formats). The name starts with a lowercase letter and every subsequent word starts with uppercase. For example, `bananaCount` or `firstDiceRoll`. This is _convention_, and will not affect code _functionality_. Different languages and communities have different conventions. Similar to driving conventions: in some countries, cars are driven on the left side, and on the right side in other countries.
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/CamelCase_new.svg/1200px-CamelCase_new.svg.png)
-
 ## Exercises
 
-Using the Chrome Dev Tools Console, write code to represent each of the following. Use descriptive variable names that explain what you are calculating. You will need to search the web for some formulas. When you are done, paste the code into a message to yourself in the community channel.
+Using the Chrome Dev Tools Console, write code to represent each of the following. Use descriptive variable names that explain what you are calculating. You will need to search the web for some formulas.
 
 1. Calculate the circumference of a circle given its radius
 2. Convert Celsius to Fahrenheit

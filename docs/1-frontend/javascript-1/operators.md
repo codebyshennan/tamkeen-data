@@ -27,7 +27,7 @@ Here is a list of arithmetic operators:
 | Remainder or Modulo ( % ) | <p>a % b<br>Result: remainder of a divided by b</p>                                   | <p>10 % 6<br>Result: 4</p> |
 | Increment ( ++ )          | <p>a++<br>Result: adds 1 to a</p>                                                     |                                                      |
 | Decrement ( -- )          | <p>a--<br>Result: subtracts 1 from a</p>                                                           |                                                      |
-| Exponential ( ** )      | <p>a ** b<br>Result: a</ is multiplied by itself by b number of times.</p> |                                                      |
+| Exponential ( ** )      | <p>a ** b<br>Result: a is multiplied by itself by b number of times.</p> |                                                      |
 
 ## String Concatenation (addition operator)
 
