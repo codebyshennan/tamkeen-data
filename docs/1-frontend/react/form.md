@@ -2,11 +2,9 @@
 
 ## Learning Objectives
 
-- Construct functional forms in React using input, select, and textarea components.
-
-- Implement controlled form components by managing their state with React hooks and handling associated events.
-
-- Develop a form submission handler that captures and processes user input data without page refresh.
+1. Construct functional forms in React using input, select, and textarea components.
+2. Implement controlled form components by managing their state with React hooks and handling associated events.
+3. Develop a form submission handler that captures and processes user input data without page refresh.
 
 ## <a href="https://react.dev/reference/react-dom/components#form-components" target="_blank">Forms</a>, <a href="https://react.dev/reference/react-dom/components/input" target="_blank">input</a>, <a href="https://react.dev/reference/react-dom/components/select" target="_blank">select</a>, <a href="https://react.dev/reference/react-dom/components/textarea" target="_blank">textarea</a>
 

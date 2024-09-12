@@ -2,9 +2,8 @@
 
 ## Learning Objectives
 
-- Construct React components following the core rules of component creation and rendering.
-
-- Implement props to pass data from parent to child components in a React application.
+1. Construct React components following the core rules of component creation and rendering.
+2. Implement props to pass data from parent to child components in a React application.
 
 ## <a href="https://react.dev/learn/your-first-component" target="_blank">React Components</a>
 
@@ -31,7 +30,7 @@ React components can communicate with each other via props, a parent may pass in
 
 > React Hooks are a newer and more efficient syntax for React Components. They allow us to write all components as functional components, and use so-called "Hook" functions to replace class component functionality such as state management and lifecycle methods. Components with hooks are functionally the same as class components.
 > 
-> Rocket recommends using Hooks in our exercises and projects from now on because Hooks are a cleaner syntax and the <a href="https://reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both" target="_blank">React team recommends using Hooks for new projects</a>. The React team is <a href="https://beta.reactjs.org/" target="_blank">re-writing the official React tutorials to use Hooks</a>. React Router v6 (the latest and greatest version of React Router) that we are about to learn only supports React Hooks syntax natively, and Rocket recommends using Hooks to enable us to use the latest React Router features.
+> <a href="https://reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both" target="_blank">React team recommends using Hooks for new projects</a>. They are <a href="https://beta.reactjs.org/" target="_blank">re-writing the official React tutorials to use Hooks</a>. React Router v6 (the latest and greatest version of React Router) that we are about to learn only supports React Hooks syntax natively.
 >
 > Many companies are still using <a href="https://legacy.reactjs.org/docs/react-component.html" target="_blank">Class based React Components</a> in their code. It will be important for us to still understand class Components, but know how to write Components with Hooks for new code to take advantage of latest React functionality. If you want to explore how to use state and lifecycles in React Class based Components you can read <a href="https://legacy.reactjs.org/docs/state-and-lifecycle.html" target="_blank">this documentation</a>.
 
@@ -41,9 +40,8 @@ React components can communicate with each other via props, a parent may pass in
 1. React Hooks provide all the functionality we need from React Class based Components that we didn't previously have with Functional Components of the past.
 2. `useState` hook replaces `this.state` and `this.setState` with a new pair of variables for getting and setting a specific state value.
 3. Note how the React team encourages us to use multiple `useState` Hooks in the same component for each type of state. There is no need to store all of a component's state in a single `this.state` object like we did previously.
-4. Returning a cleanup function from `useEffect` is advanced functionality and we will not be using it as often at Rocket
-5. We will not be writing custom Hooks at Rocket; feel free to skim through the "Building Your Own Hooks" section
-6. We will learn about `useContext` and `useReducer` hooks in a later submodule.
+4. Returning a cleanup function from `useEffect` is advanced functionality, we will be exploring it in later lessons
+5. We will learn about `useContext` and `useReducer` hooks in a later submodule.
 
 ## <a href="https://react.dev/reference/rules/rules-of-hooks" target="_blank">Rules of Hooks</a>
 

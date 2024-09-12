@@ -2,11 +2,9 @@
 
 ## Learning Objectives
 
-- Create a new React application using Vite and explain its key file structure.
-
-- Demonstrate the use of JSX to combine JavaScript and HTML-like markup in React components.
-
-- Apply JavaScript logic within JSX using curly braces to create dynamic content.
+1. Create a new React application using Vite and explain its key file structure.
+2. Demonstrate the use of JSX to combine JavaScript and HTML-like markup in React components.
+3. Apply JavaScript logic within JSX using curly braces to create dynamic content.
 
 ## <a href="https://react.dev/reference/react-dom/client/createRoot#usage" target="_blank">Hello World</a>
 

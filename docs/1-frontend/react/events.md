@@ -2,11 +2,9 @@
 
 ## Learning Objectives
 
-- Identify the steps required to handle events in React applications using JSX.
-
-- Implement event listeners and callback functions to respond to user interactions in React components.
-
-- Apply techniques to manage event propagation and prevent default behaviors in React event handling.
+1. Identify the steps required to handle events in React applications using JSX.
+2. Implement event listeners and callback functions to respond to user interactions in React components.
+3. Apply techniques to manage event propagation and prevent default behaviors in React event handling.
 
 ## <a href="https://react.dev/learn/responding-to-events" target="_blank">Handling Events</a>
 

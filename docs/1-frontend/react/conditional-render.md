@@ -2,11 +2,9 @@
 
 ## Learning Objectives
 
-- Differentiate between various methods of conditional rendering in React components.
-
-- Apply conditional statements and ternary operators to dynamically render JSX based on props or component state.
-
-- Design React components that adapt their UI based on different conditions, enhancing the user experience.
+1. Differentiate between various methods of conditional rendering in React components.
+2. Apply conditional statements and ternary operators to dynamically render JSX based on props or component state.
+3. Design React components that adapt their UI based on different conditions, enhancing the user experience.
 
 ## <a href="https://react.dev/learn/conditional-rendering" target="_blank">Conditional Rendering</a>
 

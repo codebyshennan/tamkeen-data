@@ -24,13 +24,13 @@ Go to the main.jsx within your React application and this line at the top of the
 import 'bootstrap/dist/css/bootstrap.min.css';
 ```
 
-This line imports the CSS for bootstrap into your application, any child components of this file will be able to access and utilise React-Bootstrap styling, pre-made components, utilities and alignment system.&#x20;
+This line imports the CSS for bootstrap into your application, any child components of this file will be able to access and utilise React-Bootstrap styling, pre-made components, utilities and alignment system.
 
 Now that Bootstrap has been implemented in your application it might be a good idea to look at some of the pre-styled components you can implement, look at some examples and usage <a href="https://react-bootstrap.github.io/docs/components/accordion" target="_blank">here</a>.
 
 To showcase implementing React Bootstrap into a React Application we will implement some new styled buttons on our previously edited boilerplate code from our previous section.
 
-### React Bootstrap Component&#x20;
+### React Bootstrap Component
 
 We will import Button from react-bootstrap such that we get pre-styled buttons without much effort. Alter the App.js file to reflect code below:
 
@@ -129,10 +129,11 @@ Here is a simple implementation of the react-bootstrap grid system
 
 <figure><img src="../../.gitbook/assets/Screenshot 2023-10-26 at 10.48.04 AM.png" alt=""><figcaption><p>Simple Grid System</p></figcaption></figure>
 
-It is possible to make the `Col` Components respond to the windows width, based off the breakpoints that were pointed out earlier. This allows columns to wrap and resize their content to ensure that data is shown exactly as intended, to do this we need to make use of Bootstraps breakpoint properties on our `Col` Components as shown below. You are able to apply as many breakpoint properties on a `Col` as are needed.&#x20;
+It is possible to make the `Col` Components respond to the windows width, based off the breakpoints that were pointed out earlier. This allows columns to wrap and resize their content to ensure that data is shown exactly as intended, to do this we need to make use of Bootstraps breakpoint properties on our `Col` Components as shown below. You are able to apply as many breakpoint properties on a `Col` as are needed.
 
-<pre class="language-jsx"><code class="lang-jsx">&#x3C;Container>
-          &#x3C;Row>
+```jsx
+<pre class="language-jsx"><code class="lang-jsx"><Container>
+          <Row>
           
           {/* 
             xl = On an extra large screen the Col takes up the full width of the Container
@@ -142,27 +143,28 @@ It is possible to make the `Col` Components respond to the windows width, based 
             This allows the columns to dynamically alter depending on the window size that the user is using. 
           */}
             
-            &#x3C;Col style={columnStyle} xl={12} lg={6} md={4} sm={3}>
+            <Col style={columnStyle} xl={12} lg={6} md={4} sm={3}>
               1 of 6
-            &#x3C;/Col>
-            &#x3C;Col style={columnStyle} xl={12} lg={6} md={4} sm={3}>
+            </Col>
+            <Col style={columnStyle} xl={12} lg={6} md={4} sm={3}>
               2 of 6
-            &#x3C;/Col>
-            &#x3C;Col style={columnStyle} xl={12} lg={6} md={4} sm={3}>
+            </Col>
+            <Col style={columnStyle} xl={12} lg={6} md={4} sm={3}>
               3 of 6
-            &#x3C;/Col>
-            &#x3C;Col style={columnStyle} xl={12} lg={6} md={4} sm={3}>
+            </Col>
+            <Col style={columnStyle} xl={12} lg={6} md={4} sm={3}>
               4 of 6
-            &#x3C;/Col>
-            &#x3C;Col style={columnStyle} xl={12} lg={6} md={4} sm={3}>
+            </Col>
+            <Col style={columnStyle} xl={12} lg={6} md={4} sm={3}>
               5 of 6
-            &#x3C;/Col>
-            &#x3C;Col style={columnStyle} xl={12} lg={6} md={4} sm={3}>
+            </Col>
+            <Col style={columnStyle} xl={12} lg={6} md={4} sm={3}>
               6 of 6
-            &#x3C;/Col>
-          &#x3C;/Row>
-<strong>        &#x3C;/Container>
+            </Col>
+          </Row>
+<strong>        </Container>
 </strong></code></pre>
+```
 
 Below is the output of the code above, depending on the size of the window.
 
@@ -174,7 +176,7 @@ Below is the output of the code above, depending on the size of the window.
 
 <figure><img src="../../.gitbook/assets/Screenshot 2023-10-26 at 11.07.50 AM.png" alt=""><figcaption><p>Small Screen ≥576px</p></figcaption></figure>
 
-The Grid system in `react-bootstrap` affords developers an easy way to dynamically resize content dependant on their users screens. This system of Bootstrap Components comes together to build fully responsive webpages, it should be noted that the underlying system used here is flexbox. This system is a fantastic way to ensure that an applications content can be visible to users across multiple device sizes without the need to add in hundreds of @mediaqueries.&#x20;
+The Grid system in `react-bootstrap` affords developers an easy way to dynamically resize content dependant on their users screens. This system of Bootstrap Components comes together to build fully responsive webpages, it should be noted that the underlying system used here is flexbox. This system is a fantastic way to ensure that an applications content can be visible to users across multiple device sizes without the need to add in hundreds of `@mediaqueries`.
 
 
 

@@ -1,11 +1,24 @@
 # React Deployment
 
-Please follow one of the following metbods.
+## Learning Objectives
 
-## Vitejs Deployment: Github Pages using the gh-pages CLI tool
+1. Deploy a ReactJS using Github Pages
+2. Write yaml files that would contain jobs for deployment
 
-Navigate into your project via a CLI tool (ubuntu/ terminal)\
-Go through gitflow and save your current code.&#x20;
+## Deployment
+
+Deployment is the process of making an application available to the public. This is typically done by hosting the application in a platform. 
+
+Github has its own deployment platform which is called Github Pages. The application is hosted directly from a GitHub repository and the developer can edit, then push, and any changes would be live.
+
+Deployment to Github pages can be done in the following ways:
+1. via gh-pages CLI tool
+2. via git push
+
+### Vitejs Deployment: Github Pages using the gh-pages CLI tool
+
+Navigate into your project via a CLI tool (ubuntu terminal / powershell)
+Go through gitflow and save your current code.
 
 ```
 git add
@@ -13,94 +26,97 @@ git commit -m 'commit-message'
 git push 
 ```
 
-Next, run the following command:&#x20;
+Next, run the following command:
 
 `npm run build`
 
-You can check to see if your build worked by running the command:&#x20;
+You can check to see if your build worked by running the command:
 
 `npm run preview`
 
-\
 You should be able to see your application within your browser at <a href="http://localhost:4173/" target="_blank">`http://localhost:4173`</a>
 
-After validating that this works, we will install the required packages:\
+After validating that this works, we will install the required packages:
+
+
 Run the command: `npm install gh-pages --save-dev`
 
-Now we will setup the package.json:\
-Add these scripts into scrips:
 
-```
+Now we will setup the package.json:
+
+
+Add these scripts into scripts:
+
+```json
 "predeploy": "npm run build",
 "deploy": "gh-pages -d dist",
 ```
 
-Now we will configure the vite.config.js:\
-We need to add a key value pair for gh-pages:
+Now we will configure the `vite.config.js` file:
+We need to add a key-value pair for gh-pages:
 
-The key will be base, the value should be ‘/name-of-your-repo’\
-The configure should look something like:
+The key will be base, the value should be 'name-of-your-repo'
+The configuration should look something like:
 
-```
+```js
 export default defineConfig({
   plugins: [react()],
-  base: "/ftbc14_vitejs/",
+  base: "/sample_vitejs/",
 });
 ```
 
 Now you should be able to run the command: `npm run deploy`
 
 
-## Vitejs Deployment: Github Pages through git push
+### Vitejs Deployment: Github Pages through git push
 
-Navigate into your project via a CLI tool (ubuntu/ terminal)
+Navigate into your project via a CLI tool (ubuntu terminal / powershell)
 
-Go through gitflow and save your current code.&#x20;
+Go through gitflow and save your current code.
 
-```
+```sh
 git add
 git commit -m 'commit-message'
 git push 
 ```
 
-Run the following command:&#x20;
+Run the following command:
 
 `git checkout -b gh-pages`
 
-Next, run the following command:&#x20;
+Next, run the following command:
 
 `npm run build`
 
-You can check to see if your build worked by running the command:&#x20;
+You can check to see if your build worked by running the command:
 
 `npm run preview`
 
-\
+
 You should be able to see your application within your browser at <a href="http://localhost:4173/" target="_blank">`http://localhost:4173`</a>
 
-Now we will configure the vite.config.js:\
+Now we will configure the `vite.config.js` file:
 We need to add a key value pair for deployment:
 
-The key will be base, the value should be ‘/name-of-your-repo’\
-The configure should look something like:
+The key will be base, the value should be 'name-of-your-repo'
+The configuration should look something like:
 
-```
+```js
 export default defineConfig({
   plugins: [react()],
-  base: "/ftbc14_vitejs/",
+  base: "/sample_vitejs/",
 });
 ```
 
-Within your local machine we need to make a new github workflow within a yml file.
+Within your local machine we need to make a new github workflow within a yml file. Here are the steps:
 
-\
-Create a new folder named `.github`\
-Within the newly created directory create a workflows folder\
-In the workflows folder create a new file named: `jekyll-gh-pages.yml`
+1. Create a new folder named `.github`
+2. Within the newly created directory create a `workflows` folder
+3. In the `workflows` folder create a new file named: `jekyll-gh-pages.yml`
 
-Paste in this file:
+4. Paste in this file:
 
-```
+```yml
 # Simple workflow for deploying static content to GitHub Pages
 name: Deploy static content to Pages
 
@@ -154,7 +170,11 @@ jobs:
         uses: actions/deploy-pages@v2
 ```
 
-In your GitHub, repo goto pages and then choose source as GitHub actions, not deploy from branch. Now you should be able to deploy when you push to this branch, before this will work we need to go through git flow (add commit and push)\
-Then run the command:&#x20;
+5. In your GitHub repository, go to `Settings -> Pages` and then choose source as `GitHub Actions`, not deploy from branch. 
+
+6. Now you should be able to deploy when you push to this branch, before this will work we need to go through git flow (add commit and push)
+Then run the command:
 
 `git push origin gh-pages`
+
+*Note: make sure you are working on the gh-pages branch when pushing changes to github for the job to run.*
