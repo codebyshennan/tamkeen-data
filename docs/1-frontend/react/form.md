@@ -17,7 +17,7 @@ HTML forms and their elements afford developers the opportunity to capture user 
 
 <!-- ## Post-Class Exercises: Codecademy React 101
 
-Complete all exercises in the following Codecademy lessons when they are assigned in the Rocket course schedule.
+Complete all exercises in the following Codecademy lessons.
 
 1. <a href="https://www.codecademy.com/courses/react-101/lessons/react-forms/exercises/react-forms-intro" target="_blank">React Forms</a> -->
 

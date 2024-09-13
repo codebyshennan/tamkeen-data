@@ -1,7 +1,3 @@
----
-description: ReactJs Styling
----
-
 # Styling in ReactJs
 
 Learning Objectives

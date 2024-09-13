@@ -14,5 +14,5 @@
 
 We will use React's official <a href="https://react.dev/learn" target="_blank">guide</a> and <a href="https://react.dev/learn/tutorial-tic-tac-toe" target="_blank">tutorial</a> to learn React, and the <a href="https://vitejs.dev/guide/" target="_blank">Vitejs</a> environment to scaffold our first React apps. Vite is a build tool that provides a fast and lean development experience for modern web projects. Vite leverages new advancements in the JavaScript ecosystems, the ability of native ES modules within the browser and the rise of JavaScript tools written in compile-to-native languages. This is because browsers do not read React natively; they read HTML, CSS and JS, not JSX.
 
-The following sections provide Rocket's annotations to React's official <a href="https://react.dev/learn" target="_blank">guide</a> and <a href="https://react.dev/learn/tutorial-tic-tac-toe" target="_blank">tutorial</a> to explain concepts that the React team assumes readers know.
+The following sections provide annotations to React's official <a href="https://react.dev/learn" target="_blank">guide</a> and <a href="https://react.dev/learn/tutorial-tic-tac-toe" target="_blank">tutorial</a> to explain concepts that the React team assumes readers know.
 

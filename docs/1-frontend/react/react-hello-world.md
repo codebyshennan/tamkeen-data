@@ -28,9 +28,8 @@ There are some key files that you should be aware of within this starter code. N
 
 1. Within the src/main.jsx file `document.getElementById('root')` is a DOM (Document Object Model) command that retrieves the HTML element with ID "root". React renders our app inside that element. React removes the need to write DOM code and the above command is the only DOM command we will need.
 2. <mark style="color:red;">**Note**</mark> that if you want to add and use images within your Vite React applications please add the images into the `public` directory and import as usual.
-3. Rocket recommends that you familiarise yourself with as many of the provided examples as you can to understand and digest the relevant concepts
-4. Rocket recommends completing most of the "Learn React" guide before attempting the "Tutorial: Tic Tac Toe" so the tutorial's concepts sink in better
-5. If there is anything you do not understand in the guide, please let your SL know and we can include it in these notes!
+3. Familiarise yourself with as many of the provided examples as you can to understand and digest the relevant concepts
+4. Try to complete the "Learn React" guide before attempting the "Tutorial: Tic Tac Toe" so the tutorial's concepts sink in better.
 
 ## <a href="https://react.dev/learn/writing-markup-with-jsx" target="_blank">Introducing JSX</a>
 
@@ -38,7 +37,8 @@ JSX or JavaScript and XML affords developers the opportunity to write HTML-like 
 
 1. JSX elements may only return a single root element, to display multiple elements just wrap them within a single parent tag.
 2. Close all HTML tags.
-3. DOM stands for "Document Object Model", which is a JavaScript representation of HTML rendered on a web page. Frontend frameworks like React use the DOM to programmatically manipulate UI without manually specifying HTML. Rocket recommends <a href="https://www.w3schools.com/js/js_htmldom.asp" target="_blank">W3School's intro to JavaScript HTML DOM</a> (just the 1st page) for a primer. For Rocket's Bootcamp we can stop at DOM Intro without reading W3School's subsequent pages on DOM.
+3. DOM stands for "Document Object Model", which is a JavaScript representation of HTML rendered on a web page. Frontend frameworks like React use the DOM to programmatically manipulate UI without manually specifying HTML. You can read through <a href="https://www.w3schools.com/js/js_htmldom.asp" target="_blank">W3School's intro to JavaScript HTML DOM</a> (just the 1st page) for a primer.
+
 4. Use camelCase for most if its props,<a href="https://react.dev/learn/writing-markup-with-jsx#3-camelcase-salls-most-of-the-things" target="_blank"> click here for more details</a>. To apply CSS classes to JSX elements we will need to use the `className` keyword instead of `class`, which we used with vanilla HTML. This is because `class` is a reserved keyword in JS used to declare classes (which we will see in 4: Components and Props below).
 
 ## <a href="https://react.dev/learn/javascript-in-jsx-with-curly-braces" target="_blank">JavaScript in JSX</a>

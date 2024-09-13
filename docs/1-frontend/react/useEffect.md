@@ -9,11 +9,11 @@
 
 ## Using the <a href="https://react.dev/reference/react/useEffect">`useEffect`</a> Hook
 
-At Rocket we will use `useEffect` instead of the lifeCycleMethod `componentDidMount` for setting up subscriptions such as Firebase listeners and for data fetching. `useEffect` also allows us to perform functionality that was previously provided by `componentDidUpdate` and `componentWillUnmount`, but we will use that functionality less often.
+We will use `useEffect` instead of the lifeCycleMethod `componentDidMount` for setting up subscriptions such as Firebase listeners and for data fetching. `useEffect` also allows us to perform functionality that was previously provided by `componentDidUpdate` and `componentWillUnmount`, but we will use that functionality less often.
 
 1. As the docs mention, we can think of `useEffect` as running after the component renders.
 2. A memory leak is when data that we use in parts of our apps is not properly cleaned up after the app stops using those parts. This can cause our apps to run slowly and even crash if the "leaks" cause our computers to run out of memory while running our apps. This will rarely happen to use in practice because JavaScript has automatic memory management and our apps will not be the most complex for now.
-3. Returning a cleanup function from `useEffect` is optional and we will not use it often at Rocket.
+3. Returning a cleanup function from `useEffect` is optional..
 4. No need to worry too much about "Optimizing Performance by Skipping Effects"; we will rarely need this and we can come back to it once we're more familiar with using `useEffect` and Hooks in general.
 
 ## Sample useEffect Hook
@@ -36,7 +36,7 @@ While developing React components it is possible to embed executable code within
 
 <!-- ## Post-Class Exercises: Codecademy React 101
 
-Complete all exercises in the following Codecademy lessons when they are assigned in the Rocket course schedule.
+Complete all exercises in the following Codecademy lessons when they are assigned in the course schedule.
 
 1. React Components
    1. <a href="https://www.codecademy.com/courses/react-101/lessons/your-first-react-component/exercises/hello-world-component" target="_blank">Your First React Component</a>

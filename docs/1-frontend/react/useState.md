@@ -12,7 +12,7 @@
 
 We will use the `useState` Hook most often. Clear explanations of what the `useState` Hook is and how to use it.
 
-> Rocket strongly recommends following the naming convention of `X` and `setX` as the de-structured state variable names from `useState`. This makes our code more readable because other engineers will immediately know what each variable is for.
+> Follow the naming convention of `X` and `setX` as the de-structured state variable names from `useState`. This makes our code more readable because other engineers will immediately know what each variable is for.
 
 ### Sample `useState` Hook
 
@@ -23,7 +23,7 @@ React Hooks `useState`
 
 While creating your application and enlarging functionalities you will find that you are developing your components and states into much larger and complex files than you had before. IT is important to manage state effectively and reduce redundant or duplicated states within your application.
 
-1. When using `useState` to manage component state Rocket advises following these steps
+1. When using `useState` to manage component states, you can follow these steps
    - Import the `useState` hook from the react package, at the top of the component file
    - Within your functional component declare a state variable and the updater function using the `useState` hook. As shown on <a href="https://react.dev/learn/managing-state#reacting-to-input-with-state" target="_blank">line 4</a>.
    - The initialValue of the state is passed into `useState`.
