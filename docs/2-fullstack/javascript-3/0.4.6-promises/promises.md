@@ -1,4 +1,4 @@
-# 0.4.6: Promises
+# Promises
 
 ## Learning Objectives
 
@@ -59,7 +59,7 @@ Sometimes we may wish to perform multiple network calls sequentially. For exampl
 
 ```javascript
 axios
-  .post(`https://myapp.com/change-password`, { password: "rocket123" })
+  .post(`https://myapp.com/change-password`, { password: "sample123" })
   .then((response) => axios.get(`https://myapp.com/send-email`))
   // Render password change success
   .then((response) => console.log("success!"));
@@ -75,7 +75,7 @@ axios
 
 ```javascript
 axios
-  .post(`https://myapp.com/change-password`, { password: "rocket123" })
+  .post(`https://myapp.com/change-password`, { password: "sample123" })
   .then((response) => axios.get(`https://myapp.com/send-email`))
   // Render password change success
   .then((response) => console.log("success!"))
