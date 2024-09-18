@@ -1,4 +1,4 @@
-# CSS Intro
+# CSS Introduction
 
 ## Learning Objectives
 
