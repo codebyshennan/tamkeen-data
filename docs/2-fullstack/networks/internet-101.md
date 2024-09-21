@@ -1,4 +1,4 @@
-# Internet 101 for beginners
+# Internet 101
 
 ## Learning Objectives
 
