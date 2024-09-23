@@ -189,4 +189,53 @@ function App(){
 
 ```
 
-# TODO: Add ScrollView
+You would notice that the TextInput might not be visible. This is because that it is located at the bottom of the app which the screen doesn't show. To mitigate this, we will allow the view to be scrollable. We do this by converting the View component into using the ScrollView component.
+
+```js
+import {
+  StyleSheet, Text, View, Image, TextInput, ScrollView // Add the ScrollView in our import.
+} from "react-native";
+
+//and replace the View in the JSX with ScrollView
+```
+
+After replacing the View with the ScrollView component, your app show allow scrolling and you would be able to scroll and see the TextInput component.
+
+## Flexbox
+
+In this part, we will only use the View component and Stylesheet. This example is taken from the [official React Native Flexbox documentation](https://reactnative.dev/docs/flexbox#flex).
+
+Create a new React Native app called flexboxApp and import the necessary components:
+
+```js
+import {View, StyleSheet} from "react-native";
+
+function App (){
+  return (
+    <View
+      style={[
+        styles.container,
+        {
+          // Try setting `flexDirection` to `"row"`.
+          flexDirection: "column",
+        },
+      ]}
+    >
+      <View style={{ flex: 1, backgroundColor: "red" }} />
+      <View style={{ flex: 2, backgroundColor: "darkorange" }} />
+      <View style={{ flex: 4, backgroundColor: "green" }} />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+});
+
+export default App
+```
+
+Try playing around with the number of views and flex values. Do remember to check the documentation for additional flex properties.
