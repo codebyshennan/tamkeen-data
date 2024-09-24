@@ -2,20 +2,21 @@
 
 ## Learning Objectives
 1. Identify the different components that React Native has out of the box
-2. Use React Native components to create a simple profile page
-3. Apply styling and flexbox to a React Native application
+2. Use React Native components to create a user interface
+3. Recall how to use `useState` hook to get inputs from a text input
+4. Apply styling and flexbox to a React Native application
 
 ## Introduction
 
-React Native provides a number of built-in Core Components ready for you to use in your app. They are separated into several categories such as User Interfaces and List Views. Feel free to explore the documentation into this [page](https://reactnative.dev/docs/components-and-apis#basic-components)
+React Native provides a number of built-in Core Components ready for you to use in your app. Components follow the same convention with React. They are separated into several categories such as User Interfaces and List Views. Feel free to explore the documentation into this [page](https://reactnative.dev/docs/components-and-apis#basic-components)
 
 For this lesson, we will be taking a look at the following basic components:
-- View
-- Text
-- Image
-- TextInput
-- ScrollView
-- StyleSheet
+- View - The most fundamental component for building a UI
+- Text - A React component for displaying text.
+- Image - A React component for displaying different types of images
+- TextInput - A React component for inputting text into the app via a keyboard
+- StyleSheet - A React component used to add an abstraction layer for styling
+- ScrollView - A React component that is used as a wrapper to enable scrolling
 
 ## App Creation
 
@@ -29,9 +30,13 @@ Open App.js and code the next sections there. Note that the .js format for our R
 
 ## Text and View components
 
-The most fundamental component for building a UI, **View** is a container that supports layout with flexbox, style, some touch handling, and accessibility controls. It maps directly to the native view equivalent on whatever platform React Native is running on, whether that is a UIView, android.view, etc.
+The most fundamental component for building a UI, **View** is a container that supports layout with flexbox, style, some touch handling, and accessibility controls. 
+
+It maps directly to the native view equivalent on whatever platform React Native is running on, whether that is a UIView, android.view, etc.
 
 The **Text** component is a React component for displaying text. Text supports nesting, styling, and touch handling.
+
+Components should be first imported from `react-native` before they can used in the app.
 
 Let's try to use the two components in our application:
 
@@ -89,15 +94,15 @@ return (
 
 ### Using images online
 
-The Image component can also use images online, however, it has to be styled first before the image can be used. In order to style components, the StyleSheet component can be used.
+The Image component can also use images online, however, it has to be styled first before the image can be used by specifying the dimensions of the image. In order to style components, the StyleSheet component can be used.
 
 Import the StyleSheet component from react-native:
 
 ```js
-import { Text, View, Image, StyleSheet } from "react-native";
+import { Text, View, Image, StyleSheet } from "react-native"; //Add the StyleSheet in the import
 ```
 
-Create a styles object outside of the function component:
+Create a `styles` object outside of the function component:
 
 ```js
 function App(){
@@ -112,7 +117,7 @@ const styles = StyleSheet.create({
 });
 ```
 
-Then add the Image component
+Then add the Image component, for images from the web, provide a `style` and `source` with the `uri` property. 
 
 ```js
 return (
@@ -133,7 +138,9 @@ See the results of adding the two images.
 
 ## TextInput and ScrollView components
 
-The TextInput component is a foundational component for inputting text into the app via a keyboard. Props provide configurability for several features, such as auto-correction, auto-capitalization, placeholder text, and different keyboard types, such as a numeric keypad. This is not something new to us. To have TextInput component working, we have to use a state hook `useState`.
+The TextInput component is a foundational component for inputting text into the app via a keyboard. Props provide configurability for several features, such as auto-correction, auto-capitalization, placeholder text, and different keyboard types, such as a numeric keypad. 
+
+This is not something new to us. To have TextInput component working, we have to use a state hook `useState`.
 
 Import the TextInput component from react-native:
 
@@ -182,9 +189,11 @@ const styles = StyleSheet.create({
 Implement state management via useState:
 ```js
 import React, { useState } from "react"; // the import
+//other imports
 
 function App(){
     const [text, setText] = useState(null); 
+    ...
 }
 
 ```

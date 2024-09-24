@@ -44,6 +44,7 @@ Configure the `app.json` to allow permissions for the camera:
 
 ```json
 //app.json
+//Add the part for the plugins
 {
   "expo": {
     "plugins": [
