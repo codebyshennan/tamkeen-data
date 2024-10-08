@@ -4,10 +4,10 @@
 
 Python is a high-level, interpreted, and general-purpose programming language. It is known for its simplicity and readability, which makes it an excellent choice for beginners. Python is also versatile and can be used for a wide range of applications, including web development, data analysis, artificial intelligence, and scientific computing.
 
-Python is consistently ranked in the top 3 most popular programming language (according to rankings suchs as the TIOBE Index, the PYPL Popularity of Programming Language Index and others). It is widely used by companies such as Google, Facebook, Instagram, Spotify, and Netflix.
+Python is consistently ranked in the top 3 most popular programming language (according to rankings suchs as the TIOBE Index and others). It is widely used by companies such as Google, Facebook, Instagram, Spotify, and Netflix.
 
-![stackoverflow](./assets/stackoverflow-ranking.png) ![redmonk](./assets/redmonk-ranking.jpeg)
-![tiobe](./assets/tiobe-index.png)
+![redmonk](./assets/redmonk-ranking.jpg)
+![tiobe](./assets/tiobe-ranking.webp)
 
 ## History
 
