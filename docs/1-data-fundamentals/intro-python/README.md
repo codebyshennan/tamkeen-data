@@ -25,3 +25,14 @@ Python has several advantages that make it a popular choice among programmers:
 - **Libraries**: Python has a rich ecosystem of libraries and frameworks that make it easy to build complex applications.
 
 However, Python is not without its drawbacks. It is slower than some other programming languages, such as C and C++, and may not be the best choice for performance-critical applications. Despite this, Python's simplicity, versatility, and community support make it an excellent choice for beginners and experienced programmers alike.
+
+## Chapter Outline
+
+This chapter will cover the following topics:
+
+1. Basic Syntax and Data Types
+2. Data Structures
+3. Conditions and Iterations
+4. Functions
+5. Classes and Objects
+6. Modules
