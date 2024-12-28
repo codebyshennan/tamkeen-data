@@ -2,7 +2,7 @@
 
 Visual Studio Code (VS Code) is a lightweight but powerful source code editor that runs on your desktop. It comes with built-in support for JavaScript, TypeScript, and Node.js, and has a rich ecosystem of extensions for other languages including Python.
 
-> **Note:** This guide assumes you have Anaconda installed on your system. If not, please refer to the [Anaconda installation instructions](./anaconda.md) before proceeding.
+> **Note:** This guide assumes you have Anaconda installed on your system. If not, please refer to the `Getting Started with Anaconda` before proceeding.
 
 ## Setting Up Python in VS Code
 

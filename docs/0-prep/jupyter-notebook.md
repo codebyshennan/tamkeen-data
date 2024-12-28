@@ -2,6 +2,8 @@
 
 Jupyter Notebook is an open-source web application that allows you to create and share documents containing live code, equations, visualizations, and narrative text. It's widely used in data science for data cleaning, transformation, numerical simulation, statistical modeling, and more.
 
+> **Note:** This guide assumes you have Anaconda installed on your system. If not, please refer to the `Getting Started with Anaconda` before proceeding.
+
 ![notebook](./assets/jupyter-notebook.jpg)
 
 ## Cell Types
