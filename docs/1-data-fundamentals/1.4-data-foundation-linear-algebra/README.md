@@ -1,4 +1,4 @@
-# Data Foundation
+# Data Foundation with Numpy
 
 ## Introduction to Data Types
 

@@ -1,4 +1,4 @@
-# Assignment: Introduction to Data Analytics and Data Science
+# Quiz: Introduction to Data Analytics and Data Science
 
 ## Questions
 
