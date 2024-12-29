@@ -14,9 +14,9 @@ A **probability distribution function** is a formula that calculates the probabi
 The **binomial distribution** models the number of successes in a series of independent yes/no experiments (trials) with a constant probability of success.
 
 - **Trial**: A single independent experiment with two possible outcomes (success/failure).
-- **$ n $**: Total number of trials.
-- **$ p $**: Probability of success in each trial.
-- **$ k $**: The number of successes we are interested in.
+- **$n$**: Total number of trials.
+- **$p$**: Probability of success in each trial.
+- **$k$**: The number of successes we are interested in.
 
 ### Binomial Probability Formula
 
@@ -26,7 +26,7 @@ $$
 P(X = k) = \binom{n}{k} p^k (1 - p)^{n - k}
 $$
 
-where $ \binom{n}{k} $ is the binomial coefficient:
+where $\binom{n}{k}$ is the binomial coefficient:
 
 $$
 \binom{n}{k} = \frac{n!}{k!(n - k)!}
@@ -35,10 +35,13 @@ $$
 ### Mean and Variance of a Binomial Distribution
 
 - **Mean (Expected Value)**:
+
   $$
   \mu = n \cdot p
   $$
+
 - **Variance**:
+
   $$
   \sigma^2 = n \cdot p \cdot (1 - p)
   $$
@@ -51,7 +54,7 @@ $$
 
 The **Poisson distribution** models the probability of a given number of events occurring in a fixed interval of time or space, assuming that these events happen at a known constant average rate and independently of the time since the last event.
 
-- **$ \lambda $**: The average rate of events in a given interval (also the mean of the distribution).
+- **$\lambda$**: The average rate of events in a given interval (also the mean of the distribution).
 
 ### Poisson Probability Formula
 
@@ -90,8 +93,8 @@ $$
 
 The **normal distribution** is a continuous probability distribution that is symmetrical and bell-shaped. It is often used to model real-world phenomena such as heights, weights, and test scores.
 
-- **$ \mu $**: Mean of the distribution.
-- **$ \sigma $**: Standard deviation, which determines the spread of the distribution.
+- **$\mu$**: Mean of the distribution.
+- **$\sigma$**: Standard deviation, which determines the spread of the distribution.
 
 ### Probability Density Function (PDF) of Normal Distribution
 
@@ -103,9 +106,9 @@ $$
 
 ### Properties of the Normal Distribution
 
-- The curve is symmetric about the mean $ \mu $.
+- The curve is symmetric about the mean $\mu$.
 - The total area under the curve is 1.
-- The mean $ \mu $ and standard deviation $ \sigma $ define the shape of the distribution.
+- The mean $\mu$ and standard deviation $\sigma$ define the shape of the distribution.
 
 ### Standard Normal Distribution
 

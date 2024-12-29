@@ -2,7 +2,7 @@
 
 ## Random Variables
 
-A **random variable** is a variable whose value is determined by the outcome of an experiment that involves chance. It is denoted by capital letters (e.g., $ X $).
+A **random variable** is a variable whose value is determined by the outcome of an experiment that involves chance. It is denoted by capital letters (e.g., $X$).
 
 ### Types of Random Variables
 
@@ -17,7 +17,7 @@ A **probability distribution** represents the probabilities of all possible outc
 
 ### Notation
 
-- $ P(X = x) $: The probability that the random variable $ X $ takes the specific value $ x $.
+- $P(X = x)$: The probability that the random variable $X$ takes the specific value $x$.
 
 ### Types of Probability Distributions
 
@@ -29,10 +29,13 @@ A **probability distribution** represents the probabilities of all possible outc
 #### Important Properties
 
 - For a discrete probability distribution, the sum of all probabilities is 1:
+
   $$
   \sum P(X = x) = 1
   $$
+
 - For a continuous probability distribution, the area under the curve is 1:
+
   $$
   \int_{-\infty}^{\infty} f(x) dx = 1
   $$
@@ -47,7 +50,7 @@ $$
 
 ## Expected Value and Variance
 
-### Expected Value $ E(X) $
+### Expected Value $E(X)$
 
 The expected value is the **mean** of a probability distribution, calculated as a weighted average:
 
@@ -63,15 +66,15 @@ $$
 
 ### Linearity of Expectation
 
-For any two random variables $ X $ and $ Y $:
+For any two random variables $X$ and $Y$:
 
 $$
 E(X + Y) = E(X) + E(Y)
 $$
 
-This holds regardless of whether $ X $ and $ Y $ are dependent or independent.
+This holds regardless of whether $X$ and $Y$ are dependent or independent.
 
-### Variance $ \text{Var}(X) $
+### Variance $\text{Var}(X)$
 
 The variance is a measure of how spread out the distribution is from its mean:
 

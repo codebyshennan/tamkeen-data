@@ -6,8 +6,8 @@
 
 A **correlation** refers to a relationship between two variables where one can predict the other. There are two types of correlations:
 
-1. **Positive correlation**: As variable $ A $ increases, variable $ B $ also increases.
-2. **Negative correlation**: As variable $ A $ increases, variable $ B $ decreases (and vice versa).
+1. **Positive correlation**: As variable $A$ increases, variable $B$ also increases.
+2. **Negative correlation**: As variable $A$ increases, variable $B$ decreases (and vice versa).
 
 **Important Note**:  
 Correlation does not imply causation, meaning that just because two variables are correlated, one does not necessarily cause the other. However, if causation is proven, correlation must exist.
@@ -16,7 +16,9 @@ $$
 \text{Correlation} \neq \text{Causation}
 $$
 
-$$ \text{Causation} \implies \text{Correlation} $$
+$$
+\text{Causation} \implies \text{Correlation}
+$$
 
 ![corr-vs-cause](./assets/correlation-causation.png)
 
@@ -56,29 +58,31 @@ A **scatter plot** is a graphical representation that shows the relationship bet
 ### Relationships in Scatter Plots
 
 1. **Linear relationship**: The points on the scatter plot form a line.
-2. **Positive correlation (direct relationship)**: As $ x $ increases, $ y $ also increases.
-3. **Negative correlation (inverse relationship)**: As $ x $ increases, $ y $ decreases.
-4. **Zero correlation**: No discernible relationship between $ x $ and $ y $.
+2. **Positive correlation (direct relationship)**: As $x$ increases, $y$ also increases.
+3. **Negative correlation (inverse relationship)**: As $x$ increases, $y$ decreases.
+4. **Zero correlation**: No discernible relationship between $x$ and $y$.
 
 ### Correlation Coefficient
 
-The **correlation coefficient** ($ r $) measures the strength and direction of the linear relationship between two variables. The value of $ r $ ranges from -1 to 1.
+The **correlation coefficient** ($r$) measures the strength and direction of the linear relationship between two variables. The value of $r$ ranges from -1 to 1.
 
 $$
 -1 \leq r \leq 1
 $$
 
-- $ r = 1 $: Perfect positive correlation
-- $ r = -1 $: Perfect negative correlation
-- $ r = 0 $: No correlation
+- $r = 1$: Perfect positive correlation
+- $r = -1$: Perfect negative correlation
+- $r = 0$: No correlation
 
-A negative $ r $ indicates an inverse relationship, while a positive $ r $ indicates a direct relationship. Values close to zero suggest weak or no correlation.
+A negative $r$ indicates an inverse relationship, while a positive $r$ indicates a direct relationship. Values close to zero suggest weak or no correlation.
 
 $$
 \text{For strong positive correlation, } r \approx 1
 $$
 
-$$\text{For strong negative correlation, } r \approx -1$$
+$$
+\text{For strong negative correlation, } r \approx -1
+$$
 
 ![correlation](./assets/correlation.png)
 
@@ -92,11 +96,11 @@ $$
 
 Where:
 
-- $ X_i $ and $ Y_i $ are the individual data points,
-- $ \overline{X} $ and $ \overline{Y} $ are the means of $ X $ and $ Y $, and
-- $ n $ is the number of data points.
+- $X_i$ and $Y_i$ are the individual data points,
+- $\overline{X}$ and $\overline{Y}$ are the means of $X$ and $Y$, and
+- $n$ is the number of data points.
 
-The formula for the correlation coefficient $ r $ is:
+The formula for the correlation coefficient $r$ is:
 
 $$
 r = \frac{\text{Cov}(X, Y)}{\sigma_X \sigma_Y}
@@ -104,6 +108,6 @@ $$
 
 Where:
 
-- $ \text{Cov}(X, Y) $ is the **covariance** of the two variables $ X $ and $ Y $,
-- $ \sigma_X $ is the **standard deviation** of variable $ X $,
-- $ \sigma_Y $ is the **standard deviation** of variable $ Y $.
+- $\text{Cov}(X, Y)$ is the **covariance** of the two variables $X$ and $Y$,
+- $\sigma_X$ is the **standard deviation** of variable $X$,
+- $\sigma_Y$ is the **standard deviation** of variable $Y$.

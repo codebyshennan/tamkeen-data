@@ -17,8 +17,8 @@ Descriptive statistics is a method to quickly summarize data within a set using 
 
   Where:
 
-  - $ x_i $ represents each value in the dataset.
-  - $ n $ is the total number of values.
+  - $x_i$ represents each value in the dataset.
+  - $n$ is the total number of values.
 
 - Note: The mean is very sensitive to outliers.
 
@@ -48,10 +48,10 @@ Descriptive statistics is a method to quickly summarize data within a set using 
 
   Where:
 
-  - $ \sigma $ is the standard deviation.
-  - $ x_i $ represents each value in the dataset.
-  - $ \mu $ is the mean of the dataset.
-  - $ n $ is the total number of values.
+  - $\sigma$ is the standard deviation.
+  - $x_i$ represents each value in the dataset.
+  - $\mu$ is the mean of the dataset.
+  - $n$ is the total number of values.
 
 ### Range
 
