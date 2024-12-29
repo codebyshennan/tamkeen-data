@@ -10,15 +10,15 @@ Descriptive statistics is a method to quickly summarize data within a set using 
 
 - Definition: The average of a set calculated by adding all the values in the set and dividing by the number of values in the set.
 - Formula:
-  <!-- prettier-ignore -->
-  \[
+
+  $$
   \text{Mean} = \frac{\sum_{i=1}^{n} x_i}{n}
-  \]
+  $$
 
   Where:
 
-  - \( x_i \) represents each value in the dataset.
-  - \( n \) is the total number of values.
+  - $ x_i $ represents each value in the dataset.
+  - $ n $ is the total number of values.
 
 - Note: The mean is very sensitive to outliers.
 
@@ -41,17 +41,17 @@ Descriptive statistics is a method to quickly summarize data within a set using 
 - Definition: A measurement of the amount of variation from the mean in a data set.
 - Interpretation: For example, if a data set has a mean of 50 units and a standard deviation of 20 units, we can conclude that most of the data will fall between 30 and 70 units.
 - Formula:
-  <!-- prettier-ignore -->
-  \[
+
+  $$
   \sigma = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \mu)^2}{n}}
-  \]
+  $$
 
   Where:
 
-  - \( \sigma \) is the standard deviation.
-  - \( x_i \) represents each value in the dataset.
-  - \( \mu \) is the mean of the dataset.
-  - \( n \) is the total number of values.
+  - $ \sigma $ is the standard deviation.
+  - $ x_i $ represents each value in the dataset.
+  - $ \mu $ is the mean of the dataset.
+  - $ n $ is the total number of values.
 
 ### Range
 

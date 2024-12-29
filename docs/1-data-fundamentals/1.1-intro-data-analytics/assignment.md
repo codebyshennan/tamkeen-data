@@ -58,7 +58,7 @@
 - c. To prevent unauthorized access
 - d. To store data
 
-9. Which lifecycle stage involves gathering relevant data?
+9. Which lifecycle stage involves removing records with missing data?
 
 - a. Data Cleaning
 - b. Data Exploration
