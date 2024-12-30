@@ -148,6 +148,37 @@
   * [Bias-Variance Tradeoff](5-ml-fundamentals/5.1-intro-to-ml/bias-variance.md)
   * [Assignment](5-ml-fundamentals/5.1-intro-to-ml/assignment.md)
 
+* [5.2 Supervised Learning Part 1](5-ml-fundamentals/5.2-supervised-learning-1/README.md)
+  * [Naive Bayes](5-ml-fundamentals/5.2-supervised-learning-1/naive-bayes.md)
+  * [k-Nearest Neighbors](5-ml-fundamentals/5.2-supervised-learning-1/knn.md)
+  * [Support Vector Machines](5-ml-fundamentals/5.2-supervised-learning-1/svm.md)
+  * [Decision Trees](5-ml-fundamentals/5.2-supervised-learning-1/decision-trees.md)
+  * [Assignment](5-ml-fundamentals/5.2-supervised-learning-1/assignment.md)
+
+* [5.3 Supervised Learning Part 2](5-ml-fundamentals/5.3-supervised-learning-2/README.md)
+  * [Random Forests](5-ml-fundamentals/5.3-supervised-learning-2/random-forests.md)
+  * [Gradient Boosting](5-ml-fundamentals/5.3-supervised-learning-2/gradient-boosting.md)
+  * [Neural Networks](5-ml-fundamentals/5.3-supervised-learning-2/neural-networks.md)
+  * [Backpropagation](5-ml-fundamentals/5.3-supervised-learning-2/backpropagation.md)
+  * [Regularization](5-ml-fundamentals/5.3-supervised-learning-2/regularization.md)
+  * [Assignment](5-ml-fundamentals/5.3-supervised-learning-2/assignment.md)
+
+* [5.4 Unsupervised Learning](5-ml-fundamentals/5.4-unsupervised-learning/README.md)
+  * [Principal Component Analysis](5-ml-fundamentals/5.4-unsupervised-learning/pca.md)
+  * [t-SNE](5-ml-fundamentals/5.4-unsupervised-learning/tsne.md)
+  * [K-means Clustering](5-ml-fundamentals/5.4-unsupervised-learning/kmeans.md)
+  * [Hierarchical Clustering](5-ml-fundamentals/5.4-unsupervised-learning/hierarchical.md)
+  * [DBSCAN](5-ml-fundamentals/5.4-unsupervised-learning/dbscan.md)
+  * [Assignment](5-ml-fundamentals/5.4-unsupervised-learning/assignment.md)
+
+* [5.5 Model Evaluation](5-ml-fundamentals/5.5-model-eval/README.md)
+  * [Cross-validation](5-ml-fundamentals/5.5-model-eval/cross-validation.md)
+  * [Hyperparameter Tuning](5-ml-fundamentals/5.5-model-eval/hyperparameter-tuning.md)
+  * [Metrics](5-ml-fundamentals/5.5-model-eval/metrics.md)
+  * [ROC and AUC](5-ml-fundamentals/5.5-model-eval/roc-auc.md)
+  * [Model Selection](5-ml-fundamentals/5.5-model-eval/model-selection.md)
+  * [Assignment](5-ml-fundamentals/5.5-model-eval/assignment.md)
+
 ## Additional Resources
 * [Beginners Guide](3-data-visualization/beginners-guide.md)
 * [Best Practices Guide](3-data-visualization/best-practices-guide.md)
