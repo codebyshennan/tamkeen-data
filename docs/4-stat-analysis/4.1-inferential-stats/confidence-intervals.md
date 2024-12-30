@@ -37,7 +37,7 @@ where:
 
 ## Real-world Example: Clinical Trial 💊
 
-\`\`\`python
+```python
 import numpy as np
 from scipy import stats
 
@@ -68,7 +68,7 @@ def analyze_clinical_trial():
     print(f"BP reduction lies between {ci_lower:.1f} and {ci_upper:.1f} mm Hg")
 
 analyze_clinical_trial()
-\`\`\`
+```
 
 ## Common Misconceptions: What CIs Are NOT! ⚠️
 
@@ -84,7 +84,7 @@ The point estimate is our best guess.
 ## Factors Affecting CI Width 📏
 
 ### 1. Sample Size Effect
-\`\`\`python
+```python
 def demonstrate_sample_size_effect():
     population_mean = 100
     population_std = 15
@@ -102,10 +102,10 @@ def demonstrate_sample_size_effect():
         print(f"Precision: {'🎯' * int(50/width)}")
 
 demonstrate_sample_size_effect()
-\`\`\`
+```
 
 ### 2. Confidence Level Effect
-\`\`\`python
+```python
 def demonstrate_confidence_level_effect():
     sample = np.random.normal(100, 15, 30)
     levels = [0.80, 0.90, 0.95, 0.99]
@@ -121,12 +121,12 @@ def demonstrate_confidence_level_effect():
         print(f"Reliability: {'🔒' * int(level*10)}")
 
 demonstrate_confidence_level_effect()
-\`\`\`
+```
 
 ## Different Types of Confidence Intervals 🔄
 
 ### 1. CI for a Mean (t-interval)
-\`\`\`python
+```python
 def mean_ci(data, confidence=0.95):
     """Calculate CI for a mean using t-distribution"""
     mean = np.mean(data)
@@ -140,10 +140,10 @@ ci, mean = mean_ci(scores)
 print(f"\n📚 Test Score Analysis")
 print(f"Mean score: {mean:.1f}")
 print(f"95% CI: ({ci[0]:.1f}, {ci[1]:.1f})")
-\`\`\`
+```
 
 ### 2. CI for a Proportion
-\`\`\`python
+```python
 def proportion_ci(successes, n, confidence=0.95):
     """Calculate CI for a proportion using Wilson score interval"""
     z = stats.norm.ppf((1 + confidence) / 2)
@@ -163,10 +163,10 @@ ci = proportion_ci(responses, total)
 print(f"\n📋 Survey Analysis")
 print(f"Response rate: {responses/total:.1%}")
 print(f"95% CI: ({ci[0]:.1%}, {ci[1]:.1%})")
-\`\`\`
+```
 
 ### 3. CI for Difference Between Means
-\`\`\`python
+```python
 def diff_means_ci(group1, group2, confidence=0.95):
     """Calculate CI for difference between two means"""
     diff = np.mean(group1) - np.mean(group2)
@@ -192,7 +192,7 @@ ci = diff_means_ci(method1_scores, method2_scores)
 print(f"\n📚 Teaching Method Comparison")
 print(f"Mean difference: {np.mean(method1_scores) - np.mean(method2_scores):.1f}")
 print(f"95% CI: ({ci[0]:.1f}, {ci[1]:.1f})")
-\`\`\`
+```
 
 ## Best Practices for Using CIs 🎯
 

@@ -75,7 +75,7 @@ Before diving in, you should be comfortable with:
 ## 🌟 Real-world Applications
 
 ### E-commerce Example
-\`\`\`python
+```python
 import numpy as np
 from scipy import stats
 
@@ -103,10 +103,10 @@ def ab_test_demo():
 
 # Run demonstration
 ab_test_demo()
-\`\`\`
+```
 
 ### Medical Research Example
-\`\`\`python
+```python
 def clinical_trial_demo():
     # Control group (standard treatment)
     control = np.random.normal(loc=10, scale=2, size=100)
@@ -125,7 +125,7 @@ def clinical_trial_demo():
 
 # Run demonstration
 clinical_trial_demo()
-\`\`\`
+```
 
 ## 🎯 Best Practices
 

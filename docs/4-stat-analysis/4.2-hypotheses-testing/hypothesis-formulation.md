@@ -16,7 +16,7 @@ Think of a hypothesis as your scientific GPS - it guides your investigation and 
    - States there is an effect or difference
    - What we hope to support
 
-\`\`\`python
+```python
 import numpy as np
 from scipy import stats
 import matplotlib.pyplot as plt
@@ -59,7 +59,7 @@ def demonstrate_hypotheses():
 
 # Example usage
 t_stat, p_value = demonstrate_hypotheses()
-\`\`\`
+```
 
 ## The Three Pillars of Good Hypotheses 🏛️
 
@@ -69,7 +69,7 @@ Transform vague ideas into testable statements:
 ❌ Bad: "The treatment might work better"
 ✅ Good: "The new treatment reduces recovery time by at least 2 days"
 
-\`\`\`python
+```python
 def test_specific_hypothesis(control_data, treatment_data, min_improvement=2):
     """
     Test a specific hypothesis about treatment improvement
@@ -97,12 +97,12 @@ def test_specific_hypothesis(control_data, treatment_data, min_improvement=2):
         'p_value': p_value,
         'significant': p_value < 0.05
     }
-\`\`\`
+```
 
 ### 2. Measurable 📊
 Your hypothesis should involve quantifiable variables:
 
-\`\`\`python
+```python
 def measure_customer_satisfaction(ratings, target_score=4.0):
     """
     Analyze customer satisfaction metrics
@@ -140,12 +140,12 @@ def measure_customer_satisfaction(ratings, target_score=4.0):
     plt.close()
     
     return {**metrics, 't_statistic': t_stat, 'p_value': p_value}
-\`\`\`
+```
 
 ### 3. Falsifiable ❌
 Your hypothesis must be able to be proven wrong:
 
-\`\`\`python
+```python
 def demonstrate_falsifiability():
     """
     Show the importance of falsifiable hypotheses
@@ -169,7 +169,7 @@ def demonstrate_falsifiability():
         'falsifiable_result': test_mean_effect(data, 9.5),
         'non_falsifiable': vague_statement(data)
     }
-\`\`\`
+```
 
 ## Types of Hypotheses 📚
 
@@ -177,7 +177,7 @@ def demonstrate_falsifiability():
 - Simple: Tests exact value
 - Composite: Tests range of values
 
-\`\`\`python
+```python
 def demonstrate_hypothesis_types(data):
     """Compare simple and composite hypotheses"""
     # Simple hypothesis (H₀: μ = 100)
@@ -191,10 +191,10 @@ def demonstrate_hypothesis_types(data):
         'simple_p_value': simple_test.pvalue,
         'composite_result': composite_result
     }
-\`\`\`
+```
 
 ### 2. Directional vs Non-directional 🔄
-\`\`\`python
+```python
 def compare_directional_tests(control, treatment):
     """
     Compare one-tailed and two-tailed tests
@@ -231,14 +231,14 @@ def compare_directional_tests(control, treatment):
         'two_tailed': two_tail,
         'one_tailed': one_tail
     }
-\`\`\`
+```
 
 ## Common Pitfalls and Solutions ⚠️
 
 ### 1. Multiple Testing Problem 🎯
 When testing multiple hypotheses, adjust for multiple comparisons:
 
-\`\`\`python
+```python
 def handle_multiple_testing(p_values):
     """
     Apply corrections for multiple testing
@@ -268,12 +268,12 @@ def handle_multiple_testing(p_values):
     plt.close()
     
     return corrections
-\`\`\`
+```
 
 ### 2. P-hacking 🎲
 Don't fish for significance:
 
-\`\`\`python
+```python
 def demonstrate_p_hacking(data):
     """Show why p-hacking is problematic"""
     results = []
@@ -300,7 +300,7 @@ def demonstrate_p_hacking(data):
     plt.close()
     
     return df
-\`\`\`
+```
 
 ## Best Practices for Success 🌟
 

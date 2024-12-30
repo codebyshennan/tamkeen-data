@@ -18,7 +18,7 @@ A/B testing (or split testing) is like running a scientific experiment where you
 - 💰 Pricing strategies
 - 🎨 UI/UX design choices
 
-\`\`\`python
+```python
 import numpy as np
 import pandas as pd
 from scipy import stats
@@ -83,14 +83,14 @@ class ABTest:
         plt.close()
         
         return self
-\`\`\`
+```
 
 ## Setting Up Your A/B Test 🎬
 
 ### 1. Sample Size Calculation 📊
 Don't start without knowing how many samples you need!
 
-\`\`\`python
+```python
 def calculate_sample_size(
     baseline_rate=0.1,    # Current conversion rate
     mde=0.02,            # Minimum detectable effect
@@ -145,12 +145,12 @@ sample_size_calc = calculate_sample_size(
     alpha=0.05,         # 5% significance level
     power=0.8           # 80% power
 )
-\`\`\`
+```
 
 ### 2. Random Assignment 🎲
 Ensure fair comparison with proper randomization:
 
-\`\`\`python
+```python
 def assign_to_groups(user_ids, split_ratio=0.5, seed=None):
     """
     Randomly assign users to control and treatment groups
@@ -189,14 +189,14 @@ def assign_to_groups(user_ids, split_ratio=0.5, seed=None):
     print(f"Actual split ratio: {len(assignments['treatment'])/len(user_ids):.2%}")
     
     return assignments
-\`\`\`
+```
 
 ## Running Your Test 🏃‍♂️
 
 ### 1. Data Collection 📝
 Track everything systematically:
 
-\`\`\`python
+```python
 class ABTestDataCollector:
     def __init__(self):
         self.data = []
@@ -228,12 +228,12 @@ class ABTestDataCollector:
         })
         
         return results
-\`\`\`
+```
 
 ### 2. Monitoring 📊
 Watch your test without peeking too much:
 
-\`\`\`python
+```python
 def monitor_test(data_collector, min_sample_size):
     """
     Monitor ongoing A/B test
@@ -270,14 +270,14 @@ def monitor_test(data_collector, min_sample_size):
         'p_value': p_value,
         'can_conclude': size_reached and p_value < 0.05
     }
-\`\`\`
+```
 
 ## Analysis and Decision Making 📈
 
 ### 1. Statistical Analysis
 Don't just look at the numbers - understand them:
 
-\`\`\`python
+```python
 def analyze_results(control_data, treatment_data, alpha=0.05):
     """
     Comprehensive A/B test analysis
@@ -320,14 +320,14 @@ def analyze_results(control_data, treatment_data, alpha=0.05):
         'recommendation': 'accept' if p_value < alpha and relative_change > 0 
                          else 'reject'
     }
-\`\`\`
+```
 
 ## Common Pitfalls and Solutions ⚠️
 
 ### 1. Peeking Problem 👀
 Don't keep checking results - it increases false positives!
 
-\`\`\`python
+```python
 def adjust_for_peeking(p_values, total_looks):
     """Adjust significance level for multiple looks at the data"""
     from statsmodels.stats.multitest import multipletests
@@ -347,12 +347,12 @@ def adjust_for_peeking(p_values, total_looks):
         'adjusted_p_values': adjusted_p_values,
         'significant': rejected
     }
-\`\`\`
+```
 
 ### 2. Sample Ratio Mismatch 🔄
 Check if your randomization is working:
 
-\`\`\`python
+```python
 def check_sample_ratio(control_size, treatment_size, expected_ratio=0.5):
     """
     Check if sample ratio matches expected split
@@ -377,14 +377,14 @@ def check_sample_ratio(control_size, treatment_size, expected_ratio=0.5):
         'is_valid': p_value > 0.05,
         'recommendation': 'valid split' if p_value > 0.05 else 'investigate split'
     }
-\`\`\`
+```
 
 ## Best Practices for Success 🌟
 
 ### 1. Pre-register Your Test 📝
 Document everything before starting:
 
-\`\`\`python
+```python
 class ABTestRegistry:
     def __init__(self):
         self.tests = {}
@@ -413,12 +413,12 @@ class ABTestRegistry:
             raise ValueError(f"Status must be one of: {valid_statuses}")
         
         self.tests[test_id]['status'] = status
-\`\`\`
+```
 
 ### 2. Calculate Business Impact 💰
 Translate statistics into business metrics:
 
-\`\`\`python
+```python
 def calculate_business_impact(
     control_data,
     treatment_data,
@@ -449,7 +449,7 @@ def calculate_business_impact(
         'revenue_lift': revenue_treatment - revenue_control,
         'roi_lift': roi_treatment - roi_control
     }
-\`\`\`
+```
 
 ## Practice Questions 🤔
 1. A website has 10% conversion rate. How many visitors do you need to detect a 2% improvement?

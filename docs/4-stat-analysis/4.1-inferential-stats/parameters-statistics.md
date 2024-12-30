@@ -32,7 +32,7 @@ Statistics are values we calculate from our samples to estimate the population p
 ### Point Estimates: Our Best Single Guess 🎯
 A point estimate is like taking your best shot at the true value:
 
-\`\`\`python
+```python
 import numpy as np
 np.random.seed(42)  # For reproducibility
 
@@ -48,12 +48,12 @@ print(f"🌳 Tree Height Analysis")
 print(f"Population mean (μ): {population_mean:.2f} feet")
 print(f"Sample mean (x̄): {sample_mean:.2f} feet")
 print(f"Difference: {abs(population_mean - sample_mean):.2f} feet")
-\`\`\`
+```
 
 ### Interval Estimates: Being Realistic About Uncertainty 📊
 Instead of a single guess, we provide a range where we believe the true value lies:
 
-\`\`\`python
+```python
 from scipy import stats
 
 # Calculate 95% confidence interval
@@ -73,14 +73,14 @@ print(f"{confidence_level*100}% Confidence Interval:")
 print(f"({ci_lower:.2f}, {ci_upper:.2f}) feet")
 print(f"Interpretation: We're {confidence_level*100}% confident the true average")
 print(f"tree height falls between {ci_lower:.2f} and {ci_upper:.2f} feet")
-\`\`\`
+```
 
 ## What Makes a Good Estimator? 🎯
 
 ### 1. Unbiasedness: Hitting the Target on Average 🎯
 An unbiased estimator's expected value equals the population parameter:
 
-\`\`\`python
+```python
 # Demonstrate unbiasedness of sample mean
 n_simulations = 1000
 sample_means = []
@@ -95,12 +95,12 @@ print(f"\n🎯 Unbiasedness Analysis")
 print(f"True population mean: {population_mean:.2f}")
 print(f"Average of {n_simulations} sample means: {mean_of_means:.2f}")
 print(f"Difference: {abs(population_mean - mean_of_means):.2f}")
-\`\`\`
+```
 
 ### 2. Efficiency: Minimal Variance 📉
 An efficient estimator has less variability in its estimates:
 
-\`\`\`python
+```python
 def compare_estimators(data):
     """Compare mean estimators"""
     # Regular mean
@@ -115,12 +115,12 @@ regular_mean, trimmed_mean = compare_estimators(sample)
 print(f"\n📉 Efficiency Analysis")
 print(f"Regular mean: {regular_mean:.2f}")
 print(f"Trimmed mean: {trimmed_mean:.2f}")
-\`\`\`
+```
 
 ### 3. Consistency: Getting Better with More Data 📈
 A consistent estimator converges to the true value as sample size increases:
 
-\`\`\`python
+```python
 # Demonstrate consistency with increasing sample sizes
 sample_sizes = [10, 100, 1000, 5000]
 results = []
@@ -134,7 +134,7 @@ print(f"\n📈 Consistency Analysis")
 print(f"True population mean: {population_mean:.2f}")
 for size, result in zip(sample_sizes, results):
     print(f"Sample size {size:4d}: {result:.2f} (Diff: {abs(result - population_mean):.2f})")
-\`\`\`
+```
 
 ## Real-world Applications 🌟
 

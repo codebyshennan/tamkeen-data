@@ -23,7 +23,7 @@ The Central Limit Theorem states that for sufficiently large samples:
 
 Let's see it in action!
 
-\`\`\`python
+```python
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
@@ -85,7 +85,7 @@ for dist in distributions:
     plt = demonstrate_clt(distribution=dist)
     plt.savefig(f'docs/4-stat-analysis/4.1-inferential-stats/assets/clt_{dist}.png')
     plt.close()
-\`\`\`
+```
 
 ## Standard Error: Measuring the Spread 📏
 
@@ -98,7 +98,7 @@ The standard error (SE) tells us how much sample statistics typically deviate fr
 
 Let's see how sample size affects SE:
 
-\`\`\`python
+```python
 def demonstrate_standard_error():
     """
     Show how SE changes with sample size
@@ -137,12 +137,12 @@ print("Sample Size | Theoretical SE | Empirical SE")
 print("-" * 45)
 for r in se_results:
     print(f"{r['size']:^10d} | {r['theoretical']:^13.3f} | {r['empirical']:^11.3f}")
-\`\`\`
+```
 
 ## Real-world Applications 🌍
 
 ### 1. Quality Control in Manufacturing 🏭
-\`\`\`python
+```python
 def quality_control_demo():
     """
     Simulate quality control in manufacturing
@@ -163,10 +163,10 @@ def quality_control_demo():
     print(f"Status: {'✅ In Control' if abs(mean - target) <= tolerance else '❌ Out of Control'}")
 
 quality_control_demo()
-\`\`\`
+```
 
 ### 2. Political Polling 📊
-\`\`\`python
+```python
 def polling_demo():
     """
     Simulate political polling
@@ -186,7 +186,7 @@ def polling_demo():
     print(f"Sample Size: {sample_size:,}")
 
 polling_demo()
-\`\`\`
+```
 
 ## Common Misconceptions: Let's Clear Them Up! ⚠️
 
@@ -205,7 +205,7 @@ polling_demo()
 ## Interactive Learning: Try It Yourself! 🤓
 
 ### Mini-Exercise: The Sampling Game
-\`\`\`python
+```python
 def sampling_game(true_mean=100, true_std=15, sample_size=30):
     """
     Interactive demonstration of sampling variability
@@ -222,7 +222,7 @@ def sampling_game(true_mean=100, true_std=15, sample_size=30):
     print(f"Contains true mean? {'✅' if true_mean-1.96*se <= sample_mean <= true_mean+1.96*se else '❌'}")
 
 sampling_game()
-\`\`\`
+```
 
 ## Practice Questions 📝
 1. A sample of 100 customers shows mean spending of $85 with SE=$5. What's the 95% CI?

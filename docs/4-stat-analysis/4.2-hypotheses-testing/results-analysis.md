@@ -8,7 +8,7 @@ Think of results analysis as being a detective with data - it's not just about f
 ### 1. P-values and Statistical Significance 📈
 Like a metal detector beeping - it tells you something's there, but you need to dig to understand what!
 
-\`\`\`python
+```python
 import numpy as np
 import pandas as pd
 from scipy import stats
@@ -82,12 +82,12 @@ class SignificanceAnalyzer:
         
         plt.savefig('docs/4-stat-analysis/4.2-hypotheses-testing/assets/significance_viz.png')
         plt.close()
-\`\`\`
+```
 
 ### 2. Effect Sizes: The Magnitude Matters! 📏
 Not just whether there's a difference, but how big it is:
 
-\`\`\`python
+```python
 class EffectSizeAnalyzer:
     """Toolkit for analyzing and interpreting effect sizes"""
     
@@ -169,13 +169,13 @@ class EffectSizeAnalyzer:
         """Create effect size scale visualization"""
         plt.title('Effect Size Scale')
         # Implementation details...
-\`\`\`
+```
 
 ## Visualization of Results 📊
 
 ### 1. Confidence Intervals: The Range of Possibility 🎯
 
-\`\`\`python
+```python
 class ConfidenceIntervalVisualizer:
     """Create beautiful and informative CI visualizations"""
     
@@ -213,13 +213,13 @@ class ConfidenceIntervalVisualizer:
     def _plot_ci_basic(self, mean, ci_lower, ci_upper, comparison_value):
         """Create basic CI plot"""
         # Implementation details...
-\`\`\`
+```
 
 ## Making Decisions: From Analysis to Action 🎯
 
 ### 1. The Decision Framework 📋
 
-\`\`\`python
+```python
 class DecisionFramework:
     """Framework for making data-driven decisions"""
     
@@ -269,11 +269,11 @@ class DecisionFramework:
     def _assess_risk(self, stat_sig, prac_sig, roi):
         """Assess implementation risk"""
         # Implementation details...
-\`\`\`
+```
 
 ### 2. Communicating Results 📢
 
-\`\`\`python
+```python
 class ResultsCommunicator:
     """Tools for effective results communication"""
     
@@ -320,7 +320,7 @@ class ResultsCommunicator:
     def _business_report(self, results):
         """Generate business-focused report"""
         # Implementation details...
-\`\`\`
+```
 
 ## Practice Questions 🤔
 1. Your A/B test shows p=0.04 and a 0.1% increase in conversions. What do you recommend?

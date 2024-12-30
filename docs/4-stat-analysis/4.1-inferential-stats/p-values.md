@@ -48,7 +48,7 @@ else:
 ```
 
 ### Real-world Example: Testing a New Medicine 💊
-\`\`\`python
+```python
 import numpy as np
 from scipy import stats
 
@@ -69,7 +69,7 @@ print(f"Control group mean: {np.mean(control):.2f} days")
 print(f"Treatment group mean: {np.mean(treatment):.2f} days")
 print(f"P-value: {p_value:.4f}")
 print(f"Result: {'✅ Significant' if p_value < 0.05 else '❌ Not significant'}")
-\`\`\`
+```
 
 ## Common Misconceptions: What P-values Are NOT! ⚠️
 
@@ -82,7 +82,7 @@ This common misinterpretation can lead to poor decisions.
 ### 3. ❌ NOT the Effect Size
 A tiny p-value doesn't mean a huge effect!
 
-\`\`\`python
+```python
 # Demonstrating effect size vs p-value
 def compare_scenarios():
     # Scenario 1: Small effect, large sample
@@ -110,14 +110,14 @@ def compare_scenarios():
     print(f"Effect size: {effect_size2:.2f}")
 
 compare_scenarios()
-\`\`\`
+```
 
 ## Factors Affecting P-values 🎲
 
 ### 1. Sample Size 📏
 Larger samples can make tiny effects statistically significant.
 
-\`\`\`python
+```python
 def show_sample_size_effect():
     effect_size = 0.2  # Fixed small effect
     sizes = [20, 100, 500, 1000]
@@ -130,7 +130,7 @@ def show_sample_size_effect():
         print(f"n={n:4d}: p={p_value:.4f} {'✅' if p_value < 0.05 else '❌'}")
 
 show_sample_size_effect()
-\`\`\`
+```
 
 ### 2. Effect Size 📊
 Bigger differences are easier to detect.
@@ -141,7 +141,7 @@ More consistent data makes effects easier to spot.
 ## Real-world Application: A/B Testing 🌐
 
 ### Website Conversion Rate Example
-\`\`\`python
+```python
 def ab_test_simulation(n_visitors=1000):
     # Control: 10% conversion rate
     # Treatment: 12% conversion rate
@@ -164,7 +164,7 @@ def ab_test_simulation(n_visitors=1000):
     print(f"Decision: {'✅ Launch new version' if p_value < 0.05 else '❌ Keep current version'}")
 
 ab_test_simulation()
-\`\`\`
+```
 
 ## Best Practices for Using P-values 🎯
 
@@ -180,7 +180,7 @@ Don't just say "p < 0.05".
 ### 4. Use Multiple Testing Corrections 🔄
 When performing multiple tests:
 
-\`\`\`python
+```python
 from statsmodels.stats.multitest import multipletests
 
 # Simulate multiple tests
@@ -194,7 +194,7 @@ corrected_p = multipletests(p_values, method='bonferroni')[1]
 print("\n🔄 Multiple Testing Correction")
 print(f"Original significant results: {sum(np.array(p_values) < 0.05)}")
 print(f"Corrected significant results: {sum(corrected_p < 0.05)}")
-\`\`\`
+```
 
 ## Practice Questions 📝
 1. A study finds p = 0.03. What does this mean in plain English?

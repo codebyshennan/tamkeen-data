@@ -8,7 +8,7 @@ Think of statistical tests as your data detective tools - they help you uncover 
 ### 1. T-Tests: Comparing Means 📊
 Like comparing recipes by taste-testing - are they really different or just slightly varied?
 
-\`\`\`python
+```python
 import numpy as np
 import pandas as pd
 from scipy import stats
@@ -106,12 +106,12 @@ class TTestAnalyzer:
         plt.tight_layout()
         plt.savefig('docs/4-stat-analysis/4.2-hypotheses-testing/assets/t_test_analysis.png')
         plt.close()
-\`\`\`
+```
 
 ### 2. ANOVA: Comparing Multiple Groups 🎭
 Like being a judge in a cooking competition - are any of these dishes significantly different?
 
-\`\`\`python
+```python
 class ANOVAAnalyzer:
     """ANOVA analysis toolkit"""
     
@@ -181,12 +181,12 @@ class ANOVAAnalyzer:
         plt.tight_layout()
         plt.savefig('docs/4-stat-analysis/4.2-hypotheses-testing/assets/anova_analysis.png')
         plt.close()
-\`\`\`
+```
 
 ### 3. Chi-Square Tests: Analyzing Categories 📊
 Like checking if dice are fair - are the outcomes distributed as expected?
 
-\`\`\`python
+```python
 class ChiSquareAnalyzer:
     """Chi-square analysis toolkit"""
     
@@ -244,12 +244,12 @@ class ChiSquareAnalyzer:
         plt.tight_layout()
         plt.savefig('docs/4-stat-analysis/4.2-hypotheses-testing/assets/chi_square_analysis.png')
         plt.close()
-\`\`\`
+```
 
 ### 4. Correlation Tests: Measuring Relationships 🔄
 Like checking if ice cream sales and temperature are related!
 
-\`\`\`python
+```python
 class CorrelationAnalyzer:
     """Correlation analysis toolkit"""
     
@@ -296,13 +296,13 @@ class CorrelationAnalyzer:
         plt.tight_layout()
         plt.savefig('docs/4-stat-analysis/4.2-hypotheses-testing/assets/correlation_analysis.png')
         plt.close()
-\`\`\`
+```
 
 ## Choosing the Right Test 🎯
 
 ### The Test Selection Flowchart 📊
 
-\`\`\`python
+```python
 def select_statistical_test(
     data_type='continuous',
     n_groups=2,
@@ -356,13 +356,13 @@ def select_statistical_test(
             'paired_data': paired if n_groups == 2 else 'N/A'
         }
     }
-\`\`\`
+```
 
 ## Checking Assumptions ✅
 
 ### 1. Normality Tests 📈
 
-\`\`\`python
+```python
 class NormalityChecker:
     """Toolkit for checking normality assumptions"""
     
@@ -405,11 +405,11 @@ class NormalityChecker:
                 'confidence': 'high' if min(shapiro_p, k2_p) > 0.1 else 'moderate'
             }
         }
-\`\`\`
+```
 
 ### 2. Homogeneity of Variance 📊
 
-\`\`\`python
+```python
 class VarianceChecker:
     """Toolkit for checking variance homogeneity"""
     
@@ -453,11 +453,11 @@ class VarianceChecker:
                 'confidence': 'high' if min(levene_p, bartlett_p) > 0.1 else 'moderate'
             }
         }
-\`\`\`
+```
 
 ## Effect Size Calculations 📏
 
-\`\`\`python
+```python
 class EffectSizeCalculator:
     """Toolkit for calculating effect sizes"""
     
@@ -505,7 +505,7 @@ class EffectSizeCalculator:
             return 'Medium effect'
         else:
             return 'Large effect'
-\`\`\`
+```
 
 ## Practice Questions 🤔
 1. You're comparing customer satisfaction scores before and after a website redesign. Which test should you use and why?

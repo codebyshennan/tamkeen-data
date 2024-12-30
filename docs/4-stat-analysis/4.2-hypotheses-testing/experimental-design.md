@@ -8,7 +8,7 @@ Imagine you're a chef developing a new recipe. You wouldn't randomly throw ingre
 ### 1. Control: Managing Variables 🎮
 Control is about isolating the effect you want to study. Think of it as a scientific detective work - you want to catch the true culprit (effect) without being misled by other suspects (confounding variables)!
 
-\`\`\`python
+```python
 import numpy as np
 import pandas as pd
 from scipy import stats
@@ -64,12 +64,12 @@ def demonstrate_control():
 
 # Example usage
 results = demonstrate_control()
-\`\`\`
+```
 
 ### 2. Randomization: Eliminating Bias 🎲
 Randomization is your shield against systematic bias. It's like shuffling a deck of cards - it ensures every unit has an equal chance of receiving any treatment.
 
-\`\`\`python
+```python
 def demonstrate_randomization():
     """
     Show the importance of random assignment
@@ -114,12 +114,12 @@ def demonstrate_randomization():
         'random': random_results.groupby('treatment')['conversion'].mean(),
         'nonrandom': nonrandom_results.groupby('treatment')['conversion'].mean()
     }
-\`\`\`
+```
 
 ### 3. Replication: Ensuring Reliability 🔄
 One successful experiment might be luck - replication helps confirm your findings are real and generalizable.
 
-\`\`\`python
+```python
 def demonstrate_replication(n_replications=5):
     """
     Show how replication helps establish reliability
@@ -167,14 +167,14 @@ def demonstrate_replication(n_replications=5):
     plt.close()
     
     return results_df
-\`\`\`
+```
 
 ## Types of Experimental Designs 📋
 
 ### 1. Completely Randomized Design (CRD) 🎲
 The simplest design - like flipping a coin to assign treatments.
 
-\`\`\`python
+```python
 def completely_randomized_design(n_subjects=100, n_treatments=2):
     """
     Implement a completely randomized design
@@ -196,12 +196,12 @@ def completely_randomized_design(n_subjects=100, n_treatments=2):
         'subject_id': range(n_subjects),
         'treatment': assignments
     })
-\`\`\`
+```
 
 ### 2. Randomized Block Design (RBD) 🏗️
 Like organizing a tournament where teams are first grouped by skill level.
 
-\`\`\`python
+```python
 def randomized_block_design(subjects_data, treatments, block_variable):
     """
     Implement a randomized block design
@@ -237,12 +237,12 @@ def randomized_block_design(subjects_data, treatments, block_variable):
         results.append(block_results)
     
     return pd.concat(results)
-\`\`\`
+```
 
 ### 3. Factorial Design 🔲
 Testing multiple factors at once - like a chess game where you consider multiple moves.
 
-\`\`\`python
+```python
 def factorial_design(factors):
     """
     Create a full factorial design
@@ -273,11 +273,11 @@ def factorial_design(factors):
     plt.close()
     
     return design
-\`\`\`
+```
 
 ## Power Analysis: Getting the Right Sample Size 📊
 
-\`\`\`python
+```python
 def power_analysis_demo():
     """
     Demonstrate power analysis for different effect sizes
@@ -312,14 +312,14 @@ def power_analysis_demo():
         'effect_size': effect_sizes,
         'sample_size': sample_sizes
     })
-\`\`\`
+```
 
 ## Common Pitfalls and Solutions ⚠️
 
 ### 1. Selection Bias 🎯
 - ❌ Problem: Non-random sample selection
 - ✅ Solution: Proper randomization techniques
-\`\`\`python
+```python
 # Example: Random sampling with stratification
 def stratified_sample(data, strata, size=None, seed=None):
     if seed is not None:
@@ -329,12 +329,12 @@ def stratified_sample(data, strata, size=None, seed=None):
         lambda x: x.sample(n=int(np.rint(size * len(x)/len(data))))
     )
     return sampled.reset_index(drop=True)
-\`\`\`
+```
 
 ### 2. Confounding Variables 🔄
 - ❌ Problem: Hidden variables affecting results
 - ✅ Solution: Control, blocking, or measurement
-\`\`\`python
+```python
 # Example: Checking for confounders
 def check_confounders(data, treatment_col, outcome_col, potential_confounders):
     results = {}
@@ -355,7 +355,7 @@ def check_confounders(data, treatment_col, outcome_col, potential_confounders):
         }
     
     return pd.DataFrame(results).T
-\`\`\`
+```
 
 ### 3. Hawthorne Effect 👀
 - ❌ Problem: Behavior changes due to observation
@@ -370,7 +370,7 @@ def check_confounders(data, treatment_col, outcome_col, potential_confounders):
 - Document everything
 
 ### 2. Monitor Quality 📊
-\`\`\`python
+```python
 class ExperimentMonitor:
     def __init__(self, name):
         self.name = name
@@ -396,7 +396,7 @@ class ExperimentMonitor:
             'n_events': len(self.log),
             'metrics': {k: np.mean(v) for k, v in self.metrics.items()}
         }
-\`\`\`
+```
 
 ### 3. Analyze Thoroughly 📈
 - Check assumptions

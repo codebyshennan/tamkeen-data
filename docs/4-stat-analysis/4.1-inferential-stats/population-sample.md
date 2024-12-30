@@ -38,14 +38,14 @@ A sample is a carefully selected **subset** of the population that we actually m
 ### 1. Simple Random Sampling (SRS)
 The statistical equivalent of drawing names from a hat - every member has an equal chance.
 
-\`\`\`python
+```python
 import numpy as np
 
 # Example: Randomly sampling 5 numbers from 0-99
 population = np.arange(100)
 sample = np.random.choice(population, size=5, replace=False)
 print(f"Random sample: {sample}")
-\`\`\`
+```
 
 #### Advantages
 - ✅ Unbiased
@@ -59,7 +59,7 @@ print(f"Random sample: {sample}")
 ### 2. Stratified Sampling 📊
 Like organizing a party where you ensure representation from different departments.
 
-\`\`\`python
+```python
 # Example: Stratified sampling by age groups
 young = np.arange(1000)      # IDs 0-999 (young population)
 adult = np.arange(1000,2000) # IDs 1000-1999 (adult population)
@@ -71,7 +71,7 @@ adult_sample = np.random.choice(adult, size=50, replace=False)
 senior_sample = np.random.choice(senior, size=50, replace=False)
 
 combined_sample = np.concatenate([young_sample, adult_sample, senior_sample])
-\`\`\`
+```
 
 #### Advantages
 - ✅ Ensures representation of all groups
@@ -85,11 +85,11 @@ combined_sample = np.concatenate([young_sample, adult_sample, senior_sample])
 ### 3. Systematic Sampling 🔄
 Like picking every 10th person who walks into a store.
 
-\`\`\`python
+```python
 # Example: Select every 10th customer
 population = np.arange(1000)
 systematic_sample = population[::10]  # Take every 10th element
-\`\`\`
+```
 
 #### Advantages
 - ✅ Simple to implement
@@ -149,7 +149,7 @@ where:
 - $p$ is the expected proportion
 - $E$ is the margin of error
 
-\`\`\`python
+```python
 def calculate_sample_size(confidence_level=0.95, margin_of_error=0.05, p=0.5):
     """Calculate required sample size for proportion estimation"""
     from scipy.stats import norm
@@ -161,14 +161,14 @@ def calculate_sample_size(confidence_level=0.95, margin_of_error=0.05, p=0.5):
 # Example
 n = calculate_sample_size(confidence_level=0.95, margin_of_error=0.03)
 print(f"Required sample size: {n}")
-\`\`\`
+```
 
 ## Interactive Learning 🤓
 
 ### Mini-Exercise: Sampling Simulation
 Try this code to see how sample means compare to population mean:
 
-\`\`\`python
+```python
 # Set random seed for reproducibility
 np.random.seed(42)
 
@@ -183,7 +183,7 @@ for size in sample_sizes:
     print(f"Sample size: {size}")
     print(f"Sample mean: {sample.mean():.2f}")
     print(f"Difference from population mean: {abs(sample.mean() - pop_mean):.2f}\n")
-\`\`\`
+```
 
 ## Key Takeaways 🎯
 1. 📊 Populations are complete sets, samples are subsets

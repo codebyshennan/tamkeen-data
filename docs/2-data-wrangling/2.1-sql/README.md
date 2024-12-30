@@ -41,13 +41,13 @@ graph TD
 
 ### 2. Basic SQL Operations
 Example query:
-\`\`\`sql
+```sql
 SELECT first_name, last_name, salary
 FROM employees
 WHERE department = 'Sales'
 ORDER BY salary DESC
 LIMIT 5;
-\`\`\`
+```
 
 ### 3. Aggregations and Grouping
 Performance consideration:
