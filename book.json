@@ -1,4 +1,5 @@
 {
+    "root": "docs",
     "title": "Data Science and AI Course",
     "description": "A comprehensive curriculum covering data fundamentals, data wrangling, visualization, statistical analysis, and machine learning fundamentals",
     "author": "Skills Union",
