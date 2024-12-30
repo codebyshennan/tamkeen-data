@@ -3,6 +3,7 @@
 * [🚀 Welcome to Data Science and AI Course!](README.md)
 
 ## 0. Preparation
+
 * [Anaconda Setup](0-prep/anaconda.md)
 * [Python Data Science Stack](0-prep/python-ds-stack.md)
 * [Jupyter Notebook](0-prep/jupyter-notebook.md)
@@ -12,13 +13,13 @@
 * [Airflow Setup](0-prep/airflow.md)
 
 ## 1. Data Fundamentals
+
 * [1.1 Introduction to Data Analytics](1-data-fundamentals/1.1-intro-data-analytics/README.md)
   * [Workflow Concepts](1-data-fundamentals/1.1-intro-data-analytics/workflow-concepts.md)
   * [Data Collection](1-data-fundamentals/1.1-intro-data-analytics/data-collection.md)
   * [Data Privacy](1-data-fundamentals/1.1-intro-data-analytics/data-privacy.md)
   * [Data Security](1-data-fundamentals/1.1-intro-data-analytics/data-security.md)
   * [Assignment](1-data-fundamentals/1.1-intro-data-analytics/assignment.md)
-
 * [1.2 Introduction to Python](1-data-fundamentals/1.2-intro-python/README.md)
   * [Basic Syntax and Data Types](1-data-fundamentals/1.2-intro-python/basic-syntax-data-types.md)
   * [Data Structures](1-data-fundamentals/1.2-intro-python/data-structures.md)
@@ -27,7 +28,6 @@
   * [Classes and Objects](1-data-fundamentals/1.2-intro-python/classes-objects.md)
   * [Modules](1-data-fundamentals/1.2-intro-python/modules.md)
   * [Assignment](1-data-fundamentals/1.2-intro-python/assignment.md)
-
 * [1.3 Introduction to Statistics](1-data-fundamentals/1.3-intro-statistics/README.md)
   * [Probability Fundamentals](1-data-fundamentals/1.3-intro-statistics/probability-fundamentals.md)
   * [One Variable Statistics](1-data-fundamentals/1.3-intro-statistics/one-variable-statistics.md)
@@ -35,7 +35,6 @@
   * [Probability Distributions](1-data-fundamentals/1.3-intro-statistics/probability-distributions.md)
   * [Probability Distribution Families](1-data-fundamentals/1.3-intro-statistics/probability-distribution-families.md)
   * [Assignment](1-data-fundamentals/1.3-intro-statistics/assignment.md)
-
 * [1.4 Data Foundation & Linear Algebra](1-data-fundamentals/1.4-data-foundation-linear-algebra/README.md)
   * [Introduction to NumPy](1-data-fundamentals/1.4-data-foundation-linear-algebra/intro-numpy.md)
   * [N-dimensional Arrays](1-data-fundamentals/1.4-data-foundation-linear-algebra/ndarray.md)
@@ -44,7 +43,6 @@
   * [Boolean Indexing](1-data-fundamentals/1.4-data-foundation-linear-algebra/boolean-indexing.md)
   * [Linear Algebra](1-data-fundamentals/1.4-data-foundation-linear-algebra/linear-algebra.md)
   * [Assignment](1-data-fundamentals/1.4-data-foundation-linear-algebra/assignment.md)
-
 * [1.5 Data Analysis with Pandas](1-data-fundamentals/1.5-data-analysis-pandas/README.md)
   * [Series](1-data-fundamentals/1.5-data-analysis-pandas/series.md)
   * [DataFrame](1-data-fundamentals/1.5-data-analysis-pandas/dataframe.md)
@@ -56,6 +54,7 @@
   * [Assignment](1-data-fundamentals/1.5-data-analysis-pandas/assignment.md)
 
 ## 2. Data Wrangling
+
 * [2.1 SQL](2-data-wrangling/2.1-sql/README.md)
   * [Introduction to Databases](2-data-wrangling/2.1-sql/intro-databases.md)
   * [Basic Operations](2-data-wrangling/2.1-sql/basic-operations.md)
@@ -64,7 +63,6 @@
   * [Advanced Concepts](2-data-wrangling/2.1-sql/advanced-concepts.md)
   * [Assignment](2-data-wrangling/2.1-sql/assignment.md)
   * [Project](2-data-wrangling/2.1-sql/project.md)
-
 * [2.2 Data Wrangling](2-data-wrangling/2.2-data-wrangling/README.md)
   * [Data Quality](2-data-wrangling/2.2-data-wrangling/data-quality.md)
   * [Missing Values](2-data-wrangling/2.2-data-wrangling/missing-values.md)
@@ -72,14 +70,12 @@
   * [Transformations](2-data-wrangling/2.2-data-wrangling/transformations.md)
   * [Assignment](2-data-wrangling/2.2-data-wrangling/assignment.md)
   * [Project](2-data-wrangling/2.2-data-wrangling/project.md)
-
 * [2.3 Exploratory Data Analysis](2-data-wrangling/2.3-eda/README.md)
   * [Distributions](2-data-wrangling/2.3-eda/distributions.md)
   * [Relationships](2-data-wrangling/2.3-eda/relationships.md)
   * [Time Series](2-data-wrangling/2.3-eda/time-series.md)
   * [Assignment](2-data-wrangling/2.3-eda/assignment.md)
   * [Project](2-data-wrangling/2.3-eda/project.md)
-
 * [2.4 Data Engineering](2-data-wrangling/2.4-data-engineering/README.md)
   * [ETL Fundamentals](2-data-wrangling/2.4-data-engineering/etl-fundamentals.md)
   * [Data Storage](2-data-wrangling/2.4-data-engineering/data-storage.md)
@@ -88,28 +84,27 @@
   * [Project](2-data-wrangling/2.4-data-engineering/project.md)
 
 ## 3. Data Visualization
+
 * [3.1 Introduction to Data Visualization](3-data-visualization/3.1-intro-data-viz/README.md)
   * [Visualization Principles](3-data-visualization/3.1-intro-data-viz/visualization-principles.md)
   * [Matplotlib Basics](3-data-visualization/3.1-intro-data-viz/matplotlib-basics.md)
   * [Troubleshooting Guide](3-data-visualization/3.1-intro-data-viz/troubleshooting-guide.md)
   * [Assignment](3-data-visualization/3.1-intro-data-viz/assignment.md)
-
 * [3.2 Advanced Data Visualization](3-data-visualization/3.2-adv-data-viz/README.md)
   * [Seaborn Guide](3-data-visualization/3.2-adv-data-viz/seaborn-guide.md)
   * [Plotly Guide](3-data-visualization/3.2-adv-data-viz/plotly-guide.md)
   * [Assignment](3-data-visualization/3.2-adv-data-viz/assignment.md)
-
 * [3.3 Business Intelligence with Tableau](3-data-visualization/3.3-bi-with-tableau/README.md)
   * [Tableau Basics](3-data-visualization/3.3-bi-with-tableau/tableau-basics.md)
   * [Advanced Analytics](3-data-visualization/3.3-bi-with-tableau/advanced-analytics.md)
   * [Assignment](3-data-visualization/3.3-bi-with-tableau/assignment.md)
-
 * [3.4 Data Storytelling](3-data-visualization/3.4-data-storytelling/README.md)
   * [Visual Storytelling](3-data-visualization/3.4-data-storytelling/visual-storytelling.md)
   * [Narrative Techniques](3-data-visualization/3.4-data-storytelling/narrative-techniques.md)
   * [Assignment](3-data-visualization/3.4-data-storytelling/assignment.md)
 
 ## 4. Statistical Analysis
+
 * [4.1 Inferential Statistics](4-stat-analysis/4.1-inferential-stats/README.md)
   * [Population and Sample](4-stat-analysis/4.1-inferential-stats/population-sample.md)
   * [Parameters and Statistics](4-stat-analysis/4.1-inferential-stats/parameters-statistics.md)
@@ -117,7 +112,6 @@
   * [Confidence Intervals](4-stat-analysis/4.1-inferential-stats/confidence-intervals.md)
   * [P-values](4-stat-analysis/4.1-inferential-stats/p-values.md)
   * [Assignment](4-stat-analysis/4.1-inferential-stats/assignment.md)
-
 * [4.2 Hypothesis Testing](4-stat-analysis/4.2-hypotheses-testing/README.md)
   * [Hypothesis Formulation](4-stat-analysis/4.2-hypotheses-testing/hypothesis-formulation.md)
   * [Statistical Tests](4-stat-analysis/4.2-hypotheses-testing/statistical-tests.md)
@@ -125,7 +119,6 @@
   * [A/B Testing](4-stat-analysis/4.2-hypotheses-testing/ab-testing.md)
   * [Results Analysis](4-stat-analysis/4.2-hypotheses-testing/results-analysis.md)
   * [Assignment](4-stat-analysis/4.2-hypotheses-testing/assignment.md)
-
 * [4.3 Relationships in Data](4-stat-analysis/4.3-rship-in-data/README.md)
   * [Understanding Relationships](4-stat-analysis/4.3-rship-in-data/understanding-relationships.md)
   * [Correlation Analysis](4-stat-analysis/4.3-rship-in-data/correlation-analysis.md)
@@ -133,7 +126,6 @@
   * [Multiple Linear Regression](4-stat-analysis/4.3-rship-in-data/multiple-linear-regression.md)
   * [Model Diagnostics](4-stat-analysis/4.3-rship-in-data/model-diagnostics.md)
   * [Assignment](4-stat-analysis/4.3-rship-in-data/assignment.md)
-
 * [4.4 Statistical Modeling](4-stat-analysis/4.4-stat-modelling/README.md)
   * [Polynomial Regression](4-stat-analysis/4.4-stat-modelling/polynomial-regression.md)
   * [Logistic Regression](4-stat-analysis/4.4-stat-modelling/logistic-regression.md)
@@ -143,43 +135,41 @@
   * [Assignment](4-stat-analysis/4.4-stat-modelling/assignment.md)
 
 ## 5. Machine Learning Fundamentals
+
 * [5.1 Introduction to Machine Learning](5-ml-fundamentals/5.1-intro-to-ml/README.md)
   * [Feature Engineering](5-ml-fundamentals/5.1-intro-to-ml/feature-engineering.md)
   * [Bias-Variance Tradeoff](5-ml-fundamentals/5.1-intro-to-ml/bias-variance.md)
   * [Assignment](5-ml-fundamentals/5.1-intro-to-ml/assignment.md)
-
 * [5.2 Supervised Learning Part 1](5-ml-fundamentals/5.2-supervised-learning-1/README.md)
   * [Naive Bayes](5-ml-fundamentals/5.2-supervised-learning-1/naive-bayes.md)
   * [k-Nearest Neighbors](5-ml-fundamentals/5.2-supervised-learning-1/knn.md)
   * [Support Vector Machines](5-ml-fundamentals/5.2-supervised-learning-1/svm.md)
   * [Decision Trees](5-ml-fundamentals/5.2-supervised-learning-1/decision-trees.md)
   * [Assignment](5-ml-fundamentals/5.2-supervised-learning-1/assignment.md)
-
 * [5.3 Supervised Learning Part 2](5-ml-fundamentals/5.3-supervised-learning-2/README.md)
-  * [Random Forests](5-ml-fundamentals/5.3-supervised-learning-2/random-forests.md)
+  * [Random Forests](5.-machine-learning-fundamentals/5.3-supervised-learning-2/random-forests.md)
   * [Gradient Boosting](5-ml-fundamentals/5.3-supervised-learning-2/gradient-boosting.md)
   * [Neural Networks](5-ml-fundamentals/5.3-supervised-learning-2/neural-networks.md)
-  * [Backpropagation](5-ml-fundamentals/5.3-supervised-learning-2/backpropagation.md)
-  * [Regularization](5-ml-fundamentals/5.3-supervised-learning-2/regularization.md)
+  * [Backpropagation](5.-machine-learning-fundamentals/5.3-supervised-learning-2/backpropagation.md)
+  * [Regularization](5.-machine-learning-fundamentals/5.3-supervised-learning-2/regularization.md)
   * [Assignment](5-ml-fundamentals/5.3-supervised-learning-2/assignment.md)
-
 * [5.4 Unsupervised Learning](5-ml-fundamentals/5.4-unsupervised-learning/README.md)
   * [Principal Component Analysis](5-ml-fundamentals/5.4-unsupervised-learning/pca.md)
-  * [t-SNE](5-ml-fundamentals/5.4-unsupervised-learning/tsne.md)
-  * [K-means Clustering](5-ml-fundamentals/5.4-unsupervised-learning/kmeans.md)
-  * [Hierarchical Clustering](5-ml-fundamentals/5.4-unsupervised-learning/hierarchical.md)
-  * [DBSCAN](5-ml-fundamentals/5.4-unsupervised-learning/dbscan.md)
+  * [t-SNE](5.-machine-learning-fundamentals/5.4-unsupervised-learning/t-sne.md)
+  * [K-means Clustering](5.-machine-learning-fundamentals/5.4-unsupervised-learning/k-means-clustering.md)
+  * [Hierarchical Clustering](5.-machine-learning-fundamentals/5.4-unsupervised-learning/hierarchical-clustering.md)
+  * [DBSCAN](5.-machine-learning-fundamentals/5.4-unsupervised-learning/dbscan.md)
   * [Assignment](5-ml-fundamentals/5.4-unsupervised-learning/assignment.md)
-
 * [5.5 Model Evaluation](5-ml-fundamentals/5.5-model-eval/README.md)
   * [Cross-validation](5-ml-fundamentals/5.5-model-eval/cross-validation.md)
   * [Hyperparameter Tuning](5-ml-fundamentals/5.5-model-eval/hyperparameter-tuning.md)
-  * [Metrics](5-ml-fundamentals/5.5-model-eval/metrics.md)
-  * [ROC and AUC](5-ml-fundamentals/5.5-model-eval/roc-auc.md)
-  * [Model Selection](5-ml-fundamentals/5.5-model-eval/model-selection.md)
+  * [Metrics](5.-machine-learning-fundamentals/5.5-model-eval/metrics.md)
+  * [ROC and AUC](5.-machine-learning-fundamentals/5.5-model-eval/roc-and-auc.md)
+  * [Model Selection](5.-machine-learning-fundamentals/5.5-model-eval/model-selection.md)
   * [Assignment](5-ml-fundamentals/5.5-model-eval/assignment.md)
 
 ## Additional Resources
+
 * [Beginners Guide](3-data-visualization/beginners-guide.md)
 * [Best Practices Guide](3-data-visualization/best-practices-guide.md)
 * [FAQ](3-data-visualization/FAQ.md)
