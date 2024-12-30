@@ -1,47 +1,85 @@
-# 🚀 Welcome to Bootcamp!
+# 🚀 Welcome to Data Science and AI Course!
 
 ## Overview
 
-Welcome! <a href="https://www.rocketacademy.co/courses/bootcamp-course" target="_blank">Coding Bootcamp</a> is Rocket Academy's flagship career-conversion course. It builds on concepts from Rocket's intro coding course <a href="https://www.rocketacademy.co/courses/coding-fundamentals" target="_blank">Coding Fundamentals</a>. On completion of Coding Bootcamp, students can expect to get jobs as software engineers.
+Welcome to the Data Science and AI Course! This comprehensive curriculum is designed to take you from the fundamentals of data analysis to advanced concepts in machine learning and artificial intelligence.
 
 ## Learning Objectives
 
-What makes a good software engineer? Rocket aims to teach both hard and soft skills one needs to succeed.
+What makes a good data scientist? This course aims to teach both technical skills and practical applications needed to succeed in the field.
 
-1. Hard skills (base competency)
-   1. General software knowledge
-      1. App architecture
-      2. How the internet works
-      3. Database design
-   2. Foundational technologies
-      1. HTML, CSS, JS, React, Firebase, Express, SQL, Sequelize, Algorithms
-2. Soft skills (extremely underrated and highly valued)
-   1. Teamwork
-      1. Ask technical questions
-      2. Write technical documentation
-      3. Perform code reviews
-      4. Communicate technical tradeoffs
-   2. Code quality
-      1. Naming, commenting, decomposition
-      2. Git best practices
+1. Technical Foundations
+   1. Data Fundamentals
+      - Python Programming
+      - Statistics Fundamentals
+      - Linear Algebra Basics
+      - Data Analysis with Pandas
+   2. Data Processing & Analysis
+      - SQL and Databases
+      - Data Wrangling
+      - Exploratory Data Analysis
+      - Data Engineering Concepts
+   3. Visualization & Communication
+      - Data Visualization Principles
+      - Advanced Visualization Tools
+      - Business Intelligence with Tableau
+      - Data Storytelling
+   4. Statistical Analysis & Machine Learning
+      - Inferential Statistics
+      - Hypothesis Testing
+      - Relationships in Data
+      - Machine Learning Fundamentals
+
+2. Practical Skills
+   1. Data Analysis
+      - Data Collection & Cleaning
+      - Feature Engineering
+      - Pattern Recognition
+      - Insight Generation
+   2. Problem Solving
+      - Analytical Thinking
+      - Statistical Reasoning
+      - Model Selection
+      - Performance Optimization
+   3. Communication
+      - Technical Documentation
+      - Data Presentation
+      - Stakeholder Communication
+      - Results Interpretation
 
 ## Curriculum Outline
 
-Rocket's Bootcamp contains 4 modules of 16 course days each, each of which culminates in a project. Rocket requires students complete module projects to continue in Coding Bootcamp.
+The course is structured into 5 comprehensive modules:
 
-1. Frontend
-   1. Build UI with HTML, React and CSS (individual project)
-2. Full Stack
-   1. Build full-stack app with Firebase backend (group project)
-3. Backend
-   1. Build full-stack app with Express backend (individual or group project)
-4. Capstone
-   1. Build app with new technology (individual or group project)
+1. Data Fundamentals
+   - Introduction to Data Analytics
+   - Python Programming
+   - Statistics Fundamentals
+   - Linear Algebra Foundations
+   - Data Analysis with Pandas
 
-The following is a diagram of Rocket's curriculum. Module 1 introduces the relationship between client and server and how a frontend server can serve a client-side application. Module 2 introduces a 3rd-party backend service (Firebase) that our frontend apps can use to store data. Module 3 introduces how to build a backend service of our own. Throughout the course we will learn algorithms to bolster our foundations and prepare for coding interviews.
+2. Data Wrangling
+   - SQL and Databases
+   - Data Quality & Cleaning
+   - Exploratory Data Analysis
+   - Data Engineering Fundamentals
 
-![Coding Bootcamp Curriculum Outline](<.gitbook/assets/Coding Bootcamp Curriculum Outline.png>)
+3. Data Visualization
+   - Visualization Principles
+   - Advanced Visualization Techniques
+   - Business Intelligence with Tableau
+   - Data Storytelling
 
-You may notice Rocket's docs often reference official docs, guides and tutorials for the content we teach, for example with React, Firebase and Sequelize. We do this because the official docs are often the best explanations, and Rocket supplements those explanations with our own expertise of what students at our levels are likely to understand. All Rocket exercises are intentionally and meticulously designed to suit our students' experience levels.
+4. Statistical Analysis
+   - Inferential Statistics
+   - Hypothesis Testing
+   - Relationships in Data
+   - Statistical Modeling
 
-We hope this teaching style suits you and we are excited to teach you the best!
+5. Machine Learning Fundamentals
+   - Introduction to Machine Learning
+   - Supervised Learning
+   - Unsupervised Learning
+   - Model Evaluation
+
+Each module includes theoretical concepts, practical exercises, and hands-on assignments to ensure comprehensive learning and skill development.
