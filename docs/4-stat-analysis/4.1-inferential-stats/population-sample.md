@@ -16,7 +16,7 @@ A population represents the **complete set** of all items, individuals, or measu
 - Often massive or infinite in size
 - Usually impossible to measure completely
 - Described by fixed values called parameters
-- Represented mathematically as: $\{x_1, x_2, ..., x_N\}$ where N is the population size
+- Represented mathematically as: ${x_1, x_2, ..., x_N}$ where N is the population size
 
 ## What is a Sample? 🎯
 A sample is a carefully selected **subset** of the population that we actually measure and analyze. Think of it as our "window" into the larger population.
@@ -31,7 +31,7 @@ A sample is a carefully selected **subset** of the population that we actually m
 - Manageable size (n < N)
 - Must be representative of the population
 - Used to estimate population parameters
-- Represented mathematically as: $\{x_1, x_2, ..., x_n\}$ where n is the sample size
+- Represented mathematically as: ${x_1, x_2, ..., x_n}$ where n is the sample size
 
 ## Sampling Methods: Choosing Your Strategy 🎲
 
@@ -122,12 +122,12 @@ When your sample isn't truly representative.
 ### 2. Sampling Error
 Natural variation between sample and population. Quantified by:
 
-$SE = \frac{\sigma}{\sqrt{n}}$
+$$SE = \frac{\sigma}{\sqrt{n}}$$
 
 where:
-- $SE$ is the standard error
-- $\sigma$ is the population standard deviation
-- $n$ is the sample size
+- SE is the standard error
+- σ is the population standard deviation
+- n is the sample size
 
 ### 3. Coverage Error
 When your sampling frame misses parts of the population.
@@ -141,13 +141,13 @@ When your sampling frame misses parts of the population.
 ### The Sample Size Formula
 For estimating a proportion with specified margin of error:
 
-$n = \frac{z^2 \times p(1-p)}{E^2}$
+$$n = \frac{z^2 \times p(1-p)}{E^2}$$
 
 where:
-- $n$ is the required sample size
-- $z$ is the z-score for desired confidence level
-- $p$ is the expected proportion
-- $E$ is the margin of error
+- n is the required sample size
+- z is the z-score for desired confidence level
+- p is the expected proportion
+- E is the margin of error
 
 ```python
 def calculate_sample_size(confidence_level=0.95, margin_of_error=0.05, p=0.5):

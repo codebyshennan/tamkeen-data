@@ -6,17 +6,17 @@ Logistic regression is a statistical model used for binary classification proble
 ### Mathematical Foundation
 The logistic regression model transforms a linear combination of features into a probability using the logistic (sigmoid) function:
 
-$$ P(Y=1|X) = \frac{1}{1 + e^{-(\beta_0 + \beta_1X_1 + ... + \beta_pX_p)}} = \frac{1}{1 + e^{-X^T\beta}} $$
+$$P(Y=1|X) = \frac{1}{1 + e^{-(\beta_0 + \beta_1X_1 + ... + \beta_pX_p)}} = \frac{1}{1 + e^{-X^T\beta}}$$
 
 where:
-- $P(Y=1|X)$ is the probability of the positive class given features X
-- $\beta_0$ is the intercept term
-- $\beta_1, ..., \beta_p$ are the coefficients for features $X_1, ..., X_p$
-- $X^T\beta$ represents the linear combination of features and coefficients
+- P(Y=1|X) is the probability of the positive class given features X
+- β₀ is the intercept term
+- β₁, ..., βₚ are the coefficients for features X₁, ..., Xₚ
+- X^Tβ represents the linear combination of features and coefficients
 
 The logit transformation converts probabilities to log-odds:
 
-$$ \text{logit}(p) = \ln\left(\frac{p}{1-p}\right) = \beta_0 + \beta_1X_1 + ... + \beta_pX_p $$
+$$logit(p) = ln(\frac{p}{1-p}) = \beta_0 + \beta_1X_1 + ... + \beta_pX_p$$
 
 This transformation is crucial because it:
 1. Maps probabilities (0 to 1) to the entire real line (-∞ to +∞)

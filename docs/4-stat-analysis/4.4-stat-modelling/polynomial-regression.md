@@ -6,30 +6,28 @@ Polynomial regression extends linear regression to capture non-linear relationsh
 ### Mathematical Foundation
 The general form of a polynomial regression model of degree n is:
 
-$$ Y = \beta_0 + \beta_1X + \beta_2X^2 + ... + \beta_nX^n + \epsilon $$
+$$Y = \beta_0 + \beta_1X + \beta_2X^2 + ... + \beta_nX^n + \epsilon$$
 
 where:
-- $Y$ is the dependent variable
-- $X$ is the independent variable
-- $\beta_0$ is the intercept
-- $\beta_1, \beta_2, ..., \beta_n$ are the coefficients
-- $\epsilon$ is the error term, assumed to be normally distributed: $\epsilon \sim N(0, \sigma^2)$
+- Y is the dependent variable
+- X is the independent variable
+- β₀ is the intercept
+- β₁, β₂, ..., βₙ are the coefficients
+- ε is the error term, assumed to be normally distributed: ε ~ N(0, σ²)
 
 The model can be written in matrix form as:
 
-$$ \begin{bmatrix} y_1 \\ y_2 \\ \vdots \\ y_m \end{bmatrix} = 
-\begin{bmatrix} 
-1 & x_1 & x_1^2 & \cdots & x_1^n \\
-1 & x_2 & x_2^2 & \cdots & x_2^n \\
-\vdots & \vdots & \vdots & \ddots & \vdots \\
-1 & x_m & x_m^2 & \cdots & x_m^n
-\end{bmatrix}
-\begin{bmatrix} \beta_0 \\ \beta_1 \\ \beta_2 \\ \vdots \\ \beta_n \end{bmatrix} +
-\begin{bmatrix} \epsilon_1 \\ \epsilon_2 \\ \vdots \\ \epsilon_m \end{bmatrix} $$
+$$Y = XB + E$$
+
+where:
+Y = [y₁, y₂, ..., yₘ]ᵀ
+X = [1, x, x², ..., xⁿ]
+B = [β₀, β₁, β₂, ..., βₙ]ᵀ
+E = [ε₁, ε₂, ..., εₘ]ᵀ
 
 The coefficients are estimated using the least squares method, minimizing:
 
-$$ \text{RSS} = \sum_{i=1}^m (y_i - (\beta_0 + \beta_1x_i + \beta_2x_i^2 + ... + \beta_nx_i^n))^2 $$
+$$RSS = \sum_{i=1}^m (y_i - (\beta_0 + \beta_1x_i + \beta_2x_i^2 + ... + \beta_nx_i^n))^2$$
 
 ```python
 import numpy as np

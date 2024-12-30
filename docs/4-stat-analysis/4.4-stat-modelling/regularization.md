@@ -6,23 +6,23 @@ Regularization helps prevent overfitting by adding penalty terms to the model's 
 ### Mathematical Foundation
 In regularized regression, we modify the standard loss function by adding penalty terms. The general form is:
 
-$$ \min_{\beta} \left\{ \sum_{i=1}^n (y_i - \mathbf{x}_i^T\beta)^2 + \lambda \cdot \text{penalty}(\beta) \right\} $$
+$$\min_{\beta} \{ \sum_{i=1}^n (y_i - x_i^T\beta)^2 + \lambda \cdot penalty(\beta) \}$$
 
 where:
-- $\sum_{i=1}^n (y_i - \mathbf{x}_i^T\beta)^2$ is the standard least squares loss
-- $\lambda$ is the regularization parameter
-- $\text{penalty}(\beta)$ is the regularization term
+- Σ(y_i - x_i^Tβ)² is the standard least squares loss
+- λ is the regularization parameter
+- penalty(β) is the regularization term
 
 Common regularization methods include:
 
 1. Ridge Regression (L2):
-$$ \min_{\beta} \left\{ \sum_{i=1}^n (y_i - \mathbf{x}_i^T\beta)^2 + \lambda \sum_{j=1}^p \beta_j^2 \right\} $$
+$$\min_{\beta} \{ \sum_{i=1}^n (y_i - x_i^T\beta)^2 + \lambda \sum_{j=1}^p \beta_j^2 \}$$
 
 2. LASSO (L1):
-$$ \min_{\beta} \left\{ \sum_{i=1}^n (y_i - \mathbf{x}_i^T\beta)^2 + \lambda \sum_{j=1}^p |\beta_j| \right\} $$
+$$\min_{\beta} \{ \sum_{i=1}^n (y_i - x_i^T\beta)^2 + \lambda \sum_{j=1}^p |\beta_j| \}$$
 
 3. Elastic Net (L1 + L2):
-$$ \min_{\beta} \left\{ \sum_{i=1}^n (y_i - \mathbf{x}_i^T\beta)^2 + \lambda_1 \sum_{j=1}^p |\beta_j| + \lambda_2 \sum_{j=1}^p \beta_j^2 \right\} $$
+$$\min_{\beta} \{ \sum_{i=1}^n (y_i - x_i^T\beta)^2 + \lambda_1 \sum_{j=1}^p |\beta_j| + \lambda_2 \sum_{j=1}^p \beta_j^2 \}$$
 
 ```python
 import numpy as np

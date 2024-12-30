@@ -7,11 +7,11 @@ Imagine you're a chef trying to perfect a recipe. You taste-test small portions 
 A sampling distribution is the distribution of a statistic (like mean or proportion) calculated from repeated random samples of the same size from a population. Think of it as the "distribution of distributions" - it shows us how sample statistics bounce around the true population value.
 
 ### Mathematical Definition
-For a sample mean $\bar{X}$:
-- Mean: $E(\bar{X}) = \mu$ (population mean)
-- Standard Error: $SE(\bar{X}) = \frac{\sigma}{\sqrt{n}}$
-  - where $\sigma$ is population standard deviation
-  - and $n$ is sample size
+For a sample mean X̄:
+- Mean: $$E(X̄) = μ$$ (population mean)
+- Standard Error: $$SE(X̄) = \frac{σ}{\sqrt{n}}$$
+  - where σ is population standard deviation
+  - and n is sample size
 
 ## The Central Limit Theorem (CLT): Statistical Magic! ✨
 
@@ -92,9 +92,9 @@ for dist in distributions:
 The standard error (SE) tells us how much sample statistics typically deviate from the population parameter. It's like a "margin of wobble" for our estimates!
 
 ### Formula for Different Statistics
-1. For means: $SE(\bar{X}) = \frac{\sigma}{\sqrt{n}}$
-2. For proportions: $SE(p) = \sqrt{\frac{p(1-p)}{n}}$
-3. For differences: $SE(\bar{X}_1 - \bar{X}_2) = \sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}$
+1. For means: $$SE(X̄) = \frac{σ}{\sqrt{n}}$$
+2. For proportions: $$SE(p) = \sqrt{\frac{p(1-p)}{n}}$$
+3. For differences: $$SE(X̄_1 - X̄_2) = \sqrt{\frac{σ_1^2}{n_1} + \frac{σ_2^2}{n_2}}$$
 
 Let's see how sample size affects SE:
 

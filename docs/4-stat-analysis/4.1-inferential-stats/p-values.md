@@ -7,12 +7,12 @@ Imagine you're a detective trying to solve a mystery. You have a default theory 
 A p-value is the **probability of observing results at least as extreme as what we got, assuming our null hypothesis is true**. Think of it as a measure of surprise - how unexpected are our results if nothing interesting is actually happening?
 
 ### The Mathematical Definition
-$p = P(|T| \geq |t| | H_0)$
+$$p = P(|T| \geq |t| | H_0)$$
 
 where:
-- $T$ is the test statistic
-- $t$ is the observed value
-- $H_0$ is the null hypothesis
+- T is the test statistic
+- t is the observed value
+- H_0 is the null hypothesis
 
 ## The Key Players in Hypothesis Testing 🎭
 

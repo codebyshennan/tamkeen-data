@@ -4,31 +4,31 @@
 Model selection is the process of choosing the best model from a set of candidate models. This involves balancing model complexity with predictive performance through rigorous statistical criteria and validation techniques.
 
 ### Theoretical Foundation
-The fundamental challenge in model selection is the bias-variance tradeoff. Given a true function $f(x)$ and a model $\hat{f}(x)$, the expected prediction error can be decomposed as:
+The fundamental challenge in model selection is the bias-variance tradeoff. Given a true function f(x) and a model f̂(x), the expected prediction error can be decomposed as:
 
-$$ \mathbb{E}[(Y - \hat{f}(X))^2] = \text{Bias}[\hat{f}(X)]^2 + \text{Var}[\hat{f}(X)] + \sigma^2 $$
+$$E[(Y - f̂(X))^2] = Bias[f̂(X)]^2 + Var[f̂(X)] + σ^2$$
 
 where:
-- $\text{Bias}[\hat{f}(X)] = \mathbb{E}[\hat{f}(X)] - f(X)$ is the systematic error
-- $\text{Var}[\hat{f}(X)]$ is the variance of the prediction
-- $\sigma^2$ is the irreducible error
+- Bias[f̂(X)] = E[f̂(X)] - f(X) is the systematic error
+- Var[f̂(X)] is the variance of the prediction
+- σ² is the irreducible error
 
 ### Information Criteria
 Information criteria provide a theoretical framework for model selection by penalizing model complexity:
 
 1. Akaike Information Criterion (AIC):
-$$ \text{AIC} = -2\ln(L) + 2k $$
+$$AIC = -2ln(L) + 2k$$
 
 2. Bayesian Information Criterion (BIC):
-$$ \text{BIC} = -2\ln(L) + k\ln(n) $$
+$$BIC = -2ln(L) + kln(n)$$
 
 where:
-- $L$ is the maximum likelihood
-- $k$ is the number of parameters
-- $n$ is the sample size
+- L is the maximum likelihood
+- k is the number of parameters
+- n is the sample size
 
 3. Adjusted R-squared:
-$$ R^2_{\text{adj}} = 1 - \frac{(1-R^2)(n-1)}{n-k-1} $$
+$$R^2_{adj} = 1 - \frac{(1-R^2)(n-1)}{n-k-1}$$
 
 ```python
 import numpy as np

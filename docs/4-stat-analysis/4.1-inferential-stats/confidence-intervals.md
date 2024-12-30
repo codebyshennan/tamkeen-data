@@ -9,13 +9,13 @@ A confidence interval is a range of values that likely contains the true populat
 ### The Mathematical Formula
 For a mean with normal distribution:
 
-$CI = \bar{x} \pm (t_{\alpha/2} \times \frac{s}{\sqrt{n}})$
+$$CI = \bar{x} \pm (t_{\alpha/2} \times \frac{s}{\sqrt{n}})$$
 
 where:
-- $\bar{x}$ is the sample mean
-- $t_{\alpha/2}$ is the t-value for desired confidence level
-- $s$ is the sample standard deviation
-- $n$ is the sample size
+- x̄ is the sample mean
+- t_α/2 is the t-value for desired confidence level
+- s is the sample standard deviation
+- n is the sample size
 
 ## Components of a Confidence Interval 🏗️
 

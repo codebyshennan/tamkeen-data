@@ -8,31 +8,31 @@ Understanding and interpreting statistical models is crucial for making informed
 #### 1. Linear Models
 For linear models, the interpretation is based on the equation:
 
-$$ y = \beta_0 + \beta_1x_1 + \beta_2x_2 + ... + \beta_px_p + \epsilon $$
+$$y = \beta_0 + \beta_1x_1 + \beta_2x_2 + ... + \beta_px_p + \epsilon$$
 
 where:
-- $\beta_0$ is the intercept
-- $\beta_i$ represents the change in y for a one-unit increase in $x_i$, holding other variables constant
-- $\epsilon \sim N(0, \sigma^2)$ is the error term
+- β₀ is the intercept
+- βᵢ represents the change in y for a one-unit increase in xᵢ, holding other variables constant
+- ε ~ N(0, σ²) is the error term
 
 #### 2. Logistic Models
 For logistic regression, we interpret odds ratios:
 
-$$ \text{logit}(p) = \ln\left(\frac{p}{1-p}\right) = \beta_0 + \beta_1x_1 + ... + \beta_px_p $$
+$$logit(p) = ln(\frac{p}{1-p}) = \beta_0 + \beta_1x_1 + ... + \beta_px_p$$
 
-The odds ratio for feature $x_i$ is:
+The odds ratio for feature xᵢ is:
 
-$$ \text{OR}_i = e^{\beta_i} $$
+$$OR_i = e^{\beta_i}$$
 
 #### 3. Standardized Coefficients
 For comparing feature importance:
 
-$$ \beta_i^* = \beta_i \cdot \frac{\sigma_{x_i}}{\sigma_y} $$
+$$\beta_i^* = \beta_i \cdot \frac{σ_{x_i}}{σ_y}$$
 
 where:
-- $\beta_i^*$ is the standardized coefficient
-- $\sigma_{x_i}$ is the standard deviation of feature i
-- $\sigma_y$ is the standard deviation of the target
+- β*ᵢ is the standardized coefficient
+- σ_xᵢ is the standard deviation of feature i
+- σ_y is the standard deviation of the target
 
 ```python
 import numpy as np
