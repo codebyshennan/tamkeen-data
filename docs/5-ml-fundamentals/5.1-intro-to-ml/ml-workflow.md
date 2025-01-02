@@ -200,11 +200,13 @@ df_engineered, scaler = engineer.engineer()
 ### Data Splitting
 The training process follows this pattern:
 
-$$\text{Data} \xrightarrow{\text{Split}} \begin{cases} 
+$$
+\text{Data} \xrightarrow{\text{Split}} \begin{cases} 
 \text{Training Set (60%)} \\
 \text{Validation Set (20%)} \\
 \text{Test Set (20%)}
-\end{cases}$$
+\end{cases}
+$$
 
 ```python
 from sklearn.model_selection import train_test_split
