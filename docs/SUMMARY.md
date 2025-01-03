@@ -183,6 +183,9 @@
   * [Model Selection](5.-machine-learning-fundamentals/5.5-model-eval/model-selection.md)
   * [Assignment](5-ml-fundamentals/5.5-model-eval/assignment.md)
 
+## 6. Capstone Project
+* [Project Guidelines](6-capstone/README.md)
+
 ## Additional Resources
 * [Beginners Guide](beginners-guide.md)
 * [Best Practices Guide](best-practices-guide.md)
