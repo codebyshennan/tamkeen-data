@@ -11,15 +11,17 @@
 * [DBeaver Setup](0-prep/dbeaver.md)
 * [Tableau Setup](0-prep/tableau.md)
 * [Airflow Setup](0-prep/airflow.md)
+* [Databricks Setup](0-prep/databricks.md)
+* [Snowflake Setup](0-prep/snowflake.md)
 
 ## 1. Data Fundamentals
 
+* [Module 1 Assignment](1-data-fundamentals/_assignments/module-assignment.md)
 * [1.1 Introduction to Data Analytics](1-data-fundamentals/1.1-intro-data-analytics/README.md)
   * [Workflow Concepts](1-data-fundamentals/1.1-intro-data-analytics/workflow-concepts.md)
   * [Data Collection](1-data-fundamentals/1.1-intro-data-analytics/data-collection.md)
   * [Data Privacy](1-data-fundamentals/1.1-intro-data-analytics/data-privacy.md)
   * [Data Security](1-data-fundamentals/1.1-intro-data-analytics/data-security.md)
-  * [Assignment](1-data-fundamentals/1.1-intro-data-analytics/assignment.md)
 * [1.2 Introduction to Python](1-data-fundamentals/1.2-intro-python/README.md)
   * [Basic Syntax and Data Types](1-data-fundamentals/1.2-intro-python/basic-syntax-data-types.md)
   * [Data Structures](1-data-fundamentals/1.2-intro-python/data-structures.md)
@@ -27,14 +29,12 @@
   * [Functions](1-data-fundamentals/1.2-intro-python/functions.md)
   * [Classes and Objects](1-data-fundamentals/1.2-intro-python/classes-objects.md)
   * [Modules](1-data-fundamentals/1.2-intro-python/modules.md)
-  * [Assignment](1-data-fundamentals/1.2-intro-python/assignment.md)
 * [1.3 Introduction to Statistics](1-data-fundamentals/1.3-intro-statistics/README.md)
   * [Probability Fundamentals](1-data-fundamentals/1.3-intro-statistics/probability-fundamentals.md)
   * [One Variable Statistics](1-data-fundamentals/1.3-intro-statistics/one-variable-statistics.md)
   * [Two Variable Statistics](1-data-fundamentals/1.3-intro-statistics/two-variable-statistics.md)
   * [Probability Distributions](1-data-fundamentals/1.3-intro-statistics/probability-distributions.md)
   * [Probability Distribution Families](1-data-fundamentals/1.3-intro-statistics/probability-distribution-families.md)
-  * [Assignment](1-data-fundamentals/1.3-intro-statistics/assignment.md)
 * [1.4 Data Foundation & Linear Algebra](1-data-fundamentals/1.4-data-foundation-linear-algebra/README.md)
   * [Introduction to NumPy](1-data-fundamentals/1.4-data-foundation-linear-algebra/intro-numpy.md)
   * [N-dimensional Arrays](1-data-fundamentals/1.4-data-foundation-linear-algebra/ndarray.md)
@@ -42,7 +42,6 @@
   * [NDArray Methods](1-data-fundamentals/1.4-data-foundation-linear-algebra/ndarray-methods.md)
   * [Boolean Indexing](1-data-fundamentals/1.4-data-foundation-linear-algebra/boolean-indexing.md)
   * [Linear Algebra](1-data-fundamentals/1.4-data-foundation-linear-algebra/linear-algebra.md)
-  * [Assignment](1-data-fundamentals/1.4-data-foundation-linear-algebra/assignment.md)
 * [1.5 Data Analysis with Pandas](1-data-fundamentals/1.5-data-analysis-pandas/README.md)
   * [Series](1-data-fundamentals/1.5-data-analysis-pandas/series.md)
   * [DataFrame](1-data-fundamentals/1.5-data-analysis-pandas/dataframe.md)
@@ -51,7 +50,6 @@
   * [Arithmetic and Alignment](1-data-fundamentals/1.5-data-analysis-pandas/arithmetic-alignment.md)
   * [Function Mapping](1-data-fundamentals/1.5-data-analysis-pandas/function-mapping.md)
   * [Sorting and Ranking](1-data-fundamentals/1.5-data-analysis-pandas/sorting-ranking.md)
-  * [Assignment](1-data-fundamentals/1.5-data-analysis-pandas/assignment.md)
 
 ## 2. Data Wrangling
 
