@@ -1,6 +1,20 @@
 # Mastering Tableau Basics 📊
 
 ## 🎯 Getting Started with Tableau
+What is Tableau?
+- Tableau is a powerful data visualization tool that allows users to create interactive and shareable dashboards.
+- It enables users to connect to various data sources, transform data, and create visualizations without writing code.
+
+### Tableau Product Line
+
+| Product | Description |
+|---------|-------------|
+| Tableau Prep | Visually combine, shape, clean data, automate data prep flow |
+| Tableau Desktop | Visual analysis, data exploration, data-driven decision-making |
+| Tableau Public | Free version of Tableau Desktop with some limitations |
+| Tableau Server & Online | Share the tableau report across organisation on server or cloud |
+| Tableau Mobile | Access KPI on Mobile App for iOS and Android |
+
 
 ### Understanding the Interface
 ```yaml

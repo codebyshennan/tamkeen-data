@@ -11,7 +11,7 @@ Impact on Understanding:
 ┌─────────────────────┐
 │ Text/Numbers Only   │ → 10% retention
 ├─────────────────────┤
-│ With Visuals       │ → 65% retention
+│ With Visuals        │ → 65% retention
 └─────────────────────┘
 ```
 

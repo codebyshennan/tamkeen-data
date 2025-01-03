@@ -8,11 +8,24 @@ Understanding how humans process visual information is crucial for creating effe
 ```
 Processing Time:
 ┌─────────────────────┐
-│ Pre-attentive      │ → < 250ms
+│ Pre-attentive       │ → < 250ms
 ├─────────────────────┤
-│ Conscious          │ → > 250ms
+│ Conscious           │ → > 250ms
 └─────────────────────┘
 ```
+
+### Against Attentive Processing
+Pre-attentive Processing:
+- Fast, automatic, parallel
+- Detects visual properties
+- Identifies patterns
+
+
+Attentive Processing:
+- Slow, effortful, serial
+- Focuses on details
+- Interprets complex information
+
 
 #### 1. Form Attributes
 ```yaml
@@ -72,6 +85,25 @@ Visual Organization:
      │ Figure/Ground│ → Focus vs Context
      └─────────────┘
 ```
+
+Key Principles:
+1. Simple
+- maximize impact, minimize noise
+- if it doesn't add value or serve a purpose, get rid of it
+
+2. Narrative
+- don't just show it; tell a story with your data
+- communicate key insights clearly, quickly and powerfully
+
+3. Balance betrween design & function
+- selecting the right chart type, color scheme, and layout
+- beautiful is good, functional is better, both is best
+
+> "The goal of a visualization is insight, not pictures." - Ben Shneiderman
+
+### The 10-Second Rule
+- If your audience can't understand your visualization in 10 seconds, it's not effective
+- Keep it simple, clear, and focused on the key message
 
 ## 📊 Chart Selection Framework
 

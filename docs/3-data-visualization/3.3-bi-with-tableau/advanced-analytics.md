@@ -178,92 +178,210 @@ SUM([Sales]) /
 
 ## 📈 Statistical Analysis
 
-### Clustering
+### Segmentation Analysis
 
-#### 1. K-Means Configuration
+#### Understanding Customer Segments
 ```yaml
-Parameters:
-  Number of Clusters:
-    - Use elbow method
-    - Consider business context
-    - Test different values
+Segmentation Methods:
+  Demographic:
+    - Age groups
+    - Income levels
+    - Geographic regions
     
-  Variables:
-    - Standardize numeric fields
-    - Handle categorical data
-    - Weight features appropriately
+  Behavioral:
+    - Purchase frequency
+    - Average order value
+    - Product preferences
+    
+  Value-based:
+    - Customer lifetime value
+    - Profitability
+    - Loyalty status
 ```
 
-#### 2. Cluster Analysis
+#### Implementing Segmentation
 ```sql
--- Cluster Quality
-{FIXED [Cluster] : 
-    VAR([Standardized Value])}
+-- RFM Segmentation
+{FIXED [Customer ID]:
+    MAX(DATEDIFF('day', MAX([Order Date]), TODAY()))} -- Recency
 
--- Silhouette Score
-(
-    {FIXED [Point]: MIN(
-        {EXCLUDE [Current Cluster]: 
-            AVG([Distance to Center])
-        }
-    )} -
-    {FIXED [Point]: 
-        AVG([Distance to Center])
-    }
-) /
-GREATEST(
-    {FIXED [Point]: MIN(
-        {EXCLUDE [Current Cluster]: 
-            AVG([Distance to Center])
-        }
-    )},
-    {FIXED [Point]: 
-        AVG([Distance to Center])
-    }
-)
+{FIXED [Customer ID]:
+    COUNT([Order ID])} -- Frequency
+
+{FIXED [Customer ID]:
+    AVG([Total Amount])} -- Monetary
+
+-- Custom Segment Scoring
+CASE 
+    WHEN [Recency Score] >= 4 AND [Frequency Score] >= 4 
+    THEN 'High Value'
+    WHEN [Recency Score] <= 2 AND [Frequency Score] <= 2 
+    THEN 'At Risk'
+    ELSE 'Medium Value'
+END
 ```
 
-### Forecasting
+### Groups vs Sets
 
-#### 1. Time Series Components
+#### Understanding the Difference
 ```yaml
-Components:
-  Trend:
-    - Linear
-    - Exponential
-    - Polynomial
+Groups:
+  Characteristics:
+    - Static member list
+    - Based on discrete values
+    - Simple to create and use
+    - Cannot be combined with calculations
     
-  Seasonality:
-    - Additive
-    - Multiplicative
-    - Multiple cycles
-    
-  Noise:
-    - Random variation
-    - Outlier handling
-    - Confidence intervals
+Sets:
+  Characteristics:
+    - Dynamic membership
+    - Based on conditions
+    - Can use complex logic
+    - Can be combined with other sets
 ```
 
-#### 2. Advanced Forecasting
+#### Working with Sets
 ```sql
--- Exponential Smoothing
-SCRIPT_REAL("
-    from statsmodels.tsa.holtwinters import ExponentialSmoothing
-    model = ExponentialSmoothing(
-        x, 
-        seasonal_periods=12, 
-        trend='add', 
-        seasonal='add'
-    ).fit()
-    return model.forecast(12)
-", SUM([Sales]))
+-- Dynamic Set Based on Performance
+[Sales] > {FIXED [Region]: AVG([Sales])}
 
--- Custom Forecast Model
-SCRIPT_REAL("
-    import pmdarima as pm
-    model = pm.auto_arima(x)
-    return model.predict(12)
-", SUM([Sales]))
+-- Combining Sets (Using Set Actions)
+[High Value Customers] AND [Recent Purchasers]
+
+-- Set Size Analysis
+SIZE([My Set]) / TOTAL(COUNT([Customer ID]))
+```
+
+### Combining Sets
+
+#### Set Operations
+```yaml
+Operations:
+  Union:
+    - Combines members from both sets
+    - Removes duplicates
+    
+  Intersection:
+    - Keeps only common members
+    - Useful for finding overlap
+    
+  Difference:
+    - Removes members of one set from another
+    - Identifies unique segments
+```
+
+#### Advanced Set Combinations
+```sql
+-- Complex Set Logic
+([High Value Set] AND [Active Set]) 
+OR 
+([Medium Value Set] AND [Recent Purchase Set])
+
+-- Nested Set Operations
+{FIXED [Region]: 
+    MIN(
+        [Premium Customers] 
+        AND [Loyalty Program Members]
+    )}
+```
+
+### Binning Strategies
+
+#### Types of Binning
+```yaml
+Binning Methods:
+  Fixed-width:
+    - Equal intervals
+    - Good for uniform distributions
+    
+  Quantile:
+    - Equal number of records
+    - Better for skewed data
+    
+  Custom:
+    - Business-defined ranges
+    - Domain-specific breaks
+```
+
+#### Implementation Examples
+```sql
+-- Custom Bins with LOD
+{FIXED [Customer ID]: 
+    CASE 
+        WHEN SUM([Sales]) < 1000 THEN 'Low'
+        WHEN SUM([Sales]) < 5000 THEN 'Medium'
+        ELSE 'High'
+    END
+}
+
+-- Dynamic Binning
+PERCENTILE_CONT(0.33) WITHIN GROUP (ORDER BY [Value])
+PERCENTILE_CONT(0.67) WITHIN GROUP (ORDER BY [Value])
+```
+
+### Investment Scenario Analysis
+
+#### Portfolio Analysis
+```yaml
+Analysis Components:
+  Risk Assessment:
+    - Historical volatility
+    - Value at risk (VaR)
+    - Beta calculation
+    
+  Return Analysis:
+    - Total return
+    - Risk-adjusted return
+    - Attribution analysis
+```
+
+#### Calculations
+```sql
+-- Portfolio Return
+SUM([Return] * [Weight]) / SUM([Weight])
+
+-- Risk-Adjusted Metrics
+([Return] - [Risk Free Rate]) / 
+WINDOW_STDEV([Return], -12, 0)
+
+-- Attribution Analysis
+{FIXED [Asset Class]: 
+    SUM([Return] * [Weight]) / SUM([Weight])}
+```
+
+### What-If Analysis
+
+#### Parameter-Based Scenarios
+```yaml
+Scenario Types:
+  Sensitivity:
+    - Single variable changes
+    - Impact assessment
+    
+  Multi-variable:
+    - Combined effects
+    - Interaction analysis
+    
+  Monte Carlo:
+    - Random sampling
+    - Distribution of outcomes
+```
+
+#### Implementation
+```sql
+-- Basic What-If
+[Base Value] * (1 + [Growth Parameter])
+
+-- Complex Scenario
+CASE [Scenario Parameter]
+    WHEN 'Optimistic' THEN [Value] * 1.2
+    WHEN 'Pessimistic' THEN [Value] * 0.8
+    ELSE [Value]
+END
+
+-- Sensitivity Testing
+([Value] * POWER(1 + [Growth Rate], [Years])) *
+(1 + [Adjustment Parameter])
 ```
 
 ## 🎯 Best Practices
@@ -321,5 +439,22 @@ Required Elements:
     - Common pitfalls
     - Best practices
 ```
+
+## 📚 Resources and References
+
+### Official Documentation
+- [Tableau Help: Advanced Analytics](https://help.tableau.com/current/pro/desktop/en-us/calculations_calculatedfields_advanced.htm)
+- [Tableau Sets Guide](https://help.tableau.com/current/pro/desktop/en-us/sortgroup_sets_create.htm)
+- [Level of Detail Expressions](https://help.tableau.com/current/pro/desktop/en-us/calculations_calculatedfields_lod.htm)
+
+### Community Resources
+- [Tableau Community Forums](https://community.tableau.com/)
+- [Tableau Public Gallery](https://public.tableau.com/gallery)
+- [Tableau Blog: Analytics](https://www.tableau.com/learn/articles/advanced-analytics)
+
+### Books and Publications
+- "Visual Analytics with Tableau" by Alexander Loth
+- "Practical Tableau" by Ryan Sleeper
+- "Advanced Analytics with Tableau" by Jen Stirrup
 
 Remember: Advanced analytics in Tableau is about finding the right balance between analytical power and performance. Start with clear business requirements, build incrementally, and always validate your results.
