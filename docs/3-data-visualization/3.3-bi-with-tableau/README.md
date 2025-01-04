@@ -1,4 +1,4 @@
-# Business Intelligence with Tableau 📊
+# 3.3 Business Intelligence with Tableau
 
 ## 🎯 Overview
 
@@ -18,6 +18,7 @@ Module Structure:
 ## 🌟 Why Tableau?
 
 ### 1. Intuitive Design
+
 ```yaml
 Key Features:
   Drag-and-Drop:
@@ -37,6 +38,7 @@ Key Features:
 ```
 
 ### 2. Enterprise Power
+
 ```yaml
 Capabilities:
   Data Handling:
@@ -58,15 +60,17 @@ Capabilities:
 ## 📊 Core Concepts
 
 ### 1. Data Architecture
+
 ```
 Data Pipeline:
-┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-│ Data Source │ → │   Extract   │ → │ Visualization│
-└─────────────┘    └─────────────┘    └─────────────┘
+┌─────────────┐    ┌─────────────┐    ┌───────────────┐
+│ Data Source │ →  │   Extract   │ →  │ Visualization │
+└─────────────┘    └─────────────┘    └───────────────┘
      Raw Data         Processing         Presentation
 ```
 
 #### Connection Types
+
 ```yaml
 Live Connection:
   Pros:
@@ -92,6 +96,7 @@ Extract:
 ### 2. Visual Grammar
 
 #### Basic Charts
+
 ```yaml
 Chart Selection:
   Comparison:
@@ -116,6 +121,7 @@ Chart Selection:
 ```
 
 #### Visual Best Practices
+
 ```yaml
 Design Principles:
   Color Usage:
@@ -137,6 +143,7 @@ Design Principles:
 ### 3. Calculations
 
 #### Basic Formulas
+
 ```sql
 -- Year-over-Year Growth
 YOY_Growth = 
@@ -153,6 +160,7 @@ RUNNING_SUM(SUM([Sales]))
 ```
 
 #### Advanced Analytics
+
 ```sql
 -- Forecasting
 FORECAST_INDICATOR(
@@ -176,15 +184,16 @@ T_TEST(
 ### 4. Dashboard Design
 
 #### Layout Patterns
+
 ```
 1. Executive Dashboard
-┌─────────┬─────────┬─────────┐
-│  KPI 1  │  KPI 2  │  KPI 3  │
-├─────────┴─────────┴─────────┤
-│      Main Visualization     │
-├─────────┬─────────┬─────────┤
-│ Detail 1 │ Detail 2│ Detail 3│
-└─────────┴─────────┴─────────┘
+┌──────────┬──────────┬──────────┐
+│  KPI 1   │   KPI 2  │   KPI 3  │
+├──────────┴──────────┴──────────┤
+│      Main Visualization        │
+├──────────┬──────────┬──────────┤
+│ Detail 1 │ Detail 2 │ Detail 3 │
+└──────────┴──────────┴──────────┘
 
 2. Analysis Dashboard
 ┌─────────┬─────────────────┐
@@ -192,11 +201,12 @@ T_TEST(
 ├─────────┤                 │
 │ Metrics │                 │
 ├─────────┼─────────────────┤
-│ Details │  Drill-Down     │
+│ Details │   Drill-Down    │
 └─────────┴─────────────────┘
 ```
 
 #### Interactive Elements
+
 ```yaml
 Filter Types:
   - Single value
@@ -222,6 +232,7 @@ Parameters:
 ## 🎯 Learning Path
 
 ### Week 1: Foundation
+
 ```yaml
 Day 1-2:
   - Tableau interface
@@ -242,6 +253,7 @@ Day 5:
 ```
 
 ### Week 2: Advanced Features
+
 ```yaml
 Day 1-2:
   - Complex calculations
@@ -262,6 +274,7 @@ Day 5:
 ```
 
 ### Week 3: Real-World Applications
+
 ```yaml
 Day 1-2:
   - Sales analytics
@@ -289,15 +302,17 @@ Ready to practice your Tableau skills? Head over to the [Business Intelligence w
 ## 📚 Resources
 
 ### Documentation
-- [Tableau Help](https://help.tableau.com)
-- [Knowledge Base](https://kb.tableau.com)
-- [Community Forums](https://community.tableau.com)
-- [Video Library](https://www.tableau.com/learn/training)
+
+* [Tableau Help](https://help.tableau.com)
+* [Knowledge Base](https://kb.tableau.com)
+* [Community Forums](https://community.tableau.com)
+* [Video Library](https://www.tableau.com/learn/training)
 
 ### Learning Materials
-- [Sample Workbooks](https://public.tableau.com/gallery)
-- [Best Practices](https://www.tableau.com/learn/whitepapers)
-- [Tips & Tricks](https://www.tableau.com/learn/tutorials)
-- [Blog](https://www.tableau.com/blog)
+
+* [Sample Workbooks](https://public.tableau.com/gallery)
+* [Best Practices](https://www.tableau.com/learn/whitepapers)
+* [Tips & Tricks](https://www.tableau.com/learn/tutorials)
+* [Blog](https://www.tableau.com/blog)
 
 Remember: The key to mastering Tableau is practice and experimentation. Start with simple visualizations, then gradually add complexity as you become more comfortable with the tool.

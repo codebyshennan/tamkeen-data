@@ -1,38 +1,44 @@
-# Mastering Tableau Basics 📊
+# Tableau Basics
 
 ## 🎯 Getting Started with Tableau
+
 What is Tableau?
-- Tableau is a powerful data visualization tool that allows users to create interactive and shareable dashboards.
-- It enables users to connect to various data sources, transform data, and create visualizations without writing code.
+
+* Tableau is a powerful data visualization tool that allows users to create interactive and shareable dashboards.
+* It enables users to connect to various data sources, transform data, and create visualizations without writing code.
 
 ### Tableau Product Line
 
-| Product | Description |
-|---------|-------------|
-| Tableau Prep | Visually combine, shape, clean data, automate data prep flow |
-| Tableau Desktop | Visual analysis, data exploration, data-driven decision-making |
-| Tableau Public | Free version of Tableau Desktop with some limitations |
+| Product                 | Description                                                     |
+| ----------------------- | --------------------------------------------------------------- |
+| Tableau Prep            | Visually combine, shape, clean data, automate data prep flow    |
+| Tableau Desktop         | Visual analysis, data exploration, data-driven decision-making  |
+| Tableau Public          | Free version of Tableau Desktop with some limitations           |
 | Tableau Server & Online | Share the tableau report across organisation on server or cloud |
-| Tableau Mobile | Access KPI on Mobile App for iOS and Android |
-
+| Tableau Mobile          | Access KPI on Mobile App for iOS and Android                    |
 
 ### Understanding the Interface
+
+<figure><img src="../../.gitbook/assets/Tableau Public 2025-01-04 00.54.33.png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/CleanShot 2025-01-04 at 00.58.00.png" alt=""><figcaption></figcaption></figure>
+
 ```yaml
 Interface Components:
 ┌─────────────────────────────────────────────────────────────┐
 │                      Toolbar & Menu                         │
-├────────┬────────────────────────────┬──────────────────────┤
+├────────┬────────────────────────────┬───────────────────────┤
 │        │                            │                       │
-│  Data  │     Visualization          │      Show Me         │
-│  Panel │         Canvas             │       Panel          │
+│  Data  │     Visualization          │       Show Me         │
+│  Panel │         Canvas             │        Panel          │
 │        │                            │                       │
 ├────────┤                            │                       │
-│        │                            ├──────────────────────┤
+│        │                            ├───────────────────────┤
 │ Marks  │                            │                       │
-│ Card   │                            │      Legends &       │
-│        │                            │      Filters         │
+│ Card   │                            │       Legends &       │
+│        │                            │        Filters.       │
 │        │                            │                       │
-├────────┴────────────────────────────┴──────────────────────┤
+├────────┴────────────────────────────┴───────────────────────┤
 │                  Worksheet Tabs                             │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -40,6 +46,7 @@ Interface Components:
 ### Key Components Explained
 
 #### 1. Data Panel
+
 ```yaml
 Structure:
   Dimensions (Blue):
@@ -59,6 +66,7 @@ Structure:
 ```
 
 #### 2. Marks Card
+
 ```yaml
 Visual Properties:
   - Color: Encode categories/values
@@ -74,6 +82,7 @@ Visual Properties:
 ### Connecting to Data Sources
 
 #### 1. File Connections
+
 ```yaml
 Local Files:
   Excel:
@@ -93,6 +102,7 @@ Local Files:
 ```
 
 #### 2. Database Connections
+
 ```sql
 -- Example: SQL Connection Settings
 Server: database.example.com
@@ -117,6 +127,7 @@ GROUP BY 1, 2
 ### Data Preparation
 
 #### 1. Data Source Filters
+
 ```yaml
 Filter Types:
   Extract Filters:
@@ -131,6 +142,7 @@ Filter Types:
 ```
 
 #### 2. Data Cleaning
+
 ```yaml
 Common Tasks:
   Field Renaming:
@@ -154,6 +166,7 @@ Common Tasks:
 ### Essential Chart Types
 
 #### 1. Bar Charts
+
 ```yaml
 Types:
   Vertical Bars:
@@ -170,6 +183,7 @@ Types:
 ```
 
 #### 2. Line Charts
+
 ```yaml
 Variations:
   Single Line:
@@ -188,6 +202,7 @@ Variations:
 ```
 
 #### 3. Scatter Plots
+
 ```yaml
 Construction:
   Basic Plot:
@@ -205,6 +220,7 @@ Construction:
 ### Advanced Chart Features
 
 #### 1. Dual Axis Charts
+
 ```sql
 -- Creating Dual Axis
 1. Create first measure
@@ -219,6 +235,7 @@ Mark Types: Bar and Line
 ```
 
 #### 2. Calculated Fields
+
 ```sql
 -- Basic Calculations
 Profit Ratio = [Profit] / [Sales]
@@ -238,6 +255,7 @@ RUNNING_SUM(SUM([Sales]))
 ### Visual Formatting
 
 #### 1. Color Usage
+
 ```yaml
 Color Types:
   Sequential:
@@ -257,6 +275,7 @@ Color Types:
 ```
 
 #### 2. Typography
+
 ```yaml
 Text Elements:
   Titles:
@@ -278,6 +297,7 @@ Text Elements:
 ### Layout Best Practices
 
 #### 1. Grid System
+
 ```yaml
 Alignment:
   - Use snap to grid
@@ -293,6 +313,7 @@ Distribution:
 ```
 
 #### 2. White Space
+
 ```yaml
 Usage:
   - Separate sections
@@ -304,6 +325,7 @@ Usage:
 ## 🎯 Practical Tips
 
 ### 1. Performance Optimization
+
 ```yaml
 Data Strategy:
   - Use extracts
@@ -319,6 +341,7 @@ Calculation Tips:
 ```
 
 ### 2. Common Pitfalls
+
 ```yaml
 Avoid:
   - Too many filters
@@ -334,6 +357,7 @@ Instead:
 ```
 
 ### 3. Development Workflow
+
 ```yaml
 Process:
   1. Plan visualization
@@ -347,6 +371,7 @@ Process:
 ## 📚 Next Steps
 
 ### 1. Advanced Features
+
 ```yaml
 Learn:
   - Table calculations
@@ -356,6 +381,7 @@ Learn:
 ```
 
 ### 2. Dashboard Design
+
 ```yaml
 Explore:
   - Layout techniques

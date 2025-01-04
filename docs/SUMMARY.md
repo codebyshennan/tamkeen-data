@@ -1,13 +1,13 @@
 # Table of contents
 
-* [🚀 Welcome to Data Science and AI Course!](README.md)
+* [Welcome to Data Science and Analytics Course!](README.md)
 
 ## 0. Preparation
 
 * [Anaconda Setup](0-prep/anaconda.md)
-* [Python Data Science Stack](0-prep/python-ds-stack.md)
-* [Jupyter Notebook](0-prep/jupyter-notebook.md)
-* [VS Code Setup](0-prep/vscode.md)
+* [Python for Data Science](0-prep/python-ds-stack.md)
+* [Jupyter Notebook / Google Colab](0-prep/jupyter-notebook.md)
+* [IDE Setup](0-prep/vscode.md)
 * [DBeaver Setup](0-prep/dbeaver.md)
 * [Tableau Setup](0-prep/tableau.md)
 * [Airflow Setup](0-prep/airflow.md)
@@ -163,11 +163,11 @@
     * [Real-World Applications](5-ml-fundamentals/5.2-supervised-learning-1/decision-trees/5-applications.md)
   * [Assignment](5-ml-fundamentals/5.2-supervised-learning-1/assignment.md)
 * [5.3 Supervised Learning Part 2](5-ml-fundamentals/5.3-supervised-learning-2/README.md)
-  * [Random Forests](5-ml-fundamentals/5.3-supervised-learning-2/random-forest.md)
-  * [Gradient Boosting](5-ml-fundamentals/5.3-supervised-learning-2/gradient-boosting.md)
-  * [Neural Networks](5-ml-fundamentals/5.3-supervised-learning-2/neural-networks.md)
-  * [Backpropagation](5-ml-fundamentals/5.3-supervised-learning-2/backpropagation.md)
-  * [Regularization](5-ml-fundamentals/5.3-supervised-learning-2/regularization.md)
+  * [Random Forests](5.-machine-learning-fundamentals/5.3-supervised-learning-2/random-forests.md)
+  * [Gradient Boosting](5.-machine-learning-fundamentals/5.3-supervised-learning-2/gradient-boosting.md)
+  * [Neural Networks](5.-machine-learning-fundamentals/5.3-supervised-learning-2/neural-networks.md)
+  * [Backpropagation](5.-machine-learning-fundamentals/5.3-supervised-learning-2/backpropagation.md)
+  * [Regularization](5.-machine-learning-fundamentals/5.3-supervised-learning-2/regularization.md)
   * [Assignment](5-ml-fundamentals/5.3-supervised-learning-2/assignment.md)
 * [5.4 Unsupervised Learning](5-ml-fundamentals/5.4-unsupervised-learning/README.md)
   * [Principal Component Analysis](5-ml-fundamentals/5.4-unsupervised-learning/pca.md)
@@ -184,10 +184,12 @@
   * [Assignment](5-ml-fundamentals/5.5-model-eval/assignment.md)
 
 ## 6. Capstone Project
+
 * [Project Guidelines](6-capstone/README.md)
 
 ## Additional Resources
-* [Beginners Guide](beginners-guide.md)
-* [Best Practices Guide](best-practices-guide.md)
-* [FAQ](FAQ.md)
-* [Glossary](glossary.md)
+
+* [Beginners Guide](additional-resources/beginners-guide.md)
+* [Best Practices Guide](additional-resources/best-practices-guide.md)
+* [FAQ](additional-resources/faq.md)
+* [Glossary](additional-resources/glossary.md)

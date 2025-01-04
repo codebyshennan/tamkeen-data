@@ -1,11 +1,11 @@
-# Setting Up Your Python Data Science Stack
+# Python for Data Science
 
-This guide covers the installation and setup of essential Python libraries for data science. We'll use either Anaconda (recommended) or uv for package management.
+This guide covers the installation and setup of essential Python libraries for data science. We'll use either Anaconda (recommended) or `uv` for package management.
 
 ## Prerequisites
 
-- Python 3.8+ installed
-- Package manager: Anaconda or uv (see respective setup guides)
+* Python 3.10 installed
+* Package manager: Anaconda or `uv` (see respective setup guides)
 
 ## Option 1: Using Anaconda (Recommended)
 
@@ -58,7 +58,7 @@ print(f"scikit-learn version: {sklearn.__version__}")
 print(f"statsmodels version: {sm.__version__}")
 ```
 
-## Option 2: Using uv
+## Option 2: Using `uv`
 
 ### Creating a New Environment
 
@@ -80,116 +80,109 @@ uv pip install numpy pandas matplotlib seaborn scikit-learn statsmodels jupyter 
 
 ### Installation Problems
 
-1. **Package Conflicts**:
-   ```bash
-   # Anaconda solution
-   conda remove package_name
-   conda install package_name=specific_version
+1.  **Package Conflicts**:
 
-   # uv solution
-   uv pip uninstall package_name
-   uv pip install package_name==specific_version
-   ```
+    ```bash
+    # Anaconda solution
+    conda remove package_name
+    conda install package_name=specific_version
 
+    # uv solution
+    uv pip uninstall package_name
+    uv pip install package_name==specific_version
+    ```
 2. **Memory Issues During Installation**:
-   - Close unnecessary applications
-   - Install packages one at a time
-   - Use smaller environment configurations
-
+   * Close unnecessary applications
+   * Install packages one at a time
+   * Use smaller environment configurations
 3. **Import Errors**:
-   - Verify environment activation
-   - Check package installation with `conda list` or `pip list`
-   - Reinstall problematic package
-   - For great_expectations: ensure compatible Python version
-
+   * Verify environment activation
+   * Check package installation with `conda list` or `pip list`
+   * Reinstall problematic package
+   * For great\_expectations: ensure compatible Python version
 4. **SQLAlchemy Connection Issues**:
-   - Verify database URL format
-   - Check database credentials
-   - Test database connectivity
-   - Install required database drivers
+   * Verify database URL format
+   * Check database credentials
+   * Test database connectivity
+   * Install required database drivers
 
 ### Library-Specific Issues
 
-1. **Matplotlib Backend Problems**:
-   ```python
-   # Add to your notebook or script
-   import matplotlib
-   matplotlib.use('Agg')  # for no-GUI backend
-   # or
-   %matplotlib inline    # in Jupyter
-   ```
+1.  **Matplotlib Backend Problems**:
 
+    ```python
+    # Add to your notebook or script
+    import matplotlib
+    matplotlib.use('Agg')  # for no-GUI backend
+    # or
+    %matplotlib inline    # in Jupyter
+    ```
 2. **Numpy Performance Issues**:
-   - Check if using optimized BLAS/LAPACK
-   - Install numpy with MKL support via conda
-
+   * Check if using optimized BLAS/LAPACK
+   * Install `numpy` with MKL support via `conda`
 3. **Pandas Memory Errors**:
-   - Use appropriate data types (e.g., categories for strings)
-   - Read large files in chunks
-   - Use memory-efficient methods like `read_csv(..., usecols=[...])`
+   * Use appropriate data types (e.g., categories for strings)
+   * Read large files in chunks
+   * Use memory-efficient methods like `read_csv(..., usecols=[...])`
 
 ## Best Practices
 
 ### Environment Management
 
-1. **Project Organization**:
-   ```
-   project/
-   ├── .gitignore
-   ├── README.md
-   ├── data/
-   ├── notebooks/
-   ├── src/
-   └── requirements.txt
-   ```
+1.  **Project Organization**:
 
-2. **Dependencies Documentation**:
-   ```bash
-   # Anaconda
-   conda env export > environment.yml
+    ```
+    project/
+    ├── .gitignore
+    ├── README.md
+    ├── data/
+    ├── notebooks/
+    ├── src/
+    └── requirements.txt
+    ```
+2.  **Dependencies Documentation**:
 
-   # uv
-   uv pip freeze > requirements.txt
-   ```
+    ```bash
+    # Anaconda
+    conda env export > environment.yml
 
+    # uv
+    uv pip freeze > requirements.txt
+    ```
 3. **Version Control**:
-   - Add virtual environment directories to .gitignore
-   - Track requirements.txt or environment.yml
-   - Document Python version used
+   * Add virtual environment directories to .gitignore
+   * Track requirements.txt or environment.yml
+   * Document Python version used
 
 ### Performance Optimization
 
 1. **Numpy**:
-   - Use vectorized operations
-   - Avoid Python loops when possible
-   - Pre-allocate arrays
-
+   * Use vectorized operations
+   * Avoid Python loops when possible
+   * Pre-allocate arrays
 2. **Pandas**:
-   - Use appropriate data types
-   - Chain operations efficiently
-   - Use vectorized operations
-
+   * Use appropriate data types
+   * Chain operations efficiently
+   * Use vectorized operations
 3. **Matplotlib/Seaborn**:
-   - Close figures when not needed
-   - Use style sheets for consistent plotting
-   - Save plots in vector formats (SVG/PDF) for quality
+   * Close figures when not needed
+   * Use style sheets for consistent plotting
+   * Save plots in vector formats (SVG/PDF) for quality
 
 ## Additional Resources
 
 1. **Documentation**:
-   - [NumPy Documentation](https://numpy.org/doc/stable/)
-   - [Pandas Documentation](https://pandas.pydata.org/docs/)
-   - [Matplotlib Documentation](https://matplotlib.org/stable/)
-   - [Seaborn Documentation](https://seaborn.pydata.org/)
-   - [Scikit-learn Documentation](https://scikit-learn.org/stable/)
-   - [StatsModels Documentation](https://www.statsmodels.org/stable/index.html)
-
+   * [NumPy Documentation](https://numpy.org/doc/stable/)
+   * [Pandas Documentation](https://pandas.pydata.org/docs/)
+   * [Matplotlib Documentation](https://matplotlib.org/stable/)
+   * [Seaborn Documentation](https://seaborn.pydata.org/)
+   * [Scikit-learn Documentation](https://scikit-learn.org/stable/)
+   * [StatsModels Documentation](https://www.statsmodels.org/stable/index.html)
 2. **Tutorials**:
-   - [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)
-   - [Real Python Tutorials](https://realpython.com/tutorials/data-science/)
-   - [Scipy Lectures](https://scipy-lectures.org/)
-
+   * [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)
+   * [Real Python Tutorials](https://realpython.com/tutorials/data-science/)
+   * [Scipy Lectures](https://scipy-lectures.org/)
 3. **Community Support**:
-   - Stack Overflow tags: [numpy], [pandas], [matplotlib], [scikit-learn]
-   - GitHub Issues for respective libraries
-   - Reddit: r/datascience, r/learnpython
+   * Stack Overflow tags: \[numpy], \[pandas], \[matplotlib], \[scikit-learn]
+   * GitHub Issues for respective libraries
+   * Reddit: [`r/datascience`](https://www.reddit.com/search/?q=datascience), [`r/learnpython`](https://www.reddit.com/search/?q=learnpython)
