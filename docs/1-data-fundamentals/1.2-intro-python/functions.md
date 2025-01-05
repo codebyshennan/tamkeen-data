@@ -1,328 +1,705 @@
-# Functions
+# Functions in Data Analysis
 
-## Overview
+## Understanding Functions in Data Science
 
-Functions are reusable blocks of code that perform a specific task. They are used to break down large programs into smaller, more manageable pieces. They can also be reused in different parts of the program.
-
-## Built-in Functions
-
-Built-in functions are functions that are already defined in Python. There is a wide range of built-in functions that can be used to perform various operations. So far, we have used some built-in functions like `print()`, `len()`, `type()`, `sorted()`, `range()`, `enumerate()`, `zip()`, etc. Here are some of the commonly used built-in functions in Python:
-
-- `abs()`: Returns the absolute value of a number.
-- `max()`: Returns the largest item in an iterable.
-- `min()`: Returns the smallest item in an iterable.
-- `sum()`: Returns the sum of all items in an iterable.
-- `round()`: Rounds a number to a specified number of decimal places.
-- `all()`: Returns `True` if all items in an iterable are `True`.
-- `any()`: Returns `True` if any item in an iterable is `True`.
-
-For example, let's use some of these functions:
+{% stepper %}
+{% step %}
+### Functions in Data Analysis
+Think of functions as reusable data processing components:
+- Input: Raw data (e.g., DataFrame, array, list)
+- Process: Data transformation, analysis, or modeling
+- Output: Processed data, statistics, or visualizations
 
 ```python
-# abs()
-print(abs(-10))  # 10
+import pandas as pd
+import numpy as np
 
-# max()
-print(max([1, 2, 3, 4, 5]))  # 5
+def analyze_numeric_column(data: pd.Series) -> dict:
+    """
+    Analyze a numeric column and return basic statistics.
+    
+    Args:
+        data: Pandas Series containing numeric data
+        
+    Returns:
+        Dictionary of statistics
+    """
+    return {
+        'mean': data.mean(),
+        'median': data.median(),
+        'std': data.std(),
+        'skew': data.skew(),
+        'missing': data.isna().sum()
+    }
 
-# min()
-print(min([1, 2, 3, 4, 5]))  # 1
+# Using the function
+df = pd.DataFrame({'values': [1, 2, 3, np.nan, 5]})
+stats = analyze_numeric_column(df['values'])
+print(stats)
+```
+{% endstep %}
 
-# sum()
-print(sum([1, 2, 3, 4, 5]))  # 15
+{% step %}
+### Why Functions in Data Science?
+Functions help you:
+1. **Create reproducible analysis pipelines**
+2. **Standardize data processing steps**
+3. **Share analysis methods with team**
+4. **Ensure consistent data handling**
 
-# round()
-print(round(3.14159, 2))  # 3.14
+Example without functions:
+```python
+# Without functions (repetitive and error-prone)
+# Dataset 1
+df1_nulls = df1.isnull().sum()
+df1_cleaned = df1.dropna()
+df1_scaled = (df1_cleaned - df1_cleaned.mean()) / df1_cleaned.std()
 
-# all()
-print(all([True, True, True]))  # True
-print(all([True, False, True]))  # False
-
-# any()
-print(any([True, False, False]))  # True
-print(any([False, False, False]))  # False
+# Dataset 2 (repeating same steps)
+df2_nulls = df2.isnull().sum()
+df2_cleaned = df2.dropna()
+df2_scaled = (df2_cleaned - df2_cleaned.mean()) / df2_cleaned.std()
 ```
 
-## User-Defined Functions
+Example with functions:
+```python
+def preprocess_dataset(df: pd.DataFrame) -> pd.DataFrame:
+    """Standardized preprocessing pipeline"""
+    # Check missing values
+    nulls = df.isnull().sum()
+    print(f"Missing values:\n{nulls}")
+    
+    # Clean and scale
+    df_cleaned = df.dropna()
+    df_scaled = (df_cleaned - df_cleaned.mean()) / df_cleaned.std()
+    
+    return df_scaled
 
-Now, we will learn how to define our own functions. This is also known as user-defined functions.
+# Now we can process any dataset consistently
+df1_processed = preprocess_dataset(df1)
+df2_processed = preprocess_dataset(df2)
+```
+{% endstep %}
+{% endstepper %}
 
-### Functions
+## Creating Data Analysis Functions
 
-In Python, you can define a function using the `def` keyword followed by the function name and a pair of parentheses. For example:
+{% stepper %}
+{% step %}
+### Basic Function Structure
+Modern data analysis function structure:
 
 ```python
-def greet():
-    print("Hello, World!")
-```
+from typing import Union, List, Dict
+import pandas as pd
+import numpy as np
 
-In the example above, we defined a function called `greet` that prints "Hello, World!" when called. To call a function, you simply write the function name followed by a pair of parentheses. For example:
-
-```python
-greet()
-```
-
-This will output:
-
-```
-Hello, World!
-```
-
-Functions can also take arguments. Arguments are values that are passed to the function when it is called. For example:
-
-```python
-def greet(name):
-    print(f"Hello, {name}!")
-```
-
-In the example above, we defined a function called `greet` that takes an argument `name` and prints "Hello, {name}!" when called. To call this function, you need to pass a value for the `name` argument. For example:
-
-```python
-greet("Alice")
-```
-
-This will output:
-
-```
-Hello, Alice!
-```
-
-In the examples above, we defined functions that only print messages, but don't return any values. If we assign the result of calling these functions to a variable, the variable will be `None`. For example:
-
-```python
-result = greet("Alice")
-
-print(result)  # None
-```
-
-To return a value from a function, you can use the `return` statement. For example:
-
-```python
-def add(a, b):
-    return a + b
-```
-
-In the example above, we defined a function called `add` that takes two arguments `a` and `b` and returns their sum when called. To use the result of this function, you can assign it to a variable. For example:
-
-```python
-result = add(3, 5)
-
-print(result)  # 8
-```
-
-### Multiple Return Values
-
-You can also return multiple values from a function by separating them with commas. For example:
-
-```python
-def add_and_subtract(a, b):
-    return a + b, a - b
-```
-
-In the example above, we defined a function called `add_and_subtract` that takes two arguments `a` and `b` and returns their sum and difference when called. To use the results of this function, you can assign them to multiple variables. For example:
-
-```python
-sum_result, diff_result = add_and_subtract(10, 5)
-
-print(sum_result)  # 15
-print(diff_result)  # 5
-```
-
-This is the tuple unpacking feature of Python.
-
-### Multiple Return Statements
-
-A function can have multiple `return` statements. The first `return` statement that is executed will exit the function. For example:
-
-```python
-def is_even(number):
-    if number % 2 == 0:
-        return True
+def process_timeseries(
+    data: Union[pd.Series, np.ndarray],
+    window: int = 3,
+    method: str = 'mean'
+) -> Dict[str, Union[pd.Series, float]]:
+    """
+    Process time series data with rolling statistics.
+    
+    Args:
+        data: Time series data
+        window: Rolling window size
+        method: Aggregation method ('mean' or 'median')
+    
+    Returns:
+        Dictionary containing processed data and statistics
+    
+    Raises:
+        ValueError: If method is not supported
+    """
+    # Convert to pandas Series if numpy array
+    if isinstance(data, np.ndarray):
+        data = pd.Series(data)
+    
+    # Validate method
+    if method not in ['mean', 'median']:
+        raise ValueError(f"Method {method} not supported")
+    
+    # Calculate rolling statistics
+    if method == 'mean':
+        rolling = data.rolling(window).mean()
     else:
-        return False
+        rolling = data.rolling(window).median()
+    
+    return {
+        'original': data,
+        'rolling': rolling,
+        'volatility': data.std(),
+        'trend': rolling.iloc[-1] - rolling.iloc[0]
+    }
+
+# Using the function
+data = pd.Series([1, 2, 3, 2, 3, 4, 3, 4, 5])
+results = process_timeseries(data, window=3, method='mean')
 ```
+{% endstep %}
 
-In the example above, we defined a function called `is_even` that takes a number as an argument and returns `True` if the number is even, and `False` otherwise. The function has two `return` statements. The first `return` statement will be executed if the number is even, and the second `return` statement will be executed if the number is odd.
-
-### Default Arguments
-
-We can have default values for function arguments. For example:
+{% step %}
+### Parameters for Data Processing
+Different ways to configure data processing:
 
 ```python
-def greet(name="World"):
-    print(f"Hello, {name}!")
-```
+from dataclasses import dataclass
+from typing import Optional, List, Union
+import pandas as pd
+import numpy as np
 
-In the example above, we defined a function called `greet` that takes an argument `name` with a default value of `"World"`. If you call this function without passing any arguments, it will use the default value. For example:
+@dataclass
+class ProcessingConfig:
+    """Configuration for data processing"""
+    remove_outliers: bool = True
+    fill_method: str = 'mean'
+    scaling: bool = True
+    outlier_threshold: float = 3.0
+
+def process_dataset(
+    df: pd.DataFrame,
+    numeric_columns: List[str],
+    config: Optional[ProcessingConfig] = None
+) -> pd.DataFrame:
+    """
+    Process dataset with configurable options.
+    
+    Args:
+        df: Input DataFrame
+        numeric_columns: Columns to process
+        config: Processing configuration
+    
+    Returns:
+        Processed DataFrame
+    """
+    # Use default config if none provided
+    if config is None:
+        config = ProcessingConfig()
+    
+    # Work on copy
+    df = df.copy()
+    
+    for col in numeric_columns:
+        # Remove outliers
+        if config.remove_outliers:
+            z_scores = np.abs((df[col] - df[col].mean()) / df[col].std())
+            df.loc[z_scores > config.outlier_threshold, col] = np.nan
+        
+        # Fill missing values
+        if config.fill_method == 'mean':
+            df[col] = df[col].fillna(df[col].mean())
+        elif config.fill_method == 'median':
+            df[col] = df[col].fillna(df[col].median())
+        
+        # Scale data
+        if config.scaling:
+            df[col] = (df[col] - df[col].mean()) / df[col].std()
+    
+    return df
+
+# Using the function
+df = pd.DataFrame({
+    'A': [1, 2, 100, 4, 5],  # Contains outlier
+    'B': [1, 2, np.nan, 4, 5]  # Contains missing value
+})
+
+# Default processing
+result_default = process_dataset(df, numeric_columns=['A', 'B'])
+
+# Custom processing
+custom_config = ProcessingConfig(
+    remove_outliers=True,
+    fill_method='median',
+    scaling=False
+)
+result_custom = process_dataset(
+    df, 
+    numeric_columns=['A', 'B'],
+    config=custom_config
+)
+```
+{% endstep %}
+
+{% step %}
+### Return Values in Data Analysis
+Functions can return different types of analysis results:
 
 ```python
-greet()  # Hello, World!
-greet("Alice")  # Hello, Alice!
+from typing import Dict, Tuple, Any
+import pandas as pd
+import numpy as np
+from scipy import stats
+
+def analyze_distribution(
+    data: Union[pd.Series, np.ndarray]
+) -> Dict[str, Any]:
+    """
+    Analyze distribution of data.
+    
+    Args:
+        data: Numeric data to analyze
+        
+    Returns:
+        Dictionary containing:
+        - Basic statistics
+        - Normality test results
+        - Distribution parameters
+    """
+    # Convert to numpy array
+    if isinstance(data, pd.Series):
+        data = data.dropna().values
+    
+    # Basic statistics
+    basic_stats = {
+        'mean': np.mean(data),
+        'median': np.median(data),
+        'std': np.std(data),
+        'skew': stats.skew(data),
+        'kurtosis': stats.kurtosis(data)
+    }
+    
+    # Normality test
+    shapiro_stat, shapiro_p = stats.shapiro(data)
+    normality_test = {
+        'statistic': shapiro_stat,
+        'p_value': shapiro_p,
+        'is_normal': shapiro_p > 0.05
+    }
+    
+    # Fit distribution
+    dist_params = stats.norm.fit(data)
+    distribution = {
+        'type': 'normal',
+        'parameters': {
+            'loc': dist_params[0],
+            'scale': dist_params[1]
+        }
+    }
+    
+    return {
+        'statistics': basic_stats,
+        'normality_test': normality_test,
+        'distribution': distribution
+    }
+
+# Using the function
+np.random.seed(42)
+normal_data = np.random.normal(loc=0, scale=1, size=1000)
+analysis = analyze_distribution(normal_data)
+
+# Print results
+for key, value in analysis.items():
+    print(f"\n{key.title()}:")
+    if isinstance(value, dict):
+        for k, v in value.items():
+            print(f"  {k}: {v}")
 ```
+{% endstep %}
+{% endstepper %}
 
-## Variable Scope
+## Advanced Data Analysis Functions
 
-Variable scope refers to the visibility of variables within a program. Variables can have different scopes depending on where they are defined. Understanding variable scope is important because it determines where a variable can be accessed and modified.
-
-### Local Scope
-
-Variables that are defined inside a function have local scope. This means that they can only be accessed within the function in which they are defined. For example:
+{% stepper %}
+{% step %}
+### Function Decorators for Data Validation
+Use decorators to add validation:
 
 ```python
-def greet():
-    message = "Hello, World!"
-    print(message)
+from functools import wraps
+import pandas as pd
+import numpy as np
 
-greet()
-print(message)  # NameError: name 'message' is not defined
+def validate_dataframe(required_columns=None, numeric_only=False):
+    """
+    Decorator to validate DataFrame inputs.
+    
+    Args:
+        required_columns: List of required column names
+        numeric_only: Whether to check for numeric columns
+    """
+    def decorator(func):
+        @wraps(func)
+        def wrapper(df, *args, **kwargs):
+            # Check DataFrame type
+            if not isinstance(df, pd.DataFrame):
+                raise TypeError("Input must be a pandas DataFrame")
+            
+            # Check required columns
+            if required_columns:
+                missing_cols = set(required_columns) - set(df.columns)
+                if missing_cols:
+                    raise ValueError(
+                        f"Missing required columns: {missing_cols}"
+                    )
+            
+            # Check numeric columns
+            if numeric_only:
+                non_numeric = df[required_columns].select_dtypes(
+                    exclude=[np.number]
+                ).columns
+                if len(non_numeric) > 0:
+                    raise ValueError(
+                        f"Non-numeric columns found: {non_numeric}"
+                    )
+            
+            return func(df, *args, **kwargs)
+        return wrapper
+    return decorator
+
+# Using the decorator
+@validate_dataframe(
+    required_columns=['A', 'B'],
+    numeric_only=True
+)
+def calculate_correlation(df):
+    """Calculate correlation between columns A and B"""
+    return df['A'].corr(df['B'])
+
+# Test the function
+df_good = pd.DataFrame({
+    'A': [1, 2, 3],
+    'B': [4, 5, 6]
+})
+print(calculate_correlation(df_good))
+
+# This will raise an error
+df_bad = pd.DataFrame({
+    'A': [1, 2, 3],
+    'B': ['a', 'b', 'c']  # Non-numeric
+})
+try:
+    calculate_correlation(df_bad)
+except ValueError as e:
+    print(f"Error: {e}")
 ```
+{% endstep %}
 
-In the example above, the variable `message` is defined inside the `greet` function and has local scope. It cannot be accessed outside the function.
-
-### Global Scope
-
-Variables that are defined outside of any function have global scope. This means that they can be accessed and modified anywhere in the program. For example:
+{% step %}
+### Performance Optimization
+Optimize functions for large datasets:
 
 ```python
-message = "Hello, World!"
+import pandas as pd
+import numpy as np
+from typing import List, Dict
+from functools import lru_cache
 
-def greet():
-    print(message)
+class DataProcessor:
+    def __init__(self, chunk_size: int = 10000):
+        self.chunk_size = chunk_size
+    
+    @lru_cache(maxsize=128)
+    def calculate_statistics(self, values: tuple) -> Dict:
+        """
+        Calculate statistics with caching for repeated calculations.
+        
+        Args:
+            values: Tuple of values (must be tuple for caching)
+            
+        Returns:
+            Dictionary of statistics
+        """
+        return {
+            'mean': np.mean(values),
+            'std': np.std(values),
+            'median': np.median(values)
+        }
+    
+    def process_large_dataset(
+        self,
+        df: pd.DataFrame,
+        columns: List[str]
+    ) -> Dict[str, Dict]:
+        """
+        Process large dataset in chunks.
+        
+        Args:
+            df: Input DataFrame
+            columns: Columns to process
+            
+        Returns:
+            Dictionary of results per column
+        """
+        results = {col: [] for col in columns}
+        
+        # Process in chunks
+        for start in range(0, len(df), self.chunk_size):
+            end = start + self.chunk_size
+            chunk = df.iloc[start:end]
+            
+            # Process each column
+            for col in columns:
+                # Convert to tuple for caching
+                values = tuple(chunk[col].dropna())
+                if values:
+                    stats = self.calculate_statistics(values)
+                    results[col].append(stats)
+        
+        # Combine chunk results
+        final_results = {}
+        for col in columns:
+            if results[col]:
+                final_results[col] = {
+                    'mean': np.mean([r['mean'] for r in results[col]]),
+                    'std': np.mean([r['std'] for r in results[col]]),
+                    'median': np.median([r['median'] for r in results[col]])
+                }
+        
+        return final_results
 
-greet()
-print(message)
+# Using the optimized processor
+processor = DataProcessor(chunk_size=5000)
+
+# Generate large dataset
+np.random.seed(42)
+large_df = pd.DataFrame({
+    'A': np.random.normal(0, 1, 10000),
+    'B': np.random.normal(5, 2, 10000)
+})
+
+# Process dataset
+results = processor.process_large_dataset(
+    large_df,
+    columns=['A', 'B']
+)
+
+# Print results
+for col, stats in results.items():
+    print(f"\nColumn {col}:")
+    for stat, value in stats.items():
+        print(f"  {stat}: {value:.2f}")
 ```
+{% endstep %}
+{% endstepper %}
 
-In the example above, the variable `message` is defined outside the `greet` function and has global scope. It can be accessed and printed inside the function as well as outside the function.
+## Best Practices for Data Analysis Functions
 
-### Modifying Global Variables
+{% stepper %}
+{% step %}
+### Writing Maintainable Functions
+Follow these data science best practices:
 
-You cannot modify a global variable inside a function without explicitly declaring it as a global variable. For example:
-
+1. **Clear Documentation and Type Hints**:
 ```python
-count = 0
+from typing import Union, List, Dict, Optional
+import pandas as pd
+import numpy as np
 
-def increment():
-    count += 1
-
-increment()  # UnboundLocalError: local variable 'count' referenced before assignment
+def preprocess_features(
+    df: pd.DataFrame,
+    numeric_features: List[str],
+    categorical_features: Optional[List[str]] = None,
+    scaling: bool = True
+) -> Tuple[pd.DataFrame, Dict[str, Any]]:
+    """
+    Preprocess features for machine learning.
+    
+    Args:
+        df: Input DataFrame
+        numeric_features: List of numeric feature names
+        categorical_features: List of categorical feature names
+        scaling: Whether to apply standard scaling
+    
+    Returns:
+        Tuple containing:
+        - Processed DataFrame
+        - Dictionary of transformation parameters
+    
+    Example:
+        >>> df = pd.DataFrame({
+        ...     'age': [25, 30, 35],
+        ...     'income': [50000, 60000, 70000],
+        ...     'category': ['A', 'B', 'A']
+        ... })
+        >>> processed_df, params = preprocess_features(
+        ...     df,
+        ...     numeric_features=['age', 'income'],
+        ...     categorical_features=['category']
+        ... )
+    """
+    # Function implementation...
 ```
 
-In the example above, the `increment` function tries to modify the global variable `count` by incrementing it, but it raises an error. To modify a global variable inside a function, you need to declare it as a global variable using the `global` keyword. For example:
-
+2. **Error Handling and Validation**:
 ```python
-count = 0
-
-def increment():
-    global count
-    count += 1
-
-increment()
-print(count)  # 1
+def analyze_timeseries(
+    data: pd.Series,
+    window_size: int = 3
+) -> Dict[str, Union[float, pd.Series]]:
+    """Analyze time series data"""
+    # Input validation
+    if not isinstance(data, pd.Series):
+        raise TypeError("Input must be pandas Series")
+    
+    if not pd.api.types.is_numeric_dtype(data):
+        raise ValueError("Series must contain numeric data")
+    
+    if window_size < 1:
+        raise ValueError("Window size must be positive")
+    
+    if window_size >= len(data):
+        raise ValueError("Window size too large for data")
+    
+    try:
+        # Calculate statistics
+        results = {
+            'mean': data.mean(),
+            'rolling_mean': data.rolling(window_size).mean(),
+            'volatility': data.std()
+        }
+        return results
+    except Exception as e:
+        raise RuntimeError(f"Error analyzing time series: {str(e)}")
 ```
 
-In the example above, the `global` keyword is used to indicate that the `count` variable is global. This allows the `increment` function to modify the global variable.
-
-## Arbitrary Arguments
-
-In Python, you can define functions that take an arbitrary number of arguments. These are called arbitrary arguments. To define a function with arbitrary arguments, you use an asterisk (`*`) before the parameter name. For example:
-
+3. **Modular Design**:
 ```python
-def greet(*names):
-    for name in names:
-        print(f"Hello, {name}!")
+class DataAnalyzer:
+    """Modular data analysis pipeline"""
+    
+    def __init__(self, df: pd.DataFrame):
+        self.df = df.copy()
+        self.results = {}
+    
+    def clean_data(self) -> 'DataAnalyzer':
+        """Clean the dataset"""
+        self.df = self.df.dropna()
+        return self
+    
+    def calculate_statistics(self) -> 'DataAnalyzer':
+        """Calculate basic statistics"""
+        self.results['statistics'] = {
+            col: {
+                'mean': self.df[col].mean(),
+                'std': self.df[col].std()
+            }
+            for col in self.df.select_dtypes(include=[np.number])
+        }
+        return self
+    
+    def analyze_correlations(self) -> 'DataAnalyzer':
+        """Analyze feature correlations"""
+        numeric_cols = self.df.select_dtypes(include=[np.number])
+        self.results['correlations'] = numeric_cols.corr()
+        return self
+    
+    def get_results(self) -> Dict[str, Any]:
+        """Get analysis results"""
+        return self.results
 
-greet("Alice", "Bob", "Charlie")
+# Using the modular analyzer
+analyzer = DataAnalyzer(df)
+results = (analyzer
+    .clean_data()
+    .calculate_statistics()
+    .analyze_correlations()
+    .get_results())
 ```
+{% endstep %}
 
-In the example above, the `greet` function takes an arbitrary number of arguments and prints a greeting for each name passed to the function.
+{% step %}
+### Performance Optimization Patterns
 
-You can also pass a list or tuple of values to a function with arbitrary arguments by using the unpacking operator (`*`). For example:
-
+1. **Vectorization Over Loops**:
 ```python
-names = ["Alice", "Bob", "Charlie"]
+# Slow: Using loops
+def calculate_zscore_slow(df: pd.DataFrame) -> pd.DataFrame:
+    results = df.copy()
+    for column in df.columns:
+        mean = df[column].mean()
+        std = df[column].std()
+        for idx in range(len(df)):
+            results.loc[idx, column] = (
+                (df.loc[idx, column] - mean) / std
+            )
+    return results
 
-greet(*names)
+# Fast: Using vectorization
+def calculate_zscore_fast(df: pd.DataFrame) -> pd.DataFrame:
+    return (df - df.mean()) / df.std()
 ```
 
-This will output:
-
-```
-Hello, Alice!
-Hello, Bob!
-Hello, Charlie!
-```
-
-## Keyword Arguments
-
-In Python, you can also define functions that take keyword arguments. Keyword arguments are arguments that are passed to a function with a keyword and a value. To define a function with keyword arguments, you use two asterisks (`**`) before the parameter name. For example:
-
+2. **Efficient Memory Usage**:
 ```python
-def greet(**names):
-    for name, greeting in names.items():
-        print(f"{greeting}, {name}!")
-
-greet(Alice="Hello", Bob="Hi", Charlie="Hey")
+def process_large_file(
+    filepath: str,
+    chunksize: int = 10000
+) -> pd.DataFrame:
+    """Process large CSV file in chunks"""
+    results = []
+    
+    # Process file in chunks
+    for chunk in pd.read_csv(filepath, chunksize=chunksize):
+        # Process chunk
+        processed = chunk.groupby('category')['value'].mean()
+        results.append(processed)
+    
+    # Combine results
+    return pd.concat(results).groupby(level=0).mean()
 ```
 
-In the example above, the `greet` function takes keyword arguments and prints a custom greeting for each name passed to the function.
-
-You can also pass a dictionary of values to a function with keyword arguments by using the unpacking operator (`**`). For example:
-
+3. **Caching Expensive Computations**:
 ```python
-names = {"Alice": "Hello", "Bob": "Hi", "Charlie": "Hey"}
+from functools import lru_cache
 
-greet(**names)
+class FeatureEngine:
+    @lru_cache(maxsize=128)
+    def calculate_feature(self, values: tuple) -> float:
+        """Calculate expensive feature with caching"""
+        # Expensive computation here
+        return some_expensive_calculation(values)
+    
+    def process_dataset(self, df: pd.DataFrame) -> pd.DataFrame:
+        results = []
+        for group in df.groupby('category'):
+            # Convert to tuple for caching
+            values = tuple(group['values'])
+            feature = self.calculate_feature(values)
+            results.append(feature)
+        return pd.Series(results)
 ```
+{% endstep %}
+{% endstepper %}
 
-This will output:
+## Practice Exercises for Data Analysis 🎯
 
-```
-Hello, Alice!
-Hi, Bob!
-Hey, Charlie!
-```
+Try these data science exercises:
 
-## Lambda Functions
+1. **Feature Engineering Pipeline**
+   ```python
+   # Create a function that:
+   # - Handles numeric and categorical features
+   # - Applies appropriate scaling/encoding
+   # - Handles missing values
+   # - Returns processed features and parameters
+   ```
 
-In Python, you can define small anonymous functions using the `lambda` keyword, followed by the arguments and a colon (`:`) that separates the arguments from the expression. The expression is evaluated and returned when the lambda function is called. There is no `return` statement in a lambda function because the expression is implicitly returned.
+2. **Time Series Analysis**
+   ```python
+   # Build a function that:
+   # - Calculates rolling statistics
+   # - Detects seasonality
+   # - Identifies trends
+   # - Handles missing values
+   ```
 
-Lambda functions can take any number of arguments, but they can only have one expression.
+3. **Data Quality Assessment**
+   ```python
+   # Implement a function that:
+   # - Checks data types
+   # - Identifies missing values
+   # - Detects outliers
+   # - Validates value ranges
+   # - Generates quality report
+   ```
 
-Example with one argument:
+Remember:
+- Use type hints for better code documentation
+- Handle edge cases and errors
+- Optimize for performance with large datasets
+- Write modular and reusable code
+- Include examples in docstrings
 
-```python
-double = lambda x: x * 2
-
-print(double(5))  # 10
-```
-
-Example with multiple arguments:
-
-```python
-add = lambda a, b: a + b
-
-print(add(3, 5))  # 8
-```
-
-Lambda functions are often used with built-in functions like `map()` and `filter()` to apply a function to a sequence of elements or filter elements based on a condition.
-
-For example, you can use a lambda function with `map()` to double each element in a list:
-
-```python
-numbers = [1, 2, 3, 4, 5]
-
-doubled_numbers = list(map(lambda x: x * 2, numbers))
-
-print(doubled_numbers)  # [2, 4, 6, 8, 10]
-```
-
-You can also use a lambda function with `filter()` to filter out even numbers from a list:
-
-```python
-numbers = [1, 2, 3, 4, 5]
-
-even_numbers = list(filter(lambda x: x % 2 == 0, numbers))
-
-print(even_numbers)  # [2, 4]
-```
+Happy analyzing! 🚀

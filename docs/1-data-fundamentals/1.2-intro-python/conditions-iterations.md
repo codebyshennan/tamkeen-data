@@ -1,490 +1,489 @@
-# Conditions and Iterations
+# Conditions and Iterations in Data Analysis
 
-## Overview
+## Making Decisions with Conditions
 
-Conditions and iterations are fundamental concepts in any programming language. Conditions are used to check if a certain condition is met, and iterations are used to repeat a certain block of code multiple times.
-
-## If, Elif, Else
-
-Conditional statements are used to execute different blocks of code based on certain conditions. In Python, the `if`, `elif`, and `else` statements are used to create conditional statements.
-
-### If Statement
-
-The `if` statement is used to execute a block of code if a condition is `True`. The syntax of the `if` statement is as follows:
+{% stepper %}
+{% step %}
+### Understanding If Statements in Data Analysis
+Conditions are crucial for data filtering and validation:
 
 ```python
-if condition:
-    # code block
+import pandas as pd
+import numpy as np
+
+# Data validation example
+def validate_age(age):
+    if age < 0:
+        return np.nan  # Invalid age
+    elif age > 120:
+        return np.nan  # Likely invalid age
+    else:
+        return age
+
+# Handling missing values
+def process_value(value):
+    if pd.isna(value):
+        return 0  # Replace missing with default
+    elif np.isinf(value):
+        return np.nan  # Handle infinity
+    else:
+        return value
 ```
 
-The code block is executed only if the condition is `True`. If the condition is `False`, the code block is skipped.
+💡 **Remember**: Always validate your data before analysis!
+{% endstep %}
 
-For example:
+{% step %}
+### If-Else in Data Processing
+Common data processing scenarios:
 
 ```python
-x = 5
+import pandas as pd
 
-if x > 0:
-    print("x is positive")
+# Data quality check
+def check_data_quality(df):
+    if df.isnull().sum().any():
+        print("Warning: Dataset contains missing values")
+        missing_stats = df.isnull().sum()
+        print(f"Missing value counts:\n{missing_stats}")
+    else:
+        print("Data quality check passed: No missing values")
+
+# Outlier detection
+def flag_outlier(value, mean, std):
+    if abs(value - mean) > 3 * std:
+        return 'outlier'
+    else:
+        return 'normal'
 ```
 
-In this example, the code block `print("x is positive")` is executed because the condition `x > 0` is `True`.
+Real-world example:
+```python
+# Sales data analysis
+def analyze_sales_performance(sales_value, target):
+    if sales_value >= target * 1.2:
+        return 'Exceptional'
+    elif sales_value >= target:
+        return 'Met Target'
+    elif sales_value >= target * 0.8:
+        return 'Near Target'
+    else:
+        return 'Below Target'
+```
+{% endstep %}
 
-### Elif Statement
-
-The `elif` statement is used to check multiple conditions after the `if` statement. The syntax of the `elif` statement is as follows:
+{% step %}
+### Multiple Conditions in Data Analysis
+Complex data processing decisions:
 
 ```python
-if condition1:
-    # code block
-elif condition2:
-    # code block
+import pandas as pd
+import numpy as np
+
+def categorize_customer(purchase_amount, frequency, tenure):
+    """Categorize customer based on multiple metrics"""
+    if purchase_amount > 1000 and frequency > 12:
+        if tenure > 2:
+            return 'Premium'
+        else:
+            return 'High Value'
+    elif purchase_amount > 500 or frequency > 6:
+        return 'Regular'
+    else:
+        return 'Standard'
+
+# Data transformation example
+def transform_value(value, data_type):
+    if pd.isna(value):
+        return np.nan
+    elif data_type == 'numeric':
+        if isinstance(value, str):
+            try:
+                return float(value.replace(',', ''))
+            except ValueError:
+                return np.nan
+        else:
+            return float(value)
+    elif data_type == 'categorical':
+        return str(value).lower().strip()
+    else:
+        return value
 ```
+{% endstep %}
 
-The `elif` statement is only executed if the previous conditions are `False` and the current condition is `True`.
-
-For example:
+{% step %}
+### Nested Conditions in Feature Engineering
+Complex feature creation:
 
 ```python
-x = 0
-
-if x > 0:
-    print("x is positive")
-elif x < 0:
-    print("x is negative")
-elif x == 0:
-    print("x is zero")
+def create_age_features(df):
+    """Create age-related features for analysis"""
+    
+    def categorize_age(age, gender):
+        if pd.isna(age):
+            return 'Unknown'
+        else:
+            if gender == 'F':
+                if age < 25:
+                    return 'Young Adult Female'
+                elif age < 45:
+                    return 'Adult Female'
+                else:
+                    return 'Senior Female'
+            else:  # gender == 'M'
+                if age < 25:
+                    return 'Young Adult Male'
+                elif age < 45:
+                    return 'Adult Male'
+                else:
+                    return 'Senior Male'
+    
+    df['age_category'] = df.apply(
+        lambda row: categorize_age(row['age'], row['gender']),
+        axis=1
+    )
+    return df
 ```
+{% endstep %}
+{% endstepper %}
 
-In this example, the code block `print("x is zero")` is executed because the previous conditions `x > 0` and `x < 0` are `False`, and the current condition `x == 0` is `True`.
+## Data Filtering and Comparison
 
-### Else Statement
-
-The `else` statement is used to execute a block of code if all the previous conditions are `False`. The syntax of the `else` statement is as follows:
+{% stepper %}
+{% step %}
+### Comparison Operations in Pandas
+Efficient data filtering:
 
 ```python
-if condition:
-    # code block
-else:
-    # code block
+import pandas as pd
+import numpy as np
+
+# Load sample data
+df = pd.DataFrame({
+    'value': [10, 20, 30, 40, 50],
+    'category': ['A', 'B', 'A', 'B', 'C']
+})
+
+# Single condition
+high_values = df[df['value'] > 30]
+
+# Multiple conditions
+filtered_data = df[
+    (df['value'] > 20) & 
+    (df['category'] == 'A')
+]
+
+# Complex filtering
+def filter_outliers(df, columns, n_std=3):
+    """Filter outliers based on standard deviation"""
+    for col in columns:
+        mean = df[col].mean()
+        std = df[col].std()
+        df = df[
+            (df[col] >= mean - n_std * std) &
+            (df[col] <= mean + n_std * std)
+        ]
+    return df
 ```
 
-The `else` statement is only executed if all the previous conditions are `False`.
+💡 **Performance Tip**: Use vectorized operations instead of loops for filtering!
+{% endstep %}
 
-For example:
+{% step %}
+### Logical Operations in Data Analysis
+Combining multiple conditions:
 
 ```python
-x = -5
+import pandas as pd
 
-if x > 0:
-    print("x is positive")
-else:
-    print("x is not positive")
+# Data quality checks
+def check_data_validity(df):
+    """Check various data quality conditions"""
+    
+    conditions = {
+        'missing_values': df.isnull().sum().sum() > 0,
+        'negative_values': (df.select_dtypes(include=[np.number]) < 0).any().any(),
+        'duplicates': df.duplicated().any(),
+        'outliers': detect_outliers(df)
+    }
+    
+    if any(conditions.values()):
+        print("Data quality issues found:")
+        for issue, exists in conditions.items():
+            if exists:
+                print(f"- {issue.replace('_', ' ').title()}")
+        return False
+    else:
+        print("All data quality checks passed")
+        return True
+
+def detect_outliers(df, threshold=3):
+    """Detect outliers using Z-score method"""
+    numeric_cols = df.select_dtypes(include=[np.number]).columns
+    has_outliers = False
+    
+    for col in numeric_cols:
+        z_scores = np.abs((df[col] - df[col].mean()) / df[col].std())
+        if (z_scores > threshold).any():
+            has_outliers = True
+            break
+    
+    return has_outliers
 ```
+{% endstep %}
+{% endstepper %}
 
-In this example, the code block `print("x is not positive")` is executed because the condition `x > 0` is `False`.
+## Efficient Data Iteration
 
-In the elif example before, we can also replace the last elif statement with an else statement:
+{% stepper %}
+{% step %}
+### Vectorized Operations vs. Loops
+Understanding performance implications:
 
 ```python
-x = 0
+import pandas as pd
+import numpy as np
 
-if x > 0:
-    print("x is positive")
-elif x < 0:
-    print("x is negative")
-else:
-    print("x is zero")
+# ❌ Slow: Using loops
+def slow_calculation(df):
+    results = []
+    for index, row in df.iterrows():
+        value = row['value']
+        if value > 0:
+            results.append(np.log(value))
+        else:
+            results.append(np.nan)
+    return results
+
+# ✅ Fast: Using vectorized operations
+def fast_calculation(df):
+    return np.where(
+        df['value'] > 0,
+        np.log(df['value']),
+        np.nan
+    )
+
+# ✅ Fast: Using pandas methods
+def process_data(df):
+    # Calculate statistics
+    df['z_score'] = (df['value'] - df['value'].mean()) / df['value'].std()
+    
+    # Apply multiple conditions
+    conditions = [
+        (df['z_score'] < -2),
+        (df['z_score'] >= -2) & (df['z_score'] <= 2),
+        (df['z_score'] > 2)
+    ]
+    choices = ['Low', 'Normal', 'High']
+    
+    df['category'] = np.select(conditions, choices, default='Unknown')
+    return df
 ```
+{% endstep %}
 
-In this example, the code block `print("x is zero")` is executed because the previous conditions `x > 0` and `x < 0` are `False`, and the `else` statement is executed.
-
-### Shorthand If
-
-You can also write a shorthand `if` statement, which is a one-liner version of the `if` statement. The syntax of the shorthand `if` statement is as follows:
+{% step %}
+### Efficient Iteration When Necessary
+Some cases require iteration:
 
 ```python
-if condition: # code block
+import pandas as pd
+from tqdm import tqdm  # Progress bar
+
+def process_large_dataset(df, chunk_size=1000):
+    """Process large dataset in chunks"""
+    results = []
+    
+    # Iterate over chunks
+    for i in tqdm(range(0, len(df), chunk_size)):
+        chunk = df.iloc[i:i + chunk_size].copy()
+        
+        # Process chunk
+        processed_chunk = process_chunk(chunk)
+        results.append(processed_chunk)
+    
+    return pd.concat(results)
+
+def process_chunk(chunk):
+    """Process individual chunk of data"""
+    # Perform calculations
+    chunk['calculated'] = chunk['value'].apply(complex_calculation)
+    
+    # Apply transformations
+    chunk['transformed'] = np.where(
+        chunk['calculated'] > 0,
+        np.log(chunk['calculated']),
+        0
+    )
+    
+    return chunk
 ```
 
-For example:
+💡 **Performance Tip**: Use chunking for large datasets that don't fit in memory!
+{% endstep %}
+
+{% step %}
+### Working with Time Series Data
+Efficient time series processing:
 
 ```python
-x = 5
+import pandas as pd
 
-if x > 0: print("x is positive")
+def analyze_time_series(df):
+    """Analyze time series data with rolling windows"""
+    
+    # Sort by date
+    df = df.sort_values('date')
+    
+    # Calculate rolling statistics
+    df['rolling_mean'] = df['value'].rolling(window=7).mean()
+    df['rolling_std'] = df['value'].rolling(window=7).std()
+    
+    # Detect trends
+    df['trend'] = np.where(
+        df['rolling_mean'] > df['rolling_mean'].shift(1),
+        'Upward',
+        'Downward'
+    )
+    
+    return df
+
+def process_by_group(df, group_col, value_col):
+    """Process data by groups efficiently"""
+    
+    def group_operation(group):
+        return pd.Series({
+            'mean': group[value_col].mean(),
+            'std': group[value_col].std(),
+            'count': len(group),
+            'has_outliers': detect_outliers(group[value_col])
+        })
+    
+    return df.groupby(group_col).apply(group_operation)
 ```
+{% endstep %}
+{% endstepper %}
 
-### Shorthand If Else
+## Common Data Processing Patterns
 
-You can also write a shorthand `if else` statement, which is a one-liner version of the `if else` statement. The syntax of the shorthand `if else` statement is as follows:
+{% stepper %}
+{% step %}
+### Pattern: Data Validation
+Common validation patterns:
 
 ```python
-value_if_true if condition else value_if_false
-```
+import pandas as pd
+import numpy as np
 
-For example:
+class DataValidator:
+    def __init__(self, df):
+        self.df = df
+        self.validation_results = []
+    
+    def validate_numeric_range(self, column, min_val, max_val):
+        """Validate numeric values are within range"""
+        mask = self.df[column].between(min_val, max_val)
+        invalid = self.df[~mask]
+        if len(invalid) > 0:
+            self.validation_results.append(
+                f"Found {len(invalid)} values outside range "
+                f"[{min_val}, {max_val}] in {column}"
+            )
+    
+    def validate_categorical(self, column, valid_categories):
+        """Validate categorical values"""
+        invalid = self.df[~self.df[column].isin(valid_categories)]
+        if len(invalid) > 0:
+            self.validation_results.append(
+                f"Found {len(invalid)} invalid categories in {column}"
+            )
+    
+    def get_validation_report(self):
+        """Generate validation report"""
+        if self.validation_results:
+            return "\n".join(self.validation_results)
+        return "All validations passed"
+```
+{% endstep %}
+
+{% step %}
+### Pattern: Data Cleaning
+Standard cleaning operations:
 
 ```python
-x = 5
-
-print("x is positive") if x > 0 else print("x is not positive")
+class DataCleaner:
+    def __init__(self, df):
+        self.df = df.copy()
+    
+    def clean_numeric(self, column):
+        """Clean numeric column"""
+        # Replace invalid values with NaN
+        self.df[column] = pd.to_numeric(
+            self.df[column], 
+            errors='coerce'
+        )
+        
+        # Remove outliers
+        z_scores = np.abs(
+            (self.df[column] - self.df[column].mean()) / 
+            self.df[column].std()
+        )
+        self.df.loc[z_scores > 3, column] = np.nan
+    
+    def clean_categorical(self, column):
+        """Clean categorical column"""
+        # Standardize categories
+        self.df[column] = self.df[column].str.lower().str.strip()
+        
+        # Replace rare categories
+        value_counts = self.df[column].value_counts()
+        rare_categories = value_counts[value_counts < 10].index
+        self.df.loc[
+            self.df[column].isin(rare_categories),
+            column
+        ] = 'other'
+    
+    def get_cleaned_data(self):
+        """Return cleaned dataset"""
+        return self.df
 ```
-
-In this example, the code block `print("x is positive")` is executed if the condition `x > 0` is `True`, otherwise the code block `print("x is not positive")` is executed.
-
-## While Loop
-
-Loops are used to execute a block of code multiple times. In Python, the `while` loop is used to execute a block of code as long as a condition is `True`.
-
-The syntax of the `while` loop is as follows:
-
-```python
-while condition:
-    # code block
-```
-
-The code block is executed repeatedly as long as the condition is `True`. If the condition is `False`, the loop is terminated, and the program continues with the next statement after the loop.
-
-For example:
-
-```python
-x = 0
-
-while x < 5:
-    print(x)
-    x += 1
-```
-
-In this example, the loop will print the numbers `0`, `1`, `2`, `3`, and `4` because the condition `x < 5` is `True` for these values of `x`.
-
-### Break Statement
-
-The `break` statement is used to exit a loop prematurely. When the `break` statement is encountered, the loop is terminated, and the program continues with the next statement after the loop.
-
-For example:
-
-```python
-x = 0
-
-while x < 5:
-    print(x)
-    if x == 2:
-        break
-    x += 1
-```
-
-In this example, the loop will print the numbers `0`, `1`, and `2` because the `break` statement is encountered when `x == 2`.
-
-### Continue Statement
-
-The `continue` statement is used to skip the rest of the code block and continue with the next iteration of the loop. When the `continue` statement is encountered, the program jumps back to the beginning of the loop and evaluates the condition again.
-
-For example:
-
-```python
-x = 0
-
-while x < 5:
-    x += 1
-    if x == 2:
-        continue
-    print(x)
-```
-
-In this example, the loop will print the numbers `1`, `3`, `4`, and `5` because the `continue` statement is encountered when `x == 2`.
-
-### Else Statement
-
-The `else` statement can be used in a loop to execute a block of code when the loop condition is `False`. The syntax of the `else` statement in a loop is as follows:
-
-```python
-while condition:
-    # code block
-else:
-    # code block
-```
-
-The `else` statement is only executed when the loop condition is `False`. If the loop is terminated prematurely using the `break` statement, the `else` statement is not executed.
-
-For example:
-
-```python
-x = 0
-
-while x < 5:
-    print(x)
-    x += 1
-else:
-    print("Loop finished")
-```
-
-In this example, the loop will print the numbers `0`, `1`, `2`, `3`, and `4`, and then print "Loop finished" because the loop condition `x < 5` is `False` when `x == 5`.
-
-## For Loop
-
-In Python, the `for` loop is used to iterate over a sequence of elements, such as a range of numbers, a string, a list, or a dictionary.
-
-The syntax of the `for` loop is as follows:
-
-```python
-for element in sequence:
-    # code block
-```
-
-The `for` loop iterates over each element in the sequence and executes the code block for each element. The loop continues until all elements in the sequence have been processed.
-
-For example:
-
-```python
-fruits = ["apple", "banana", "cherry"]
-
-for fruit in fruits:
-    print(fruit)
-```
-
-In this example, the loop will print each element in the `fruits` list.
-
-### Range Function
-
-The `range()` function is commonly used in `for` loops to generate a sequence of numbers. The `range()` function takes up to three arguments: `start`, `stop`, and `step`. The `start` argument specifies the starting value of the sequence, the `stop` argument specifies the end value of the sequence (not inclusive), and the `step` argument specifies the increment between each value in the sequence.
-
-For example:
-
-```python
-for i in range(5):
-    print(i)
-```
-
-In this example, the loop will print the numbers `0`, `1`, `2`, `3`, and `4`.
-
-You can also specify the `start`, `stop`, and `step` arguments in the `range()` function:
-
-```python
-for i in range(1, 10, 2):
-    print(i)
-```
-
-In this example, the loop will print the numbers `1`, `3`, `5`, `7`, and `9`.
-
-### Break Statement
-
-The `break` statement is used to exit a loop prematurely. When the `break` statement is encountered, the loop is terminated, and the program continues with the next statement after the loop.
-
-For example:
-
-```python
-for i in range(5):
-    print(i)
-    if i == 2:
-        break
-```
-
-In this example, the loop will print the numbers `0`, `1`, and `2` because the `break` statement is encountered when `i == 2`.
-
-### Continue Statement
-
-The `continue` statement is used to skip the rest of the code block and continue with the next iteration of the loop. When the `continue` statement is encountered, the program jumps back to the beginning of the loop and evaluates the condition again.
-
-For example:
-
-```python
-for i in range(5):
-    if i == 2:
-        continue
-    print(i)
-```
-
-In this example, the loop will print the numbers `0`, `1`, `3`, and `4` because the `continue` statement is encountered when `i == 2`.
-
-### Else Statement
-
-The `else` statement can be used in a loop to execute a block of code when the loop completes normally (i.e., without encountering a `break` statement). The syntax of the `else` statement in a loop is as follows:
-
-```python
-for element in sequence:
-    # code block
-else:
-    # code block
-```
-
-The `else` statement is only executed if the loop completes normally without encountering a `break` statement.
-
-For example:
-
-```python
-for i in range(5):
-    print(i)
-else:
-    print("Loop completed normally")
-```
-
-In this example, the loop will print the numbers `0`, `1`, `2`, `3`, and `4`, and then print `Loop completed normally`.
-
-### Nested For Loops
-
-You can nest `for` loops inside each other to iterate over multiple sequences. The inner loop is executed for each iteration of the outer loop.
-
-For example:
-
-```python
-fruits = ["apple", "banana", "cherry"]
-colors = ["red", "yellow", "purple"]
-
-for fruit in fruits:
-    for color in colors:
-        print(fruit, color)
-```
-
-In this example, the inner loop will iterate over each element in the `colors` list for each element in the `fruits` list.
-
-### Looping Through Strings and Dictionaries
-
-You can also use the `for` loop to iterate over strings and dictionaries.
-
-#### Strings
-
-You can iterate over each character in a string using a `for` loop:
-
-```python
-for char in "hello":
-    print(char)
-```
-
-In this example, the loop will print each character in the string `"hello"`.
-
-#### Dictionaries
-
-You can iterate over each key in a dictionary using a `for` loop:
-
-```python
-person = {"name": "Alice", "age": 30, "city": "New York"}
-
-for key in person:
-    print(key, person[key])
-```
-
-In this example, the loop will print each key-value pair in the `person` dictionary.
-
-You can also iterate over each key-value pair in a dictionary using the `items()` method. This also makes use of tuple unpacking:
-
-```python
-for key, value in person.items():
-    print(key, value)
-```
-
-In this example, the loop will print each key-value pair in the `person` dictionary.
-
-### Enumerate Function
-
-The `enumerate()` function can be used in a `for` loop to get both the index and value of each element in a sequence. The `enumerate()` function returns a tuple containing the index and value of each element.
-
-For example:
-
-```python
-fruits = ["apple", "banana", "cherry"]
-
-for index, fruit in enumerate(fruits):
-    print(index, fruit)
-```
-
-In this example, the loop will print the index and value of each element in the `fruits` list.
-
-### Zip Function
-
-The `zip()` function can be used in a `for` loop to iterate over multiple sequences simultaneously. The `zip()` function combines the elements of multiple sequences into tuples and returns an iterator of tuples.
-
-For example:
-
-```python
-fruits = ["apple", "banana", "cherry"]
-colors = ["red", "yellow", "purple"]
-
-for fruit, color in zip(fruits, colors):
-    print(fruit, color)
-```
-
-In this example, the loop will print each element in the `fruits` list paired with the corresponding element in the `colors` list.
-
-## Comprehensions
-
-Comprehensions are a concise way to create sequences, such as lists, dictionaries, sets, and generators, in Python. They allow you to create a new sequence by transforming or filtering an existing sequence. Comprehensions are more readable and expressive than traditional loops and can help you write more efficient and maintainable code.
-
-### List Comprehensions
-
-List comprehensions are used to create lists in Python. The syntax of a list comprehension is as follows:
-
-```python
-new_list = [expression for item in iterable if condition]
-```
-
-The list comprehension iterates over each item in the iterable and applies the expression to create a new list. The condition is optional and can be used to filter the items in the iterable.
-
-For example:
-
-```python
-numbers = [1, 2, 3, 4, 5]
-
-squares = [x ** 2 for x in numbers]
-
-print(squares)  # [1, 4, 9, 16, 25]
-```
-
-In this example, the list comprehension `x ** 2` is applied to each element in the `numbers` list to create a new list of squares.
-
-### Dictionary Comprehensions
-
-Dictionary comprehensions are used to create dictionaries in Python. The syntax of a dictionary comprehension is as follows:
-
-```python
-new_dict = {key: value for item in iterable if condition}
-```
-
-The dictionary comprehension iterates over each item in the iterable and applies the expression to create a new dictionary. The condition is optional and can be used to filter the items in the iterable.
-
-For example:
-
-```python
-fruits = ["apple", "banana", "cherry"]
-
-fruit_lengths = {fruit: len(fruit) for fruit in fruits}
-
-print(fruit_lengths)  # {'apple': 5, 'banana': 6, 'cherry': 6}
-```
-
-In this example, the dictionary comprehension `len(fruit)` is applied to each element in the `fruits` list to create a new dictionary of fruit lengths.
-
-You can also use dictionary comprehensions to create dictionaries from other dictionaries:
-
-```python
-students = {"Alice": 25, "Bob": 30, "Charlie": 35}
-
-adult_students = {name: age for name, age in students.items() if age >= 30}
-
-print(adult_students)  # {'Bob': 30, 'Charlie': 35}
-```
-
-### Generator Comprehensions
-
-Generator is a type of iterable that generates values on-the-fly. Instead of storing all the values in memory, a generator produces values one at a time, which can be more memory-efficient for large sequences.
-
-Generator comprehensions are used to create generators in Python. The syntax of a generator comprehension is similar to a list comprehension, but it uses parentheses instead of square brackets:
-
-```python
-new_generator = (expression for item in iterable if condition)
-```
-
-The generator comprehension iterates over each item in the iterable and applies the expression to create a new generator. The condition is optional and can be used to filter the items in the iterable.
-
-For example:
-
-```python
-numbers = [1, 2, 3, 4, 5]
-
-squares_generator = (x ** 2 for x in numbers)
-
-print(squares_generator)  # <generator object <genexpr> at 0x7f8b1c7b3d60>
-print(list(squares_generator))  # [1, 4, 9, 16, 25]
-```
-
-In this example, the generator comprehension `x ** 2` is applied to each element in the `numbers` list to create a new generator of squares.
+{% endstep %}
+{% endstepper %}
+
+## Practice Exercises for Data Analysis 🎯
+
+Try these data science exercises:
+
+1. **Data Quality Assessment**
+   ```python
+   # Create a function that:
+   # - Checks for missing values
+   # - Identifies outliers
+   # - Validates data types
+   # - Reports data quality metrics
+   ```
+
+2. **Time Series Analysis**
+   ```python
+   # Build a program that:
+   # - Processes time series data
+   # - Calculates rolling statistics
+   # - Detects anomalies
+   # - Generates summary reports
+   ```
+
+3. **Customer Segmentation**
+   ```python
+   # Implement a system that:
+   # - Processes customer data
+   # - Calculates key metrics
+   # - Segments customers by behavior
+   # - Generates insights
+   ```
+
+Remember:
+- Use vectorized operations when possible
+- Consider memory efficiency
+- Handle edge cases
+- Validate results
+
+Happy analyzing! 🚀

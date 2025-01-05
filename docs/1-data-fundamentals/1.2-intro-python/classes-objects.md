@@ -1,231 +1,434 @@
-# Classes and Objects
+[Previous content remains the same...]
 
-## Overview
+## Advanced Data Science Classes
 
-Classes are a fundamental concept in object-oriented programming. In object-oriented programming, classes are used to model real-world entities and define their properties and behaviors. Python is an object-oriented programming language, which means that it supports classes and objects. A class is a blueprint for creating objects, and an object is an instance of a class.
-
-## Classes
-
-In Python, you can define a class using the `class` keyword followed by the class name. For example:
-
-```python
-class Person:
-    pass
-```
-
-In the example above, we defined a class called `Person`. The name of the class should be in CamelCase, with the first letter of each word capitalized.
-
-The `pass` statement is used as a placeholder to indicate that the class is empty. We will learn how to define properties and methods inside a class to model the attributes and behaviors of the real-world entity that the class represents.
-
-You can create an object from a class by calling the class name followed by a pair of parentheses. This is called instantiation.
+{% stepper %}
+{% step %}
+### Machine Learning Pipeline
+Example of a modular ML pipeline:
 
 ```python
-person = Person()
+from abc import ABC, abstractmethod
+from typing import List, Dict, Any, Optional, Union
+import pandas as pd
+import numpy as np
+from sklearn.base import BaseEstimator, TransformerMixin
+
+class BaseTransformer(ABC):
+    """Abstract base class for transformers"""
+    
+    @abstractmethod
+    def fit(self, X: pd.DataFrame) -> 'BaseTransformer':
+        """Fit transformer to data"""
+        pass
+    
+    @abstractmethod
+    def transform(self, X: pd.DataFrame) -> pd.DataFrame:
+        """Transform data"""
+        pass
+    
+    def fit_transform(self, X: pd.DataFrame) -> pd.DataFrame:
+        """Fit and transform data"""
+        return self.fit(X).transform(X)
+
+class MissingValueImputer(BaseTransformer):
+    """Handle missing values in dataset"""
+    
+    def __init__(
+        self,
+        numeric_strategy: str = 'mean',
+        categorical_strategy: str = 'mode'
+    ):
+        self.numeric_strategy = numeric_strategy
+        self.categorical_strategy = categorical_strategy
+        self.fill_values = {}
+    
+    def fit(self, X: pd.DataFrame) -> 'MissingValueImputer':
+        """Calculate fill values from data"""
+        numeric_cols = X.select_dtypes(include=[np.number]).columns
+        categorical_cols = X.select_dtypes(exclude=[np.number]).columns
+        
+        # Calculate fill values for numeric columns
+        for col in numeric_cols:
+            if self.numeric_strategy == 'mean':
+                self.fill_values[col] = X[col].mean()
+            elif self.numeric_strategy == 'median':
+                self.fill_values[col] = X[col].median()
+        
+        # Calculate fill values for categorical columns
+        for col in categorical_cols:
+            if self.categorical_strategy == 'mode':
+                self.fill_values[col] = X[col].mode()[0]
+        
+        return self
+    
+    def transform(self, X: pd.DataFrame) -> pd.DataFrame:
+        """Fill missing values"""
+        X = X.copy()
+        for col, fill_value in self.fill_values.items():
+            X[col] = X[col].fillna(fill_value)
+        return X
+
+class OutlierHandler(BaseTransformer):
+    """Handle outliers in numeric columns"""
+    
+    def __init__(self, threshold: float = 3.0):
+        self.threshold = threshold
+        self.bounds = {}
+    
+    def fit(self, X: pd.DataFrame) -> 'OutlierHandler':
+        """Calculate outlier bounds"""
+        numeric_cols = X.select_dtypes(include=[np.number]).columns
+        
+        for col in numeric_cols:
+            Q1 = X[col].quantile(0.25)
+            Q3 = X[col].quantile(0.75)
+            IQR = Q3 - Q1
+            self.bounds[col] = {
+                'lower': Q1 - self.threshold * IQR,
+                'upper': Q3 + self.threshold * IQR
+            }
+        
+        return self
+    
+    def transform(self, X: pd.DataFrame) -> pd.DataFrame:
+        """Handle outliers"""
+        X = X.copy()
+        for col, bounds in self.bounds.items():
+            mask = (X[col] < bounds['lower']) | (X[col] > bounds['upper'])
+            X.loc[mask, col] = np.nan
+        return X
+
+class FeatureScaler(BaseTransformer):
+    """Scale numeric features"""
+    
+    def __init__(self, method: str = 'standard'):
+        self.method = method
+        self.scalers = {}
+    
+    def fit(self, X: pd.DataFrame) -> 'FeatureScaler':
+        """Calculate scaling parameters"""
+        numeric_cols = X.select_dtypes(include=[np.number]).columns
+        
+        for col in numeric_cols:
+            if self.method == 'standard':
+                self.scalers[col] = {
+                    'mean': X[col].mean(),
+                    'std': X[col].std()
+                }
+            elif self.method == 'minmax':
+                self.scalers[col] = {
+                    'min': X[col].min(),
+                    'max': X[col].max()
+                }
+        
+        return self
+    
+    def transform(self, X: pd.DataFrame) -> pd.DataFrame:
+        """Scale features"""
+        X = X.copy()
+        for col, scaler in self.scalers.items():
+            if self.method == 'standard':
+                X[col] = (X[col] - scaler['mean']) / scaler['std']
+            elif self.method == 'minmax':
+                X[col] = (X[col] - scaler['min']) / (
+                    scaler['max'] - scaler['min']
+                )
+        return X
+
+class MLPipeline:
+    """Machine learning pipeline"""
+    
+    def __init__(
+        self,
+        transformers: List[BaseTransformer],
+        model: Optional[BaseEstimator] = None
+    ):
+        self.transformers = transformers
+        self.model = model
+    
+    def fit(
+        self,
+        X: pd.DataFrame,
+        y: Optional[pd.Series] = None
+    ) -> 'MLPipeline':
+        """Fit pipeline to data"""
+        data = X.copy()
+        
+        # Fit transformers
+        for transformer in self.transformers:
+            data = transformer.fit_transform(data)
+        
+        # Fit model if provided
+        if self.model is not None and y is not None:
+            self.model.fit(data, y)
+        
+        return self
+    
+    def transform(self, X: pd.DataFrame) -> pd.DataFrame:
+        """Transform data through pipeline"""
+        data = X.copy()
+        
+        # Apply transformations
+        for transformer in self.transformers:
+            data = transformer.transform(data)
+        
+        return data
+    
+    def predict(self, X: pd.DataFrame) -> np.ndarray:
+        """Make predictions"""
+        if self.model is None:
+            raise ValueError("No model provided")
+        
+        # Transform data and predict
+        data = self.transform(X)
+        return self.model.predict(data)
+
+# Using the ML pipeline
+from sklearn.ensemble import RandomForestClassifier
+
+# Create sample data
+df = pd.DataFrame({
+    'age': [25, 30, np.nan, 100, 35],
+    'income': [50000, 60000, 75000, 1000000, 65000],
+    'category': ['A', 'B', 'A', 'C', 'B'],
+    'target': [0, 1, 1, 1, 0]
+})
+
+# Create pipeline
+pipeline = MLPipeline(
+    transformers=[
+        MissingValueImputer(),
+        OutlierHandler(threshold=2.0),
+        FeatureScaler(method='standard')
+    ],
+    model=RandomForestClassifier(random_state=42)
+)
+
+# Split features and target
+X = df.drop('target', axis=1)
+y = df['target']
+
+# Fit pipeline
+pipeline.fit(X, y)
+
+# Make predictions
+predictions = pipeline.predict(X)
+print("\nPredictions:", predictions)
 ```
+{% endstep %}
 
-In the example above, we created an object called `person` from the `Person` class. The object `person` is an instance of the `Person` class.
-
-### Constructors
-
-A constructor is a special method in a class that is used to initialize the object. In Python, the constructor method is called `__init__`. The constructor method is automatically called when an object is created from a class.
+{% step %}
+### Data Pipeline Architecture
+Example of a data processing pipeline:
 
 ```python
-class Person:
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
+from abc import ABC, abstractmethod
+from typing import List, Dict, Any, Optional
+import pandas as pd
+import numpy as np
+from datetime import datetime
+import logging
+
+class DataPipelineStep(ABC):
+    """Abstract base class for pipeline steps"""
+    
+    @abstractmethod
+    def process(self, data: pd.DataFrame) -> pd.DataFrame:
+        """Process data"""
+        pass
+    
+    @abstractmethod
+    def get_step_name(self) -> str:
+        """Get step name"""
+        pass
+
+class DataLoader(DataPipelineStep):
+    """Load data from various sources"""
+    
+    def __init__(self, filepath: str):
+        self.filepath = filepath
+    
+    def process(self, data: Optional[pd.DataFrame] = None) -> pd.DataFrame:
+        """Load data from file"""
+        if self.filepath.endswith('.csv'):
+            return pd.read_csv(self.filepath)
+        elif self.filepath.endswith('.parquet'):
+            return pd.read_parquet(self.filepath)
+        else:
+            raise ValueError(f"Unsupported file type: {self.filepath}")
+    
+    def get_step_name(self) -> str:
+        return "DataLoader"
+
+class DataCleaner(DataPipelineStep):
+    """Clean and preprocess data"""
+    
+    def __init__(
+        self,
+        drop_duplicates: bool = True,
+        handle_missing: bool = True
+    ):
+        self.drop_duplicates = drop_duplicates
+        self.handle_missing = handle_missing
+    
+    def process(self, data: pd.DataFrame) -> pd.DataFrame:
+        """Clean data"""
+        df = data.copy()
+        
+        if self.drop_duplicates:
+            df = df.drop_duplicates()
+        
+        if self.handle_missing:
+            numeric_cols = df.select_dtypes(include=[np.number]).columns
+            df[numeric_cols] = df[numeric_cols].fillna(
+                df[numeric_cols].mean()
+            )
+            
+            categorical_cols = df.select_dtypes(exclude=[np.number]).columns
+            df[categorical_cols] = df[categorical_cols].fillna(
+                df[categorical_cols].mode().iloc[0]
+            )
+        
+        return df
+    
+    def get_step_name(self) -> str:
+        return "DataCleaner"
+
+class FeatureEngineer(DataPipelineStep):
+    """Create new features"""
+    
+    def __init__(self, date_columns: List[str]):
+        self.date_columns = date_columns
+    
+    def process(self, data: pd.DataFrame) -> pd.DataFrame:
+        """Engineer features"""
+        df = data.copy()
+        
+        for col in self.date_columns:
+            df[col] = pd.to_datetime(df[col])
+            df[f"{col}_year"] = df[col].dt.year
+            df[f"{col}_month"] = df[col].dt.month
+            df[f"{col}_day"] = df[col].dt.day
+            df[f"{col}_dayofweek"] = df[col].dt.dayofweek
+        
+        return df
+    
+    def get_step_name(self) -> str:
+        return "FeatureEngineer"
+
+class DataPipeline:
+    """Data processing pipeline"""
+    
+    def __init__(self, steps: List[DataPipelineStep]):
+        self.steps = steps
+        self.logger = self._setup_logger()
+    
+    def _setup_logger(self) -> logging.Logger:
+        """Setup logging"""
+        logger = logging.getLogger(__name__)
+        logger.setLevel(logging.INFO)
+        
+        if not logger.handlers:
+            handler = logging.StreamHandler()
+            formatter = logging.Formatter(
+                '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+            )
+            handler.setFormatter(formatter)
+            logger.addHandler(handler)
+        
+        return logger
+    
+    def run(self, data: Optional[pd.DataFrame] = None) -> pd.DataFrame:
+        """Run pipeline"""
+        current_data = data
+        start_time = datetime.now()
+        
+        self.logger.info("Starting pipeline execution")
+        
+        for step in self.steps:
+            step_start = datetime.now()
+            self.logger.info(f"Running step: {step.get_step_name()}")
+            
+            try:
+                current_data = step.process(current_data)
+                
+                step_duration = datetime.now() - step_start
+                self.logger.info(
+                    f"Completed step: {step.get_step_name()} "
+                    f"in {step_duration.total_seconds():.2f} seconds"
+                )
+                
+            except Exception as e:
+                self.logger.error(
+                    f"Error in step {step.get_step_name()}: {str(e)}"
+                )
+                raise
+        
+        total_duration = datetime.now() - start_time
+        self.logger.info(
+            f"Pipeline completed in {total_duration.total_seconds():.2f} "
+            "seconds"
+        )
+        
+        return current_data
+
+# Using the data pipeline
+# Create pipeline steps
+steps = [
+    DataLoader('data.csv'),
+    DataCleaner(drop_duplicates=True, handle_missing=True),
+    FeatureEngineer(date_columns=['date'])
+]
+
+# Create and run pipeline
+pipeline = DataPipeline(steps)
+try:
+    result = pipeline.run()
+    print("\nPipeline execution successful")
+    print("\nProcessed data shape:", result.shape)
+except Exception as e:
+    print(f"\nPipeline execution failed: {str(e)}")
 ```
+{% endstep %}
+{% endstepper %}
 
-In the example above, we defined a constructor method `__init__` in the `Person` class. The constructor takes two parameters `name` and `age` and initializes the properties `self.name` and `self.age` with the values passed to the constructor. Properties defined in the constructor are also called instance variables.
+## Practice Exercises for Data Science 🎯
 
-The `self` parameter is a reference to the current instance of the class.
+Try these advanced exercises:
 
-You can create an object from the `Person` class and pass values to the constructor as arguments. For example:
+1. **Create a Feature Selection System**
+   ```python
+   # Build classes for:
+   # - Feature importance calculation
+   # - Correlation analysis
+   # - Feature selection based on metrics
+   # - Feature ranking and visualization
+   ```
 
-```python
-person = Person("Alice", 30)
+2. **Implement a Model Evaluation Pipeline**
+   ```python
+   # Create classes for:
+   # - Cross-validation
+   # - Metric calculation
+   # - Model comparison
+   # - Results visualization
+   ```
 
-print(person.name)  # Alice
-print(person.age)  # 30
-```
+3. **Build an Automated Report Generator**
+   ```python
+   # Develop classes for:
+   # - Data profiling
+   # - Statistical analysis
+   # - Visualization generation
+   # - Report formatting
+   ```
 
-In the example above, we created an object called `person` from the `Person` class and passed the values `"Alice"` and `30` to the constructor. The object `person` now has two instance variables `name` and `age` with the values `"Alice"` and `30`, respectively.
+Remember:
+- Use type hints for better code documentation
+- Implement proper error handling
+- Consider performance implications
+- Write unit tests for your classes
+- Follow SOLID principles
 
-You can modify the properties of an object by accessing them using the dot notation. For example:
-
-```python
-person.age = 31
-
-print(person.age)  # 31
-```
-
-## Methods
-
-A method is a function that is defined inside a class. Methods are used to define the behaviors of the objects created from the class. There are three types of methods in Python classes:
-
-- Instance methods
-- Class methods
-- Static methods
-
-### Instance Methods
-
-Instance methods are methods that are defined inside a class and are called on an instance of the class. Instance methods take `self` as the first parameter, which is a reference to the current instance of the class. Instance methods can access and modify the instance variables of the class. To define an instance method, you use the `def` keyword followed by the method name and the `self` parameter. For example:
-
-```python
-class Person:
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
-
-    def greet(self):
-        print(f"Hello, my name is {self.name} and I am {self.age} years old.")
-
-    def celebrate_birthday(self):
-        self.age += 1
-        print(f"Happy birthday, {self.name}! You are now {self.age} years old.")
-
-    def change_name(self, new_name):
-        self.name = new_name
-
-person = Person("Alice", 30)
-person.greet()  # Hello, my name is Alice and I am 30 years old.
-person.celebrate_birthday()  # Happy birthday, Alice! You are now 31 years old.
-person.change_name("Bob")
-person.greet()  # Hello, my name is Bob and I am 31 years old.
-```
-
-### The `__str__` Method
-
-The `__str__` method is a special instance method that is used to return a string representation of an object. The `__str__` method is called when you use the `str()` function or the `print()` function on an object. To define the `__str__` method, you use the `def` keyword followed by the method name `__str__` and the `self` parameter. The `__str__` method should return a string representation of the object. For example:
-
-```python
-class Person:
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
-
-    def __str__(self):
-        return f"Person(name={self.name}, age={self.age})"
-
-person = Person("Alice", 30)
-print(person)  # Person(name=Alice, age=30)
-```
-
-### Class Variables and Methods
-
-Class variables are variables that are defined inside a class but outside any method. Class variables are shared among all instances of the class. Class variables are accessed using the class name or the instance name.
-
-Class methods are methods that are defined inside a class and are called on the class itself rather than an instance of the class. Class methods take `cls` as the first parameter, which is a reference to the class itself. Class methods can access and modify class variables. To define a class method, you use the `@classmethod` decorator followed by the `def` keyword, the method name, and the `cls` parameter.
-
-```python
-class Person:
-    count = 0
-
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
-        Person.count += 1
-
-    @classmethod
-    def get_count(cls):
-        return cls.count
-
-    @classmethod
-    def create_person(cls, name, age):
-        return cls(name, age)
-
-print(Person.get_count())  # 0
-person1 = Person.create_person("Alice", 30)
-print(Person.get_count())  # 1
-person2 = Person.create_person("Bob", 25)
-print(Person.get_count())  # 2
-```
-
-In the example above, we defined a class method `get_count` that returns the value of the `count` class variable and a class method `create_person` that creates a new `Person` object. The `create_person` method is used to create new `Person` objects without directly calling the constructor.
-
-### Static Methods
-
-Static methods are methods that are defined inside a class but do not take `self` or `cls` as the first parameter. Static methods are used when the method does not depend on the instance or class and does not access or modify instance or class variables. To define a static method, you use the `@staticmethod` decorator followed by the `def` keyword and the method name. For example:
-
-```python
-class Math:
-    @staticmethod
-    def add(a, b):
-        return a + b
-
-    @staticmethod
-    def subtract(a, b):
-        return a - b
-
-print(Math.add(3, 5))  # 8
-print(Math.subtract(5, 3))  # 2
-```
-
-## Inheritance
-
-Inheritance is a fundamental concept in object-oriented programming. Inheritance allows you to create a new class that inherits properties and behaviors from an existing class. The existing class is called the base class or parent class, and the new class is called the derived class or subclass. Inheritance allows you to reuse code and create a hierarchy of classes with shared properties and behaviors.
-
-In Python, you can define a class that inherits from another class by specifying the base class in parentheses after the class name. For example:
-
-```python
-class Animal:
-    def __init__(self, name):
-        self.name = name
-
-    def speak(self):
-        return "Animal sound!"
-
-class Dog(Animal):
-    def speak(self):
-        return "Woof!"
-
-class Cat(Animal):
-    def speak(self):
-        return "Meow!"
-
-dog = Dog("Buddy")
-cat = Cat("Whiskers")
-
-print(dog.speak())  # Woof!
-print(cat.speak())  # Meow!
-```
-
-### Base Classes and Derived Classes
-
-Inheritance allows you to create a hierarchy of classes with shared properties and behaviors. For example, you can have a base class `Shape` with properties like `color` and methods like `area`, and derived classes like `Circle` and `Rectangle` that inherit from the `Shape` class and provide specific implementations for the `area` method.
-
-```python
-class Shape:
-    def __init__(self, color):
-        self.color = color
-
-    def area(self):
-        return 0
-
-class Circle(Shape):
-    def __init__(self, color, radius):
-        super().__init__(color)
-        self.radius = radius
-
-    def area(self):
-        return 3.14 * self.radius ** 2
-
-class Rectangle(Shape):
-    def __init__(self, color, width, height):
-        super().__init__(color)
-        self.width = width
-        self.height = height
-
-    def area(self):
-        return self.width * self.height
-
-circle = Circle("Red", 5)
-rectangle = Rectangle("Blue", 3, 4)
-
-print(circle.area())  # 78.5
-print(circle.color)  # Red
-print(rectangle.area())  # 12
-print(rectangle.color)  # Blue
-```
-
-In the example above, we defined a base class `Shape` with a property `color` and a method `area`. We then defined two derived classes `Circle` and `Rectangle` that inherit from the `Shape` class and provide specific implementations for the `area` method. The `super()` function is used to call the constructor of the base class in the derived class.
+Happy coding! 🚀
