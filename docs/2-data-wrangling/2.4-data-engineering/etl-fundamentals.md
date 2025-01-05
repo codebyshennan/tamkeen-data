@@ -2,10 +2,220 @@
 
 ## Introduction to ETL 🔄
 
-ETL (Extract, Transform, Load) is a fundamental process in data engineering that involves:
-- Extracting data from various sources
-- Transforming data into a suitable format
-- Loading data into target systems
+ETL (Extract, Transform, Load) is a fundamental process in data engineering that forms the backbone of data integration and warehousing solutions.
+
+### ETL Workflow Diagram
+```mermaid
+graph LR
+    subgraph Extract
+        A[Source Systems] --> B[Data Extraction]
+        B --> C[Raw Data]
+    end
+    subgraph Transform
+        C --> D[Data Cleaning]
+        D --> E[Data Enrichment]
+        E --> F[Data Validation]
+    end
+    subgraph Load
+        F --> G[Staging Area]
+        G --> H[Data Warehouse]
+    end
+```
+
+### Data Pipeline Architecture with Airflow
+```mermaid
+graph TD
+    subgraph Airflow DAG
+        A[Start] --> B[Extract Task]
+        B --> C[Transform Task]
+        C --> D[Load Task]
+        D --> E[Validation Task]
+        E --> F[End]
+    end
+    subgraph Monitoring
+        G[Airflow UI]
+        H[Metrics Dashboard]
+        I[Alert System]
+    end
+    E -.-> G
+    E -.-> H
+    H -.-> I
+```
+
+### Error Handling Flowchart
+```mermaid
+graph TD
+    A[Task Start] --> B{Check Source}
+    B -->|Available| C[Extract Data]
+    B -->|Unavailable| D[Retry Logic]
+    D -->|Max Retries| E[Alert & Log]
+    D -->|Retry| B
+    C --> F{Validate Data}
+    F -->|Valid| G[Process Data]
+    F -->|Invalid| H[Error Handler]
+    H --> I[Clean/Fix Data]
+    I --> F
+    G --> J[Load Data]
+    J --> K{Load Success}
+    K -->|Yes| L[Complete]
+    K -->|No| M[Rollback]
+    M --> N[Retry Load]
+    N --> J
+```
+
+### Airflow DAG Example
+```python
+from airflow import DAG
+from airflow.operators.python_operator import PythonOperator
+from datetime import datetime, timedelta
+
+default_args = {
+    'owner': 'data_engineer',
+    'depends_on_past': False,
+    'start_date': datetime(2024, 1, 1),
+    'email': ['alerts@example.com'],
+    'email_on_failure': True,
+    'email_on_retry': False,
+    'retries': 3,
+    'retry_delay': timedelta(minutes=5)
+}
+
+dag = DAG(
+    'sales_etl_pipeline',
+    default_args=default_args,
+    description='Sales data ETL pipeline',
+    schedule_interval='0 0 * * *',  # Daily at midnight
+    catchup=False
+)
+
+# Extract task
+extract_task = PythonOperator(
+    task_id='extract_sales_data',
+    python_callable=extract_sales_data,
+    dag=dag
+)
+
+# Transform task
+transform_task = PythonOperator(
+    task_id='transform_sales_data',
+    python_callable=transform_sales_data,
+    dag=dag
+)
+
+# Load task
+load_task = PythonOperator(
+    task_id='load_sales_data',
+    python_callable=load_sales_data,
+    dag=dag
+)
+
+# Validation task
+validate_task = PythonOperator(
+    task_id='validate_sales_data',
+    python_callable=validate_sales_data,
+    dag=dag
+)
+
+# Define task dependencies
+extract_task >> transform_task >> load_task >> validate_task
+```
+
+### Monitoring Dashboard Example (Tableau)
+```
+[Tableau Dashboard Layout]
++------------------------+------------------------+
+|    Pipeline Status     |    Data Quality KPIs   |
++------------------------+------------------------+
+| - Success Rate         | - Completeness         |
+| - Processing Time      | - Accuracy             |
+| - Error Count         | - Timeliness           |
+| - Resource Usage      | - Consistency          |
++------------------------+------------------------+
+|        Error Distribution by Type              |
++-----------------------------------------------+
+| - Connection Errors                            |
+| - Validation Failures                          |
+| - Processing Errors                            |
+| - System Errors                                |
++-----------------------------------------------+
+|        Performance Metrics Over Time           |
++-----------------------------------------------+
+| - Processing Volume                            |
+| - Response Time                                |
+| - Resource Utilization                         |
+| - Throughput                                   |
++-----------------------------------------------+
+```
+
+### Core Concepts
+
+#### 1. Extract
+- **Data Sources**:
+  * Databases (SQL, NoSQL)
+  * APIs and web services
+  * File systems (CSV, JSON)
+  * Streaming sources
+  * Legacy systems
+
+- **Extraction Methods**:
+  * Full extraction
+  * Incremental extraction
+  * Change data capture
+  * Event-driven extraction
+
+#### 2. Transform
+- **Data Cleaning**:
+  * Missing value handling
+  * Duplicate removal
+  * Error correction
+  * Format standardization
+
+- **Data Enhancement**:
+  * Enrichment
+  * Aggregation
+  * Derivation
+  * Validation
+
+#### 3. Load
+- **Loading Types**:
+  * Full load
+  * Incremental load
+  * Merge load
+  * Upsert operations
+
+- **Target Systems**:
+  * Data warehouses
+  * Data marts
+  * Operational databases
+  * Analytics platforms
+
+### Business Impact
+- **Decision Making**:
+  * Real-time insights
+  * Historical analysis
+  * Predictive modeling
+  * Performance monitoring
+
+- **Operational Efficiency**:
+  * Process automation
+  * Data consistency
+  * Resource optimization
+  * Error reduction
+
+### Technical Considerations
+- **Performance**:
+  * Processing speed
+  * Resource usage
+  * Scalability
+  * Optimization
+
+- **Quality**:
+  * Data accuracy
+  * Completeness
+  * Consistency
+  * Timeliness
+
+Here's a comprehensive implementation of an ETL pipeline:
 
 ## ETL Pipeline Components 🛠️
 
@@ -102,7 +312,71 @@ class ETLPipeline:
 
 ## Extract Phase 📥
 
+The Extract phase is responsible for retrieving data from various source systems while handling different formats, protocols, and potential issues.
+
+### Key Considerations
+- **Source Systems**:
+  * Availability windows
+  * Access patterns
+  * Rate limits
+  * Authentication
+
+- **Data Volume**:
+  * Batch size
+  * Memory constraints
+  * Network bandwidth
+  * Processing capacity
+
+- **Reliability**:
+  * Connection stability
+  * Error handling
+  * Retry mechanisms
+  * Fallback options
+
 ### 1. Data Sources
+
+Different data sources require specific handling approaches:
+
+#### Database Sources
+- **Relational Databases**:
+  * Connection pooling
+  * Query optimization
+  * Transaction isolation
+  * Cursor management
+
+- **NoSQL Databases**:
+  * Document retrieval
+  * Key-value access
+  * Graph traversal
+  * Column family queries
+
+#### File Systems
+- **Local Files**:
+  * File formats
+  * Encoding handling
+  * Directory structure
+  * File locking
+
+- **Cloud Storage**:
+  * Access credentials
+  * Region selection
+  * Transfer optimization
+  * Cost management
+
+#### APIs
+- **REST APIs**:
+  * Authentication
+  * Rate limiting
+  * Pagination
+  * Error handling
+
+- **Streaming APIs**:
+  * Connection management
+  * Backpressure handling
+  * Message ordering
+  * State management
+
+Here's a comprehensive implementation:
 
 ```python
 class DataExtractor:
@@ -159,7 +433,70 @@ def extract_with_retry(source, max_retries=3):
 
 ## Transform Phase 🔄
 
+The Transform phase is where raw data is converted into a format suitable for analysis and loading into target systems.
+
+### Transformation Types
+- **Data Cleansing**:
+  * Missing value handling
+  * Outlier detection
+  * Error correction
+  * Format standardization
+
+- **Data Enrichment**:
+  * Lookup operations
+  * Derived calculations
+  * Data augmentation
+  * Feature engineering
+
+- **Data Restructuring**:
+  * Schema mapping
+  * Normalization
+  * Denormalization
+  * Aggregation
+
+### Key Considerations
+- **Data Quality**:
+  * Validation rules
+  * Business constraints
+  * Data integrity
+  * Consistency checks
+
+- **Performance**:
+  * Memory usage
+  * Processing time
+  * Resource allocation
+  * Optimization
+
+- **Maintainability**:
+  * Code organization
+  * Documentation
+  * Testing
+  * Version control
+
 ### 1. Data Cleaning
+
+Data cleaning ensures data quality and consistency:
+
+#### Cleaning Operations
+- **Missing Values**:
+  * Imputation strategies
+  * Default values
+  * Removal policies
+  * Documentation
+
+- **Duplicates**:
+  * Detection methods
+  * Resolution strategies
+  * Business rules
+  * Audit trails
+
+- **Data Types**:
+  * Type conversion
+  * Format validation
+  * Range checking
+  * Custom types
+
+Here's a comprehensive implementation:
 
 ```python
 class DataTransformer:
@@ -233,7 +570,71 @@ def validate_dataset(df, schema):
 
 ## Load Phase 📤
 
+The Load phase is responsible for writing transformed data to target systems efficiently and reliably.
+
+### Loading Strategies
+- **Batch Loading**:
+  * Full loads
+  * Incremental loads
+  * Delta loads
+  * Merge operations
+
+- **Real-time Loading**:
+  * Stream processing
+  * Change data capture
+  * Event-driven loads
+  * Message queues
+
+- **Hybrid Loading**:
+  * Micro-batching
+  * Lambda architecture
+  * Kappa architecture
+  * Hybrid patterns
+
+### Key Considerations
+- **Performance**:
+  * Batch size optimization
+  * Parallel loading
+  * Index management
+  * Resource utilization
+
+- **Data Integrity**:
+  * Transaction management
+  * Consistency checks
+  * Rollback strategies
+  * Recovery procedures
+
+- **Target Systems**:
+  * System capacity
+  * Load windows
+  * Concurrency limits
+  * Maintenance schedules
+
 ### 1. Data Loading
+
+Different loading approaches for various target systems:
+
+#### Database Loading
+- **Bulk Loading**:
+  * Batch inserts
+  * COPY commands
+  * Staging tables
+  * Partition switching
+
+- **Incremental Loading**:
+  * Change tracking
+  * Timestamp-based
+  * Version-based
+  * Merge operations
+
+#### File System Loading
+- **File Management**:
+  * File naming
+  * Directory structure
+  * Compression
+  * Archival
+
+Here's a comprehensive implementation:
 
 ```python
 class DataLoader:
@@ -291,7 +692,70 @@ class TransactionLoader:
 
 ## Pipeline Orchestration 🎯
 
+Pipeline orchestration manages the execution, monitoring, and maintenance of ETL workflows.
+
+### Orchestration Concepts
+- **Workflow Management**:
+  * Task scheduling
+  * Dependency resolution
+  * Resource allocation
+  * Error handling
+
+- **Pipeline Patterns**:
+  * Sequential processing
+  * Parallel execution
+  * Fan-out/Fan-in
+  * Branching logic
+
+- **State Management**:
+  * Checkpointing
+  * Recovery points
+  * State persistence
+  * Failure recovery
+
+### Key Features
+- **Scheduling**:
+  * Time-based triggers
+  * Event-driven execution
+  * Dependencies
+  * Priorities
+
+- **Monitoring**:
+  * Health checks
+  * Performance metrics
+  * Resource usage
+  * SLA compliance
+
+- **Error Handling**:
+  * Retry policies
+  * Failure notifications
+  * Recovery procedures
+  * Fallback strategies
+
 ### 1. Pipeline Configuration
+
+Configuration management for ETL pipelines:
+
+#### Configuration Types
+- **Source Config**:
+  * Connection details
+  * Authentication
+  * Query parameters
+  * Rate limits
+
+- **Transform Config**:
+  * Business rules
+  * Validation rules
+  * Mapping rules
+  * Processing rules
+
+- **Target Config**:
+  * Connection details
+  * Table mappings
+  * Load options
+  * Error handling
+
+Here's a comprehensive implementation:
 
 ```python
 class PipelineConfig:

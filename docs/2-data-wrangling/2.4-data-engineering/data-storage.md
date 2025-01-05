@@ -2,12 +2,193 @@
 
 ## Introduction to Data Storage 💾
 
-Understanding different data storage solutions is crucial for:
-- Choosing the right storage for your data
-- Optimizing data access patterns
-- Ensuring data durability
-- Managing data growth
-- Supporting various use cases
+Data storage is a fundamental aspect of data engineering that requires careful consideration of various factors to ensure efficient, reliable, and scalable data management.
+
+### Storage Types Comparison Chart
+```
++------------------+------------------------+------------------------+------------------------+
+| Characteristic   | Data Warehouse         | Data Lake             | Database              |
++------------------+------------------------+------------------------+------------------------+
+| Data Structure   | Structured             | Any Structure         | Structured/Semi       |
+| Schema           | Schema-on-Write        | Schema-on-Read        | Fixed Schema          |
+| Data Quality     | Refined                | Raw                   | Validated             |
+| Query Speed      | Fast                   | Varies                | Fast                  |
+| Storage Cost     | Higher                 | Lower                 | Medium                |
+| Processing       | Batch                  | Batch/Real-time       | Real-time             |
+| Use Cases        | BI/Reporting           | Data Science/ML       | OLTP                  |
+| Scalability      | Vertical               | Horizontal            | Both                  |
+| Tools            | Snowflake, Redshift    | S3, Azure Blob        | PostgreSQL, MongoDB   |
++------------------+------------------------+-----------------------+------------------------+
+```
+
+### Data Warehouse Architecture
+```mermaid
+graph TD
+    subgraph Sources
+        A[OLTP Database]
+        B[APIs]
+        C[Files]
+    end
+    subgraph Staging
+        D[Landing Zone]
+        E[Staging Area]
+    end
+    subgraph Warehouse
+        F[Raw Layer]
+        G[Integration Layer]
+        H[Data Marts]
+    end
+    A --> D
+    B --> D
+    C --> D
+    D --> E
+    E --> F
+    F --> G
+    G --> H
+```
+
+### Data Lake Organization
+```mermaid
+graph TD
+    subgraph Bronze Layer
+        A[Raw Data]
+        B[Source Files]
+        C[Stream Data]
+    end
+    subgraph Silver Layer
+        D[Cleaned Data]
+        E[Validated Data]
+        F[Transformed Data]
+    end
+    subgraph Gold Layer
+        G[Aggregated Data]
+        H[Feature Sets]
+        I[Analytics Data]
+    end
+    A --> D
+    B --> D
+    C --> D
+    D --> E
+    E --> F
+    F --> G
+    F --> H
+    F --> I
+```
+
+### Storage Performance Comparison (Tableau Dashboard)
+```
+[Tableau Dashboard Layout]
++------------------------+------------------------+
+|    Query Performance   |    Storage Metrics     |
++------------------------+------------------------+
+| - Response Time        | - Storage Usage        |
+| - Throughput          | - Growth Rate          |
+| - Concurrency         | - Cost per GB          |
+| - Cache Hit Rate      | - Compression Ratio    |
++------------------------+------------------------+
+|        Access Patterns by Storage Type         |
++-----------------------------------------------+
+| - Read/Write Ratios                           |
+| - Query Types                                 |
+| - Data Volume                                 |
+| - User Concurrency                            |
++-----------------------------------------------+
+|        Performance Trends Over Time           |
++-----------------------------------------------+
+| - Query Response Time                         |
+| - Storage Growth                              |
+| - Cost Trends                                 |
+| - Resource Usage                              |
++-----------------------------------------------+
+```
+
+### Key Considerations
+
+#### 1. Data Characteristics
+- **Volume**:
+  * Current data size
+  * Growth projections
+  * Storage capacity planning
+  * Cost considerations
+
+- **Velocity**:
+  * Data ingestion rate
+  * Processing requirements
+  * Real-time vs batch
+  * Access patterns
+
+- **Variety**:
+  * Structured data
+  * Semi-structured data
+  * Unstructured data
+  * Binary objects
+
+#### 2. Performance Requirements
+- **Access Patterns**:
+  * Read/write ratios
+  * Query complexity
+  * Concurrency needs
+  * Latency requirements
+
+- **Scalability**:
+  * Horizontal scaling
+  * Vertical scaling
+  * Partitioning strategy
+  * Load distribution
+
+#### 3. Data Governance
+- **Security**:
+  * Access control
+  * Encryption
+  * Audit logging
+  * Compliance requirements
+
+- **Data Quality**:
+  * Validation rules
+  * Consistency checks
+  * Data integrity
+  * Error handling
+
+#### 4. Operational Aspects
+- **Maintenance**:
+  * Backup strategies
+  * Recovery procedures
+  * Monitoring setup
+  * Performance tuning
+
+- **Cost Management**:
+  * Storage costs
+  * Operation costs
+  * Scaling costs
+  * Maintenance costs
+
+### Storage Selection Criteria
+
+#### 1. Business Requirements
+- **Use Cases**:
+  * Transaction processing
+  * Analytics
+  * Archival
+  * Caching
+
+- **SLA Requirements**:
+  * Availability
+  * Durability
+  * Performance
+  * Recovery time
+
+#### 2. Technical Requirements
+- **Data Model**:
+  * Schema flexibility
+  * Relationship handling
+  * Indexing needs
+  * Query capabilities
+
+- **Integration**:
+  * API support
+  * Tool compatibility
+  * Protocol support
+  * Ecosystem integration
 
 ## Types of Data Storage 🗄️
 
@@ -55,6 +236,64 @@ def setup_database(connection_string):
 ```
 
 ### 2. NoSQL Databases
+
+NoSQL databases provide flexible schema design and horizontal scalability for handling diverse data types and high-volume workloads.
+
+#### Types of NoSQL Databases
+- **Document Stores**:
+  * Schema flexibility
+  * Nested structures
+  * JSON/BSON format
+  * Query capabilities
+  * Example: MongoDB, CouchDB
+
+- **Key-Value Stores**:
+  * Simple data model
+  * High performance
+  * Scalable architecture
+  * Cache-friendly
+  * Example: Redis, DynamoDB
+
+- **Column-Family Stores**:
+  * Wide-column storage
+  * High write throughput
+  * Efficient compression
+  * Horizontal scaling
+  * Example: Cassandra, HBase
+
+- **Graph Databases**:
+  * Relationship-focused
+  * Network analysis
+  * Path traversal
+  * Pattern matching
+  * Example: Neo4j, JanusGraph
+
+#### Use Cases
+- **Document Stores**:
+  * Content management
+  * User profiles
+  * Game states
+  * Product catalogs
+
+- **Key-Value Stores**:
+  * Session management
+  * Shopping carts
+  * User preferences
+  * Real-time bidding
+
+- **Column-Family**:
+  * Time-series data
+  * Event logging
+  * Sensor data
+  * Large-scale analytics
+
+- **Graph Databases**:
+  * Social networks
+  * Recommendation engines
+  * Fraud detection
+  * Knowledge graphs
+
+Here's a comprehensive MongoDB implementation:
 
 ```python
 from pymongo import MongoClient
@@ -152,6 +391,55 @@ class DataLakeHandler:
 ```
 
 ### 4. Data Warehouses
+
+Data warehouses are specialized databases optimized for analytics and reporting, providing a centralized repository for integrated data from multiple sources.
+
+#### Architecture Components
+- **Staging Area**:
+  * Raw data landing
+  * Initial validation
+  * Format conversion
+  * Load preparation
+
+- **Core Warehouse**:
+  * Dimensional models
+  * Fact tables
+  * Slowly changing dimensions
+  * Historical tracking
+
+- **Data Marts**:
+  * Subject-specific views
+  * Aggregated data
+  * Department-specific
+  * Optimized access
+
+#### Design Patterns
+- **Star Schema**:
+  * Fact tables
+  * Dimension tables
+  * Denormalization
+  * Query optimization
+
+- **Snowflake Schema**:
+  * Normalized dimensions
+  * Reduced redundancy
+  * Complex relationships
+  * Storage efficiency
+
+#### Performance Features
+- **Columnar Storage**:
+  * Compression
+  * Query optimization
+  * Parallel processing
+  * Analytical workloads
+
+- **Materialized Views**:
+  * Pre-computed results
+  * Faster queries
+  * Refresh strategies
+  * Resource optimization
+
+Here's a comprehensive implementation:
 
 ```python
 from snowflake.connector import connect

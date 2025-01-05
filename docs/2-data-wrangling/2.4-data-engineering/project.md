@@ -2,15 +2,47 @@
 
 ## Overview 🎯
 
-In this assignment, you'll build a complete data engineering pipeline that extracts data from multiple sources, transforms it according to business rules, and loads it into a data warehouse. You'll apply various data engineering concepts including ETL processes, data storage solutions, and data integration patterns.
+In this comprehensive assignment, you'll build a production-ready data engineering pipeline that demonstrates your ability to handle real-world data processing challenges. You'll apply advanced ETL concepts, implement robust error handling, and ensure scalable performance.
+
+### Learning Objectives
+- Master ETL pipeline development
+- Implement data quality controls
+- Handle complex transformations
+- Ensure system reliability
+- Optimize performance
+- Monitor pipeline health
 
 ## Project Description 📋
 
-You'll be building a data pipeline for an e-commerce company that needs to:
-- Collect sales data from multiple sources
-- Transform and clean the data
-- Load it into a centralized data warehouse
-- Generate reports for business analysis
+You'll be building an enterprise-grade data pipeline for an e-commerce company that processes millions of transactions daily. The system needs to:
+
+### Data Collection
+- **Sales Data**:
+  * API integration with order system
+  * Database connection to inventory
+  * File imports from legacy systems
+  * Real-time transaction streams
+
+### Data Processing
+- **Transformation**:
+  * Clean and standardize data
+  * Apply business rules
+  * Calculate derived metrics
+  * Validate data quality
+
+### Data Storage
+- **Warehouse Design**:
+  * Dimensional modeling
+  * Fact table design
+  * Incremental loading
+  * Performance optimization
+
+### Reporting
+- **Analytics Support**:
+  * Sales analytics
+  * Inventory metrics
+  * Customer insights
+  * Performance KPIs
 
 ## Setup 🚀
 

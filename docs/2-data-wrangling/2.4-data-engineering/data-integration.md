@@ -2,12 +2,120 @@
 
 ## Introduction to Data Integration 🔄
 
-Data integration involves:
-- Combining data from multiple sources
-- Handling different data formats
-- Ensuring data consistency
-- Managing data quality
-- Orchestrating data flows
+### Integration Patterns Diagram
+```mermaid
+graph TD
+    subgraph Batch Integration
+        A[Extract] --> B[Transform]
+        B --> C[Load]
+    end
+    subgraph Real-time Integration
+        D[Stream] --> E[Process]
+        E --> F[Store]
+    end
+    subgraph Hybrid Integration
+        G[Batch Layer] --> I[Serving Layer]
+        H[Speed Layer] --> I
+    end
+```
+
+### Real-time vs Batch Processing Comparison
+```
++------------------+------------------------+------------------------+
+| Characteristic   | Real-time Processing   | Batch Processing      |
++------------------+------------------------+------------------------+
+| Latency         | Seconds or less        | Minutes to hours      |
+| Data Volume     | Small chunks           | Large volumes         |
+| Resource Usage  | Continuous             | Periodic spikes       |
+| Complexity      | Higher                 | Lower                 |
+| Cost            | Higher                 | Lower                 |
+| Use Cases       | Fraud detection        | Daily reports         |
+|                 | Real-time alerts       | Data warehousing      |
+|                 | Live dashboards        | Complex analytics     |
++------------------+------------------------+------------------------+
+```
+
+### Data Quality Monitoring (Tableau Dashboard)
+```
+[Tableau Dashboard Layout]
++------------------------+------------------------+
+|    Quality Metrics     |    Integration Status  |
++------------------------+------------------------+
+| - Completeness         | - Success Rate        |
+| - Accuracy            | - Error Rate          |
+| - Consistency         | - Processing Time     |
+| - Timeliness         | - Resource Usage      |
++------------------------+------------------------+
+|        Data Quality Trends                     |
++-----------------------------------------------+
+| - Quality Score Over Time                      |
+| - Error Types Distribution                     |
+| - Data Volume Trends                          |
+| - Processing Time Trends                       |
++-----------------------------------------------+
+|        Integration Performance                 |
++-----------------------------------------------+
+| - Throughput                                  |
+| - Latency                                     |
+| - Resource Utilization                        |
+| - Cost Metrics                                |
++-----------------------------------------------+
+```
+
+### Core Functions
+- **Data Consolidation**:
+  * Merging data from multiple sources
+  * Resolving format differences
+  * Handling schema variations
+  * Maintaining data relationships
+
+### Key Challenges
+- **Data Quality**:
+  * Inconsistent formats
+  * Missing values
+  * Duplicate records
+  * Conflicting information
+
+### Business Impact
+- **Decision Making**:
+  * 360-degree view of business
+  * Real-time insights
+  * Historical analysis
+  * Predictive modeling
+
+### Technical Considerations
+- **Performance**:
+  * Processing efficiency
+  * Resource utilization
+  * Scalability requirements
+  * Response time targets
+
+### Implementation Approaches
+- **Batch Processing**:
+  * Scheduled data loads
+  * Bulk transformations
+  * Historical data processing
+  * Resource optimization
+
+- **Real-time Processing**:
+  * Stream processing
+  * Event-driven integration
+  * Immediate updates
+  * Low-latency requirements
+
+### Quality Assurance
+- **Data Validation**:
+  * Schema validation
+  * Business rule checking
+  * Referential integrity
+  * Format standardization
+
+### Monitoring and Maintenance
+- **System Health**:
+  * Performance metrics
+  * Error tracking
+  * Resource monitoring
+  * SLA compliance
 
 ## Data Source Integration 🔌
 
@@ -55,6 +163,38 @@ class APIIntegrator:
 ```
 
 ### 2. File Integration
+
+File integration is a fundamental aspect of data engineering, dealing with various file formats and storage systems. Here's what you need to consider:
+
+#### Supported Formats
+- **Structured**:
+  * CSV (Comma Separated Values)
+  * Excel (XLSX/XLS)
+  * JSON (JavaScript Object Notation)
+  * Parquet (Columnar Storage)
+
+#### Performance Considerations
+- **File Size**:
+  * Chunked reading
+  * Memory management
+  * Parallel processing
+  * Compression handling
+
+#### Data Quality
+- **Format Validation**:
+  * Schema checking
+  * Data type verification
+  * Encoding handling
+  * Header validation
+
+#### Best Practices
+- **Error Handling**:
+  * File not found
+  * Permission issues
+  * Corrupt files
+  * Format mismatches
+
+Here's a robust implementation:
 
 ```python
 class FileIntegrator:
@@ -124,7 +264,58 @@ class DatabaseIntegrator:
 
 ## Data Transformation 🔄
 
+Data transformation is a critical phase in data integration that involves converting data from source formats to target formats while ensuring data quality and consistency.
+
+### Key Transformation Types
+- **Structure Transformations**:
+  * Schema mapping
+  * Data type conversions
+  * Denormalization/Normalization
+  * Aggregations
+
+- **Content Transformations**:
+  * Data cleansing
+  * Value standardization
+  * Unit conversions
+  * Encoding changes
+
+- **Semantic Transformations**:
+  * Business rule application
+  * Derived calculations
+  * Lookup operations
+  * Data enrichment
+
 ### 1. Schema Mapping
+
+Schema mapping is the process of creating relationships between source and target data models. Key considerations include:
+
+#### Mapping Types
+- **One-to-One**:
+  * Direct field mappings
+  * Name standardization
+  * Type alignment
+  * Format consistency
+
+- **One-to-Many**:
+  * Data splitting
+  * Array expansion
+  * Nested structure handling
+  * Relationship preservation
+
+- **Many-to-One**:
+  * Data aggregation
+  * Field combination
+  * Value concatenation
+  * Logic application
+
+#### Best Practices
+- **Documentation**:
+  * Mapping documentation
+  * Transformation rules
+  * Business logic
+  * Data lineage
+
+Here's a comprehensive implementation:
 
 ```python
 from typing import Dict, List
