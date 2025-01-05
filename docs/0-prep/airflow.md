@@ -11,7 +11,7 @@ Apache Airflow is a platform to programmatically author, schedule, and monitor w
 
 ## Installation Options
 
-### Option 1: Using pip (Recommended for Development)
+### Option 1: Using uv (Recommended for Development)
 
 ```bash
 # Create a new directory for airflow
