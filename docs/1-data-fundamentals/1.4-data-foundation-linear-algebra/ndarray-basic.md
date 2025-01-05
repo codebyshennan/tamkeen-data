@@ -1,171 +1,259 @@
-# ndarray Basic
+# NumPy Array Basics: Math Magic! ✨
 
-## Arithmetic with ndarrays
+## Arithmetic with Arrays 🧮
 
-Arithmetic operations are applied as batch operations on arrays without any `for` loops. This is called _vectorization_. Any arithmetic operations between equal-size arrays applies the operation element-wise.
+Ever wished you could do math on entire lists at once? With NumPy arrays, you can! This is called _vectorization_ - it's like having a calculator that works on all numbers simultaneously. Imagine you're:
+- 📊 Calculating sales tax on thousands of prices
+- 📈 Converting temperatures from Celsius to Fahrenheit
+- 💰 Computing compound interest on multiple investments
+- 📏 Scaling measurements from inches to centimeters
+
+Instead of writing loops, NumPy lets you perform these operations in one go!
+
+{% stepper %}
+{% step %}
+### Basic Math Operations
+```python
+import numpy as np
+
+# Create a 2D array (think of it as a table of numbers)
+arr = np.array([
+    [1.0, 2.0, 3.0],  # First row
+    [4.0, 5.0, 6.0]   # Second row
+])
+
+# Basic arithmetic operations
+print("Original array:")
+print(arr)
+
+print("\nAddition (add 10 to everything):")
+print(arr + 10)  # Every number gets 10 added to it
+
+print("\nMultiplication (multiply everything by 2):")
+print(arr * 2)   # Every number gets doubled
+
+print("\nPower (square everything):")
+print(arr ** 2)  # Every number gets squared
+
+print("\nDivision (divide everything by 2):")
+print(arr / 2)   # Every number gets halved
+
+# More complex operations
+print("\nSquare root of every number:")
+print(np.sqrt(arr))
+
+print("\nExponential (e^x) of every number:")
+print(np.exp(arr))
+```
+
+Real-world example - Converting temperatures:
+```python
+# Temperatures in Celsius
+celsius = np.array([0, 15, 30, 45])
+
+# Convert to Fahrenheit: F = (C × 9/5) + 32
+fahrenheit = (celsius * 9/5) + 32
+
+print("Celsius:", celsius)
+print("Fahrenheit:", fahrenheit)
+```
+{% endstep %}
+
+{% step %}
+### How It Works
+```
+Original Array:     Operation:      Result:
+┌─────────────┐     Multiply      ┌─────────────┐
+│ 1  2  3     │       ×          │ 1  4  9     │
+│ 4  5  6     │     itself       │ 16 25 36    │
+└─────────────┘                   └─────────────┘
+```
+{% endstep %}
+{% endstepper %}
 
 ![vectorization](./assets/vectorization.png)
 
-```python
-arr = np.array([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]])
-arr
-```
+## Broadcasting: The Shape-Shifter! 🔄
+
+{% stepper %}
+{% step %}
+### What is Broadcasting?
+It's NumPy's superpower to make arrays of different shapes work together! Think of it as NumPy automatically copying smaller arrays to match bigger ones.
 
 ```python
-arr * arr
+# Original 2D array
+arr = np.array([
+    [1.0, 2.0, 3.0],
+    [4.0, 5.0, 6.0]
+])
+
+# Add [1, 1, 1] to each row
+print(arr + np.array([1, 1, 1]))
+# Result:
+# [[2. 3. 4.]
+#  [5. 6. 7.]]
 ```
+{% endstep %}
 
-```python
-arr - arr
-```
-
-Broadcasting is another powerful feature of Numpy. It describes how arithmetic works between arrays of different shapes. For example, you can think of the smaller array (or scalar value) being replicated multiple times to match the shape of the larger array.
-
-```python
-arr + np.array([1, 1, 1])
-```
-
-Here, `[1, 1, 1]` is stretched or broadcasted across the larger array `arr` so that it matches the shape.
-
+{% step %}
+### Magic with Numbers
 ```python
 arr1 = np.array([1, 2, 3, 4])
+
+# Add 4 to everything
+print(arr1 + 4)  # [5, 6, 7, 8]
+
+# Square everything
+print(arr1 ** 2)  # [1, 4, 9, 16]
+
+# Divide 1 by everything
+print(1 / arr1)  # [1.0, 0.5, 0.33, 0.25]
 ```
+{% endstep %}
 
-```python
-arr1 + 4
+{% step %}
+### How Broadcasting Works
 ```
+Array:     Number:     Result:
+[1 2 3]  +    4    =  [1+4 2+4 3+4]
+                      [5   6   7  ]
 
-4 becomes `[4, 4, 4, 4]` beneath the hood, then arithmetic happens element-wise.
-
-```python
-arr1**2
+NumPy automatically turns 4 into [4 4 4]!
 ```
+{% endstep %}
+{% endstepper %}
 
+## Comparing Arrays 🔍
+
+{% stepper %}
+{% step %}
+### Array Comparisons
 ```python
-1 / arr1
+arr2 = np.array([[0.0, 4.0, 1.0],
+                 [7.0, 2.0, 12.0]])
+
+# Compare arrays
+print(arr2 > arr)
+# Result:
+# [[False  True False]
+#  [ True False  True]]
 ```
+{% endstep %}
 
-To find out more about broadcasting, check out the [official documentation](https://numpy.org/doc/stable/user/basics.broadcasting.html).
-
-Comparison between arrays of the same size yields boolean arrays.
-
-```python
-arr2 = np.array([[0.0, 4.0, 1.0], [7.0, 2.0, 12.0]])
-arr2
+{% step %}
+### Understanding the Result
 ```
-
-```python
-arr2 > arr
+Array 1:     Compare:    Array 2:     Result:
+┌─────────┐     >      ┌─────────┐  ┌─────────┐
+│ 1  2  3 │            │ 0  4  1 │  │ F  T  F │
+│ 4  5  6 │            │ 7  2  12│  │ T  F  T │
+└─────────┘            └─────────┘  └─────────┘
 ```
+{% endstep %}
+{% endstepper %}
 
-## Indexing and Slicing
+## Indexing and Slicing: Array Surgery 🔪
 
-Indexing and slicing allow you to select subsets of array data.
-
-One-dimensional arrays are simple; on the surface, they act similarly to Python lists.
-
+{% stepper %}
+{% step %}
+### Basic Indexing (1D Arrays)
 ```python
+# Create array [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 arr = np.arange(10)
-arr
+
+# Get single element
+print(arr[5])      # 5
+
+# Get a range
+print(arr[5:8])    # [5 6 7]
 ```
+{% endstep %}
 
-Indexing to select a single element.
-
+{% step %}
+### Changing Values
 ```python
-arr[5]
-```
-
-Slicing to select a range of elements.
-
-```python
-arr[5:8]
-```
-
-You can also assign a value to it, which will be propagated to the entire selection.
-
-```python
+# Change a range to 12
 arr[5:8] = 12
-arr
-```
+print(arr)  # [0 1 2 3 4 12 12 12 8 9]
 
-Array slices are views on the original array. This means that the data is not copied, and any modifications to the view will be reflected in the source array (in-place).
-
-```python
+# Views share memory!
 arr_slice = arr[5:8]
-arr_slice
-```
-
-```python
 arr_slice[1] = 10
-arr
+print(arr)  # [0 1 2 3 4 12 10 12 8 9]
 ```
+{% endstep %}
 
-The "bare" slice `[:]` will assign to all values in an array.
+{% step %}
+### Understanding Slices
+```
+Index:  0  1  2  3  4  5  6  7  8  9
+Array: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                     ↑        ↑
+                   start     end
+       arr[5:8] gets elements 5,6,7
+```
+{% endstep %}
+{% endstepper %}
 
+## 2D Array Access: Matrix Magic! 🎯
+
+{% stepper %}
+{% step %}
+### Creating a 2D Array
 ```python
-arr_slice[:] = 64
-arr
+arr2d = np.array([
+    [1, 2, 3],  # Row 0
+    [4, 5, 6],  # Row 1
+    [7, 8, 9]   # Row 2
+])
 ```
+{% endstep %}
 
-In a two-dimensional array, the elements at each index are no longer scalars but rather one-dimensional arrays.
-
+{% step %}
+### Getting Elements
 ```python
-arr2d = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
-arr2d[1]
+# Get a row
+print(arr2d[1])     # [4 5 6]
+
+# Get single element
+print(arr2d[1, 2])  # 6 (row 1, column 2)
+print(arr2d[1][2])  # Same thing!
 ```
+{% endstep %}
 
-You can index it "twice" to get individual elements. These two expressions are equivalent.
-
+{% step %}
+### Slicing 2D Arrays
 ```python
-arr2d[1][2]
-```
+# First two rows
+print(arr2d[:2])
+# [[1 2 3]
+#  [4 5 6]]
 
-```python
-arr2d[1, 2]
+# First two rows, skip first column
+print(arr2d[:2, 1:])
+# [[2 3]
+#  [5 6]]
 ```
+{% endstep %}
 
-For 2D array indexing, the syntax is `arr2d[row_index, col_index]` or `arr2d[axis_0_index, axis_1_index]`. Think of axis 0 as the "rows" of the array and axis 1 as the "columns."
+{% step %}
+### Visual Guide
+```
+       Columns (axis 1)
+       0   1   2
+Rows  ┌───────────┐
+(axis │ 1  2  3   │ Row 0
+ 0)   │ 4  5  6   │ Row 1
+      │ 7  8  9   │ Row 2
+      └───────────┘
+```
+{% endstep %}
+{% endstepper %}
 
 ![2d_array_indexing](./assets/ndarray_axis_index.png)
 
-To slice out the first two rows of the `arr2d` array, you can pass `[:2]` as the row index.
-
-```python
-arr2d[:2]
-```
-
-You can pass multiple slices just like you can pass multiple indexes:
-
-```python
-arr2d[:2, 1:]
-```
-
-You can mix indexing and slicing.
-
-```python
-arr2d[1, :2]
-```
-
-Passing a slice with `:` means to select the entire axis. To select the first column:
-
-```python
-arr2d[:, :1]  # or arr2d[:, 0]
-```
-
-Check the shape:
-
-```python
-arr2d[:, :1].shape
-```
-
-To select the first row:
-
-```python
-arr2d[:1, :]  # or arr2d[0, :]
-```
-
-Check the shape:
-
-```python
-arr2d[:1, :].shape
-```
+💡 **Pro Tips**:
+- Use `:` to select everything in that dimension
+- Remember: `[row, column]` order
+- Slices create views (changes affect original)
+- Think of 2D arrays like spreadsheets!

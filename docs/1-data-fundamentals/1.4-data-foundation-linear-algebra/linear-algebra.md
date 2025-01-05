@@ -1,63 +1,218 @@
-# Linear Algebra
+# Linear Algebra: Matrix Magic! ✨
 
-## Unique and Other Set Logic
+## Set Operations: Finding Unique Values! 🎯
 
-You can use `unique` to return a sorted array of unique values.
+{% stepper %}
+{% step %}
+### Finding Unique Values
+Like finding unique cards in a deck! Set operations are crucial for:
+- 🔍 Data cleaning (removing duplicates)
+- 📊 Feature engineering (unique categories)
+- 🎯 Finding distinct values
+- 🔄 Comparing datasets
 
+Real-world applications:
+- 📝 Finding unique customer IDs
+- 🏷️ Extracting unique product categories
+- 📊 Identifying unique transaction types
+- 🌍 Finding unique locations in data
 ```python
+import numpy as np
+
+# Array with duplicates
 names = np.array(["Bob", "Will", "Joe", "Bob", "Will", "Joe", "Joe"])
-np.unique(names)
-```
 
+# Get unique values and their counts
+unique_names, counts = np.unique(names, return_counts=True)
+print("Unique names:", unique_names)
+print("Counts:", counts)
+# Shows how many times each name appears
+
+# Numbers work too!
+numbers = np.array([3, 3, 3, 2, 2, 1, 1, 4, 4])
+unique_nums, counts = np.unique(numbers, return_counts=True)
+print("\nUnique numbers:", unique_nums)
+print("Counts:", counts)
+
+# Real-world example - Sales data
+sales_data = np.array([
+    ['Electronics', 100],
+    ['Books', 50],
+    ['Electronics', 75],
+    ['Clothing', 60],
+    ['Books', 45]
+])
+unique_categories = np.unique(sales_data[:, 0])  # Get unique product categories
+print("\nUnique product categories:", unique_categories)
+```
+{% endstep %}
+
+{% step %}
+### Testing Membership
+Like checking if someone's on the guest list!
 ```python
-np.unique(np.array([3, 3, 3, 2, 2, 1, 1, 4, 4]))
+# Guest list scenario
+guests = np.array([1, 2, 3, 4, 5])  # Authorized IDs
+to_check = np.array([2, 3, 6])      # IDs to verify
+
+# Check membership
+is_authorized = np.in1d(to_check, guests)
+print("Authorization check:", is_authorized)
+print("Authorized IDs:", to_check[is_authorized])
+print("Unauthorized IDs:", to_check[~is_authorized])
+
+# Real-world example - Product inventory
+inventory = np.array(['SKU001', 'SKU002', 'SKU003', 'SKU004'])
+orders = np.array(['SKU002', 'SKU005', 'SKU001'])
+
+# Check which orders can be fulfilled
+can_fulfill = np.in1d(orders, inventory)
+print("\nOrder fulfillment check:")
+print("Can fulfill:", orders[can_fulfill])
+print("Out of stock:", orders[~can_fulfill])
 ```
+{% endstep %}
+{% endstepper %}
 
-`in1d` tests membership of the values in one array in another, returning a boolean array.
+## Matrix Multiplication: The Dance of Numbers! 💃
 
+{% stepper %}
+{% step %}
+### What is Matrix Multiplication?
+Think of it like a special dance between numbers:
 ```python
-np.in1d([2, 3, 6], [1, 2, 3, 4, 5])
+# First matrix (2 rows, 3 columns)
+x = np.array([
+    [1, 2, 3],
+    [4, 5, 6]
+])
+
+# Second matrix (3 rows, 2 columns)
+y = np.array([
+    [6, 23],
+    [-1, 7],
+    [8, 9]
+])
+
+# Let them dance!
+result = x @ y  # or np.dot(x, y)
+print(result)
 ```
+{% endstep %}
 
-Refer to the [official documentation](https://numpy.org/doc/stable/reference/routines.set.html) for more set operations.
+{% step %}
+### Visual Guide to Matrix Multiplication
+```
+Matrix 1:      Matrix 2:      Result:
+┌─────────┐    ┌───────┐     ┌───────┐
+│ 1 2 3   │    │ 6  23 │     │ 28 84 │
+│ 4 5 6   │  × │-1   7 │  =  │ 73 210│
+└─────────┘    │ 8   9 │     └───────┘
+               └───────┘
 
-> Search for a set function that finds the common values between two arrays.
-> Run it on `x` and `y` arrays below.
+First element (28) = 1×6 + 2×(-1) + 3×8
+```
+{% endstep %}
 
+{% step %}
+### Three Ways to Multiply
 ```python
-x = np.array([1, 2, 3, 4, 5])
-y = np.array([3, 4, 5, 6, 7])
+# Method 1: Using @
+result1 = x @ y
+
+# Method 2: Using dot
+result2 = np.dot(x, y)
+
+# Method 3: Using matmul
+result3 = np.matmul(x, y)
+
+# All give the same result!
 ```
+{% endstep %}
+{% endstepper %}
 
-## Linear Algebra
+## Linear Algebra Operations: The Toolbox! 🧰
 
-Linear algebra operations, like matrix multiplication, decompositions, determinants, and other square matrix math, are an important part of many array libraries.
-
-Multiplying two two-dimensional arrays with `*` is an element-wise product, while matrix multiplications require either using the `dot` function or the `@` infix operator.
-
-![matrix_multiplication](./assets/matrix_multiplication.png)
-
+{% stepper %}
+{% step %}
+### Common Operations
 ```python
-x = np.array([[1, 2, 3], [4, 5, 6]])
-y = np.array([[6, 23], [-1, 7], [8, 9]])
+# Create a 2x2 matrix
+a = np.array([[1, 2],
+              [3, 4]])
 
-x.dot(y)
+# Find determinant
+det = np.linalg.det(a)
+print("Determinant:", det)
+
+# Find inverse
+inv = np.linalg.inv(a)
+print("Inverse:\n", inv)
+
+# Solve linear equations
+b = np.array([5, 11])
+x = np.linalg.solve(a, b)
+print("Solution:", x)
 ```
+{% endstep %}
 
-You can also use the `@` operator:
+{% step %}
+### Visual Guide to Operations
+```
+Original Matrix:   Inverse Matrix:
+┌─────┐           ┌──────────┐
+│ 1 2 │    =>     │ -2   1  │
+│ 3 4 │           │ 1.5 -0.5│
+└─────┘           └──────────┘
 
+Solving equations:
+1x + 2y = 5
+3x + 4y = 11
+Solution: x = 1, y = 2
+```
+{% endstep %}
+{% endstepper %}
+
+## Matrix Properties: Getting to Know Your Data! 📊
+
+{% stepper %}
+{% step %}
+### Finding Matrix Properties
 ```python
-x @ y
+matrix = np.array([[1, 2, 3],
+                   [4, 5, 6]])
+
+# Shape
+print("Shape:", matrix.shape)  # (2, 3)
+
+# Rank
+print("Rank:", np.linalg.matrix_rank(matrix))
+
+# Trace (sum of diagonal elements)
+square_matrix = np.array([[1, 2],
+                         [3, 4]])
+print("Trace:", np.trace(square_matrix))
 ```
+{% endstep %}
 
-Or the `dot` function:
-
+{% step %}
+### Eigenvalues and Eigenvectors
 ```python
-np.dot(x, y)
-```
+# For square matrices only
+square = np.array([[4, -2],
+                   [1, 1]])
 
-Refer to the [official documentation](https://numpy.org/doc/stable/reference/routines.linalg.html) for more linear algebra operations.
-
-```python
-a = np.array([[1, 2], [3, 4]])
+# Get eigenvalues and eigenvectors
+eigenvals, eigenvecs = np.linalg.eig(square)
+print("Eigenvalues:", eigenvals)
+print("Eigenvectors:\n", eigenvecs)
 ```
+{% endstep %}
+{% endstepper %}
+
+💡 **Pro Tips**:
+- Use `@` for matrix multiplication - it's cleaner!
+- Check matrix shapes before multiplying
+- Remember: not all matrices have inverses
+- Use `np.linalg` for advanced operations
+- Think about what operation makes sense for your data
