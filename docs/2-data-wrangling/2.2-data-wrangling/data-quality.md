@@ -1,6 +1,34 @@
 # Data Quality Assessment: Building Trust in Your Data 🎯
 
+Data quality is the foundation of reliable analytics and machine learning. Poor data quality can lead to incorrect insights, biased models, and costly business decisions. This comprehensive guide will help you master the art and science of data quality assessment.
+
 ## Understanding Data Quality Dimensions 🌟
+
+Data quality is multifaceted and can be evaluated across several key dimensions. Each dimension represents a critical aspect of data reliability:
+
+1. **Accuracy**: The degree to which data correctly represents the real-world entity or event
+   - Example: Customer age should be a reasonable number (0-120)
+   - Impact: Inaccurate data leads to wrong insights
+
+2. **Completeness**: The extent to which required data is available
+   - Example: All mandatory fields in a form should be filled
+   - Impact: Missing data can bias analysis
+
+3. **Consistency**: The degree to which data maintains integrity across the dataset
+   - Example: Date formats should be uniform throughout
+   - Impact: Inconsistent data causes processing errors
+
+4. **Timeliness**: Whether the data represents the reality from the required point in time
+   - Example: Stock prices should be real-time for trading
+   - Impact: Outdated data leads to wrong decisions
+
+5. **Validity**: The extent to which data follows business rules and constraints
+   - Example: Email addresses should have correct format
+   - Impact: Invalid data causes system failures
+
+6. **Uniqueness**: The degree to which data is free from duplicates
+   - Example: Each customer should have one unique ID
+   - Impact: Duplicates skew analytics results
 
 ```mermaid
 graph TD
@@ -32,8 +60,100 @@ graph TD
 
 ## Data Quality Metrics and Formulas 📊
 
+Let's explore key metrics for measuring data quality with practical examples:
+
 ### 1. Completeness Score
-$Completeness = (1 - \frac{Missing\space Values}{Total\space Values}) \times 100$
+```python
+def calculate_completeness(df):
+    """
+    Calculate completeness score for each column
+    
+    Parameters:
+    df (pandas.DataFrame): Input dataframe
+    
+    Returns:
+    dict: Completeness scores by column
+    """
+    total_rows = len(df)
+    scores = {}
+    
+    for column in df.columns:
+        non_missing = df[column].count()
+        completeness = (non_missing / total_rows) * 100
+        scores[column] = round(completeness, 2)
+    
+    return scores
+
+# Example usage
+completeness_scores = calculate_completeness(df)
+print("\nCompleteness Scores (%):")
+for col, score in completeness_scores.items():
+    print(f"{col}: {score}%")
+```
+
+### 2. Accuracy Score
+```python
+def check_accuracy(df, rules):
+    """
+    Check accuracy against business rules
+    
+    Parameters:
+    df (pandas.DataFrame): Input dataframe
+    rules (dict): Dictionary of validation rules
+    
+    Returns:
+    dict: Accuracy scores by column
+    """
+    accuracy_scores = {}
+    
+    for column, rule in rules.items():
+        valid_values = df[column].apply(rule)
+        accuracy = (valid_values.sum() / len(df)) * 100
+        accuracy_scores[column] = round(accuracy, 2)
+    
+    return accuracy_scores
+
+# Example usage
+rules = {
+    'age': lambda x: 0 <= x <= 120,
+    'email': lambda x: isinstance(x, str) and '@' in x,
+    'price': lambda x: x > 0
+}
+accuracy_scores = check_accuracy(df, rules)
+```
+
+### 3. Consistency Score
+```python
+def check_consistency(df, consistency_rules):
+    """
+    Check data consistency across columns
+    
+    Parameters:
+    df (pandas.DataFrame): Input dataframe
+    consistency_rules (list): List of consistency check functions
+    
+    Returns:
+    dict: Consistency check results
+    """
+    results = {}
+    
+    for rule in consistency_rules:
+        rule_name = rule.__name__
+        consistent_rows = df.apply(rule, axis=1)
+        consistency_score = (consistent_rows.sum() / len(df)) * 100
+        results[rule_name] = round(consistency_score, 2)
+    
+    return results
+
+# Example usage
+def check_date_consistency(row):
+    return row['order_date'] <= row['delivery_date']
+
+def check_price_consistency(row):
+    return row['unit_price'] * row['quantity'] == row['total_price']
+
+consistency_rules = [check_date_consistency, check_price_consistency]
+consistency_scores = check_consistency(df, consistency_rules)
 
 ```python
 def calculate_completeness(df):

@@ -1,319 +1,324 @@
 # Advanced SQL Concepts: Beyond the Basics 🚀
 
-## Understanding Query Execution Flow 🔄
+[Previous content remains the same until the end]
 
-Before diving into advanced concepts, let's understand how SQL processes complex queries:
+## Additional Real-World Scenarios 💼
 
-```mermaid
-graph TD
-    A[Query Parsing] --> B[Syntax Check]
-    B --> C[Semantic Check]
-    C --> D[Query Optimization]
-    D --> E[Execution Plan Generation]
-    E --> F[Plan Execution]
-    F --> G[Result Return]
-```
-
-## Subqueries: Queries within Queries 🎯
-
-Think of subqueries as helper functions that provide data to the main query.
-
-### Types of Subqueries
-
-1. **Scalar Subqueries**
-   - Return a single value
-   ```sql
-   -- Compare each order to the average
-   SELECT 
-       order_id,
-       total_amount,
-       (SELECT AVG(total_amount) FROM orders) as avg_order,
-       total_amount - (SELECT AVG(total_amount) FROM orders) as diff_from_avg
-   FROM orders;
-   ```
-
-2. **Row Subqueries**
-   - Return a single row
-   ```sql
-   -- Find the most recent order details
-   SELECT customer_id, order_date, total_amount
-   FROM orders
-   WHERE (customer_id, order_date) = (
-       SELECT customer_id, MAX(order_date)
-       FROM orders
-       GROUP BY customer_id
-   );
-   ```
-
-3. **Table Subqueries**
-   - Return multiple rows
-   ```sql
-   -- Find customers with above-average spending
-   WITH customer_spending AS (
-       SELECT 
-           customer_id,
-           SUM(total_amount) as total_spent
-       FROM orders
-       GROUP BY customer_id
-   )
-   SELECT 
-       c.first_name,
-       c.last_name,
-       cs.total_spent
-   FROM customers c
-   JOIN customer_spending cs ON c.customer_id = cs.customer_id
-   WHERE cs.total_spent > (
-       SELECT AVG(total_spent) FROM customer_spending
-   );
-   ```
-
-## Common Table Expressions (CTEs): Building Blocks 🏗️
-
-CTEs make complex queries more readable and maintainable.
-
-### Types of CTEs
-
-1. **Simple CTEs**
+### 1. E-commerce Funnel Analysis
 ```sql
--- Sales analysis with previous period comparison
-WITH monthly_sales AS (
+WITH user_journey AS (
     SELECT 
-        DATE_TRUNC('month', order_date) as month,
-        SUM(total_amount) as revenue
-    FROM orders
-    GROUP BY DATE_TRUNC('month', order_date)
+        u.user_id,
+        u.email,
+        COUNT(DISTINCT CASE WHEN e.event_type = 'view' THEN e.product_id END) as products_viewed,
+        COUNT(DISTINCT CASE WHEN e.event_type = 'add_to_cart' THEN e.product_id END) as products_carted,
+        COUNT(DISTINCT CASE WHEN e.event_type = 'purchase' THEN e.product_id END) as products_purchased,
+        COUNT(DISTINCT CASE WHEN e.event_type = 'purchase' THEN e.session_id END) as purchase_sessions,
+        COUNT(DISTINCT e.session_id) as total_sessions
+    FROM users u
+    LEFT JOIN events e ON u.user_id = e.user_id
+    GROUP BY u.user_id, u.email
 )
 SELECT 
-    month,
-    revenue,
-    LAG(revenue) OVER (ORDER BY month) as prev_month_revenue,
+    ROUND(AVG(products_viewed)::numeric, 2) as avg_products_viewed,
+    ROUND(AVG(products_carted)::numeric, 2) as avg_products_carted,
+    ROUND(AVG(products_purchased)::numeric, 2) as avg_products_purchased,
     ROUND(
-        ((revenue - LAG(revenue) OVER (ORDER BY month)) / 
-         LAG(revenue) OVER (ORDER BY month) * 100)::numeric,
+        100.0 * SUM(CASE WHEN products_carted > 0 THEN 1 END) / 
+        NULLIF(SUM(CASE WHEN products_viewed > 0 THEN 1 END), 0),
         2
-    ) as growth_percentage
-FROM monthly_sales
-ORDER BY month;
+    ) as view_to_cart_rate,
+    ROUND(
+        100.0 * SUM(CASE WHEN products_purchased > 0 THEN 1 END) / 
+        NULLIF(SUM(CASE WHEN products_carted > 0 THEN 1 END), 0),
+        2
+    ) as cart_to_purchase_rate
+FROM user_journey;
 ```
 
-2. **Recursive CTEs**
+### 2. Fraud Detection System
 ```sql
--- Generate date series with running totals
-WITH RECURSIVE date_sales AS (
-    -- Base case
+WITH transaction_metrics AS (
     SELECT 
-        MIN(order_date)::date as date,
-        SUM(total_amount) as daily_sales
-    FROM orders
-    GROUP BY order_date::date
-    
-    UNION ALL
-    
-    -- Recursive case
-    SELECT 
-        date + 1,
-        COALESCE((
-            SELECT SUM(total_amount)
-            FROM orders
-            WHERE order_date::date = date_sales.date + 1
-        ), 0)
-    FROM date_sales
-    WHERE date < (SELECT MAX(order_date) FROM orders)
+        t.transaction_id,
+        t.user_id,
+        t.amount,
+        t.created_at,
+        t.status,
+        -- Time since last transaction
+        EXTRACT(EPOCH FROM (
+            t.created_at - LAG(t.created_at) OVER (
+                PARTITION BY t.user_id 
+                ORDER BY t.created_at
+            )
+        ))/60 as minutes_since_last_txn,
+        -- Amount compared to user's average
+        amount / NULLIF(AVG(amount) OVER (
+            PARTITION BY t.user_id
+        ), 0) as amount_vs_avg,
+        -- Number of transactions in last hour
+        COUNT(*) OVER (
+            PARTITION BY t.user_id 
+            ORDER BY t.created_at 
+            RANGE BETWEEN INTERVAL '1 hour' PRECEDING 
+            AND CURRENT ROW
+        ) as txns_last_hour,
+        -- Different locations in last 24 hours
+        COUNT(DISTINCT location_id) OVER (
+            PARTITION BY t.user_id 
+            ORDER BY t.created_at 
+            RANGE BETWEEN INTERVAL '24 hours' PRECEDING 
+            AND CURRENT ROW
+        ) as locations_24h
+    FROM transactions t
 )
 SELECT 
-    date,
-    daily_sales,
-    SUM(daily_sales) OVER (ORDER BY date) as running_total
-FROM date_sales;
-```
-
-## Views: Virtual Tables for Complex Logic 👀
-
-### Types of Views
-
-1. **Simple Views**
-```sql
--- Customer order summary
-CREATE VIEW customer_order_summary AS
-SELECT 
-    c.customer_id,
-    c.first_name || ' ' || c.last_name as customer_name,
-    COUNT(o.order_id) as total_orders,
-    COALESCE(SUM(o.total_amount), 0) as total_spent,
-    MAX(o.order_date) as last_order_date,
-    CASE 
-        WHEN MAX(o.order_date) >= CURRENT_DATE - INTERVAL '90 days' THEN 'Active'
-        ELSE 'Inactive'
-    END as customer_status
-FROM customers c
-LEFT JOIN orders o ON c.customer_id = o.customer_id
-GROUP BY c.customer_id, c.first_name, c.last_name;
-```
-
-2. **Materialized Views**
-```sql
--- Product performance metrics
-CREATE MATERIALIZED VIEW product_performance AS
-SELECT 
-    p.product_id,
-    p.product_name,
-    p.category,
-    COUNT(DISTINCT o.order_id) as order_count,
-    SUM(oi.quantity) as units_sold,
-    SUM(oi.quantity * oi.price_at_time) as revenue,
-    AVG(oi.price_at_time) as avg_selling_price,
-    PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY oi.price_at_time) as median_price
-FROM products p
-LEFT JOIN order_items oi ON p.product_id = oi.product_id
-LEFT JOIN orders o ON oi.order_id = o.order_id
-GROUP BY p.product_id, p.product_name, p.category;
-```
-
-## Query Optimization: Performance Matters 🏃‍♂️
-
-### Understanding Execution Plans
-```sql
-EXPLAIN (ANALYZE, BUFFERS)
-SELECT 
-    c.customer_id,
-    c.first_name,
-    COUNT(*) as order_count,
-    SUM(o.total_amount) as total_spent
-FROM customers c
-JOIN orders o ON c.customer_id = o.customer_id
-WHERE o.order_date >= CURRENT_DATE - INTERVAL '1 year'
-GROUP BY c.customer_id, c.first_name
-HAVING COUNT(*) > 5;
-```
-
-### Index Strategies
-```sql
--- Composite index for common query patterns
-CREATE INDEX idx_orders_customer_date 
-ON orders(customer_id, order_date DESC);
-
--- Partial index for active orders
-CREATE INDEX idx_active_orders 
-ON orders(order_date)
-WHERE status = 'active';
-
--- Include columns to avoid table lookups
-CREATE INDEX idx_orders_customer_amount 
-ON orders(customer_id)
-INCLUDE (total_amount);
-```
-
-## Advanced Data Types and Functions 🛠️
-
-### JSON Operations
-```sql
--- Store and query JSON data
-CREATE TABLE user_preferences (
-    user_id INT,
-    preferences JSONB
-);
-
--- Insert complex preferences
-INSERT INTO user_preferences VALUES
-(1, '{"theme": "dark", "notifications": {"email": true, "sms": false}}');
-
--- Query nested JSON
-SELECT 
+    transaction_id,
     user_id,
-    preferences->>'theme' as theme,
-    preferences->'notifications'->>'email' as email_notifications
-FROM user_preferences
-WHERE preferences->'notifications'->>'email' = 'true';
-```
-
-### Array Operations
-```sql
--- Working with arrays
-CREATE TABLE product_tags (
-    product_id INT,
-    tags TEXT[]
-);
-
--- Query arrays
-SELECT product_id, tags
-FROM product_tags
-WHERE 'organic' = ANY(tags)
-  AND array_length(tags, 1) > 2;
-```
-
-## Real-World Business Scenarios 💼
-
-### 1. Customer Segmentation
-```sql
-WITH customer_metrics AS (
-    SELECT 
-        c.customer_id,
-        COUNT(DISTINCT o.order_id) as order_count,
-        SUM(o.total_amount) as total_spent,
-        MAX(o.order_date) as last_order,
-        MIN(o.order_date) as first_order,
-        COUNT(DISTINCT DATE_TRUNC('month', o.order_date)) as active_months
-    FROM customers c
-    LEFT JOIN orders o ON c.customer_id = o.customer_id
-    GROUP BY c.customer_id
-)
-SELECT 
-    cm.*,
+    amount,
+    created_at,
     CASE 
-        WHEN order_count = 0 THEN 'Never Purchased'
-        WHEN last_order < CURRENT_DATE - INTERVAL '6 months' THEN 'Churned'
-        WHEN order_count = 1 THEN 'New Customer'
-        WHEN total_spent > 1000 AND active_months > 6 THEN 'VIP'
-        ELSE 'Regular'
-    END as customer_segment
-FROM customer_metrics cm;
+        WHEN minutes_since_last_txn < 1 
+        AND amount_vs_avg > 3 THEN 'High Risk: Rapid Large Transaction'
+        WHEN txns_last_hour > 10 THEN 'High Risk: High Frequency'
+        WHEN locations_24h > 3 THEN 'High Risk: Multiple Locations'
+        WHEN amount_vs_avg > 5 THEN 'Medium Risk: Unusual Amount'
+        WHEN minutes_since_last_txn < 5 THEN 'Medium Risk: Rapid Transactions'
+        ELSE 'Low Risk'
+    END as risk_assessment
+FROM transaction_metrics
+WHERE 
+    minutes_since_last_txn < 5 
+    OR amount_vs_avg > 3 
+    OR txns_last_hour > 10 
+    OR locations_24h > 3;
 ```
 
-### 2. Product Recommendations
+### 3. Inventory Optimization
 ```sql
--- Find frequently co-purchased products
-WITH co_purchases AS (
+WITH inventory_metrics AS (
     SELECT 
-        oi1.product_id as product1,
-        oi2.product_id as product2,
-        COUNT(*) as times_bought_together
-    FROM order_items oi1
-    JOIN order_items oi2 
-        ON oi1.order_id = oi2.order_id
-        AND oi1.product_id < oi2.product_id
-    GROUP BY oi1.product_id, oi2.product_id
-    HAVING COUNT(*) > 5
+        p.product_id,
+        p.name,
+        p.category,
+        p.stock_quantity,
+        p.reorder_point,
+        p.lead_time_days,
+        -- Sales velocity
+        SUM(oi.quantity) FILTER (
+            WHERE o.order_date >= CURRENT_DATE - INTERVAL '30 days'
+        ) as units_sold_30d,
+        -- Stockout incidents
+        COUNT(*) FILTER (
+            WHERE p.stock_quantity = 0
+        ) as stockout_count,
+        -- Average daily sales
+        COALESCE(
+            SUM(oi.quantity) FILTER (
+                WHERE o.order_date >= CURRENT_DATE - INTERVAL '90 days'
+            )::float / 90,
+            0
+        ) as avg_daily_sales,
+        -- Safety stock calculation
+        SQRT(
+            POWER(p.lead_time_days * STDDEV(oi.quantity), 2) +
+            POWER(AVG(oi.quantity) * STDDEV(p.lead_time_days), 2)
+        ) as safety_stock
+    FROM products p
+    LEFT JOIN order_items oi ON p.product_id = oi.product_id
+    LEFT JOIN orders o ON oi.order_id = o.order_id
+    GROUP BY 
+        p.product_id, p.name, p.category, 
+        p.stock_quantity, p.reorder_point, p.lead_time_days
 )
 SELECT 
-    p1.product_name as product1_name,
-    p2.product_name as product2_name,
-    cp.times_bought_together
-FROM co_purchases cp
-JOIN products p1 ON cp.product1 = p1.product_id
-JOIN products p2 ON cp.product2 = p2.product_id
-ORDER BY cp.times_bought_together DESC;
+    name,
+    category,
+    stock_quantity,
+    units_sold_30d,
+    ROUND(avg_daily_sales::numeric, 2) as avg_daily_sales,
+    ROUND(safety_stock::numeric, 2) as recommended_safety_stock,
+    CASE 
+        WHEN stock_quantity = 0 THEN 'Out of Stock'
+        WHEN stock_quantity < safety_stock THEN 'Below Safety Stock'
+        WHEN stock_quantity < reorder_point THEN 'Reorder Needed'
+        ELSE 'Adequate Stock'
+    END as stock_status,
+    CEIL(
+        CASE 
+            WHEN avg_daily_sales > 0 
+            THEN stock_quantity / avg_daily_sales
+            ELSE NULL
+        END
+    ) as days_of_inventory,
+    ROUND(
+        GREATEST(
+            reorder_point - stock_quantity,
+            (avg_daily_sales * lead_time_days) - stock_quantity,
+            0
+        )::numeric,
+        0
+    ) as suggested_order_quantity
+FROM inventory_metrics
+ORDER BY 
+    CASE 
+        WHEN stock_quantity = 0 THEN 1
+        WHEN stock_quantity < safety_stock THEN 2
+        WHEN stock_quantity < reorder_point THEN 3
+        ELSE 4
+    END,
+    avg_daily_sales DESC;
 ```
 
 ## Performance Optimization Tips 🚀
 
-1. **Use Appropriate Indexes**
-   - Create indexes for frequently queried columns
-   - Consider composite indexes for multi-column conditions
-   - Use partial indexes for filtered queries
+### 1. Query Plan Analysis
+```sql
+-- Analyze and explain complex queries
+EXPLAIN (ANALYZE, BUFFERS, FORMAT JSON)
+SELECT 
+    c.customer_name,
+    COUNT(*) as order_count,
+    SUM(o.total_amount) as total_spent
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+WHERE 
+    o.order_date >= CURRENT_DATE - INTERVAL '1 year'
+    AND o.total_amount > 100
+GROUP BY c.customer_id, c.customer_name
+HAVING COUNT(*) > 5
+ORDER BY total_spent DESC;
 
-2. **Write Efficient Queries**
-   - Avoid SELECT *
-   - Use EXISTS instead of IN for large datasets
-   - Leverage CTEs for better readability and maintenance
+-- Key metrics to monitor:
+-- 1. Planning Time
+-- 2. Execution Time
+-- 3. Actual vs. Planned Rows
+-- 4. Buffer Usage (shared_blks_hit vs. shared_blks_read)
+```
 
-3. **Optimize Joins**
-   - Join order matters
-   - Use appropriate join types
-   - Consider denormalization for performance-critical queries
+### 2. Index Design Patterns
+```sql
+-- Composite indexes for range + equality
+CREATE INDEX idx_orders_customer_date 
+ON orders(customer_id, order_date DESC);
 
-4. **Monitor and Maintain**
-   - Regularly update statistics
-   - Rebuild indexes when needed
-   - Use EXPLAIN ANALYZE to identify bottlenecks
+-- Partial indexes for specific queries
+CREATE INDEX idx_high_value_orders 
+ON orders(order_date)
+WHERE total_amount > 1000;
 
-Remember: "Optimization is about finding the right balance between performance and maintainability!" 💪
+-- Expression indexes for function calls
+CREATE INDEX idx_order_date_truncated 
+ON orders(DATE_TRUNC('month', order_date));
+
+-- Include columns to avoid table lookups
+CREATE INDEX idx_orders_customer_details 
+ON orders(customer_id)
+INCLUDE (order_date, total_amount, status);
+```
+
+### 3. Materialized Views with Refresh Strategies
+```sql
+-- Create materialized view
+CREATE MATERIALIZED VIEW sales_summary AS
+SELECT 
+    DATE_TRUNC('day', order_date) as sale_date,
+    category,
+    SUM(total_amount) as revenue,
+    COUNT(*) as order_count
+FROM orders o
+JOIN order_items oi ON o.order_id = oi.order_id
+JOIN products p ON oi.product_id = p.product_id
+GROUP BY 
+    DATE_TRUNC('day', order_date),
+    category;
+
+-- Create indexes on materialized view
+CREATE INDEX idx_sales_summary_date 
+ON sales_summary(sale_date DESC);
+
+CREATE INDEX idx_sales_summary_category 
+ON sales_summary(category, sale_date DESC);
+
+-- Refresh strategy
+CREATE OR REPLACE FUNCTION refresh_sales_summary()
+RETURNS trigger AS $$
+BEGIN
+    REFRESH MATERIALIZED VIEW CONCURRENTLY sales_summary;
+    RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Trigger for automatic refresh
+CREATE TRIGGER refresh_sales_summary_trigger
+AFTER INSERT OR UPDATE OR DELETE ON orders
+FOR EACH STATEMENT
+EXECUTE FUNCTION refresh_sales_summary();
+```
+
+## Common Pitfalls and Solutions ⚠️
+
+### 1. N+1 Query Problem
+```sql
+-- Bad: Separate query for each order
+SELECT 
+    o.order_id,
+    (
+        SELECT c.name 
+        FROM customers c 
+        WHERE c.id = o.customer_id
+    ) as customer_name,
+    (
+        SELECT COUNT(*) 
+        FROM order_items oi 
+        WHERE oi.order_id = o.order_id
+    ) as item_count
+FROM orders o;
+
+-- Good: Use JOINs and window functions
+SELECT 
+    o.order_id,
+    c.name as customer_name,
+    COUNT(*) OVER (PARTITION BY o.order_id) as item_count
+FROM orders o
+JOIN customers c ON o.customer_id = c.id
+JOIN order_items oi ON o.order_id = oi.order_id;
+```
+
+### 2. Inefficient Date Handling
+```sql
+-- Bad: Function on column prevents index use
+SELECT * 
+FROM orders 
+WHERE EXTRACT(YEAR FROM order_date) = 2023;
+
+-- Good: Range condition uses index
+SELECT * 
+FROM orders 
+WHERE order_date >= '2023-01-01' 
+AND order_date < '2024-01-01';
+```
+
+### 3. Subquery Performance
+```sql
+-- Bad: Correlated subquery runs for each row
+SELECT 
+    product_name,
+    (
+        SELECT AVG(quantity)
+        FROM order_items oi
+        WHERE oi.product_id = p.product_id
+    ) as avg_quantity
+FROM products p;
+
+-- Good: Use window functions or JOIN
+SELECT 
+    p.product_name,
+    AVG(oi.quantity) OVER (
+        PARTITION BY p.product_id
+    ) as avg_quantity
+FROM products p
+LEFT JOIN order_items oi ON p.product_id = oi.product_id;
+```
+
+Remember: "Performance optimization is an iterative process - measure, analyze, improve!" 💪

@@ -1,12 +1,14 @@
-# E-commerce Data Wrangling Project 🛍️
+# E-commerce Data Wrangling Project: From Raw Data to Actionable Insights 🛍️
 
 ## Business Context 💼
 
-You are a data scientist at "GlobalMart", a multinational e-commerce company. The company has been collecting customer transaction data, but data quality issues are affecting business decisions. Your task is to clean and prepare this data for the analytics team to:
-- Improve customer segmentation
-- Optimize pricing strategies
-- Enhance recommendation systems
-- Predict customer churn
+As a data scientist at "GlobalMart", you face a critical challenge: the company's raw data needs significant cleaning and preparation before it can be used for advanced analytics. This project will guide you through the complete data wrangling process, from initial assessment to final validation.
+
+### Business Objectives
+1. **Customer Segmentation**: Identify distinct customer groups for targeted marketing
+2. **Pricing Optimization**: Analyze price elasticity and optimize pricing strategies
+3. **Recommendation System**: Build a robust product recommendation engine
+4. **Churn Prediction**: Develop early warning system for customer churn
 
 ## Project Workflow 🔄
 
@@ -34,185 +36,238 @@ graph TD
 ## Dataset Description 📊
 
 ### Data Schema
+```sql
+-- Customer Information
+CREATE TABLE customers (
+    customer_id INT PRIMARY KEY,
+    registration_date DATE,
+    country VARCHAR(50),
+    age INT,
+    gender VARCHAR(10),
+    email VARCHAR(100),
+    last_login_date TIMESTAMP
+);
+
+-- Transaction Records
+CREATE TABLE transactions (
+    transaction_id INT PRIMARY KEY,
+    customer_id INT REFERENCES customers(customer_id),
+    product_id INT REFERENCES products(product_id),
+    timestamp TIMESTAMP,
+    amount DECIMAL(10,2),
+    payment_method VARCHAR(50),
+    device_type VARCHAR(50)
+);
+
+-- Product Catalog
+CREATE TABLE products (
+    product_id INT PRIMARY KEY,
+    category VARCHAR(50),
+    price DECIMAL(10,2),
+    brand VARCHAR(50),
+    description TEXT,
+    stock_level INT,
+    supplier_id INT
+);
 ```
-customers/
-├── customer_id (PK)
-├── registration_date
-├── country
-├── age
-└── gender
 
-transactions/
-├── transaction_id (PK)
-├── customer_id (FK)
-├── product_id (FK)
-├── timestamp
-├── amount
-└── payment_method
+## Implementation Guide 🛠️
 
-products/
-├── product_id (PK)
-├── category
-├── price
-├── brand
-└── description
-```
+### 1. Data Quality Assessment (20%)
 
-### Sample Data
 ```python
-# Customers
-customers_sample = pd.DataFrame({
-    'customer_id': [1, 2, 3],
-    'registration_date': ['2023-01-15', '2023-02-01', '2023-01-20'],
-    'country': ['USA', 'UK', None],
-    'age': [25, None, 45],
-    'gender': ['F', 'M', 'F']
-})
-
-# Transactions
-transactions_sample = pd.DataFrame({
-    'transaction_id': [101, 102, 103],
-    'customer_id': [1, 1, 2],
-    'product_id': [201, 202, 201],
-    'timestamp': ['2023-03-15 10:30:00', '2023-03-16 15:45:00', '2023-03-15 11:20:00'],
-    'amount': [99.99, 150.00, -50.00],  # Note the negative amount
-    'payment_method': ['credit_card', 'paypal', 'credit_card']
-})
-
-# Products
-products_sample = pd.DataFrame({
-    'product_id': [201, 202, 203],
-    'category': ['Electronics', 'Electronics', 'Clothing'],
-    'price': [99.99, 149.99, 29.99],
-    'brand': ['Samsung', 'Apple', None],
-    'description': ['Smartphone', 'Tablet', 'T-shirt']
-})
-```
-
-## Tasks and Evaluation Criteria 📝
-
-### 1. Data Quality Assessment (20 points)
-
-#### a) Initial Data Exploration (5 points)
-```python
-def explore_dataset(df):
-    """Comprehensive data exploration"""
-    exploration = {
-        'basic_info': {
-            'shape': df.shape,
-            'dtypes': df.dtypes,
-            'memory_usage': df.memory_usage().sum() / 1024**2  # MB
-        },
-        'missing_data': {
-            'total_missing': df.isnull().sum().sum(),
-            'missing_by_column': df.isnull().sum(),
-            'missing_percentage': (df.isnull().sum() / len(df)) * 100
-        },
-        'duplicates': {
-            'total_duplicates': df.duplicated().sum(),
-            'duplicate_rows': df[df.duplicated(keep=False)]
-        },
-        'numeric_summary': df.describe(),
-        'categorical_summary': df.describe(include=['O'])
+def assess_data_quality(df):
+    """Comprehensive data quality assessment"""
+    
+    quality_report = {
+        'completeness': {},
+        'validity': {},
+        'consistency': {},
+        'uniqueness': {}
     }
     
-    # Visualizations
-    plt.figure(figsize=(15, 10))
+    # Completeness check
+    quality_report['completeness'] = {
+        'missing_values': df.isnull().sum(),
+        'missing_percentage': (df.isnull().sum() / len(df)) * 100
+    }
     
-    # Missing values heatmap
-    plt.subplot(221)
-    sns.heatmap(df.isnull(), yticklabels=False, cbar=True)
-    plt.title('Missing Values Pattern')
-    
-    # Correlation matrix
-    plt.subplot(222)
+    # Validity check
     numeric_cols = df.select_dtypes(include=[np.number]).columns
-    sns.heatmap(df[numeric_cols].corr(), annot=True, cmap='coolwarm')
-    plt.title('Correlation Matrix')
+    quality_report['validity']['numeric_ranges'] = {
+        col: {'min': df[col].min(), 'max': df[col].max()}
+        for col in numeric_cols
+    }
     
-    # Distribution plots
-    plt.subplot(223)
-    for col in numeric_cols:
-        sns.kdeplot(df[col], label=col)
-    plt.title('Numeric Distributions')
-    plt.legend()
+    # Consistency check
+    if 'registration_date' in df.columns and 'last_login_date' in df.columns:
+        quality_report['consistency']['date_order'] = (
+            df['last_login_date'] >= df['registration_date']
+        ).mean()
     
-    # Categorical value counts
-    plt.subplot(224)
-    categorical_cols = df.select_dtypes(include=['object']).columns
-    pd.DataFrame({col: df[col].value_counts() for col in categorical_cols}).plot(kind='bar')
-    plt.title('Categorical Value Counts')
+    # Uniqueness check
+    quality_report['uniqueness'] = {
+        col: df[col].nunique() / len(df)
+        for col in df.columns
+    }
     
-    plt.tight_layout()
-    plt.show()
-    
-    return exploration
+    return quality_report
 ```
 
-#### b) Missing Value Analysis (5 points)
+### 2. Data Cleaning Implementation (30%)
+
 ```python
-def analyze_missing_values(df):
-    """Advanced missing value analysis"""
-    # Your implementation here
-    pass
-```
-
-[Continue with detailed implementations for each section...]
-
-## Real-World Considerations 🌍
-
-### 1. Data Privacy
-- Remove personally identifiable information (PII)
-- Apply appropriate anonymization techniques
-- Follow GDPR/CCPA guidelines
-
-### 2. Performance Optimization
-```python
-def optimize_memory_usage(df):
-    """Optimize DataFrame memory usage"""
-    numerics = ['int16', 'int32', 'int64', 'float64']
+class DataCleaner:
+    """Data cleaning pipeline for e-commerce data"""
     
-    for col in df.select_dtypes(include=numerics).columns:
-        col_min = df[col].min()
-        col_max = df[col].max()
+    def __init__(self, config=None):
+        self.config = config or {
+            'age_range': (13, 100),
+            'price_range': (0, 10000),
+            'outlier_threshold': 3
+        }
+    
+    def clean_customer_data(self, customers_df):
+        """Clean customer dataset"""
+        df = customers_df.copy()
         
-        # Integer optimization
-        if str(df[col].dtype).startswith('int'):
-            if col_min > np.iinfo(np.int8).min and col_max < np.iinfo(np.int8).max:
-                df[col] = df[col].astype(np.int8)
-            elif col_min > np.iinfo(np.int16).min and col_max < np.iinfo(np.int16).max:
-                df[col] = df[col].astype(np.int16)
-            elif col_min > np.iinfo(np.int32).min and col_max < np.iinfo(np.int32).max:
-                df[col] = df[col].astype(np.int32)
+        # Handle missing values
+        df['age'] = df['age'].fillna(df['age'].median())
+        df['country'] = df['country'].fillna(df['country'].mode()[0])
         
-        # Float optimization
-        else:
-            df[col] = pd.to_numeric(df[col], downcast='float')
+        # Fix data types
+        df['registration_date'] = pd.to_datetime(df['registration_date'])
+        
+        # Validate age range
+        df.loc[~df['age'].between(*self.config['age_range']), 'age'] = np.nan
+        
+        # Standardize country codes
+        df['country'] = df['country'].str.upper()
+        
+        return df
     
-    return df
+    def clean_transaction_data(self, transactions_df):
+        """Clean transaction dataset"""
+        df = transactions_df.copy()
+        
+        # Remove duplicate transactions
+        df = df.drop_duplicates(subset=['customer_id', 'timestamp', 'amount'])
+        
+        # Handle outliers in amount
+        z_scores = np.abs(stats.zscore(df['amount']))
+        df.loc[z_scores > self.config['outlier_threshold'], 'amount'] = np.nan
+        
+        # Standardize payment methods
+        df['payment_method'] = df['payment_method'].str.lower()
+        
+        return df
 ```
 
-### 3. Scalability Considerations
+### 3. Feature Engineering (30%)
+
 ```python
-def process_in_chunks(file_path, chunk_size=10000):
-    """Process large datasets in chunks"""
-    chunks = []
-    for chunk in pd.read_csv(file_path, chunksize=chunk_size):
-        # Process each chunk
-        processed_chunk = process_chunk(chunk)
-        chunks.append(processed_chunk)
+class FeatureEngineer:
+    """Feature engineering for e-commerce data"""
     
-    return pd.concat(chunks)
+    def create_customer_features(self, customers_df, transactions_df):
+        """Create customer-level features"""
+        
+        # Customer lifetime value
+        clv = transactions_df.groupby('customer_id')['amount'].sum()
+        
+        # Purchase frequency
+        purchase_freq = transactions_df.groupby('customer_id').size()
+        
+        # Average order value
+        avg_order = transactions_df.groupby('customer_id')['amount'].mean()
+        
+        # Days since last purchase
+        last_purchase = transactions_df.groupby('customer_id')['timestamp'].max()
+        days_since = (pd.Timestamp.now() - last_purchase).dt.days
+        
+        # Combine features
+        features = pd.DataFrame({
+            'customer_lifetime_value': clv,
+            'purchase_frequency': purchase_freq,
+            'average_order_value': avg_order,
+            'days_since_last_purchase': days_since
+        })
+        
+        return features
+    
+    def create_product_features(self, products_df, transactions_df):
+        """Create product-level features"""
+        
+        # Sales velocity
+        sales_velocity = transactions_df.groupby('product_id').size()
+        
+        # Price elasticity
+        def calculate_elasticity(group):
+            price_pct_change = group['price'].pct_change()
+            demand_pct_change = group['quantity'].pct_change()
+            return (demand_pct_change / price_pct_change).mean()
+        
+        elasticity = transactions_df.groupby('product_id').apply(calculate_elasticity)
+        
+        # Combine features
+        features = pd.DataFrame({
+            'sales_velocity': sales_velocity,
+            'price_elasticity': elasticity
+        })
+        
+        return features
 ```
 
-## Deliverables 📦
+### 4. Data Validation (20%)
 
-### 1. Code Repository
+```python
+def validate_final_dataset(df, validation_rules):
+    """Validate the final dataset"""
+    
+    validation_results = {
+        'completeness': {},
+        'consistency': {},
+        'statistical_validity': {}
+    }
+    
+    # Check completeness
+    missing_values = df.isnull().sum()
+    validation_results['completeness'] = {
+        'missing_values': missing_values,
+        'missing_percentage': (missing_values / len(df)) * 100
+    }
+    
+    # Check consistency
+    for rule_name, rule_func in validation_rules['consistency'].items():
+        validation_results['consistency'][rule_name] = rule_func(df)
+    
+    # Statistical validation
+    numeric_cols = df.select_dtypes(include=[np.number]).columns
+    validation_results['statistical_validity'] = {
+        col: {
+            'mean': df[col].mean(),
+            'std': df[col].std(),
+            'skew': df[col].skew(),
+            'kurtosis': df[col].kurtosis()
+        }
+        for col in numeric_cols
+    }
+    
+    return validation_results
+```
+
+## Project Deliverables 📦
+
+### 1. Code Repository Structure
 ```
 project/
 ├── data/
 │   ├── raw/
+│   │   ├── customers.csv
+│   │   ├── transactions.csv
+│   │   └── products.csv
 │   └── processed/
+│       └── final_dataset.csv
 ├── notebooks/
 │   ├── 1_exploration.ipynb
 │   ├── 2_cleaning.ipynb
@@ -252,32 +307,38 @@ project/
    - Performance metrics
 ```
 
-## Bonus Challenges 🌟
+## Best Practices 📝
 
-### 1. Advanced Feature Engineering
-```python
-def create_customer_features(transactions_df, customers_df):
-    """Create advanced customer features"""
-    features = {
-        'purchase_frequency': calculate_frequency(transactions_df),
-        'customer_lifetime_value': calculate_clv(transactions_df),
-        'product_affinity': calculate_affinity(transactions_df),
-        'churn_probability': calculate_churn_risk(transactions_df, customers_df)
-    }
-    return features
-```
+1. **Version Control**
+   - Use Git for code versioning
+   - Document all data transformations
+   - Track data quality metrics
 
-### 2. Automated Quality Checks
-```python
-def setup_quality_monitors(df):
-    """Set up automated quality monitoring"""
-    monitors = {
-        'completeness': monitor_completeness(df),
-        'consistency': monitor_consistency(df),
-        'accuracy': monitor_accuracy(df),
-        'timeliness': monitor_timeliness(df)
-    }
-    return monitors
-```
+2. **Performance Optimization**
+   - Use efficient data structures
+   - Implement parallel processing
+   - Optimize memory usage
 
-Remember: "Clean data is the foundation of reliable analytics!" 🎯
+3. **Documentation**
+   - Maintain clear documentation
+   - Create data dictionaries
+   - Document assumptions and decisions
+
+## Evaluation Criteria 📊
+
+1. **Code Quality (30%)**
+   - Clean, well-organized code
+   - Proper error handling
+   - Efficient implementations
+
+2. **Documentation (20%)**
+   - Clear explanations
+   - Comprehensive data dictionary
+   - Well-documented decisions
+
+3. **Results (50%)**
+   - Data quality improvements
+   - Feature engineering effectiveness
+   - Validation metrics
+
+Remember: "The quality of your data wrangling directly impacts the reliability of your analytics!" 🎯

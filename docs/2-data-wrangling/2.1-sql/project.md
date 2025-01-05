@@ -1,420 +1,352 @@
-# E-commerce Data Analysis: From Data to Business Insights 🚀
+# E-commerce Data Analysis Project: GlobalMart Analytics Platform 🚀
 
-## Project Overview 🎯
+[Previous content remains the same until the sales_metrics CTE]
 
-You're a data analyst at "GlobalMart", a growing e-commerce platform. Your task is to analyze customer behavior, product performance, and business metrics to drive strategic decisions.
+### 3. Business Operations (40 points)
 
-## Database Schema 📊
-
-```mermaid
-erDiagram
-    CUSTOMERS ||--o{ ORDERS : places
-    ORDERS ||--|{ ORDER_ITEMS : contains
-    PRODUCTS ||--o{ ORDER_ITEMS : included_in
-    CATEGORIES ||--o{ PRODUCTS : categorizes
-
-    CUSTOMERS {
-        int customer_id PK
-        string first_name
-        string last_name
-        string email UK
-        date join_date
-        string country
-    }
-
-    ORDERS {
-        int order_id PK
-        int customer_id FK
-        timestamp order_date
-        string status
-        decimal total_amount
-    }
-
-    ORDER_ITEMS {
-        int order_id PK,FK
-        int product_id PK,FK
-        int quantity
-        decimal price_at_time
-    }
-
-    PRODUCTS {
-        int product_id PK
-        string product_name
-        int category_id FK
-        decimal price
-        int stock_quantity
-        text description
-    }
-
-    CATEGORIES {
-        int category_id PK
-        string category_name
-        text description
-    }
-```
-
-## Setup Instructions 🛠️
-
+#### 3.1 Sales Performance (15 points)
 ```sql
--- Database creation script
-CREATE DATABASE globalmart;
-
--- Table creation scripts
-CREATE TABLE customers (
-    customer_id SERIAL PRIMARY KEY,
-    first_name VARCHAR(50),
-    last_name VARCHAR(50),
-    email VARCHAR(100) UNIQUE,
-    join_date DATE,
-    country VARCHAR(50)
-);
-
--- ... (remaining table creation scripts)
-
--- Indexes for performance
-CREATE INDEX idx_orders_customer ON orders(customer_id);
-CREATE INDEX idx_orders_date ON orders(order_date);
-CREATE INDEX idx_items_product ON order_items(product_id);
-```
-
-## Analysis Tasks 📝
-
-### 1. Customer Analysis (15 points)
-
-#### 1.1 Top Customer Analysis (3 points)
-```sql
--- Find top 5 customers by total spending
-WITH customer_metrics AS (
+WITH daily_sales AS (
     SELECT 
-        c.customer_id,
-        c.first_name || ' ' || c.last_name as customer_name,
-        COUNT(DISTINCT o.order_id) as order_count,
-        SUM(o.total_amount) as total_spent,
-        AVG(o.total_amount) as avg_order_value
-    FROM customers c
-    JOIN orders o ON c.customer_id = o.customer_id
-    GROUP BY c.customer_id, c.first_name, c.last_name
-)
-SELECT 
-    customer_name,
-    order_count,
-    ROUND(total_spent::numeric, 2) as total_spent,
-    ROUND(avg_order_value::numeric, 2) as avg_order_value
-FROM customer_metrics
-ORDER BY total_spent DESC
-LIMIT 5;
-
-/* Expected Output:
-customer_name    | order_count | total_spent | avg_order_value
------------------|-------------|-------------|----------------
-John Smith       | 12          | 2500.00     | 208.33
-Sarah Johnson    | 8           | 1800.50     | 225.06
-...
-*/
-```
-
-#### 1.2 Customer Segmentation (6 points)
-```sql
-WITH customer_metrics AS (
-    SELECT 
-        c.customer_id,
-        c.first_name || ' ' || c.last_name as customer_name,
-        COUNT(DISTINCT o.order_id) as order_count,
-        SUM(o.total_amount) as total_spent,
-        AVG(o.total_amount) as avg_order_value,
-        MAX(o.order_date) as last_order_date,
-        CURRENT_DATE - MAX(o.order_date) as days_since_last_order
-    FROM customers c
-    LEFT JOIN orders o ON c.customer_id = o.customer_id
-    GROUP BY c.customer_id, c.first_name, c.last_name
-)
-SELECT 
-    customer_name,
-    CASE 
-        WHEN total_spent > 1000 AND order_count > 10 THEN 'VIP'
-        WHEN total_spent > 500 OR order_count > 5 THEN 'Regular'
-        WHEN total_spent > 0 THEN 'New'
-        ELSE 'Inactive'
-    END as customer_segment,
-    order_count,
-    ROUND(total_spent::numeric, 2) as total_spent,
-    ROUND(avg_order_value::numeric, 2) as avg_order_value,
-    days_since_last_order
-FROM customer_metrics
-ORDER BY total_spent DESC;
-```
-
-#### 1.3 Cohort Analysis (6 points)
-```sql
--- Monthly cohort analysis
-WITH cohort_dates AS (
-    SELECT 
-        customer_id,
-        DATE_TRUNC('month', join_date) as cohort_month,
-        DATE_TRUNC('month', order_date) as order_month
-    FROM customers c
-    LEFT JOIN orders o ON c.customer_id = o.customer_id
-),
-cohort_size AS (
-    SELECT 
-        cohort_month,
-        COUNT(DISTINCT customer_id) as num_customers
-    FROM cohort_dates
-    GROUP BY cohort_month
-),
-retention_table AS (
-    SELECT 
-        cohort_month,
-        order_month,
-        COUNT(DISTINCT customer_id) as num_customers
-    FROM cohort_dates
-    GROUP BY cohort_month, order_month
-)
-SELECT 
-    c.cohort_month,
-    cs.num_customers as cohort_size,
-    r.order_month,
-    r.num_customers as active_customers,
-    ROUND(100.0 * r.num_customers / cs.num_customers, 2) as retention_rate
-FROM cohort_size cs
-JOIN retention_table r ON cs.cohort_month = r.cohort_month
-ORDER BY c.cohort_month, r.order_month;
-```
-
-### 2. Product Analysis (15 points)
-
-#### 2.1 Product Performance (5 points)
-```sql
-WITH product_metrics AS (
-    SELECT 
-        p.product_id,
-        p.product_name,
-        c.category_name,
+        DATE_TRUNC('day', o.order_date) as sale_date,
         COUNT(DISTINCT o.order_id) as num_orders,
-        SUM(oi.quantity) as total_units_sold,
-        SUM(oi.quantity * oi.price_at_time) as total_revenue,
-        p.stock_quantity as current_stock
-    FROM products p
+        COUNT(DISTINCT o.customer_id) as num_customers,
+        SUM(o.total_amount) as revenue,
+        SUM(o.shipping_cost) as shipping_cost,
+        SUM(o.discount_amount) as discounts,
+        COUNT(DISTINCT CASE 
+            WHEN c.join_date = DATE_TRUNC('day', o.order_date)
+            THEN c.customer_id 
+        END) as new_customers
+    FROM orders o
+    JOIN customers c ON o.customer_id = c.customer_id
+    WHERE o.order_date >= CURRENT_DATE - INTERVAL '90 days'
+    GROUP BY DATE_TRUNC('day', o.order_date)
+),
+sales_metrics AS (
+    SELECT 
+        *,
+        revenue - shipping_cost - discounts as net_revenue,
+        revenue / NULLIF(num_orders, 0) as avg_order_value,
+        revenue / NULLIF(num_customers, 0) as revenue_per_customer,
+        new_customers::float / NULLIF(num_customers, 0) * 100 as new_customer_percentage,
+        LAG(revenue) OVER (ORDER BY sale_date) as prev_day_revenue,
+        LAG(num_orders) OVER (ORDER BY sale_date) as prev_day_orders,
+        LAG(num_customers) OVER (ORDER BY sale_date) as prev_day_customers
+    FROM daily_sales
+),
+sales_analysis AS (
+    SELECT 
+        *,
+        ROUND(
+            ((revenue - prev_day_revenue) / 
+             NULLIF(prev_day_revenue, 0) * 100)::numeric,
+            2
+        ) as revenue_growth,
+        ROUND(
+            ((num_orders - prev_day_orders)::float / 
+             NULLIF(prev_day_orders, 0) * 100)::numeric,
+            2
+        ) as order_growth,
+        ROUND(
+            ((num_customers - prev_day_customers)::float / 
+             NULLIF(prev_day_customers, 0) * 100)::numeric,
+            2
+        ) as customer_growth,
+        AVG(revenue) OVER (
+            ORDER BY sale_date
+            ROWS BETWEEN 6 PRECEDING AND CURRENT ROW
+        ) as revenue_7day_avg,
+        AVG(num_orders) OVER (
+            ORDER BY sale_date
+            ROWS BETWEEN 6 PRECEDING AND CURRENT ROW
+        ) as orders_7day_avg
+    FROM sales_metrics
+)
+SELECT 
+    sale_date,
+    num_orders,
+    num_customers,
+    new_customers,
+    ROUND(new_customer_percentage::numeric, 2) as new_customer_pct,
+    ROUND(revenue::numeric, 2) as revenue,
+    ROUND(net_revenue::numeric, 2) as net_revenue,
+    ROUND(avg_order_value::numeric, 2) as aov,
+    ROUND(revenue_per_customer::numeric, 2) as revenue_per_customer,
+    ROUND(revenue_7day_avg::numeric, 2) as revenue_7day_avg,
+    ROUND(orders_7day_avg::numeric, 1) as orders_7day_avg,
+    revenue_growth,
+    order_growth,
+    customer_growth,
+    CASE 
+        WHEN revenue_growth >= 20 THEN '🚀 High Growth'
+        WHEN revenue_growth > 0 THEN '📈 Growing'
+        WHEN revenue_growth > -20 THEN '📉 Declining'
+        ELSE '⚠️ Sharp Decline'
+    END as revenue_trend,
+    CASE 
+        WHEN customer_growth >= 20 THEN '🎯 Strong Acquisition'
+        WHEN customer_growth > 0 THEN '👥 Growing Base'
+        WHEN customer_growth > -20 THEN '⚠️ Customer Loss'
+        ELSE '🚨 High Churn'
+    END as customer_trend
+FROM sales_analysis
+ORDER BY sale_date DESC;
+```
+
+#### 3.2 Marketing Campaign Analysis (15 points)
+```sql
+WITH campaign_metrics AS (
+    SELECT 
+        mc.campaign_id,
+        mc.name as campaign_name,
+        mc.start_date,
+        mc.end_date,
+        mc.budget,
+        mc.target_segment,
+        mc.channel,
+        SUM(cp.impressions) as total_impressions,
+        SUM(cp.clicks) as total_clicks,
+        SUM(cp.conversions) as total_conversions,
+        SUM(cp.spend) as total_spend,
+        SUM(cp.revenue) as total_revenue,
+        COUNT(DISTINCT DATE_TRUNC('day', cp.date)) as campaign_days
+    FROM marketing_campaigns mc
+    LEFT JOIN campaign_performance cp ON mc.campaign_id = cp.campaign_id
+    GROUP BY 
+        mc.campaign_id, mc.name, mc.start_date, mc.end_date,
+        mc.budget, mc.target_segment, mc.channel
+),
+campaign_kpis AS (
+    SELECT 
+        *,
+        CASE 
+            WHEN total_impressions > 0 
+            THEN ROUND((total_clicks::float / total_impressions * 100)::numeric, 2)
+            ELSE 0 
+        END as ctr,
+        CASE 
+            WHEN total_clicks > 0 
+            THEN ROUND((total_conversions::float / total_clicks * 100)::numeric, 2)
+            ELSE 0 
+        END as conversion_rate,
+        CASE 
+            WHEN total_conversions > 0 
+            THEN ROUND((total_revenue / total_conversions)::numeric, 2)
+            ELSE 0 
+        END as revenue_per_conversion,
+        CASE 
+            WHEN total_spend > 0 
+            THEN ROUND((total_revenue / total_spend)::numeric, 2)
+            ELSE 0 
+        END as roas,
+        ROUND((total_spend / NULLIF(total_clicks, 0))::numeric, 2) as cpc,
+        ROUND((total_spend / NULLIF(total_conversions, 0))::numeric, 2) as cpa,
+        total_revenue - total_spend as profit,
+        CASE 
+            WHEN total_spend > 0 
+            THEN ROUND(((total_revenue - total_spend) / total_spend * 100)::numeric, 2)
+            ELSE 0 
+        END as roi
+    FROM campaign_metrics
+)
+SELECT 
+    campaign_name,
+    channel,
+    target_segment,
+    start_date,
+    end_date,
+    campaign_days,
+    ROUND(budget::numeric, 2) as budget,
+    ROUND(total_spend::numeric, 2) as spend,
+    ROUND((total_spend / budget * 100)::numeric, 2) as budget_utilization,
+    total_impressions,
+    total_clicks,
+    total_conversions,
+    ctr as click_through_rate,
+    conversion_rate,
+    ROUND(total_revenue::numeric, 2) as revenue,
+    ROUND(profit::numeric, 2) as profit,
+    roas as return_on_ad_spend,
+    roi as return_on_investment,
+    cpc as cost_per_click,
+    cpa as cost_per_acquisition,
+    CASE 
+        WHEN roi >= 100 THEN 'Exceptional'
+        WHEN roi >= 50 THEN 'Strong'
+        WHEN roi >= 0 THEN 'Acceptable'
+        ELSE 'Poor'
+    END as performance_category,
+    CASE 
+        WHEN roi < 0 THEN 'Pause Campaign'
+        WHEN cpa > revenue_per_conversion THEN 'Optimize Targeting'
+        WHEN budget_utilization < 80 THEN 'Increase Budget'
+        WHEN conversion_rate < 2 THEN 'Improve Landing Page'
+        WHEN ctr < 1 THEN 'Revise Ad Creative'
+        ELSE 'Maintain Strategy'
+    END as recommended_action
+FROM campaign_kpis
+ORDER BY roi DESC;
+```
+
+#### 3.3 Supply Chain Efficiency (10 points)
+```sql
+WITH supplier_metrics AS (
+    SELECT 
+        s.supplier_id,
+        s.company_name,
+        s.country,
+        s.lead_time_days,
+        COUNT(DISTINCT p.product_id) as products_supplied,
+        SUM(p.stock_quantity) as total_inventory,
+        SUM(p.stock_quantity * p.cost_price) as inventory_value,
+        COUNT(DISTINCT o.order_id) as fulfilled_orders,
+        AVG(EXTRACT(EPOCH FROM (sh.actual_delivery - sh.ship_date)) / 86400) as avg_delivery_days,
+        COUNT(DISTINCT CASE 
+            WHEN sh.actual_delivery > sh.estimated_delivery 
+            THEN sh.shipment_id 
+        END)::float / NULLIF(COUNT(DISTINCT sh.shipment_id), 0) * 100 as late_delivery_rate
+    FROM suppliers s
+    LEFT JOIN products p ON s.supplier_id = p.supplier_id
     LEFT JOIN order_items oi ON p.product_id = oi.product_id
     LEFT JOIN orders o ON oi.order_id = o.order_id
-    LEFT JOIN categories c ON p.category_id = c.category_id
-    GROUP BY p.product_id, p.product_name, c.category_name
-)
-SELECT 
-    product_name,
-    category_name,
-    num_orders,
-    total_units_sold,
-    ROUND(total_revenue::numeric, 2) as total_revenue,
-    current_stock,
-    CASE 
-        WHEN current_stock = 0 THEN 'Out of Stock'
-        WHEN current_stock < total_units_sold * 0.1 THEN 'Low Stock'
-        ELSE 'In Stock'
-    END as stock_status
-FROM product_metrics
-ORDER BY total_revenue DESC;
-```
-
-#### 2.2 Category Analysis (5 points)
-```sql
--- Category performance over time
-SELECT 
-    c.category_name,
-    DATE_TRUNC('month', o.order_date) as month,
-    COUNT(DISTINCT o.order_id) as num_orders,
-    SUM(oi.quantity) as units_sold,
-    ROUND(SUM(oi.quantity * oi.price_at_time)::numeric, 2) as revenue,
-    ROUND(AVG(oi.price_at_time)::numeric, 2) as avg_price
-FROM categories c
-JOIN products p ON c.category_id = p.category_id
-JOIN order_items oi ON p.product_id = oi.product_id
-JOIN orders o ON oi.order_id = o.order_id
-GROUP BY c.category_name, DATE_TRUNC('month', o.order_date)
-ORDER BY c.category_name, month;
-```
-
-#### 2.3 Product Recommendations (5 points)
-```sql
--- Find frequently co-purchased products
-WITH co_purchases AS (
-    SELECT 
-        oi1.product_id as product1_id,
-        oi2.product_id as product2_id,
-        COUNT(*) as times_bought_together
-    FROM order_items oi1
-    JOIN order_items oi2 
-        ON oi1.order_id = oi2.order_id
-        AND oi1.product_id < oi2.product_id
-    GROUP BY oi1.product_id, oi2.product_id
-    HAVING COUNT(*) >= 3
-)
-SELECT 
-    p1.product_name as product1,
-    p2.product_name as product2,
-    cp.times_bought_together,
-    ROUND(
-        100.0 * cp.times_bought_together / 
-        LEAST(
-            (SELECT COUNT(*) FROM order_items WHERE product_id = p1.product_id),
-            (SELECT COUNT(*) FROM order_items WHERE product_id = p2.product_id)
-        ),
-        2
-    ) as purchase_affinity
-FROM co_purchases cp
-JOIN products p1 ON cp.product1_id = p1.product_id
-JOIN products p2 ON cp.product2_id = p2.product_id
-ORDER BY cp.times_bought_together DESC;
-```
-
-### 3. Business Metrics (20 points)
-
-#### 3.1 Revenue Analysis (7 points)
-```sql
--- Monthly revenue trends with YoY growth
-WITH monthly_revenue AS (
-    SELECT 
-        DATE_TRUNC('month', order_date) as month,
-        SUM(total_amount) as revenue
-    FROM orders
-    GROUP BY DATE_TRUNC('month', order_date)
+    LEFT JOIN shipments sh ON o.order_id = sh.order_id
+    GROUP BY s.supplier_id, s.company_name, s.country, s.lead_time_days
 ),
-revenue_growth AS (
+supplier_performance AS (
     SELECT 
-        month,
-        revenue,
-        LAG(revenue) OVER (ORDER BY month) as prev_month_revenue,
-        LAG(revenue) OVER (
-            ORDER BY month 
-            RANGE BETWEEN INTERVAL '1 year' PRECEDING 
-            AND INTERVAL '1 year' PRECEDING
-        ) as prev_year_revenue
-    FROM monthly_revenue
+        *,
+        NTILE(4) OVER (ORDER BY late_delivery_rate DESC) as reliability_quartile,
+        NTILE(4) OVER (ORDER BY avg_delivery_days DESC) as speed_quartile,
+        NTILE(4) OVER (ORDER BY inventory_value DESC) as value_quartile
+    FROM supplier_metrics
 )
 SELECT 
-    month,
-    ROUND(revenue::numeric, 2) as revenue,
-    ROUND(
-        100.0 * (revenue - prev_month_revenue) / prev_month_revenue,
-        2
-    ) as mom_growth,
-    ROUND(
-        100.0 * (revenue - prev_year_revenue) / prev_year_revenue,
-        2
-    ) as yoy_growth
-FROM revenue_growth
-ORDER BY month;
-```
-
-#### 3.2 Order Analysis (7 points)
-```sql
--- Order patterns and fulfillment analysis
-SELECT 
-    DATE_TRUNC('hour', order_date) as hour_of_day,
-    COUNT(*) as num_orders,
-    ROUND(AVG(total_amount)::numeric, 2) as avg_order_value,
-    COUNT(CASE WHEN status = 'completed' THEN 1 END) as completed_orders,
-    COUNT(CASE WHEN status = 'cancelled' THEN 1 END) as cancelled_orders,
-    ROUND(
-        100.0 * COUNT(CASE WHEN status = 'completed' THEN 1 END)::numeric / COUNT(*),
-        2
-    ) as completion_rate
-FROM orders
-GROUP BY DATE_TRUNC('hour', order_date)
-ORDER BY hour_of_day;
-```
-
-#### 3.3 Customer Lifetime Value (6 points)
-```sql
-WITH customer_value AS (
-    SELECT 
-        c.customer_id,
-        c.join_date,
-        COUNT(DISTINCT o.order_id) as total_orders,
-        SUM(o.total_amount) as total_spent,
-        MAX(o.order_date) as last_order_date,
-        EXTRACT(YEAR FROM AGE(MAX(o.order_date), MIN(o.order_date))) as years_active
-    FROM customers c
-    LEFT JOIN orders o ON c.customer_id = o.customer_id
-    GROUP BY c.customer_id, c.join_date
-)
-SELECT 
-    customer_id,
-    total_orders,
-    ROUND(total_spent::numeric, 2) as total_spent,
-    ROUND((total_spent / NULLIF(years_active, 0))::numeric, 2) as annual_value,
+    company_name,
+    country,
+    lead_time_days,
+    products_supplied,
+    total_inventory,
+    ROUND(inventory_value::numeric, 2) as inventory_value,
+    fulfilled_orders,
+    ROUND(avg_delivery_days::numeric, 1) as avg_delivery_days,
+    ROUND(late_delivery_rate::numeric, 2) as late_delivery_rate,
     CASE 
-        WHEN last_order_date >= CURRENT_DATE - INTERVAL '90 days' THEN 'Active'
-        WHEN last_order_date >= CURRENT_DATE - INTERVAL '180 days' THEN 'At Risk'
-        ELSE 'Churned'
-    END as status
-FROM customer_value
-ORDER BY total_spent DESC;
+        WHEN reliability_quartile = 1 THEN 'High Risk'
+        WHEN reliability_quartile = 2 THEN 'Medium Risk'
+        WHEN reliability_quartile = 3 THEN 'Low Risk'
+        ELSE 'Very Reliable'
+    END as reliability_rating,
+    CASE 
+        WHEN speed_quartile = 1 THEN 'Slow'
+        WHEN speed_quartile = 2 THEN 'Moderate'
+        WHEN speed_quartile = 3 THEN 'Fast'
+        ELSE 'Very Fast'
+    END as speed_rating,
+    CASE 
+        WHEN value_quartile = 1 THEN 'Strategic'
+        WHEN value_quartile = 2 THEN 'Major'
+        WHEN value_quartile = 3 THEN 'Medium'
+        ELSE 'Minor'
+    END as value_rating,
+    CASE 
+        WHEN late_delivery_rate > 20 OR avg_delivery_days > lead_time_days * 1.5 
+        THEN 'Review Partnership'
+        WHEN late_delivery_rate > 10 OR avg_delivery_days > lead_time_days * 1.2
+        THEN 'Needs Improvement'
+        WHEN late_delivery_rate > 5 OR avg_delivery_days > lead_time_days
+        THEN 'Monitor Closely'
+        ELSE 'Good Standing'
+    END as supplier_status
+FROM supplier_performance
+ORDER BY inventory_value DESC;
 ```
 
-## Bonus Challenges 🌟
+## Implementation Guidelines 📋
 
-### 1. Dynamic Pricing Analysis (10 points)
-Implement a price optimization model considering:
-- Historical sales data
-- Competitor pricing
-- Seasonal trends
-- Stock levels
+### 1. Project Setup
+1. Create database and tables
+2. Import sample data
+3. Create necessary indexes
+4. Set up monitoring queries
 
-### 2. Predictive Analytics (10 points)
-Create SQL queries to:
-- Predict future sales
-- Identify potential churners
-- Recommend inventory levels
-- Optimize marketing spend
+### 2. Analysis Workflow
+1. Run customer analytics
+2. Analyze product performance
+3. Review business operations
+4. Generate recommendations
 
-## Submission Requirements 📋
+### 3. Performance Optimization
+1. Index strategy
+   ```sql
+   -- Indexes for frequent joins
+   CREATE INDEX idx_orders_customer ON orders(customer_id);
+   CREATE INDEX idx_orders_date ON orders(order_date);
+   
+   -- Indexes for range queries
+   CREATE INDEX idx_products_price ON products(price);
+   CREATE INDEX idx_inventory_stock ON products(stock_quantity);
+   
+   -- Composite indexes for common query patterns
+   CREATE INDEX idx_orders_customer_date 
+   ON orders(customer_id, order_date DESC);
+   ```
 
-1. SQL Files:
-   - All queries in a single .sql file
-   - Comments explaining each section
-   - Performance optimization notes
+2. Query optimization
+   - Use CTEs for complex queries
+   - Apply appropriate join types
+   - Filter early in the query
+   - Use covering indexes
 
-2. Documentation:
-   - Analysis methodology
-   - Key findings
+3. Maintenance
+   ```sql
+   -- Regular statistics update
+   ANALYZE customers;
+   ANALYZE orders;
+   ANALYZE products;
+   
+   -- Monitor query performance
+   SELECT * FROM pg_stat_statements 
+   ORDER BY total_time DESC 
+   LIMIT 10;
+   ```
+
+## Deliverables 📊
+
+1. SQL Scripts
+   - Table creation
+   - Data import
+   - Analysis queries
+   - Optimization code
+
+2. Documentation
+   - Schema design
+   - Query explanations
+   - Performance notes
    - Recommendations
-   - Performance considerations
 
-3. Results:
-   - Sample output for each query
-   - Visualization suggestions
-   - Business implications
+3. Visualizations
+   - Customer segments
+   - Product performance
+   - Sales trends
+   - Campaign effectiveness
 
-## Evaluation Criteria 📊
+## Success Metrics 📈
 
-| Criterion | Weight | Description |
-|-----------|---------|-------------|
-| Query Correctness | 40% | Accurate results, proper joins, correct aggregations |
-| Performance | 20% | Efficient execution, proper indexing, optimization |
-| Code Quality | 20% | Readability, comments, organization |
-| Business Insight | 20% | Meaningful analysis, actionable recommendations |
+1. Query Performance
+   - Execution time < 5 seconds
+   - Efficient resource usage
+   - Proper index utilization
 
-## Tips for Success 💡
+2. Analysis Quality
+   - Accurate insights
+   - Actionable recommendations
+   - Clear documentation
 
-1. **Start Simple**
-   - Begin with basic queries
-   - Add complexity gradually
-   - Test each component
+3. Business Impact
+   - Improved customer retention
+   - Optimized inventory
+   - Increased sales
+   - Better marketing ROI
 
-2. **Optimize Performance**
-   - Use appropriate indexes
-   - Avoid SELECT *
-   - Consider query execution plans
-
-3. **Handle Edge Cases**
-   - NULL values
-   - Empty results
-   - Data type conversions
-
-4. **Document Everything**
-   - Query purpose
-   - Assumptions made
-   - Known limitations
-
-Remember: "The goal is not just to query data, but to derive actionable insights!" 🎯
+Remember: "Data-driven decisions lead to better business outcomes!" 🎯

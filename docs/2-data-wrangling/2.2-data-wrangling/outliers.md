@@ -1,6 +1,25 @@
 # Outliers: Detection and Treatment Strategies 🔍
 
-## Understanding Outliers: A Decision Framework 📊
+Outliers are observations that deviate significantly from the general pattern of a dataset. While they can sometimes represent errors, they may also contain valuable insights about unusual but important phenomena. This comprehensive guide will help you master the art of outlier detection and treatment.
+
+## Understanding Outliers: A Comprehensive Framework 📊
+
+Outliers can be classified into several types, each requiring different detection and treatment approaches:
+
+1. **Point Outliers**
+   - Individual observations that deviate significantly
+   - Example: A transaction amount of $999,999 in typical $100 transactions
+   - Detection: Statistical methods (Z-score, IQR)
+
+2. **Contextual Outliers**
+   - Values unusual in a specific context
+   - Example: 20°C temperature in winter
+   - Detection: Domain-specific rules
+
+3. **Collective Outliers**
+   - Groups of observations that deviate together
+   - Example: Unusual patterns in time series data
+   - Detection: Pattern analysis, clustering
 
 ```mermaid
 graph TD
@@ -20,27 +39,127 @@ graph TD
     E --> E2[Density Methods]
 ```
 
-## Mathematical Foundations 📐
+## Mathematical Foundations and Implementation 📐
 
-### 1. Z-Score Method
-$Z = \frac{x - \mu}{\sigma}$
-where:
-- $x$ is the observation
-- $\mu$ is the mean
-- $\sigma$ is the standard deviation
+### 1. Statistical Methods
 
-### 2. IQR Method
-$IQR = Q_3 - Q_1$
-$Lower\space Bound = Q_1 - k \times IQR$
-$Upper\space Bound = Q_3 + k \times IQR$
-where:
-- $Q_1$ is the 25th percentile
-- $Q_3$ is the 75th percentile
-- $k$ is typically 1.5 (moderate) or 3 (extreme)
+#### Z-Score Method
+```python
+def detect_outliers_zscore(data, threshold=3):
+    """
+    Detect outliers using Z-score method
+    
+    Parameters:
+    data (array-like): Input data
+    threshold (float): Z-score threshold (default=3)
+    
+    Returns:
+    array: Boolean mask of outliers
+    """
+    z_scores = np.abs((data - np.mean(data)) / np.std(data))
+    return z_scores > threshold
 
-### 3. Modified Z-Score (MAD)
-$MAD = median(|x_i - median(x)|)$
-$M_i = \frac{0.6745(x_i - median(x))}{MAD}$
+# Mathematical representation:
+# Z = (x - μ) / σ
+# where:
+# x is the observation
+# μ is the mean
+# σ is the standard deviation
+```
+
+#### IQR Method
+```python
+def detect_outliers_iqr(data, k=1.5):
+    """
+    Detect outliers using Interquartile Range method
+    
+    Parameters:
+    data (array-like): Input data
+    k (float): IQR multiplier (default=1.5)
+    
+    Returns:
+    array: Boolean mask of outliers
+    """
+    Q1 = np.percentile(data, 25)
+    Q3 = np.percentile(data, 75)
+    IQR = Q3 - Q1
+    
+    lower_bound = Q1 - k * IQR
+    upper_bound = Q3 + k * IQR
+    
+    return (data < lower_bound) | (data > upper_bound)
+
+# Mathematical representation:
+# IQR = Q3 - Q1
+# Lower Bound = Q1 - k × IQR
+# Upper Bound = Q3 + k × IQR
+```
+
+#### Modified Z-Score (MAD)
+```python
+def detect_outliers_mad(data, threshold=3.5):
+    """
+    Detect outliers using Modified Z-score method
+    
+    Parameters:
+    data (array-like): Input data
+    threshold (float): Modified Z-score threshold (default=3.5)
+    
+    Returns:
+    array: Boolean mask of outliers
+    """
+    median = np.median(data)
+    mad = np.median(np.abs(data - median))
+    modified_zscore = 0.6745 * (data - median) / mad
+    return np.abs(modified_zscore) > threshold
+
+# Mathematical representation:
+# MAD = median(|xi - median(x)|)
+# Mi = 0.6745(xi - median(x)) / MAD
+```
+
+### 2. Machine Learning Methods
+
+#### Isolation Forest
+```python
+from sklearn.ensemble import IsolationForest
+
+def detect_outliers_iforest(data, contamination=0.1):
+    """
+    Detect outliers using Isolation Forest
+    
+    Parameters:
+    data (array-like): Input data
+    contamination (float): Expected proportion of outliers
+    
+    Returns:
+    array: Boolean mask of outliers
+    """
+    clf = IsolationForest(
+        contamination=contamination,
+        random_state=42
+    )
+    return clf.fit_predict(data.reshape(-1, 1)) == -1
+```
+
+#### Local Outlier Factor
+```python
+from sklearn.neighbors import LocalOutlierFactor
+
+def detect_outliers_lof(data, contamination=0.1):
+    """
+    Detect outliers using Local Outlier Factor
+    
+    Parameters:
+    data (array-like): Input data
+    contamination (float): Expected proportion of outliers
+    
+    Returns:
+    array: Boolean mask of outliers
+    """
+    clf = LocalOutlierFactor(contamination=contamination)
+    return clf.fit_predict(data.reshape(-1, 1)) == -1
+```
 
 ## Comprehensive Outlier Detection Framework 🔬
 

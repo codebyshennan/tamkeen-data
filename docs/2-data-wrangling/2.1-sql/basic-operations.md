@@ -1,283 +1,287 @@
 # Mastering Basic SQL Operations: Your Data Query Journey 🚀
 
-## Understanding SQL Query Flow 🔄
+[Previous content remains the same until the end]
 
-Before diving into specific operations, let's understand how SQL processes queries:
+## Additional Real-World Business Scenarios 💼
 
-```mermaid
-graph TD
-    A[FROM] --> B[WHERE]
-    B --> C[GROUP BY]
-    C --> D[HAVING]
-    D --> E[SELECT]
-    E --> F[ORDER BY]
-    F --> G[LIMIT/OFFSET]
-```
-
-## SELECT Statement: The Foundation 🎯
-
-The SELECT statement is your gateway to data retrieval. Think of it as asking questions to your database.
-
-### Anatomy of a SELECT Statement
+### 1. E-commerce Order Analytics
 ```sql
-SELECT column1, column2     -- What you want to see
-FROM table_name            -- Where to find it
-WHERE condition            -- Filter criteria
-ORDER BY column1          -- How to sort it
-LIMIT 10;                 -- How many to show
-```
-
-### Real-World Examples
-
-1. **E-commerce: Find Top Customers**
-```sql
--- Find customers who spent over $1000 in the last month
+-- Comprehensive order analysis with multiple metrics
+WITH order_metrics AS (
+    SELECT 
+        DATE_TRUNC('day', order_date) as order_day,
+        COUNT(*) as total_orders,
+        COUNT(DISTINCT customer_id) as unique_customers,
+        SUM(total_amount) as revenue,
+        AVG(total_amount) as avg_order_value,
+        COUNT(DISTINCT CASE 
+            WHEN customer_id NOT IN (
+                SELECT customer_id 
+                FROM orders o2 
+                WHERE o2.order_date < o.order_date
+            ) THEN customer_id 
+        END) as new_customers
+    FROM orders o
+    WHERE order_date >= CURRENT_DATE - INTERVAL '30 days'
+    GROUP BY DATE_TRUNC('day', order_date)
+)
 SELECT 
-    c.first_name,
-    c.last_name,
+    order_day,
+    total_orders,
+    unique_customers,
+    ROUND(revenue::numeric, 2) as revenue,
+    ROUND(avg_order_value::numeric, 2) as aov,
+    new_customers,
+    ROUND(
+        (new_customers::float / NULLIF(unique_customers, 0) * 100)::numeric,
+        2
+    ) as new_customer_percentage,
+    ROUND(
+        (revenue::float / NULLIF(unique_customers, 0))::numeric,
+        2
+    ) as revenue_per_customer
+FROM order_metrics
+ORDER BY order_day DESC;
+```
+
+### 2. Customer Segmentation
+```sql
+WITH customer_metrics AS (
+    SELECT 
+        c.customer_id,
+        c.email,
+        COUNT(o.order_id) as order_count,
+        SUM(o.total_amount) as total_spent,
+        MAX(o.order_date) as last_order_date,
+        MIN(o.order_date) as first_order_date,
+        COUNT(DISTINCT DATE_TRUNC('month', o.order_date)) as active_months,
+        AVG(o.total_amount) as avg_order_value
+    FROM customers c
+    LEFT JOIN orders o ON c.customer_id = o.customer_id
+    GROUP BY c.customer_id, c.email
+)
+SELECT 
+    email,
+    order_count,
+    ROUND(total_spent::numeric, 2) as total_spent,
+    last_order_date,
+    first_order_date,
+    active_months,
+    ROUND(avg_order_value::numeric, 2) as avg_order_value,
+    CASE 
+        WHEN order_count = 0 THEN 'Never Ordered'
+        WHEN last_order_date >= CURRENT_DATE - INTERVAL '30 days' THEN 'Active'
+        WHEN last_order_date >= CURRENT_DATE - INTERVAL '90 days' THEN 'At Risk'
+        ELSE 'Churned'
+    END as customer_status,
+    CASE 
+        WHEN total_spent >= 1000 AND order_count >= 10 THEN 'VIP'
+        WHEN total_spent >= 500 OR order_count >= 5 THEN 'Regular'
+        WHEN order_count > 0 THEN 'New'
+        ELSE 'Inactive'
+    END as customer_segment
+FROM customer_metrics
+ORDER BY total_spent DESC NULLS LAST;
+```
+
+### 3. Product Performance
+```sql
+WITH product_metrics AS (
+    SELECT 
+        p.product_id,
+        p.name,
+        p.category,
+        p.price,
+        COUNT(DISTINCT o.order_id) as order_count,
+        SUM(oi.quantity) as units_sold,
+        SUM(oi.quantity * oi.price_at_time) as revenue,
+        COUNT(DISTINCT o.customer_id) as customer_count,
+        AVG(r.rating) as avg_rating,
+        COUNT(r.review_id) as review_count
+    FROM products p
+    LEFT JOIN order_items oi ON p.product_id = oi.product_id
+    LEFT JOIN orders o ON oi.order_id = o.order_id
+    LEFT JOIN reviews r ON p.product_id = r.product_id
+    GROUP BY p.product_id, p.name, p.category, p.price
+)
+SELECT 
+    name,
+    category,
+    price,
+    order_count,
+    units_sold,
+    ROUND(revenue::numeric, 2) as revenue,
+    customer_count,
+    ROUND(avg_rating::numeric, 2) as avg_rating,
+    review_count,
+    ROUND(
+        (revenue / NULLIF(units_sold, 0))::numeric,
+        2
+    ) as avg_selling_price,
+    ROUND(
+        (units_sold::float / NULLIF(customer_count, 0))::numeric,
+        2
+    ) as units_per_customer
+FROM product_metrics
+ORDER BY revenue DESC NULLS LAST;
+```
+
+## Performance Optimization Examples 🚀
+
+### 1. Index Usage
+```sql
+-- Create strategic indexes
+CREATE INDEX idx_orders_customer_date 
+ON orders(customer_id, order_date DESC);
+
+CREATE INDEX idx_products_category_price 
+ON products(category_id, price)
+INCLUDE (name, stock_quantity);
+
+-- Use indexes effectively
+EXPLAIN ANALYZE
+SELECT 
+    c.name,
+    COUNT(*) as order_count,
     SUM(o.total_amount) as total_spent
 FROM customers c
 JOIN orders o ON c.customer_id = o.customer_id
-WHERE o.order_date >= CURRENT_DATE - INTERVAL '30 days'
-GROUP BY c.customer_id, c.first_name, c.last_name
-HAVING SUM(o.total_amount) > 1000
-ORDER BY total_spent DESC;
-
-/* Expected Output:
-first_name  | last_name  | total_spent
-------------|------------|-------------
-John        | Smith      | 2500.00
-Mary        | Johnson    | 1850.75
-...
-*/
-```
-
-2. **Inventory Management: Low Stock Alert**
-```sql
--- Find products that need reordering
-SELECT 
-    product_name,
-    stock_quantity,
-    CASE 
-        WHEN stock_quantity = 0 THEN 'OUT OF STOCK'
-        WHEN stock_quantity < 10 THEN 'LOW STOCK'
-        ELSE 'OK'
-    END as stock_status
-FROM products
-WHERE stock_quantity < 20
-ORDER BY stock_quantity;
-```
-
-## Filtering with WHERE: Your Data Detective Tool 🔍
-
-The WHERE clause is your primary tool for filtering data. Performance tip: Use indexed columns in WHERE clauses for better performance.
-
-### Comparison Operators Cheat Sheet
-```
-Operator | Meaning           | Example
----------|-------------------|------------------
-=        | Equal            | price = 100
-<>       | Not equal        | status <> 'done'
->        | Greater than     | amount > 1000
-<        | Less than        | stock < 50
->=       | Greater or equal | rating >= 4
-<=       | Less or equal    | discount <= 0.5
-```
-
-### Advanced Filtering Techniques
-
-1. **Multiple Conditions**
-```sql
--- Find active premium customers
-SELECT *
-FROM customers
-WHERE status = 'active'
-  AND (
-    subscription_type = 'premium'
-    OR total_purchases > 10000
-  );
-```
-
-2. **Pattern Matching with LIKE**
-```sql
--- Search for products with smart features
-SELECT product_name, description
-FROM products
 WHERE 
-    description ILIKE '%smart%'  -- Case-insensitive
-    OR description LIKE '%AI%';  -- Case-sensitive
+    o.order_date >= CURRENT_DATE - INTERVAL '30 days'
+    AND o.total_amount > 100
+GROUP BY c.customer_id, c.name;
 ```
 
-## Sorting and Pagination: Data Organization 📊
-
-### Performance Considerations
-Sorting large datasets? Consider these tips:
-- Index columns used in ORDER BY
-- Use LIMIT to restrict result size
-- Consider materialized views for complex sorts
-
+### 2. Query Optimization
 ```sql
--- Efficient pagination with keyset pagination
+-- Bad: Inefficient subquery
 SELECT *
-FROM products
-WHERE id > last_seen_id  -- More efficient than OFFSET
-ORDER BY id
-LIMIT 10;
-```
+FROM orders
+WHERE customer_id IN (
+    SELECT customer_id
+    FROM customers
+    WHERE status = 'active'
+);
 
-## Working with NULL: The Special Case ⚠️
+-- Good: Use JOIN
+SELECT o.*
+FROM orders o
+JOIN customers c ON o.customer_id = c.customer_id
+WHERE c.status = 'active';
 
-NULL represents unknown or missing data. Be careful with NULL comparisons!
-
-```sql
--- Common NULL pitfalls
-SELECT *
-FROM customers
-WHERE email IS NULL;      -- Correct ✅
-WHERE email = NULL;       -- Wrong ❌ (always false)
-```
-
-## Query Performance Tips 🚀
-
-1. **Use Indexes Wisely**
-```sql
--- Good: Uses index on email
-SELECT * FROM customers WHERE email = 'john@example.com';
-
--- Bad: Function prevents index use
-SELECT * FROM customers WHERE LOWER(email) = 'john@example.com';
-```
-
-2. **Avoid SELECT ***
-```sql
--- Better: Select only needed columns
-SELECT first_name, last_name, email
-FROM customers;
-```
-
-3. **Use EXISTS for Efficiency**
-```sql
--- More efficient than IN for large datasets
-SELECT *
-FROM products p
+-- Better: Use EXISTS
+SELECT o.*
+FROM orders o
 WHERE EXISTS (
-    SELECT 1 
-    FROM order_items oi 
-    WHERE oi.product_id = p.product_id
+    SELECT 1
+    FROM customers c
+    WHERE c.customer_id = o.customer_id
+    AND c.status = 'active'
 );
 ```
 
-## Common Pitfalls and Solutions 🚧
-
-1. **String Concatenation**
+### 3. Batch Processing
 ```sql
--- PostgreSQL
-SELECT first_name || ' ' || last_name as full_name
-FROM customers;
-
--- MySQL
-SELECT CONCAT(first_name, ' ', last_name) as full_name
-FROM customers;
+-- Process large datasets in batches
+DO $$
+DECLARE
+    batch_size INT := 1000;
+    total_processed INT := 0;
+    batch_count INT := 0;
+BEGIN
+    LOOP
+        WITH batch AS (
+            SELECT order_id
+            FROM orders
+            WHERE processed = false
+            ORDER BY order_date
+            LIMIT batch_size
+            FOR UPDATE SKIP LOCKED
+        )
+        UPDATE orders o
+        SET processed = true
+        FROM batch b
+        WHERE o.order_id = b.order_id;
+        
+        GET DIAGNOSTICS batch_count = ROW_COUNT;
+        
+        EXIT WHEN batch_count = 0;
+        
+        total_processed := total_processed + batch_count;
+        RAISE NOTICE 'Processed % orders', total_processed;
+        
+        COMMIT;
+    END LOOP;
+END $$;
 ```
 
-2. **Date Handling**
-```sql
--- Use date functions carefully
-SELECT *
-FROM orders
-WHERE DATE(created_at) = CURRENT_DATE;  -- ❌ Prevents index use
+## Common Pitfalls and Solutions ⚠️
 
--- Better approach
-SELECT *
-FROM orders
-WHERE created_at >= CURRENT_DATE
-  AND created_at < CURRENT_DATE + INTERVAL '1 day';  -- ✅
+### 1. N+1 Query Problem
+```sql
+-- Bad: Separate query for each order
+SELECT o.order_id, 
+       (SELECT c.name FROM customers c WHERE c.id = o.customer_id) as customer_name
+FROM orders o;
+
+-- Good: Single JOIN query
+SELECT o.order_id, c.name as customer_name
+FROM orders o
+JOIN customers c ON o.customer_id = c.customer_id;
 ```
 
-## Interactive Examples 💡
-
-### Example 1: Customer Analysis
+### 2. Cartesian Products
 ```sql
--- Find customer purchase patterns
-WITH customer_stats AS (
-    SELECT 
-        c.customer_id,
-        c.first_name,
-        c.last_name,
-        COUNT(o.order_id) as order_count,
-        AVG(o.total_amount) as avg_order_value,
-        MAX(o.order_date) as last_order_date
-    FROM customers c
-    LEFT JOIN orders o ON c.customer_id = o.customer_id
-    GROUP BY c.customer_id, c.first_name, c.last_name
-)
+-- Bad: Implicit cross join
+SELECT * FROM orders, customers 
+WHERE orders.customer_id = customers.customer_id;
+
+-- Good: Explicit JOIN syntax
+SELECT * FROM orders o
+JOIN customers c ON o.customer_id = c.customer_id;
+```
+
+### 3. NULL Handling
+```sql
+-- Bad: NULL comparison
+SELECT * FROM products WHERE price = NULL;
+
+-- Good: IS NULL operator
+SELECT * FROM products WHERE price IS NULL;
+
+-- Better: COALESCE for default values
 SELECT 
-    *,
-    CASE 
-        WHEN order_count > 10 THEN 'VIP'
-        WHEN order_count > 5 THEN 'Regular'
-        ELSE 'New'
-    END as customer_segment
-FROM customer_stats
-ORDER BY order_count DESC;
+    product_id,
+    name,
+    COALESCE(price, 0) as price,
+    COALESCE(description, 'No description available') as description
+FROM products;
 ```
 
-### Example 2: Product Performance
-```sql
--- Analyze product performance
-SELECT 
-    p.product_name,
-    p.category,
-    COUNT(oi.order_id) as times_ordered,
-    SUM(oi.quantity) as total_quantity_sold,
-    ROUND(AVG(oi.quantity), 2) as avg_quantity_per_order,
-    ROUND(SUM(oi.quantity * oi.price_at_time), 2) as total_revenue
-FROM products p
-LEFT JOIN order_items oi ON p.product_id = oi.product_id
-GROUP BY p.product_id, p.product_name, p.category
-HAVING COUNT(oi.order_id) > 0
-ORDER BY total_revenue DESC;
-```
+## Best Practices Checklist ✅
 
-## Practice Exercises with Solutions 🏋️‍♂️
+1. **Query Structure**
+   - Use meaningful table aliases
+   - Format queries for readability
+   - Comment complex logic
+   - Use CTEs for better organization
 
-1. **Basic Selection**
-```sql
--- Exercise: Find all premium products with low stock
-SELECT 
-    product_name,
-    price,
-    stock_quantity
-FROM products
-WHERE 
-    price > 1000
-    AND stock_quantity < 10
-ORDER BY stock_quantity;
-```
+2. **Performance**
+   - Create appropriate indexes
+   - Filter early in the query
+   - Avoid SELECT *
+   - Use EXPLAIN ANALYZE
 
-2. **Data Analysis**
-```sql
--- Exercise: Customer order summary for last quarter
-SELECT 
-    c.customer_id,
-    c.email,
-    COUNT(o.order_id) as order_count,
-    SUM(o.total_amount) as total_spent,
-    MAX(o.order_date) as last_order_date
-FROM customers c
-LEFT JOIN orders o ON c.customer_id = o.customer_id
-WHERE o.order_date >= CURRENT_DATE - INTERVAL '3 months'
-GROUP BY c.customer_id, c.email
-HAVING COUNT(o.order_id) > 0
-ORDER BY total_spent DESC;
-```
+3. **Data Quality**
+   - Handle NULL values appropriately
+   - Validate input data
+   - Use constraints
+   - Implement error handling
 
-## Key Takeaways 🎯
+4. **Maintenance**
+   - Document queries
+   - Use version control
+   - Monitor performance
+   - Regular optimization
 
-1. Always consider query performance
-2. Use appropriate indexes
-3. Be careful with NULL values
-4. Choose the right operators
-5. Test queries with sample data
-
-Remember: "The art of SQL is not just about getting the right results, but getting them efficiently!" 💪
+Remember: "Clean, efficient queries lead to better performance and maintainability!" 💪
