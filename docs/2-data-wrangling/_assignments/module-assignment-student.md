@@ -1,8 +1,8 @@
-# Module 2: Data Wrangling Assignment
+# Data Wrangling Module Assessment
 
-This comprehensive assignment covers key concepts from SQL, Data Wrangling, Exploratory Data Analysis (EDA), and Data Engineering.
+This comprehensive assessment covers key concepts from SQL, Data Wrangling, Exploratory Data Analysis (EDA), and Data Engineering.
 
-## Part 1: SQL Fundamentals
+## SQL (25 points)
 
 1. Which SQL command is used to retrieve data from a database?
    a. SELECT
@@ -22,51 +22,51 @@ This comprehensive assignment covers key concepts from SQL, Data Wrangling, Expl
    c. LEFT JOIN
    d. RIGHT JOIN
 
-4. What is the purpose of GROUP BY?
-   a. To sort records
-   b. To group rows with similar values
-   c. To filter records
-   d. To join tables
+4. What is the difference between HAVING and WHERE?
+   a. HAVING filters grouped results, WHERE filters individual rows
+   b. HAVING is used before GROUP BY, WHERE after
+   c. They are interchangeable
+   d. HAVING can only be used with JOINs
 
-5. Which aggregate function returns the number of rows?
-   a. SUM
-   b. AVG
-   c. COUNT
-   d. MAX
+5. Which statement about indexes is correct?
+   a. Indexes always improve query performance
+   b. Indexes can slow down INSERT and UPDATE operations
+   c. You should index every column
+   d. Indexes don't affect storage space
 
-## Part 2: Data Wrangling
+## Data Wrangling (25 points)
 
 6. What is data cleaning?
-   a. Collecting data
-   b. Analyzing data
-   c. Fixing or removing incorrect data
-   d. Visualizing data
+   a. Collecting data from various sources
+   b. Analyzing data patterns and trends
+   c. Fixing or removing incorrect, corrupted, or irrelevant data
+   d. Visualizing data relationships
 
 7. Which of these is NOT a common data quality issue?
-   a. Missing values
-   b. Duplicate records
-   c. Inconsistent formats
-   d. Beautiful visualization
+   a. Missing values in customer records
+   b. Duplicate transaction entries
+   c. Inconsistent date formats
+   d. Beautiful data visualization
 
-8. What is the best way to handle missing values?
+8. What is the best approach for handling missing values?
    a. Always delete rows with missing values
    b. Always replace with zero
-   c. Choose method based on context and data
-   d. Ignore them
+   c. Choose method based on context and data patterns
+   d. Ignore them completely
 
 9. What is data transformation?
-   a. Converting data from one format to another
-   b. Deleting incorrect data
-   c. Collecting new data
+   a. Converting data from one format or structure to another
+   b. Deleting incorrect data entries
+   c. Collecting new data samples
    d. Analyzing data patterns
 
-10. Which scaling method preserves zero values and is robust to outliers?
-    a. Standard scaling
-    b. Robust scaling
+10. Which scaling method is most robust to outliers?
+    a. Standard scaling (z-score)
+    b. Robust scaling (using quartiles)
     c. Min-max scaling
     d. Log transformation
 
-## Part 3: Exploratory Data Analysis (EDA)
+## Exploratory Data Analysis (25 points)
 
 11. What is the main purpose of EDA?
     a. To understand patterns and relationships in data
@@ -98,33 +98,33 @@ This comprehensive assignment covers key concepts from SQL, Data Wrangling, Expl
     c. Line plot
     d. Pie chart
 
-## Part 4: Data Engineering
+## Data Engineering (25 points)
 
-16. What is ETL?
+16. What is ETL in data engineering?
     a. Extract, Transform, Load
     b. Export, Transfer, Link
     c. Evaluate, Test, Launch
     d. Extract, Test, Load
 
-17. Which storage format is best for structured data?
+17. Which storage solution is most appropriate for structured, relational data with ACID requirements?
     a. Text files
     b. Relational databases
     c. PDF files
     d. Image files
 
-18. What is data integration?
+18. What is the primary purpose of data integration?
     a. Combining data from different sources
     b. Cleaning data
     c. Analyzing data
     d. Visualizing data
 
-19. Which is NOT a common data storage system?
+19. Which is NOT typically used as a data storage system?
     a. MySQL
     b. PostgreSQL
     c. MongoDB
     d. Microsoft Word
 
-20. What is the purpose of data warehousing?
+20. What is the primary purpose of data warehousing?
     a. To store integrated data for analysis
     b. To collect new data
     c. To clean data

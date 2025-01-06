@@ -5,39 +5,76 @@
 ### Section 1: Machine Learning Fundamentals
 
 1. Answer: a. Algorithms that learn from data
-   **Explanation**: Machine learning enables systems to learn patterns from data without explicit programming. Key aspects:
-   - Data-driven approach vs traditional rule-based programming
-   - Pattern recognition and generalization
-   - Automatic improvement with experience
-   - Minimal human intervention in the learning process
+   **Explanation**: Machine learning:
+   - Enables systems to learn patterns from data
+   - Improves performance with experience
+   - Makes predictions on new data
+   - Automates decision-making
+   Key aspects:
+   - Data-driven approach
+   - Pattern recognition
+   - Generalization ability
+   - Minimal human intervention
+
+   *For more information, see: [What is ML](../5.1-intro-to-ml/what-is-ml.md)*
 
 2. Answer: a. Creating new features from existing data
-   **Explanation**: Feature engineering transforms raw data into meaningful features:
-   - Uses domain knowledge to create new features
-   - Improves model performance
-   - Examples: polynomial features, binning, encoding
-   - Critical for model success
+   **Explanation**: Feature engineering involves:
+   - Transforming raw data into useful features
+   - Creating meaningful representations
+   - Incorporating domain knowledge
+   - Improving model performance
+   Common techniques:
+   - Scaling and normalization
+   - One-hot encoding
+   - Binning/discretization
+   - Interaction features
+   - Polynomial features
+
+   *For more information, see: [Feature Engineering](../5.1-intro-to-ml/feature-engineering.md)*
 
 3. Answer: a. Balance between model complexity and generalization
-   **Explanation**: The bias-variance tradeoff represents:
-   - Bias: Error from model assumptions (underfitting)
-   - Variance: Sensitivity to training data (overfitting)
-   - Trade-off between simple and complex models
-   - Goal: Find optimal complexity point
+   **Explanation**: The bias-variance tradeoff:
+   - Represents fundamental ML challenge
+   - Balances underfitting vs. overfitting
+   - Affects model generalization
+   - Guides model selection
+   Key concepts:
+   - High bias: Underfitting
+   - High variance: Overfitting
+   - Optimal balance depends on data
+   - Related to model complexity
+
+   *For more information, see: [Bias-Variance](../5.1-intro-to-ml/bias-variance.md)*
 
 4. Answer: a. Assessing model performance on unseen data
    **Explanation**: Cross-validation:
+   - Evaluates model generalization
    - Provides robust performance estimates
    - Helps detect overfitting
-   - Uses all data efficiently
-   - Standard practice in model evaluation
+   - Guides hyperparameter tuning
+   Implementation involves:
+   - Splitting data multiple times
+   - Training on different subsets
+   - Testing on held-out data
+   - Averaging performance metrics
+
+   *For more information, see: [ML Workflow](../5.1-intro-to-ml/ml-workflow.md)*
 
 5. Answer: a. Supervised uses labeled data, unsupervised doesn't
    **Explanation**: Key differences:
-   - Supervised: Has target variable, makes predictions
-   - Unsupervised: No labels, finds patterns
-   - Different applications and evaluation methods
-   - Complementary approaches in ML
+   - Supervised Learning:
+     * Uses labeled training data
+     * Has defined target variable
+     * Makes predictions
+     * Examples: classification, regression
+   - Unsupervised Learning:
+     * Uses unlabeled data
+     * Finds hidden patterns
+     * No target variable
+     * Examples: clustering, dimensionality reduction
+
+   *For more information, see: [What is ML](../5.1-intro-to-ml/what-is-ml.md)*
 
 ### Section 2: Supervised Learning
 
