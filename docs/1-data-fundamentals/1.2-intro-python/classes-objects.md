@@ -1,4 +1,341 @@
-[Previous content remains the same...]
+# Python Classes and Objects in Data Science
+
+## Introduction to Object-Oriented Programming
+
+### Core OOP Concepts
+1. **Encapsulation**: Bundling data and methods that operate on that data
+2. **Inheritance**: Creating new classes based on existing ones
+3. **Polymorphism**: Using a single interface for different data types
+4. **Abstraction**: Hiding complex implementation details
+
+### Why OOP in Data Science?
+- Modular and reusable code
+- Maintainable data pipelines
+- Scalable machine learning systems
+- Consistent interfaces
+
+## Design Patterns in Data Science
+
+### 1. Factory Pattern
+```python
+from abc import ABC, abstractmethod
+from typing import Dict, Type
+
+class Model(ABC):
+    @abstractmethod
+    def train(self, X, y):
+        pass
+    
+    @abstractmethod
+    def predict(self, X):
+        pass
+
+class RandomForestModel(Model):
+    def train(self, X, y):
+        print("Training Random Forest")
+    
+    def predict(self, X):
+        print("Predicting with Random Forest")
+
+class XGBoostModel(Model):
+    def train(self, X, y):
+        print("Training XGBoost")
+    
+    def predict(self, X):
+        print("Predicting with XGBoost")
+
+class ModelFactory:
+    _models: Dict[str, Type[Model]] = {
+        'random_forest': RandomForestModel,
+        'xgboost': XGBoostModel
+    }
+    
+    @classmethod
+    def create_model(cls, model_type: str) -> Model:
+        if model_type not in cls._models:
+            raise ValueError(f"Unknown model type: {model_type}")
+        return cls._models[model_type]()
+```
+
+### 2. Strategy Pattern
+```python
+from typing import Protocol, Dict, Any
+
+class FeatureEngineeringStrategy(Protocol):
+    def engineer_features(self, data: pd.DataFrame) -> pd.DataFrame:
+        ...
+
+class DateFeatures:
+    def engineer_features(self, data: pd.DataFrame) -> pd.DataFrame:
+        for col in data.select_dtypes('datetime64'):
+            data[f'{col}_year'] = data[col].dt.year
+            data[f'{col}_month'] = data[col].dt.month
+        return data
+
+class TextFeatures:
+    def engineer_features(self, data: pd.DataFrame) -> pd.DataFrame:
+        for col in data.select_dtypes('object'):
+            data[f'{col}_length'] = data[col].str.len()
+            data[f'{col}_word_count'] = data[col].str.split().str.len()
+        return data
+
+class FeatureEngineer:
+    def __init__(self, strategies: List[FeatureEngineeringStrategy]):
+        self.strategies = strategies
+    
+    def apply_all(self, data: pd.DataFrame) -> pd.DataFrame:
+        for strategy in self.strategies:
+            data = strategy.engineer_features(data)
+        return data
+```
+
+### 3. Observer Pattern
+```python
+from typing import List, Protocol
+from dataclasses import dataclass
+from datetime import datetime
+
+class ModelObserver(Protocol):
+    def update(self, metrics: Dict[str, float]):
+        ...
+
+@dataclass
+class ModelMetrics:
+    timestamp: datetime
+    metrics: Dict[str, float]
+
+class MetricsLogger(ModelObserver):
+    def __init__(self):
+        self.history: List[ModelMetrics] = []
+    
+    def update(self, metrics: Dict[str, float]):
+        self.history.append(
+            ModelMetrics(datetime.now(), metrics)
+        )
+
+class AlertSystem(ModelObserver):
+    def __init__(self, threshold: float):
+        self.threshold = threshold
+    
+    def update(self, metrics: Dict[str, float]):
+        if metrics.get('error', 0) > self.threshold:
+            print(f"Alert: Model error {metrics['error']} "
+                  f"exceeded threshold {self.threshold}")
+
+class ObservableModel:
+    def __init__(self):
+        self._observers: List[ModelObserver] = []
+    
+    def attach(self, observer: ModelObserver):
+        self._observers.append(observer)
+    
+    def notify(self, metrics: Dict[str, float]):
+        for observer in self._observers:
+            observer.update(metrics)
+```
+
+## Testing and Debugging
+
+### Unit Testing
+```python
+import unittest
+from typing import List, Dict
+
+class TestMLPipeline(unittest.TestCase):
+    def setUp(self):
+        self.sample_data = pd.DataFrame({
+            'feature1': [1, 2, np.nan, 4],
+            'feature2': ['A', None, 'B', 'A']
+        })
+        
+        self.pipeline = MLPipeline([
+            MissingValueImputer(),
+            FeatureScaler()
+        ])
+    
+    def test_missing_value_imputation(self):
+        result = self.pipeline.transform(self.sample_data)
+        self.assertFalse(result.isnull().any().any())
+    
+    def test_feature_scaling(self):
+        result = self.pipeline.transform(self.sample_data)
+        numeric_cols = result.select_dtypes(include=[np.number]).columns
+        for col in numeric_cols:
+            self.assertAlmostEqual(result[col].mean(), 0, places=2)
+            self.assertAlmostEqual(result[col].std(), 1, places=2)
+
+if __name__ == '__main__':
+    unittest.main()
+```
+
+### Debugging Tips
+1. **Use Logging Effectively**
+```python
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+
+logger = logging.getLogger(__name__)
+
+class DebuggableTransformer(BaseTransformer):
+    def transform(self, X: pd.DataFrame) -> pd.DataFrame:
+        logger.info(f"Starting transformation on {X.shape} data")
+        try:
+            result = self._transform_implementation(X)
+            logger.info("Transformation successful")
+            return result
+        except Exception as e:
+            logger.error(f"Transformation failed: {str(e)}")
+            raise
+```
+
+2. **Data Validation**
+```python
+from dataclasses import dataclass
+from typing import Optional, List
+
+@dataclass
+class DataValidationResult:
+    is_valid: bool
+    errors: List[str]
+    warnings: List[str]
+
+class DataValidator:
+    def validate(self, data: pd.DataFrame) -> DataValidationResult:
+        errors = []
+        warnings = []
+        
+        # Check for missing values
+        missing = data.isnull().sum()
+        if missing.any():
+            warnings.append(
+                f"Missing values found in columns: "
+                f"{missing[missing > 0].index.tolist()}"
+            )
+        
+        # Check data types
+        if not all(data.select_dtypes(include=[np.number]).columns):
+            errors.append("Non-numeric data found in feature columns")
+        
+        return DataValidationResult(
+            is_valid=len(errors) == 0,
+            errors=errors,
+            warnings=warnings
+        )
+```
+
+## Error Handling Best Practices
+
+### 1. Custom Exceptions
+```python
+class PipelineError(Exception):
+    """Base exception for pipeline errors"""
+    pass
+
+class DataValidationError(PipelineError):
+    """Raised when data validation fails"""
+    pass
+
+class ModelError(PipelineError):
+    """Raised when model operations fail"""
+    pass
+
+class TransformerError(PipelineError):
+    """Raised when transformer operations fail"""
+    def __init__(self, transformer_name: str, message: str):
+        self.transformer_name = transformer_name
+        super().__init__(f"{transformer_name}: {message}")
+```
+
+### 2. Graceful Error Handling
+```python
+class RobustPipeline:
+    def __init__(self, steps: List[BaseTransformer]):
+        self.steps = steps
+        self.errors: List[Dict] = []
+    
+    def process(self, data: pd.DataFrame) -> Optional[pd.DataFrame]:
+        try:
+            # Validate input data
+            validation_result = DataValidator().validate(data)
+            if not validation_result.is_valid:
+                raise DataValidationError(
+                    f"Validation failed: {validation_result.errors}"
+                )
+            
+            # Process each step
+            current_data = data
+            for step in self.steps:
+                try:
+                    current_data = step.transform(current_data)
+                except Exception as e:
+                    self.errors.append({
+                        'step': step.__class__.__name__,
+                        'error': str(e),
+                        'timestamp': datetime.now()
+                    })
+                    raise TransformerError(
+                        step.__class__.__name__, str(e)
+                    )
+            
+            return current_data
+            
+        except Exception as e:
+            self.errors.append({
+                'step': 'pipeline',
+                'error': str(e),
+                'timestamp': datetime.now()
+            })
+            raise PipelineError(f"Pipeline failed: {str(e)}")
+```
+
+## Performance Optimization
+
+### 1. Parallel Processing
+```python
+from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
+from typing import Callable
+
+class ParallelTransformer(BaseTransformer):
+    def __init__(self, func: Callable, n_jobs: int = -1):
+        self.func = func
+        self.n_jobs = n_jobs
+    
+    def transform(self, X: pd.DataFrame) -> pd.DataFrame:
+        # Split data into chunks
+        chunks = np.array_split(X, self.n_jobs)
+        
+        # Process chunks in parallel
+        with ProcessPoolExecutor(max_workers=self.n_jobs) as executor:
+            results = list(executor.map(self.func, chunks))
+        
+        # Combine results
+        return pd.concat(results)
+```
+
+### 2. Memory Optimization
+```python
+class MemoryEfficientPipeline:
+    def __init__(self, steps: List[BaseTransformer]):
+        self.steps = steps
+    
+    def transform(self, X: pd.DataFrame) -> pd.DataFrame:
+        # Process data in chunks
+        chunk_size = 1000
+        chunks = []
+        
+        for chunk in pd.read_csv('large_file.csv', chunksize=chunk_size):
+            # Process each chunk through pipeline
+            for step in self.steps:
+                chunk = step.transform(chunk)
+            chunks.append(chunk)
+        
+        return pd.concat(chunks)
+```
+
 
 ## Advanced Data Science Classes
 
@@ -432,3 +769,22 @@ Remember:
 - Follow SOLID principles
 
 Happy coding! 🚀
+
+## Additional Resources 📚
+
+1. **Books**
+   - "Clean Code" by Robert C. Martin
+   - "Design Patterns" by Gang of Four
+   - "Python Patterns" by Brandon Rhodes
+
+2. **Online Resources**
+   - [Real Python OOP Tutorials](https://realpython.com/python3-object-oriented-programming/)
+   - [Python Design Patterns](https://python-patterns.guide/)
+   - [Scikit-learn Development Guide](https://scikit-learn.org/stable/developers/index.html)
+
+3. **Tools**
+   - [PyTest](https://docs.pytest.org/) for testing
+   - [Black](https://github.com/psf/black) for code formatting
+   - [Mypy](http://mypy-lang.org/) for type checking
+
+Remember: "Clean code is not written by following a set of rules. You don't become a software craftsman by learning a list of heuristics. Professionalism and craftsmanship come from values that drive disciplines." - Robert C. Martin 🎯
