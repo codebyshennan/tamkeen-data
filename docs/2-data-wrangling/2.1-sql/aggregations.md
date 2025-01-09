@@ -1,6 +1,6 @@
-# SQL Aggregations: Transforming Data into Insights 📊
+# SQL Aggregations: Transforming Data into Insights
 
-## Understanding Aggregations 🎯
+## Understanding Aggregations
 
 Aggregations in SQL transform detailed data into meaningful summaries. Think of it like:
 - Raw data = Individual grocery receipts
@@ -20,7 +20,7 @@ graph TD
     end
 ```
 
-## Aggregate Functions: Your Data Analysis Toolkit 🛠️
+## Aggregate Functions
 
 ### Basic Statistical Functions
 
@@ -118,7 +118,223 @@ graph TD
    GROUP BY customer_id;
    ```
 
-### Statistical Functions
+## Advanced Aggregation Concepts 
+
+### Window Functions Deep Dive
+Window functions perform calculations across a set of table rows related to the current row.
+
+```sql
+-- Employee salary analysis by department
+SELECT 
+    employee_name,
+    department,
+    salary,
+    AVG(salary) OVER (PARTITION BY department) as dept_avg_salary,
+    salary - AVG(salary) OVER (PARTITION BY department) as diff_from_avg,
+    RANK() OVER (PARTITION BY department ORDER BY salary DESC) as salary_rank,
+    DENSE_RANK() OVER (PARTITION BY department ORDER BY salary DESC) as dense_rank,
+    ROW_NUMBER() OVER (PARTITION BY department ORDER BY salary DESC) as row_num,
+    NTILE(4) OVER (PARTITION BY department ORDER BY salary) as salary_quartile,
+    FIRST_VALUE(salary) OVER (
+        PARTITION BY department 
+        ORDER BY salary DESC
+        ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
+    ) as highest_salary_in_dept,
+    salary / SUM(salary) OVER (PARTITION BY department) * 100 as pct_of_dept_total
+FROM employees;
+
+-- Running totals with different frame specifications
+SELECT 
+    sale_date,
+    amount,
+    -- Running total (default frame)
+    SUM(amount) OVER (ORDER BY sale_date) as running_total,
+    -- Previous 7 days total
+    SUM(amount) OVER (
+        ORDER BY sale_date 
+        ROWS BETWEEN 6 PRECEDING AND CURRENT ROW
+    ) as rolling_7day_total,
+    -- Previous month to next month
+    SUM(amount) OVER (
+        ORDER BY sale_date 
+        RANGE BETWEEN INTERVAL '1' MONTH PRECEDING 
+        AND INTERVAL '1' MONTH FOLLOWING
+    ) as three_month_window
+FROM sales;
+```
+
+### HAVING vs WHERE: Understanding the Difference
+```sql
+-- WHERE filters individual rows before grouping
+-- HAVING filters groups after grouping
+
+-- Example: Find departments with high-performing sales teams
+SELECT 
+    department,
+    COUNT(*) as employee_count,
+    AVG(sales) as avg_sales,
+    SUM(sales) as total_sales
+FROM employees
+WHERE status = 'active'  -- Filter individual employees first
+GROUP BY department
+HAVING 
+    COUNT(*) >= 5 AND  -- Only departments with 5+ employees
+    AVG(sales) > 50000;  -- And above-average sales
+
+-- Common mistake: Using WHERE for aggregate conditions
+SELECT 
+    product_category,
+    COUNT(*) as product_count,
+    AVG(price) as avg_price
+FROM products
+WHERE AVG(price) > 100  -- Wrong! Will cause error
+GROUP BY product_category;
+
+-- Correct version
+SELECT 
+    product_category,
+    COUNT(*) as product_count,
+    AVG(price) as avg_price
+FROM products
+GROUP BY product_category
+HAVING AVG(price) > 100;  -- Correct! Filters after aggregation
+```
+
+### GROUP BY vs PARTITION BY: Key Differences
+```sql
+-- GROUP BY: Reduces rows, one row per group
+SELECT 
+    department,
+    COUNT(*) as employee_count,
+    AVG(salary) as avg_salary
+FROM employees
+GROUP BY department;
+
+-- PARTITION BY: Maintains rows, adds aggregate values
+SELECT 
+    department,
+    employee_name,
+    salary,
+    AVG(salary) OVER (PARTITION BY department) as dept_avg_salary,
+    salary - AVG(salary) OVER (PARTITION BY department) as salary_diff
+FROM employees;
+
+-- Combined usage example
+WITH dept_stats AS (
+    SELECT 
+        department,
+        COUNT(*) as employee_count,
+        AVG(salary) as avg_salary
+    FROM employees
+    GROUP BY department
+)
+SELECT 
+    e.department,
+    e.employee_name,
+    e.salary,
+    ds.avg_salary as dept_avg,
+    RANK() OVER (PARTITION BY e.department ORDER BY e.salary DESC) as salary_rank
+FROM employees e
+JOIN dept_stats ds ON e.department = ds.department;
+```
+
+## Common Pitfalls and Best Practices 🚧
+
+### 1. NULL Handling
+```sql
+-- Bad: Ignoring NULLs
+SELECT AVG(salary) FROM employees;  -- Might be misleading
+
+-- Good: Explicit NULL handling
+SELECT 
+    COUNT(*) as total_employees,
+    COUNT(salary) as employees_with_salary,
+    COUNT(*) - COUNT(salary) as employees_missing_salary,
+    AVG(COALESCE(salary, 0)) as avg_salary_including_zeros,
+    AVG(salary) as avg_salary_excluding_nulls
+FROM employees;
+```
+
+### 2. Performance Considerations
+```sql
+-- Bad: Unnecessary subquery
+SELECT 
+    department,
+    (SELECT AVG(salary) FROM employees e2 
+     WHERE e2.department = e1.department) as avg_salary
+FROM employees e1
+GROUP BY department;
+
+-- Good: More efficient window function
+SELECT DISTINCT
+    department,
+    AVG(salary) OVER (PARTITION BY department) as avg_salary
+FROM employees;
+```
+
+### 3. Precision and Rounding
+```sql
+-- Bad: Inconsistent decimal places
+SELECT 
+    department,
+    AVG(salary) as avg_salary,
+    SUM(salary) as total_salary
+FROM employees
+GROUP BY department;
+
+-- Good: Consistent decimal handling
+SELECT 
+    department,
+    ROUND(AVG(salary)::numeric, 2) as avg_salary,
+    ROUND(SUM(salary)::numeric, 2) as total_salary
+FROM employees
+GROUP BY department;
+```
+
+## Practice Exercises 🎯
+
+1. **Basic Aggregation**
+   ```sql
+   -- Calculate monthly sales metrics
+   -- Include: total sales, average order value, order count
+   -- Group by year and month
+   -- Sort by year and month descending
+   ```
+
+2. **Window Functions**
+   ```sql
+   -- For each order:
+   -- Calculate running total sales for the customer
+   -- Show customer's previous order amount
+   -- Show customer's average order value
+   -- Rank orders by amount within customer
+   ```
+
+3. **Complex Grouping**
+   ```sql
+   -- Create a sales summary with:
+   -- Daily, weekly, monthly totals
+   -- Year-over-year comparison
+   -- Moving averages
+   -- Percentage of total calculations
+   ```
+
+4. **Advanced Analytics**
+   ```sql
+   -- Customer cohort analysis
+   -- Product affinity analysis
+   -- Customer lifetime value calculation
+   -- Churn risk scoring
+   ```
+
+## Additional Resources 📚
+
+- [PostgreSQL Aggregation Documentation](https://www.postgresql.org/docs/current/functions-aggregate.html)
+- [Window Functions Tutorial](https://mode.com/sql-tutorial/sql-window-functions/)
+- [SQL Performance Tuning Guide](https://use-the-index-luke.com/)
+- [Advanced SQL Recipes](https://modern-sql.com/)
+
+## Statistical Functions
 
 1. **STDDEV**: Standard Deviation
    ```sql
@@ -333,6 +549,12 @@ FROM sales_stats
 ORDER BY sale_date DESC;
 ```
 
-[Previous content remains the same until the end]
-
 Remember: "Good aggregations tell a story about your data!" 📊
+
+## Next Steps 🎯
+
+1. Practice with real datasets
+2. Experiment with different window functions
+3. Optimize query performance
+4. Build comprehensive dashboards
+5. Share insights with stakeholders

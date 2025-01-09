@@ -1,6 +1,273 @@
 # Mastering Basic SQL Operations: Your Data Query Journey 🚀
 
-[Previous content remains the same until the end]
+## Introduction to SQL Basics
+
+SQL (Structured Query Language) is the standard language for managing and manipulating relational databases. Understanding basic SQL operations is crucial for:
+- Data retrieval and analysis
+- Database management
+- Data integrity maintenance
+- Application development
+
+## CRUD Operations
+
+### 1. CREATE: Adding Data
+```sql
+-- Create a new table
+CREATE TABLE customers (
+    customer_id SERIAL PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert single row
+INSERT INTO customers (first_name, last_name, email)
+VALUES ('John', 'Doe', 'john.doe@email.com');
+
+-- Insert multiple rows
+INSERT INTO customers (first_name, last_name, email)
+VALUES 
+    ('Jane', 'Smith', 'jane.smith@email.com'),
+    ('Bob', 'Johnson', 'bob.johnson@email.com');
+```
+
+### 2. READ: Querying Data
+```sql
+-- Select all columns
+SELECT * FROM customers;
+
+-- Select specific columns
+SELECT first_name, last_name, email 
+FROM customers;
+
+-- Basic filtering
+SELECT * FROM customers
+WHERE last_name = 'Smith';
+
+-- Pattern matching
+SELECT * FROM customers
+WHERE email LIKE '%@email.com';
+```
+
+### 3. UPDATE: Modifying Data
+```sql
+-- Update single record
+UPDATE customers
+SET email = 'new.email@email.com'
+WHERE customer_id = 1;
+
+-- Update multiple records
+UPDATE customers
+SET created_at = CURRENT_TIMESTAMP
+WHERE created_at IS NULL;
+
+-- Update with conditions
+UPDATE customers
+SET 
+    first_name = INITCAP(first_name),
+    last_name = INITCAP(last_name)
+WHERE 
+    first_name != INITCAP(first_name) OR
+    last_name != INITCAP(last_name);
+```
+
+### 4. DELETE: Removing Data
+```sql
+-- Delete specific records
+DELETE FROM customers
+WHERE customer_id = 1;
+
+-- Delete with conditions
+DELETE FROM customers
+WHERE created_at < CURRENT_DATE - INTERVAL '1 year';
+
+-- Delete all records
+TRUNCATE TABLE customers;
+```
+
+## Basic Query Structure
+
+### 1. SELECT Statement Anatomy
+```sql
+SELECT 
+    column1,
+    column2,
+    column3 AS alias,
+    CONCAT(column4, ' ', column5) as derived_column
+FROM table_name
+WHERE condition
+GROUP BY column1
+HAVING group_condition
+ORDER BY column3 DESC
+LIMIT 10;
+```
+
+### 2. Filtering and Sorting
+```sql
+-- Basic WHERE clauses
+SELECT * FROM products
+WHERE 
+    category = 'Electronics' AND
+    price >= 100 AND
+    stock_quantity > 0;
+
+-- Multiple conditions
+SELECT * FROM orders
+WHERE 
+    status IN ('pending', 'processing') AND
+    order_date BETWEEN 
+        CURRENT_DATE - INTERVAL '30 days' 
+        AND CURRENT_DATE;
+
+-- Pattern matching
+SELECT * FROM customers
+WHERE 
+    email LIKE '%.com' AND
+    first_name ILIKE 'j%';  -- Case-insensitive
+
+-- Sorting results
+SELECT 
+    product_name,
+    price,
+    stock_quantity
+FROM products
+ORDER BY 
+    price DESC,
+    product_name ASC;
+```
+
+## Data Types and Constraints
+
+### 1. Common Data Types
+```sql
+CREATE TABLE products (
+    -- Numeric types
+    product_id SERIAL PRIMARY KEY,
+    price DECIMAL(10,2),
+    weight INTEGER,
+    
+    -- String types
+    name VARCHAR(100),
+    description TEXT,
+    
+    -- Date/Time types
+    created_at TIMESTAMP,
+    sale_date DATE,
+    
+    -- Boolean type
+    is_active BOOLEAN,
+    
+    -- Enumerated type
+    status product_status
+);
+```
+
+### 2. Constraints
+```sql
+CREATE TABLE orders (
+    -- Primary Key
+    order_id SERIAL PRIMARY KEY,
+    
+    -- Foreign Key
+    customer_id INTEGER REFERENCES customers(customer_id),
+    
+    -- Not Null
+    order_date TIMESTAMP NOT NULL,
+    
+    -- Unique
+    tracking_number VARCHAR(50) UNIQUE,
+    
+    -- Check constraint
+    total_amount DECIMAL(10,2) CHECK (total_amount >= 0),
+    
+    -- Default value
+    status VARCHAR(20) DEFAULT 'pending'
+);
+```
+
+## Table Relationships
+
+### 1. One-to-Many Relationship
+```sql
+CREATE TABLE categories (
+    category_id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE products (
+    product_id SERIAL PRIMARY KEY,
+    category_id INTEGER REFERENCES categories(category_id),
+    name VARCHAR(100) NOT NULL
+);
+```
+
+### 2. Many-to-Many Relationship
+```sql
+CREATE TABLE products (
+    product_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE orders (
+    order_id SERIAL PRIMARY KEY,
+    order_date TIMESTAMP NOT NULL
+);
+
+CREATE TABLE order_items (
+    order_id INTEGER REFERENCES orders(order_id),
+    product_id INTEGER REFERENCES products(product_id),
+    quantity INTEGER NOT NULL,
+    price_at_time DECIMAL(10,2) NOT NULL,
+    PRIMARY KEY (order_id, product_id)
+);
+```
+
+## Basic Joins
+
+### 1. INNER JOIN
+```sql
+-- Get all orders with customer information
+SELECT 
+    o.order_id,
+    o.order_date,
+    c.first_name,
+    c.last_name,
+    o.total_amount
+FROM orders o
+INNER JOIN customers c ON o.customer_id = c.customer_id;
+```
+
+### 2. LEFT JOIN
+```sql
+-- Get all customers and their orders (if any)
+SELECT 
+    c.customer_id,
+    c.first_name,
+    c.last_name,
+    COUNT(o.order_id) as order_count,
+    COALESCE(SUM(o.total_amount), 0) as total_spent
+FROM customers c
+LEFT JOIN orders o ON c.customer_id = o.customer_id
+GROUP BY c.customer_id, c.first_name, c.last_name;
+```
+
+### 3. Multiple Joins
+```sql
+-- Get order details with product and customer information
+SELECT 
+    o.order_id,
+    c.first_name || ' ' || c.last_name as customer_name,
+    p.name as product_name,
+    oi.quantity,
+    oi.price_at_time,
+    oi.quantity * oi.price_at_time as line_total
+FROM orders o
+JOIN customers c ON o.customer_id = c.customer_id
+JOIN order_items oi ON o.order_id = oi.order_id
+JOIN products p ON oi.product_id = p.product_id
+ORDER BY o.order_id, p.name;
+```
 
 ## Additional Real-World Business Scenarios 💼
 

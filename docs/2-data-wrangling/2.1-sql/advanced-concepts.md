@@ -1,6 +1,334 @@
 # Advanced SQL Concepts: Beyond the Basics 🚀
 
-[Previous content remains the same until the end]
+## Introduction to Advanced SQL
+
+SQL mastery goes beyond basic CRUD operations. Advanced SQL concepts enable you to:
+- Write complex, performant queries
+- Handle large-scale data processing
+- Implement sophisticated business logic
+- Optimize database operations
+
+## Advanced SQL Functions
+
+### 1. JSON Operations
+```sql
+-- JSON creation and manipulation
+SELECT 
+    order_id,
+    jsonb_build_object(
+        'customer', customer_name,
+        'items', (
+            SELECT jsonb_agg(
+                jsonb_build_object(
+                    'product', product_name,
+                    'quantity', quantity,
+                    'price', price
+                )
+            )
+            FROM order_items oi
+            JOIN products p ON oi.product_id = p.product_id
+            WHERE oi.order_id = o.order_id
+        )
+    ) as order_details
+FROM orders o
+JOIN customers c ON o.customer_id = c.customer_id;
+
+-- JSON querying
+SELECT 
+    order_id,
+    order_details -> 'customer' as customer,
+    jsonb_array_length(order_details -> 'items') as item_count,
+    jsonb_path_query_array(
+        order_details,
+        '$.items[*].price'
+    ) as prices
+FROM order_details_json;
+```
+
+### 2. Full-Text Search
+```sql
+-- Create search vectors
+CREATE INDEX idx_products_search ON products USING gin(
+    to_tsvector('english', 
+        coalesce(name,'') || ' ' || 
+        coalesce(description,'') || ' ' || 
+        coalesce(category,'')
+    )
+);
+
+-- Perform search with ranking
+SELECT 
+    name,
+    description,
+    ts_rank(
+        to_tsvector('english', 
+            coalesce(name,'') || ' ' || 
+            coalesce(description,'') || ' ' || 
+            coalesce(category,'')
+        ),
+        plainto_tsquery('english', 'search term')
+    ) as relevance
+FROM products
+WHERE to_tsvector('english', 
+    coalesce(name,'') || ' ' || 
+    coalesce(description,'') || ' ' || 
+    coalesce(category,'')
+) @@ plainto_tsquery('english', 'search term')
+ORDER BY relevance DESC;
+```
+
+### 3. Recursive Queries
+```sql
+-- Employee hierarchy
+WITH RECURSIVE employee_hierarchy AS (
+    -- Base case: top-level employees
+    SELECT 
+        employee_id,
+        name,
+        manager_id,
+        1 as level,
+        ARRAY[name] as path
+    FROM employees
+    WHERE manager_id IS NULL
+    
+    UNION ALL
+    
+    -- Recursive case: employees with managers
+    SELECT 
+        e.employee_id,
+        e.name,
+        e.manager_id,
+        eh.level + 1,
+        eh.path || e.name
+    FROM employees e
+    JOIN employee_hierarchy eh ON e.manager_id = eh.employee_id
+)
+SELECT 
+    level,
+    lpad(' ', (level-1)*2) || name as employee,
+    array_to_string(path, ' -> ') as hierarchy_path
+FROM employee_hierarchy
+ORDER BY path;
+```
+
+## Window Functions Deep Dive
+
+### 1. Advanced Framing
+```sql
+SELECT 
+    date,
+    amount,
+    -- Different frame specifications
+    SUM(amount) OVER (
+        ORDER BY date
+        ROWS BETWEEN 
+            UNBOUNDED PRECEDING 
+            AND CURRENT ROW
+    ) as cumulative_sum,
+    
+    AVG(amount) OVER (
+        ORDER BY date
+        ROWS BETWEEN 
+            3 PRECEDING 
+            AND 1 FOLLOWING
+    ) as centered_average,
+    
+    SUM(amount) OVER (
+        ORDER BY date
+        RANGE BETWEEN 
+            INTERVAL '1 month' PRECEDING 
+            AND CURRENT ROW
+    ) as rolling_monthly_sum
+FROM transactions;
+```
+
+### 2. Multiple Window Functions
+```sql
+SELECT 
+    category,
+    product_name,
+    price,
+    -- Rankings within category
+    RANK() OVER w1 as price_rank,
+    DENSE_RANK() OVER w1 as dense_rank,
+    ROW_NUMBER() OVER w1 as row_num,
+    
+    -- Statistics within category
+    AVG(price) OVER w2 as avg_price,
+    price - AVG(price) OVER w2 as price_diff,
+    
+    -- Percentiles within category
+    NTILE(4) OVER w1 as price_quartile,
+    PERCENT_RANK() OVER w1 as price_percentile
+FROM products
+WINDOW 
+    w1 as (PARTITION BY category ORDER BY price DESC),
+    w2 as (PARTITION BY category);
+```
+
+## Advanced Joins and Set Operations
+
+### 1. Lateral Joins
+```sql
+SELECT 
+    c.customer_name,
+    recent_orders.order_id,
+    recent_orders.order_date,
+    recent_orders.amount
+FROM customers c
+CROSS JOIN LATERAL (
+    SELECT 
+        order_id,
+        order_date,
+        total_amount as amount
+    FROM orders o
+    WHERE o.customer_id = c.customer_id
+    ORDER BY order_date DESC
+    LIMIT 3
+) recent_orders;
+```
+
+### 2. Set Operations with Ordering
+```sql
+-- Complex set operations
+(
+    SELECT 
+        'Current' as period,
+        category,
+        SUM(amount) as total_sales
+    FROM sales
+    WHERE date >= CURRENT_DATE - INTERVAL '1 month'
+    GROUP BY category
+)
+UNION ALL
+(
+    SELECT 
+        'Previous' as period,
+        category,
+        SUM(amount) as total_sales
+    FROM sales
+    WHERE 
+        date >= CURRENT_DATE - INTERVAL '2 months' AND
+        date < CURRENT_DATE - INTERVAL '1 month'
+    GROUP BY category
+)
+ORDER BY 
+    category,
+    period DESC;
+```
+
+## Error Handling and Transactions
+
+### 1. Transaction Management
+```sql
+-- Complex transaction with savepoints
+BEGIN;
+
+SAVEPOINT order_start;
+
+-- Create order
+INSERT INTO orders (customer_id, order_date, status)
+VALUES (123, CURRENT_TIMESTAMP, 'pending')
+RETURNING order_id INTO v_order_id;
+
+-- Check inventory and update stock
+UPDATE products
+SET stock_quantity = stock_quantity - order_quantity
+WHERE product_id = v_product_id
+AND stock_quantity >= order_quantity;
+
+IF NOT FOUND THEN
+    ROLLBACK TO order_start;
+    RAISE EXCEPTION 'Insufficient stock for product %', v_product_id;
+END IF;
+
+-- Process payment
+SAVEPOINT payment;
+
+BEGIN
+    -- Payment processing logic
+    IF payment_failed THEN
+        ROLLBACK TO payment;
+        RAISE EXCEPTION 'Payment failed';
+    END IF;
+EXCEPTION
+    WHEN OTHERS THEN
+        ROLLBACK TO payment;
+        RAISE;
+END;
+
+COMMIT;
+```
+
+### 2. Error Handling
+```sql
+CREATE OR REPLACE FUNCTION process_order(
+    p_customer_id INT,
+    p_items JSONB
+) RETURNS INT AS $$
+DECLARE
+    v_order_id INT;
+    v_item JSONB;
+    v_total DECIMAL(10,2) := 0;
+BEGIN
+    -- Input validation
+    IF p_items IS NULL OR jsonb_array_length(p_items) = 0 THEN
+        RAISE EXCEPTION 'Order must contain at least one item';
+    END IF;
+    
+    -- Start transaction
+    BEGIN
+        -- Create order
+        INSERT INTO orders (customer_id, order_date, status)
+        VALUES (p_customer_id, CURRENT_TIMESTAMP, 'pending')
+        RETURNING order_id INTO v_order_id;
+        
+        -- Process items
+        FOR v_item IN SELECT * FROM jsonb_array_elements(p_items)
+        LOOP
+            -- Add order item
+            BEGIN
+                INSERT INTO order_items (
+                    order_id, 
+                    product_id,
+                    quantity,
+                    price
+                )
+                VALUES (
+                    v_order_id,
+                    (v_item->>'product_id')::INT,
+                    (v_item->>'quantity')::INT,
+                    (v_item->>'price')::DECIMAL
+                );
+            EXCEPTION
+                WHEN foreign_key_violation THEN
+                    RAISE EXCEPTION 'Invalid product ID: %',
+                        (v_item->>'product_id');
+                WHEN numeric_value_out_of_range THEN
+                    RAISE EXCEPTION 'Invalid quantity or price for product %',
+                        (v_item->>'product_id');
+            END;
+            
+            -- Update total
+            v_total := v_total + 
+                ((v_item->>'quantity')::INT * (v_item->>'price')::DECIMAL);
+        END LOOP;
+        
+        -- Update order total
+        UPDATE orders 
+        SET total_amount = v_total,
+            status = 'confirmed'
+        WHERE order_id = v_order_id;
+        
+        RETURN v_order_id;
+    EXCEPTION
+        WHEN OTHERS THEN
+            RAISE EXCEPTION 'Order processing failed: %', SQLERRM;
+    END;
+END;
+$$ LANGUAGE plpgsql;
+```
+
 
 ## Additional Real-World Scenarios 💼
 
@@ -322,3 +650,38 @@ LEFT JOIN order_items oi ON p.product_id = oi.product_id;
 ```
 
 Remember: "Performance optimization is an iterative process - measure, analyze, improve!" 💪
+
+
+## Best Practices and Guidelines 📋
+
+### 1. Query Writing
+- Write self-documenting queries with clear aliases
+- Use CTEs for better readability and maintenance
+- Leverage appropriate indexes for performance
+- Consider query plan and execution cost
+
+### 2. Database Design
+- Implement proper constraints and relationships
+- Use appropriate data types
+- Design with scalability in mind
+- Regular maintenance and optimization
+
+### 3. Development Process
+- Version control your database changes
+- Implement proper testing procedures
+- Monitor query performance
+- Regular code reviews and optimization
+
+## Additional Resources 📚
+
+1. **Documentation**
+   - [PostgreSQL Documentation](https://www.postgresql.org/docs/)
+   - [SQL Performance Tuning](https://use-the-index-luke.com/)
+   - [Modern SQL Guide](https://modern-sql.com/)
+
+2. **Tools**
+   - [pgAdmin](https://www.pgadmin.org/) for database management
+   - [DBeaver](https://dbeaver.io/) for query development
+   - [pg_stat_statements](https://www.postgresql.org/docs/current/pgstatstatements.html) for query analysis
+
+Remember: "Complex queries should be like well-written essays - clear, structured, and purposeful!" 🎯

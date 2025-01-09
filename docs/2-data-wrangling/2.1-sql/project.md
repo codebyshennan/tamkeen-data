@@ -1,6 +1,243 @@
 # E-commerce Data Analysis Project: GlobalMart Analytics Platform 🚀
 
-[Previous content remains the same until the sales_metrics CTE]
+## Project Overview 📊
+
+This project implements a comprehensive analytics platform for GlobalMart, an e-commerce business. The platform provides insights into customer behavior, product performance, and business operations through SQL-based analysis.
+
+## Analysis Components 📈
+
+### 1. Customer Analytics (30 points)
+
+#### 1.1 Customer Segmentation (15 points)
+```sql
+WITH customer_metrics AS (
+    SELECT 
+        c.customer_id,
+        c.join_date,
+        COUNT(DISTINCT o.order_id) as total_orders,
+        SUM(o.total_amount) as total_spent,
+        AVG(o.total_amount) as avg_order_value,
+        MAX(o.order_date) as last_order_date,
+        COUNT(DISTINCT DATE_TRUNC('month', o.order_date)) as active_months,
+        SUM(o.discount_amount) / NULLIF(SUM(o.total_amount), 0) * 100 as discount_rate
+    FROM customers c
+    LEFT JOIN orders o ON c.customer_id = o.customer_id
+    WHERE o.order_date >= CURRENT_DATE - INTERVAL '12 months'
+    GROUP BY c.customer_id, c.join_date
+),
+customer_segments AS (
+    SELECT 
+        *,
+        NTILE(4) OVER (ORDER BY total_spent DESC) as spending_quartile,
+        NTILE(4) OVER (ORDER BY total_orders DESC) as frequency_quartile,
+        CURRENT_DATE - last_order_date as days_since_last_order,
+        total_spent / NULLIF(active_months, 0) as monthly_avg_spend
+    FROM customer_metrics
+)
+SELECT 
+    customer_id,
+    ROUND(total_spent::numeric, 2) as total_spent,
+    total_orders,
+    ROUND(avg_order_value::numeric, 2) as avg_order_value,
+    active_months,
+    ROUND(monthly_avg_spend::numeric, 2) as monthly_avg_spend,
+    ROUND(discount_rate::numeric, 2) as discount_rate,
+    days_since_last_order,
+    CASE 
+        WHEN spending_quartile = 1 AND frequency_quartile = 1 THEN '💎 VIP'
+        WHEN spending_quartile <= 2 AND frequency_quartile <= 2 THEN '🌟 High Value'
+        WHEN days_since_last_order <= 30 THEN '✨ Active'
+        WHEN days_since_last_order <= 90 THEN '😴 At Risk'
+        ELSE '💔 Churned'
+    END as customer_segment,
+    CASE 
+        WHEN discount_rate > 20 THEN '🎯 Discount Sensitive'
+        WHEN avg_order_value > 500 THEN '💰 Premium Buyer'
+        WHEN total_orders > 12 THEN '🔄 Regular Buyer'
+        ELSE '👤 Standard'
+    END as buying_pattern
+FROM customer_segments
+ORDER BY total_spent DESC;
+```
+
+#### 1.2 Customer Retention Analysis (15 points)
+```sql
+WITH cohort_dates AS (
+    SELECT 
+        customer_id,
+        DATE_TRUNC('month', join_date) as cohort_month,
+        DATE_TRUNC('month', order_date) as order_month
+    FROM customers c
+    JOIN orders o ON c.customer_id = o.customer_id
+),
+cohort_size AS (
+    SELECT 
+        cohort_month,
+        COUNT(DISTINCT customer_id) as num_customers
+    FROM cohort_dates
+    GROUP BY cohort_month
+),
+retention_analysis AS (
+    SELECT 
+        c.cohort_month,
+        o.order_month,
+        COUNT(DISTINCT c.customer_id) as active_customers,
+        cs.num_customers as cohort_size,
+        EXTRACT(MONTH FROM o.order_month - c.cohort_month) as months_since_join
+    FROM cohort_dates c
+    JOIN cohort_dates o ON c.customer_id = o.customer_id
+    JOIN cohort_size cs ON cs.cohort_month = c.cohort_month
+    GROUP BY c.cohort_month, o.order_month, cs.num_customers
+)
+SELECT 
+    cohort_month,
+    cohort_size,
+    months_since_join,
+    active_customers,
+    ROUND(
+        (active_customers::float / cohort_size * 100)::numeric,
+        2
+    ) as retention_rate,
+    CASE 
+        WHEN months_since_join = 0 THEN '🆕 New'
+        WHEN months_since_join <= 3 THEN '✨ Early'
+        WHEN months_since_join <= 6 THEN '🌟 Established'
+        ELSE '💫 Loyal'
+    END as cohort_stage
+FROM retention_analysis
+WHERE months_since_join <= 12
+ORDER BY cohort_month DESC, months_since_join;
+```
+
+### 2. Product Performance (30 points)
+
+#### 2.1 Product Analytics (15 points)
+```sql
+WITH product_metrics AS (
+    SELECT 
+        p.product_id,
+        p.name as product_name,
+        p.category,
+        p.price,
+        p.cost_price,
+        COUNT(DISTINCT o.order_id) as total_orders,
+        SUM(oi.quantity) as units_sold,
+        SUM(oi.quantity * p.price) as gross_revenue,
+        SUM(oi.quantity * (p.price - p.cost_price)) as gross_profit,
+        AVG(r.rating) as avg_rating,
+        COUNT(r.review_id) as review_count
+    FROM products p
+    LEFT JOIN order_items oi ON p.product_id = oi.product_id
+    LEFT JOIN orders o ON oi.order_id = o.order_id
+    LEFT JOIN reviews r ON p.product_id = r.product_id
+    WHERE o.order_date >= CURRENT_DATE - INTERVAL '90 days'
+    GROUP BY p.product_id, p.name, p.category, p.price, p.cost_price
+),
+product_rankings AS (
+    SELECT 
+        *,
+        ROUND((gross_revenue / NULLIF(units_sold, 0))::numeric, 2) as avg_selling_price,
+        ROUND((gross_profit / NULLIF(gross_revenue, 0) * 100)::numeric, 2) as profit_margin,
+        RANK() OVER (PARTITION BY category ORDER BY units_sold DESC) as category_rank,
+        PERCENT_RANK() OVER (ORDER BY gross_revenue) as revenue_percentile
+    FROM product_metrics
+)
+SELECT 
+    product_name,
+    category,
+    ROUND(price::numeric, 2) as list_price,
+    units_sold,
+    ROUND(gross_revenue::numeric, 2) as gross_revenue,
+    ROUND(gross_profit::numeric, 2) as gross_profit,
+    profit_margin,
+    ROUND(avg_rating::numeric, 2) as avg_rating,
+    review_count,
+    category_rank,
+    CASE 
+        WHEN revenue_percentile >= 0.9 THEN '🏆 Top Performer'
+        WHEN revenue_percentile >= 0.7 THEN '⭐ High Performer'
+        WHEN revenue_percentile >= 0.4 THEN '📊 Mid Performer'
+        ELSE '⚠️ Under Performer'
+    END as performance_tier,
+    CASE 
+        WHEN profit_margin >= 50 THEN '💰 High Margin'
+        WHEN profit_margin >= 25 THEN '💵 Good Margin'
+        WHEN profit_margin >= 10 THEN '⚖️ Fair Margin'
+        ELSE '⚠️ Low Margin'
+    END as margin_category,
+    CASE 
+        WHEN avg_rating >= 4.5 THEN '⭐⭐⭐⭐⭐'
+        WHEN avg_rating >= 4.0 THEN '⭐⭐⭐⭐'
+        WHEN avg_rating >= 3.0 THEN '⭐⭐⭐'
+        WHEN avg_rating >= 2.0 THEN '⭐⭐'
+        ELSE '⭐'
+    END as rating_display
+FROM product_rankings
+ORDER BY gross_revenue DESC;
+```
+
+#### 2.2 Inventory Analysis (15 points)
+```sql
+WITH inventory_metrics AS (
+    SELECT 
+        p.product_id,
+        p.name as product_name,
+        p.category,
+        p.stock_quantity,
+        p.reorder_level,
+        p.cost_price,
+        SUM(oi.quantity) as units_sold_30d,
+        COUNT(DISTINCT o.order_id) as order_count_30d,
+        SUM(oi.quantity) / 30.0 as daily_demand
+    FROM products p
+    LEFT JOIN order_items oi ON p.product_id = oi.product_id
+    LEFT JOIN orders o ON oi.order_id = o.order_id
+    WHERE o.order_date >= CURRENT_DATE - INTERVAL '30 days'
+    GROUP BY p.product_id, p.name, p.category, p.stock_quantity, 
+             p.reorder_level, p.cost_price
+),
+inventory_analysis AS (
+    SELECT 
+        *,
+        ROUND(stock_quantity / NULLIF(daily_demand, 0)) as days_of_inventory,
+        stock_quantity * cost_price as inventory_value,
+        CASE 
+            WHEN stock_quantity = 0 THEN 0
+            ELSE ROUND(units_sold_30d::float / stock_quantity * 100, 2)
+        END as inventory_turnover
+    FROM inventory_metrics
+)
+SELECT 
+    product_name,
+    category,
+    stock_quantity,
+    reorder_level,
+    ROUND(daily_demand::numeric, 2) as daily_demand,
+    days_of_inventory,
+    ROUND(inventory_value::numeric, 2) as inventory_value,
+    inventory_turnover,
+    CASE 
+        WHEN stock_quantity = 0 THEN '🚨 Out of Stock'
+        WHEN stock_quantity <= reorder_level THEN '⚠️ Reorder Needed'
+        WHEN days_of_inventory >= 90 THEN '💤 Overstocked'
+        WHEN days_of_inventory >= 30 THEN '✅ Healthy Stock'
+        ELSE '📊 Low Stock'
+    END as stock_status,
+    CASE 
+        WHEN inventory_turnover >= 50 THEN '🔄 High Turnover'
+        WHEN inventory_turnover >= 25 THEN '📈 Good Turnover'
+        WHEN inventory_turnover >= 10 THEN '📊 Moderate Turnover'
+        ELSE '📉 Slow Turnover'
+    END as turnover_rate,
+    CASE 
+        WHEN stock_quantity = 0 THEN 'Urgent Reorder'
+        WHEN stock_quantity <= reorder_level THEN 'Place Order'
+        WHEN days_of_inventory >= 90 THEN 'Consider Promotion'
+        ELSE 'Monitor Stock'
+    END as recommended_action
+FROM inventory_analysis
+ORDER BY inventory_value DESC;
+```
 
 ### 3. Business Operations (40 points)
 
@@ -350,3 +587,4 @@ ORDER BY inventory_value DESC;
    - Better marketing ROI
 
 Remember: "Data-driven decisions lead to better business outcomes!" 🎯
+
