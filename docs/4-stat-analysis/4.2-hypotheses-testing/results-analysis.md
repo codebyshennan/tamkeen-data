@@ -1,11 +1,13 @@
 # Results Analysis: From Numbers to Insights 📊
 
 ## Introduction: Why Results Analysis Matters 🎯
+
 Think of results analysis as being a detective with data - it's not just about finding clues (statistical significance) but understanding what they mean for the case (practical significance). Whether you're analyzing A/B tests, research studies, or business experiments, proper results analysis helps you turn raw numbers into actionable insights!
 
 ## Understanding Test Results 🔍
 
 ### 1. P-values and Statistical Significance 📈
+
 Like a metal detector beeping - it tells you something's there, but you need to dig to understand what!
 
 ```python
@@ -85,6 +87,7 @@ class SignificanceAnalyzer:
 ```
 
 ### 2. Effect Sizes: The Magnitude Matters! 📏
+
 Not just whether there's a difference, but how big it is:
 
 ```python
@@ -171,175 +174,96 @@ class EffectSizeAnalyzer:
         # Implementation details...
 ```
 
-## Visualization of Results 📊
+## Recommended Visualizations
 
-### 1. Confidence Intervals: The Range of Possibility 🎯
+To enhance understanding of results analysis, we recommend adding the following visualizations:
 
-```python
-class ConfidenceIntervalVisualizer:
-    """Create beautiful and informative CI visualizations"""
-    
-    def plot_confidence_interval(self, mean, ci_lower, ci_upper, 
-                               label='', comparison_value=None):
-        """
-        Create comprehensive CI visualization
-        
-        Parameters:
-        -----------
-        mean : float
-            Point estimate
-        ci_lower, ci_upper : float
-            Confidence interval bounds
-        label : str
-            Description of the measure
-        comparison_value : float, optional
-            Reference value for comparison
-        """
-        plt.figure(figsize=(12, 6))
-        
-        # Main CI plot
-        plt.subplot(121)
-        self._plot_ci_basic(mean, ci_lower, ci_upper, comparison_value)
-        
-        # Interpretation guide
-        plt.subplot(122)
-        self._plot_ci_interpretation(mean, ci_lower, ci_upper, comparison_value)
-        
-        plt.suptitle(f'Confidence Interval Analysis\n{label}')
-        plt.tight_layout()
-        plt.savefig('docs/4-stat-analysis/4.2-hypotheses-testing/assets/ci_analysis.png')
-        plt.close()
-    
-    def _plot_ci_basic(self, mean, ci_lower, ci_upper, comparison_value):
-        """Create basic CI plot"""
-        # Implementation details...
-```
+1. **Statistical vs Practical Significance**
+   - Side-by-side comparison of statistical and practical significance
+   - Show relationship between p-values and effect sizes
+   - Include real-world impact assessment
 
-## Making Decisions: From Analysis to Action 🎯
+2. **Confidence Interval Diagram**
+   - Visual explanation of confidence intervals
+   - Show relationship between sample size and interval width
+   - Demonstrate interpretation
 
-### 1. The Decision Framework 📋
+3. **Effect Size Visualization**
+   - Visual representation of different effect sizes
+   - Show relationship between effect size and power
+   - Include practical significance thresholds
 
-```python
-class DecisionFramework:
-    """Framework for making data-driven decisions"""
-    
-    def analyze_decision(self, statistical_sig, practical_sig, 
-                        implementation_cost, potential_benefit):
-        """
-        Comprehensive decision analysis
-        
-        Parameters:
-        -----------
-        statistical_sig : bool
-            Whether result is statistically significant
-        practical_sig : bool
-            Whether effect size is practically significant
-        implementation_cost : float
-            Cost to implement change
-        potential_benefit : float
-            Potential benefit if successful
-        """
-        # Calculate ROI
-        roi = (potential_benefit - implementation_cost) / implementation_cost
-        
-        # Decision matrix
-        decision = self._get_decision(statistical_sig, practical_sig, roi)
-        
-        # Risk assessment
-        risk = self._assess_risk(statistical_sig, practical_sig, roi)
-        
-        return {
-            'decision': decision,
-            'roi': roi,
-            'risk_level': risk,
-            'recommendation': self._get_recommendation(decision, risk)
-        }
-    
-    def _get_decision(self, stat_sig, prac_sig, roi):
-        """Determine decision category"""
-        if stat_sig and prac_sig and roi > 0:
-            return "Strong Implement"
-        elif stat_sig and prac_sig:
-            return "Consider Implement"
-        elif stat_sig:
-            return "Monitor"
-        else:
-            return "Do Not Implement"
-    
-    def _assess_risk(self, stat_sig, prac_sig, roi):
-        """Assess implementation risk"""
-        # Implementation details...
-```
+4. **Results Dashboard**
+   - Comprehensive view of all test results
+   - Include key metrics and visualizations
+   - Show trends over time
+   - Highlight significant findings
 
-### 2. Communicating Results 📢
+5. **Decision Framework**
+   - Visual guide for making decisions
+   - Show relationship between:
+     - Statistical significance
+     - Practical significance
+     - Implementation cost
+     - Potential benefit
 
-```python
-class ResultsCommunicator:
-    """Tools for effective results communication"""
-    
-    def generate_report(self, results, audience='technical'):
-        """
-        Generate appropriate report for target audience
-        
-        Parameters:
-        -----------
-        results : dict
-            Analysis results
-        audience : str
-            'technical', 'business', or 'executive'
-        """
-        if audience == 'technical':
-            return self._technical_report(results)
-        elif audience == 'business':
-            return self._business_report(results)
-        else:
-            return self._executive_summary(results)
-    
-    def _technical_report(self, results):
-        """Generate detailed technical report"""
-        report = {
-            'statistical_analysis': {
-                'test_statistic': results['test_statistic'],
-                'p_value': results['p_value'],
-                'effect_size': results['effect_size'],
-                'confidence_interval': results['ci']
-            },
-            'methodology': {
-                'test_type': results['test_type'],
-                'assumptions_checked': results['assumptions'],
-                'limitations': results['limitations']
-            },
-            'visualizations': [
-                'significance_test.png',
-                'effect_size.png',
-                'confidence_intervals.png'
-            ]
-        }
-        return report
-    
-    def _business_report(self, results):
-        """Generate business-focused report"""
-        # Implementation details...
-```
+## Common Mistakes to Avoid
 
-## Practice Questions 🤔
-1. Your A/B test shows p=0.04 and a 0.1% increase in conversions. What do you recommend?
-2. How would you communicate statistical results to:
-   - A technical data scientist?
-   - A business manager?
-   - A CEO?
-3. When might you implement a change despite non-significant results?
-4. How do you balance statistical significance with business priorities?
-5. What factors beyond p-values should influence your decisions?
+1. **Focusing Only on P-values**
+   - Consider effect sizes
+   - Think about practical significance
+   - Look at confidence intervals
 
-## Key Takeaways 🎯
-1. 📊 Statistical significance is just the starting point
-2. 📏 Effect sizes tell you practical importance
-3. 💰 Consider business context in decisions
-4. ⚠️ Assess and communicate risks clearly
-5. 👥 Tailor communication to your audience
+2. **Ignoring Assumptions**
+   - Check normality
+   - Verify equal variances
+   - Test independence
+   - Report violations
+
+3. **Multiple Testing Without Correction**
+   - Plan all comparisons in advance
+   - Use appropriate correction methods
+   - Report adjusted p-values
+
+4. **Overlooking Practical Significance**
+   - Consider effect sizes
+   - Think about real-world impact
+   - Balance statistical and practical importance
+
+5. **Poor Visualization**
+   - Use appropriate chart types
+   - Include error bars
+   - Show confidence intervals
+   - Make it easy to understand
+
+## Best Practices
+
+1. **Analysis Phase**
+   - Check assumptions
+   - Use appropriate tests
+   - Calculate effect sizes
+   - Consider practical significance
+
+2. **Interpretation Phase**
+   - Consider both statistical and practical significance
+   - Report effect sizes
+   - Discuss limitations
+   - Make recommendations
+
+3. **Visualization Phase**
+   - Choose appropriate charts
+   - Include error bars
+   - Show confidence intervals
+   - Make it easy to understand
+
+4. **Reporting Phase**
+   - Be transparent
+   - Include visualizations
+   - Acknowledge limitations
+   - Make actionable recommendations
 
 ## Additional Resources 📚
+
 - [Effect Size Calculator](https://www.psychometrica.de/effect_size.html)
 - [Decision Making Framework](https://hbr.org/2019/09/the-abcs-of-data-driven-decisions)
 - [Results Communication Guide](https://www.nature.com/articles/s41467-020-17896-w)

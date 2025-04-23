@@ -1,11 +1,13 @@
 # Formulating Hypotheses: The Art of Scientific Questions 🔍
 
 ## Introduction: Why Hypotheses Matter 🎯
+
 Think of a hypothesis as your scientific GPS - it guides your investigation and helps you arrive at meaningful conclusions. Whether you're testing a new drug, optimizing a website, or studying customer behavior, well-formulated hypotheses are your roadmap to discovery!
 
 ## The Anatomy of a Hypothesis 🔬
 
 ### The Dynamic Duo: Null and Alternative
+
 1. **Null Hypothesis (H₀)** 🚫
    - The "nothing special happening" hypothesis
    - States no effect or no difference
@@ -64,6 +66,7 @@ t_stat, p_value = demonstrate_hypotheses()
 ## The Three Pillars of Good Hypotheses 🏛️
 
 ### 1. Specific and Clear 📝
+
 Transform vague ideas into testable statements:
 
 ❌ Bad: "The treatment might work better"
@@ -100,6 +103,7 @@ def test_specific_hypothesis(control_data, treatment_data, min_improvement=2):
 ```
 
 ### 2. Measurable 📊
+
 Your hypothesis should involve quantifiable variables:
 
 ```python
@@ -143,6 +147,7 @@ def measure_customer_satisfaction(ratings, target_score=4.0):
 ```
 
 ### 3. Falsifiable ❌
+
 Your hypothesis must be able to be proven wrong:
 
 ```python
@@ -174,6 +179,7 @@ def demonstrate_falsifiability():
 ## Types of Hypotheses 📚
 
 ### 1. Simple vs Composite Hypotheses
+
 - Simple: Tests exact value
 - Composite: Tests range of values
 
@@ -194,6 +200,7 @@ def demonstrate_hypothesis_types(data):
 ```
 
 ### 2. Directional vs Non-directional 🔄
+
 ```python
 def compare_directional_tests(control, treatment):
     """
@@ -233,129 +240,234 @@ def compare_directional_tests(control, treatment):
     }
 ```
 
-## Common Pitfalls and Solutions ⚠️
+## Recommended Visualizations
 
-### 1. Multiple Testing Problem 🎯
-When testing multiple hypotheses, adjust for multiple comparisons:
+To enhance understanding of hypothesis formulation, we recommend adding the following visualizations:
 
-```python
-def handle_multiple_testing(p_values):
-    """
-    Apply corrections for multiple testing
-    """
-    from statsmodels.stats.multitest import multipletests
-    
-    # Different correction methods
-    corrections = {
-        'bonferroni': multipletests(p_values, method='bonferroni')[1],
-        'fdr': multipletests(p_values, method='fdr_bh')[1],
-        'holm': multipletests(p_values, method='holm')[1]
-    }
-    
-    # Visualize
-    plt.figure(figsize=(10, 6))
-    
-    for i, (method, values) in enumerate(corrections.items()):
-        plt.subplot(1, 3, i+1)
-        plt.scatter(p_values, values)
-        plt.plot([0, 1], [0, 1], 'r--')
-        plt.title(f'{method.capitalize()} Correction')
-        plt.xlabel('Original p-value')
-        plt.ylabel('Adjusted p-value')
-    
-    plt.tight_layout()
-    plt.savefig('docs/4-stat-analysis/4.2-hypotheses-testing/assets/multiple_testing.png')
-    plt.close()
-    
-    return corrections
-```
+1. **Hypothesis Testing Flowchart**
+   - Step-by-step guide to hypothesis formulation
+   - Show relationship between research question and hypothesis
+   - Include decision points for test selection
 
-### 2. P-hacking 🎲
-Don't fish for significance:
+2. **Null vs Alternative Distribution**
+   - Side-by-side comparison of null and alternative distributions
+   - Show critical regions and significance levels
+   - Demonstrate Type I and Type II errors
 
-```python
-def demonstrate_p_hacking(data):
-    """Show why p-hacking is problematic"""
-    results = []
-    
-    # DON'T do this!
-    for cutoff in range(10, len(data), 10):
-        subset = data[:cutoff]
-        _, p_value = stats.ttest_1samp(subset, 0)
-        results.append({
-            'sample_size': cutoff,
-            'p_value': p_value
-        })
-    
-    # Visualize the problem
-    plt.figure(figsize=(8, 5))
-    df = pd.DataFrame(results)
-    plt.plot(df['sample_size'], df['p_value'])
-    plt.axhline(0.05, color='r', linestyle='--', label='Significance Level')
-    plt.title('P-hacking Demonstration')
-    plt.xlabel('Sample Size')
-    plt.ylabel('P-value')
-    plt.legend()
-    plt.savefig('docs/4-stat-analysis/4.2-hypotheses-testing/assets/p_hacking.png')
-    plt.close()
-    
-    return df
-```
+3. **Effect Size Visualization**
+   - Visual representation of different effect sizes
+   - Show relationship between effect size and power
+   - Include practical significance thresholds
 
-## Best Practices for Success 🌟
+4. **Test Selection Decision Tree**
+   - Interactive flowchart for choosing statistical tests
+   - Based on data type and research question
+   - Include common test scenarios
 
-### 1. Plan Your Analysis 📋
-```python
-class HypothesisTest:
-    def __init__(self, name, null_hypothesis, alternative_hypothesis):
-        self.name = name
-        self.null = null_hypothesis
-        self.alternative = alternative_hypothesis
-        self.data = {}
-        self.results = None
-        
-    def add_data(self, group_name, data):
-        self.data[group_name] = data
-        
-    def run_test(self):
-        # Implement specific test logic
-        pass
-    
-    def visualize(self):
-        # Create visualizations
-        pass
-    
-    def report(self):
-        # Generate summary report
-        pass
-```
+5. **Multiple Testing Correction**
+   - Visual explanation of correction methods
+   - Show impact on significance levels
+   - Demonstrate family-wise error rate
 
-### 2. Document Everything 📝
-- State hypotheses clearly
-- Specify significance level
-- Record all decisions
-- Note any deviations
+## Common Mistakes to Avoid
 
-### 3. Consider Practical Significance 💭
-Statistical significance ≠ Practical importance
+1. **Vague Hypotheses**
+   - Be specific about variables
+   - Define measurement methods
+   - Specify expected direction
 
-## Practice Questions 🤔
-1. Write null and alternative hypotheses for testing if a new teaching method improves test scores.
-2. When would you use a one-tailed vs two-tailed test? Give examples.
-3. How would you handle testing multiple features of a website simultaneously?
-4. Design a hypothesis test for comparing customer satisfaction across three different stores.
-5. What's wrong with p-hacking and how can you avoid it?
+2. **Multiple Hypotheses Without Correction**
+   - Plan all tests in advance
+   - Use appropriate correction methods
+   - Report adjusted significance levels
 
-## Key Takeaways 🎯
-1. 📝 Clear, specific hypotheses guide good research
-2. 📊 Make your hypotheses measurable and falsifiable
-3. ⚠️ Beware of multiple testing and p-hacking
-4. 🔍 Consider both statistical and practical significance
-5. 📈 Document your decisions and rationale
+3. **Ignoring Assumptions**
+   - Check test assumptions
+   - Use appropriate tests
+   - Report violations
+
+4. **Data-Driven Hypotheses**
+   - Formulate before data collection
+   - Avoid post-hoc hypotheses
+   - Document all analyses
+
+5. **Overlooking Practical Significance**
+   - Consider effect sizes
+   - Think about real-world impact
+   - Balance statistical and practical significance
+
+## Best Practices
+
+1. **Formulation Phase**
+   - Start with research question
+   - Review existing literature
+   - Consider practical implications
+   - Write clear, testable statements
+
+2. **Testing Phase**
+   - Choose appropriate test
+   - Check assumptions
+   - Calculate required sample size
+   - Plan analysis methods
+
+3. **Interpretation Phase**
+   - Consider both statistical and practical significance
+   - Report effect sizes
+   - Discuss limitations
+   - Make recommendations
+
+4. **Documentation Phase**
+   - Record all hypotheses
+   - Document test procedures
+   - Report all results
+   - Include sensitivity analyses
 
 ## Additional Resources 📚
+
 - [Statistical Hypothesis Testing Guide](https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/)
 - [Multiple Testing Calculator](https://www.statstest.com/bonferroni/)
 - [P-value Misconceptions](https://www.nature.com/articles/nmeth.3288)
 
 Remember: A well-formulated hypothesis is half the battle won! 🎯
+
+# Hypothesis Formulation: Asking the Right Questions
+
+## Introduction
+
+Think of hypothesis formulation as being a scientific detective. Just like a detective starts with a theory about what happened, we start with a hypothesis about what we expect to find. This guide will help you formulate clear, testable hypotheses.
+
+![Scientific Method Flowchart](assets/scientific_method.png)
+
+## The Anatomy of a Hypothesis
+
+### Null Hypothesis (H₀)
+
+The null hypothesis is your default position - what you'd expect if nothing interesting is happening:
+
+- No difference between groups
+- No relationship between variables
+- No effect of treatment
+
+### Alternative Hypothesis (H₁ or Hₐ)
+
+The alternative hypothesis is what you're really interested in proving:
+
+- There is a difference between groups
+- There is a relationship between variables
+- The treatment has an effect
+
+## The Three Pillars of Good Hypotheses
+
+### 1. Specific and Clear
+
+Your hypothesis should be precise and unambiguous:
+
+```python
+# Bad hypothesis: "The treatment improves outcomes"
+# Good hypothesis: "The new website design increases conversion rate by at least 5%"
+
+def calculate_improvement(control_data, treatment_data):
+    """Calculate percentage improvement"""
+    control_mean = np.mean(control_data)
+    treatment_mean = np.mean(treatment_data)
+    return ((treatment_mean - control_mean) / control_mean) * 100
+```
+
+### 2. Measurable
+
+Your hypothesis should involve quantifiable variables:
+
+```python
+def is_measurable(metric, data):
+    """Check if a metric is measurable in the data"""
+    return (
+        metric in data.columns and
+        data[metric].dtype in ['int64', 'float64']
+    )
+```
+
+### 3. Falsifiable
+
+Your hypothesis must be testable and possible to prove wrong:
+![Statistical Test Decision Tree](assets/statistical_test_tree.png)
+
+## Types of Hypotheses
+
+### Simple vs. Composite
+
+- Simple: Specifies exact values
+- Composite: Specifies ranges or inequalities
+
+### Directional vs. Non-directional
+
+- Directional: Specifies the direction of effect
+- Non-directional: Only specifies that there is an effect
+
+## Effect Size Considerations
+
+Understanding the magnitude of effects:
+![Effect Sizes](assets/effect_sizes.png)
+
+## Statistical Power
+
+Ensure your study can detect meaningful effects:
+![Power Analysis](assets/power_analysis.png)
+
+## Confidence Intervals
+
+Understand the precision of your estimates:
+![Confidence Intervals](assets/confidence_intervals.png)
+
+## Common Mistakes to Avoid
+
+1. Vague or ambiguous statements
+2. Untestable claims
+3. Multiple hypotheses without correction
+4. Ignoring practical significance
+5. Confirmation bias
+
+## Best Practices
+
+### Formulation
+
+1. Start with a clear research question
+2. Write both null and alternative hypotheses
+3. Ensure measurability
+4. Consider practical significance
+
+### Testing
+
+1. Choose appropriate statistical tests
+2. Calculate required sample size
+3. Plan for multiple testing
+4. Document assumptions
+
+### Interpretation
+
+1. Consider both statistical and practical significance
+2. Look at effect sizes
+3. Use confidence intervals
+4. Be cautious about causation
+
+### Documentation
+
+1. Pre-register hypotheses
+2. Document any changes
+3. Report all tests conducted
+4. Share data and code
+
+## Additional Resources
+
+1. Books:
+   - "The Art of Scientific Investigation" by W.I.B. Beveridge
+   - "Research Design" by John W. Creswell
+
+2. Online Resources:
+   - Open Science Framework
+   - Statistical Power Calculator
+   - Hypothesis Registry
+
+3. Software:
+   - Python's statsmodels
+   - R's hypothesis tests
+   - G*Power for power analysis

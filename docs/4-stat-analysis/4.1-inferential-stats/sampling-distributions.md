@@ -1,22 +1,28 @@
-# Sampling Distributions: The Heart of Statistical Inference 📊
+# Sampling Distributions: The Heart of Statistical Inference
 
-## Introduction: Why Sampling Distributions Matter 🎯
-Imagine you're a chef trying to perfect a recipe. You taste-test small portions (samples) to understand how the entire dish (population) tastes. But how reliable are these taste tests? That's where sampling distributions come in - they help us understand how sample statistics vary and how well they represent the true population! 🍲
+## Introduction: Why Sampling Distributions Matter
 
-## What is a Sampling Distribution? 🎲
+Imagine you're a chef trying to perfect a recipe. You taste-test small portions (samples) to understand how the entire dish (population) tastes. But how reliable are these taste tests? That's where sampling distributions come in - they help us understand how sample statistics vary and how well they represent the true population!
+
+## What is a Sampling Distribution?
+
 A sampling distribution is the distribution of a statistic (like mean or proportion) calculated from repeated random samples of the same size from a population. Think of it as the "distribution of distributions" - it shows us how sample statistics bounce around the true population value.
 
 ### Mathematical Definition
+
 For a sample mean X̄:
+
 - Mean: $$E(X̄) = μ$$ (population mean)
 - Standard Error: $$SE(X̄) = \frac{σ}{\sqrt{n}}$$
   - where σ is population standard deviation
   - and n is sample size
 
-## The Central Limit Theorem (CLT): Statistical Magic! ✨
+## The Central Limit Theorem (CLT): Statistical Magic
 
 ### What is CLT?
+
 The Central Limit Theorem states that for sufficiently large samples:
+
 1. The sampling distribution of the mean is approximately normal
 2. This holds true regardless of the population's distribution
 3. The larger the sample size, the more normal it becomes
@@ -87,11 +93,12 @@ for dist in distributions:
     plt.close()
 ```
 
-## Standard Error: Measuring the Spread 📏
+## Standard Error: Measuring the Spread
 
 The standard error (SE) tells us how much sample statistics typically deviate from the population parameter. It's like a "margin of wobble" for our estimates!
 
 ### Formula for Different Statistics
+
 1. For means: $$SE(X̄) = \frac{σ}{\sqrt{n}}$$
 2. For proportions: $$SE(p) = \sqrt{\frac{p(1-p)}{n}}$$
 3. For differences: $$SE(X̄_1 - X̄_2) = \sqrt{\frac{σ_1^2}{n_1} + \frac{σ_2^2}{n_2}}$$
@@ -132,16 +139,17 @@ def demonstrate_standard_error():
 
 # Run demonstration
 se_results = demonstrate_standard_error()
-print("\n🎯 Standard Error Analysis")
+print("\nStandard Error Analysis")
 print("Sample Size | Theoretical SE | Empirical SE")
 print("-" * 45)
 for r in se_results:
     print(f"{r['size']:^10d} | {r['theoretical']:^13.3f} | {r['empirical']:^11.3f}")
 ```
 
-## Real-world Applications 🌍
+## Real-world Applications
 
-### 1. Quality Control in Manufacturing 🏭
+### 1. Quality Control in Manufacturing
+
 ```python
 def quality_control_demo():
     """
@@ -156,16 +164,17 @@ def quality_control_demo():
     mean = np.mean(measurements)
     se = stats.sem(measurements)
     
-    print("\n🏭 Quality Control Report")
+    print("\nQuality Control Report")
     print(f"Specification: {target} ± {tolerance}")
     print(f"Sample Mean: {mean:.2f}")
     print(f"Standard Error: {se:.3f}")
-    print(f"Status: {'✅ In Control' if abs(mean - target) <= tolerance else '❌ Out of Control'}")
+    print(f"Status: {'In Control' if abs(mean - target) <= tolerance else 'Out of Control'}")
 
 quality_control_demo()
 ```
 
-### 2. Political Polling 📊
+### 2. Political Polling
+
 ```python
 def polling_demo():
     """
@@ -180,7 +189,7 @@ def polling_demo():
     p_hat = np.mean(poll)
     se = np.sqrt(p_hat * (1-p_hat) / sample_size)
     
-    print("\n📊 Political Poll Results")
+    print("\nPolitical Poll Results")
     print(f"Support: {p_hat:.1%}")
     print(f"Margin of Error (95% CI): ±{1.96*se:.1%}")
     print(f"Sample Size: {sample_size:,}")
@@ -188,23 +197,27 @@ def polling_demo():
 polling_demo()
 ```
 
-## Common Misconceptions: Let's Clear Them Up! ⚠️
+## Common Misconceptions: Let's Clear Them Up
 
 ### 1. Sampling Distribution vs. Sample Distribution
-- 📊 Sample Distribution: The spread of values in ONE sample
-- 🎲 Sampling Distribution: The spread of statistics from MANY samples
+
+- Sample Distribution: The spread of values in ONE sample
+- Sampling Distribution: The spread of statistics from MANY samples
 
 ### 2. Standard Deviation vs. Standard Error
-- 📏 Standard Deviation: Spread of individual values
-- 🎯 Standard Error: Spread of sample statistics
+
+- Standard Deviation: Spread of individual values
+- Standard Error: Spread of sample statistics
 
 ### 3. Sample Size Effects
-- ❌ "Larger samples always give the right answer"
-- ✅ "Larger samples give more precise estimates"
 
-## Interactive Learning: Try It Yourself! 🤓
+- "Larger samples always give the right answer"
+- "Larger samples give more precise estimates"
+
+## Interactive Learning: Try It Yourself
 
 ### Mini-Exercise: The Sampling Game
+
 ```python
 def sampling_game(true_mean=100, true_std=15, sample_size=30):
     """
@@ -215,32 +228,35 @@ def sampling_game(true_mean=100, true_std=15, sample_size=30):
     sample_mean = np.mean(sample)
     se = np.std(sample) / np.sqrt(sample_size)
     
-    print("\n🎮 The Sampling Game")
+    print("\nThe Sampling Game")
     print(f"Sample Mean: {sample_mean:.1f}")
     print(f"Standard Error: {se:.2f}")
     print(f"95% CI: ({sample_mean - 1.96*se:.1f}, {sample_mean + 1.96*se:.1f})")
-    print(f"Contains true mean? {'✅' if true_mean-1.96*se <= sample_mean <= true_mean+1.96*se else '❌'}")
+    print(f"Contains true mean? {'Yes' if true_mean-1.96*se <= sample_mean <= true_mean+1.96*se else 'No'}")
 
 sampling_game()
 ```
 
-## Practice Questions 📝
+## Practice Questions
+
 1. A sample of 100 customers shows mean spending of $85 with SE=$5. What's the 95% CI?
 2. How would doubling sample size affect the standard error? Show the math!
 3. Why might the CLT not work well with very small samples?
 4. Design a sampling strategy for estimating average daily website traffic.
 5. How would you explain sampling distributions to a non-technical stakeholder?
 
-## Key Takeaways 🎯
-1. 📊 Sampling distributions help us understand estimation uncertainty
-2. 🎲 The CLT is the foundation of many statistical methods
-3. 📏 Larger samples give more precise estimates (smaller SE)
-4. ⚖️ There's always a trade-off between precision and cost
-5. 🎯 Understanding sampling distributions is crucial for inference
+## Key Takeaways
 
-## Additional Resources 📚
+1. Sampling distributions help us understand estimation uncertainty
+2. The CLT is the foundation of many statistical methods
+3. Larger samples give more precise estimates (smaller SE)
+4. There's always a trade-off between precision and cost
+5. Understanding sampling distributions is crucial for inference
+
+## Additional Resources
+
 - [Interactive CLT Simulator](https://seeing-theory.brown.edu/sampling-distributions/index.html)
 - [Standard Error Calculator](https://www.calculator.net/standard-error-calculator.html)
 - [Sampling Distribution Visualizer](https://rpsychologist.com/d3/CI/)
 
-Remember: Sampling distributions are like a GPS for statistics - they help us navigate from sample to population with confidence! 🗺️
+Remember: Sampling distributions are like a GPS for statistics - they help us navigate from sample to population with confidence!

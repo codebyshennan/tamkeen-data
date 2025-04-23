@@ -1,11 +1,13 @@
 # Statistical Tests: Your Data Analysis Toolkit 🧰
 
 ## Introduction: Why Statistical Tests Matter 🎯
+
 Think of statistical tests as your data detective tools - they help you uncover patterns, relationships, and differences that might not be obvious at first glance. Whether you're comparing customer groups, analyzing experimental results, or exploring relationships between variables, statistical tests help you make informed decisions based on evidence rather than intuition!
 
 ## The Statistical Tests Family Tree 🌳
 
 ### 1. T-Tests: Comparing Means 📊
+
 Like comparing recipes by taste-testing - are they really different or just slightly varied?
 
 ```python
@@ -109,6 +111,7 @@ class TTestAnalyzer:
 ```
 
 ### 2. ANOVA: Comparing Multiple Groups 🎭
+
 Like being a judge in a cooking competition - are any of these dishes significantly different?
 
 ```python
@@ -184,6 +187,7 @@ class ANOVAAnalyzer:
 ```
 
 ### 3. Chi-Square Tests: Analyzing Categories 📊
+
 Like checking if dice are fair - are the outcomes distributed as expected?
 
 ```python
@@ -247,6 +251,7 @@ class ChiSquareAnalyzer:
 ```
 
 ### 4. Correlation Tests: Measuring Relationships 🔄
+
 Like checking if ice cream sales and temperature are related!
 
 ```python
@@ -298,232 +303,245 @@ class CorrelationAnalyzer:
         plt.close()
 ```
 
-## Choosing the Right Test 🎯
+## Recommended Visualizations
 
-### The Test Selection Flowchart 📊
+To enhance understanding of statistical tests, we recommend adding the following visualizations:
 
-```python
-def select_statistical_test(
-    data_type='continuous',
-    n_groups=2,
-    paired=False,
-    normal=True,
-    sample_size=100
-):
-    """
-    Guide for selecting appropriate statistical test
-    
-    Parameters:
-    -----------
-    data_type : str
-        'continuous' or 'categorical'
-    n_groups : int
-        Number of groups to compare
-    paired : bool
-        Whether the data is paired
-    normal : bool
-        Whether the data is normally distributed
-    sample_size : int
-        Sample size
-        
-    Returns:
-    --------
-    dict with test recommendation and assumptions
-    """
-    if data_type == 'continuous':
-        if n_groups == 1:
-            test = "One-sample t-test" if normal else "Wilcoxon signed-rank test"
-        elif n_groups == 2:
-            if paired:
-                test = "Paired t-test" if normal else "Wilcoxon signed-rank test"
-            else:
-                test = "Independent t-test" if normal else "Mann-Whitney U test"
-        else:
-            test = "ANOVA" if normal else "Kruskal-Wallis H-test"
-    else:  # categorical
-        if n_groups == 1:
-            test = "Chi-square goodness of fit"
-        elif n_groups == 2:
-            test = "Fisher's exact test" if sample_size < 30 else "Chi-square test"
-        else:
-            test = "Chi-square test of independence"
-    
-    return {
-        'recommended_test': test,
-        'assumptions': {
-            'normality_required': normal and data_type == 'continuous',
-            'minimum_sample_size': sample_size,
-            'paired_data': paired if n_groups == 2 else 'N/A'
-        }
-    }
-```
+1. **Statistical Test Decision Tree**
+   - Interactive flowchart for choosing the right test
+   - Based on data type and research question
+   - Include common scenarios and examples
 
-## Checking Assumptions ✅
+2. **Distribution Comparison**
+   - Side-by-side comparison of different distributions
+   - Show normal vs non-normal distributions
+   - Demonstrate effect of sample size
 
-### 1. Normality Tests 📈
+3. **Effect Size Visualization**
+   - Visual representation of different effect sizes
+   - Show relationship between effect size and power
+   - Include practical significance thresholds
 
-```python
-class NormalityChecker:
-    """Toolkit for checking normality assumptions"""
-    
-    def __init__(self, data):
-        self.data = data
-    
-    def check_all(self):
-        """Run comprehensive normality checks"""
-        # Statistical tests
-        shapiro_stat, shapiro_p = stats.shapiro(self.data)
-        k2_stat, k2_p = stats.normaltest(self.data)
-        
-        # Visual checks
-        plt.figure(figsize=(15, 5))
-        
-        # Histogram
-        plt.subplot(131)
-        sns.histplot(self.data, kde=True)
-        plt.title('Distribution')
-        
-        # Q-Q plot
-        plt.subplot(132)
-        stats.probplot(self.data, dist="norm", plot=plt)
-        plt.title('Q-Q Plot')
-        
-        # Box plot
-        plt.subplot(133)
-        sns.boxplot(y=self.data)
-        plt.title('Box Plot')
-        
-        plt.tight_layout()
-        plt.savefig('docs/4-stat-analysis/4.2-hypotheses-testing/assets/normality_check.png')
-        plt.close()
-        
-        return {
-            'shapiro_test': {'statistic': shapiro_stat, 'p_value': shapiro_p},
-            'dagostino_test': {'statistic': k2_stat, 'p_value': k2_p},
-            'interpretation': {
-                'is_normal': shapiro_p > 0.05,
-                'confidence': 'high' if min(shapiro_p, k2_p) > 0.1 else 'moderate'
-            }
-        }
-```
+4. **Confidence Interval Diagram**
+   - Visual explanation of confidence intervals
+   - Show relationship between sample size and interval width
+   - Demonstrate interpretation
 
-### 2. Homogeneity of Variance 📊
+5. **Power Analysis Interface**
+   - Interactive tool showing relationship between:
+     - Sample size
+     - Effect size
+     - Power
+     - Significance level
 
-```python
-class VarianceChecker:
-    """Toolkit for checking variance homogeneity"""
-    
-    def __init__(self, *groups):
-        self.groups = groups
-    
-    def check_all(self):
-        """Run comprehensive variance checks"""
-        # Levene's test
-        levene_stat, levene_p = stats.levene(*self.groups)
-        
-        # Bartlett's test
-        bartlett_stat, bartlett_p = stats.bartlett(*self.groups)
-        
-        # Visual check
-        plt.figure(figsize=(10, 5))
-        
-        # Box plots
-        plt.subplot(121)
-        sns.boxplot(data=self.groups)
-        plt.title('Group Variances')
-        
-        # Spread-Location plot
-        plt.subplot(122)
-        means = [np.mean(group) for group in self.groups]
-        vars = [np.var(group) for group in self.groups]
-        plt.scatter(means, vars)
-        plt.xlabel('Group Means')
-        plt.ylabel('Group Variances')
-        plt.title('Spread-Location Plot')
-        
-        plt.tight_layout()
-        plt.savefig('docs/4-stat-analysis/4.2-hypotheses-testing/assets/variance_check.png')
-        plt.close()
-        
-        return {
-            'levene_test': {'statistic': levene_stat, 'p_value': levene_p},
-            'bartlett_test': {'statistic': bartlett_stat, 'p_value': bartlett_p},
-            'interpretation': {
-                'homogeneous': levene_p > 0.05,
-                'confidence': 'high' if min(levene_p, bartlett_p) > 0.1 else 'moderate'
-            }
-        }
-```
+## Common Mistakes to Avoid
 
-## Effect Size Calculations 📏
+1. **Choosing the Wrong Test**
+   - Consider data type and distribution
+   - Check assumptions
+   - Use appropriate test for your question
 
-```python
-class EffectSizeCalculator:
-    """Toolkit for calculating effect sizes"""
-    
-    def __init__(self, data1, data2=None):
-        self.data1 = data1
-        self.data2 = data2
-    
-    def calculate_all(self):
-        """Calculate multiple effect size measures"""
-        if self.data2 is None:
-            # One-sample effect size
-            d = np.mean(self.data1) / np.std(self.data1)
-            return {
-                'cohens_d': d,
-                'interpretation': self._interpret_d(d)
-            }
-        else:
-            # Two-sample effect sizes
-            # Cohen's d
-            d = (np.mean(self.data1) - np.mean(self.data2)) / \
-                np.sqrt((np.var(self.data1) + np.var(self.data2)) / 2)
-            
-            # Glass's delta
-            delta = (np.mean(self.data1) - np.mean(self.data2)) / np.std(self.data2)
-            
-            # Hedges' g
-            n1, n2 = len(self.data1), len(self.data2)
-            g = d * (1 - (3 / (4 * (n1 + n2) - 9)))
-            
-            return {
-                'cohens_d': d,
-                'glass_delta': delta,
-                'hedges_g': g,
-                'interpretation': self._interpret_d(d)
-            }
-    
-    def _interpret_d(self, d):
-        """Interpret Cohen's d effect size"""
-        d = abs(d)
-        if d < 0.2:
-            return 'Very small effect'
-        elif d < 0.5:
-            return 'Small effect'
-        elif d < 0.8:
-            return 'Medium effect'
-        else:
-            return 'Large effect'
-```
+2. **Ignoring Assumptions**
+   - Check normality
+   - Verify equal variances
+   - Test independence
+   - Report violations
 
-## Practice Questions 🤔
-1. You're comparing customer satisfaction scores before and after a website redesign. Which test should you use and why?
-2. A marketing team wants to know if purchase amounts vary by customer age group (18-25, 26-35, 36-50, 50+). What's the appropriate test?
-3. How would you test if there's a relationship between email open rates and time of day?
-4. Your A/B test shows p < 0.05 but a tiny effect size. What should you recommend?
-5. When should you use non-parametric tests instead of their parametric counterparts?
+3. **Multiple Testing Without Correction**
+   - Plan all comparisons in advance
+   - Use appropriate correction methods
+   - Report adjusted p-values
 
-## Key Takeaways 🎯
-1. 📊 Choose tests based on data type and research question
-2. ✅ Always check assumptions before testing
-3. 📏 Consider effect sizes, not just p-values
-4. 🔄 Use multiple approaches when appropriate
-5. 📝 Document all decisions and interpretations
+4. **Overlooking Effect Size**
+   - Report effect sizes
+   - Consider practical significance
+   - Balance statistical and practical importance
+
+5. **Insufficient Sample Size**
+   - Calculate required sample size
+   - Consider power analysis
+   - Account for potential dropouts
+
+## Best Practices
+
+1. **Planning Phase**
+   - Define clear research question
+   - Choose appropriate test
+   - Calculate required sample size
+   - Check assumptions
+
+2. **Execution Phase**
+   - Collect data properly
+   - Document procedures
+   - Monitor data quality
+   - Maintain consistency
+
+3. **Analysis Phase**
+   - Use appropriate software
+   - Check assumptions
+   - Report all results
+   - Include effect sizes
+
+4. **Reporting Phase**
+   - Be transparent
+   - Include visualizations
+   - Discuss limitations
+   - Make recommendations
 
 ## Additional Resources 📚
+
 - [Statistical Test Calculator](https://www.socscistatistics.com/)
 - [Effect Size Calculator](https://www.psychometrica.de/effect_size.html)
 - [Interactive Test Selection Guide](https://stats.idre.ucla.edu/other/mult-pkg/whatstat/)
 
 Remember: Statistical tests are like tools in a toolbox - choose the right one for the job! 🛠️
+
+# Statistical Tests: Choosing and Using the Right Tools
+
+## Introduction
+
+Statistical tests are like different tools in a toolbox - each one has its specific purpose. This guide will help you choose and use the right statistical test for your data.
+
+## Choosing the Right Test
+
+Follow this decision tree to select the appropriate test:
+![Statistical Test Decision Tree](assets/statistical_test_tree.png)
+
+## Understanding Effect Sizes
+
+Different effect sizes and their interpretation:
+![Effect Sizes](assets/effect_sizes.png)
+
+## Statistical Power
+
+Ensure your test can detect meaningful effects:
+![Power Analysis](assets/power_analysis.png)
+
+## Confidence Intervals
+
+Interpret your results with precision:
+![Confidence Intervals](assets/confidence_intervals.png)
+
+## Common Statistical Tests
+
+### T-Tests
+
+```python
+import numpy as np
+from scipy import stats
+
+def perform_ttest(control_data, treatment_data, alpha=0.05):
+    """Perform an independent t-test"""
+    t_stat, p_value = stats.ttest_ind(control_data, treatment_data)
+    effect_size = (np.mean(treatment_data) - np.mean(control_data)) / np.std(control_data)
+    
+    return {
+        't_statistic': t_stat,
+        'p_value': p_value,
+        'effect_size': effect_size,
+        'significant': p_value < alpha
+    }
+```
+
+### ANOVA
+
+```python
+def perform_anova(*groups, alpha=0.05):
+    """Perform one-way ANOVA"""
+    f_stat, p_value = stats.f_oneway(*groups)
+    
+    # Calculate effect size (eta-squared)
+    groups_array = [np.array(g) for g in groups]
+    grand_mean = np.mean([np.mean(g) for g in groups_array])
+    
+    ss_between = sum(len(g) * (np.mean(g) - grand_mean)**2 for g in groups_array)
+    ss_total = sum(sum((x - grand_mean)**2) for g in groups_array for x in g)
+    
+    eta_squared = ss_between / ss_total
+    
+    return {
+        'f_statistic': f_stat,
+        'p_value': p_value,
+        'effect_size': eta_squared,
+        'significant': p_value < alpha
+    }
+```
+
+### Chi-Square Tests
+
+```python
+def perform_chi_square(observed, expected=None, alpha=0.05):
+    """Perform chi-square test"""
+    if expected is None:
+        # Goodness of fit test
+        chi2, p_value = stats.chisquare(observed)
+    else:
+        # Test of independence
+        chi2, p_value = stats.chi2_contingency(observed)[:2]
+    
+    # Calculate effect size (Cramer's V)
+    n = np.sum(observed)
+    min_dim = min(observed.shape) - 1
+    cramer_v = np.sqrt(chi2 / (n * min_dim))
+    
+    return {
+        'chi2_statistic': chi2,
+        'p_value': p_value,
+        'effect_size': cramer_v,
+        'significant': p_value < alpha
+    }
+```
+
+## Common Mistakes to Avoid
+
+1. Using the wrong test
+2. Violating assumptions
+3. Ignoring effect sizes
+4. Multiple testing without correction
+5. Misinterpreting p-values
+
+## Best Practices
+
+### Test Selection
+
+1. Consider your data type
+2. Check test assumptions
+3. Think about effect sizes
+4. Plan for multiple testing
+
+### Test Execution
+
+1. Verify data quality
+2. Check for outliers
+3. Handle missing values
+4. Document procedures
+
+### Result Interpretation
+
+1. Look beyond p-values
+2. Consider effect sizes
+3. Use confidence intervals
+4. Think about practical significance
+
+### Reporting
+
+1. State hypotheses clearly
+2. Report test statistics
+3. Include effect sizes
+4. Acknowledge limitations
+
+## Additional Resources
+
+1. Books:
+   - "Statistics in Plain English" by Timothy C. Urdan
+   - "Discovering Statistics Using Python" by Andy Field
+
+2. Online Resources:
+   - UCLA Statistical Computing
+   - Penn State STAT 500
+   - R Statistics Handbook
+
+3. Software:
+   - Python's scipy.stats
+   - statsmodels
+   - pingouin for advanced tests

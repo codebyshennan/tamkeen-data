@@ -1,7 +1,23 @@
-# Model Diagnostics
+# Model Diagnostics: Validating Your Regression Models
 
-## Introduction
-Model diagnostics are crucial for validating regression assumptions and ensuring reliable results. This guide covers essential diagnostic techniques and remedies for common issues.
+Welcome to the world of model diagnostics! This guide will help you ensure your regression models are reliable and their assumptions are met. Good model diagnostics are crucial for making valid inferences and predictions.
+
+## Why Model Diagnostics Matter
+
+Model diagnostics help you:
+
+1. Validate model assumptions
+2. Identify potential problems
+3. Ensure reliable predictions
+4. Make valid statistical inferences
+
+## Key Assumptions to Check
+
+### 1. Linearity
+
+- The relationship between predictors and outcome should be linear
+- Check using residual plots
+- Look for non-random patterns
 
 ```python
 import numpy as np
@@ -9,331 +25,315 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy import stats
-import statsmodels.api as sm
-from statsmodels.stats.outliers_influence import variance_inflation_factor
-from statsmodels.stats.diagnostic import het_breuschpagan
 
-def generate_sample_data(n=100, seed=42):
-    """Generate sample data with various diagnostic issues"""
-    np.random.seed(seed)
-    X = np.random.normal(0, 1, (n, 2))
+def check_linearity(model, X, y):
+    # Get predictions
+    y_pred = model.predict(X)
+    residuals = y - y_pred
     
-    # Add heteroscedasticity
-    noise = np.random.normal(0, np.exp(X[:, 0]), n)
-    y = 2 * X[:, 0] + 3 * X[:, 1] + noise
-    
-    # Add outliers
-    y[0] = y[0] + 10  # Add outlier
-    
-    return pd.DataFrame({
-        'X1': X[:, 0],
-        'X2': X[:, 1],
-        'y': y
-    })
-```
-
-## Checking Model Assumptions
-
-### 1. Linearity
-```python
-def check_linearity(model):
-    """Check linearity assumption"""
-    fitted_vals = model.fittedvalues
-    residuals = model.resid
-    
-    plt.figure(figsize=(12, 4))
-    
-    # Residual vs Fitted plot
-    plt.subplot(121)
-    plt.scatter(fitted_vals, residuals, alpha=0.5)
+    # Create plot
+    plt.figure(figsize=(10, 6))
+    plt.scatter(y_pred, residuals)
     plt.axhline(y=0, color='r', linestyle='--')
-    plt.title('Residuals vs Fitted')
     plt.xlabel('Fitted values')
     plt.ylabel('Residuals')
-    
-    # Component plus residual plots
-    plt.subplot(122)
-    sm.graphics.plot_ccpr(model, 'X1')
-    plt.title('Component Plus Residual Plot')
-    
-    plt.tight_layout()
-    plt.savefig('linearity_check.png')
-    plt.close()
-    
-    # Ramsey RESET test
-    reset_test = sm.stats.diagnostic.linear_reset(model)
-    
-    return {
-        'reset_test_f': reset_test[0],
-        'reset_test_p': reset_test[1],
-        'linear': reset_test[1] > 0.05
-    }
+    plt.title('Residuals vs Fitted Values')
+    plt.show()
 ```
 
-### 2. Independence
+### 2. Independence of Errors
+
+- Residuals should be independent
+- No patterns over time or space
+- Check using Durbin-Watson test
+
 ```python
-def check_independence(model):
-    """Check independence assumption"""
-    residuals = model.resid
-    
+from statsmodels.stats.stattools import durbin_watson
+
+def check_independence(residuals):
     # Durbin-Watson test
-    dw_stat = sm.stats.stattools.durbin_watson(residuals)
-    
-    # Plot residuals over time/order
-    plt.figure(figsize=(8, 4))
-    plt.plot(residuals)
-    plt.axhline(y=0, color='r', linestyle='--')
-    plt.title('Residuals Over Order')
-    plt.xlabel('Order')
-    plt.ylabel('Residuals')
-    plt.savefig('independence_check.png')
-    plt.close()
-    
-    return {
-        'durbin_watson': dw_stat,
-        'independent': 1.5 < dw_stat < 2.5
-    }
+    dw_statistic = durbin_watson(residuals)
+    print(f"Durbin-Watson statistic: {dw_statistic:.2f}")
+    print("Values close to:")
+    print("2.0 suggest no autocorrelation")
+    print("<1.0 suggest positive autocorrelation")
+    print(">3.0 suggest negative autocorrelation")
 ```
 
-### 3. Normality
-```python
-def check_normality(model):
-    """Check normality of residuals"""
-    residuals = model.resid
-    
-    plt.figure(figsize=(12, 4))
-    
-    # Q-Q plot
-    plt.subplot(121)
-    stats.probplot(residuals, dist="norm", plot=plt)
-    plt.title('Q-Q Plot')
-    
-    # Histogram
-    plt.subplot(122)
-    plt.hist(residuals, bins=30, density=True, alpha=0.7)
-    xmin, xmax = plt.xlim()
-    x = np.linspace(xmin, xmax, 100)
-    p = stats.norm.pdf(x, np.mean(residuals), np.std(residuals))
-    plt.plot(x, p, 'k', linewidth=2)
-    plt.title('Residual Distribution')
-    
-    plt.tight_layout()
-    plt.savefig('normality_check.png')
-    plt.close()
-    
-    # Statistical tests
-    shapiro_test = stats.shapiro(residuals)
-    normaltest = stats.normaltest(residuals)
-    
-    return {
-        'shapiro_stat': shapiro_test[0],
-        'shapiro_p': shapiro_test[1],
-        'dagostino_stat': normaltest[0],
-        'dagostino_p': normaltest[1],
-        'normal': shapiro_test[1] > 0.05
-    }
-```
+### 3. Homoscedasticity
 
-### 4. Homoscedasticity
+- Constant variance of residuals
+- Check using scale-location plots
+- Look for fan or funnel patterns
+
 ```python
-def check_homoscedasticity(model):
-    """Check homoscedasticity assumption"""
-    fitted_vals = model.fittedvalues
-    residuals = model.resid
+def check_homoscedasticity(model, X, y):
+    # Get predictions and residuals
+    y_pred = model.predict(X)
+    residuals = y - y_pred
     
-    plt.figure(figsize=(8, 4))
-    plt.scatter(fitted_vals, np.abs(residuals), alpha=0.5)
-    plt.title('Scale-Location Plot')
+    # Create plot
+    plt.figure(figsize=(10, 6))
+    plt.scatter(y_pred, np.abs(residuals))
     plt.xlabel('Fitted values')
     plt.ylabel('|Residuals|')
-    plt.savefig('homoscedasticity_check.png')
-    plt.close()
-    
-    # Breusch-Pagan test
-    bp_test = het_breuschpagan(residuals, model.model.exog)
-    
-    return {
-        'bp_stat': bp_test[0],
-        'bp_p': bp_test[1],
-        'homoscedastic': bp_test[1] > 0.05
-    }
+    plt.title('Scale-Location Plot')
+    plt.show()
 ```
 
-## Influence Analysis
+### 4. Normality of Residuals
 
-### 1. Outliers and Leverage Points
+- Residuals should follow normal distribution
+- Check using Q-Q plots and statistical tests
+- Consider transformations if needed
+
 ```python
-def analyze_influence(model):
-    """Analyze influential observations"""
-    influence = model.get_influence()
+def check_normality(residuals):
+    # Create Q-Q plot
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
     
-    # Studentized residuals
-    student_resid = influence.resid_studentized_internal
+    # Histogram
+    ax1.hist(residuals, bins=30, density=True, alpha=0.7)
+    ax1.set_title('Histogram of Residuals')
     
-    # Leverage
-    leverage = influence.hat_matrix_diag
-    
-    # Cook's distance
-    cooks_d = influence.cooks_distance[0]
-    
-    plt.figure(figsize=(12, 4))
-    
-    # Leverage vs Studentized Residuals
-    plt.subplot(121)
-    plt.scatter(leverage, student_resid, alpha=0.5)
-    plt.axhline(y=0, color='r', linestyle='--')
-    plt.title('Leverage vs Studentized Residuals')
-    plt.xlabel('Leverage')
-    plt.ylabel('Studentized Residuals')
-    
-    # Cook's distance plot
-    plt.subplot(122)
-    plt.stem(range(len(cooks_d)), cooks_d, markerfmt=',')
-    plt.title("Cook's Distance")
-    plt.xlabel('Observation')
-    plt.ylabel("Cook's Distance")
+    # Q-Q plot
+    stats.probplot(residuals, dist="norm", plot=ax2)
+    ax2.set_title('Normal Q-Q Plot')
     
     plt.tight_layout()
-    plt.savefig('influence_analysis.png')
-    plt.close()
+    plt.show()
     
-    return pd.DataFrame({
-        'studentized_residuals': student_resid,
-        'leverage': leverage,
+    # Shapiro-Wilk test
+    stat, p_value = stats.shapiro(residuals)
+    print(f"Shapiro-Wilk test p-value: {p_value:.4f}")
+    print("If p-value < 0.05, residuals may not be normally distributed")
+```
+
+## Influence Measures
+
+### 1. Cook's Distance
+
+- Identifies influential observations
+- Measures impact of removing each point
+- Values > 4/n are potentially influential
+
+```python
+def calculate_cooks_distance(model, X, y):
+    # Get predictions and residuals
+    y_pred = model.predict(X)
+    residuals = y - y_pred
+    
+    # Calculate leverage
+    hat_matrix = X @ np.linalg.inv(X.T @ X) @ X.T
+    leverage = np.diagonal(hat_matrix)
+    
+    # Calculate Cook's distance
+    n = len(y)
+    p = X.shape[1]
+    mse = np.sum(residuals**2) / (n - p)
+    cooks_d = (residuals**2 * leverage) / (p * mse * (1 - leverage)**2)
+    
+    # Plot
+    plt.figure(figsize=(10, 6))
+    plt.stem(range(len(cooks_d)), cooks_d, markerfmt='ro')
+    plt.axhline(y=4/n, color='r', linestyle='--', label='Threshold')
+    plt.xlabel('Observation')
+    plt.ylabel("Cook's Distance")
+    plt.title("Cook's Distance Plot")
+    plt.legend()
+    plt.show()
+    
+    return cooks_d
+```
+
+### 2. Leverage Points
+
+- Observations with extreme predictor values
+- Check using hat values
+- High leverage doesn't always mean high influence
+
+```python
+def check_leverage(X):
+    # Calculate hat values
+    hat_matrix = X @ np.linalg.inv(X.T @ X) @ X.T
+    leverage = np.diagonal(hat_matrix)
+    
+    # Plot
+    plt.figure(figsize=(10, 6))
+    plt.stem(range(len(leverage)), leverage, markerfmt='bo')
+    plt.axhline(y=2*X.shape[1]/len(X), color='r', linestyle='--', label='Threshold')
+    plt.xlabel('Observation')
+    plt.ylabel('Leverage')
+    plt.title('Leverage Plot')
+    plt.legend()
+    plt.show()
+    
+    return leverage
+```
+
+### 3. DFBETAS
+
+- Measures impact on regression coefficients
+- Identifies observations affecting specific coefficients
+- Values > 2/√n are concerning
+
+```python
+def calculate_dfbetas(model, X, y):
+    n = len(y)
+    p = X.shape[1]
+    dfbetas = np.zeros((n, p))
+    
+    # Calculate DFBETAS for each observation and predictor
+    for i in range(n):
+        # Fit model without observation i
+        mask = np.ones(n, dtype=bool)
+        mask[i] = False
+        model_i = model.__class__()
+        model_i.fit(X[mask], y[mask])
+        
+        # Calculate difference in coefficients
+        diff = model.coef_ - model_i.coef_
+        dfbetas[i] = diff / np.sqrt(np.diagonal(np.linalg.inv(X.T @ X)))
+    
+    return dfbetas
+```
+
+## Comprehensive Diagnostic Function
+
+Here's a function that combines all diagnostics:
+
+```python
+def run_diagnostics(model, X, y):
+    """
+    Run comprehensive diagnostics on a regression model.
+    
+    Parameters:
+    model: fitted sklearn regression model
+    X: feature matrix
+    y: target variable
+    """
+    # Get predictions and residuals
+    y_pred = model.predict(X)
+    residuals = y - y_pred
+    
+    print("=== Model Diagnostics ===\n")
+    
+    # 1. Linearity
+    print("Checking linearity...")
+    check_linearity(model, X, y)
+    
+    # 2. Independence
+    print("\nChecking independence...")
+    check_independence(residuals)
+    
+    # 3. Homoscedasticity
+    print("\nChecking homoscedasticity...")
+    check_homoscedasticity(model, X, y)
+    
+    # 4. Normality
+    print("\nChecking normality...")
+    check_normality(residuals)
+    
+    # 5. Influence measures
+    print("\nCalculating influence measures...")
+    cooks_d = calculate_cooks_distance(model, X, y)
+    leverage = check_leverage(X)
+    dfbetas = calculate_dfbetas(model, X, y)
+    
+    # Summary of potential issues
+    print("\n=== Summary of Potential Issues ===")
+    print(f"Number of high leverage points: {sum(leverage > 2*X.shape[1]/len(X))}")
+    print(f"Number of influential points (Cook's D): {sum(cooks_d > 4/len(y))}")
+    print(f"Number of large DFBETAS: {sum(np.abs(dfbetas) > 2/np.sqrt(len(y)))}")
+    
+    return {
+        'residuals': residuals,
         'cooks_distance': cooks_d,
-        'outlier': np.abs(student_resid) > 3,
-        'high_leverage': leverage > 2 * model.model.exog.shape[1] / len(leverage),
-        'influential': cooks_d > 4 / len(cooks_d)
-    })
-```
-
-### 2. Multicollinearity
-```python
-def check_multicollinearity(X):
-    """Check for multicollinearity"""
-    # Correlation matrix
-    corr_matrix = X.corr()
-    
-    plt.figure(figsize=(8, 6))
-    sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', center=0)
-    plt.title('Correlation Matrix')
-    plt.savefig('correlation_matrix.png')
-    plt.close()
-    
-    # VIF
-    X_with_const = sm.add_constant(X)
-    vif_data = pd.DataFrame()
-    vif_data["Variable"] = X_with_const.columns
-    vif_data["VIF"] = [variance_inflation_factor(X_with_const.values, i) 
-                       for i in range(X_with_const.shape[1])]
-    
-    return {
-        'correlation_matrix': corr_matrix,
-        'vif_data': vif_data,
-        'high_vif_vars': vif_data[vif_data['VIF'] > 5]['Variable'].tolist()
+        'leverage': leverage,
+        'dfbetas': dfbetas
     }
 ```
 
-## Remedial Measures
+## Practice Exercise
 
-### 1. Handling Non-linearity
+Try this hands-on exercise:
+
 ```python
-def handle_nonlinearity(data, target, features):
-    """Handle non-linear relationships"""
-    transformed_data = data.copy()
-    
-    for feature in features:
-        # Try common transformations
-        transformed_data[f'{feature}_squared'] = data[feature]**2
-        transformed_data[f'{feature}_log'] = np.log1p(data[feature] - data[feature].min() + 1)
-        transformed_data[f'{feature}_sqrt'] = np.sqrt(data[feature] - data[feature].min())
-    
-    # Fit models with different transformations
-    results = {}
-    for feature in features:
-        # Original
-        model_orig = sm.OLS(data[target], 
-                          sm.add_constant(data[feature])).fit()
-        
-        # Squared
-        model_sq = sm.OLS(data[target], 
-                         sm.add_constant(transformed_data[f'{feature}_squared'])).fit()
-        
-        # Log
-        model_log = sm.OLS(data[target], 
-                          sm.add_constant(transformed_data[f'{feature}_log'])).fit()
-        
-        # Square root
-        model_sqrt = sm.OLS(data[target], 
-                           sm.add_constant(transformed_data[f'{feature}_sqrt'])).fit()
-        
-        results[feature] = {
-            'original_r2': model_orig.rsquared,
-            'squared_r2': model_sq.rsquared,
-            'log_r2': model_log.rsquared,
-            'sqrt_r2': model_sqrt.rsquared
-        }
-    
-    return results
+# Generate sample data
+np.random.seed(42)
+n_samples = 100
+
+# Create predictors with an outlier
+X = np.random.normal(0, 1, (n_samples, 2))
+X[0] = [5, 5]  # Add an outlier
+
+# Create response with non-constant variance
+y = 2 * X[:, 0] + 3 * X[:, 1] + np.random.normal(0, np.abs(X[:, 0]), n_samples)
+
+# Fit model
+from sklearn.linear_model import LinearRegression
+model = LinearRegression()
+model.fit(X, y)
+
+# Run diagnostics
+diagnostics = run_diagnostics(model, X, y)
+
+# Your tasks:
+# 1. Interpret the diagnostic plots
+# 2. Identify potential problems
+# 3. Suggest improvements
+# 4. Implement solutions
+# 5. Re-run diagnostics to verify improvements
 ```
 
-### 2. Handling Heteroscedasticity
-```python
-def handle_heteroscedasticity(model):
-    """Apply corrections for heteroscedasticity"""
-    # White's heteroscedasticity-consistent standard errors
-    robust_cov = sm.stats.sandwich_covariance.cov_hc3(model)
-    robust_std_err = np.sqrt(np.diag(robust_cov))
-    
-    # WLS estimation
-    weights = 1 / (model.resid**2)
-    wls_model = sm.WLS(model.model.endog, 
-                      model.model.exog, 
-                      weights=weights).fit()
-    
-    return {
-        'original_std_errors': model.bse,
-        'robust_std_errors': robust_std_err,
-        'wls_results': wls_model
-    }
-```
+## Common Problems and Solutions
 
-### 3. Handling Outliers
-```python
-def handle_outliers(model, max_studentized_resid=3):
-    """Handle outliers in regression"""
-    influence = model.get_influence()
-    student_resid = influence.resid_studentized_internal
-    
-    # Remove outliers
-    clean_data = pd.DataFrame({
-        'y': model.model.endog,
-        'X': model.model.exog[:, 1]  # Assuming one predictor
-    })
-    clean_data = clean_data[np.abs(student_resid) <= max_studentized_resid]
-    
-    # Refit model
-    clean_model = sm.OLS(clean_data['y'], 
-                        sm.add_constant(clean_data['X'])).fit()
-    
-    return {
-        'original_params': model.params,
-        'clean_params': clean_model.params,
-        'n_outliers': sum(np.abs(student_resid) > max_studentized_resid),
-        'clean_model': clean_model
-    }
-```
+1. **Non-linearity**
+   - Transform variables (log, square root, etc.)
+   - Consider polynomial terms
+   - Use non-linear models
 
-## Practice Questions
-1. What are the key assumptions of linear regression?
-2. How do you identify influential observations?
-3. When should you use robust regression methods?
-4. What are the consequences of violating model assumptions?
-5. How do you choose between different remedial measures?
+2. **Heteroscedasticity**
+   - Transform response variable
+   - Use weighted least squares
+   - Consider robust regression
+
+3. **Non-normal Residuals**
+   - Transform response variable
+   - Use robust regression
+   - Consider non-parametric methods
+
+4. **Autocorrelation**
+   - Add time-related predictors
+   - Use time series models
+   - Consider GLS (Generalized Least Squares)
+
+5. **Influential Points**
+   - Investigate unusual observations
+   - Consider robust regression
+   - Document and justify any removals
 
 ## Key Takeaways
+
 1. Always check model assumptions
 2. Use multiple diagnostic tools
-3. Consider the impact of influential observations
-4. Apply appropriate remedial measures
-5. Document diagnostic findings and actions taken
+3. Consider the context when interpreting results
+4. Document any violations and solutions
+5. Be transparent about limitations
+
+## Next Steps
+
+Now that you understand model diagnostics, you can:
+
+1. Apply these techniques to your own models
+2. Learn about robust regression methods
+3. Explore advanced diagnostic techniques
+4. Study remedial measures for assumption violations
+
+## Additional Resources
+
+- [STHDA Regression Diagnostics](https://www.sthda.com/english/articles/39-regression-model-diagnostics/)
+- [Penn State Statistics](https://online.stat.psu.edu/stat504/lesson/7/7.2)
+- [UCLA Stats](https://stats.oarc.ucla.edu/stata/webbooks/reg/chapter2/stata-webbooksregressionwith-statachapter-2-regression-diagnostics/)
+- [Scikit-learn Documentation](https://scikit-learn.org/stable/modules/linear_model.html)
+- [Perplexity AI](https://www.perplexity.ai/) - For quick statistical questions and clarifications
