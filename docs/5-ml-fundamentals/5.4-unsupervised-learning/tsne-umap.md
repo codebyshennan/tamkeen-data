@@ -1,287 +1,202 @@
-# t-SNE and UMAP
+# t-SNE and UMAP: Visualizing Complex Data in 2D
 
-While PCA is great for linear dimensionality reduction, real-world data often has complex, non-linear relationships. t-SNE and UMAP are powerful techniques that can capture these relationships and create meaningful visualizations. Let's explore these advanced methods! 🎨
+Imagine you're trying to create a map of your neighborhood. You want to show how close different places are to each other, but you also want to preserve the relationships between them. That's exactly what t-SNE and UMAP do with high-dimensional data - they help us create meaningful 2D maps of complex data while preserving important relationships!
 
-## Understanding t-SNE 🎯
+## What are t-SNE and UMAP? 🤔
 
-t-SNE (t-Distributed Stochastic Neighbor Embedding) works by:
-1. Converting high-dimensional distances to probabilities
-2. Creating a similar probability distribution in low dimensions
-3. Minimizing the difference between these distributions
+### t-SNE (t-Distributed Stochastic Neighbor Embedding)
+
+Think of t-SNE as a smart photographer who knows exactly which angle to take a photo from to show the most important relationships between people in a group photo.
+
+### UMAP (Uniform Manifold Approximation and Projection)
+
+UMAP is like a more efficient version of t-SNE - it's like having a GPS that can create a simplified map of a complex city while still showing all the important connections between places.
+
+## Why Do We Need These Tools? 💡
+
+1. **Complex Data Visualization**: When we have data with many features, it's hard to see patterns. These tools help us visualize it in 2D.
+
+2. **Preserving Local Structure**: They help us see how similar items are to each other, like showing which products are often bought together.
+
+3. **Exploratory Analysis**: They're great for discovering patterns and relationships in your data.
+
+## How Do They Work? 🛠️
+
+Let's break it down with a simple example:
 
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.datasets import make_blobs
 from sklearn.manifold import TSNE
-from sklearn.datasets import load_digits
+import umap
 
-# Load and prepare data
-digits = load_digits()
-X, y = digits.data, digits.target
+# Create sample data with clear clusters
+X, y = make_blobs(n_samples=300, centers=4, cluster_std=0.60, random_state=0)
 
 # Apply t-SNE
 tsne = TSNE(n_components=2, random_state=42)
 X_tsne = tsne.fit_transform(X)
 
-# Plot results
-plt.figure(figsize=(10, 8))
-scatter = plt.scatter(X_tsne[:, 0], X_tsne[:, 1], 
-                     c=y, cmap='tab10')
-plt.colorbar(scatter)
-plt.title('t-SNE visualization of digits dataset')
-plt.show()
-```
-
-## Understanding UMAP 🌍
-
-UMAP (Uniform Manifold Approximation and Projection) is similar to t-SNE but:
-- Is faster
-- Better preserves global structure
-- Has stronger theoretical foundations
-
-```python
-import umap
-
 # Apply UMAP
 reducer = umap.UMAP(random_state=42)
 X_umap = reducer.fit_transform(X)
 
-# Plot results
-plt.figure(figsize=(10, 8))
-scatter = plt.scatter(X_umap[:, 0], X_umap[:, 1], 
-                     c=y, cmap='tab10')
-plt.colorbar(scatter)
-plt.title('UMAP visualization of digits dataset')
-plt.show()
+# Create visualization
+plt.figure(figsize=(15, 5))
+
+# Original data (first two dimensions)
+plt.subplot(131)
+plt.scatter(X[:, 0], X[:, 1], c=y, cmap='viridis')
+plt.title('Original Data (First 2 Dimensions)')
+plt.xlabel('Feature 1')
+plt.ylabel('Feature 2')
+
+# t-SNE visualization
+plt.subplot(132)
+plt.scatter(X_tsne[:, 0], X_tsne[:, 1], c=y, cmap='viridis')
+plt.title('t-SNE Visualization')
+plt.xlabel('t-SNE 1')
+plt.ylabel('t-SNE 2')
+
+# UMAP visualization
+plt.subplot(133)
+plt.scatter(X_umap[:, 0], X_umap[:, 1], c=y, cmap='viridis')
+plt.title('UMAP Visualization')
+plt.xlabel('UMAP 1')
+plt.ylabel('UMAP 2')
+
+plt.tight_layout()
+plt.savefig('assets/tsne_umap_comparison.png')
+plt.close()
 ```
 
-## Comparing Methods 📊
+## Real-World Example: Visualizing Handwritten Digits 📝
 
-Let's compare PCA, t-SNE, and UMAP on the same dataset:
+Let's see how these tools can help us visualize complex data:
 
-```python
-from sklearn.decomposition import PCA
-
-def plot_dimensionality_reduction_comparison(X, y, figsize=(15, 5)):
-    # Apply all three methods
-    pca = PCA(n_components=2)
-    tsne = TSNE(n_components=2)
-    reducer = umap.UMAP()
-    
-    X_pca = pca.fit_transform(X)
-    X_tsne = tsne.fit_transform(X)
-    X_umap = reducer.fit_transform(X)
-    
-    # Create plots
-    fig, axes = plt.subplots(1, 3, figsize=figsize)
-    
-    # PCA
-    scatter = axes[0].scatter(X_pca[:, 0], X_pca[:, 1], 
-                            c=y, cmap='tab10')
-    axes[0].set_title('PCA')
-    
-    # t-SNE
-    axes[1].scatter(X_tsne[:, 0], X_tsne[:, 1], 
-                   c=y, cmap='tab10')
-    axes[1].set_title('t-SNE')
-    
-    # UMAP
-    axes[2].scatter(X_umap[:, 0], X_umap[:, 1], 
-                   c=y, cmap='tab10')
-    axes[2].set_title('UMAP')
-    
-    plt.colorbar(scatter)
-    plt.tight_layout()
-    plt.show()
-
-plot_dimensionality_reduction_comparison(X, y)
-```
-
-## Parameter Tuning 🎛️
-
-### t-SNE Parameters
-```python
-def explore_tsne_parameters(X, y, perplexities=[5, 30, 50, 100]):
-    fig, axes = plt.subplots(2, 2, figsize=(15, 15))
-    axes = axes.ravel()
-    
-    for idx, perp in enumerate(perplexities):
-        tsne = TSNE(n_components=2, perplexity=perp, 
-                    random_state=42)
-        X_tsne = tsne.fit_transform(X)
-        
-        axes[idx].scatter(X_tsne[:, 0], X_tsne[:, 1], 
-                         c=y, cmap='tab10')
-        axes[idx].set_title(f'Perplexity: {perp}')
-    
-    plt.tight_layout()
-    plt.show()
-
-explore_tsne_parameters(X, y)
-```
-
-### UMAP Parameters
-```python
-def explore_umap_parameters(X, y, n_neighbors=[5, 15, 30, 50],
-                          min_dist=[0.1, 0.25, 0.5, 0.8]):
-    fig, axes = plt.subplots(len(n_neighbors), len(min_dist), 
-                            figsize=(20, 20))
-    
-    for i, nn in enumerate(n_neighbors):
-        for j, md in enumerate(min_dist):
-            reducer = umap.UMAP(n_neighbors=nn, min_dist=md,
-                              random_state=42)
-            X_umap = reducer.fit_transform(X)
-            
-            axes[i, j].scatter(X_umap[:, 0], X_umap[:, 1], 
-                             c=y, cmap='tab10', s=5)
-            axes[i, j].set_title(f'n_neighbors={nn}, min_dist={md}')
-    
-    plt.tight_layout()
-    plt.show()
-
-explore_umap_parameters(X, y)
-```
-
-## Real-World Applications 🌟
-
-### 1. Single-Cell RNA Sequencing
-```python
-# Simulated gene expression data
-n_cells = 1000
-n_genes = 50
-np.random.seed(42)
-
-# Create three cell types
-cell_type_1 = np.random.normal(0, 1, (n_cells//3, n_genes))
-cell_type_2 = np.random.normal(3, 1, (n_cells//3, n_genes))
-cell_type_3 = np.random.normal(-3, 1, (n_cells//3, n_genes))
-
-X_genes = np.vstack([cell_type_1, cell_type_2, cell_type_3])
-y_genes = np.repeat([0, 1, 2], n_cells//3)
-
-# Apply UMAP
-reducer = umap.UMAP(n_neighbors=15, min_dist=0.1)
-X_umap = reducer.fit_transform(X_genes)
-
-plt.figure(figsize=(10, 8))
-scatter = plt.scatter(X_umap[:, 0], X_umap[:, 1], 
-                     c=y_genes, cmap='tab10')
-plt.colorbar(scatter)
-plt.title('UMAP visualization of gene expression data')
-plt.show()
-```
-
-### 2. Image Similarity
 ```python
 from sklearn.datasets import load_digits
 import numpy as np
+import matplotlib.pyplot as plt
 
-# Load digits data
+# Load digits dataset
 digits = load_digits()
 X = digits.data
 y = digits.target
 
 # Apply t-SNE
-tsne = TSNE(n_components=2, perplexity=30)
+tsne = TSNE(n_components=2, random_state=42)
 X_tsne = tsne.fit_transform(X)
 
-# Plot with thumbnail images
-def plot_digits_tsne(X_tsne, images, y):
-    fig, ax = plt.subplots(figsize=(15, 15))
-    scatter = ax.scatter(X_tsne[:, 0], X_tsne[:, 1], c=y, cmap='tab10')
-    
-    # Add thumbnails for some points
-    for idx in np.random.choice(len(images), 20):
-        img = images[idx].reshape(8, 8)
-        imagebox = OffsetImage(img, zoom=1, cmap='gray')
-        ab = AnnotationBbox(imagebox, X_tsne[idx], frameon=False)
-        ax.add_artist(ab)
-    
-    plt.colorbar(scatter)
-    plt.title('t-SNE visualization with digit thumbnails')
-    plt.show()
+# Apply UMAP
+reducer = umap.UMAP(random_state=42)
+X_umap = reducer.fit_transform(X)
 
-plot_digits_tsne(X_tsne, digits.images, y)
+# Create visualization
+plt.figure(figsize=(15, 5))
+
+# t-SNE visualization
+plt.subplot(121)
+scatter = plt.scatter(X_tsne[:, 0], X_tsne[:, 1], c=y, cmap='tab10')
+plt.colorbar(scatter)
+plt.title('t-SNE Visualization of Digits')
+plt.xlabel('t-SNE 1')
+plt.ylabel('t-SNE 2')
+
+# UMAP visualization
+plt.subplot(122)
+scatter = plt.scatter(X_umap[:, 0], X_umap[:, 1], c=y, cmap='tab10')
+plt.colorbar(scatter)
+plt.title('UMAP Visualization of Digits')
+plt.xlabel('UMAP 1')
+plt.ylabel('UMAP 2')
+
+plt.tight_layout()
+plt.savefig('assets/tsne_umap_digits.png')
+plt.close()
 ```
 
-## Best Practices 🌟
+## Key Differences Between t-SNE and UMAP 🔍
 
-### 1. Preprocessing
+1. **Speed**: UMAP is generally faster than t-SNE
+2. **Memory Usage**: UMAP uses less memory
+3. **Parameter Sensitivity**: t-SNE is more sensitive to parameter choices
+4. **Global Structure**: UMAP often preserves global structure better
+
+## When to Use Each Tool 🌟
+
+### Use t-SNE when
+
+- You need highly detailed local structure
+- You have a small to medium dataset
+- You want to focus on local relationships
+
+### Use UMAP when
+
+- You have a large dataset
+- You need to preserve both local and global structure
+- You need faster computation
+- You want to use the embedding for downstream tasks
+
+## Best Practices ✅
+
+1. **Preprocessing**:
+
 ```python
-from sklearn.preprocessing import StandardScaler
-
-def preprocess_for_embedding(X):
+def preprocess_for_visualization(X):
+    # Remove missing values
+    X = np.nan_to_num(X)
+    
     # Scale data
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
     
-    # Reduce noise with PCA if needed
-    if X.shape[1] > 50:
-        pca = PCA(n_components=50)
-        X_scaled = pca.fit_transform(X_scaled)
-    
     return X_scaled
 ```
 
-### 2. Parameter Selection
+2. **Parameter Tuning**:
+
 ```python
-def find_best_params(X, y, method='tsne'):
-    if method == 'tsne':
-        perplexities = [5, 30, 50]
-        scores = []
+def find_best_parameters(X, y):
+    # Try different perplexity values for t-SNE
+    perplexities = [5, 30, 50, 100]
+    plt.figure(figsize=(15, 10))
+    
+    for i, perplexity in enumerate(perplexities):
+        tsne = TSNE(n_components=2, perplexity=perplexity, random_state=42)
+        X_tsne = tsne.fit_transform(X)
         
-        for perp in perplexities:
-            tsne = TSNE(perplexity=perp)
-            X_embedded = tsne.fit_transform(X)
-            # Calculate some metric (e.g., clustering score)
-            score = silhouette_score(X_embedded, y)
-            scores.append(score)
-            
-        best_perp = perplexities[np.argmax(scores)]
-        return best_perp
+        plt.subplot(2, 2, i+1)
+        plt.scatter(X_tsne[:, 0], X_tsne[:, 1], c=y, cmap='viridis')
+        plt.title(f't-SNE with perplexity={perplexity}')
     
-    elif method == 'umap':
-        # Similar process for UMAP parameters
-        pass
+    plt.tight_layout()
+    plt.savefig('assets/tsne_parameter_tuning.png')
+    plt.close()
 ```
 
-### 3. Visualization
-```python
-def plot_embedding_with_confidence(X_embedded, y, 
-                                 confidence_scores=None):
-    plt.figure(figsize=(10, 8))
-    
-    if confidence_scores is None:
-        plt.scatter(X_embedded[:, 0], X_embedded[:, 1], 
-                   c=y, cmap='tab10')
-    else:
-        scatter = plt.scatter(X_embedded[:, 0], X_embedded[:, 1],
-                            c=y, cmap='tab10', 
-                            alpha=confidence_scores)
-        plt.colorbar(scatter)
-    
-    plt.title('Embedding with confidence visualization')
-    plt.show()
-```
+## Common Mistakes to Avoid 🚫
 
-## Common Pitfalls and Solutions 🚧
+1. **Not Scaling Data**: Always standardize your data first
+2. **Using Wrong Parameters**: Choose parameters based on your data size
+3. **Interpreting Distances**: Remember that distances in the visualization are not always meaningful
+4. **Over-interpreting Results**: These are visualization tools, not clustering algorithms
 
-1. **Computational Cost**
-   - Use UMAP for large datasets
-   - Apply PCA first to reduce dimensions
-   - Use approximate nearest neighbors
+## Further Reading 📚
 
-2. **Reproducibility**
-   - Set random state
-   - Save transformed coordinates
-   - Document parameters
+1. [t-SNE Documentation](https://scikit-learn.org/stable/modules/generated/sklearn.manifold.TSNE.html)
+2. [UMAP Documentation](https://umap-learn.readthedocs.io/)
+3. [Interactive t-SNE Visualization](https://distill.pub/2016/misread-tsne/)
 
-3. **Interpretation**
-   - Don't trust distances too much
-   - Consider multiple runs
-   - Compare with other methods
+## Practice Exercise 🎯
 
-## Next Steps
+Try visualizing the famous MNIST dataset:
 
-Now that you understand dimensionality reduction, let's explore [Clustering Algorithms](./clustering.md) to find natural groups in your data!
+1. Load the data
+2. Preprocess it
+3. Apply both t-SNE and UMAP
+4. Compare the results
+5. Try different parameters to see how they affect the visualization
+
+Remember: The goal is to understand your data better, not just to create pretty pictures!

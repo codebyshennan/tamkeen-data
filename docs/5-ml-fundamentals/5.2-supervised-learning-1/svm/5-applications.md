@@ -1,12 +1,27 @@
-# Real-World Applications of SVM 🌍
+# Real-World Applications of SVM
 
-Let's explore how SVM is used in various industries with practical examples and deployment strategies.
+## Learning Objectives 🎯
 
-## 1. Text Classification 📝
+By the end of this section, you will be able to:
 
-> **Text Classification** involves categorizing text documents into predefined categories.
+- Implement SVM for real-world problems
+- Choose appropriate SVM configurations for different applications
+- Evaluate and optimize SVM performance in practical scenarios
+- Handle common challenges in real-world deployments
+
+## SVM in Different Domains
+
+SVM can be applied to various real-world problems, each requiring different configurations:
+
+![Applications Comparison](assets/applications_comparison.png)
+
+*Figure: SVM applied to different domains. Left: Text Classification (linear boundary), Middle: Image Recognition (circular boundary), Right: Medical Diagnosis (complex boundary).*
+
+## 1. Text Classification
 
 ### Spam Detection System
+
+Let's build a spam detector that can classify emails:
 
 ```python
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -16,25 +31,43 @@ import numpy as np
 
 class EmailClassifier:
     def __init__(self):
+        """
+        Initialize email classifier with TF-IDF and SVM.
+        """
         self.pipeline = Pipeline([
             ('vectorizer', TfidfVectorizer(
-                max_features=10000,
-                ngram_range=(1, 2),
-                stop_words='english'
+                max_features=10000,  # Limit vocabulary size
+                ngram_range=(1, 2),  # Use single words and pairs
+                stop_words='english'  # Remove common words
             )),
             ('classifier', LinearSVC(
                 C=1.0,
-                class_weight='balanced',
+                class_weight='balanced',  # Handle imbalanced classes
                 max_iter=1000
             ))
         ])
         
     def train(self, emails, labels):
-        """Train the spam detector"""
+        """
+        Train the spam detector.
+        
+        Parameters:
+        - emails: List of email texts
+        - labels: 1 for spam, 0 for not spam
+        """
         self.pipeline.fit(emails, labels)
         
     def predict(self, emails, threshold=0.8):
-        """Predict with confidence threshold"""
+        """
+        Predict with confidence threshold.
+        
+        Parameters:
+        - emails: List of emails to classify
+        - threshold: Confidence threshold
+        
+        Returns:
+        - Predictions and confidence scores
+        """
         # Get decision function scores
         scores = self.pipeline.decision_function(emails)
         
@@ -56,13 +89,20 @@ emails = [
 ]
 labels = [1, 0, 1, 0]  # 1 for spam, 0 for not spam
 
+# Create and train classifier
 classifier = EmailClassifier()
 classifier.train(emails, labels)
+
+# Make predictions
+new_emails = ["Special offer just for you!", "Team meeting notes"]
+predictions, confidences = classifier.predict(new_emails)
 ```
 
-## 2. Image Recognition 🖼️
+## 2. Image Recognition
 
 ### Face Detection System
+
+Let's build a simple face detector:
 
 ```python
 import cv2
@@ -72,6 +112,9 @@ from sklearn.preprocessing import StandardScaler
 
 class FaceDetector:
     def __init__(self):
+        """
+        Initialize face detector with Haar Cascade and SVM.
+        """
         self.face_cascade = cv2.CascadeClassifier(
             cv2.data.haarcascades + 
             'haarcascade_frontalface_default.xml'
@@ -82,7 +125,15 @@ class FaceDetector:
         ])
         
     def extract_features(self, image):
-        """Extract features from face image"""
+        """
+        Extract features from face image.
+        
+        Parameters:
+        - image: Input image
+        
+        Returns:
+        - Feature vector
+        """
         # Convert to grayscale
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         
@@ -96,7 +147,13 @@ class FaceDetector:
         return features.flatten()
         
     def train(self, face_images, labels):
-        """Train the face detector"""
+        """
+        Train the face detector.
+        
+        Parameters:
+        - face_images: List of face images
+        - labels: Person labels
+        """
         # Extract features from all images
         features = np.array([
             self.extract_features(img)
@@ -107,7 +164,16 @@ class FaceDetector:
         self.model.fit(features, labels)
         
     def detect(self, image, min_confidence=0.8):
-        """Detect faces in image"""
+        """
+        Detect faces in image.
+        
+        Parameters:
+        - image: Input image
+        - min_confidence: Minimum confidence threshold
+        
+        Returns:
+        - List of detected faces with confidence
+        """
         # Detect faces using cascade
         faces = self.face_cascade.detectMultiScale(
             image, 
@@ -134,9 +200,11 @@ class FaceDetector:
         return results
 ```
 
-## 3. Medical Diagnosis 🏥
+## 3. Medical Diagnosis
 
-### Disease Classification
+### Disease Classification System
+
+Let's build a system to help diagnose diseases:
 
 ```python
 from sklearn.preprocessing import StandardScaler
@@ -145,6 +213,9 @@ from sklearn.metrics import roc_auc_score
 
 class MedicalDiagnosisSystem:
     def __init__(self):
+        """
+        Initialize medical diagnosis system.
+        """
         self.model = Pipeline([
             ('scaler', StandardScaler()),
             ('svm', SVC(
@@ -155,7 +226,13 @@ class MedicalDiagnosisSystem:
         ])
         
     def train_with_validation(self, X, y):
-        """Train with cross-validation"""
+        """
+        Train with cross-validation.
+        
+        Parameters:
+        - X: Patient features
+        - y: Disease labels
+        """
         # Setup cross-validation
         cv = StratifiedKFold(n_splits=5)
         
@@ -185,7 +262,16 @@ class MedicalDiagnosisSystem:
         self.model.fit(X, y)
         
     def diagnose(self, patient_data, threshold=0.5):
-        """Make diagnosis with confidence"""
+        """
+        Make diagnosis with confidence.
+        
+        Parameters:
+        - patient_data: Patient features
+        - threshold: Decision threshold
+        
+        Returns:
+        - Diagnosis results
+        """
         # Get probability
         prob = self.model.predict_proba([patient_data])[0]
         
@@ -199,9 +285,11 @@ class MedicalDiagnosisSystem:
         }
 ```
 
-## 4. Financial Applications 💰
+## 4. Financial Applications
 
 ### Credit Risk Assessment
+
+Let's build a system to assess credit risk:
 
 ```python
 from sklearn.preprocessing import StandardScaler
@@ -209,6 +297,9 @@ from sklearn.model_selection import cross_val_predict
 
 class CreditRiskAssessor:
     def __init__(self):
+        """
+        Initialize credit risk assessment system.
+        """
         self.model = Pipeline([
             ('scaler', StandardScaler()),
             ('svm', SVC(
@@ -219,7 +310,13 @@ class CreditRiskAssessor:
         ])
         
     def train_with_monitoring(self, X, y):
-        """Train with performance monitoring"""
+        """
+        Train with performance monitoring.
+        
+        Parameters:
+        - X: Applicant features
+        - y: Risk labels
+        """
         # Get cross-validated predictions
         y_pred = cross_val_predict(
             self.model, X, y,
@@ -242,14 +339,22 @@ class CreditRiskAssessor:
         self.model.fit(X, y)
         
     def assess_risk(self, applicant_data):
-        """Assess credit risk"""
+        """
+        Assess credit risk.
+        
+        Parameters:
+        - applicant_data: Applicant features
+        
+        Returns:
+        - Risk assessment results
+        """
         # Get probability
         prob = self.model.predict_proba([applicant_data])[0]
         
         # Define risk levels
         if prob[1] < 0.2:
             risk_level = 'Low'
-        elif prob[1] < 0.6:
+        elif prob[1] < 0.5:
             risk_level = 'Medium'
         else:
             risk_level = 'High'
@@ -257,158 +362,94 @@ class CreditRiskAssessor:
         return {
             'risk_level': risk_level,
             'probability': prob[1],
-            'auto_approve': prob[1] < 0.2,
-            'auto_reject': prob[1] > 0.8
+            'recommendation': 'Approve' if prob[1] < 0.3 else 'Review'
         }
 ```
 
-## 5. Anomaly Detection 🔍
+## Common Challenges and Solutions
 
-### Network Intrusion Detection
-
-```python
-from sklearn.svm import OneClassSVM
-import numpy as np
-
-class NetworkMonitor:
-    def __init__(self):
-        self.model = Pipeline([
-            ('scaler', StandardScaler()),
-            ('detector', OneClassSVM(
-                kernel='rbf',
-                nu=0.1  # Contamination rate
-            ))
-        ])
-        
-    def train_on_normal(self, normal_traffic):
-        """Train on normal network traffic"""
-        self.model.fit(normal_traffic)
-        
-    def detect_anomalies(self, traffic_data):
-        """Detect anomalous traffic"""
-        # Get anomaly scores
-        scores = self.model.decision_function(traffic_data)
-        
-        # Detect anomalies
-        predictions = self.model.predict(traffic_data)
-        
-        # Analyze results
-        anomalies = []
-        for i, (score, pred) in enumerate(zip(scores, predictions)):
-            if pred == -1:  # Anomaly
-                anomalies.append({
-                    'index': i,
-                    'score': abs(score),
-                    'data': traffic_data[i]
-                })
-                
-        return sorted(
-            anomalies,
-            key=lambda x: x['score'],
-            reverse=True
-        )
-```
-
-## Deployment Best Practices 🚀
-
-### 1. Model Versioning
+### 1. Data Quality Issues
 
 ```python
-import joblib
-import json
-from datetime import datetime
-
-class ModelManager:
-    def __init__(self, base_path='models/'):
-        self.base_path = base_path
-        
-    def save_model(self, model, metadata):
-        """Save model with version control"""
-        # Create version ID
-        version = datetime.now().strftime('%Y%m%d_%H%M%S')
-        
-        # Save model
-        model_path = f"{self.base_path}model_{version}.joblib"
-        joblib.dump(model, model_path)
-        
-        # Save metadata
-        meta_path = f"{self.base_path}metadata_{version}.json"
-        with open(meta_path, 'w') as f:
-            json.dump({
-                'version': version,
-                'timestamp': str(datetime.now()),
-                'performance': metadata
-            }, f)
-            
-    def load_latest_model(self):
-        """Load most recent model"""
-        import glob
-        import os
-        
-        # Find latest version
-        model_files = glob.glob(
-            f"{self.base_path}model_*.joblib"
-        )
-        latest = max(model_files, key=os.path.getctime)
-        
-        # Load model and metadata
-        model = joblib.load(latest)
-        meta_file = latest.replace(
-            'model_', 'metadata_'
-        ).replace('.joblib', '.json')
-        
-        with open(meta_file, 'r') as f:
-            metadata = json.load(f)
-            
-        return model, metadata
+def handle_missing_data(X):
+    """
+    Handle missing values in data.
+    
+    Parameters:
+    - X: Input features
+    
+    Returns:
+    - Cleaned features
+    """
+    from sklearn.impute import SimpleImputer
+    
+    imputer = SimpleImputer(strategy='mean')
+    return imputer.fit_transform(X)
 ```
 
-### 2. Performance Monitoring
+### 2. Feature Scaling
 
 ```python
-class ModelMonitor:
-    def __init__(self):
-        self.predictions = []
-        self.actuals = []
-        self.timestamps = []
-        
-    def log_prediction(self, prediction, actual=None):
-        """Log prediction details"""
-        self.predictions.append(prediction)
-        self.actuals.append(actual)
-        self.timestamps.append(datetime.now())
-        
-    def analyze_performance(self, window_size=1000):
-        """Analyze recent performance"""
-        if len(self.predictions) < window_size:
-            return
-            
-        recent_preds = self.predictions[-window_size:]
-        recent_actuals = [a for a in self.actuals[-window_size:]
-                         if a is not None]
-        
-        if recent_actuals:
-            metrics = {
-                'accuracy': accuracy_score(
-                    recent_actuals,
-                    recent_preds
-                ),
-                'timestamp': datetime.now()
-            }
-            
-            return metrics
+def scale_features(X):
+    """
+    Scale features for SVM.
+    
+    Parameters:
+    - X: Input features
+    
+    Returns:
+    - Scaled features
+    """
+    scaler = StandardScaler()
+    return scaler.fit_transform(X)
 ```
 
-## Next Steps 🎯
+### 3. Class Imbalance
 
-After exploring these applications:
-1. Choose a specific domain
-2. Start with small-scale implementation
-3. Gradually add complexity
-4. Monitor and improve
+```python
+def handle_imbalance(X, y):
+    """
+    Handle imbalanced classes.
+    
+    Parameters:
+    - X: Features
+    - y: Labels
+    
+    Returns:
+    - Balanced dataset
+    """
+    from imblearn.over_sampling import SMOTE
+    
+    smote = SMOTE()
+    X_balanced, y_balanced = smote.fit_resample(X, y)
+    return X_balanced, y_balanced
+```
 
-Remember:
-- Always validate assumptions
-- Test thoroughly before deployment
-- Monitor performance in production
-- Update models regularly
+## Best Practices
+
+1. **Data Preparation**
+   - Clean and preprocess data
+   - Handle missing values
+   - Scale features
+   - Balance classes if needed
+
+2. **Model Selection**
+   - Start with simple kernels
+   - Use cross-validation
+   - Monitor performance metrics
+   - Consider computational cost
+
+3. **Deployment**
+   - Save trained models
+   - Implement monitoring
+   - Handle new data properly
+   - Update models regularly
+
+## Next Steps
+
+1. Practice with real datasets
+2. Experiment with different kernels
+3. Try different preprocessing techniques
+4. Implement monitoring systems
+
+Remember: Real-world applications require careful consideration of data quality, model performance, and deployment requirements!
