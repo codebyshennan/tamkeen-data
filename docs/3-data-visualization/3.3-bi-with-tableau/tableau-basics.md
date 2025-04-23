@@ -1,393 +1,335 @@
-# Tableau Basics
+# Tableau Basics: Sample Superstore Guide
 
-## 🎯 Getting Started with Tableau
+## Introduction to Tableau with Sample Superstore
 
-What is Tableau?
+Tableau is a powerful data visualization tool that enables interactive analytics and visualizations. The Sample Superstore dataset is a built-in dataset that simulates a retail business, making it ideal for learning Tableau's features and capabilities. This guide covers:
 
-* Tableau is a powerful data visualization tool that allows users to create interactive and shareable dashboards.
-* It enables users to connect to various data sources, transform data, and create visualizations without writing code.
+- Tableau's intuitive visualization interface
+- Real-time data analysis without coding
+- Interactive dashboard creation
+- Advanced visualization techniques
 
-### Tableau Product Line
+### Prerequisites
 
-| Product                 | Description                                                     |
-| ----------------------- | --------------------------------------------------------------- |
-| Tableau Prep            | Visually combine, shape, clean data, automate data prep flow    |
-| Tableau Desktop         | Visual analysis, data exploration, data-driven decision-making  |
-| Tableau Public          | Free version of Tableau Desktop with some limitations           |
-| Tableau Server & Online | Share the tableau report across organisation on server or cloud |
-| Tableau Mobile          | Access KPI on Mobile App for iOS and Android                    |
+1. **Required Components:**
+   - Tableau Desktop 2021.1 or newer
+   - Basic understanding of data analysis
+   - Familiarity with business metrics
 
-### Understanding the Interface
+2. **System Requirements:**
+   - Windows 10/11 or macOS 12+
+   - 8GB RAM minimum (16GB recommended)
+   - 2GB free disk space
+   - Modern multi-core processor
 
-<figure><img src="../../.gitbook/assets/Tableau Public 2025-01-04 00.54.33.png" alt=""><figcaption></figcaption></figure>
+### Getting Started: Step-by-Step Guide
 
-<figure><img src="../../.gitbook/assets/CleanShot 2025-01-04 at 00.58.00.png" alt=""><figcaption></figcaption></figure>
-
-```yaml
-Interface Components:
-┌─────────────────────────────────────────────────────────────┐
-│                      Toolbar & Menu                         │
-├────────┬────────────────────────────┬───────────────────────┤
-│        │                            │                       │
-│  Data  │     Visualization          │       Show Me         │
-│  Panel │         Canvas             │        Panel          │
-│        │                            │                       │
-├────────┤                            │                       │
-│        │                            ├───────────────────────┤
-│ Marks  │                            │                       │
-│ Card   │                            │       Legends &       │
-│        │                            │        Filters.       │
-│        │                            │                       │
-├────────┴────────────────────────────┴───────────────────────┤
-│                  Worksheet Tabs                             │
-└─────────────────────────────────────────────────────────────┘
-```
-
-### Key Components Explained
-
-#### 1. Data Panel
+#### 1. Connecting to Sample Superstore
 
 ```yaml
-Structure:
-  Dimensions (Blue):
-    - Categorical data
-    - Dates
-    - Geographic fields
-    
-  Measures (Green):
-    - Numeric values
-    - Aggregated data
-    - Calculated fields
-    
-  Other Elements:
-    - Parameters
-    - Sets
-    - Calculated fields
+Steps:
+1. Launch Tableau Desktop
+   [Screenshot: Tableau Start Page]
+   - Look for the Connect pane on the left
+   - Under Saved Data Sources, click "Sample - Superstore"
+
+2. Data Source Preview
+   [Screenshot: Data Source Tab]
+   - Review the data structure
+   - Note the dimensions (blue) and measures (green)
+   - Check the first 1,000 rows of data
+
+3. Create New Worksheet
+   [Screenshot: Blank Worksheet]
+   - Click the "New Worksheet" button
+   - Familiarize yourself with the workspace layout
 ```
 
-#### 2. Marks Card
+#### 2. Creating Your First Visualization
 
 ```yaml
-Visual Properties:
-  - Color: Encode categories/values
-  - Size: Represent magnitude
-  - Label: Show data points
-  - Detail: Add information
-  - Tooltip: Interactive info
-  - Path: Line/polygon order
+Example: Sales by Category Bar Chart
+Steps:
+1. Basic Chart Creation
+   [Screenshot: Drag and Drop Fields]
+   - Drag "Category" to Rows shelf
+   - Drag "Sales" to Columns shelf
+   - Tableau creates a horizontal bar chart
+
+2. Chart Customization
+   [Screenshot: Chart Formatting]
+   - Click "Show Me" panel
+   - Select "Bar Chart" if not already selected
+   - Sort bars by descending sales
+   - Add color by category
+   - Add data labels
+
+3. Formatting
+   [Screenshot: Format Pane]
+   - Adjust axis labels
+   - Modify colors
+   - Add title
+   - Format numbers
 ```
 
-## 📊 Data Connection Fundamentals
-
-### Connecting to Data Sources
-
-#### 1. File Connections
+#### 3. Adding Filters and Interactivity
 
 ```yaml
-Local Files:
-  Excel:
-    - Multiple sheets
-    - Named ranges
-    - Custom SQL
-    
-  CSV/Text:
-    - Delimiter options
-    - Character encoding
-    - First row headers
-    
-  JSON/XML:
-    - Schema detection
-    - Path specification
-    - Data flattening
+Steps:
+1. Adding Filters
+   [Screenshot: Filter Shelf]
+   - Drag "Region" to Filters shelf
+   - Select regions to include
+   - Apply filter to view
+
+2. Creating Parameters
+   [Screenshot: Parameter Creation]
+   - Right-click in Data pane
+   - Select "Create Parameter"
+   - Configure parameter properties
+   - Add parameter control to view
+
+3. Dashboard Actions
+   [Screenshot: Dashboard Actions]
+   - Create new dashboard
+   - Add multiple views
+   - Set up filter actions
+   - Configure highlight actions
 ```
 
-#### 2. Database Connections
-
-```sql
--- Example: SQL Connection Settings
-Server: database.example.com
-Port: 5432
-Database: sales_data
-Authentication:
-  - Username/Password
-  - Integrated
-  - SSL certificates
-
--- Example: Custom SQL Query
-SELECT 
-    date_trunc('month', order_date) as month,
-    product_category,
-    SUM(sales) as total_sales,
-    COUNT(DISTINCT customer_id) as unique_customers
-FROM sales_table
-WHERE order_date >= '2023-01-01'
-GROUP BY 1, 2
-```
-
-### Data Preparation
-
-#### 1. Data Source Filters
+#### 4. Building a Complete Dashboard
 
 ```yaml
-Filter Types:
-  Extract Filters:
-    - Reduce data size
-    - Improve performance
-    - Focus analysis
-    
-  Connection Filters:
-    - Limit initial load
-    - Improve query speed
-    - Reduce server load
+Steps:
+1. Dashboard Layout
+   [Screenshot: Dashboard Workspace]
+   - Create new dashboard
+   - Add multiple worksheets
+   - Arrange views in layout
+   - Add title and text boxes
+
+2. Adding Interactivity
+   [Screenshot: Dashboard Interactivity]
+   - Add filter controls
+   - Set up dashboard actions
+   - Configure parameter controls
+   - Add navigation buttons
+
+3. Final Touches
+   [Screenshot: Final Dashboard]
+   - Add legends
+   - Format colors
+   - Adjust spacing
+   - Add tooltips
 ```
 
-#### 2. Data Cleaning
+### Common Visualization Examples
+
+#### 1. Sales Analysis Dashboard
 
 ```yaml
-Common Tasks:
-  Field Renaming:
-    - Clear naming
-    - Remove spaces
-    - Add prefixes
-    
-  Data Type Setting:
-    - String → Date
-    - Number → Currency
-    - String → Geographic
-    
-  Null Handling:
-    - Filter nulls
-    - Replace values
-    - Special indicators
+Components:
+1. Sales Trend
+   [Screenshot: Line Chart]
+   - Order Date (Month) on Columns
+   - Sales on Rows
+   - Add trend line
+   - Format date display
+
+2. Geographic Analysis
+   [Screenshot: Map View]
+   - State on Map
+   - Sales on Color
+   - Add state labels
+   - Configure tooltips
+
+3. Category Breakdown
+   [Screenshot: Bar Chart]
+   - Category on Rows
+   - Sales on Columns
+   - Sort by sales
+   - Add percentage labels
 ```
 
-## 🎨 Building Basic Visualizations
-
-### Essential Chart Types
-
-#### 1. Bar Charts
+#### 2. Profit Analysis Dashboard
 
 ```yaml
-Types:
-  Vertical Bars:
-    Use: Category comparison
-    Example: Sales by Product
-    
-  Horizontal Bars:
-    Use: Long category names
-    Example: Customer Rankings
-    
-  Stacked Bars:
-    Use: Part-to-whole
-    Example: Sales by Region & Category
+Components:
+1. Profit by Sub-Category
+   [Screenshot: Heat Map]
+   - Sub-Category on Columns
+   - Category on Rows
+   - Profit on Color
+   - Add profit values
+
+2. Discount Impact
+   [Screenshot: Scatter Plot]
+   - Discount on X-axis
+   - Profit Ratio on Y-axis
+   - Add trend line
+   - Create bins
+
+3. Regional Performance
+   [Screenshot: Map with Indicators]
+   - Region on Map
+   - Profit on Color
+   - Add reference lines
+   - Configure tooltips
 ```
 
-#### 2. Line Charts
+### Advanced Features
+
+#### 1. Calculated Fields
 
 ```yaml
-Variations:
-  Single Line:
-    Steps:
-      1. Date to Columns
-      2. Measure to Rows
-      3. Set date level
-      4. Add reference lines
-      
-  Multiple Lines:
-    Steps:
-      1. Base line chart
-      2. Color by dimension
-      3. Add legends
-      4. Customize tooltips
+Examples:
+1. Profit Ratio
+   [Screenshot: Calculation Editor]
+   Formula: SUM([Profit])/SUM([Sales])
+   Steps:
+   - Right-click in Data pane
+   - Select "Create Calculated Field"
+   - Enter formula
+   - Name the calculation
+
+2. Year-over-Year Growth
+   [Screenshot: Table Calculation]
+   Formula: (SUM([Sales]) - LOOKUP(SUM([Sales]), -1))/ABS(LOOKUP(SUM([Sales]), -1))
+   Steps:
+   - Create calculation
+   - Set up table calculation
+   - Format as percentage
 ```
 
-#### 3. Scatter Plots
+#### 2. Level of Detail Expressions
 
 ```yaml
-Construction:
-  Basic Plot:
-    1. Measure X → Columns
-    2. Measure Y → Rows
-    3. Change mark to Circle
-    
-  Enhancements:
-    - Size by measure
-    - Color by dimension
-    - Add trend lines
-    - Show clusters
+Examples:
+1. Fixed LOD
+   [Screenshot: LOD Editor]
+   Formula: {FIXED [Category] : SUM([Sales])}
+   Steps:
+   - Create calculated field
+   - Enter LOD expression
+   - Apply to visualization
+
+2. Include LOD
+   [Screenshot: LOD in View]
+   Formula: {INCLUDE [Region] : AVG([Profit])}
+   Steps:
+   - Create calculation
+   - Add to view
+   - Format results
 ```
 
-### Advanced Chart Features
+### Best Practices for High-Performance Visualizations
 
-#### 1. Dual Axis Charts
-
-```sql
--- Creating Dual Axis
-1. Create first measure
-2. Drag second measure to right
-3. Right-click → Dual Axis
-4. Synchronize if needed
-
--- Example: Sales and Profit
-Axis 1: SUM([Sales])
-Axis 2: SUM([Profit])
-Mark Types: Bar and Line
-```
-
-#### 2. Calculated Fields
-
-```sql
--- Basic Calculations
-Profit Ratio = [Profit] / [Sales]
-
--- Date Calculations
-Days Since First Purchase = 
-DATEDIFF('day', {FIXED [Customer ID] : 
-  MIN([Order Date])}, [Order Date])
-
--- Window Calculations
-Running Total = 
-RUNNING_SUM(SUM([Sales]))
-```
-
-## 🔧 Formatting and Style
-
-### Visual Formatting
-
-#### 1. Color Usage
+#### 1. Data Source Optimization
 
 ```yaml
-Color Types:
-  Sequential:
-    - Single hue progression
-    - Intensity variation
-    - Quantitative data
-    
-  Diverging:
-    - Two-color scale
-    - Neutral midpoint
-    - Above/below threshold
-    
-  Categorical:
-    - Distinct hues
-    - Clear separation
-    - Qualitative data
+Optimization Steps:
+1. Data Preparation:
+   - Clean and prepare data before analysis
+   - Use appropriate data types
+   - Remove unnecessary fields
+   - Create data extracts for better performance
+
+2. Query Optimization:
+   - Use appropriate filters
+   - Implement efficient calculations
+   - Optimize data extracts
+   - Monitor query performance
+
+3. Resource Management:
+   - Monitor memory usage
+   - Optimize view complexity
+   - Configure refresh intervals
+   - Manage dashboard size
 ```
 
-#### 2. Typography
+#### 2. Dashboard Design Optimization
 
 ```yaml
-Text Elements:
-  Titles:
-    - Clear hierarchy
-    - Consistent size
-    - Informative text
-    
-  Labels:
-    - Readable size
-    - Strategic placement
-    - Minimal overlap
-    
-  Tooltips:
-    - Relevant info
-    - Clear formatting
-    - Custom content
+Design Best Practices:
+1. Layout Optimization:
+   - Use efficient dashboard layouts
+   - Implement appropriate sizing
+   - Optimize view placement
+   - Balance information density
+
+2. Performance Considerations:
+   - Limit number of views
+   - Use appropriate chart types
+   - Implement efficient filters
+   - Monitor dashboard performance
+
+3. User Experience:
+   - Create intuitive navigation
+   - Implement clear labeling
+   - Use consistent formatting
+   - Provide helpful tooltips
 ```
 
-### Layout Best Practices
-
-#### 1. Grid System
+#### 3. Visualization Best Practices
 
 ```yaml
-Alignment:
-  - Use snap to grid
-  - Maintain margins
-  - Consistent spacing
-  - Aligned elements
+Visualization Guidelines:
+1. Chart Selection:
+   - Choose appropriate chart types
+   - Consider data relationships
+   - Optimize for readability
+   - Use consistent styling
 
-Distribution:
-  - Even spacing
-  - Balanced layout
-  - Visual hierarchy
-  - Clear grouping
+2. Color Usage:
+   - Implement meaningful color schemes
+   - Use color for emphasis
+   - Consider color blindness
+   - Maintain consistency
+
+3. Interactivity:
+   - Add appropriate filters
+   - Implement dashboard actions
+   - Create parameter controls
+   - Enable drill-down capabilities
 ```
 
-#### 2. White Space
+### Additional Resources
 
-```yaml
-Usage:
-  - Separate sections
-  - Frame content
-  - Improve readability
-  - Guide attention
-```
+**Tableau Resources:**
 
-## 🎯 Practical Tips
+- [Tableau Documentation](https://help.tableau.com/current/guides/get-started-tutorial/en-us/get-started-tutorial-home.htm)
+- [Tableau Public Gallery](https://public.tableau.com/app/discover)
+- [Tableau Community](https://community.tableau.com/s/)
 
-### 1. Performance Optimization
+**Support Channels:**
 
-```yaml
-Data Strategy:
-  - Use extracts
-  - Filter early
-  - Aggregate data
-  - Index key fields
+- Tableau Technical Support
+- Community Forums
+- Knowledge Base
+- Training Resources
 
-Calculation Tips:
-  - Minimize complexity
-  - Use context filters
-  - Pre-aggregate
-  - Cache results
-```
+### Implementation Checklist
 
-### 2. Common Pitfalls
+1. **Initial Setup:**
+   - Install Tableau Desktop
+   - Connect to Sample Superstore
+   - Create initial worksheets
+   - Test basic visualizations
 
-```yaml
-Avoid:
-  - Too many filters
-  - Complex calculations
-  - Large extracts
-  - Visual clutter
+2. **Performance Optimization:**
+   - Configure data extracts
+   - Optimize calculations
+   - Implement efficient filters
+   - Monitor performance
 
-Instead:
-  - Strategic filtering
-  - Simple measures
-  - Optimized data
-  - Clean design
-```
+3. **Maintenance:**
+   - Regular performance testing
+   - Update visualizations
+   - Monitor usage patterns
+   - Document changes
 
-### 3. Development Workflow
-
-```yaml
-Process:
-  1. Plan visualization
-  2. Prepare data
-  3. Build basic view
-  4. Add interactivity
-  5. Format and polish
-  6. Test performance
-```
-
-## 📚 Next Steps
-
-### 1. Advanced Features
-
-```yaml
-Learn:
-  - Table calculations
-  - Level of Detail (LOD)
-  - Parameters
-  - Actions
-```
-
-### 2. Dashboard Design
-
-```yaml
-Explore:
-  - Layout techniques
-  - Interactivity
-  - Mobile design
-  - Performance
-```
-
-Remember: The key to mastering Tableau is practice and experimentation. Start with simple visualizations and gradually increase complexity as you become more comfortable with the tool.
+4. **Security:**
+   - Implement user permissions
+   - Configure data access
+   - Monitor usage
+   - Maintain audit logs
