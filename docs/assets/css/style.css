@@ -1,0 +1,70 @@
+/* Main styles for the site */
+body {
+    background-color: #f6f8fa;
+}
+
+.container-lg {
+    max-width: 800px !important;
+    margin: 0 auto;
+    padding: 0 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.markdown-body {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 2em;
+}
+
+/* Adjust table width for better readability */
+.markdown-body table {
+    display: table;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    margin: 1em 0;
+}
+
+.markdown-body table th,
+.markdown-body table td {
+    padding: 8px;
+    border: 1px solid #dfe2e5;
+}
+
+/* Ensure code blocks don't overflow */
+.markdown-body pre {
+    max-width: 100%;
+    overflow-x: auto;
+    background-color: #f6f8fa;
+    padding: 1em;
+    border-radius: 6px;
+}
+
+/* Add some spacing between sections */
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3 {
+    margin-top: 2em;
+    margin-bottom: 1em;
+    border-bottom: 1px solid #eaecef;
+    padding-bottom: 0.3em;
+}
+
+/* Improve readability of lists */
+.markdown-body ul,
+.markdown-body ol {
+    padding-left: 2em;
+    margin: 1em 0;
+}
+
+/* Add some breathing room for blockquotes */
+.markdown-body blockquote {
+    margin: 1em 0;
+    padding: 0.5em 1em;
+    border-left: 4px solid #0366d6;
+    background-color: #f6f8fa;
+    border-radius: 0 6px 6px 0;
+} 
