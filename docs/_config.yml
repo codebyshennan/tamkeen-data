@@ -1,47 +1,49 @@
-title: Data Science and AI Course
-description: A comprehensive curriculum covering data fundamentals, data wrangling, visualization, statistical analysis, and machine learning fundamentals
-baseurl: "/tamkeen-data"
-url: "https://codebyshennan.github.io"
+# title: Data Science and AI Course
+# description: A comprehensive curriculum covering data fundamentals, data wrangling, visualization, statistical analysis, and machine learning fundamentals
+# baseurl: "/tamkeen-data"
+# url: "https://codebyshennan.github.io"
 
-# Repository information
-repository: codebyshennan/tamkeen-data
-github:
-  repository_url: https://github.com/codebyshennan/tamkeen-data
+# # Repository information
+# repository: codebyshennan/tamkeen-data
+# github:
+#   repository_url: https://github.com/codebyshennan/tamkeen-data
 
-# Build settings
-markdown: kramdown
-remote_theme: pages-themes/primer@v0.6.0
-plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
-  - jekyll-sitemap
-  - jekyll-github-metadata
-  - jekyll-remote-theme
+# # Build settings
+# markdown: kramdown
+# remote_theme: pages-themes/primer@v0.6.0
+# plugins:
+#   - jekyll-feed
+#   - jekyll-seo-tag
+#   - jekyll-sitemap
+#   - jekyll-github-metadata
+#   - jekyll-remote-theme
 
-# Error handling
-liquid:
-  error_mode: warn
-  strict_variables: false
-  strict_filters: false
+# # Error handling
+# liquid:
+#   error_mode: warn
+#   strict_variables: false
+#   strict_filters: false
 
-# Collections
-collections:
-  docs:
-    output: true
-    permalink: /:collection/:path
+# # Collections
+# collections:
+#   docs:
+#     output: true
+#     permalink: /:collection/:path
 
-# Default front matter
-defaults:
-  - scope:
-      path: ""
-      type: "docs"
-    values:
-      layout: "default"
-  - scope:
-      path: ""
-      type: "pages"
-    values:
-      layout: "default"
+# # Default front matter
+# defaults:
+#   - scope:
+#       path: ""
+#       type: "docs"
+#     values:
+#       layout: "default"
+#   - scope:
+#       path: ""
+#       type: "pages"
+#     values:
+#       layout: "default"
+
+theme: jekyll-theme-primer
 
 # Include directories
 include:
