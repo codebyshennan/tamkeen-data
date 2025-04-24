@@ -38,4 +38,9 @@ exclude:
   - .gitignore
   - book.json
   - node_modules/
-  - vendor/ 
+  - vendor/
+
+# GitHub Pages settings
+github:
+  metadata: true
+  branch: main
