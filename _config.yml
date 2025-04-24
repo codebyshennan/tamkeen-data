@@ -9,14 +9,33 @@ theme: minima
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Collections
+collections:
+  docs:
+    output: true
+    permalink: /:collection/:path
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+      type: "docs"
+    values:
+      layout: "default"
 
 # Include docs directory
 include:
   - docs
+  - _posts
+  - _pages
 
 # Exclude from processing
 exclude:
   - .git/
   - .venv/
   - .gitignore
-  - book.json 
+  - book.json
+  - node_modules/
+  - vendor/ 
