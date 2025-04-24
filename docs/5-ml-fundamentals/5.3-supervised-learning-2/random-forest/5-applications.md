@@ -5,6 +5,7 @@ Let's explore how Random Forests are used to solve real-world problems across di
 ## 1. Financial Applications 💰
 
 ### Credit Risk Assessment
+
 ```python
 import pandas as pd
 import numpy as np
@@ -77,6 +78,7 @@ print(pd.qcut(risk_scores, q=5).value_counts())
 ```
 
 ### Stock Price Prediction
+
 ```python
 import yfinance as yf
 from sklearn.ensemble import RandomForestRegressor
@@ -134,6 +136,7 @@ def train_stock_predictor(symbol='AAPL', lookback_days=30):
 ## 2. Healthcare Applications 🏥
 
 ### Disease Prediction
+
 ```python
 # Create sample medical data
 medical_data = pd.DataFrame({
@@ -196,6 +199,7 @@ def assess_health_risk(model, patient_data):
 ## 3. Environmental Applications 🌱
 
 ### Climate Change Analysis
+
 ```python
 def analyze_climate_data(data):
     """Analyze climate change patterns"""
@@ -237,6 +241,7 @@ print(importance)
 ## 4. Marketing Applications 📊
 
 ### Customer Churn Prediction
+
 ```python
 def predict_customer_churn(customer_data):
     """Predict customer churn probability"""
@@ -288,6 +293,7 @@ def predict_customer_churn(customer_data):
 ## 5. Manufacturing Applications 🏭
 
 ### Quality Control
+
 ```python
 def predict_product_quality(manufacturing_data):
     """Predict product quality issues"""
