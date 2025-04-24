@@ -2,8 +2,5 @@
 .git
 .github
 .venv
-docs/_site
-docs/.jekyll-cache
-docs/.gitbook
 node_modules
 vendor
