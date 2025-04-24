@@ -57,5 +57,7 @@ exclude:
   - vendor/
   - Gemfile
   - Gemfile.lock
+  - 0-prep/
+  - 1-data-fundamentals/
 
 # GitHub Pages settings
