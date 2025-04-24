@@ -22,6 +22,7 @@ In statistical inference, we distinguish between parameters and statistics. Para
 - Examples: sample mean, sample standard deviation, sample proportion
 
 ![Parameter-Statistic Relationship](assets/parameter_statistic_diagram.png)
+*Figure 1: Visual representation of the relationship between population parameters and sample statistics. Parameters (Greek letters) describe the entire population, while statistics (Latin letters) are calculated from samples to estimate these parameters.*
 
 ## Point and Interval Estimates
 
@@ -39,6 +40,7 @@ In statistical inference, we distinguish between parameters and statistics. Para
 - Example: Confidence intervals
 
 ![Confidence Intervals](assets/confidence_interval_diagram.png)
+*Figure 2: Visualization of confidence intervals. The red line represents our point estimate, while the blue shaded area shows the range where we're confident the true parameter lies.*
 
 ## Properties of Good Estimators
 
@@ -55,6 +57,9 @@ A good estimator should possess the following properties:
 3. **Consistency**
    - As sample size increases, the estimator converges to the parameter value
    - Example: Sample mean becomes more accurate as sample size increases
+
+![Estimator Properties](assets/estimator_properties_diagram.png)
+*Figure 3: Visual comparison of different estimator properties. The top panel shows unbiased vs biased estimators, the middle panel demonstrates efficiency, and the bottom panel illustrates consistency.*
 
 ## From Sample to Population: Making the Connection
 
@@ -79,6 +84,9 @@ print(f"Population mean (μ): {population_mean:.2f} feet")
 print(f"Sample mean (x̄): {sample_mean:.2f} feet")
 print(f"Difference: {abs(population_mean - sample_mean):.2f} feet")
 ```
+
+![Tree Height Analysis](assets/tree_height_analysis.png)
+*Figure 4: Comparison of population and sample distributions for tree heights. The red dashed lines indicate the means, and the blue shaded area shows the 95% confidence interval.*
 
 ### Interval Estimates: Being Realistic About Uncertainty
 
@@ -129,6 +137,9 @@ print(f"Average of {n_simulations} sample means: {mean_of_means:.2f}")
 print(f"Difference: {abs(population_mean - mean_of_means):.2f}")
 ```
 
+![Unbiasedness Demonstration](assets/unbiasedness_demonstration.png)
+*Figure 5: Distribution of sample means around the population mean. The green dashed line shows the mean of sample means, which is very close to the true population mean (red dashed line).*
+
 ### 2. Efficiency: Minimal Variance
 
 An efficient estimator has less variability in its estimates:
@@ -150,6 +161,9 @@ print(f"Regular mean: {regular_mean:.2f}")
 print(f"Trimmed mean: {trimmed_mean:.2f}")
 ```
 
+![Efficiency Comparison](assets/efficiency_comparison.png)
+*Figure 6: Comparison of regular mean (red) and trimmed mean (green) estimators. The regular mean is more efficient for normally distributed data.*
+
 ### 3. Consistency: Getting Better with More Data
 
 A consistent estimator converges to the true value as sample size increases:
@@ -169,6 +183,9 @@ print(f"True population mean: {population_mean:.2f}")
 for size, result in zip(sample_sizes, results):
     print(f"Sample size {size:4d}: {result:.2f} (Diff: {abs(result - population_mean):.2f})")
 ```
+
+![Consistency Demonstration](assets/consistency_demonstration.png)
+*Figure 7: Demonstration of consistency. As sample size increases, the sample mean (blue line) converges to the true population mean (red dashed line).*
 
 ## Real-World Applications
 
@@ -203,6 +220,9 @@ def quality_control_example():
     }
 ```
 
+![Quality Control Analysis](assets/quality_control_analysis.png)
+*Figure 8: Quality control measurements with target value (red), sample mean (green), and 95% confidence interval (blue).*
+
 ### 2. A/B Testing in Tech
 
 ```python
@@ -234,6 +254,9 @@ def ab_testing_example():
     }
 ```
 
+![A/B Testing Results](assets/ab_testing_results.png)
+*Figure 9: A/B test results showing conversion rates for control and treatment groups with error bars.*
+
 ## Practice Questions
 
 1. A company measures the battery life of 100 phones and finds a mean of 12 hours. Is this a parameter or a statistic? Why?
@@ -248,6 +271,8 @@ def ab_testing_example():
 2. Sample statistics help us estimate unknown population parameters
 3. Larger samples generally provide more precise estimates
 4. Good estimators are unbiased, efficient, and consistent
+5. Confidence intervals provide a range of plausible values for population parameters
+6. Real-world applications include quality control, A/B testing, and market research
 
 ## Additional Resources 📚
 

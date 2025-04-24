@@ -14,6 +14,9 @@
 - **Parameter**: A numerical characteristic of a population
 - **Statistic**: A numerical characteristic of a sample
 
+![Key Terms Visualization](assets/parameter_statistic_diagram.png)
+*Figure 1: Visual representation of key terms in sampling. The diagram shows how parameters describe populations and statistics describe samples.*
+
 ## Introduction: The Detective Analogy
 
 Imagine you're a detective trying to understand a city's crime patterns. You can't investigate every single crime (population), but you can study a carefully selected set of cases (sample) to make informed conclusions about the whole city. This is the essence of sampling in statistics!
@@ -39,7 +42,7 @@ A population is the **complete set** of all items, individuals, or measurements 
 ### Visual Representation
 
 ![Population and Sample Relationship](assets/population_sample_diagram.png)
-*Figure 1: The relationship between population and sample. The larger circle represents the entire population, while the smaller circle inside represents our sample.*
+*Figure 2: The relationship between population and sample. The larger circle represents the entire population, while the smaller circle inside represents our sample.*
 
 ## What is a Sample?
 
@@ -84,19 +87,33 @@ sample = np.random.choice(population, size=100, replace=False)
 plt.figure(figsize=(12, 6))
 plt.subplot(121)
 plt.hist(population, bins=30, alpha=0.7, color='blue')
+plt.axvline(np.mean(population), color='red', linestyle='--', label='Population Mean')
 plt.title('Population Distribution')
 plt.xlabel('Measurement')
 plt.ylabel('Frequency')
+plt.legend()
 
 plt.subplot(122)
 plt.hist(sample, bins=15, alpha=0.7, color='green')
+plt.axvline(np.mean(sample), color='red', linestyle='--', label='Sample Mean')
 plt.title('Sample Distribution')
 plt.xlabel('Measurement')
 plt.ylabel('Frequency')
+plt.legend()
 
 plt.tight_layout()
-plt.savefig('docs/4-stat-analysis/4.1-inferential-stats/assets/population_sample_dist.png')
+plt.savefig('assets/population_sample_dist.png')
+plt.close()
+
+# Print statistics
+print("\nQuality Control Analysis")
+print(f"Population mean: {np.mean(population):.2f}")
+print(f"Sample mean: {np.mean(sample):.2f}")
+print(f"Difference: {abs(np.mean(population) - np.mean(sample)):.2f}")
 ```
+
+![Population and Sample Distributions](assets/population_sample_dist.png)
+*Figure 3: Comparison of population and sample distributions in a quality control example. The red dashed lines indicate the means, showing how well the sample represents the population.*
 
 ## Sampling Methods: Choosing Your Strategy
 
@@ -109,15 +126,26 @@ def simple_random_sample(population, sample_size):
     """Generate a simple random sample"""
     return np.random.choice(population, size=sample_size, replace=False)
 
-# Example usage
+# Example usage with visualization
 population = np.arange(1000)  # IDs 0-999
 sample = simple_random_sample(population, 100)
+
+# Visualize the sampling process
+plt.figure(figsize=(10, 6))
+plt.scatter(population, [0]*len(population), alpha=0.3, label='Population')
+plt.scatter(sample, [0.1]*len(sample), color='red', label='Selected Sample')
+plt.title('Simple Random Sampling')
+plt.xlabel('Population ID')
+plt.yticks([])
+plt.legend()
+plt.savefig('assets/simple_random_sampling.png')
+plt.close()
+
 print(f"Random sample IDs: {sample[:5]}...")  # Show first 5 IDs
 ```
 
-#### Visual Representation
-
-[Recommended Image: A hat with names being drawn randomly]
+![Simple Random Sampling](assets/simple_random_sampling.png)
+*Figure 4: Visualization of simple random sampling. Each point represents a member of the population, with red points indicating selected sample members.*
 
 ### 2. Stratified Sampling
 
@@ -129,11 +157,29 @@ def stratified_sample(population, strata_sizes, sample_sizes):
     samples = []
     start_idx = 0
     
-    for stratum_size, sample_size in zip(strata_sizes, sample_sizes):
+    # Visualize the strata
+    plt.figure(figsize=(12, 6))
+    colors = ['blue', 'green', 'red']
+    
+    for i, (stratum_size, sample_size) in enumerate(zip(strata_sizes, sample_sizes)):
         stratum = population[start_idx:start_idx + stratum_size]
         sample = np.random.choice(stratum, size=sample_size, replace=False)
         samples.extend(sample)
+        
+        # Plot stratum
+        plt.scatter(stratum, [i]*len(stratum), alpha=0.3, color=colors[i], 
+                   label=f'Stratum {i+1}')
+        plt.scatter(sample, [i+0.1]*len(sample), color=colors[i], 
+                   label=f'Sample {i+1}' if i==0 else "")
+        
         start_idx += stratum_size
+    
+    plt.title('Stratified Sampling')
+    plt.xlabel('Population ID')
+    plt.yticks(range(len(strata_sizes)), [f'Stratum {i+1}' for i in range(len(strata_sizes))])
+    plt.legend()
+    plt.savefig('assets/stratified_sampling.png')
+    plt.close()
     
     return np.array(samples)
 
@@ -144,9 +190,8 @@ sample_sizes = [50, 50, 50]  # Equal size samples
 sample = stratified_sample(population, strata_sizes, sample_sizes)
 ```
 
-#### Visual Representation
-
-[Recommended Image: Population divided into colored sections with samples taken from each]
+![Stratified Sampling](assets/stratified_sampling.png)
+*Figure 5: Visualization of stratified sampling. The population is divided into three strata (blue, green, red), and samples are taken from each stratum.*
 
 ### 3. Systematic Sampling
 
@@ -156,16 +201,28 @@ Like picking every 10th person who walks into a store.
 def systematic_sample(population, interval):
     """Generate a systematic sample"""
     start = np.random.randint(0, interval)
-    return population[start::interval]
+    sample = population[start::interval]
+    
+    # Visualize the sampling process
+    plt.figure(figsize=(10, 6))
+    plt.scatter(population, [0]*len(population), alpha=0.3, label='Population')
+    plt.scatter(sample, [0.1]*len(sample), color='red', label='Selected Sample')
+    plt.title(f'Systematic Sampling (Interval: {interval})')
+    plt.xlabel('Population ID')
+    plt.yticks([])
+    plt.legend()
+    plt.savefig('assets/systematic_sampling.png')
+    plt.close()
+    
+    return sample
 
 # Example: Select every 10th customer
 population = np.arange(1000)
 sample = systematic_sample(population, 10)
 ```
 
-#### Visual Representation
-
-[Recommended Image: A line of people with every 10th person highlighted]
+![Systematic Sampling](assets/systematic_sampling.png)
+*Figure 6: Visualization of systematic sampling. The red points show how every 10th member is selected from the population.*
 
 ### 4. Cluster Sampling
 
@@ -174,13 +231,29 @@ Like studying a few neighborhoods to understand a city.
 ```python
 def cluster_sample(population, n_clusters, cluster_size):
     """Generate a cluster sample"""
-    clusters = np.random.choice(len(population), size=n_clusters, replace=False)
+    clusters = np.random.choice(len(population) // cluster_size, size=n_clusters, replace=False)
     samples = []
     
-    for cluster in clusters:
+    # Visualize the clusters
+    plt.figure(figsize=(12, 6))
+    plt.scatter(population, [0]*len(population), alpha=0.3, label='Population')
+    
+    for i, cluster in enumerate(clusters):
         start = cluster * cluster_size
         end = start + cluster_size
-        samples.extend(population[start:end])
+        cluster_members = population[start:end]
+        samples.extend(cluster_members)
+        
+        # Plot cluster
+        plt.scatter(cluster_members, [0.1]*len(cluster_members), 
+                   color=f'C{i}', label=f'Cluster {i+1}' if i==0 else "")
+    
+    plt.title(f'Cluster Sampling ({n_clusters} clusters of size {cluster_size})')
+    plt.xlabel('Population ID')
+    plt.yticks([])
+    plt.legend()
+    plt.savefig('assets/cluster_sampling.png')
+    plt.close()
     
     return np.array(samples)
 
@@ -189,14 +262,13 @@ population = np.arange(1000)
 sample = cluster_sample(population, 5, 20)
 ```
 
-#### Visual Representation
-
-[Recommended Image: Map showing selected neighborhoods/clusters]
+![Cluster Sampling](assets/cluster_sampling.png)
+*Figure 7: Visualization of cluster sampling. The colored points show how entire clusters are selected from the population.*
 
 ### Visual Comparison of Sampling Methods
 
 ![Sampling Methods Comparison](assets/sampling_methods_diagram.png)
-*Figure 2: Visual comparison of different sampling methods. From top-left: Simple Random, Stratified, Systematic, and Cluster sampling.*
+*Figure 8: Visual comparison of different sampling methods. From top-left: Simple Random, Stratified, Systematic, and Cluster sampling.*
 
 ## Common Sampling Errors and How to Avoid Them
 
@@ -218,13 +290,28 @@ def calculate_sampling_error(population_std, sample_size):
     """Calculate standard error of the mean"""
     return population_std / np.sqrt(sample_size)
 
-# Example
+# Example with visualization
 population_std = 15
 sample_sizes = [10, 100, 1000]
+ses = []
+
+plt.figure(figsize=(10, 6))
 for n in sample_sizes:
     se = calculate_sampling_error(population_std, n)
+    ses.append(se)
     print(f"Sample size {n}: Standard Error = {se:.2f}")
+
+plt.plot(sample_sizes, ses, 'bo-')
+plt.xlabel('Sample Size')
+plt.ylabel('Standard Error')
+plt.title('Effect of Sample Size on Standard Error')
+plt.grid(True)
+plt.savefig('assets/sampling_error_effect.png')
+plt.close()
 ```
+
+![Sampling Error Effect](assets/sampling_error_effect.png)
+*Figure 9: Effect of sample size on standard error. As sample size increases, the standard error decreases, showing improved precision.*
 
 ### 3. Coverage Error
 
@@ -248,87 +335,52 @@ def calculate_sample_size(confidence_level=0.95, margin_of_error=0.05, p=0.5):
     
     z_score = norm.ppf(1 - (1 - confidence_level) / 2)
     n = (z_score**2 * p * (1-p)) / margin_of_error**2
-    return int(np.ceil(n))
+    
+    # Visualize the relationship
+    margins = np.linspace(0.01, 0.1, 100)
+    sizes = [(z_score**2 * p * (1-p)) / m**2 for m in margins]
+    
+    plt.figure(figsize=(10, 6))
+    plt.plot(margins, sizes)
+    plt.xlabel('Margin of Error')
+    plt.ylabel('Required Sample Size')
+    plt.title('Sample Size vs Margin of Error')
+    plt.grid(True)
+    plt.savefig('assets/sample_size_relationship.png')
+    plt.close()
+    
+    return int(n)
 
-# Example
-n = calculate_sample_size(confidence_level=0.95, margin_of_error=0.03)
-print(f"Required sample size: {n}")
+# Example usage
+n = calculate_sample_size()
+print(f"\nRequired sample size: {n}")
 ```
 
-## Interactive Learning
+![Sample Size Relationship](assets/sample_size_relationship.png)
+*Figure 10: Relationship between margin of error and required sample size. As the desired margin of error decreases, the required sample size increases.*
 
-### Mini-Exercise: Sampling Simulation
+## Practice Questions
 
-Try this code to see how sample means compare to population mean:
-
-```python
-def sampling_simulation(population_mean=100, population_std=15, sample_sizes=[10, 100, 1000]):
-    """Demonstrate the effect of sample size on estimation"""
-    population = np.random.normal(loc=population_mean, scale=population_std, size=10000)
-    pop_mean = population.mean()
-    
-    print(f"Population mean: {pop_mean:.2f}\n")
-    
-    for size in sample_sizes:
-        sample = np.random.choice(population, size=size)
-        print(f"Sample size: {size}")
-        print(f"Sample mean: {sample.mean():.2f}")
-        print(f"Difference from population mean: {abs(sample.mean() - pop_mean):.2f}\n")
-
-sampling_simulation()
-```
-
-### Visualizing Sampling Error
-
-![Sampling Error Visualization](assets/sampling_error_diagram.png)
-*Figure 3: Visualization of sampling error. The blue curve shows the population distribution, while the red curve shows the distribution of sample means.*
-
-### Effect of Sample Size
-
-![Sample Size Effect](assets/sample_size_effect_diagram.png)
-*Figure 4: How sample size affects the sampling distribution. Larger samples (purple) show less variability than smaller samples (red).*
-
-## Common Questions and Answers
-
-1. **Q: Why can't we just study the entire population?**
-   A: Often impractical due to cost, time, or the population being too large or constantly changing.
-
-2. **Q: How do I know if my sample is representative?**
-   A: Use random sampling methods and check if sample characteristics match known population characteristics.
-
-3. **Q: What's the minimum sample size I need?**
-   A: Depends on your desired confidence level and margin of error. Use the sample size calculator provided.
-
-## Practice Problems
-
-1. A company wants to estimate the average time customers spend on their website. They have 1 million monthly visitors. What sampling method would you recommend and why?
-
-2. Calculate the required sample size for a survey with:
-   - 95% confidence level
-   - 3% margin of error
-   - Expected proportion of 0.5
-
-3. A researcher wants to study student satisfaction across different faculties. Design a sampling strategy that ensures representation from each faculty.
+1. Why might a simple random sample not be the best choice for studying a city's crime patterns?
+2. How would you design a sampling strategy for estimating the average income of a country's population?
+3. What sampling method would you use to study the effectiveness of a new teaching method across different schools?
+4. How does sample size affect the reliability of your estimates?
+5. What are the advantages and disadvantages of each sampling method?
 
 ## Key Takeaways
 
 1. Populations are complete sets, samples are subsets
-2. Good sampling is crucial for valid inferences
-3. Larger samples generally give more precise estimates
-4. Be aware of potential sampling errors
-5. Different sampling methods suit different situations
+2. Different sampling methods suit different situations
+3. Sample size affects estimation precision
+4. Sampling errors can be minimized with proper design
+5. Visualizing sampling processes aids understanding
+6. Real-world applications require careful sampling design
+7. Common sampling errors can be avoided with proper planning
 
 ## Additional Resources
 
-- [Interactive Sampling Distribution Simulator](https://seeing-theory.brown.edu/sampling-distributions/index.html)
+- [Interactive Sampling Simulator](https://seeing-theory.brown.edu/frequentist-inference/index.html)
+- [Understanding Sampling Methods](https://statisticsbyjim.com/basics/sampling-methods/)
 - [Sample Size Calculator](https://www.surveymonkey.com/mp/sample-size-calculator/)
-- [Sampling Methods Tutorial](https://stattrek.com/survey-research/sampling-methods)
 
-## Next Steps
-
-- Learn about parameters and statistics
-- Understand sampling distributions
-- Explore confidence intervals
-- Study hypothesis testing
-
-Remember: Sampling is like taking a photograph - the better your technique, the clearer your picture of the population! 📸
+Remember: Good sampling is the foundation of reliable statistical inference. Choose your sampling method wisely!

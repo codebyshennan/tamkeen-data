@@ -4,6 +4,9 @@
 
 Imagine you're a detective trying to solve a mystery. You have a default theory (null hypothesis), but you've found some evidence that might suggest otherwise. How strong does this evidence need to be to convince you to reject your default theory? That's where p-values come in!
 
+![P-value Concept](assets/p_value_concept_diagram.png)
+*Figure 1: Visual representation of p-value concept. The shaded area represents the probability of observing results as extreme or more extreme than what we got, assuming the null hypothesis is true.*
+
 ## What is a P-value?
 
 A p-value is the **probability of observing results at least as extreme as what we got, assuming our null hypothesis is true**. Think of it as a measure of surprise - how unexpected are our results if nothing interesting is actually happening?
@@ -17,6 +20,9 @@ where:
 - T is the test statistic
 - t is the observed value
 - H_0 is the null hypothesis
+
+![P-value Calculation](assets/p_value_calculation_diagram.png)
+*Figure 2: Visual explanation of p-value calculation. The red line shows our observed test statistic, and the shaded area represents the p-value.*
 
 ## The Key Players in Hypothesis Testing
 
@@ -44,6 +50,9 @@ where:
 - Usually 0.05 (5%) or 0.01 (1%)
 - Must be set before analyzing data!
 
+![Hypothesis Testing Framework](assets/hypothesis_testing_diagram.png)
+*Figure 3: Visual representation of the hypothesis testing framework. The diagram shows the relationship between null and alternative hypotheses, and how the significance level divides the decision space.*
+
 ## How to Interpret P-values: A Decision Guide
 
 ### The Basic Rules
@@ -60,6 +69,7 @@ else:
 ```python
 import numpy as np
 from scipy import stats
+import matplotlib.pyplot as plt
 
 # Simulate patient recovery times (in days)
 np.random.seed(42)  # For reproducibility
@@ -73,12 +83,28 @@ treatment = np.random.normal(loc=9, scale=2, size=30)  # Mean: 9 days
 # Perform t-test
 t_stat, p_value = stats.ttest_ind(control, treatment)
 
+# Visualize the distributions
+plt.figure(figsize=(10, 6))
+plt.hist(control, alpha=0.5, label='Control', bins=15)
+plt.hist(treatment, alpha=0.5, label='Treatment', bins=15)
+plt.axvline(np.mean(control), color='blue', linestyle='--', label='Control Mean')
+plt.axvline(np.mean(treatment), color='orange', linestyle='--', label='Treatment Mean')
+plt.xlabel('Recovery Time (days)')
+plt.ylabel('Frequency')
+plt.title('Distribution of Recovery Times')
+plt.legend()
+plt.savefig('assets/recovery_times_distribution.png')
+plt.close()
+
 print("Clinical Trial Analysis")
 print(f"Control group mean: {np.mean(control):.2f} days")
 print(f"Treatment group mean: {np.mean(treatment):.2f} days")
 print(f"P-value: {p_value:.4f}")
 print(f"Result: {'Significant' if p_value < 0.05 else 'Not significant'}")
 ```
+
+![Recovery Times Distribution](assets/recovery_times_distribution.png)
+*Figure 4: Distribution of recovery times for control and treatment groups. The dashed lines indicate the mean recovery time for each group.*
 
 ## Common Misconceptions: What P-values Are NOT
 
@@ -112,6 +138,25 @@ def compare_scenarios():
     effect_size1 = (np.mean(large_sample2) - np.mean(large_sample1)) / np.std(large_sample1)
     effect_size2 = (np.mean(small_sample2) - np.mean(small_sample1)) / np.std(small_sample1)
     
+    # Visualize the scenarios
+    plt.figure(figsize=(12, 5))
+    
+    plt.subplot(121)
+    plt.hist(large_sample1, alpha=0.5, label='Group 1', bins=30)
+    plt.hist(large_sample2, alpha=0.5, label='Group 2', bins=30)
+    plt.title(f'Small Effect (p={p_value1:.4f})')
+    plt.legend()
+    
+    plt.subplot(122)
+    plt.hist(small_sample1, alpha=0.5, label='Group 1', bins=15)
+    plt.hist(small_sample2, alpha=0.5, label='Group 2', bins=15)
+    plt.title(f'Large Effect (p={p_value2:.4f})')
+    plt.legend()
+    
+    plt.tight_layout()
+    plt.savefig('assets/effect_size_comparison.png')
+    plt.close()
+    
     print("\nEffect Size vs P-value Comparison")
     print("\nScenario 1: Small Effect, Large Sample")
     print(f"P-value: {p_value1:.4f}")
@@ -124,6 +169,9 @@ def compare_scenarios():
 compare_scenarios()
 ```
 
+![Effect Size Comparison](assets/effect_size_comparison.png)
+*Figure 5: Comparison of small effect with large sample (left) vs large effect with small sample (right). This demonstrates how p-values can be misleading without considering effect size.*
+
 ## Factors Affecting P-values
 
 ### 1. Sample Size
@@ -135,6 +183,23 @@ def show_sample_size_effect():
     effect_size = 0.2  # Fixed small effect
     sizes = [20, 100, 500, 1000]
     
+    # Visualize the effect of sample size
+    plt.figure(figsize=(10, 6))
+    for n in sizes:
+        control = np.random.normal(0, 1, n)
+        treatment = np.random.normal(effect_size, 1, n)
+        _, p_value = stats.ttest_ind(control, treatment)
+        
+        plt.subplot(2, 2, sizes.index(n) + 1)
+        plt.hist(control, alpha=0.5, label='Control', bins=15)
+        plt.hist(treatment, alpha=0.5, label='Treatment', bins=15)
+        plt.title(f'n={n}, p={p_value:.4f}')
+        plt.legend()
+    
+    plt.tight_layout()
+    plt.savefig('assets/sample_size_effect.png')
+    plt.close()
+    
     print("\nSample Size Effect Demo")
     for n in sizes:
         control = np.random.normal(0, 1, n)
@@ -144,6 +209,9 @@ def show_sample_size_effect():
 
 show_sample_size_effect()
 ```
+
+![Sample Size Effect](assets/sample_size_effect.png)
+*Figure 6: Effect of sample size on p-values. As sample size increases, the same effect size becomes more detectable (smaller p-value).*
 
 ### 2. Effect Size
 
@@ -173,6 +241,19 @@ def ab_test_simulation(n_visitors=1000):
     
     _, p_value, _, _ = stats.chi2_contingency(table)
     
+    # Visualize the results
+    plt.figure(figsize=(8, 6))
+    plt.bar(['Control', 'Treatment'], 
+            [np.mean(control), np.mean(treatment)],
+            yerr=[np.std(control)/np.sqrt(len(control)), 
+                  np.std(treatment)/np.sqrt(len(treatment))],
+            capsize=10)
+    plt.title(f'A/B Test Results (p={p_value:.4f})')
+    plt.ylabel('Conversion Rate')
+    plt.ylim(0, 0.2)
+    plt.savefig('assets/ab_test_results.png')
+    plt.close()
+    
     print("\nA/B Test Results")
     print(f"Control conversion: {np.mean(control):.1%}")
     print(f"Treatment conversion: {np.mean(treatment):.1%}")
@@ -181,6 +262,9 @@ def ab_test_simulation(n_visitors=1000):
 
 ab_test_simulation()
 ```
+
+![A/B Test Results](assets/ab_test_results.png)
+*Figure 7: A/B test results showing conversion rates for control and treatment groups with error bars.*
 
 ## Best Practices for Using P-values
 
@@ -211,10 +295,25 @@ p_values = [stats.ttest_ind(np.random.normal(0, 1, 30),
 # Apply Bonferroni correction
 corrected_p = multipletests(p_values, method='bonferroni')[1]
 
+# Visualize the correction
+plt.figure(figsize=(10, 6))
+plt.scatter(range(len(p_values)), p_values, label='Original p-values')
+plt.scatter(range(len(corrected_p)), corrected_p, label='Corrected p-values')
+plt.axhline(y=0.05, color='r', linestyle='--', label='α = 0.05')
+plt.xlabel('Test Number')
+plt.ylabel('P-value')
+plt.title('Multiple Testing Correction')
+plt.legend()
+plt.savefig('assets/multiple_testing_correction.png')
+plt.close()
+
 print("\nMultiple Testing Correction")
 print(f"Original significant results: {sum(np.array(p_values) < 0.05)}")
 print(f"Corrected significant results: {sum(corrected_p < 0.05)}")
 ```
+
+![Multiple Testing Correction](assets/multiple_testing_correction.png)
+*Figure 8: Effect of multiple testing correction. The Bonferroni method adjusts p-values to control for the increased chance of false positives when performing multiple tests.*
 
 ## Practice Questions
 
@@ -231,6 +330,8 @@ print(f"Corrected significant results: {sum(corrected_p < 0.05)}")
 3. Sample size strongly influences p-values
 4. Statistical significance ≠ Practical significance
 5. Correct for multiple testing
+6. Always consider both statistical and practical importance
+7. Visualize your data to better understand the results
 
 ## Additional Resources
 
