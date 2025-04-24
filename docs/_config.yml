@@ -10,12 +10,13 @@ github:
 
 # Build settings
 markdown: kramdown
-theme: jekyll-theme-primer
+remote_theme: pages-themes/primer@v0.6.0
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-github-metadata
+  - jekyll-remote-theme
 
 # Error handling
 liquid:
@@ -58,4 +59,3 @@ exclude:
   - Gemfile.lock
 
 # GitHub Pages settings
-remote_theme: pages-themes/primer@v0.6.0 
