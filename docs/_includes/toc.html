@@ -1,0 +1,19 @@
+{%- assign html = include.html -%}
+{%- assign min_level = 2 -%}
+{%- assign max_level = 3 -%}
+
+{%- assign items = html | split: '<h' -%} {%- assign first=true -%} <nav class="toc">
+    <ul>
+        {%- for item in items -%}
+        {%- if item contains 'id=' -%}
+        {%- assign level = item | slice: 0, 1 | plus: 0 -%}
+        {%- if level >= min_level and level <= max_level -%} {%- assign id=item | split: 'id="' | last | split: '"' |
+            first -%} {%- assign title=item | split: '>' | last | split: '</h' | first -%} <li
+            class="toc-level-{{ level }}">
+            <a href="#{{ id }}">{{ title }}</a>
+            </li>
+            {%- endif -%}
+            {%- endif -%}
+            {%- endfor -%}
+    </ul>
+    </nav>
