@@ -9,10 +9,5 @@
         "summary": "SUMMARY.md"
     },
     "plugins": [],
-    "pluginsConfig": {},
-    "output": {
-        "github-pages": {
-            "output": "_book"
-        }
-    }
+    "pluginsConfig": {}
 }

@@ -15,16 +15,16 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "18"
+          node-version: "12"
 
       - name: Install GitBook
         run: |
-          npm install -g gitbook-cli
-          npm install -g gitbook-summary
+          npm install -g gitbook-cli@2.3.2
+          gitbook fetch 3.2.3
+          gitbook install
 
       - name: Build GitBook
         run: |
-          gitbook install
           gitbook build
 
       - name: Deploy to GitHub Pages
