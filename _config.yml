@@ -10,6 +10,10 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
 
+# Include docs directory
+include:
+  - docs
+
 # Exclude from processing
 exclude:
   - .git/
