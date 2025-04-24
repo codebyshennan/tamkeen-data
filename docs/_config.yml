@@ -24,15 +24,9 @@ defaults:
       type: "docs"
     values:
       layout: "default"
-  - scope:
-      path: "docs"
-      type: "docs"
-    values:
-      layout: "default"
 
-# Include docs directory
+# Include directories
 include:
-  - docs
   - _posts
   - _pages
   - _layouts
@@ -42,12 +36,10 @@ include:
 # Exclude from processing
 exclude:
   - .git/
-  - .venv/
+  - .gitbook/
   - .gitignore
-  - book.json
   - node_modules/
   - vendor/
-  - docs/.gitbook/
 
 # GitHub Pages settings
-remote_theme: pages-themes/minima@v0.2.0
+remote_theme: pages-themes/minima@v0.2.0 
