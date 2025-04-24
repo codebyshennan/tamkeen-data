@@ -30,8 +30,17 @@ jobs:
         uses: actions/configure-pages@v4
       - name: Build with Jekyll
         run: |
-          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+          echo "Listing files before build:"
+          ls -la
+          echo "Listing docs directory:"
+          ls -la docs/
+          echo "Building site..."
+          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}" --verbose
+          echo "Listing _site directory:"
           ls -la _site
+          echo "Listing _site/docs directory:"
+          ls -la _site/docs
+          echo "Contents of _site/index.html:"
           cat _site/index.html
         env:
           JEKYLL_ENV: production

@@ -35,6 +35,9 @@ include:
   - docs
   - _posts
   - _pages
+  - _layouts
+  - _includes
+  - assets
 
 # Exclude from processing
 exclude:
