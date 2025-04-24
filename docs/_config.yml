@@ -48,7 +48,6 @@ theme: jekyll-theme-primer
 # Include directories
 include:
   - .assets
-  - assets
 
 # Exclude from processing
 exclude:
@@ -56,9 +55,6 @@ exclude:
   - .gitbook/
   - .gitignore
   - node_modules/
-  - vendor/
-  - Gemfile
-  - Gemfile.lock
   - 0-prep/
   - 1-data-fundamentals/
 
