@@ -3,6 +3,11 @@ description: A comprehensive curriculum covering data fundamentals, data wrangli
 baseurl: "/tamkeen-data"
 url: "https://codebyshennan.github.io"
 
+# Repository information
+repository: codebyshennan/tamkeen-data
+github:
+  repository_url: https://github.com/codebyshennan/tamkeen-data
+
 # Build settings
 markdown: kramdown
 theme: jekyll-theme-primer
@@ -10,6 +15,7 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-github-metadata
 
 # Collections
 collections:
