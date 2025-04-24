@@ -24,6 +24,11 @@ defaults:
       type: "docs"
     values:
       layout: "default"
+  - scope:
+      path: "docs"
+      type: "docs"
+    values:
+      layout: "default"
 
 # Include docs directory
 include:
@@ -39,6 +44,7 @@ exclude:
   - book.json
   - node_modules/
   - vendor/
+  - docs/.gitbook/
 
 # GitHub Pages settings
 github:
