@@ -67,3 +67,18 @@ exclude:
   - .jekyll-metadata
 
 # GitHub Pages settings
+lsi: false
+safe: true
+incremental: false
+highlighter: rouge
+gist:
+  noscript: false
+kramdown:
+  math_engine: mathjax
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    default_lang: python
+    line_numbers: true
+    start_line: 1
+    tab_size: 4
+    wrap: true
