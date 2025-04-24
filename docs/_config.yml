@@ -57,5 +57,13 @@ exclude:
   - node_modules/
   - 0-prep/
   - 1-data-fundamentals/
+  - docs/0-prep/
+  - docs/1-data-fundamentals/
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - .sass-cache/
+  - .jekyll-cache/
+  - .jekyll-metadata
 
 # GitHub Pages settings
