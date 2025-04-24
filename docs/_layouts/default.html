@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: " en" }}">
+<html lang="{{ page.lang | default: site.lang | default: " en-US" }}">
 
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ page.title | default: site.title }}</title>
-  <link rel="stylesheet" href="{{ " /assets/css/main.css" | relative_url }}">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.0.0/mermaid.min.js"></script>
+  {% seo %}
+  <link rel="stylesheet" href="{{ " /assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
   {%- feed_meta -%}
   {%- if jekyll.environment == 'production' and site.google_analytics -%}
   {%- include google-analytics.html -%}
@@ -50,6 +52,34 @@
       <p>&copy; {{ site.time | date: '%Y' }} {{ site.title | escape }}. All rights reserved.</p>
     </div>
   </footer>
+
+  <div class="container-lg px-3 my-5 markdown-body">
+    {% if site.github.private != true and site.github.license %}
+    <div class="footer border-top border-gray-light mt-5 pt-3 text-right text-gray">
+      This site is open source. {% github_edit_link "Improve this page" %}.
+    </div>
+    {% endif %}
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js"
+    integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+  <script>anchors.add();</script>
 </body>
+
+<script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+</script>
+
+<script>
+  var config = {
+    startOnLoad: true,
+    theme: 'forest',
+    flowchart: {
+      useMaxWidth: false,
+      htmlLabels: true
+    }
+  };
+  mermaid.initialize(config);
+  window.mermaid.init(undefined, document.querySelectorAll('.language-mermaid'));
+</script>
 
 </html>
