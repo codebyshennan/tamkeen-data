@@ -1,0 +1,18 @@
+title: Data Science and AI Course
+description: A comprehensive curriculum covering data fundamentals, data wrangling, visualization, statistical analysis, and machine learning fundamentals
+baseurl: "/tamkeen-data"
+url: "https://codebyshennan.github.io"
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Exclude from processing
+exclude:
+  - .git/
+  - .venv/
+  - .gitignore
+  - book.json 
