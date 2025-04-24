@@ -38,19 +38,8 @@ defaults:
 
 # Include directories
 include:
-  - _posts
-  - _pages
-  - _layouts
-  - _includes
+  - .assets
   - assets
-  - 0-prep
-  - 1-data-fundamentals
-  - 2-data-wrangling
-  - 3-data-visualization
-  - 4-stat-analysis
-  - 5-ml-fundamentals
-  - 6-capstone
-  - additional-resources
 
 # Exclude from processing
 exclude:
