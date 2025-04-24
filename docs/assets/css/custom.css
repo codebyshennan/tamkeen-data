@@ -1,0 +1,46 @@
+/* Custom styles for centered content with margins */
+.container-lg {
+    max-width: 800px !important;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.markdown-body {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* Adjust table width for better readability */
+.markdown-body table {
+    display: table;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+/* Ensure code blocks don't overflow */
+.markdown-body pre {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+/* Add some spacing between sections */
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3 {
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+/* Improve readability of lists */
+.markdown-body ul,
+.markdown-body ol {
+    padding-left: 2em;
+}
+
+/* Add some breathing room for blockquotes */
+.markdown-body blockquote {
+    margin: 1em 0;
+    padding: 0.5em 1em;
+    border-left: 4px solid #dfe2e5;
+} 
