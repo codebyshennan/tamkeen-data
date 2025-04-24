@@ -512,15 +512,129 @@ def create_bootstrap_visualization():
     plt.close()
 
 
+def create_p_value_concept_diagram():
+    """Create a diagram showing the concept of p-values"""
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    # Generate normal distribution
+    x = np.linspace(-4, 4, 1000)
+    y = stats.norm.pdf(x)
+
+    # Plot distribution
+    ax.plot(x, y, "b-", label="Null Distribution")
+
+    # Add observed value and p-value area
+    observed = 2.5
+    ax.axvline(observed, color="r", linestyle="--", label="Observed Value")
+
+    # Shade p-value area
+    x_fill = np.linspace(observed, 4, 100)
+    y_fill = stats.norm.pdf(x_fill)
+    ax.fill_between(x_fill, y_fill, alpha=0.3, color="red", label="P-value Area")
+
+    ax.set_xlabel("Test Statistic")
+    ax.set_ylabel("Density")
+    ax.set_title("P-value Concept")
+    ax.legend()
+
+    plt.savefig("p_value_concept_diagram.png", dpi=300, bbox_inches="tight")
+    plt.close()
+
+
+def create_p_value_calculation_diagram():
+    """Create a diagram showing p-value calculation"""
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    # Generate normal distribution
+    x = np.linspace(-4, 4, 1000)
+    y = stats.norm.pdf(x)
+
+    # Plot distribution
+    ax.plot(x, y, "b-", label="Null Distribution")
+
+    # Add observed value
+    observed = 2.5
+    ax.axvline(observed, color="r", linestyle="--", label="Observed Value")
+    ax.axvline(-observed, color="r", linestyle="--")
+
+    # Shade p-value areas
+    x_fill1 = np.linspace(observed, 4, 100)
+    x_fill2 = np.linspace(-4, -observed, 100)
+    y_fill1 = stats.norm.pdf(x_fill1)
+    y_fill2 = stats.norm.pdf(x_fill2)
+    ax.fill_between(x_fill1, y_fill1, alpha=0.3, color="red", label="P-value Area")
+    ax.fill_between(x_fill2, y_fill2, alpha=0.3, color="red")
+
+    ax.set_xlabel("Test Statistic")
+    ax.set_ylabel("Density")
+    ax.set_title("P-value Calculation")
+    ax.legend()
+
+    plt.savefig("p_value_calculation_diagram.png", dpi=300, bbox_inches="tight")
+    plt.close()
+
+
+def create_hypothesis_testing_diagram():
+    """Create a diagram showing hypothesis testing framework"""
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    # Generate normal distribution
+    x = np.linspace(-4, 4, 1000)
+    y = stats.norm.pdf(x)
+
+    # Plot distribution
+    ax.plot(x, y, "b-", label="Null Distribution")
+
+    # Add critical value and rejection region
+    critical = 1.96
+    ax.axvline(critical, color="r", linestyle="--", label="Critical Value")
+    ax.axvline(-critical, color="r", linestyle="--")
+
+    # Shade rejection regions
+    x_fill1 = np.linspace(critical, 4, 100)
+    x_fill2 = np.linspace(-4, -critical, 100)
+    y_fill1 = stats.norm.pdf(x_fill1)
+    y_fill2 = stats.norm.pdf(x_fill2)
+    ax.fill_between(x_fill1, y_fill1, alpha=0.3, color="red", label="Rejection Region")
+    ax.fill_between(x_fill2, y_fill2, alpha=0.3, color="red")
+
+    ax.set_xlabel("Test Statistic")
+    ax.set_ylabel("Density")
+    ax.set_title("Hypothesis Testing Framework")
+    ax.legend()
+
+    plt.savefig("hypothesis_testing_diagram.png", dpi=300, bbox_inches="tight")
+    plt.close()
+
+
 if __name__ == "__main__":
+    # Create all visualizations
+    print("Generating visualizations...")
+
+    # Population and Sample
     create_population_sample_diagram()
+    create_parameter_statistic_diagram()
+
+    # Sampling Methods
     create_sampling_methods_diagram()
     create_sampling_error_diagram()
     create_sample_size_effect_diagram()
-    create_parameter_statistic_diagram()
-    create_estimator_properties_diagram()
+
+    # Confidence Intervals
     create_confidence_interval_diagram()
+
+    # Sampling Distributions
     create_sampling_distribution_comparison()
     create_clt_visualization()
     create_standard_error_visualization()
+
+    # P-values
+    create_p_value_concept_diagram()
+    create_p_value_calculation_diagram()
+    create_hypothesis_testing_diagram()
+
+    # Additional visualizations
+    create_estimator_properties_diagram()
     create_bootstrap_visualization()
+
+    print("All visualizations generated successfully!")
