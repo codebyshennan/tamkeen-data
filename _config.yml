@@ -50,6 +50,4 @@ exclude:
   - docs/.gitbook/
 
 # GitHub Pages settings
-github:
-  metadata: true
-  branch: main
+remote_theme: pages-themes/minima@v0.2.0
