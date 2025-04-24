@@ -3,6 +3,7 @@ body {
     background-color: #f6f8fa;
     margin: 0;
     padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
 /* Center the main container */
@@ -23,6 +24,8 @@ body {
     margin: 0 auto;
     padding: 2em;
     box-sizing: border-box;
+    color: #24292e;
+    line-height: 1.6;
 }
 
 /* Ensure content doesn't overflow */
@@ -54,6 +57,7 @@ body {
     background-color: #f6f8fa;
     padding: 1em;
     border-radius: 6px;
+    font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
 }
 
 /* Add some spacing between sections */
@@ -64,6 +68,7 @@ body {
     margin-bottom: 1em;
     border-bottom: 1px solid #eaecef;
     padding-bottom: 0.3em;
+    color: #24292e;
 }
 
 /* Improve readability of lists */
@@ -80,6 +85,7 @@ body {
     border-left: 4px solid #0366d6;
     background-color: #f6f8fa;
     border-radius: 0 6px 6px 0;
+    color: #6a737d;
 }
 
 /* Responsive adjustments */
