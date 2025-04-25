@@ -1,8 +1,8 @@
-# Mathematical Foundation of Regularization 📐
+# Mathematical Foundation of Regularization
 
 Think of regularization as a set of rules that help keep your model in check, just like how traffic rules help keep roads safe. Let's break down the mathematical concepts in a way that's easier to understand!
 
-## Loss Function with Regularization 🎯
+## Loss Function with Regularization
 
 ### General Form
 
@@ -20,7 +20,7 @@ where:
 
 Just as a good student balances studying and following rules, a good model balances accuracy and simplicity. Regularization helps find this balance.
 
-## Types of Regularization Terms 🔍
+## Types of Regularization Terms
 
 ### 1. L1 Regularization (Lasso)
 
@@ -58,7 +58,7 @@ Properties:
 - $\alpha$ controls the mix (like adjusting the balance between strict and gentle)
 - More stable than pure L1 (like having multiple safety nets)
 
-## Optimization Theory 🎓
+## Optimization Theory
 
 ### Gradient Descent with L2
 
@@ -85,7 +85,7 @@ where $\text{prox}$ is the soft-thresholding operator:
 
 $$\text{prox}_{\lambda}(x) = \text{sign}(x)\max(|x|-\lambda, 0)$$
 
-## Geometric Interpretation 🌐
+## Geometric Interpretation
 
 ### L1 Constraint Region
 
@@ -105,7 +105,7 @@ $$\text{prox}_{\lambda}(x) = \text{sign}(x)\max(|x|-\lambda, 0)$$
 - Combines properties of L1 and L2 - like having both structure and flexibility
 - Controlled by mixing parameter $\alpha$ - like adjusting the balance
 
-## Statistical Properties 📊
+## Statistical Properties
 
 ### Bias-Variance Tradeoff
 
@@ -130,9 +130,9 @@ $$\text{df}(\lambda) = \text{tr}(X(X^TX + \lambda I)^{-1}X^T)$$
 
 This measures how many "free parameters" your model has, like counting how many decisions you can make.
 
-For lasso, degrees of freedom ≈ number of non-zero coefficients (like counting how many features you're actually using)
+For lasso, degrees of freedom  number of non-zero coefficients (like counting how many features you're actually using)
 
-## Theoretical Guarantees 🎯
+## Theoretical Guarantees
 
 ### Oracle Properties
 
@@ -150,7 +150,7 @@ For well-behaved problems:
 - Lasso: $O(1/\sqrt{t})$ convergence rate (like taking smaller steps)
 - Elastic Net: Between $O(1/t)$ and $O(1/\sqrt{t})$ (like having a mix of step sizes)
 
-## Cross-Validation Theory 📉
+## Cross-Validation Theory
 
 ### K-Fold CV Error
 
@@ -170,7 +170,7 @@ $$\text{CV}(\lambda) \leq \min_{\lambda'}\text{CV}(\lambda') + \text{SE}(\min_{\
 
 This is like choosing the simplest model that still performs well within a reasonable margin of error.
 
-## Regularization Path 🛣️
+## Regularization Path
 
 ### Solution Path Equations
 
@@ -184,7 +184,7 @@ These equations show how the model changes as you adjust the regularization stre
 
 where $\hat{\beta}_{OLS}$ is the ordinary least squares solution (like the model without any rules)
 
-## Common Mistakes to Avoid ⚠️
+## Common Mistakes to Avoid
 
 1. Using too strong regularization (like having too many rules)
 2. Not tuning the regularization parameter (like not adjusting the rules)
@@ -192,11 +192,11 @@ where $\hat{\beta}_{OLS}$ is the ordinary least squares solution (like the model
 4. Ignoring feature scaling (like comparing apples and oranges)
 5. Not validating the regularization effect (like not checking if the rules are working)
 
-## Next Steps 🚀
+## Next Steps
 
 Now that you understand the mathematics behind regularization, let's move on to [Implementation](3-implementation.md) to see how to put these concepts into practice!
 
-## Additional Resources 📚
+## Additional Resources
 
 - [Understanding Regularization Mathematically](https://towardsdatascience.com/regularization-in-machine-learning-76441ddcf99a)
 - [Geometric Interpretation of Regularization](https://www.analyticsvidhya.com/blog/2016/01/complete-tutorial-ridge-lasso-regression-python/)

@@ -1,12 +1,12 @@
 # Mathematical Foundation of Naive Bayes
 
-## Welcome to the Math Behind Naive Bayes! 🎯
+## Welcome to the Math Behind Naive Bayes
 
 Don't worry if math isn't your strongest suit! We'll break down the concepts into simple, understandable pieces. Think of this as learning a new language - we'll start with the basics and build up gradually.
 
 ## Understanding Probability: The Language of Naive Bayes
 
-### What is Probability? 🤔
+### What is Probability?
 
 Probability is just a fancy way of saying "how likely something is to happen." For example:
 
@@ -32,7 +32,7 @@ Think of it like this:
 - $P(y)$: "What was your initial belief about y?" (Your prior knowledge)
 - $P(X)$: "How likely is X in general?" (The overall evidence)
 
-### Real-World Example: Email Spam Detection 📧
+### Real-World Example: Email Spam Detection
 
 Let's make this concrete with an email example:
 
@@ -97,7 +97,7 @@ To classify something (like an email as spam or not spam):
 
 It's like a voting system where each feature gets a say, and the class with the most votes wins!
 
-### Example: Document Classification 📄
+### Example: Document Classification
 
 Let's classify a document as either tech or sports:
 
@@ -158,7 +158,7 @@ female_prob = gaussian_probability(168, female_height_mean, female_height_std)
 prediction = "male" if male_prob > female_prob else "female"
 ```
 
-## Common Mistakes to Avoid ❌
+## Common Mistakes to Avoid
 
 1. **Forgetting to Scale Numerical Features**
    - Always scale your numbers (like height, weight) before using Gaussian Naive Bayes
@@ -173,7 +173,7 @@ prediction = "male" if male_prob > female_prob else "female"
    - Use Multinomial for counts (like word frequencies)
    - Use Bernoulli for yes/no features
 
-## Practice Makes Perfect! 🎯
+## Practice Makes Perfect
 
 The best way to understand these concepts is to practice:
 
@@ -182,7 +182,7 @@ The best way to understand these concepts is to practice:
 3. Compare the results with and without scaling
 4. See how the algorithm behaves with different datasets
 
-## Next Steps 📚
+## Next Steps
 
 Ready to see these concepts in action? Let's move on to [Types of Naive Bayes](3-types.md) to learn about the different versions of the algorithm and when to use each one.
 

@@ -6,8 +6,11 @@ Welcome to Python! Whether you're new to programming or coming from another lang
 
 {% stepper %}
 {% step %}
+
 ### What is Python?
+
 Python is a high-level, interpreted programming language that emphasizes code readability with its notable use of significant whitespace. In data science, Python serves as your Swiss Army knife for:
+
 - Data analysis and manipulation
 - Statistical computations
 - Machine learning model development
@@ -16,6 +19,7 @@ Python is a high-level, interpreted programming language that emphasizes code re
 - ETL (Extract, Transform, Load) processes
 
 **Quick Example**:
+
 ```python
 # Simple data analysis in Python
 import pandas as pd
@@ -31,12 +35,17 @@ monthly_sales.plot(kind='bar')
 plt.title('Monthly Sales Performance')
 plt.show()
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Why Python for Data Science?
+
 Python stands out because it:
+
 - **Readable Syntax**: Compare these examples:
+
   ```python
   # Python
   sales_data = pd.read_csv('sales.csv')
@@ -48,6 +57,7 @@ Python stands out because it:
   ```
 
 - **Rich Ecosystem**: Essential data science libraries:
+
   ```python
   import numpy as np        # Numerical computations
   import pandas as pd       # Data manipulation
@@ -57,6 +67,7 @@ Python stands out because it:
   ```
 
 - **Integration Capabilities**: Connect with various data sources:
+
   ```python
   # Database connection
   from sqlalchemy import create_engine
@@ -70,13 +81,17 @@ Python stands out because it:
   import pyspark
   from pyspark.sql import SparkSession
   ```
+
 {% endstep %}
 
 {% step %}
+
 ### Python in Industry
+
 Real-world applications across industries:
 
 **1. Finance**
+
 ```python
 # Stock price analysis
 import yfinance as yf
@@ -90,6 +105,7 @@ history['MA50'] = history['Close'].rolling(window=50).mean()
 ```
 
 **2. Healthcare**
+
 ```python
 # Patient data analysis
 import pandas as pd
@@ -108,6 +124,7 @@ def predict_readmission(patient_data):
 ```
 
 **3. E-commerce**
+
 ```python
 # Customer segmentation
 from sklearn.cluster import KMeans
@@ -120,6 +137,7 @@ def segment_customers(customer_data):
 ```
 
 **4. Marketing**
+
 ```python
 # Social media sentiment analysis
 from textblob import TextBlob
@@ -131,13 +149,17 @@ def analyze_sentiment(tweets):
         sentiments.append(analysis.sentiment.polarity)
     return pd.Series(sentiments).mean()
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Modern Python Features
+
 Latest Python features that enhance data science work:
 
 **1. Type Hints (Python 3.5+)**
+
 ```python
 from typing import List, Dict
 import pandas as pd
@@ -154,6 +176,7 @@ def process_sales_data(
 ```
 
 **2. Walrus Operator (Python 3.8+)**
+
 ```python
 # Efficient data processing
 if (n_rows := len(df)) > 1000:
@@ -162,6 +185,7 @@ if (n_rows := len(df)) > 1000:
 ```
 
 **3. Pattern Matching (Python 3.10+)**
+
 ```python
 def analyze_data_point(point):
     match point:
@@ -172,6 +196,7 @@ def analyze_data_point(point):
         case _:
             return 'standard_transaction'
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -179,7 +204,9 @@ def analyze_data_point(point):
 
 {% stepper %}
 {% step %}
+
 ### Efficient Data Analysis
+
 ```python
 # Quick data exploration
 import pandas as pd
@@ -201,10 +228,13 @@ def quick_eda(df: pd.DataFrame) -> None:
     plt.title("Correlation Matrix")
     plt.show()
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Data Visualization
+
 ```python
 # Advanced visualization example
 import plotly.express as px
@@ -229,10 +259,13 @@ def create_interactive_dashboard(sales_data: pd.DataFrame) -> None:
     fig2.show()
     fig3.show()
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Machine Learning Integration
+
 ```python
 # End-to-end ML pipeline
 from sklearn.pipeline import Pipeline
@@ -246,6 +279,7 @@ def create_ml_pipeline():
         ('classifier', RandomForestClassifier())
     ])
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -255,8 +289,11 @@ This chapter will take you through Python fundamentals with a data science focus
 
 {% stepper %}
 {% step %}
+
 ### 1. Basic Syntax and Data Types
+
 Learn the building blocks with data science context:
+
 ```python
 # Numbers for statistical calculations
 mean_value = 42.5
@@ -270,11 +307,15 @@ cleaned_text = text_data.strip().lower()
 is_valid = True
 has_missing_values = False
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### 2. Data Structures
+
 Master Python's data structures for data manipulation:
+
 ```python
 # Lists for time series
 stock_prices = [100.0, 101.5, 102.3, 101.7]
@@ -292,11 +333,15 @@ unique_categories = {'electronics', 'clothing', 'food'}
 # Tuples for immutable data
 data_point = (42.0, 'positive', True)
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### 3. Control Flow
+
 Learn flow control with data processing examples:
+
 ```python
 # Data filtering
 def filter_outliers(data, threshold):
@@ -317,11 +362,15 @@ def process_transactions(transactions):
         else:
             process_normal(transaction)
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### 4. Functions
+
 Create reusable data analysis components:
+
 ```python
 def calculate_metrics(data: List[float]) -> Dict[str, float]:
     """
@@ -340,11 +389,15 @@ def calculate_metrics(data: List[float]) -> Dict[str, float]:
         'range': max(data) - min(data)
     }
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### 5. Object-Oriented Programming
+
 Learn to organize data science code:
+
 ```python
 class DataCleaner:
     def __init__(self, data: pd.DataFrame):
@@ -371,11 +424,15 @@ class DataCleaner:
             'removed_rows': self.original_shape[0] - len(self.data)
         }
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### 6. Modules and Packages
+
 Learn to use and create data science packages:
+
 ```python
 # Custom data science utility module
 # data_utils.py
@@ -408,12 +465,14 @@ from data_utils import DataAnalyzer
 analyzer = DataAnalyzer()
 numeric_summary = analyzer.summarize_numeric(df['sales'])
 ```
+
 {% endstep %}
 {% endstepper %}
 
 ## Ready to Start?
 
 Remember these data science best practices:
+
 - Always explore your data before analysis
 - Document your code with clear comments
 - Use version control (git) for your projects
@@ -421,4 +480,4 @@ Remember these data science best practices:
 - Test your functions with sample data
 - Consider performance for large datasets
 
-Let's begin your Python data science journey! 🚀
+Let's begin your Python data science journey!

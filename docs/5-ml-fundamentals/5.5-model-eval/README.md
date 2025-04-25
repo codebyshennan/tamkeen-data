@@ -38,6 +38,7 @@ By the end of this section, you will be able to:
 ## Prerequisites
 
 Before starting this section, you should be familiar with:
+
 - Basic Python programming
 - NumPy and Pandas
 - Basic machine learning concepts
@@ -48,7 +49,7 @@ Before starting this section, you should be familiar with:
 
 Each topic we'll cover has crucial importance:
 
-- **Cross Validation**: 
+- **Cross Validation**:
   - Provides reliable performance estimates
   - Helps detect overfitting
   - Ensures model generalization
@@ -69,6 +70,7 @@ Each topic we'll cover has crucial importance:
 ## Tools and Libraries
 
 We'll be using:
+
 - scikit-learn
 - Optuna
 - Hyperopt
@@ -80,6 +82,7 @@ We'll be using:
 ## Practical Applications
 
 You'll learn to apply these techniques to:
+
 1. Model selection
 2. Performance optimization
 3. Automated ML pipelines
@@ -89,6 +92,7 @@ You'll learn to apply these techniques to:
 ## Section Structure
 
 Each topic includes:
+
 1. Theoretical foundations
 2. Implementation details
 3. Best practices
@@ -97,7 +101,7 @@ Each topic includes:
 6. Hands-on exercises
 7. Real-world scenarios
 
-## Assignment 📝
+## Assignment
 
 Ready to apply your model evaluation knowledge? Head over to the [Model Evaluation Assignment](../_assignments/5.5-assignment.md) to test your understanding of cross-validation, hyperparameter tuning, and pipeline development!
 
@@ -155,4 +159,4 @@ Begin with [Cross Validation](./cross-validation.md) to understand how to proper
 
 Ready to dive in? Start with [Cross Validation](./cross-validation.md) to learn how to properly evaluate your machine learning models!
 
-Let's master model evaluation and tuning! 🚀
+Let's master model evaluation and tuning!

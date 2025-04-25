@@ -1,10 +1,11 @@
 # Scikit-learn Pipelines
 
-Imagine building a car assembly line - each step needs to happen in the right order, and you want to be able to replicate the process exactly. That's what scikit-learn pipelines do for machine learning workflows! Let's learn how to build efficient and reproducible pipelines. 🏭
+Imagine building a car assembly line - each step needs to happen in the right order, and you want to be able to replicate the process exactly. That's what scikit-learn pipelines do for machine learning workflows! Let's learn how to build efficient and reproducible pipelines.
 
-## Understanding Pipelines 🎯
+## Understanding Pipelines
 
 Pipelines help us:
+
 1. Ensure preprocessing steps are consistent
 2. Prevent data leakage
 3. Simplify model deployment
@@ -46,9 +47,10 @@ pipeline.fit(X_train, y_train)
 print(f"Pipeline score: {pipeline.score(X_test, y_test):.3f}")
 ```
 
-## Building Complex Pipelines 🔧
+## Building Complex Pipelines
 
 ### Feature Unions
+
 Combine multiple feature processing steps:
 
 ```python
@@ -78,6 +80,7 @@ print(f"Feature union score: {union_pipeline.score(X_test, y_test):.3f}")
 ```
 
 ### Custom Transformers
+
 Create your own preprocessing steps:
 
 ```python
@@ -112,7 +115,7 @@ pipeline_with_custom.fit(X_train, y_train)
 print(f"Custom pipeline score: {pipeline_with_custom.score(X_test, y_test):.3f}")
 ```
 
-## Real-World Example: Text Classification 📝
+## Real-World Example: Text Classification
 
 ```python
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -155,7 +158,7 @@ text_pipeline.fit(X_train, y_train)
 predictions = text_pipeline.predict(X_test)
 ```
 
-## Pipeline Persistence 💾
+## Pipeline Persistence
 
 Save and load pipelines:
 
@@ -175,9 +178,10 @@ save_pipeline(pipeline, 'model_pipeline.joblib')
 loaded_pipeline = load_pipeline('model_pipeline.joblib')
 ```
 
-## Advanced Techniques 🚀
+## Advanced Techniques
 
 ### 1. Memory Caching
+
 ```python
 from sklearn.pipeline import Pipeline
 from sklearn.externals import Memory
@@ -194,6 +198,7 @@ cached_pipeline = Pipeline([
 ```
 
 ### 2. Parameter Grid Search
+
 ```python
 from sklearn.model_selection import GridSearchCV
 
@@ -210,6 +215,7 @@ grid_search.fit(X_train, y_train)
 ```
 
 ### 3. Column Transformer
+
 ```python
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder
@@ -228,9 +234,10 @@ column_pipeline = Pipeline([
 ])
 ```
 
-## Best Practices 🌟
+## Best Practices
 
 ### 1. Naming Conventions
+
 ```python
 # Use descriptive names for steps
 pipeline = Pipeline([
@@ -242,6 +249,7 @@ pipeline = Pipeline([
 ```
 
 ### 2. Error Handling
+
 ```python
 class RobustTransformer(BaseEstimator, TransformerMixin):
     def transform(self, X):
@@ -255,6 +263,7 @@ class RobustTransformer(BaseEstimator, TransformerMixin):
 ```
 
 ### 3. Validation
+
 ```python
 from sklearn.model_selection import cross_val_score
 
@@ -267,7 +276,7 @@ def validate_pipeline(pipeline, X, y, cv=5):
     print(f"Mean CV score: {scores.mean():.3f} (+/- {scores.std() * 2:.3f})")
 ```
 
-## Common Pitfalls and Solutions 🚧
+## Common Pitfalls and Solutions
 
 1. **Data Leakage**
    - Keep all preprocessing in pipeline
@@ -284,6 +293,10 @@ def validate_pipeline(pipeline, X, y, cv=5):
    - Optimize transformers
    - Use parallel processing
 
-## Next Steps
+## Additional Resources
 
-Now that you understand scikit-learn pipelines, try the [assignment](./assignment.md) to practice building efficient machine learning workflows!
+- [Scikit-learn Pipeline Documentation](https://scikit-learn.org/stable/modules/pipeline.html)
+- [Pipeline Best Practices](https://scikit-learn.org/stable/modules/compose.html)
+- [Custom Transformers Guide](https://scikit-learn.org/stable/modules/generated/sklearn.base.TransformerMixin.html)
+
+Remember: Pipelines are your best friend for reproducible machine learning workflows!

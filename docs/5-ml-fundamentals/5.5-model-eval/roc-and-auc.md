@@ -1,10 +1,10 @@
 # ROC and AUC
 
-## What are ROC and AUC? 🤔
+## What are ROC and AUC?
 
 Think of ROC (Receiver Operating Characteristic) and AUC (Area Under the Curve) as a way to measure how good your model is at distinguishing between different classes. It's like having a radar system that needs to distinguish between friendly and enemy aircraft - you want to minimize false alarms while catching all real threats.
 
-### Why ROC and AUC Matter 🌟
+### Why ROC and AUC Matter
 
 Imagine you're a doctor diagnosing a disease. You want to:
 
@@ -14,7 +14,7 @@ Imagine you're a doctor diagnosing a disease. You want to:
 
 ROC and AUC help us find this balance and measure how well our model performs across different thresholds.
 
-## Real-World Analogies 📚
+## Real-World Analogies
 
 ### The Airport Security Analogy
 
@@ -38,7 +38,7 @@ ROC and AUC are like weather forecasting:
 
 The AUC tells us how good our weather forecaster is overall.
 
-## Understanding ROC and AUC 🎯
+## Understanding ROC and AUC
 
 ### 1. ROC Curve
 
@@ -161,7 +161,7 @@ def plot_threshold_analysis(y_true, y_pred_proba):
 plot_threshold_analysis(y_test, y_pred_proba)
 ```
 
-## Common Mistakes to Avoid ⚠️
+## Common Mistakes to Avoid
 
 1. **Threshold Selection**
    - Using default threshold (0.5)
@@ -178,7 +178,7 @@ plot_threshold_analysis(y_test, y_pred_proba)
    - Not considering computational cost
    - Not considering interpretability
 
-## Practical Example: Credit Risk Prediction 💳
+## Practical Example: Credit Risk Prediction
 
 Let's see how ROC and AUC help in a credit risk prediction task:
 
@@ -225,7 +225,7 @@ plot_roc_curve(fpr, tpr, roc_auc)
 plot_threshold_analysis(y_test, y_pred_proba)
 ```
 
-## Best Practices 🌟
+## Best Practices
 
 ### 1. ROC and AUC Analysis
 
@@ -249,24 +249,10 @@ def analyze_roc_auc(y_true, y_pred_proba):
 analyze_roc_auc(y_test, y_pred_proba)
 ```
 
-## Additional Resources 📚
+## Additional Resources
 
-1. **Online Courses**
-   - Coursera: Machine Learning by Andrew Ng
-   - edX: Introduction to Machine Learning
+- [ROC and AUC Guide](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_curve.html)
+- [Threshold Selection](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html)
+- [Model Evaluation Best Practices](https://scikit-learn.org/stable/modules/model_evaluation.html)
 
-2. **Books**
-   - "Introduction to Machine Learning with Python" by Andreas Müller
-   - "Hands-On Machine Learning with Scikit-Learn" by Aurélien Géron
-
-3. **Documentation**
-   - [Scikit-learn ROC Curve](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_curve.html)
-   - [AUC Score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html)
-
-## Next Steps 🚀
-
-Ready to learn more? Check out:
-
-1. [Model Metrics](./metrics.md) to understand other evaluation metrics
-2. [Cross Validation](./cross-validation.md) to properly evaluate your model
-3. [Model Selection](./model-selection.md) to choose the best model for your problem
+Remember: ROC and AUC are powerful tools for evaluating binary classification models!

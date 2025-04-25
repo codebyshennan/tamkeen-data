@@ -1,6 +1,6 @@
 # Implementing Naive Bayes in Practice
 
-## Welcome to Hands-On Naive Bayes! 🎯
+## Welcome to Hands-On Naive Bayes
 
 Now that you understand the theory, let's roll up our sleeves and implement Naive Bayes in real projects. We'll start with simple examples and gradually build up to more complex applications.
 
@@ -20,7 +20,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
 ```
 
-## Project 1: Spam Email Classifier 📧
+## Project 1: Spam Email Classifier
 
 ### Understanding the Problem
 
@@ -106,7 +106,7 @@ for email, pred, prob in zip(new_emails, predictions, probabilities):
     print(f"Confidence: {max(prob):.2%}")
 ```
 
-## Project 2: Medical Diagnosis System 🏥
+## Project 2: Medical Diagnosis System
 
 ### Understanding the Problem
 
@@ -179,7 +179,7 @@ print(f"Diagnosis: {'Sick' if prediction[0] == 1 else 'Healthy'}")
 print(f"Confidence: {max(probability[0]):.2%}")
 ```
 
-## Project 3: Product Categorization System 🛍️
+## Project 3: Product Categorization System
 
 ### Understanding the Problem
 
@@ -251,7 +251,7 @@ prediction = model.predict(new_product)
 print(f"Predicted Category: {prediction[0]}")
 ```
 
-## Best Practices and Tips 💡
+## Best Practices and Tips
 
 ### 1. Data Preprocessing
 
@@ -299,7 +299,7 @@ Use multiple metrics to evaluate your model:
    print(f"Mean accuracy: {scores.mean():.2f}")
    ```
 
-## Next Steps 📚
+## Next Steps
 
 Ready to take your Naive Bayes skills to the next level? Check out the [Advanced Topics](5-advanced-topics.md) section to learn about:
 

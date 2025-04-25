@@ -1,8 +1,9 @@
 # Data Integration
 
-## Introduction to Data Integration 🔄
+## Introduction to Data Integration
 
 ### Integration Patterns Diagram
+
 ```mermaid
 graph TD
     subgraph Batch Integration
@@ -20,6 +21,7 @@ graph TD
 ```
 
 ### Real-time vs Batch Processing Comparison
+
 ```
 +------------------+------------------------+------------------------+
 | Characteristic   | Real-time Processing   | Batch Processing      |
@@ -36,6 +38,7 @@ graph TD
 ```
 
 ### Data Quality Monitoring (Tableau Dashboard)
+
 ```
 [Tableau Dashboard Layout]
 +------------------------+------------------------+
@@ -63,61 +66,68 @@ graph TD
 ```
 
 ### Core Functions
+
 - **Data Consolidation**:
-  * Merging data from multiple sources
-  * Resolving format differences
-  * Handling schema variations
-  * Maintaining data relationships
+  - Merging data from multiple sources
+  - Resolving format differences
+  - Handling schema variations
+  - Maintaining data relationships
 
 ### Key Challenges
+
 - **Data Quality**:
-  * Inconsistent formats
-  * Missing values
-  * Duplicate records
-  * Conflicting information
+  - Inconsistent formats
+  - Missing values
+  - Duplicate records
+  - Conflicting information
 
 ### Business Impact
+
 - **Decision Making**:
-  * 360-degree view of business
-  * Real-time insights
-  * Historical analysis
-  * Predictive modeling
+  - 360-degree view of business
+  - Real-time insights
+  - Historical analysis
+  - Predictive modeling
 
 ### Technical Considerations
+
 - **Performance**:
-  * Processing efficiency
-  * Resource utilization
-  * Scalability requirements
-  * Response time targets
+  - Processing efficiency
+  - Resource utilization
+  - Scalability requirements
+  - Response time targets
 
 ### Implementation Approaches
+
 - **Batch Processing**:
-  * Scheduled data loads
-  * Bulk transformations
-  * Historical data processing
-  * Resource optimization
+  - Scheduled data loads
+  - Bulk transformations
+  - Historical data processing
+  - Resource optimization
 
 - **Real-time Processing**:
-  * Stream processing
-  * Event-driven integration
-  * Immediate updates
-  * Low-latency requirements
+  - Stream processing
+  - Event-driven integration
+  - Immediate updates
+  - Low-latency requirements
 
 ### Quality Assurance
+
 - **Data Validation**:
-  * Schema validation
-  * Business rule checking
-  * Referential integrity
-  * Format standardization
+  - Schema validation
+  - Business rule checking
+  - Referential integrity
+  - Format standardization
 
 ### Monitoring and Maintenance
-- **System Health**:
-  * Performance metrics
-  * Error tracking
-  * Resource monitoring
-  * SLA compliance
 
-## Data Source Integration 🔌
+- **System Health**:
+  - Performance metrics
+  - Error tracking
+  - Resource monitoring
+  - SLA compliance
+
+## Data Source Integration
 
 ### 1. API Integration
 
@@ -167,32 +177,36 @@ class APIIntegrator:
 File integration is a fundamental aspect of data engineering, dealing with various file formats and storage systems. Here's what you need to consider:
 
 #### Supported Formats
+
 - **Structured**:
-  * CSV (Comma Separated Values)
-  * Excel (XLSX/XLS)
-  * JSON (JavaScript Object Notation)
-  * Parquet (Columnar Storage)
+  - CSV (Comma Separated Values)
+  - Excel (XLSX/XLS)
+  - JSON (JavaScript Object Notation)
+  - Parquet (Columnar Storage)
 
 #### Performance Considerations
+
 - **File Size**:
-  * Chunked reading
-  * Memory management
-  * Parallel processing
-  * Compression handling
+  - Chunked reading
+  - Memory management
+  - Parallel processing
+  - Compression handling
 
 #### Data Quality
+
 - **Format Validation**:
-  * Schema checking
-  * Data type verification
-  * Encoding handling
-  * Header validation
+  - Schema checking
+  - Data type verification
+  - Encoding handling
+  - Header validation
 
 #### Best Practices
+
 - **Error Handling**:
-  * File not found
-  * Permission issues
-  * Corrupt files
-  * Format mismatches
+  - File not found
+  - Permission issues
+  - Corrupt files
+  - Format mismatches
 
 Here's a robust implementation:
 
@@ -262,58 +276,61 @@ class DatabaseIntegrator:
             conn.execute(text(query))
 ```
 
-## Data Transformation 🔄
+## Data Transformation
 
 Data transformation is a critical phase in data integration that involves converting data from source formats to target formats while ensuring data quality and consistency.
 
 ### Key Transformation Types
+
 - **Structure Transformations**:
-  * Schema mapping
-  * Data type conversions
-  * Denormalization/Normalization
-  * Aggregations
+  - Schema mapping
+  - Data type conversions
+  - Denormalization/Normalization
+  - Aggregations
 
 - **Content Transformations**:
-  * Data cleansing
-  * Value standardization
-  * Unit conversions
-  * Encoding changes
+  - Data cleansing
+  - Value standardization
+  - Unit conversions
+  - Encoding changes
 
 - **Semantic Transformations**:
-  * Business rule application
-  * Derived calculations
-  * Lookup operations
-  * Data enrichment
+  - Business rule application
+  - Derived calculations
+  - Lookup operations
+  - Data enrichment
 
 ### 1. Schema Mapping
 
 Schema mapping is the process of creating relationships between source and target data models. Key considerations include:
 
 #### Mapping Types
+
 - **One-to-One**:
-  * Direct field mappings
-  * Name standardization
-  * Type alignment
-  * Format consistency
+  - Direct field mappings
+  - Name standardization
+  - Type alignment
+  - Format consistency
 
 - **One-to-Many**:
-  * Data splitting
-  * Array expansion
-  * Nested structure handling
-  * Relationship preservation
+  - Data splitting
+  - Array expansion
+  - Nested structure handling
+  - Relationship preservation
 
 - **Many-to-One**:
-  * Data aggregation
-  * Field combination
-  * Value concatenation
-  * Logic application
+  - Data aggregation
+  - Field combination
+  - Value concatenation
+  - Logic application
 
 #### Best Practices
+
 - **Documentation**:
-  * Mapping documentation
-  * Transformation rules
-  * Business logic
-  * Data lineage
+  - Mapping documentation
+  - Transformation rules
+  - Business logic
+  - Data lineage
 
 Here's a comprehensive implementation:
 
@@ -399,7 +416,7 @@ class DataValidator:
         return all(result.all() for result in validation_results)
 ```
 
-## Data Integration Pipeline 🔄
+## Data Integration Pipeline
 
 ```python
 class DataIntegrationPipeline:
@@ -431,7 +448,7 @@ class DataIntegrationPipeline:
         return result
 ```
 
-## Integration Patterns 📋
+## Integration Patterns
 
 ### 1. Extract and Load
 
@@ -493,7 +510,7 @@ def incremental_load(source_integrator, target_integrator,
     return data, last_value
 ```
 
-## Best Practices 💡
+## Best Practices
 
 1. **Data Quality**
    - Validate data before integration
@@ -519,16 +536,17 @@ def incremental_load(source_integrator, target_integrator,
    - Track transformations
    - Maintain metadata
 
-## Practice Exercise 🏋️‍♂️
+## Practice Exercise
 
 Build a data integration pipeline that:
+
 1. Extracts data from multiple sources
 2. Applies transformations
 3. Validates data quality
 4. Loads data to target system
 5. Handles errors appropriately
 
-## Solution Template 💡
+## Solution Template
 
 ```python
 # Configuration
@@ -609,4 +627,4 @@ except Exception as e:
     print(f"Integration failed: {str(e)}")
 ```
 
-Remember: Effective data integration requires careful planning and robust error handling! 🎯
+Remember: Effective data integration requires careful planning and robust error handling!

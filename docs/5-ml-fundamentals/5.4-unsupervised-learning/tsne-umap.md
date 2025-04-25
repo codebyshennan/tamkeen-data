@@ -2,7 +2,7 @@
 
 Imagine you're trying to create a map of your neighborhood. You want to show how close different places are to each other, but you also want to preserve the relationships between them. That's exactly what t-SNE and UMAP do with high-dimensional data - they help us create meaningful 2D maps of complex data while preserving important relationships!
 
-## What are t-SNE and UMAP? 🤔
+## What are t-SNE and UMAP?
 
 ### t-SNE (t-Distributed Stochastic Neighbor Embedding)
 
@@ -12,7 +12,7 @@ Think of t-SNE as a smart photographer who knows exactly which angle to take a p
 
 UMAP is like a more efficient version of t-SNE - it's like having a GPS that can create a simplified map of a complex city while still showing all the important connections between places.
 
-## Why Do We Need These Tools? 💡
+## Why Do We Need These Tools?
 
 1. **Complex Data Visualization**: When we have data with many features, it's hard to see patterns. These tools help us visualize it in 2D.
 
@@ -20,7 +20,7 @@ UMAP is like a more efficient version of t-SNE - it's like having a GPS that can
 
 3. **Exploratory Analysis**: They're great for discovering patterns and relationships in your data.
 
-## How Do They Work? 🛠️
+## How Do They Work?
 
 Let's break it down with a simple example:
 
@@ -71,7 +71,7 @@ plt.savefig('assets/tsne_umap_comparison.png')
 plt.close()
 ```
 
-## Real-World Example: Visualizing Handwritten Digits 📝
+## Real-World Example: Visualizing Handwritten Digits
 
 Let's see how these tools can help us visualize complex data:
 
@@ -117,14 +117,14 @@ plt.savefig('assets/tsne_umap_digits.png')
 plt.close()
 ```
 
-## Key Differences Between t-SNE and UMAP 🔍
+## Key Differences Between t-SNE and UMAP
 
 1. **Speed**: UMAP is generally faster than t-SNE
 2. **Memory Usage**: UMAP uses less memory
 3. **Parameter Sensitivity**: t-SNE is more sensitive to parameter choices
 4. **Global Structure**: UMAP often preserves global structure better
 
-## When to Use Each Tool 🌟
+## When to Use Each Tool
 
 ### Use t-SNE when
 
@@ -139,7 +139,7 @@ plt.close()
 - You need faster computation
 - You want to use the embedding for downstream tasks
 
-## Best Practices ✅
+## Best Practices
 
 1. **Preprocessing**:
 
@@ -176,20 +176,20 @@ def find_best_parameters(X, y):
     plt.close()
 ```
 
-## Common Mistakes to Avoid 🚫
+## Common Mistakes to Avoid
 
 1. **Not Scaling Data**: Always standardize your data first
 2. **Using Wrong Parameters**: Choose parameters based on your data size
 3. **Interpreting Distances**: Remember that distances in the visualization are not always meaningful
 4. **Over-interpreting Results**: These are visualization tools, not clustering algorithms
 
-## Further Reading 📚
+## Further Reading
 
 1. [t-SNE Documentation](https://scikit-learn.org/stable/modules/generated/sklearn.manifold.TSNE.html)
 2. [UMAP Documentation](https://umap-learn.readthedocs.io/)
 3. [Interactive t-SNE Visualization](https://distill.pub/2016/misread-tsne/)
 
-## Practice Exercise 🎯
+## Practice Exercise
 
 Try visualizing the famous MNIST dataset:
 

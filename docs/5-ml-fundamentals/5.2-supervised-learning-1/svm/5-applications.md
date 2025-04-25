@@ -1,6 +1,6 @@
 # Real-World Applications of SVM
 
-## Learning Objectives 🎯
+## Learning Objectives
 
 By the end of this section, you will be able to:
 

@@ -1,6 +1,6 @@
 # Advanced Neural Network Techniques
 
-## Welcome to Advanced Neural Networks! 🎓
+## Welcome to Advanced Neural Networks
 
 Ready to take your neural network skills to the next level? This guide will introduce you to advanced techniques that power state-of-the-art AI systems. Think of it like learning advanced cooking techniques after mastering the basics!
 

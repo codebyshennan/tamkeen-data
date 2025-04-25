@@ -1,8 +1,9 @@
-# Data Wrangling Module TODOs 📋
+# Data Wrangling Module TODOs
 
-## Required Resources and Graphics 🎨
+## Required Resources and Graphics
 
 ### 2.1 SQL
+
 1. **Database Schema Diagrams**
    - [ ] ER diagram showing relationships between tables
    - [ ] Sample database schema with primary/foreign keys
@@ -14,6 +15,7 @@
    - [ ] Index usage visualization
 
 ### 2.2 Data Wrangling
+
 1. **Data Quality Framework**
    - [ ] Data quality dimensions infographic
    - [ ] Data validation workflow diagram
@@ -35,6 +37,7 @@
    - [ ] Feature engineering process diagram
 
 ### 2.3 EDA
+
 1. **Distribution Analysis**
    - [ ] Common distribution shapes gallery
    - [ ] Skewness and kurtosis visualization
@@ -51,6 +54,7 @@
    - [ ] Trend analysis examples
 
 ### 2.4 Data Engineering
+
 1. **ETL Process**
    - [ ] ETL workflow diagram
    - [ ] Data pipeline architecture
@@ -66,7 +70,7 @@
    - [ ] Real-time vs batch processing comparison
    - [ ] Data quality monitoring dashboard
 
-## Interactive Examples 🔄
+## Interactive Examples
 
 1. **SQL Practice Environment**
    - [ ] Set up interactive SQL playground
@@ -83,7 +87,7 @@
    - [ ] Create dynamic dashboards
    - [ ] Add real-time data exploration examples
 
-## Case Studies 📚
+## Case Studies
 
 1. **E-commerce Data**
    - [ ] Customer transaction dataset
@@ -100,7 +104,7 @@
    - [ ] Transaction logs
    - [ ] Risk assessment metrics
 
-## Documentation 📝
+## Documentation
 
 1. **Best Practices Guides**
    - [ ] Data quality checklist
@@ -117,7 +121,7 @@
    - [ ] Python data wrangling cheatsheet
    - [ ] Statistical tests guide
 
-## Assessment Materials 📊
+## Assessment Materials
 
 1. **Practice Problems**
    - [ ] SQL query challenges
@@ -134,7 +138,7 @@
    - [ ] Documentation standards
    - [ ] Project evaluation criteria
 
-## Additional Resources 📚
+## Additional Resources
 
 1. **External Tools**
    - [ ] Data quality monitoring tools
@@ -152,6 +156,7 @@
    - [ ] Additional reading materials
 
 Remember to:
+
 - Use consistent styling across all graphics
 - Include source files for all diagrams
 - Provide high-resolution versions of images

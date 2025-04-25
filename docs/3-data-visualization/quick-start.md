@@ -1,6 +1,6 @@
 # Data Visualization Quick Start Guide
 
-## 🎯 What You'll Learn
+## What You'll Learn
 
 In this quick start guide, you'll learn how to:
 
@@ -8,7 +8,7 @@ In this quick start guide, you'll learn how to:
 2. Choose the right chart type
 3. Make your visualizations look professional
 
-## 📊 Your First Visualization in 5 Minutes
+## Your First Visualization in 5 Minutes
 
 ### Step 1: Set Up Your Environment
 
@@ -46,7 +46,7 @@ plt.grid(True, linestyle='--', alpha=0.7)
 plt.show()
 ```
 
-## 🎨 Three Most Common Chart Types
+## Three Most Common Chart Types
 
 ### 1. Line Chart
 
@@ -84,7 +84,7 @@ plt.title('Sales Distribution')
 plt.show()
 ```
 
-## 🚀 Quick Tips for Better Charts
+## Quick Tips for Better Charts
 
 ### 1. Keep it Simple
 
@@ -104,7 +104,7 @@ plt.show()
 - Label your axes
 - Include units
 
-## 📝 Simple Checklist for Every Chart
+## Simple Checklist for Every Chart
 
 Before sharing your visualization, check:
 
@@ -114,7 +114,7 @@ Before sharing your visualization, check:
 - [ ] Are the colors appropriate?
 - [ ] Is the message clear?
 
-## 🎓 Next Steps
+## Next Steps
 
 Once you're comfortable with basic charts:
 
@@ -123,7 +123,7 @@ Once you're comfortable with basic charts:
 3. Add interactivity
 4. Learn about advanced features
 
-## 🔧 Common Problems and Solutions
+## Common Problems and Solutions
 
 ### Problem: Chart Too Cluttered
 
@@ -163,7 +163,7 @@ plt.plot(data)
 plt.plot(data, color='#2ecc71', alpha=0.7)
 ```
 
-## 🎯 Practice Exercises
+## Practice Exercises
 
 1. **Basic Line Chart**
    Create a line chart showing temperature over a week
@@ -174,7 +174,7 @@ plt.plot(data, color='#2ecc71', alpha=0.7)
 3. **Basic Pie Chart**
    Show how you spend your time in a day
 
-## 📚 Resources for Learning More
+## Resources for Learning More
 
 1. **Official Documentation**
    - Matplotlib Tutorial

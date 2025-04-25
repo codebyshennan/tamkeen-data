@@ -1,10 +1,11 @@
 # Data Storage Solutions
 
-## Introduction to Data Storage 💾
+## Introduction to Data Storage
 
 Data storage is a fundamental aspect of data engineering that requires careful consideration of various factors to ensure efficient, reliable, and scalable data management.
 
 ### Storage Types Comparison Chart
+
 ```
 +------------------+------------------------+------------------------+------------------------+
 | Characteristic   | Data Warehouse         | Data Lake             | Database              |
@@ -22,6 +23,7 @@ Data storage is a fundamental aspect of data engineering that requires careful c
 ```
 
 ### Data Warehouse Architecture
+
 ```mermaid
 graph TD
     subgraph Sources
@@ -48,6 +50,7 @@ graph TD
 ```
 
 ### Data Lake Organization
+
 ```mermaid
 graph TD
     subgraph Bronze Layer
@@ -76,6 +79,7 @@ graph TD
 ```
 
 ### Storage Performance Comparison (Tableau Dashboard)
+
 ```
 [Tableau Dashboard Layout]
 +------------------------+------------------------+
@@ -105,92 +109,98 @@ graph TD
 ### Key Considerations
 
 #### 1. Data Characteristics
+
 - **Volume**:
-  * Current data size
-  * Growth projections
-  * Storage capacity planning
-  * Cost considerations
+  - Current data size
+  - Growth projections
+  - Storage capacity planning
+  - Cost considerations
 
 - **Velocity**:
-  * Data ingestion rate
-  * Processing requirements
-  * Real-time vs batch
-  * Access patterns
+  - Data ingestion rate
+  - Processing requirements
+  - Real-time vs batch
+  - Access patterns
 
 - **Variety**:
-  * Structured data
-  * Semi-structured data
-  * Unstructured data
-  * Binary objects
+  - Structured data
+  - Semi-structured data
+  - Unstructured data
+  - Binary objects
 
 #### 2. Performance Requirements
+
 - **Access Patterns**:
-  * Read/write ratios
-  * Query complexity
-  * Concurrency needs
-  * Latency requirements
+  - Read/write ratios
+  - Query complexity
+  - Concurrency needs
+  - Latency requirements
 
 - **Scalability**:
-  * Horizontal scaling
-  * Vertical scaling
-  * Partitioning strategy
-  * Load distribution
+  - Horizontal scaling
+  - Vertical scaling
+  - Partitioning strategy
+  - Load distribution
 
 #### 3. Data Governance
+
 - **Security**:
-  * Access control
-  * Encryption
-  * Audit logging
-  * Compliance requirements
+  - Access control
+  - Encryption
+  - Audit logging
+  - Compliance requirements
 
 - **Data Quality**:
-  * Validation rules
-  * Consistency checks
-  * Data integrity
-  * Error handling
+  - Validation rules
+  - Consistency checks
+  - Data integrity
+  - Error handling
 
 #### 4. Operational Aspects
+
 - **Maintenance**:
-  * Backup strategies
-  * Recovery procedures
-  * Monitoring setup
-  * Performance tuning
+  - Backup strategies
+  - Recovery procedures
+  - Monitoring setup
+  - Performance tuning
 
 - **Cost Management**:
-  * Storage costs
-  * Operation costs
-  * Scaling costs
-  * Maintenance costs
+  - Storage costs
+  - Operation costs
+  - Scaling costs
+  - Maintenance costs
 
 ### Storage Selection Criteria
 
 #### 1. Business Requirements
+
 - **Use Cases**:
-  * Transaction processing
-  * Analytics
-  * Archival
-  * Caching
+  - Transaction processing
+  - Analytics
+  - Archival
+  - Caching
 
 - **SLA Requirements**:
-  * Availability
-  * Durability
-  * Performance
-  * Recovery time
+  - Availability
+  - Durability
+  - Performance
+  - Recovery time
 
 #### 2. Technical Requirements
+
 - **Data Model**:
-  * Schema flexibility
-  * Relationship handling
-  * Indexing needs
-  * Query capabilities
+  - Schema flexibility
+  - Relationship handling
+  - Indexing needs
+  - Query capabilities
 
 - **Integration**:
-  * API support
-  * Tool compatibility
-  * Protocol support
-  * Ecosystem integration
+  - API support
+  - Tool compatibility
+  - Protocol support
+  - Ecosystem integration
 
-## Types of Data Storage 🗄️
+## Types of Data Storage
 
 ### 1. Relational Databases (RDBMS)
 
@@ -240,58 +250,60 @@ def setup_database(connection_string):
 NoSQL databases provide flexible schema design and horizontal scalability for handling diverse data types and high-volume workloads.
 
 #### Types of NoSQL Databases
+
 - **Document Stores**:
-  * Schema flexibility
-  * Nested structures
-  * JSON/BSON format
-  * Query capabilities
-  * Example: MongoDB, CouchDB
+  - Schema flexibility
+  - Nested structures
+  - JSON/BSON format
+  - Query capabilities
+  - Example: MongoDB, CouchDB
 
 - **Key-Value Stores**:
-  * Simple data model
-  * High performance
-  * Scalable architecture
-  * Cache-friendly
-  * Example: Redis, DynamoDB
+  - Simple data model
+  - High performance
+  - Scalable architecture
+  - Cache-friendly
+  - Example: Redis, DynamoDB
 
 - **Column-Family Stores**:
-  * Wide-column storage
-  * High write throughput
-  * Efficient compression
-  * Horizontal scaling
-  * Example: Cassandra, HBase
+  - Wide-column storage
+  - High write throughput
+  - Efficient compression
+  - Horizontal scaling
+  - Example: Cassandra, HBase
 
 - **Graph Databases**:
-  * Relationship-focused
-  * Network analysis
-  * Path traversal
-  * Pattern matching
-  * Example: Neo4j, JanusGraph
+  - Relationship-focused
+  - Network analysis
+  - Path traversal
+  - Pattern matching
+  - Example: Neo4j, JanusGraph
 
 #### Use Cases
+
 - **Document Stores**:
-  * Content management
-  * User profiles
-  * Game states
-  * Product catalogs
+  - Content management
+  - User profiles
+  - Game states
+  - Product catalogs
 
 - **Key-Value Stores**:
-  * Session management
-  * Shopping carts
-  * User preferences
-  * Real-time bidding
+  - Session management
+  - Shopping carts
+  - User preferences
+  - Real-time bidding
 
 - **Column-Family**:
-  * Time-series data
-  * Event logging
-  * Sensor data
-  * Large-scale analytics
+  - Time-series data
+  - Event logging
+  - Sensor data
+  - Large-scale analytics
 
 - **Graph Databases**:
-  * Social networks
-  * Recommendation engines
-  * Fraud detection
-  * Knowledge graphs
+  - Social networks
+  - Recommendation engines
+  - Fraud detection
+  - Knowledge graphs
 
 Here's a comprehensive MongoDB implementation:
 
@@ -395,49 +407,52 @@ class DataLakeHandler:
 Data warehouses are specialized databases optimized for analytics and reporting, providing a centralized repository for integrated data from multiple sources.
 
 #### Architecture Components
+
 - **Staging Area**:
-  * Raw data landing
-  * Initial validation
-  * Format conversion
-  * Load preparation
+  - Raw data landing
+  - Initial validation
+  - Format conversion
+  - Load preparation
 
 - **Core Warehouse**:
-  * Dimensional models
-  * Fact tables
-  * Slowly changing dimensions
-  * Historical tracking
+  - Dimensional models
+  - Fact tables
+  - Slowly changing dimensions
+  - Historical tracking
 
 - **Data Marts**:
-  * Subject-specific views
-  * Aggregated data
-  * Department-specific
-  * Optimized access
+  - Subject-specific views
+  - Aggregated data
+  - Department-specific
+  - Optimized access
 
 #### Design Patterns
+
 - **Star Schema**:
-  * Fact tables
-  * Dimension tables
-  * Denormalization
-  * Query optimization
+  - Fact tables
+  - Dimension tables
+  - Denormalization
+  - Query optimization
 
 - **Snowflake Schema**:
-  * Normalized dimensions
-  * Reduced redundancy
-  * Complex relationships
-  * Storage efficiency
+  - Normalized dimensions
+  - Reduced redundancy
+  - Complex relationships
+  - Storage efficiency
 
 #### Performance Features
+
 - **Columnar Storage**:
-  * Compression
-  * Query optimization
-  * Parallel processing
-  * Analytical workloads
+  - Compression
+  - Query optimization
+  - Parallel processing
+  - Analytical workloads
 
 - **Materialized Views**:
-  * Pre-computed results
-  * Faster queries
-  * Refresh strategies
-  * Resource optimization
+  - Pre-computed results
+  - Faster queries
+  - Refresh strategies
+  - Resource optimization
 
 Here's a comprehensive implementation:
 
@@ -476,7 +491,7 @@ class DataWarehouseHandler:
         """)
 ```
 
-## Data Storage Patterns 📋
+## Data Storage Patterns
 
 ### 1. Data Partitioning
 
@@ -588,7 +603,7 @@ class DataVersioning:
         return hashlib.md5(data_str.encode()).hexdigest()
 ```
 
-## Best Practices 💡
+## Best Practices
 
 1. **Choose the Right Storage**
    - Consider data structure
@@ -614,16 +629,17 @@ class DataVersioning:
    - Monitor access
    - Regular backups
 
-## Practice Exercise 🏋️‍♂️
+## Practice Exercise
 
 Implement a data storage system that:
+
 1. Supports multiple storage backends
 2. Handles data partitioning
 3. Implements versioning
 4. Includes data validation
 5. Provides monitoring capabilities
 
-## Solution Template 💡
+## Solution Template
 
 ```python
 class DataStorage:
@@ -755,4 +771,4 @@ storage.store_data(
 )
 ```
 
-Remember: Choose your data storage solution based on your specific requirements and use cases! 🎯
+Remember: Choose your data storage solution based on your specific requirements and use cases!

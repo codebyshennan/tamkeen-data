@@ -1,8 +1,8 @@
-# Mathematical Foundation of Random Forest 📐
+# Mathematical Foundation of Random Forest
 
 Let's break down the mathematical concepts behind Random Forests in a way that's easy to understand. Think of this as learning the rules of a game - once you understand the basic principles, everything else makes more sense!
 
-## Bootstrap Aggregating (Bagging) 🎲
+## Bootstrap Aggregating (Bagging)
 
 ### What is Bagging?
 
@@ -43,7 +43,7 @@ def bootstrap_sample(X, y):
 
 Think of this as a built-in validation set. For each tree, some data points weren't used in training - we can use these to estimate how well the model will perform on new data.
 
-## Random Feature Selection 🎯
+## Random Feature Selection
 
 ### What is Feature Selection?
 
@@ -85,7 +85,7 @@ def get_random_features(n_features, n_select):
     )
 ```
 
-## Ensemble Prediction 🤝
+## Ensemble Prediction
 
 ### Classification
 
@@ -98,7 +98,7 @@ For regression problems, it's like taking the average of all expert opinions. Th
 ![Ensemble Prediction](assets/ensemble_prediction.png)
 *Figure 2: How individual tree predictions combine to form the final ensemble prediction.*
 
-## Feature Importance 📊
+## Feature Importance
 
 ### What is Feature Importance?
 
@@ -142,13 +142,13 @@ Random Forests help reduce variance while maintaining bias, making the model mor
 ![Bias-Variance Tradeoff](assets/bias_variance.png)
 *Figure 3: The bias-variance tradeoff in Random Forests - how model complexity affects predictions.*
 
-## Convergence Properties 🎯
+## Convergence Properties
 
 ### Law of Large Numbers
 
 As we add more trees to our forest, the predictions become more stable and reliable. This is like how a larger sample size gives us more confidence in our results.
 
-## Optimization Criteria 🎛️
+## Optimization Criteria
 
 ### Split Quality
 
@@ -180,7 +180,7 @@ def information_gain(parent, left, right):
     return gain
 ```
 
-## Hyperparameter Effects 🔧
+## Hyperparameter Effects
 
 ### Number of Trees
 
@@ -203,6 +203,6 @@ def information_gain(parent, left, right):
 ![Decision Tree vs Random Forest](assets/decision_tree_boundary.png)
 *Figure 4: A single decision tree (left) makes simple, piecewise linear decisions, while a Random Forest (right) combines multiple trees to create more complex decision boundaries.*
 
-## Next Steps 🚀
+## Next Steps
 
 Now that you understand the mathematics behind Random Forests, let's move on to [Implementation](3-implementation.md) to see how to put these concepts into practice!

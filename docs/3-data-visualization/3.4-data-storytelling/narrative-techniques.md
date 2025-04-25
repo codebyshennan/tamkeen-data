@@ -172,10 +172,10 @@ Think of this like setting up a mystery novel - provide enough context without g
 
 Use this decision tree to select the most appropriate visualization for your data:
 
-- For comparisons between categories → Bar charts
-- For trends over time → Line charts
-- For distributions and spread → Histograms or box plots
-- For outlier analysis → Box plots
+- For comparisons between categories  Bar charts
+- For trends over time  Line charts
+- For distributions and spread  Histograms or box plots
+- For outlier analysis  Box plots
 
 ### Color Usage Guidelines
 

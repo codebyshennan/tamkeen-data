@@ -2,7 +2,7 @@
 
 Welcome to the Statistical Modeling module! This comprehensive guide will walk you through advanced statistical modeling techniques using Python, with a focus on making complex concepts accessible to beginners.
 
-## 🎯 Learning Journey
+## Learning Journey
 
 This module is designed as a progressive learning path:
 
@@ -11,7 +11,7 @@ This module is designed as a progressive learning path:
 3. **Real-world Applications**: Learn through relatable examples and case studies
 4. **Visual Learning**: Comprehensive diagrams and visualizations to aid understanding
 
-## 📚 Learning Objectives
+## Learning Objectives
 
 By the end of this module, you will be able to:
 
@@ -50,7 +50,7 @@ By the end of this module, you will be able to:
 - Communicate results effectively
 - Make data-driven decisions
 
-## 📋 Topics Covered
+## Topics Covered
 
 1. [Logistic Regression Fundamentals](./logistic-regression.md)
    - Binary classification basics
@@ -82,7 +82,7 @@ By the end of this module, you will be able to:
    - Decision boundaries
    - Practical implications
 
-## 🛠️ Prerequisites
+## Prerequisites
 
 Before starting this module, you should have:
 
@@ -93,7 +93,7 @@ Before starting this module, you should have:
 
 Don't worry if you're not an expert in all these areas! We'll provide refreshers and additional resources where needed.
 
-## 💡 Why This Matters
+## Why This Matters
 
 Statistical modeling is essential for:
 
@@ -103,7 +103,7 @@ Statistical modeling is essential for:
 - Solving real-world problems
 - Building robust analytical solutions
 
-## 🚀 Getting Started
+## Getting Started
 
 1. Review the prerequisites and ensure you have the necessary background
 2. Follow the modules in order for the best learning experience
@@ -111,7 +111,7 @@ Statistical modeling is essential for:
 4. Use the provided code examples to practice
 5. Don't hesitate to revisit concepts if needed
 
-## 📝 Additional Resources
+## Additional Resources
 
 - [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)
 - [Introduction to Statistical Learning](https://www.statlearning.com/)

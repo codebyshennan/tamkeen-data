@@ -196,11 +196,11 @@ predictions = fast_knn.predict(X_test)
 1. **Using Weighted KNN Without Scaling**
 
    ```python
-   # ❌ Wrong way
+   #  Wrong way
    knn = KNeighborsClassifier(weights='distance')
    knn.fit(X_unscaled, y)
    
-   # ✅ Right way
+   #  Right way
    from sklearn.preprocessing import StandardScaler
    scaler = StandardScaler()
    X_scaled = scaler.fit_transform(X)
@@ -210,21 +210,21 @@ predictions = fast_knn.predict(X_test)
 2. **Reducing Dimensions Too Much**
 
    ```python
-   # ❌ Wrong way
+   #  Wrong way
    pca = PCA(n_components=1)  # Too few components
    
-   # ✅ Right way
+   #  Right way
    pca = PCA(n_components=0.95)  # Keep 95% of variance
    ```
 
 3. **Ignoring Class Imbalance**
 
    ```python
-   # ❌ Wrong way
+   #  Wrong way
    knn = KNeighborsClassifier()
    knn.fit(X_imbalanced, y_imbalanced)
    
-   # ✅ Right way
+   #  Right way
    from imblearn.over_sampling import SMOTE
    smote = SMOTE()
    X_balanced, y_balanced = smote.fit_resample(X_imbalanced, y_imbalanced)

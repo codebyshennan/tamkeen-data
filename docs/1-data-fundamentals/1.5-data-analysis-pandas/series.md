@@ -4,20 +4,23 @@
 
 A Pandas Series is like a column in a spreadsheet or a single list of data with labels. Think of it as a smart, one-dimensional array that knows the name of each item! It's perfect for:
 
-- 📈 Time series data (stock prices over time)
-- 📊 Storing categorical data (product categories)
-- 📝 Tracking measurements (temperatures, distances)
-- 🏷️ Working with labeled data (student grades)
+- Time series data (stock prices over time)
+- Storing categorical data (product categories)
+- Tracking measurements (temperatures, distances)
+- Working with labeled data (student grades)
 
 Real-world applications:
-- 💰 Financial data analysis
-- 📅 Daily temperature readings
-- 📊 Survey responses
-- 📈 Sales performance tracking
+
+- Financial data analysis
+- Daily temperature readings
+- Survey responses
+- Sales performance tracking
 
 {% stepper %}
 {% step %}
+
 ### Creating Your First Series
+
 Let's explore different ways to create a Series:
 
 ```python
@@ -56,7 +59,9 @@ Notice how Pandas automatically creates numbered labels (0, 1, 2, 3) for each va
 {% endstep %}
 
 {% step %}
+
 ### Custom Labels
+
 You can create your own labels (called an index) for each value:
 
 ```python
@@ -65,7 +70,9 @@ grades = pd.Series([90, 85, 95, 78],
                   index=['Alice', 'Bob', 'Charlie', 'David'])
 print(grades)
 ```
+
 Output:
+
 ```
 Alice      90
 Bob        85
@@ -78,7 +85,9 @@ Now you can access values using these friendly names!
 {% endstep %}
 
 {% step %}
+
 ### Working with Series
+
 Here are some common ways to work with your Series:
 
 ```python
@@ -93,6 +102,7 @@ passing_grades = grades[grades >= 90]
 print("\nStudents with A grades:")
 print(passing_grades)
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -100,8 +110,11 @@ print(passing_grades)
 
 {% stepper %}
 {% step %}
+
 ### Creating from Dictionary
+
 A Series can be created from a dictionary, where:
+
 - Dictionary keys become the index (labels)
 - Dictionary values become the Series values
 
@@ -115,7 +128,9 @@ population = pd.Series({
 })
 print(population)
 ```
+
 Output:
+
 ```
 New York     8.4
 London       9.0
@@ -123,10 +138,13 @@ Tokyo       37.4
 Paris        2.2
 dtype: float64
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Converting Back to Dictionary
+
 You can convert your Series back to a dictionary:
 
 ```python
@@ -134,10 +152,13 @@ You can convert your Series back to a dictionary:
 pop_dict = population.to_dict()
 print(pop_dict)
 ```
+
 Output:
+
 ```python
 {'New York': 8.4, 'London': 9.0, 'Tokyo': 37.4, 'Paris': 2.2}
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -145,7 +166,9 @@ Output:
 
 {% stepper %}
 {% step %}
+
 ### Understanding Missing Data
+
 In the real world, data is often incomplete. Pandas uses `NaN` (Not a Number) to represent missing values:
 
 ```python
@@ -153,7 +176,9 @@ In the real world, data is often incomplete. Pandas uses `NaN` (Not a Number) to
 scores = pd.Series({'Math': 90, 'English': 85, 'Science': None, 'History': 88})
 print(scores)
 ```
+
 Output:
+
 ```
 Math       90.0
 English    85.0
@@ -161,10 +186,13 @@ Science     NaN
 History    88.0
 dtype: float64
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Handling Missing Data
+
 Pandas provides tools to work with missing data:
 
 ```python
@@ -180,6 +208,7 @@ print(scores.dropna())
 print("\nScores with filled values (0):")
 print(scores.fillna(0))
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -187,7 +216,9 @@ print(scores.fillna(0))
 
 {% stepper %}
 {% step %}
+
 ### Basic Math Operations
+
 Series support mathematical operations, just like regular numbers:
 
 ```python
@@ -203,10 +234,13 @@ curved_grades = grades + 5
 print("Grades after curve:")
 print(curved_grades)
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Statistical Operations
+
 Pandas provides many built-in statistical methods:
 
 ```python
@@ -215,6 +249,7 @@ print(f"Highest grade: {grades.max()}")
 print(f"Lowest grade: {grades.min()}")
 print(f"Grade summary:\n{grades.describe()}")
 ```
+
 {% endstep %}
 {% endstepper %}
 

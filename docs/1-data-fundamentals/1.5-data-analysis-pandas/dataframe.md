@@ -4,23 +4,26 @@
 
 Think of a DataFrame as an Excel spreadsheet in Python! It's a 2-dimensional table with rows and columns, where each column can hold different types of data (numbers, text, dates, etc.). DataFrames are perfect for:
 
-- 📊 Analyzing structured data (sales records, customer info)
-- 📈 Time series analysis (stock prices, weather data)
-- 📑 Data cleaning and preparation
-- 🔍 Complex data analysis and statistics
+- Analyzing structured data (sales records, customer info)
+- Time series analysis (stock prices, weather data)
+- Data cleaning and preparation
+- Complex data analysis and statistics
 
 Real-world applications:
-- 💼 Sales analytics
-- 📈 Financial reporting
-- 👥 Customer demographics analysis
-- 📊 Survey data analysis
-- 🏥 Medical research data
+
+- Sales analytics
+- Financial reporting
+- Customer demographics analysis
+- Survey data analysis
+- Medical research data
 
 ![dataframe](./assets/dataframe.png)
 
 {% stepper %}
 {% step %}
+
 ### Creating Your First DataFrame
+
 Let's explore different ways to create a DataFrame:
 
 ```python
@@ -62,13 +65,17 @@ Notice how Pandas automatically adds numbered row labels (0, 1, 2) called the in
 {% endstep %}
 
 {% step %}
+
 ### Understanding DataFrame Structure
+
 A DataFrame has several key components:
+
 1. **Columns**: Named fields (like "Name", "Age", "Grade")
 2. **Index**: Row labels (0, 1, 2 by default)
 3. **Values**: The actual data
 
 Check these components:
+
 ```python
 # Column names
 print("Columns:", df.columns.tolist())
@@ -79,6 +86,7 @@ print("Index:", df.index.tolist())
 # Shape (rows, columns)
 print("Shape:", df.shape)
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -86,7 +94,9 @@ print("Shape:", df.shape)
 
 {% stepper %}
 {% step %}
+
 ### Viewing Your Data
+
 Pandas provides several ways to peek at your data:
 
 ```python
@@ -102,11 +112,15 @@ print(df.info())
 print("\nNumerical Statistics:")
 print(df.describe())
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Accessing Columns
+
 You can access columns in two ways:
+
 1. Dictionary-style with square brackets
 2. Attribute-style with dot notation
 
@@ -122,10 +136,13 @@ print(df.Name)
 print("\nMultiple columns:")
 print(df[['Name', 'Grade']])
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Adding and Modifying Data
+
 You can easily add or modify columns:
 
 ```python
@@ -139,6 +156,7 @@ df['Age'] = df['Age'] + 1
 print("\nAfter increasing everyone's age:")
 print(df)
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -146,7 +164,9 @@ print(df)
 
 {% stepper %}
 {% step %}
+
 ### Accessing Rows
+
 Use `loc` for label-based indexing or `iloc` for position-based indexing:
 
 ```python
@@ -158,10 +178,13 @@ print(df.iloc[0])
 print("\nRow with index 1:")
 print(df.loc[1])
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Filtering Rows
+
 You can filter rows based on conditions:
 
 ```python
@@ -175,6 +198,7 @@ good_grades_young = df[(df['Grade'] >= 85) & (df['Age'] < 22)]
 print("\nYoung students with good grades:")
 print(good_grades_young)
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -182,7 +206,9 @@ print(good_grades_young)
 
 {% stepper %}
 {% step %}
+
 ### Understanding Missing Values
+
 Real-world data often has missing values (shown as `NaN` in Pandas):
 
 ```python
@@ -194,10 +220,13 @@ student_data = pd.DataFrame({
 })
 print(student_data)
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Dealing with Missing Values
+
 Pandas provides several ways to handle missing data:
 
 ```python
@@ -213,6 +242,7 @@ print(student_data.dropna())
 print("\nFill missing values with 0:")
 print(student_data.fillna(0))
 ```
+
 {% endstep %}
 {% endstepper %}
 

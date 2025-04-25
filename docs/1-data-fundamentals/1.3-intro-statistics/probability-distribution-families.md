@@ -1,10 +1,12 @@
-# Probability Distribution Families with Python 📊
+# Probability Distribution Families with Python
 
 ## Understanding Distribution Families
 
 {% stepper %}
 {% step %}
+
 ### Distribution Families in Python
+
 Let's explore different distribution families using Python:
 
 ```python
@@ -116,10 +118,13 @@ poisson_params = [
 ]
 explorer.plot_distribution_family('poisson', poisson_params)
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Distribution Fitting and Testing
+
 Let's create tools for fitting distributions to data:
 
 ```python
@@ -246,6 +251,7 @@ data = np.random.lognormal(mean=0, sigma=0.5, size=1000)
 best_fit = fitter.find_best_fit(data)
 fitter.plot_fit_comparison(data, best_fit)
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -253,7 +259,9 @@ fitter.plot_fit_comparison(data, best_fit)
 
 {% stepper %}
 {% step %}
+
 ### Binomial Distribution
+
 Let's implement tools for working with binomial distributions:
 
 ```python
@@ -342,10 +350,13 @@ analyzer.plot_distribution(simulated_data)
 prob_5 = analyzer.calculate_probability(5)
 print(f"\nProbability of exactly 5 successes: {prob_5:.4f}")
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Poisson Distribution
+
 Implementation for Poisson distributions:
 
 ```python
@@ -435,10 +446,13 @@ analyzer.plot_distribution(simulated_data)
 prob_5 = analyzer.calculate_probability(5)
 print(f"\nProbability of exactly 5 events: {prob_5:.4f}")
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Normal Distribution and Central Limit Theorem
+
 Let's demonstrate the Central Limit Theorem:
 
 ```python
@@ -569,14 +583,16 @@ demonstrator.plot_clt_demonstration(
     sample_sizes
 )
 ```
+
 {% endstep %}
 {% endstepper %}
 
-## Practice Exercises 🎯
+## Practice Exercises
 
 Try these distribution analysis exercises:
 
 1. **Customer Service Analysis**
+
    ```python
    # Create functions to:
    # - Analyze call arrival patterns
@@ -585,6 +601,7 @@ Try these distribution analysis exercises:
    ```
 
 2. **Manufacturing Quality Control**
+
    ```python
    # Build tools to:
    # - Model defect rates
@@ -593,6 +610,7 @@ Try these distribution analysis exercises:
    ```
 
 3. **Financial Risk Analysis**
+
    ```python
    # Implement system to:
    # - Analyze return distributions
@@ -601,10 +619,11 @@ Try these distribution analysis exercises:
    ```
 
 Remember:
+
 - Choose appropriate distribution family
 - Validate distribution assumptions
 - Consider sample size effects
 - Use visualization for insights
 - Document your analysis
 
-Happy analyzing! 🚀
+Happy analyzing!

@@ -1,15 +1,15 @@
-# Exploratory Data Analysis: From Data to Insights 🔍
+# Exploratory Data Analysis: From Data to Insights
 
 Exploratory Data Analysis (EDA) is the crucial first step in any data analysis project. It's like being a detective - you investigate your data to uncover patterns, spot anomalies, test hypotheses, and check assumptions. Through EDA, you transform raw data into actionable insights.
 
-## The EDA Journey: A Systematic Approach 🗺️
+## The EDA Journey: A Systematic Approach
 
 The journey of EDA is both an art and a science. Like a skilled explorer, you need to:
+
 1. Start with broad questions about your data
 2. Use visualizations and statistics to find answers
 3. Let those answers lead to more specific questions
 4. Iterate until you have a deep understanding of your dataset
-
 
 ```mermaid
 graph TD
@@ -31,9 +31,10 @@ graph TD
     E --> E3[Anomalies]
 ```
 
-## Comprehensive EDA Framework 🎯
+## Comprehensive EDA Framework
 
 ### 1. Initial Data Exploration
+
 ```python
 import pandas as pd
 import numpy as np
@@ -223,7 +224,7 @@ class AdvancedAnalyzer:
         return patterns, decomposition
 ```
 
-## Real-World Case Study: E-commerce Analytics 🛍️
+## Real-World Case Study: E-commerce Analytics
 
 ```python
 # Load sample e-commerce data
@@ -285,11 +286,12 @@ fig = px.scatter_3d(
 fig.show()
 ```
 
-## Performance Optimization Tips 🚀
+## Performance Optimization Tips
 
 When working with large datasets, performance optimization becomes crucial. Here are some battle-tested strategies to make your EDA more efficient:
 
 ### 1. Memory Management: Working Smart with Big Data
+
 ```python
 def optimize_dataframe(df):
     """Optimize DataFrame memory usage"""
@@ -322,6 +324,7 @@ def optimize_dataframe(df):
 ```
 
 ### 2. Chunked Processing
+
 ```python
 def analyze_large_dataset(file_path, chunk_size=10000):
     """Process large datasets in chunks"""
@@ -340,11 +343,12 @@ def analyze_large_dataset(file_path, chunk_size=10000):
     return pd.concat(chunks)
 ```
 
-## Common Pitfalls and Solutions ⚠️
+## Common Pitfalls and Solutions
 
 Even experienced data scientists can fall into these common traps. Here's how to avoid them:
 
 1. **Skewed Distributions: The Silent Analysis Killer**
+
    ```python
    # Bad: Assuming normal distribution
    mean = df['amount'].mean()
@@ -356,6 +360,7 @@ Even experienced data scientists can fall into these common traps. Here's how to
    ```
 
 2. **Correlation vs Causation: Don't Jump to Conclusions**
+
    ```python
    # Correlation analysis
    correlation = df['price'].corr(df['sales'])
@@ -367,6 +372,7 @@ Even experienced data scientists can fall into these common traps. Here's how to
    ```
 
 3. **Missing Data Impact: The Hidden Influence**
+
    ```python
    # Bad: Drop all missing values
    df_clean = df.dropna()
@@ -379,7 +385,7 @@ Even experienced data scientists can fall into these common traps. Here's how to
    })
    ```
 
-## Interactive Visualization Tips: Making Your Data Come Alive 📊
+## Interactive Visualization Tips: Making Your Data Come Alive
 
 Static visualizations are good, but interactive ones can tell a more compelling story. Here's how to create engaging visualizations that help stakeholders explore and understand the data themselves:
 
@@ -414,13 +420,14 @@ def create_interactive_dashboard(df):
     return [fig1, fig2, fig3]
 ```
 
-## Assignment 📝
+## Assignment
 
 Ready to practice your EDA skills? Head over to the [EDA Assignment](../_assignments/2.3-assignment.md) to apply what you've learned!
 
-Remember: "EDA is not just about looking at data, it's about understanding the story it tells!" 🎯
+Remember: "EDA is not just about looking at data, it's about understanding the story it tells!"
 
 Pro Tips:
+
 - Always start with simple visualizations before moving to complex ones
 - Let your business questions guide your exploration
 - Document your findings and assumptions along the way
@@ -428,6 +435,7 @@ Pro Tips:
 - Share your insights in a way that non-technical stakeholders can understand
 
 Next, dive into specific aspects of EDA:
+
 - [Understanding Distributions](distributions.md)
 - [Analyzing Relationships](relationships.md)
 - [Time Series Analysis](time-series.md)

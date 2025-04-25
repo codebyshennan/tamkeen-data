@@ -3,6 +3,7 @@
 ## Understanding Aggregations
 
 Aggregations in SQL transform detailed data into meaningful summaries. Think of it like:
+
 - Raw data = Individual grocery receipts
 - Aggregated data = Monthly spending summary
 
@@ -25,6 +26,7 @@ graph TD
 ### Basic Statistical Functions
 
 1. **COUNT**: Row Counter
+
    ```sql
    -- Different COUNT variations
    SELECT 
@@ -45,6 +47,7 @@ graph TD
    ```
 
 2. **SUM**: Numerical Addition
+
    ```sql
    -- Sales Analysis
    SELECT 
@@ -70,6 +73,7 @@ graph TD
    ```
 
 3. **AVG**: Mean Calculator
+
    ```sql
    -- Price Analysis with Standard Error
    SELECT 
@@ -94,6 +98,7 @@ graph TD
    ```
 
 4. **MIN/MAX**: Range Identifiers
+
    ```sql
    -- Price Range Analysis
    SELECT 
@@ -118,9 +123,10 @@ graph TD
    GROUP BY customer_id;
    ```
 
-## Advanced Aggregation Concepts 
+## Advanced Aggregation Concepts
 
 ### Window Functions Deep Dive
+
 Window functions perform calculations across a set of table rows related to the current row.
 
 ```sql
@@ -164,6 +170,7 @@ FROM sales;
 ```
 
 ### HAVING vs WHERE: Understanding the Difference
+
 ```sql
 -- WHERE filters individual rows before grouping
 -- HAVING filters groups after grouping
@@ -201,6 +208,7 @@ HAVING AVG(price) > 100;  -- Correct! Filters after aggregation
 ```
 
 ### GROUP BY vs PARTITION BY: Key Differences
+
 ```sql
 -- GROUP BY: Reduces rows, one row per group
 SELECT 
@@ -238,9 +246,10 @@ FROM employees e
 JOIN dept_stats ds ON e.department = ds.department;
 ```
 
-## Common Pitfalls and Best Practices 🚧
+## Common Pitfalls and Best Practices
 
 ### 1. NULL Handling
+
 ```sql
 -- Bad: Ignoring NULLs
 SELECT AVG(salary) FROM employees;  -- Might be misleading
@@ -256,6 +265,7 @@ FROM employees;
 ```
 
 ### 2. Performance Considerations
+
 ```sql
 -- Bad: Unnecessary subquery
 SELECT 
@@ -273,6 +283,7 @@ FROM employees;
 ```
 
 ### 3. Precision and Rounding
+
 ```sql
 -- Bad: Inconsistent decimal places
 SELECT 
@@ -291,9 +302,10 @@ FROM employees
 GROUP BY department;
 ```
 
-## Practice Exercises 🎯
+## Practice Exercises
 
 1. **Basic Aggregation**
+
    ```sql
    -- Calculate monthly sales metrics
    -- Include: total sales, average order value, order count
@@ -302,6 +314,7 @@ GROUP BY department;
    ```
 
 2. **Window Functions**
+
    ```sql
    -- For each order:
    -- Calculate running total sales for the customer
@@ -311,6 +324,7 @@ GROUP BY department;
    ```
 
 3. **Complex Grouping**
+
    ```sql
    -- Create a sales summary with:
    -- Daily, weekly, monthly totals
@@ -320,6 +334,7 @@ GROUP BY department;
    ```
 
 4. **Advanced Analytics**
+
    ```sql
    -- Customer cohort analysis
    -- Product affinity analysis
@@ -327,7 +342,7 @@ GROUP BY department;
    -- Churn risk scoring
    ```
 
-## Additional Resources 📚
+## Additional Resources
 
 - [PostgreSQL Aggregation Documentation](https://www.postgresql.org/docs/current/functions-aggregate.html)
 - [Window Functions Tutorial](https://mode.com/sql-tutorial/sql-window-functions/)
@@ -337,6 +352,7 @@ GROUP BY department;
 ## Statistical Functions
 
 1. **STDDEV**: Standard Deviation
+
    ```sql
    -- Product price variation analysis
    SELECT 
@@ -354,6 +370,7 @@ GROUP BY department;
    ```
 
 2. **PERCENTILE**: Distribution Analysis
+
    ```sql
    -- Price distribution by category
    SELECT 
@@ -395,9 +412,10 @@ GROUP BY department;
    ) customer_totals;
    ```
 
-## Real-World Business Analytics 💼
+## Real-World Business Analytics
 
 ### 1. Customer Segmentation
+
 ```sql
 WITH customer_metrics AS (
     SELECT 
@@ -448,6 +466,7 @@ ORDER BY
 ```
 
 ### 2. Product Performance Analysis
+
 ```sql
 WITH product_metrics AS (
     SELECT 
@@ -497,6 +516,7 @@ ORDER BY
 ```
 
 ### 3. Sales Trend Analysis
+
 ```sql
 WITH daily_sales AS (
     SELECT 
@@ -549,9 +569,9 @@ FROM sales_stats
 ORDER BY sale_date DESC;
 ```
 
-Remember: "Good aggregations tell a story about your data!" 📊
+Remember: "Good aggregations tell a story about your data!"
 
-## Next Steps 🎯
+## Next Steps
 
 1. Practice with real datasets
 2. Experiment with different window functions

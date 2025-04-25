@@ -4,23 +4,27 @@
 
 {% stepper %}
 {% step %}
+
 ### What are Data Types?
+
 In Pandas, each column in a DataFrame (or each value in a Series) has a specific data type (dtype). Understanding data types is crucial for:
-- 🎯 Memory efficiency
-- ⚡ Better performance
-- 🧮 Correct calculations
-- 📊 Proper data handling
+
+- Memory efficiency
+- Better performance
+- Correct calculations
+- Proper data handling
 
 Common data types include:
-- **numbers**: 
+
+- **numbers**:
   - `int64` (whole numbers: age, count)
   - `float64` (decimal numbers: price, temperature)
-- **text**: 
+- **text**:
   - `object` or `string` (names, categories)
   - Use `string` when possible (more efficient than `object`)
-- **boolean**: 
+- **boolean**:
   - `bool` (True/False: is_active, has_subscription)
-- **dates**: 
+- **dates**:
   - `datetime64` (timestamps, calendar dates)
   - `timedelta64` (time differences)
 - **categorical**:
@@ -59,6 +63,7 @@ df.info()
 ```
 
 Real-world example - Sales data:
+
 ```python
 # Create sales data with appropriate types
 sales_df = pd.DataFrame({
@@ -74,10 +79,13 @@ print(sales_df.dtypes)
 print("\nUnique Products:", sales_df['Product'].unique())
 print("Total Sales:", (sales_df['Price'] * sales_df['Quantity']).sum())
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Checking and Converting Data Types
+
 You can check and change data types easily:
 
 ```python
@@ -92,6 +100,7 @@ print(numbers)
 ```
 
 Common type conversions:
+
 ```python
 # String to number
 text_numbers = pd.Series(['1.5', '2.5', '3.5'])
@@ -105,10 +114,13 @@ text = numbers.astype('string')
 dates = pd.Series(['2023-01-01', '2023-01-02'])
 dates = pd.to_datetime(dates)
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Selecting Columns by Data Type
+
 You can select columns based on their data type:
 
 ```python
@@ -130,6 +142,7 @@ text_cols = df.select_dtypes(include=['object'])
 print("\nText columns:")
 print(text_cols)
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -137,8 +150,11 @@ print(text_cols)
 
 {% stepper %}
 {% step %}
+
 ### What is an Index?
+
 Think of an index as the "row labels" in your DataFrame or Series. It's like the row numbers in Excel, but more powerful because:
+
 - It can contain any immutable type (numbers, strings, dates)
 - It helps align data when performing operations
 - It makes accessing data more intuitive
@@ -153,10 +169,13 @@ print(sales)
 # Access data using index
 print("\nFebruary sales:", sales['Feb'])
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Working with Index
+
 You can perform various operations with index:
 
 ```python
@@ -173,10 +192,13 @@ print(df)
 print("\nIndex values:", df.index.tolist())
 print("Is index unique?", df.index.is_unique)
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Setting and Resetting Index
+
 You can change the index of your DataFrame:
 
 ```python
@@ -196,6 +218,7 @@ df_reset = df_indexed.reset_index()
 print("\nAfter resetting index:")
 print(df_reset)
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -203,7 +226,9 @@ print(df_reset)
 
 {% stepper %}
 {% step %}
+
 ### Data Type Best Practices
+
 1. **Choose Appropriate Types**:
    - Use `int64` for whole numbers
    - Use `float64` for decimal numbers
@@ -220,7 +245,9 @@ print(df_reset)
 {% endstep %}
 
 {% step %}
+
 ### Index Best Practices
+
 1. **Choose Meaningful Index**:
    - Use business-relevant identifiers
    - Ensure index values are unique when needed
@@ -232,6 +259,7 @@ print(df_reset)
    - Reset index when needed for calculations
 
 Example:
+
 ```python
 # Good index practice
 sales_data = pd.DataFrame({
@@ -242,6 +270,7 @@ sales_data = pd.DataFrame({
 print("Well-structured DataFrame with date index:")
 print(sales_data)
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -250,6 +279,7 @@ print(sales_data)
 1. **Mixed Data Types**:
    - Problem: Column contains mix of numbers and strings
    - Solution: Clean data and convert to appropriate type
+
    ```python
    # Fix mixed types
    df['Amount'] = pd.to_numeric(df['Amount'], errors='coerce')
@@ -258,6 +288,7 @@ print(sales_data)
 2. **Wrong Date Format**:
    - Problem: Dates stored as strings
    - Solution: Convert to datetime
+
    ```python
    # Convert to datetime
    df['Date'] = pd.to_datetime(df['Date'])
@@ -266,6 +297,7 @@ print(sales_data)
 3. **Duplicate Index Values**:
    - Problem: Non-unique index causing data access issues
    - Solution: Ensure index uniqueness or use multi-index
+
    ```python
    # Check for duplicates
    print("Duplicate index values:", df.index.duplicated().any())

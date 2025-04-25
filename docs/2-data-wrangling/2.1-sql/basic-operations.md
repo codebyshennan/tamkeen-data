@@ -1,8 +1,9 @@
-# Mastering Basic SQL Operations: Your Data Query Journey 🚀
+# Mastering Basic SQL Operations: Your Data Query Journey
 
 ## Introduction to SQL Basics
 
 SQL (Structured Query Language) is the standard language for managing and manipulating relational databases. Understanding basic SQL operations is crucial for:
+
 - Data retrieval and analysis
 - Database management
 - Data integrity maintenance
@@ -11,6 +12,7 @@ SQL (Structured Query Language) is the standard language for managing and manipu
 ## CRUD Operations
 
 ### 1. CREATE: Adding Data
+
 ```sql
 -- Create a new table
 CREATE TABLE customers (
@@ -33,6 +35,7 @@ VALUES
 ```
 
 ### 2. READ: Querying Data
+
 ```sql
 -- Select all columns
 SELECT * FROM customers;
@@ -51,6 +54,7 @@ WHERE email LIKE '%@email.com';
 ```
 
 ### 3. UPDATE: Modifying Data
+
 ```sql
 -- Update single record
 UPDATE customers
@@ -73,6 +77,7 @@ WHERE
 ```
 
 ### 4. DELETE: Removing Data
+
 ```sql
 -- Delete specific records
 DELETE FROM customers
@@ -89,6 +94,7 @@ TRUNCATE TABLE customers;
 ## Basic Query Structure
 
 ### 1. SELECT Statement Anatomy
+
 ```sql
 SELECT 
     column1,
@@ -104,6 +110,7 @@ LIMIT 10;
 ```
 
 ### 2. Filtering and Sorting
+
 ```sql
 -- Basic WHERE clauses
 SELECT * FROM products
@@ -140,6 +147,7 @@ ORDER BY
 ## Data Types and Constraints
 
 ### 1. Common Data Types
+
 ```sql
 CREATE TABLE products (
     -- Numeric types
@@ -164,6 +172,7 @@ CREATE TABLE products (
 ```
 
 ### 2. Constraints
+
 ```sql
 CREATE TABLE orders (
     -- Primary Key
@@ -189,6 +198,7 @@ CREATE TABLE orders (
 ## Table Relationships
 
 ### 1. One-to-Many Relationship
+
 ```sql
 CREATE TABLE categories (
     category_id SERIAL PRIMARY KEY,
@@ -203,6 +213,7 @@ CREATE TABLE products (
 ```
 
 ### 2. Many-to-Many Relationship
+
 ```sql
 CREATE TABLE products (
     product_id SERIAL PRIMARY KEY,
@@ -226,6 +237,7 @@ CREATE TABLE order_items (
 ## Basic Joins
 
 ### 1. INNER JOIN
+
 ```sql
 -- Get all orders with customer information
 SELECT 
@@ -239,6 +251,7 @@ INNER JOIN customers c ON o.customer_id = c.customer_id;
 ```
 
 ### 2. LEFT JOIN
+
 ```sql
 -- Get all customers and their orders (if any)
 SELECT 
@@ -253,6 +266,7 @@ GROUP BY c.customer_id, c.first_name, c.last_name;
 ```
 
 ### 3. Multiple Joins
+
 ```sql
 -- Get order details with product and customer information
 SELECT 
@@ -269,9 +283,10 @@ JOIN products p ON oi.product_id = p.product_id
 ORDER BY o.order_id, p.name;
 ```
 
-## Additional Real-World Business Scenarios 💼
+## Additional Real-World Business Scenarios
 
 ### 1. E-commerce Order Analytics
+
 ```sql
 -- Comprehensive order analysis with multiple metrics
 WITH order_metrics AS (
@@ -312,6 +327,7 @@ ORDER BY order_day DESC;
 ```
 
 ### 2. Customer Segmentation
+
 ```sql
 WITH customer_metrics AS (
     SELECT 
@@ -352,6 +368,7 @@ ORDER BY total_spent DESC NULLS LAST;
 ```
 
 ### 3. Product Performance
+
 ```sql
 WITH product_metrics AS (
     SELECT 
@@ -393,9 +410,10 @@ FROM product_metrics
 ORDER BY revenue DESC NULLS LAST;
 ```
 
-## Performance Optimization Examples 🚀
+## Performance Optimization Examples
 
 ### 1. Index Usage
+
 ```sql
 -- Create strategic indexes
 CREATE INDEX idx_orders_customer_date 
@@ -420,6 +438,7 @@ GROUP BY c.customer_id, c.name;
 ```
 
 ### 2. Query Optimization
+
 ```sql
 -- Bad: Inefficient subquery
 SELECT *
@@ -448,6 +467,7 @@ WHERE EXISTS (
 ```
 
 ### 3. Batch Processing
+
 ```sql
 -- Process large datasets in batches
 DO $$
@@ -482,9 +502,10 @@ BEGIN
 END $$;
 ```
 
-## Common Pitfalls and Solutions ⚠️
+## Common Pitfalls and Solutions
 
 ### 1. N+1 Query Problem
+
 ```sql
 -- Bad: Separate query for each order
 SELECT o.order_id, 
@@ -498,6 +519,7 @@ JOIN customers c ON o.customer_id = c.customer_id;
 ```
 
 ### 2. Cartesian Products
+
 ```sql
 -- Bad: Implicit cross join
 SELECT * FROM orders, customers 
@@ -509,6 +531,7 @@ JOIN customers c ON o.customer_id = c.customer_id;
 ```
 
 ### 3. NULL Handling
+
 ```sql
 -- Bad: NULL comparison
 SELECT * FROM products WHERE price = NULL;
@@ -525,7 +548,7 @@ SELECT
 FROM products;
 ```
 
-## Best Practices Checklist ✅
+## Best Practices Checklist
 
 1. **Query Structure**
    - Use meaningful table aliases
@@ -551,4 +574,4 @@ FROM products;
    - Monitor performance
    - Regular optimization
 
-Remember: "Clean, efficient queries lead to better performance and maintainability!" 💪
+Remember: "Clean, efficient queries lead to better performance and maintainability!"

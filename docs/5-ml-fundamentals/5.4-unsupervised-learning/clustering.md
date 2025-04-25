@@ -2,7 +2,7 @@
 
 Imagine you're organizing a library. You might naturally group books by genre, author, or topic. That's exactly what clustering algorithms do with data - they help us find natural groups or patterns without being told what to look for!
 
-## What is Clustering? 🤔
+## What is Clustering?
 
 Clustering is like having a smart assistant who can look at a pile of items and automatically organize them into meaningful groups. It's particularly useful when:
 
@@ -10,14 +10,14 @@ Clustering is like having a smart assistant who can look at a pile of items and 
 - You want to discover natural patterns
 - You need to segment your data into meaningful categories
 
-## Why Do We Need Clustering? 💡
+## Why Do We Need Clustering?
 
 1. **Customer Segmentation**: Like grouping customers based on their shopping habits
 2. **Image Organization**: Like automatically sorting photos by content
 3. **Document Clustering**: Like organizing articles by topic
 4. **Anomaly Detection**: Like finding unusual patterns in data
 
-## Types of Clustering Algorithms 🛠️
+## Types of Clustering Algorithms
 
 ### 1. K-Means Clustering
 
@@ -149,7 +149,7 @@ plt.savefig('assets/dbscan_example.png')
 plt.close()
 ```
 
-## How to Choose the Right Algorithm 🌟
+## How to Choose the Right Algorithm
 
 ### Use K-Means when
 
@@ -169,7 +169,7 @@ plt.close()
 - Your clusters can be any shape
 - You want to identify outliers
 
-## Best Practices ✅
+## Best Practices
 
 1. **Data Preprocessing**:
 
@@ -207,20 +207,20 @@ def find_optimal_clusters(X, max_clusters=10):
     plt.close()
 ```
 
-## Common Mistakes to Avoid 🚫
+## Common Mistakes to Avoid
 
 1. **Not Scaling Data**: Always standardize your data first
 2. **Choosing Wrong Number of Clusters**: Use methods like the elbow method
 3. **Using Wrong Algorithm**: Consider your data's characteristics
 4. **Ignoring Outliers**: Some algorithms are sensitive to outliers
 
-## Further Reading 📚
+## Further Reading
 
 1. [Scikit-learn Clustering Documentation](https://scikit-learn.org/stable/modules/clustering.html)
 2. [Understanding K-Means Clustering](https://towardsdatascience.com/understanding-k-means-clustering-in-machine-learning-6a6e67336aa1)
 3. [DBSCAN Algorithm Explained](https://towardsdatascience.com/dbscan-algorithm-explained-13e3f82f62c6)
 
-## Practice Exercise 🎯
+## Practice Exercise
 
 Try clustering the famous Iris dataset:
 

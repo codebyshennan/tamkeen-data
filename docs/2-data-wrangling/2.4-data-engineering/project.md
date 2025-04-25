@@ -1,10 +1,11 @@
 # Data Engineering Assignment
 
-## Overview 🎯
+## Overview
 
 In this comprehensive assignment, you'll build a production-ready data engineering pipeline that demonstrates your ability to handle real-world data processing challenges. You'll apply advanced ETL concepts, implement robust error handling, and ensure scalable performance.
 
 ### Learning Objectives
+
 - Master ETL pipeline development
 - Implement data quality controls
 - Handle complex transformations
@@ -12,39 +13,43 @@ In this comprehensive assignment, you'll build a production-ready data engineeri
 - Optimize performance
 - Monitor pipeline health
 
-## Project Description 📋
+## Project Description
 
 You'll be building an enterprise-grade data pipeline for an e-commerce company that processes millions of transactions daily. The system needs to:
 
 ### Data Collection
+
 - **Sales Data**:
-  * API integration with order system
-  * Database connection to inventory
-  * File imports from legacy systems
-  * Real-time transaction streams
+  - API integration with order system
+  - Database connection to inventory
+  - File imports from legacy systems
+  - Real-time transaction streams
 
 ### Data Processing
+
 - **Transformation**:
-  * Clean and standardize data
-  * Apply business rules
-  * Calculate derived metrics
-  * Validate data quality
+  - Clean and standardize data
+  - Apply business rules
+  - Calculate derived metrics
+  - Validate data quality
 
 ### Data Storage
+
 - **Warehouse Design**:
-  * Dimensional modeling
-  * Fact table design
-  * Incremental loading
-  * Performance optimization
+  - Dimensional modeling
+  - Fact table design
+  - Incremental loading
+  - Performance optimization
 
 ### Reporting
-- **Analytics Support**:
-  * Sales analytics
-  * Inventory metrics
-  * Customer insights
-  * Performance KPIs
 
-## Setup 🚀
+- **Analytics Support**:
+  - Sales analytics
+  - Inventory metrics
+  - Customer insights
+  - Performance KPIs
+
+## Setup
 
 ```python
 # Required libraries
@@ -64,11 +69,12 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 ```
 
-## Tasks 📝
+## Tasks
 
 ### 1. Data Source Integration (25 points)
 
 a) API Integration (10 points)
+
 - Implement API client for sales data
 - Handle authentication
 - Implement error handling and retries
@@ -95,12 +101,14 @@ class SalesAPIClient:
 ```
 
 b) Database Integration (10 points)
+
 - Connect to source database
 - Implement efficient query patterns
 - Handle large data volumes
 - Implement connection pooling
 
 c) File Integration (5 points)
+
 - Handle different file formats
 - Implement file validation
 - Process files in batches
@@ -109,6 +117,7 @@ c) File Integration (5 points)
 ### 2. Data Transformation (25 points)
 
 a) Data Cleaning (10 points)
+
 ```python
 class DataCleaner:
     """
@@ -134,12 +143,14 @@ class DataCleaner:
 ```
 
 b) Data Enrichment (10 points)
+
 - Add derived columns
 - Calculate aggregations
 - Join with reference data
 - Apply business rules
 
 c) Data Quality (5 points)
+
 - Implement data quality checks
 - Generate quality metrics
 - Handle validation failures
@@ -148,6 +159,7 @@ c) Data Quality (5 points)
 ### 3. Data Storage (25 points)
 
 a) Schema Design (10 points)
+
 ```python
 class WarehouseSchema:
     """
@@ -190,12 +202,14 @@ class WarehouseSchema:
 ```
 
 b) Data Loading (10 points)
+
 - Implement efficient load patterns
 - Handle incremental loads
 - Manage transactions
 - Implement error recovery
 
 c) Performance Optimization (5 points)
+
 - Implement indexing strategy
 - Optimize query performance
 - Manage data partitioning
@@ -204,6 +218,7 @@ c) Performance Optimization (5 points)
 ### 4. Pipeline Orchestration (15 points)
 
 a) Pipeline Implementation (10 points)
+
 ```python
 class DataPipeline:
     """
@@ -239,6 +254,7 @@ class DataPipeline:
 ```
 
 b) Monitoring and Logging (5 points)
+
 - Implement logging
 - Track metrics
 - Monitor performance
@@ -247,18 +263,20 @@ b) Monitoring and Logging (5 points)
 ### 5. Documentation and Testing (10 points)
 
 a) Documentation
+
 - Code documentation
 - Architecture diagram
 - Setup instructions
 - Maintenance guide
 
 b) Testing
+
 - Unit tests
 - Integration tests
 - Performance tests
 - Error handling tests
 
-## Deliverables 📦
+## Deliverables
 
 1. Python Package containing:
    - All implementation code
@@ -278,7 +296,7 @@ b) Testing
    - Performance metrics
    - Code coverage report
 
-## Evaluation Criteria 📊
+## Evaluation Criteria
 
 - Code quality and organization (20%)
 - Implementation completeness (30%)
@@ -286,7 +304,7 @@ b) Testing
 - Documentation quality (15%)
 - Test coverage (15%)
 
-## Solution Template 💡
+## Solution Template
 
 ```python
 # Configuration
@@ -372,7 +390,7 @@ if __name__ == "__main__":
         logger.error(f"Pipeline failed: {str(e)}")
 ```
 
-## Bonus Challenges 🌟
+## Bonus Challenges
 
 1. **Real-time Processing**
    - Implement streaming data processing
@@ -392,4 +410,4 @@ if __name__ == "__main__":
    - Add caching layer
    - Implement query optimization
 
-Good luck! Remember to focus on building a robust and maintainable solution! 🚀
+Good luck! Remember to focus on building a robust and maintainable solution!

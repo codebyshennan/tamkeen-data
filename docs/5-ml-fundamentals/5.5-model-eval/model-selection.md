@@ -1,10 +1,10 @@
 # Model Selection
 
-## What is Model Selection? 🤔
+## What is Model Selection?
 
 Think of model selection like choosing the right tool for a job. Just as you wouldn't use a hammer to screw in a bolt, you need to choose the right machine learning model for your specific problem. Model selection helps us find the best model that balances performance, complexity, and practical considerations.
 
-### Why Model Selection Matters 🌟
+### Why Model Selection Matters
 
 Imagine you're planning a road trip. You wouldn't just pick any vehicle - you'd consider factors like:
 
@@ -20,7 +20,7 @@ Similarly, in machine learning, we need to consider:
 - Computational resources
 - Business requirements
 
-## Real-World Analogies 📚
+## Real-World Analogies
 
 ### The Restaurant Menu Analogy
 
@@ -42,7 +42,7 @@ Model selection is like building a sports team:
 - You need to consider team chemistry (model ensemble)
 - You want the best performance within your budget
 
-## Types of Models 🎯
+## Types of Models
 
 ### 1. Linear Models
 
@@ -181,7 +181,7 @@ def plot_learning_curve(model, X, y):
 plot_learning_curve(nn_model, X, y)
 ```
 
-## Model Comparison 📊
+## Model Comparison
 
 Let's compare different models:
 
@@ -217,7 +217,7 @@ models = {
 results = compare_models(models, X_train, X_test, y_train, y_test)
 ```
 
-## Common Mistakes to Avoid ⚠️
+## Common Mistakes to Avoid
 
 1. **Overfitting**
    - Using too complex models
@@ -234,7 +234,7 @@ results = compare_models(models, X_train, X_test, y_train, y_test)
    - Not evaluating on new data
    - Not considering model interpretability
 
-## Practical Example: Credit Risk Prediction 💳
+## Practical Example: Credit Risk Prediction
 
 Let's see how different models perform on a credit risk prediction task:
 
@@ -275,7 +275,7 @@ pipelines = {
 results = compare_models(pipelines, X_train, X_test, y_train, y_test)
 ```
 
-## Best Practices 🌟
+## Best Practices
 
 ### 1. Model Selection Process
 
@@ -305,7 +305,7 @@ def model_selection_process(X, y):
 model_selection_process(X, y)
 ```
 
-## Additional Resources 📚
+## Additional Resources
 
 1. **Online Courses**
    - Coursera: Machine Learning by Andrew Ng
@@ -319,7 +319,7 @@ model_selection_process(X, y)
    - [Scikit-learn Model Selection](https://scikit-learn.org/stable/model_selection.html)
    - [Model Comparison](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html)
 
-## Next Steps 🚀
+## Next Steps
 
 Ready to learn more? Check out:
 

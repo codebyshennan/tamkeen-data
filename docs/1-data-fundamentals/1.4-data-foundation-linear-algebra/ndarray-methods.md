@@ -1,18 +1,21 @@
-# NumPy Array Methods: Shape-Shifting Magic! 🔮
+# NumPy Array Methods: Shape-Shifting Magic
 
-## Reshaping Arrays: The Transformer! 🤖
+## Reshaping Arrays: The Transformer
 
 {% stepper %}
 {% step %}
+
 ### What is Reshaping?
+
 Think of reshaping like rearranging chairs in a room - same number of chairs, different arrangement! It's useful when you need to:
 
-- 📊 Convert 1D data into a 2D table format
-- 🔄 Restructure data to match another array's shape
-- 📸 Transform image data (e.g., flattening for ML models)
-- 📈 Prepare data for plotting or analysis
+- Convert 1D data into a 2D table format
+- Restructure data to match another array's shape
+- Transform image data (e.g., flattening for ML models)
+- Prepare data for plotting or analysis
 
 Key concepts:
+
 1. Total elements must stay the same
 2. Order of elements is preserved
 3. Shape is specified as (rows, columns)
@@ -46,10 +49,13 @@ print("\nOriginal image shape:", image_data.shape)  # (4, 4, 3)
 flattened = image_data.reshape(-1)  # -1 means "figure out this dimension"
 print("Flattened shape:", flattened.shape)  # (48,)
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Visual Guide to Reshaping
+
 ```
 Before (1D):
 [0 1 2 3 4 5 6 7 8 9 10 11]
@@ -69,14 +75,17 @@ Common shapes:
 - (m,n)    → m×n matrix
 - (h,w,c)  → Image with height h, width w, c channels
 ```
+
 {% endstep %}
 {% endstepper %}
 
-## Transposing: The Flip Master! 🔄
+## Transposing: The Flip Master
 
 {% stepper %}
 {% step %}
+
 ### What is Transposing?
+
 Transposing is like looking at your data from the side - rows become columns and columns become rows!
 
 ```python
@@ -93,10 +102,13 @@ print(arr.T)  # or arr.transpose()
 #  [2 5]
 #  [3 6]]
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Visual Guide to Transposing
+
 ```
 Before:        After:
 ┌─────────┐    ┌─────┐
@@ -105,6 +117,7 @@ Before:        After:
 └─────────┘    │ 3 6 │
                └─────┘
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -112,7 +125,9 @@ Before:        After:
 
 {% stepper %}
 {% step %}
+
 ### What are Universal Functions?
+
 They're like magic spells that work on every element in your array at once!
 
 ```python
@@ -126,10 +141,13 @@ print("Square roots:", np.sqrt(arr))
 # e raised to each power
 print("Exponentials:", np.exp(arr))
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### One Array vs Two Arrays
+
 ```python
 # One array operations (Unary)
 x = np.array([1, 4, 9])
@@ -140,10 +158,13 @@ a = np.array([3, 7, 15, 5, 12])
 b = np.array([11, 2, 4, 6, 8])
 print("Maximum values:", np.maximum(a, b))
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Visual Guide to Universal Functions
+
 ```
 One Array (sqrt):
 Input:  [1  4  9]
@@ -156,6 +177,7 @@ Array2: [11 2  4 ]
          ↓  ↓  ↓  max
 Output: [11 7  15]
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -163,7 +185,9 @@ Output: [11 7  15]
 
 {% stepper %}
 {% step %}
+
 ### What is where()?
+
 Think of it as a smart chooser - "If this, pick that, otherwise pick this"
 
 ```python
@@ -177,10 +201,13 @@ result = np.where(conditions, x, y)
 print("Result:", result)
 # [1.1 2.2 1.3 1.4 2.5]
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Visual Guide to where()
+
 ```
 Condition: [True  False True  True  False]
 X values:  [1.1   1.2   1.3   1.4   1.5 ]
@@ -189,14 +216,17 @@ Y values:  [2.1   2.2   2.3   2.4   2.5 ]
 Result:    [1.1   2.2   1.3   1.4   2.5 ]
            (X)    (Y)    (X)    (X)    (Y)
 ```
+
 {% endstep %}
 {% endstepper %}
 
-## Array Statistics: Number Crunching! 📊
+## Array Statistics: Number Crunching
 
 {% stepper %}
 {% step %}
+
 ### Basic Statistics
+
 ```python
 # Create a random array
 arr = np.array([[1, 2, 3],
@@ -208,10 +238,13 @@ print("Sum:", arr.sum())
 print("Min:", arr.min())
 print("Max:", arr.max())
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Computing Along Axes
+
 ```python
 # Mean of each row (axis=1)
 print("Row means:", arr.mean(axis=1))
@@ -221,6 +254,7 @@ print("Column means:", arr.mean(axis=0))
 ```
 
 Visual guide to axes:
+
 ```
 axis=0 (down columns)    axis=1 (across rows)
     ↓   ↓   ↓             →→→
@@ -230,14 +264,17 @@ axis=0 (down columns)    axis=1 (across rows)
 │ 7  8  9   │ →         │ 7  8  9   │
 └───────────┘           └───────────┘
 ```
+
 {% endstep %}
 {% endstepper %}
 
-## Boolean Operations: Truth Seekers! 🔍
+## Boolean Operations: Truth Seekers
 
 {% stepper %}
 {% step %}
+
 ### Testing Arrays
+
 ```python
 # Create boolean array
 bools = np.array([False, False, True, False])
@@ -248,10 +285,13 @@ print("Any True?", bools.any())  # True
 # Check if all are True
 print("All True?", bools.all())  # False
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Sorting Arrays
+
 ```python
 # Create random array
 arr = np.array([3, 1, 4, 1, 5, 9, 2, 6])
@@ -261,10 +301,12 @@ print("Before:", arr)
 arr.sort()
 print("After:", arr)
 ```
+
 {% endstep %}
 {% endstepper %}
 
-💡 **Pro Tips**:
+ **Pro Tips**:
+
 - Use `reshape` when you need to change array dimensions
 - Remember: rows → columns with `transpose` or `.T`
 - Universal functions are super fast - use them!

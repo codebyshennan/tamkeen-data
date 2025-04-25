@@ -278,8 +278,8 @@ When your sample isn't truly representative.
 
 #### Example
 
-❌ Surveying only mall shoppers about online shopping habits
-✅ Using a mix of in-store and online customer lists
+ Surveying only mall shoppers about online shopping habits
+ Using a mix of in-store and online customer lists
 
 ### 2. Sampling Error
 
@@ -319,8 +319,8 @@ When your sampling frame misses parts of the population.
 
 #### Example
 
-❌ Email survey missing customers without email
-✅ Using multiple contact methods (phone, mail, in-person)
+ Email survey missing customers without email
+ Using multiple contact methods (phone, mail, in-person)
 
 ## Sample Size Determination
 

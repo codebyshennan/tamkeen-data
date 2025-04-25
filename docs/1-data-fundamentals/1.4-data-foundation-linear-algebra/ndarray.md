@@ -1,6 +1,6 @@
-# NumPy Arrays: Your Data Superhero! 🦸‍♂️
+# NumPy Arrays: Your Data Superhero
 
-## What is an ndarray? 🤔
+## What is an ndarray?
 
 Think of a NumPy array (ndarray) as a super-powered list that can work with numbers at lightning speed! It's like having a spreadsheet where every cell can do math instantly. The 'nd' in ndarray stands for 'N-dimensional', meaning it can handle data in multiple dimensions:
 
@@ -10,21 +10,24 @@ Think of a NumPy array (ndarray) as a super-powered list that can work with numb
 - And beyond! (4D, 5D, etc.)
 
 Real-world examples:
-- 📊 1D: Time series data (stock prices over time)
-- 📑 2D: Spreadsheet data (rows and columns)
-- 📸 3D: Image data (height × width × color channels)
+
+- 1D: Time series data (stock prices over time)
+- 2D: Spreadsheet data (rows and columns)
+- 3D: Image data (height × width × color channels)
 - 🎥 4D: Video data (frames × height × width × channels)
 
 {% stepper %}
 {% step %}
+
 ### Basic Example
+
 ```python
 import numpy as np
 
 # Create your first array
 data = np.array([1.5, -0.1, 3])
 
-# Watch the magic! ✨
+# Watch the magic! 
 print("Original data:", data)
 print("Multiplied by 10:", data * 10)     # [15.0, -1.0, 30.0]
 print("Added to itself:", data + data)     # [3.0, -0.2, 6.0]
@@ -37,37 +40,47 @@ print("\n2D array (matrix):")
 print(matrix)
 print("Shape:", matrix.shape)  # (2, 3) means 2 rows, 3 columns
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Why It's Cool
-- 🚀 Super fast calculations (100x faster than Python lists)
-- 📦 Efficient memory use (contiguous memory blocks)
-- 🧮 Easy math operations (vectorized operations)
-- 🎯 Perfect for data science (integrates with pandas, scipy, etc.)
-- 🔢 Support for complex math (linear algebra, statistics)
-- 📊 Broadcasting capabilities (work with arrays of different sizes)
+
+- Super fast calculations (100x faster than Python lists)
+- Efficient memory use (contiguous memory blocks)
+- Easy math operations (vectorized operations)
+- Perfect for data science (integrates with pandas, scipy, etc.)
+- Support for complex math (linear algebra, statistics)
+- Broadcasting capabilities (work with arrays of different sizes)
 {% endstep %}
 {% endstepper %}
 
-## Understanding Arrays 📚
+## Understanding Arrays
 
 {% stepper %}
 {% step %}
+
 ### Array Anatomy
+
 Think of an array like a container:
+
 ```
 ┌─────────────────────┐
 │ 1.5  -0.1   3.0    │ <- All numbers same type
 └─────────────────────┘
 ```
+
 Key features:
+
 - Fixed size (can't grow/shrink)
 - All elements same type (like all integers or all floats)
 {% endstep %}
 
 {% step %}
+
 ### Important Properties
+
 ```python
 # Shape tells you the size
 print(data.shape)    # (3,) means 1D array with 3 elements
@@ -75,26 +88,32 @@ print(data.shape)    # (3,) means 1D array with 3 elements
 # dtype tells you the type
 print(data.dtype)    # float64 means decimal numbers
 ```
+
 {% endstep %}
 {% endstepper %}
 
 ![ndarray](./assets/numpy_ndarray.png)
 
-## Creating Arrays 🛠️
+## Creating Arrays
 
 {% stepper %}
 {% step %}
+
 ### 1D Arrays (Like a List)
+
 ```python
 # From a list
 simple_list = [6, 7.5, 8, 0, 1]
 array_1d = np.array(simple_list)
 print(array_1d)  # [6.  7.5  8.  0.  1. ]
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### 2D Arrays (Like a Table)
+
 ```python
 # From nested lists
 table_data = [
@@ -104,30 +123,38 @@ table_data = [
 array_2d = np.array(table_data)
 print(array_2d)
 ```
+
 Looks like:
+
 ```
 ┌───────────────┐
 │ 1  2  3  4    │ Row 1
 │ 5  6  7  8    │ Row 2
 └───────────────┘
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Checking Array Info
+
 ```python
 print(array_2d.shape)   # (2, 4) means 2 rows, 4 columns
 print(array_2d.dtype)   # int64 means whole numbers
 print(array_2d.ndim)    # 2 means two-dimensional
 ```
+
 {% endstep %}
 {% endstepper %}
 
-## Quick Array Creation 🚀
+## Quick Array Creation
 
 {% stepper %}
 {% step %}
+
 ### Special Arrays
+
 ```python
 # Array of zeros
 zeros = np.zeros(5)
@@ -137,10 +164,13 @@ print(zeros)  # [0. 0. 0. 0. 0.]
 zeros_2d = np.zeros((3, 6))  # 3 rows, 6 columns
 print(zeros_2d)
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Controlling Data Types
+
 ```python
 # Floating point numbers
 floats = np.array([1, 2, 3], dtype=np.float64)
@@ -150,10 +180,12 @@ print(floats)  # [1. 2. 3.]
 ints = np.array([1, 2, 3], dtype=np.int32)
 print(ints)    # [1 2 3]
 ```
+
 {% endstep %}
 {% endstepper %}
 
-💡 **Pro Tips**:
+ **Pro Tips**:
+
 - Use `dtype` when you need specific number types
 - 2D arrays are perfect for tables of data
 - Check `shape` when you're unsure about array size

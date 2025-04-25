@@ -1,6 +1,6 @@
 # Introduction to Support Vector Machines (SVM)
 
-## Learning Objectives 🎯
+## Learning Objectives
 
 By the end of this section, you will be able to:
 
@@ -9,7 +9,7 @@ By the end of this section, you will be able to:
 - Identify when to use SVM in real-world problems
 - Recognize the advantages and limitations of SVM
 
-## What is SVM? 🤔
+## What is SVM?
 
 > **Support Vector Machines (SVM)** is like a smart boundary creator that finds the best way to separate different groups of data points.
 
@@ -63,7 +63,7 @@ Imagine you're building a fence to separate two types of plants in your garden:
 - Like having a safety buffer zone between two opposing teams
 - A wider margin means better separation and more confidence in predictions
 
-## When Should You Use SVM? 🎯
+## When Should You Use SVM?
 
 ### Perfect For These Situations
 
@@ -98,7 +98,7 @@ Imagine you're building a fence to separate two types of plants in your garden:
 
 ## Advantages and Limitations
 
-### Advantages ✅
+### Advantages
 
 1. **Effective in High Dimensions**
    - Works well even with many features
@@ -112,7 +112,7 @@ Imagine you're building a fence to separate two types of plants in your garden:
    - Can handle linear and non-linear problems
    - Different kernel options for different needs
 
-### Limitations ❌
+### Limitations
 
 1. **Sensitive to Feature Scaling**
    - Need to normalize/scale features
@@ -126,7 +126,7 @@ Imagine you're building a fence to separate two types of plants in your garden:
    - Need to choose right kernel
    - Need to set regularization parameter (C)
 
-## Common Mistakes to Avoid 🚫
+## Common Mistakes to Avoid
 
 1. **Forgetting to Scale Features**
    - Always scale your features before using SVM
@@ -141,7 +141,7 @@ Imagine you're building a fence to separate two types of plants in your garden:
    - Use class_weight parameter for imbalanced data
    - Consider SMOTE for severe imbalance
 
-## Next Steps 📚
+## Next Steps
 
 In the following sections, we'll explore:
 

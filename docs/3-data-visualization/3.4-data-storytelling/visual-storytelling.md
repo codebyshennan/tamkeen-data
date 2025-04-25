@@ -345,28 +345,28 @@ The layout examples above show three common structures:
 
 ### 1. The Clutter Trap
 
-❌ **Don't**: Put everything on one screen
-✅ **Do**: Focus on key insights
+ **Don't**: Put everything on one screen
+ **Do**: Focus on key insights
 
 ### 2. The Color Chaos
 
-❌ **Don't**: Use too many colors
-✅ **Do**: Use a consistent color scheme
+ **Don't**: Use too many colors
+ **Do**: Use a consistent color scheme
 
 ### 3. The Scale Problem
 
-❌ **Don't**: Use misleading scales
-✅ **Do**: Start axes at zero when appropriate
+ **Don't**: Use misleading scales
+ **Do**: Start axes at zero when appropriate
 
 ### 4. The Font Fiasco
 
-❌ **Don't**: Use too many fonts
-✅ **Do**: Stick to 2-3 font families
+ **Don't**: Use too many fonts
+ **Do**: Stick to 2-3 font families
 
 ### 5. The Alignment Issue
 
-❌ **Don't**: Randomly place elements
-✅ **Do**: Use consistent alignment
+ **Don't**: Randomly place elements
+ **Do**: Use consistent alignment
 
 ## Practical Exercises
 

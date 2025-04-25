@@ -4,7 +4,9 @@
 
 {% stepper %}
 {% step %}
+
 ### Data Structures in Data Science
+
 Each data structure serves specific purposes in data analysis:
 
 ```python
@@ -36,6 +38,7 @@ prices_series = pd.Series(stock_prices,
 ```
 
 Each structure optimized for different operations:
+
 - Lists for flexible data collection
 - Tuples for immutable records
 - Sets for unique value operations
@@ -45,7 +48,9 @@ Each structure optimized for different operations:
 {% endstep %}
 
 {% step %}
+
 ### Performance Considerations
+
 Choose structures based on operation needs:
 
 ```python
@@ -84,6 +89,7 @@ def compare_memory():
     print(f"List memory: {list_mem} bytes")
     print(f"NumPy memory: {array_mem} bytes")
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -91,7 +97,9 @@ def compare_memory():
 
 {% stepper %}
 {% step %}
+
 ### Advanced List Operations
+
 Common data manipulation patterns:
 
 ```python
@@ -123,11 +131,13 @@ def clean_data(data):
     return [x for x in data if lower_bound <= x <= upper_bound]
 ```
 
-💡 **Performance Tip**: For numerical computations, prefer NumPy arrays over lists!
+ **Performance Tip**: For numerical computations, prefer NumPy arrays over lists!
 {% endstep %}
 
 {% step %}
+
 ### List Comprehensions in Data Science
+
 Efficient data transformations:
 
 ```python
@@ -159,6 +169,7 @@ def normalize_features(data):
         for x in data
     ]
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -166,7 +177,9 @@ def normalize_features(data):
 
 {% stepper %}
 {% step %}
+
 ### Efficient Data Records
+
 Using tuples for fixed-structure data:
 
 ```python
@@ -196,10 +209,13 @@ records = [
 # Access by name
 print(records[0].price)  # 173.57
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Tuple Performance Advantages
+
 Memory and speed benefits:
 
 ```python
@@ -238,6 +254,7 @@ def compare_access():
     print(f"Tuple access time: {tuple_time:.6f} seconds")
     print(f"List access time: {list_time:.6f} seconds")
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -245,7 +262,9 @@ def compare_access():
 
 {% stepper %}
 {% step %}
+
 ### Advanced Set Operations
+
 Efficient unique value operations:
 
 ```python
@@ -281,10 +300,13 @@ def find_duplicates(data):
     
     return duplicates
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Set Operations for Data Cleaning
+
 Common data cleaning patterns:
 
 ```python
@@ -325,6 +347,7 @@ class DataCleaner:
                 ) if pd.notna(x) else x
             )
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -332,7 +355,9 @@ class DataCleaner:
 
 {% stepper %}
 {% step %}
+
 ### Advanced Dictionary Patterns
+
 Efficient data organization:
 
 ```python
@@ -376,10 +401,13 @@ class DatasetMetadata:
         
         return metadata
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Dictionary Comprehensions for Analysis
+
 Efficient data transformations:
 
 ```python
@@ -412,14 +440,16 @@ def analyze_correlations(df, threshold=0.7):
         abs(corr_matrix.loc[col1, col2]) >= threshold
     }
 ```
+
 {% endstep %}
 {% endstepper %}
 
-## Practice Exercises for Data Analysis 🎯
+## Practice Exercises for Data Analysis
 
 Try these data science exercises:
 
 1. **Time Series Analysis**
+
    ```python
    # Create a system that:
    # - Stores time series data efficiently
@@ -429,6 +459,7 @@ Try these data science exercises:
    ```
 
 2. **Feature Engineering**
+
    ```python
    # Build a feature engineering pipeline that:
    # - Handles different data types
@@ -438,6 +469,7 @@ Try these data science exercises:
    ```
 
 3. **Data Quality Analysis**
+
    ```python
    # Implement a data quality checker that:
    # - Profiles dataset characteristics
@@ -447,9 +479,10 @@ Try these data science exercises:
    ```
 
 Remember:
+
 - Choose appropriate data structures for your task
 - Consider performance implications
 - Handle edge cases
 - Document your code
 
-Happy analyzing! 🚀
+Happy analyzing!

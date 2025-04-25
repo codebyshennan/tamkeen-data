@@ -2,7 +2,7 @@
 
 Welcome to the first part of supervised learning! Here we'll explore fundamental algorithms that form the backbone of machine learning. Think of these algorithms as different tools in your ML toolkit - each with its own strengths and ideal use cases.
 
-## Learning Objectives 🎯
+## Learning Objectives
 
 By the end of this section, you will be able to:
 
@@ -12,9 +12,9 @@ By the end of this section, you will be able to:
 4. Build and interpret Decision Trees for transparent decision-making
 5. Choose the optimal algorithm for different problem types
 
-## Algorithm Overview 🔍
+## Algorithm Overview
 
-### 1. [Naive Bayes](broken-reference) 📊
+### 1. [Naive Bayes](broken-reference)
 
 Probabilistic classifier based on Bayes' Theorem:
 
@@ -27,7 +27,7 @@ Perfect for:
 * Real-time prediction needs
 * When independence assumption holds
 
-### 2. [k-Nearest Neighbors](broken-reference) 🎯
+### 2. [k-Nearest Neighbors](broken-reference)
 
 Instance-based learning using distance metrics:
 
@@ -40,7 +40,7 @@ Ideal for:
 * Anomaly detection
 * When data is well-clustered
 
-### 3. [Support Vector Machines](broken-reference) ⚔️
+### 3. [Support Vector Machines](broken-reference)
 
 Finds optimal hyperplane with maximum margin:
 
@@ -53,7 +53,7 @@ Best for:
 * High-dimensional spaces
 * When clear margin of separation exists
 
-### 4. [Decision Trees](broken-reference) 🌳
+### 4. [Decision Trees](broken-reference)
 
 Hierarchical decisions using information theory:
 
@@ -66,7 +66,7 @@ Excellent for:
 * Feature importance analysis
 * When non-linear relationships exist
 
-## Algorithm Selection Guide 🧭
+## Algorithm Selection Guide
 
 ### Classification Tasks
 
@@ -88,12 +88,12 @@ def select_classifier(data_characteristics):
 
 | Algorithm      | Training Speed | Prediction Speed | Interpretability | Memory Usage |
 | -------------- | -------------- | ---------------- | ---------------- | ------------ |
-| Naive Bayes    | ⚡️⚡️⚡️         | ⚡️⚡️⚡️           | ⭐️⭐️             | 💾           |
-| kNN            | ⚡️⚡️⚡️         | ⚡️               | ⭐️⭐️⭐️           | 💾💾💾       |
-| SVM            | ⚡️             | ⚡️⚡️             | ⭐️               | 💾💾         |
-| Decision Trees | ⚡️⚡️           | ⚡️⚡️⚡️           | ⭐️⭐️⭐️           | 💾           |
+| Naive Bayes    |          |            |              |            |
+| kNN            |          |                |            |        |
+| SVM            |              |              |                |          |
+| Decision Trees |            |            |            |            |
 
-## Prerequisites 📚
+## Prerequisites
 
 Before diving in, ensure you're comfortable with:
 
@@ -121,7 +121,7 @@ import matplotlib.pyplot as plt  # Visualization
 * Cross-validation
 * Bias-variance tradeoff
 
-## Real-World Applications 🌍
+## Real-World Applications
 
 ### 1. Email Classification
 
@@ -161,7 +161,7 @@ from sklearn.neighbors import KNeighborsClassifier
 knn_classifier = KNeighborsClassifier(n_neighbors=5)
 ```
 
-## Learning Path 🛣️
+## Learning Path
 
 1. Start with [Naive Bayes](broken-reference)
    * Understand probability basics
@@ -180,7 +180,7 @@ knn_classifier = KNeighborsClassifier(n_neighbors=5)
    * Understand splitting criteria
    * Practice pruning techniques
 
-## Tools and Environment 🛠️
+## Tools and Environment
 
 ### Required Libraries
 
@@ -204,7 +204,7 @@ import seaborn as sns
 np.random.seed(42)
 ```
 
-## Best Practices 💡
+## Best Practices
 
 1. Data Preparation
    * Handle missing values
@@ -219,7 +219,7 @@ np.random.seed(42)
    * Test on holdout set
    * Consider computational costs
 
-## Common Pitfalls ⚠️
+## Common Pitfalls
 
 1. Naive Bayes
    * Zero frequency problem
@@ -238,12 +238,12 @@ np.random.seed(42)
    * Feature interaction handling
    * Categorical variable splits
 
-## Assignment 📝
+## Assignment
 
 Ready to apply your supervised learning knowledge? Head over to the [Supervised Learning Assignment](../_assignments/5.2-assignment.md) to test your understanding of these fundamental algorithms!
 
-## Ready to Begin? 🚀
+## Ready to Begin?
 
 Start your journey with [Naive Bayes](broken-reference) to build a strong foundation in probabilistic classification. Each algorithm builds upon previous concepts, so following the suggested order will maximize your learning experience.
 
-Remember: The best way to learn is by doing! Each section includes hands-on examples and exercises to reinforce your understanding. Let's dive in! 🎯
+Remember: The best way to learn is by doing! Each section includes hands-on examples and exercises to reinforce your understanding. Let's dive in!

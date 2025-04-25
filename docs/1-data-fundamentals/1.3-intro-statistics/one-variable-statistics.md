@@ -1,10 +1,12 @@
-# One-Variable Statistics with Python 📊
+# One-Variable Statistics with Python
 
 ## Understanding One-Variable Statistics
 
 {% stepper %}
 {% step %}
+
 ### What is One-Variable Statistics?
+
 One-variable (univariate) statistics helps us understand individual variables in our dataset. Let's explore with Python:
 
 ```python
@@ -31,13 +33,16 @@ plt.show()
 ```
 
 This gives us a quick overview of:
+
 - Central tendency (mean, median)
 - Spread (std, quartiles)
 - Distribution shape
 {% endstep %}
 
 {% step %}
+
 ### Real-World Applications
+
 Let's analyze real estate data:
 
 ```python
@@ -85,6 +90,7 @@ def analyze_distribution(data: pd.Series) -> None:
 # Analyze house prices
 analyze_distribution(house_prices)
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -92,7 +98,9 @@ analyze_distribution(house_prices)
 
 {% stepper %}
 {% step %}
+
 ### Mean, Median, and Mode in Python
+
 Let's implement all three measures:
 
 ```python
@@ -155,11 +163,13 @@ ct.print_summary()
 ct.compare_measures()
 ```
 
-💡 **Pro Tip**: Use `trimmed_mean` when your data has outliers but you still want to use a mean-like measure!
+ **Pro Tip**: Use `trimmed_mean` when your data has outliers but you still want to use a mean-like measure!
 {% endstep %}
 
 {% step %}
+
 ### When to Use Each Measure
+
 Let's create a function to help choose the appropriate measure:
 
 ```python
@@ -200,6 +210,7 @@ for name, data in datasets.items():
     print(f"\n{name} Dataset:")
     print(recommend_central_measure(data))
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -207,7 +218,9 @@ for name, data in datasets.items():
 
 {% stepper %}
 {% step %}
+
 ### Calculating Spread Measures
+
 Let's create a comprehensive spread analyzer:
 
 ```python
@@ -304,10 +317,13 @@ spread = SpreadAnalyzer(temperatures)
 spread.print_summary()
 spread.plot_spread()
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Understanding Variability in Context
+
 Let's analyze variability in different scenarios:
 
 ```python
@@ -379,6 +395,7 @@ datasets = {
 
 compare_variability(datasets)
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -386,7 +403,9 @@ compare_variability(datasets)
 
 {% stepper %}
 {% step %}
+
 ### Creating Frequency Distributions
+
 Let's create a comprehensive frequency analyzer:
 
 ```python
@@ -483,10 +502,13 @@ freq_analyzer = FrequencyAnalyzer(grades)
 freq_analyzer.print_summary()
 freq_analyzer.plot_distributions()
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Advanced Visualization Techniques
+
 Let's create publication-quality visualizations:
 
 ```python
@@ -565,14 +587,16 @@ create_analysis_dashboard(
     "Real Estate Size Analysis"
 )
 ```
+
 {% endstep %}
 {% endstepper %}
 
-## Practice Exercises 🎯
+## Practice Exercises
 
 Try these data analysis exercises:
 
 1. **Analyze Customer Data**
+
    ```python
    # Create functions to:
    # - Load and clean customer data
@@ -582,6 +606,7 @@ Try these data analysis exercises:
    ```
 
 2. **Financial Analysis**
+
    ```python
    # Build analysis tools for:
    # - Stock price distributions
@@ -591,6 +616,7 @@ Try these data analysis exercises:
    ```
 
 3. **Environmental Data**
+
    ```python
    # Analyze temperature data:
    # - Identify seasonal patterns
@@ -600,10 +626,11 @@ Try these data analysis exercises:
    ```
 
 Remember:
+
 - Use appropriate statistical measures
 - Create clear visualizations
 - Handle outliers appropriately
 - Document your analysis
 - Consider the context of your data
 
-Happy analyzing! 🚀
+Happy analyzing!

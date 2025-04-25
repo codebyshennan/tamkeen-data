@@ -2,11 +2,11 @@
 
 Imagine you're trying to describe a person to someone who's never met them. Instead of listing every single detail (height, weight, hair color, eye color, clothing, etc.), you might focus on the most distinctive features that make them recognizable. That's exactly what PCA does with data - it helps us focus on the most important aspects while simplifying the rest!
 
-## What is PCA? 🤔
+## What is PCA?
 
 PCA is like creating a simplified map of a complex city. Just as a map helps you navigate a city by showing the most important streets and landmarks, PCA helps you navigate complex data by showing the most important features.
 
-### Why Do We Need PCA? 💡
+### Why Do We Need PCA?
 
 1. **Too Many Features**: Imagine trying to understand a person by looking at 100 different measurements. It's overwhelming! PCA helps us focus on the most important ones.
 
@@ -14,7 +14,7 @@ PCA is like creating a simplified map of a complex city. Just as a map helps you
 
 3. **Noise Reduction**: Like removing background noise from a recording, PCA helps us focus on the important signals in our data.
 
-## How Does PCA Work? 🛠️
+## How Does PCA Work?
 
 Let's break it down into simple steps:
 
@@ -83,7 +83,7 @@ plt.close()
 print("Explained variance ratio:", pca.explained_variance_ratio_)
 ```
 
-## Real-World Example: Image Compression 📸
+## Real-World Example: Image Compression
 
 Let's see how PCA can help compress images while maintaining quality:
 
@@ -123,7 +123,7 @@ plt.savefig('assets/pca_image_compression.png')
 plt.close()
 ```
 
-## How to Choose the Number of Components 📊
+## How to Choose the Number of Components
 
 ### Method 1: Explained Variance Ratio
 
@@ -171,13 +171,13 @@ def plot_scree(X):
 plot_scree(X)
 ```
 
-## Common Mistakes to Avoid 🚫
+## Common Mistakes to Avoid
 
 1. **Not Scaling Data**: Always standardize your data before PCA
 2. **Using Too Many Components**: Don't keep components that don't add much information
 3. **Ignoring the Context**: Make sure PCA makes sense for your specific problem
 
-## Best Practices ✅
+## Best Practices
 
 1. **Always Scale Your Data**:
 
@@ -216,20 +216,20 @@ def validate_pca_results(X, n_components):
     return train_error, test_error
 ```
 
-## When to Use PCA 🌟
+## When to Use PCA
 
 1. **Data Visualization**: When you need to visualize high-dimensional data
 2. **Feature Reduction**: When you have too many features
 3. **Noise Reduction**: When your data has a lot of noise
 4. **Data Compression**: When you need to reduce storage requirements
 
-## Further Reading 📚
+## Further Reading
 
 1. [Scikit-learn PCA Documentation](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html)
 2. [Understanding PCA with Python](https://towardsdatascience.com/pca-using-python-scikit-learn-e653f8989e60)
 3. [Interactive PCA Visualization](https://setosa.io/ev/principal-component-analysis/)
 
-## Practice Exercise 🎯
+## Practice Exercise
 
 Try applying PCA to the famous Iris dataset:
 

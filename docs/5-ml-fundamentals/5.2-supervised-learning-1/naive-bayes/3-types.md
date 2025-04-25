@@ -1,6 +1,6 @@
 # Types of Naive Bayes Classifiers
 
-## Welcome to Different Flavors of Naive Bayes! 🎯
+## Welcome to Different Flavors of Naive Bayes
 
 Just like ice cream comes in different flavors for different tastes, Naive Bayes comes in different types for different kinds of data. Let's explore each type and learn when to use them!
 
@@ -23,7 +23,7 @@ graph TD
     F -->|No| H[Transform your data]
 ```
 
-## 1. Gaussian Naive Bayes: For Numbers 📊
+## 1. Gaussian Naive Bayes: For Numbers
 
 ### What is it?
 
@@ -80,7 +80,7 @@ Gaussian NB is great because:
 - Can handle different scales (like temperature and age)
 - Fast and efficient
 
-## 2. Multinomial Naive Bayes: For Counting 📝
+## 2. Multinomial Naive Bayes: For Counting
 
 ### What is it?
 
@@ -137,7 +137,7 @@ Multinomial NB is great because:
 - Works with any kind of count data
 - Very efficient with large datasets
 
-## 3. Bernoulli Naive Bayes: For Yes/No Questions 🎯
+## 3. Bernoulli Naive Bayes: For Yes/No Questions
 
 ### What is it?
 
@@ -210,7 +210,7 @@ graph TD
 | Multinomial | Counts | Word frequencies | When counting occurrences |
 | Bernoulli | Yes/No | Feature presence | When only presence matters |
 
-## Common Mistakes to Avoid ❌
+## Common Mistakes to Avoid
 
 1. **Using the Wrong Type**
    - Don't use Gaussian for text data
@@ -227,7 +227,7 @@ graph TD
    - Transform data if needed
    - Consider mixing types for different features
 
-## Practice Time! 🎯
+## Practice Time
 
 Try these exercises:
 
@@ -236,7 +236,7 @@ Try these exercises:
 3. Predict medical conditions using Gaussian NB
 4. Compare the performance of different types
 
-## Next Steps 📚
+## Next Steps
 
 Ready to put these types into action? Let's move on to [Implementation](4-implementation.md) to see how to use these different types in real projects.
 

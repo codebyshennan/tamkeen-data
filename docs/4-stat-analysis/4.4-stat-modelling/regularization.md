@@ -77,7 +77,7 @@ def plot_regularization_effects():
         model = Ridge(alpha=alpha)
         model.fit(x.reshape(-1, 1), y)
         plt.plot(x, model.predict(x.reshape(-1, 1)), 
-                label=f'α={alpha}')
+                label=f'={alpha}')
     plt.scatter(x, y, alpha=0.3)
     plt.title('Ridge Regression')
     plt.legend()
@@ -89,7 +89,7 @@ def plot_regularization_effects():
         model = Lasso(alpha=alpha)
         model.fit(x.reshape(-1, 1), y)
         plt.plot(x, model.predict(x.reshape(-1, 1)), 
-                label=f'α={alpha}')
+                label=f'={alpha}')
     plt.scatter(x, y, alpha=0.3)
     plt.title('Lasso Regression')
     plt.legend()
@@ -138,16 +138,16 @@ def plot_constraint_spaces():
     plt.subplot(121)
     plt.contour(B1, B2, l1, levels=[1], colors='r')
     plt.title('L1 Constraint (Diamond)')
-    plt.xlabel('β₁')
-    plt.ylabel('β₂')
+    plt.xlabel('')
+    plt.ylabel('')
     plt.grid(True)
     
     # L2 Constraint
     plt.subplot(122)
     plt.contour(B1, B2, l2, levels=[1], colors='b')
     plt.title('L2 Constraint (Circle)')
-    plt.xlabel('β₁')
-    plt.ylabel('β₂')
+    plt.xlabel('')
+    plt.ylabel('')
     plt.grid(True)
     
     plt.tight_layout()
@@ -258,9 +258,9 @@ def select_regularization_parameter(X, y):
     plt.semilogx(alphas, ridge.cv_values_.mean(axis=0), 'b-', label='Ridge')
     plt.semilogx(alphas, lasso.mse_path_.mean(axis=0), 'r-', label='Lasso')
     plt.axvline(ridge.alpha_, color='b', linestyle='--', 
-                label=f'Ridge α={ridge.alpha_:.2f}')
+                label=f'Ridge ={ridge.alpha_:.2f}')
     plt.axvline(lasso.alpha_, color='r', linestyle='--', 
-                label=f'Lasso α={lasso.alpha_:.2f}')
+                label=f'Lasso ={lasso.alpha_:.2f}')
     plt.xlabel('Alpha')
     plt.ylabel('Mean Squared Error')
     plt.title('Regularization Parameter Selection')

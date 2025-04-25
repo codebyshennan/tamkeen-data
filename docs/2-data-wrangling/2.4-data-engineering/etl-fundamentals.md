@@ -1,10 +1,11 @@
 # ETL Fundamentals
 
-## Introduction to ETL 🔄
+## Introduction to ETL
 
 ETL (Extract, Transform, Load) is a fundamental process in data engineering that forms the backbone of data integration and warehousing solutions.
 
 ### ETL Workflow Diagram
+
 ```mermaid
 graph LR
     subgraph Extract
@@ -23,6 +24,7 @@ graph LR
 ```
 
 ### Data Pipeline Architecture with Airflow
+
 ```mermaid
 graph TD
     subgraph Airflow DAG
@@ -43,6 +45,7 @@ graph TD
 ```
 
 ### Error Handling Flowchart
+
 ```mermaid
 graph TD
     A[Task Start] --> B{Check Source}
@@ -64,6 +67,7 @@ graph TD
 ```
 
 ### Airflow DAG Example
+
 ```python
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
@@ -121,6 +125,7 @@ extract_task >> transform_task >> load_task >> validate_task
 ```
 
 ### Monitoring Dashboard Example (Tableau)
+
 ```
 [Tableau Dashboard Layout]
 +------------------------+------------------------+
@@ -150,74 +155,79 @@ extract_task >> transform_task >> load_task >> validate_task
 ### Core Concepts
 
 #### 1. Extract
+
 - **Data Sources**:
-  * Databases (SQL, NoSQL)
-  * APIs and web services
-  * File systems (CSV, JSON)
-  * Streaming sources
-  * Legacy systems
+  - Databases (SQL, NoSQL)
+  - APIs and web services
+  - File systems (CSV, JSON)
+  - Streaming sources
+  - Legacy systems
 
 - **Extraction Methods**:
-  * Full extraction
-  * Incremental extraction
-  * Change data capture
-  * Event-driven extraction
+  - Full extraction
+  - Incremental extraction
+  - Change data capture
+  - Event-driven extraction
 
 #### 2. Transform
+
 - **Data Cleaning**:
-  * Missing value handling
-  * Duplicate removal
-  * Error correction
-  * Format standardization
+  - Missing value handling
+  - Duplicate removal
+  - Error correction
+  - Format standardization
 
 - **Data Enhancement**:
-  * Enrichment
-  * Aggregation
-  * Derivation
-  * Validation
+  - Enrichment
+  - Aggregation
+  - Derivation
+  - Validation
 
 #### 3. Load
+
 - **Loading Types**:
-  * Full load
-  * Incremental load
-  * Merge load
-  * Upsert operations
+  - Full load
+  - Incremental load
+  - Merge load
+  - Upsert operations
 
 - **Target Systems**:
-  * Data warehouses
-  * Data marts
-  * Operational databases
-  * Analytics platforms
+  - Data warehouses
+  - Data marts
+  - Operational databases
+  - Analytics platforms
 
 ### Business Impact
+
 - **Decision Making**:
-  * Real-time insights
-  * Historical analysis
-  * Predictive modeling
-  * Performance monitoring
+  - Real-time insights
+  - Historical analysis
+  - Predictive modeling
+  - Performance monitoring
 
 - **Operational Efficiency**:
-  * Process automation
-  * Data consistency
-  * Resource optimization
-  * Error reduction
+  - Process automation
+  - Data consistency
+  - Resource optimization
+  - Error reduction
 
 ### Technical Considerations
+
 - **Performance**:
-  * Processing speed
-  * Resource usage
-  * Scalability
-  * Optimization
+  - Processing speed
+  - Resource usage
+  - Scalability
+  - Optimization
 
 - **Quality**:
-  * Data accuracy
-  * Completeness
-  * Consistency
-  * Timeliness
+  - Data accuracy
+  - Completeness
+  - Consistency
+  - Timeliness
 
 Here's a comprehensive implementation of an ETL pipeline:
 
-## ETL Pipeline Components 🛠️
+## ETL Pipeline Components
 
 ```python
 import pandas as pd
@@ -310,71 +320,75 @@ class ETLPipeline:
             raise
 ```
 
-## Extract Phase 📥
+## Extract Phase
 
 The Extract phase is responsible for retrieving data from various source systems while handling different formats, protocols, and potential issues.
 
 ### Key Considerations
+
 - **Source Systems**:
-  * Availability windows
-  * Access patterns
-  * Rate limits
-  * Authentication
+  - Availability windows
+  - Access patterns
+  - Rate limits
+  - Authentication
 
 - **Data Volume**:
-  * Batch size
-  * Memory constraints
-  * Network bandwidth
-  * Processing capacity
+  - Batch size
+  - Memory constraints
+  - Network bandwidth
+  - Processing capacity
 
 - **Reliability**:
-  * Connection stability
-  * Error handling
-  * Retry mechanisms
-  * Fallback options
+  - Connection stability
+  - Error handling
+  - Retry mechanisms
+  - Fallback options
 
 ### 1. Data Sources
 
 Different data sources require specific handling approaches:
 
 #### Database Sources
+
 - **Relational Databases**:
-  * Connection pooling
-  * Query optimization
-  * Transaction isolation
-  * Cursor management
+  - Connection pooling
+  - Query optimization
+  - Transaction isolation
+  - Cursor management
 
 - **NoSQL Databases**:
-  * Document retrieval
-  * Key-value access
-  * Graph traversal
-  * Column family queries
+  - Document retrieval
+  - Key-value access
+  - Graph traversal
+  - Column family queries
 
 #### File Systems
+
 - **Local Files**:
-  * File formats
-  * Encoding handling
-  * Directory structure
-  * File locking
+  - File formats
+  - Encoding handling
+  - Directory structure
+  - File locking
 
 - **Cloud Storage**:
-  * Access credentials
-  * Region selection
-  * Transfer optimization
-  * Cost management
+  - Access credentials
+  - Region selection
+  - Transfer optimization
+  - Cost management
 
 #### APIs
+
 - **REST APIs**:
-  * Authentication
-  * Rate limiting
-  * Pagination
-  * Error handling
+  - Authentication
+  - Rate limiting
+  - Pagination
+  - Error handling
 
 - **Streaming APIs**:
-  * Connection management
-  * Backpressure handling
-  * Message ordering
-  * State management
+  - Connection management
+  - Backpressure handling
+  - Message ordering
+  - State management
 
 Here's a comprehensive implementation:
 
@@ -431,70 +445,73 @@ def extract_with_retry(source, max_retries=3):
             time.sleep(2 ** attempt)  # Exponential backoff
 ```
 
-## Transform Phase 🔄
+## Transform Phase
 
 The Transform phase is where raw data is converted into a format suitable for analysis and loading into target systems.
 
 ### Transformation Types
+
 - **Data Cleansing**:
-  * Missing value handling
-  * Outlier detection
-  * Error correction
-  * Format standardization
+  - Missing value handling
+  - Outlier detection
+  - Error correction
+  - Format standardization
 
 - **Data Enrichment**:
-  * Lookup operations
-  * Derived calculations
-  * Data augmentation
-  * Feature engineering
+  - Lookup operations
+  - Derived calculations
+  - Data augmentation
+  - Feature engineering
 
 - **Data Restructuring**:
-  * Schema mapping
-  * Normalization
-  * Denormalization
-  * Aggregation
+  - Schema mapping
+  - Normalization
+  - Denormalization
+  - Aggregation
 
 ### Key Considerations
+
 - **Data Quality**:
-  * Validation rules
-  * Business constraints
-  * Data integrity
-  * Consistency checks
+  - Validation rules
+  - Business constraints
+  - Data integrity
+  - Consistency checks
 
 - **Performance**:
-  * Memory usage
-  * Processing time
-  * Resource allocation
-  * Optimization
+  - Memory usage
+  - Processing time
+  - Resource allocation
+  - Optimization
 
 - **Maintainability**:
-  * Code organization
-  * Documentation
-  * Testing
-  * Version control
+  - Code organization
+  - Documentation
+  - Testing
+  - Version control
 
 ### 1. Data Cleaning
 
 Data cleaning ensures data quality and consistency:
 
 #### Cleaning Operations
+
 - **Missing Values**:
-  * Imputation strategies
-  * Default values
-  * Removal policies
-  * Documentation
+  - Imputation strategies
+  - Default values
+  - Removal policies
+  - Documentation
 
 - **Duplicates**:
-  * Detection methods
-  * Resolution strategies
-  * Business rules
-  * Audit trails
+  - Detection methods
+  - Resolution strategies
+  - Business rules
+  - Audit trails
 
 - **Data Types**:
-  * Type conversion
-  * Format validation
-  * Range checking
-  * Custom types
+  - Type conversion
+  - Format validation
+  - Range checking
+  - Custom types
 
 Here's a comprehensive implementation:
 
@@ -568,71 +585,75 @@ def validate_dataset(df, schema):
     return True
 ```
 
-## Load Phase 📤
+## Load Phase
 
 The Load phase is responsible for writing transformed data to target systems efficiently and reliably.
 
 ### Loading Strategies
+
 - **Batch Loading**:
-  * Full loads
-  * Incremental loads
-  * Delta loads
-  * Merge operations
+  - Full loads
+  - Incremental loads
+  - Delta loads
+  - Merge operations
 
 - **Real-time Loading**:
-  * Stream processing
-  * Change data capture
-  * Event-driven loads
-  * Message queues
+  - Stream processing
+  - Change data capture
+  - Event-driven loads
+  - Message queues
 
 - **Hybrid Loading**:
-  * Micro-batching
-  * Lambda architecture
-  * Kappa architecture
-  * Hybrid patterns
+  - Micro-batching
+  - Lambda architecture
+  - Kappa architecture
+  - Hybrid patterns
 
 ### Key Considerations
+
 - **Performance**:
-  * Batch size optimization
-  * Parallel loading
-  * Index management
-  * Resource utilization
+  - Batch size optimization
+  - Parallel loading
+  - Index management
+  - Resource utilization
 
 - **Data Integrity**:
-  * Transaction management
-  * Consistency checks
-  * Rollback strategies
-  * Recovery procedures
+  - Transaction management
+  - Consistency checks
+  - Rollback strategies
+  - Recovery procedures
 
 - **Target Systems**:
-  * System capacity
-  * Load windows
-  * Concurrency limits
-  * Maintenance schedules
+  - System capacity
+  - Load windows
+  - Concurrency limits
+  - Maintenance schedules
 
 ### 1. Data Loading
 
 Different loading approaches for various target systems:
 
 #### Database Loading
+
 - **Bulk Loading**:
-  * Batch inserts
-  * COPY commands
-  * Staging tables
-  * Partition switching
+  - Batch inserts
+  - COPY commands
+  - Staging tables
+  - Partition switching
 
 - **Incremental Loading**:
-  * Change tracking
-  * Timestamp-based
-  * Version-based
-  * Merge operations
+  - Change tracking
+  - Timestamp-based
+  - Version-based
+  - Merge operations
 
 #### File System Loading
+
 - **File Management**:
-  * File naming
-  * Directory structure
-  * Compression
-  * Archival
+  - File naming
+  - Directory structure
+  - Compression
+  - Archival
 
 Here's a comprehensive implementation:
 
@@ -690,70 +711,73 @@ class TransactionLoader:
                 raise
 ```
 
-## Pipeline Orchestration 🎯
+## Pipeline Orchestration
 
 Pipeline orchestration manages the execution, monitoring, and maintenance of ETL workflows.
 
 ### Orchestration Concepts
+
 - **Workflow Management**:
-  * Task scheduling
-  * Dependency resolution
-  * Resource allocation
-  * Error handling
+  - Task scheduling
+  - Dependency resolution
+  - Resource allocation
+  - Error handling
 
 - **Pipeline Patterns**:
-  * Sequential processing
-  * Parallel execution
-  * Fan-out/Fan-in
-  * Branching logic
+  - Sequential processing
+  - Parallel execution
+  - Fan-out/Fan-in
+  - Branching logic
 
 - **State Management**:
-  * Checkpointing
-  * Recovery points
-  * State persistence
-  * Failure recovery
+  - Checkpointing
+  - Recovery points
+  - State persistence
+  - Failure recovery
 
 ### Key Features
+
 - **Scheduling**:
-  * Time-based triggers
-  * Event-driven execution
-  * Dependencies
-  * Priorities
+  - Time-based triggers
+  - Event-driven execution
+  - Dependencies
+  - Priorities
 
 - **Monitoring**:
-  * Health checks
-  * Performance metrics
-  * Resource usage
-  * SLA compliance
+  - Health checks
+  - Performance metrics
+  - Resource usage
+  - SLA compliance
 
 - **Error Handling**:
-  * Retry policies
-  * Failure notifications
-  * Recovery procedures
-  * Fallback strategies
+  - Retry policies
+  - Failure notifications
+  - Recovery procedures
+  - Fallback strategies
 
 ### 1. Pipeline Configuration
 
 Configuration management for ETL pipelines:
 
 #### Configuration Types
+
 - **Source Config**:
-  * Connection details
-  * Authentication
-  * Query parameters
-  * Rate limits
+  - Connection details
+  - Authentication
+  - Query parameters
+  - Rate limits
 
 - **Transform Config**:
-  * Business rules
-  * Validation rules
-  * Mapping rules
-  * Processing rules
+  - Business rules
+  - Validation rules
+  - Mapping rules
+  - Processing rules
 
 - **Target Config**:
-  * Connection details
-  * Table mappings
-  * Load options
-  * Error handling
+  - Connection details
+  - Table mappings
+  - Load options
+  - Error handling
 
 Here's a comprehensive implementation:
 
@@ -822,7 +846,7 @@ class PipelineMonitor:
         self.metrics[metric_name] = value
 ```
 
-## Best Practices 💡
+## Best Practices
 
 1. **Error Handling**
    - Implement proper exception handling
@@ -848,16 +872,17 @@ class PipelineMonitor:
    - Test with sample data
    - Validate outputs
 
-## Practice Exercise 🏋️‍♂️
+## Practice Exercise
 
 Build an ETL pipeline that:
+
 1. Extracts data from multiple sources
 2. Performs data cleaning and validation
 3. Loads data to a target system
 4. Includes error handling and monitoring
 5. Follows best practices
 
-## Solution Template 💡
+## Solution Template
 
 ```python
 # Pipeline implementation
@@ -911,4 +936,4 @@ if __name__ == "__main__":
         print(f"Pipeline failed: {str(e)}")
 ```
 
-Remember: A well-designed ETL pipeline is crucial for reliable data processing! 🎯
+Remember: A well-designed ETL pipeline is crucial for reliable data processing!

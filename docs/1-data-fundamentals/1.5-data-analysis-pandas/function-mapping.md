@@ -4,30 +4,37 @@
 
 {% stepper %}
 {% step %}
+
 ### What is Function Application?
+
 Function application in Pandas means applying a function to your data to transform or analyze it. Think of it like:
-- 🧪 A recipe that you apply to each ingredient
-- 📏 A rule that processes each piece of data
-- 🔄 A transformation that changes values
-- 🎯 A filter that selects specific data
-- 🔍 An analysis that extracts insights
+
+- A recipe that you apply to each ingredient
+- A rule that processes each piece of data
+- A transformation that changes values
+- A filter that selects specific data
+- An analysis that extracts insights
 
 Key benefits:
-- ⚡ Efficient data processing
-- 🔄 Consistent transformations
-- 📊 Complex calculations
-- 🎯 Custom data manipulation
+
+- Efficient data processing
+- Consistent transformations
+- Complex calculations
+- Custom data manipulation
 
 Real-world applications:
-- 💰 Financial calculations (interest, tax)
-- 📊 Data cleaning (standardization)
-- 📈 Feature engineering (ML preparation)
-- 📅 Date/time processing
-- 📝 Text analysis and cleaning
+
+- Financial calculations (interest, tax)
+- Data cleaning (standardization)
+- Feature engineering (ML preparation)
+- Date/time processing
+- Text analysis and cleaning
 {% endstep %}
 
 {% step %}
+
 ### Basic Function Application
+
 Let's explore with practical examples:
 
 ```python
@@ -82,6 +89,7 @@ sales_data['Total'] = sales_data['Price'] * sales_data['Quantity']
 print("\nCleaned sales data:")
 print(sales_data)
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -89,7 +97,9 @@ print(sales_data)
 
 {% stepper %}
 {% step %}
+
 ### Using apply()
+
 The `apply()` method is the most versatile way to apply functions:
 
 ```python
@@ -111,12 +121,15 @@ print(sales_df)
 ```
 
 The `axis` parameter determines whether the function is applied to:
+
 - rows (`axis=1`)
 - columns (`axis=0` or default)
 {% endstep %}
 
 {% step %}
+
 ### Using applymap()
+
 `applymap()` applies a function to every single element in a DataFrame:
 
 ```python
@@ -134,10 +147,13 @@ print(df)
 print("\nFormatted numbers:")
 print(formatted_df)
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Using map() with Series
+
 For Series objects, use `map()` to transform values:
 
 ```python
@@ -159,6 +175,7 @@ print(products)
 print("\nProduct names:")
 print(product_labels)
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -166,7 +183,9 @@ print(product_labels)
 
 {% stepper %}
 {% step %}
+
 ### Data Cleaning Example
+
 Clean and standardize customer data:
 
 ```python
@@ -195,10 +214,13 @@ customers['Phone'] = customers['Phone'].apply(standardize_phone)
 print("Cleaned customer data:")
 print(customers)
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Data Analysis Example
+
 Calculate statistics for student grades:
 
 ```python
@@ -228,6 +250,7 @@ print(grades)
 print("\nGrade analysis:")
 print(analysis)
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -235,8 +258,11 @@ print(analysis)
 
 {% stepper %}
 {% step %}
+
 ### Performance Considerations
+
 1. **Vectorization Over Iteration**:
+
    ```python
    # Slower: Using apply for simple operations
    df['Double'] = df['Value'].apply(lambda x: x * 2)
@@ -246,6 +272,7 @@ print(analysis)
    ```
 
 2. **Built-in Methods**:
+
    ```python
    # Use built-in methods when available
    # Instead of:
@@ -254,11 +281,15 @@ print(analysis)
    # Use:
    df['Sum'] = df['A'] + df['B']
    ```
+
 {% endstep %}
 
 {% step %}
+
 ### Function Design Tips
+
 1. **Keep Functions Simple**:
+
    ```python
    # Good: Single responsibility
    def calculate_tax(amount):
@@ -273,6 +304,7 @@ print(analysis)
    ```
 
 2. **Handle Edge Cases**:
+
    ```python
    def safe_division(x):
        try:
@@ -282,12 +314,14 @@ print(analysis)
    
    df['Result'] = df['Value'].apply(safe_division)
    ```
+
 {% endstep %}
 {% endstepper %}
 
 ## Common Pitfalls and Solutions
 
 1. **Modifying Data During Apply**:
+
    ```python
    # Wrong: Modifying DataFrame during apply
    def bad_function(row):
@@ -300,6 +334,7 @@ print(analysis)
    ```
 
 2. **Choosing the Wrong Axis**:
+
    ```python
    # Remember:
    # axis=0 (default) -> apply function to each column
@@ -313,6 +348,7 @@ print(analysis)
    ```
 
 3. **Performance with Large Datasets**:
+
    ```python
    # If possible, use vectorized operations
    # Instead of:

@@ -1,14 +1,15 @@
-# E-commerce Data Analysis Project: GlobalMart Analytics Platform 🚀
+# E-commerce Data Analysis Project: GlobalMart Analytics Platform
 
-## Project Overview 📊
+## Project Overview
 
 This project implements a comprehensive analytics platform for GlobalMart, an e-commerce business. The platform provides insights into customer behavior, product performance, and business operations through SQL-based analysis.
 
-## Analysis Components 📈
+## Analysis Components
 
 ### 1. Customer Analytics (30 points)
 
 #### 1.1 Customer Segmentation (15 points)
+
 ```sql
 WITH customer_metrics AS (
     SELECT 
@@ -44,23 +45,24 @@ SELECT
     ROUND(discount_rate::numeric, 2) as discount_rate,
     days_since_last_order,
     CASE 
-        WHEN spending_quartile = 1 AND frequency_quartile = 1 THEN '💎 VIP'
-        WHEN spending_quartile <= 2 AND frequency_quartile <= 2 THEN '🌟 High Value'
-        WHEN days_since_last_order <= 30 THEN '✨ Active'
-        WHEN days_since_last_order <= 90 THEN '😴 At Risk'
-        ELSE '💔 Churned'
+        WHEN spending_quartile = 1 AND frequency_quartile = 1 THEN ' VIP'
+        WHEN spending_quartile <= 2 AND frequency_quartile <= 2 THEN ' High Value'
+        WHEN days_since_last_order <= 30 THEN ' Active'
+        WHEN days_since_last_order <= 90 THEN ' At Risk'
+        ELSE ' Churned'
     END as customer_segment,
     CASE 
-        WHEN discount_rate > 20 THEN '🎯 Discount Sensitive'
-        WHEN avg_order_value > 500 THEN '💰 Premium Buyer'
-        WHEN total_orders > 12 THEN '🔄 Regular Buyer'
-        ELSE '👤 Standard'
+        WHEN discount_rate > 20 THEN ' Discount Sensitive'
+        WHEN avg_order_value > 500 THEN ' Premium Buyer'
+        WHEN total_orders > 12 THEN ' Regular Buyer'
+        ELSE ' Standard'
     END as buying_pattern
 FROM customer_segments
 ORDER BY total_spent DESC;
 ```
 
 #### 1.2 Customer Retention Analysis (15 points)
+
 ```sql
 WITH cohort_dates AS (
     SELECT 
@@ -99,10 +101,10 @@ SELECT
         2
     ) as retention_rate,
     CASE 
-        WHEN months_since_join = 0 THEN '🆕 New'
-        WHEN months_since_join <= 3 THEN '✨ Early'
-        WHEN months_since_join <= 6 THEN '🌟 Established'
-        ELSE '💫 Loyal'
+        WHEN months_since_join = 0 THEN ' New'
+        WHEN months_since_join <= 3 THEN ' Early'
+        WHEN months_since_join <= 6 THEN ' Established'
+        ELSE ' Loyal'
     END as cohort_stage
 FROM retention_analysis
 WHERE months_since_join <= 12
@@ -112,6 +114,7 @@ ORDER BY cohort_month DESC, months_since_join;
 ### 2. Product Performance (30 points)
 
 #### 2.1 Product Analytics (15 points)
+
 ```sql
 WITH product_metrics AS (
     SELECT 
@@ -154,29 +157,30 @@ SELECT
     review_count,
     category_rank,
     CASE 
-        WHEN revenue_percentile >= 0.9 THEN '🏆 Top Performer'
-        WHEN revenue_percentile >= 0.7 THEN '⭐ High Performer'
-        WHEN revenue_percentile >= 0.4 THEN '📊 Mid Performer'
-        ELSE '⚠️ Under Performer'
+        WHEN revenue_percentile >= 0.9 THEN ' Top Performer'
+        WHEN revenue_percentile >= 0.7 THEN ' High Performer'
+        WHEN revenue_percentile >= 0.4 THEN ' Mid Performer'
+        ELSE ' Under Performer'
     END as performance_tier,
     CASE 
-        WHEN profit_margin >= 50 THEN '💰 High Margin'
-        WHEN profit_margin >= 25 THEN '💵 Good Margin'
-        WHEN profit_margin >= 10 THEN '⚖️ Fair Margin'
-        ELSE '⚠️ Low Margin'
+        WHEN profit_margin >= 50 THEN ' High Margin'
+        WHEN profit_margin >= 25 THEN ' Good Margin'
+        WHEN profit_margin >= 10 THEN ' Fair Margin'
+        ELSE ' Low Margin'
     END as margin_category,
     CASE 
-        WHEN avg_rating >= 4.5 THEN '⭐⭐⭐⭐⭐'
-        WHEN avg_rating >= 4.0 THEN '⭐⭐⭐⭐'
-        WHEN avg_rating >= 3.0 THEN '⭐⭐⭐'
-        WHEN avg_rating >= 2.0 THEN '⭐⭐'
-        ELSE '⭐'
+        WHEN avg_rating >= 4.5 THEN ''
+        WHEN avg_rating >= 4.0 THEN ''
+        WHEN avg_rating >= 3.0 THEN ''
+        WHEN avg_rating >= 2.0 THEN ''
+        ELSE ''
     END as rating_display
 FROM product_rankings
 ORDER BY gross_revenue DESC;
 ```
 
 #### 2.2 Inventory Analysis (15 points)
+
 ```sql
 WITH inventory_metrics AS (
     SELECT 
@@ -217,17 +221,17 @@ SELECT
     ROUND(inventory_value::numeric, 2) as inventory_value,
     inventory_turnover,
     CASE 
-        WHEN stock_quantity = 0 THEN '🚨 Out of Stock'
-        WHEN stock_quantity <= reorder_level THEN '⚠️ Reorder Needed'
-        WHEN days_of_inventory >= 90 THEN '💤 Overstocked'
-        WHEN days_of_inventory >= 30 THEN '✅ Healthy Stock'
-        ELSE '📊 Low Stock'
+        WHEN stock_quantity = 0 THEN ' Out of Stock'
+        WHEN stock_quantity <= reorder_level THEN ' Reorder Needed'
+        WHEN days_of_inventory >= 90 THEN ' Overstocked'
+        WHEN days_of_inventory >= 30 THEN ' Healthy Stock'
+        ELSE ' Low Stock'
     END as stock_status,
     CASE 
-        WHEN inventory_turnover >= 50 THEN '🔄 High Turnover'
-        WHEN inventory_turnover >= 25 THEN '📈 Good Turnover'
-        WHEN inventory_turnover >= 10 THEN '📊 Moderate Turnover'
-        ELSE '📉 Slow Turnover'
+        WHEN inventory_turnover >= 50 THEN ' High Turnover'
+        WHEN inventory_turnover >= 25 THEN ' Good Turnover'
+        WHEN inventory_turnover >= 10 THEN ' Moderate Turnover'
+        ELSE ' Slow Turnover'
     END as turnover_rate,
     CASE 
         WHEN stock_quantity = 0 THEN 'Urgent Reorder'
@@ -242,6 +246,7 @@ ORDER BY inventory_value DESC;
 ### 3. Business Operations (40 points)
 
 #### 3.1 Sales Performance (15 points)
+
 ```sql
 WITH daily_sales AS (
     SELECT 
@@ -316,22 +321,23 @@ SELECT
     order_growth,
     customer_growth,
     CASE 
-        WHEN revenue_growth >= 20 THEN '🚀 High Growth'
-        WHEN revenue_growth > 0 THEN '📈 Growing'
-        WHEN revenue_growth > -20 THEN '📉 Declining'
-        ELSE '⚠️ Sharp Decline'
+        WHEN revenue_growth >= 20 THEN ' High Growth'
+        WHEN revenue_growth > 0 THEN ' Growing'
+        WHEN revenue_growth > -20 THEN ' Declining'
+        ELSE ' Sharp Decline'
     END as revenue_trend,
     CASE 
-        WHEN customer_growth >= 20 THEN '🎯 Strong Acquisition'
-        WHEN customer_growth > 0 THEN '👥 Growing Base'
-        WHEN customer_growth > -20 THEN '⚠️ Customer Loss'
-        ELSE '🚨 High Churn'
+        WHEN customer_growth >= 20 THEN ' Strong Acquisition'
+        WHEN customer_growth > 0 THEN ' Growing Base'
+        WHEN customer_growth > -20 THEN ' Customer Loss'
+        ELSE ' High Churn'
     END as customer_trend
 FROM sales_analysis
 ORDER BY sale_date DESC;
 ```
 
 #### 3.2 Marketing Campaign Analysis (15 points)
+
 ```sql
 WITH campaign_metrics AS (
     SELECT 
@@ -427,6 +433,7 @@ ORDER BY roi DESC;
 ```
 
 #### 3.3 Supply Chain Efficiency (10 points)
+
 ```sql
 WITH supplier_metrics AS (
     SELECT 
@@ -499,22 +506,26 @@ FROM supplier_performance
 ORDER BY inventory_value DESC;
 ```
 
-## Implementation Guidelines 📋
+## Implementation Guidelines
 
 ### 1. Project Setup
+
 1. Create database and tables
 2. Import sample data
 3. Create necessary indexes
 4. Set up monitoring queries
 
 ### 2. Analysis Workflow
+
 1. Run customer analytics
 2. Analyze product performance
 3. Review business operations
 4. Generate recommendations
 
 ### 3. Performance Optimization
+
 1. Index strategy
+
    ```sql
    -- Indexes for frequent joins
    CREATE INDEX idx_orders_customer ON orders(customer_id);
@@ -536,6 +547,7 @@ ORDER BY inventory_value DESC;
    - Use covering indexes
 
 3. Maintenance
+
    ```sql
    -- Regular statistics update
    ANALYZE customers;
@@ -548,7 +560,7 @@ ORDER BY inventory_value DESC;
    LIMIT 10;
    ```
 
-## Deliverables 📊
+## Deliverables
 
 1. SQL Scripts
    - Table creation
@@ -568,7 +580,7 @@ ORDER BY inventory_value DESC;
    - Sales trends
    - Campaign effectiveness
 
-## Success Metrics 📈
+## Success Metrics
 
 1. Query Performance
    - Execution time < 5 seconds
@@ -586,5 +598,4 @@ ORDER BY inventory_value DESC;
    - Increased sales
    - Better marketing ROI
 
-Remember: "Data-driven decisions lead to better business outcomes!" 🎯
-
+Remember: "Data-driven decisions lead to better business outcomes!"

@@ -1,10 +1,12 @@
-# Probability Distributions with Python 📊
+# Probability Distributions with Python
 
 ## Understanding Random Variables Through Code
 
 {% stepper %}
 {% step %}
+
 ### Implementing Random Variables
+
 Let's explore random variables using Python:
 
 ```python
@@ -149,10 +151,13 @@ heights = explorer.simulate_continuous(
 print("\nHeight Distribution:")
 explorer.plot_distribution(heights, kind='continuous')
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Expected Value and Variance
+
 Let's implement tools for calculating distribution properties:
 
 ```python
@@ -278,6 +283,7 @@ print("\nUniform Distribution:")
 uniform_data = np.random.uniform(low=-3, high=3, size=1000)
 analyzer.analyze_distribution(uniform_data, "Uniform")
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -285,7 +291,9 @@ analyzer.analyze_distribution(uniform_data, "Uniform")
 
 {% stepper %}
 {% step %}
+
 ### Implementing Distribution Functions
+
 Let's create tools for working with common distributions:
 
 ```python
@@ -423,10 +431,13 @@ distributions = {
 # Plot and analyze distributions
 pd_explorer.plot_distributions(distributions)
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Distribution Shape Analysis
+
 Let's create tools for analyzing distribution shapes:
 
 ```python
@@ -540,14 +551,16 @@ shape_analyzer.plot_shape_analysis(
     "Bimodal Distribution"
 )
 ```
+
 {% endstep %}
 {% endstepper %}
 
-## Practice Exercises 🎯
+## Practice Exercises
 
 Try these distribution analysis exercises:
 
 1. **Stock Returns Analysis**
+
    ```python
    # Create functions to:
    # - Load stock price data
@@ -557,6 +570,7 @@ Try these distribution analysis exercises:
    ```
 
 2. **Customer Behavior Model**
+
    ```python
    # Build analysis tools for:
    # - Purchase frequency distribution
@@ -565,6 +579,7 @@ Try these distribution analysis exercises:
    ```
 
 3. **Quality Control System**
+
    ```python
    # Implement system to:
    # - Monitor process measurements
@@ -574,10 +589,11 @@ Try these distribution analysis exercises:
    ```
 
 Remember:
+
 - Use appropriate distributions
 - Validate distribution assumptions
 - Consider sample size effects
 - Create clear visualizations
 - Document your analysis
 
-Happy analyzing! 🚀
+Happy analyzing!

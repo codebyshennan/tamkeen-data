@@ -6,22 +6,29 @@ Pandas is your best friend when it comes to working with data in Python! Think o
 
 {% stepper %}
 {% step %}
+
 ### Understanding the Name
+
 The name "Pandas" comes from "Panel Data", referring to datasets that contain observations over multiple time periods. However, don't let that confuse you - Pandas is great for working with any kind of structured data!
 {% endstep %}
 
 {% step %}
+
 ### Key Features Explained
+
 Let's break down what Pandas can do for you:
-- 📊 **DataFrames**: Like Excel spreadsheets in Python
-- 🔍 **Data Exploration**: Easily peek into your data
-- 🧹 **Data Cleaning**: Fix messy data quickly
-- 🔄 **Data Transformation**: Reshape and modify data
-- 📈 **Data Analysis**: Calculate statistics and find patterns
+
+- **DataFrames**: Like Excel spreadsheets in Python
+- **Data Exploration**: Easily peek into your data
+- **Data Cleaning**: Fix messy data quickly
+- **Data Transformation**: Reshape and modify data
+- **Data Analysis**: Calculate statistics and find patterns
 {% endstep %}
 
 {% step %}
+
 ### Why Use Pandas?
+
 1. **User-Friendly**: Works like Excel but with code
 2. **Powerful**: Handles millions of rows efficiently
 3. **Flexible**: Works with many data formats (CSV, Excel, SQL, etc.)
@@ -35,8 +42,11 @@ Pandas has two main data structures that you'll use all the time:
 
 {% stepper %}
 {% step %}
+
 ### Series: The 1D Wonder
+
 Think of a Series as a single column in Excel:
+
 ```python
 import pandas as pd
 
@@ -44,7 +54,9 @@ import pandas as pd
 grades = pd.Series([85, 90, 88, 92])
 print(grades)
 ```
+
 Output:
+
 ```
 0    85
 1    90
@@ -52,11 +64,15 @@ Output:
 3    92
 dtype: int64
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### DataFrame: The 2D Powerhouse
+
 A DataFrame is like an entire Excel spreadsheet:
+
 ```python
 # Creating a simple DataFrame
 student_data = pd.DataFrame({
@@ -66,13 +82,16 @@ student_data = pd.DataFrame({
 })
 print(student_data)
 ```
+
 Output:
+
 ```
       Name  Age  Grade
 0    Alice   20     85
 1      Bob   22     90
 2  Charlie   21     88
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -82,7 +101,9 @@ Here's a quick look at some everyday operations you'll perform with Pandas:
 
 {% stepper %}
 {% step %}
+
 ### Reading Data
+
 ```python
 # Read from CSV
 df = pd.read_csv('data.csv')
@@ -90,10 +111,13 @@ df = pd.read_csv('data.csv')
 # Read from Excel
 df = pd.read_excel('data.xlsx')
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Viewing Data
+
 ```python
 # First few rows
 df.head()
@@ -104,10 +128,13 @@ df.info()
 # Quick statistics
 df.describe()
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Basic Analysis
+
 ```python
 # Calculate mean of a column
 average = df['Age'].mean()
@@ -118,12 +145,14 @@ df['Category'].value_counts()
 # Filter data
 young_students = df[df['Age'] < 25]
 ```
+
 {% endstep %}
 {% endstepper %}
 
 ## What's Next?
 
 In the following sections, we'll dive deeper into:
+
 1. Series: The building block of Pandas
 2. DataFrame: Your main tool for data analysis
 3. Data Types and Indexing: How Pandas organizes data

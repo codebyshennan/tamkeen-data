@@ -1,10 +1,11 @@
-# Data Querying with SQL: Your Gateway to Data Mastery 🎯
+# Data Querying with SQL: Your Gateway to Data Mastery
 
 Welcome to the fascinating world of SQL! Imagine having a conversation with your data - that's exactly what SQL allows you to do. Whether you're analyzing customer behavior, tracking business metrics, or uncovering hidden patterns, SQL is your trusted companion in the data journey.
 
 Think of SQL as a universal language for data - just like how English helps people from different countries communicate, SQL helps different systems and people work with data in a standardized way. It's like having a Swiss Army knife for data manipulation: one tool that can slice, dice, filter, combine, and analyze data in countless ways.
 
 For example, with a single SQL query, you can:
+
 - Find your top 10 customers by revenue
 - Calculate month-over-month growth rates
 - Identify products frequently bought together
@@ -13,7 +14,7 @@ For example, with a single SQL query, you can:
 
 And the best part? The same SQL query will work whether you're dealing with 100 records or 100 million records!
 
-## Learning Objectives 🎯
+## Learning Objectives
 
 By the end of this module, you will be able to:
 
@@ -46,7 +47,7 @@ By the end of this module, you will be able to:
    - Write efficient joins
    - Implement caching strategies
 
-## Why SQL Matters 💡
+## Why SQL Matters
 
 In today's data-driven world, SQL is more relevant than ever:
 
@@ -75,6 +76,7 @@ In today's data-driven world, SQL is more relevant than ever:
   - Enable cross-system analysis
 
 Consider this real-world scenario:
+
 ```sql
 -- A single query that provides valuable business insights
 SELECT 
@@ -99,14 +101,16 @@ Basic           | 5250          | 45.75           | 240,187.50    | 1.0
 ```
 
 This single query tells us:
+
 - Which customer segments are most valuable
 - Average spending patterns
 - Customer engagement levels
 - Revenue distribution
 
-## Module Overview 📚
+## Module Overview
 
 ### 1. Introduction to Databases
+
 ```mermaid
 graph TD
     A[Database] --> B[Tables]
@@ -123,6 +127,7 @@ graph TD
 ```
 
 Learn the building blocks of databases:
+
 - **RDBMS Fundamentals**
   - PostgreSQL, MySQL, Oracle
   - Client-server architecture
@@ -136,6 +141,7 @@ Learn the building blocks of databases:
   - Performance considerations
 
 - **Data Types & Constraints**
+
   ```sql
   CREATE TABLE products (
       product_id SERIAL PRIMARY KEY,
@@ -147,6 +153,7 @@ Learn the building blocks of databases:
   ```
 
 ### 2. Basic SQL Operations
+
 Master the fundamental operations with practical examples:
 
 ```sql
@@ -177,6 +184,7 @@ Apple Watch     | 60         | 24000    | 58
 ```
 
 ### 3. Aggregations and Grouping
+
 Transform raw data into actionable insights:
 
 ```sql
@@ -204,6 +212,7 @@ $T_{query} = O(n \log n)$ for sorted aggregations
 $T_{memory} = O(k)$ where k = number of groups
 
 ### 4. Joins and Relationships
+
 Master the art of combining data:
 
 ```mermaid
@@ -215,6 +224,7 @@ graph LR
 ```
 
 Example of complex joins:
+
 ```sql
 -- Customer order history with product details
 WITH customer_orders AS (
@@ -243,9 +253,11 @@ HAVING COUNT(DISTINCT order_id) > 0;
 ```
 
 ### 5. Advanced SQL Concepts
+
 Take your SQL skills to the next level:
 
 1. **Query Optimization**
+
    ```sql
    EXPLAIN ANALYZE
    SELECT /*+ INDEX(orders idx_order_date) */
@@ -258,6 +270,7 @@ Take your SQL skills to the next level:
    ```
 
 2. **Window Functions**
+
    ```sql
    SELECT 
        category_name,
@@ -271,6 +284,7 @@ Take your SQL skills to the next level:
    ```
 
 3. **Common Table Expressions (CTEs)**
+
    ```sql
    WITH RECURSIVE subordinates AS (
        -- Base case: direct reports
@@ -289,11 +303,12 @@ Take your SQL skills to the next level:
    ```
 
 Performance considerations:
+
 - Query Cost = $I/O + CPU + Memory$
 - Index Usage = $\frac{SelectivityFactor \times DataSize}{IndexSize}$
 - Join Cost = $O(n \log n)$ for hash joins
 
-## Prerequisites 📋
+## Prerequisites
 
 Before starting this journey, ensure you have:
 
@@ -321,10 +336,11 @@ Before starting this journey, ensure you have:
    - Simple statistics (average, sum, count)
    - Basic logical operations
 
-## Tools Required 🛠️
+## Tools Required
 
 1. **DBeaver Community Edition**
    - Universal Database Tool
+
    ```bash
    # Installation commands
    # For macOS:
@@ -333,7 +349,7 @@ Before starting this journey, ensure you have:
    # For Ubuntu:
    sudo snap install dbeaver-ce
    ```
-   
+
    Features:
    - SQL Editor with syntax highlighting
    - Visual Query Builder
@@ -344,6 +360,7 @@ Before starting this journey, ensure you have:
 
 2. **Sample Database - Northwind**
    Real-world business scenario database including:
+
    ```sql
    -- Core tables
    - Customers (customer demographics and contacts)
@@ -358,6 +375,7 @@ Before starting this journey, ensure you have:
    ```
 
    Installation:
+
    ```sql
    -- 1. Create database
    CREATE DATABASE northwind;
@@ -376,6 +394,7 @@ Before starting this journey, ensure you have:
    - **Postman**: For testing database APIs
 
 4. **Version Control Setup**
+
    ```bash
    # Initialize SQL project
    mkdir sql-practice
@@ -387,14 +406,15 @@ Before starting this journey, ensure you have:
    echo "*.tmp" >> .gitignore
    ```
 
-## Best Practices 🌟
+## Best Practices
 
 1. **Query Writing Standards**
+
    ```sql
-   -- ❌ Bad Practice
+   --  Bad Practice
    SELECT * FROM orders o, customers c WHERE o.customer_id=c.id;
    
-   -- ✅ Good Practice
+   --  Good Practice
    SELECT 
        c.first_name,
        c.last_name,
@@ -411,6 +431,7 @@ Before starting this journey, ensure you have:
 
 2. **Performance Optimization**
    - **Indexing Strategy**
+
      ```sql
      -- Create indexes for frequently queried columns
      CREATE INDEX idx_orders_date ON orders(order_date);
@@ -420,20 +441,22 @@ Before starting this journey, ensure you have:
      CREATE INDEX idx_orders_customer_date 
      ON orders(customer_id, order_date);
      ```
-   
+
    - **Query Optimization**
+
      ```sql
-     -- ❌ Bad: Full table scan
+     --  Bad: Full table scan
      SELECT * FROM orders 
      WHERE EXTRACT(YEAR FROM order_date) = 2023;
      
-     -- ✅ Good: Uses index
+     --  Good: Uses index
      SELECT * FROM orders 
      WHERE order_date >= '2023-01-01' 
        AND order_date < '2024-01-01';
      ```
 
 3. **Data Integrity**
+
    ```sql
    -- Use constraints to enforce business rules
    CREATE TABLE products (
@@ -446,6 +469,7 @@ Before starting this journey, ensure you have:
    ```
 
 4. **Code Organization**
+
    ```sql
    -- Use CTEs for complex queries
    WITH monthly_sales AS (
@@ -472,9 +496,10 @@ Before starting this journey, ensure you have:
    FROM sales_growth;
    ```
 
-## Resources 📚
+## Resources
 
 ### Official Documentation
+
 - [PostgreSQL Documentation](https://www.postgresql.org/docs/)
   - Complete reference for PostgreSQL
   - Detailed explanations and examples
@@ -488,17 +513,18 @@ Before starting this journey, ensure you have:
   - Documentation practices
 
 ### Interactive Learning
+
 1. **Practice Platforms**
    - **LeetCode SQL Path**
      - 50+ SQL problems
      - Difficulty progression
      - Real interview questions
-   
+
    - **HackerRank SQL Track**
      - Basic to advanced challenges
      - Instant feedback
      - Certification available
-   
+
    - **SQL Zoo**
      - Interactive tutorials
      - Progressive learning
@@ -509,13 +535,14 @@ Before starting this journey, ensure you have:
      - Comprehensive coverage
      - Academic perspective
      - Free access
-   
+
    - **Mode Analytics SQL Tutorial**
      - Business-focused examples
      - Interactive exercises
      - Real data scenarios
 
 ### Essential Books
+
 1. **For Beginners**
    - "Learning SQL" by Alan Beaulieu
    - "SQL Queries for Mere Mortals"
@@ -532,6 +559,7 @@ Before starting this journey, ensure you have:
    - "Data Analysis Using SQL and Excel"
 
 ### Community Resources
+
 1. **Forums & Communities**
    - Stack Overflow SQL Tag
    - PostgreSQL Mailing Lists
@@ -550,14 +578,14 @@ Before starting this journey, ensure you have:
    - SQLFiddle (Query testing)
    - Explain.depesz.com (Query plan analysis)
 
-## Assignment 📝
+## Assignment
 
 Ready to test your SQL skills? Head over to the [SQL Assignment](../_assignments/2.1-assignment.md) to apply what you've learned!
 
-## What's Next? 🚀
+## What's Next?
 
 Get ready to embark on an exciting journey into the world of data querying! We'll start with the basics and gradually move to advanced concepts, with plenty of hands-on exercises along the way.
 
 Remember: "Data is the new oil, and SQL is the drill!"
 
-Let's dive in and master SQL together! 💪
+Let's dive in and master SQL together!

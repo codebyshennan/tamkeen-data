@@ -1,10 +1,10 @@
-# A/B Testing: Making Data-Driven Decisions 🎯
+# A/B Testing: Making Data-Driven Decisions
 
-## Introduction: Why A/B Testing? 🤔
+## Introduction: Why A/B Testing?
 
 Imagine you're a chef trying to improve a recipe. Instead of guessing what changes might work better, you could serve two versions and see which one customers prefer. That's A/B testing in a nutshell - a scientific way to compare options and make data-driven decisions!
 
-## The Basics: Control vs Treatment 🔄
+## The Basics: Control vs Treatment
 
 ### What is A/B Testing?
 
@@ -14,13 +14,13 @@ A/B testing (or split testing) is like running a scientific experiment where you
 2. Show them randomly to different groups
 3. Measure which performs better
 
-### Common Applications 🌟
+### Common Applications
 
-- 🌐 Website optimization
-- 📧 Email marketing campaigns
-- 📱 Mobile app features
-- 💰 Pricing strategies
-- 🎨 UI/UX design choices
+- Website optimization
+- Email marketing campaigns
+- Mobile app features
+- Pricing strategies
+- UI/UX design choices
 
 ```python
 import numpy as np
@@ -89,9 +89,9 @@ class ABTest:
         return self
 ```
 
-## Setting Up Your A/B Test 🎬
+## Setting Up Your A/B Test
 
-### 1. Sample Size Calculation 📊
+### 1. Sample Size Calculation
 
 Don't start without knowing how many samples you need!
 
@@ -152,7 +152,7 @@ sample_size_calc = calculate_sample_size(
 )
 ```
 
-### 2. Random Assignment 🎲
+### 2. Random Assignment
 
 Ensure fair comparison with proper randomization:
 
@@ -197,9 +197,9 @@ def assign_to_groups(user_ids, split_ratio=0.5, seed=None):
     return assignments
 ```
 
-## Running Your Test 🏃‍♂️
+## Running Your Test
 
-### 1. Data Collection 📝
+### 1. Data Collection
 
 Track everything systematically:
 
@@ -237,7 +237,7 @@ class ABTestDataCollector:
         return results
 ```
 
-### 2. Monitoring 📊
+### 2. Monitoring
 
 Watch your test without peeking too much:
 
@@ -280,7 +280,7 @@ def monitor_test(data_collector, min_sample_size):
     }
 ```
 
-## Analysis and Decision Making 📈
+## Analysis and Decision Making
 
 ### 1. Statistical Analysis
 
@@ -331,9 +331,11 @@ def analyze_results(control_data, treatment_data, alpha=0.05):
     }
 ```
 
-## Common Pitfalls and Solutions ⚠️
+### 2. Making the Call
 
-### 1. Peeking Problem 👀
+## Common Pitfalls and Solutions
+
+### 1. Peeking Problem
 
 Don't keep checking results - it increases false positives!
 
@@ -359,7 +361,7 @@ def adjust_for_peeking(p_values, total_looks):
     }
 ```
 
-### 2. Sample Ratio Mismatch 🔄
+### 2. Sample Ratio Mismatch
 
 Check if your randomization is working:
 
@@ -390,103 +392,13 @@ def check_sample_ratio(control_size, treatment_size, expected_ratio=0.5):
     }
 ```
 
-## Best Practices for Success 🌟
+## Additional Resources
 
-### 1. Pre-register Your Test 📝
+- [A/B Testing Calculator](https://www.abtestguide.com/calc/)
+- [Sample Size Calculator](https://www.optimizely.com/sample-size-calculator/)
+- [A/B Testing Best Practices](https://www.optimizely.com/optimization-glossary/ab-testing/)
 
-Document everything before starting:
-
-```python
-class ABTestRegistry:
-    def __init__(self):
-        self.tests = {}
-        
-    def register_test(
-        self,
-        test_id,
-        hypothesis,
-        metrics,
-        sample_size,
-        start_date=None
-    ):
-        """Register a new A/B test"""
-        self.tests[test_id] = {
-            'hypothesis': hypothesis,
-            'metrics': metrics,
-            'sample_size': sample_size,
-            'start_date': start_date or pd.Timestamp.now(),
-            'status': 'registered'
-        }
-        
-    def update_status(self, test_id, status):
-        """Update test status"""
-        valid_statuses = ['registered', 'running', 'completed', 'stopped']
-        if status not in valid_statuses:
-            raise ValueError(f"Status must be one of: {valid_statuses}")
-        
-        self.tests[test_id]['status'] = status
-```
-
-### 2. Calculate Business Impact 💰
-
-Translate statistics into business metrics:
-
-```python
-def calculate_business_impact(
-    control_data,
-    treatment_data,
-    revenue_per_conversion=10,
-    cost_per_user=0.1
-):
-    """
-    Calculate business impact of test results
-    
-    Returns:
-    --------
-    dict with business metrics
-    """
-    # Calculate conversion rates
-    conv_rate_control = np.mean(control_data > 0)
-    conv_rate_treatment = np.mean(treatment_data > 0)
-    
-    # Calculate revenue
-    revenue_control = conv_rate_control * revenue_per_conversion
-    revenue_treatment = conv_rate_treatment * revenue_per_conversion
-    
-    # Calculate ROI
-    roi_control = (revenue_control - cost_per_user) / cost_per_user
-    roi_treatment = (revenue_treatment - cost_per_user) / cost_per_user
-    
-    return {
-        'conversion_lift': conv_rate_treatment - conv_rate_control,
-        'revenue_lift': revenue_treatment - revenue_control,
-        'roi_lift': roi_treatment - roi_control
-    }
-```
-
-## Practice Questions 🤔
-
-1. A website has 10% conversion rate. How many visitors do you need to detect a 2% improvement?
-2. Your A/B test shows statistical significance but tiny effect size. What should you do?
-3. How would you handle seasonality in your A/B test?
-4. What metrics would you track for an e-commerce website redesign?
-5. How would you communicate A/B test results to non-technical stakeholders?
-
-## Key Takeaways 🎯
-
-1. 📊 Plan your test thoroughly before starting
-2. 🎲 Ensure proper randomization
-3. 📈 Wait for sufficient sample size
-4. ⚠️ Be aware of common pitfalls
-5. 💰 Consider business impact, not just statistics
-
-## Additional Resources 📚
-
-- [A/B Testing Guide](https://www.optimizely.com/optimization-glossary/ab-testing/)
-- [Sample Size Calculator](https://www.evanmiller.org/ab-testing/sample-size.html)
-- [Statistical Significance Calculator](https://www.abtasty.com/ab-test-significance-calculator/)
-
-Remember: A well-designed A/B test is your compass for data-driven decisions! 🧭
+Remember: A/B testing is a powerful tool, but only when used correctly!
 
 ## Recommended Visualizations
 

@@ -1,10 +1,10 @@
 # Introduction to Naive Bayes Classification
 
-## Welcome to Naive Bayes! 🎯
+## Welcome to Naive Bayes
 
 Before we dive into the technical details, let's understand why Naive Bayes is such an important algorithm in machine learning. Think of it as your first "smart assistant" in the world of classification - it's simple yet powerful, making it perfect for beginners to understand and use.
 
-## What is Naive Bayes? 🤔
+## What is Naive Bayes?
 
 Imagine you're trying to sort your emails into "spam" and "not spam" folders. You don't need to read every word carefully - you just look for certain clues like "free", "money", or "win". Naive Bayes works similarly - it's a smart way to make decisions based on probabilities and patterns.
 
@@ -26,29 +26,29 @@ Naive Bayes is special because:
 - Great for text classification
 - Perfect for real-time predictions
 
-## Real-World Applications 🌍
+## Real-World Applications
 
 Let's look at some everyday examples where Naive Bayes is used:
 
-### 1. Email Spam Detection 📧
+### 1. Email Spam Detection
 
 - How it works: Analyzes words in emails to decide if they're spam
 - Why it's good: Fast and accurate, even with simple features
 - Real impact: Saves you from unwanted emails every day
 
-### 2. Medical Diagnosis 🏥
+### 2. Medical Diagnosis
 
 - How it works: Uses symptoms and test results to predict diseases
 - Why it's good: Can handle multiple symptoms at once
 - Real impact: Helps doctors make faster, more accurate diagnoses
 
-### 3. News Article Categorization 📰
+### 3. News Article Categorization
 
 - How it works: Classifies articles into topics like sports, politics, or technology
 - Why it's good: Works well with text data
 - Real impact: Helps organize and recommend relevant news
 
-## The Learning Journey Ahead 🚀
+## The Learning Journey Ahead
 
 In this course, we'll explore Naive Bayes step by step:
 
@@ -72,7 +72,7 @@ In this course, we'll explore Naive Bayes step by step:
    - Handle real-world challenges
    - Optimize your models
 
-## Common Questions from Beginners ❓
+## Common Questions from Beginners
 
 ### "Is Naive Bayes really naive?"
 
@@ -92,7 +92,7 @@ You can create:
 - Medical diagnosis tools
 - And much more!
 
-## Next Steps 📚
+## Next Steps
 
 Ready to dive deeper? Let's start with the [Mathematical Foundation](2-math-foundation.md) to understand how Naive Bayes makes its predictions.
 

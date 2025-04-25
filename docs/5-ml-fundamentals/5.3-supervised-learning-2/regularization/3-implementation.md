@@ -1,8 +1,8 @@
-# Implementing Regularization 💻
+# Implementing Regularization
 
 Think of implementing regularization like learning to ride a bicycle - we'll start with the basics and gradually build up to more advanced techniques. Let's make this journey as smooth as possible!
 
-## Basic Implementation 🚀
+## Basic Implementation
 
 ### Simple Example with Ridge Regression
 
@@ -43,7 +43,7 @@ ridge.fit(X_train_scaled, y_train)
 y_pred = ridge.predict(X_test_scaled)
 ```
 
-## Real-World Example: House Price Prediction 🏠
+## Real-World Example: House Price Prediction
 
 Let's look at a more practical example that you might encounter in the real world - predicting house prices.
 
@@ -139,11 +139,11 @@ plt.show()
 # This helps us compare how well each method performs
 for name, result in results.items():
     print(f"\n{name}:")
-    print(f"R² Score: {result['R2']:.3f}")  # Higher is better
+    print(f"R Score: {result['R2']:.3f}")  # Higher is better
     print(f"RMSE: ${result['RMSE']:,.2f}")  # Lower is better
 ```
 
-## Hyperparameter Tuning 🎛️
+## Hyperparameter Tuning
 
 Finding the right regularization strength (alpha) is like finding the right amount of seasoning for a dish - too little and it's bland, too much and it's overwhelming.
 
@@ -166,7 +166,7 @@ grid_search.fit(X_train, y_train)
 print("Best alpha:", grid_search.best_params_['alpha'])
 ```
 
-## Feature Selection with Lasso 🎯
+## Feature Selection with Lasso
 
 Lasso regularization is particularly good at feature selection - it's like having a strict teacher who helps you focus on the most important subjects.
 
@@ -195,7 +195,7 @@ selected = select_features_lasso(
 )
 ```
 
-## Cross-Validation Implementation 📊
+## Cross-Validation Implementation
 
 Cross-validation is like taking multiple tests to ensure you really understand the material, not just memorizing the answers.
 
@@ -236,7 +236,7 @@ results_df = compare_alphas(X_scaled, y)
 print(results_df)
 ```
 
-## Model Evaluation Functions 📈
+## Model Evaluation Functions
 
 Evaluating your model is like checking your work after solving a problem - it helps you understand how well you're doing.
 
@@ -269,7 +269,7 @@ def evaluate_regularized_model(model, X_train, X_test, y_train, y_test):
     return results
 ```
 
-## Best Practices 🌟
+## Best Practices
 
 ### 1. Feature Scaling
 
@@ -297,7 +297,7 @@ Compare different regularization methods to find the best one for your specific 
 
 Plot the regularization path to understand how different features are affected by regularization. This is like seeing how different ingredients affect the taste of a dish.
 
-## Common Mistakes to Avoid ⚠️
+## Common Mistakes to Avoid
 
 1. Not scaling features before regularization
 2. Using the same regularization strength for all features
@@ -305,11 +305,11 @@ Plot the regularization path to understand how different features are affected b
 4. Ignoring feature selection when appropriate
 5. Not comparing different regularization methods
 
-## Next Steps 🚀
+## Next Steps
 
 Now that you understand how to implement regularization, let's move on to [Advanced Topics](4-advanced.md) to explore more sophisticated techniques!
 
-## Additional Resources 📚
+## Additional Resources
 
 - [Scikit-learn Regularization Documentation](https://scikit-learn.org/stable/modules/linear_model.html)
 - [Regularization in Machine Learning](https://towardsdatascience.com/regularization-in-machine-learning-76441ddcf99a)

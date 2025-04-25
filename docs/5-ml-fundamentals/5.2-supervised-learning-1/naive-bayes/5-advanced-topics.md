@@ -1,6 +1,6 @@
 # Advanced Topics in Naive Bayes
 
-## Welcome to Advanced Naive Bayes! 🎯
+## Welcome to Advanced Naive Bayes
 
 Now that you've mastered the basics, let's explore some advanced techniques that will make your Naive Bayes models even better. Think of this as adding special tools to your machine learning toolbox!
 
@@ -281,7 +281,7 @@ log_probs = model.predict_log_proba(X)
 predictions = np.argmax(log_probs, axis=1)
 ```
 
-## Next Steps 📚
+## Next Steps
 
 Ready to become a Naive Bayes expert? Try these challenges:
 

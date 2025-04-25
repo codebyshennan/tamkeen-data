@@ -4,8 +4,11 @@
 
 {% stepper %}
 {% step %}
+
 ### Functions in Data Analysis
+
 Think of functions as reusable data processing components:
+
 - Input: Raw data (e.g., DataFrame, array, list)
 - Process: Data transformation, analysis, or modeling
 - Output: Processed data, statistics, or visualizations
@@ -37,17 +40,22 @@ df = pd.DataFrame({'values': [1, 2, 3, np.nan, 5]})
 stats = analyze_numeric_column(df['values'])
 print(stats)
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Why Functions in Data Science?
+
 Functions help you:
+
 1. **Create reproducible analysis pipelines**
 2. **Standardize data processing steps**
 3. **Share analysis methods with team**
 4. **Ensure consistent data handling**
 
 Example without functions:
+
 ```python
 # Without functions (repetitive and error-prone)
 # Dataset 1
@@ -62,6 +70,7 @@ df2_scaled = (df2_cleaned - df2_cleaned.mean()) / df2_cleaned.std()
 ```
 
 Example with functions:
+
 ```python
 def preprocess_dataset(df: pd.DataFrame) -> pd.DataFrame:
     """Standardized preprocessing pipeline"""
@@ -79,6 +88,7 @@ def preprocess_dataset(df: pd.DataFrame) -> pd.DataFrame:
 df1_processed = preprocess_dataset(df1)
 df2_processed = preprocess_dataset(df2)
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -86,7 +96,9 @@ df2_processed = preprocess_dataset(df2)
 
 {% stepper %}
 {% step %}
+
 ### Basic Function Structure
+
 Modern data analysis function structure:
 
 ```python
@@ -138,10 +150,13 @@ def process_timeseries(
 data = pd.Series([1, 2, 3, 2, 3, 4, 3, 4, 5])
 results = process_timeseries(data, window=3, method='mean')
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Parameters for Data Processing
+
 Different ways to configure data processing:
 
 ```python
@@ -220,10 +235,13 @@ result_custom = process_dataset(
     config=custom_config
 )
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Return Values in Data Analysis
+
 Functions can return different types of analysis results:
 
 ```python
@@ -296,6 +314,7 @@ for key, value in analysis.items():
         for k, v in value.items():
             print(f"  {k}: {v}")
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -303,7 +322,9 @@ for key, value in analysis.items():
 
 {% stepper %}
 {% step %}
+
 ### Function Decorators for Data Validation
+
 Use decorators to add validation:
 
 ```python
@@ -374,10 +395,13 @@ try:
 except ValueError as e:
     print(f"Error: {e}")
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Performance Optimization
+
 Optimize functions for large datasets:
 
 ```python
@@ -471,6 +495,7 @@ for col, stats in results.items():
     for stat, value in stats.items():
         print(f"  {stat}: {value:.2f}")
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -478,10 +503,13 @@ for col, stats in results.items():
 
 {% stepper %}
 {% step %}
+
 ### Writing Maintainable Functions
+
 Follow these data science best practices:
 
 1. **Clear Documentation and Type Hints**:
+
 ```python
 from typing import Union, List, Dict, Optional
 import pandas as pd
@@ -523,6 +551,7 @@ def preprocess_features(
 ```
 
 2. **Error Handling and Validation**:
+
 ```python
 def analyze_timeseries(
     data: pd.Series,
@@ -555,6 +584,7 @@ def analyze_timeseries(
 ```
 
 3. **Modular Design**:
+
 ```python
 class DataAnalyzer:
     """Modular data analysis pipeline"""
@@ -597,12 +627,15 @@ results = (analyzer
     .analyze_correlations()
     .get_results())
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Performance Optimization Patterns
 
 1. **Vectorization Over Loops**:
+
 ```python
 # Slow: Using loops
 def calculate_zscore_slow(df: pd.DataFrame) -> pd.DataFrame:
@@ -622,6 +655,7 @@ def calculate_zscore_fast(df: pd.DataFrame) -> pd.DataFrame:
 ```
 
 2. **Efficient Memory Usage**:
+
 ```python
 def process_large_file(
     filepath: str,
@@ -641,6 +675,7 @@ def process_large_file(
 ```
 
 3. **Caching Expensive Computations**:
+
 ```python
 from functools import lru_cache
 
@@ -660,14 +695,16 @@ class FeatureEngine:
             results.append(feature)
         return pd.Series(results)
 ```
+
 {% endstep %}
 {% endstepper %}
 
-## Practice Exercises for Data Analysis 🎯
+## Practice Exercises for Data Analysis
 
 Try these data science exercises:
 
 1. **Feature Engineering Pipeline**
+
    ```python
    # Create a function that:
    # - Handles numeric and categorical features
@@ -677,6 +714,7 @@ Try these data science exercises:
    ```
 
 2. **Time Series Analysis**
+
    ```python
    # Build a function that:
    # - Calculates rolling statistics
@@ -686,6 +724,7 @@ Try these data science exercises:
    ```
 
 3. **Data Quality Assessment**
+
    ```python
    # Implement a function that:
    # - Checks data types
@@ -696,10 +735,11 @@ Try these data science exercises:
    ```
 
 Remember:
+
 - Use type hints for better code documentation
 - Handle edge cases and errors
 - Optimize for performance with large datasets
 - Write modular and reusable code
 - Include examples in docstrings
 
-Happy analyzing! 🚀
+Happy analyzing!

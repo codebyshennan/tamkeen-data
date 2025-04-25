@@ -1,4 +1,4 @@
-# Support Vector Machines (SVM) ⚔️
+# Support Vector Machines (SVM)
 
 This content has been reorganized into smaller, more digestible sections for better learning:
 

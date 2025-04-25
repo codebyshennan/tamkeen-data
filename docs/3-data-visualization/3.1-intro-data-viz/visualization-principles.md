@@ -1,6 +1,6 @@
-# Data Visualization Principles 📊
+# Data Visualization Principles
 
-## 🧠 Understanding Visual Perception
+## Understanding Visual Perception
 
 Think of visual perception like reading a book. Just as your eyes quickly scan words and your brain processes them, your brain processes visual information in specific ways that we can use to create better visualizations.
 
@@ -11,7 +11,7 @@ Think of visual perception like reading a book. Just as your eyes quickly scan w
 - **Memory**: Visual information is easier to remember than text
 - **Understanding**: Complex relationships are clearer when visualized
 
-## 🎯 The Science Behind Visualization
+## The Science Behind Visualization
 
 ### Pre-attentive Processing
 
@@ -34,7 +34,7 @@ Think of this as your brain's "careful look" processing:
 - Processes complex information
 - Interprets meaning and relationships
 
-## 📊 Visual Elements
+## Visual Elements
 
 ### 1. Form Attributes
 
@@ -86,7 +86,7 @@ Think of colors as a language:
 - **Placement**: Like arranging items in a specific order
 - **Alignment**: Like lining up items in a row
 
-## 🎨 Gestalt Principles
+## Gestalt Principles
 
 Think of these as the rules of visual organization:
 
@@ -115,7 +115,7 @@ Think of these as the rules of visual organization:
 - The brain separates objects from their background
 - Like seeing a person standing in front of a wall
 
-## 📈 Chart Selection Framework
+## Chart Selection Framework
 
 ### 1. Comparison
 
@@ -159,7 +159,7 @@ Think of this as showing how things are connected:
 - **Heat Map**: Like showing relationships between many things
 - **Network Graph**: Like showing connections between items
 
-## 🎨 Color Theory
+## Color Theory
 
 ### 1. Color Schemes
 
@@ -208,7 +208,7 @@ Think of these as making your visualizations readable for everyone:
 - Create clear hierarchy
 - Use high contrast labels
 
-## 📐 Layout and Composition
+## Layout and Composition
 
 ### 1. Visual Hierarchy
 
@@ -246,7 +246,7 @@ Think of this as organizing your layout:
 - Gutters: 16px
 - Padding: 16px
 
-## ⚠️ Common Pitfalls
+## Common Pitfalls
 
 ### 1. Chart Junk
 
@@ -268,7 +268,7 @@ Think of this as organizing your layout:
 - Too much information
 - Like trying to show everything at once
 
-## 🎯 Best Practices
+## Best Practices
 
 ### 1. Start with a Clear Purpose
 
@@ -294,7 +294,7 @@ Think of this as organizing your layout:
 - Verify accuracy
 - Get feedback
 
-## 📚 Next Steps
+## Next Steps
 
 1. Practice with different chart types
 2. Experiment with color schemes

@@ -1,6 +1,6 @@
-# Mathematical Foundation of Neural Networks 📐
+# Mathematical Foundation of Neural Networks
 
-## Welcome to the Math Behind Neural Networks! 🎓
+## Welcome to the Math Behind Neural Networks
 
 Don't worry if math isn't your strongest suit! We'll break down these concepts into simple, understandable pieces. Think of this like learning to cook - you don't need to be a master chef to make a great meal, you just need to understand the basic ingredients and how they work together.
 
@@ -13,7 +13,7 @@ Understanding the math behind neural networks helps you:
 - Create more efficient and effective models
 - Understand why certain techniques work better than others
 
-## Forward Propagation 🔄
+## Forward Propagation
 
 ### Single Neuron
 
@@ -45,7 +45,7 @@ Imagine you're deciding whether to go to the beach:
 - Bias: Your general preference for the beach
 - Activation: Your final decision (go/don't go)
 
-## Activation Functions 📈
+## Activation Functions
 
 ### Common Functions and Their Derivatives
 
@@ -86,7 +86,7 @@ def tanh_derivative(x):
     return 1 - np.tanh(x)**2
 ```
 
-## Loss Functions 📉
+## Loss Functions
 
 ### Common Loss Functions
 
@@ -116,7 +116,7 @@ def binary_cross_entropy(y_true, y_pred):
     )
 ```
 
-## Backpropagation 🔙
+## Backpropagation
 
 ### Chain Rule Application
 
@@ -154,7 +154,7 @@ def backward_pass(network, x, y, cache):
     return gradients
 ```
 
-## Weight Initialization 🎲
+## Weight Initialization
 
 ### Xavier/Glorot Initialization
 
@@ -182,7 +182,7 @@ def he_init(n_in, n_out):
     return np.random.normal(0, limit, (n_out, n_in))
 ```
 
-## Optimization Algorithms 🎯
+## Optimization Algorithms
 
 ### Gradient Descent with Momentum
 
@@ -265,7 +265,7 @@ class AdamOptimizer:
             )
 ```
 
-## Regularization Techniques 🎛️
+## Regularization Techniques
 
 ### L2 Regularization
 
@@ -334,6 +334,6 @@ plt.tight_layout()
 plt.show()
 ```
 
-## Next Steps 🚀
+## Next Steps
 
 Now that you understand the mathematics behind Neural Networks, let's move on to [Implementation](3-implementation.md) to see how to put these concepts into practice!

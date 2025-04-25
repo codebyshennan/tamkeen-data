@@ -3,12 +3,14 @@
 ## Introduction to Object-Oriented Programming
 
 ### Core OOP Concepts
+
 1. **Encapsulation**: Bundling data and methods that operate on that data
 2. **Inheritance**: Creating new classes based on existing ones
 3. **Polymorphism**: Using a single interface for different data types
 4. **Abstraction**: Hiding complex implementation details
 
 ### Why OOP in Data Science?
+
 - Modular and reusable code
 - Maintainable data pipelines
 - Scalable machine learning systems
@@ -17,6 +19,7 @@
 ## Design Patterns in Data Science
 
 ### 1. Factory Pattern
+
 ```python
 from abc import ABC, abstractmethod
 from typing import Dict, Type
@@ -58,6 +61,7 @@ class ModelFactory:
 ```
 
 ### 2. Strategy Pattern
+
 ```python
 from typing import Protocol, Dict, Any
 
@@ -90,6 +94,7 @@ class FeatureEngineer:
 ```
 
 ### 3. Observer Pattern
+
 ```python
 from typing import List, Protocol
 from dataclasses import dataclass
@@ -137,6 +142,7 @@ class ObservableModel:
 ## Testing and Debugging
 
 ### Unit Testing
+
 ```python
 import unittest
 from typing import List, Dict
@@ -169,7 +175,9 @@ if __name__ == '__main__':
 ```
 
 ### Debugging Tips
+
 1. **Use Logging Effectively**
+
 ```python
 import logging
 
@@ -193,6 +201,7 @@ class DebuggableTransformer(BaseTransformer):
 ```
 
 2. **Data Validation**
+
 ```python
 from dataclasses import dataclass
 from typing import Optional, List
@@ -230,6 +239,7 @@ class DataValidator:
 ## Error Handling Best Practices
 
 ### 1. Custom Exceptions
+
 ```python
 class PipelineError(Exception):
     """Base exception for pipeline errors"""
@@ -251,6 +261,7 @@ class TransformerError(PipelineError):
 ```
 
 ### 2. Graceful Error Handling
+
 ```python
 class RobustPipeline:
     def __init__(self, steps: List[BaseTransformer]):
@@ -295,6 +306,7 @@ class RobustPipeline:
 ## Performance Optimization
 
 ### 1. Parallel Processing
+
 ```python
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 from typing import Callable
@@ -317,6 +329,7 @@ class ParallelTransformer(BaseTransformer):
 ```
 
 ### 2. Memory Optimization
+
 ```python
 class MemoryEfficientPipeline:
     def __init__(self, steps: List[BaseTransformer]):
@@ -336,12 +349,13 @@ class MemoryEfficientPipeline:
         return pd.concat(chunks)
 ```
 
-
 ## Advanced Data Science Classes
 
 {% stepper %}
 {% step %}
+
 ### Machine Learning Pipeline
+
 Example of a modular ML pipeline:
 
 ```python
@@ -553,10 +567,13 @@ pipeline.fit(X, y)
 predictions = pipeline.predict(X)
 print("\nPredictions:", predictions)
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Data Pipeline Architecture
+
 Example of a data processing pipeline:
 
 ```python
@@ -727,14 +744,16 @@ try:
 except Exception as e:
     print(f"\nPipeline execution failed: {str(e)}")
 ```
+
 {% endstep %}
 {% endstepper %}
 
-## Practice Exercises for Data Science 🎯
+## Practice Exercises for Data Science
 
 Try these advanced exercises:
 
 1. **Create a Feature Selection System**
+
    ```python
    # Build classes for:
    # - Feature importance calculation
@@ -744,6 +763,7 @@ Try these advanced exercises:
    ```
 
 2. **Implement a Model Evaluation Pipeline**
+
    ```python
    # Create classes for:
    # - Cross-validation
@@ -753,6 +773,7 @@ Try these advanced exercises:
    ```
 
 3. **Build an Automated Report Generator**
+
    ```python
    # Develop classes for:
    # - Data profiling
@@ -762,15 +783,16 @@ Try these advanced exercises:
    ```
 
 Remember:
+
 - Use type hints for better code documentation
 - Implement proper error handling
 - Consider performance implications
 - Write unit tests for your classes
 - Follow SOLID principles
 
-Happy coding! 🚀
+Happy coding!
 
-## Additional Resources 📚
+## Additional Resources
 
 1. **Books**
    - "Clean Code" by Robert C. Martin
@@ -787,4 +809,4 @@ Happy coding! 🚀
    - [Black](https://github.com/psf/black) for code formatting
    - [Mypy](http://mypy-lang.org/) for type checking
 
-Remember: "Clean code is not written by following a set of rules. You don't become a software craftsman by learning a list of heuristics. Professionalism and craftsmanship come from values that drive disciplines." - Robert C. Martin 🎯
+Remember: "Clean code is not written by following a set of rules. You don't become a software craftsman by learning a list of heuristics. Professionalism and craftsmanship come from values that drive disciplines." - Robert C. Martin

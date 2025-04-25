@@ -1,10 +1,10 @@
 # Introduction to Neural Networks
 
-## Welcome to Neural Networks! 🎉
+## Welcome to Neural Networks
 
 Imagine you're teaching a child to recognize different types of fruits. At first, they might make mistakes, but with practice and feedback, they get better. Neural networks learn in a similar way! They're computer systems inspired by how our brains work, designed to learn from examples and improve over time.
 
-## What are Neural Networks? 🤔
+## What are Neural Networks?
 
 Think of a neural network like a team of experts working together to solve a puzzle. Each expert (neuron) specializes in recognizing different patterns, and they communicate with each other to reach a final decision.
 
@@ -36,7 +36,7 @@ Neural networks power many of the technologies we use daily:
    - Weights: How important each connection is
    - Biases: Like adjusting the difficulty level
 
-## When to Use Neural Networks? 🎯
+## When to Use Neural Networks?
 
 ### Perfect For
 
@@ -54,7 +54,7 @@ Neural networks power many of the technologies we use daily:
 - Simple problems that can be solved with basic math
 - When you need instant results
 
-## Types of Neural Networks 🌐
+## Types of Neural Networks
 
 ### 1. Feedforward Neural Networks
 
@@ -80,7 +80,7 @@ Neural networks power many of the technologies we use daily:
 - Better at remembering important information
 - Used in: Language translation, weather forecasting
 
-## Common Mistakes to Avoid 🚫
+## Common Mistakes to Avoid
 
 1. **Using too complex models for simple problems**
    - Start simple and only add complexity when needed
@@ -98,7 +98,7 @@ Neural networks power many of the technologies we use daily:
    - Can lead to memorizing instead of learning
    - Use validation data to check when to stop
 
-## Getting Started with Code 🚀
+## Getting Started with Code
 
 Let's build a simple neural network to recognize handwritten digits. This is like teaching a computer to read numbers!
 
@@ -139,7 +139,7 @@ test_loss, test_acc = model.evaluate(test_images, test_labels)
 print(f"Test accuracy: {test_acc:.3f}")
 ```
 
-## Additional Resources 📚
+## Additional Resources
 
 ### For Beginners
 
@@ -152,6 +152,6 @@ print(f"Test accuracy: {test_acc:.3f}")
 - [Kaggle](https://www.kaggle.com/learn/intro-to-deep-learning) - Hands-on exercises
 - [Google Colab](https://colab.research.google.com/) - Free cloud notebooks to try code
 
-## Next Steps 🎯
+## Next Steps
 
 Ready to understand the math behind neural networks? Continue to [Mathematical Foundation](2-math-foundation.md) to learn how these amazing systems actually work!

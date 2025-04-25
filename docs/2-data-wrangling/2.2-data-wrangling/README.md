@@ -1,8 +1,8 @@
-# Data Wrangling: From Raw Data to Reliable Insights 🚀
+# Data Wrangling: From Raw Data to Reliable Insights
 
 Data wrangling, also known as data munging or data preprocessing, is the art and science of transforming raw data into a clean, reliable format suitable for analysis. Think of it as preparing ingredients before cooking - just as a chef needs clean, properly cut ingredients, a data scientist needs clean, properly formatted data.
 
-## The Data Wrangling Journey 🗺️
+## The Data Wrangling Journey
 
 Let's explore the essential steps in transforming messy data into analysis-ready datasets:
 
@@ -33,39 +33,39 @@ graph TD
     end
 ```
 
-## Learning Objectives 🎯
+## Learning Objectives
 
 After completing this module, you will be able to:
 
-1. **Assess Data Quality** 📊
+1. **Assess Data Quality**
    - Identify data quality dimensions (accuracy, completeness, consistency, timeliness)
    - Measure data completeness using statistical methods
    - Evaluate data consistency across different sources
    - Detect anomalies using statistical and machine learning approaches
    - Example: Analyzing customer data to identify incorrect email formats or impossible age values
 
-2. **Clean Data Effectively** 🧹
+2. **Clean Data Effectively**
    - Handle missing values using advanced imputation techniques
    - Treat outliers using statistical methods (z-score, IQR)
    - Remove or merge duplicates while preserving data integrity
    - Fix inconsistencies in formats and representations
    - Example: Cleaning sales data by handling missing prices, removing duplicate orders, and standardizing product names
 
-3. **Transform Data** 🔄
+3. **Transform Data**
    - Scale numerical features using various methods (min-max, standard scaling)
    - Encode categorical variables (one-hot, label encoding)
    - Engineer new features to capture domain knowledge
    - Standardize formats (dates, currencies, units)
    - Example: Preparing customer transaction data by normalizing monetary values and creating time-based features
 
-4. **Validate Results** ✅
+4. **Validate Results**
    - Implement automated quality checks
    - Verify transformations using statistical tests
    - Ensure data integrity through cross-validation
    - Document changes for reproducibility
    - Example: Validating cleaned customer data by checking for impossible combinations and verifying statistical properties
 
-## Real-World Example: E-commerce Data Analysis 🛍️
+## Real-World Example: E-commerce Data Analysis
 
 Let's walk through a comprehensive example of wrangling e-commerce data. This example demonstrates common challenges and solutions you'll encounter in real-world data science projects:
 
@@ -118,7 +118,7 @@ def validate_data(df):
 validate_data(df)
 ```
 
-## Common Data Quality Issues and Solutions 🔧
+## Common Data Quality Issues and Solutions
 
 Here's a comprehensive guide to handling common data quality challenges:
 
@@ -133,9 +133,10 @@ Here's a comprehensive guide to handling common data quality challenges:
 | Date Format Issues | Pattern validation | Parsing & standardization | Convert all dates to ISO format |
 | Case Sensitivity | String operations | Case normalization | Email: Convert all to lowercase |
 
-## Data Transformation Techniques 🔄
+## Data Transformation Techniques
 
 ### 1. Scaling Methods
+
 ```python
 # Standardization (Z-score normalization)
 from sklearn.preprocessing import StandardScaler
@@ -149,6 +150,7 @@ df['normalized_price'] = scaler.fit_transform(df[['price']])
 ```
 
 ### 2. Encoding Categorical Variables
+
 ```python
 # One-Hot Encoding
 df_encoded = pd.get_dummies(df, columns=['category'])
@@ -159,9 +161,10 @@ le = LabelEncoder()
 df['encoded_category'] = le.fit_transform(df['category'])
 ```
 
-## Best Practices for Data Wrangling 📝
+## Best Practices for Data Wrangling
 
 1. **Document Everything**
+
    ```python
    # Data cleaning log
    cleaning_log = {
@@ -173,6 +176,7 @@ df['encoded_category'] = le.fit_transform(df['category'])
    ```
 
 2. **Create Reusable Functions**
+
    ```python
    def clean_dataset(df):
        """
@@ -192,6 +196,7 @@ df['encoded_category'] = le.fit_transform(df['category'])
    ```
 
 3. **Validate Transformations**
+
    ```python
    def validate_transformation(original_df, transformed_df):
        """Validate data transformation results"""
@@ -200,9 +205,10 @@ df['encoded_category'] = le.fit_transform(df['category'])
        print("Transformation validated successfully!")
    ```
 
-## Performance Considerations 🚀
+## Performance Considerations
 
 1. **Memory Efficiency**
+
    ```python
    # Optimize datatypes
    def optimize_dtypes(df):
@@ -215,6 +221,7 @@ df['encoded_category'] = le.fit_transform(df['category'])
    ```
 
 2. **Processing Speed**
+
    ```python
    # Use vectorized operations
    # Good:
@@ -225,15 +232,16 @@ df['encoded_category'] = le.fit_transform(df['category'])
    #     df.loc[i, 'total'] = df.loc[i, 'price'] * df.loc[i, 'quantity']
    ```
 
-## Prerequisites 📋
+## Prerequisites
 
 - Python 3.x
 - Key libraries:
+
   ```bash
   pip install pandas numpy scikit-learn matplotlib seaborn
   ```
 
-## Tools and Resources 🛠️
+## Tools and Resources
 
 1. **Python Libraries**
    - pandas: Data manipulation
@@ -251,8 +259,8 @@ df['encoded_category'] = le.fit_transform(df['category'])
    - [Data Cleaning Guide](https://scikit-learn.org/stable/modules/preprocessing.html)
    - [Feature Engineering Book](https://www.oreilly.com/library/view/feature-engineering-for/9781491953235/)
 
-## Assignment 📝
+## Assignment
 
 Ready to practice your data wrangling skills? Head over to the [Data Wrangling Assignment](../_assignments/2.2-assignment.md) to apply what you've learned!
 
-Let's transform messy data into analysis-ready datasets! 💪
+Let's transform messy data into analysis-ready datasets!

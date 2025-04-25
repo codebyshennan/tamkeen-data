@@ -1,8 +1,9 @@
-# Advanced SQL Concepts: Beyond the Basics 🚀
+# Advanced SQL Concepts: Beyond the Basics
 
 ## Introduction to Advanced SQL
 
 SQL mastery goes beyond basic CRUD operations. Advanced SQL concepts enable you to:
+
 - Write complex, performant queries
 - Handle large-scale data processing
 - Implement sophisticated business logic
@@ -11,6 +12,7 @@ SQL mastery goes beyond basic CRUD operations. Advanced SQL concepts enable you 
 ## Advanced SQL Functions
 
 ### 1. JSON Operations
+
 ```sql
 -- JSON creation and manipulation
 SELECT 
@@ -46,6 +48,7 @@ FROM order_details_json;
 ```
 
 ### 2. Full-Text Search
+
 ```sql
 -- Create search vectors
 CREATE INDEX idx_products_search ON products USING gin(
@@ -78,6 +81,7 @@ ORDER BY relevance DESC;
 ```
 
 ### 3. Recursive Queries
+
 ```sql
 -- Employee hierarchy
 WITH RECURSIVE employee_hierarchy AS (
@@ -114,6 +118,7 @@ ORDER BY path;
 ## Window Functions Deep Dive
 
 ### 1. Advanced Framing
+
 ```sql
 SELECT 
     date,
@@ -143,6 +148,7 @@ FROM transactions;
 ```
 
 ### 2. Multiple Window Functions
+
 ```sql
 SELECT 
     category,
@@ -169,6 +175,7 @@ WINDOW
 ## Advanced Joins and Set Operations
 
 ### 1. Lateral Joins
+
 ```sql
 SELECT 
     c.customer_name,
@@ -189,6 +196,7 @@ CROSS JOIN LATERAL (
 ```
 
 ### 2. Set Operations with Ordering
+
 ```sql
 -- Complex set operations
 (
@@ -220,6 +228,7 @@ ORDER BY
 ## Error Handling and Transactions
 
 ### 1. Transaction Management
+
 ```sql
 -- Complex transaction with savepoints
 BEGIN;
@@ -261,6 +270,7 @@ COMMIT;
 ```
 
 ### 2. Error Handling
+
 ```sql
 CREATE OR REPLACE FUNCTION process_order(
     p_customer_id INT,
@@ -329,10 +339,10 @@ END;
 $$ LANGUAGE plpgsql;
 ```
 
-
-## Additional Real-World Scenarios 💼
+## Additional Real-World Scenarios
 
 ### 1. E-commerce Funnel Analysis
+
 ```sql
 WITH user_journey AS (
     SELECT 
@@ -365,6 +375,7 @@ FROM user_journey;
 ```
 
 ### 2. Fraud Detection System
+
 ```sql
 WITH transaction_metrics AS (
     SELECT 
@@ -423,6 +434,7 @@ WHERE
 ```
 
 ### 3. Inventory Optimization
+
 ```sql
 WITH inventory_metrics AS (
     SELECT 
@@ -498,9 +510,10 @@ ORDER BY
     avg_daily_sales DESC;
 ```
 
-## Performance Optimization Tips 🚀
+## Performance Optimization Tips
 
 ### 1. Query Plan Analysis
+
 ```sql
 -- Analyze and explain complex queries
 EXPLAIN (ANALYZE, BUFFERS, FORMAT JSON)
@@ -525,6 +538,7 @@ ORDER BY total_spent DESC;
 ```
 
 ### 2. Index Design Patterns
+
 ```sql
 -- Composite indexes for range + equality
 CREATE INDEX idx_orders_customer_date 
@@ -546,6 +560,7 @@ INCLUDE (order_date, total_amount, status);
 ```
 
 ### 3. Materialized Views with Refresh Strategies
+
 ```sql
 -- Create materialized view
 CREATE MATERIALIZED VIEW sales_summary AS
@@ -584,9 +599,10 @@ FOR EACH STATEMENT
 EXECUTE FUNCTION refresh_sales_summary();
 ```
 
-## Common Pitfalls and Solutions ⚠️
+## Common Pitfalls and Solutions
 
 ### 1. N+1 Query Problem
+
 ```sql
 -- Bad: Separate query for each order
 SELECT 
@@ -614,6 +630,7 @@ JOIN order_items oi ON o.order_id = oi.order_id;
 ```
 
 ### 2. Inefficient Date Handling
+
 ```sql
 -- Bad: Function on column prevents index use
 SELECT * 
@@ -628,6 +645,7 @@ AND order_date < '2024-01-01';
 ```
 
 ### 3. Subquery Performance
+
 ```sql
 -- Bad: Correlated subquery runs for each row
 SELECT 
@@ -649,30 +667,32 @@ FROM products p
 LEFT JOIN order_items oi ON p.product_id = oi.product_id;
 ```
 
-Remember: "Performance optimization is an iterative process - measure, analyze, improve!" 💪
+Remember: "Performance optimization is an iterative process - measure, analyze, improve!"
 
-
-## Best Practices and Guidelines 📋
+## Best Practices and Guidelines
 
 ### 1. Query Writing
+
 - Write self-documenting queries with clear aliases
 - Use CTEs for better readability and maintenance
 - Leverage appropriate indexes for performance
 - Consider query plan and execution cost
 
 ### 2. Database Design
+
 - Implement proper constraints and relationships
 - Use appropriate data types
 - Design with scalability in mind
 - Regular maintenance and optimization
 
 ### 3. Development Process
+
 - Version control your database changes
 - Implement proper testing procedures
 - Monitor query performance
 - Regular code reviews and optimization
 
-## Additional Resources 📚
+## Additional Resources
 
 1. **Documentation**
    - [PostgreSQL Documentation](https://www.postgresql.org/docs/)
@@ -684,4 +704,4 @@ Remember: "Performance optimization is an iterative process - measure, analyze, 
    - [DBeaver](https://dbeaver.io/) for query development
    - [pg_stat_statements](https://www.postgresql.org/docs/current/pgstatstatements.html) for query analysis
 
-Remember: "Complex queries should be like well-written essays - clear, structured, and purposeful!" 🎯
+Remember: "Complex queries should be like well-written essays - clear, structured, and purposeful!"

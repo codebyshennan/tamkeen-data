@@ -1,6 +1,6 @@
-# Introduction to Data Visualization 📊
+# Introduction to Data Visualization
 
-## 🎯 What is Data Visualization?
+## What is Data Visualization?
 
 Data visualization is like translating a complex story into a picture book. Just as a picture is worth a thousand words, a well-crafted visualization can communicate complex data patterns and insights in an instant. Think of it as the bridge between raw numbers and human understanding.
 
@@ -11,7 +11,7 @@ Data visualization is like translating a complex story into a picture book. Just
 - **Pattern Recognition**: Visual patterns are easier to spot than numerical patterns
 - **Decision Making**: Clear visualizations lead to better, faster decisions
 
-## 🌟 Real-World Applications
+## Real-World Applications
 
 ### Healthcare
 
@@ -31,7 +31,7 @@ Data visualization is like translating a complex story into a picture book. Just
 - **Customer Behavior**: Shopping patterns
 - **Inventory Management**: Stock levels and turnover
 
-## 📊 Core Principles
+## Core Principles
 
 ### 1. Chart Selection Guide
 
@@ -64,7 +64,7 @@ Think of colors like a language:
 
 ![Color Schemes](assets/color_schemes.png)
 
-## 🎨 Getting Started with Matplotlib
+## Getting Started with Matplotlib
 
 ### Your First Plot
 
@@ -94,7 +94,7 @@ See how a basic plot can be enhanced with proper styling and annotations:
 
 ![Before and After Example](assets/before_after.png)
 
-## 📈 Learning Path
+## Learning Path
 
 ### Week 1: Foundations
 
@@ -117,7 +117,7 @@ See how a basic plot can be enhanced with proper styling and annotations:
 - Custom styling
 - Animations and dynamic updates
 
-## 🛠️ Best Practices
+## Best Practices
 
 ### 1. Design Principles
 
@@ -140,7 +140,7 @@ See how a basic plot can be enhanced with proper styling and annotations:
 - Ensure sufficient contrast
 - Use clear, readable fonts
 
-## 📚 Additional Resources
+## Additional Resources
 
 ### Books
 
@@ -161,7 +161,7 @@ See how a basic plot can be enhanced with proper styling and annotations:
 - Plotly: Interactive visualizations
 - Tableau: Business intelligence and analytics
 
-## 🎯 Next Steps
+## Next Steps
 
 1. Start with simple plots and gradually add complexity
 2. Practice with real-world datasets

@@ -4,26 +4,31 @@
 
 {% stepper %}
 {% step %}
+
 ### What is Reindexing?
+
 Think of reindexing like reorganizing your data to match a new set of labels. It's a powerful tool for:
 
-- 🔄 Rearranging data in a specific order
-- ➕ Adding new index labels (with placeholder values)
-- 🔍 Removing unwanted index labels
-- 📊 Aligning multiple datasets
-- 🔀 Restructuring data hierarchies
+- Rearranging data in a specific order
+- Adding new index labels (with placeholder values)
+- Removing unwanted index labels
+- Aligning multiple datasets
+- Restructuring data hierarchies
 
 Real-world applications:
-- 📈 Aligning financial data from different sources
-- 📅 Filling in missing dates in time series
-- 🌍 Standardizing country codes/names
-- 📊 Matching customer records across systems
+
+- Aligning financial data from different sources
+- Filling in missing dates in time series
+- Standardizing country codes/names
+- Matching customer records across systems
 
 Let's explore with examples:
 {% endstep %}
 
 {% step %}
+
 ### Basic Reindexing
+
 Let's start with practical examples:
 
 ```python
@@ -61,7 +66,9 @@ Notice how 'David' was added with a NaN (Not a Number) value since we didn't hav
 {% endstep %}
 
 {% step %}
+
 ### Filling Missing Values
+
 When reindexing, you can specify how to handle missing values:
 
 ```python
@@ -84,6 +91,7 @@ temps_bfill = temps.reindex(all_days, method='bfill')
 print("\nFilled backward:")
 print(temps_bfill)
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -91,7 +99,9 @@ print(temps_bfill)
 
 {% stepper %}
 {% step %}
+
 ### Reindexing DataFrame Rows
+
 You can reindex both rows and columns in a DataFrame:
 
 ```python
@@ -110,10 +120,13 @@ df_reindexed = df.reindex(all_days)
 print("\nAfter reindexing rows:")
 print(df_reindexed)
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Reindexing DataFrame Columns
+
 You can also reindex columns to add or rearrange them:
 
 ```python
@@ -128,6 +141,7 @@ df_rearranged = df.reindex(columns=['humidity', 'temp'])
 print("\nAfter rearranging columns:")
 print(df_rearranged)
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -135,8 +149,11 @@ print(df_rearranged)
 
 {% stepper %}
 {% step %}
+
 ### Understanding Drop Operations
+
 Dropping is like removing items from your dataset. You can drop:
+
 - Specific rows or columns
 - Rows or columns that meet certain conditions
 - Missing values
@@ -145,7 +162,9 @@ The dropped data is removed from the result but your original data remains uncha
 {% endstep %}
 
 {% step %}
+
 ### Dropping Rows
+
 Here's how to drop rows from your data:
 
 ```python
@@ -168,10 +187,13 @@ df_clean = df.dropna()
 print("\nAfter dropping rows with missing values:")
 print(df_clean)
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Dropping Columns
+
 You can also drop columns you don't need:
 
 ```python
@@ -185,6 +207,7 @@ df_names_only = df.drop(['grade', 'attendance'], axis=1)
 print("\nAfter dropping multiple columns:")
 print(df_names_only)
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -192,14 +215,18 @@ print(df_names_only)
 
 {% stepper %}
 {% step %}
+
 ### When to Use Reindex
+
 Use reindex when you want to:
+
 1. Align data with a specific order or structure
 2. Add new index entries with placeholder values
 3. Reorganize columns in a specific order
 4. Match the structure of another DataFrame
 
 Example of aligning two DataFrames:
+
 ```python
 # Two DataFrames with different indexes
 df1 = pd.DataFrame({'A': [1, 2, 3]}, index=['a', 'b', 'c'])
@@ -210,17 +237,22 @@ df2_aligned = df2.reindex(df1.index)
 print("Aligned DataFrame:")
 print(df2_aligned)
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### When to Use Drop
+
 Use drop when you want to:
+
 1. Remove unnecessary columns
 2. Clean data by removing rows with missing values
 3. Filter out specific rows or columns
 4. Create a subset of your data
 
 Example of smart dropping:
+
 ```python
 # Drop rows where more than 50% of values are missing
 df_clean = df.dropna(thresh=df.shape[1]//2)
@@ -231,12 +263,14 @@ df_unique = df.drop_duplicates()
 # Drop rows based on a condition
 df_filtered = df.drop(df[df['grade'] < 60].index)
 ```
+
 {% endstep %}
 {% endstepper %}
 
 ## Common Pitfalls and Solutions
 
 1. **Forgetting to Assign Results**:
+
    ```python
    # Wrong: original df unchanged
    df.drop('column_name', axis=1)
@@ -248,6 +282,7 @@ df_filtered = df.drop(df[df['grade'] < 60].index)
    ```
 
 2. **Wrong Axis**:
+
    ```python
    # Remember:
    # axis=0 or 'index' for rows
@@ -261,6 +296,7 @@ df_filtered = df.drop(df[df['grade'] < 60].index)
    ```
 
 3. **Chaining Operations**:
+
    ```python
    # More efficient way to drop multiple items
    df_clean = (df

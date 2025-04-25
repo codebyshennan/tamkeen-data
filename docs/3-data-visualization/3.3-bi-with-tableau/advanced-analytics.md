@@ -1,18 +1,18 @@
-# Taking Your Tableau Skills to the Next Level 🚀
+# Taking Your Tableau Skills to the Next Level
 
 ## Introduction: Beyond the Basics
 
 Now that you're comfortable with basic charts and dashboards, let's explore some powerful features that will make your visualizations even better! Think of this as upgrading from a basic calculator to a scientific calculator - more buttons, but so much more you can do!
 
-## 1. Table Calculations: Making Your Numbers Smarter 🧮
+## 1. Table Calculations: Making Your Numbers Smarter
 
 ### What Are Table Calculations?
 
 Think of them as Excel formulas that work across your entire visualization. They help you:
 
-- 📊 Compare values over time
-- 📈 Calculate growth rates
-- 🏆 Rank and analyze performance
+- Compare values over time
+- Calculate growth rates
+- Rank and analyze performance
 
 ### Common Table Calculations (With Real Examples!)
 
@@ -61,7 +61,7 @@ Example Use:
    - Choose 3 periods
 ```
 
-## 2. Level of Detail (LOD) Expressions: The Secret Sauce 🔍
+## 2. Level of Detail (LOD) Expressions: The Secret Sauce
 
 ### What Are LOD Expressions?
 
@@ -108,7 +108,7 @@ Perfect For:
 3. Overall trends
 ```
 
-## 3. Advanced Charts: Making Your Data Beautiful 🎨
+## 3. Advanced Charts: Making Your Data Beautiful
 
 ### Combo Charts (Two Charts in One!)
 
@@ -144,7 +144,7 @@ Try These Cool Ideas:
    - Visualize flow
 ```
 
-## 4. Making It Interactive: Bringing Your Dashboard to Life 🎮
+## 4. Making It Interactive: Bringing Your Dashboard to Life
 
 ### Parameters (Let Users Choose!)
 
@@ -179,7 +179,7 @@ Types of Actions:
    - Connect to docs
 ```
 
-## 5. Best Practices for Advanced Analytics 💡
+## 5. Best Practices for Advanced Analytics
 
 ### Performance Tips
 
@@ -221,7 +221,7 @@ Make It Clear:
    - Clear hierarchy
 ```
 
-## Practice Exercises to Try 🎯
+## Practice Exercises to Try
 
 1. **Customer Analysis Dashboard:**
 
@@ -250,15 +250,15 @@ Make It Clear:
    3. Seasonal patterns
    ```
 
-## Need Help? 🆘
+## Need Help?
 
-- 📚 Tableau Help: [help.tableau.com](https://help.tableau.com)
-- 👥 Community: [community.tableau.com](https://community.tableau.com)
-- 📺 Video Tutorials: [Tableau YouTube](https://www.youtube.com/user/tableausoftware)
+- Tableau Help: [help.tableau.com](https://help.tableau.com)
+- Community: [community.tableau.com](https://community.tableau.com)
+- Video Tutorials: [Tableau YouTube](https://www.youtube.com/user/tableausoftware)
 
 Remember:
 
-- 🎯 Start with simple calculations
-- 📈 Build complexity gradually
-- 🔄 Practice with sample data
-- 💡 Don't be afraid to experiment!
+- Start with simple calculations
+- Build complexity gradually
+- Practice with sample data
+- Don't be afraid to experiment!

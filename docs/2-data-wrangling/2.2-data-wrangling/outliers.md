@@ -1,8 +1,8 @@
-# Outliers: Detection and Treatment Strategies 🔍
+# Outliers: Detection and Treatment Strategies
 
 Outliers are observations that deviate significantly from the general pattern of a dataset. While they can sometimes represent errors, they may also contain valuable insights about unusual but important phenomena. This comprehensive guide will help you master the art of outlier detection and treatment.
 
-## Understanding Outliers: A Comprehensive Framework 📊
+## Understanding Outliers: A Comprehensive Framework
 
 Outliers can be classified into several types, each requiring different detection and treatment approaches:
 
@@ -39,11 +39,12 @@ graph TD
     E --> E2[Density Methods]
 ```
 
-## Mathematical Foundations and Implementation 📐
+## Mathematical Foundations and Implementation
 
 ### 1. Statistical Methods
 
 #### Z-Score Method
+
 ```python
 def detect_outliers_zscore(data, threshold=3):
     """
@@ -68,6 +69,7 @@ def detect_outliers_zscore(data, threshold=3):
 ```
 
 #### IQR Method
+
 ```python
 def detect_outliers_iqr(data, k=1.5):
     """
@@ -96,6 +98,7 @@ def detect_outliers_iqr(data, k=1.5):
 ```
 
 #### Modified Z-Score (MAD)
+
 ```python
 def detect_outliers_mad(data, threshold=3.5):
     """
@@ -121,6 +124,7 @@ def detect_outliers_mad(data, threshold=3.5):
 ### 2. Machine Learning Methods
 
 #### Isolation Forest
+
 ```python
 from sklearn.ensemble import IsolationForest
 
@@ -143,6 +147,7 @@ def detect_outliers_iforest(data, contamination=0.1):
 ```
 
 #### Local Outlier Factor
+
 ```python
 from sklearn.neighbors import LocalOutlierFactor
 
@@ -161,7 +166,7 @@ def detect_outliers_lof(data, contamination=0.1):
     return clf.fit_predict(data.reshape(-1, 1)) == -1
 ```
 
-## Comprehensive Outlier Detection Framework 🔬
+## Comprehensive Outlier Detection Framework
 
 ```python
 import pandas as pd
@@ -261,9 +266,10 @@ class OutlierDetector:
         plt.show()
 ```
 
-## Advanced Treatment Strategies 🛠️
+## Advanced Treatment Strategies
 
 ### 1. Robust Statistics
+
 ```python
 def calculate_robust_statistics(data):
     """Calculate statistics robust to outliers"""
@@ -276,6 +282,7 @@ def calculate_robust_statistics(data):
 ```
 
 ### 2. Adaptive Capping
+
 ```python
 def adaptive_capping(data, sensitivity=1.5):
     """Cap outliers based on local density"""
@@ -291,6 +298,7 @@ def adaptive_capping(data, sensitivity=1.5):
 ```
 
 ### 3. Feature Engineering
+
 ```python
 def engineer_outlier_features(data):
     """Create features from outlier information"""
@@ -312,7 +320,7 @@ def engineer_outlier_features(data):
     return pd.DataFrame(outlier_info)
 ```
 
-## Real-World Case Study: E-commerce Transactions 💼
+## Real-World Case Study: E-commerce Transactions
 
 ```python
 def analyze_transaction_outliers(transactions_df):
@@ -364,7 +372,7 @@ def analyze_transaction_outliers(transactions_df):
     }
 ```
 
-## Performance Impact Analysis 📈
+## Performance Impact Analysis
 
 ```python
 def analyze_outlier_impact(data, target, outlier_mask):
@@ -397,9 +405,10 @@ def analyze_outlier_impact(data, target, outlier_mask):
     return results
 ```
 
-## Best Practices and Common Pitfalls ⚠️
+## Best Practices and Common Pitfalls
 
 ### 1. Detection Strategy Selection
+
 ```python
 def select_outlier_strategy(data):
     """Select appropriate outlier detection strategy"""
@@ -417,6 +426,7 @@ def select_outlier_strategy(data):
 ```
 
 ### 2. Validation Framework
+
 ```python
 def validate_outlier_treatment(original, treated):
     """Validate the impact of outlier treatment"""
@@ -444,7 +454,7 @@ def validate_outlier_treatment(original, treated):
     return validation
 ```
 
-## Practice Exercise: Financial Data Analysis 🏋️‍♂️
+## Practice Exercise: Financial Data Analysis
 
 ```python
 # Load and prepare data
@@ -475,4 +485,4 @@ report = {
 }
 ```
 
-Remember: "Not all outliers are errors, and not all errors are outliers. Context is key!" 🎯
+Remember: "Not all outliers are errors, and not all errors are outliers. Context is key!"

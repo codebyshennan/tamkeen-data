@@ -5,25 +5,25 @@ Welcome to your journey into k-Nearest Neighbors (KNN)! This algorithm is one of
 ![KNN Decision Boundary](assets/knn_decision_boundary.png)
 *Figure: KNN Decision Boundary showing how the algorithm classifies different regions*
 
-## What is KNN? 🤔
+## What is KNN?
 
 > **k-Nearest Neighbors** is like having a group of friends who help you make decisions. The algorithm looks at the "k" closest examples in your data and makes predictions based on their characteristics.
 
 ### Real-World Analogies
 
-1. **Movie Recommendations** 🎬
+1. **Movie Recommendations**
    - Imagine you're trying to decide what movie to watch
    - You ask your 5 closest friends (k=5) for recommendations
    - If 3 friends recommend action movies and 2 recommend comedies
    - You'll likely choose an action movie because it got more "votes"
 
-2. **Restaurant Selection** 🍽️
+2. **Restaurant Selection**
    - You're in a new city looking for dinner
    - You ask the 3 nearest people (k=3) for recommendations
    - 2 suggest Italian, 1 suggests Chinese
    - You choose Italian because it's the majority vote
 
-3. **House Price Prediction** 🏠
+3. **House Price Prediction**
    - You want to estimate your house's value
    - You look at the sale prices of the 5 most similar houses in your neighborhood
    - The average of these prices gives you a good estimate
@@ -38,7 +38,7 @@ KNN is important because:
 - It's great for exploring patterns in your data
 - It's perfect for beginners to understand how machine learning works
 
-## How Does KNN Work? 🛠️
+## How Does KNN Work?
 
 Let's break it down into simple steps:
 
@@ -65,7 +65,7 @@ knn.fit(X_train, y_train)
 predictions = knn.predict(X_test)
 ```
 
-## Common Mistakes to Avoid 🚫
+## Common Mistakes to Avoid
 
 1. **Choosing the Wrong k Value**
    - Too small (k=1): Too sensitive to noise
@@ -80,7 +80,7 @@ predictions = knn.predict(X_test)
    - KNN can be slow with big datasets
    - Solution: Consider using approximate nearest neighbors or other algorithms
 
-## When to Use KNN? 📊
+## When to Use KNN?
 
 ### Perfect For
 
@@ -96,7 +96,7 @@ predictions = knn.predict(X_test)
 - When features are on different scales
 - When memory is limited
 
-## Key Decisions in KNN 🔑
+## Key Decisions in KNN
 
 1. **Choosing k**
    - Start with k=5 and experiment
@@ -112,7 +112,7 @@ predictions = knn.predict(X_test)
    - Uniform: All neighbors have equal weight
    - Distance-based: Closer neighbors have more influence
 
-## Next Steps 📚
+## Next Steps
 
 In the following sections, we'll explore:
 
@@ -121,7 +121,7 @@ In the following sections, we'll explore:
 3. [Advanced Techniques](4-advanced.md) - Making KNN work better
 4. [Applications](5-applications.md) - Real-world uses of KNN
 
-## Additional Resources 📖
+## Additional Resources
 
 For further learning:
 

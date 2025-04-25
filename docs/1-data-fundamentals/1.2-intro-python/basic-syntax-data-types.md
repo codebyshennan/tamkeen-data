@@ -4,7 +4,9 @@
 
 {% stepper %}
 {% step %}
+
 ### Your First Data Analysis Program
+
 Let's start with a simple data analysis example:
 
 ```python
@@ -25,6 +27,7 @@ print(f"Standard Deviation: {std}")
 ```
 
 This example demonstrates:
+
 - Importing libraries (`import` statement)
 - Creating a data list
 - Using functions for analysis
@@ -32,10 +35,13 @@ This example demonstrates:
 {% endstep %}
 
 {% step %}
+
 ### Running Python Code for Data Analysis
+
 Two main approaches for data analysis:
 
 1. **Interactive Mode (Jupyter Notebook)**:
+
    ```python
    # In Jupyter cell
    import pandas as pd
@@ -44,9 +50,11 @@ Two main approaches for data analysis:
    df = pd.read_csv('sales_data.csv')
    df.head()
    ```
+
    Perfect for exploratory data analysis!
 
 2. **Script Mode (Production Code)**:
+
    ```python
    # analysis.py
    import pandas as pd
@@ -61,6 +69,7 @@ Two main approaches for data analysis:
    
    results = analyze_sales('sales_data.csv')
    ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -68,7 +77,9 @@ Two main approaches for data analysis:
 
 {% stepper %}
 {% step %}
+
 ### Indentation in Data Processing
+
 Python's indentation is crucial in data processing flows:
 
 ```python
@@ -89,11 +100,13 @@ raw_data = [10, None, 20, np.nan, 30]
 clean_data = process_data(raw_data)
 ```
 
-💡 **Pro Tip**: Consistent indentation is crucial for maintaining complex data processing pipelines.
+ **Pro Tip**: Consistent indentation is crucial for maintaining complex data processing pipelines.
 {% endstep %}
 
 {% step %}
+
 ### Comments in Data Analysis Code
+
 Good documentation is essential in data science:
 
 ```python
@@ -123,7 +136,7 @@ def preprocess_data(df):
     return df
 ```
 
-💡 **Best Practice**: Use docstrings for functions and detailed inline comments for complex operations.
+ **Best Practice**: Use docstrings for functions and detailed inline comments for complex operations.
 {% endstep %}
 {% endstepper %}
 
@@ -131,7 +144,9 @@ def preprocess_data(df):
 
 {% stepper %}
 {% step %}
+
 ### Variables in Data Analysis
+
 Variables in data science often represent different types of data:
 
 ```python
@@ -160,14 +175,17 @@ df = pd.DataFrame({
 })
 ```
 
-💡 **Remember**: Choose appropriate data types for efficient memory usage and processing!
+ **Remember**: Choose appropriate data types for efficient memory usage and processing!
 {% endstep %}
 
 {% step %}
+
 ### Variable Naming in Data Science
+
 Follow these conventions for clear data analysis code:
 
-✅ **Do This**:
+ **Do This**:
+
 ```python
 mean_temperature = 23.5     # Clear statistical measure
 customer_id = "C001"        # Entity identifier
@@ -176,21 +194,25 @@ daily_sales_data = df      # DataFrame content
 MAX_ITERATIONS = 1000      # Constant value
 ```
 
-❌ **Don't Do This**:
+ **Don't Do This**:
+
 ```python
 temp = 23.5                # Too vague
 data1 = pd.DataFrame()     # Uninformative name
 x = np.array([1,2,3])     # Unclear purpose
 ```
 
-💡 **Pro Tip**: Use descriptive names that indicate the variable's role in your analysis.
+ **Pro Tip**: Use descriptive names that indicate the variable's role in your analysis.
 {% endstep %}
 
 {% step %}
+
 ### Data Types for Analysis
+
 Python data types commonly used in data science:
 
 1. **Numeric Types for Statistical Analysis**:
+
    ```python
    import numpy as np
    
@@ -207,6 +229,7 @@ Python data types commonly used in data science:
    ```
 
 2. **Text Data for Natural Language Processing**:
+
    ```python
    # String operations for text analysis
    text = "Data Science is fascinating"
@@ -218,6 +241,7 @@ Python data types commonly used in data science:
    ```
 
 3. **Boolean Arrays for Filtering**:
+
    ```python
    import pandas as pd
    
@@ -231,6 +255,7 @@ Python data types commonly used in data science:
    ```
 
 4. **Special Types for Missing Data**:
+
    ```python
    # None for missing values
    optional_value = None
@@ -245,11 +270,13 @@ Python data types commonly used in data science:
    clean_df = df.dropna()
    ```
 
-💡 **Tip**: Use `dtype` to check array types in NumPy/Pandas:
+ **Tip**: Use `dtype` to check array types in NumPy/Pandas:
+
 ```python
 print(df['value'].dtype)  # dtype('float64')
 print(np.array([1, 2]).dtype)  # dtype('int64')
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -257,7 +284,9 @@ print(np.array([1, 2]).dtype)  # dtype('int64')
 
 {% stepper %}
 {% step %}
+
 ### Mathematical Operations for Data Science
+
 Common numerical operations in data analysis:
 
 ```python
@@ -284,11 +313,13 @@ diff_matrix = matrix_a - matrix_b
 correlation = np.corrcoef(data, data)
 ```
 
-💡 **Pro Tip**: Use NumPy for efficient numerical computations with large datasets!
+ **Pro Tip**: Use NumPy for efficient numerical computations with large datasets!
 {% endstep %}
 
 {% step %}
+
 ### Numerical Precision and Types
+
 Understanding precision in data analysis:
 
 ```python
@@ -311,6 +342,7 @@ a = 0.1 + 0.2
 b = 0.3
 print(f"0.1 + 0.2 == 0.3: {abs(a - b) < 1e-10}")  # Use tolerance for float comparison
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -318,7 +350,9 @@ print(f"0.1 + 0.2 == 0.3: {abs(a - b) < 1e-10}")  # Use tolerance for float comp
 
 {% stepper %}
 {% step %}
+
 ### Text Data Processing
+
 Common string operations in data analysis:
 
 ```python
@@ -340,10 +374,13 @@ date_obj = datetime.strptime(date_str, '%Y-%m-%d')
 csv_line = "id,name,value"
 columns = csv_line.split(',')
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### String Formatting in Reports
+
 Format strings for data reporting:
 
 ```python
@@ -369,6 +406,7 @@ F1 Score: {f1_score:.2%}
 
 print(report)
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -376,7 +414,9 @@ print(report)
 
 {% stepper %}
 {% step %}
+
 ### Data Type Conversions
+
 Common type conversions in data analysis:
 
 ```python
@@ -401,7 +441,8 @@ float_array = np.array([1, 2, 3], dtype=float)
 int_array = float_array.astype(int)
 ```
 
-💡 **Warning**: Always validate data before conversion:
+ **Warning**: Always validate data before conversion:
+
 ```python
 def safe_float_convert(value):
     try:
@@ -409,10 +450,13 @@ def safe_float_convert(value):
     except (ValueError, TypeError):
         return np.nan
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Data Type Checking and Validation
+
 Best practices for type checking in data analysis:
 
 ```python
@@ -443,10 +487,11 @@ def validate_dataset(df):
     
     return df
 ```
+
 {% endstep %}
 {% endstepper %}
 
-## Practice Exercises for Data Science 🎯
+## Practice Exercises for Data Science
 
 Try these data analysis exercises:
 
@@ -471,9 +516,10 @@ Try these data analysis exercises:
    - Handle outliers
 
 Remember:
+
 - Use numpy for numerical operations
 - Pandas for structured data
 - Always validate your data
 - Handle errors gracefully
 
-Happy analyzing! 🚀
+Happy analyzing!

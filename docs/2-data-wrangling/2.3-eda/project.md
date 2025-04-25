@@ -1,19 +1,20 @@
 # Exploratory Data Analysis Assignment
 
-## Overview 🎯
+## Overview
 
 In this assignment, you'll perform a comprehensive exploratory data analysis on a real-world e-commerce dataset. You'll apply various EDA techniques to uncover patterns, relationships, and trends in the data.
 
-## Dataset Description 📊
+## Dataset Description
 
 You'll be working with an e-commerce dataset containing:
+
 - Customer transactions
 - Product information
 - Temporal data
 - Customer demographics
 - Sales metrics
 
-## Setup 🚀
+## Setup
 
 ```python
 # Required libraries
@@ -28,11 +29,12 @@ from statsmodels.tsa.seasonal import seasonal_decompose
 df = pd.read_csv('ecommerce_data.csv')
 ```
 
-## Tasks 📝
+## Tasks
 
 ### 1. Data Distribution Analysis (25 points)
 
 a) Numeric Variables (15 points)
+
 - Analyze the distribution of sales amounts
 - Examine customer spending patterns
 - Study product pricing distributions
@@ -40,6 +42,7 @@ a) Numeric Variables (15 points)
 - Transform skewed distributions if necessary
 
 b) Categorical Variables (10 points)
+
 - Analyze product category distributions
 - Examine customer demographics
 - Study geographical distributions
@@ -48,6 +51,7 @@ b) Categorical Variables (10 points)
 ### 2. Relationship Analysis (25 points)
 
 a) Numeric Relationships (10 points)
+
 ```python
 # Example structure
 def analyze_numeric_relationships(data):
@@ -59,11 +63,13 @@ def analyze_numeric_relationships(data):
 ```
 
 b) Categorical Relationships (10 points)
+
 - Cross-tabulations of categories
 - Chi-square tests of independence
 - Visualization of category relationships
 
 c) Mixed Variable Analysis (5 points)
+
 - Compare numeric variables across categories
 - Analyze variance between groups
 - Create box plots and violin plots
@@ -71,18 +77,21 @@ c) Mixed Variable Analysis (5 points)
 ### 3. Time Series Analysis (25 points)
 
 a) Temporal Patterns (10 points)
+
 - Daily sales patterns
 - Weekly trends
 - Monthly seasonality
 - Year-over-year growth
 
 b) Decomposition (10 points)
+
 - Trend analysis
 - Seasonal patterns
 - Residual analysis
 - Moving averages
 
 c) Anomaly Detection (5 points)
+
 - Identify unusual patterns
 - Detect seasonal anomalies
 - Flag suspicious transactions
@@ -90,6 +99,7 @@ c) Anomaly Detection (5 points)
 ### 4. Advanced Analysis (15 points)
 
 a) Customer Segmentation
+
 ```python
 def segment_customers(data):
     """
@@ -107,11 +117,13 @@ def segment_customers(data):
 ```
 
 b) Product Analysis
+
 - Analyze product affinities
 - Study category performance
 - Identify top performers
 
 c) Geographic Analysis
+
 - Regional sales patterns
 - Location-based trends
 - Market penetration analysis
@@ -119,18 +131,20 @@ c) Geographic Analysis
 ### 5. Documentation and Presentation (10 points)
 
 a) Analysis Report
+
 - Executive summary
 - Key findings
 - Methodology description
 - Recommendations
 
 b) Visualizations
+
 - Clear and informative plots
 - Proper labeling
 - Consistent styling
 - Interactive elements (optional)
 
-## Deliverables 📦
+## Deliverables
 
 1. Jupyter Notebook containing:
    - All analysis code
@@ -149,7 +163,7 @@ b) Visualizations
    - Main insights
    - Actionable recommendations
 
-## Evaluation Criteria 📊
+## Evaluation Criteria
 
 - Code quality and organization (20%)
 - Analysis depth and accuracy (30%)
@@ -157,7 +171,7 @@ b) Visualizations
 - Insights and interpretation (20%)
 - Documentation clarity (10%)
 
-## Solution Template 💡
+## Solution Template
 
 ```python
 # 1. Initial Setup
@@ -280,7 +294,7 @@ if __name__ == "__main__":
     report = generate_report(df, results)
 ```
 
-## Tips for Success 💡
+## Tips for Success
 
 1. **Start with Questions**
    - Define analysis objectives
@@ -306,7 +320,7 @@ if __name__ == "__main__":
    - Add proper labels
    - Include explanations
 
-## Bonus Challenges 🌟
+## Bonus Challenges
 
 1. **Advanced Visualization**
    - Create interactive plots
@@ -326,4 +340,4 @@ if __name__ == "__main__":
    - Pattern recognition
    - Predictive modeling
 
-Good luck! Remember to focus on generating actionable insights from your analysis! 🚀
+Good luck! Remember to focus on generating actionable insights from your analysis!

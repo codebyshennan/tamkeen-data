@@ -1,11 +1,11 @@
-# Introduction to Regularization 🎯
+# Introduction to Regularization
 
 Imagine you're learning to ride a bicycle. At first, you might use training wheels to prevent falling over. Regularization in machine learning works similarly - it's like adding training wheels to your model to prevent it from "falling over" (overfitting) when making predictions.
 
 ![Regularization Path](assets/regularization_path.png)
-*Figure 1: How regularization affects model coefficients as the regularization strength (α) changes*
+*Figure 1: How regularization affects model coefficients as the regularization strength () changes*
 
-## What is Regularization? 🤔
+## What is Regularization?
 
 Regularization is a technique that helps prevent overfitting by adding a penalty to your model's complexity. Think of it like a parent setting rules for a child - the rules (regularization) help keep behavior (model predictions) in check.
 
@@ -16,7 +16,7 @@ Just like Goldilocks wanted her porridge "not too hot, not too cold, but just ri
 ![Bias-Variance Tradeoff](assets/bias_variance_tradeoff.png)
 *Figure 2: The tradeoff between bias and variance as regularization strength changes*
 
-## Understanding Regularization 📚
+## Understanding Regularization
 
 Regularization works by adding a penalty term to the model's loss function:
 
@@ -83,7 +83,7 @@ Features:
 - More robust than pure L1 or L2 (like having multiple safety nets)
 - Good for highly correlated features (like managing a team with overlapping skills)
 
-## When to Use Regularization? 🎯
+## When to Use Regularization?
 
 ### Perfect For
 
@@ -100,9 +100,9 @@ Features:
 - When interpretability is crucial (like needing to explain decisions to stakeholders)
 - When you need exact zero coefficients (L2) (like needing to completely eliminate certain factors)
 
-## Advantages and Limitations 📊
+## Advantages and Limitations
 
-### Advantages ✅
+### Advantages
 
 1. Prevents overfitting (like having a safety net)
 2. Improves model generalization (like learning principles instead of memorizing)
@@ -110,15 +110,15 @@ Features:
 4. Handles multicollinearity (L2) (like managing related variables effectively)
 5. Reduces model complexity (like simplifying a complex system)
 
-### Limitations ❌
+### Limitations
 
-1. Additional hyperparameter to tune (λ) (like finding the right balance of rules)
-2. May underfit if λ is too large (like having too many restrictions)
+1. Additional hyperparameter to tune () (like finding the right balance of rules)
+2. May underfit if  is too large (like having too many restrictions)
 3. L1 can be unstable with correlated features (like having conflicting rules)
 4. L2 never produces exact zero coefficients (like having some influence even when small)
 5. Can be computationally intensive (like having more complex calculations)
 
-## Common Mistakes to Avoid ⚠️
+## Common Mistakes to Avoid
 
 1. Using too strong regularization (like having too many rules)
 2. Not tuning the regularization parameter (like not adjusting the training wheels)
@@ -126,7 +126,7 @@ Features:
 4. Ignoring feature scaling (like comparing apples and oranges)
 5. Not validating the regularization effect (like not checking if the rules are working)
 
-## Prerequisites 📚
+## Prerequisites
 
 Before diving deeper, ensure you understand:
 
@@ -136,11 +136,11 @@ Before diving deeper, ensure you understand:
 4. Cross-validation (like testing your understanding in different situations)
 5. Model evaluation metrics (like knowing how to measure success)
 
-## Next Steps 🚀
+## Next Steps
 
 Ready to dive deeper? Continue to [Mathematical Foundation](2-math-foundation.md) to understand the theory behind Regularization!
 
-## Additional Resources 📚
+## Additional Resources
 
 - [Scikit-learn Regularization Documentation](https://scikit-learn.org/stable/modules/linear_model.html)
 - [Regularization in Machine Learning](https://towardsdatascience.com/regularization-in-machine-learning-76441ddcf99a)

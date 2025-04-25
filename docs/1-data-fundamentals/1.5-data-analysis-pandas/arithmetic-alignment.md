@@ -4,28 +4,35 @@
 
 {% stepper %}
 {% step %}
+
 ### What is Data Alignment?
+
 Data alignment is one of Pandas' most powerful features! It automatically matches up data by their index labels when performing operations. Think of it like:
-- 📝 Two people comparing shopping lists
-- 🔄 Matching employee records from different departments
-- 📊 Combining sales data from multiple stores
-- 📈 Merging financial data from different sources
+
+- Two people comparing shopping lists
+- Matching employee records from different departments
+- Combining sales data from multiple stores
+- Merging financial data from different sources
 
 Key benefits:
-- ✨ Automatic matching by index
-- 🔍 Safe handling of missing data
-- 🛡️ Prevention of data misalignment errors
-- 🔄 Flexible data combination options
+
+- Automatic matching by index
+- Safe handling of missing data
+- Prevention of data misalignment errors
+- Flexible data combination options
 
 Real-world applications:
-- 💰 Financial data reconciliation
-- 📊 Sales data comparison across regions
-- 📈 Stock portfolio analysis
-- 🏢 Company performance metrics
+
+- Financial data reconciliation
+- Sales data comparison across regions
+- Stock portfolio analysis
+- Company performance metrics
 {% endstep %}
 
 {% step %}
+
 ### Basic Alignment Example
+
 Let's explore alignment with practical examples:
 
 ```python
@@ -75,6 +82,7 @@ print(remaining)
 ```
 
 Notice how:
+
 - Labels that exist in both Series ('b' and 'c') get added together
 - Labels that exist in only one Series ('a' and 'd') get NaN values
 {% endstep %}
@@ -84,7 +92,9 @@ Notice how:
 
 {% stepper %}
 {% step %}
+
 ### Basic DataFrame Operations
+
 Let's see how arithmetic works with DataFrames:
 
 ```python
@@ -111,6 +121,7 @@ print(result)
 ```
 
 Notice how:
+
 - Only column 'B' exists in both DataFrames
 - Column 'A' only exists in df1
 - Column 'C' only exists in df2
@@ -118,7 +129,9 @@ Notice how:
 {% endstep %}
 
 {% step %}
+
 ### Filling Missing Values
+
 You can specify a fill value for missing data during operations:
 
 ```python
@@ -136,8 +149,11 @@ This is like saying "if a value is missing in one DataFrame, treat it as 0 for t
 
 {% stepper %}
 {% step %}
+
 ### Available Methods
+
 Pandas provides several arithmetic methods:
+
 - `add()` or `+`: Addition
 - `sub()` or `-`: Subtraction
 - `mul()` or `*`: Multiplication
@@ -159,10 +175,13 @@ print(prices)
 print("\nQuantities:")
 print(quantity)
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Using Arithmetic Methods
+
 Methods give you more control over operations:
 
 ```python
@@ -184,8 +203,11 @@ The `fill_value` parameter helps handle missing data more gracefully than the de
 
 {% stepper %}
 {% step %}
+
 ### Using combine_first()
+
 `combine_first()` is perfect when you have two datasets and want to:
+
 - Use values from the first dataset where available
 - Fill in missing values from the second dataset
 
@@ -211,10 +233,13 @@ combined = primary_data.combine_first(secondary_data)
 print("\nCombined data:")
 print(combined)
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Real-World Example
+
 Here's a practical example using sales data:
 
 ```python
@@ -239,12 +264,14 @@ combined_sales = store1_sales.combine_first(store2_sales)
 print("\nCombined Sales Data:")
 print(combined_sales)
 ```
+
 {% endstep %}
 {% endstepper %}
 
 ## Best Practices and Tips
 
 1. **Always Check Your Data**:
+
    ```python
    # Before operations, check for:
    print("Missing values in df1:", df1.isna().sum())
@@ -252,6 +279,7 @@ print(combined_sales)
    ```
 
 2. **Use Appropriate Fill Values**:
+
    ```python
    # Choose fill_value based on your data:
    # 0 for additive operations
@@ -262,6 +290,7 @@ print(combined_sales)
    ```
 
 3. **Handle Index Alignment**:
+
    ```python
    # Make sure indexes match when needed
    df1 = df1.reindex(df2.index)
@@ -270,6 +299,7 @@ print(combined_sales)
    ```
 
 4. **Document Your Choices**:
+
    ```python
    # Add comments explaining your decisions
    # Example: Combining sales data, preferring recent data

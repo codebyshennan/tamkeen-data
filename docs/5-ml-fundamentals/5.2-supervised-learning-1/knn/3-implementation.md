@@ -153,11 +153,11 @@ model, scaler = classify_iris_flowers()
 1. **Forgetting to Scale Features**
 
    ```python
-   # ❌ Wrong way
+   #  Wrong way
    knn = KNeighborsClassifier()
    knn.fit(X_train, y_train)  # Features not scaled
    
-   # ✅ Right way
+   #  Right way
    scaler = StandardScaler()
    X_train_scaled = scaler.fit_transform(X_train)
    knn.fit(X_train_scaled, y_train)
@@ -166,10 +166,10 @@ model, scaler = classify_iris_flowers()
 2. **Choosing the Wrong k Value**
 
    ```python
-   # ❌ Using k=1 (too sensitive to noise)
+   #  Using k=1 (too sensitive to noise)
    knn = KNeighborsClassifier(n_neighbors=1)
    
-   # ✅ Try different values and use cross-validation
+   #  Try different values and use cross-validation
    from sklearn.model_selection import GridSearchCV
    param_grid = {'n_neighbors': [3, 5, 7, 9, 11]}
    grid_search = GridSearchCV(knn, param_grid, cv=5)
@@ -179,10 +179,10 @@ model, scaler = classify_iris_flowers()
 3. **Not Handling Categorical Features**
 
    ```python
-   # ❌ Using categorical features directly
+   #  Using categorical features directly
    knn.fit(X_with_categories, y)
    
-   # ✅ Encode categorical features first
+   #  Encode categorical features first
    from sklearn.preprocessing import OneHotEncoder
    encoder = OneHotEncoder()
    X_encoded = encoder.fit_transform(X_with_categories)

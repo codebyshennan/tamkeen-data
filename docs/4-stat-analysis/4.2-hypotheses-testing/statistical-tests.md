@@ -1,12 +1,12 @@
-# Statistical Tests: Your Data Analysis Toolkit 🧰
+# Statistical Tests: Your Data Analysis Toolkit
 
-## Introduction: Why Statistical Tests Matter 🎯
+## Introduction: Why Statistical Tests Matter
 
 Think of statistical tests as your data detective tools - they help you uncover patterns, relationships, and differences that might not be obvious at first glance. Whether you're comparing customer groups, analyzing experimental results, or exploring relationships between variables, statistical tests help you make informed decisions based on evidence rather than intuition!
 
-## The Statistical Tests Family Tree 🌳
+## The Statistical Tests Family Tree
 
-### 1. T-Tests: Comparing Means 📊
+### 1. T-Tests: Comparing Means
 
 Like comparing recipes by taste-testing - are they really different or just slightly varied?
 
@@ -110,7 +110,7 @@ class TTestAnalyzer:
         plt.close()
 ```
 
-### 2. ANOVA: Comparing Multiple Groups 🎭
+### 2. ANOVA: Comparing Multiple Groups
 
 Like being a judge in a cooking competition - are any of these dishes significantly different?
 
@@ -186,7 +186,7 @@ class ANOVAAnalyzer:
         plt.close()
 ```
 
-### 3. Chi-Square Tests: Analyzing Categories 📊
+### 3. Chi-Square Tests: Analyzing Categories
 
 Like checking if dice are fair - are the outcomes distributed as expected?
 
@@ -250,7 +250,7 @@ class ChiSquareAnalyzer:
         plt.close()
 ```
 
-### 4. Correlation Tests: Measuring Relationships 🔄
+### 4. Correlation Tests: Measuring Relationships
 
 Like checking if ice cream sales and temperature are related!
 
@@ -388,13 +388,13 @@ To enhance understanding of statistical tests, we recommend adding the following
    - Discuss limitations
    - Make recommendations
 
-## Additional Resources 📚
+## Additional Resources
 
-- [Statistical Test Calculator](https://www.socscistatistics.com/)
-- [Effect Size Calculator](https://www.psychometrica.de/effect_size.html)
-- [Interactive Test Selection Guide](https://stats.idre.ucla.edu/other/mult-pkg/whatstat/)
+- [Statistical Tests Guide](https://www.statisticshowto.com/probability-and-statistics/statistical-tests/)
+- [Effect Size Calculator](https://www.statstest.com/effect-size/)
+- [Multiple Testing Correction](https://www.statstest.com/bonferroni/)
 
-Remember: Statistical tests are like tools in a toolbox - choose the right one for the job! 🛠️
+Remember: Statistical tests are like tools in a toolbox - choose the right one for the job!
 
 # Statistical Tests: Choosing and Using the Right Tools
 

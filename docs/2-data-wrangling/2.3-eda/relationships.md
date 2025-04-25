@@ -1,21 +1,23 @@
-# Understanding Data Relationships: A Comprehensive Guide 🔍
+# Understanding Data Relationships: A Comprehensive Guide
 
 Understanding relationships between variables is crucial for:
+
 - Making better predictions
 - Identifying key drivers
 - Discovering hidden patterns
 - Making informed business decisions
 
-## Why Study Relationships? 🤔
+## Why Study Relationships?
 
 Relationship analysis helps you:
+
 1. Identify cause-and-effect patterns
 2. Predict future outcomes
 3. Optimize business processes
 4. Make data-driven decisions
 5. Validate business hypotheses
 
-## Relationship Analysis Workflow: A Systematic Approach 🔄
+## Relationship Analysis Workflow: A Systematic Approach
 
 Follow this workflow to uncover meaningful relationships in your data:
 
@@ -39,7 +41,7 @@ graph TD
     E --> E3[Effect Size]
 ```
 
-## Mathematical Foundations 📐
+## Mathematical Foundations
 
 ### 1. Correlation Measures: Understanding Association Strength
 
@@ -85,7 +87,7 @@ Methods for understanding relationships between categorical variables:
   - Information theory based
   - Always non-negative
 
-## Comprehensive Relationship Analysis Framework: A Practical Guide 🔬
+## Comprehensive Relationship Analysis Framework: A Practical Guide
 
 This framework helps you systematically analyze relationships in your data:
 
@@ -253,7 +255,7 @@ class RelationshipAnalyzer:
         }
 ```
 
-## Real-World Case Study: Customer Analysis 💼
+## Real-World Case Study: Customer Analysis
 
 Let's analyze customer behavior to understand key relationships:
 
@@ -290,10 +292,10 @@ print(f"Cramer's V: {category_loyalty['cramers_v']:.3f}")
 # 3. Analyze spending by segment
 segment_spending = analyzer.analyze_mixed_relationship('spending', 'customer_segment')
 print("\nSpending by Segment Analysis:")
-print(f"Effect Size (η²): {segment_spending['eta_squared']:.3f}")
+print(f"Effect Size (): {segment_spending['eta_squared']:.3f}")
 ```
 
-## Performance Optimization Tips: Handling Large-Scale Relationship Analysis 🚀
+## Performance Optimization Tips: Handling Large-Scale Relationship Analysis
 
 Optimize your analysis for large datasets:
 
@@ -316,6 +318,7 @@ Optimize your analysis for large datasets:
    - Focus on relevant subsets
 
 ### 1. Efficient Correlation Computation
+
 ```python
 def compute_correlations_efficiently(df, method='pearson'):
     """Compute correlations efficiently for large datasets"""
@@ -334,6 +337,7 @@ def compute_correlations_efficiently(df, method='pearson'):
 ```
 
 ### 2. Memory-Efficient Categorical Analysis
+
 ```python
 def analyze_categories_efficiently(df, cat1, cat2, max_categories=50):
     """Memory-efficient categorical analysis"""
@@ -352,7 +356,7 @@ def analyze_categories_efficiently(df, cat1, cat2, max_categories=50):
     return contingency
 ```
 
-## Common Pitfalls and Solutions: Learning from Experience ⚠️
+## Common Pitfalls and Solutions: Learning from Experience
 
 Avoid these common mistakes in relationship analysis:
 
@@ -374,7 +378,8 @@ Avoid these common mistakes in relationship analysis:
    - Use appropriate statistical tests
    - Validate findings across subsets
 
-1. **Correlation ≠ Causation**
+1. **Correlation  Causation**
+
    ```python
    def check_confounding(df, x, y, potential_confounders):
        """Check for confounding variables"""
@@ -395,6 +400,7 @@ Avoid these common mistakes in relationship analysis:
    ```
 
 2. **Non-linear Relationships**
+
    ```python
    def check_nonlinearity(df, x, y):
        """Check for non-linear relationships"""
@@ -415,6 +421,7 @@ Avoid these common mistakes in relationship analysis:
    ```
 
 3. **Sample Size Considerations**
+
    ```python
    def adjust_for_sample_size(statistic, n, type='correlation'):
        """Adjust statistics for sample size"""
@@ -431,4 +438,4 @@ Avoid these common mistakes in relationship analysis:
            return statistic
    ```
 
-Remember: "Correlation is not causation, but it's a good place to start looking!" 🎯
+Remember: "Correlation is not causation, but it's a good place to start looking!"

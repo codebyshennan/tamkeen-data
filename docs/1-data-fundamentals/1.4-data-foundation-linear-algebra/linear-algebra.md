@@ -1,21 +1,26 @@
-# Linear Algebra: Matrix Magic! ✨
+# Linear Algebra: Matrix Magic
 
-## Set Operations: Finding Unique Values! 🎯
+## Set Operations: Finding Unique Values
 
 {% stepper %}
 {% step %}
+
 ### Finding Unique Values
+
 Like finding unique cards in a deck! Set operations are crucial for:
-- 🔍 Data cleaning (removing duplicates)
-- 📊 Feature engineering (unique categories)
-- 🎯 Finding distinct values
-- 🔄 Comparing datasets
+
+- Data cleaning (removing duplicates)
+- Feature engineering (unique categories)
+- Finding distinct values
+- Comparing datasets
 
 Real-world applications:
-- 📝 Finding unique customer IDs
-- 🏷️ Extracting unique product categories
-- 📊 Identifying unique transaction types
-- 🌍 Finding unique locations in data
+
+- Finding unique customer IDs
+- Extracting unique product categories
+- Identifying unique transaction types
+- Finding unique locations in data
+
 ```python
 import numpy as np
 
@@ -45,11 +50,15 @@ sales_data = np.array([
 unique_categories = np.unique(sales_data[:, 0])  # Get unique product categories
 print("\nUnique product categories:", unique_categories)
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Testing Membership
+
 Like checking if someone's on the guest list!
+
 ```python
 # Guest list scenario
 guests = np.array([1, 2, 3, 4, 5])  # Authorized IDs
@@ -71,15 +80,19 @@ print("\nOrder fulfillment check:")
 print("Can fulfill:", orders[can_fulfill])
 print("Out of stock:", orders[~can_fulfill])
 ```
+
 {% endstep %}
 {% endstepper %}
 
-## Matrix Multiplication: The Dance of Numbers! 💃
+## Matrix Multiplication: The Dance of Numbers
 
 {% stepper %}
 {% step %}
+
 ### What is Matrix Multiplication?
+
 Think of it like a special dance between numbers:
+
 ```python
 # First matrix (2 rows, 3 columns)
 x = np.array([
@@ -98,10 +111,13 @@ y = np.array([
 result = x @ y  # or np.dot(x, y)
 print(result)
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Visual Guide to Matrix Multiplication
+
 ```
 Matrix 1:      Matrix 2:      Result:
 ┌─────────┐    ┌───────┐     ┌───────┐
@@ -112,10 +128,13 @@ Matrix 1:      Matrix 2:      Result:
 
 First element (28) = 1×6 + 2×(-1) + 3×8
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Three Ways to Multiply
+
 ```python
 # Method 1: Using @
 result1 = x @ y
@@ -128,14 +147,17 @@ result3 = np.matmul(x, y)
 
 # All give the same result!
 ```
+
 {% endstep %}
 {% endstepper %}
 
-## Linear Algebra Operations: The Toolbox! 🧰
+## Linear Algebra Operations: The Toolbox
 
 {% stepper %}
 {% step %}
+
 ### Common Operations
+
 ```python
 # Create a 2x2 matrix
 a = np.array([[1, 2],
@@ -154,10 +176,13 @@ b = np.array([5, 11])
 x = np.linalg.solve(a, b)
 print("Solution:", x)
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Visual Guide to Operations
+
 ```
 Original Matrix:   Inverse Matrix:
 ┌─────┐           ┌──────────┐
@@ -170,14 +195,17 @@ Solving equations:
 3x + 4y = 11
 Solution: x = 1, y = 2
 ```
+
 {% endstep %}
 {% endstepper %}
 
-## Matrix Properties: Getting to Know Your Data! 📊
+## Matrix Properties: Getting to Know Your Data
 
 {% stepper %}
 {% step %}
+
 ### Finding Matrix Properties
+
 ```python
 matrix = np.array([[1, 2, 3],
                    [4, 5, 6]])
@@ -193,10 +221,13 @@ square_matrix = np.array([[1, 2],
                          [3, 4]])
 print("Trace:", np.trace(square_matrix))
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Eigenvalues and Eigenvectors
+
 ```python
 # For square matrices only
 square = np.array([[4, -2],
@@ -207,10 +238,12 @@ eigenvals, eigenvecs = np.linalg.eig(square)
 print("Eigenvalues:", eigenvals)
 print("Eigenvectors:\n", eigenvecs)
 ```
+
 {% endstep %}
 {% endstepper %}
 
-💡 **Pro Tips**:
+ **Pro Tips**:
+
 - Use `@` for matrix multiplication - it's cleaner!
 - Check matrix shapes before multiplying
 - Remember: not all matrices have inverses

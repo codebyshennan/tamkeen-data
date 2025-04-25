@@ -4,31 +4,38 @@
 
 {% stepper %}
 {% step %}
+
 ### What is Sorting?
+
 Sorting in Pandas helps you organize your data in a specific order. Think of it like:
-- 📚 Arranging books alphabetically on a shelf
-- 📊 Organizing test scores from highest to lowest
-- 📅 Arranging dates from oldest to newest
-- 💰 Sorting transactions by amount
-- 🏆 Ranking players by score
+
+- Arranging books alphabetically on a shelf
+- Organizing test scores from highest to lowest
+- Arranging dates from oldest to newest
+- Sorting transactions by amount
+- Ranking players by score
 
 Key benefits:
-- 🔍 Quick value lookup
-- 📈 Pattern identification
-- 📊 Data presentation
-- 🎯 Priority identification
-- 📉 Trend analysis
+
+- Quick value lookup
+- Pattern identification
+- Data presentation
+- Priority identification
+- Trend analysis
 
 Real-world applications:
-- 📈 Financial portfolio analysis
-- 🏆 Sports rankings and statistics
-- 📊 Sales performance reports
-- 📅 Event scheduling and planning
-- 🎯 Customer segmentation
+
+- Financial portfolio analysis
+- Sports rankings and statistics
+- Sales performance reports
+- Event scheduling and planning
+- Customer segmentation
 {% endstep %}
 
 {% step %}
+
 ### Basic Sorting Example
+
 Let's explore sorting with practical examples:
 
 ```python
@@ -69,6 +76,7 @@ sales_data['Total'] = sales_data['Price'] * sales_data['Units']
 print("\nSales Data (sorted by total sales):")
 print(sales_data.sort_values('Total', ascending=False))
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -76,7 +84,9 @@ print(sales_data.sort_values('Total', ascending=False))
 
 {% stepper %}
 {% step %}
+
 ### Sorting by a Single Column
+
 Let's work with a student grades DataFrame:
 
 ```python
@@ -99,10 +109,13 @@ print(grades.sort_values('Math'))
 print("\nSorted by Math scores (highest to lowest):")
 print(grades.sort_values('Math', ascending=False))
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Sorting by Multiple Columns
+
 You can sort by multiple columns to break ties:
 
 ```python
@@ -115,6 +128,7 @@ print("\nScience descending, Math ascending:")
 print(grades.sort_values(['Science', 'Math'], 
                         ascending=[False, True]))
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -122,8 +136,11 @@ print(grades.sort_values(['Science', 'Math'],
 
 {% stepper %}
 {% step %}
+
 ### What is Ranking?
+
 Ranking assigns positions to your data based on their values. Think of it like:
+
 - Ranking athletes in a competition
 - Assigning class rank to students
 - Determining the position of teams in a league
@@ -132,7 +149,9 @@ The difference from sorting is that ranking keeps your data in its original orde
 {% endstep %}
 
 {% step %}
+
 ### Basic Ranking Example
+
 Let's see different ways to rank data:
 
 ```python
@@ -164,7 +183,9 @@ Notice how different methods handle the tied scores (85 appears twice).
 
 {% stepper %}
 {% step %}
+
 ### Sales Performance Analysis
+
 Let's analyze sales data:
 
 ```python
@@ -185,10 +206,13 @@ sales['RegionalRank'] = sales.groupby('Region')['Sales'].rank(ascending=False)
 print("\nSales with regional rankings:")
 print(sales)
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Student Performance Analysis
+
 Analyze student rankings across different subjects:
 
 ```python
@@ -211,6 +235,7 @@ for subject in ['Math', 'Science', 'History']:
 print("Student rankings:")
 print(students.sort_values('OverallRank'))
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -218,8 +243,11 @@ print(students.sort_values('OverallRank'))
 
 {% stepper %}
 {% step %}
+
 ### Sorting Best Practices
+
 1. **Preserve Original Data**:
+
    ```python
    # Create sorted view without modifying original
    sorted_df = df.sort_values('column')
@@ -229,21 +257,27 @@ print(students.sort_values('OverallRank'))
    ```
 
 2. **Handle Missing Values**:
+
    ```python
    # Control where NaN values appear
    df.sort_values('column', na_position='first')  # or 'last'
    ```
 
 3. **Stable Sorting**:
+
    ```python
    # Maintain relative order of equal values
    df.sort_values(['A', 'B'], kind='stable')
    ```
+
 {% endstep %}
 
 {% step %}
+
 ### Ranking Best Practices
+
 1. **Choose Appropriate Method**:
+
    ```python
    # For competition rankings (1224 ranking)
    df['Rank'] = df['Score'].rank(method='min')
@@ -256,22 +290,26 @@ print(students.sort_values('OverallRank'))
    ```
 
 2. **Handle Percentile Rankings**:
+
    ```python
    # Calculate percentile ranks
    df['Percentile'] = df['Score'].rank(pct=True)
    ```
+
 {% endstep %}
 {% endstepper %}
 
 ## Common Pitfalls and Solutions
 
 1. **Forgetting to Handle NaN Values**:
+
    ```python
    # Specify na_position explicitly
    df.sort_values('column', na_position='last')
    ```
 
 2. **Incorrect Rank Method**:
+
    ```python
    # Different methods for different needs:
    # 'average': Default, assigns average of ranks for ties
@@ -282,6 +320,7 @@ print(students.sort_values('OverallRank'))
    ```
 
 3. **Not Considering Performance**:
+
    ```python
    # More efficient for large datasets
    df.nlargest(10, 'column')  # Instead of sort_values().head(10)

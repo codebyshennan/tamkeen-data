@@ -4,7 +4,9 @@
 
 {% stepper %}
 {% step %}
+
 ### Understanding If Statements in Data Analysis
+
 Conditions are crucial for data filtering and validation:
 
 ```python
@@ -30,11 +32,13 @@ def process_value(value):
         return value
 ```
 
-💡 **Remember**: Always validate your data before analysis!
+ **Remember**: Always validate your data before analysis!
 {% endstep %}
 
 {% step %}
+
 ### If-Else in Data Processing
+
 Common data processing scenarios:
 
 ```python
@@ -58,6 +62,7 @@ def flag_outlier(value, mean, std):
 ```
 
 Real-world example:
+
 ```python
 # Sales data analysis
 def analyze_sales_performance(sales_value, target):
@@ -70,10 +75,13 @@ def analyze_sales_performance(sales_value, target):
     else:
         return 'Below Target'
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Multiple Conditions in Data Analysis
+
 Complex data processing decisions:
 
 ```python
@@ -109,10 +117,13 @@ def transform_value(value, data_type):
     else:
         return value
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Nested Conditions in Feature Engineering
+
 Complex feature creation:
 
 ```python
@@ -144,6 +155,7 @@ def create_age_features(df):
     )
     return df
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -151,7 +163,9 @@ def create_age_features(df):
 
 {% stepper %}
 {% step %}
+
 ### Comparison Operations in Pandas
+
 Efficient data filtering:
 
 ```python
@@ -186,11 +200,13 @@ def filter_outliers(df, columns, n_std=3):
     return df
 ```
 
-💡 **Performance Tip**: Use vectorized operations instead of loops for filtering!
+ **Performance Tip**: Use vectorized operations instead of loops for filtering!
 {% endstep %}
 
 {% step %}
+
 ### Logical Operations in Data Analysis
+
 Combining multiple conditions:
 
 ```python
@@ -230,6 +246,7 @@ def detect_outliers(df, threshold=3):
     
     return has_outliers
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -237,14 +254,16 @@ def detect_outliers(df, threshold=3):
 
 {% stepper %}
 {% step %}
+
 ### Vectorized Operations vs. Loops
+
 Understanding performance implications:
 
 ```python
 import pandas as pd
 import numpy as np
 
-# ❌ Slow: Using loops
+#  Slow: Using loops
 def slow_calculation(df):
     results = []
     for index, row in df.iterrows():
@@ -255,7 +274,7 @@ def slow_calculation(df):
             results.append(np.nan)
     return results
 
-# ✅ Fast: Using vectorized operations
+#  Fast: Using vectorized operations
 def fast_calculation(df):
     return np.where(
         df['value'] > 0,
@@ -263,7 +282,7 @@ def fast_calculation(df):
         np.nan
     )
 
-# ✅ Fast: Using pandas methods
+#  Fast: Using pandas methods
 def process_data(df):
     # Calculate statistics
     df['z_score'] = (df['value'] - df['value'].mean()) / df['value'].std()
@@ -279,10 +298,13 @@ def process_data(df):
     df['category'] = np.select(conditions, choices, default='Unknown')
     return df
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Efficient Iteration When Necessary
+
 Some cases require iteration:
 
 ```python
@@ -318,11 +340,13 @@ def process_chunk(chunk):
     return chunk
 ```
 
-💡 **Performance Tip**: Use chunking for large datasets that don't fit in memory!
+ **Performance Tip**: Use chunking for large datasets that don't fit in memory!
 {% endstep %}
 
 {% step %}
+
 ### Working with Time Series Data
+
 Efficient time series processing:
 
 ```python
@@ -360,6 +384,7 @@ def process_by_group(df, group_col, value_col):
     
     return df.groupby(group_col).apply(group_operation)
 ```
+
 {% endstep %}
 {% endstepper %}
 
@@ -367,7 +392,9 @@ def process_by_group(df, group_col, value_col):
 
 {% stepper %}
 {% step %}
+
 ### Pattern: Data Validation
+
 Common validation patterns:
 
 ```python
@@ -403,10 +430,13 @@ class DataValidator:
             return "\n".join(self.validation_results)
         return "All validations passed"
 ```
+
 {% endstep %}
 
 {% step %}
+
 ### Pattern: Data Cleaning
+
 Standard cleaning operations:
 
 ```python
@@ -446,14 +476,16 @@ class DataCleaner:
         """Return cleaned dataset"""
         return self.df
 ```
+
 {% endstep %}
 {% endstepper %}
 
-## Practice Exercises for Data Analysis 🎯
+## Practice Exercises for Data Analysis
 
 Try these data science exercises:
 
 1. **Data Quality Assessment**
+
    ```python
    # Create a function that:
    # - Checks for missing values
@@ -463,6 +495,7 @@ Try these data science exercises:
    ```
 
 2. **Time Series Analysis**
+
    ```python
    # Build a program that:
    # - Processes time series data
@@ -472,6 +505,7 @@ Try these data science exercises:
    ```
 
 3. **Customer Segmentation**
+
    ```python
    # Implement a system that:
    # - Processes customer data
@@ -481,9 +515,10 @@ Try these data science exercises:
    ```
 
 Remember:
+
 - Use vectorized operations when possible
 - Consider memory efficiency
 - Handle edge cases
 - Validate results
 
-Happy analyzing! 🚀
+Happy analyzing!
