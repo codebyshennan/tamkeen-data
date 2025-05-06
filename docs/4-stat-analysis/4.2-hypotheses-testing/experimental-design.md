@@ -47,7 +47,7 @@ This guide will help you understand the basics of experimental design, with simp
 Suppose you have 10 participants and want to assign them to two groups at random:
 
 ```python
-# Self-contained example: Randomly assign 10 participants to two groups
+# Example: Randomly assign 10 participants to two groups
 import numpy as np
 
 participants = [f'P{i+1}' for i in range(10)]  # Create participant IDs
@@ -113,7 +113,7 @@ Experimental design is about how you assign treatments to units (like people, pl
 Suppose you're testing two fertilizers (A and B) on 20 identical plants. You want to assign each plant to a fertilizer at random.
 
 ```python
-# Self-contained example: Completely Randomized Design (CRD)
+# Example: Completely Randomized Design (CRD)
 import numpy as np
 
 def completely_randomized_design(treatments, units):
@@ -163,7 +163,7 @@ for unit, treatment in assignment.items():
 Suppose you're testing two fertilizers on plants, but your garden has sunny and shady areas. You want to make sure both fertilizers are tested in both conditions.
 
 ```python
-# Self-contained example: Randomized Block Design (RBD)
+# Example: Randomized Block Design (RBD)
 import numpy as np
 
 def randomized_block_design(treatments, blocks):
