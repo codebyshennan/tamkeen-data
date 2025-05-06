@@ -59,6 +59,9 @@ control_group = shuffled[:group_size]
 treatment_group = shuffled[group_size:]
 print("Control group:", control_group)
 print("Treatment group:", treatment_group)
+# Sample output:
+# Control group: ['P7' 'P4' 'P8' 'P5' 'P3']
+# Treatment group: ['P6' 'P1' 'P9' 'P10' 'P2']
 ```
 
 **What to look for:**
@@ -128,12 +131,20 @@ def completely_randomized_design(treatments, units):
     return dict(zip(units, assignments))
 
 # Example usage:
-units = [f'Plant_{i+1}' for i in range(20)]
+units = [f'Plant_{i+1}' for i in range(6)]
 treatments = ['A', 'B']
 assignment = completely_randomized_design(treatments, units)
 print("Assignments:")
 for unit, treatment in assignment.items():
     print(f"{unit}: {treatment}")
+# Sample output:
+# Assignments:
+# Plant_1: B
+# Plant_2: A
+# Plant_3: B
+# Plant_4: B
+# Plant_5: A
+# Plant_6: B
 ```
 
 **What to look for:**
@@ -176,7 +187,6 @@ def randomized_block_design(treatments, blocks):
     np.random.seed(42)
     assignments = {}
     for block, units in blocks.items():
-        # Repeat treatments to match block size, then shuffle
         reps = len(units) // len(treatments)
         block_treatments = (treatments * reps)[:len(units)]
         block_assignments = np.random.permutation(block_treatments)
@@ -185,14 +195,24 @@ def randomized_block_design(treatments, blocks):
 
 # Example usage:
 blocks = {
-    'Sunny': [f'Sunny_{i+1}' for i in range(6)],
-    'Shady': [f'Shady_{i+1}' for i in range(6)]
+    'Sunny': [f'Sunny_{i+1}' for i in range(4)],
+    'Shady': [f'Shady_{i+1}' for i in range(4)]
 }
 treatments = ['A', 'B']
 assignment = randomized_block_design(treatments, blocks)
 print("Assignments:")
 for unit, treatment in assignment.items():
     print(f"{unit}: {treatment}")
+# Sample output:
+# Assignments:
+# Sunny_1: B
+# Sunny_2: A
+# Sunny_3: B
+# Sunny_4: A
+# Shady_1: B
+# Shady_2: A
+# Shady_3: B
+# Shady_4: A
 ```
 
 **What to look for:**

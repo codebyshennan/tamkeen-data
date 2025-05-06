@@ -66,6 +66,8 @@ def perform_ttest(control_data, treatment_data, alpha=0.05):
 
 result = perform_ttest(control_data, treatment_data)
 print(result['explanation'])
+# Sample output:
+# T-statistic: -4.47, P-value: 0.002. Effect size: 3.00. Significant difference between group means at alpha=0.05.
 ```
 
 ### 2. ANOVA: Comparing More Than Two Groups
@@ -117,6 +119,8 @@ def perform_anova(*groups, alpha=0.05):
 
 result = perform_anova(group1, group2, group3)
 print(result['explanation'])
+# Sample output:
+# F-statistic: 44.00, P-value: 0.000. Effect size (eta-squared): 0.88. At least one group mean is significantly different at alpha=0.05.
 ```
 
 ### 3. Chi-Square Tests: Analyzing Categorical Data
@@ -174,6 +178,8 @@ def perform_chi_square(observed, expected=None, alpha=0.05):
 
 result = perform_chi_square(observed, expected)
 print(result['explanation'])
+# Sample output:
+# Chi-square: 1.18, P-value: 0.946. Effect size (Cramer's V): 0.20. No significant association at alpha=0.05.
 ```
 
 ### 4. Correlation Tests: Measuring Relationships
@@ -231,6 +237,9 @@ result = perform_correlation(x, y, method='pearson')
 print(result['explanation'])
 result = perform_correlation(x, y, method='spearman')
 print(result['explanation'])
+# Sample output:
+# Pearson correlation: 0.89, P-value: 0.018. Significant correlation at alpha=0.05.
+# Spearman correlation: 0.94, P-value: 0.005. Significant correlation at alpha=0.05.
 ```
 
 ## Effect Size, Power, and Confidence Intervals
