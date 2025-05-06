@@ -18,50 +18,14 @@ Think of a hypothesis as your scientific GPS - it guides your investigation and 
    - States there is an effect or difference
    - What we hope to support
 
-```python
-import numpy as np
-from scipy import stats
-import matplotlib.pyplot as plt
-import seaborn as sns
+**Mathematical Formulation:**
 
-def demonstrate_hypotheses():
-    """
-    Visualize the concept of null vs alternative hypotheses
-    """
-    # Generate data
-    np.random.seed(42)
-    
-    # Null hypothesis data (no effect)
-    null_data = np.random.normal(100, 15, 1000)
-    
-    # Alternative hypothesis data (with effect)
-    alt_data = np.random.normal(105, 15, 1000)
-    
-    # Visualization
-    plt.figure(figsize=(12, 6))
-    
-    plt.subplot(121)
-    sns.histplot(null_data, label='Control', alpha=0.5)
-    sns.histplot(alt_data, label='Treatment', alpha=0.5)
-    plt.title('Data Distribution')
-    plt.legend()
-    
-    plt.subplot(122)
-    sns.boxplot(data=[null_data, alt_data])
-    plt.xticks([0, 1], ['Control', 'Treatment'])
-    plt.title('Group Comparison')
-    
-    plt.tight_layout()
-    plt.savefig('docs/4-stat-analysis/4.2-hypotheses-testing/assets/hypothesis_visualization.png')
-    plt.close()
-    
-    # Statistical test
-    t_stat, p_value = stats.ttest_ind(null_data, alt_data)
-    return t_stat, p_value
+\[
+H_0: \mu_1 = \mu_2 \\
+H_1: \mu_1 \neq \mu_2
+\]
 
-# Example usage
-t_stat, p_value = demonstrate_hypotheses()
-```
+![Null vs Alternative Distribution](assets/null_vs_alternative.png)
 
 ## The Three Pillars of Good Hypotheses
 
@@ -201,44 +165,10 @@ def demonstrate_hypothesis_types(data):
 
 ### 2. Directional vs Non-directional
 
-```python
-def compare_directional_tests(control, treatment):
-    """
-    Compare one-tailed and two-tailed tests
-    
-    One-tailed: H₁: treatment > control
-    Two-tailed: H₁: treatment ≠ control
-    """
-    # Two-tailed test
-    two_tail = stats.ttest_ind(treatment, control)
-    
-    # One-tailed test
-    one_tail = stats.ttest_ind(treatment, control, alternative='greater')
-    
-    # Visualize
-    plt.figure(figsize=(12, 5))
-    
-    plt.subplot(121)
-    sns.histplot(control, label='Control', alpha=0.5)
-    sns.histplot(treatment, label='Treatment', alpha=0.5)
-    plt.title('Distribution Comparison')
-    plt.legend()
-    
-    plt.subplot(122)
-    plt.text(0.1, 0.7, f"Two-tailed p-value: {two_tail.pvalue:.4f}")
-    plt.text(0.1, 0.5, f"One-tailed p-value: {one_tail.pvalue:.4f}")
-    plt.axis('off')
-    plt.title('Test Results')
-    
-    plt.tight_layout()
-    plt.savefig('docs/4-stat-analysis/4.2-hypotheses-testing/assets/directional_tests.png')
-    plt.close()
-    
-    return {
-        'two_tailed': two_tail,
-        'one_tailed': one_tail
-    }
-```
+**One-tailed vs Two-tailed Test Formulas:**
+
+- Two-tailed: \( H_1: \mu_1 \neq \mu_2 \)
+- One-tailed: \( H_1: \mu_1 > \mu_2 \) or \( H_1: \mu_1 < \mu_2 \)
 
 ## Recommended Visualizations
 
@@ -248,6 +178,8 @@ To enhance understanding of hypothesis formulation, we recommend adding the foll
    - Step-by-step guide to hypothesis formulation
    - Show relationship between research question and hypothesis
    - Include decision points for test selection
+
+![Hypothesis Testing Flowchart](assets/hypothesis_testing_flowchart.png)
 
 2. **Null vs Alternative Distribution**
    - Side-by-side comparison of null and alternative distributions
@@ -268,6 +200,8 @@ To enhance understanding of hypothesis formulation, we recommend adding the foll
    - Visual explanation of correction methods
    - Show impact on significance levels
    - Demonstrate family-wise error rate
+
+![Multiple Testing Correction](assets/multiple_testing.png)
 
 ## Common Mistakes to Avoid
 
