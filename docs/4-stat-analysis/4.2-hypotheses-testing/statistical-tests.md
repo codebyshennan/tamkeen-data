@@ -38,8 +38,13 @@ Choosing the correct test depends on your research question, the type of data yo
 **Example:**
 
 ```python
+# Self-contained example: Independent t-test
 import numpy as np
 from scipy import stats
+
+# Example data: two groups
+control_data = np.array([8, 9, 7, 10, 9])
+treatment_data = np.array([12, 11, 13, 12, 14])
 
 def perform_ttest(control_data, treatment_data, alpha=0.05):
     """Perform an independent t-test and explain the results."""
@@ -58,6 +63,9 @@ def perform_ttest(control_data, treatment_data, alpha=0.05):
         'significant': p_value < alpha,
         'explanation': explanation
     }
+
+result = perform_ttest(control_data, treatment_data)
+print(result['explanation'])
 ```
 
 ### 2. ANOVA: Comparing More Than Two Groups
@@ -76,8 +84,14 @@ def perform_ttest(control_data, treatment_data, alpha=0.05):
 **Example:**
 
 ```python
+# Self-contained example: One-way ANOVA
 from scipy import stats
 import numpy as np
+
+# Example data: three groups
+group1 = np.array([5, 6, 7, 5, 6])
+group2 = np.array([8, 9, 7, 8, 9])
+group3 = np.array([10, 11, 12, 10, 11])
 
 def perform_anova(*groups, alpha=0.05):
     """Perform one-way ANOVA and explain the results."""
@@ -100,6 +114,9 @@ def perform_anova(*groups, alpha=0.05):
         'significant': p_value < alpha,
         'explanation': explanation
     }
+
+result = perform_anova(group1, group2, group3)
+print(result['explanation'])
 ```
 
 ### 3. Chi-Square Tests: Analyzing Categorical Data
@@ -118,8 +135,14 @@ def perform_anova(*groups, alpha=0.05):
 **Example:**
 
 ```python
+# Self-contained example: Chi-square test (goodness of fit)
 import numpy as np
 from scipy import stats
+
+# Example observed frequencies (e.g., dice rolls)
+observed = np.array([18, 22, 20, 15, 17, 18])
+# Expected frequencies (fair dice)
+expected = np.array([18.33, 18.33, 18.33, 18.33, 18.33, 18.33])
 
 def perform_chi_square(observed, expected=None, alpha=0.05):
     """Perform chi-square test and explain the results."""
@@ -148,6 +171,9 @@ def perform_chi_square(observed, expected=None, alpha=0.05):
         'test_type': test_type,
         'explanation': explanation
     }
+
+result = perform_chi_square(observed, expected)
+print(result['explanation'])
 ```
 
 ### 4. Correlation Tests: Measuring Relationships
@@ -170,8 +196,13 @@ def perform_chi_square(observed, expected=None, alpha=0.05):
 **Example:**
 
 ```python
+# Self-contained example: Correlation test (Pearson and Spearman)
 from scipy import stats
 import numpy as np
+
+# Example data
+x = np.array([1, 2, 3, 4, 5, 6])
+y = np.array([2, 4, 5, 4, 5, 7])
 
 def perform_correlation(x, y, method='pearson', alpha=0.05):
     """Perform correlation test and explain the results."""
@@ -195,6 +226,11 @@ def perform_correlation(x, y, method='pearson', alpha=0.05):
         'method': method_name,
         'explanation': explanation
     }
+
+result = perform_correlation(x, y, method='pearson')
+print(result['explanation'])
+result = perform_correlation(x, y, method='spearman')
+print(result['explanation'])
 ```
 
 ## Effect Size, Power, and Confidence Intervals
