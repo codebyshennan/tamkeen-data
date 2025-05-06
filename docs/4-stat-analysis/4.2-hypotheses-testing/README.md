@@ -205,20 +205,65 @@ To enhance understanding, we recommend adding the following visualizations:
    - A step-by-step diagram showing the hypothesis testing process
    - Should include: Question → Hypothesis → Experiment → Analysis → Conclusion
 
+   ![Scientific Method Flowchart](assets/scientific_method.png)
+
 2. **Statistical Test Decision Tree**
    - Interactive flowchart to help choose the right statistical test
    - Should include: Data type → Number of groups → Distribution → Test selection
+
+   ![Statistical Test Decision Tree](assets/statistical_test_tree.png)
 
 3. **A/B Testing Timeline**
    - Visual timeline showing the stages of an A/B test
    - Should include: Planning → Setup → Running → Analysis → Implementation
 
+   ![A/B Testing Timeline](assets/ab_testing_timeline.png)
+
 4. **Effect Size Visualization**
    - Side-by-side comparison of different effect sizes
    - Should show: Small vs Medium vs Large effects with real-world examples
 
+   ![Effect Sizes](assets/effect_sizes.png)
+
 5. **Confidence Interval Diagram**
    - Visual explanation of confidence intervals
    - Should demonstrate: Point estimate, margin of error, and interpretation
+
+   ![Confidence Intervals](assets/confidence_intervals.png)
+
+---
+
+## Key Diagrams
+
+Here are all the key diagrams and assets referenced in this module:
+
+- ![Scientific Method Flowchart](assets/scientific_method.png)
+- ![Statistical Test Decision Tree](assets/statistical_test_tree.png)
+- ![A/B Testing Timeline](assets/ab_testing_timeline.png)
+- ![Effect Sizes](assets/effect_sizes.png)
+- ![Confidence Intervals](assets/confidence_intervals.png)
+- ![Experimental Design Flowchart](assets/experimental_design_flowchart.png)
+- ![Sample Size Determination](assets/sample_size_determination.png)
+- ![Results Dashboard](assets/results_dashboard.png)
+- ![Decision Framework](assets/decision_framework.png)
+- ![Null vs Alternative Distribution](assets/null_vs_alternative.png)
+- ![Hypothesis Testing Flowchart](assets/hypothesis_testing_flowchart.png)
+- ![Multiple Testing Correction](assets/multiple_testing.png)
+
+---
+
+## Example Statistical Test Formula
+
+The t-test statistic for comparing two means is:
+
+\[
+t = \frac{\bar{X}_1 - \bar{X}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}
+\]
+
+where:
+
+- \( \bar{X}_1, \bar{X}_2 \): sample means
+- \( s_1^2, s_2^2 \): sample variances
+- \( n_1, n_2 \): sample sizes
 
 Remember: Good hypothesis testing is about asking the right questions and using the right tools to find reliable answers!
