@@ -90,6 +90,17 @@ class SignificanceAnalyzer:
 
 Not just whether there's a difference, but how big it is:
 
+**Cohen's d formula:**
+
+\[
+d = \frac{\bar{X}_1 - \bar{X}_2}{s_p}
+\]
+
+where:
+
+- \( \bar{X}_1, \bar{X}_2 \): means of the two groups
+- \( s_p \): pooled standard deviation
+
 ```python
 class EffectSizeAnalyzer:
     """Toolkit for analyzing and interpreting effect sizes"""
@@ -199,6 +210,8 @@ To enhance understanding of results analysis, we recommend adding the following 
    - Show trends over time
    - Highlight significant findings
 
+![Results Dashboard](assets/results_dashboard.png)
+
 5. **Decision Framework**
    - Visual guide for making decisions
    - Show relationship between:
@@ -206,6 +219,8 @@ To enhance understanding of results analysis, we recommend adding the following 
      - Practical significance
      - Implementation cost
      - Potential benefit
+
+![Decision Framework](assets/decision_framework.png)
 
 ## Common Mistakes to Avoid
 
