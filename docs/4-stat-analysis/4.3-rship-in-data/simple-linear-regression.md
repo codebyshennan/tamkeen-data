@@ -79,6 +79,41 @@ plt.legend()
 plt.show()
 ```
 
+![simple-linear-regression_fig_1](assets/simple-linear-regression_fig_1.png)
+
+```
+Intercept (a): 0.83
+Slope (b): 2.01
+R-squared: 0.98
+```
+
+
+
+```
+Intercept (a): 0.83
+Slope (b): 2.01
+R-squared: 0.98
+```
+
+```
+Intercept (a): 0.83
+Slope (b): 2.01
+R-squared: 0.98
+Saved figure to assets/simple-linear-regression_fig_1.png
+```
+
+
+
+```
+Intercept (a): 0.83
+Slope (b): 2.01
+R-squared: 0.98
+Saved figure to assets/simple-linear-regression_fig_1.png
+```
+
+
+
+
 ## Model Interpretation
 
 Understanding your model's output:
@@ -143,6 +178,17 @@ def plot_diagnostics(X, y, y_pred):
 # Create diagnostic plots
 plot_diagnostics(X, y, y_pred)
 ```
+
+![simple-linear-regression_fig_2](assets/simple-linear-regression_fig_2.png)
+
+
+
+```
+Saved figure to assets/simple-linear-regression_fig_2.png
+```
+
+
+
 
 ## Practical Applications
 

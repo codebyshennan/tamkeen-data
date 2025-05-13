@@ -40,6 +40,22 @@ r, p_value = stats.pearsonr(study_time, exam_scores)
 print(f"Pearson correlation: {r:.2f}")
 print(f"P-value: {p_value:.4f}")
 ```
+```
+Pearson correlation: 0.99
+P-value: 0.0010
+```
+
+
+```
+Pearson correlation: 0.99
+P-value: 0.0010
+```
+
+```
+Pearson correlation: 0.99
+P-value: 0.0010
+```
+
 
 ### 2. Spearman Rank Correlation (ρ, rho)
 
@@ -55,6 +71,17 @@ rho, p_value = stats.spearmanr(study_time, exam_scores)
 print(f"Spearman correlation: {rho:.2f}")
 print(f"P-value: {p_value:.4f}")
 ```
+```
+Spearman correlation: 1.00
+P-value: 0.0000
+```
+
+
+```
+Spearman correlation: 1.00
+P-value: 0.0000
+```
+
 
 ### 3. Kendall Rank Correlation (τ, tau)
 
@@ -69,6 +96,17 @@ tau, p_value = stats.kendalltau(study_time, exam_scores)
 print(f"Kendall correlation: {tau:.2f}")
 print(f"P-value: {p_value:.4f}")
 ```
+```
+Kendall correlation: 1.00
+P-value: 0.0167
+```
+
+
+```
+Kendall correlation: 1.00
+P-value: 0.0167
+```
+
 
 ## Interpreting Correlation Coefficients
 
@@ -136,6 +174,8 @@ plt.title('Correlation Matrix')
 plt.show()
 ```
 
+![correlation-analysis_fig_4](assets/correlation-analysis_fig_4.png)
+
 ## Common Pitfalls and Considerations
 
 1. **Correlation ≠ Causation**
@@ -184,6 +224,8 @@ plt.text(0.05, 0.95, f'Correlation: {r:.2f}',
          transform=plt.gca().transAxes)
 plt.show()
 ```
+
+![correlation-analysis_fig_5](assets/correlation-analysis_fig_5.png)
 
 Try this exercise:
 

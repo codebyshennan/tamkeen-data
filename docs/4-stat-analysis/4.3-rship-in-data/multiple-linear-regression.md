@@ -101,6 +101,55 @@ def calculate_vif(X):
 print("\nVariance Inflation Factors:")
 print(calculate_vif(X))
 ```
+```
+Coefficients:
+study_hours: 1.82
+prev_gpa: 2.96
+sleep_hours: 1.53
+
+Intercept: 0.09
+R-squared: 0.94
+
+Variance Inflation Factors:
+      Variable       VIF
+0  study_hours  1.053354
+1     prev_gpa  1.019570
+2  sleep_hours  1.034520
+```
+
+
+```
+Coefficients:
+study_hours: 1.82
+prev_gpa: 2.96
+sleep_hours: 1.53
+
+Intercept: 0.09
+R-squared: 0.94
+
+Variance Inflation Factors:
+      Variable       VIF
+0  study_hours  1.053354
+1     prev_gpa  1.019570
+2  sleep_hours  1.034520
+```
+
+```
+Coefficients:
+study_hours: 1.82
+prev_gpa: 2.96
+sleep_hours: 1.53
+
+Intercept: 0.09
+R-squared: 0.94
+
+Variance Inflation Factors:
+      Variable       VIF
+0  study_hours  1.053354
+1     prev_gpa  1.019570
+2  sleep_hours  1.034520
+```
+
 
 ## Model Selection
 
@@ -125,6 +174,15 @@ X_selected = selector.fit_transform(X, y)
 selected_features = X.columns[selector.get_support()].tolist()
 print("\nSelected features:", selected_features)
 ```
+```
+Selected features: ['prev_gpa', 'sleep_hours']
+```
+
+
+```
+Selected features: ['prev_gpa', 'sleep_hours']
+```
+
 
 ### 3. Stepwise Selection
 
@@ -139,6 +197,15 @@ selector = selector.fit(X, y)
 selected_features = X.columns[selector.support_].tolist()
 print("\nSelected features:", selected_features)
 ```
+```
+Selected features: ['study_hours', 'prev_gpa']
+```
+
+
+```
+Selected features: ['study_hours', 'prev_gpa']
+```
+
 
 ## Model Diagnostics
 
@@ -183,6 +250,9 @@ def plot_diagnostics(model, X, y):
 # Create diagnostic plots
 plot_diagnostics(model, X, y)
 ```
+
+![multiple-linear-regression_fig_4](assets/multiple-linear-regression_fig_4.png)
+
 
 ## Practical Applications
 

@@ -286,6 +286,89 @@ diagnostics = run_diagnostics(model, X, y)
 # 5. Re-run diagnostics to verify improvements
 ```
 
+![model-diagnostics_fig_9](assets/model-diagnostics_fig_9.png)
+
+```
+=== Model Diagnostics ===
+
+Checking linearity...
+
+Checking independence...
+Durbin-Watson statistic: 2.03
+Values close to:
+2.0 suggest no autocorrelation
+<1.0 suggest positive autocorrelation
+>3.0 suggest negative autocorrelation
+
+Checking homoscedasticity...
+
+Checking normality...
+Shapiro-Wilk test p-value: 0.0000
+If p-value < 0.05, residuals may not be normally distributed
+
+Calculating influence measures...
+
+=== Summary of Potential Issues ===
+Number of high leverage points: 5
+Number of influential points (Cook's D): 8
+Number of large DFBETAS: [8 3]
+```
+
+
+
+```
+=== Model Diagnostics ===
+
+Checking linearity...
+
+Checking independence...
+Durbin-Watson statistic: 2.03
+Values close to:
+2.0 suggest no autocorrelation
+<1.0 suggest positive autocorrelation
+>3.0 suggest negative autocorrelation
+
+Checking homoscedasticity...
+
+Checking normality...
+Shapiro-Wilk test p-value: 0.0000
+If p-value < 0.05, residuals may not be normally distributed
+
+Calculating influence measures...
+
+=== Summary of Potential Issues ===
+Number of high leverage points: 5
+Number of influential points (Cook's D): 8
+Number of large DFBETAS: [8 3]
+```
+
+```
+=== Model Diagnostics ===
+
+Checking linearity...
+
+Checking independence...
+Durbin-Watson statistic: 2.03
+Values close to:
+2.0 suggest no autocorrelation
+<1.0 suggest positive autocorrelation
+>3.0 suggest negative autocorrelation
+
+Checking homoscedasticity...
+
+Checking normality...
+Shapiro-Wilk test p-value: 0.0000
+If p-value < 0.05, residuals may not be normally distributed
+
+Calculating influence measures...
+
+=== Summary of Potential Issues ===
+Number of high leverage points: 5
+Number of influential points (Cook's D): 8
+Number of large DFBETAS: [8 3]
+Saved figure to assets/model-diagnostics_fig_9.png
+```
+
 ## Common Problems and Solutions
 
 1. **Non-linearity**

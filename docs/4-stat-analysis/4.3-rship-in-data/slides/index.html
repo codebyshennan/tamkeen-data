@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relationships in Data: Correlation and Regression</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/theme/white.css">
+    <style>
+        body {
+            background: #ffffff;
+            font-size: 12px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .reveal {
+            --primary-blue: #1877F2;
+            --dark-blue: #0e305a;
+            --light-blue: #e7f0fd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .reveal h1,
+        .reveal h2,
+        .reveal h3 {
+            color: var(--dark-blue);
+            text-transform: none;
+            text-align: center;
+            margin-top: 0.5em;
+            font-weight: 600;
+        }
+
+        .reveal h1 {
+            font-size: 1.8em;
+        }
+
+        .reveal h2 {
+            font-size: 1.4em;
+        }
+
+        .reveal h3 {
+            font-size: 1.2em;
+        }
+
+        .reveal .slides {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .reveal ul {
+            margin-left: 1em;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .reveal li {
+            margin-bottom: 0.8em;
+            text-align: left;
+            line-height: 1.5;
+        }
+
+        .reveal .highlight {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        .reveal .box {
+            background: var(--light-blue);
+            padding: 0.6em 1em;
+            border-radius: 8px;
+            margin: 0.8em auto;
+            border-left: 4px solid var(--primary-blue);
+            max-width: 800px;
+            width: 100%;
+            box-sizing: border-box;
+            display: block;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .reveal .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2em;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .reveal .three-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2em;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .reveal .center {
+            text-align: center;
+        }
+
+        .reveal .right {
+            text-align: right;
+        }
+
+        .slide-header {
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 1;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .slide-header img {
+            height: 100vh;
+            width: auto;
+            object-fit: cover;
+        }
+
+        .slide-footer {
+            position: absolute;
+            bottom: 0.8em;
+            left: 1.5em;
+            color: var(--dark-blue);
+            font-size: 0.75em;
+            opacity: 0.85;
+            font-weight: 500;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 0.8em;
+            right: 1.5em;
+            color: var(--primary-blue);
+            font-size: 0.75em;
+            opacity: 0.85;
+            font-weight: 500;
+        }
+
+        section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            height: 100vh;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 6em 2.5em;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .reveal section>* {
+            max-width: 900px;
+            width: 100%;
+            margin: 0.8em auto;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .reveal p {
+            line-height: 1.6;
+            margin-bottom: 1em;
+        }
+
+        .reveal img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .reveal code {
+            background: var(--light-blue);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-size: 0.8em;
+        }
+
+        .reveal pre {
+            background: var(--light-blue);
+            padding: 0.6em;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            font-size: 0.8em;
+        }
+
+        .reveal .list-container {
+            display: inline-block;
+            text-align: left;
+            margin: 0 auto;
+        }
+
+        .reveal ul {
+            margin-left: 1em;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h1>Relationships in Data: Correlation and Regression</h1>
+                    <h3></h3>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Correlation Analysis</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>How strongly are two variables related?</li>
+<li>Do they move together or in opposite directions?</li>
+<li>Is the relationship linear or non-linear?</li>
+<li>**+1**: Perfect positive correlation</li>
+<li>**0**: No linear correlation</li>
+<li>**-1**: Perfect negative correlation</li>
+<li>Most common type</li>
+<li>Used for continuous, normally distributed data</li>
+<li>Measures linear relationships</li>
+<li>Sensitive to outliers</li>
+<li>Non-parametric alternative</li>
+<li>Used for ordinal data or non-normal distributions</li>
+<li>Measures monotonic relationships</li>
+<li>More robust to outliers</li>
+<li>Based on ranked data</li>
+<li>Another non-parametric measure</li>
+<li>Best for small samples</li>
+<li>More robust with tied ranks</li>
+<li>Based on concordant and discordant pairs</li>
+<li>[GraphPad Statistics Guide](https://www.graphpad.com/guides/prism/latest/statistics/stat_key_concepts_correlation.htm)</li>
+<li>[Statistics Solutions](https://www.statisticssolutions.com/free-resources/directory-of-statistical-analyses/correlation-pearson-kendall-spearman/)</li>
+<li>[Seaborn Documentation](https://seaborn.pydata.org/examples/index.html)</li>
+<li>[Scipy Statistics](https://docs.scipy.org/doc/scipy/reference/stats.html)</li>
+<li>[Perplexity AI](https://www.perplexity.ai/) - For quick statistical questions and clarifications</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Model Diagnostics</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>The relationship between predictors and outcome should be linear</li>
+<li>Check using residual plots</li>
+<li>Look for non-random patterns</li>
+<li>Residuals should be independent</li>
+<li>No patterns over time or space</li>
+<li>Check using Durbin-Watson test</li>
+<li>Constant variance of residuals</li>
+<li>Check using scale-location plots</li>
+<li>Look for fan or funnel patterns</li>
+<li>Residuals should follow normal distribution</li>
+<li>Check using Q-Q plots and statistical tests</li>
+<li>Consider transformations if needed</li>
+<li>Identifies influential observations</li>
+<li>Measures impact of removing each point</li>
+<li>Values > 4/n are potentially influential</li>
+<li>Observations with extreme predictor values</li>
+<li>Check using hat values</li>
+<li>High leverage doesn't always mean high influence</li>
+<li>Measures impact on regression coefficients</li>
+<li>Identifies observations affecting specific coefficients</li>
+<li>Values > 2/√n are concerning</li>
+<li>[STHDA Regression Diagnostics](https://www.sthda.com/english/articles/39-regression-model-diagnostics/)</li>
+<li>[Penn State Statistics](https://online.stat.psu.edu/stat504/lesson/7/7.2)</li>
+<li>[UCLA Stats](https://stats.oarc.ucla.edu/stata/webbooks/reg/chapter2/stata-webbooksregressionwith-statachapter-2-regression-diagnostics/)</li>
+<li>[Scikit-learn Documentation](https://scikit-learn.org/stable/modules/linear_model.html)</li>
+<li>[Perplexity AI](https://www.perplexity.ai/) - For quick statistical questions and clarifications</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Multiple Linear Regression</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>\(Y\) is the dependent (response) variable</li>
+<li>\(X_1, X_2, ..., X_p\) are independent (predictor) variables</li>
+<li>\(\beta_0\) is the intercept</li>
+<li>\(\beta_1, ..., \beta_p\) are regression coefficients</li>
+<li>\(\epsilon\) is the error term</li>
+<li>Based on domain knowledge</li>
+<li>Prior research findings</li>
+<li>Logical relationships</li>
+<li>[Investopedia MLR Guide](https://www.investopedia.com/terms/m/mlr.asp)</li>
+<li>[StatQuest Videos](https://www.youtube.com/c/joshstarmer)</li>
+<li>[Scikit-learn Documentation](https://scikit-learn.org/stable/modules/linear_model.html)</li>
+<li>[Statsmodels Documentation](https://www.statsmodels.org/)</li>
+<li>[Perplexity AI](https://www.perplexity.ai/) - For quick statistical questions and clarifications</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Simple Linear Regression</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>One independent (predictor) variable (x)</li>
+<li>One dependent (outcome) variable (y)</li>
+<li>\(\hat{y}\) is the predicted value</li>
+<li>\(a\) is the y-intercept (value of y when x = 0)</li>
+<li>\(b\) is the slope (change in y for a one-unit change in x)</li>
+<li>\(x\) is the independent variable</li>
+<li>[DataCamp Tutorial](https://www.datacamp.com/tutorial/simple-linear-regression)</li>
+<li>[Penn State Statistics](https://online.stat.psu.edu/stat501/lesson/1/1.1)</li>
+<li>[Scikit-learn Documentation](https://scikit-learn.org/stable/modules/linear_model.html)</li>
+<li>[Seaborn Regression Plots](https://seaborn.pydata.org/tutorial/regression.html)</li>
+<li>[Perplexity AI](https://www.perplexity.ai/) - For quick statistical questions and clarifications</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Understanding Relationships</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>When study time increases, do exam scores tend to increase as well?</li>
+<li>When temperature rises, do ice cream sales go up?</li>
+<li>When exercise frequency increases, does weight tend to decrease?</li>
+<li>The x-axis shows study time in hours</li>
+<li>The y-axis shows exam scores</li>
+<li>Each point represents one student</li>
+<li>The general trend shows that more study time leads to higher scores</li>
+<li>The x-axis shows age</li>
+<li>The y-axis shows running speed</li>
+<li>The curve shows that running speed tends to decrease as people get older</li>
+<li>The decrease is not constant - it's faster at younger ages and slower at older ages</li>
+<li>The x-axis shows shoe size</li>
+<li>The y-axis shows IQ score</li>
+<li>The points are scattered randomly</li>
+<li>There's no clear pattern or trend</li>
+<li>Each value in one variable corresponds to exactly one value in another</li>
+<li>Example: Each person has one passport number</li>
+<li>Rare in practice, often indicates data could be combined</li>
+<li>One value in a variable can relate to multiple values in another</li>
+<li>Example: One customer can make many purchases</li>
+<li>Most common type in real-world data</li>
+<li>Values in both variables can relate to multiple values in the other</li>
+<li>Example: Students can take many courses, courses can have many students</li>
+<li>Requires special handling in analysis</li>
+<li>Strong: Points cluster closely around a pattern</li>
+<li>Weak: Points are more scattered</li>
+<li>Perfect: All points fall exactly on a line or curve</li>
+<li>Positive: As one variable increases, the other increases</li>
+<li>Negative: As one variable increases, the other decreases</li>
+<li>No direction: In non-linear relationships</li>
+<li>[Python Data Science Handbook - Visualization](https://jakevdp.github.io/PythonDataScienceHandbook/04.00-introduction-to-matplotlib.html)</li>
+<li>[Seaborn Gallery](https://seaborn.pydata.org/examples/index.html)</li>
+<li>[Matplotlib Tutorial](https://matplotlib.org/stable/tutorials/index.html)</li>
+<li>[Perplexity AI](https://www.perplexity.ai/) - A helpful tool for getting quick answers to your statistics questions</li>
+<li>[Practical Data Modeling Guide](https://practicaldatamodeling.substack.com/p/relationships)</li>
+<li>[Database Relationships Guide](https://www.acceldata.io/blog/database-relationships-explained-key-concepts-and-best-practices)</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            center: false,
+            transition: 'slide',
+            plugins: []
+        });
+        Reveal.on('slidechanged', function (event) {
+            document.querySelectorAll('.slide-number').forEach((el, idx) => {
+                el.textContent = `Slide ${idx + 1} / ${document.querySelectorAll('.slides section').length}`;
+            });
+        });
+        setTimeout(() => {
+            document.querySelectorAll('.slide-number').forEach((el, idx) => {
+                el.textContent = `Slide ${idx + 1} / ${document.querySelectorAll('.slides section').length}`;
+            });
+        }, 500);
+    </script>
+</body>
+
+</html>

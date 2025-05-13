@@ -59,6 +59,9 @@ plt.ylabel('Exam Score')
 plt.show()
 ```
 
+![understanding-relationships_fig_1](assets/understanding-relationships_fig_1.png)
+
+
 In this example:
 
 - The x-axis shows study time in hours
@@ -85,6 +88,9 @@ plt.ylabel('Running Speed (km/h)')
 plt.show()
 ```
 
+![understanding-relationships_fig_2](assets/understanding-relationships_fig_2.png)
+
+
 In this example:
 
 - The x-axis shows age
@@ -110,6 +116,9 @@ plt.xlabel('Shoe Size')
 plt.ylabel('IQ Score')
 plt.show()
 ```
+
+![understanding-relationships_fig_3](assets/understanding-relationships_fig_3.png)
+
 
 In this example:
 
