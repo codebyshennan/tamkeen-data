@@ -1,0 +1,107 @@
+{
+    "title": "3.3 Business Intelligence with Tableau",
+    "subtitle": "",
+    "slides": [
+        {
+            "type": "title",
+            "title": "3.3 Business Intelligence with Tableau",
+            "subtitle": ""
+        },
+        {
+            "type": "content",
+            "title": "Advanced Analytics",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Compare values over time",
+                    "Calculate growth rates",
+                    "Rank and analyze performance",
+                    "Bars for Sales",
+                    "Line for Profit",
+                    "Top N selector",
+                    "Date range picker",
+                    "Threshold setter",
+                    "Tableau Help: [help.tableau.com](https://help.tableau.com)",
+                    "Community: [community.tableau.com](https://community.tableau.com)",
+                    "Video Tutorials: [Tableau YouTube](https://www.youtube.com/user/tableausoftware)",
+                    "Start with simple calculations",
+                    "Build complexity gradually",
+                    "Practice with sample data",
+                    "Don't be afraid to experiment!"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Looker Studio Case Study",
+            "content": {
+                "type": "box",
+                "items": [
+                    "A dynamic sales performance dashboard",
+                    "A geographical distribution analysis",
+                    "A product profitability analysis",
+                    "Interactive filters and controls",
+                    "It contains clean, pre-formatted data",
+                    "It includes realistic business scenarios",
+                    "It's easy to import into Google Sheets",
+                    "It covers multiple analysis dimensions",
+                    "1"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Powerbi Case Study",
+            "content": {
+                "type": "box",
+                "items": [
+                    "A dynamic sales performance dashboard",
+                    "A geographical distribution analysis",
+                    "A product profitability analysis",
+                    "Interactive filters and drill-downs",
+                    "It contains clean, pre-formatted data",
+                    "It includes realistic business scenarios",
+                    "It's readily available in Power BI",
+                    "It covers multiple analysis dimensions"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Tableau Basics",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Tableau's intuitive visualization interface",
+                    "Real-time data analysis without coding",
+                    "Interactive dashboard creation",
+                    "Advanced visualization techniques",
+                    "[Tableau Documentation](https://help.tableau.com/current/guides/get-started-tutorial/en-us/get-started-tutorial-home.htm)",
+                    "[Tableau Public Gallery](https://public.tableau.com/app/discover)",
+                    "[Tableau Community](https://community.tableau.com/s/)",
+                    "Tableau Technical Support",
+                    "Community Forums",
+                    "Knowledge Base",
+                    "Training Resources"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Tableau Case Study",
+            "content": {
+                "type": "box",
+                "items": [
+                    "A dynamic sales performance dashboard",
+                    "A geographical distribution analysis",
+                    "A product profitability analysis",
+                    "Interactive filters and drill-downs",
+                    "It contains clean, pre-formatted data",
+                    "It includes realistic business scenarios",
+                    "It's readily available in Tableau",
+                    "It covers multiple analysis dimensions"
+                ]
+            }
+        }
+    ]
+}

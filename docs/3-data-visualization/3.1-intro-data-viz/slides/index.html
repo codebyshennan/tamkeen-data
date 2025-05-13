@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Data Visualization</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/theme/white.css">
+    <style>
+        body {
+            background: #ffffff;
+            font-size: 12px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .reveal {
+            --primary-blue: #1877F2;
+            --dark-blue: #0e305a;
+            --light-blue: #e7f0fd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .reveal h1,
+        .reveal h2,
+        .reveal h3 {
+            color: var(--dark-blue);
+            text-transform: none;
+            text-align: center;
+            margin-top: 0.5em;
+            font-weight: 600;
+        }
+
+        .reveal h1 {
+            font-size: 1.8em;
+        }
+
+        .reveal h2 {
+            font-size: 1.4em;
+        }
+
+        .reveal h3 {
+            font-size: 1.2em;
+        }
+
+        .reveal .slides {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .reveal ul {
+            margin-left: 1em;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .reveal li {
+            margin-bottom: 0.8em;
+            text-align: left;
+            line-height: 1.5;
+        }
+
+        .reveal .highlight {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        .reveal .box {
+            background: var(--light-blue);
+            padding: 0.6em 1em;
+            border-radius: 8px;
+            margin: 0.8em auto;
+            border-left: 4px solid var(--primary-blue);
+            max-width: 800px;
+            width: 100%;
+            box-sizing: border-box;
+            display: block;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .reveal .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2em;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .reveal .three-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2em;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .reveal .center {
+            text-align: center;
+        }
+
+        .reveal .right {
+            text-align: right;
+        }
+
+        .slide-header {
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 1;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .slide-header img {
+            height: 100vh;
+            width: auto;
+            object-fit: cover;
+        }
+
+        .slide-footer {
+            position: absolute;
+            bottom: 0.8em;
+            left: 1.5em;
+            color: var(--dark-blue);
+            font-size: 0.75em;
+            opacity: 0.85;
+            font-weight: 500;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 0.8em;
+            right: 1.5em;
+            color: var(--primary-blue);
+            font-size: 0.75em;
+            opacity: 0.85;
+            font-weight: 500;
+        }
+
+        section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            height: 100vh;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 6em 2.5em;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .reveal section>* {
+            max-width: 900px;
+            width: 100%;
+            margin: 0.8em auto;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .reveal p {
+            line-height: 1.6;
+            margin-bottom: 1em;
+        }
+
+        .reveal img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .reveal code {
+            background: var(--light-blue);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-size: 0.8em;
+        }
+
+        .reveal pre {
+            background: var(--light-blue);
+            padding: 0.6em;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            font-size: 0.8em;
+        }
+
+        .reveal .list-container {
+            display: inline-block;
+            text-align: left;
+            margin: 0 auto;
+        }
+
+        .reveal ul {
+            margin-left: 1em;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h1>Introduction to Data Visualization</h1>
+                    <h3></h3>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Matplotlib Basics</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>**Industry Standard**: Most widely used Python plotting library</li>
+<li>**Flexibility**: Can create almost any type of visualization</li>
+<li>**Integration**: Works seamlessly with other data science libraries</li>
+<li>**Customization**: Highly customizable for professional results</li>
+<li>**Figure**: The entire canvas</li>
+<li>**Axes**: The area where you draw</li>
+<li>**Title**: The name of your artwork</li>
+<li>**Labels**: Descriptions of what you're showing</li>
+<li>**Legend**: A guide to your colors and symbols</li>
+<li>Start with a clear purpose</li>
+<li>Choose the right chart type</li>
+<li>Plan your color scheme</li>
+<li>Consider your audience</li>
+<li>Use functions for reusable plots</li>
+<li>Keep your code clean and documented</li>
+<li>Use consistent naming conventions</li>
+<li>Comment complex operations</li>
+<li>Overcrowding with too much data</li>
+<li>Using inappropriate chart types</li>
+<li>Poor color choices</li>
+<li>Missing labels or context</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Troubleshooting Guide</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>Not closing figures when done</li>
+<li>Using inappropriate chart types</li>
+<li>Poor color choices</li>
+<li>Missing labels or context</li>
+<li>Start with a clear purpose</li>
+<li>Keep it simple</li>
+<li>Test your visualizations</li>
+<li>Get feedback from others</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Visualization Principles</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>**Quick Processing**: Your brain processes visual information in milliseconds</li>
+<li>**Pattern Recognition**: You can spot patterns in images faster than in numbers</li>
+<li>**Memory**: Visual information is easier to remember than text</li>
+<li>**Understanding**: Complex relationships are clearer when visualized</li>
+<li>Happens in less than 250 milliseconds</li>
+<li>Automatic and parallel (processes multiple things at once)</li>
+<li>Detects basic visual properties like:</li>
+<li>Takes more than 250 milliseconds</li>
+<li>Requires focused attention</li>
+<li>Processes complex information</li>
+<li>Interprets meaning and relationships</li>
+<li>**Bar Charts**: Like measuring the height of different buildings</li>
+<li>**Line Length**: Like comparing the length of different roads</li>
+<li>**Progress Bars**: Like showing how far you've run in a race</li>
+<li>**Bubble Plots**: Like showing the population of different cities</li>
+<li>**Tree Maps**: Like showing the size of different files on your computer</li>
+<li>**Icon Size**: Like showing the importance of different features</li>
+<li>**Markers**: Like using different symbols on a map</li>
+<li>**Icons**: Like using different icons for different types of files</li>
+<li>**Symbols**: Like using different symbols for different categories</li>
+<li>**Boundaries**: Like drawing a circle around related items</li>
+<li>**Containers**: Like putting similar items in the same box</li>
+<li>**Groups**: Like organizing items into categories</li>
+<li>**Categories**: Like using different colors for different types of fruit</li>
+<li>**Distinct Groups**: Like using different colors for different teams</li>
+<li>**Qualitative Data**: Like using different colors for different regions</li>
+<li>**Sequential Data**: Like using darker colors for higher values</li>
+<li>**Heat Maps**: Like using color intensity to show temperature</li>
+<li>**Density Plots**: Like using color intensity to show concentration</li>
+<li>**Coordinates**: Like plotting points on a map</li>
+<li>**Placement**: Like arranging items in a specific order</li>
+<li>**Alignment**: Like lining up items in a row</li>
+<li>Items that are close together are perceived as related</li>
+<li>Like grouping related items in a menu</li>
+<li>Items that look similar are perceived as related</li>
+<li>Like using the same color for related items</li>
+<li>The eye follows smooth, continuous lines</li>
+<li>Like following a path on a map</li>
+<li>The brain fills in missing parts of shapes</li>
+<li>Like seeing a complete circle even when part is missing</li>
+<li>The brain separates objects from their background</li>
+<li>Like seeing a person standing in front of a wall</li>
+<li>**Few Items**: Bar Chart (like comparing heights)</li>
+<li>**Many Items**: Lollipop Chart (like comparing many values)</li>
+<li>**Over Time**: Line Chart (like tracking progress)</li>
+<li>**Histogram**: Like showing the distribution of heights</li>
+<li>**Density Plot**: Like showing the concentration of data</li>
+<li>**Box Plot**: Like showing the range and outliers</li>
+<li>**Box Plots**: Like comparing distributions across groups</li>
+<li>**Violin Plots**: Like showing the shape of distributions</li>
+<li>**Ridge Plots**: Like showing multiple distributions</li>
+<li>**Scatter Plot**: Like plotting height vs. weight</li>
+<li>**Line Plot**: Like showing how two things change together</li>
+<li>**Bubble Plot**: Like showing three variables at once</li>
+<li>**Parallel Coordinates**: Like showing many variables at once</li>
+<li>**Heat Map**: Like showing relationships between many things</li>
+<li>**Network Graph**: Like showing connections between items</li>
+<li>Use for ordered data</li>
+<li>Like a thermometer (light to dark)</li>
+<li>Examples:</li>
+<li>Use for data with a midpoint</li>
+<li>Like a weather map (hot to cold)</li>
+<li>Examples:</li>
+<li>Use for categories</li>
+<li>Like different types of fruit</li>
+<li>Examples:</li>
+<li>Use colorblind-safe palettes</li>
+<li>Maintain sufficient contrast</li>
+<li>Provide alternative encodings</li>
+<li>Use readable font sizes</li>
+<li>Create clear hierarchy</li>
+<li>Use high contrast labels</li>
+<li>Key message or visual</li>
+<li>Like a headline in a newspaper</li>
+<li>Supporting information</li>
+<li>Like subheadings in an article</li>
+<li>Details and context</li>
+<li>Like the body text of an article</li>
+<li>Full Width: 12 columns</li>
+<li>Half Width: 6 columns</li>
+<li>Third Width: 4 columns</li>
+<li>Quarter Width: 3 columns</li>
+<li>Margins: 24px</li>
+<li>Gutters: 16px</li>
+<li>Padding: 16px</li>
+<li>Unnecessary decorative elements</li>
+<li>Like adding too many colors or patterns</li>
+<li>Inappropriate axis scales</li>
+<li>Like starting a scale from a non-zero point</li>
+<li>Hard to distinguish colors</li>
+<li>Like using similar colors for different categories</li>
+<li>Too much information</li>
+<li>Like trying to show everything at once</li>
+<li>Know what you want to communicate</li>
+<li>Choose the right chart type</li>
+<li>Focus on your message</li>
+<li>Remove unnecessary elements</li>
+<li>Use clear labels</li>
+<li>Maintain consistent style</li>
+<li>Use appropriate terminology</li>
+<li>Provide necessary context</li>
+<li>Make it accessible</li>
+<li>Check for clarity</li>
+<li>Verify accuracy</li>
+<li>Get feedback</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            center: false,
+            transition: 'slide',
+            plugins: []
+        });
+        Reveal.on('slidechanged', function (event) {
+            document.querySelectorAll('.slide-number').forEach((el, idx) => {
+                el.textContent = `Slide ${idx + 1} / ${document.querySelectorAll('.slides section').length}`;
+            });
+        });
+        setTimeout(() => {
+            document.querySelectorAll('.slide-number').forEach((el, idx) => {
+                el.textContent = `Slide ${idx + 1} / ${document.querySelectorAll('.slides section').length}`;
+            });
+        }, 500);
+    </script>
+</body>
+
+</html>

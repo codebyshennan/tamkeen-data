@@ -1,0 +1,40 @@
+{
+    "title": "Advanced Data Visualization 📊",
+    "subtitle": "",
+    "slides": [
+        {
+            "type": "title",
+            "title": "Advanced Data Visualization 📊",
+            "subtitle": ""
+        },
+        {
+            "type": "content",
+            "title": "Plotly Guide",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Start with Plotly Express for quick results",
+                    "Use Graph Objects for fine-grained control",
+                    "Consider performance with large datasets",
+                    "Test interactivity across browsers",
+                    "Include clear documentation for users"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Seaborn Guide",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Start with data exploration",
+                    "Choose appropriate visualizations",
+                    "Keep it simple but informative",
+                    "Consider your audience",
+                    "Use consistent styling",
+                    "Save high-quality outputs"
+                ]
+            }
+        }
+    ]
+}
