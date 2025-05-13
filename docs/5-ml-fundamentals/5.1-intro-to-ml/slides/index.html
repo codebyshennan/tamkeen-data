@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Machine Learning</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/theme/white.css">
+    <style>
+        body {
+            background: #ffffff;
+            font-size: 12px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .reveal {
+            --primary-blue: #1877F2;
+            --dark-blue: #0e305a;
+            --light-blue: #e7f0fd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .reveal h1,
+        .reveal h2,
+        .reveal h3 {
+            color: var(--dark-blue);
+            text-transform: none;
+            text-align: center;
+            margin-top: 0.5em;
+            font-weight: 600;
+        }
+
+        .reveal h1 {
+            font-size: 1.8em;
+        }
+
+        .reveal h2 {
+            font-size: 1.4em;
+        }
+
+        .reveal h3 {
+            font-size: 1.2em;
+        }
+
+        .reveal .slides {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .reveal ul {
+            margin-left: 1em;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .reveal li {
+            margin-bottom: 0.8em;
+            text-align: left;
+            line-height: 1.5;
+        }
+
+        .reveal .highlight {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        .reveal .box {
+            background: var(--light-blue);
+            padding: 0.6em 1em;
+            border-radius: 8px;
+            margin: 0.8em auto;
+            border-left: 4px solid var(--primary-blue);
+            max-width: 800px;
+            width: 100%;
+            box-sizing: border-box;
+            display: block;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .reveal .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2em;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .reveal .three-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2em;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .reveal .center {
+            text-align: center;
+        }
+
+        .reveal .right {
+            text-align: right;
+        }
+
+        .slide-header {
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 1;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .slide-header img {
+            height: 100vh;
+            width: auto;
+            object-fit: cover;
+        }
+
+        .slide-footer {
+            position: absolute;
+            bottom: 0.8em;
+            left: 1.5em;
+            color: var(--dark-blue);
+            font-size: 0.75em;
+            opacity: 0.85;
+            font-weight: 500;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 0.8em;
+            right: 1.5em;
+            color: var(--primary-blue);
+            font-size: 0.75em;
+            opacity: 0.85;
+            font-weight: 500;
+        }
+
+        section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            height: 100vh;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 6em 2.5em;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .reveal section>* {
+            max-width: 900px;
+            width: 100%;
+            margin: 0.8em auto;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .reveal p {
+            line-height: 1.6;
+            margin-bottom: 1em;
+        }
+
+        .reveal img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .reveal code {
+            background: var(--light-blue);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-size: 0.8em;
+        }
+
+        .reveal pre {
+            background: var(--light-blue);
+            padding: 0.6em;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            font-size: 0.8em;
+        }
+
+        .reveal .list-container {
+            display: inline-block;
+            text-align: left;
+            margin: 0 auto;
+        }
+
+        .reveal ul {
+            margin-left: 1em;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h1>Introduction to Machine Learning</h1>
+                    <h3></h3>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Bias Variance</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>**High Bias (Underfitting)**</li>
+<li>**Low Bias**</li>
+<li>**High Variance (Overfitting)**</li>
+<li>**Low Variance**</li>
+<li>If you only show them one type of cat (high bias), they might miss other cat breeds</li>
+<li>If you show them every possible variation (high variance), they might start calling dogs cats too!</li>
+<li>**Training Score**: How well the model performs on the data it's seen (like a student's performance on practice tests)</li>
+<li>**Cross-validation Score**: How well the model performs on new data (like a student's performance on the actual exam)</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Feature Engineering New</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>**Continuous Values**: Like temperature or weight - they can take any value within a range</li>
+<li>**Discrete Values**: Like counting items - they can only take specific values</li>
+<li>**Nominal Categories**: Groups with no particular order</li>
+<li>**Ordinal Categories**: Groups with a meaningful order</li>
+<li>**Timestamps**: Specific points in time</li>
+<li>**Time Series Data**: Measurements taken over time</li>
+<li>**Documents**: Full text content</li>
+<li>**Social Media Posts**: Short-form text</li>
+<li>$x$ is your original value (like a temperature in Celsius)</li>
+<li>$\mu$ is the average of all values (mean)</li>
+<li>$\sigma$ is how spread out the values are (standard deviation)</li>
+<li>$x$ is your original value</li>
+<li>$x_{min}$ is the smallest value in your data</li>
+<li>$x_{max}$ is the largest value in your data</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Feature Engineering</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>**Continuous Values**: Like temperature or weight - they can take any value within a range</li>
+<li>**Discrete Values**: Like counting items - they can only take specific values</li>
+<li>**Nominal Categories**: Groups with no particular order</li>
+<li>**Ordinal Categories**: Groups with a meaningful order</li>
+<li>**Timestamps**: Specific points in time</li>
+<li>**Time Series Data**: Measurements taken over time</li>
+<li>**Documents**: Full text content</li>
+<li>**Social Media Posts**: Short-form text</li>
+<li>$x$ is your original value (like a temperature in Celsius)</li>
+<li>$\mu$ is the average of all values (mean)</li>
+<li>$\sigma$ is how spread out the values are (standard deviation)</li>
+<li>$x$ is your original value</li>
+<li>$x_{min}$ is the smallest value in your data</li>
+<li>$x_{max}$ is the largest value in your data</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Ml Workflow</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>What problem are we trying to solve?</li>
+<li>What are our success metrics?</li>
+<li>What data do we need?</li>
+<li>How will the solution be used?</li>
+<li>Keep track of your code changes</li>
+<li>Document model versions and performance</li>
+<li>Save model artifacts systematically</li>
+<li>Document your assumptions</li>
+<li>Keep track of preprocessing steps</li>
+<li>Record model performance metrics</li>
+<li>Monitor model performance over time</li>
+<li>Watch for data drift</li>
+<li>Set up alerts for performance degradation</li>
+<li>Analyze where your model makes mistakes</li>
+<li>Look for patterns in errors</li>
+<li>Use insights to improve the model</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>What Is Ml</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>**Traditional Programming**: We write specific rules (program) to convert input into output</li>
+<li>**Machine Learning**: We provide examples of inputs and outputs, and the computer learns the rules</li>
+<li>Predicting house prices based on features (size, location, etc.)</li>
+<li>Classifying emails as spam or not spam</li>
+<li>Identifying objects in images</li>
+<li>Customer segmentation</li>
+<li>Anomaly detection</li>
+<li>Topic modeling in text</li>
+<li>Game playing AI</li>
+<li>Robot navigation</li>
+<li>Resource management</li>
+<li>**Underfitting (High Bias)**: Model is too simple and misses important patterns</li>
+<li>**Good Fit**: Model captures the underlying patterns well</li>
+<li>**Overfitting (High Variance)**: Model is too complex and captures noise in the data</li>
+<li>**Training Score**: How well the model performs on training data</li>
+<li>**Cross-validation Score**: How well the model performs on new, unseen data</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            center: false,
+            transition: 'slide',
+            plugins: []
+        });
+        Reveal.on('slidechanged', function (event) {
+            document.querySelectorAll('.slide-number').forEach((el, idx) => {
+                el.textContent = `Slide ${idx + 1} / ${document.querySelectorAll('.slides section').length}`;
+            });
+        });
+        setTimeout(() => {
+            document.querySelectorAll('.slide-number').forEach((el, idx) => {
+                el.textContent = `Slide ${idx + 1} / ${document.querySelectorAll('.slides section').length}`;
+            });
+        }, 500);
+    </script>
+</body>
+
+</html>

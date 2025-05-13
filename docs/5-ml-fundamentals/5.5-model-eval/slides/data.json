@@ -1,0 +1,339 @@
+{
+    "title": "Model Evaluation and Hyperparameter Tuning",
+    "subtitle": "",
+    "slides": [
+        {
+            "type": "title",
+            "title": "Model Evaluation and Hyperparameter Tuning",
+            "subtitle": ""
+        },
+        {
+            "type": "content",
+            "title": "Accuracy",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Perfect accuracy: 1.0",
+                    "Random guessing: 0.5",
+                    "Worst case: 0.0",
+                    "Perfect accuracy: 1.0",
+                    "Random guessing: 1/n_classes",
+                    "Worst case: 0.0",
+                    "Balanced: Accuracy is meaningful",
+                    "Imbalanced: May be misleading",
+                    "Consider other metrics"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Confusion Matrix",
+            "content": {
+                "type": "box",
+                "items": [
+                    "True Positives (TP): Correctly predicted positive cases",
+                    "True Negatives (TN): Correctly predicted negative cases",
+                    "False Positives (FP): Incorrectly predicted positive cases",
+                    "False Negatives (FN): Incorrectly predicted negative cases",
+                    "True Positives (TP): Correctly identified positive cases",
+                    "True Negatives (TN): Correctly identified negative cases",
+                    "False Positives (FP): Type I errors",
+                    "False Negatives (FN): Type II errors",
+                    "Diagonal elements: Correct predictions",
+                    "Off-diagonal elements: Misclassifications",
+                    "Row sums: Actual class distribution",
+                    "Column sums: Predicted class distribution",
+                    "Accuracy: (TP + TN) / (TP + TN + FP + FN)",
+                    "Precision: TP / (TP + FP)",
+                    "Recall: TP / (TP + FN)",
+                    "F1 Score: 2 *(Precision* Recall) / (Precision + Recall)"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Cross Validation",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Test different dishes with various groups of customers",
+                    "Get feedback from different demographics",
+                    "Try different times of day",
+                    "Consider different seasons",
+                    "Each fold is like a practice game",
+                    "The training data is like your team's practice",
+                    "The validation data is like the practice game",
+                    "The final model is like your team going into the real season",
+                    "[Cross Validation Guide](https://scikit-learn.org/stable/modules/cross_validation.html)",
+                    "[Time Series Cross Validation](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html)",
+                    "[Model Evaluation Best Practices](https://scikit-learn.org/stable/modules/model_evaluation.html)"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Early Stopping",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Training: Studying the material",
+                    "Validation: Taking practice tests",
+                    "Early stopping: Stopping when practice test scores start to decline",
+                    "Training: Practicing skills",
+                    "Validation: Performance in practice games",
+                    "Early stopping: Stopping when performance plateaus"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Hyperparameter Tuning",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Controls step size in gradient descent",
+                    "Too high: overshooting",
+                    "Too low: slow convergence",
+                    "More trees: better performance but slower",
+                    "Fewer trees: faster but less accurate",
+                    "Deeper trees: more complex patterns",
+                    "Shallower trees: simpler patterns"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Learning Curves",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Training curve: How well the student performs on practice problems",
+                    "Validation curve: How well the student performs on new problems",
+                    "Gap between curves: How well the student generalizes",
+                    "Training curve: Performance in practice",
+                    "Validation curve: Performance in games",
+                    "Gap between curves: Ability to apply skills in real situations",
+                    "Both curves plateau at low performance",
+                    "Small gap between curves",
+                    "More data won't help much",
+                    "Training curve much higher than validation curve",
+                    "Large gap between curves",
+                    "More data might help",
+                    "Both curves plateau at high performance",
+                    "Small gap between curves",
+                    "Model generalizes well"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Metrics",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Accuracy is like the win-loss record",
+                    "Precision is like the percentage of shots that hit the target",
+                    "Recall is like the percentage of opportunities that were converted",
+                    "F1-score is like the overall team performance rating",
+                    "Accuracy is like how often the forecast is correct",
+                    "Precision is like how specific the forecast is",
+                    "Recall is like how well we catch all the important weather events",
+                    "ROC curve is like the trade-off between false alarms and missed events",
+                    "[Scikit-learn Metrics Guide](https://scikit-learn.org/stable/modules/model_evaluation.html)",
+                    "[Model Evaluation Best Practices](https://scikit-learn.org/stable/modules/model_evaluation.html#scoring-parameter)",
+                    "[Classification Metrics Tutorial](https://scikit-learn.org/stable/modules/model_evaluation.html#classification-metrics)"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Model Selection",
+            "content": {
+                "type": "box",
+                "items": [
+                    "How many people are traveling?",
+                    "What's the terrain like?",
+                    "What's your budget?",
+                    "How much luggage do you have?",
+                    "The type of problem (classification, regression, etc.)",
+                    "The size and nature of the data",
+                    "Computational resources",
+                    "Business requirements",
+                    "Each dish (model) has different ingredients (features)",
+                    "Some dishes are quick to prepare (simple models)",
+                    "Others take more time but are more complex (complex models)",
+                    "You need to consider dietary restrictions (constraints)",
+                    "You want the best value for money (performance vs. cost)",
+                    "Each player (model) has different strengths",
+                    "Some players are versatile (general-purpose models)",
+                    "Others are specialists (domain-specific models)",
+                    "You need to consider team chemistry (model ensemble)",
+                    "You want the best performance within your budget"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Overfitting Underfitting",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Overfitting: Memorizing specific questions and answers",
+                    "Underfitting: Only learning basic concepts",
+                    "Good fit: Understanding concepts and applying them to new problems",
+                    "Overfitting: Predicting exact temperatures for specific locations",
+                    "Underfitting: Always predicting the same temperature",
+                    "Good fit: Making accurate predictions based on patterns"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Precision Recall",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Definition: Ratio of true positives to all predicted positives",
+                    "Formula: TP / (TP + FP)",
+                    "Interpretation: How many of the predicted positive cases are actually positive",
+                    "Range: 0 to 1 (higher is better)",
+                    "Definition: Ratio of true positives to all actual positives",
+                    "Formula: TP / (TP + FN)",
+                    "Interpretation: How many of the actual positive cases are correctly identified",
+                    "Range: 0 to 1 (higher is better)",
+                    "Area Under Curve (AUC): Overall model performance",
+                    "Perfect classifier: AUC = 1.0",
+                    "Random classifier: AUC = 0.5",
+                    "Good classifier: AUC > 0.8",
+                    "Poor classifier: AUC < 0.6",
+                    "One curve per class",
+                    "Micro-average: Overall performance",
+                    "Macro-average: Class-wise average",
+                    "Weighted average: Class-weighted performance",
+                    "Range: 0 to 1",
+                    "0.5: Random classifier",
+                    "1.0: Perfect classifier",
+                    "0.7-0.8: Good classifier",
+                    "0.8-0.9: Very good classifier",
+                    "0.9+: Excellent classifier"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Regularization",
+            "content": {
+                "type": "box",
+                "items": [
+                    "L1: Strict rules about what you can eat",
+                    "L2: General guidelines about portion sizes",
+                    "Elastic Net: A balanced approach with both rules and guidelines",
+                    "L1: Strict speed limits on specific roads",
+                    "L2: General traffic flow guidelines",
+                    "Elastic Net: A combination of specific and general rules"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Roc And Auc",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Correctly identify all patients with the disease (high sensitivity)",
+                    "Avoid false alarms for healthy patients (high specificity)",
+                    "Find the right balance between these two goals",
+                    "True Positives: Correctly identifying dangerous items",
+                    "False Positives: Flagging safe items as dangerous",
+                    "True Negatives: Correctly identifying safe items",
+                    "False Negatives: Missing dangerous items",
+                    "True Positives: Correctly predicting rain when it rains",
+                    "False Positives: Predicting rain when it's sunny",
+                    "True Negatives: Correctly predicting sunshine",
+                    "False Negatives: Missing rain predictions",
+                    "[ROC and AUC Guide](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_curve.html)",
+                    "[Threshold Selection](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html)",
+                    "[Model Evaluation Best Practices](https://scikit-learn.org/stable/modules/model_evaluation.html)"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Roc Auc",
+            "content": {
+                "type": "box",
+                "items": [
+                    "AUC = 1.0: Perfect classification",
+                    "AUC = 0.5: Random guessing",
+                    "AUC < 0.5: Worse than random",
+                    "Upper left corner: Ideal point",
+                    "Diagonal line: Random guessing",
+                    "Curve shape: Model performance",
+                    "AUC > 0.9: Excellent",
+                    "0.7 < AUC < 0.9: Good",
+                    "0.5 < AUC < 0.7: Fair",
+                    "AUC = 0.5: Random",
+                    "Operating point: Business requirements",
+                    "Cost-benefit analysis",
+                    "Class imbalance"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Roc Curve",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Area Under Curve (AUC): Overall model performance",
+                    "Diagonal line: Random classifier",
+                    "Upper left corner: Ideal classifier",
+                    "Curve shape: Model's discriminative ability",
+                    "One curve per class",
+                    "Micro-average: Overall performance",
+                    "Macro-average: Class-wise average",
+                    "Weighted average: Class-weighted performance",
+                    "Range: 0 to 1",
+                    "0.5: Random classifier",
+                    "1.0: Perfect classifier",
+                    "0.7-0.8: Good classifier",
+                    "0.8-0.9: Very good classifier",
+                    "0.9+: Excellent classifier"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Sklearn Pipelines",
+            "content": {
+                "type": "box",
+                "items": [
+                    "[Scikit-learn Pipeline Documentation](https://scikit-learn.org/stable/modules/pipeline.html)",
+                    "[Pipeline Best Practices](https://scikit-learn.org/stable/modules/compose.html)",
+                    "[Custom Transformers Guide](https://scikit-learn.org/stable/modules/generated/sklearn.base.TransformerMixin.html)"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Validation Curves",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Training score increases",
+                    "Validation score decreases",
+                    "Large gap between curves",
+                    "Need more regularization",
+                    "Both scores are low",
+                    "Small gap between curves",
+                    "Need more complexity",
+                    "More features might help",
+                    "Both scores are high",
+                    "Small gap between curves",
+                    "Optimal parameter found",
+                    "Model is well-tuned"
+                ]
+            }
+        }
+    ]
+}

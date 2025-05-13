@@ -1,0 +1,124 @@
+{
+    "title": "Introduction to Machine Learning",
+    "subtitle": "",
+    "slides": [
+        {
+            "type": "title",
+            "title": "Introduction to Machine Learning",
+            "subtitle": ""
+        },
+        {
+            "type": "content",
+            "title": "Bias Variance",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**High Bias (Underfitting)**",
+                    "**Low Bias**",
+                    "**High Variance (Overfitting)**",
+                    "**Low Variance**",
+                    "If you only show them one type of cat (high bias), they might miss other cat breeds",
+                    "If you show them every possible variation (high variance), they might start calling dogs cats too!",
+                    "**Training Score**: How well the model performs on the data it's seen (like a student's performance on practice tests)",
+                    "**Cross-validation Score**: How well the model performs on new data (like a student's performance on the actual exam)"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Feature Engineering New",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**Continuous Values**: Like temperature or weight - they can take any value within a range",
+                    "**Discrete Values**: Like counting items - they can only take specific values",
+                    "**Nominal Categories**: Groups with no particular order",
+                    "**Ordinal Categories**: Groups with a meaningful order",
+                    "**Timestamps**: Specific points in time",
+                    "**Time Series Data**: Measurements taken over time",
+                    "**Documents**: Full text content",
+                    "**Social Media Posts**: Short-form text",
+                    "$x$ is your original value (like a temperature in Celsius)",
+                    "$\\mu$ is the average of all values (mean)",
+                    "$\\sigma$ is how spread out the values are (standard deviation)",
+                    "$x$ is your original value",
+                    "$x_{min}$ is the smallest value in your data",
+                    "$x_{max}$ is the largest value in your data"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Feature Engineering",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**Continuous Values**: Like temperature or weight - they can take any value within a range",
+                    "**Discrete Values**: Like counting items - they can only take specific values",
+                    "**Nominal Categories**: Groups with no particular order",
+                    "**Ordinal Categories**: Groups with a meaningful order",
+                    "**Timestamps**: Specific points in time",
+                    "**Time Series Data**: Measurements taken over time",
+                    "**Documents**: Full text content",
+                    "**Social Media Posts**: Short-form text",
+                    "$x$ is your original value (like a temperature in Celsius)",
+                    "$\\mu$ is the average of all values (mean)",
+                    "$\\sigma$ is how spread out the values are (standard deviation)",
+                    "$x$ is your original value",
+                    "$x_{min}$ is the smallest value in your data",
+                    "$x_{max}$ is the largest value in your data"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Ml Workflow",
+            "content": {
+                "type": "box",
+                "items": [
+                    "What problem are we trying to solve?",
+                    "What are our success metrics?",
+                    "What data do we need?",
+                    "How will the solution be used?",
+                    "Keep track of your code changes",
+                    "Document model versions and performance",
+                    "Save model artifacts systematically",
+                    "Document your assumptions",
+                    "Keep track of preprocessing steps",
+                    "Record model performance metrics",
+                    "Monitor model performance over time",
+                    "Watch for data drift",
+                    "Set up alerts for performance degradation",
+                    "Analyze where your model makes mistakes",
+                    "Look for patterns in errors",
+                    "Use insights to improve the model"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "What Is Ml",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**Traditional Programming**: We write specific rules (program) to convert input into output",
+                    "**Machine Learning**: We provide examples of inputs and outputs, and the computer learns the rules",
+                    "Predicting house prices based on features (size, location, etc.)",
+                    "Classifying emails as spam or not spam",
+                    "Identifying objects in images",
+                    "Customer segmentation",
+                    "Anomaly detection",
+                    "Topic modeling in text",
+                    "Game playing AI",
+                    "Robot navigation",
+                    "Resource management",
+                    "**Underfitting (High Bias)**: Model is too simple and misses important patterns",
+                    "**Good Fit**: Model captures the underlying patterns well",
+                    "**Overfitting (High Variance)**: Model is too complex and captures noise in the data",
+                    "**Training Score**: How well the model performs on training data",
+                    "**Cross-validation Score**: How well the model performs on new, unseen data"
+                ]
+            }
+        }
+    ]
+}

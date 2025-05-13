@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Evaluation and Hyperparameter Tuning</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/theme/white.css">
+    <style>
+        body {
+            background: #ffffff;
+            font-size: 12px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .reveal {
+            --primary-blue: #1877F2;
+            --dark-blue: #0e305a;
+            --light-blue: #e7f0fd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .reveal h1,
+        .reveal h2,
+        .reveal h3 {
+            color: var(--dark-blue);
+            text-transform: none;
+            text-align: center;
+            margin-top: 0.5em;
+            font-weight: 600;
+        }
+
+        .reveal h1 {
+            font-size: 1.8em;
+        }
+
+        .reveal h2 {
+            font-size: 1.4em;
+        }
+
+        .reveal h3 {
+            font-size: 1.2em;
+        }
+
+        .reveal .slides {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .reveal ul {
+            margin-left: 1em;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .reveal li {
+            margin-bottom: 0.8em;
+            text-align: left;
+            line-height: 1.5;
+        }
+
+        .reveal .highlight {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        .reveal .box {
+            background: var(--light-blue);
+            padding: 0.6em 1em;
+            border-radius: 8px;
+            margin: 0.8em auto;
+            border-left: 4px solid var(--primary-blue);
+            max-width: 800px;
+            width: 100%;
+            box-sizing: border-box;
+            display: block;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .reveal .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2em;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .reveal .three-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2em;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .reveal .center {
+            text-align: center;
+        }
+
+        .reveal .right {
+            text-align: right;
+        }
+
+        .slide-header {
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 1;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .slide-header img {
+            height: 100vh;
+            width: auto;
+            object-fit: cover;
+        }
+
+        .slide-footer {
+            position: absolute;
+            bottom: 0.8em;
+            left: 1.5em;
+            color: var(--dark-blue);
+            font-size: 0.75em;
+            opacity: 0.85;
+            font-weight: 500;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 0.8em;
+            right: 1.5em;
+            color: var(--primary-blue);
+            font-size: 0.75em;
+            opacity: 0.85;
+            font-weight: 500;
+        }
+
+        section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            height: 100vh;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 6em 2.5em;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .reveal section>* {
+            max-width: 900px;
+            width: 100%;
+            margin: 0.8em auto;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .reveal p {
+            line-height: 1.6;
+            margin-bottom: 1em;
+        }
+
+        .reveal img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .reveal code {
+            background: var(--light-blue);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-size: 0.8em;
+        }
+
+        .reveal pre {
+            background: var(--light-blue);
+            padding: 0.6em;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            font-size: 0.8em;
+        }
+
+        .reveal .list-container {
+            display: inline-block;
+            text-align: left;
+            margin: 0 auto;
+        }
+
+        .reveal ul {
+            margin-left: 1em;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h1>Model Evaluation and Hyperparameter Tuning</h1>
+                    <h3></h3>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Accuracy</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>Perfect accuracy: 1.0</li>
+<li>Random guessing: 0.5</li>
+<li>Worst case: 0.0</li>
+<li>Perfect accuracy: 1.0</li>
+<li>Random guessing: 1/n_classes</li>
+<li>Worst case: 0.0</li>
+<li>Balanced: Accuracy is meaningful</li>
+<li>Imbalanced: May be misleading</li>
+<li>Consider other metrics</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Confusion Matrix</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>True Positives (TP): Correctly predicted positive cases</li>
+<li>True Negatives (TN): Correctly predicted negative cases</li>
+<li>False Positives (FP): Incorrectly predicted positive cases</li>
+<li>False Negatives (FN): Incorrectly predicted negative cases</li>
+<li>True Positives (TP): Correctly identified positive cases</li>
+<li>True Negatives (TN): Correctly identified negative cases</li>
+<li>False Positives (FP): Type I errors</li>
+<li>False Negatives (FN): Type II errors</li>
+<li>Diagonal elements: Correct predictions</li>
+<li>Off-diagonal elements: Misclassifications</li>
+<li>Row sums: Actual class distribution</li>
+<li>Column sums: Predicted class distribution</li>
+<li>Accuracy: (TP + TN) / (TP + TN + FP + FN)</li>
+<li>Precision: TP / (TP + FP)</li>
+<li>Recall: TP / (TP + FN)</li>
+<li>F1 Score: 2 *(Precision* Recall) / (Precision + Recall)</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Cross Validation</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>Test different dishes with various groups of customers</li>
+<li>Get feedback from different demographics</li>
+<li>Try different times of day</li>
+<li>Consider different seasons</li>
+<li>Each fold is like a practice game</li>
+<li>The training data is like your team's practice</li>
+<li>The validation data is like the practice game</li>
+<li>The final model is like your team going into the real season</li>
+<li>[Cross Validation Guide](https://scikit-learn.org/stable/modules/cross_validation.html)</li>
+<li>[Time Series Cross Validation](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html)</li>
+<li>[Model Evaluation Best Practices](https://scikit-learn.org/stable/modules/model_evaluation.html)</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Early Stopping</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>Training: Studying the material</li>
+<li>Validation: Taking practice tests</li>
+<li>Early stopping: Stopping when practice test scores start to decline</li>
+<li>Training: Practicing skills</li>
+<li>Validation: Performance in practice games</li>
+<li>Early stopping: Stopping when performance plateaus</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Hyperparameter Tuning</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>Controls step size in gradient descent</li>
+<li>Too high: overshooting</li>
+<li>Too low: slow convergence</li>
+<li>More trees: better performance but slower</li>
+<li>Fewer trees: faster but less accurate</li>
+<li>Deeper trees: more complex patterns</li>
+<li>Shallower trees: simpler patterns</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Learning Curves</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>Training curve: How well the student performs on practice problems</li>
+<li>Validation curve: How well the student performs on new problems</li>
+<li>Gap between curves: How well the student generalizes</li>
+<li>Training curve: Performance in practice</li>
+<li>Validation curve: Performance in games</li>
+<li>Gap between curves: Ability to apply skills in real situations</li>
+<li>Both curves plateau at low performance</li>
+<li>Small gap between curves</li>
+<li>More data won't help much</li>
+<li>Training curve much higher than validation curve</li>
+<li>Large gap between curves</li>
+<li>More data might help</li>
+<li>Both curves plateau at high performance</li>
+<li>Small gap between curves</li>
+<li>Model generalizes well</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Metrics</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>Accuracy is like the win-loss record</li>
+<li>Precision is like the percentage of shots that hit the target</li>
+<li>Recall is like the percentage of opportunities that were converted</li>
+<li>F1-score is like the overall team performance rating</li>
+<li>Accuracy is like how often the forecast is correct</li>
+<li>Precision is like how specific the forecast is</li>
+<li>Recall is like how well we catch all the important weather events</li>
+<li>ROC curve is like the trade-off between false alarms and missed events</li>
+<li>[Scikit-learn Metrics Guide](https://scikit-learn.org/stable/modules/model_evaluation.html)</li>
+<li>[Model Evaluation Best Practices](https://scikit-learn.org/stable/modules/model_evaluation.html#scoring-parameter)</li>
+<li>[Classification Metrics Tutorial](https://scikit-learn.org/stable/modules/model_evaluation.html#classification-metrics)</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Model Selection</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>How many people are traveling?</li>
+<li>What's the terrain like?</li>
+<li>What's your budget?</li>
+<li>How much luggage do you have?</li>
+<li>The type of problem (classification, regression, etc.)</li>
+<li>The size and nature of the data</li>
+<li>Computational resources</li>
+<li>Business requirements</li>
+<li>Each dish (model) has different ingredients (features)</li>
+<li>Some dishes are quick to prepare (simple models)</li>
+<li>Others take more time but are more complex (complex models)</li>
+<li>You need to consider dietary restrictions (constraints)</li>
+<li>You want the best value for money (performance vs. cost)</li>
+<li>Each player (model) has different strengths</li>
+<li>Some players are versatile (general-purpose models)</li>
+<li>Others are specialists (domain-specific models)</li>
+<li>You need to consider team chemistry (model ensemble)</li>
+<li>You want the best performance within your budget</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Overfitting Underfitting</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>Overfitting: Memorizing specific questions and answers</li>
+<li>Underfitting: Only learning basic concepts</li>
+<li>Good fit: Understanding concepts and applying them to new problems</li>
+<li>Overfitting: Predicting exact temperatures for specific locations</li>
+<li>Underfitting: Always predicting the same temperature</li>
+<li>Good fit: Making accurate predictions based on patterns</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Precision Recall</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>Definition: Ratio of true positives to all predicted positives</li>
+<li>Formula: TP / (TP + FP)</li>
+<li>Interpretation: How many of the predicted positive cases are actually positive</li>
+<li>Range: 0 to 1 (higher is better)</li>
+<li>Definition: Ratio of true positives to all actual positives</li>
+<li>Formula: TP / (TP + FN)</li>
+<li>Interpretation: How many of the actual positive cases are correctly identified</li>
+<li>Range: 0 to 1 (higher is better)</li>
+<li>Area Under Curve (AUC): Overall model performance</li>
+<li>Perfect classifier: AUC = 1.0</li>
+<li>Random classifier: AUC = 0.5</li>
+<li>Good classifier: AUC > 0.8</li>
+<li>Poor classifier: AUC < 0.6</li>
+<li>One curve per class</li>
+<li>Micro-average: Overall performance</li>
+<li>Macro-average: Class-wise average</li>
+<li>Weighted average: Class-weighted performance</li>
+<li>Range: 0 to 1</li>
+<li>0.5: Random classifier</li>
+<li>1.0: Perfect classifier</li>
+<li>0.7-0.8: Good classifier</li>
+<li>0.8-0.9: Very good classifier</li>
+<li>0.9+: Excellent classifier</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Regularization</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>L1: Strict rules about what you can eat</li>
+<li>L2: General guidelines about portion sizes</li>
+<li>Elastic Net: A balanced approach with both rules and guidelines</li>
+<li>L1: Strict speed limits on specific roads</li>
+<li>L2: General traffic flow guidelines</li>
+<li>Elastic Net: A combination of specific and general rules</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Roc And Auc</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>Correctly identify all patients with the disease (high sensitivity)</li>
+<li>Avoid false alarms for healthy patients (high specificity)</li>
+<li>Find the right balance between these two goals</li>
+<li>True Positives: Correctly identifying dangerous items</li>
+<li>False Positives: Flagging safe items as dangerous</li>
+<li>True Negatives: Correctly identifying safe items</li>
+<li>False Negatives: Missing dangerous items</li>
+<li>True Positives: Correctly predicting rain when it rains</li>
+<li>False Positives: Predicting rain when it's sunny</li>
+<li>True Negatives: Correctly predicting sunshine</li>
+<li>False Negatives: Missing rain predictions</li>
+<li>[ROC and AUC Guide](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_curve.html)</li>
+<li>[Threshold Selection](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.roc_auc_score.html)</li>
+<li>[Model Evaluation Best Practices](https://scikit-learn.org/stable/modules/model_evaluation.html)</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Roc Auc</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>AUC = 1.0: Perfect classification</li>
+<li>AUC = 0.5: Random guessing</li>
+<li>AUC < 0.5: Worse than random</li>
+<li>Upper left corner: Ideal point</li>
+<li>Diagonal line: Random guessing</li>
+<li>Curve shape: Model performance</li>
+<li>AUC > 0.9: Excellent</li>
+<li>0.7 < AUC < 0.9: Good</li>
+<li>0.5 < AUC < 0.7: Fair</li>
+<li>AUC = 0.5: Random</li>
+<li>Operating point: Business requirements</li>
+<li>Cost-benefit analysis</li>
+<li>Class imbalance</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Roc Curve</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>Area Under Curve (AUC): Overall model performance</li>
+<li>Diagonal line: Random classifier</li>
+<li>Upper left corner: Ideal classifier</li>
+<li>Curve shape: Model's discriminative ability</li>
+<li>One curve per class</li>
+<li>Micro-average: Overall performance</li>
+<li>Macro-average: Class-wise average</li>
+<li>Weighted average: Class-weighted performance</li>
+<li>Range: 0 to 1</li>
+<li>0.5: Random classifier</li>
+<li>1.0: Perfect classifier</li>
+<li>0.7-0.8: Good classifier</li>
+<li>0.8-0.9: Very good classifier</li>
+<li>0.9+: Excellent classifier</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Sklearn Pipelines</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>[Scikit-learn Pipeline Documentation](https://scikit-learn.org/stable/modules/pipeline.html)</li>
+<li>[Pipeline Best Practices](https://scikit-learn.org/stable/modules/compose.html)</li>
+<li>[Custom Transformers Guide](https://scikit-learn.org/stable/modules/generated/sklearn.base.TransformerMixin.html)</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Validation Curves</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>Training score increases</li>
+<li>Validation score decreases</li>
+<li>Large gap between curves</li>
+<li>Need more regularization</li>
+<li>Both scores are low</li>
+<li>Small gap between curves</li>
+<li>Need more complexity</li>
+<li>More features might help</li>
+<li>Both scores are high</li>
+<li>Small gap between curves</li>
+<li>Optimal parameter found</li>
+<li>Model is well-tuned</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            center: false,
+            transition: 'slide',
+            plugins: []
+        });
+        Reveal.on('slidechanged', function (event) {
+            document.querySelectorAll('.slide-number').forEach((el, idx) => {
+                el.textContent = `Slide ${idx + 1} / ${document.querySelectorAll('.slides section').length}`;
+            });
+        });
+        setTimeout(() => {
+            document.querySelectorAll('.slide-number').forEach((el, idx) => {
+                el.textContent = `Slide ${idx + 1} / ${document.querySelectorAll('.slides section').length}`;
+            });
+        }, 500);
+    </script>
+</body>
+
+</html>

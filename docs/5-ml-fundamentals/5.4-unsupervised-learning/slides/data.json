@@ -1,0 +1,69 @@
+{
+    "title": "Unsupervised Learning: Discovering Hidden Patterns in Data",
+    "subtitle": "",
+    "slides": [
+        {
+            "type": "title",
+            "title": "Unsupervised Learning: Discovering Hidden Patterns in Data",
+            "subtitle": ""
+        },
+        {
+            "type": "content",
+            "title": "Advanced Clustering",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Automatically adapting to varying densities",
+                    "Not requiring an epsilon parameter",
+                    "Providing cluster membership probabilities"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Clustering",
+            "content": {
+                "type": "box",
+                "items": [
+                    "You don't know what groups exist in your data",
+                    "You want to discover natural patterns",
+                    "You need to segment your data into meaningful categories",
+                    "Decides how many groups to make (k)",
+                    "Places items in the group they're closest to",
+                    "Keeps adjusting until everything is in the right place",
+                    "Starts with each item as its own group",
+                    "Gradually combines similar groups",
+                    "Creates a tree-like structure of relationships",
+                    "Identifies dense neighborhoods (clusters)",
+                    "Marks sparse areas as noise",
+                    "Doesn't need to know how many neighborhoods to look for",
+                    "You know how many clusters you want",
+                    "Your clusters are roughly spherical",
+                    "You have a large dataset",
+                    "You don't know how many clusters you want",
+                    "You want to see the relationships between clusters",
+                    "You have a small to medium dataset",
+                    "You don't know how many clusters you want",
+                    "Your clusters can be any shape",
+                    "You want to identify outliers"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Tsne Umap",
+            "content": {
+                "type": "box",
+                "items": [
+                    "You need highly detailed local structure",
+                    "You have a small to medium dataset",
+                    "You want to focus on local relationships",
+                    "You have a large dataset",
+                    "You need to preserve both local and global structure",
+                    "You need faster computation",
+                    "You want to use the embedding for downstream tasks"
+                ]
+            }
+        }
+    ]
+}
