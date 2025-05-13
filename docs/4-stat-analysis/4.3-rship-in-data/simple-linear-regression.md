@@ -225,26 +225,37 @@ plot_diagnostics(X, y, y_pred)
 
 
 ### What to Look for in Diagnostic Plots:
+1. Residuals vs Fitted (Top Left)
 
-1. **Residuals vs Predicted (top left)**
-   - **Good**: Points randomly scattered around the horizontal line at zero
-   - **Bad**: Any pattern or curve
-   - **Like**: Checking if your bathroom scale is accurate across different weights
+What I see: The points appear to be randomly scattered around the horizontal zero line without any clear pattern or systematic curve. The spread seems relatively consistent across the range of fitted values (from 0 to 20).
 
-2. **Q-Q Plot (top right)**
-   - **Good**: Points follow the diagonal line
-   - **Bad**: Points that curve away from the line
-   - **Like**: Checking if your prediction errors follow a normal bell curve
+Interpretation: This is a good sign! Your model seems to be capturing the relationship in your data well without missing any non-linear patterns. The random scatter suggests that your linear model is appropriate for this data.
 
-3. **Scale-Location (bottom left)**
-   - **Good**: Even spread of points with no pattern
-   - **Bad**: Funnel shape (wider on one side)
-   - **Like**: Checking if your predictions are equally reliable for all values
+In everyday terms: Your "bathroom scale" appears to be equally accurate whether measuring light or heavy objects - it's not systematically overestimating or underestimating at certain weight ranges.
 
-4. **Residuals vs Leverage (bottom right)**
-   - **Good**: No points far from others
-   - **Bad**: Points in the top or bottom right
-   - **Like**: Checking if any single data point is overly influencing your whole model
+2. Normal Q-Q Plot (Top Right)
+
+What I see: The points follow the diagonal reference line quite closely throughout most of the range, with only very minor deviations at the extreme ends.
+
+Interpretation: This indicates that the residuals (errors) from your model follow a normal distribution very well. This satisfies one of the key assumptions of linear regression.
+
+In everyday terms: The mistakes your model makes follow a predictable pattern that statisticians can work with confidently. The errors are symmetrically distributed around zero, which is exactly what we want.
+
+3. Scale-Location Plot (Bottom Left)
+
+What I see: There might be a slight upward trend in the spread of points as the fitted values increase, but it's not dramatically pronounced. There's some variability in the spread.
+
+Interpretation: There could be a mild heteroscedasticity issue (variance of residuals increasing with fitted values), but it doesn't appear severe. This suggests that your model's predictions might be slightly less reliable for higher fitted values.
+
+In everyday terms: Your weather forecast might be a bit more accurate for moderate temperatures than for extreme temperatures, but the difference isn't dramatic.
+
+4. Residuals vs Leverage Plot (Bottom Right)
+
+What I see: The points are spread out without any particularly influential points in the concerning regions (top or bottom right corners). No points appear to be outside Cook's distance contours (which would indicate high influence).
+
+Interpretation: There don't appear to be any individual data points that are unduly influencing your regression results. This suggests your model is robust and not being skewed by outliers.
+
+In everyday terms: No single person is dominating the group decision - everyone has a relatively equal say in how your model behaves, which is what we want.
 
 ## Real-Life Applications: Where Is Simple Linear Regression Used?
 
