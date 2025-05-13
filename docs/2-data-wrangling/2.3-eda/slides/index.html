@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exploratory Data Analysis: From Data to Insights</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/theme/white.css">
+    <style>
+        body {
+            background: #ffffff;
+            font-size: 12px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .reveal {
+            --primary-blue: #1877F2;
+            --dark-blue: #0e305a;
+            --light-blue: #e7f0fd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .reveal h1,
+        .reveal h2,
+        .reveal h3 {
+            color: var(--dark-blue);
+            text-transform: none;
+            text-align: center;
+            margin-top: 0.5em;
+            font-weight: 600;
+        }
+
+        .reveal h1 {
+            font-size: 1.8em;
+        }
+
+        .reveal h2 {
+            font-size: 1.4em;
+        }
+
+        .reveal h3 {
+            font-size: 1.2em;
+        }
+
+        .reveal .slides {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .reveal ul {
+            margin-left: 1em;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .reveal li {
+            margin-bottom: 0.8em;
+            text-align: left;
+            line-height: 1.5;
+        }
+
+        .reveal .highlight {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        .reveal .box {
+            background: var(--light-blue);
+            padding: 0.6em 1em;
+            border-radius: 8px;
+            margin: 0.8em auto;
+            border-left: 4px solid var(--primary-blue);
+            max-width: 800px;
+            width: 100%;
+            box-sizing: border-box;
+            display: block;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .reveal .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2em;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .reveal .three-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2em;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .reveal .center {
+            text-align: center;
+        }
+
+        .reveal .right {
+            text-align: right;
+        }
+
+        .slide-header {
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 1;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .slide-header img {
+            height: 100vh;
+            width: auto;
+            object-fit: cover;
+        }
+
+        .slide-footer {
+            position: absolute;
+            bottom: 0.8em;
+            left: 1.5em;
+            color: var(--dark-blue);
+            font-size: 0.75em;
+            opacity: 0.85;
+            font-weight: 500;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 0.8em;
+            right: 1.5em;
+            color: var(--primary-blue);
+            font-size: 0.75em;
+            opacity: 0.85;
+            font-weight: 500;
+        }
+
+        section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            height: 100vh;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 6em 2.5em;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .reveal section>* {
+            max-width: 900px;
+            width: 100%;
+            margin: 0.8em auto;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .reveal p {
+            line-height: 1.6;
+            margin-bottom: 1em;
+        }
+
+        .reveal img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .reveal code {
+            background: var(--light-blue);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-size: 0.8em;
+        }
+
+        .reveal pre {
+            background: var(--light-blue);
+            padding: 0.6em;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            font-size: 0.8em;
+        }
+
+        .reveal .list-container {
+            display: inline-block;
+            text-align: left;
+            margin: 0 auto;
+        }
+
+        .reveal ul {
+            margin-left: 1em;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h1>Exploratory Data Analysis: From Data to Insights</h1>
+                    <h3></h3>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Distributions</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>**Mean**: $\bar{x} = \frac{1}{n}\sum_{i=1}^n x_i$</li>
+<li>**Median**: Middle value when sorted</li>
+<li>**Mode**: Most frequent value</li>
+<li>**Variance**: $\sigma^2 = \frac{1}{n}\sum_{i=1}^n (x_i - \bar{x})^2$</li>
+<li>**Standard Deviation**: $\sigma = \sqrt{\frac{1}{n}\sum_{i=1}^n (x_i - \bar{x})^2}$</li>
+<li>**IQR**: $IQR = Q_3 - Q_1$</li>
+<li>**Skewness**: $\gamma_1 = \frac{m_3}{m_2^{3/2}}$ where $m_k = \frac{1}{n}\sum_{i=1}^n (x_i - \bar{x})^k$</li>
+<li>**Kurtosis**: $\gamma_2 = \frac{m_4}{m_2^2} - 3$</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Project</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>Customer transactions</li>
+<li>Product information</li>
+<li>Temporal data</li>
+<li>Customer demographics</li>
+<li>Sales metrics</li>
+<li>Analyze the distribution of sales amounts</li>
+<li>Examine customer spending patterns</li>
+<li>Study product pricing distributions</li>
+<li>Identify and handle outliers</li>
+<li>Transform skewed distributions if necessary</li>
+<li>Analyze product category distributions</li>
+<li>Examine customer demographics</li>
+<li>Study geographical distributions</li>
+<li>Create meaningful visualizations for each</li>
+<li>Cross-tabulations of categories</li>
+<li>Chi-square tests of independence</li>
+<li>Visualization of category relationships</li>
+<li>Compare numeric variables across categories</li>
+<li>Analyze variance between groups</li>
+<li>Create box plots and violin plots</li>
+<li>Daily sales patterns</li>
+<li>Weekly trends</li>
+<li>Monthly seasonality</li>
+<li>Year-over-year growth</li>
+<li>Trend analysis</li>
+<li>Seasonal patterns</li>
+<li>Residual analysis</li>
+<li>Moving averages</li>
+<li>Identify unusual patterns</li>
+<li>Detect seasonal anomalies</li>
+<li>Flag suspicious transactions</li>
+<li>Analyze product affinities</li>
+<li>Study category performance</li>
+<li>Identify top performers</li>
+<li>Regional sales patterns</li>
+<li>Location-based trends</li>
+<li>Market penetration analysis</li>
+<li>Executive summary</li>
+<li>Key findings</li>
+<li>Methodology description</li>
+<li>Recommendations</li>
+<li>Clear and informative plots</li>
+<li>Proper labeling</li>
+<li>Consistent styling</li>
+<li>Interactive elements (optional)</li>
+<li>Code quality and organization (20%)</li>
+<li>Analysis depth and accuracy (30%)</li>
+<li>Visualization effectiveness (20%)</li>
+<li>Insights and interpretation (20%)</li>
+<li>Documentation clarity (10%)</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Relationships</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>Making better predictions</li>
+<li>Identifying key drivers</li>
+<li>Discovering hidden patterns</li>
+<li>Making informed business decisions</li>
+<li>**Pearson Correlation**: $r = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^n (x_i - \bar{x})^2}\sqrt{\sum_{i=1}^n (y_i - \bar{y})^2}}$</li>
+<li>**Spearman Rank Correlation**: $\rho = 1 - \frac{6\sum d_i^2}{n(n^2-1)}$ where $d_i$ is rank difference</li>
+<li>**Kendall's Tau**: $\tau = \frac{2(P - Q)}{n(n-1)}$ where P and Q are concordant and discordant pairs</li>
+<li>**Chi-square Test**: $\chi^2 = \sum \frac{(O - E)^2}{E}$</li>
+<li>**Cramer's V**: $V = \sqrt{\frac{\chi^2}{n \min(r-1, c-1)}}$</li>
+<li>**Mutual Information**: $I(X;Y) = \sum_{y \in Y} \sum_{x \in X} p(x,y) \log(\frac{p(x,y)}{p(x)p(y)})$</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Time Series</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>Forecasting future trends</li>
+<li>Understanding seasonal patterns</li>
+<li>Detecting anomalies</li>
+<li>Making data-driven decisions</li>
+<li>Optimizing business operations</li>
+<li>**Trend** ($T_t$): Long-term direction</li>
+<li>**Seasonality** ($S_t$): Regular patterns</li>
+<li>**Residuals** ($R_t$): Random variations</li>
+<li>**Additive Model**: $Y_t = T_t + S_t + R_t$</li>
+<li>**Multiplicative Model**: $Y_t = T_t \times S_t \times R_t$</li>
+<li>**Simple Moving Average**: $MA_t = \frac{1}{n}\sum_{i=0}^{n-1} Y_{t-i}$</li>
+<li>**Exponential Moving Average**: $EMA_t = \alpha Y_t + (1-\alpha)EMA_{t-1}$</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            center: false,
+            transition: 'slide',
+            plugins: []
+        });
+        Reveal.on('slidechanged', function (event) {
+            document.querySelectorAll('.slide-number').forEach((el, idx) => {
+                el.textContent = `Slide ${idx + 1} / ${document.querySelectorAll('.slides section').length}`;
+            });
+        });
+        setTimeout(() => {
+            document.querySelectorAll('.slide-number').forEach((el, idx) => {
+                el.textContent = `Slide ${idx + 1} / ${document.querySelectorAll('.slides section').length}`;
+            });
+        }, 500);
+    </script>
+</body>
+
+</html>

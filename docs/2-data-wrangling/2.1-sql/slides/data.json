@@ -1,0 +1,105 @@
+{
+    "title": "Data Querying with SQL: Your Gateway to Data Mastery",
+    "subtitle": "",
+    "slides": [
+        {
+            "type": "title",
+            "title": "Data Querying with SQL: Your Gateway to Data Mastery",
+            "subtitle": ""
+        },
+        {
+            "type": "content",
+            "title": "Advanced Concepts",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Write complex, performant queries",
+                    "Handle large-scale data processing",
+                    "Implement sophisticated business logic",
+                    "Optimize database operations",
+                    "Write self-documenting queries with clear aliases",
+                    "Use CTEs for better readability and maintenance",
+                    "Leverage appropriate indexes for performance",
+                    "Consider query plan and execution cost",
+                    "Implement proper constraints and relationships",
+                    "Use appropriate data types",
+                    "Design with scalability in mind",
+                    "Regular maintenance and optimization",
+                    "Version control your database changes",
+                    "Implement proper testing procedures",
+                    "Monitor query performance",
+                    "Regular code reviews and optimization"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Aggregations",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Raw data = Individual grocery receipts",
+                    "Aggregated data = Monthly spending summary",
+                    "[PostgreSQL Aggregation Documentation](https://www.postgresql.org/docs/current/functions-aggregate.html)",
+                    "[Window Functions Tutorial](https://mode.com/sql-tutorial/sql-window-functions/)",
+                    "[SQL Performance Tuning Guide](https://use-the-index-luke.com/)",
+                    "[Advanced SQL Recipes](https://modern-sql.com/)"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Basic Operations",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Data retrieval and analysis",
+                    "Database management",
+                    "Data integrity maintenance",
+                    "Application development"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Intro Databases",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Uses structured tables with rows and columns",
+                    "Enforces relationships between tables",
+                    "Examples: PostgreSQL, MySQL, Oracle",
+                    "Document Stores (MongoDB)",
+                    "Key-Value Stores (Redis)",
+                    "Column-Family Stores (Cassandra)",
+                    "Graph Databases (Neo4j)",
+                    "Time-Series Databases (InfluxDB)",
+                    "Search Engines (Elasticsearch)",
+                    "Vector Databases (Pinecone)",
+                    "Spatial Databases (PostGIS)",
+                    "Conceptual Model",
+                    "Logical Model",
+                    "Physical Model",
+                    "Data Storage",
+                    "Data Retrieval",
+                    "Data Update",
+                    "Administration",
+                    "Security"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Joins",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Retrieving related data across tables",
+                    "Building comprehensive reports",
+                    "Analyzing relationships in data",
+                    "Creating meaningful insights"
+                ]
+            }
+        }
+    ]
+}

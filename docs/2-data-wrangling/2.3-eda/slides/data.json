@@ -1,0 +1,127 @@
+{
+    "title": "Exploratory Data Analysis: From Data to Insights",
+    "subtitle": "",
+    "slides": [
+        {
+            "type": "title",
+            "title": "Exploratory Data Analysis: From Data to Insights",
+            "subtitle": ""
+        },
+        {
+            "type": "content",
+            "title": "Distributions",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**Mean**: $\\bar{x} = \\frac{1}{n}\\sum_{i=1}^n x_i$",
+                    "**Median**: Middle value when sorted",
+                    "**Mode**: Most frequent value",
+                    "**Variance**: $\\sigma^2 = \\frac{1}{n}\\sum_{i=1}^n (x_i - \\bar{x})^2$",
+                    "**Standard Deviation**: $\\sigma = \\sqrt{\\frac{1}{n}\\sum_{i=1}^n (x_i - \\bar{x})^2}$",
+                    "**IQR**: $IQR = Q_3 - Q_1$",
+                    "**Skewness**: $\\gamma_1 = \\frac{m_3}{m_2^{3/2}}$ where $m_k = \\frac{1}{n}\\sum_{i=1}^n (x_i - \\bar{x})^k$",
+                    "**Kurtosis**: $\\gamma_2 = \\frac{m_4}{m_2^2} - 3$"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Project",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Customer transactions",
+                    "Product information",
+                    "Temporal data",
+                    "Customer demographics",
+                    "Sales metrics",
+                    "Analyze the distribution of sales amounts",
+                    "Examine customer spending patterns",
+                    "Study product pricing distributions",
+                    "Identify and handle outliers",
+                    "Transform skewed distributions if necessary",
+                    "Analyze product category distributions",
+                    "Examine customer demographics",
+                    "Study geographical distributions",
+                    "Create meaningful visualizations for each",
+                    "Cross-tabulations of categories",
+                    "Chi-square tests of independence",
+                    "Visualization of category relationships",
+                    "Compare numeric variables across categories",
+                    "Analyze variance between groups",
+                    "Create box plots and violin plots",
+                    "Daily sales patterns",
+                    "Weekly trends",
+                    "Monthly seasonality",
+                    "Year-over-year growth",
+                    "Trend analysis",
+                    "Seasonal patterns",
+                    "Residual analysis",
+                    "Moving averages",
+                    "Identify unusual patterns",
+                    "Detect seasonal anomalies",
+                    "Flag suspicious transactions",
+                    "Analyze product affinities",
+                    "Study category performance",
+                    "Identify top performers",
+                    "Regional sales patterns",
+                    "Location-based trends",
+                    "Market penetration analysis",
+                    "Executive summary",
+                    "Key findings",
+                    "Methodology description",
+                    "Recommendations",
+                    "Clear and informative plots",
+                    "Proper labeling",
+                    "Consistent styling",
+                    "Interactive elements (optional)",
+                    "Code quality and organization (20%)",
+                    "Analysis depth and accuracy (30%)",
+                    "Visualization effectiveness (20%)",
+                    "Insights and interpretation (20%)",
+                    "Documentation clarity (10%)"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Relationships",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Making better predictions",
+                    "Identifying key drivers",
+                    "Discovering hidden patterns",
+                    "Making informed business decisions",
+                    "**Pearson Correlation**: $r = \\frac{\\sum_{i=1}^n (x_i - \\bar{x})(y_i - \\bar{y})}{\\sqrt{\\sum_{i=1}^n (x_i - \\bar{x})^2}\\sqrt{\\sum_{i=1}^n (y_i - \\bar{y})^2}}$",
+                    "**Spearman Rank Correlation**: $\\rho = 1 - \\frac{6\\sum d_i^2}{n(n^2-1)}$ where $d_i$ is rank difference",
+                    "**Kendall's Tau**: $\\tau = \\frac{2(P - Q)}{n(n-1)}$ where P and Q are concordant and discordant pairs",
+                    "**Chi-square Test**: $\\chi^2 = \\sum \\frac{(O - E)^2}{E}$",
+                    "**Cramer's V**: $V = \\sqrt{\\frac{\\chi^2}{n \\min(r-1, c-1)}}$",
+                    "**Mutual Information**: $I(X;Y) = \\sum_{y \\in Y} \\sum_{x \\in X} p(x,y) \\log(\\frac{p(x,y)}{p(x)p(y)})$"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Time Series",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Forecasting future trends",
+                    "Understanding seasonal patterns",
+                    "Detecting anomalies",
+                    "Making data-driven decisions",
+                    "Optimizing business operations",
+                    "**Trend** ($T_t$): Long-term direction",
+                    "**Seasonality** ($S_t$): Regular patterns",
+                    "**Residuals** ($R_t$): Random variations",
+                    "**Additive Model**: $Y_t = T_t + S_t + R_t$",
+                    "**Multiplicative Model**: $Y_t = T_t \\times S_t \\times R_t$",
+                    "**Simple Moving Average**: $MA_t = \\frac{1}{n}\\sum_{i=0}^{n-1} Y_{t-i}$",
+                    "**Exponential Moving Average**: $EMA_t = \\alpha Y_t + (1-\\alpha)EMA_{t-1}$"
+                ]
+            }
+        }
+    ]
+}

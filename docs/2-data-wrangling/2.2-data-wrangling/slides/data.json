@@ -1,0 +1,54 @@
+{
+    "title": "Data Wrangling: From Raw Data to Reliable Insights",
+    "subtitle": "",
+    "slides": [
+        {
+            "type": "title",
+            "title": "Data Wrangling: From Raw Data to Reliable Insights",
+            "subtitle": ""
+        },
+        {
+            "type": "content",
+            "title": "Missing Values",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Always investigate why data is missing",
+                    "Consider domain knowledge",
+                    "Document assumptions"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Project",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Key findings",
+                    "Critical issues",
+                    "Recommendations"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Transformations",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**Standard Scaling (Z-score)**",
+                    "**Min-Max Scaling**",
+                    "**Robust Scaling**",
+                    "**Log Transform**",
+                    "**Box-Cox Transform**",
+                    "**Yeo-Johnson Transform**",
+                    "Consider the data distribution",
+                    "Understand algorithm requirements",
+                    "Preserve important relationships",
+                    "Handle special cases (zeros, negatives)"
+                ]
+            }
+        }
+    ]
+}
