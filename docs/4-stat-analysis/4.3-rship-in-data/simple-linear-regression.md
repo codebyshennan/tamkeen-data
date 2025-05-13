@@ -225,37 +225,63 @@ plot_diagnostics(X, y, y_pred)
 
 
 ### What to Look for in Diagnostic Plots:
-1. Residuals vs Fitted (Top Left)
+### 1. Residuals vs Predicted/Fitted (Top Left)
+- **What it shows:**  
+   The difference between what your model predicted and what actually happened.
+- **Good looks like:**  
+   Points randomly scattered around the horizontal zero line, like confetti thrown evenly on the ground.
+- **Bad looks like:**  
+   Any pattern, curve, or trend in the dots.
+- **Real-world analogy:**  
+   Checking if your bathroom scale is accurate across different weights – it should be equally reliable whether weighing a feather or a bowling ball.
+- **In this example:**  
+   The points appear randomly scattered around the zero line without any clear pattern. This is a good sign! Your model seems to be capturing the relationship in your data well without missing any non-linear patterns. Your "scale" is equally accurate for light and heavy objects.
 
-What I see: The points appear to be randomly scattered around the horizontal zero line without any clear pattern or systematic curve. The spread seems relatively consistent across the range of fitted values (from 0 to 20).
+### 2. Q-Q Plot (Top Right)
+- **What it shows:**  
+   Whether your prediction errors follow a normal distribution (bell curve).
+- **Good looks like:**  
+   Points that follow the diagonal line closely, like cars staying in their lane.
+- **Bad looks like:**  
+   Points that curve away from the line, especially at the ends.
+- **Real-world analogy:**  
+   Checking if the mistakes your model makes follow a predictable pattern that statisticians can work with.
+- **In this example:**  
+   The points follow the diagonal reference line quite closely with only minor deviations at the extreme ends. This indicates that your model’s errors follow a normal distribution very well, satisfying a key assumption of linear regression. The mistakes your model makes are symmetrically distributed around zero – exactly what we want.
 
-Interpretation: This is a good sign! Your model seems to be capturing the relationship in your data well without missing any non-linear patterns. The random scatter suggests that your linear model is appropriate for this data.
+### 3. Scale-Location (Bottom Left)
+- **What it shows:**  
+   Whether your model’s accuracy is consistent across all predictions.
+- **Good looks like:**  
+   An even spread of points with no clear pattern, like evenly distributed stars.
+- **Bad looks like:**  
+   A funnel shape (wider on one side), which means your model is more accurate for some values than others.
+- **Real-world analogy:**  
+   Checking if your weather forecast is equally reliable for sunny days and rainy days.
+- **In this example:**  
+   There might be a slight upward trend in the spread as the fitted values increase, but it’s not dramatically pronounced. This suggests minor heteroscedasticity – your model’s predictions might be slightly less reliable for higher values, like a weather forecast that’s a bit more accurate for moderate temperatures than for extreme ones.
 
-In everyday terms: Your "bathroom scale" appears to be equally accurate whether measuring light or heavy objects - it's not systematically overestimating or underestimating at certain weight ranges.
+### 4. Residuals vs Leverage (Bottom Right)
+- **What it shows:**  
+   Whether any single data point is having too much influence on your entire model.
+- **Good looks like:**  
+   No points far from others, especially in the top or bottom right corners.
+- **Bad looks like:**  
+   Points in the top or bottom right (influential outliers).
+- **Real-world analogy:**  
+   Checking if one extremely vocal person is swaying an entire group’s decision, rather than everyone having equal input.
+- **In this example:**  
+   The points are well-spread without any particularly influential points in concerning regions. No points appear outside Cook’s distance contours (which would indicate high influence). This suggests your model is robust and not being skewed by outliers – no single data point is dominating how your model behaves.
 
-2. Normal Q-Q Plot (Top Right)
-
-What I see: The points follow the diagonal reference line quite closely throughout most of the range, with only very minor deviations at the extreme ends.
-
-Interpretation: This indicates that the residuals (errors) from your model follow a normal distribution very well. This satisfies one of the key assumptions of linear regression.
-
-In everyday terms: The mistakes your model makes follow a predictable pattern that statisticians can work with confidently. The errors are symmetrically distributed around zero, which is exactly what we want.
-
-3. Scale-Location Plot (Bottom Left)
-
-What I see: There might be a slight upward trend in the spread of points as the fitted values increase, but it's not dramatically pronounced. There's some variability in the spread.
-
-Interpretation: There could be a mild heteroscedasticity issue (variance of residuals increasing with fitted values), but it doesn't appear severe. This suggests that your model's predictions might be slightly less reliable for higher fitted values.
-
-In everyday terms: Your weather forecast might be a bit more accurate for moderate temperatures than for extreme temperatures, but the difference isn't dramatic.
-
-4. Residuals vs Leverage Plot (Bottom Right)
-
-What I see: The points are spread out without any particularly influential points in the concerning regions (top or bottom right corners). No points appear to be outside Cook's distance contours (which would indicate high influence).
-
-Interpretation: There don't appear to be any individual data points that are unduly influencing your regression results. This suggests your model is robust and not being skewed by outliers.
-
-In everyday terms: No single person is dominating the group decision - everyone has a relatively equal say in how your model behaves, which is what we want.
+### Overall Assessment
+- **Linearity ✓:**  
+   The random scatter in the Residuals vs Fitted plot indicates your model captures the relationships appropriately.
+- **Normality of residuals ✓:**  
+   The good alignment in the Q-Q plot shows errors follow a normal distribution.
+- **Homoscedasticity ⚠️:**  
+   There’s a slight concern in the Scale-Location plot, but it’s not severe.
+- **No influential outliers ✓:**  
+   The Residuals vs Leverage plot shows no problematic points driving your results.
 
 ## Real-Life Applications: Where Is Simple Linear Regression Used?
 
