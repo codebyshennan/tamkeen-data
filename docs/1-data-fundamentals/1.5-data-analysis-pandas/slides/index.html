@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analysis with Pandas</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/theme/white.css">
+    <style>
+        body {
+            background: #ffffff;
+            font-size: 12px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        .reveal {
+            --primary-blue: #1877F2;
+            --dark-blue: #0e305a;
+            --light-blue: #e7f0fd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .reveal h1,
+        .reveal h2,
+        .reveal h3 {
+            color: var(--dark-blue);
+            text-transform: none;
+            text-align: center;
+            margin-top: 0.5em;
+            font-weight: 600;
+        }
+
+        .reveal h1 {
+            font-size: 1.8em;
+        }
+
+        .reveal h2 {
+            font-size: 1.4em;
+        }
+
+        .reveal h3 {
+            font-size: 1.2em;
+        }
+
+        .reveal .slides {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .reveal ul {
+            margin-left: 1em;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .reveal li {
+            margin-bottom: 0.8em;
+            text-align: left;
+            line-height: 1.5;
+        }
+
+        .reveal .highlight {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        .reveal .box {
+            background: var(--light-blue);
+            padding: 0.6em 1em;
+            border-radius: 8px;
+            margin: 0.8em auto;
+            border-left: 4px solid var(--primary-blue);
+            max-width: 800px;
+            width: 100%;
+            box-sizing: border-box;
+            display: block;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .reveal .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2em;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .reveal .three-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2em;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .reveal .center {
+            text-align: center;
+        }
+
+        .reveal .right {
+            text-align: right;
+        }
+
+        .slide-header {
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 1;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .slide-header img {
+            height: 100vh;
+            width: auto;
+            object-fit: cover;
+        }
+
+        .slide-footer {
+            position: absolute;
+            bottom: 0.8em;
+            left: 1.5em;
+            color: var(--dark-blue);
+            font-size: 0.75em;
+            opacity: 0.85;
+            font-weight: 500;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 0.8em;
+            right: 1.5em;
+            color: var(--primary-blue);
+            font-size: 0.75em;
+            opacity: 0.85;
+            font-weight: 500;
+        }
+
+        section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            height: 100vh;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 6em 2.5em;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .reveal section>* {
+            max-width: 900px;
+            width: 100%;
+            margin: 0.8em auto;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .reveal p {
+            line-height: 1.6;
+            margin-bottom: 1em;
+        }
+
+        .reveal img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .reveal code {
+            background: var(--light-blue);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-size: 0.8em;
+        }
+
+        .reveal pre {
+            background: var(--light-blue);
+            padding: 0.6em;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            font-size: 0.8em;
+        }
+
+        .reveal .list-container {
+            display: inline-block;
+            text-align: left;
+            margin: 0 auto;
+        }
+
+        .reveal ul {
+            margin-left: 1em;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h1>Data Analysis with Pandas</h1>
+                    <h3></h3>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Arithmetic Alignment</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>Two people comparing shopping lists</li>
+<li>Matching employee records from different departments</li>
+<li>Combining sales data from multiple stores</li>
+<li>Merging financial data from different sources</li>
+<li>Automatic matching by index</li>
+<li>Safe handling of missing data</li>
+<li>Prevention of data misalignment errors</li>
+<li>Flexible data combination options</li>
+<li>Financial data reconciliation</li>
+<li>Sales data comparison across regions</li>
+<li>Stock portfolio analysis</li>
+<li>Company performance metrics</li>
+<li>Labels that exist in both Series ('b' and 'c') get added together</li>
+<li>Labels that exist in only one Series ('a' and 'd') get NaN values</li>
+<li>Only column 'B' exists in both DataFrames</li>
+<li>Column 'A' only exists in df1</li>
+<li>Column 'C' only exists in df2</li>
+<li>Row 'row4' only exists in df2</li>
+<li>`add()` or `+`: Addition</li>
+<li>`sub()` or `-`: Subtraction</li>
+<li>`mul()` or `*`: Multiplication</li>
+<li>`div()` or `/`: Division</li>
+<li>Use values from the first dataset where available</li>
+<li>Fill in missing values from the second dataset</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Data Types Index</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>Memory efficiency</li>
+<li>Better performance</li>
+<li>Correct calculations</li>
+<li>Proper data handling</li>
+<li>**numbers**:</li>
+<li>**text**:</li>
+<li>**boolean**:</li>
+<li>**dates**:</li>
+<li>**categorical**:</li>
+<li>It can contain any immutable type (numbers, strings, dates)</li>
+<li>It helps align data when performing operations</li>
+<li>It makes accessing data more intuitive</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Dataframe</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>Analyzing structured data (sales records, customer info)</li>
+<li>Time series analysis (stock prices, weather data)</li>
+<li>Data cleaning and preparation</li>
+<li>Complex data analysis and statistics</li>
+<li>Sales analytics</li>
+<li>Financial reporting</li>
+<li>Customer demographics analysis</li>
+<li>Survey data analysis</li>
+<li>Medical research data</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Function Mapping</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>A recipe that you apply to each ingredient</li>
+<li>A rule that processes each piece of data</li>
+<li>A transformation that changes values</li>
+<li>A filter that selects specific data</li>
+<li>An analysis that extracts insights</li>
+<li>Efficient data processing</li>
+<li>Consistent transformations</li>
+<li>Complex calculations</li>
+<li>Custom data manipulation</li>
+<li>Financial calculations (interest, tax)</li>
+<li>Data cleaning (standardization)</li>
+<li>Feature engineering (ML preparation)</li>
+<li>Date/time processing</li>
+<li>Text analysis and cleaning</li>
+<li>rows (`axis=1`)</li>
+<li>columns (`axis=0` or default)</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Reindexing Dropping</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>Rearranging data in a specific order</li>
+<li>Adding new index labels (with placeholder values)</li>
+<li>Removing unwanted index labels</li>
+<li>Aligning multiple datasets</li>
+<li>Restructuring data hierarchies</li>
+<li>Aligning financial data from different sources</li>
+<li>Filling in missing dates in time series</li>
+<li>Standardizing country codes/names</li>
+<li>Matching customer records across systems</li>
+<li>Specific rows or columns</li>
+<li>Rows or columns that meet certain conditions</li>
+<li>Missing values</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Series</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>Time series data (stock prices over time)</li>
+<li>Storing categorical data (product categories)</li>
+<li>Tracking measurements (temperatures, distances)</li>
+<li>Working with labeled data (student grades)</li>
+<li>Financial data analysis</li>
+<li>Daily temperature readings</li>
+<li>Survey responses</li>
+<li>Sales performance tracking</li>
+<li>Dictionary keys become the index (labels)</li>
+<li>Dictionary values become the Series values</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+
+                <section>
+                    <div class="slide-header"><img src="/docs/slides/logo.png" alt="Logo"></div>
+                    <h2>Sorting Ranking</h2>
+                    <div class="box">
+                        
+                        
+                    <div class="list-container">
+                        <ul>
+                            <li>Arranging books alphabetically on a shelf</li>
+<li>Organizing test scores from highest to lowest</li>
+<li>Arranging dates from oldest to newest</li>
+<li>Sorting transactions by amount</li>
+<li>Ranking players by score</li>
+<li>Quick value lookup</li>
+<li>Pattern identification</li>
+<li>Data presentation</li>
+<li>Priority identification</li>
+<li>Trend analysis</li>
+<li>Financial portfolio analysis</li>
+<li>Sports rankings and statistics</li>
+<li>Sales performance reports</li>
+<li>Event scheduling and planning</li>
+<li>Customer segmentation</li>
+<li>Ranking athletes in a competition</li>
+<li>Assigning class rank to students</li>
+<li>Determining the position of teams in a league</li>
+                        </ul>
+                    </div>
+                
+                    </div>
+                    <div class="slide-footer">Data Science & Analytics | Skills Union</div>
+                    <div class="slide-number"></div>
+                </section>
+            
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            center: false,
+            transition: 'slide',
+            plugins: []
+        });
+        Reveal.on('slidechanged', function (event) {
+            document.querySelectorAll('.slide-number').forEach((el, idx) => {
+                el.textContent = `Slide ${idx + 1} / ${document.querySelectorAll('.slides section').length}`;
+            });
+        });
+        setTimeout(() => {
+            document.querySelectorAll('.slide-number').forEach((el, idx) => {
+                el.textContent = `Slide ${idx + 1} / ${document.querySelectorAll('.slides section').length}`;
+            });
+        }, 500);
+    </script>
+</body>
+
+</html>

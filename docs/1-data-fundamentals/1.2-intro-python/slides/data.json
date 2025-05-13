@@ -1,0 +1,155 @@
+{
+    "title": "Introduction to Python for Data Science",
+    "subtitle": "",
+    "slides": [
+        {
+            "type": "title",
+            "title": "Introduction to Python for Data Science",
+            "subtitle": ""
+        },
+        {
+            "type": "content",
+            "title": "Basic Syntax and Data Types",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**Python Basics**:",
+                    "- Variables and assignment",
+                    "- Basic data types (int, float, str, bool)",
+                    "- Type conversion",
+                    "- Basic operators",
+                    "**Data Structures**:",
+                    "- Lists and tuples",
+                    "- Dictionaries and sets",
+                    "- String manipulation",
+                    "- List comprehensions",
+                    "**Best Practices**:",
+                    "- Use descriptive variable names",
+                    "- Follow PEP 8 style guide",
+                    "- Write clear comments",
+                    "- Use type hints"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Functions",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**Function Basics**:",
+                    "- Function definition and calling",
+                    "- Parameters and arguments",
+                    "- Return values",
+                    "- Scope and namespaces",
+                    "**Function Types**:",
+                    "- Built-in functions",
+                    "- User-defined functions",
+                    "- Lambda functions",
+                    "- Generator functions",
+                    "**Best Practices**:",
+                    "- Single responsibility principle",
+                    "- Clear documentation",
+                    "- Error handling",
+                    "- Type hints"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Conditions and Iterations",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**Control Flow**:",
+                    "- If-elif-else statements",
+                    "- For loops",
+                    "- While loops",
+                    "- Break and continue",
+                    "**Iteration Tools**:",
+                    "- Range and enumerate",
+                    "- List comprehensions",
+                    "- Generator expressions",
+                    "- Iterators and generators",
+                    "**Best Practices**:",
+                    "- Use appropriate loop types",
+                    "- Avoid nested loops when possible",
+                    "- Use list comprehensions for simple transformations",
+                    "- Handle edge cases"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Data Structures",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**Core Data Structures**:",
+                    "- Lists: Ordered, mutable sequences",
+                    "- Tuples: Ordered, immutable sequences",
+                    "- Dictionaries: Key-value mappings",
+                    "- Sets: Unordered collections of unique elements",
+                    "**Advanced Data Structures**:",
+                    "- Collections module",
+                    "- NumPy arrays",
+                    "- Pandas DataFrames",
+                    "- Custom data structures",
+                    "**Best Practices**:",
+                    "- Choose appropriate data structure",
+                    "- Consider performance implications",
+                    "- Use built-in methods effectively",
+                    "- Document data structure choices"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Classes and Objects",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**Object-Oriented Concepts**:",
+                    "- Classes and objects",
+                    "- Attributes and methods",
+                    "- Inheritance and polymorphism",
+                    "- Encapsulation",
+                    "**Class Design**:",
+                    "- Constructor methods",
+                    "- Property decorators",
+                    "- Class methods and static methods",
+                    "- Special methods",
+                    "**Best Practices**:",
+                    "- Follow SOLID principles",
+                    "- Use proper encapsulation",
+                    "- Write comprehensive docstrings",
+                    "- Implement proper error handling"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Modules",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**Module Basics**:",
+                    "- Importing modules",
+                    "- Creating modules",
+                    "- Module organization",
+                    "- Package structure",
+                    "**Common Modules**:",
+                    "- Standard library modules",
+                    "- Third-party packages",
+                    "- Custom modules",
+                    "- Virtual environments",
+                    "**Best Practices**:",
+                    "- Use meaningful module names",
+                    "- Follow package structure",
+                    "- Document module purpose",
+                    "- Handle dependencies properly"
+                ]
+            }
+        }
+    ]
+}

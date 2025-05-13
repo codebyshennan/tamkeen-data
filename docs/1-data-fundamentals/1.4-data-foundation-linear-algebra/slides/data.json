@@ -1,0 +1,131 @@
+{
+    "title": "Data Foundation with NumPy",
+    "subtitle": "",
+    "slides": [
+        {
+            "type": "title",
+            "title": "Data Foundation with NumPy",
+            "subtitle": ""
+        },
+        {
+            "type": "content",
+            "title": "Introduction to NumPy",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**NumPy Basics**:",
+                    "- Array creation and manipulation",
+                    "- Array attributes and methods",
+                    "- Broadcasting and vectorization",
+                    "- Universal functions (ufuncs)",
+                    "**Applications**:",
+                    "- Numerical computations",
+                    "- Data analysis",
+                    "- Scientific computing",
+                    "- Machine learning",
+                    "**Best Practices**:",
+                    "- Use vectorized operations",
+                    "- Avoid loops when possible",
+                    "- Choose appropriate data types",
+                    "- Document array operations"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Ndarray Basics",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**Array Creation**:",
+                    "- From lists and tuples",
+                    "- Using built-in functions",
+                    "- Special arrays (zeros, ones, etc.)",
+                    "- Random arrays",
+                    "**Array Operations**:",
+                    "- Indexing and slicing",
+                    "- Reshaping and transposing",
+                    "- Concatenation and splitting",
+                    "- Broadcasting",
+                    "**Best Practices**:",
+                    "- Understand array shapes",
+                    "- Use appropriate indexing",
+                    "- Consider memory usage",
+                    "- Document array operations"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Ndarray Methods",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**Array Methods**:",
+                    "- Mathematical operations",
+                    "- Statistical functions",
+                    "- Sorting and searching",
+                    "- Set operations",
+                    "**Advanced Operations**:",
+                    "- Masking and filtering",
+                    "- Aggregation functions",
+                    "- Reduction operations",
+                    "- Broadcasting rules",
+                    "**Best Practices**:",
+                    "- Use appropriate methods",
+                    "- Consider performance",
+                    "- Handle edge cases",
+                    "- Document method usage"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Boolean Indexing",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**Boolean Operations**:",
+                    "- Comparison operators",
+                    "- Logical operators",
+                    "- Boolean masks",
+                    "- Fancy indexing",
+                    "**Applications**:",
+                    "- Data filtering",
+                    "- Conditional operations",
+                    "- Data cleaning",
+                    "- Feature selection",
+                    "**Best Practices**:",
+                    "- Use vectorized operations",
+                    "- Consider memory usage",
+                    "- Handle edge cases",
+                    "- Document filtering logic"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Linear Algebra",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**Matrix Operations**:",
+                    "- Matrix multiplication",
+                    "- Matrix decomposition",
+                    "- Eigenvalues and eigenvectors",
+                    "- Matrix inversion",
+                    "**Applications**:",
+                    "- Data transformation",
+                    "- Feature engineering",
+                    "- Dimensionality reduction",
+                    "- Machine learning",
+                    "**Best Practices**:",
+                    "- Check matrix dimensions",
+                    "- Handle singular matrices",
+                    "- Consider numerical stability",
+                    "- Document matrix operations"
+                ]
+            }
+        }
+    ]
+}

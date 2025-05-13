@@ -1,0 +1,161 @@
+{
+    "title": "Introduction to Data Analytics and Data Science",
+    "subtitle": "",
+    "slides": [
+        {
+            "type": "title",
+            "title": "Introduction to Data Analytics and Data Science",
+            "subtitle": ""
+        },
+        {
+            "type": "content",
+            "title": "Data Collection Methods",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Surveys and questionnaires",
+                    "Interviews and focus groups",
+                    "Observations and measurements",
+                    "Web scraping and APIs",
+                    "Sensor data collection",
+                    "Social media monitoring"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Data Quality Considerations",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Accuracy and precision",
+                    "Completeness and coverage",
+                    "Consistency and reliability",
+                    "Timeliness and relevance"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Data Collection Best Practices",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Define clear objectives",
+                    "Choose appropriate methods",
+                    "Ensure data quality",
+                    "Maintain ethical standards",
+                    "Document collection process"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Key Privacy Concepts",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Personal Identifiable Information (PII)",
+                    "Sensitive Personal Information",
+                    "Protected Health Information (PHI)"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Privacy Regulations",
+            "content": {
+                "type": "box",
+                "items": [
+                    "GDPR (General Data Protection Regulation)",
+                    "CCPA (California Consumer Privacy Act)",
+                    "HIPAA (Health Insurance Portability and Accountability Act)"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Privacy Best Practices",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Data minimization",
+                    "Purpose limitation",
+                    "Storage limitation",
+                    "Security measures",
+                    "User consent and rights"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Security Principles",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Confidentiality",
+                    "Integrity",
+                    "Availability",
+                    "Non-repudiation"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Security Measures",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Encryption (symmetric, asymmetric, hybrid)",
+                    "Access controls",
+                    "Authentication and authorization",
+                    "Data backup and recovery",
+                    "Security monitoring and auditing"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Security Best Practices",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Regular security assessments",
+                    "Employee training",
+                    "Incident response planning",
+                    "Security documentation",
+                    "Compliance monitoring"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Data Analysis Workflow",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Problem definition",
+                    "Data collection",
+                    "Data cleaning and preparation",
+                    "Data analysis",
+                    "Results interpretation",
+                    "Communication and reporting"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Workflow Best Practices",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Document each step",
+                    "Version control",
+                    "Reproducibility",
+                    "Quality assurance",
+                    "Stakeholder communication"
+                ]
+            }
+        }
+    ]
+}

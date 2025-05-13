@@ -1,0 +1,179 @@
+{
+    "title": "Data Analysis with Pandas",
+    "subtitle": "",
+    "slides": [
+        {
+            "type": "title",
+            "title": "Data Analysis with Pandas",
+            "subtitle": ""
+        },
+        {
+            "type": "content",
+            "title": "Series",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**Series Basics**:",
+                    "- One-dimensional labeled array",
+                    "- Index and values",
+                    "- Data types and missing values",
+                    "- Series operations",
+                    "**Series Methods**:",
+                    "- Mathematical operations",
+                    "- Statistical functions",
+                    "- String methods",
+                    "- DateTime operations",
+                    "**Best Practices**:",
+                    "- Use appropriate data types",
+                    "- Handle missing values",
+                    "- Consider performance",
+                    "- Document operations"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "DataFrame",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**DataFrame Basics**:",
+                    "- Two-dimensional labeled data structure",
+                    "- Columns and index",
+                    "- Data types and missing values",
+                    "- DataFrame operations",
+                    "**DataFrame Methods**:",
+                    "- Selection and indexing",
+                    "- Filtering and boolean indexing",
+                    "- Grouping and aggregation",
+                    "- Merging and joining",
+                    "**Best Practices**:",
+                    "- Use appropriate data types",
+                    "- Handle missing values",
+                    "- Consider memory usage",
+                    "- Document operations"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Data Types and Index",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**Data Types**:",
+                    "- Numeric types (int, float)",
+                    "- Categorical data",
+                    "- DateTime data",
+                    "- String data",
+                    "**Index Operations**:",
+                    "- Setting and resetting index",
+                    "- Multi-level indexing",
+                    "- Index alignment",
+                    "- Index operations",
+                    "**Best Practices**:",
+                    "- Choose appropriate data types",
+                    "- Use efficient indexing",
+                    "- Handle missing values",
+                    "- Document data structure"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Arithmetic and Alignment",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**Arithmetic Operations**:",
+                    "- Addition and subtraction",
+                    "- Multiplication and division",
+                    "- Broadcasting rules",
+                    "- Missing value handling",
+                    "**Alignment Rules**:",
+                    "- Index alignment",
+                    "- Column alignment",
+                    "- Broadcasting",
+                    "- Missing value propagation",
+                    "**Best Practices**:",
+                    "- Understand alignment rules",
+                    "- Handle missing values",
+                    "- Consider performance",
+                    "- Document operations"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Function Mapping",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**Function Application**:",
+                    "- Element-wise operations",
+                    "- Row/column operations",
+                    "- Aggregation functions",
+                    "- Transformation functions",
+                    "**Mapping Methods**:",
+                    "- apply and applymap",
+                    "- map and replace",
+                    "- transform and filter",
+                    "- pipe and pipe",
+                    "**Best Practices**:",
+                    "- Use vectorized operations",
+                    "- Consider performance",
+                    "- Handle edge cases",
+                    "- Document functions"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Reindexing and Dropping",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**Reindexing Operations**:",
+                    "- Changing index order",
+                    "- Adding new index labels",
+                    "- Removing index labels",
+                    "- Filling missing values",
+                    "**Dropping Operations**:",
+                    "- Dropping rows/columns",
+                    "- Dropping duplicates",
+                    "- Dropping missing values",
+                    "- Dropping by condition",
+                    "**Best Practices**:",
+                    "- Use appropriate methods",
+                    "- Handle missing values",
+                    "- Consider performance",
+                    "- Document operations"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Sorting and Ranking",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**Sorting Operations**:",
+                    "- Sorting by index",
+                    "- Sorting by values",
+                    "- Sorting by multiple columns",
+                    "- Stable sorting",
+                    "**Ranking Operations**:",
+                    "- Ranking methods",
+                    "- Handling ties",
+                    "- Ranking by groups",
+                    "- Custom ranking",
+                    "**Best Practices**:",
+                    "- Use appropriate methods",
+                    "- Handle missing values",
+                    "- Consider performance",
+                    "- Document operations"
+                ]
+            }
+        }
+    ]
+}

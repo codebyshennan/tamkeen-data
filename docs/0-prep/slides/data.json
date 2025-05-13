@@ -1,0 +1,115 @@
+{
+    "title": "Data Science Bootcamp Preparation",
+    "subtitle": "Essential Tools and Resources",
+    "slides": [
+        {
+            "type": "title",
+            "title": "Data Science Bootcamp Preparation",
+            "subtitle": "Essential Tools and Resources"
+        },
+        {
+            "type": "content",
+            "title": "Teaching Pedagogy",
+            "content": {
+                "type": "box",
+                "title": "Flipped Classroom Model",
+                "items": [
+                    "Learn at your own pace",
+                    "Hands-on practice during class",
+                    "Regular office hours for support"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Essential Tools",
+            "content": {
+                "type": "box",
+                "items": [
+                    "VS Code - Your code editor",
+                    "DBeaver - Database management",
+                    "Jupyter Notebooks - Interactive coding",
+                    "Google Colab - Cloud-based notebooks"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Development Environment",
+            "content": {
+                "type": "box",
+                "title": "Python Data Science Stack",
+                "items": [
+                    "Anaconda - Python distribution",
+                    "Jupyter - Interactive notebooks",
+                    "Essential libraries and packages"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Cloud Platforms",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Snowflake - Data warehouse",
+                    "Databricks - Unified analytics",
+                    "Google Colab - Cloud notebooks"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Data Visualization",
+            "content": {
+                "type": "box",
+                "title": "Tableau",
+                "items": [
+                    "Interactive dashboards",
+                    "Data exploration",
+                    "Business intelligence"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Workflow Automation",
+            "content": {
+                "type": "box",
+                "title": "Apache Airflow",
+                "items": [
+                    "Data pipeline orchestration",
+                    "Workflow automation",
+                    "Task scheduling"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Getting Started",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Install VS Code and extensions",
+                    "Set up Anaconda environment",
+                    "Configure DBeaver for databases",
+                    "Create accounts for cloud platforms"
+                ],
+                "ordered": true
+            }
+        },
+        {
+            "type": "content",
+            "title": "Support Resources",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Weekly office hours",
+                    "Documentation and guides",
+                    "Practice exercises",
+                    "Community forums"
+                ]
+            }
+        }
+    ]
+}

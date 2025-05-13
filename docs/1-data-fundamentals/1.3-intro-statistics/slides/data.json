@@ -1,0 +1,131 @@
+{
+    "title": "Introduction to Statistics",
+    "subtitle": "",
+    "slides": [
+        {
+            "type": "title",
+            "title": "Introduction to Statistics",
+            "subtitle": ""
+        },
+        {
+            "type": "content",
+            "title": "One Variable Statistics",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**Descriptive Statistics**:",
+                    "- Measures of central tendency (mean, median, mode)",
+                    "- Measures of dispersion (variance, standard deviation)",
+                    "- Measures of shape (skewness, kurtosis)",
+                    "- Percentiles and quartiles",
+                    "**Data Visualization**:",
+                    "- Histograms and density plots",
+                    "- Box plots and violin plots",
+                    "- Stem-and-leaf plots",
+                    "- QQ plots",
+                    "**Best Practices**:",
+                    "- Choose appropriate measures",
+                    "- Handle outliers appropriately",
+                    "- Consider data distribution",
+                    "- Document assumptions"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Two Variable Statistics",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**Correlation Analysis**:",
+                    "- Pearson correlation",
+                    "- Spearman correlation",
+                    "- Kendall's tau",
+                    "- Correlation vs causation",
+                    "**Regression Analysis**:",
+                    "- Simple linear regression",
+                    "- Multiple regression",
+                    "- Model assumptions",
+                    "- Model evaluation",
+                    "**Best Practices**:",
+                    "- Check for linearity",
+                    "- Handle outliers",
+                    "- Consider sample size",
+                    "- Validate assumptions"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Probability Fundamentals",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**Basic Probability Concepts**:",
+                    "- Sample spaces and events",
+                    "- Probability rules",
+                    "- Conditional probability",
+                    "- Bayes' theorem",
+                    "**Random Variables**:",
+                    "- Discrete vs continuous",
+                    "- Probability mass functions",
+                    "- Probability density functions",
+                    "- Expected value and variance",
+                    "**Best Practices**:",
+                    "- Understand probability rules",
+                    "- Use appropriate distributions",
+                    "- Consider independence",
+                    "- Document assumptions"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Probability Distributions",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**Discrete Distributions**:",
+                    "- Binomial distribution",
+                    "- Poisson distribution",
+                    "- Geometric distribution",
+                    "- Negative binomial distribution",
+                    "**Continuous Distributions**:",
+                    "- Normal distribution",
+                    "- Exponential distribution",
+                    "- Gamma distribution",
+                    "- Beta distribution",
+                    "**Best Practices**:",
+                    "- Choose appropriate distribution",
+                    "- Validate assumptions",
+                    "- Consider sample size",
+                    "- Document distribution choice"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Probability Distribution Families",
+            "content": {
+                "type": "box",
+                "items": [
+                    "**Distribution Families**:",
+                    "- Location-scale families",
+                    "- Exponential families",
+                    "- Power law distributions",
+                    "- Heavy-tailed distributions",
+                    "**Applications**:",
+                    "- Statistical modeling",
+                    "- Risk assessment",
+                    "- Quality control",
+                    "- Reliability analysis",
+                    "**Best Practices**:",
+                    "- Understand family properties",
+                    "- Choose appropriate family",
+                    "- Validate assumptions",
+                    "- Document family choice"
+                ]
+            }
+        }
+    ]
+}
