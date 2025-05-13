@@ -1,0 +1,93 @@
+{
+    "title": "Testing Hypotheses: From Questions to Answers",
+    "subtitle": "",
+    "slides": [
+        {
+            "type": "title",
+            "title": "Testing Hypotheses: From Questions to Answers",
+            "subtitle": ""
+        },
+        {
+            "type": "content",
+            "title": "Ab Testing",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Website optimization",
+                    "Email marketing campaigns",
+                    "Mobile app features",
+                    "Pricing strategies",
+                    "UI/UX design choices",
+                    "[A/B Testing Calculator](https://www.abtestguide.com/calc/)",
+                    "[Sample Size Calculator](https://www.optimizely.com/sample-size-calculator/)",
+                    "[A/B Testing Best Practices](https://www.optimizely.com/optimization-glossary/ab-testing/)",
+                    "Relevant to your goals",
+                    "Measurable",
+                    "Sensitive to changes"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Experimental Design",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Control groups provide a baseline for comparison",
+                    "Controlled variables reduce noise in our measurements",
+                    "Randomization helps eliminate bias",
+                    "Multiple trials increase confidence",
+                    "Sample size calculations ensure adequate power"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Hypothesis Formulation",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Simple: Tests exact value",
+                    "Composite: Tests range of values",
+                    "[Statistical Hypothesis Testing Guide](https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/)",
+                    "[Multiple Testing Calculator](https://www.statstest.com/bonferroni/)",
+                    "[P-value Misconceptions](https://www.nature.com/articles/nmeth.3288)",
+                    "No difference between groups",
+                    "No relationship between variables",
+                    "No effect of treatment",
+                    "There is a difference between groups",
+                    "There is a relationship between variables",
+                    "The treatment has an effect",
+                    "Simple: Specifies exact values",
+                    "Composite: Specifies ranges or inequalities",
+                    "Directional: Specifies the direction of effect",
+                    "Non-directional: Only specifies that there is an effect"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Results Analysis",
+            "content": {
+                "type": "box",
+                "items": [
+                    "[Effect Size Calculator](https://www.psychometrica.de/effect_size.html)",
+                    "[Decision Making Framework](https://hbr.org/2019/09/the-abcs-of-data-driven-decisions)",
+                    "[Results Communication Guide](https://www.nature.com/articles/s41467-020-17896-w)"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Statistical Tests",
+            "content": {
+                "type": "box",
+                "items": [
+                    "[Statistical Tests Guide](https://www.statisticshowto.com/probability-and-statistics/statistical-tests/)",
+                    "[Effect Size Calculator](https://www.statstest.com/effect-size/)",
+                    "[Multiple Testing Correction](https://www.statstest.com/bonferroni/)"
+                ]
+            }
+        }
+    ]
+}

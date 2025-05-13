@@ -1,0 +1,148 @@
+{
+    "title": "Introduction to Inferential Statistics",
+    "subtitle": "",
+    "slides": [
+        {
+            "type": "title",
+            "title": "Introduction to Inferential Statistics",
+            "subtitle": ""
+        },
+        {
+            "type": "content",
+            "title": "Confidence Intervals",
+            "content": {
+                "type": "box",
+                "items": [
+                    "x̄ is the sample mean",
+                    "t_α/2 is the t-value for desired confidence level",
+                    "s is the sample standard deviation",
+                    "n is the sample size",
+                    "Our best single guess at the parameter",
+                    "Usually the sample statistic (mean, proportion, etc.)",
+                    "Measures the precision of our estimate",
+                    "Affected by:",
+                    "Usually 95% or 99%",
+                    "Higher confidence = wider interval",
+                    "Trade-off between confidence and precision",
+                    "95% is standard but consider your needs",
+                    "Higher stakes = higher confidence level",
+                    "Remember the width trade-off",
+                    "Point estimate",
+                    "Confidence level",
+                    "Interval bounds",
+                    "Sample size",
+                    "Practical significance",
+                    "Cost of errors",
+                    "Required precision",
+                    "Error bars",
+                    "Forest plots",
+                    "Confidence bands",
+                    "[Interactive CI Simulator](https://seeing-theory.brown.edu/frequentist-inference/index.html)",
+                    "[Understanding CIs in Medical Research](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2689604/)",
+                    "[Common CI Mistakes](https://statisticsbyjim.com/hypothesis-testing/confidence-intervals/)"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "P Values",
+            "content": {
+                "type": "box",
+                "items": [
+                    "T is the test statistic",
+                    "t is the observed value",
+                    "H_0 is the null hypothesis",
+                    "The \"nothing special happening\" theory",
+                    "The default position we assume is true",
+                    "Examples:",
+                    "The \"something's happening\" theory",
+                    "What we're actually interested in proving",
+                    "Examples:",
+                    "Our threshold for \"surprising enough\"",
+                    "Usually 0.05 (5%) or 0.01 (1%)",
+                    "Must be set before analyzing data!",
+                    "[Interactive P-value Simulator](https://seeing-theory.brown.edu/frequentist-inference/index.html)",
+                    "[ASA Statement on P-values](https://www.amstat.org/asa/files/pdfs/p-valuestatement.pdf)",
+                    "[Common P-value Mistakes](https://statisticsbyjim.com/hypothesis-testing/interpreting-p-values/)"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Parameters Statistics",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Fixed, unknown values that describe a population",
+                    "Typically denoted by Greek letters (e.g., μ, σ, σ², ρ, π)",
+                    "Examples: population mean, population standard deviation, population proportion",
+                    "Calculated values from sample data",
+                    "Used to estimate population parameters",
+                    "Typically denoted by Latin letters (e.g., x̄, s, s², r, p)",
+                    "Examples: sample mean, sample standard deviation, sample proportion",
+                    "Single value estimates of population parameters",
+                    "Examples:",
+                    "Range of values that likely contains the population parameter",
+                    "Provides more information than point estimates",
+                    "Example: Confidence intervals",
+                    "[Interactive Sampling Distribution Simulator](https://seeing-theory.brown.edu/sampling-distributions/index.html)",
+                    "[Confidence Interval Calculator](https://www.mathsisfun.com/data/confidence-interval-calculator.html)",
+                    "[Statistical Estimation Tutorial](https://www.khanacademy.org/math/statistics-probability/sampling-distributions-library)",
+                    "Cost constraints",
+                    "Time limitations",
+                    "Physical impossibility",
+                    "Destructive testing requirements",
+                    "Random sampling",
+                    "Adequate sample size",
+                    "Checking for sampling bias",
+                    "Stratification when necessary",
+                    "Standard deviation: Measures variability in the population",
+                    "Standard error: Measures variability of the sample mean",
+                    "For large enough sample sizes, the sampling distribution of the mean will be approximately normal",
+                    "The mean of the sampling distribution equals the population mean",
+                    "The standard deviation of the sampling distribution (standard error) equals σ/√n"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Population Sample",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Basic understanding of descriptive statistics (mean, median, standard deviation)",
+                    "Familiarity with basic probability concepts",
+                    "Basic Python programming knowledge (for examples)",
+                    "**Population**: The complete set of all items or individuals we want to study",
+                    "**Sample**: A subset of the population that we actually measure",
+                    "**Sampling**: The process of selecting a sample from a population",
+                    "**Parameter**: A numerical characteristic of a population",
+                    "**Statistic**: A numerical characteristic of a sample",
+                    "[Interactive Sampling Simulator](https://seeing-theory.brown.edu/frequentist-inference/index.html)",
+                    "[Understanding Sampling Methods](https://statisticsbyjim.com/basics/sampling-methods/)",
+                    "[Sample Size Calculator](https://www.surveymonkey.com/mp/sample-size-calculator/)"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Sampling Distributions",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Mean: $$E(X̄) = μ$$ (population mean)",
+                    "Standard Error: $$SE(X̄) = \\frac{σ}{\\sqrt{n}}$$",
+                    "Sample Distribution: The spread of values in ONE sample",
+                    "Sampling Distribution: The spread of statistics from MANY samples",
+                    "Standard Deviation: Spread of individual values",
+                    "Standard Error: Spread of sample statistics",
+                    "\"Larger samples always give the right answer\"",
+                    "\"Larger samples give more precise estimates\"",
+                    "[Interactive Sampling Distribution Simulator](https://seeing-theory.brown.edu/frequentist-inference/index.html)",
+                    "[Understanding Sampling Distributions](https://statisticsbyjim.com/basics/sampling-distribution/)",
+                    "[CLT in Practice](https://www.khanacademy.org/math/statistics-probability/sampling-distributions-library)"
+                ]
+            }
+        }
+    ]
+}

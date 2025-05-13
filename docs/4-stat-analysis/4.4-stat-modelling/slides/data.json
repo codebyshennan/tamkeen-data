@@ -1,0 +1,93 @@
+{
+    "title": "Statistical Modeling with Python",
+    "subtitle": "",
+    "slides": [
+        {
+            "type": "title",
+            "title": "Statistical Modeling with Python",
+            "subtitle": ""
+        },
+        {
+            "type": "content",
+            "title": "Logistic Regression",
+            "content": {
+                "type": "box",
+                "items": [
+                    "$P(Y=1|X)$ is the probability of the positive class",
+                    "$\\beta_0$ is the intercept (bias)",
+                    "$\\beta_1, ..., \\beta_p$ are the coefficients for each feature",
+                    "$X_1, ..., X_p$ are the input features",
+                    "[Scikit-learn Logistic Regression Documentation](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)",
+                    "[Statsmodels Logistic Regression Documentation](https://www.statsmodels.org/stable/generated/statsmodels.discrete.discrete_model.Logit.html)",
+                    "[Introduction to Statistical Learning](https://www.statlearning.com/) (Chapter 4)"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Model Interpretation",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Building trust in your model",
+                    "Making informed decisions",
+                    "Identifying potential biases",
+                    "Communicating results effectively",
+                    "You can't explain why loans are approved or denied",
+                    "You might miss important patterns or biases",
+                    "Stakeholders won't trust your model",
+                    "You can't improve the model effectively",
+                    "[Interpretable Machine Learning](https://christophm.github.io/interpretable-ml-book/)",
+                    "[SHAP Documentation](https://shap.readthedocs.io/)",
+                    "[Scikit-learn Model Interpretation](https://scikit-learn.org/stable/modules/partial_dependence.html)"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Model Selection",
+            "content": {
+                "type": "box",
+                "items": [
+                    "[Scikit-learn Model Selection](https://scikit-learn.org/stable/model_selection.html)",
+                    "[Introduction to Statistical Learning](https://www.statlearning.com/) (Chapter 6)",
+                    "[Elements of Statistical Learning](https://web.stanford.edu/~hastie/ElemStatLearn/) (Chapter 7)"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Polynomial Regression",
+            "content": {
+                "type": "box",
+                "items": [
+                    "$y$ is the dependent variable",
+                    "$x$ is the independent variable",
+                    "$\\beta_0, \\beta_1, ..., \\beta_n$ are the coefficients",
+                    "$\\epsilon$ is the error term",
+                    "[Scikit-learn Polynomial Features](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html)",
+                    "[Introduction to Statistical Learning](https://www.statlearning.com/) (Chapter 7)",
+                    "[Polynomial Regression in Python](https://www.statsmodels.org/stable/examples/notebooks/generated/polynomial-regression.html)"
+                ]
+            }
+        },
+        {
+            "type": "content",
+            "title": "Regularization",
+            "content": {
+                "type": "box",
+                "items": [
+                    "Your model might focus too much on specific features",
+                    "It could become overly sensitive to small changes in the data",
+                    "It might perform poorly on new, unseen data",
+                    "First term is the usual least squares loss",
+                    "Second term is the regularization penalty",
+                    "$\\lambda$ controls the strength of regularization",
+                    "[Scikit-learn Regularization](https://scikit-learn.org/stable/modules/linear_model.html)",
+                    "[Introduction to Statistical Learning](https://www.statlearning.com/) (Chapter 6)",
+                    "[Elements of Statistical Learning](https://web.stanford.edu/~hastie/ElemStatLearn/) (Chapter 3)"
+                ]
+            }
+        }
+    ]
+}
