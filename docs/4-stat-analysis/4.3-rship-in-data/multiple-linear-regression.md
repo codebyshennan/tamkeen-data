@@ -157,6 +157,7 @@ Multicollinearity Check (VIF values):
 2  sleep_hours  1.034520
 ```
 
+
 ### Understanding the Results
 
 Let's interpret what our model is telling us:
@@ -182,11 +183,9 @@ Let's interpret what our model is telling us:
 
 It's harder to visualize a multiple regression model because it exists in more than two dimensions. However, we can look at the relationship between predicted scores and actual scores:
 
-![Multiple Regression Prediction](assets/multiple-regression-prediction.png)
 
 We can also see how our exam score relates to each individual predictor while holding the others constant:
 
-![Partial Regression Plots](assets/partial-regression-plots.png)
 
 ## Choosing the Right Predictors
 
@@ -217,6 +216,7 @@ print("\nStatistically strongest features:", selected_features)
 Statistically strongest features: ['prev_gpa', 'sleep_hours']
 ```
 
+
 ### 3. Stepwise Selection
 
 This is like building a team one player at a time - you add predictors one by one, keeping only those that improve the model.
@@ -235,6 +235,7 @@ print("\nFeatures selected by stepwise method:", selected_features)
 ```
 Features selected by stepwise method: ['study_hours', 'prev_gpa']
 ```
+
 
 Notice how different methods can select different predictors! This shows why it's important to combine statistical methods with subject knowledge.
 
@@ -283,6 +284,8 @@ check_model_validity(model, X, y)
 ```
 
 ![multiple-linear-regression_fig_4](assets/multiple-linear-regression_fig_4.png)
+
+
 
 ### What Good Diagnostic Plots Look Like:
 

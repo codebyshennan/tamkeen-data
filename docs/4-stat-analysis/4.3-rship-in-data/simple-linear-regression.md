@@ -118,6 +118,14 @@ Rate of change (slope): 2.01
 Accuracy (R-squared): 0.98
 ```
 
+
+
+```
+Starting point (intercept): 0.83
+Rate of change (slope): 2.01
+Accuracy (R-squared): 0.98
+```
+
 ### What This Example Shows:
 
 In our example about study hours and test scores:
@@ -213,6 +221,8 @@ plot_diagnostics(X, y, y_pred)
 ```
 
 ![simple-linear-regression_fig_2](assets/simple-linear-regression_fig_2.png)
+
+
 
 ### What to Look for in Diagnostic Plots:
 
@@ -328,6 +338,15 @@ print(data.head())
 # 5. Check if your model meets the assumptions using diagnostic plots
 # 6. Interpret what the intercept and slope mean in real-world terms
 ```
+```
+hours_studied  exam_scores
+0       3.745401    74.928536
+1       9.507143    89.378271
+2       7.319939    81.381577
+3       5.986585    76.454236
+4       1.560186    57.287949
+```
+
 
 ### Suggested Solution:
 

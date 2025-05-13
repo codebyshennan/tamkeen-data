@@ -75,7 +75,6 @@ In a linear relationship, when one thing changes, the other thing changes at a s
 - The more hours you work at a fixed hourly rate, the more money you earn
 - The more slices of pizza you eat, the more calories you consume
 
-![understanding-relationships_fig_1](assets/understanding-relationships_fig_1.png)
 
 This graph shows study time and exam scores. See how the dots roughly form a line going up? That suggests that more study time tends to lead to higher scores in a fairly steady way.
 
@@ -93,7 +92,6 @@ Think about learning a new skill like playing the piano:
 - The relationship between speed and fuel efficiency in cars (efficiency improves until an optimal speed, then gets worse)
 - Learning returns on study time (diminishing returns after a certain point)
 
-![understanding-relationships_fig_2](assets/understanding-relationships_fig_2.png)
 
 This graph shows age and running speed. Notice how it's not a straight line but a curve? Running speed decreases with age, but the rate of decrease isn't constant.
 
@@ -106,7 +104,6 @@ Sometimes, two things have no meaningful connection whatsoever.
 - The number of birds in your yard today and tomorrow's stock prices
 - The first letter of your name and your mathematics ability
 
-![understanding-relationships_fig_3](assets/understanding-relationships_fig_3.png)
 
 This scatter plot shows shoe size and IQ scores. The dots are all over the place with no pattern, suggesting these two things aren't related.
 
@@ -148,7 +145,6 @@ Imagine you're measuring the heights and weights of adults. These tend to be str
 
 **Think of it like:** How tightly a rubber band connects two objects. A strong relationship has a tight connection with little wiggle room.
 
-![Strong Relationship](assets/understanding-relationships_strong.png)
 
 ### Weak Relationships
 
@@ -156,7 +152,6 @@ Now imagine looking at hours of sleep and test performance. While there might be
 
 **Think of it like:** A stretched-out rubber band that allows a lot of movement between objects.
 
-![Weak Relationship](assets/understanding-relationships_weak.png)
 
 ### Perfect Relationships
 
