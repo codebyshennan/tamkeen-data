@@ -4,8 +4,6 @@
 
 Model interpretation is the process of understanding and explaining how your statistical model makes predictions. It's a crucial skill for data scientists and analysts because even the most accurate model is of limited value if you can't explain how it works or why it makes certain predictions.
 
-> **Teacher's Note**: When introducing model interpretation, emphasize that it's not just a technical step but a bridge between technical modeling and practical decision-making. Models that can't be explained are often difficult to trust and implement in real-world settings.
-
 ### Why Interpretation Matters
 
 Imagine you've built a model to predict loan approvals. Without proper interpretation:
@@ -32,7 +30,7 @@ Model interpretation transforms "black box" predictions into actionable insights
 
 **With interpretation**: The bank can tell the applicant their high debt-to-income ratio was the primary factor, and what they can do to improve their chances next time.
 
-#### 2. Medical Diagnosis 
+#### 2. Medical Diagnosis
 
 **Without interpretation**: A model predicts a patient has a high risk of heart disease but doesn't explain why.
 
@@ -144,6 +142,7 @@ When you run this code, you'll see a visualization of the linear regression coef
 ![Coefficient Interpretation](assets/coefficient_interpretation.png)
 
 And you'll get output like:
+
 ```
 Linear Regression Coefficient Interpretation:
 Intercept: $99872.39 (Base price when all features are 0)
@@ -399,6 +398,7 @@ When you run this code, you'll see partial dependence plots (saved as `partial_d
 ![PDP Age](assets/pdp_age.png)
 
 PDPs are powerful because they:
+
 - Work with any model, even complex "black box" models
 - Show non-linear relationships
 - Display the average effect of a feature across all observations
@@ -468,6 +468,7 @@ When you run this code, you'll see ICE plots (saved as `ice_income.png` and `ice
 ![ICE Age](assets/ice_age.png)
 
 ICE plots show:
+
 - How predictions change for each individual observation
 - Whether effects are consistent across observations or vary substantially
 - Potential interactions between features (when lines aren't parallel)
@@ -535,6 +536,7 @@ When you run this code, you'll see various SHAP plots (saved as multiple PNG fil
 ![SHAP Waterfall](assets/shap_waterfall.png)
 
 SHAP values are especially powerful because they:
+
 - Provide both global and local explanations
 - Are consistent and theoretically sound
 - Show feature interactions and non-linear effects
@@ -791,6 +793,7 @@ And also the feature importance from the tree (saved as `tree_feature_importance
 ![Tree Feature Importance](assets/tree_feature_importance.png)
 
 Decision trees are excellent for interpretation because:
+
 - They explicitly show the decision rules
 - You can follow the path of any prediction
 - They intuitively separate data into segments

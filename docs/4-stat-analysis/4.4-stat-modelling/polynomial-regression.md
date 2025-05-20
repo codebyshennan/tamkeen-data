@@ -4,8 +4,6 @@
 
 Polynomial regression is a powerful extension of linear regression that allows us to model non-linear relationships between variables. While linear regression assumes a straight-line relationship, polynomial regression can capture more complex patterns in the data by using polynomial terms (squares, cubes, etc.) of the input variables.
 
-> **Teacher's Note**: When introducing polynomial regression, it's helpful to start with visual examples of data that clearly can't be modeled effectively with a straight line. This makes the need for polynomial terms immediately apparent to students.
-
 ### From Linear to Polynomial Regression
 
 To understand polynomial regression, let's first recall the linear regression equation:
@@ -13,6 +11,7 @@ To understand polynomial regression, let's first recall the linear regression eq
 **Linear Regression**: $y = \beta_0 + \beta_1x + \epsilon$
 
 Where:
+
 - $y$ is the dependent variable (what we're trying to predict)
 - $x$ is the independent variable (our input feature)
 - $\beta_0$ is the intercept (where the line crosses the y-axis)
@@ -93,6 +92,7 @@ When you run this code, you'll see a scatter plot that looks something like this
 ![Non-linear Relationship](assets/nonlinear_relationship.png)
 
 Looking at the plot, you can observe:
+
 1. Scores increase rapidly in the initial study hours (0-4 hours)
 2. The rate of improvement slows down between 4-8 hours
 3. After about 8 hours, additional studying provides minimal benefit or even slight decrease (due to fatigue)
@@ -158,6 +158,7 @@ When you run this code, you'll see a comparison like this (saved as `linear_vs_p
 ![Linear vs Polynomial](assets/linear_vs_polynomial.png)
 
 This visualization clearly shows that:
+
 1. The **linear model** (red line) fails to capture the non-linear pattern in the data
 2. The **polynomial model** (green line) closely follows the true relationship
 3. The error (MSE) is much lower for the polynomial model
@@ -238,11 +239,10 @@ Polynomial Feature Transformation (degree=2):
 ![Feature Transformation](assets/feature_transformation.png)
 
 This shows how:
+
 1. Each original value ($x$) gets transformed into multiple features
 2. A value like $x=4$ becomes $[4, 16]$ (the original value and its square)
 3. The squared term grows much faster than the linear term
-
-> **Teacher's Note**: Emphasize that even though we're creating non-linear features, the model is still a linear regression model with respect to the parameters. We're just using a linear combination of non-linear features.
 
 ### The Polynomial Equation
 
@@ -321,8 +321,6 @@ This visualization shows:
 3. **Degree 3 (cubic)**: Good fit - captures the true underlying pattern
 4. **Degree 10**: Overfits - the model follows the noise instead of the true pattern
 
-> **Teacher's Note**: Point out that the degree 3 model performs best because the true relationship is cubic. In real-world scenarios, we don't know the true function, so we need tools like cross-validation to select the optimal degree.
-
 ## Building a Polynomial Regression Model
 
 Now, let's walk through the process of building a polynomial regression model step-by-step.
@@ -330,6 +328,7 @@ Now, let's walk through the process of building a polynomial regression model st
 ### Step 1: Prepare the Data
 
 First, we need to prepare our data, which includes:
+
 - Cleaning the data
 - Handling missing values
 - Creating polynomial features
@@ -371,11 +370,13 @@ def prepare_polynomial_data(X, y, degree=2):
 #### Why Scaling Matters
 
 Scaling becomes even more important with polynomial features because:
+
 1. Higher-degree terms grow very quickly (x² and x³ can get very large)
 2. Unscaled polynomial features lead to numerical instability
 3. Different scales across features impact the optimization process
 
 For example, if x ranges from 1 to 10:
+
 - x ranges from 1 to 10
 - x² ranges from 1 to 100
 - x³ ranges from 1 to 1000
@@ -524,6 +525,7 @@ R² Score: 0.9234
 ```
 
 These plots and metrics tell us:
+
 1. How well the model fits the data
 2. Whether it's capturing the underlying pattern
 3. How accurate our predictions are likely to be
@@ -588,8 +590,6 @@ When you run this code, you'll see a plot like this (saved as `optimal_degree_se
 
 This shows how the cross-validation error changes with different polynomial degrees. The optimal degree is the one with the lowest error.
 
-> **Teacher's Note**: The optimal degree often depends on the sample size. With more data, you can fit more complex models without overfitting. Remind students that the process of selecting the optimal degree is a form of hyperparameter tuning.
-
 ## Common Challenges and Solutions
 
 Polynomial regression comes with several challenges. Let's explore these and discuss solutions:
@@ -599,6 +599,7 @@ Polynomial regression comes with several challenges. Let's explore these and dis
 **Problem**: Higher-degree polynomials can fit the training data perfectly but perform poorly on new data.
 
 **Solutions**:
+
 - Use cross-validation to select the optimal degree
 - Apply regularization to penalize complex models
 - Ensure you have enough data for higher-degree polynomials
@@ -667,6 +668,7 @@ When you run this code, you'll see a visualization like this (saved as `polynomi
 ![Polynomial Overfitting](assets/polynomial_overfitting.png)
 
 This clearly shows how:
+
 1. The **linear model** (degree 1) underfits both training and test data
 2. The **cubic model** (degree 3) provides a good balance
 3. The **degree 15** model overfits the training data but performs poorly on test data
@@ -676,6 +678,7 @@ This clearly shows how:
 **Problem**: Polynomial terms are often highly correlated, causing unstable coefficient estimates.
 
 **Solutions**:
+
 - Use regularization techniques (Ridge, Lasso)
 - Apply orthogonal polynomials
 - Center your data before creating polynomial features
@@ -744,6 +747,7 @@ When you run this code, you'll see a comparison like this (saved as `polynomial_
 ![Polynomial Regularization](assets/polynomial_regularization.png)
 
 This shows how regularization helps control the model's complexity, even with a high polynomial degree:
+
 1. **No regularization**: The model captures noise, creating an erratic fit
 2. **Ridge (L2)**: Smooths the curve by constraining coefficient sizes
 3. **Lasso (L1)**: Creates an even simpler model by setting some coefficients to zero

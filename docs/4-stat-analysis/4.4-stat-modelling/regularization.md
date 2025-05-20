@@ -4,8 +4,6 @@
 
 Regularization is a crucial technique in statistical modeling that helps prevent overfitting by adding a penalty term to the model's loss function. Think of it as a way to keep your model from becoming too complex and memorizing the training data instead of learning general patterns.
 
-> **Teacher's Note**: When introducing regularization, it's helpful to use the analogy of Occam's razor: "The simplest explanation that fits the data is usually the best." Regularization is the mathematical implementation of this principle.
-
 ### Why Regularization Matters
 
 Imagine you're trying to predict house prices. Without regularization:
@@ -212,6 +210,7 @@ When you run this code, you'll see a comparison of Ridge and Lasso regularizatio
 ![Regularization Effects](assets/regularization_effects.png)
 
 This visualization shows how:
+
 1. As the regularization strength (α) increases, both Ridge and Lasso models become simpler
 2. With strong regularization (α=10), both models become nearly flat (approximating the mean of y)
 3. Ridge penalties provide a smoother transition between models of different strengths
@@ -220,16 +219,20 @@ This visualization shows how:
 
 For those who are interested in the mathematical explanation, here's how regularization modifies the standard linear regression loss function:
 
-#### Standard Linear Regression (Ordinary Least Squares):
+#### Standard Linear Regression (Ordinary Least Squares)
+
 $$\min_{\beta} \sum_{i=1}^n (y_i - \hat{y}_i)^2$$
 
-#### Ridge Regression (L2):
+#### Ridge Regression (L2)
+
 $$\min_{\beta} \sum_{i=1}^n (y_i - \hat{y}_i)^2 + \lambda \sum_{j=1}^p \beta_j^2$$
 
-#### Lasso Regression (L1):
+#### Lasso Regression (L1)
+
 $$\min_{\beta} \sum_{i=1}^n (y_i - \hat{y}_i)^2 + \lambda \sum_{j=1}^p |\beta_j|$$
 
 Where:
+
 - $y_i$ is the actual target value
 - $\hat{y}_i$ is the predicted value
 - $\beta_j$ are the model coefficients
@@ -758,7 +761,8 @@ And you'll get output like:
 ### 1. Start with Ridge Regression
 
 Ridge regression is a good default choice for most problems because:
-- It's more stable than Lasso 
+
+- It's more stable than Lasso
 - It handles multicollinearity well
 - It's less likely to discard potentially useful features
 
@@ -867,7 +871,8 @@ print(f"Optimal Ridge alpha: {ridge_cv.alpha_:.4f}")
 
 **Challenge**: When features are highly correlated, coefficient estimates can be unstable.
 
-**Solution**: 
+**Solution**:
+
 - Ridge is generally better for correlated features
 - Consider dimensionality reduction techniques like PCA before modeling
 - Feature clustering to combine similar features
@@ -877,6 +882,7 @@ print(f"Optimal Ridge alpha: {ridge_cv.alpha_:.4f}")
 **Challenge**: Regularized coefficients are biased due to the penalty term.
 
 **Solution**:
+
 - Use standardized coefficients for importance comparison
 - For prediction accuracy, the bias is often acceptable
 - For causal inference, be cautious with heavy regularization

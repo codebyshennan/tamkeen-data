@@ -44,13 +44,12 @@ This module is designed as a progressive learning path:
    - Conceptual diagrams that explain mathematical concepts intuitively
    - All visualizations can be found in the `assets` folder for reference
 
-> **Teacher's Note**: Throughout this module, look for sections like this that provide additional context, teaching tips, and discussion prompts to enhance classroom engagement.
-
 ## Module Structure
 
 This module flows logically from classification (logistic regression) to handling non-linear relationships (polynomial regression), selecting the best model (model selection), preventing overfitting (regularization), and finally understanding what our models are telling us (model interpretation).
 
 Each section includes:
+
 - Clear explanations of concepts
 - Python code examples with expected outputs
 - Visualizations to enhance understanding
@@ -240,21 +239,21 @@ Statistical modeling is essential for:
 1. Review the prerequisites and ensure you have the necessary background
    - Take time to refresh your Python skills if needed
    - Review basic statistical concepts that might be rusty
-   
+
 2. Follow the modules in order for the best learning experience
    - Each topic builds on previous concepts
    - Later sections assume familiarity with earlier material
-   
+
 3. Complete the hands-on exercises in each section
    - Practice is essential for understanding
    - Don't just read the code—run it and experiment
    - Try modifying examples to test your understanding
-   
+
 4. Use the provided code examples to practice
    - All code can be run in Jupyter notebooks
    - Experiment with different parameters
    - Apply techniques to your own datasets when possible
-   
+
 5. Don't hesitate to revisit concepts if needed
    - Learning statistical modeling is iterative
    - It's normal to revisit earlier topics as you progress

@@ -4,11 +4,10 @@
 
 Logistic regression is one of the most fundamental and widely used classification algorithms in statistics and machine learning. Despite its name containing "regression," it's primarily used for classification tasks - specifically, for predicting categorical outcomes like yes/no, true/false, or 0/1.
 
-> **Teacher's Note**: Many students get confused about why this model is called "regression" when it's used for classification. Explain that the name comes from the regression-like equation used in the model, but it's adapted for classification problems by using the logistic function.
-
 ### What is Logistic Regression?
 
 Logistic regression is a statistical method that:
+
 - Estimates the probability that an instance belongs to a particular class
 - Uses the logistic function to transform a linear combination of features into a probability (0 to 1)
 - Sets a threshold (typically 0.5) to convert probabilities into class predictions
@@ -96,6 +95,7 @@ This code generates and visualizes a dataset representing student exam results b
 ![Binary Classification Example](assets/binary_classification_example.png)
 
 In this plot:
+
 - **Green plus signs (+)** represent students who passed the exam
 - **Red x marks** represent students who failed the exam
 - The challenge is to build a model that can predict whether a new student will pass based on their study hours and aptitude score
@@ -117,6 +117,7 @@ Logistic regression uses a special S-shaped curve called the logistic function (
 $$p = \frac{1}{1 + e^{-z}}$$
 
 Where:
+
 - $p$ is the probability of the positive class (between 0 and 1)
 - $z$ is the linear combination of features: $z = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n$
 - $e$ is the base of natural logarithm (approximately 2.718)
@@ -162,6 +163,7 @@ When you run this code, you'll see a visualization of the logistic function (sav
 ![Logistic Curve Annotated](assets/logistic_curve_annotated.png)
 
 Key characteristics of the logistic function:
+
 1. **Range**: Always between 0 and 1 (perfect for representing probabilities)
 2. **S-shape**: Gradually transitions from 0 to 1
 3. **Symmetry**: Centered at z = 0, where p = 0.5
@@ -190,7 +192,7 @@ This is the "logistic" part of logistic regression - we're modeling the log of t
 
 Interpreting coefficients in logistic regression is slightly different than in linear regression:
 
-1. **Sign of Coefficient**: 
+1. **Sign of Coefficient**:
    - **Positive**: As the feature increases, the probability of the positive class increases
    - **Negative**: As the feature increases, the probability of the positive class decreases
 
@@ -236,6 +238,7 @@ When you run this code, you'll see how different coefficients affect the probabi
 ![Coefficient Effects](assets/coefficient_effects.png)
 
 From this visualization, you can see that:
+
 1. **Strong coefficients** (β=2 or β=-2) create a steep curve, meaning the probability changes quickly over a small range of X
 2. **Weak coefficients** (β=0.5 or β=-0.5) create a gradual curve, meaning the probability changes slowly over a wider range of X
 3. **Positive coefficients** shift the "crossover point" (where p=0.5) to the left
@@ -301,6 +304,7 @@ When you run this code, you'll see a visualization of odds ratios (saved as `odd
 ![Odds Ratios](assets/odds_ratios.png)
 
 This visualization shows:
+
 1. Features with odds ratios > 1 (to the right of the red line) increase the odds of the positive class
 2. Features with odds ratios < 1 (to the left of the red line) decrease the odds of the positive class
 3. The further from 1, the stronger the effect
@@ -410,6 +414,7 @@ When you run this code, you'll see a visualization of the decision boundary (sav
 ![Logistic Decision Boundary](assets/logistic_decision_boundary.png)
 
 In this plot:
+
 - The **color gradient** represents the probability of passing (blue = low, red = high)
 - The **dashed line** is the decision boundary where the probability equals 0.5
 - **Blue points** are students who failed the exam
@@ -714,6 +719,7 @@ When you run this code, you'll see a comparison of regular and balanced models o
 ![Imbalanced Comparison](assets/imbalanced_comparison.png)
 
 This comparison shows that:
+
 1. The **balanced model** (which gives more weight to the minority class) typically has better recall
 2. For imbalanced datasets, the **precision-recall curve** is often more informative than the ROC curve
 3. Using appropriate metrics like F1-score or average precision is crucial
@@ -725,6 +731,7 @@ This comparison shows that:
 **Problem**: One class has many more examples than the other, leading to biased models.
 
 **Solutions**:
+
 - Use `class_weight='balanced'` parameter in LogisticRegression
 - Oversample the minority class (using techniques like SMOTE)
 - Undersample the majority class
@@ -747,6 +754,7 @@ weighted_model = LogisticRegression(class_weight=class_weights)
 **Problem**: Features are highly correlated, making coefficient interpretation difficult.
 
 **Solutions**:
+
 - Remove redundant features
 - Use regularization (L1 or L2)
 - Apply dimensionality reduction techniques (like PCA)
@@ -769,6 +777,7 @@ l2_model = LogisticRegression(penalty='l2', C=0.1)
 **Problem**: Logistic regression assumes a linear relationship in log-odds space.
 
 **Solutions**:
+
 - Add polynomial features
 - Use feature transformations
 - Consider non-linear models (random forests, neural networks)

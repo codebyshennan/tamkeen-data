@@ -4,11 +4,10 @@
 
 Model selection is the process of choosing the best statistical model from a set of candidate models. It's a crucial step in the data analysis pipeline that helps us find the right balance between model complexity and predictive performance. In other words, model selection helps us answer the question: "Which model will give us the most accurate predictions without being unnecessarily complex?"
 
-> **Teacher's Note**: Model selection is often where students struggle with making practical decisions. Emphasize that there's rarely a single "perfect" model—rather, we're looking for the most useful model given our specific goals and constraints.
-
 ### Why Model Selection Matters
 
 Every time we build a model, we face an important trade-off between:
+
 - **Simplicity**: Simple models are easier to understand, explain, and implement
 - **Flexibility**: Complex models can capture more intricate patterns in the data
 - **Generalization**: Our ultimate goal is to make good predictions on new, unseen data
@@ -56,7 +55,7 @@ Let's explore some scenarios where model selection is crucial:
 
 When selecting a model, we need to consider:
 
-1. **What's the goal of our model?** 
+1. **What's the goal of our model?**
    - Prediction? Explanation? Both?
    - Short-term vs. long-term forecasting?
 
@@ -137,6 +136,7 @@ When you run this code, you'll see a visualization like the one below (saved as 
 ![Bias-Variance Tradeoff](assets/bias_variance_tradeoff.png)
 
 This plot illustrates:
+
 1. **Bias** (blue line) decreases as model complexity increases
 2. **Variance** (red line) increases as model complexity increases
 3. **Total error** (green line) is minimized at an intermediate level of complexity
@@ -320,16 +320,19 @@ And a visualization like the one below (saved as `train_test_split.png`):
 ![Train-Test Split](assets/train_test_split.png)
 
 This approach:
+
 1. Reserves a portion of your data (e.g., 20%) for testing
 2. Trains the model only on the training data
 3. Evaluates performance on the test data
 4. Helps detect overfitting (if test error is much higher than training error)
 
 **Advantages**:
+
 - Simple and quick
 - Provides an unbiased estimate of model performance
 
 **Limitations**:
+
 - Results can vary depending on the specific train-test split
 - Doesn't work well with small datasets
 - Wastes some data that could be used for training
@@ -424,16 +427,19 @@ And a visualization like the one below (saved as `cross_validation.png`):
 ![Cross Validation](assets/cross_validation.png)
 
 Cross-validation works by:
+
 1. Splitting the data into k equal-sized folds (typically 5 or 10)
 2. Training the model k times, each time using a different fold as the validation set and the remaining folds as the training set
 3. Averaging the performance across all k iterations
 
 **Advantages**:
+
 - Uses all data for both training and validation
 - Provides more stable performance estimates
 - Helps detect if model performance varies significantly depending on the data split
 
 **Limitations**:
+
 - Computationally more expensive (trains k models instead of 1)
 - Still has some variance in the estimates
 - May not be suitable for time-series data (requires special temporal CV approaches)
@@ -537,15 +543,18 @@ And a visualization like the one below (saved as `information_criteria.png`):
 ![Information Criteria](assets/information_criteria.png)
 
 Information criteria work by:
+
 1. Assessing model fit (usually through likelihood or MSE)
 2. Penalizing complexity (number of parameters)
 3. Providing a standardized way to compare models
 
 **Key differences**:
+
 - **AIC**: Optimized for prediction accuracy
 - **BIC**: Optimized for finding the "true" model, with a stronger penalty for complexity
 
 **When to use which criterion**:
+
 - Use **AIC** when your primary goal is prediction
 - Use **BIC** when your primary goal is explanation and identifying the true underlying model
 
@@ -690,16 +699,19 @@ And a visualization like the one below (saved as `forward_selection.png`):
 ![Forward Selection](assets/forward_selection.png)
 
 Forward selection works by:
+
 1. Starting with zero features
 2. Adding the single best feature that improves the model the most
 3. Repeating until a stopping criterion is reached (e.g., no more significant improvement)
 
 **Advantages**:
+
 - Simple and intuitive
 - Can be computationally efficient when you have many features
 - Produces a ranked list of features
 
 **Limitations**:
+
 - May miss optimal feature combinations
 - Doesn't account for feature interactions
 - Can be unstable if features are correlated
