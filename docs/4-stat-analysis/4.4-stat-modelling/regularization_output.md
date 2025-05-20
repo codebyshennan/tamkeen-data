@@ -1,0 +1,931 @@
+# Code Execution Output: regularization.md
+
+This file contains the output from running the code blocks in `regularization.md`.
+
+
+### Code Block 1
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn.linear_model import LinearRegression, Ridge, Lasso
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
+from sklearn.pipeline import make_pipeline
+
+# Set a random seed for reproducibility
+np.random.seed(42)
+
+# Generate sample data: y = x^2 + noise
+x = np.linspace(-3, 3, 50)
+y_true = x**2
+y = y_true + np.random.normal(0, 1, size=len(x))
+
+# Visualize the data
+plt.figure(figsize=(10, 6))
+plt.scatter(x, y, alpha=0.7, label='Data points')
+plt.plot(x, y_true, 'r-', label='True function (y = x²)')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Simple Quadratic Function with Noise')
+plt.legend()
+plt.grid(True)
+plt.savefig('overfitting_data.png')
+plt.show()
+
+# Split the data into train and test sets
+X = x.reshape(-1, 1)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# Fit different polynomial degrees to show overfitting
+degrees = [1, 2, 15]  # Linear, quadratic, and high-degree polynomial
+colors = ['blue', 'green', 'purple']
+labels = ['Linear (Underfitting)', 'Quadratic (Good fit)', 'Degree 15 (Overfitting)']
+plt.figure(figsize=(12, 6))
+
+# Plot training data
+plt.scatter(X_train, y_train, c='black', alpha=0.7, label='Training data')
+plt.plot(x, y_true, 'r-', alpha=0.5, label='True function')
+
+# Fit models of different complexity
+x_plot = np.linspace(-3.5, 3.5, 100).reshape(-1, 1)
+for i, degree in enumerate(degrees):
+    # Create and fit model
+    model = make_pipeline(
+        PolynomialFeatures(degree),
+        LinearRegression()
+    )
+    model.fit(X_train, y_train)
+    
+    # Make predictions
+    y_plot = model.predict(x_plot)
+    
+    # Calculate errors
+    train_error = mean_squared_error(y_train, model.predict(X_train))
+    test_error = mean_squared_error(y_test, model.predict(X_test))
+    
+    # Plot the model's predictions
+    plt.plot(x_plot, y_plot, c=colors[i], 
+             label=f'{labels[i]}\nTrain MSE: {train_error:.2f}, Test MSE: {test_error:.2f}')
+
+plt.title('Overfitting Example: Different Polynomial Degrees')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.ylim(-5, 15)
+plt.legend()
+plt.grid(True)
+plt.savefig('overfitting_example.png')
+plt.show()
+
+```
+
+
+
+### Code Block 2
+```python
+def plot_regularization_effects():
+    """Visualize how different regularization methods affect coefficients"""
+    # Generate sample data with some noise
+    np.random.seed(42)
+    x = np.linspace(-5, 5, 100)
+    y = 2*x + np.random.normal(0, 1, 100)
+    
+    X = x.reshape(-1, 1)
+    
+    # Set up different regularization strengths (alpha values)
+    # alpha=0 means no regularization
+    alphas = [0, 0.1, 1, 10]
+    
+    plt.figure(figsize=(15, 6))
+    
+    # Ridge Regression (L2)
+    plt.subplot(121)
+    for alpha in alphas:
+        model = Ridge(alpha=alpha)
+        model.fit(X, y)
+        y_pred = model.predict(X)
+        plt.plot(x, y_pred, 
+                label=f'α={alpha}')
+    
+    plt.scatter(x, y, alpha=0.3, color='black')
+    plt.title('Ridge Regression (L2)')
+    plt.xlabel('Feature Value')
+    plt.ylabel('Prediction')
+    plt.legend()
+    plt.grid(True)
+    
+    # Lasso Regression (L1)
+    plt.subplot(122)
+    for alpha in alphas:
+        model = Lasso(alpha=alpha)
+        model.fit(X, y)
+        y_pred = model.predict(X)
+        plt.plot(x, y_pred, 
+                label=f'α={alpha}')
+    
+    plt.scatter(x, y, alpha=0.3, color='black')
+    plt.title('Lasso Regression (L1)')
+    plt.xlabel('Feature Value')
+    plt.ylabel('Prediction')
+    plt.legend()
+    plt.grid(True)
+    
+    plt.tight_layout()
+    plt.savefig('regularization_effects.png')
+    plt.show()
+
+# Execute the function
+plot_regularization_effects()
+
+```
+
+
+
+### Code Block 3
+```python
+def plot_constraint_spaces():
+    """Visualize L1 and L2 constraint spaces"""
+    # Generate coefficient space
+    beta1 = np.linspace(-2, 2, 100)
+    beta2 = np.linspace(-2, 2, 100)
+    B1, B2 = np.meshgrid(beta1, beta2)
+    
+    # Calculate constraint regions
+    l1 = np.abs(B1) + np.abs(B2)  # L1 constraint: |β1| + |β2| ≤ c
+    l2 = B1**2 + B2**2            # L2 constraint: β1² + β2² ≤ c
+    
+    # Create contour plots
+    plt.figure(figsize=(12, 6))
+    
+    # L1 Constraint (Diamond)
+    plt.subplot(121)
+    plt.contour(B1, B2, l1, levels=[1], colors='r', linewidths=2)
+    
+    # Add loss function contours (circular contours representing MSE)
+    for r in [0.4, 0.8, 1.2, 1.6]:
+        plt.contour(B1, B2, (B1-1)**2 + (B2-0.5)**2, levels=[r**2], 
+                   colors='blue', alpha=0.5, linestyles='--')
+    
+    # Highlight the corner intersection point
+    plt.plot([1], [0], 'ko', markersize=8)
+    
+    plt.title('L1 Constraint (Diamond)')
+    plt.xlabel('Coefficient β₁')
+    plt.ylabel('Coefficient β₂')
+    plt.axis('equal')
+    plt.grid(True)
+    plt.annotate('Sparse Solution\n(β₂ = 0)', xy=(1, 0), xytext=(1, -1.5),
+                arrowprops=dict(facecolor='black', shrink=0.05))
+    
+    # L2 Constraint (Circle)
+    plt.subplot(122)
+    plt.contour(B1, B2, l2, levels=[1], colors='b', linewidths=2)
+    
+    # Add the same loss function contours
+    for r in [0.4, 0.8, 1.2, 1.6]:
+        plt.contour(B1, B2, (B1-1)**2 + (B2-0.5)**2, levels=[r**2], 
+                   colors='blue', alpha=0.5, linestyles='--')
+    
+    # Highlight the non-sparse intersection point
+    plt.plot([0.9], [0.45], 'ko', markersize=8)
+    
+    plt.title('L2 Constraint (Circle)')
+    plt.xlabel('Coefficient β₁')
+    plt.ylabel('Coefficient β₂')
+    plt.axis('equal')
+    plt.grid(True)
+    plt.annotate('Non-sparse Solution\n(both β₁ and β₂ ≠ 0)', 
+                xy=(0.9, 0.45), xytext=(0.2, -1.5),
+                arrowprops=dict(facecolor='black', shrink=0.05))
+    
+    plt.tight_layout()
+    plt.savefig('constraint_spaces.png')
+    plt.show()
+
+# Execute the function
+plot_constraint_spaces()
+
+```
+
+
+
+### Code Block 4
+```python
+def implement_ridge(X, y, alphas=np.logspace(-4, 4, 100)):
+    """Implement ridge regression with cross-validation"""
+    from sklearn.linear_model import RidgeCV
+    from sklearn.preprocessing import StandardScaler
+    from sklearn.model_selection import train_test_split
+    
+    # Split data
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+    
+    # Scale features
+    scaler = StandardScaler()
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_test_scaled = scaler.transform(X_test)
+    
+    # Fit model with cross-validation to select the best alpha
+    model = RidgeCV(alphas=alphas, cv=5, scoring='neg_mean_squared_error')
+    model.fit(X_train_scaled, y_train)
+    
+    # Evaluate model
+    train_score = model.score(X_train_scaled, y_train)
+    test_score = model.score(X_test_scaled, y_test)
+    
+    print(f"Ridge Regression Results:")
+    print(f"Best alpha: {model.alpha_:.4f}")
+    print(f"Training R²: {train_score:.4f}")
+    print(f"Test R²: {test_score:.4f}")
+    
+    # Visualize coefficients
+    if X.shape[1] <= 10:  # Only create visualization for relatively small number of features
+        # Create dummy feature names if not provided
+        feature_names = [f"Feature {i+1}" for i in range(X.shape[1])]
+        
+        # Plot coefficients
+        plt.figure(figsize=(10, 6))
+        plt.barh(feature_names, model.coef_)
+        plt.title(f'Ridge Regression Coefficients (α={model.alpha_:.4f})')
+        plt.xlabel('Coefficient Value')
+        plt.axvline(x=0, color='k', linestyle='--')
+        plt.grid(True)
+        plt.tight_layout()
+        plt.savefig('ridge_coefficients.png')
+        plt.show()
+    
+    return {
+        'model': model,
+        'best_alpha': model.alpha_,
+        'coefficients': model.coef_,
+        'train_score': train_score,
+        'test_score': test_score
+    }
+
+# Generate synthetic multivariate data with collinearity for demonstration
+def generate_collinear_data(n_samples=200, noise_level=0.5):
+    """Generate synthetic data with collinearity"""
+    np.random.seed(42)
+    
+    # Generate independent features
+    x1 = np.random.normal(0, 1, n_samples)
+    x2 = np.random.normal(0, 1, n_samples)
+    
+    # Generate collinear feature
+    x3 = 0.7*x1 + 0.3*x2 + np.random.normal(0, 0.1, n_samples)  # Collinear with x1 and x2
+    
+    # Two more independent features
+    x4 = np.random.normal(0, 1, n_samples)
+    x5 = np.random.normal(0, 1, n_samples)
+    
+    # Combine features
+    X = np.column_stack([x1, x2, x3, x4, x5])
+    
+    # True coefficients (x3 should have small coefficient since it's redundant)
+    true_coef = np.array([2, 1, 0.2, 0.5, 0])
+    
+    # Generate target
+    y = X @ true_coef + np.random.normal(0, noise_level, n_samples)
+    
+    return X, y, true_coef
+
+# Generate data and apply Ridge regression
+X_collinear, y_collinear, true_coef = generate_collinear_data()
+ridge_results = implement_ridge(X_collinear, y_collinear)
+
+```
+
+Output:
+```
+Ridge Regression Results:
+Best alpha: 0.0673
+Training R²: 0.9537
+Test R²: 0.9573
+
+```
+
+
+
+### Code Block 5
+```python
+Ridge Regression Results:
+Best alpha: 1.0000
+Training R²: 0.9102
+Test R²: 0.9056
+
+```
+
+Output:
+```
+Error: invalid character '²' (U+00B2) (<string>, line 3)
+
+```
+
+
+
+### Code Block 6
+```python
+def implement_lasso(X, y, alphas=np.logspace(-4, 1, 100)):
+    """Implement lasso regression with cross-validation"""
+    from sklearn.linear_model import LassoCV
+    from sklearn.preprocessing import StandardScaler
+    from sklearn.model_selection import train_test_split
+    
+    # Split data
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+    
+    # Scale features
+    scaler = StandardScaler()
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_test_scaled = scaler.transform(X_test)
+    
+    # Fit model with cross-validation
+    model = LassoCV(alphas=alphas, cv=5, max_iter=10000, selection='random')
+    model.fit(X_train_scaled, y_train)
+    
+    # Evaluate model
+    train_score = model.score(X_train_scaled, y_train)
+    test_score = model.score(X_test_scaled, y_test)
+    
+    # Count non-zero coefficients
+    n_nonzero = np.sum(model.coef_ != 0)
+    
+    print(f"Lasso Regression Results:")
+    print(f"Best alpha: {model.alpha_:.4f}")
+    print(f"Training R²: {train_score:.4f}")
+    print(f"Test R²: {test_score:.4f}")
+    print(f"Number of features selected: {n_nonzero} out of {X.shape[1]}")
+    
+    # Visualize coefficients
+    if X.shape[1] <= 10:
+        # Create dummy feature names if not provided
+        feature_names = [f"Feature {i+1}" for i in range(X.shape[1])]
+        
+        # Plot coefficients
+        plt.figure(figsize=(10, 6))
+        plt.barh(feature_names, model.coef_)
+        plt.title(f'Lasso Regression Coefficients (α={model.alpha_:.4f})')
+        plt.xlabel('Coefficient Value')
+        plt.axvline(x=0, color='k', linestyle='--')
+        plt.grid(True)
+        plt.tight_layout()
+        plt.savefig('lasso_coefficients.png')
+        plt.show()
+    
+    return {
+        'model': model,
+        'best_alpha': model.alpha_,
+        'coefficients': model.coef_,
+        'selected_features': np.where(model.coef_ != 0)[0],
+        'train_score': train_score,
+        'test_score': test_score
+    }
+
+# Apply Lasso regression to the same data
+lasso_results = implement_lasso(X_collinear, y_collinear)
+
+```
+
+Output:
+```
+Lasso Regression Results:
+Best alpha: 0.0059
+Training R²: 0.9532
+Test R²: 0.9593
+Number of features selected: 5 out of 5
+
+```
+
+
+
+### Code Block 7
+```python
+Lasso Regression Results:
+Best alpha: 0.0210
+Training R²: 0.9087
+Test R²: 0.9058
+Number of features selected: 4 out of 5
+
+```
+
+Output:
+```
+Error: invalid character '²' (U+00B2) (<string>, line 3)
+
+```
+
+
+
+### Code Block 8
+```python
+def implement_elastic_net(X, y, l1_ratios=[.1, .5, .7, .9, .95, .99, 1], alphas=np.logspace(-4, 1, 100)):
+    """Implement elastic net regression"""
+    from sklearn.linear_model import ElasticNetCV
+    from sklearn.preprocessing import StandardScaler
+    from sklearn.model_selection import train_test_split
+    
+    # Split data
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+    
+    # Scale features
+    scaler = StandardScaler()
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_test_scaled = scaler.transform(X_test)
+    
+    # Fit model
+    model = ElasticNetCV(l1_ratio=l1_ratios, alphas=alphas, cv=5, max_iter=10000)
+    model.fit(X_train_scaled, y_train)
+    
+    # Evaluate model
+    train_score = model.score(X_train_scaled, y_train)
+    test_score = model.score(X_test_scaled, y_test)
+    n_nonzero = np.sum(model.coef_ != 0)
+    
+    print(f"Elastic Net Results:")
+    print(f"Best alpha: {model.alpha_:.4f}")
+    print(f"Best l1_ratio: {model.l1_ratio_:.2f}")
+    print(f"Training R²: {train_score:.4f}")
+    print(f"Test R²: {test_score:.4f}")
+    print(f"Number of features selected: {n_nonzero} out of {X.shape[1]}")
+    
+    # Visualize coefficients
+    if X.shape[1] <= 10:
+        # Create dummy feature names if not provided
+        feature_names = [f"Feature {i+1}" for i in range(X.shape[1])]
+        
+        # Plot coefficients
+        plt.figure(figsize=(10, 6))
+        plt.barh(feature_names, model.coef_)
+        plt.title(f'Elastic Net Coefficients (α={model.alpha_:.4f}, l1_ratio={model.l1_ratio_:.2f})')
+        plt.xlabel('Coefficient Value')
+        plt.axvline(x=0, color='k', linestyle='--')
+        plt.grid(True)
+        plt.tight_layout()
+        plt.savefig('elastic_net_coefficients.png')
+        plt.show()
+    
+    return {
+        'model': model,
+        'best_alpha': model.alpha_,
+        'best_l1_ratio': model.l1_ratio_,
+        'coefficients': model.coef_,
+        'train_score': train_score,
+        'test_score': test_score
+    }
+
+# Apply Elastic Net regression
+elastic_net_results = implement_elastic_net(X_collinear, y_collinear)
+
+```
+
+Output:
+```
+Elastic Net Results:
+Best alpha: 0.0059
+Best l1_ratio: 1.00
+Training R²: 0.9532
+Test R²: 0.9592
+Number of features selected: 4 out of 5
+
+```
+
+
+
+### Code Block 9
+```python
+Elastic Net Results:
+Best alpha: 0.0162
+Best l1_ratio: 0.70
+Training R²: 0.9086
+Test R²: 0.9055
+Number of features selected: 4 out of 5
+
+```
+
+Output:
+```
+Error: invalid character '²' (U+00B2) (<string>, line 4)
+
+```
+
+
+
+### Code Block 10
+```python
+def select_regularization_parameter(X, y):
+    """Select optimal regularization parameter using cross-validation"""
+    from sklearn.linear_model import RidgeCV, LassoCV
+    from sklearn.preprocessing import StandardScaler
+    from sklearn.model_selection import KFold
+    
+    # Scale features
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X)
+    
+    # Try different alphas
+    alphas = np.logspace(-4, 4, 20)
+    
+    # Initialize cross-validation
+    kf = KFold(n_splits=5, shuffle=True, random_state=42)
+    
+    # Ridge CV
+    ridge = RidgeCV(alphas=alphas, cv=kf, scoring='neg_mean_squared_error')
+    ridge.fit(X_scaled, y)
+    
+    # Lasso CV
+    lasso = LassoCV(alphas=alphas, cv=kf, max_iter=10000)
+    lasso.fit(X_scaled, y)
+    
+    # Plot results
+    plt.figure(figsize=(12, 6))
+    
+    # Convert MSE values from negative to positive
+    ridge_alphas = ridge.alphas
+    ridge_mse = -ridge.cv_values_.mean(axis=0)
+    
+    lasso_alphas = lasso.alphas_
+    lasso_mse = np.mean(lasso.mse_path_, axis=1)
+    
+    plt.semilogx(ridge_alphas, ridge_mse, 'b-o', label='Ridge')
+    plt.semilogx(lasso_alphas, lasso_mse, 'r-o', label='Lasso')
+    plt.axvline(ridge.alpha_, color='b', linestyle='--', 
+                label=f'Ridge Best α={ridge.alpha_:.2f}')
+    plt.axvline(lasso.alpha_, color='r', linestyle='--', 
+                label=f'Lasso Best α={lasso.alpha_:.2f}')
+    plt.xlabel('Alpha (Regularization Strength)')
+    plt.ylabel('Mean Squared Error (CV)')
+    plt.title('Regularization Parameter Selection')
+    plt.legend()
+    plt.grid(True)
+    plt.savefig('regularization_selection.png')
+    plt.show()
+    
+    return {
+        'ridge_alpha': ridge.alpha_,
+        'lasso_alpha': lasso.alpha_,
+        'ridge_score': ridge.score(X_scaled, y),
+        'lasso_score': lasso.score(X_scaled, y)
+    }
+
+# Select optimal regularization parameters
+param_selection = select_regularization_parameter(X_collinear, y_collinear)
+
+```
+
+Output:
+```
+Error: 'RidgeCV' object has no attribute 'cv_results_'
+
+```
+
+![Figure 1](assets/block_10_figure_1.png)
+
+
+
+### Code Block 11
+```python
+def compare_regularization_methods(X, y):
+    """Compare different regularization methods on the same data"""
+    from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet
+    from sklearn.preprocessing import StandardScaler
+    from sklearn.model_selection import train_test_split, cross_val_score
+    
+    # Split data
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+    
+    # Scale features
+    scaler = StandardScaler()
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_test_scaled = scaler.transform(X_test)
+    
+    # Define models to compare
+    models = {
+        'Linear Regression (No Regularization)': LinearRegression(),
+        'Ridge Regression (L2)': Ridge(alpha=ridge_results['best_alpha']),
+        'Lasso Regression (L1)': Lasso(alpha=lasso_results['best_alpha'], max_iter=10000),
+        'Elastic Net (L1 + L2)': ElasticNet(
+            alpha=elastic_net_results['best_alpha'], 
+            l1_ratio=elastic_net_results['best_l1_ratio'], 
+            max_iter=10000
+        )
+    }
+    
+    # Train and evaluate each model
+    results = []
+    for name, model in models.items():
+        # Train model
+        model.fit(X_train_scaled, y_train)
+        
+        # Evaluate model
+        train_score = model.score(X_train_scaled, y_train)
+        test_score = model.score(X_test_scaled, y_test)
+        
+        # Count non-zero coefficients (if applicable)
+        if hasattr(model, 'coef_'):
+            n_nonzero = np.sum(model.coef_ != 0)
+        else:
+            n_nonzero = X.shape[1]  # Assume all features used
+            
+        results.append({
+            'Model': name,
+            'Train R²': train_score,
+            'Test R²': test_score,
+            'Features Used': n_nonzero
+        })
+    
+    # Convert to DataFrame for display
+    results_df = pd.DataFrame(results)
+    
+    # Plot results
+    plt.figure(figsize=(12, 8))
+    
+    # Plot R² scores
+    plt.subplot(211)
+    x = np.arange(len(results))
+    width = 0.35
+    plt.bar(x - width/2, [r['Train R²'] for r in results], width, label='Train R²')
+    plt.bar(x + width/2, [r['Test R²'] for r in results], width, label='Test R²')
+    plt.xticks(x, [r['Model'].split(' (')[0] for r in results])
+    plt.ylabel('R² Score')
+    plt.title('Model Performance Comparison')
+    plt.legend()
+    plt.grid(True, alpha=0.3)
+    
+    # Plot feature counts
+    plt.subplot(212)
+    plt.bar(x, [r['Features Used'] for r in results], color='green', alpha=0.7)
+    plt.xticks(x, [r['Model'].split(' (')[0] for r in results])
+    plt.ylabel('Number of Features Used')
+    plt.title('Feature Selection Comparison')
+    plt.grid(True, alpha=0.3)
+    
+    plt.tight_layout()
+    plt.savefig('regularization_comparison.png')
+    plt.show()
+    
+    return results_df
+
+# Compare all regularization methods
+comparison = compare_regularization_methods(X_collinear, y_collinear)
+print(comparison)
+
+```
+
+Output:
+```
+                                   Model  Train R²   Test R²  Features Used
+0  Linear Regression (No Regularization)  0.953706  0.956742              5
+1                  Ridge Regression (L2)  0.953689  0.957309              5
+2                  Lasso Regression (L1)  0.953238  0.959198              4
+3                  Elastic Net (L1 + L2)  0.953238  0.959198              4
+
+```
+
+
+
+### Code Block 12
+```python
+Model  Train R²  Test R²  Features Used
+0  Linear Regression (No Regularization)    0.9113   0.9042              5
+1             Ridge Regression (L2)         0.9102   0.9056              5
+2             Lasso Regression (L1)         0.9087   0.9058              4
+3             Elastic Net (L1 + L2)         0.9086   0.9055              4
+
+```
+
+Output:
+```
+Error: invalid character '²' (U+00B2) (<string>, line 1)
+
+```
+
+
+
+### Code Block 13
+```python
+from sklearn.linear_model import Ridge
+from sklearn.model_selection import GridSearchCV
+
+# Set up parameter grid
+param_grid = {'alpha': np.logspace(-3, 3, 13)}
+
+# Create and fit the grid search
+grid = GridSearchCV(Ridge(), param_grid, cv=5, scoring='neg_mean_squared_error')
+grid.fit(X_train_scaled, y_train)
+
+# Get best parameters
+print(f"Best Ridge alpha: {grid.best_params_['alpha']}")
+print(f"Best score: {-grid.best_score_:.4f} MSE")
+
+```
+
+Output:
+```
+Error: name 'X_train_scaled' is not defined
+
+```
+
+
+
+### Code Block 14
+```python
+from sklearn.linear_model import Lasso
+
+# Train Lasso model with the optimal alpha from earlier
+lasso = Lasso(alpha=lasso_results['best_alpha'], max_iter=10000)
+lasso.fit(X_train_scaled, y_train)
+
+# Get feature names (create dummy names if not available)
+feature_names = [f"Feature {i+1}" for i in range(X.shape[1])]
+
+# Display non-zero coefficients
+important_features = [(feature_names[i], coef) for i, coef in enumerate(lasso.coef_) if coef != 0]
+print("Selected features and their coefficients:")
+for feature, coef in important_features:
+    print(f"{feature}: {coef:.4f}")
+
+```
+
+Output:
+```
+Error: name 'X_train_scaled' is not defined
+
+```
+
+
+
+### Code Block 15
+```python
+from sklearn.linear_model import ElasticNetCV
+
+# Find optimal parameters
+elastic_net = ElasticNetCV(
+    l1_ratio=[.1, .5, .7, .9, .95, .99, 1],
+    alphas=np.logspace(-4, 1, 50),
+    cv=5, 
+    max_iter=10000
+)
+elastic_net.fit(X_train_scaled, y_train)
+
+print(f"Best alpha: {elastic_net.alpha_:.4f}")
+print(f"Best l1_ratio: {elastic_net.l1_ratio_:.2f}")
+
+```
+
+Output:
+```
+Error: name 'X_train_scaled' is not defined
+
+```
+
+
+
+### Code Block 16
+```python
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+
+# Create a pipeline that standardizes first, then applies regularization
+pipeline = Pipeline([
+    ('scaler', StandardScaler()),
+    ('model', Ridge(alpha=1.0))
+])
+
+# Now you can fit and predict without worrying about scaling
+pipeline.fit(X_train, y_train)
+y_pred = pipeline.predict(X_test)
+
+```
+
+
+
+### Code Block 17
+```python
+from sklearn.linear_model import RidgeCV, LassoCV
+from sklearn.model_selection import RepeatedKFold
+
+# Create a more robust cross-validation scheme
+cv = RepeatedKFold(n_splits=5, n_repeats=3, random_state=42)
+
+# Wide range of alphas on logarithmic scale
+alphas = np.logspace(-6, 6, 100)
+
+# Ridge with cross-validation
+ridge_cv = RidgeCV(alphas=alphas, cv=cv, scoring='neg_mean_squared_error')
+ridge_cv.fit(X_scaled, y)
+
+print(f"Optimal Ridge alpha: {ridge_cv.alpha_:.4f}")
+
+```
+
+Output:
+```
+Error: name 'X_scaled' is not defined
+
+```
+
+
+
+### Code Block 18
+```python
+# Get standardized coefficients
+def get_standardized_coefs(model, scaler, feature_names=None):
+    """Calculate standardized coefficients accounting for feature scaling"""
+    # Get raw coefficients
+    coefs = model.coef_
+    
+    # Get feature standard deviations from scaler
+    if hasattr(scaler, 'scale_'):
+        scales = scaler.scale_
+    else:
+        scales = np.ones(len(coefs))
+    
+    # Calculate standardized coefficients
+    std_coefs = coefs * scales
+    
+    if feature_names is None:
+        feature_names = [f"Feature {i+1}" for i in range(len(coefs))]
+    
+    # Return as DataFrame
+    return pd.DataFrame({
+        'Feature': feature_names,
+        'Coefficient': coefs,
+        'Standardized Coefficient': std_coefs
+    }).sort_values('Standardized Coefficient', key=abs, ascending=False)
+
+# Example usage
+std_coefs = get_standardized_coefs(ridge_results['model'], scaler)
+print(std_coefs)
+
+```
+
+Output:
+```
+Error: name 'scaler' is not defined
+
+```
+
+
+
+### Code Block 19
+```python
+# Generate synthetic housing data
+np.random.seed(42)
+n_samples = 200
+
+# Generate features
+size = np.random.normal(1500, 300, n_samples)  # Square footage
+rooms = np.random.normal(3, 0.5, n_samples)    # Number of rooms
+age = np.random.uniform(1, 50, n_samples)      # Age of house
+distance = np.random.uniform(0, 30, n_samples) # Distance to city center
+
+# Create some correlated features (multicollinearity)
+bathrooms = 0.7 * rooms + np.random.normal(0, 0.3, n_samples)
+garden_size = 0.4 * size + np.random.normal(0, 100, n_samples)
+garage = 0.5 + 0.0003 * size + np.random.normal(0, 0.3, n_samples)
+garage = np.clip(garage, 0, 2)
+
+# Create non-informative features that only add noise
+random_feature1 = np.random.normal(0, 1, n_samples)
+random_feature2 = np.random.normal(0, 1, n_samples)
+
+# Generate target (house prices) with non-linear relationships
+price = (
+    100 * size +                   # Size has strong positive effect
+    15000 * rooms +                # More rooms increase price
+    -1000 * age +                  # Older houses are cheaper
+    10000 * bathrooms +            # Bathrooms add value
+    -500 * distance**2 +           # Distance has diminishing effect
+    5 * garden_size +              # Garden adds some value
+    8000 * garage +                # Garage adds value
+    np.random.normal(0, 10000, n_samples)  # Random noise
+)
+
+# Combine features
+X_housing = np.column_stack([
+    size, rooms, age, distance, bathrooms, garden_size, 
+    garage, random_feature1, random_feature2
+])
+
+# Feature names for interpretation
+housing_feature_names = [
+    'Size (sq ft)', 'Rooms', 'Age (years)', 'Distance to City (miles)', 
+    'Bathrooms', 'Garden Size (sq ft)', 'Garage Spaces', 
+    'Random Feature 1', 'Random Feature 2'
+]
+
+# Split the data
+X_train, X_test, y_train, y_test = train_test_split(
+    X_housing, price, test_size=0.3, random_state=42
+)
+
+# Task: Apply different regularization methods and compare their performance
+# 1. Try Linear Regression without regularization
+# 2. Apply Ridge Regression
+# 3. Apply Lasso Regression
+# 4. Apply Elastic Net
+# 5. Compare results and determine which features are most important
+
+```
+
