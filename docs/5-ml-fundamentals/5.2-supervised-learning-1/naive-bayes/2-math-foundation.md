@@ -23,14 +23,14 @@ Imagine you're a detective trying to solve a case. You have some initial hunches
 
 Let's break down the formula step by step:
 
-$P(y|X) = \frac{P(X|y)P(y)}{P(X)}$
+\[P(y|X) = \frac{P(X|y)P(y)}{P(X)}\]
 
 Think of it like this:
 
-- $P(y|X)$: "What's the probability of y given X?" (Your updated belief)
-- $P(X|y)$: "How likely is X if y is true?" (The evidence)
-- $P(y)$: "What was your initial belief about y?" (Your prior knowledge)
-- $P(X)$: "How likely is X in general?" (The overall evidence)
+- \(P(y|X)\): "What's the probability of y given X?" (Your updated belief)
+- \(P(X|y)\): "How likely is X if y is true?" (The evidence)
+- \(P(y)\): "What was your initial belief about y?" (Your prior knowledge)
+- \(P(X)\): "How likely is X in general?" (The overall evidence)
 
 ### Real-World Example: Email Spam Detection
 
