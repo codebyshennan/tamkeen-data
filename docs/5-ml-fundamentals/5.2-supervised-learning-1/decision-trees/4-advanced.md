@@ -23,155 +23,260 @@ Think of pruning like trimming a tree in your garden. You remove unnecessary bra
 This is like setting rules before the tree starts growing:
 
 ```python
+import numpy as np
+import matplotlib.pyplot as plt
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import cross_val_score
+from sklearn.datasets import load_iris
 
-class PrePrunedTree:
-    def __init__(self):
-        """Create a tree with strict growth rules"""
-        self.model = DecisionTreeClassifier(
-            max_depth=3,              # Don't grow too deep
-            min_samples_split=20,     # Need enough samples to split
-            min_samples_leaf=5,       # Each leaf needs enough samples
-            max_features='sqrt',      # Consider subset of features
-            min_impurity_decrease=0.01  # Only split if it helps enough
-        )
-        
-    def analyze_parameters(self, X, y):
-        """See how different settings affect the tree"""
-        # Try different parameter combinations
-        params = {
-            'max_depth': [3, 5, 7, 10],
-            'min_samples_split': [10, 20, 50],
-            'min_samples_leaf': [5, 10, 20]
-        }
-        
-        # Test each combination
-        results = {}
-        for param, values in params.items():
-            scores = []
-            for value in values:
-                # Update parameter
-                setattr(self.model, param, value)
-                # Evaluate performance
-                score = cross_val_score(
-                    self.model, X, y, cv=5
-                ).mean()
-                scores.append(score)
-            results[param] = scores
-            
-        # Visualize results
-        self._plot_parameter_impact(results)
-        
-    def _plot_parameter_impact(self, results):
-        """Show how parameters affect performance"""
-        fig, axes = plt.subplots(1, 3, figsize=(15, 5))
-        for ax, (param, scores) in zip(axes, results.items()):
-            ax.plot(scores, marker='o')
-            ax.set_title(f'Impact of {param}')
-            ax.grid(True)
-        plt.tight_layout()
-        plt.show()
+# Load the iris dataset
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Create a tree with strict growth rules
+tree = DecisionTreeClassifier(
+    max_depth=3,              # Don't grow too deep
+    min_samples_split=10,     # Need enough samples to split
+    min_samples_leaf=5,       # Each leaf needs enough samples
+    max_features='sqrt',      # Consider subset of features
+    min_impurity_decrease=0.01  # Only split if it helps enough
+)
+
+# Fit the tree to our data
+tree.fit(X, y)
+
+# Evaluate performance with cross-validation
+scores = cross_val_score(tree, X, y, cv=5)
+print(f"Average accuracy: {scores.mean():.3f}")
+
+# Visualize the tree
+plt.figure(figsize=(15, 10))
+from sklearn.tree import plot_tree
+plot_tree(
+    tree,
+    feature_names=iris.feature_names,
+    class_names=iris.target_names,
+    filled=True,
+    rounded=True
+)
+plt.title('Pre-pruned Decision Tree')
+plt.show()
 ```
+
+Pre-pruning is a preventative approach where we set limits before training the tree. This prevents the tree from growing too complex in the first place. The parameters used above control different aspects of tree complexity:
+
+- `max_depth`: Limits how deep the tree can grow
+- `min_samples_split`: Requires a minimum number of samples to split a node
+- `min_samples_leaf`: Ensures each leaf node has enough samples
+- `max_features`: Limits how many features to consider at each split
+- `min_impurity_decrease`: Only allows splits that improve purity by a certain amount
 
 #### 2. Post-pruning (Cost-Complexity Pruning)
 
 This is like trimming the tree after it's grown:
 
 ```python
-def optimize_tree_complexity(X, y):
-    """Find the best balance between tree size and accuracy"""
-    # Create initial tree
-    tree = DecisionTreeClassifier()
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import load_breast_cancer
+
+# Load a dataset
+cancer = load_breast_cancer()
+X = cancer.data
+y = cancer.target
+
+# Split into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+# Create initial tree
+tree = DecisionTreeClassifier(random_state=42)
+tree.fit(X_train, y_train)
+
+# Get pruning path
+path = tree.cost_complexity_pruning_path(X_train, y_train)
+ccp_alphas = path.ccp_alphas
+
+# Remove the last element (it's usually too high)
+ccp_alphas = ccp_alphas[:-1]
+
+# Try different pruning levels
+trees = []
+train_scores = []
+test_scores = []
+
+for ccp_alpha in ccp_alphas:
+    # Create a tree with this pruning parameter
+    tree = DecisionTreeClassifier(ccp_alpha=ccp_alpha, random_state=42)
+    tree.fit(X_train, y_train)
     
-    # Get pruning path
-    path = tree.cost_complexity_pruning_path(X, y)
-    ccp_alphas = path.ccp_alphas
-    
-    # Try different pruning levels
-    trees = []
-    for ccp_alpha in ccp_alphas:
-        tree = DecisionTreeClassifier(ccp_alpha=ccp_alpha)
-        tree.fit(X, y)
-        trees.append(tree)
-    
-    # Plot tree size vs alpha
-    node_counts = [tree.tree_.node_count for tree in trees]
-    plt.figure(figsize=(10, 6))
-    plt.plot(ccp_alphas, node_counts, marker='o')
-    plt.xlabel('Pruning Strength (alpha)')
-    plt.ylabel('Number of Nodes')
-    plt.title('Tree Size vs Pruning Strength')
-    plt.show()
-    
-    return trees, ccp_alphas
+    # Save the tree and scores
+    trees.append(tree)
+    train_scores.append(tree.score(X_train, y_train))
+    test_scores.append(tree.score(X_test, y_test))
+
+# Plot accuracy vs alpha
+plt.figure(figsize=(10, 6))
+plt.plot(ccp_alphas, train_scores, marker='o', label='Train')
+plt.plot(ccp_alphas, test_scores, marker='o', label='Test')
+plt.xlabel('Pruning Strength (alpha)')
+plt.ylabel('Accuracy')
+plt.legend()
+plt.title('Accuracy vs Pruning Strength')
+
+# Plot tree size vs alpha
+plt.figure(figsize=(10, 6))
+node_counts = [tree.tree_.node_count for tree in trees]
+plt.plot(ccp_alphas, node_counts, marker='o')
+plt.xlabel('Pruning Strength (alpha)')
+plt.ylabel('Number of Nodes')
+plt.title('Tree Size vs Pruning Strength')
+plt.show()
+
+# Find the best alpha
+best_alpha_idx = np.argmax(test_scores)
+best_alpha = ccp_alphas[best_alpha_idx]
+best_tree = trees[best_alpha_idx]
+
+print(f"Best pruning parameter: {best_alpha:.6f}")
+print(f"Training accuracy: {train_scores[best_alpha_idx]:.3f}")
+print(f"Testing accuracy: {test_scores[best_alpha_idx]:.3f}")
+print(f"Tree size: {node_counts[best_alpha_idx]} nodes")
 ```
 
-## Understanding Pruning Effects
+Post-pruning is a corrective approach where we first grow a full tree and then trim it back. The `ccp_alpha` parameter controls the strength of pruning:
+- Higher values lead to more pruning (smaller trees)
+- Lower values lead to less pruning (larger trees)
 
-The depth of a tree significantly affects its performance. Let's see how:
-
-![Pruning Effect](assets/pruning_effect.png)
+The optimal pruning strength balances underfitting and overfitting, maximizing performance on unseen data.
 
 ## Advanced Tree Growing Techniques
 
-### 1. Custom Splitting Criteria
+### Custom Impurity Measures
 
-Sometimes the standard ways of splitting aren't enough. You might want to create your own rules:
+This example shows how to implement and use a custom impurity function:
 
 ```python
-from sklearn.tree._criterion import Criterion
 import numpy as np
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.datasets import make_classification
 
-class CustomSplitCriterion:
-    """Example of custom splitting rule"""
-    def node_impurity(self, y):
-        """Calculate how mixed a node is"""
-        # Count how many of each class
-        _, counts = np.unique(y, return_counts=True)
-        probabilities = counts / len(y)
-        
-        # Custom impurity measure (cubic instead of quadratic)
-        return 1 - np.sum(probabilities ** 3)
-        
-    def children_impurity(self, y_left, y_right):
-        """Calculate impurity after split"""
-        n_left = len(y_left)
-        n_right = len(y_right)
-        n_total = n_left + n_right
-        
-        # Weighted average of child impurities
-        return (
-            (n_left/n_total) * self.node_impurity(y_left) +
-            (n_right/n_total) * self.node_impurity(y_right)
-        )
+# Create a synthetic dataset
+X, y = make_classification(
+    n_samples=1000,
+    n_features=10,
+    n_informative=5,
+    n_redundant=2,
+    random_state=42
+)
+
+# Custom function to calculate impurity
+def calculate_custom_impurity(y_classes):
+    """Calculate a custom impurity measure (cubic instead of quadratic)"""
+    # Get class probabilities
+    _, counts = np.unique(y_classes, return_counts=True)
+    probabilities = counts / len(y_classes)
+    
+    # Custom impurity (1 - sum of cubed probabilities)
+    # Standard Gini would use squared probabilities
+    return 1 - np.sum(probabilities ** 3)
+
+# Let's manually calculate impurity for some examples
+sample1 = np.array([0, 0, 0, 0, 1])  # 80% class 0, 20% class 1
+sample2 = np.array([0, 0, 1, 1, 1])  # 40% class 0, 60% class 1
+sample3 = np.array([0, 1, 0, 1, 0])  # 60% class 0, 40% class 1
+
+print(f"Sample 1 impurity: {calculate_custom_impurity(sample1):.3f}")
+print(f"Sample 2 impurity: {calculate_custom_impurity(sample2):.3f}")
+print(f"Sample 3 impurity: {calculate_custom_impurity(sample3):.3f}")
+
+# While we can't directly use this in sklearn's DecisionTreeClassifier,
+# we can compare it with the built-in criteria
+for criterion in ['gini', 'entropy']:
+    tree = DecisionTreeClassifier(criterion=criterion, random_state=42)
+    tree.fit(X, y)
+    accuracy = tree.score(X, y)
+    nodes = tree.tree_.node_count
+    print(f"{criterion.capitalize()} criterion - Accuracy: {accuracy:.3f}, Nodes: {nodes}")
 ```
 
-### 2. Dynamic Feature Selection
+While scikit-learn doesn't allow us to directly use custom impurity functions in its implementation, we can understand how different impurity measures affect tree performance. The built-in options are:
 
-Choose different features at different levels of the tree:
+- `gini`: Measures how "mixed" the classes are (based on squared probabilities)
+- `entropy`: Measures how "uncertain" the classes are (based on logarithms)
+
+Different impurity measures can lead to different tree structures and decisions.
+
+## Feature Selection with Decision Trees
+
+Decision trees can help us identify which features are most important:
 
 ```python
-class SmartFeatureSelector:
-    def __init__(self, n_features=10):
-        """Initialize feature selector"""
-        self.n_features = n_features
-        
-    def select_features(self, X, y, depth):
-        """Choose features based on tree depth"""
-        if depth < 3:
-            # Use all features at top levels
-            return list(range(X.shape[1]))
-        else:
-            # Use most important features for deeper levels
-            importances = self._get_feature_importance(X, y)
-            return np.argsort(importances)[-self.n_features:]
-            
-    def _get_feature_importance(self, X, y):
-        """Calculate feature importance"""
-        tree = DecisionTreeClassifier(max_depth=1)
-        tree.fit(X, y)
-        return tree.feature_importances_
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.datasets import load_wine
+from sklearn.model_selection import train_test_split
+
+# Load a dataset with many features
+wine = load_wine()
+X = wine.data
+y = wine.target
+feature_names = wine.feature_names
+
+# Split the data
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+# Train a decision tree
+tree = DecisionTreeClassifier(max_depth=4, random_state=42)
+tree.fit(X_train, y_train)
+
+# Get feature importance
+importances = tree.feature_importances_
+
+# Sort features by importance
+indices = np.argsort(importances)[::-1]
+sorted_features = [feature_names[i] for i in indices]
+sorted_importances = importances[indices]
+
+# Plot feature importance
+plt.figure(figsize=(12, 8))
+plt.bar(range(X.shape[1]), sorted_importances)
+plt.xticks(range(X.shape[1]), sorted_features, rotation=90)
+plt.title('Feature Importance')
+plt.tight_layout()
+plt.show()
+
+# Let's use only the top 5 features
+top_features = indices[:5]
+X_train_top = X_train[:, top_features]
+X_test_top = X_test[:, top_features]
+
+# Train a new tree with only top features
+tree_top = DecisionTreeClassifier(max_depth=4, random_state=42)
+tree_top.fit(X_train_top, y_train)
+
+# Compare performance
+full_accuracy = tree.score(X_test, y_test)
+top_accuracy = tree_top.score(X_test_top, y_test)
+
+print(f"Accuracy with all features: {full_accuracy:.3f}")
+print(f"Accuracy with top 5 features: {top_accuracy:.3f}")
+print(f"Top 5 features: {', '.join([feature_names[i] for i in top_features])}")
 ```
+
+This technique shows how we can:
+1. Identify which features are most important in our decision tree
+2. Use this information to create simpler models with fewer features
+3. Often maintain similar performance with a much simpler model
+
+Feature importance in decision trees is calculated based on how much each feature improves the purity at each split across the entire tree.
 
 ## Introduction to Tree Ensembles
 
@@ -180,163 +285,292 @@ Think of ensembles like a team of experts working together. Each expert (tree) m
 ### 1. Random Forest Preview
 
 ```python
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import cross_val_score
+from sklearn.datasets import load_breast_cancer
 
-def compare_single_vs_forest(X, y):
-    """Compare single tree vs forest of trees"""
-    # Single tree
-    tree = DecisionTreeClassifier(max_depth=3)
-    tree_scores = cross_val_score(tree, X, y, cv=5)
-    
-    # Random forest
-    forest = RandomForestClassifier(
-        n_estimators=100,  # Number of trees
-        max_depth=3        # Depth of each tree
-    )
-    forest_scores = cross_val_score(forest, X, y, cv=5)
-    
-    # Plot comparison
-    plt.figure(figsize=(8, 6))
-    plt.boxplot([tree_scores, forest_scores], 
-                labels=['Single Tree', 'Random Forest'])
-    plt.title('Which is Better: One Expert or Many?')
-    plt.ylabel('Accuracy')
-    plt.show()
+# Load a dataset
+cancer = load_breast_cancer()
+X = cancer.data
+y = cancer.target
+
+# Compare single tree vs forest
+# Single tree
+tree = DecisionTreeClassifier(max_depth=3)
+tree_scores = cross_val_score(tree, X, y, cv=5)
+
+# Random forest
+forest = RandomForestClassifier(
+    n_estimators=100,  # Number of trees
+    max_depth=3,       # Depth of each tree
+    random_state=42
+)
+forest_scores = cross_val_score(forest, X, y, cv=5)
+
+# Plot comparison
+plt.figure(figsize=(8, 6))
+plt.boxplot([tree_scores, forest_scores], 
+            labels=['Single Tree', 'Random Forest'])
+plt.title('Which is Better: One Expert or Many?')
+plt.ylabel('Accuracy')
+plt.ylim(0.8, 1.0)
+plt.grid(axis='y')
+plt.show()
+
+# Print average scores
+print(f"Single Tree Average: {tree_scores.mean():.3f}")
+print(f"Random Forest Average: {forest_scores.mean():.3f}")
 ```
+
+Random Forest creates many diverse decision trees by:
+1. Training each tree on a random subset of the data (bootstrapping)
+2. Considering only a random subset of features at each split
+3. Combining their predictions through voting (for classification) or averaging (for regression)
+
+This diversity helps the ensemble overcome individual tree weaknesses and produce more robust predictions.
 
 ### 2. Gradient Boosting Preview
 
-This is like learning from your mistakes. Each new tree tries to fix the errors of the previous ones:
-
 ```python
+import numpy as np
+import matplotlib.pyplot as plt
 from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import make_circles
 
-def learn_from_mistakes(X, y):
-    """Show how boosting improves over time"""
-    boosting = GradientBoostingClassifier(
-        n_estimators=100,      # Number of trees
-        learning_rate=0.1,     # How much to learn from each mistake
-        max_depth=3            # Depth of each tree
-    )
-    
-    # Track performance as we add more trees
-    train_scores = []
-    test_scores = []
-    
-    # Split data
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2
-    )
-    
-    # Train and track performance
-    for i in range(1, 101):
-        boosting.n_estimators = i
-        boosting.fit(X_train, y_train)
-        train_scores.append(boosting.score(X_train, y_train))
-        test_scores.append(boosting.score(X_test, y_test))
-    
-    # Plot learning progress
-    plt.figure(figsize=(10, 6))
-    plt.plot(train_scores, label='Training')
-    plt.plot(test_scores, label='Testing')
-    plt.xlabel('Number of Trees')
-    plt.ylabel('Accuracy')
-    plt.title('Learning from Mistakes Over Time')
-    plt.legend()
-    plt.show()
+# Create a challenging dataset
+X, y = make_circles(n_samples=1000, noise=0.2, factor=0.5, random_state=42)
+
+# Split the data
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+# Initialize a gradient boosting model
+boosting = GradientBoostingClassifier(
+    n_estimators=100,      # Maximum number of trees
+    learning_rate=0.1,     # How much to learn from each mistake
+    max_depth=3,           # Depth of each tree
+    random_state=42
+)
+
+# Train and track performance as we add more trees
+train_scores = []
+test_scores = []
+n_estimators_range = range(1, 101, 5)  # Check every 5 trees
+
+for i in n_estimators_range:
+    # Set number of trees
+    boosting.n_estimators = i
+    # Train model
+    boosting.fit(X_train, y_train)
+    # Record scores
+    train_scores.append(boosting.score(X_train, y_train))
+    test_scores.append(boosting.score(X_test, y_test))
+
+# Plot learning progress
+plt.figure(figsize=(10, 6))
+plt.plot(n_estimators_range, train_scores, 'b-', label='Training')
+plt.plot(n_estimators_range, test_scores, 'r-', label='Testing')
+plt.xlabel('Number of Trees')
+plt.ylabel('Accuracy')
+plt.title('Learning from Mistakes Over Time')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# Find optimal number of trees
+best_n_estimators = n_estimators_range[np.argmax(test_scores)]
+print(f"Optimal number of trees: {best_n_estimators}")
+print(f"Best accuracy: {max(test_scores):.3f}")
 ```
 
-## Comparing Single Trees vs Ensembles
+Gradient Boosting works by:
+1. Starting with a simple model
+2. Identifying where this model makes mistakes
+3. Adding a new tree specifically focused on correcting those mistakes
+4. Repeating this process, with each new tree focusing on the remaining errors
 
-Let's see how ensembles compare to single trees:
-
-![Ensemble Comparison](assets/ensemble_comparison.png)
+This sequential learning process allows the model to focus on the difficult cases and gradually improve its predictions.
 
 ## Advanced Visualization Techniques
 
-### 1. Interactive Tree Explorer
+### Decision Path Highlighter
 
 ```python
-def explore_tree_interactively(model, feature_names):
-    """Create interactive tree visualization"""
-    from dtreeviz.trees import dtreeviz
-    
-    viz = dtreeviz(
-        model,
-        X_train,
-        y_train,
-        target_name='target',
-        feature_names=feature_names,
-        class_names=list(model.classes_)
-    )
-    
-    return viz
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.datasets import load_iris
+
+# Load the Iris dataset
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Create and train a tree
+tree_clf = DecisionTreeClassifier(max_depth=3, random_state=42)
+tree_clf.fit(X, y)
+
+# Select a sample to trace
+sample_idx = 42
+sample = X[sample_idx:sample_idx+1]
+true_class = iris.target_names[y[sample_idx]]
+
+# Get decision path
+path = tree_clf.decision_path(sample)
+
+# Print sample information
+print(f"Sample features: {sample[0]}")
+print(f"True class: {true_class}")
+print(f"Predicted class: {iris.target_names[tree_clf.predict(sample)[0]]}")
+
+# Create visualization with highlighted path
+plt.figure(figsize=(20, 10))
+plot_tree(
+    tree_clf,
+    feature_names=iris.feature_names,
+    class_names=iris.target_names,
+    filled=True,
+    rounded=True
+)
+
+# Extract node IDs in the path
+path_indices = path.indices
+
+# Print the decision rules for this sample
+print("\nDecision path:")
+for i, node_id in enumerate(path_indices):
+    if node_id != tree_clf.tree_.node_count - 1:  # Skip leaf nodes
+        feature = tree_clf.tree_.feature[node_id]
+        threshold = tree_clf.tree_.threshold[node_id]
+        feature_name = iris.feature_names[feature]
+        
+        if sample[0, feature] <= threshold:
+            direction = "<="
+        else:
+            direction = ">"
+            
+        print(f"Step {i+1}: Is {feature_name} {direction} {threshold:.2f}? {'Yes' if sample[0, feature] <= threshold else 'No'}")
+
+plt.title('Decision Tree with Highlighted Path')
+plt.show()
 ```
 
-### 2. Decision Path Highlighter
+This visualization helps us understand exactly how a decision tree makes a specific prediction by:
+1. Tracing the path from the root to the leaf for a specific sample
+2. Showing each decision point along the way
+3. Revealing the decision rules that led to the final prediction
 
-```python
-def highlight_decision_path(model, X, feature_names):
-    """Show how a specific prediction was made"""
-    # Get decision path
-    path = model.decision_path(X)
-    
-    # Create visualization
-    plt.figure(figsize=(20, 10))
-    plot_tree(
-        model,
-        feature_names=feature_names,
-        filled=True,
-        rounded=True
-    )
-    
-    # Highlight the path
-    for node_id in path.indices:
-        plt.gca().get_xticklabels()[node_id].set_color('red')
-    
-    plt.show()
-```
+This transparency is one of the major advantages of decision trees over black-box models.
 
 ## Common Advanced Techniques
 
-1. **Handling Imbalanced Data**
+### 1. Handling Imbalanced Data
 
-   ```python
-   # Use class weights
-   clf = DecisionTreeClassifier(
-       class_weight='balanced'  # Give more weight to minority class
-   )
-   ```
+```python
+import numpy as np
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report, confusion_matrix
 
-2. **Feature Engineering**
+# Create an imbalanced dataset (90% class 0, 10% class 1)
+X, y = make_classification(
+    n_samples=1000,
+    n_classes=2,
+    weights=[0.9, 0.1],  # Class distribution
+    random_state=42
+)
 
-   ```python
-   # Create interaction features
-   X['feature1_x_feature2'] = X['feature1'] * X['feature2']
-   ```
+# Split the data
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42, stratify=y
+)
 
-3. **Cross-Validation**
+# Train a regular tree
+regular_tree = DecisionTreeClassifier(random_state=42)
+regular_tree.fit(X_train, y_train)
 
-   ```python
-   # Use stratified k-fold for imbalanced data
-   from sklearn.model_selection import StratifiedKFold
-   cv = StratifiedKFold(n_splits=5)
-   ```
+# Train a tree with class weights
+weighted_tree = DecisionTreeClassifier(
+    class_weight='balanced',  # Give more weight to minority class
+    random_state=42
+)
+weighted_tree.fit(X_train, y_train)
+
+# Evaluate both models
+print("Regular Tree:")
+y_pred_regular = regular_tree.predict(X_test)
+print(confusion_matrix(y_test, y_pred_regular))
+print(classification_report(y_test, y_pred_regular))
+
+print("\nWeighted Tree:")
+y_pred_weighted = weighted_tree.predict(X_test)
+print(confusion_matrix(y_test, y_pred_weighted))
+print(classification_report(y_test, y_pred_weighted))
+```
+
+When dealing with imbalanced data (where some classes are much more common than others), we can:
+1. Use `class_weight='balanced'` to automatically adjust weights inversely proportional to class frequencies
+2. Manually specify weights for each class using a dictionary, e.g., `class_weight={0: 1, 1: 9}`
+3. Evaluate models using metrics beyond accuracy, such as precision, recall, and F1-score
+
+These techniques help ensure the model pays attention to minority classes instead of just predicting the majority class.
+
+### 2. Cross-Validation
+
+```python
+import numpy as np
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import cross_val_score, KFold, StratifiedKFold
+from sklearn.datasets import load_breast_cancer
+
+# Load a dataset
+cancer = load_breast_cancer()
+X = cancer.data
+y = cancer.target
+
+# Regular K-Fold cross-validation
+kf = KFold(n_splits=5, shuffle=True, random_state=42)
+tree = DecisionTreeClassifier(max_depth=3, random_state=42)
+scores_kf = cross_val_score(tree, X, y, cv=kf)
+
+# Stratified K-Fold (maintains class distribution)
+skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+scores_skf = cross_val_score(tree, X, y, cv=skf)
+
+print("Regular K-Fold CV scores:", scores_kf)
+print(f"Average: {scores_kf.mean():.3f}, Std Dev: {scores_kf.std():.3f}")
+
+print("\nStratified K-Fold CV scores:", scores_skf)
+print(f"Average: {scores_skf.mean():.3f}, Std Dev: {scores_skf.std():.3f}")
+```
+
+Cross-validation helps us get a more reliable estimate of model performance by:
+1. Splitting the data into multiple folds
+2. Training and evaluating the model multiple times on different splits
+3. Averaging the results to get a more stable performance metric
+
+Stratified cross-validation specifically ensures that each fold maintains the same class distribution as the original dataset, which is especially important for imbalanced data.
 
 ## Practice Exercise
 
-Try these advanced techniques:
+Try these advanced techniques on your own:
 
-1. Implement pre-pruning and post-pruning
-2. Compare their effects on model performance
-3. Try different ensemble methods
-4. Visualize the results
+1. Compare pre-pruning and post-pruning on a dataset of your choice
+2. Implement a custom impurity measure and compare it to Gini and entropy
+3. Visualize feature importances and decision paths for a specific prediction
+4. Apply class weights to handle an imbalanced dataset
 
 ## Next Steps
 
 Ready to apply these techniques? Check out:
 
-1. [Real-world applications](5-applications.md)
+1. [Real-world applications](5-applications.md) of decision trees
 2. How to deploy decision trees in production
-3. Advanced ensemble methods
+3. Advanced ensemble methods (Random Forests, Gradient Boosting)
 4. Hyperparameter tuning techniques
