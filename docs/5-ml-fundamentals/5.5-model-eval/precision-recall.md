@@ -6,19 +6,45 @@ Precision and Recall are fundamental metrics in machine learning for evaluating 
 
 ## What are Precision and Recall?
 
+![Precision-Recall Curve](assets/precision_recall_curve.png)
+
 ### Precision
 
-- Definition: Ratio of true positives to all predicted positives
-- Formula: TP / (TP + FP)
-- Interpretation: How many of the predicted positive cases are actually positive
-- Range: 0 to 1 (higher is better)
+- **Definition**: Ratio of true positives to all predicted positives
+- **Formula**: TP / (TP + FP)
+- **Interpretation**: "Of all the cases I predicted as positive, how many were actually positive?"
+- **Range**: 0 to 1 (higher is better)
+- **Focus**: Quality of positive predictions
 
-### Recall
+### Recall (Sensitivity)
 
-- Definition: Ratio of true positives to all actual positives
-- Formula: TP / (TP + FN)
-- Interpretation: How many of the actual positive cases are correctly identified
-- Range: 0 to 1 (higher is better)
+- **Definition**: Ratio of true positives to all actual positives  
+- **Formula**: TP / (TP + FN)
+- **Interpretation**: "Of all the actual positive cases, how many did I correctly identify?"
+- **Range**: 0 to 1 (higher is better)
+- **Focus**: Completeness of positive detection
+
+### The Precision-Recall Trade-off
+
+There's typically a trade-off between precision and recall:
+
+- **High Precision, Low Recall**: Very conservative model - when it says "positive," it's usually right, but it misses many positive cases
+- **Low Precision, High Recall**: Very liberal model - catches most positive cases but also flags many false positives
+- **Balanced**: Moderate precision and recall - good overall performance
+
+### Real-World Examples
+
+**Medical Diagnosis (Cancer Screening):**
+- **High Recall Priority**: Don't miss any cancer cases (even if some false alarms)
+- **High Precision Priority**: Avoid unnecessary anxiety and procedures
+
+**Email Spam Detection:**
+- **High Precision Priority**: Don't block important emails
+- **High Recall Priority**: Catch all spam emails
+
+**Fraud Detection:**
+- **High Recall Priority**: Catch all fraudulent transactions
+- **High Precision Priority**: Don't block legitimate transactions
 
 ## Types of Precision-Recall Curves
 

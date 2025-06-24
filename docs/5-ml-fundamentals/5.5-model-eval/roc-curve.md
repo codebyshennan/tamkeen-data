@@ -8,6 +8,28 @@ The Receiver Operating Characteristic (ROC) curve is a fundamental tool in machi
 
 An ROC curve plots the True Positive Rate (TPR) against the False Positive Rate (FPR) at various threshold settings. It helps visualize the trade-off between sensitivity and specificity.
 
+![ROC Curve](assets/roc_curve.png)
+
+**Key Components:**
+- **True Positive Rate (TPR)** = Sensitivity = Recall = TP / (TP + FN)
+  - "Of all actual positive cases, how many did we correctly identify?"
+- **False Positive Rate (FPR)** = 1 - Specificity = FP / (FP + TN)  
+  - "Of all actual negative cases, how many did we incorrectly identify as positive?"
+
+**Understanding the Curve:**
+- **Perfect Classifier**: Curve goes straight up to (0,1) then across to (1,1) - AUC = 1.0
+- **Random Classifier**: Diagonal line from (0,0) to (1,1) - AUC = 0.5
+- **Good Classifier**: Curve bows toward the upper-left corner - AUC > 0.7
+- **Poor Classifier**: Curve below diagonal line - AUC < 0.5
+
+### Real-World Example: Email Spam Detection
+
+Imagine an email spam filter:
+- **High TPR, Low FPR**: Catches most spam (good!) without blocking legitimate emails (good!)
+- **High TPR, High FPR**: Catches spam but also blocks important emails (bad!)
+- **Low TPR, Low FPR**: Doesn't block legitimate emails but lets spam through (bad!)
+- **Low TPR, High FPR**: Worst case - misses spam AND blocks legitimate emails!
+
 ## Types of ROC Curves
 
 ### 1. Binary Classification

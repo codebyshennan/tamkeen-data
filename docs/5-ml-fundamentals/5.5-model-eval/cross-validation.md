@@ -39,15 +39,114 @@ Think of cross validation like a sports team's practice games:
 
 ### K-Fold Cross-Validation
 
-The data is divided into k subsets, and the holdout method is repeated k times.
+The data is divided into k subsets (called "folds"), and the holdout method is repeated k times. Each time, one fold serves as the validation set while the remaining k-1 folds form the training set.
 
-### Leave-One-Out Cross-Validation
+![K-Fold Visualization](assets/kfold_visualization.png)
 
-Each observation is used once as a validation set while the remaining observations form the training set.
+**How it works:**
+1. Split data into k equal-sized folds
+2. For each fold:
+   - Train model on k-1 folds
+   - Validate on the remaining fold
+3. Average the k validation scores
+
+**Example with k=5:**
+```python
+from sklearn.model_selection import KFold, cross_val_score
+from sklearn.ensemble import RandomForestClassifier
+import numpy as np
+
+# Create sample data
+X = np.random.randn(100, 4)
+y = np.random.randint(0, 2, 100)
+
+# 5-fold cross-validation
+kf = KFold(n_splits=5, shuffle=True, random_state=42)
+model = RandomForestClassifier(random_state=42)
+
+# What this does: Trains and evaluates the model 5 times,
+# each time using a different fold as validation set
+scores = cross_val_score(model, X, y, cv=kf)
+
+print(f"Cross-validation scores: {scores}")
+print(f"Mean CV score: {scores.mean():.3f} (+/- {scores.std() * 2:.3f})")
+```
+
+### Leave-One-Out Cross-Validation (LOOCV)
+
+Each observation is used once as a validation set while the remaining observations form the training set. This is equivalent to k-fold where k equals the number of samples.
+
+**When to use:**
+- Small datasets (< 100 samples)
+- When you need maximum use of training data
+- Computationally expensive for large datasets
+
+**Example:**
+```python
+from sklearn.model_selection import LeaveOneOut
+
+loo = LeaveOneOut()
+scores = cross_val_score(model, X, y, cv=loo)
+print(f"LOOCV mean score: {scores.mean():.3f}")
+```
 
 ### Stratified K-Fold Cross-Validation
 
-Similar to K-Fold but ensures that the proportions of samples for each class are the same in each fold.
+Similar to K-Fold but ensures that the proportions of samples for each class are the same in each fold. This is crucial for imbalanced datasets.
+
+![Stratified vs Regular K-Fold](assets/stratified_vs_regular_kfold.png)
+
+**Why stratification matters:**
+- Prevents folds with very few or no samples from minority classes
+- Ensures each fold is representative of the overall dataset
+- Provides more reliable performance estimates for imbalanced data
+
+**Example:**
+```python
+from sklearn.model_selection import StratifiedKFold
+
+# Create imbalanced dataset
+y_imbalanced = np.concatenate([np.zeros(80), np.ones(20)])
+X_imbalanced = np.random.randn(100, 4)
+
+# Compare regular vs stratified k-fold
+skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+kf = KFold(n_splits=5, shuffle=True, random_state=42)
+
+# Stratified scores
+stratified_scores = cross_val_score(model, X_imbalanced, y_imbalanced, cv=skf)
+# Regular scores  
+regular_scores = cross_val_score(model, X_imbalanced, y_imbalanced, cv=kf)
+
+print(f"Stratified CV: {stratified_scores.mean():.3f} (+/- {stratified_scores.std() * 2:.3f})")
+print(f"Regular CV: {regular_scores.mean():.3f} (+/- {regular_scores.std() * 2:.3f})")
+```
+
+### Time Series Cross-Validation
+
+For time series data, we need to respect the temporal order and avoid using future data to predict the past.
+
+![Time Series Cross-Validation](assets/timeseries_cv.png)
+
+**Key principles:**
+- Training data always comes before validation data
+- No shuffling of data
+- Expanding or sliding window approaches
+
+**Example:**
+```python
+from sklearn.model_selection import TimeSeriesSplit
+
+# Time series split
+tscv = TimeSeriesSplit(n_splits=5)
+
+# What this does: Creates 5 splits where each validation set
+# comes after its corresponding training set in time
+for fold, (train_idx, val_idx) in enumerate(tscv.split(X)):
+    print(f"Fold {fold+1}:")
+    print(f"  Train indices: {train_idx[:5]}...{train_idx[-5:]}")
+    print(f"  Val indices: {val_idx[:5]}...{val_idx[-5:]}")
+```
 
 ## Benefits of Cross-Validation
 

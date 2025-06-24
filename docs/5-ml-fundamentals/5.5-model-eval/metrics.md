@@ -28,6 +28,112 @@ Model evaluation is like weather forecasting:
 - Recall is like how well we catch all the important weather events
 - ROC curve is like the trade-off between false alarms and missed events
 
+## Metrics Comparison and Selection Guide
+
+### Classification Metrics Comparison Table
+
+| Metric | Formula | Range | Best Value | Use When | Pros | Cons |
+|--------|---------|-------|------------|----------|------|------|
+| **Accuracy** | (TP+TN)/(TP+TN+FP+FN) | 0-1 | 1.0 | Balanced classes | Simple, intuitive | Misleading with imbalanced data |
+| **Precision** | TP/(TP+FP) | 0-1 | 1.0 | Cost of false positives is high | Focuses on positive prediction quality | Ignores false negatives |
+| **Recall** | TP/(TP+FN) | 0-1 | 1.0 | Cost of false negatives is high | Focuses on finding all positives | Ignores false positives |
+| **F1-Score** | 2×(Precision×Recall)/(Precision+Recall) | 0-1 | 1.0 | Need balance between precision/recall | Balances precision and recall | May not reflect business priorities |
+| **ROC-AUC** | Area under ROC curve | 0-1 | 1.0 | Balanced classes, probability ranking | Threshold-independent | Misleading with imbalanced data |
+| **PR-AUC** | Area under PR curve | 0-1 | 1.0 | Imbalanced classes | Good for imbalanced data | Less intuitive than ROC-AUC |
+
+### Regression Metrics Comparison Table
+
+| Metric | Formula | Range | Best Value | Use When | Pros | Cons |
+|--------|---------|-------|------------|----------|------|------|
+| **MSE** | Σ(y_true - y_pred)²/n | 0-∞ | 0 | Penalize large errors heavily | Differentiable, common | Sensitive to outliers |
+| **RMSE** | √(MSE) | 0-∞ | 0 | Same units as target | Interpretable units | Sensitive to outliers |
+| **MAE** | Σ\|y_true - y_pred\|/n | 0-∞ | 0 | Robust to outliers | Less sensitive to outliers | Less differentiable |
+| **R²** | 1 - SS_res/SS_tot | -∞-1 | 1.0 | Measure explained variance | Normalized, interpretable | Can be negative |
+| **MAPE** | Σ\|y_true - y_pred\|/y_true/n | 0-∞ | 0 | Percentage errors matter | Scale-independent | Undefined for zero values |
+
+### Metric Relationships and Trade-offs
+
+![Model Comparison](assets/model_comparison.png)
+
+#### Precision vs Recall Trade-off
+```python
+# Demonstration of precision-recall trade-off
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.metrics import precision_recall_curve
+
+def demonstrate_precision_recall_tradeoff():
+    # Simulate different threshold scenarios
+    thresholds = np.linspace(0.1, 0.9, 9)
+    scenarios = {
+        'Conservative Model': {'precision': [0.95, 0.92, 0.88, 0.82, 0.75, 0.68, 0.60, 0.52, 0.45],
+                              'recall': [0.20, 0.35, 0.48, 0.62, 0.73, 0.81, 0.87, 0.91, 0.94]},
+        'Aggressive Model': {'precision': [0.60, 0.58, 0.55, 0.52, 0.48, 0.44, 0.40, 0.36, 0.32],
+                            'recall': [0.85, 0.88, 0.90, 0.92, 0.94, 0.95, 0.96, 0.97, 0.98]},
+        'Balanced Model': {'precision': [0.80, 0.78, 0.75, 0.72, 0.68, 0.64, 0.60, 0.55, 0.50],
+                          'recall': [0.50, 0.58, 0.65, 0.71, 0.76, 0.80, 0.84, 0.87, 0.90]}
+    }
+    
+    plt.figure(figsize=(12, 8))
+    
+    for model_name, metrics in scenarios.items():
+        plt.plot(metrics['recall'], metrics['precision'], 'o-', 
+                label=f'{model_name}', linewidth=2, markersize=6)
+    
+    plt.xlabel('Recall (Sensitivity)', fontsize=12)
+    plt.ylabel('Precision', fontsize=12)
+    plt.title('Precision vs Recall Trade-off for Different Model Types', fontsize=14)
+    plt.legend(fontsize=11)
+    plt.grid(True, alpha=0.3)
+    plt.xlim(0, 1)
+    plt.ylim(0, 1)
+    
+    # Add annotations
+    plt.annotate('High Precision\nLow Recall\n(Conservative)', 
+                xy=(0.3, 0.9), fontsize=10, ha='center',
+                bbox=dict(boxstyle="round,pad=0.3", facecolor="lightblue"))
+    plt.annotate('Low Precision\nHigh Recall\n(Aggressive)', 
+                xy=(0.9, 0.4), fontsize=10, ha='center',
+                bbox=dict(boxstyle="round,pad=0.3", facecolor="lightcoral"))
+    plt.annotate('Balanced\nPrecision & Recall', 
+                xy=(0.7, 0.7), fontsize=10, ha='center',
+                bbox=dict(boxstyle="round,pad=0.3", facecolor="lightgreen"))
+    
+    plt.tight_layout()
+    plt.show()
+
+demonstrate_precision_recall_tradeoff()
+```
+
+#### When to Use Which Metric: Decision Tree
+
+```
+Start Here: What type of problem?
+│
+├── Classification
+│   │
+│   ├── Are classes balanced?
+│   │   ├── Yes → Use Accuracy, ROC-AUC
+│   │   └── No → Use Precision, Recall, F1, PR-AUC
+│   │
+│   ├── What's the cost of errors?
+│   │   ├── False Positives costly → Optimize Precision
+│   │   ├── False Negatives costly → Optimize Recall
+│   │   └── Both equally costly → Optimize F1-Score
+│   │
+│   └── Need probability ranking? → Use ROC-AUC or PR-AUC
+│
+└── Regression
+    │
+    ├── Are there outliers?
+    │   ├── Yes → Use MAE, Huber Loss
+    │   └── No → Use MSE, RMSE
+    │
+    ├── Need interpretable units? → Use RMSE, MAE
+    ├── Need percentage errors? → Use MAPE
+    └── Need explained variance? → Use R²
+```
+
 ## Classification Metrics
 
 ### 1. Accuracy
