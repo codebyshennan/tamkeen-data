@@ -355,22 +355,6 @@ project/
 └── README.md          # Project documentation
 ```
 
-## Evaluation Criteria
-1. Technical Depth (40%)
-   - Appropriate use of data science techniques
-   - Code quality and implementation
-   - Model performance and validation
-
-2. Business Understanding (30%)
-   - Problem formulation
-   - Solution approach
-   - Business value of insights
-
-3. Communication (30%)
-   - Video presentation clarity
-   - Visualization quality
-   - Documentation completeness
-
 ## Submission Guidelines
 
 ### GitHub Repository
