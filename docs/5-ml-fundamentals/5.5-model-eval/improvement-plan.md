@@ -53,7 +53,7 @@ Based on a comprehensive review of the model evaluation learning materials, this
 - ✅ hyperparameter-tuning.md (3 visualizations integrated)
 - ✅ cross-validation.md (3 visualizations integrated)
 - ✅ confusion-matrix.md (enhanced with visualization)
-- ✅ roc-curve.md (comprehensive integration)
+- ✅ roc-auc-comprehensive.md (consolidated from roc-and-auc.md, roc-auc.md, and roc-curve.md)
 - ✅ precision-recall.md (trade-off visualization)
 - ✅ metrics.md (comparison visualizations)
 
@@ -300,7 +300,7 @@ Based on a comprehensive review of the model evaluation learning materials, this
 1. **hyperparameter-tuning.md** - Complete rewrite (1,500 → 15,000+ words)
 2. **cross-validation.md** - Enhanced with visualizations and structure
 3. **confusion-matrix.md** - Improved with real-world context
-4. **roc-curve.md** - Added comprehensive interpretation guides
+4. **roc-and-auc.md** - Consolidated ROC/AUC content with comprehensive interpretation guides
 5. **precision-recall.md** - Enhanced with trade-off analysis
 6. **metrics.md** - Added comparison tables and relationships
 7. **tutorial.ipynb** - Completely restructured with educational best practices
