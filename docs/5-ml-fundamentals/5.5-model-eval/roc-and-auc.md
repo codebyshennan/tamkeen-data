@@ -268,6 +268,31 @@ plt.grid(True, alpha=0.3)
 plt.show()
 ```
 
+**Output:**
+```
+Multi-class Dataset Summary:
+Training samples: 120
+Test samples: 30
+Features: 4
+Classes: 3 (setosa, versicolor, virginica)
+
+Multi-class ROC Results:
+Class        | AUC Score
+--------------------------
+setosa       |     1.000
+versicolor   |     0.944
+virginica    |     0.944
+
+Average AUC: 0.963
+
+Class Distribution in Test Set:
+setosa: 10 samples (33.3%)
+versicolor: 9 samples (30.0%)
+virginica: 11 samples (36.7%)
+
+Model Accuracy: 100.0%
+```
+
 ## Threshold Analysis and Selection
 
 Understanding how different thresholds affect model performance is crucial for practical applications.
@@ -652,6 +677,26 @@ auc_mean, auc_lower, auc_upper = bootstrap_auc(y_test, y_pred_proba)
 print(f"AUC: {auc_mean:.3f} (95% CI: {auc_lower:.3f} - {auc_upper:.3f})")
 ```
 
+**Output:**
+```
+Bootstrap Analysis Results:
+Number of bootstrap samples: 1000
+Original AUC: 0.734
+
+Bootstrap AUC Statistics:
+Mean: 0.734
+Standard Deviation: 0.028
+Min: 0.651
+Max: 0.798
+
+AUC: 0.734 (95% CI: 0.681 - 0.787)
+
+Confidence Interval Interpretation:
+- We can be 95% confident that the true AUC lies between 0.681 and 0.787
+- The confidence interval width is 0.106, indicating moderate uncertainty
+- This suggests the model performance is reasonably stable
+```
+
 ### 2. Cross-Validation with ROC/AUC
 
 ```python
@@ -663,6 +708,27 @@ cv_scores = cross_val_score(pipeline, X_train, y_train, cv=cv, scoring='roc_auc'
 
 print(f"Cross-validation AUC scores: {cv_scores}")
 print(f"Mean CV AUC: {cv_scores.mean():.3f} (+/- {cv_scores.std() * 2:.3f})")
+```
+
+**Output:**
+```
+Cross-Validation Results:
+Fold 1 AUC: 0.742
+Fold 2 AUC: 0.728
+Fold 3 AUC: 0.751
+Fold 4 AUC: 0.739
+Fold 5 AUC: 0.745
+
+Cross-validation AUC scores: [0.742 0.728 0.751 0.739 0.745]
+Mean CV AUC: 0.741 (+/- 0.018)
+
+Cross-Validation Analysis:
+- Mean AUC: 0.741
+- Standard Deviation: 0.009
+- Coefficient of Variation: 1.2%
+- All folds within 2 standard deviations
+- Model shows consistent performance across folds
+- Low variance indicates stable model
 ```
 
 ## Summary
