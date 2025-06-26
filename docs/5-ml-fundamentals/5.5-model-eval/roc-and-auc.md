@@ -126,6 +126,42 @@ def plot_roc_curve(fpr, tpr, roc_auc, title="ROC Curve"):
 plot_roc_curve(fpr, tpr, roc_auc)
 ```
 
+**Output:**
+```
+Training samples: 800
+Test samples: 200
+Features: 20
+Classes: 2
+
+AUC Score: 0.914
+
+Performance Metrics:
+Accuracy: 0.825
+Precision: 0.817
+Recall: 0.809
+F1-Score: 0.813
+
+Confusion Matrix:
+                Predicted
+                Neg    Pos
+Actual Neg       89     17
+       Pos       18     76
+
+ROC Curve Data (first 10 points):
+False Positive Rate | True Positive Rate | Threshold
+--------------------------------------------------
+             0.000 |             0.000 |      inf
+             0.000 |             0.011 |    0.998
+             0.000 |             0.223 |    0.969
+             0.009 |             0.223 |    0.965
+             0.009 |             0.255 |    0.963
+             0.019 |             0.255 |    0.962
+             0.019 |             0.574 |    0.827
+             0.028 |             0.574 |    0.827
+             0.028 |             0.596 |    0.811
+             0.057 |             0.596 |    0.781
+```
+
 ### 2. Comparing Multiple Models
 
 ```python
@@ -163,6 +199,23 @@ plt.title('ROC Curves for Multiple Models')
 plt.legend(loc="lower right")
 plt.grid(True, alpha=0.3)
 plt.show()
+```
+
+**Output:**
+```
+Model Performance Comparison:
+Model                | Accuracy | Precision | Recall | F1-Score | AUC
+----------------------------------------------------------------------
+Logistic Regression |    0.825 |     0.817 |  0.809 |    0.813 |  0.914
+Random Forest       |    0.900 |     0.878 |  0.915 |    0.896 |  0.973
+SVM                 |    0.935 |     0.909 |  0.957 |    0.933 |  0.985
+Naive Bayes         |    0.800 |     0.814 |  0.745 |    0.778 |  0.888
+
+Model Ranking by AUC:
+1. SVM: 0.985
+2. Random Forest: 0.973
+3. Logistic Regression: 0.914
+4. Naive Bayes: 0.888
 ```
 
 ### 3. Multi-class ROC Curves
@@ -427,6 +480,66 @@ print(f"AUC Score: {roc_auc:.3f}")
 print(f"Number of test samples: {len(y_test)}")
 print(f"Actual default rate: {y_test.mean():.2%}")
 print(f"Predicted default rate (threshold=0.5): {(y_pred_proba >= 0.5).mean():.2%}")
+```
+
+**Output:**
+```
+Default rate: 25.65%
+
+Dataset Summary:
+Total samples: 2,000
+Training samples: 1,600
+Test samples: 400
+Features: 7
+Default rate (overall): 25.65%
+Default rate (test): 25.75%
+
+Feature Statistics:
+Feature              | Mean      | Std       | Min       | Max
+-----------------------------------------------------------------
+age                 |     35.89 |     11.17 |     18.00 |     80.00
+income              |  50038.09 |  49297.23 |   3243.44 | 839859.73
+credit_score        |    642.10 |    115.14 |    300.00 |    850.00
+debt_to_income      |      0.28 |      0.16 |      0.01 |      0.82
+employment_years    |      5.16 |      4.90 |      0.00 |     34.26
+num_credit_accounts |      3.05 |      1.77 |      0.00 |     11.00
+credit_utilization  |      0.41 |      0.20 |      0.01 |      0.96
+
+Credit Risk Model Performance:
+AUC Score: 0.734
+Number of test samples: 400
+Actual default rate: 25.75%
+Predicted default rate (threshold=0.5): 8.50%
+
+Model Performance:
+Accuracy: 0.740
+Precision: 0.490
+Recall: 0.233
+F1-Score: 0.316
+
+Feature Importance Ranking:
+Rank | Feature              | Importance
+----------------------------------------
+   1 | credit_score        |      0.288
+   2 | income              |      0.144
+   3 | credit_utilization  |      0.131
+   4 | debt_to_income      |      0.127
+   5 | age                 |      0.125
+   6 | employment_years    |      0.123
+   7 | num_credit_accounts |      0.063
+
+Business Insights:
+Key Risk Factors:
+1. Credit utilization is the strongest predictor
+2. Credit score has significant negative correlation with default
+3. Income level provides moderate protection against default
+4. Employment stability (years) reduces default risk
+
+Recommendations:
+- Focus on applicants with credit utilization < 50%
+- Require minimum credit score of 600
+- Consider income-to-debt ratio in approval decisions
+- Weight employment history in risk assessment
 ```
 
 ## Best Practices

@@ -194,6 +194,37 @@ def plot_confusion_matrix(y_true, y_pred):
 plot_confusion_matrix(y_test, y_pred)
 ```
 
+**Output:**
+```
+Training samples: 800
+Test samples: 200
+Features: 20
+Classes: 2
+
+Accuracy: 0.825
+
+Performance Metrics:
+Precision: 0.817
+Recall: 0.809
+F1-Score: 0.813
+
+Confusion Matrix:
+                Predicted
+                Neg    Pos
+Actual Neg       89     17
+       Pos       18     76
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.83      0.84      0.84       106
+           1       0.82      0.81      0.81        94
+
+    accuracy                           0.82       200
+   macro avg       0.82      0.82      0.82       200
+weighted avg       0.82      0.82      0.82       200
+```
+
 ### 2. Precision and Recall
 
 These are like the balance between being thorough and being accurate.
@@ -305,6 +336,57 @@ def plot_regression_predictions(y_true, y_pred):
     plt.show()
 
 plot_regression_predictions(y_test, y_pred)
+```
+
+**Output:**
+```
+Dataset Summary:
+Training samples: 800
+Test samples: 200
+Features: 20
+Target range: [-699.25, 895.97]
+Target mean: -1.67
+Target std: 233.65
+
+Model Performance:
+Mean Squared Error: 0.010042
+Root Mean Squared Error (RMSE): 0.100212
+Mean Absolute Error (MAE): 0.077831
+R-squared Score: 1.000000
+
+Residual Analysis:
+Mean: 0.005114
+Std: 0.100081
+Min: -0.281454
+Max: 0.332576
+
+Model Coefficients (first 10):
+Feature | Coefficient
+-------------------------
+X     0 |   69.725351
+X     1 |   18.609466
+X     2 |   86.876709
+X     3 |   98.574173
+X     4 |   -0.000673
+X     5 |    0.003768
+X     6 |   48.384112
+X     7 |    3.102771
+X     8 |   79.997339
+X     9 |   65.165862
+
+Prediction Examples (first 10 test samples):
+True Value | Predicted | Residual
+-----------------------------------
+  -181.086 |  -180.988 |   -0.098
+   -82.667 |   -82.642 |   -0.025
+   260.859 |   260.935 |   -0.076
+   282.385 |   282.442 |   -0.056
+    65.916 |    65.933 |   -0.016
+    99.381 |    99.412 |   -0.031
+  -221.661 |  -221.752 |    0.091
+   206.724 |   206.756 |   -0.032
+  -578.084 |  -578.140 |    0.056
+   223.480 |   223.213 |    0.268
 ```
 
 ### 2. R-squared Score
