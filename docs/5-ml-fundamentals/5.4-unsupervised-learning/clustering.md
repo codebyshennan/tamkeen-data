@@ -2,6 +2,12 @@
 
 Imagine you're organizing a library. You might naturally group books by genre, author, or topic. That's exactly what clustering algorithms do with data - they help us find natural groups or patterns without being told what to look for!
 
+### Video Tutorial: K-means Clustering Explained
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4b5d3muPQmA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*StatQuest: K-means Clustering by Josh Starmer*
+
 ## What is Clustering?
 
 Clustering is like having a smart assistant who can look at a pile of items and automatically organize them into meaningful groups. It's particularly useful when:
