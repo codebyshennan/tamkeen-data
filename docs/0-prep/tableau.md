@@ -38,8 +38,8 @@ Tableau is a powerful tool for creating beautiful, interactive data visualizatio
 
 > **Time needed:** About 15-20 minutes total
 
-{% tabs %}
-{% tab title="Step 1: Create Account" %}
+### Step 1: Create Account
+
 **Create your free Tableau Public account:**
 
 1. Visit [Tableau Public](https://public.tableau.com)
@@ -55,9 +55,9 @@ Tableau is a powerful tool for creating beautiful, interactive data visualizatio
 ![Tableau Sign Up Page Placeholder - Shows the registration form]
 
 > **Tip:** Your username will be part of your public profile URL, so choose something professional!
-{% endtab %}
 
-{% tab title="Step 2: Download Tableau" %}
+### Step 2: Download Tableau
+
 **Download the Tableau Public desktop application:**
 
 1. Visit [Tableau Public Download](https://www.tableau.com/products/public/download)
@@ -69,24 +69,32 @@ Tableau is a powerful tool for creating beautiful, interactive data visualizatio
 
 **Installation:**
 
-**For Windows:**
+<details>
+<summary><b>For Windows</b></summary>
+
 1. Find the downloaded `.exe` file (usually in Downloads folder)
 2. Double-click to run the installer
 3. Follow the installation wizard (just click "Next" through the steps)
 4. Click "Install" and wait for it to finish
 5. Click "Finish"
 
-**For macOS:**
+</details>
+
+<details>
+<summary><b>For macOS</b></summary>
+
 1. Find the downloaded `.dmg` file (usually in Downloads folder)
 2. Double-click to open it
 3. Drag the **Tableau Public** icon to the **Applications** folder
 4. Open Applications and double-click Tableau Public to launch
 5. If macOS asks about security, go to System Preferences → Security & Privacy and click "Open Anyway"
 
-![Tableau Installation Placeholder - Shows installation progress]
-{% endtab %}
+</details>
 
-{% tab title="Step 3: First Launch Setup" %}
+![Tableau Installation Placeholder - Shows installation progress]
+
+### Step 3: First Launch Setup
+
 **Configure Tableau when you first open it:**
 
 1. **Accept License Agreement:**
@@ -110,8 +118,6 @@ Tableau is a powerful tool for creating beautiful, interactive data visualizatio
 ![Tableau Workspace Placeholder - Shows the main Tableau interface]
 
 > **Note:** Tableau will automatically save your workbooks to the cloud. You can access them from any computer by logging into your account!
-{% endtab %}
-{% endtabs %}
 
 ## Data Connection Setup
 

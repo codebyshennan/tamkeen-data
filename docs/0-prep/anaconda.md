@@ -66,8 +66,9 @@ Anaconda is a **free** Python distribution that comes with Python and hundreds o
 
 **Step 2: Install Anaconda**
 
-{% tabs %}
-{% tab title="Windows" %}
+<details>
+<summary><b>Windows Installation</b></summary>
+
 1. Find the downloaded `.exe` file (usually in your Downloads folder)
 2. Double-click to run the installer
 3. If Windows asks for permission, click **"Yes"**
@@ -86,9 +87,12 @@ Anaconda is a **free** Python distribution that comes with Python and hundreds o
 ![Windows Installation Wizard Placeholder - Shows installation options]
 
 > **Note:** If you see a warning about PATH, that's okay - you checked the box to add it automatically.
-{% endtab %}
 
-{% tab title="macOS" %}
+</details>
+
+<details>
+<summary><b>macOS Installation</b></summary>
+
 1. Find the downloaded `.pkg` file (usually in your Downloads folder)
 2. Double-click to open the installer
 3. Follow the installation prompts:
@@ -101,7 +105,7 @@ Anaconda is a **free** Python distribution that comes with Python and hundreds o
 
 ![macOS Installation Wizard Placeholder - Shows installation steps]
 
-**Step 3: Verify Installation**
+**Verify Installation:**
 
 1. Open **Terminal** (Applications → Utilities → Terminal)
 2. Type: `conda --version`
@@ -111,8 +115,8 @@ Anaconda is a **free** Python distribution that comes with Python and hundreds o
 If you see a version number, congratulations - Anaconda is installed! 🎉
 
 > **Troubleshooting:** If you see "command not found", try restarting Terminal or your computer.
-{% endtab %}
-{% endtabs %}
+
+</details>
 
 ### Package Installation
 

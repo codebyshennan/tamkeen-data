@@ -55,8 +55,9 @@ DBeaver is a **free** database tool that lets you connect to and work with datab
 
 ### Step 2: Install DBeaver
 
-{% tabs %}
-{% tab title="Windows" %}
+<details>
+<summary><b>Windows Installation</b></summary>
+
 1. Find the downloaded `.exe` file (usually in your Downloads folder)
 2. Double-click to run the installer
 3. If Windows asks for permission, click **"Yes"**
@@ -68,9 +69,12 @@ DBeaver is a **free** database tool that lets you connect to and work with datab
 6. DBeaver should launch automatically!
 
 ![Windows Installation Wizard Placeholder - Shows the installation steps]
-{% endtab %}
 
-{% tab title="macOS" %}
+</details>
+
+<details>
+<summary><b>macOS Installation</b></summary>
+
 1. Find the downloaded `.dmg` file (usually in your Downloads folder)
 2. Double-click to open it
 3. You'll see a window with the DBeaver icon
@@ -80,8 +84,8 @@ DBeaver is a **free** database tool that lets you connect to and work with datab
 7. If macOS asks about security, go to **System Preferences → Security & Privacy** and click **"Open Anyway"**
 
 ![macOS DMG Window Placeholder - Shows dragging DBeaver to Applications]
-{% endtab %}
-{% endtabs %}
+
+</details>
 
 ## Initial Setup
 
@@ -126,8 +130,9 @@ When you first open DBeaver, you might see a few popups:
 
 ![New Connection Dialog Placeholder - Shows the database selection screen]
 
-{% tabs %}
-{% tab title="SQLite (Recommended for Beginners)" %}
+<details>
+<summary><b>SQLite (Recommended for Beginners)</b></summary>
+
 **SQLite is perfect for learning!** It's a simple database that stores everything in a single file on your computer.
 
 1. In the connection window, find and click **"SQLite"**
@@ -141,9 +146,12 @@ When you first open DBeaver, you might see a few popups:
 ![SQLite Connection Setup Placeholder - Shows SQLite connection configuration]
 
 > **Tip:** SQLite databases are just files on your computer - you can easily copy, backup, or delete them!
-{% endtab %}
 
-{% tab title="PostgreSQL (If You Have a Server)" %}
+</details>
+
+<details>
+<summary><b>PostgreSQL (If You Have a Server)</b></summary>
+
 **PostgreSQL** is a more advanced database that runs on a server. You'll need connection details from your instructor or database administrator.
 
 1. In the connection window, find and click **"PostgreSQL"**
@@ -160,8 +168,8 @@ When you first open DBeaver, you might see a few popups:
 ![PostgreSQL Connection Setup Placeholder - Shows PostgreSQL connection form]
 
 > **Note:** If you don't have a PostgreSQL server set up, start with SQLite instead!
-{% endtab %}
-{% endtabs %}
+
+</details>
 
 ## Basic Configuration
 
