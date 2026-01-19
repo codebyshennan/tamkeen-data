@@ -1,8 +1,34 @@
 # Data Analysis with Pandas
 
+> **Time needed:** 5-6 hours to complete this module
+
 ## What is Pandas?
 
 Pandas is your best friend when it comes to working with data in Python! Think of it as Excel on steroids - it's a powerful library that makes data manipulation and analysis much easier.
+
+### Video Tutorial: Introduction to Pandas
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Iqjy9UqKKuo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*Data Analysis with Python and Pandas Tutorial Introduction by sentdex*
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZyhV4-qRgG4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*Pandas Tutorial for Beginners - Data Analysis for Machine Learning with Python*
+
+> **Note:** The name "Pandas" comes from "Panel Data", but don't worry about that - just think of it as your go-to tool for working with tables of data in Python!
+
+## Prerequisites
+
+Before starting this module, you should have:
+
+- Completed the "Introduction to Python" module
+- Completed the "Data Foundation with NumPy" module (Pandas is built on NumPy)
+- Basic understanding of Python data structures (lists, dictionaries)
+- Familiarity with working with spreadsheets (Excel, Google Sheets) is helpful
+- Comfortable with basic data analysis concepts
+
+> **Tip:** If you've used Excel before, you'll find many Pandas operations familiar! Pandas DataFrames work a lot like Excel spreadsheets, but with the power of Python programming.
 
 {% stepper %}
 {% step %}
@@ -162,4 +188,32 @@ In the following sections, we'll dive deeper into:
 
 Each section will include practical examples and clear explanations to help you master Pandas step by step!
 
-Remember: The best way to learn Pandas is by practicing. Try out the examples in your own Python environment as you go through each section.
+## What You'll Be Able to Do After This Module
+
+By the end of this module, you'll be able to:
+
+- Read data from various file formats (CSV, Excel, JSON, etc.)
+- Explore and understand your data quickly
+- Clean and transform messy data
+- Filter, sort, and group data efficiently
+- Perform calculations and aggregations
+- Combine data from multiple sources
+- Prepare data for analysis and visualization
+
+> **Tip:** Pandas is the most important library for data analysis in Python. Master this, and you'll be able to handle most real-world data analysis tasks!
+
+## Remember
+
+The best way to learn Pandas is by practicing. Try out the examples in your own Python environment as you go through each section.
+
+> **Note:** Don't try to memorize every Pandas function - focus on understanding the core concepts. You can always look up specific functions when you need them. The key is understanding how to think about data manipulation.
+
+## Next Steps
+
+After completing this module, you'll move on to:
+
+1. **Data Wrangling** - Apply Pandas to real-world data cleaning tasks
+2. **Exploratory Data Analysis** - Use Pandas to discover insights in data
+3. **Data Visualization** - Visualize your Pandas analysis results
+
+> **Important:** Pandas is used in almost every data science project. Make sure you're comfortable with the basics before moving on. Practice with different datasets to build your confidence!

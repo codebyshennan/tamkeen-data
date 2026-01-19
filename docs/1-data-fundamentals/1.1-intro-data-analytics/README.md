@@ -23,7 +23,7 @@ Data analytics is like being a detective with numbers. It's the process of exami
 
 ### The Data Analytics Process
 
-> Don't worry if you don't understand the code, this is meant to warm you up on what to expect in the course, and to give you some insights on how things are done in the industry.
+> **Important:** Don't worry if you don't understand the code examples yet! These are meant to give you a preview of what to expect in the course and show you how things are done in the industry. We'll teach you everything step by step as we go.
 
 {% stepper %}
 {% step %}
@@ -89,9 +89,9 @@ Say we've decided on the data structure that we would want to work with. The nex
 - Website analytics
 - Social media mentions etc.
 
-**Data Processing:
+**Data Processing:**
 
-These raw (and often big) data comes in various formats, e.g. for dates, people have spent countless of hours arguing whether `dates` are represented in `MMDDYYYY` or `DDMMYYYY`. Programmes have other ways of recognizing them as `datetime` or `timestamp`.
+These raw (and often big) data comes in various formats. For example, for dates, people have spent countless hours arguing whether dates are represented in `MMDDYYYY` or `DDMMYYYY`. Programs have other ways of recognizing them as `datetime` or `timestamp`.
 
 We might also want to organize information by grouping (categorizing information) and aggregating (arithmetic operations to reduce many numbers into one). Sometimes, we might create new "features" and derived metrics by combing different metrics into one.
 
@@ -710,3 +710,27 @@ This chapter will cover:
    - Risk management
 
 Each section includes practical examples, hands-on exercises, and real-world case studies to help you understand these concepts better. The focus is on building both theoretical knowledge and practical skills that are directly applicable in the industry.
+
+## What You'll Be Able to Do After This Module
+
+By the end of this module, you'll be able to:
+
+- Explain the difference between data analytics and data science
+- Understand the data analytics lifecycle and its key stages
+- Identify different types of data analytics (descriptive, diagnostic, predictive, prescriptive)
+- Recognize common tools used in data analytics and data science
+- Understand the importance of data privacy and security
+- Explain how data is collected, processed, and analyzed in real-world scenarios
+
+> **Tip:** As you go through this module, try to think of examples from your own life or work where data analytics could be useful. This will help you understand the concepts better!
+
+## Next Steps
+
+After completing this module, you'll move on to:
+
+1. **Introduction to Python** - Learn the programming language that powers data science
+2. **Introduction to Statistics** - Build the statistical foundation needed for analysis
+3. **Data Foundation with NumPy** - Master numerical computing
+4. **Data Analysis with Pandas** - Learn to manipulate and analyze data efficiently
+
+> **Note:** Each module builds on the previous one, so make sure you understand the concepts here before moving forward. Take your time and don't rush!

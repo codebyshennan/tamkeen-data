@@ -1,6 +1,21 @@
 # Introduction to Statistics
 
+> **Time needed:** 5-6 hours to complete this module
+
 Have you ever wondered how Netflix predicts what shows you might like? Or how weather forecasts are made? Welcome to the world of statistics - your key to understanding data and making informed decisions!
+
+> **Note:** Statistics might sound intimidating, but it's really just about making sense of numbers. We'll start with simple concepts and build up gradually. You don't need to be a math whiz to succeed here!
+
+## Prerequisites
+
+Before starting this module, you should have:
+
+- Completed the "Introduction to Python" module (or basic Python knowledge)
+- Basic math skills (addition, subtraction, multiplication, division)
+- Comfortable with basic concepts like averages and percentages
+- No advanced math required (we'll explain everything you need)
+
+> **Tip:** If you've ever calculated your average grade or compared prices at the store, you've already done statistics! We're just going to make it more formal and powerful.
 
 ## What is Statistics?
 
@@ -83,8 +98,31 @@ This chapter will take you on an exciting journey through:
    - Understanding relationships
    - Making predictions
 
+## What You'll Be Able to Do After This Module
+
+By the end of this module, you'll be able to:
+
+- Calculate and interpret basic statistical measures (mean, median, mode, standard deviation)
+- Understand probability concepts and how they apply to real-world situations
+- Work with different types of probability distributions
+- Analyze relationships between two variables
+- Make informed decisions based on statistical analysis
+- Apply statistical thinking to data science problems
+
+> **Tip:** Statistics is everywhere! As you learn, try to spot statistical concepts in news articles, sports, weather reports, and everyday life. This will help solidify your understanding.
+
 ## Remember
 
 Statistics isn't just about numbers - it's about telling stories with data. As you learn, you'll develop a new way of seeing the world, making decisions, and solving problems.
+
+> **Note:** Don't worry if some concepts seem abstract at first. With practice and real-world examples, they'll become clearer. Take your time with each section.
+
+## Next Steps
+
+After completing this module, you'll move on to:
+
+1. **Data Foundation with NumPy** - Apply statistical concepts using Python
+2. **Data Analysis with Pandas** - Use statistics to analyze real datasets
+3. **Data Wrangling** - Clean and prepare data for statistical analysis
 
 Let's begin this exciting journey together!

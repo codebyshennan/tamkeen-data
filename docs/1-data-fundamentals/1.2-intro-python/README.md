@@ -1,8 +1,23 @@
 # Introduction to Python for Data Science
 
+> **Time needed:** 4-5 hours to complete this module
+
 ## Overview
 
 Welcome to Python! Whether you're new to programming or coming from another language, Python is an excellent choice for your data science journey. Let's understand why Python has become the de facto language for data science and analytics.
+
+> **Note:** If you've never programmed before, don't worry! Python is known for being beginner-friendly, and we'll guide you through everything step by step.
+
+## Prerequisites
+
+Before starting this module, you should have:
+
+- Completed the "Introduction to Data Analytics" module (or have basic understanding of what data analytics is)
+- A computer with Python installed (we'll help you set this up if needed)
+- Basic computer skills (opening files, using a text editor)
+- No prior programming experience required
+
+> **Tip:** Python reads almost like English! If you can read this sentence, you can learn Python. The syntax is designed to be intuitive and beginner-friendly.
 
 {% stepper %}
 {% step %}
@@ -469,6 +484,20 @@ numeric_summary = analyzer.summarize_numeric(df['sales'])
 {% endstep %}
 {% endstepper %}
 
+## What You'll Be Able to Do After This Module
+
+By the end of this module, you'll be able to:
+
+- Write basic Python programs for data analysis
+- Understand Python's core data types and structures
+- Use control flow (if statements, loops) to process data
+- Create and use functions to organize your code
+- Work with Python modules and packages
+- Apply object-oriented programming concepts to data science tasks
+- Read and understand Python code written by others
+
+> **Tip:** Practice is key! Try writing your own code examples as you go through each section. Don't just read - code along!
+
 ## Ready to Start?
 
 Remember these data science best practices:
@@ -479,5 +508,15 @@ Remember these data science best practices:
 - Write modular, reusable code
 - Test your functions with sample data
 - Consider performance for large datasets
+
+> **Note:** Don't try to memorize everything at once. Focus on understanding the concepts, and the syntax will become natural with practice.
+
+## Next Steps
+
+After completing this module, you'll move on to:
+
+1. **Introduction to Statistics** - Build the statistical foundation needed for analysis
+2. **Data Foundation with NumPy** - Master numerical computing with Python
+3. **Data Analysis with Pandas** - Learn to manipulate and analyze data efficiently
 
 Let's begin your Python data science journey!
