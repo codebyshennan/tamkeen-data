@@ -4,6 +4,12 @@
 
 Cross-validation is a resampling method that uses different portions of the data to test and train a model on different iterations.
 
+### Video Tutorial: Cross-Validation Explained
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/fSytzGwwBVw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*StatQuest: Cross Validation by Josh Starmer*
+
 ### Why Cross-Validation Matters
 
 Think of cross validation like a student taking multiple practice tests before the final exam. It helps us:

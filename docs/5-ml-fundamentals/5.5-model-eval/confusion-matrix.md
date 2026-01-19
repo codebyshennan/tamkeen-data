@@ -4,6 +4,12 @@
 
 A confusion matrix is a fundamental tool in machine learning for evaluating classification models. It provides a detailed breakdown of model predictions versus actual values, helping to understand model performance across different classes.
 
+### Video Tutorial: Confusion Matrix Explained
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Kdsp6soqA7o" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*StatQuest: Machine Learning Fundamentals: The Confusion Matrix by Josh Starmer*
+
 ## What is a Confusion Matrix?
 
 A confusion matrix is a table that describes the performance of a classification model by comparing predicted values with actual values. Think of it as a "report card" for your model that shows exactly where it's getting things right and wrong.

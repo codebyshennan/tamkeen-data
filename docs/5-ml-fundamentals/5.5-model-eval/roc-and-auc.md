@@ -4,6 +4,12 @@
 
 The Receiver Operating Characteristic (ROC) curve and Area Under the Curve (AUC) are powerful tools for evaluating binary classification models. They provide a comprehensive view of model performance across different classification thresholds and help us understand the trade-offs between sensitivity and specificity.
 
+### Video Tutorial: ROC and AUC Explained
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4jRBRDbJemM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*StatQuest: ROC and AUC, Clearly Explained! by Josh Starmer*
+
 ## Real-World Analogies
 
 ### The Airport Security Analogy

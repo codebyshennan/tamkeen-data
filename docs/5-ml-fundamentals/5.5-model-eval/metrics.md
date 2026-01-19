@@ -4,6 +4,12 @@
 
 Think of evaluation metrics as the "scorecard" or "report card" for your machine learning model. Just like how a teacher uses different tests and assignments to evaluate a student's performance, we use different metrics to evaluate how well our model is performing.
 
+### Video Tutorial: Model Evaluation Metrics
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Kdsp6soqA7o" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*StatQuest: Machine Learning Fundamentals: The Confusion Matrix by Josh Starmer*
+
 ### Why Metrics Matter
 
 Imagine you're a doctor diagnosing patients. You wouldn't just look at one symptom - you'd consider multiple factors like temperature, blood pressure, and lab results. Similarly, in machine learning, we need multiple metrics to get a complete picture of our model's performance.

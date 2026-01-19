@@ -4,6 +4,12 @@
 
 Precision and Recall are fundamental metrics in machine learning for evaluating classification models. They provide insights into a model's performance in terms of accuracy and completeness.
 
+### Video Tutorial: Precision and Recall Explained
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/vP06aMoz4v8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*StatQuest: Machine Learning Fundamentals: Sensitivity and Specificity by Josh Starmer*
+
 ## What are Precision and Recall?
 
 ![Precision-Recall Curve](assets/precision_recall_curve.png)
