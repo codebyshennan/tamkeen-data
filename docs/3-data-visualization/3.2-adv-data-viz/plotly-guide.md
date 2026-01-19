@@ -4,6 +4,12 @@
 
 Plotly transforms static visualizations into dynamic, interactive web experiences. Think of it as giving your audience a visualization they can explore, not just view.
 
+### Video Tutorial: Plotly Interactive Visualization
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/GGL6U0k8WYA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*Plotly Express - Interactive Visualization made easy in Python*
+
 ```yaml
 Key Features:
 ┌─────────────────────────┐
@@ -135,6 +141,9 @@ scatter_fig = create_interactive_scatter(
 )
 ```
 
+**Output (Animation Frames):**
+![Animated Scatter Frames](assets/plotly_animated_scatter_frames.png)
+
 ### 2. Time Series Visualization
 ```python
 def create_time_series_plot(data, x_col, y_col, 
@@ -193,6 +202,9 @@ time_fig = create_time_series_plot(
     group_col='continent'
 )
 ```
+
+**Output (with Range Slider):**
+![Time Series with Range Slider](assets/plotly_timeseries_rangeslider.png)
 
 ## 📈 Statistical Visualizations
 
@@ -277,6 +289,26 @@ dist_fig = create_distribution_dashboard(
     group_col='continent'
 )
 ```
+
+**Output:**
+![Distribution Dashboard](assets/plotly_distribution_dashboard.png)
+
+### Additional Interactive Features
+
+**3D Scatter Plot:**
+![3D Scatter](assets/plotly_3d_scatter.png)
+
+**Dashboard Layout:**
+![Dashboard Layout](assets/plotly_dashboard_layout.png)
+
+**Interactive Hover Information:**
+![Hover Example](assets/plotly_hover_example.png)
+
+**Hierarchical Visualization (Sunburst-style):**
+![Sunburst Style](assets/plotly_sunburst_style.png)
+
+**Theme Comparison:**
+![Theme Comparison](assets/plotly_theme_comparison.png)
 
 ## 🎨 Advanced Features
 

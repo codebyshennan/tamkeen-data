@@ -12,7 +12,7 @@
    - Select the sheet as your data source
 4. Click "Add" to connect the data
 
-[Screenshot: Looker Studio Start Page]
+![Looker Studio Start Page](assets/looker_start_page.png)
 *Caption: The Looker Studio start page showing the data source connection options.*
 
 ### 2. Understanding the Looker Studio Workspace
@@ -42,7 +42,7 @@ The Looker Studio interface consists of several key areas:
    - Data source settings
    - Filter controls
 
-[Screenshot: Looker Studio Workspace]
+![Looker Studio Workspace](assets/looker_workspace.png)
 *Caption: The Looker Studio workspace showing key areas and their functions.*
 
 ## Project Overview
@@ -54,7 +54,7 @@ In this comprehensive case study, we'll analyze retail data to drive business de
 - A product profitability analysis
 - Interactive filters and controls
 
-[Screenshot: Final Dashboard Preview]
+![Final Dashboard Preview](assets/tableau_final_dashboard.png)
 *Caption: The complete dashboard we'll build, showing sales trends, geographical distribution, and product performance.*
 
 ## Dataset Introduction
@@ -66,7 +66,7 @@ We'll utilize the "Sample - Superstore" dataset adapted for Looker Studio. This 
 - It's easy to import into Google Sheets
 - It covers multiple analysis dimensions
 
-[Screenshot: Sample Superstore Data]
+![Sample Superstore Data](assets/tableau_data_source.png)
 *Caption: The Sample Superstore dataset in Google Sheets, showing the tables and their relationships.*
 
 ### Data Structure Overview
@@ -126,7 +126,7 @@ Data Structure:
    - Tracking Period: Full dataset
 ```
 
-[Screenshot: Data Source Configuration]
+![Data Source Configuration](assets/looker_data_source.png)
 *Caption: The data source configuration in Looker Studio showing field properties.*
 
 ## Step-by-Step Visualization Guide
@@ -144,7 +144,7 @@ Data Structure:
    - Add a title
    - Configure tooltips
 
-[Screenshot: First Chart Creation]
+![First Chart Creation](assets/tableau_first_chart.png)
 *Caption: Creating a basic bar chart showing sales by category.*
 
 ### 2. Time Series Analysis
@@ -163,7 +163,7 @@ Data Structure:
    - Configure date range
    - Add trend lines
 
-[Screenshot: Time Series Setup]
+![Time Series Setup](assets/looker_timeseries.png)
 *Caption: Setting up a time series chart with multiple metrics.*
 
 ### 3. Geographic Analysis
@@ -182,7 +182,7 @@ Data Structure:
    - Configure tooltips
    - Set zoom level
 
-[Screenshot: Map Creation]
+![Map Creation](assets/tableau_map.png)
 *Caption: Creating a geographic map showing sales by state.*
 
 ### 4. Building a Dashboard
@@ -195,7 +195,7 @@ Data Structure:
    - Configure cross-filtering
    - Add navigation between pages
 
-[Screenshot: Dashboard Building]
+![Dashboard Building](assets/looker_dashboard.png)
 *Caption: Building a dashboard with multiple visualizations and interactive elements.*
 
 ## Advanced Features
@@ -249,7 +249,7 @@ SUM(Sales) /
 (SELECT SUM(Sales) FROM Orders)
 ```
 
-[Screenshot: Advanced Calculations]
+![Advanced Calculations](assets/looker_calculations.png)
 *Caption: Creating and using advanced calculated fields in Looker Studio.*
 
 ### 2. Parameters and Controls
@@ -283,7 +283,7 @@ CASE
 END
 ```
 
-[Screenshot: Interactive Controls]
+![Interactive Controls](assets/looker_controls.png)
 *Caption: Setting up and configuring interactive controls in the dashboard.*
 
 ## Data Blending and Integration
@@ -312,7 +312,7 @@ LEFT JOIN Customers c ON o.CustomerID = c.CustomerID
 LEFT JOIN Returns r ON o.OrderID = r.OrderID
 ```
 
-[Screenshot: Data Blending]
+![Data Blending](assets/looker_blending.png)
 *Caption: Setting up complex data blends between multiple sources.*
 
 ### 2. Data Source Management
@@ -332,7 +332,7 @@ LEFT JOIN Returns r ON o.OrderID = r.OrderID
    - Real-time updates
    - Incremental refresh
 
-[Screenshot: Data Source Management]
+![Data Source Management](assets/looker_source_mgmt.png)
 *Caption: Managing data sources and refresh settings.*
 
 ## Advanced Visualizations
@@ -353,7 +353,7 @@ LEFT JOIN Returns r ON o.OrderID = r.OrderID
    - Tree maps
    - Sankey diagrams
 
-[Screenshot: Advanced Charts]
+![Advanced Charts](assets/powerbi_advanced_charts.png)
 *Caption: Creating and customizing advanced chart types.*
 
 ### 2. Interactive Features
@@ -370,7 +370,7 @@ LEFT JOIN Returns r ON o.OrderID = r.OrderID
    - Responsive layouts
    - Mobile optimization
 
-[Screenshot: Interactive Features]
+![Interactive Features](assets/looker_interactivity.png)
 *Caption: Implementing interactive features in visualizations.*
 
 ## Collaboration and Sharing
@@ -389,7 +389,7 @@ LEFT JOIN Returns r ON o.OrderID = r.OrderID
    - Group access
    - Audit logs
 
-[Screenshot: Collaboration Features]
+![Collaboration Features](assets/tableau_collaboration.png)
 *Caption: Team collaboration features in Looker Studio.*
 
 ### 2. Advanced Sharing Options
@@ -407,7 +407,7 @@ LEFT JOIN Returns r ON o.OrderID = r.OrderID
    - Data-driven triggers
    - Custom notifications
 
-[Screenshot: Sharing Options]
+![Sharing Options](assets/looker_sharing.png)
 *Caption: Advanced sharing and distribution options.*
 
 ## Performance Optimization
@@ -426,7 +426,7 @@ LEFT JOIN Returns r ON o.OrderID = r.OrderID
    - Cache hit rates
    - Refresh performance
 
-[Screenshot: Performance Monitoring]
+![Performance Monitoring](assets/looker_performance.png)
 *Caption: Monitoring and optimizing dashboard performance.*
 
 ### 2. Dashboard Optimization
@@ -443,7 +443,7 @@ LEFT JOIN Returns r ON o.OrderID = r.OrderID
    - Mobile-specific views
    - Offline capabilities
 
-[Screenshot: Dashboard Optimization]
+![Dashboard Optimization](assets/looker_optimization.png)
 *Caption: Optimizing dashboards for performance and mobile use.*
 
 ## AI and Automation
@@ -462,7 +462,7 @@ LEFT JOIN Returns r ON o.OrderID = r.OrderID
    - Data-driven actions
    - Scheduled tasks
 
-[Screenshot: AI Features]
+![AI Features](assets/looker_ai.png)
 *Caption: Using AI-powered features in Looker Studio.*
 
 ## Next Steps

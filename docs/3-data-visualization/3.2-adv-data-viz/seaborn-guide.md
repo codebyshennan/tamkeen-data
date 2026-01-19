@@ -4,6 +4,12 @@
 
 Seaborn is your statistical visualization powerhouse - think of it as Matplotlib with a PhD in Statistics. It's designed to make complex statistical visualizations both beautiful and informative, while requiring minimal code.
 
+### Video Tutorial: Seaborn Data Visualization
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/6GUZXDef2U0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*Seaborn Tutorial - Data Visualization in Python*
+
 ```yaml
 Key Advantages:
 ┌─────────────────────────┐
@@ -127,6 +133,9 @@ def plot_distribution_suite(data, variable):
 dist_fig = plot_distribution_suite(tips, "total_bill")
 ```
 
+**Output:**
+![Distribution Suite](assets/seaborn_distribution_suite.png)
+
 ### 2. Categorical Distributions
 ```python
 def plot_categorical_analysis(data, cat_var, num_var):
@@ -183,6 +192,9 @@ def plot_categorical_analysis(data, cat_var, num_var):
 # Example usage
 cat_fig = plot_categorical_analysis(tips, "day", "total_bill")
 ```
+
+**Output:**
+![Categorical Analysis](assets/seaborn_categorical_analysis.png)
 
 ## 📈 Relationship Analysis
 
@@ -247,6 +259,9 @@ def create_scatter_analysis(data, x_var, y_var, hue_var=None):
 scatter_fig = create_scatter_analysis(tips, "total_bill", "tip", "time")
 ```
 
+**Output:**
+![Scatter Analysis](assets/seaborn_scatter_analysis.png)
+
 ### 2. Complex Relationships
 ```python
 def analyze_complex_relationships(data, x_var, y_var, cat_vars):
@@ -284,6 +299,12 @@ pair_g, facet_g = analyze_complex_relationships(
     tips, "total_bill", "tip", ["time", "day"]
 )
 ```
+
+**Output - Pair Grid:**
+![Pair Plot](assets/seaborn_pairplot.png)
+
+**Output - Facet Grid:**
+![Facet Grid](assets/seaborn_facetgrid.png)
 
 ## 🎨 Matrix Visualizations
 
@@ -323,6 +344,29 @@ def create_correlation_analysis(data, method='pearson'):
 # Example usage
 corr_fig = create_correlation_analysis(tips)
 ```
+
+**Output - Heatmap:**
+![Correlation Heatmap](assets/seaborn_correlation_heatmap.png)
+
+**Output - Clustermap:**
+![Clustermap](assets/seaborn_clustermap.png)
+
+### Additional Visualization Examples
+
+**Bar Plot with Error Bars:**
+![Bar Plot](assets/seaborn_barplot.png)
+
+**Count Plot:**
+![Count Plot](assets/seaborn_countplot.png)
+
+**Joint Plot:**
+![Joint Plot](assets/seaborn_jointplot.png)
+
+**Time Series Heatmap:**
+![Flights Heatmap](assets/seaborn_flights_heatmap.png)
+
+**Line Plot:**
+![Line Plot](assets/seaborn_lineplot.png)
 
 ## 🎯 Best Practices
 

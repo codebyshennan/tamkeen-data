@@ -29,18 +29,18 @@ Tableau is a powerful data visualization tool that enables interactive analytics
 ```yaml
 Steps:
 1. Launch Tableau Desktop
-   [Screenshot: Tableau Start Page]
+   ![Tableau Start Page](assets/tableau_start_page.png)
    - Look for the Connect pane on the left
    - Under Saved Data Sources, click "Sample - Superstore"
 
 2. Data Source Preview
-   [Screenshot: Data Source Tab]
+   ![Data Source Tab](assets/tableau_data_source.png)
    - Review the data structure
    - Note the dimensions (blue) and measures (green)
    - Check the first 1,000 rows of data
 
 3. Create New Worksheet
-   [Screenshot: Blank Worksheet]
+   ![Blank Worksheet](assets/tableau_blank_worksheet.png)
    - Click the "New Worksheet" button
    - Familiarize yourself with the workspace layout
 ```
@@ -51,13 +51,13 @@ Steps:
 Example: Sales by Category Bar Chart
 Steps:
 1. Basic Chart Creation
-   [Screenshot: Drag and Drop Fields]
+   ![Drag and Drop Fields](assets/tableau_drag_drop.png)
    - Drag "Category" to Rows shelf
    - Drag "Sales" to Columns shelf
    - Tableau creates a horizontal bar chart
 
 2. Chart Customization
-   [Screenshot: Chart Formatting]
+   ![Chart Formatting](assets/tableau_chart_formatting.png)
    - Click "Show Me" panel
    - Select "Bar Chart" if not already selected
    - Sort bars by descending sales
@@ -65,7 +65,7 @@ Steps:
    - Add data labels
 
 3. Formatting
-   [Screenshot: Format Pane]
+   ![Format Pane](assets/tableau_format_pane.png)
    - Adjust axis labels
    - Modify colors
    - Add title
@@ -77,20 +77,20 @@ Steps:
 ```yaml
 Steps:
 1. Adding Filters
-   [Screenshot: Filter Shelf]
+   ![Filter Shelf](assets/tableau_filter_shelf.png)
    - Drag "Region" to Filters shelf
    - Select regions to include
    - Apply filter to view
 
 2. Creating Parameters
-   [Screenshot: Parameter Creation]
+   ![Parameter Creation](assets/tableau_parameter.png)
    - Right-click in Data pane
    - Select "Create Parameter"
    - Configure parameter properties
    - Add parameter control to view
 
 3. Dashboard Actions
-   [Screenshot: Dashboard Actions]
+   ![Dashboard Actions](assets/tableau_dashboard_actions.png)
    - Create new dashboard
    - Add multiple views
    - Set up filter actions
@@ -102,21 +102,21 @@ Steps:
 ```yaml
 Steps:
 1. Dashboard Layout
-   [Screenshot: Dashboard Workspace]
+   ![Dashboard Workspace](assets/tableau_dashboard_workspace.png)
    - Create new dashboard
    - Add multiple worksheets
    - Arrange views in layout
    - Add title and text boxes
 
 2. Adding Interactivity
-   [Screenshot: Dashboard Interactivity]
+   ![Dashboard Interactivity](assets/tableau_dashboard_interactivity.png)
    - Add filter controls
    - Set up dashboard actions
    - Configure parameter controls
    - Add navigation buttons
 
 3. Final Touches
-   [Screenshot: Final Dashboard]
+   ![Final Dashboard](assets/tableau_final_dashboard.png)
    - Add legends
    - Format colors
    - Adjust spacing
@@ -130,21 +130,21 @@ Steps:
 ```yaml
 Components:
 1. Sales Trend
-   [Screenshot: Line Chart]
+   ![Line Chart](assets/tableau_line_chart.png)
    - Order Date (Month) on Columns
    - Sales on Rows
    - Add trend line
    - Format date display
 
 2. Geographic Analysis
-   [Screenshot: Map View]
+   ![Map View](assets/tableau_map.png)
    - State on Map
    - Sales on Color
    - Add state labels
    - Configure tooltips
 
 3. Category Breakdown
-   [Screenshot: Bar Chart]
+   ![Bar Chart](assets/tableau_bar_chart.png)
    - Category on Rows
    - Sales on Columns
    - Sort by sales
@@ -156,21 +156,21 @@ Components:
 ```yaml
 Components:
 1. Profit by Sub-Category
-   [Screenshot: Heat Map]
+   ![Heat Map](assets/tableau_heatmap.png)
    - Sub-Category on Columns
    - Category on Rows
    - Profit on Color
    - Add profit values
 
 2. Discount Impact
-   [Screenshot: Scatter Plot]
+   ![Scatter Plot](assets/tableau_scatter.png)
    - Discount on X-axis
    - Profit Ratio on Y-axis
    - Add trend line
    - Create bins
 
 3. Regional Performance
-   [Screenshot: Map with Indicators]
+   ![Map with Indicators](assets/tableau_advanced_map.png)
    - Region on Map
    - Profit on Color
    - Add reference lines
@@ -184,7 +184,7 @@ Components:
 ```yaml
 Examples:
 1. Profit Ratio
-   [Screenshot: Calculation Editor]
+   ![Calculation Editor](assets/tableau_calculated_field.png)
    Formula: SUM([Profit])/SUM([Sales])
    Steps:
    - Right-click in Data pane
@@ -193,7 +193,7 @@ Examples:
    - Name the calculation
 
 2. Year-over-Year Growth
-   [Screenshot: Table Calculation]
+   ![Table Calculation](assets/tableau_table_calc.png)
    Formula: (SUM([Sales]) - LOOKUP(SUM([Sales]), -1))/ABS(LOOKUP(SUM([Sales]), -1))
    Steps:
    - Create calculation
@@ -206,7 +206,7 @@ Examples:
 ```yaml
 Examples:
 1. Fixed LOD
-   [Screenshot: LOD Editor]
+   ![LOD Editor](assets/tableau_lod.png)
    Formula: {FIXED [Category] : SUM([Sales])}
    Steps:
    - Create calculated field
@@ -214,7 +214,7 @@ Examples:
    - Apply to visualization
 
 2. Include LOD
-   [Screenshot: LOD in View]
+   ![LOD in View](assets/tableau_lod.png)
    Formula: {INCLUDE [Region] : AVG([Profit])}
    Steps:
    - Create calculation
