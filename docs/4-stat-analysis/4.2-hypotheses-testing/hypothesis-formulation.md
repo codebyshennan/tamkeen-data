@@ -4,6 +4,16 @@
 
 A hypothesis is your scientific roadmap—it guides your investigation and helps you reach meaningful conclusions. Whether you're testing a new drug, optimizing a website, or studying customer behavior, well-formulated hypotheses are essential for discovery and sound decision-making.
 
+### Video Tutorial: Hypothesis Testing Explained
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0oc49DyA3hU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*StatQuest: Hypothesis Testing and The Null Hypothesis, Clearly Explained!!! by Josh Starmer*
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/5koKb5B_YWo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*StatQuest: Alternative Hypotheses: Main Ideas!!! by Josh Starmer*
+
 ## 2. The Anatomy of a Hypothesis
 
 ### Null Hypothesis (H₀)

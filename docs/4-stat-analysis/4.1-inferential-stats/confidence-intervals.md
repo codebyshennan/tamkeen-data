@@ -4,6 +4,12 @@
 
 Imagine you're a weather forecaster trying to predict tomorrow's temperature. Instead of saying "it will be exactly 75°F," it's more realistic to say "it will be between 73°F and 77°F." That's the essence of confidence intervals - they help us express uncertainty in our estimates!
 
+### Video Tutorial: Confidence Intervals Explained
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/TqOeMYtOc1w" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*StatQuest: Confidence Intervals, Clearly Explained!!! by Josh Starmer*
+
 ![Confidence Interval Concept](assets/confidence_interval_diagram.png)
 *Figure 1: The point estimate (red line) is surrounded by a range (blue shaded area) that likely contains the true parameter value.*
 

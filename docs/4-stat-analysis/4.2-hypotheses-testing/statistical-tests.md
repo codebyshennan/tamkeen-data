@@ -4,6 +4,16 @@
 
 Statistical tests are essential tools for analyzing data. They help you determine whether observed patterns, differences, or relationships in your data are likely to be real or just due to random chance. By using the right statistical test, you can make informed, evidence-based decisions rather than relying on intuition alone.
 
+### Video Tutorial: Statistical Tests Explained
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/NF5_btOaCig" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*StatQuest: Using Linear Models for t-tests and ANOVA, Clearly Explained!!! by Josh Starmer*
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7_cs1YlZoug" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*Chi-Square Tests: Crash Course Statistics #29*
+
 ## How to Choose the Right Statistical Test
 
 Choosing the correct test depends on your research question, the type of data you have, and the assumptions your data meets. Use the decision tree below to guide your choice:

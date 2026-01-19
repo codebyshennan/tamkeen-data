@@ -4,6 +4,12 @@
 
 Imagine you're a detective trying to solve a mystery. You have a default theory (null hypothesis), but you've found some evidence that might suggest otherwise. How strong does this evidence need to be to convince you to reject your default theory? That's where p-values come in!
 
+### Video Tutorial: P-values Explained
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/UFhJefdVCjE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*StatQuest: P-values, Clearly Explained by Josh Starmer*
+
 ![P-value Concept](assets/p_value_concept_diagram.png)
 *Figure 1: Visual representation of p-value concept. The shaded area represents the probability of observing results as extreme or more extreme than what we got, assuming the null hypothesis is true.*
 

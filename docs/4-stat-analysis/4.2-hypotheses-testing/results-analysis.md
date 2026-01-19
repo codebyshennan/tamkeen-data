@@ -4,6 +4,16 @@
 
 Think of results analysis as being a detective with data - it's not just about finding clues (statistical significance) but understanding what they mean for the case (practical significance). Whether you're analyzing A/B tests, research studies, or business experiments, proper results analysis helps you turn raw numbers into actionable insights!
 
+### Video Tutorial: Results Analysis and Statistical Significance
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/UFhJefdVCjE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*StatQuest: P-values, Clearly Explained by Josh Starmer*
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/TqOeMYtOc1w" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*StatQuest: Confidence Intervals, Clearly Explained!!! by Josh Starmer*
+
 ## Understanding Test Results
 
 ### 1. P-values and Statistical Significance

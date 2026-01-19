@@ -6,6 +6,12 @@
 
 Imagine you're baking a cake. You need a recipe, the right ingredients, and a plan for how to mix and bake everything. Experimental design is like a recipe for scientific discovery: it's a plan that helps you test ideas in a way that gives you reliable answers. If you skip steps or mix things up, your results might not turn out right!
 
+### Video Tutorial: Experimental Design
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0oc49DyA3hU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*StatQuest: Hypothesis Testing and The Null Hypothesis, Clearly Explained!!! by Josh Starmer*
+
 This guide will help you understand the basics of experimental design, with simple explanations, real-world examples, and easy-to-follow code. Whether you're new to experiments or just want a refresher, you'll find practical tips and best practices here.
 
 ![Scientific Method Flowchart](assets/scientific_method.png)
