@@ -1,33 +1,55 @@
 # Getting Started with Apache Airflow
 
-Apache Airflow is a platform to programmatically author, schedule, and monitor workflows. It's essential for data engineering tasks and ETL processes.
+## What is Apache Airflow?
+
+Apache Airflow is a tool that helps you automate and schedule data tasks. Think of it as a smart scheduler for your data work - it can run your Python scripts, SQL queries, and other data processing tasks automatically at specific times (like every day at 2 AM) or when certain conditions are met.
+
+**In simple terms:** Airflow helps you set up automated workflows (called "DAGs") that run your data processing tasks in the right order, handle errors, and send you notifications when things go wrong.
+
+> **Note for beginners:** You don't need to master Airflow right away. Start with the basics and learn as you go. This guide will walk you through everything step by step.
+
+![Airflow Dashboard Placeholder - Shows the Airflow web interface with DAGs list]
 
 ## System Requirements
 
-- Python 3.8+ installed
+- Python 3.10+ installed
 - 4GB RAM minimum (8GB+ recommended)
 - 10GB free disk space
 - POSIX-compliant operating system (Linux/macOS preferred, Windows via WSL2)
 
 ## Installation Options
 
-### Option 1: Using uv (Recommended for Development)
+> **Which option should I choose?**
+> - **Option 1 (uv)**: Best for learning and development. Easier to set up and manage.
+> - **Option 2 (Docker)**: Better for production environments or if you're already familiar with Docker.
+
+### Option 1: Using uv (Recommended for Beginners)
 
 ```bash
-# Create a new directory for airflow
+# Step 1: Create a new directory for airflow
 mkdir airflow
 cd airflow
 
-# Set the AIRFLOW_HOME environment variable
+# Step 2: Create and activate virtual environment
+# (This keeps Airflow separate from other Python projects)
+uv venv
+source .venv/bin/activate  # macOS/Linux
+.venv\Scripts\activate     # Windows
+
+# Step 3: Set the AIRFLOW_HOME environment variable
+# (This tells Airflow where to store its files)
 export AIRFLOW_HOME=$(pwd)
 
-# Install airflow with minimal dependencies
-pip install apache-airflow
+# Step 4: Install airflow with minimal dependencies
+# (This may take a few minutes - grab a coffee!)
+uv pip install apache-airflow
 
-# Initialize the database
+# Step 5: Initialize the database
+# (Airflow needs a database to track your workflows)
 airflow db init
 
-# Create an admin user
+# Step 6: Create an admin user
+# (Replace the email and password with your own)
 airflow users create \
     --username admin \
     --firstname Admin \
@@ -36,6 +58,8 @@ airflow users create \
     --email admin@example.com \
     --password admin
 ```
+
+> **What just happened?** You've created a virtual environment (like a separate workspace), installed Airflow, set up its database, and created a user account to access the web interface.
 
 ### Option 2: Using Docker (Recommended for Production)
 
@@ -106,19 +130,48 @@ session_lifetime_days = 1
 
 ## Starting Airflow Services
 
+> **Important:** You need to run TWO separate commands in TWO separate terminal windows/tabs. Don't close either one!
+
 ### Local Development
 
-1. Start the webserver:
+**Step 1: Start the Web Server** (Open Terminal Window 1)
 ```bash
+# Make sure you're in your airflow directory and virtual environment is activated
+cd airflow
+source .venv/bin/activate  # macOS/Linux
+# or .venv\Scripts\activate for Windows
+
+# Start the web server
 airflow webserver --port 8080
 ```
 
-2. In a new terminal, start the scheduler:
+You should see output like: `Running the Gunicorn Server with: Workers: 4 threads...`
+
+**Step 2: Start the Scheduler** (Open Terminal Window 2)
 ```bash
+# Navigate to your airflow directory again
+cd airflow
+source .venv/bin/activate  # macOS/Linux
+# or .venv\Scripts\activate for Windows
+
+# Start the scheduler (this is what actually runs your tasks)
 airflow scheduler
 ```
 
-3. Access the UI at http://localhost:8080
+You should see output showing the scheduler is running and checking for DAGs.
+
+**Step 3: Access the Web Interface**
+
+1. Open your web browser
+2. Go to: http://localhost:8080
+3. Log in with the username and password you created earlier
+
+![Airflow Login Screen Placeholder - Shows the login page]
+
+> **Troubleshooting:** If you can't access the web interface, make sure:
+> - The webserver is still running in Terminal 1
+> - You're using the correct URL (http://localhost:8080)
+> - No other program is using port 8080
 
 ### Docker Environment
 
@@ -133,13 +186,16 @@ docker-compose ps
 
 1. **Dependencies Conflict**:
 ```bash
-# Create a fresh virtual environment
-python -m venv airflow_env
+# Create a fresh virtual environment with uv
+uv venv airflow_env
 source airflow_env/bin/activate  # Linux/macOS
 airflow_env\Scripts\activate     # Windows
 
-# Install with constraints
-pip install apache-airflow==2.7.1 --constraint constraints-3.8.txt
+# Install with uv (handles constraints automatically)
+uv pip install apache-airflow
+
+# Or install specific version if needed
+uv pip install "apache-airflow>=2.8.0"
 ```
 
 2. **Database Issues**:
@@ -177,28 +233,37 @@ tail -f logs/scheduler/latest
 
 ### DAG Development
 
-1. **Structure**:
+**What is a DAG?** DAG stands for "Directed Acyclic Graph" - but don't worry about the technical name! Think of it as a workflow diagram that shows which tasks need to run and in what order.
+
+**Basic DAG Structure:**
+
 ```python
+# Import necessary libraries
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 
+# Define default settings for all tasks in this DAG
 default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'start_date': datetime(2024, 1, 1),
-    'email_on_failure': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=5),
+    'owner': 'airflow',                    # Who owns this workflow
+    'depends_on_past': False,              # Don't wait for previous run to finish
+    'start_date': datetime(2025, 1, 1),   # When this DAG should start running
+    'email_on_failure': False,             # Don't send emails on failure (for now)
+    'retries': 1,                          # Retry once if task fails
+    'retry_delay': timedelta(minutes=5),   # Wait 5 minutes before retrying
 }
 
-with DAG('example_dag',
-         default_args=default_args,
-         schedule_interval='@daily') as dag:
+# Create the DAG
+with DAG('example_dag',                    # Name of your workflow
+         default_args=default_args,        # Use the settings above
+         schedule='@daily') as dag:        # Run once per day
     
-    # Define tasks here
+    # Define your tasks here
+    # (We'll add tasks in the next step)
     pass
 ```
+
+![DAG Example Placeholder - Shows a simple DAG with 3 tasks connected]
 
 2. **Testing**:
 - Use `airflow tasks test` for individual task testing

@@ -1,35 +1,87 @@
 # IDE Setup
 
-## Visual Studio Code
+## What is an IDE?
 
-<figure><img src="../.gitbook/assets/Hero Light Large (1).gif" alt=""><figcaption><p>VS Code</p></figcaption></figure>
+An **IDE** (Integrated Development Environment) is a code editor with extra features like error checking, autocomplete, and debugging tools. Think of it as a word processor, but for writing code instead of documents.
 
-Visual Studio Code (VS Code) is a lightweight but powerful source code editor that runs on your desktop. It comes with built-in support for JavaScript, TypeScript, and Node.js, and has a rich ecosystem of extensions for other languages including Python.
+## Visual Studio Code (VS Code)
 
-> **Note:** This guide assumes you have Anaconda installed on your system. If not, please refer to the `Getting Started with Anaconda` before proceeding.
+**What is VS Code?** VS Code is a **free** code editor made by Microsoft. It's lightweight, fast, and has amazing features for Python development.
+
+**Why use VS Code?**
+- ✅ **Free** - Completely free to use
+- ✅ **Lightweight** - Doesn't slow down your computer
+- ✅ **Extensible** - Thousands of free extensions
+- ✅ **Great for Python** - Excellent Python support
+- ✅ **Popular** - Used by millions of developers
+- ✅ **Cross-platform** - Works on Windows, macOS, and Linux
+
+![VS Code Interface Placeholder - Shows the VS Code workspace]
+
+> **Note:** This guide assumes you have Anaconda or `uv` installed. If not, please refer to the `Getting Started with Anaconda` or `Python for Data Science` guides first.
 
 ## Setting Up Python in VS Code
 
-1. Install the Python extension:
-   * Open VS Code
-   * Click on the Extensions icon in the sidebar
-   * Search for "Python"
-   * Install the Microsoft Python extension
-2. Configure Anaconda Integration:
-   * If you have Anaconda installed, VS Code should automatically detect it
-   * To verify your Python interpreter:
-     * Press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (macOS)
-     * Type "Python: Select Interpreter"
-     * Look for your Anaconda environment (usually shows as "base")
+> **Time needed:** About 5 minutes
 
-## Verifying Anaconda Environment
+### Step 1: Install VS Code
 
-To check if VS Code is using your Anaconda environment:
+If you don't have VS Code yet:
+
+1. Visit [code.visualstudio.com](https://code.visualstudio.com/)
+2. Download for your operating system
+3. Run the installer and follow the prompts
+4. Launch VS Code
+
+![VS Code Download Page Placeholder - Shows download options]
+
+### Step 2: Install the Python Extension
+
+**Extensions add features to VS Code.** The Python extension is essential for Python development.
+
+1. Open VS Code
+2. Click the **Extensions icon** in the left sidebar (looks like four squares, or press `Ctrl+Shift+X` / `Cmd+Shift+X`)
+3. In the search box, type: **"Python"**
+4. Find **"Python"** by Microsoft (it should be the first result)
+5. Click the **"Install"** button
+6. Wait for installation to complete
+
+![Python Extension Installation Placeholder - Shows the extension marketplace]
+
+> **Tip:** VS Code will suggest installing the Python extension automatically when you open a `.py` file!
+
+### Step 3: Configure Your Python Environment
+
+**What is a Python interpreter?** It's the Python program that runs your code. VS Code needs to know which one to use.
+
+**Automatic Detection:**
+- If you have Anaconda: VS Code usually detects it automatically
+- If you're using `uv`: VS Code will find your `.venv` folder
+
+**Manual Selection (if needed):**
+
+1. Press `Ctrl+Shift+P` (Windows/Linux) or `Cmd+Shift+P` (macOS)
+2. Type: **"Python: Select Interpreter"**
+3. Press Enter
+4. You'll see a list of Python environments:
+   - Anaconda environments show as: `Python 3.10.x ('base': conda)`
+   - `uv` environments show as: `Python 3.10.x ('.venv': venv)`
+5. Click on the one you want to use
+
+![Python Interpreter Selection Placeholder - Shows the interpreter selection menu]
+
+> **Tip:** You can see which interpreter is active in the bottom-right corner of VS Code!
+
+## Verifying Python Environment
+
+To check if VS Code is using your Python environment:
 
 1. Open an existing Python file (`.py` extension) or create a new file, write `print("Hello, VS Code!")`, and save it as `hello.py`
 2. Look at the bottom status bar - you should see your Python version and environment
 3. Open a new terminal in VS Code (`Terminal > New Terminal`)
-4. You should see `(base)` at the beginning of your terminal prompt
+4. You should see your environment name at the beginning of your terminal prompt:
+   * Anaconda: `(base)` or `(dsai)`
+   * uv: `(.venv)` or your virtual environment name
 
 ## Useful VS Code Features for Python
 

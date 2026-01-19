@@ -1,6 +1,19 @@
 # Getting Started with Databricks Community Edition
 
-Databricks Community Edition is a free version of Databricks that provides a collaborative environment for data science and machine learning. It includes access to basic Databricks features and a small cluster for learning and experimentation.
+## What is Databricks?
+
+Databricks is a cloud-based platform that lets you work with data and build machine learning models using Python, SQL, R, or Scala. The Community Edition is **completely free** and perfect for learning!
+
+**In simple terms:** Think of Databricks as Google Colab's big brother - it's more powerful, designed for larger datasets, and includes tools for working with "big data" using Apache Spark.
+
+**Key Benefits:**
+- ✅ No installation needed - works in your web browser
+- ✅ Free to use (with some limitations)
+- ✅ Pre-installed with popular data science libraries
+- ✅ Can handle much larger datasets than your local computer
+- ✅ Great for learning Spark and distributed computing
+
+![Databricks Workspace Placeholder - Shows the Databricks interface with notebooks]
 
 ## System Requirements
 
@@ -19,31 +32,61 @@ Databricks Community Edition is a free version of Databricks that provides a col
 
 ## Account Setup
 
-1. Visit [Databricks Community Edition](https://community.cloud.databricks.com/login.html)
-2. Click "Get Started With Community Edition"
-3. Sign up using:
-   - GitHub account (recommended)
-   - Email address
-4. Complete registration form
-5. Verify email address
-6. Accept terms of service
+> **Time needed:** About 5 minutes
+
+**Step 1: Visit the Sign-Up Page**
+1. Go to [Databricks Community Edition](https://community.cloud.databricks.com/login.html)
+2. Click the **"Get Started With Community Edition"** button
+
+![Databricks Sign Up Page Placeholder - Shows the registration page]
+
+**Step 2: Choose Your Sign-Up Method**
+- **Option A: GitHub** (Recommended - faster and easier)
+  - Click "Sign up with GitHub"
+  - Authorize Databricks to access your GitHub account
+- **Option B: Email**
+  - Enter your email address
+  - Create a password
+  - Complete the registration form
+
+**Step 3: Complete Registration**
+1. Fill out the registration form with your information
+2. Verify your email address (check your inbox!)
+3. Accept the terms of service
+4. You're ready to go! 🎉
+
+> **Tip:** If you don't have a GitHub account, you can create one for free at github.com - it's useful for many data science tools!
 
 ## Initial Configuration
 
 ### Workspace Setup
 
-1. Create a new workspace:
-   - Click "Create" in the sidebar
-   - Choose "Notebook"
-   - Select Python as the default language
-   - Name your notebook
+**Step 1: Create Your First Notebook**
 
-2. Create a cluster:
-   - Click "Compute" in the sidebar
-   - Click "Create Cluster"
-   - Use default settings for Community Edition
-   - Name your cluster
-   - Click "Create Cluster"
+A notebook is where you'll write and run your code - similar to Jupyter Notebooks!
+
+1. Click **"Create"** in the left sidebar (or the "+" button)
+2. Choose **"Notebook"** from the dropdown menu
+3. Select **Python** as the default language (you can change this later)
+4. Give your notebook a descriptive name (e.g., "My First Data Analysis")
+5. Click **"Create"**
+
+![Create Notebook Dialog Placeholder - Shows the notebook creation interface]
+
+**Step 2: Create a Cluster**
+
+A cluster is like a remote computer that runs your code. You need one to execute your notebooks!
+
+1. Click **"Compute"** in the left sidebar (looks like a computer/server icon)
+2. Click the **"Create Cluster"** button
+3. For Community Edition, the default settings are perfect - don't change anything!
+4. Give your cluster a name (e.g., "My Learning Cluster")
+5. Click **"Create Cluster"**
+6. Wait 2-3 minutes for the cluster to start (you'll see a spinning icon)
+
+![Cluster Creation Page Placeholder - Shows cluster settings and creation button]
+
+> **Important:** Your cluster will automatically stop after 2 hours of inactivity to save resources. Just click "Start" when you need it again!
 
 ### Importing Libraries
 

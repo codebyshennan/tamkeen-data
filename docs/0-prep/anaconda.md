@@ -1,14 +1,45 @@
 # Anaconda Setup
 
-This guide covers setting up your Python environment using either Anaconda (recommended for beginners) or `uv` (recommended for advanced users). Both tools help manage Python environments and packages, but they serve different purposes:
+## What is Anaconda?
 
-* **Anaconda**: A comprehensive distribution that includes Python and many pre-installed data science packages
-* **`uv`**: A fast, reliable Python package installer and environment manager (alternative to `pip`/`venv`)
+Anaconda is a **free** Python distribution that comes with Python and hundreds of pre-installed data science packages. Think of it as a "starter kit" for data science - everything you need is already included!
 
-Choose the one that best fits your needs:
+**In simple terms:** Instead of installing Python and then installing dozens of packages one by one, Anaconda gives you everything in one package. It also includes a visual tool (Anaconda Navigator) that lets you manage everything with clicks instead of typing commands.
 
-* Use Anaconda if you want a GUI and pre-installed packages
-* Use `uv` if you prefer a lightweight, fast command-line tool
+**Why use Anaconda?**
+- ✅ **Beginner-friendly** - Visual interface (Anaconda Navigator) for managing packages
+- ✅ **Pre-installed packages** - Popular data science tools ready to use
+- ✅ **Easy environment management** - Create separate workspaces for different projects
+- ✅ **Includes Jupyter Notebook** - Ready to use for data analysis
+- ✅ **Well-supported** - Great documentation and community
+
+![Anaconda Navigator Placeholder - Shows the Anaconda Navigator interface]
+
+## What is `uv`?
+
+`uv` is a modern, super-fast Python package manager. It's like a turbocharged version of `pip` - it installs packages 10-100 times faster!
+
+**When to use `uv`:**
+- You're comfortable with command-line tools
+- You want faster package installation
+- You prefer lightweight tools
+- You're working on multiple projects
+
+## Which Should I Choose?
+
+**Choose Anaconda if:**
+- You're a beginner
+- You prefer visual tools (GUI)
+- You want everything pre-installed
+- You want the easiest setup experience
+
+**Choose `uv` if:**
+- You're comfortable with command-line
+- You want faster package installation
+- You prefer lightweight tools
+- You're an experienced developer
+
+> **Tip for beginners:** Start with Anaconda! You can always learn `uv` later. This guide covers both options.
 
 ## Option 1: Anaconda
 
@@ -22,46 +53,111 @@ Choose the one that best fits your needs:
 
 ### Download and Installation
 
-<figure><img src="../.gitbook/assets/Installer 2025-01-04 01.22.33.png" alt=""><figcaption></figcaption></figure>
+> **Time needed:** About 15-20 minutes (download time varies)
+
+**Step 1: Download Anaconda**
+
+1. Visit the [Anaconda Download Page](https://www.anaconda.com/download)
+2. You'll see options for different operating systems
+3. Click **"Download"** for your operating system (choose 64-Bit)
+4. The download will start - this file is large (500MB+), so it may take a while
+
+![Anaconda Download Page Placeholder - Shows the download options]
+
+**Step 2: Install Anaconda**
 
 {% tabs %}
 {% tab title="Windows" %}
-* Visit the [Anaconda Download Page](https://www.anaconda.com/download)
-* Download the Windows installer (64-Bit)
-* Run the installer (.exe file)
-* Important installation options:
-  * Install for "Just Me" (recommended)
-  * Choose destination folder (default is fine)
-  * Select "Add Anaconda to my PATH environment variable"
-  * Register Anaconda as my default Python
+1. Find the downloaded `.exe` file (usually in your Downloads folder)
+2. Double-click to run the installer
+3. If Windows asks for permission, click **"Yes"**
+4. Follow the installation wizard:
+
+   **Important Installation Options:**
+   - **Install for:** Choose **"Just Me"** (recommended for most users)
+   - **Destination folder:** Leave as default (usually `C:\Users\YourName\anaconda3`)
+   - **Advanced Options:** 
+     - ✅ **Check:** "Add Anaconda to my PATH environment variable"
+     - ✅ **Check:** "Register Anaconda as my default Python"
+   
+5. Click **"Install"** and wait (this takes 5-10 minutes)
+6. Click **"Next"** and then **"Finish"** when done
+
+![Windows Installation Wizard Placeholder - Shows installation options]
+
+> **Note:** If you see a warning about PATH, that's okay - you checked the box to add it automatically.
 {% endtab %}
 
-{% tab title="MacOS" %}
-* Visit the [Anaconda Download Page](https://www.anaconda.com/download)
-* Download the macOS installer (64-Bit)
-* Run the installer (`.pkg` file)
-* Follow the prompts in the installer
-* Open Terminal and verify installation by typing `conda --version`
+{% tab title="macOS" %}
+1. Find the downloaded `.pkg` file (usually in your Downloads folder)
+2. Double-click to open the installer
+3. Follow the installation prompts:
+   - Click **"Continue"** through the introduction
+   - Read (or scroll through) the license and click **"Agree"**
+   - Choose **"Install for me only"** (recommended)
+   - Click **"Install"** and enter your password when prompted
+4. Wait for installation to complete (5-10 minutes)
+5. Click **"Close"** when finished
+
+![macOS Installation Wizard Placeholder - Shows installation steps]
+
+**Step 3: Verify Installation**
+
+1. Open **Terminal** (Applications → Utilities → Terminal)
+2. Type: `conda --version`
+3. Press Enter
+4. You should see something like: `conda 23.x.x`
+
+If you see a version number, congratulations - Anaconda is installed! 🎉
+
+> **Troubleshooting:** If you see "command not found", try restarting Terminal or your computer.
 {% endtab %}
 {% endtabs %}
 
 ### Package Installation
 
-After installing Anaconda, open Terminal (macOS) or Anaconda Prompt (Windows) and run:
+**What is an environment?** Think of it as a separate workspace for your project. Each environment has its own set of packages, so you can have different versions for different projects without conflicts.
+
+**Step 1: Open Terminal/Anaconda Prompt**
+
+- **Windows:** Open "Anaconda Prompt" from the Start menu (search for "Anaconda Prompt")
+- **macOS:** Open Terminal (Applications → Utilities → Terminal)
+
+**Step 2: Create Your First Environment**
 
 ```bash
-# Create a new environment for the course
+# Create a new environment named "dsai" with Python 3.10
+# This will take a minute or two
 conda create -n dsai python=3.10
+```
 
-# Activate the environment
+When prompted, type `y` and press Enter to proceed.
+
+**Step 3: Activate Your Environment**
+
+```bash
+# Activate the environment (you'll see "(dsai)" appear in your prompt)
 conda activate dsai
+```
 
-# Install required packages
+> **What just happened?** You created a fresh workspace and activated it. Notice your prompt now shows `(dsai)` - that means you're working in that environment!
+
+**Step 4: Install Essential Packages**
+
+```bash
+# Install core data science packages
+# This will take several minutes - grab a coffee!
 conda install numpy pandas matplotlib seaborn scikit-learn statsmodels jupyter
 
-# Install additional packages
+# Install additional packages (if needed for your course)
 conda install -c conda-forge apache-airflow
 ```
+
+When prompted, type `y` and press Enter for each installation.
+
+> **Tip:** You can install packages one at a time, but installing them together is faster and helps avoid conflicts.
+
+![Terminal with Conda Commands Placeholder - Shows conda commands being executed]
 
 ### Environment Management
 
@@ -83,28 +179,49 @@ conda env remove -n environment_name
 
 ### Anaconda Navigator (Anaconda only)
 
-1. **Windows**: Start menu → Anaconda Navigator
-2. **macOS**: Launchpad → Anaconda Navigator
+Anaconda Navigator is a visual tool that lets you launch applications and manage packages with clicks instead of commands.
 
-![navigator](assets/anaconda-navigator.png)
+**How to Open:**
+- **Windows:** Start menu → Search "Anaconda Navigator" → Click it
+- **macOS:** Launchpad → Search "Anaconda Navigator" → Click it
+
+![Anaconda Navigator Interface Placeholder - Shows the Navigator with available applications]
+
+**What you'll see:**
+- A list of applications you can launch (Jupyter Notebook, VS Code, etc.)
+- Package management tools
+- Environment management
 
 ### Jupyter Notebook
 
-Method 1 (via Navigator):
+**Method 1: Using Anaconda Navigator (Easiest for Beginners)**
 
 1. Open Anaconda Navigator
-2. Click 'Launch' under Jupyter Notebook
+2. Find "Jupyter Notebook" in the list
+3. Click the **"Launch"** button below it
+4. Your web browser will open automatically with Jupyter Notebook
 
-Method 2 (via Terminal/Command Prompt):
+![Jupyter Launch in Navigator Placeholder - Shows clicking Launch button]
 
-1. Open Terminal (macOS) or Command Prompt (Windows)
-2. Type `jupyter notebook` and press Enter
-3. Your default browser will open with Jupyter Notebook
+**Method 2: Using Terminal/Command Prompt**
+
+1. Open Terminal (macOS) or Anaconda Prompt (Windows)
+2. Make sure your environment is activated (you should see `(dsai)` in the prompt)
+3. Type: `jupyter notebook` and press Enter
+4. Your default browser will open with Jupyter Notebook
+
+> **Tip:** If you see a URL like `http://localhost:8888`, that's normal - Jupyter is running on your computer!
 
 ### VS Code
 
+**Using Anaconda Navigator:**
+
 1. Open Anaconda Navigator
-2. Click 'Launch' under VS Code
+2. Find "VS Code" in the list
+3. Click the **"Launch"** button
+4. VS Code will open
+
+> **Note:** If VS Code isn't listed, you may need to install it separately. See the VS Code setup guide for details.
 
 ## Common Issues & Troubleshooting
 
@@ -135,42 +252,87 @@ Method 2 (via Terminal/Command Prompt):
 
 ### Why `uv`?
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption><p><em>Installing</em> <a href="https://trio.readthedocs.io/"><em>Trio</em></a><em>'s dependencies with a warm cache.</em></p></figcaption></figure>
+[`uv`](https://github.com/astral-sh/uv) is a modern Python package manager created by Astral (the team behind Ruff). It's designed to be **10-100 times faster** than traditional `pip`!
 
-[`uv`](https://github.com/astral-sh/uv) is a powerful, all-in-one Python development tool created by Astral (the team behind Ruff) that aims to consolidate multiple existing tools like `pip`, `pip-tools`, `pipx`, `poetry`, `pyenv`, and others into a single efficient solution. Boasting speeds 10-100 times faster than pip, it offers comprehensive functionality including Python version management, package installation, project management, and script execution capabilities.&#x20;
+**Key Benefits:**
+- ⚡ **Super fast** - Installs packages much faster than pip
+- 🎯 **Better dependency resolution** - Handles package conflicts automatically
+- 📦 **Lightweight** - Smaller footprint than Anaconda
+- 🔧 **All-in-one tool** - Replaces multiple tools (pip, venv, pip-tools, etc.)
+- ✅ **Compatible** - Works with `requirements.txt` and `pyproject.toml`
 
-The tool features a universal lockfile system, pip-compatible interface, support for multi-project workspaces, and efficient disk space usage through global caching. uv can be easily installed via curl or pip and runs seamlessly across macOS, Linux, and Windows platforms, making it a versatile choice for Python developers seeking to streamline their development workflow.
+**Who should use `uv`?**
+- Developers comfortable with command-line tools
+- People who want faster package installation
+- Those who prefer lightweight tools
+- Experienced Python developers
 
-* Faster package installation than pip
-* Better dependency resolution
-* Lightweight and efficient
-* Compatible with `requirements.txt` and `pyproject.toml`
+![uv Installation Speed Comparison Placeholder - Shows speed comparison with pip]
 
 ### Installation
 
-```bash
-# macOS/Linux
-curl -LsSf https://astral.sh/uv/install.sh | sh
+> **Time needed:** Less than 2 minutes
 
-# Windows (PowerShell)
+**Step 1: Install `uv`**
+
+Open your terminal and run the command for your operating system:
+
+**For macOS/Linux:**
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+**For Windows (PowerShell):**
+```powershell
 irm https://astral.sh/uv/install.ps1 | iex
 ```
 
+**Step 2: Verify Installation**
+
+Close and reopen your terminal, then type:
+```bash
+uv --version
+```
+
+You should see a version number like `uv 0.x.x`. If you do, you're all set! 🎉
+
+> **Troubleshooting:** If the command isn't found, you may need to restart your terminal or add `uv` to your PATH. Check the [uv documentation](https://github.com/astral-sh/uv) for platform-specific instructions.
+
 ### Usage
 
-{% code overflow="wrap" %}
+**Step 1: Create a New Environment**
+
+Navigate to your project folder, then:
+
 ```bash
-# Create new environment
+# Create a new virtual environment
+# This creates a folder called ".venv" in your current directory
 uv venv
+```
 
-# Activate environment
-source .venv/bin/activate  # macOS/Linux
-.venv\Scripts\activate     # Windows
+**Step 2: Activate the Environment**
 
-# e.g. Install packages
+```bash
+# macOS/Linux
+source .venv/bin/activate
+
+# Windows
+.venv\Scripts\activate
+```
+
+You should see `(.venv)` appear in your terminal prompt - that means the environment is active!
+
+**Step 3: Install Packages**
+
+```bash
+# Install all essential data science packages
+# This is much faster than pip!
 uv pip install numpy pandas matplotlib seaborn scikit-learn statsmodels jupyter apache-airflow
 ```
-{% endcode %}
+
+> **Tip:** You can install packages one at a time, or all together like above. `uv` will handle any conflicts automatically.
+
+![uv Package Installation Placeholder - Shows packages being installed quickly]
 
 ### `uv` Issues
 

@@ -1,16 +1,33 @@
 # Teaching Pedagogy
 
-This bootcamp follows a flipped classroom model with weekly office hours to provide an effective and flexible learning experience for students.
+## How This Course Works
+
+Welcome! This bootcamp uses a **flipped classroom** approach combined with weekly office hours. This means you'll learn at your own pace, and we'll use class time for hands-on practice and getting help.
+
+**What does this mean for you?**
+- 📚 You'll review materials **before** class (at your own pace)
+- 💻 Class time is for **practical work** and **getting help**
+- 🎯 You can **ask questions** during weekly office hours
+- ⏰ **Flexible schedule** - learn when it works for you
+
+> **Don't worry if this is new to you!** This approach actually makes learning easier because you can review materials as many times as you need, and class time is focused on actually doing the work.
 
 ## Flipped Classroom Model
 
 ### What is a Flipped Classroom?
 
-A flipped classroom inverts traditional teaching methods by:
-- Delivering instructional content outside of class time
-- Using class time for practical application and discussion
-- Emphasizing active learning and problem-solving
-- Allowing students to learn at their own pace
+**Traditional Classroom:**
+- Teacher lectures in class
+- Students do homework alone at home
+- Limited time for questions
+
+**Flipped Classroom (Our Approach):**
+- You watch/read materials at home (your pace!)
+- Class time is for hands-on practice and help
+- More time for questions and collaboration
+- Learn at your own speed
+
+**In simple terms:** Instead of listening to lectures in class and struggling with homework alone, you'll review materials on your own time, then come to class ready to practice and get help!
 
 ### How it Works
 
