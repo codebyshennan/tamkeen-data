@@ -4,6 +4,16 @@
 
 Model interpretation is the process of understanding and explaining how your statistical model makes predictions. It's a crucial skill for data scientists and analysts because even the most accurate model is of limited value if you can't explain how it works or why it makes certain predictions.
 
+### Video Tutorial: Introduction to Model Interpretation
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/VB9uV-xFgtU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*SHAP Values Explained by StatQuest with Josh Starmer*
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/MREiHgHgl0k" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*LIME: Explaining Machine Learning Models by StatQuest with Josh Starmer*
+
 ### Why Interpretation Matters
 
 Imagine you've built a model to predict loan approvals. Without proper interpretation:
@@ -346,6 +356,16 @@ When you run this code, you'll see a visualization of the categorical effects (s
 This approach shows the effect of each category compared to a reference category (usually the first level alphabetically).
 
 ## Advanced Interpretation Techniques
+
+### Video Tutorial: SHAP and LIME for Model Interpretation
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/VB9uV-xFgtU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*SHAP Values Explained by StatQuest with Josh Starmer*
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/MREiHgHgl0k" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*LIME: Explaining Machine Learning Models by StatQuest with Josh Starmer*
 
 ### 1. Partial Dependence Plots (PDPs)
 

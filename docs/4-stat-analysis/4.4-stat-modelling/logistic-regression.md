@@ -4,6 +4,12 @@
 
 Logistic regression is one of the most fundamental and widely used classification algorithms in statistics and machine learning. Despite its name containing "regression," it's primarily used for classification tasks - specifically, for predicting categorical outcomes like yes/no, true/false, or 0/1.
 
+### Video Tutorial: Introduction to Logistic Regression
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/yIYKR4sgzI8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*StatQuest: Logistic Regression by Josh Starmer*
+
 ### What is Logistic Regression?
 
 Logistic regression is a statistical method that:
@@ -101,6 +107,12 @@ In this plot:
 - The challenge is to build a model that can predict whether a new student will pass based on their study hours and aptitude score
 
 ## Understanding the Basics
+
+### Video Tutorial: Logistic Regression Details
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/vN5cNN2-HWE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*StatQuest: Logistic Regression Details Pt 1: Coefficients by Josh Starmer*
 
 ### From Linear to Logistic Regression
 
@@ -310,6 +322,12 @@ This visualization shows:
 3. The further from 1, the stronger the effect
 
 ## Building Your First Logistic Regression Model
+
+### Video Tutorial: Implementing Logistic Regression
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YYEJ_GUguHw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*Logistic Regression from Scratch in Python by AssemblyAI*
 
 Now, let's build a logistic regression model on our student exam data:
 

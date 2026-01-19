@@ -4,6 +4,12 @@
 
 Polynomial regression is a powerful extension of linear regression that allows us to model non-linear relationships between variables. While linear regression assumes a straight-line relationship, polynomial regression can capture more complex patterns in the data by using polynomial terms (squares, cubes, etc.) of the input variables.
 
+### Video Tutorial: Introduction to Polynomial Regression
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/15W63X2q_Dc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*Polynomial Regression Explained by StatQuest with Josh Starmer*
+
 ### From Linear to Polynomial Regression
 
 To understand polynomial regression, let's first recall the linear regression equation:
@@ -322,6 +328,12 @@ This visualization shows:
 4. **Degree 10**: Overfits - the model follows the noise instead of the true pattern
 
 ## Building a Polynomial Regression Model
+
+### Video Tutorial: Implementing Polynomial Regression
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/15W63X2q_Dc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*Polynomial Regression Tutorial in Python*
 
 Now, let's walk through the process of building a polynomial regression model step-by-step.
 

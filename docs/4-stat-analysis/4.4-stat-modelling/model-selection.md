@@ -4,6 +4,12 @@
 
 Model selection is the process of choosing the best statistical model from a set of candidate models. It's a crucial step in the data analysis pipeline that helps us find the right balance between model complexity and predictive performance. In other words, model selection helps us answer the question: "Which model will give us the most accurate predictions without being unnecessarily complex?"
 
+### Video Tutorial: Introduction to Model Selection
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/r-Mc8YswoCE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*Model Selection & Boosting | Machine Learning Tutorial | Edureka*
+
 ### Why Model Selection Matters
 
 Every time we build a model, we face an important trade-off between:
@@ -75,6 +81,16 @@ When selecting a model, we need to consider:
 
 At the heart of model selection is the bias-variance tradeoff. This is a fundamental concept in machine learning that helps us understand why we can't minimize both bias and variance simultaneously:
 
+### Video Tutorial: Bias-Variance Tradeoff
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Vzw54MFIwFk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*Bias Variance Trade off Clearly Explained!! Machine Learning Tutorials by Kindson The Genius*
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YIPsfEtJppE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*Bias-Variance Tradeoff: Data Science Basics by ritvikmath*
+
 - **Bias**: The error from incorrect assumptions in the model. High bias means the model is too simple to capture the underlying pattern (underfitting).
 - **Variance**: The error from sensitivity to small fluctuations in the training data. High variance means the model is too complex and captures noise (overfitting).
 
@@ -145,6 +161,12 @@ This plot illustrates:
 > **Teacher's Note**: A helpful analogy is learning to play darts. A high-bias player always misses in the same direction (systematic error). A high-variance player is all over the board (inconsistent). The best player has both low bias (aim is centered) and low variance (throws are clustered).
 
 ### Overfitting vs Underfitting
+
+### Video Tutorial: Overfitting and Underfitting
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/U3jGdnRL3KI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*Overfitting and Underfitting by StatQuest with Josh Starmer*
 
 Let's explore these concepts further with a concrete example of different models applied to the same dataset:
 
@@ -246,6 +268,12 @@ Now that we understand the conceptual background, let's examine specific techniq
 
 The simplest way to evaluate a model is to split your data into training and testing sets:
 
+### Video Tutorial: Train-Test Split and Cross-Validation
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/1AGuK_8LkGQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*K-Fold Cross Validation: Explanation + Tutorial in Python, Scikit-Learn & NumPy by Greg Hogg*
+
 ```python
 def train_test_split_example(X, y, test_size=0.2):
     """Demonstrate train-test split with a visualization"""
@@ -340,6 +368,12 @@ This approach:
 ### 2. Cross-Validation
 
 A more robust approach is k-fold cross-validation, which uses all of your data for both training and validation:
+
+### Video Tutorial: Cross-Validation
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/eTkAJQLQMgw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*K-Fold Cross Validation Example Using Sklearn Python by Cory Maklin*
 
 ```python
 def cross_validation_example(X, y, k=5):
@@ -447,6 +481,16 @@ Cross-validation works by:
 ### 3. Information Criteria
 
 For more formal model comparison, especially in statistical modeling, we can use information criteria like AIC (Akaike Information Criterion) and BIC (Bayesian Information Criterion):
+
+### Video Tutorial: AIC and BIC
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-BR4WElPIXg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*Statistics 101: Multiple Regression, AIC, AICc, and BIC Basics*
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/McEN54l3EPU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*Time Series Model Selection (AIC & BIC) : Time Series Talk*
 
 ```python
 def compare_models_aic_bic(X, y, max_degree=5):
@@ -565,6 +609,12 @@ Another important aspect of model selection is determining which features to inc
 ### 1. Forward Selection
 
 Start with no features and add them one by one:
+
+### Video Tutorial: Forward Selection
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/5l_3Lrey-Wc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*Forward Stepwise Feature Selection | Variable Selection | Machine Learning*
 
 ```python
 def forward_selection(X, y, max_features=None):
@@ -719,6 +769,12 @@ Forward selection works by:
 ### 2. Backward Elimination
 
 Backward elimination starts with all features and removes them one by one:
+
+### Video Tutorial: Backward Elimination
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nh2IGC_kLWw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*Python Feature Selection: Backward Elimination | Feature Selection | Python*
 
 ```python
 def backward_elimination(X, y, min_features=1):

@@ -4,6 +4,16 @@
 
 Regularization is a crucial technique in statistical modeling that helps prevent overfitting by adding a penalty term to the model's loss function. Think of it as a way to keep your model from becoming too complex and memorizing the training data instead of learning general patterns.
 
+### Video Tutorial: Introduction to Regularization
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Q81RR3yKn30" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*StatQuest: Regularization Part 1: Ridge (L2) Regression by Josh Starmer*
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/NGf0voTMlcs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*StatQuest: Regularization Part 2: Lasso (L1) Regression by Josh Starmer*
+
 ### Why Regularization Matters
 
 Imagine you're trying to predict house prices. Without regularization:
@@ -323,6 +333,12 @@ This geometric interpretation explains:
 > **Teacher's Note**: The visual difference between the diamond (L1) and circle (L2) constraints helps students understand why Lasso can zero out coefficients while Ridge only shrinks them.
 
 ## Implementing Regularization
+
+### Video Tutorial: Elastic Net Regularization
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/1dKRdX9bfIo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*StatQuest: Regularization Part 3: Elastic Net Regression by Josh Starmer*
 
 Now let's implement Ridge, Lasso, and Elastic Net regularization in Python:
 
