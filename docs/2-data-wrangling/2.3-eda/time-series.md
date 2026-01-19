@@ -10,6 +10,8 @@ Time series analysis is crucial for:
 
 ## Why Analyze Time Series?
 
+![Time Series Trend](assets/timeseries_trend.png)
+
 Time series analysis helps you:
 
 1. Predict future values
@@ -253,6 +255,15 @@ class TimeSeriesAnalyzer:
         
         return anomalies.dropna()
 ```
+
+**Example Output - Seasonal Decomposition:**
+![Seasonal Decomposition](assets/seasonal_decomposition.png)
+
+**Example Output - Monthly Pattern Analysis:**
+![Monthly Pattern](assets/monthly_pattern.png)
+
+**Example Output - Autocorrelation Analysis:**
+![Autocorrelation](assets/autocorrelation.png)
 
 ## Real-World Case Study: Sales Forecasting
 

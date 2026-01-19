@@ -9,6 +9,8 @@ Understanding relationships between variables is crucial for:
 
 ## Why Study Relationships?
 
+![Correlation Heatmap](assets/correlation_heatmap.png)
+
 Relationship analysis helps you:
 
 1. Identify cause-and-effect patterns
@@ -254,6 +256,15 @@ class RelationshipAnalyzer:
             'eta_squared': eta_squared
         }
 ```
+
+**Example Output - Scatter Plot with Regression:**
+![Scatter with Regression](assets/scatter_regression.png)
+
+**Example Output - Pair Plot for Multivariate Relationships:**
+![Pair Plot](assets/pairplot.png)
+
+**Example Output - Grouped Bar Chart:**
+![Grouped Bar Chart](assets/grouped_bar.png)
 
 ## Real-World Case Study: Customer Analysis
 

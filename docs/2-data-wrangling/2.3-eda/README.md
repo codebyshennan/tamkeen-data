@@ -1,6 +1,14 @@
 # Exploratory Data Analysis: From Data to Insights
 
+![EDA Dashboard](assets/eda_dashboard.png)
+
 Exploratory Data Analysis (EDA) is the crucial first step in any data analysis project. It's like being a detective - you investigate your data to uncover patterns, spot anomalies, test hypotheses, and check assumptions. Through EDA, you transform raw data into actionable insights.
+
+### Video Tutorial: Exploratory Data Analysis
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xi0vhXFPegw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*Exploratory Data Analysis (EDA) Using Python - Edureka*
 
 ## The EDA Journey: A Systematic Approach
 

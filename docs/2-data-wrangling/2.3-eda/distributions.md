@@ -4,6 +4,8 @@ Data distributions are fundamental to understanding your dataset's characteristi
 
 ## Why Study Distributions?
 
+![Distribution Types](assets/distribution_types.png)
+
 Understanding distributions helps you:
 
 1. Choose appropriate statistical methods
@@ -240,6 +242,15 @@ class DistributionAnalyzer:
         )
         fig2.show()
 ```
+
+**Example Output - Histogram with Statistics:**
+![Histogram with Statistics](assets/histogram_with_stats.png)
+
+**Example Output - QQ Plots for Normality Assessment:**
+![QQ Plots](assets/qq_plots.png)
+
+**Example Output - Outlier Detection:**
+![Outlier Detection](assets/outlier_detection.png)
 
 ## Real-World Case Study: Sales Data Analysis
 
