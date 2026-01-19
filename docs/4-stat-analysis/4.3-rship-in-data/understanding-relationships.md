@@ -2,6 +2,12 @@
 
 Welcome to your journey of discovering how things connect in the world of data! Think of this guide as your friendly map to help you see how different pieces of information might be linked to each other.
 
+### Video Tutorial: Understanding Relationships in Data
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xZ_z8KWkhXE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*StatQuest: Correlation by Josh Starmer*
+
 ## What is a Relationship in Data?
 
 Imagine you're wondering if there's a connection between two things in your life. For example:

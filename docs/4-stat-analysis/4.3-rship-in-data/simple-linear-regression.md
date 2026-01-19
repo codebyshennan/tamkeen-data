@@ -2,6 +2,12 @@
 
 Welcome to the exciting world of prediction! In this guide, we'll explore simple linear regression - a powerful tool that helps us not just understand relationships between things, but actually predict one thing based on another.
 
+### Video Tutorial: Introduction to Linear Regression
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nk2CQITm_eo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*StatQuest: Linear Regression, Clearly Explained!!! by Josh Starmer*
+
 ## What is Simple Linear Regression?
 
 Imagine you could draw the perfect line through a scatter of points on a graph - a line that comes as close as possible to all the points. That's essentially what simple linear regression does!

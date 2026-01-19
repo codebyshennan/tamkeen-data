@@ -2,6 +2,12 @@
 
 Welcome to the next level of prediction! We've explored how one factor can predict an outcome using simple linear regression. Now we're taking a big step forward by learning how to use **multiple factors at once** to make even better predictions.
 
+### Video Tutorial: Introduction to Multiple Regression
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/zITIFTsivN8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*StatQuest: Multiple Regression, Clearly Explained!!! by Josh Starmer*
+
 ## What is Multiple Linear Regression?
 
 In real life, outcomes are rarely influenced by just one factor. Think about it:

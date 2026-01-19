@@ -2,6 +2,16 @@
 
 Welcome to the world of correlation analysis! In this guide, we'll learn how to put a number on the relationships between things we observe. If you've ever wondered "How can I tell exactly how connected these two things are?" - you're about to find out!
 
+### Video Tutorial: Introduction to Correlation Analysis
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xZ_z8KWkhXE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*StatQuest: Correlation by Josh Starmer*
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4EXNedimDMs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*Pearson vs Spearman Correlation Tutorial*
+
 ## What is Correlation Analysis?
 
 Imagine you're trying to explain to a friend that taller people tend to weigh more. You could say "there's a relationship," but your friend might ask, "How strong is that relationship?" Correlation analysis gives us a precise way to answer that question with a number.

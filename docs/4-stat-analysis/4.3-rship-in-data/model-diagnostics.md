@@ -2,6 +2,12 @@
 
 Welcome to the world of model diagnostics! Think of this guide as a "health check" for your regression models. Just like doctors run tests to make sure you're healthy, we need to run tests on our models to make sure they're giving us reliable predictions.
 
+### Video Tutorial: Model Diagnostics and Residual Analysis
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/U1sISt-vsTA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+*Model Adequacy Checking - Regression Assumptions and Residuals*
+
 ## Why Do We Need Model Check-Ups?
 
 Imagine building a bridge without checking if your materials and design are good enough. That would be dangerous! Similarly, using a prediction model without checking its quality could lead to poor decisions.
