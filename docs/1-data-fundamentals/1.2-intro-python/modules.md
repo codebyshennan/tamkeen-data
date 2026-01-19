@@ -1,5 +1,9 @@
 # Python Modules in Data Science
 
+> **🤖 AI Learning:** Ask "Explain Python modules using a library analogy"
+
+> **💡 Modern Tools:** Learn to use virtual environments with `uv` or `conda`
+
 ## Understanding Modules in Data Analysis
 
 {% stepper %}
@@ -598,5 +602,14 @@ Remember:
 - Include unit tests
 - Follow PEP 8 style guide
 - Create clear documentation
+- **Use AI to generate docstrings and tests**
+- **Check code quality with automated tools**
 
-Happy coding! 🚀
+> **🤖 AI for Modules:**
+> - "Generate a Python module structure for [your project]"
+> - "Create unit tests for this module: [paste code]"
+> - "Review my module organization and suggest improvements"
+
+> **📺 Learn More:** Check [Video Resources](./video-resources.md) - Modules section
+
+Happy coding!

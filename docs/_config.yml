@@ -55,16 +55,22 @@ exclude:
   - .gitbook/
   - .gitignore
   - node_modules/
-  - 0-prep/
-  - 1-data-fundamentals/
-  - docs/0-prep/
-  - docs/1-data-fundamentals/
+  # Removed 0-prep/ and 1-data-fundamentals/ to include in site build
+  # - 0-prep/
+  # - 1-data-fundamentals/
+  # - docs/0-prep/
+  # - docs/1-data-fundamentals/
   - Gemfile
   - Gemfile.lock
   - vendor/
   - .sass-cache/
   - .jekyll-cache/
   - .jekyll-metadata
+  # Exclude internal documentation
+  - "**/ENHANCEMENTS-SUMMARY.md"
+  - "**/REVIEW-ENHANCEMENTS.md"
+  - "**/GITHUB-PAGES-GUIDE.md"
+  - CLAUDE.md
 
 # GitHub Pages settings
 lsi: false

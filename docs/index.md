@@ -36,6 +36,10 @@ This comprehensive curriculum covers everything from data fundamentals to machin
   * [Functions](1-data-fundamentals/1.2-intro-python/functions.md)
   * [Classes and Objects](1-data-fundamentals/1.2-intro-python/classes-objects.md)
   * [Modules](1-data-fundamentals/1.2-intro-python/modules.md)
+  * **Learning Resources:**
+    * [📺 Video Resources Guide](1-data-fundamentals/1.2-intro-python/video-resources.md) - Curated videos with timestamps
+    * [📓 Interactive Notebooks](1-data-fundamentals/1.2-intro-python/notebooks/README.md) - Practice in Google Colab
+    * [✨ Enhancement Summary](1-data-fundamentals/1.2-intro-python/ENHANCEMENTS-SUMMARY.md) - What's new!
 * [1.3 Introduction to Statistics](1-data-fundamentals/1.3-intro-statistics/README.md)
   * [Probability Fundamentals](1-data-fundamentals/1.3-intro-statistics/probability-fundamentals.md)
   * [One Variable Statistics](1-data-fundamentals/1.3-intro-statistics/one-variable-statistics.md)
