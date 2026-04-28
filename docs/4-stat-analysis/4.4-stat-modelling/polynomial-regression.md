@@ -314,10 +314,10 @@ This visualization clearly shows that:
 
 Polynomial regression works through a process called feature transformation. Here's what happens behind the scenes:
 
-1. **Original feature**: $x$
-2. **Transformation**: Create new features by raising $x$ to different powers: $x^2$, $x^3$, etc.
-3. **New feature matrix**: $X = [1, x, x^2, x^3, ...]$
-4. **Apply linear regression**: Fit a linear model using these transformed features
+1. **Original feature:** \\(x\\).
+2. **Transformation:** create new features by raising \\(x\\) to higher powers: \\(x^2\\), \\(x^3\\), and so on.
+3. **New feature matrix:** \\(X = [1, x, x^2, x^3, \dots]\\).
+4. **Apply linear regression:** fit a linear model using these transformed features.
 
 Let's visualize this transformation process:
 
