@@ -47,8 +47,6 @@ Regularization is a crucial technique in statistical modeling that helps prevent
 
 {% include mermaid-diagram.html src="4-stat-analysis/4.4-stat-modelling/diagrams/regularization-1.mmd" %}
 
-> **Figure (add screenshot or diagram):** Geometric interpretation — L1 constraint region (diamond) vs L2 constraint region (circle) in 2D coefficient space, showing why L1 produces exact zeros at corners while L2 does not.
-
 ### Why Regularization Matters
 
 Imagine you're trying to predict house prices. Without regularization:
