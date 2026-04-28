@@ -1262,5 +1262,3 @@ Feature Importance:
 - [Introduction to Statistical Learning](https://www.statlearning.com/) (Chapter 4)
 - [Logistic Regression in Python Tutorial](https://realpython.com/logistic-regression-python/)
 - [Handling Class Imbalance](https://machinelearningmastery.com/tactics-to-combat-imbalanced-classes-in-your-machine-learning-dataset/)
-
-Remember: While logistic regression is one of the simplest classification algorithms, it's often surprisingly effective in practice. Its simplicity, interpretability, and efficiency make it an excellent starting point for many classification problems, especially in domains where understanding the impact of each feature is important!
