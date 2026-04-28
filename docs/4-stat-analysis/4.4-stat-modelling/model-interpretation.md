@@ -648,7 +648,7 @@ PDPs show how a feature affects predictions, on average, while controlling for o
 
 **Purpose:** Fit `GradientBoostingRegressor` on the loan `X`, `y` and plot average partial dependence for Income and Age (plus manual line plots).
 
-**Walkthrough:** `sklearn.inspection.plot_partial_dependence` / `partial_dependence` with `kind='average'`; optional loop over features for custom matplotlib curves.
+**Walkthrough:** `PartialDependenceDisplay.from_estimator` / `partial_dependence` with `kind='average'`; optional loop over features for custom matplotlib curves.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
