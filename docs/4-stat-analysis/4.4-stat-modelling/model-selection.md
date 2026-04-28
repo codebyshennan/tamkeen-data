@@ -1,6 +1,15 @@
+---
+reading_minutes: 50
+objectives:
+  - Separate training, validation, and test data and explain why each is needed.
+  - Run k-fold cross-validation to estimate generalisation and pick hyperparameters.
+  - Compare candidate models using R², MSE/RMSE/MAE, and information criteria (AIC, BIC).
+  - Apply forward, backward, and recursive feature selection without leaking validation data.
+---
+
 # Model Selection
 
-**After this lesson:** you can explain the core ideas in “Model Selection” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can compare candidate models honestly with cross-validation and information criteria, and select features without leaking validation data.
 
 ## Overview
 
