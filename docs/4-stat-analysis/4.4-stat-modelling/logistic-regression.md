@@ -549,42 +549,46 @@ In this plot:
 **Walkthrough:** `predict` / `predict_proba`; `roc_curve`; diagonal baseline; `savefig` for CM and ROC figures.
 
 ```python
-def evaluate_model(model, X_test, y_test):
-    """Evaluate logistic regression model performance"""
+def evaluate_model(model, X_test, y_test, class_names=('Negative', 'Positive')):
+    """Evaluate a binary classifier and plot the confusion matrix and ROC curve.
+
+    `class_names` should match the meaning of the 0 and 1 labels for this dataset.
+    """
     # Make predictions
     y_pred = model.predict(X_test)
     y_pred_prob = model.predict_proba(X_test)[:, 1]
-    
+
     # Calculate accuracy
     accuracy = accuracy_score(y_test, y_pred)
-    
+
     # Create confusion matrix
     cm = confusion_matrix(y_test, y_pred)
-    
+
     # Print results
     print(f"Model Accuracy: {accuracy:.4f}")
     print("\nConfusion Matrix:")
-    
+    print(cm)
+
     # Plot confusion matrix
     plt.figure(figsize=(8, 6))
     sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
-                xticklabels=['Failed', 'Passed'],
-                yticklabels=['Failed', 'Passed'])
+                xticklabels=class_names,
+                yticklabels=class_names)
     plt.xlabel('Predicted')
     plt.ylabel('Actual')
     plt.title('Confusion Matrix')
     plt.savefig('confusion_matrix.png')
     plt.show()
-    
+
     # Print classification report
     print("\nClassification Report:")
-    print(classification_report(y_test, y_pred, target_names=['Failed', 'Passed']))
-    
+    print(classification_report(y_test, y_pred, target_names=class_names))
+
     # Plot ROC curve
     from sklearn.metrics import roc_curve, roc_auc_score
     fpr, tpr, thresholds = roc_curve(y_test, y_pred_prob)
     auc = roc_auc_score(y_test, y_pred_prob)
-    
+
     plt.figure(figsize=(8, 6))
     plt.plot(fpr, tpr, label=f'AUC = {auc:.4f}')
     plt.plot([0, 1], [0, 1], 'k--', label='Random')
@@ -596,8 +600,8 @@ def evaluate_model(model, X_test, y_test):
     plt.savefig('roc_curve.png')
     plt.show()
 
-# Evaluate the model
-evaluate_model(model, X_test_scaled, y_test)
+# Evaluate the exam model
+evaluate_model(model, X_test_scaled, y_test, class_names=('Failed', 'Passed'))
 ```
 
 ![logistic-regression](assets/logistic-regression_fig_7.png)
