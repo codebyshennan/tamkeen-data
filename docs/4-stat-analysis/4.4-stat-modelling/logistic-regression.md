@@ -165,9 +165,9 @@ In this plot:
 
 To understand how logistic regression works, let's start with what we know about linear regression:
 
-**Linear Regression**: $y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n$
+**Linear Regression:** \\(y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_n x_n\\).
 
-The problem with using linear regression for classification is that it can produce values outside the range [0,1], making them difficult to interpret as probabilities. This is where the logistic function comes in.
+The problem with using linear regression for classification is that it can produce values outside the range \\([0, 1]\\), making them difficult to interpret as probabilities. This is where the logistic function comes in.
 
 ### The Logistic Function
 
