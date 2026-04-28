@@ -682,7 +682,7 @@ The `±` gives the standard deviation *across* folds — a model with CV MSE 1.0
 
 The simpler sklearn path for model comparison — no manual fold loop required:
 
-```python
+{% highlight python %}
 from sklearn.model_selection import cross_val_score
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import PolynomialFeatures
@@ -707,7 +707,7 @@ for degree in [1, 2, 3, 5, 10]:
 for r in results:
     flag = " ← best" if r['cv_mse_mean'] == min(x['cv_mse_mean'] for x in results) else ""
     print(f"degree={r['degree']:2d}  CV MSE={r['cv_mse_mean']:.3f} ± {r['cv_mse_std']:.3f}{flag}")
-```
+{% endhighlight %}
 
 ```
 degree= 1  CV MSE=1.418 ± 0.134
