@@ -707,8 +707,8 @@ loan_coefficients = loan_coefficients.sort_values('Odds_Ratio', ascending=False)
 print("\nLoan Approval Model Coefficients:")
 print(loan_coefficients)
 
-# Evaluate the model
-evaluate_model(loan_model, X_test_scaled, y_test)
+# Evaluate the loan model with appropriate class labels
+evaluate_model(loan_model, X_test_scaled, y_test, class_names=('Denied', 'Approved'))
 ```
 
 ![logistic-regression](assets/logistic-regression_fig_9.png)
