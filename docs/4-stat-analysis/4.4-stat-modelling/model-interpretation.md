@@ -708,7 +708,7 @@ for feature in features_to_plot:
       <span class="code-callout__title">Built-in PDP Plot</span>
     </div>
     <div class="code-callout__body">
-      <p>Use <code>plot_partial_dependence</code> with <code>kind='average'</code> to render the average marginal effect of Income and Age on loan amount.</p>
+      <p>Use <code>PartialDependenceDisplay.from_estimator</code> with <code>kind='average'</code> to render the average marginal effect of Income and Age on loan amount.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="24-37" data-tint="3">
