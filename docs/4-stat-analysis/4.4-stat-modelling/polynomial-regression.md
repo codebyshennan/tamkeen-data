@@ -43,21 +43,21 @@ Polynomial regression is a powerful extension of linear regression that allows u
 
 To understand polynomial regression, let's first recall the linear regression equation:
 
-**Linear Regression**: $y = \beta_0 + \beta_1x + \epsilon$
+**Linear regression:** \\(y = \beta_0 + \beta_1 x + \epsilon\\).
 
 Where:
 
-- $y$ is the dependent variable (what we're trying to predict)
-- $x$ is the independent variable (our input feature)
-- $\beta_0$ is the intercept (where the line crosses the y-axis)
-- $\beta_1$ is the slope (how much $y$ changes for each unit change in $x$)
-- $\epsilon$ is the error term
+- \\(y\\) is the dependent variable (what we're trying to predict).
+- \\(x\\) is the independent variable (the input feature).
+- \\(\beta_0\\) is the intercept (where the line crosses the y-axis).
+- \\(\beta_1\\) is the slope (how much \\(y\\) changes for each unit change in \\(x\\)).
+- \\(\epsilon\\) is the error term.
 
-In polynomial regression, we add higher powers of $x$:
+In polynomial regression, we add higher powers of \\(x\\):
 
-**Polynomial Regression**: $y = \beta_0 + \beta_1x + \beta_2x^2 + \beta_3x^3 + ... + \beta_nx^n + \epsilon$
+**Polynomial regression:** \\(y = \beta_0 + \beta_1 x + \beta_2 x^2 + \beta_3 x^3 + \dots + \beta_n x^n + \epsilon\\).
 
-This allows our model to fit curved patterns in the data. The degree of the polynomial (the highest power of $x$) determines how "wiggly" the fitted curve can be.
+This lets the model fit curved patterns. The degree of the polynomial (the highest power of \\(x\\)) sets how flexible the fitted curve can be.
 
 ### Real-world Examples
 
