@@ -1,6 +1,15 @@
+---
+reading_minutes: 45
+objectives:
+  - Distinguish classification from regression and recognise when a sigmoid link is appropriate.
+  - Fit a logistic regression with sklearn, interpret coefficients as log-odds, and convert to odds ratios.
+  - Read a confusion matrix, ROC curve, and AUC; choose a threshold from precision–recall trade-offs.
+  - Extend binary logistic regression to multi-class classification and recognise common pitfalls (imbalance, separation, scaling).
+---
+
 # Logistic Regression Fundamentals
 
-**After this lesson:** you can explain the core ideas in “Logistic Regression Fundamentals” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can fit, interpret, and evaluate a logistic regression model for binary (and multi-class) classification.
 
 ## Overview
 
