@@ -177,9 +177,9 @@ $$p = \frac{1}{1 + e^{-z}}$$
 
 Where:
 
-- $p$ is the probability of the positive class (between 0 and 1)
-- $z$ is the linear combination of features: $z = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_n x_n$
-- $e$ is the base of natural logarithm (approximately 2.718)
+- \\(p\\) is the probability of the positive class (between 0 and 1).
+- \\(z\\) is the linear combination of features: \\(z = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_n x_n\\).
+- \\(e\\) is the base of natural logarithm (approximately 2.718).
 
 Let's visualize this function:
 
