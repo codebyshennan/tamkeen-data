@@ -134,6 +134,21 @@ plt.show()
 
 print(exam_data.head())
 {% endhighlight %}
+
+<figure>
+<img src="assets/logistic-regression_fig_1.png" alt="logistic-regression" />
+<figcaption>Figure 1: Exam Results Based on Study Hours and Aptitude</figcaption>
+</figure>
+
+```
+   StudyHours  AptitudeScore  Passed
+0    5.993428      43.769439       0
+1    4.723471      58.690320       1
+2    6.295377      59.859282       1
+3    8.046060      52.965841       1
+4    4.531693      62.580714       0
+```
+
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-11" data-tint="1">
@@ -267,6 +282,12 @@ def plot_logistic_curve():
 # Plot the logistic curve
 plot_logistic_curve()
 {% endhighlight %}
+
+<figure>
+<img src="assets/logistic-regression_fig_2.png" alt="logistic-regression" />
+<figcaption>Figure 2: The Logistic (Sigmoid) Function</figcaption>
+</figure>
+
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-10" data-tint="1">
@@ -380,6 +401,12 @@ def plot_coefficient_effects():
 # Plot how coefficients affect the probability curve
 plot_coefficient_effects()
 {% endhighlight %}
+
+<figure>
+<img src="assets/logistic-regression_fig_3.png" alt="logistic-regression" />
+<figcaption>Figure 3: Effect of Different Coefficients on Probability Curve</figcaption>
+</figure>
+
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-14" data-tint="1">
@@ -475,6 +502,12 @@ def plot_odds_ratios():
 # Plot odds ratios
 plot_odds_ratios()
 {% endhighlight %}
+
+<figure>
+<img src="assets/logistic-regression_fig_4.png" alt="logistic-regression" />
+<figcaption>Figure 4: Odds Ratios with 95% Confidence Intervals</figcaption>
+</figure>
+
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-14" data-tint="1">
@@ -562,6 +595,12 @@ print("Data preparation complete.")
 print(f"Training set shape: {X_train.shape}")
 print(f"Test set shape: {X_test.shape}")
 {% endhighlight %}
+```
+Data preparation complete.
+Training set shape: (75, 2)
+Test set shape: (25, 2)
+```
+
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-7" data-tint="1">
@@ -623,6 +662,17 @@ print(f"\nIntercept: {model.intercept_[0]:.4f}")
 # z = β₀ + β₁x₁ + β₂x₂ = 0
 # Solving for x₂ (AptitudeScore): x₂ = -(β₀ + β₁x₁) / β₂
 {% endhighlight %}
+```
+Model trained successfully!
+
+Coefficients:
+         Feature  Coefficient  Odds Ratio
+0     StudyHours     1.381725    3.981764
+1  AptitudeScore     0.109766    1.116016
+
+Intercept: 0.2269
+```
+
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-9" data-tint="1">
@@ -710,6 +760,12 @@ def plot_decision_boundary(X, y, model, scaler):
 X_scaled = scaler.transform(X)
 plot_decision_boundary(X_scaled, y, model, scaler)
 {% endhighlight %}
+
+<figure>
+<img src="assets/logistic-regression_fig_5.png" alt="logistic-regression" />
+<figcaption>Figure 5: Logistic Regression Decision Boundary</figcaption>
+</figure>
+
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-13" data-tint="1">
@@ -817,6 +873,36 @@ def evaluate_model(model, X_test, y_test, class_names=('Negative', 'Positive')):
 # Evaluate the exam model
 evaluate_model(model, X_test_scaled, y_test, class_names=('Failed', 'Passed'))
 {% endhighlight %}
+
+<figure>
+<img src="assets/logistic-regression_fig_6.png" alt="logistic-regression" />
+<figcaption>Figure 6: Confusion Matrix</figcaption>
+</figure>
+
+
+<figure>
+<img src="assets/logistic-regression_fig_7.png" alt="logistic-regression" />
+<figcaption>Figure 7: ROC Curve</figcaption>
+</figure>
+
+```
+Model Accuracy: 0.7600
+
+Confusion Matrix:
+[[10  6]
+ [ 0  9]]
+
+Classification Report:
+              precision    recall  f1-score   support
+
+      Failed       1.00      0.62      0.77        16
+      Passed       0.60      1.00      0.75         9
+
+    accuracy                           0.76        25
+   macro avg       0.80      0.81      0.76        25
+weighted avg       0.86      0.76      0.76        25
+```
+
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-13" data-tint="1">
@@ -858,25 +944,7 @@ evaluate_model(model, X_test_scaled, y_test, class_names=('Failed', 'Passed'))
 </aside>
 </div>
 
-![logistic-regression](assets/logistic-regression_fig_7.png)
-
-```
-Model Accuracy: 0.7600
-
-Confusion Matrix:
-
-Classification Report:
-              precision    recall  f1-score   support
-
-      Failed       1.00      0.62      0.77        16
-      Passed       0.60      1.00      0.75         9
-
-    accuracy                           0.76        25
-   macro avg       0.80      0.81      0.76        25
-weighted avg       0.86      0.76      0.76        25
-```
-
-The auto-injected figure above is the confusion matrix produced by the code (saved locally as `confusion_matrix.png` and to `assets/` by the build pipeline). The recall values tell the story: 10 of 16 failures and 9 of 9 passes were classified correctly. Six failures slipped through as false positives — typical when the cut-off probability sits at 0.5 and one class is over-represented. Adjusting the threshold (or applying class weights, [later in this lesson](#1-handling-imbalanced-datasets)) trades these false alarms for some missed passes.
+The figures above are the confusion matrix and ROC curve. The recall values tell the story: 10 of 16 failures and 9 of 9 passes were classified correctly. Six failures slipped through as false positives — typical when the cut-off probability sits at 0.5 and one class is over-represented. Adjusting the threshold (or applying class weights, [later in this lesson](#1-handling-imbalanced-datasets)) trades these false alarms for some missed passes.
 
 ## Practical Applications and Extensions
 
@@ -961,6 +1029,56 @@ print(loan_coefficients)
 # Evaluate the loan model with appropriate class labels
 evaluate_model(loan_model, X_test_scaled, y_test, class_names=('Denied', 'Approved'))
 {% endhighlight %}
+
+<figure>
+<img src="assets/logistic-regression_fig_8.png" alt="logistic-regression" />
+<figcaption>Figure 8: Confusion Matrix</figcaption>
+</figure>
+
+
+<figure>
+<img src="assets/logistic-regression_fig_9.png" alt="logistic-regression" />
+<figcaption>Figure 9: ROC Curve</figcaption>
+</figure>
+
+```
+Loan approval dataset created.
+              Age        Income  ...  CreditScore    Approved
+count  500.000000    500.000000  ...   500.000000  500.000000
+mean    35.068380  50477.391756  ...   849.351735    0.046000
+std      9.812532  14669.957928  ...     6.854254    0.209695
+min      2.587327   9546.700356  ...   738.183677    0.000000
+25%     27.996926  41070.623902  ...   850.000000    0.000000
+50%     35.127971  50427.973993  ...   850.000000    0.000000
+75%     41.367833  59768.634463  ...   850.000000    0.000000
+max     73.527315  89485.730973  ...   850.000000    1.000000
+
+[8 rows x 6 columns]
+
+Loan Approval Model Coefficients:
+          Feature  Coefficient  Odds_Ratio
+0             Age     0.630864    1.879233
+1          Income     0.583599    1.792477
+2  EducationYears     0.460648    1.585101
+4     CreditScore     0.042793    1.043722
+3    DebtToIncome    -0.244546    0.783060
+Model Accuracy: 0.9440
+
+Confusion Matrix:
+[[117   0]
+ [  7   1]]
+
+Classification Report:
+              precision    recall  f1-score   support
+
+      Denied       0.94      1.00      0.97       117
+    Approved       1.00      0.12      0.22         8
+
+    accuracy                           0.94       125
+   macro avg       0.97      0.56      0.60       125
+weighted avg       0.95      0.94      0.92       125
+```
+
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-13" data-tint="1">
@@ -1101,6 +1219,12 @@ def plot_feature_importance(model, feature_names):
 # Plot feature importance
 plot_feature_importance(loan_model, X_loan.columns)
 {% endhighlight %}
+
+<figure>
+<img src="assets/logistic-regression_fig_10.png" alt="logistic-regression" />
+<figcaption>Figure 10: Feature Importance in Logistic Regression</figcaption>
+</figure>
+
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-12" data-tint="1">
@@ -1443,6 +1567,11 @@ poly_model = make_pipeline(
 )
 poly_model.fit(X_train, y_train)
 {% endhighlight %}
+```
+Pipeline(steps=[('polynomialfeatures', PolynomialFeatures(include_bias=False)),
+                ('logisticregression', LogisticRegression())])
+```
+
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-10" data-tint="1">
@@ -1502,6 +1631,11 @@ print(f"Accuracy on multi-class problem: {accuracy:.4f}")
 class_probabilities = ovr_model.predict_proba(X_test)
 print("Shape of probability matrix:", class_probabilities.shape)
 {% endhighlight %}
+```
+Accuracy on multi-class problem: 0.9556
+Shape of probability matrix: (45, 3)
+```
+
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-10" data-tint="1">
@@ -1547,6 +1681,10 @@ softmax_model.fit(X_train, y_train)
 softmax_accuracy = softmax_model.score(X_test, y_test)
 print(f"Multinomial (Softmax) accuracy: {softmax_accuracy:.4f}")
 {% endhighlight %}
+```
+Multinomial (Softmax) accuracy: 1.0000
+```
+
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-7" data-tint="1">
@@ -1709,6 +1847,63 @@ coefficients = coefficients.sort_values('Odds_Ratio', ascending=False)
 print("\nFeature Importance:")
 print(coefficients)
 {% endhighlight %}
+```
+<class 'pandas.DataFrame'>
+RangeIndex: 768 entries, 0 to 767
+Data columns (total 9 columns):
+ #   Column                    Non-Null Count  Dtype  
+---  ------                    --------------  -----  
+ 0   Pregnancies               768 non-null    int64  
+ 1   Glucose                   768 non-null    int64  
+ 2   BloodPressure             768 non-null    int64  
+ 3   SkinThickness             768 non-null    int64  
+ 4   Insulin                   768 non-null    int64  
+ 5   BMI                       768 non-null    float64
+ 6   DiabetesPedigreeFunction  768 non-null    float64
+ 7   Age                       768 non-null    int64  
+ 8   Outcome                   768 non-null    int64  
+dtypes: float64(2), int64(7)
+memory usage: 54.1 KB
+None
+       Pregnancies     Glucose  ...         Age     Outcome
+count   768.000000  768.000000  ...  768.000000  768.000000
+mean      3.845052  120.894531  ...   33.240885    0.348958
+std       3.369578   31.972618  ...   11.760232    0.476951
+min       0.000000    0.000000  ...   21.000000    0.000000
+25%       1.000000   99.000000  ...   24.000000    0.000000
+50%       3.000000  117.000000  ...   29.000000    0.000000
+75%       6.000000  140.250000  ...   41.000000    1.000000
+max      17.000000  199.000000  ...   81.000000    1.000000
+
+[8 rows x 9 columns]
+
+Confusion Matrix:
+[[95 28]
+ [24 45]]
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.80      0.77      0.79       123
+           1       0.62      0.65      0.63        69
+
+    accuracy                           0.73       192
+   macro avg       0.71      0.71      0.71       192
+weighted avg       0.73      0.73      0.73       192
+
+
+Feature Importance:
+                    Feature  Coefficient  Odds_Ratio
+1                   Glucose     1.131155    3.099233
+5                       BMI     0.760050    2.138384
+7                       Age     0.429940    1.537165
+0               Pregnancies     0.201701    1.223482
+6  DiabetesPedigreeFunction     0.171810    1.187453
+3             SkinThickness     0.066148    1.068385
+4                   Insulin    -0.172464    0.841589
+2             BloodPressure    -0.222390    0.800603
+```
+
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-12" data-tint="1">
