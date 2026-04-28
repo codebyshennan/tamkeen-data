@@ -1,3 +1,12 @@
+---
+reading_minutes: 40
+objectives:
+  - Check the four OLS assumptions (linearity, independence, homoscedasticity, normal errors) using residual plots and tests.
+  - Identify high-leverage and high-influence points with hat values and Cook's distance.
+  - Choose a fix (transformation, robust method, richer model) based on the violation pattern.
+  - Avoid common diagnostic mistakes (lag-1 only, large-n Shapiro, deleting influence without investigation).
+---
+
 # Model Check-Ups: Making Sure Your Predictions Are Trustworthy
 
 **After this lesson:** you can explain the core ideas in “Model Check-Ups: Making Sure Your Predictions Are Trustworthy” and reproduce the examples here in your own notebook or environment.
@@ -16,8 +25,6 @@ Fitting a model is cheap; **trusting** it requires checking whether the errors l
 - [Multiple linear regression](./multiple-linear-regression.md).
 
 > **Important:** Diagnostics apply to many models beyond ordinary least squares.
-
-Welcome to the world of model diagnostics! Think of this guide as a "health check" for your regression models. Just like doctors run tests to make sure you're healthy, we need to run tests on our models to make sure they're giving us reliable predictions.
 
 ### Video Tutorial: Model Diagnostics and Residual Analysis
 
@@ -40,8 +47,6 @@ Model check-ups help us:
 
 {% include mermaid-diagram.html src="4-stat-analysis/4.3-rship-in-data/diagrams/model-diagnostics-1.mmd" %}
 
-> **Figure (add screenshot or diagram):** Four standard residual diagnostic plots in a 2×2 grid: Residuals vs Fitted, Normal QQ, Scale-Location, Residuals vs Leverage — with labels on what each plot reveals.
-
 ## Four Key Questions to Ask About Your Model
 
 To make sure your model is healthy, we need to check four main assumptions. Think of these as the "vital signs" of your model:
@@ -55,10 +60,6 @@ To make sure your model is healthy, we need to check four main assumptions. Thin
 **How to check it**: Look at a "residual plot" - a graph showing the difference between our predictions and the actual values.
 
 **Residuals vs fitted for the linear mean structure**
-
-**Purpose:** Plot residuals against fitted values and draw a zero reference line so you can see curvature, heteroscedasticity, or other patterns that violate linearity.
-
-**Walkthrough:** `model.predict(X)` gives fitted values; subtracting from `y` yields residuals; `plt.axhline(0, ...)` marks the ideal random-scatter band.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -89,32 +90,6 @@ def check_if_relationship_is_straight(model, X, y):
     print("✓ GOOD: Random scatter around the zero line with no pattern")
     print("✗ BAD: Any curves, funnels, or patterns in the dots")
 {% endhighlight %}
-
-<figure>
-<img src="assets/model-diagnostics_fig_1.png" alt="model-diagnostics" />
-<figcaption>Figure 1: Population Distribution
-(Exponential Distribution)</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/model-diagnostics_fig_2.png" alt="model-diagnostics" />
-<figcaption>Figure 2: Sample Size: 10
-SE: 4.72</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/model-diagnostics_fig_3.png" alt="model-diagnostics" />
-<figcaption>Figure 3: Quality Control Measurements</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/model-diagnostics_fig_4.png" alt="model-diagnostics" />
-<figcaption>Figure 4: The Sampling Game</figcaption>
-</figure>
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -153,10 +128,6 @@ SE: 4.72</figcaption>
 
 **Durbin–Watson statistic on a residual series**
 
-**Purpose:** Summarize first-order autocorrelation in ordered residuals (often time-ordered) with a single statistic near 2 when errors are uncorrelated.
-
-**Walkthrough:** `durbin_watson(errors)` from statsmodels expects a 1D residual array; values far below or above 2 suggest positive or negative serial correlation.
-
 ```python
 from statsmodels.stats.stattools import durbin_watson
 
@@ -184,10 +155,6 @@ def check_if_points_are_independent(errors):
 **How to check it**: We look at how the size of errors changes across different predicted values.
 
 **Absolute residuals vs fitted (scale-location style)**
-
-**Purpose:** Plot `|residual|` against fitted values to spot funnels or trends that indicate non-constant variance (heteroscedasticity).
-
-**Walkthrough:** Same fitted values and residuals as the linearity plot; taking `np.abs` emphasizes magnitude of error rather than sign.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -248,10 +215,6 @@ def check_if_error_spread_is_even(model, X, y):
 **How to check it**: We look at the distribution of errors with histograms and what's called a "Q-Q plot."
 
 **Histogram, Q-Q plot, and Shapiro–Wilk on residuals**
-
-**Purpose:** Compare the residual distribution to a normal reference both visually (histogram and Q-Q) and with a formal normality test p-value.
-
-**Walkthrough:** `stats.probplot(..., dist="norm", plot=ax)` overlays theoretical normal quantiles; `stats.shapiro` returns a test statistic and p-value for small-to-moderate sample sizes.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -317,10 +280,6 @@ Sometimes, just a few unusual data points can have an outsized impact on your mo
 **Everyday analogy**: In a classroom discussion, some students might significantly change the direction of the conversation if they were absent. Cook's Distance helps us identify those influential "conversation changers."
 
 **Cook’s distance from residuals, leverage, and MSE**
-
-**Purpose:** Compute Cook’s \\(D_i\\) for each observation and plot it against index with a simple rule-of-thumb cutoff to flag high-influence points.
-
-**Walkthrough:** Leverage comes from the hat matrix diagonal; `mse` uses residual sum of squares divided by `n - p`; the stem plot compares each \\(D_i\\) to `4/n`.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -397,10 +356,6 @@ def find_all_around_troublemakers(model, X, y):
 
 **Leverage (hat values) for each row of X**
 
-**Purpose:** Show how extreme each observation’s predictors are in predictor space via the diagonal of the hat matrix, with a common \\(2p/n\\) reference line.
-
-**Walkthrough:** Same hat-matrix construction as Cook’s distance; `np.diagonal` extracts leverage \\(h_{ii}\\) for plotting.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -454,10 +409,6 @@ def find_unusual_x_values(X):
 Here's a function that performs all these checks at once:
 
 **End-to-end diagnostic runner**
-
-**Purpose:** Chain the helper plots and prints—linearity, Durbin–Watson, spread, normality, Cook’s distance, and leverage—and return residuals plus influence summaries.
-
-**Walkthrough:** The function calls the previously defined helpers in order, then prints counts of points above simple leverage and Cook thresholds.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -548,10 +499,6 @@ def give_model_complete_checkup(model, X, y):
 Let's see how this works with some example data:
 
 **Synthetic data with an outlier and heteroscedastic noise, then full check-up**
-
-**Purpose:** Build a two-predictor design with one extreme row, fit `LinearRegression`, and run `give_model_complete_checkup` to see diagnostics and printed guidance together.
-
-**Walkthrough:** `np.abs(X[:, 0])` scales the noise to create heteroscedastic-like behavior; `model.fit` then feeds the same `X` into the check-up pipeline.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -719,15 +666,6 @@ Try running a model check-up on a dataset you're working with. Here are the step
 ## Next steps
 
 - Start [Statistical modelling (module 4.4)](../4.4-stat-modelling/README.md) with [Logistic regression](../4.4-stat-modelling/logistic-regression.md).
-
-Now that you understand how to check if your model is reliable, you can:
-
-1. Apply these tests to your own regression models
-2. Learn more about robust regression methods that work better with imperfect data
-3. Explore more advanced diagnostic techniques
-4. Study specific solutions for common regression problems
-
-Remember: A good model isn't just about getting a high R-squared value. It's about creating a tool that works reliably for the question you're trying to answer!
 
 ## Gotchas
 

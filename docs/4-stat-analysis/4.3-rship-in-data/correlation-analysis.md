@@ -1,3 +1,12 @@
+---
+reading_minutes: 35
+objectives:
+  - Compute and interpret Pearson, Spearman, and Kendall coefficients on the same data and pick the right one.
+  - Read a correlation matrix and heatmap for many variables without over-counting significant pairs.
+  - Use partial correlation to test whether an association survives after controlling for a confounder.
+  - Avoid the standard pitfalls (ordinal data, non-linear shapes, NaN handling, multiple-comparison inflation).
+---
+
 # Correlation Analysis: Measuring How Things Move Together
 
 **After this lesson:** you can explain the core ideas in “Correlation Analysis: Measuring How Things Move Together” and reproduce the examples here in your own notebook or environment.
@@ -16,8 +25,6 @@ Correlation turns a scatterplot into a **single number** (with a sign and a stre
 - [Understanding relationships](./understanding-relationships.md).
 
 > **Warning:** Correlation alone never proves causation.
-
-Welcome to the world of correlation analysis! In this guide, we'll learn how to put a number on the relationships between things we observe. If you've ever wondered "How can I tell exactly how connected these two things are?" - you're about to find out!
 
 ### Video Tutorial: Introduction to Correlation Analysis
 
@@ -47,8 +54,6 @@ The result is a single number called a **correlation coefficient** that ranges f
 - **+1**: Perfect positive correlation (when one goes up, the other goes up by a proportional amount)
 - **0**: No linear relationship (knowing one tells you nothing about the other)
 - **-1**: Perfect negative correlation (when one goes up, the other goes down by a proportional amount)
-
-> **Figure (add screenshot or diagram):** A row of six scatter plots showing correlations at r = +1.0, +0.7, +0.3, 0.0, −0.7, −1.0. Each plot should label the r value and briefly describe the pattern (e.g. "strong positive", "weak positive", "none", "strong negative"). This gives learners a visual anchor for what each number *looks* like in real data.
 
 ### Real-World Example: Height and Weight
 
@@ -83,10 +88,6 @@ Just as you wouldn't use a hammer for every home repair job, we have different t
 **Everyday Analogy**: It's like measuring how consistently two cars change speed together. If one car accelerates and the other accelerates proportionally, they have a high Pearson correlation.
 
 **Pearson correlation for study time vs. exam scores**
-
-**Purpose:** Compute Pearson’s \\(r\\) and the two-sided p-value for two numeric arrays to quantify linear association and statistical significance.
-
-**Walkthrough:** `stats.pearsonr` returns `(r, p_value)`; the formatted prints match the example interpretation below.
 
 ```python
 import numpy as np
@@ -125,10 +126,6 @@ This tells us there's a very strong positive relationship (0.99 is very close to
 
 **Spearman rank correlation on the same study vs. score arrays**
 
-**Purpose:** Measure monotonic association via ranks (robust to outliers and mild nonlinearity) and print \\(\rho\\) and its p-value using the same `study_time` and `exam_scores` as Pearson.
-
-**Walkthrough:** `stats.spearmanr` returns Spearman’s \\(\rho\\) and a p-value; compare to Pearson when you suspect outliers or nonlinearity.
-
 ```python
 # Calculate Spearman correlation
 rho, p_value = stats.spearmanr(study_time, exam_scores)
@@ -157,10 +154,6 @@ The Spearman correlation of 1.00 tells us there's a perfect rank correlation - a
 **Everyday Analogy**: Imagine looking at all possible pairs of data points and asking, "Do these values move in the same direction, or do they move in opposite directions?"
 
 **Kendall’s tau for pairwise concordance**
-
-**Purpose:** Summarize agreement between ranks using concordant vs. discordant pairs, useful for small samples or many ties.
-
-**Walkthrough:** `stats.kendalltau` returns Kendall’s \\(\tau\\) and a p-value; interpret \\(\tau\\) on a similar \\([-1, 1]\\)-style scale as other correlations.
 
 ```python
 # Calculate Kendall correlation
@@ -193,10 +186,6 @@ Let's decode what those correlation values actually tell us:
 - The absolute value (how close to 1) tells you the strength
 - Squaring the correlation (r²) tells you the percentage of variation in one variable that can be explained by the other
 
-### Visual Interpretation
-
-Here's what different correlation strengths look like:
-
 ## Correlation in the Real World: Practical Applications
 
 Correlation analysis is a powerful tool used across many fields:
@@ -226,10 +215,6 @@ Correlation analysis is a powerful tool used across many fields:
 When you have many variables, checking correlations between each pair individually becomes tedious. That's where correlation matrices come in - they show all possible correlations in one view!
 
 **Correlation matrix and heatmap for several variables**
-
-**Purpose:** Assemble a small multivariate table, compute pairwise Pearson correlations with `DataFrame.corr()`, and draw an annotated heatmap for all pairs at once.
-
-**Walkthrough:** `df.corr()` defaults to Pearson; `sns.heatmap` with `vmin=-1` and `vmax=1` maps strength to color on a consistent scale.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -304,53 +289,11 @@ plt.show()
 - Sleep hours and exam scores have a positive correlation (+0.82)
 - Study time and stress level have a strong negative correlation (-0.98)
 
-## Watch Out! Common Correlation Pitfalls
-
-### 1. Correlation Does Not Equal Causation
-
-This is so important it deserves its own section! Just because two things move together doesn't mean one causes the other.
-
-**Example**: Ice cream sales and drowning deaths are correlated (both increase in summer)
-- **Wrong conclusion**: Ice cream causes drowning
-- **Right analysis**: Both are influenced by a third factor - summer weather
-
-**Everyday analogy**: It's like noticing that rooster crows and sunrise happen around the same time, then concluding that roosters cause the sun to rise!
-
-### 2. Outliers Can Distort Your Results
-
-A single unusual data point can dramatically change correlation values, especially with Pearson's method.
-
-**Example**: In a study of neighborhood incomes, including one billionaire would skew the results
-- **Solution**: Always visualize your data with scatter plots before calculating correlation
-- **Better approach**: Consider using Spearman correlation which is less sensitive to outliers
-
-### 3. Correlation Only Captures Linear Relationships
-
-Sometimes two variables have a strong relationship, but not a straight-line one.
-
-**Example**: The relationship between age and athletic performance (improves in youth, peaks in early adulthood, then declines)
-- **Pearson correlation might show**: Close to 0 (suggesting no relationship)
-- **Reality**: There's a strong relationship, but it's curved (non-linear)
-- **Solution**: Always visualize your data or use other methods for non-linear relationships
-
-### 4. Small Sample Sizes Can Be Misleading
-
-Correlations based on few data points can appear stronger than they really are.
-
-**Example**: Finding a high correlation between two variables using only 5 data points
-- **Solution**: Gather more data when possible
-- **Alternative**: Use appropriate statistical tests and report confidence intervals
-- **Rule of thumb**: For reliable results, aim for at least 30 observations when using Pearson correlation
-
 ## Let's Try It Together: Temperature and Ice Cream Sales
 
 Now let's apply what we've learned with a practical example:
 
 **Scatter plot of temperature vs. ice cream sales with correlation annotation**
-
-**Purpose:** Simulate noisy bivariate data, plot a scatter, and overlay the Pearson correlation from `np.corrcoef` to connect visualization with a single-number summary.
-
-**Walkthrough:** `np.corrcoef` returns a 2×2 matrix; element `[0, 1]` is the correlation; `plt.text(..., transform=plt.gca().transAxes)` pins the label in axes coordinates.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -549,15 +492,6 @@ For most product and business questions, the practical answer is: *run an A/B te
 ## Next steps
 
 - Continue to [Simple linear regression](./simple-linear-regression.md).
-
-Now that you understand correlation, you're also ready to:
-
-1. Learn about regression analysis - which helps predict one variable based on another
-2. Explore partial correlation - which controls for the effects of other variables
-3. Investigate more complex relationships using advanced statistical techniques
-4. Apply correlation analysis to your own questions and datasets
-
-Remember: Correlation is a powerful tool, but it's just the beginning of understanding relationships in data!
 
 ## Gotchas
 

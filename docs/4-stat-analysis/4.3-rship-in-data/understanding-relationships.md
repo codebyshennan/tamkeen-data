@@ -1,3 +1,12 @@
+---
+reading_minutes: 25
+objectives:
+  - Read a scatterplot before relying on a single summary statistic.
+  - Distinguish linear, non-linear, and no-relationship patterns by eye.
+  - Tell association from causation by naming a plausible confounder before claiming a link.
+  - Spot common misreadings (outliers, ordinal-as-ratio, Simpson's paradox) in a relationship plot.
+---
+
 # Understanding Relationships in Data: Connecting the Dots
 
 **After this lesson:** you can explain the core ideas in “Understanding Relationships in Data: Connecting the Dots” and reproduce the examples here in your own notebook or environment.
@@ -17,8 +26,6 @@ Before you compute a correlation or fit a line, you need a **picture of the join
 - NumPy or pandas comfort for examples in later files.
 
 > **Note:** This is the first lesson in [Relationships in data (4.3)](./README.md).
-
-Welcome to your journey of discovering how things connect in the world of data! Think of this guide as your friendly map to help you see how different pieces of information might be linked to each other.
 
 ### Video Tutorial: Understanding Relationships in Data
 
@@ -105,9 +112,6 @@ In a linear relationship, when one thing changes, the other thing changes at a s
 - The more hours you work at a fixed hourly rate, the more money you earn
 - The more slices of pizza you eat, the more calories you consume
 
-
-This graph shows study time and exam scores. See how the dots roughly form a line going up? That suggests that more study time tends to lead to higher scores in a fairly steady way.
-
 ### 2. Curved Connections (Non-linear Relationships)
 
 Not all relationships follow a straight line. Sometimes they curve or bend.
@@ -122,9 +126,6 @@ Think about learning a new skill like playing the piano:
 - The relationship between speed and fuel efficiency in cars (efficiency improves until an optimal speed, then gets worse)
 - Learning returns on study time (diminishing returns after a certain point)
 
-
-This graph shows age and running speed. Notice how it's not a straight line but a curve? Running speed decreases with age, but the rate of decrease isn't constant.
-
 ### 3. No Connection At All (No Relationship)
 
 Sometimes, two things have no meaningful connection whatsoever.
@@ -133,9 +134,6 @@ Sometimes, two things have no meaningful connection whatsoever.
 - Your shoe size and your favorite color
 - The number of birds in your yard today and tomorrow's stock prices
 - The first letter of your name and your mathematics ability
-
-
-This scatter plot shows shoe size and IQ scores. The dots are all over the place with no pattern, suggesting these two things aren't related.
 
 ## How Information Can Be Connected
 
@@ -289,15 +287,6 @@ Ready to put your new knowledge into action? Here's a simple activity:
 ## Next steps
 
 - Continue to [Correlation analysis](./correlation-analysis.md).
-
-Now that you understand the basics of how things can be related, you're also ready to:
-
-1. Learn about correlation – a specific way to measure how strongly things are related
-2. Explore regression – a tool to predict one thing based on another
-3. Test whether relationships you find are statistically significant
-4. Apply these concepts to your own questions and data
-
-Remember: Finding relationships in data is a bit like being a detective. You look for clues, patterns, and connections – but you always need to think critically about what those connections really mean!
 
 ## Gotchas
 

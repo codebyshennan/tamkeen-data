@@ -1,3 +1,12 @@
+---
+reading_minutes: 30
+objectives:
+  - Fit ordinary least squares with sklearn and interpret the intercept, slope, and R² in real units.
+  - Read residuals-vs-fitted, Q-Q, scale-location, and leverage plots to validate the linear assumption.
+  - Distinguish in-sample R² from generalisation quality and avoid extrapolation past the training range.
+  - Recognise when a high R² hides curvature or heteroscedasticity in residuals.
+---
+
 # Simple Linear Regression: Your First Step into Prediction
 
 **After this lesson:** you can explain the core ideas in “Simple Linear Regression: Your First Step into Prediction” and reproduce the examples here in your own notebook or environment.
@@ -17,8 +26,6 @@ Simple linear regression estimates an **intercept** and a **slope** that minimiz
 - Optional: [tutorial notebook](./relationships-in-data.ipynb).
 
 > **Note:** Assumptions (linearity, independence, homoscedasticity, normal errors) appear again in [model diagnostics](./model-diagnostics.md).
-
-Welcome to the exciting world of prediction! In this guide, we'll explore simple linear regression - a powerful tool that helps us not just understand relationships between things, but actually predict one thing based on another.
 
 ### Video Tutorial: Introduction to Linear Regression
 
@@ -73,8 +80,6 @@ If you start at mile marker 0 and drive at 60 miles per hour, after 2 hours (x),
 
 For our simple linear regression to work well, the relationship should follow certain patterns:
 
-> **Figure (add screenshot or diagram):** A 2×2 panel of the four standard residual diagnostic plots: (1) Residuals vs Fitted — should show a flat band with no curve; (2) Normal Q-Q — points should hug the diagonal; (3) Scale-Location — flat line confirms constant spread; (4) Residuals vs Leverage — flags high-influence points. Annotate each panel with what "good" looks like vs a violation.
-
 ### 1. The Relationship Should Be a Straight Line
 
 Imagine trying to draw a straight line through data that actually forms a circle - it wouldn't work well! Your data should roughly form a straight-line pattern.
@@ -104,10 +109,6 @@ The mistakes in our predictions should follow a normal distribution (bell curve)
 Let's walk through a concrete example using Python. Don't worry if you're not familiar with the code - focus on the concepts!
 
 **Fit `LinearRegression`, print intercept, slope, and R², and plot the line**
-
-**Purpose:** Fit ordinary least squares on simulated study hours vs. test scores, report the intercept and slope, quantify fit with `r2_score`, and overlay predictions on a scatter plot.
-
-**Walkthrough:** `LinearRegression().fit` expects `X` as a 2D array; `model.coef_` and `model.intercept_` are the slope and intercept; `r2_score(y, y_pred)` compares observed and predicted outcomes.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -151,13 +152,6 @@ plt.show()
 <img src="assets/simple-linear-regression_fig_1.png" alt="simple-linear-regression" />
 <figcaption>Figure 1: Hours Studied vs. Test Scores</figcaption>
 </figure>
-
-```
-Starting point (intercept): 0.83
-Rate of change (slope): 2.01
-Accuracy (R-squared): 0.98
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -208,12 +202,6 @@ Accuracy (R-squared): 0.98
   </div>
 </aside>
 </div>
-
-```
-Starting point (intercept): 0.83
-Rate of change (slope): 2.01
-Accuracy (R-squared): 0.98
-```
 
 ```
 Starting point (intercept): 0.83
@@ -275,10 +263,6 @@ R-squared measures how well your line fits the data, from 0 (terrible) to 1 (per
 Before trusting your model, you should always check if it's valid. One way to do this is through diagnostic plots.
 
 **Four-panel diagnostic plots (residuals, Q-Q, scale-location, leverage)**
-
-**Purpose:** Visualize residuals versus fitted values, normality of residuals, spread of absolute residuals, and residual versus leverage from the hat matrix for a simple linear setup.
-
-**Walkthrough:** `stats.probplot` draws the Q-Q plot; the leverage panel uses the diagonal of `X (X'X)^{-1} X'` for the `X` passed into the function.
 
 ```python
 # Function to create diagnostic plots
@@ -409,51 +393,11 @@ Simple linear regression is used in countless real-world scenarios:
 - **Resource Allocation**: Understanding how class size affects student performance
 - **Career Planning**: Analyzing how education level affects income
 
-## Common Mistakes to Avoid
-
-Even with a simple tool like linear regression, there are several pitfalls to watch out for:
-
-### 1. Predicting Beyond Your Data Range
-
-**The Issue**: Using your model to predict values far outside the range of your original data.
-
-**Real-Life Example**: If you studied the relationship between study time (1-10 hours) and test scores, don't use it to predict scores for someone studying 50 hours.
-
-**Kitchen Analogy**: It's like testing a recipe with 1-3 teaspoons of salt, then assuming 15 teaspoons would make it taste better!
-
-### 2. Ignoring Outliers
-
-**The Issue**: A few unusual data points can dramatically change your regression line.
-
-**Real-Life Example**: In analyzing house prices in a neighborhood, one mansion selling for $5 million among $300,000 homes could severely distort your predictions.
-
-**Sports Analogy**: One 7-foot-tall person in a height study could make you conclude that the average person is much taller than reality.
-
-### 3. Forcing a Linear Relationship on Non-Linear Data
-
-**The Issue**: Some relationships simply aren't straight lines.
-
-**Real-Life Example**: The relationship between age and height is not linear across a lifetime - we grow quickly as children, then stop growing as adults.
-
-**Nature Analogy**: Plant growth isn't linear - it might be rapid in spring and summer, then stop in fall and winter.
-
-### 4. Assuming Correlation Means Causation
-
-**The Issue**: Just because two things move together doesn't mean one causes the other.
-
-**Classic Example**: Ice cream sales and drowning deaths both increase in summer, but ice cream doesn't cause drowning!
-
-**Medical Analogy**: Patients who take a certain medication might improve, but was it the medication or would they have improved anyway?
-
 ## Let's Practice Together: Predicting Exam Scores
 
 Try working through this simple example:
 
 **Practice dataset: random hours studied and exam scores**
-
-**Purpose:** Build a small synthetic dataset in a `DataFrame` and inspect the first rows with `head()` before you plot, fit, and diagnose as in the commented tasks.
-
-**Walkthrough:** `pd.DataFrame` aligns `hours_studied` and `exam_scores` as columns; `print(data.head())` shows the first five rows for a quick sanity check.
 
 ```python
 # Generate a realistic dataset
@@ -506,15 +450,6 @@ The model would likely show:
 ## Next steps
 
 - Continue to [Multiple linear regression](./multiple-linear-regression.md).
-
-Now that you understand simple linear regression, you can also explore:
-
-1. **Multiple Linear Regression**: Using several variables to make predictions
-2. **Polynomial Regression**: Fitting curves instead of straight lines
-3. **Regularization Techniques**: Methods to prevent overfitting
-4. **Different Evaluation Metrics**: Other ways to assess your model beyond R²
-
-Remember: Simple linear regression is just the beginning of your predictive modeling journey, but it's a powerful foundation that appears in many more complex methods!
 
 ## Gotchas
 

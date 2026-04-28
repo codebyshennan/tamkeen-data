@@ -1,3 +1,12 @@
+---
+reading_minutes: 35
+objectives:
+  - Fit multivariate OLS and read each coefficient as a conditional effect with the other predictors held fixed.
+  - Detect multicollinearity with VIF and adjust the predictor set when redundancy hides individual effects.
+  - Compare knowledge-based, statistical, and stepwise feature selection without leaking labels into the choice.
+  - Validate fit through residual diagnostics and a predictor correlation heatmap before reporting coefficients.
+---
+
 # Multiple Linear Regression: Prediction with Multiple Factors
 
 **After this lesson:** you can explain the core ideas in “Multiple Linear Regression: Prediction with Multiple Factors” and reproduce the examples here in your own notebook or environment.
@@ -16,8 +25,6 @@ Multiple linear regression extends the simple case to a **linear combination of 
 - [Simple linear regression](./simple-linear-regression.md).
 
 > **Note:** Watch for multicollinearity and omitted-variable bias when adding predictors.
-
-Welcome to the next level of prediction! We've explored how one factor can predict an outcome using simple linear regression. Now we're taking a big step forward by learning how to use **multiple factors at once** to make even better predictions.
 
 ### Video Tutorial: Introduction to Multiple Regression
 
@@ -116,10 +123,6 @@ Let's walk through a concrete example using Python. Don't worry if the code look
 
 **Multiple regression with coefficients, R², and VIF**
 
-**Purpose:** Simulate exam scores from three predictors, fit `LinearRegression` on all three, print each coefficient and the intercept, report in-sample R², and screen for multicollinearity with variance inflation factors.
-
-**Walkthrough:** `model.score(X, y)` is training R²; `variance_inflation_factor` from statsmodels runs per-column VIF on the predictor matrix.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -177,22 +180,6 @@ def check_predictor_similarity(X):
 print("\nMulticollinearity Check (VIF values):")
 print(check_predictor_similarity(X))
 {% endhighlight %}
-```
-Contribution of each factor:
-study_hours: 1.82 points
-prev_gpa: 2.96 points
-sleep_hours: 1.53 points
-
-Starting point (intercept): 0.09
-Model accuracy (R-squared): 0.94
-
-Multicollinearity Check (VIF values):
-      Variable       VIF
-0  study_hours  1.053354
-1     prev_gpa  1.019570
-2  sleep_hours  1.034520
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -281,12 +268,6 @@ Let's interpret what our model is telling us:
    - This means our predictors aren't too similar to each other
    - Rule of thumb: VIF values above 10 indicate problematic similarity
 
-### Visualizing the Model
-
-It's harder to visualize a multiple regression model because it exists in more than two dimensions. However, we can look at the relationship between predicted scores and actual scores:
-
-We can also see how our exam score relates to each individual predictor while holding the others constant:
-
 ## Choosing the Right Predictors
 
 One of the biggest challenges in multiple regression is deciding which factors to include in your model. There are three main approaches:
@@ -302,10 +283,6 @@ This is when you use your understanding of the subject to choose predictors.
 You can let the numbers guide you by including only statistically significant predictors.
 
 **Univariate F-test feature selection (`SelectKBest`)**
-
-**Purpose:** Rank predictors by univariate linear F-scores and keep the top `k` columns, then print which features were selected for this dataset.
-
-**Walkthrough:** `SelectKBest(score_func=f_regression, k=2)` fits separate F-tests; `get_support()` marks the chosen columns.
 
 ```python
 from sklearn.feature_selection import SelectKBest, f_regression
@@ -328,10 +305,6 @@ Statistically strongest features: ['prev_gpa', 'sleep_hours']
 This is like building a team one player at a time - you add predictors one by one, keeping only those that improve the model.
 
 **Recursive feature elimination (`RFE`)**
-
-**Purpose:** Greedy backward selection wrapped around the fitted linear model, keeping a fixed number of features and listing which columns survived.
-
-**Walkthrough:** `RFE(estimator=model, n_features_to_select=2)` uses the already-fitted `model`; `support_` is a boolean mask over `X.columns`.
 
 ```python
 from sklearn.feature_selection import RFE
@@ -356,10 +329,6 @@ Notice how different methods can select different predictors! This shows why it'
 Just like we check a car before a long journey, we should check our model before relying on its predictions. Here are some key diagnostics:
 
 **Residual panels plus predictor correlation heatmap**
-
-**Purpose:** Plot residuals vs fitted, Q-Q of residuals, absolute residuals vs fitted for spread, and a heatmap of `X.corr()` to spot strong predictor–predictor correlations.
-
-**Walkthrough:** The first three panels mirror standard regression diagnostics; `sns.heatmap` on `X.corr()` highlights multicollinearity risks among inputs.
 
 ```python
 # Function for diagnostic plots
@@ -443,51 +412,11 @@ Multiple linear regression is an incredibly versatile tool used across many fiel
 - **Pollution Prediction**: Forecasting air quality based on traffic volume, industrial activity, and weather conditions
 - **Resource Management**: Predicting water usage based on population, season, and weather patterns
 
-## Common Challenges and How to Address Them
-
-Even with a powerful tool like multiple regression, there are pitfalls to watch out for:
-
-### 1. Overfitting: Including Too Many Predictors
-
-**The Problem**: Adding too many predictors can make your model fit the training data perfectly but perform poorly on new data.
-
-**The Analogy**: It's like memorizing exact answers to practice questions rather than understanding the underlying concepts. You'll do great on those specific questions but fail when given new ones.
-
-**The Solution**: Use techniques like cross-validation (testing on data the model hasn't seen) and regularization (penalizing complex models).
-
-### 2. Multicollinearity: When Predictors Are Too Similar
-
-**The Problem**: When predictors are highly correlated, it becomes difficult to determine their individual effects.
-
-**The Analogy**: Imagine trying to determine which twin ate the cookies when they're always together at the same time. It's impossible to separate their effects!
-
-**The Solution**: Check VIF values (like we did earlier) and remove or combine highly correlated predictors.
-
-### 3. Missing Important Variables
-
-**The Problem**: Omitting key predictors can lead to biased results and poor predictions.
-
-**The Analogy**: Trying to predict crop yield while considering rainfall and sunlight, but forgetting about soil quality.
-
-**The Solution**: Use domain knowledge, literature review, and exploratory data analysis to identify potentially important predictors.
-
-### 4. Extrapolation: Predicting Beyond Your Data Range
-
-**The Problem**: Using your model to predict for values far outside your original data range can be unreliable.
-
-**The Analogy**: Testing a car's performance at 30-60 mph, then assuming it will behave similarly at 200 mph.
-
-**The Solution**: Be cautious with predictions outside the range of your training data and clearly communicate the limitations of your model.
-
 ## Hands-On Practice: Sales Prediction Exercise
 
 Try working through this example to solidify your understanding:
 
 **Sales prediction exercise scaffold**
-
-**Purpose:** Create a small synthetic dataset with advertising, price, and competition, then use the commented checklist to explore, fit, and diagnose a multiple regression yourself.
-
-**Walkthrough:** The response is built as a linear combination of predictors plus Gaussian noise; `pd.DataFrame` holds everything for plotting and `sklearn` fitting in the tasks.
 
 ```python
 # Generate a realistic sales dataset
@@ -524,12 +453,6 @@ data = pd.DataFrame({
 #    - 5 competitors
 ```
 
-
-<figure>
-<img src="assets/multiple-linear-regression_fig_1.png" alt="multiple-linear-regression" />
-<figcaption>Figure 1: Are Our Errors Random? (They Should Be!)</figcaption>
-</figure>
-
 ### What You Should Find:
 
 - **Advertising** should have a positive coefficient (more advertising = more sales)
@@ -549,15 +472,6 @@ data = pd.DataFrame({
 ## Next steps
 
 - Continue to [Model diagnostics](./model-diagnostics.md).
-
-## Where to Go From Here
-
-Now that you understand multiple linear regression, you can explore:
-
-1. **Polynomial Regression**: Adding squared or cubed terms to model curved relationships
-2. **Interaction Terms**: When the effect of one variable depends on another
-3. **Regularization Techniques**: Ridge, Lasso, and Elastic Net for handling many predictors
-4. **Categorical Variables**: Using dummy variables to include non-numeric factors
 
 ## Gotchas
 

@@ -78,8 +78,6 @@ Understanding relationships in data is a core skill for analysis and modelling. 
 3. Practice with the provided examples
 4. Try applying these concepts to your own data
 
-Note: Learning statistics is like learning a new language - it takes practice and patience. Take your time, and don't hesitate to revisit concepts as needed!
-
 ## Additional Resources
 
 - [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/)
