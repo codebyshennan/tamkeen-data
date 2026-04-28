@@ -135,6 +135,20 @@ plt.show()
 print(exam_data.head())
 {% endhighlight %}
 
+<figure>
+<img src="assets/logistic-regression_fig_1.png" alt="logistic-regression" />
+<figcaption>Figure 1: Exam Results Based on Study Hours and Aptitude</figcaption>
+</figure>
+
+```
+   StudyHours  AptitudeScore  Passed
+0    5.993428      43.769439       0
+1    4.723471      58.690320       1
+2    6.295377      59.859282       1
+3    8.046060      52.965841       1
+4    4.531693      62.580714       0
+```
+
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-11" data-tint="1">
@@ -1699,6 +1713,12 @@ if prob > 0.5:
 else:
     print("Action: No special offer needed.")
 {% endhighlight %}
+```
+Customer profile: 28 years old, 5 mins on site, viewed 8 pages, returning customer: True
+Probability of purchase: 4.46%
+Action: No special offer needed.
+```
+
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-11" data-tint="1">
