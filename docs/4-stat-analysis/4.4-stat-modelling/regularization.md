@@ -149,6 +149,18 @@ plt.grid(True)
 plt.savefig('overfitting_example.png')
 plt.show()
 {% endhighlight %}
+
+<figure>
+<img src="assets/regularization_fig_1.png" alt="regularization" />
+<figcaption>Figure 1: Simple Quadratic Function with Noise</figcaption>
+</figure>
+
+
+<figure>
+<img src="assets/regularization_fig_2.png" alt="regularization" />
+<figcaption>Figure 2: Overfitting Example: Different Polynomial Degrees</figcaption>
+</figure>
+
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-14" data-tint="1">
@@ -310,6 +322,12 @@ def plot_regularization_effects():
 # Execute the function
 plot_regularization_effects()
 {% endhighlight %}
+
+<figure>
+<img src="assets/regularization_fig_3.png" alt="regularization" />
+<figcaption>Figure 3: Ridge Regression (L2)</figcaption>
+</figure>
+
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-13" data-tint="1">
@@ -460,6 +478,12 @@ def plot_constraint_spaces():
 # Execute the function
 plot_constraint_spaces()
 {% endhighlight %}
+
+<figure>
+<img src="assets/regularization_fig_4.png" alt="regularization" />
+<figcaption>Figure 4: L1 Constraint (Diamond)</figcaption>
+</figure>
+
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-12" data-tint="1">
@@ -626,6 +650,19 @@ def generate_collinear_data(n_samples=200, noise_level=0.5):
 X_collinear, y_collinear, true_coef = generate_collinear_data()
 ridge_results = implement_ridge(X_collinear, y_collinear)
 {% endhighlight %}
+
+<figure>
+<img src="assets/regularization_fig_5.png" alt="regularization" />
+<figcaption>Figure 5: Ridge Regression Coefficients (α=0.0673)</figcaption>
+</figure>
+
+```
+Ridge Regression Results:
+Best alpha: 0.0673
+Training R²: 0.9537
+Test R²: 0.9573
+```
+
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-13" data-tint="1">
@@ -765,6 +802,20 @@ def implement_lasso(X, y, alphas=np.logspace(-4, 1, 100)):
 # Apply Lasso regression to the same data
 lasso_results = implement_lasso(X_collinear, y_collinear)
 {% endhighlight %}
+
+<figure>
+<img src="assets/regularization_fig_6.png" alt="regularization" />
+<figcaption>Figure 6: Lasso Regression Coefficients (α=0.0059)</figcaption>
+</figure>
+
+```
+Lasso Regression Results:
+Best alpha: 0.0059
+Training R²: 0.9532
+Test R²: 0.9593
+Number of features selected: 5 out of 5
+```
+
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-14" data-tint="1">
@@ -890,6 +941,21 @@ def implement_elastic_net(X, y, l1_ratios=[.1, .5, .7, .9, .95, .99, 1], alphas=
 # Apply Elastic Net regression
 elastic_net_results = implement_elastic_net(X_collinear, y_collinear)
 {% endhighlight %}
+
+<figure>
+<img src="assets/regularization_fig_7.png" alt="regularization" />
+<figcaption>Figure 7: Elastic Net Coefficients (α=0.0059, l1_ratio=1.00)</figcaption>
+</figure>
+
+```
+Elastic Net Results:
+Best alpha: 0.0059
+Best l1_ratio: 1.00
+Training R²: 0.9532
+Test R²: 0.9592
+Number of features selected: 4 out of 5
+```
+
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-14" data-tint="1">
@@ -1154,6 +1220,20 @@ def compare_regularization_methods(X, y):
 comparison = compare_regularization_methods(X_collinear, y_collinear)
 print(comparison)
 {% endhighlight %}
+
+<figure>
+<img src="assets/regularization_fig_8.png" alt="regularization" />
+<figcaption>Figure 8: Model Performance Comparison</figcaption>
+</figure>
+
+```
+                                   Model  Train R²   Test R²  Features Used
+0  Linear Regression (No Regularization)  0.953706  0.956742              5
+1                  Ridge Regression (L2)  0.953689  0.957309              5
+2                  Lasso Regression (L1)  0.953238  0.959198              4
+3                  Elastic Net (L1 + L2)  0.953238  0.959198              4
+```
+
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-14" data-tint="1">
