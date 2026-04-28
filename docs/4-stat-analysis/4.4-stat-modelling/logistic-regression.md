@@ -1666,8 +1666,10 @@ def predict_purchase_probability(age, time_on_site, pages_visited, is_returning_
     """Predict the probability of purchase based on customer characteristics"""
     # Create a synthetic model (in real applications, you would load a trained model)
     model = LogisticRegression()
+    model.classes_ = np.array([0, 1])
     model.coef_ = np.array([[0.03, 0.05, 0.1, 0.8]])
     model.intercept_ = np.array([-4])
+    model.n_features_in_ = 4
     
     # Create input features
     X = np.array([[age, time_on_site, pages_visited, int(is_returning_customer)]])
