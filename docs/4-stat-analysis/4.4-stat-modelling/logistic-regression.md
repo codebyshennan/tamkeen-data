@@ -40,8 +40,6 @@ Logistic regression is one of the most fundamental and widely used classificatio
 
 {% include mermaid-diagram.html src="4-stat-analysis/4.4-stat-modelling/diagrams/logistic-regression-1.mmd" %}
 
-> **Figure (add screenshot or diagram):** Sigmoid curve — x-axis is the linear score z (−6 to +6), y-axis is probability (0 to 1), showing the characteristic S-shape with p=0.5 at z=0 and the decision boundary marked.
-
 ### What is Logistic Regression?
 
 Logistic regression is a statistical method that:
