@@ -242,10 +242,10 @@ $$P(Y=1|X) = \frac{1}{1 + e^{-(\beta_0 + \beta_1X_1 + ... + \beta_pX_p)}}$$
 
 Where:
 
-- $P(Y=1|X)$ is the probability of the positive class given the input features X
-- $\beta_0$ is the intercept (bias)
-- $\beta_1, ..., \beta_p$ are the coefficients for each feature
-- $X_1, ..., X_p$ are the input features
+- \\(P(Y=1 \mid X)\\) is the probability of the positive class given the input features.
+- \\(\beta_0\\) is the intercept (bias).
+- \\(\beta_1, \dots, \beta_p\\) are the coefficients for each feature.
+- \\(X_1, \dots, X_p\\) are the input features.
 
 To make the model more useful, we can transform this equation to get the "log odds" or "logit" function:
 
