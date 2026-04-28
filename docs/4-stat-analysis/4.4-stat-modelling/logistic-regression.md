@@ -946,15 +946,14 @@ This comparison shows that:
 **Walkthrough:** `LogisticRegression(class_weight=...)` constructors only (no fit in snippet).
 
 ```python
-# Example of using class weights
 from sklearn.linear_model import LogisticRegression
 
-# Option 1: Let sklearn calculate optimal weights
-weighted_model = LogisticRegression(class_weight='balanced')
+# Option 1: let sklearn pick weights inversely proportional to class frequencies
+balanced_model = LogisticRegression(class_weight='balanced')
 
-# Option 2: Custom weights
-class_weights = {0: 1, 1: 10}  # Give 10x importance to class 1
-weighted_model = LogisticRegression(class_weight=class_weights)
+# Option 2: pass an explicit {class: weight} dict for asymmetric costs
+class_weights = {0: 1, 1: 10}  # 10x importance on class 1
+custom_weighted_model = LogisticRegression(class_weight=class_weights)
 ```
 
 ![logistic-regression](assets/logistic-regression_fig_12.png)
