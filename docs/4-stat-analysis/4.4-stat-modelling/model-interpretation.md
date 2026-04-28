@@ -1,6 +1,15 @@
+---
+reading_minutes: 60
+objectives:
+  - Interpret regression and classification coefficients in the original units of the data.
+  - Compute and read partial dependence plots and permutation feature importance.
+  - Apply SHAP and LIME-style attributions to explain individual predictions.
+  - Communicate model behaviour to non-technical stakeholders with appropriate caveats.
+---
+
 # Model Interpretation
 
-**After this lesson:** you can explain the core ideas in “Model Interpretation” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain what a fitted model is doing in terms a stakeholder can act on — coefficients, partial dependence, permutation importance, and SHAP-style attributions.
 
 ## Overview
 
