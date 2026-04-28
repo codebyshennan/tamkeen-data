@@ -867,6 +867,7 @@ SHAP values provide a powerful framework for interpreting model predictions:
 <div class="code-explainer__code">
 
 {% highlight python %}
+# no-output
 # NOTE: You need to install shap first with: pip install shap
 import shap
 
