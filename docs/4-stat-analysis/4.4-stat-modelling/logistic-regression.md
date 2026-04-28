@@ -1024,16 +1024,17 @@ Logistic regression can be extended to handle multiple classes using two approac
 
 ### 1. One-vs-Rest (OvR)
 
-Trains one binary classifier per class and selects the class with the highest probability.
+Trains one binary classifier per class and selects the class with the highest probability. In sklearn, wrap a binary `LogisticRegression` in `OneVsRestClassifier`.
 
 **Iris data: one-vs-rest logistic regression**
 
-**Purpose:** Load Iris, split, fit `LogisticRegression(multi_class='ovr')`, report test accuracy and `predict_proba` shape.
+**Purpose:** Load Iris, split, fit `OneVsRestClassifier(LogisticRegression())`, report test accuracy and `predict_proba` shape.
 
 **Walkthrough:** `load_iris`; `train_test_split`; `score`; `predict_proba` for class probabilities.
 
 ```python
 from sklearn.linear_model import LogisticRegression
+from sklearn.multiclass import OneVsRestClassifier
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 
@@ -1042,32 +1043,32 @@ iris = load_iris()
 X, y = iris.data, iris.target
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
-# Train multi-class logistic regression model
-multi_class_model = LogisticRegression(multi_class='ovr', random_state=42)
-multi_class_model.fit(X_train, y_train)
+# One-vs-Rest with explicit wrapper
+ovr_model = OneVsRestClassifier(LogisticRegression(max_iter=1000, random_state=42))
+ovr_model.fit(X_train, y_train)
 
 # Evaluate
-accuracy = multi_class_model.score(X_test, y_test)
+accuracy = ovr_model.score(X_test, y_test)
 print(f"Accuracy on multi-class problem: {accuracy:.4f}")
 
 # Get probabilities for each class
-class_probabilities = multi_class_model.predict_proba(X_test)
+class_probabilities = ovr_model.predict_proba(X_test)
 print("Shape of probability matrix:", class_probabilities.shape)
 ```
 
 ### 2. Multinomial Logistic Regression (Softmax Regression)
 
-Generalizes logistic regression to multiple classes using the softmax function.
+Generalizes logistic regression to multiple classes using the softmax function. In sklearn ≥ 1.5 the default behaviour for `LogisticRegression` on a multi-class target is multinomial; the explicit `multi_class` argument was deprecated in 1.5 and removed in 1.7.
 
-**Multinomial logistic (`multinomial` + `lbfgs`) on the same Iris split**
+**Multinomial logistic on the same Iris split**
 
 **Purpose:** Fit softmax regression on the same train/test as OvR and compare held-out accuracy.
 
-**Walkthrough:** `multi_class='multinomial'`; `solver='lbfgs'`; `score` on `X_test`, `y_test`.
+**Walkthrough:** Default `LogisticRegression` with `solver='lbfgs'`; `score` on `X_test`, `y_test`.
 
 ```python
-# Train multinomial logistic regression
-softmax_model = LogisticRegression(multi_class='multinomial', solver='lbfgs', random_state=42)
+# Multinomial is the default for multi-class targets in modern sklearn
+softmax_model = LogisticRegression(solver='lbfgs', max_iter=1000, random_state=42)
 softmax_model.fit(X_train, y_train)
 
 # Compare performance
