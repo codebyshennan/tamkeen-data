@@ -1129,44 +1129,6 @@ weighted avg       0.95      0.94      0.92       125
 </aside>
 </div>
 
-![logistic-regression](assets/logistic-regression_fig_9.png)
-
-```
-Loan approval dataset created.
-              Age        Income  ...  CreditScore    Approved
-count  500.000000    500.000000  ...   500.000000  500.000000
-mean    35.068380  50477.391756  ...   849.351735    0.046000
-std      9.812532  14669.957928  ...     6.854254    0.209695
-min      2.587327   9546.700356  ...   738.183677    0.000000
-25%     27.996926  41070.623902  ...   850.000000    0.000000
-50%     35.127971  50427.973993  ...   850.000000    0.000000
-75%     41.367833  59768.634463  ...   850.000000    0.000000
-max     73.527315  89485.730973  ...   850.000000    1.000000
-
-[8 rows x 6 columns]
-
-Loan Approval Model Coefficients:
-          Feature  Coefficient  Odds_Ratio
-0             Age     0.630864    1.879233
-1          Income     0.583599    1.792477
-2  EducationYears     0.460648    1.585101
-4     CreditScore     0.042793    1.043722
-3    DebtToIncome    -0.244546    0.783060
-Model Accuracy: 0.9440
-
-Confusion Matrix:
-
-Classification Report:
-              precision    recall  f1-score   support
-
-      Denied       0.94      1.00      0.97       117
-    Approved       1.00      0.12      0.22         8
-
-    accuracy                           0.94       125
-   macro avg       0.97      0.56      0.60       125
-weighted avg       0.95      0.94      0.92       125
-```
-
 The 0.94 accuracy looks impressive but the recall on the **Approved** class is only 0.12 — the model defaults to predicting "Denied" because that class dominates the training data (only 4.6 % approved). This is a textbook **class-imbalance** failure; the next subsection on `class_weight='balanced'` is the standard fix.
 
 ### 2. Feature Importance and Interpretation
