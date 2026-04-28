@@ -288,12 +288,12 @@ $$\min_{\beta} \sum_{i=1}^n (y_i - \hat{y}_i)^2 + \lambda \sum_{j=1}^p |\beta_j|
 
 Where:
 
-- $y_i$ is the actual target value
-- $\hat{y}_i$ is the predicted value
-- $\beta_j$ are the model coefficients
-- $\lambda$ (lambda) is the regularization strength (also called alpha in scikit-learn)
-- $n$ is the number of samples
-- $p$ is the number of features
+- \\(y_i\\) is the actual target value.
+- \\(\hat{y}_i\\) is the predicted value.
+- \\(\beta_j\\) are the model coefficients.
+- \\(\lambda\\) is the regularization strength (called `alpha` in scikit-learn).
+- \\(n\\) is the number of samples.
+- \\(p\\) is the number of features.
 
 ### Visualizing the Constraint Space
 
