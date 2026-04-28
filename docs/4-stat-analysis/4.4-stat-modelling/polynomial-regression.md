@@ -1,6 +1,15 @@
+---
+reading_minutes: 40
+objectives:
+  - Recognise non-linear structure in scatter plots and decide when polynomial features are appropriate.
+  - Build polynomial features with sklearn pipelines and fit linear-in-parameters models with curvature.
+  - Diagnose under- and overfitting across degrees by comparing train vs validation error.
+  - Choose polynomial degree with cross-validation rather than visual inspection alone.
+---
+
 # Polynomial Regression
 
-**After this lesson:** you can explain the core ideas in “Polynomial Regression” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can fit, evaluate, and tune polynomial regression models for non-linear relationships in one or more predictors.
 
 ## Overview
 
