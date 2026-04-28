@@ -56,23 +56,23 @@ Multiple linear regression is like using a complete recipe with flour, sugar, bu
 
 The formula looks like this:
 
-\\[ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + ... + \beta_p X_p + \epsilon \\]
+\\[ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_p x_p + \epsilon \\]
 
 This might look intimidating, but let's break it down:
 
-- **Y** is what we're trying to predict (like exam score)
-- **X₁, X₂, etc.** are our predictors (like hours studied, hours slept, previous knowledge)
+- **y** is what we're trying to predict (like exam score)
+- **x₁, x₂, …** are our predictors (like hours studied, hours slept, previous knowledge)
 - **β₀** is our starting point (intercept)
-- **β₁, β₂, etc.** tell us how much each predictor contributes to our prediction
+- **β₁, β₂, …** tell us how much each predictor contributes to our prediction
 - **ε** represents the error (because no prediction is perfect)
 
 ### Real-World Example: Predicting House Prices
 
 Imagine we want to predict house prices:
-- X₁ might be the house size in square feet
-- X₂ might be the number of bedrooms
-- X₃ might be the house's age
-- Y would be the house price
+- x₁ might be the house size in square feet
+- x₂ might be the number of bedrooms
+- x₃ might be the house's age
+- y would be the house price
 
 Our equation might look like:
 Price = $50,000 + ($100 × SquareFeet) + ($5,000 × Bedrooms) - ($1,000 × Age)

@@ -58,23 +58,23 @@ The formula for our prediction line is beautifully simple:
 **Predicted Value = Starting Point + Rate of Change × Input Value**
 
 In math notation:
-\\[ \hat{y} = a + bx \\]
+\\[ \hat{y} = \beta_0 + \beta_1 x \\]
 
 Where:
 - **ŷ (y-hat)** is what we're predicting
-- **a** is our starting point (y-intercept)
-- **b** is our rate of change (slope)
+- **β₀** is our starting point (y-intercept)
+- **β₁** is our rate of change (slope)
 - **x** is our input value
 
 ### Real-World Analogy: The Road Trip
 
 Think of simple linear regression like planning a road trip:
-- **Starting point (a)**: Where you begin your journey (when x = 0)
-- **Rate of change (b)**: How fast you're traveling (speed)
+- **Starting point (β₀)**: Where you begin your journey (when x = 0)
+- **Rate of change (β₁)**: How fast you're traveling (speed)
 - **Input value (x)**: How long you've been driving (time)
-- **Predicted value (y)**: How far you've traveled (distance)
+- **Predicted value (ŷ)**: How far you've traveled (distance)
 
-If you start at mile marker 0 and drive at 60 miles per hour, after 2 hours (x), you'll have traveled 120 miles (y). Your formula would be: y = 0 + 60x.
+If you start at mile marker 0 and drive at 60 miles per hour, after 2 hours (x), you'll have traveled 120 miles (ŷ). Your formula would be: ŷ = 0 + 60x.
 
 ## Before We Start: What Makes a Good Regression?
 
@@ -292,7 +292,8 @@ def plot_diagnostics(X, y, y_pred):
     axes[1,0].set_title('Scale-Location (check for constant spread)')
     
     # 4. Residuals vs Leverage - checks for influential points
-    leverage = np.diagonal(X @ np.linalg.inv(X.T @ X) @ X.T)
+    X_design = np.column_stack([np.ones(len(X)), X])  # add intercept column
+    leverage = np.diagonal(X_design @ np.linalg.inv(X_design.T @ X_design) @ X_design.T)
     axes[1,1].scatter(leverage, residuals)
     axes[1,1].set_xlabel('Leverage')
     axes[1,1].set_ylabel('Residuals')

@@ -292,12 +292,13 @@ def find_all_around_troublemakers(model, X, y):
     errors = y - y_pred
 
     # Calculate leverage (how extreme each point's x-values are)
-    hat_matrix = X @ np.linalg.inv(X.T @ X) @ X.T
+    X_design = np.column_stack([np.ones(len(X)), X])  # add intercept column
+    hat_matrix = X_design @ np.linalg.inv(X_design.T @ X_design) @ X_design.T
     leverage = np.diagonal(hat_matrix)
 
     # Calculate Cook's distance
     n = len(y)
-    p = X.shape[1]
+    p = X_design.shape[1]  # number of parameters including intercept
     mse = np.sum(errors**2) / (n - p)
     cooks_d = (errors**2 * leverage) / (p * mse * (1 - leverage)**2)
 
@@ -363,13 +364,15 @@ def find_all_around_troublemakers(model, X, y):
 def find_unusual_x_values(X):
     """Find data points with unusual X values."""
     # Calculate hat values (another name for leverage)
-    hat_matrix = X @ np.linalg.inv(X.T @ X) @ X.T
+    X_design = np.column_stack([np.ones(len(X)), X])  # add intercept column
+    hat_matrix = X_design @ np.linalg.inv(X_design.T @ X_design) @ X_design.T
     leverage = np.diagonal(hat_matrix)
+    p = X_design.shape[1]
 
     # Plot
     plt.figure(figsize=(10, 6))
     plt.stem(range(len(leverage)), leverage, markerfmt='bo')
-    plt.axhline(y=2*X.shape[1]/len(X), color='r', linestyle='--', label='Threshold for concern')
+    plt.axhline(y=2*p/len(X), color='r', linestyle='--', label='Threshold for concern')
     plt.xlabel('Data Point Number')
     plt.ylabel('Leverage (Unusual X Values)')
     plt.title('Which Points Have Unusual X Values?')
@@ -452,7 +455,7 @@ def give_model_complete_checkup(model, X, y):
 
     # Summary of issues found
     print("\n=== SUMMARY OF POTENTIAL ISSUES ===")
-    print(f"Points with unusual X values: {sum(leverage > 2*X.shape[1]/len(X))}")
+    print(f"Points with unusual X values: {sum(leverage > 2*(X.shape[1]+1)/len(X))}")
     print(f"Points with too much overall influence: {sum(cooks_d > 4/len(y))}")
 
     return {
@@ -584,7 +587,7 @@ If p-value < 0.05, errors likely don't follow a bell curve
 ✅ FINDING TROUBLEMAKER POINTS...
 
 === SUMMARY OF POTENTIAL ISSUES ===
-Points with unusual X values: 5
+Points with unusual X values: 4
 Points with too much overall influence: 8
 ```
 
