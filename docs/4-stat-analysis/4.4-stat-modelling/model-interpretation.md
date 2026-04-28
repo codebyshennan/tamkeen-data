@@ -655,22 +655,20 @@ PDPs show how a feature affects predictions, on average, while controlling for o
 
 {% highlight python %}
 from sklearn.ensemble import GradientBoostingRegressor
-from sklearn.inspection import partial_dependence, plot_partial_dependence
+from sklearn.inspection import partial_dependence, PartialDependenceDisplay
 
 # Train a more complex model
 gbm = GradientBoostingRegressor(random_state=42)
 gbm.fit(X, y)
 
-# Create partial dependence plots
-fig, ax = plt.subplots(figsize=(12, 8))
-
-# Calculate and plot partial dependence for specific features
+# Create partial dependence plots (sklearn 1.5+ uses PartialDependenceDisplay)
 features_to_plot = ['Income', 'Age']
-display = plot_partial_dependence(
+fig, ax = plt.subplots(figsize=(12, 8))
+PartialDependenceDisplay.from_estimator(
     gbm, X, features_to_plot,
     kind='average', subsample=100,
     n_jobs=3, grid_resolution=20, random_state=42,
-    ax=ax
+    ax=ax,
 )
 fig.suptitle('Partial Dependence of Loan Amount on Selected Features', fontsize=16)
 plt.subplots_adjust(top=0.9)
@@ -684,7 +682,7 @@ for feature in features_to_plot:
 
     # Plot
     plt.figure(figsize=(8, 6))
-    plt.plot(pdp_result['values'][0], pdp_result['average'][0], '-', linewidth=2)
+    plt.plot(pdp_result['grid_values'][0], pdp_result['average'][0], '-', linewidth=2)
     plt.xlabel(feature)
     plt.ylabel('Partial Dependence')
     plt.title(f'Partial Dependence of Loan Amount on {feature}')
