@@ -735,13 +735,15 @@ Confusion Matrix:
 Classification Report:
               precision    recall  f1-score   support
 
-      Failed       0.94      1.00      0.97       117
-      Passed       1.00      0.12      0.22         8
+      Denied       0.94      1.00      0.97       117
+    Approved       1.00      0.12      0.22         8
 
     accuracy                           0.94       125
    macro avg       0.97      0.56      0.60       125
 weighted avg       0.95      0.94      0.92       125
 ```
+
+The 0.94 accuracy looks impressive but the recall on the **Approved** class is only 0.12 — the model defaults to predicting "Denied" because that class dominates the training data (only 4.6 % approved). This is a textbook **class-imbalance** failure; the next subsection on `class_weight='balanced'` is the standard fix.
 
 ### 2. Feature Importance and Interpretation
 
