@@ -1138,5 +1138,3 @@ X_train, X_test, y_train, y_test = train_test_split(
 - [Introduction to Statistical Learning](https://www.statlearning.com/) (Chapter 6)
 - [Elements of Statistical Learning](https://web.stanford.edu/~hastie/ElemStatLearn/) (Chapter 3)
 - [Regularization for Machine Learning](https://towardsdatascience.com/regularization-in-machine-learning-76441ddcf99a)
-
-Remember: Regularization is a powerful technique for improving model performance and interpretability, but it requires careful parameter tuning and feature scaling. Start simple with Ridge regression and gradually explore more complex approaches like Lasso and Elastic Net as needed.
