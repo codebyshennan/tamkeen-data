@@ -1,6 +1,15 @@
+---
+reading_minutes: 40
+objectives:
+  - Explain the bias-variance tradeoff and how penalising coefficients reduces variance.
+  - Apply Ridge (L2), Lasso (L1), and Elastic Net with sklearn, scaling features beforehand.
+  - Tune the penalty strength α with cross-validation rather than a single split.
+  - Read the qualitative difference between Ridge shrinkage and Lasso’s exact zeros for feature selection.
+---
+
 # Regularization Techniques
 
-**After this lesson:** you can explain the core ideas in “Regularization Techniques” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can fit, tune, and choose between Ridge, Lasso, and Elastic Net models to control overfitting and stabilise coefficients.
 
 ## Overview
 
