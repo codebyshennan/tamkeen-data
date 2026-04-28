@@ -1737,5 +1737,3 @@ plt.show()
 - [Elements of Statistical Learning](https://web.stanford.edu/~hastie/ElemStatLearn/) (Chapter 7)
 - [Applied Predictive Modeling](http://appliedpredictivemodeling.com/) by Max Kuhn and Kjell Johnson
 - [Feature Engineering and Selection](http://www.feat.engineering/) by Max Kuhn and Kjell Johnson
-
-Remember: The best model is not always the most complex one. Focus on finding the right balance between model complexity, performance, and practical utility for your specific problem and constraints.
