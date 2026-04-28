@@ -196,13 +196,10 @@ plot_bias_variance_tradeoff()
 <figcaption>Figure 1: Are Our Errors Random? (They Should Be!)</figcaption>
 </figure>
 
-
 <figure>
 <img src="assets/model-selection_fig_2.png" alt="model-selection" />
 <figcaption>Figure 2: Bias-Variance Tradeoff</figcaption>
 </figure>
-
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -253,8 +250,6 @@ plot_bias_variance_tradeoff()
   </div>
 </aside>
 </div>
-
-When you run this code, you'll see a visualization like the one below (saved as `bias_variance_tradeoff.png`):
 
 ![Bias-Variance Tradeoff](assets/bias_variance_tradeoff.png)
 
@@ -356,8 +351,6 @@ demonstrate_overfitting_underfitting()
 Train MSE: 16.92, Test MSE: 16.23</figcaption>
 </figure>
 
-
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-16" data-tint="1">
@@ -398,8 +391,6 @@ Train MSE: 16.92, Test MSE: 16.23</figcaption>
   </div>
 </aside>
 </div>
-
-When you run this code, you'll see a visualization like the one below (saved as `overfitting_underfitting.png`):
 
 ![Overfitting vs Underfitting](assets/overfitting_underfitting.png)
 
@@ -515,7 +506,6 @@ Training MSE: 0.8864
 Test MSE: 0.8728
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-14" data-tint="1">
@@ -557,14 +547,10 @@ Test MSE: 0.8728
 </aside>
 </div>
 
-When you run this code, you'll see output like:
-
 ```
 Training MSE: 0.9425
 Test MSE: 1.0126
 ```
-
-And a visualization like the one below (saved as `train_test_split.png`):
 
 ![Train-Test Split](assets/train_test_split.png)
 
@@ -735,7 +721,6 @@ Degree 2 wins — it matches the true data-generating process (which is quadrati
 
 **Key rule:** when two models have similar CV MSE, prefer the simpler one. If degree 2 (CV MSE 1.018 ± 0.102) and degree 3 (CV MSE 1.025 ± 0.114) are within one standard error, degree 2 wins on parsimony.
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-19" data-tint="1">
@@ -786,14 +771,10 @@ Degree 2 wins — it matches the true data-generating process (which is quadrati
 </aside>
 </div>
 
-When you run this code, you'll see output like:
-
 ```
 Mean MSE: 0.9836
 Standard Deviation: 0.0423
 ```
-
-And a visualization like the one below (saved as `cross_validation.png`):
 
 ![Cross Validation](assets/cross_validation.png)
 
@@ -930,7 +911,6 @@ Best model according to AIC: Degree 5.0 polynomial
 Best model according to BIC: Degree 5.0 polynomial
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-10" data-tint="1">
@@ -981,14 +961,10 @@ Best model according to BIC: Degree 5.0 polynomial
 </aside>
 </div>
 
-When you run this code, you'll see output like:
-
 ```
 Best model according to AIC: Degree 3 polynomial
 Best model according to BIC: Degree 2 polynomial
 ```
-
-And a visualization like the one below (saved as `information_criteria.png`):
 
 ![Information Criteria](assets/information_criteria.png)
 
@@ -1164,7 +1140,6 @@ Optimal number of features: 3
 Optimal features: ['Feature 1', 'Feature 3', 'Feature 2']
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-30" data-tint="1">
@@ -1224,8 +1199,6 @@ Optimal features: ['Feature 1', 'Feature 3', 'Feature 2']
 </aside>
 </div>
 
-When you run this code, you'll see output like:
-
 ```
 Step 1: Added Feature 1, Train MSE: 1.1254, Test MSE: 1.3421
 Step 2: Added Feature 3, Train MSE: 0.7856, Test MSE: 0.9124
@@ -1234,8 +1207,6 @@ Step 3: Added Feature 2, Train MSE: 0.6723, Test MSE: 0.8976
 Optimal number of features: 3
 Optimal features: ['Feature 1', 'Feature 3', 'Feature 2']
 ```
-
-And a visualization like the one below (saved as `forward_selection.png`):
 
 ![Forward Selection](assets/forward_selection.png)
 
@@ -1414,7 +1385,6 @@ Step 7: Removed Feature 3, Train MSE: 9.2499, Test MSE: 23.3469
 Optimal number of features: 3
 Optimal features: ['Feature 1', 'Feature 2', 'Feature 3']
 ```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

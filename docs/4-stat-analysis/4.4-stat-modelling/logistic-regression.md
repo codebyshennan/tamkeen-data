@@ -83,7 +83,10 @@ Let's visualize a simple binary classification problem that logistic regression 
 
 **Walkthrough:** Manual sigmoid for `passing_probability`; `np.random.binomial`; matplotlib scatter with markers/colors by class; `savefig` for the lesson figure.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -130,7 +133,47 @@ plt.savefig('binary_classification_example.png')
 plt.show()
 
 print(exam_data.head())
-```
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-11" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Import numpy as np</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–11: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="12-23" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Generate synthetic data for student exam results</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 12–23: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="24-34" data-tint="3">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Exam_data = pd.DataFrame({</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 24–34: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="35-46" data-tint="4">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Plt.scatter(exam_data.StudyHours[exam_data.Pa…</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 35–46: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ```
    StudyHours  AptitudeScore  Passed
@@ -141,8 +184,7 @@ print(exam_data.head())
 4    4.531693      62.580714       0
 ```
 
-This code generates and visualizes a dataset representing student exam results based on study hours and aptitude scores. When you run it, you'll see a scatter plot like this (saved as `binary_classification_example.png`):
-
+This code generates and visualizes a dataset representing student exam results based on study hours and aptitude scores:
 ![Binary Classification Example](assets/binary_classification_example.png)
 
 In this plot:
@@ -189,7 +231,10 @@ Let's visualize this function:
 
 **Walkthrough:** Pure NumPy and matplotlib; `plt.annotate`, `axhline`, `axvline`; `savefig` as `logistic_curve_annotated.png`.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 def plot_logistic_curve():
     """Visualize the logistic function with annotations"""
     x = np.linspace(-6, 6, 100)
@@ -221,9 +266,38 @@ def plot_logistic_curve():
 
 # Plot the logistic curve
 plot_logistic_curve()
-```
-
-When you run this code, you'll see a visualization of the logistic function (saved as `logistic_curve_annotated.png`):
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-10" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Def plot_logistic_curve():</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–10: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="11-20" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Arrowprops=dict(facecolor=&#x27;black&#x27;, shrink=0.05))</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 11–20: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="21-31" data-tint="3">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Plt.title(&#x27;The Logistic (Sigmoid) Function&#x27;)</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 21–31: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ![Logistic Curve Annotated](assets/logistic_curve_annotated.png)
 
@@ -273,7 +347,10 @@ Let's visualize how different coefficients affect the probability curve:
 
 **Walkthrough:** Loop over scenario dict mapping label → `z` array; `1/(1+np.exp(-z))`; shared horizontal line at 0.5.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 def plot_coefficient_effects():
     """Visualize how coefficients affect the probability curve"""
     x = np.linspace(-6, 6, 100)
@@ -302,9 +379,29 @@ def plot_coefficient_effects():
 
 # Plot how coefficients affect the probability curve
 plot_coefficient_effects()
-```
-
-When you run this code, you'll see how different coefficients affect the probability curve (saved as `coefficient_effects.png`):
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-14" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Def plot_coefficient_effects():</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–14: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="15-28" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Y = 1 / (1 + np.exp(-z))</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 15–28: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ![Coefficient Effects](assets/coefficient_effects.png)
 
@@ -331,7 +428,10 @@ Here's a way to visualize odds ratios:
 
 **Walkthrough:** `np.exp` for point and CI limits; `plt.errorbar` with asymmetric x errors; `plt.xscale('log')`.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 def plot_odds_ratios():
     """Visualize odds ratios from coefficients"""
     # Sample coefficients
@@ -374,9 +474,38 @@ def plot_odds_ratios():
 
 # Plot odds ratios
 plot_odds_ratios()
-```
-
-When you run this code, you'll see a visualization of odds ratios (saved as `odds_ratios.png`):
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-14" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Def plot_odds_ratios():</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–14: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="15-28" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">&#x27;Feature&#x27;: feature_names,</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 15–28: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="29-42" data-tint="3">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Plt.yticks(range(len(df)), df.Feature)</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 29–42: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ![Odds Ratios](assets/odds_ratios.png)
 
@@ -413,7 +542,10 @@ Before building a model, you need to:
 
 **Walkthrough:** `train_test_split`; `StandardScaler.fit_transform` / `transform`; print shapes to confirm dimensions.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 # Let's use our exam data from earlier
 X = exam_data[['StudyHours', 'AptitudeScore']]
 y = exam_data['Passed']
@@ -429,7 +561,29 @@ X_test_scaled = scaler.transform(X_test)
 print("Data preparation complete.")
 print(f"Training set shape: {X_train.shape}")
 print(f"Test set shape: {X_test.shape}")
-```
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-7" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Let&#x27;s use our exam data from earlier</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–7: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="8-15" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Scale the features</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 8–15: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ```
 Data preparation complete.
@@ -445,7 +599,10 @@ Test set shape: (25, 2)
 
 **Walkthrough:** `LogisticRegression.fit`; odds ratio as `np.exp(model.coef_[0])`; comments sketch the 0.5 probability contour in 2D.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 # Create and train the model
 model = LogisticRegression(random_state=42)
 model.fit(X_train_scaled, y_train)
@@ -465,7 +622,29 @@ print(f"\nIntercept: {model.intercept_[0]:.4f}")
 # Calculate probability threshold at the decision boundary
 # z = β₀ + β₁x₁ + β₂x₂ = 0
 # Solving for x₂ (AptitudeScore): x₂ = -(β₀ + β₁x₁) / β₂
-```
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-9" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Create and train the model</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–9: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="10-19" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">})</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 10–19: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ```
 Model trained successfully!
@@ -486,7 +665,10 @@ Intercept: 0.2269
 
 **Walkthrough:** `np.meshgrid`; `scaler.transform` on flattened grid; `contourf` + `contour` at 0.5; `scatter` colored by class.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 def plot_decision_boundary(X, y, model, scaler):
     """Plot the decision boundary of a logistic regression model"""
     # Create a mesh grid of points to evaluate the model on
@@ -527,9 +709,38 @@ def plot_decision_boundary(X, y, model, scaler):
 # Plot the decision boundary
 X_scaled = scaler.transform(X)
 plot_decision_boundary(X_scaled, y, model, scaler)
-```
-
-When you run this code, you'll see a visualization of the decision boundary (saved as `logistic_decision_boundary.png`):
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-13" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Def plot_decision_boundary(X, y, model, scaler):</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–13: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="14-26" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Z = model.predict_proba(mesh_points_scaled)[:…</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 14–26: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="27-40" data-tint="3">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Plot data points</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 27–40: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ![Logistic Decision Boundary](assets/logistic_decision_boundary.png)
 
@@ -548,7 +759,10 @@ In this plot:
 
 **Walkthrough:** `predict` / `predict_proba`; `roc_curve`; diagonal baseline; `savefig` for CM and ROC figures.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 def evaluate_model(model, X_test, y_test, class_names=('Negative', 'Positive')):
     """Evaluate a binary classifier and plot the confusion matrix and ROC curve.
 
@@ -602,7 +816,47 @@ def evaluate_model(model, X_test, y_test, class_names=('Negative', 'Positive')):
 
 # Evaluate the exam model
 evaluate_model(model, X_test_scaled, y_test, class_names=('Failed', 'Passed'))
-```
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-13" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Def evaluate_model(model, X_test, y_test, cla…</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–13: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="14-26" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Cm = confusion_matrix(y_test, y_pred)</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 14–26: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="27-39" data-tint="3">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Plt.ylabel(&#x27;Actual&#x27;)</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 27–39: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="40-53" data-tint="4">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Plt.figure(figsize=(8, 6))</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 40–53: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ![logistic-regression](assets/logistic-regression_fig_7.png)
 
@@ -636,7 +890,10 @@ Logistic regression can handle multiple features. Let's create an example with m
 
 **Walkthrough:** Manual logit → `sigmoid` → Bernoulli outcomes; `train_test_split` + `StandardScaler`; `loan_model.coef_[0]` and `np.exp`; calls `evaluate_model`.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 # Generate a more complex dataset
 np.random.seed(42)
 n_samples = 500
@@ -703,7 +960,56 @@ print(loan_coefficients)
 
 # Evaluate the loan model with appropriate class labels
 evaluate_model(loan_model, X_test_scaled, y_test, class_names=('Denied', 'Approved'))
-```
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-13" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Generate a more complex dataset</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–13: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="14-26" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Create logit for probability of loan approval</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 14–26: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="27-39" data-tint="3">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Create DataFrame</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 27–39: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="40-52" data-tint="4">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Build a model with multiple features</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 40–52: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="53-66" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Show coefficients and odds ratios</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 53–66: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ![logistic-regression](assets/logistic-regression_fig_9.png)
 
@@ -753,7 +1059,10 @@ The 0.94 accuracy looks impressive but the recall on the **Approved** class is o
 
 **Walkthrough:** `model.coef_[0]`; `Patch` legend for positive/negative effect; horizontal bar chart.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 def plot_feature_importance(model, feature_names):
     """Plot the feature importance from logistic regression coefficients"""
     # Get absolute coefficient values
@@ -791,9 +1100,38 @@ def plot_feature_importance(model, feature_names):
 
 # Plot feature importance
 plot_feature_importance(loan_model, X_loan.columns)
-```
-
-When you run this code, you'll see a visualization of feature importance (saved as `feature_importance.png`):
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-12" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Def plot_feature_importance(model, feature_na…</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–12: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="13-24" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">})</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 13–24: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="25-37" data-tint="3">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">From matplotlib.patches import Patch</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 25–37: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ![Feature Importance](assets/feature_importance.png)
 
@@ -807,7 +1145,10 @@ In many real-world applications, the classes are imbalanced (e.g., rare medical 
 
 **Walkthrough:** `stratify` in `train_test_split`; `roc_curve`, `roc_auc_score`, `precision_recall_curve`, `average_precision_score`; subplot layout.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 # Create an imbalanced dataset (10% positive class)
 np.random.seed(42)
 n_samples = 1000
@@ -912,9 +1253,65 @@ models = {
     'Balanced Logistic Regression': balanced_model
 }
 compare_models_on_imbalanced_data(models, X_test, y_test)
-```
-
-When you run this code, you'll see a comparison of regular and balanced models on imbalanced data (saved as `imbalanced_comparison.png`):
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-17" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Create an imbalanced dataset (10% positive cl…</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–17: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="18-34" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Create DataFrame</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 18–34: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="35-52" data-tint="3">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Plt.savefig(&#x27;class_imbalance.png&#x27;)</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 35–52: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="53-69" data-tint="4">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Compare models</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 53–69: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="70-86" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Plt.ylabel(&#x27;True Positive Rate&#x27;)</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 70–86: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="87-104" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Plt.grid(True, alpha=0.3)</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 87–104: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 This comparison shows that:
 
@@ -941,7 +1338,10 @@ This comparison shows that:
 
 **Walkthrough:** `LogisticRegression(class_weight=...)` constructors only (no fit in snippet).
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 from sklearn.linear_model import LogisticRegression
 
 # Option 1: let sklearn pick weights inversely proportional to class frequencies
@@ -950,7 +1350,20 @@ balanced_model = LogisticRegression(class_weight='balanced')
 # Option 2: pass an explicit {class: weight} dict for asymmetric costs
 class_weights = {0: 1, 1: 10}  # 10x importance on class 1
 custom_weighted_model = LogisticRegression(class_weight=class_weights)
-```
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-8" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">From sklearn.linear_model import LogisticRegr…</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–8: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ![logistic-regression](assets/logistic-regression_fig_12.png)
 
@@ -970,7 +1383,10 @@ custom_weighted_model = LogisticRegression(class_weight=class_weights)
 
 **Walkthrough:** `C` as inverse regularization strength; comment ties smaller `C` to stronger shrinkage.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 # Example of using regularization to handle multicollinearity
 from sklearn.linear_model import LogisticRegression
 
@@ -981,7 +1397,20 @@ l1_model = LogisticRegression(penalty='l1', solver='liblinear', C=0.1)
 l2_model = LogisticRegression(penalty='l2', C=0.1)
 
 # Note: C is inverse of regularization strength (smaller C = stronger regularization)
-```
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-10" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Example of using regularization to handle mul…</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–10: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ### 3. Non-linearity
 
@@ -999,7 +1428,10 @@ l2_model = LogisticRegression(penalty='l2', C=0.1)
 
 **Walkthrough:** `make_pipeline`; `fit` on `X_train`, `y_train` from earlier exam workflow.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 # Example of adding polynomial features
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.pipeline import make_pipeline
@@ -1010,7 +1442,20 @@ poly_model = make_pipeline(
     LogisticRegression()
 )
 poly_model.fit(X_train, y_train)
-```
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-10" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Example of adding polynomial features</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–10: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ```
 Pipeline(steps=[('polynomialfeatures', PolynomialFeatures(include_bias=False)),
@@ -1031,7 +1476,10 @@ Trains one binary classifier per class and selects the class with the highest pr
 
 **Walkthrough:** `load_iris`; `train_test_split`; `score`; `predict_proba` for class probabilities.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 from sklearn.linear_model import LogisticRegression
 from sklearn.multiclass import OneVsRestClassifier
 from sklearn.datasets import load_iris
@@ -1053,7 +1501,29 @@ print(f"Accuracy on multi-class problem: {accuracy:.4f}")
 # Get probabilities for each class
 class_probabilities = ovr_model.predict_proba(X_test)
 print("Shape of probability matrix:", class_probabilities.shape)
-```
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-10" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">From sklearn.linear_model import LogisticRegr…</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–10: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="11-21" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">One-vs-Rest with explicit wrapper</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 11–21: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ### 2. Multinomial Logistic Regression (Softmax Regression)
 
@@ -1065,7 +1535,10 @@ Generalizes logistic regression to multiple classes using the softmax function. 
 
 **Walkthrough:** Default `LogisticRegression` with `solver='lbfgs'`; `score` on `X_test`, `y_test`.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 # Multinomial is the default for multi-class targets in modern sklearn
 softmax_model = LogisticRegression(solver='lbfgs', max_iter=1000, random_state=42)
 softmax_model.fit(X_train, y_train)
@@ -1073,7 +1546,20 @@ softmax_model.fit(X_train, y_train)
 # Compare performance
 softmax_accuracy = softmax_model.score(X_test, y_test)
 print(f"Multinomial (Softmax) accuracy: {softmax_accuracy:.4f}")
-```
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-7" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Multinomial is the default for multi-class ta…</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–7: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ## Interactive Example: Predict Customer Purchase
 
@@ -1085,7 +1571,10 @@ Let's create an interactive example where we predict if a customer will make a p
 
 **Walkthrough:** Assign `coef_` and `intercept_`; manual `(X - mean) / std`; threshold narrative at 0.5.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 # Create a function to predict purchase probability
 def predict_purchase_probability(age, time_on_site, pages_visited, is_returning_customer):
     """Predict the probability of purchase based on customer characteristics"""
@@ -1121,7 +1610,38 @@ if prob > 0.5:
     print("Action: Target with special offer!")
 else:
     print("Action: No special offer needed.")
-```
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-11" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Create a function to predict purchase probabi…</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–11: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="12-23" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Scale features (using typical means and stds)</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 12–23: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="24-35" data-tint="3">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Time_on_site = 5  # minutes</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 24–35: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ## Practice Exercise
 
@@ -1133,7 +1653,10 @@ Try building a logistic regression model to predict diabetes using the Pima Indi
 
 **Walkthrough:** `pd.read_csv`; `train_test_split`; `StandardScaler`; `classification_report`, `confusion_matrix`; `np.exp` on coefficients.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 # Import libraries
 import pandas as pd
 import numpy as np
@@ -1185,7 +1708,47 @@ coefficients = pd.DataFrame({
 coefficients = coefficients.sort_values('Odds_Ratio', ascending=False)
 print("\nFeature Importance:")
 print(coefficients)
-```
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-12" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Import libraries</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–12: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="13-25" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Diabetes_data = pd.read_csv(url, names=column…</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 13–25: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="26-38" data-tint="3">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Scale features</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 26–38: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="39-51" data-tint="4">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Print(confusion_matrix(y_test, y_pred))</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 39–51: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ```
 <class 'pandas.DataFrame'>

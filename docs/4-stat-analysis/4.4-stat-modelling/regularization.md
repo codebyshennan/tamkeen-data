@@ -72,7 +72,10 @@ Before we dive into regularization techniques, let's understand the problem they
 
 **Walkthrough:** `train_test_split`; `make_pipeline(PolynomialFeatures(degree), LinearRegression())`; `mean_squared_error` train/test; multi-series line plot.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -145,13 +148,58 @@ plt.legend()
 plt.grid(True)
 plt.savefig('overfitting_example.png')
 plt.show()
-```
-
-When you run this code, you'll see two visualizations. The first shows the data and the true relationship (saved as `overfitting_data.png`):
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-14" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Import numpy as np</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–14: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="15-28" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Y_true = x**2</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 15–28: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="29-43" data-tint="3">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Split the data into train and test sets</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 29–43: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="44-57" data-tint="4">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Fit models of different complexity</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 44–57: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="58-72" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Train_error = mean_squared_error(y_train, mod…</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 58–72: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ![Overfitting Data](assets/overfitting_data.png)
-
-The second shows models with different levels of complexity (saved as `overfitting_example.png`):
 
 ![Overfitting Example](assets/overfitting_example.png)
 
@@ -204,7 +252,10 @@ Let's visualize how these work:
 
 **Walkthrough:** `Ridge(alpha=...)` and `Lasso(alpha=...)` with `.fit` / `.predict`; shared scatter; `tight_layout` and `savefig`.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 def plot_regularization_effects():
     """Visualize how different regularization methods affect coefficients"""
     # Generate sample data with some noise
@@ -258,9 +309,47 @@ def plot_regularization_effects():
 
 # Execute the function
 plot_regularization_effects()
-```
-
-When you run this code, you'll see a comparison of Ridge and Lasso regularization (saved as `regularization_effects.png`):
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-13" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Def plot_regularization_effects():</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–13: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="14-26" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Plt.figure(figsize=(15, 6))</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 14–26: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="27-39" data-tint="3">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Plt.xlabel(&#x27;Feature Value&#x27;)</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 27–39: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="40-53" data-tint="4">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Plt.scatter(x, y, alpha=0.3, color=&#x27;black&#x27;)</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 40–53: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ![Regularization Effects](assets/regularization_effects.png)
 
@@ -305,7 +394,10 @@ A helpful way to understand the difference between L1 and L2 regularization is t
 
 **Walkthrough:** `np.meshgrid`; `plt.contour`; annotations for sparse vs non-sparse intersections.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 def plot_constraint_spaces():
     """Visualize L1 and L2 constraint spaces"""
     # Generate coefficient space
@@ -367,9 +459,56 @@ def plot_constraint_spaces():
 
 # Execute the function
 plot_constraint_spaces()
-```
-
-When you run this code, you'll see a visualization of the L1 and L2 constraint spaces (saved as `constraint_spaces.png`):
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-12" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Def plot_constraint_spaces():</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–12: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="13-24" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Plt.figure(figsize=(12, 6))</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 13–24: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="25-36" data-tint="3">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Plt.plot([1], [0], &#x27;ko&#x27;, markersize=8)</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 25–36: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="37-48" data-tint="4">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Plt.contour(B1, B2, l2, levels=[1], colors=&#x27;b…</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 37–48: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="49-61" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Plt.ylabel(&#x27;Coefficient β₂&#x27;)</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 49–61: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ![Constraint Spaces](assets/constraint_spaces.png)
 
@@ -401,7 +540,10 @@ Now let's implement Ridge, Lasso, and Elastic Net regularization in Python:
 
 **Walkthrough:** `StandardScaler` on train/test; `RidgeCV(alphas=..., cv=5)`; `generate_collinear_data` helper builds `X @ true_coef + noise`.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 def implement_ridge(X, y, alphas=np.logspace(-4, 4, 100)):
     """Implement ridge regression with cross-validation"""
     from sklearn.linear_model import RidgeCV
@@ -483,9 +625,65 @@ def generate_collinear_data(n_samples=200, noise_level=0.5):
 # Generate data and apply Ridge regression
 X_collinear, y_collinear, true_coef = generate_collinear_data()
 ridge_results = implement_ridge(X_collinear, y_collinear)
-```
-
-When you run this code, you'll see output similar to:
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-13" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Def implement_ridge(X, y, alphas=np.logspace(…</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–13: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="14-27" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Fit model with cross-validation to select the…</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 14–27: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="28-40" data-tint="3">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Visualize coefficients</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 28–40: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="41-54" data-tint="4">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Plt.savefig(&#x27;ridge_coefficients.png&#x27;)</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 41–54: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="55-67" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Np.random.seed(42)</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 55–67: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="68-81" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Combine features</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 68–81: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ```
 Ridge Regression Results:
@@ -493,8 +691,6 @@ Best alpha: 1.0000
 Training R²: 0.9102
 Test R²: 0.9056
 ```
-
-And a visualization of the coefficients (saved as `ridge_coefficients.png`):
 
 ![Ridge Coefficients](assets/ridge_coefficients.png)
 
@@ -506,7 +702,10 @@ And a visualization of the coefficients (saved as `ridge_coefficients.png`):
 
 **Walkthrough:** `LassoCV(alphas=..., cv=5, selection='random')`; `np.sum(coef_ != 0)`; optional horizontal bar.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 def implement_lasso(X, y, alphas=np.logspace(-4, 1, 100)):
     """Implement lasso regression with cross-validation"""
     from sklearn.linear_model import LassoCV
@@ -565,9 +764,47 @@ def implement_lasso(X, y, alphas=np.logspace(-4, 1, 100)):
 
 # Apply Lasso regression to the same data
 lasso_results = implement_lasso(X_collinear, y_collinear)
-```
-
-When you run this code, you'll see output similar to:
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-14" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Def implement_lasso(X, y, alphas=np.logspace(…</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–14: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="15-29" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Fit model with cross-validation</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 15–29: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="30-43" data-tint="3">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Print(f&quot;Number of features selected: {n_nonze…</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 30–43: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="44-58" data-tint="4">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Plt.tight_layout()</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 44–58: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ```
 Lasso Regression Results:
@@ -576,8 +813,6 @@ Training R²: 0.9087
 Test R²: 0.9058
 Number of features selected: 4 out of 5
 ```
-
-And a visualization of the coefficients (saved as `lasso_coefficients.png`):
 
 ![Lasso Coefficients](assets/lasso_coefficients.png)
 
@@ -593,7 +828,10 @@ Elastic Net combines both L1 and L2 penalties, providing a balance between Ridge
 
 **Walkthrough:** `ElasticNetCV(l1_ratio=..., alphas=..., cv=5)`; same evaluation pattern as Lasso.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 def implement_elastic_net(X, y, l1_ratios=[.1, .5, .7, .9, .95, .99, 1], alphas=np.logspace(-4, 1, 100)):
     """Implement elastic net regression"""
     from sklearn.linear_model import ElasticNetCV
@@ -651,9 +889,47 @@ def implement_elastic_net(X, y, l1_ratios=[.1, .5, .7, .9, .95, .99, 1], alphas=
 
 # Apply Elastic Net regression
 elastic_net_results = implement_elastic_net(X_collinear, y_collinear)
-```
-
-When you run this code, you'll see output similar to:
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-14" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Def implement_elastic_net(X, y, l1_ratios=[.1…</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–14: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="15-28" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Fit model</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 15–28: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="29-42" data-tint="3">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Print(f&quot;Number of features selected: {n_nonze…</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 29–42: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="43-57" data-tint="4">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Plt.tight_layout()</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 43–57: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ```
 Elastic Net Results:
@@ -663,8 +939,6 @@ Training R²: 0.9086
 Test R²: 0.9055
 Number of features selected: 4 out of 5
 ```
-
-And a visualization of the coefficients (saved as `elastic_net_coefficients.png`):
 
 ![Elastic Net Coefficients](assets/elastic_net_coefficients.png)
 
@@ -680,7 +954,10 @@ How do you choose the best type of regularization and its strength? Here's a com
 
 **Walkthrough:** `ridge.cv_values_.mean(axis=0)`; `lasso.mse_path_` mean; `semilogx`; `plt.axvline` for best alphas.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 def select_regularization_parameter(X, y):
     """Select optimal regularization parameter using cross-validation"""
     from sklearn.linear_model import RidgeCV, LassoCV
@@ -738,10 +1015,47 @@ def select_regularization_parameter(X, y):
 
 # Select optimal regularization parameters
 param_selection = select_regularization_parameter(X_collinear, y_collinear)
-```
-
-When you run this code, you'll see a visualization of how MSE changes with alpha (saved as `regularization_selection.png`):
-
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-14" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Def select_regularization_parameter(X, y):</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–14: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="15-28" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Kf = KFold(n_splits=5, shuffle=True, random_s…</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 15–28: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="29-42" data-tint="3">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Ridge_alphas = ridge.alphas</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 29–42: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="43-57" data-tint="4">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Plt.title(&#x27;Regularization Parameter Selection&#x27;)</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 43–57: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ### 2. Comparing Different Regularization Methods
 
@@ -751,7 +1065,10 @@ When you run this code, you'll see a visualization of how MSE changes with alpha
 
 **Walkthrough:** Reuses `ridge_results`, `lasso_results`, `elastic_net_results` dicts; `model.score`; `plt.bar` twice for R² and feature counts.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 def compare_regularization_methods(X, y):
     """Compare different regularization methods on the same data"""
     from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet
@@ -836,9 +1153,65 @@ def compare_regularization_methods(X, y):
 # Compare all regularization methods
 comparison = compare_regularization_methods(X_collinear, y_collinear)
 print(comparison)
-```
-
-When you run this code, you'll see a comparison of all regularization methods (saved as `regularization_comparison.png`):
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-14" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Def compare_regularization_methods(X, y):</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–14: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="15-28" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Define models to compare</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 15–28: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="29-42" data-tint="3">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">For name, model in models.items():</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 29–42: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="43-56" data-tint="4">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Results.append({</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 43–56: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="57-70" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Plt.subplot(211)</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 57–70: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="71-84" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Plt.xticks(x, [r[&#x27;Model&#x27;].split(&#x27; (&#x27;)[0] for…</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 71–84: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ![Regularization Comparison](assets/regularization_comparison.png)
 
@@ -868,7 +1241,10 @@ Ridge regression is a good default choice for most problems because:
 
 **Walkthrough:** Uses `X_train_scaled`, `y_train` from earlier ridge section; `grid.best_params_`, `grid.best_score_`.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 from sklearn.linear_model import Ridge
 from sklearn.model_selection import GridSearchCV
 
@@ -882,7 +1258,20 @@ grid.fit(X_train_scaled, y_train)
 # Get best parameters
 print(f"Best Ridge alpha: {grid.best_params_['alpha']}")
 print(f"Best score: {-grid.best_score_:.4f} MSE")
-```
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-13" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">From sklearn.linear_model import Ridge</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–13: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ### 2. Use Lasso for Feature Selection
 
@@ -894,7 +1283,10 @@ If you have many features and suspect that some might be irrelevant, Lasso can h
 
 **Walkthrough:** List comprehension over `coef_`; uses dummy `feature_names` if needed.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 from sklearn.linear_model import Lasso
 
 # Train Lasso model with the optimal alpha from earlier
@@ -909,7 +1301,20 @@ important_features = [(feature_names[i], coef) for i, coef in enumerate(lasso.co
 print("Selected features and their coefficients:")
 for feature, coef in important_features:
     print(f"{feature}: {coef:.4f}")
-```
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-14" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">From sklearn.linear_model import Lasso</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–14: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ### 3. Try Elastic Net for a Balance
 
@@ -921,7 +1326,10 @@ When you're unsure whether to use Ridge or Lasso, Elastic Net provides a balance
 
 **Walkthrough:** `ElasticNetCV.fit`; read `alpha_` and `l1_ratio_` attributes.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 from sklearn.linear_model import ElasticNetCV
 
 # Find optimal parameters
@@ -935,7 +1343,20 @@ elastic_net.fit(X_train_scaled, y_train)
 
 print(f"Best alpha: {elastic_net.alpha_:.4f}")
 print(f"Best l1_ratio: {elastic_net.l1_ratio_:.2f}")
-```
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-13" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">From sklearn.linear_model import ElasticNetCV</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–13: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ### 4. Always Scale Your Features
 
@@ -947,7 +1368,10 @@ Regularization is sensitive to the scale of your features, so standardization is
 
 **Walkthrough:** `pipeline.fit` / `predict` on raw `X_train`, `X_test`.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 
@@ -960,7 +1384,20 @@ pipeline = Pipeline([
 # Now you can fit and predict without worrying about scaling
 pipeline.fit(X_train, y_train)
 y_pred = pipeline.predict(X_test)
-```
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-12" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">From sklearn.preprocessing import StandardScaler</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–12: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ## Common Challenges and Solutions
 
@@ -976,7 +1413,10 @@ y_pred = pipeline.predict(X_test)
 
 **Walkthrough:** `RepeatedKFold(n_splits=5, n_repeats=3)`; `RidgeCV(alphas=..., cv=cv)`; print `alpha_`.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 from sklearn.linear_model import RidgeCV, LassoCV
 from sklearn.model_selection import RepeatedKFold
 
@@ -991,7 +1431,20 @@ ridge_cv = RidgeCV(alphas=alphas, cv=cv, scoring='neg_mean_squared_error')
 ridge_cv.fit(X_scaled, y)
 
 print(f"Optimal Ridge alpha: {ridge_cv.alpha_:.4f}")
-```
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-14" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">From sklearn.linear_model import RidgeCV, Las…</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–14: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ### 2. Handling Highly Correlated Features
 
@@ -1019,7 +1472,10 @@ print(f"Optimal Ridge alpha: {ridge_cv.alpha_:.4f}")
 
 **Walkthrough:** Guard `hasattr(scaler, 'scale_')`; return sorted `DataFrame`.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 # Get standardized coefficients
 def get_standardized_coefs(model, scaler, feature_names=None):
     """Calculate standardized coefficients accounting for feature scaling"""
@@ -1048,7 +1504,29 @@ def get_standardized_coefs(model, scaler, feature_names=None):
 # Example usage
 std_coefs = get_standardized_coefs(ridge_results['model'], scaler)
 print(std_coefs)
-```
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-14" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Get standardized coefficients</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–14: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="15-28" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">If feature_names is None:</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 15–28: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ## Practice Exercise
 
@@ -1060,7 +1538,10 @@ Let's apply regularization to improve a model for housing price prediction:
 
 **Walkthrough:** `np.column_stack` + name list; exercise leaves modeling steps to the student.
 
-```python
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
+
+{% highlight python %}
 # Generate synthetic housing data
 np.random.seed(42)
 n_samples = 200
@@ -1117,7 +1598,47 @@ X_train, X_test, y_train, y_test = train_test_split(
 # 3. Apply Lasso Regression
 # 4. Apply Elastic Net
 # 5. Compare results and determine which features are most important
-```
+{% endhighlight %}
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-14" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Generate synthetic housing data</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 1–14: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="15-28" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Garage = np.clip(garage, 0, 2)</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 15–28: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="29-42" data-tint="3">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">8000 * garage +                # Garage adds…</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 29–42: follow this band in the snippet.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="43-56" data-tint="4">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">&#x27;Random Feature 1&#x27;, &#x27;Random Feature 2&#x27;</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Lines 43–56: follow this band in the snippet.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
 ## Next steps
 

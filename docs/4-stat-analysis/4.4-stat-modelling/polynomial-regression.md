@@ -136,14 +136,10 @@ plt.show()
 <figcaption>Figure 1: Model Performance Comparison</figcaption>
 </figure>
 
-
 <figure>
 <img src="assets/polynomial-regression_fig_2.png" alt="polynomial-regression" />
 <figcaption>Figure 2: Study Time vs Exam Score</figcaption>
 </figure>
-
-
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -176,8 +172,6 @@ plt.show()
   </div>
 </aside>
 </div>
-
-When you run this code, you'll see a scatter plot that looks something like this (saved as `nonlinear_relationship.png`):
 
 ![Non-linear Relationship](assets/nonlinear_relationship.png)
 
@@ -257,8 +251,6 @@ compare_linear_polynomial()
 <figcaption>Figure 3: Linear vs Polynomial Regression</figcaption>
 </figure>
 
-
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="3-6" data-tint="1">
@@ -299,8 +291,6 @@ compare_linear_polynomial()
   </div>
 </aside>
 </div>
-
-When you run this code, you'll see a comparison like this (saved as `linear_vs_polynomial.png`):
 
 ![Linear vs Polynomial](assets/linear_vs_polynomial.png)
 
@@ -390,7 +380,6 @@ Polynomial Feature Transformation (degree=2):
 4           5  5.0  25.0
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="3-10" data-tint="1">
@@ -422,8 +411,6 @@ Polynomial Feature Transformation (degree=2):
   </div>
 </aside>
 </div>
-
-When you run this code, you'll see both a table and visualization like this (saved as `feature_transformation.png`):
 
 ```
 Polynomial Feature Transformation (degree=2):
@@ -523,8 +510,6 @@ plot_different_degrees()
 <figcaption>Figure 4: Degree 1 Polynomial (MSE: 46.18)</figcaption>
 </figure>
 
-
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="3-8" data-tint="1">
@@ -556,8 +541,6 @@ plot_different_degrees()
   </div>
 </aside>
 </div>
-
-When you run this code, you'll see a comparison like this (saved as `polynomial_degrees.png`):
 
 ![Polynomial Degrees](assets/polynomial_degrees.png)
 
@@ -635,7 +618,6 @@ def prepare_polynomial_data(X, y, degree=2):
 <img src="assets/polynomial-regression_fig_1.png" alt="polynomial-regression" />
 <figcaption>Figure 1: Are Our Errors Random? (They Should Be!)</figcaption>
 </figure>
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -761,7 +743,6 @@ Intercept (β₀): -6.0711
 Number of coefficients: 3
 First few coefficients: [ 6.50706898 -7.72810022  9.60710778]
 ```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -909,9 +890,6 @@ evaluation = evaluate_polynomial_model(model, X_test, y_test, poly, scaler, X_ex
 </aside>
 </div>
 
-When you run this code, you'll see two plots like these (saved as `polynomial_prediction.png` and `polynomial_actual_vs_predicted.png`):
-
-
 And you'll get output like:
 
 ```
@@ -990,11 +968,9 @@ def find_optimal_degree(X, y, max_degree=10):
 optimal_degree, cv_errors = find_optimal_degree(X_example, y_example)
 {% endhighlight %}
 
-
 ```
 The optimal polynomial degree is: 3
 ```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -1036,8 +1012,6 @@ The optimal polynomial degree is: 3
   </div>
 </aside>
 </div>
-
-When you run this code, you'll see a plot like this (saved as `optimal_degree_selection.png`):
 
 ![Optimal Degree Selection](assets/optimal_degree_selection.png)
 
@@ -1157,9 +1131,6 @@ demonstrate_overfitting()
 </aside>
 </div>
 
-When you run this code, you'll see a visualization like this (saved as `polynomial_overfitting.png`):
-
-
 This clearly shows how:
 
 1. The **linear model** (degree 1) underfits both training and test data
@@ -1275,9 +1246,6 @@ demonstrate_regularization()
   </div>
 </aside>
 </div>
-
-When you run this code, you'll see a comparison like this (saved as `polynomial_regularization.png`):
-
 
 This shows how regularization helps control the model's complexity, even with a high polynomial degree:
 

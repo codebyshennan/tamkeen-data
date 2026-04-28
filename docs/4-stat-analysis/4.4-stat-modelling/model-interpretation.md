@@ -197,7 +197,6 @@ Distance from Downtown: $-14984.28 - For each additional mile from downtown, the
 Number of Rooms: $28010.98 - For each additional room, the house price increases by $28010.98
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-10" data-tint="1">
@@ -247,8 +246,6 @@ Number of Rooms: $28010.98 - For each additional room, the house price increases
   </div>
 </aside>
 </div>
-
-When you run this code, you'll see a visualization of the linear regression coefficients (saved as `coefficient_interpretation.png`):
 
 ![Coefficient Interpretation](assets/coefficient_interpretation.png)
 
@@ -324,7 +321,6 @@ age: -16126.96 - A one standard deviation increase in age decreases the price by
 distance_downtown: -14857.72 - A one standard deviation increase in distance_downtown decreases the price by $14857.72
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-9" data-tint="1">
@@ -365,8 +361,6 @@ distance_downtown: -14857.72 - A one standard deviation increase in distance_dow
   </div>
 </aside>
 </div>
-
-When you run this code, you'll see a visualization of the standardized coefficients (saved as `standardized_coefficients.png`):
 
 ![Standardized Coefficients](assets/standardized_coefficients.png)
 
@@ -422,7 +416,6 @@ distance_downtown: 0.1074 - Contributes 10.7% to the model's decisions
 age: 0.1044 - Contributes 10.4% to the model's decisions
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-12" data-tint="1">
@@ -454,8 +447,6 @@ age: 0.1044 - Contributes 10.4% to the model's decisions
   </div>
 </aside>
 </div>
-
-When you run this code, you'll see a visualization of the random forest feature importances (saved as `feature_importance.png`):
 
 ![Feature Importance](assets/feature_importance.png)
 
@@ -579,7 +570,6 @@ MaritalStatus_Married: $11630.11 - This category increases the loan amount by $1
 MaritalStatus_Single: $3295.10 - This category increases the loan amount by $3295.10 compared to the baseline
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-38" data-tint="1">
@@ -629,8 +619,6 @@ MaritalStatus_Single: $3295.10 - This category increases the loan amount by $329
   </div>
 </aside>
 </div>
-
-When you run this code, you'll see a visualization of the categorical effects (saved as `categorical_effects.png`):
 
 ![Categorical Effects](assets/categorical_effects.png)
 
@@ -736,9 +724,6 @@ for feature in features_to_plot:
   </div>
 </aside>
 </div>
-
-When you run this code, you'll see partial dependence plots (saved as `partial_dependence.png`, `pdp_income.png`, and `pdp_age.png`):
-
 
 PDPs are powerful because they:
 
@@ -864,9 +849,6 @@ for feature in ['Income', 'Age']:
 </aside>
 </div>
 
-When you run this code, you'll see ICE plots (saved as `ice_income.png` and `ice_age.png`):
-
-
 ICE plots show:
 
 - How predictions change for each individual observation
@@ -977,9 +959,6 @@ plt.show()
   </div>
 </aside>
 </div>
-
-When you run this code, you'll see various SHAP plots (saved as multiple PNG files):
-
 
 SHAP values are especially powerful because they:
 
@@ -1101,9 +1080,6 @@ print(linear_interpretation)
 </aside>
 </div>
 
-When you run this code, you'll see a visualization of the linear regression coefficients with confidence intervals (saved as `linear_model_interpretation.png`):
-
-
 ### 2. Logistic Regression
 
 For logistic regression, we often interpret coefficients as odds ratios:
@@ -1208,7 +1184,6 @@ Age: 1.062 - For each additional year of age, the odds of diabetes increase by 6
 Glucose: 1.032 - For each additional unit of glucose, the odds of diabetes increase by 3.2%
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-30" data-tint="1">
@@ -1249,8 +1224,6 @@ Glucose: 1.032 - For each additional unit of glucose, the odds of diabetes incre
   </div>
 </aside>
 </div>
-
-When you run this code, you'll see a visualization of the logistic regression odds ratios (saved as `logistic_odds_ratios.png`):
 
 ![Logistic Odds Ratios](assets/logistic_odds_ratios.png)
 
@@ -1346,7 +1319,6 @@ def interpret_tree_prediction(tree_model, X, feature_names, sample_index=0):
 interpret_tree_prediction(tree_model, X, X.columns, sample_index=0)
 {% endhighlight %}
 
-
 ```
 Decision path for sample 0:
 Sample values: {'Income': np.float64(67450.71229516849), 'Age': np.float64(26.710049890779274), 'Education_High School': np.False_, 'Education_Master': np.True_, 'Education_PhD': np.False_, 'MaritalStatus_Married': np.True_, 'MaritalStatus_Single': np.False_}
@@ -1356,7 +1328,6 @@ Node 8: Education_High School = 0.00 <= 0.50 → Go to left child
 Node 9: Education_PhD = 0.00 <= 0.50 → Go to left child
 Leaf node 10: Predicted value = 52388.22
 ```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -1408,8 +1379,6 @@ Leaf node 10: Predicted value = 52388.22
 </aside>
 </div>
 
-
-
 ```
 Decision path for sample 0:
 Sample values: {'Income': np.float64(67450.71229516849), 'Age': np.float64(26.710049890779274), 'Education_High School': np.False_, 'Education_Master': np.True_, 'Education_PhD': np.False_, 'MaritalStatus_Married': np.True_, 'MaritalStatus_Single': np.False_}
@@ -1420,11 +1389,7 @@ Node 9: Education_PhD = 0.00 <= 0.50 → Go to left child
 Leaf node 10: Predicted value = 52388.22
 ```
 
-When you run this code, you'll see a visualization of the decision tree (saved as `decision_tree.png`):
-
 ![Decision Tree](assets/decision_tree.png)
-
-And also the feature importance from the tree (saved as `tree_feature_importance.png`):
 
 ![Tree Feature Importance](assets/tree_feature_importance.png)
 
@@ -1568,7 +1533,6 @@ Model Interpretability Comparison:
 [6 rows x 5 columns]
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-22" data-tint="1">
@@ -1609,8 +1573,6 @@ Model Interpretability Comparison:
   </div>
 </aside>
 </div>
-
-When you run this code, you'll see a comparison of different models in terms of performance and interpretability (saved as `model_interpretability_comparison.png`):
 
 ![Model Interpretability Comparison](assets/model_interpretability_comparison.png)
 
@@ -1987,7 +1949,6 @@ Interpretation Challenge:
 - A proper causal model would recognize that controlling for Temperature makes Shorts_Wearing irrelevant
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-20" data-tint="1">
@@ -2028,8 +1989,6 @@ Interpretation Challenge:
   </div>
 </aside>
 </div>
-
-When you run this code, you'll see a visualization of correlation vs. causation (saved as `correlation_vs_causation.png`):
 
 ![Correlation vs Causation](assets/correlation_vs_causation.png)
 
@@ -2191,8 +2150,6 @@ explore_feature_interactions()
   </div>
 </aside>
 </div>
-
-When you run this code, you'll see a visualization of feature interactions (saved as `feature_interaction.png`):
 
 ![Feature Interaction](assets/feature_interaction.png)
 
@@ -2368,9 +2325,6 @@ print(complexity_comparison)
   </div>
 </aside>
 </div>
-
-When you run this code, you'll see a visualization of model complexity vs. interpretability (saved as `complexity_vs_interpretability.png`):
-
 
 ## Practice Exercise
 
