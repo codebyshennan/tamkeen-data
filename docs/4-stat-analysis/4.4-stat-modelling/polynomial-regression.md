@@ -439,28 +439,28 @@ Polynomial Feature Transformation (degree=2):
 
 This shows how:
 
-1. Each original value ($x$) gets transformed into multiple features
-2. A value like $x=4$ becomes $[4, 16]$ (the original value and its square)
-3. The squared term grows much faster than the linear term
+1. Each original value \\(x\\) gets transformed into multiple features.
+2. A value like \\(x = 4\\) becomes \\([4, 16]\\) (the original value and its square).
+3. The squared term grows much faster than the linear term.
 
 ### The Polynomial Equation
 
-A polynomial regression model of degree n can be written as:
+A polynomial regression model of degree \\(n\\) can be written as:
 
-$$y = \beta_0 + \beta_1x + \beta_2x^2 + ... + \beta_nx^n + \epsilon$$
+$$y = \beta_0 + \beta_1 x + \beta_2 x^2 + \dots + \beta_n x^n + \epsilon$$
 
 Where:
 
-- $y$ is the dependent variable
-- $x$ is the independent variable
-- $\beta_0, \beta_1, ..., \beta_n$ are the coefficients
-- $\epsilon$ is the error term
+- \\(y\\) is the dependent variable.
+- \\(x\\) is the independent variable.
+- \\(\beta_0, \beta_1, \dots, \beta_n\\) are the coefficients.
+- \\(\epsilon\\) is the error term.
 
-For multiple input features, polynomial regression also includes interaction terms. For example, with two features $x_1$ and $x_2$ and degree 2:
+For multiple input features, polynomial regression also includes interaction terms. For example, with two features \\(x_1\\) and \\(x_2\\) and degree 2:
 
-$$y = \beta_0 + \beta_1x_1 + \beta_2x_2 + \beta_3x_1^2 + \beta_4x_2^2 + \beta_5x_1x_2 + \epsilon$$
+$$y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \beta_3 x_1^2 + \beta_4 x_2^2 + \beta_5 x_1 x_2 + \epsilon$$
 
-The interaction term $x_1x_2$ allows the model to capture how the effect of one variable might depend on the value of another.
+The interaction term \\(x_1 x_2\\) lets the model capture how the effect of one variable depends on the value of another.
 
 ### Choosing the Right Degree
 
