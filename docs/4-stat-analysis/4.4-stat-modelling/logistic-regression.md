@@ -622,13 +622,7 @@ Classification Report:
 weighted avg       0.86      0.76      0.76        25
 ```
 
-When you run this code, you'll see the confusion matrix (saved as `confusion_matrix.png`):
-
-![Confusion Matrix](assets/confusion_matrix.png)
-
-And the ROC curve (saved as `roc_curve.png`):
-
-![ROC Curve](assets/roc_curve.png)
+The auto-injected figure above is the confusion matrix; the next figure is the ROC curve. The first row of the confusion matrix shows that 16 of 16 actual failures were correctly predicted, while the second row shows 9 of 9 actual passes captured — alongside 6 false positives. The 0.86 weighted F1 reflects the cost of those false alarms; in a real screening setting you would lower the decision threshold to trade some false negatives for fewer missed passes.
 
 ## Practical Applications and Extensions
 
