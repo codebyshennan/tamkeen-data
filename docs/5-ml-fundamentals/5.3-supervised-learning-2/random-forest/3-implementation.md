@@ -1,3 +1,11 @@
+---
+reading_minutes: 30
+objectives:
+  - "Fit `RandomForestClassifier` / `RandomForestRegressor` end-to-end with sensible defaults for `n_estimators`, `max_features`, and `min_samples_leaf`."
+  - "Read `feature_importances_` and the OOB score, and use permutation importance for a fairer comparison when features are correlated."
+  - "Tune hyperparameters with `GridSearchCV` / `RandomizedSearchCV` and avoid the more-is-always-better trap by tracking validation score, not just training fit."
+---
+
 # Implementing Random Forest
 
 **After this lesson:** you can explain the core ideas in “Implementing Random Forest” and reproduce the examples here in your own notebook or environment.
@@ -19,9 +27,6 @@ Crash Course AI: supervised learning framing (~15 min).
 Let's start with a basic example that shows how to create and train a Random Forest classifier:
 
 #### `RandomForestClassifier` on synthetic data
-
-- **Purpose:** Train a **bagged forest** on `make_classification`, evaluate with **`classification_report`** (precision/recall/F1 per class).
-- **Walkthrough:** `n_estimators` trees vote; `max_depth` caps each tree; same train/test split seed keeps examples reproducible.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -101,9 +106,6 @@ weighted avg       0.90      0.90      0.90       200
 Let's create a more realistic example that shows how Random Forest can be used in a real-world scenario:
 
 #### Credit risk: OOB score, probabilities, risk tiers
-
-- **Purpose:** Use **`oob_score=True`** for a bagging generalization estimate without a separate validation set; bucket **`predict_proba`** into Low/Medium/High risk.
-- **Walkthrough:** Synthetic credit rows in a **`DataFrame`**; `pd.cut` bins continuous risk scores for reporting.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -232,9 +234,6 @@ Understanding which features are most important for making predictions:
 
 #### Importance bars with tree-to-tree variance
 
-- **Purpose:** Plot **mean Gini importance** with **error bars** from the distribution of per-tree importances—more informative than a single vector.
-- **Walkthrough:** Uses trained **`rf`** and feature names from **`X.columns`** (run the credit example above first).
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -310,9 +309,6 @@ Finding the best combination of parameters for your model:
 
 #### `RandomizedSearchCV` with ROC-AUC
 
-- **Purpose:** Search random hyperparameter draws under **5-fold CV**, optimizing **ROC-AUC**—good default for binary skew-sensitive tasks.
-- **Walkthrough:** `param_dist` mixes `randint` and lists; `n_iter` controls budget; `fit` on **`X_train`, `y_train`** from the credit example.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -385,9 +381,6 @@ Creating a custom scoring metric that favors precision over recall:
 
 #### `make_scorer` + $F_\beta$ ($\beta<1$ favors precision)
 
-- **Purpose:** Wrap **`fbeta_score`** so **`cross_val_score`** optimizes a precision-weighted objective instead of plain accuracy.
-- **Walkthrough:** Uses fitted **`rf`** and full **`X`, `y`** from the credit workflow; lower $\beta$ pushes precision.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -439,9 +432,6 @@ F-0.5 scores: [0.98214286 1.         1.         1.         0.94339623]
 Selecting only the most important features:
 
 #### `SelectFromModel` thresholded on importances
-
-- **Purpose:** Drop weak features by keeping columns whose importance exceeds the **median** (or a fixed threshold)—reduces variance and inference cost.
-- **Walkthrough:** `prefit=True` uses the already-fitted **`rf`**; `get_support()` maps the boolean mask back to **`X.columns`**.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -495,9 +485,6 @@ Selected features: ['employment_length', 'debt_ratio', 'credit_score']
 Using a balanced version of Random Forest for imbalanced datasets:
 
 #### `BalancedRandomForestClassifier` (imbalanced-learn)
-
-- **Purpose:** Undersample each bootstrap to **balance classes** before fitting trees—helps when the positive class is rare.
-- **Walkthrough:** Requires **`pip install imbalanced-learn`**; same **`X_train`/`y_train`** as your main example; compare reports to vanilla `rf`.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -553,9 +540,6 @@ Comprehensive evaluation of model performance:
 
 #### Reports + ROC curve helper
 
-- **Purpose:** Print **train vs test** `classification_report` and plot a **ROC** curve to spot overfitting and threshold behavior.
-- **Walkthrough:** Assumes **binary** `predict_proba`; imports **`matplotlib.pyplot`** as `plt` before calling.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -605,9 +589,6 @@ def evaluate_model(model, X_train, X_test, y_train, y_test):
 Creating new features to improve model performance:
 
 #### `FunctionTransformer` + `Pipeline`
-
-- **Purpose:** Engineer ratios and nonlinear terms **inside** a pipeline so the same transforms apply at predict time.
-- **Walkthrough:** `FunctionTransformer` applies **`create_interaction_features`**; the forest step sees augmented columns.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -665,9 +646,6 @@ pipeline = Pipeline([
 Saving and loading trained models:
 
 #### `joblib` for sklearn estimators
-
-- **Purpose:** Persist a fitted **`RandomForestClassifier`** (or any sklearn object graph) to disk for deployment or reproducibility.
-- **Walkthrough:** Pickle-compatible; match **sklearn** versions between save and load environments.
 
 ```python
 import joblib
