@@ -1,3 +1,11 @@
+---
+reading_minutes: 15
+objectives:
+  - "Trace what backpropagation does as a feedback loop: the forward pass produces a prediction, and the backward pass apportions the loss to each weight as a gradient."
+  - "Distinguish backpropagation (the gradient-computation algorithm) from gradient descent (the optimizer that consumes those gradients to update weights)."
+  - "Explain why caching pre-activations and activations during the forward pass is required for the backward pass to work."
+---
+
 # Introduction to Backpropagation
 
 **After this lesson:** you can explain the core ideas in “Introduction to Backpropagation” and reproduce the examples here in your own notebook or environment.
@@ -70,16 +78,6 @@ Backpropagation powers many technologies we use every day:
    - Netflix movie suggestions
    - Amazon product recommendations
    - Spotify music recommendations
-
-## Learning Objectives
-
-By the end of this module, you will be able to:
-
-- Understand how neural networks learn from their mistakes
-- Implement backpropagation in your own neural networks
-- Handle common challenges like vanishing and exploding gradients
-- Apply best practices for training neural networks
-- Debug and optimize neural network performance
 
 ## Prerequisites
 
