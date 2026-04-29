@@ -1,3 +1,10 @@
+---
+reading_minutes: 20
+objectives:
+  - "Pick `GaussianNB`, `MultinomialNB`, or `BernoulliNB` from the shape of the input features (continuous, counts, or binary)."
+  - "Match each variant to a canonical use case: medical readings, news classification, or yes/no spam features."
+  - "Use the lesson's decision table to make the right pick on unfamiliar data."
+---
 # Types of Naive Bayes Classifiers
 
 **After this lesson:** you can explain the core ideas in “Types of Naive Bayes Classifiers” and reproduce the examples here in your own notebook or environment.
@@ -8,11 +15,11 @@ Crash Course AI: supervised learning for classical algorithms.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## Welcome to Different Flavors of Naive Bayes
+## Overview
 
-Just like ice cream comes in different flavors for different tastes, Naive Bayes comes in different types for different kinds of data. Let's explore each type and learn when to use them!
+Naive Bayes comes in three variants: Gaussian for continuous features, multinomial for counts, and Bernoulli for binary indicators. The right pick is dictated by the **shape of your features**, not the domain. **Prerequisites:** [1-introduction.md](1-introduction.md) and the math from [2-math-foundation.md](2-math-foundation.md).
 
-## Overview: Choosing the Right Type
+### Choosing the Right Type
 
 Think of choosing a Naive Bayes type like choosing the right tool for a job:
 
@@ -47,12 +54,6 @@ Imagine you're a doctor trying to predict if a patient has a certain disease bas
 These are all numbers, so Gaussian NB is perfect!
 
 #### Gaussian NB on scaled vitals
-
-**Purpose:** Train `GaussianNB` on continuous patient features after `StandardScaler`, then predict a new patient.
-
-**Walkthrough:**
-- `StandardScaler().fit_transform` on training rows; `GaussianNB().fit`.
-- `transform` the new patient before `predict`.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -141,12 +142,6 @@ Multinomial NB counts how often words appear in each category to make its predic
 
 #### Multinomial NB on word counts
 
-**Purpose:** Vectorize short articles with `CountVectorizer`, fit `MultinomialNB`, and classify a new headline.
-
-**Walkthrough:**
-- `CountVectorizer().fit_transform(articles)` builds the document-term matrix.
-- `MultinomialNB().fit(X, categories)`; `vectorizer.transform(new_article)` then `predict`.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -230,12 +225,6 @@ Imagine you're building a spam filter that checks for:
 Bernoulli NB is perfect for these yes/no features!
 
 #### Bernoulli NB on binary feature vectors
-
-**Purpose:** Fit `BernoulliNB` on 0/1 feature rows (spam cues) and predict a new email vector.
-
-**Walkthrough:**
-- `email_features` and `labels` are parallel lists; `BernoulliNB().fit`.
-- `predict` on `new_email` with the same four binary columns.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
