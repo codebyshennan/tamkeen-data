@@ -385,11 +385,12 @@ def process_markdown_file(
     modified = False
 
     def _process_python_block(code: str, start: int, end: int) -> None:
-        if _has_following_output_or_figure(text, end):
-            return
         code = _strip_liquid_raw_if_wrapped(code)
         if _skip_block_pragma(code):
             return
+        # Always execute so the shared namespace stays populated for downstream
+        # blocks; only suppress the output insertion when the page already has it.
+        has_output = _has_following_output_or_figure(text, end)
 
         # Capture pragma caption before code is mutated by execution helpers
         pragma_caption = _parse_fig_caption_pragma(code)
