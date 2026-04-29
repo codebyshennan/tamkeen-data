@@ -431,6 +431,9 @@ def process_markdown_file(
         finally:
             os.chdir(old_cwd)
 
+        if has_output:
+            return
+
         parts: list[str] = []
         for fig, mpl_title in zip(figs, fig_titles):
             rel = fig.as_posix()
