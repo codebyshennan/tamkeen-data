@@ -1,3 +1,12 @@
+---
+reading_minutes: 6
+objectives:
+  - "Explain bottom-up agglomerative clustering and how a dendrogram encodes the order in which clusters merge."
+  - "Compare ward / complete / average / single linkage and how each shapes the resulting cluster geometry."
+  - "Use `AgglomerativeClustering` and `scipy.cluster.hierarchy.linkage` + `dendrogram` to fit, plot, and pick a cut height."
+  - "Recognise practical limits: O(n²) memory, no `predict` for new points, and why ward linkage requires Euclidean distance."
+---
+
 # Hierarchical Clustering
 
 **After this lesson:** you can explain the core ideas in “Hierarchical Clustering” and reproduce the examples here in your own notebook or environment.
@@ -15,8 +24,6 @@ StatQuest overview of K-means clustering.
 ## Quick Reference
 
 {% include mermaid-diagram.html src="5-ml-fundamentals/5.4-unsupervised-learning/diagrams/hierarchical-clustering-1.mmd" %}
-
-> **Figure (add screenshot or diagram):** A dendrogram with a horizontal dashed line showing where to cut to obtain 3 clusters, with the three resulting cluster branches coloured differently.
 
 Hierarchical clustering is ideal when:
 - You want to explore multiple cluster levels
