@@ -1,3 +1,11 @@
+---
+reading_minutes: 20
+objectives:
+  - "Define a neural network as stacked differentiable layers and connect units → layers → loss → optimizer into one mental model."
+  - "Pick a network family for a problem: MLP for tabular, CNN for images, RNN/Transformer for sequences."
+  - "Recognise where neural networks beat classical ML (large datasets, raw inputs, complex feature interactions) and where they don't (small tabular, hard interpretability, tight latency)."
+---
+
 # Introduction to Neural Networks
 
 **After this lesson:** you can explain the core ideas in “Introduction to Neural Networks” and reproduce the examples here in your own notebook or environment.

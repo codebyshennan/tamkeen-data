@@ -1,3 +1,11 @@
+---
+reading_minutes: 30
+objectives:
+  - "Build, compile, and fit a simple MLP in TensorFlow/Keras with `Sequential`, `Dense`, and `model.fit` on a labelled dataset."
+  - "Reproduce the same network in PyTorch using `nn.Module`, an explicit training loop, and `optim.Adam`."
+  - "Plot training vs validation loss and accuracy curves and read them for under- vs over-fitting."
+---
+
 # Implementing Neural Networks
 
 **After this lesson:** you can explain the core ideas in “Implementing Neural Networks” and reproduce the examples here in your own notebook or environment.
@@ -35,9 +43,6 @@ First, let's make sure you have everything you need:
 
 #### Environment: TensorFlow + sklearn utilities
 
-- **Purpose:** Install/import **TensorFlow** and the usual **train/test split** + **scaling** helpers for the examples below (notebooks may use `!pip`; local envs use `uv pip` / `pip`).
-- **Walkthrough:** Keep **TensorFlow** and **Python** versions compatible per [TF install docs](https://www.tensorflow.org/install).
-
 ```python
 # Install required packages
 # pip install tensorflow numpy scikit-learn matplotlib
@@ -55,9 +60,6 @@ from sklearn.preprocessing import StandardScaler
 Let's build a simple network to predict house prices based on features like size, number of bedrooms, and location.
 
 #### Keras `Sequential`: regression with early stopping
-
-- **Purpose:** Train a small **fully connected** net on synthetic tabular data with **MSE** loss, **MAE** metric, and **`EarlyStopping`** on a validation slice.
-- **Walkthrough:** `create_house_data` builds features and noisy prices; **`StandardScaler`** is fit on train only; sample prediction shows inference on one row.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -204,9 +206,6 @@ Let's create some plots to understand how our model is performing:
 
 #### Loss curves + predicted vs actual scatter
 
-- **Purpose:** Visualize **training vs validation loss** across epochs and check **calibration** of predictions vs `y_test`.
-- **Walkthrough:** Uses **`history`** and **`model`** from the previous cell; diagonal line is perfect agreement.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -313,9 +312,6 @@ Ready to try more advanced implementations? Continue to [Advanced Topics](4-adva
 
 #### Keras classifier on `make_classification`
 
-- **Purpose:** Binary classification with **dropout**, **`binary_crossentropy`**, and **early stopping** on scaled features.
-- **Walkthrough:** `sigmoid` output with one unit; `evaluate` returns loss + **accuracy** on the held-out set.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -411,9 +407,6 @@ print(f"Test accuracy: {test_acc:.3f}")
 
 #### PyTorch `nn.Module` training loop
 
-- **Purpose:** Mirror the Keras example with an explicit **forward → loss → backward** loop for educational control.
-- **Walkthrough:** Expects **`X_train_scaled`**, **`y_train`** from the **TensorFlow classification** cell; **BCE** with logits would be more stable for production—here matches `sigmoid` + `BCELoss`.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -505,9 +498,6 @@ with torch.no_grad():
 ### CNN with TensorFlow
 
 #### Illustrative CNN + `ImageDataGenerator` (paths are placeholders)
-
-- **Purpose:** Show a **Conv2D** stack, **batch norm**, and **data augmentation**—you must point **`train_dir`** / **`validation_dir`** at real image folders.
-- **Walkthrough:** `flow_from_directory` expects class subfolders; adjust **`steps_per_epoch`** if batch size changes.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -613,9 +603,6 @@ history = model.fit(
 
 #### Transfer learning: frozen ResNet50 + fine-tune tail
 
-- **Purpose:** Reuse **ImageNet** weights: train a small head while the CNN body is frozen, then unfreeze last layers with a **lower learning rate**.
-- **Walkthrough:** Expects **`train_generator`** / **`validation_generator`** from the CNN section; set **`num_classes`** from `train_generator.class_indices`.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -713,9 +700,6 @@ history_fine = model.fit(
 
 #### BatchNorm + dropout stack (template)
 
-- **Purpose:** Reusable **Dense** stack with **BatchNormalization** and **Dropout** for multiclass softmax outputs.
-- **Walkthrough:** First `BatchNormalization` can act on inputs when `input_shape` is set; tune widths for your feature dimension.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -770,9 +754,6 @@ def create_model(input_shape, num_classes):
 ### 2. Training Configuration
 
 #### Optimizer, metrics, and callback bundle
-
-- **Purpose:** Centralize **compile** settings: Adam with **gradient clipping**, classification metrics, and **EarlyStopping** / **ReduceLROnPlateau** / **ModelCheckpoint**.
-- **Walkthrough:** Pass the returned dict into `model.compile(**get_training_config())` after filtering keys your TF version supports.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -838,9 +819,6 @@ def get_training_config():
 ### 3. Data Pipeline
 
 #### `image_dataset_from_directory` + ResNet preprocess
-
-- **Purpose:** Efficient **tf.data** pipeline: load images from folders, **split** validation, **preprocess** for ResNet, **prefetch**.
-- **Walkthrough:** `data_dir` should follow Keras image_dataset layout (class subfolders).
 
 ```python
 import tensorflow as tf

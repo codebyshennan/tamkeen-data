@@ -1,3 +1,11 @@
+---
+reading_minutes: 25
+objectives:
+  - "Compute a forward pass through a fully connected network by hand for a tiny example, including activation choice (sigmoid/ReLU/tanh)."
+  - "Pick a loss function appropriate to the task — MSE for regression, cross-entropy for classification — and explain what its gradient says about training direction."
+  - "Sketch how backpropagation, weight initialization (Xavier/He), and regularization combine to make training tractable."
+---
+
 # Mathematical Foundation of Neural Networks
 
 **After this lesson:** you can explain the core ideas in “Mathematical Foundation of Neural Networks” and reproduce the examples here in your own notebook or environment.

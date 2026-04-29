@@ -1,3 +1,11 @@
+---
+reading_minutes: 20
+objectives:
+  - "Identify the right architecture for a task: CNN for image data, RNN/LSTM/GRU for sequences, Transformer for long-range dependencies."
+  - "Apply training refinements — Adam, learning-rate scheduling, batch normalization, dropout — and explain when each helps."
+  - "Use transfer learning by fine-tuning a pretrained backbone instead of training from scratch."
+---
+
 # Advanced Neural Network Techniques
 
 **After this lesson:** you can explain the core ideas in “Advanced Neural Network Techniques” and reproduce the examples here in your own notebook or environment.

@@ -1,3 +1,11 @@
+---
+reading_minutes: 25
+objectives:
+  - "Apply neural networks to computer-vision tasks (image classification, object detection) using CNN-style models."
+  - "Apply neural networks to NLP tasks (text classification, sequence tagging) using embeddings plus recurrent or transformer encoders."
+  - "Apply neural networks to time-series forecasting with sliding windows and recurrent or attention-based models."
+---
+
 # Real-World Applications of Neural Networks
 
 **After this lesson:** you can explain the core ideas in “Real-World Applications of Neural Networks” and reproduce the examples here in your own notebook or environment.
