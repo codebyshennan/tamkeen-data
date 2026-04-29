@@ -1,3 +1,12 @@
+---
+reading_minutes: 14
+objectives:
+  - "Plot training and validation score against a **single hyperparameter** with `sklearn.model_selection.validation_curve`."
+  - "Read the U-shape: validation score peaks at the sweet-spot complexity; left of the peak is underfit, right is overfit."
+  - "Use the curve to bracket a search range for grid / randomised search rather than as a substitute for full hyperparameter tuning."
+  - "Avoid the gotchas: too few CV folds (jagged curve), tuning only one hyperparameter when interactions matter, and confusing validation with **learning** curves."
+---
+
 # Validation Curves
 
 **After this lesson:** you can explain the core ideas in “Validation Curves” and reproduce the examples here in your own notebook or environment.
@@ -26,16 +35,11 @@ Validation curves plot the model's performance (typically error or accuracy) aga
 
 {% include mermaid-diagram.html src="5-ml-fundamentals/5.5-model-eval/diagrams/validation-curves-1.mmd" %}
 
-> **Figure (add screenshot or diagram):** A validation curve for tree `max_depth` (x-axis 1–20): training score (blue, stays high) and CV score (orange, peaks around depth 5–8 then drops), showing where overfitting starts.
-
 ## Types of Validation Curves
 
 ### 1. Model Complexity
 
 #### `validation_curve` for tree depth
-
-- **Purpose:** Sweep **`max_depth`** on a decision tree and plot **mean ± std** train vs CV scores—gap widening means overfitting as complexity grows.
-- **Walkthrough:** `validation_curve` fits `cv` folds per depth; `axis=1` aggregates folds; `fill_between` shows variance across splits.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -82,7 +86,6 @@ plt.show()
 <figcaption>Figure 1: Validation Curves (Model Complexity)</figcaption>
 </figure>
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-15" data-tint="1">
@@ -106,13 +109,9 @@ plt.show()
 </aside>
 </div>
 
-
 ### 2. Regularization Strength
 
 #### Logistic `C` on a log scale
-
-- **Purpose:** See how **inverse regularization** `C` trades off bias and variance; uses the **same** `X, y` as the tree example above.
-- **Walkthrough:** `semilogx` matches log-spaced `C`; smaller `C` = stronger L2 penalty in sklearn’s `LogisticRegression`.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -152,7 +151,6 @@ plt.show()
 <figcaption>Figure 2: Validation Curves (Regularization)</figcaption>
 </figure>
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-11" data-tint="1">
@@ -176,13 +174,9 @@ plt.show()
 </aside>
 </div>
 
-
 ### 3. Learning Rate
 
 #### Gradient boosting `learning_rate`
-
-- **Purpose:** Illustrate validation curves for **`learning_rate`** in `GradientBoostingClassifier`—too high can overfit; too low needs more trees.
-- **Walkthrough:** Same `validation_curve` API with `param_name="learning_rate"`; compare train vs CV gap across rates.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -222,7 +216,6 @@ plt.show()
 <figcaption>Figure 3: Validation Curves (Learning Rate)</figcaption>
 </figure>
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-11" data-tint="1">
@@ -245,7 +238,6 @@ plt.show()
   </div>
 </aside>
 </div>
-
 
 ## Interpreting Validation Curves
 
@@ -315,9 +307,6 @@ Let's analyze validation curves for a credit risk prediction model:
 
 #### Pipeline + `classifier__max_depth` sweep
 
-- **Purpose:** Tune **nested** hyperparameters: the forest lives inside a **Pipeline**, so use **`classifier__max_depth`** as `param_name`.
-- **Walkthrough:** `validation_curve` clones the pipeline per depth; no manual train/test split here—the function does **internal CV** on `(X, y)`.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -384,7 +373,6 @@ plt.show()
 <figcaption>Figure 4: Validation Curves for Credit Risk Prediction</figcaption>
 </figure>
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-29" data-tint="1">
@@ -416,7 +404,6 @@ plt.show()
   </div>
 </aside>
 </div>
-
 
 ## Gotchas
 

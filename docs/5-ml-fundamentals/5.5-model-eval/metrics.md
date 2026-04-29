@@ -1,3 +1,12 @@
+---
+reading_minutes: 30
+objectives:
+  - "Pick the right **classification** metric for the question: accuracy for balanced screening, precision/recall/F1 when classes are imbalanced or asymmetric, ROC-AUC for ranking, log loss for calibrated probabilities."
+  - "Pick the right **regression** metric for the question: MAE for outlier robustness, RMSE when large errors matter more, R² for variance explained, MAPE only when targets are far from zero."
+  - "Compute every metric here via `sklearn.metrics` and read its signature (`average=`, `greater_is_better`) without surprises."
+  - "Always report a baseline (majority class, mean predictor) alongside the model's metric — a number on its own is not interpretable."
+---
+
 # Model Evaluation Metrics
 
 **After this lesson:** you can explain the core ideas in “Model Evaluation Metrics” and reproduce the examples here in your own notebook or environment.
@@ -75,9 +84,6 @@ Model evaluation is like weather forecasting:
 
 #### Precision vs Recall Trade-off
 
-- **Purpose:** Illustrate **qualitatively** how conservative vs aggressive models move along precision–recall space (hand-drawn curves—not from a fitted model).
-- **Walkthrough:** Three fictional scenarios plot **precision vs recall** pairs; annotations highlight conservative (high precision, low recall) vs aggressive regions.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -135,7 +141,6 @@ demonstrate_precision_recall_tradeoff()
 <figcaption>Figure 1: Precision vs Recall Trade-off for Different Model Types</figcaption>
 </figure>
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-17" data-tint="1">
@@ -167,7 +172,6 @@ demonstrate_precision_recall_tradeoff()
   </div>
 </aside>
 </div>
-
 
 #### When to Use Which Metric: Decision Tree
 
@@ -205,9 +209,6 @@ Start Here: What type of problem?
 This is like the percentage of correct answers on a test.
 
 #### Accuracy and confusion matrix on synthetic data
-
-- **Purpose:** Compute **accuracy** and a **confusion matrix** from a simple logistic regression on `make_classification`—baseline workflow for classification metrics below.
-- **Walkthrough:** `predict` for hard labels; `accuracy_score` and `confusion_matrix` summarize mistakes; the rest of the cell (often in full notebook) prints reports.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -275,7 +276,6 @@ plot_confusion_matrix(y_test, y_pred)
 Accuracy: 0.825
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-26" data-tint="1">
@@ -298,7 +298,6 @@ Accuracy: 0.825
   </div>
 </aside>
 </div>
-
 
 ```
 Accuracy: 0.825
@@ -340,9 +339,6 @@ weighted avg       0.82      0.82      0.82       200
 These are like the balance between being thorough and being accurate.
 
 #### Scalar P/R/F1 and precision–recall curve
-
-- **Purpose:** Show **`precision_score` / `recall_score` / `f1_score`** on hard predictions, then **`precision_recall_curve`** from **probability** scores for the same model.
-- **Walkthrough:** Uses `y_pred` from above for scalars; `y_pred_proba[:, 1]` feeds `precision_recall_curve` for the plot (see also [precision-recall.md](precision-recall.md)).
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -390,7 +386,6 @@ Recall: 0.809
 F1 Score: 0.813
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-11" data-tint="1">
@@ -413,7 +408,6 @@ F1 Score: 0.813
   </div>
 </aside>
 </div>
-
 
 ```
 Precision: 0.817
@@ -452,9 +446,6 @@ This is like the trade-off between sensitivity and specificity.
 
 #### Plot ROC from predicted probabilities
 
-- **Purpose:** Encapsulate **`roc_curve` + `auc`** with a reusable plotting helper—same function is called again in the credit-risk example at the end.
-- **Walkthrough:** `roc_curve` needs **scores**, not hard labels; diagonal line is the **random** baseline.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -487,7 +478,6 @@ plot_roc_curve(y_test, y_pred_proba)
 <figcaption>Figure 4: Receiver Operating Characteristic (ROC) Curve</figcaption>
 </figure>
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-3" data-tint="1">
@@ -510,7 +500,6 @@ plot_roc_curve(y_test, y_pred_proba)
   </div>
 </aside>
 </div>
-
 
 **Output:**
 ```
@@ -544,9 +533,6 @@ Performance at Different Thresholds:
 This is like the average squared difference between predictions and actual values.
 
 #### MSE and prediction scatter for regression
-
-- **Purpose:** Fit **linear regression** on `make_regression`, report **MSE**, and plot **predicted vs true** with a diagonal reference line.
-- **Walkthrough:** `mean_squared_error` penalizes large errors more than MAE; scatter tightness around the red line indicates fit quality.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -603,7 +589,6 @@ plot_regression_predictions(y_test, y_pred)
 Mean Squared Error: 0.010
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-23" data-tint="1">
@@ -626,7 +611,6 @@ Mean Squared Error: 0.010
   </div>
 </aside>
 </div>
-
 
 ```
 Mean Squared Error: 0.010
@@ -689,9 +673,6 @@ This is like the percentage of variance explained by the model.
 
 #### R² and residual plot
 
-- **Purpose:** Report **`r2_score`** on the test set and **plot residuals** vs predictions to spot heteroscedasticity or outliers.
-- **Walkthrough:** Residuals should be **centered on 0** with no strong funnel shape if linear assumptions hold roughly.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -726,7 +707,6 @@ plot_residuals(y_test, y_pred)
 R-squared Score: 1.000
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-3" data-tint="1">
@@ -749,7 +729,6 @@ R-squared Score: 1.000
   </div>
 </aside>
 </div>
-
 
 ```
 R-squared Score: 1.000
@@ -777,9 +756,6 @@ R-squared Score: 1.000
 Let's see how different metrics help evaluate a credit risk model:
 
 #### Pipeline + multiple classification metrics
-
-- **Purpose:** One **tabular** toy example: scale features, **RandomForest**, then print **accuracy/precision/recall/F1** and reuse **`plot_roc_curve`** from the ROC section above.
-- **Walkthrough:** `y` is a simple rule on stacked features; **ensure `plot_roc_curve` is defined** in the same notebook/session before running.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -844,7 +820,6 @@ Recall: 0.989
 F1 Score: 0.967
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-19" data-tint="1">
@@ -876,7 +851,6 @@ F1 Score: 0.967
   </div>
 </aside>
 </div>
-
 
 ```
 Accuracy: 0.970

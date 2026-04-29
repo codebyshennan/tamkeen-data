@@ -1,3 +1,12 @@
+---
+reading_minutes: 16
+objectives:
+  - "Define **precision** (of predicted positives, how many are real) and **recall** (of real positives, how many we caught), and tie both back to confusion-matrix cells."
+  - "Move along the **precision–recall curve** by changing the decision threshold — there is no free lunch."
+  - "Compute and read PR curves with `precision_recall_curve` and `average_precision_score`; prefer PR over ROC when the positive class is rare."
+  - "Pick a threshold that matches the cost asymmetry of your problem (false positives vs false negatives) — defaulting to 0.5 is rarely right."
+---
+
 # Precision and Recall
 
 **After this lesson:** you can explain the core ideas in “Precision and Recall” and reproduce the examples here in your own notebook or environment.
@@ -21,8 +30,6 @@ Precision and Recall are fundamental metrics in machine learning for evaluating 
 ## What are Precision and Recall?
 
 {% include mermaid-diagram.html src="5-ml-fundamentals/5.5-model-eval/diagrams/precision-recall-1.mmd" %}
-
-> **Figure (add screenshot or diagram):** A Precision-Recall curve (x-axis = Recall 0–1, y-axis = Precision 0–1) for a classification model, showing the area under the PR curve (PR-AUC) shaded, with the operating threshold point marked.
 
 ![Precision-Recall Curve](assets/precision_recall_curve.png)
 
@@ -70,9 +77,6 @@ There's typically a trade-off between precision and recall:
 
 #### PR curve and average precision
 
-- **Purpose:** Plot **precision vs recall** from **predicted probabilities** (not hard labels) and report **average precision** (area-like summary under the PR curve).
-- **Walkthrough:** `precision_recall_curve` returns aligned arrays; `average_precision_score` integrates the step function—strong when positives are rare ([ROC](roc-and-auc.md) can look optimistic).
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -115,7 +119,6 @@ plt.show()
 <figcaption>Figure 1: Precision-Recall Curve</figcaption>
 </figure>
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-14" data-tint="1">
@@ -148,13 +151,9 @@ plt.show()
 </aside>
 </div>
 
-
 ### 2. Multi-class Classification
 
 #### One-vs-rest PR curves (Iris)
-
-- **Purpose:** For **multiclass**, draw one PR curve per class by binarizing labels **per class** vs rest—same pattern as multiclass ROC.
-- **Walkthrough:** `label_binarize` on `y_test`; loop pairs `y_test_bin[:, i]` with `y_pred_proba[:, i]`; legend shows **AP** per class.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -211,7 +210,6 @@ plt.show()
 <figcaption>Figure 2: Multi-class Precision-Recall Curves</figcaption>
 </figure>
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-16" data-tint="1">
@@ -243,7 +241,6 @@ plt.show()
   </div>
 </aside>
 </div>
-
 
 ## Interpreting Precision-Recall Curves
 
@@ -323,9 +320,6 @@ Let's analyze precision-recall curves for a credit risk prediction model:
 
 #### Credit pipeline + PR plot
 
-- **Purpose:** Combine **tabular** features, **scaled RandomForest**, and a **precision–recall** plot with **AP** for a skew-sensitive view of a scoring model.
-- **Walkthrough:** Same synthetic target idea as other 5.5 “credit” snippets; `[:, 1]` is probability of the positive class.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -390,7 +384,6 @@ plt.show()
 <figcaption>Figure 3: Precision-Recall Curve for Credit Risk Prediction</figcaption>
 </figure>
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-22" data-tint="1">
@@ -422,7 +415,6 @@ plt.show()
   </div>
 </aside>
 </div>
-
 
 ## Gotchas
 

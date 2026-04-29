@@ -1,3 +1,12 @@
+---
+reading_minutes: 28
+objectives:
+  - "Distinguish **parameters** (learned from data) from **hyperparameters** (set before training) and list the load-bearing ones for common algorithms."
+  - "Run `GridSearchCV`, `RandomizedSearchCV`, and Bayesian optimisation (e.g., scikit-optimize, Optuna) — and pick between them based on search-space size and compute budget."
+  - "Always wrap preprocessing + model in a `Pipeline` so the search refits transformers per fold without leaking validation data; use `step__param` keys."
+  - "Avoid the common traps: tuning on the test set, optimising the wrong scoring metric, and reporting tuned CV scores as final test scores instead of held-out."
+---
+
 # Hyperparameter Tuning
 
 **After this lesson:** you can explain the core ideas in “Hyperparameter Tuning” and reproduce the examples here in your own notebook or environment.
@@ -117,9 +126,6 @@ Grid search exhaustively searches through a manually specified subset of hyperpa
 
 #### `GridSearchCV` on a random forest
 
-- **Purpose:** **Exhaustively** fit every combination in `param_grid`, pick the set with best **CV score**, then report **held-out test** accuracy (still only one test evaluation—avoid peeking repeatedly).
-- **Walkthrough:** `cv=5` means each combo is scored by 5 folds; `best_estimator_` is refit on full `X_train` after selection.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -175,7 +181,6 @@ Best cross-validation score: 0.9075
 Test set accuracy: 0.9450
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-10" data-tint="1">
@@ -216,7 +221,6 @@ Test set accuracy: 0.9450
   </div>
 </aside>
 </div>
-
 
 ```
 Starting grid search...
@@ -261,9 +265,6 @@ Random search samples hyperparameter combinations randomly from specified distri
 **Implementation Example:**
 
 #### `RandomizedSearchCV` with scipy distributions
-
-- **Purpose:** Sample **`n_iter`** random combos from continuous/discrete **distributions**—often better than grid search when many knobs matter ([Bergstra & Bengio](https://www.jmlr.org/papers/volume13/bergstra12a/bergstra12a.pdf)).
-- **Walkthrough:** Uses the **same** `X_train`, `y_train` as the grid-search cell above; `randint`/`uniform` define priors over hyperparameters.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -314,7 +315,6 @@ Best parameters: {'max_depth': 32, 'max_features': np.float64(0.4206680542692774
 Best cross-validation score: 0.9037
 Test set accuracy: 0.9500
 ```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -383,9 +383,6 @@ Bayesian optimization uses probabilistic models to guide the search for optimal 
 **Implementation Example:**
 
 #### `BayesSearchCV` (scikit-optimize)
-
-- **Purpose:** Use a **Gaussian-process** model of CV score to pick promising next points—fewer evaluations than grid search on large spaces (requires **`scikit-optimize`**).
-- **Walkthrough:** `Integer`/`Real` define typed bounds; `n_iter` is how many surrogate-guided trials to run.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -492,9 +489,6 @@ print(f"Test set accuracy: {test_score:.4f}")
 
 #### Coarse then fine grids
 
-- **Purpose:** **Stage 1** explores the landscape cheaply; **Stage 2** zooms near the best coarse point—reduces wasted fits vs one huge grid.
-- **Walkthrough:** These are **dicts only**; plug into `GridSearchCV` twice, using stage-1 `best_params_` to set stage-2 ranges.
-
 ```python
 # Stage 1: Coarse search with wide ranges
 coarse_grid = {
@@ -513,9 +507,6 @@ fine_grid = {
 
 #### Gradient boosting with `n_iter_no_change`
 
-- **Purpose:** For **iterative** boosters, cap trees but let **validation monitoring** stop early when score plateaus—pairs with tuning `learning_rate` / `subsample`.
-- **Walkthrough:** `GradientBoostingClassifier` uses last `validation_fraction` of training as internal validation when these keys are set.
-
 ```python
 from sklearn.ensemble import GradientBoostingClassifier
 
@@ -531,9 +522,6 @@ gb_params = {
 ### 3. Nested Cross-Validation
 
 #### Outer CV + inner `GridSearchCV`
-
-- **Purpose:** **Outer** folds estimate generalization; **inner** CV on each outer training fold picks hyperparameters—reduces optimistic bias from tuning on the same split you test on.
-- **Walkthrough:** Each outer fold builds a **fresh** `GridSearchCV` on `X_train_outer`, then scores on `X_test_outer`.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -571,7 +559,6 @@ print(
 ```
 Unbiased performance estimate: 0.8970 ± 0.0279
 ```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -621,9 +608,6 @@ Unbiased performance estimate: 0.8970 ± 0.0279
 
 #### Wall-clock for one tuning run
 
-- **Purpose:** Log **elapsed time** and **how many param combos** were evaluated—helps compare grids vs random search budgets.
-- **Walkthrough:** Assumes `grid_search` from the `GridSearchCV` example above.
-
 ```python
 import time
 
@@ -649,9 +633,6 @@ Evaluated 108 combinations
 ### 5. Document All Experiments
 
 #### Export `cv_results_` and best params
-
-- **Purpose:** Persist **every trial** (`cv_results_`) and **best** settings for reproducibility and plots.
-- **Walkthrough:** `test_score` should be the single held-out test accuracy from `best_estimator_` after tuning.
 
 ```python
 import pandas as pd
@@ -777,9 +758,6 @@ with open('best_params.txt', 'w') as f:
 
 #### Trial object + `cross_val_score`
 
-- **Purpose:** **Optuna** runs many trials, pruning unpromising ones—flexible alternative to sklearn search classes.
-- **Walkthrough:** `trial.suggest_*` draws parameters; objective returns **mean CV score** to maximize.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -793,7 +771,6 @@ X, y = make_classification(n_samples=1000, n_features=20, random_state=42)
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
-
 
 def objective(trial):
     # Suggest hyperparameters

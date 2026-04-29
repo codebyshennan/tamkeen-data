@@ -1,3 +1,12 @@
+---
+reading_minutes: 12
+objectives:
+  - "Explain regularisation as a penalty on weight magnitude that trades a small training-error increase for a large variance reduction."
+  - "Distinguish **L2** (Ridge — shrinks weights, all features kept), **L1** (Lasso — sparsity / implicit feature selection), and **ElasticNet** (a blend of the two)."
+  - "Tune the regularisation strength (`alpha` / `C`) with cross-validated search; standardise features first, or the penalty is uneven across features."
+  - "Apply the same intuition to deep learning (weight decay, dropout) and gradient boosting (`min_samples_leaf`, `max_depth`, `reg_alpha`)."
+---
+
 # Regularization
 
 **After this lesson:** you can explain the core ideas in “Regularization” and reproduce the examples here in your own notebook or environment.
@@ -41,9 +50,6 @@ L1 regularization adds the absolute value of coefficients to the loss function:
 
 #### Lasso pipeline (regression $R^2$)
 
-- **Purpose:** **L1** (`Lasso`) shrinks coefficients and can zero some out—`alpha` controls penalty strength; score is **$R^2$** on the test set.
-- **Walkthrough:** Synthetic regression data via `make_regression`; `StandardScaler` puts features on comparable scales before penalizing weights.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -74,7 +80,6 @@ print(f"L1 Regularization Score: {pipeline.score(X_test, y_test):.3f}")
 L1 Regularization Score: 0.989
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-11" data-tint="1">
@@ -104,9 +109,6 @@ L2 regularization adds the squared value of coefficients to the loss function:
 
 #### Ridge pipeline (same synthetic split)
 
-- **Purpose:** **L2** (`Ridge`) penalizes large squared weights—usually no exact zeros; compare $R^2$ to Lasso at the same `alpha` for intuition.
-- **Walkthrough:** Reuses the same `X_train`/`X_test` as the Lasso cell if run in order; or re-run `make_regression` + `train_test_split` in a fresh notebook.
-
 ```python
 from sklearn.linear_model import Ridge
 from sklearn.preprocessing import StandardScaler
@@ -128,9 +130,6 @@ print(f"L2 Regularization Score: {pipeline.score(X_test, y_test):.3f}")
 Elastic Net combines L1 and L2 regularization:
 
 #### Elastic Net (`l1_ratio` mixes L1 vs L2)
-
-- **Purpose:** Blend **Lasso**-like sparsity with **Ridge**-like stability; `l1_ratio=0` is pure Ridge, `1` is pure Lasso.
-- **Walkthrough:** Same regression pipeline pattern; tune `alpha` and `l1_ratio` with cross-validation in practice.
 
 ```python
 from sklearn.linear_model import ElasticNet
@@ -211,9 +210,6 @@ Let's see how regularization helps in a credit risk prediction task:
 
 #### Logistic penalties (L1 / L2 / elastic-net)
 
-- **Purpose:** Compare **linear** classifiers with different `penalty` settings on the same synthetic credit features—accuracy summarizes fit (also inspect coefficients for sparsity).
-- **Walkthrough:** `solver` must match penalty (`liblinear` for L1, `saga` for elastic-net); `train_test_split` creates the evaluation split.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -275,7 +271,6 @@ plt.show()
 <img src="assets/regularization_fig_1.png" alt="regularization" />
 <figcaption>Figure 1: Regularization Comparison</figcaption>
 </figure>
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

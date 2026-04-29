@@ -1,3 +1,12 @@
+---
+reading_minutes: 22
+objectives:
+  - "Run controlled comparisons across linear, tree, ensemble, and neural baselines on the **same** train/validation split with the **same** scoring metric."
+  - "Pair each candidate with sensible defaults and a small `Pipeline` so the comparison is preprocessing-fair, not just model-fair."
+  - "Use cross-validated mean ± std (not a single split) to avoid picking a winner that just got lucky on one fold."
+  - "Pick the simplest model within ~1 std of the best — and balance accuracy against latency, interpretability, and operational cost."
+---
+
 # Model Selection
 
 **After this lesson:** you can explain the core ideas in “Model Selection” and reproduce the examples here in your own notebook or environment.
@@ -65,9 +74,6 @@ Model selection is like building a sports team:
 These are like following a straight path - simple and interpretable.
 
 #### Logistic regression + 2D boundary plot
-
-- **Purpose:** Baseline **linear** classifier accuracy and a **2D** decision surface (first two features) for intuition.
-- **Walkthrough:** `plot_decision_boundary` refits on `X[:, :2]` only—so the image matches a 2-feature slice, not full 20D geometry.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -137,7 +143,6 @@ plot_decision_boundary(linear_model, X, y)
 Linear Model Accuracy: 0.825
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-24" data-tint="1">
@@ -161,7 +166,6 @@ Linear Model Accuracy: 0.825
 </aside>
 </div>
 
-
 ```
 Linear Model Accuracy: 0.825
 ```
@@ -176,9 +180,6 @@ The linear model creates a straight decision boundary, which works well for line
 These are like following a decision tree - more complex but often more powerful.
 
 #### Random forest accuracy + importances
-
-- **Purpose:** Compare **nonlinear** tree ensemble accuracy to logistic regression on the **same** split (`X_train` from §1).
-- **Walkthrough:** `plot_feature_importance` saves under `assets/` when you run locally—paths match figures checked into the lesson.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -222,7 +223,6 @@ plot_feature_importance(tree_model, [f'Feature {i+1}' for i in range(X.shape[1])
 Tree Model Accuracy: 0.910
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-11" data-tint="1">
@@ -246,7 +246,6 @@ Tree Model Accuracy: 0.910
 </aside>
 </div>
 
-
 ```
 Tree Model Accuracy: 0.910
 ```
@@ -261,9 +260,6 @@ The Random Forest model shows which features are most important for making predi
 These are like having multiple layers of decision-making - very powerful but more complex.
 
 #### MLP + `learning_curve`
-
-- **Purpose:** Show a **high-capacity** model’s accuracy and how score changes with **training set size** (same `X`, `y` as prior subsections).
-- **Walkthrough:** `learning_curve` uses internal CV; the saved PNG illustrates train vs validation gap.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -319,7 +315,6 @@ plot_learning_curve(nn_model, X, y)
 Neural Network Accuracy: 0.950
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-10" data-tint="1">
@@ -343,7 +338,6 @@ Neural Network Accuracy: 0.950
 </aside>
 </div>
 
-
 ```
 Neural Network Accuracy: 0.950
 ```
@@ -358,9 +352,6 @@ The learning curve shows how the model's performance improves with more training
 Let's compare different models:
 
 #### Bar chart of test accuracies
-
-- **Purpose:** One place to **fit** several estimators and compare **test** accuracy—extend with CV or nested CV for real selection.
-- **Walkthrough:** Dictionary maps label → unfitted estimator; each is fit on `X_train` and scored on `X_test`.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -402,7 +393,6 @@ results = compare_models(models, X_train, X_test, y_train, y_test)
 <figcaption>Figure 4: Model Comparison</figcaption>
 </figure>
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-20" data-tint="1">
@@ -425,7 +415,6 @@ results = compare_models(models, X_train, X_test, y_train, y_test)
   </div>
 </aside>
 </div>
-
 
 **Output:**
 ```
@@ -460,9 +449,6 @@ The comparison shows that the Neural Network performs best on this dataset, foll
 Let's see how different models perform on a credit risk prediction task:
 
 #### Pipelines on synthetic credit features
-
-- **Purpose:** Compare **scaled** linear, forest, and MLP pipelines on tabular credit-like inputs.
-- **Walkthrough:** Builds `X`, `y`, then **`train_test_split`**; reuses **`compare_models`** from the previous section.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -517,7 +503,6 @@ results = compare_models(pipelines, X_train, X_test, y_train, y_test)
 <figcaption>Figure 5: Model Comparison</figcaption>
 </figure>
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-22" data-tint="1">
@@ -541,7 +526,6 @@ results = compare_models(pipelines, X_train, X_test, y_train, y_test)
 </aside>
 </div>
 
-
 **Output:**
 ```
 Linear Accuracy: 0.990
@@ -558,9 +542,6 @@ For the credit risk prediction task, all models perform exceptionally well, with
 ### 1. Model Selection Process
 
 #### End-to-end helper (same-session API)
-
-- **Purpose:** Split → compare models → plot learning curve for the **winner**—illustrative; production workflows add **nested CV** and a locked test set.
-- **Walkthrough:** Expects **`compare_models`** and **`plot_learning_curve`** defined earlier on this page.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -601,7 +582,6 @@ model_selection_process(X, y)
 <figcaption>Figure 6: Model Comparison</figcaption>
 </figure>
 
-
 <figure>
 <img src="assets/model-selection_fig_7.png" alt="model-selection" />
 <figcaption>Figure 7: Learning Curve</figcaption>
@@ -610,7 +590,6 @@ model_selection_process(X, y)
 ```
 {'Linear': 0.995, 'Tree': 0.985, 'Neural Network': 0.56}
 ```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -634,8 +613,6 @@ model_selection_process(X, y)
   </div>
 </aside>
 </div>
-
-
 
 ```
 {'Linear': 0.995, 'Tree': 0.98, 'Neural Network': 0.455}

@@ -1,3 +1,12 @@
+---
+reading_minutes: 12
+objectives:
+  - "Distinguish three flavours: **tree built-in** (impurity / Gini), **permutation importance**, and model-agnostic **SHAP** / linear coefficients."
+  - "Compute `feature_importances_` and `permutation_importance` in scikit-learn, then read the ranking with appropriate caution."
+  - "Recognise the pitfalls: tree impurity inflates high-cardinality features, correlated features split the importance, and importance is **not** causal."
+  - "Use feature importance to drive iteration (drop, engineer, investigate) rather than to make ground-truth claims about the world."
+---
+
 # Feature Importance
 
 **After this lesson:** you can explain the core ideas in “Feature Importance” and reproduce the examples here in your own notebook or environment.
@@ -32,9 +41,6 @@ Feature importance measures how much each feature contributes to the model's pre
 ### 1. Tree-Based Methods
 
 #### Gini-based `feature_importances_`
-
-- **Purpose:** **Mean impurity decrease** (Gini) aggregated over trees—fast, but **biased** toward high-cardinality features.
-- **Walkthrough:** Fit `RandomForestClassifier`, read `feature_importances_`, sort indices descending, bar plot.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -72,7 +78,6 @@ plt.show()
 <figcaption>Figure 1: Feature Importances</figcaption>
 </figure>
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-9" data-tint="1">
@@ -105,13 +110,9 @@ plt.show()
 </aside>
 </div>
 
-
 ### 2. Permutation Importance
 
 #### Model-agnostic drop in score
-
-- **Purpose:** Shuffle each feature, measure **score drop**—works for any fitted estimator and reflects **held-out** behavior better than impurity alone.
-- **Walkthrough:** Uses the same `rf`, `X`, `y` as above; `n_repeats` gives a distribution per feature (boxplot).
 
 ```python
 from sklearn.inspection import permutation_importance
@@ -128,13 +129,9 @@ plt.tight_layout()
 plt.show()
 ```
 
-
 ### 3. SHAP Values
 
 #### TreeExplainer + summary plot
-
-- **Purpose:** **SHAP** attributes each prediction to features with consistency properties—useful for debugging and stakeholder explanations (install **`shap`**).
-- **Walkthrough:** `TreeExplainer` is exact for tree ensembles; summary plot shows magnitude and direction of impact.
 
 ```python
 import shap
@@ -194,9 +191,6 @@ plt.show()
 Let's analyze feature importance in a credit risk prediction task:
 
 #### Pipeline importances + SHAP on the forest
-
-- **Purpose:** Read **`classifier__`** step importances from a **Pipeline**, then explain the **underlying** `RandomForestClassifier` with SHAP.
-- **Walkthrough:** Same synthetic credit table as other 5.5 examples; `TreeExplainer` is fit on the forest, not the scaler.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">

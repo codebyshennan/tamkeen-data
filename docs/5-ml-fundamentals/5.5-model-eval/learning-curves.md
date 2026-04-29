@@ -1,3 +1,12 @@
+---
+reading_minutes: 14
+objectives:
+  - "Plot training and validation score vs **training-set size** with `sklearn.model_selection.learning_curve`."
+  - "Read the curves: both flat and high-error = bias; large gap = variance; both still climbing = more data will help."
+  - "Decide the next move from the shape: more data, more model capacity, more regularisation, or stop training."
+  - "Avoid the gotchas: noisy curves on tiny datasets, mismatched CV strategy, and confusing learning curves with **validation** curves (capacity-vs-error)."
+---
+
 # Learning Curves
 
 **After this lesson:** you can explain the core ideas in “Learning Curves” and reproduce the examples here in your own notebook or environment.
@@ -49,14 +58,9 @@ Learning curves are like sports training:
 
 {% include mermaid-diagram.html src="5-ml-fundamentals/5.5-model-eval/diagrams/learning-curves-1.mmd" %}
 
-> **Figure (add screenshot or diagram):** Three side-by-side learning curve plots (x-axis = training set size, y-axis = error): underfitting (both curves high and close), good fit (both curves low and converging), overfitting (training curve low, validation curve high, large gap).
-
 ### 1. Ideal Learning Curve
 
 #### `learning_curve` with logistic regression
-
-- **Purpose:** Plot **training vs CV score** as training set size grows—**converging** curves with a small gap usually mean adequate model capacity and generalization.
-- **Walkthrough:** `train_sizes` subsamples increasing fractions of `X`; each point is mean/std across **cv** folds (`axis=1` is folds).
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -107,7 +111,6 @@ plt.show()
 <figcaption>Figure 1: Learning Curves</figcaption>
 </figure>
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-10" data-tint="1">
@@ -140,13 +143,9 @@ plt.show()
 </aside>
 </div>
 
-
 ### 2. Overfitting Learning Curve
 
 #### Larger MLP (typical gap)
-
-- **Purpose:** Show a **high-capacity** model: training score often stays high while validation lags, producing a **wide gap** (variance).
-- **Walkthrough:** Same `learning_curve` call; **must** recompute `train_mean` / `val_mean` from `train_scores` / `val_scores` for this estimator.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -187,7 +186,6 @@ plt.show()
 <figcaption>Figure 2: Overfitting Learning Curves</figcaption>
 </figure>
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-11" data-tint="1">
@@ -220,13 +218,9 @@ plt.show()
 </aside>
 </div>
 
-
 ### 3. Underfitting Learning Curve
 
 #### Dummy baseline (high bias)
-
-- **Purpose:** A **majority-class** dummy shows **both** curves low and close—more data does not fix the wrong model family.
-- **Walkthrough:** Recompute means/stds from the new `learning_curve` output.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -267,7 +261,6 @@ plt.show()
 <figcaption>Figure 3: Underfitting Learning Curves</figcaption>
 </figure>
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-11" data-tint="1">
@@ -299,7 +292,6 @@ plt.show()
   </div>
 </aside>
 </div>
-
 
 ## Interpreting Learning Curves
 

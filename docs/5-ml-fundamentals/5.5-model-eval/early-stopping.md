@@ -1,3 +1,12 @@
+---
+reading_minutes: 15
+objectives:
+  - "Explain **early stopping** as monitoring validation loss during training and halting when it stops improving for `patience` steps."
+  - "Wire it up in scikit-learn (`MLPClassifier`, `HistGradientBoosting`, `SGDClassifier` with `early_stopping=True`), gradient-boosting libraries, and Keras callbacks."
+  - "Tune `patience` and the validation-set fraction so noisy curves don't trigger termination, and a clear plateau still does."
+  - "Pair early stopping with `restore_best_weights` (or equivalent) so the kept model is the one with lowest validation loss, not the one at the stop step."
+---
+
 # Early Stopping
 
 **After this lesson:** you can explain the core ideas in “Early Stopping” and reproduce the examples here in your own notebook or environment.
@@ -55,9 +64,6 @@ Early stopping is like sports training:
 
 #### Manual `partial_fit` loop with patience
 
-- **Purpose:** Illustrate **patience**: stop when validation score fails to improve for several epochs—same idea as Keras/ PyTorch callbacks.
-- **Walkthrough:** `MLPClassifier.partial_fit` needs `classes` on the first call; synthetic data is created so the snippet runs alone.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -101,7 +107,6 @@ for epoch in range(1000):
 Early stopping at epoch 11
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-15" data-tint="1">
@@ -128,9 +133,6 @@ Early stopping at epoch 11
 ### 2. Using Scikit-learn's Early Stopping
 
 #### `SGDClassifier(early_stopping=True)`
-
-- **Purpose:** Let sklearn reserve a **validation_fraction** of training data and stop when score plateaus—no manual epoch loop.
-- **Walkthrough:** Requires **`X_train`/`y_train`** from a classification dataset; below uses `make_classification` for a self-contained fit.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -162,7 +164,6 @@ print(f"Early Stopping Score: {pipeline.score(X_test, y_test):.3f}")
 Early Stopping Score: 0.815
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-11" data-tint="1">
@@ -190,9 +191,6 @@ Early Stopping Score: 0.815
 
 #### Callable tracker object
 
-- **Purpose:** Encapsulate **patience** and **min_delta** in a small class you can plug into any training loop.
-- **Walkthrough:** Same synthetic split as **§1** so the cell runs alone; `EarlyStopping` tracks whether validation score improved.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -211,7 +209,6 @@ X_val, X_test, y_val, y_test = train_test_split(
 model = MLPClassifier(
     hidden_layer_sizes=(100, 50), max_iter=1, warm_start=True, random_state=42
 )
-
 
 class EarlyStopping:
     def __init__(self, patience=5, min_delta=0):
@@ -247,7 +244,6 @@ for epoch in range(1000):
 ```
 Early stopping at epoch 28
 ```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -326,9 +322,6 @@ Let's see how early stopping helps in a credit risk prediction task:
 
 #### Growing `n_estimators` with patience
 
-- **Purpose:** Treat **number of trees** as a training “epoch” and stop when **test** accuracy stops improving—pedagogical (production uses **OOB** or **CV**, not the test set for selection).
-- **Walkthrough:** `set_params(classifier__n_estimators=...)` refits the pipeline each step; **do not** use this pattern for real model selection without a validation fold.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -390,7 +383,6 @@ print(f"Best model score: {best_score:.3f}")
 Early stopping at 90 trees
 Best model score: 0.985
 ```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

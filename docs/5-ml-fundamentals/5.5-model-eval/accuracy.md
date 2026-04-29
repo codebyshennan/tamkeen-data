@@ -1,3 +1,12 @@
+---
+reading_minutes: 12
+objectives:
+  - "Define accuracy as the fraction of correct predictions and compute it for binary and multi-class problems with `sklearn.metrics.accuracy_score`."
+  - "Recognise when accuracy is misleading: with class imbalance (>~80% majority), report at least one of precision/recall, F1, or a confusion matrix alongside it."
+  - "Compare your model's accuracy to the **majority-class baseline** before celebrating — beating \"always predict the most common label\" is the actual bar."
+  - "Validate with cross-validation and a held-out test set, not the training set, to avoid mistaking memorisation for skill."
+---
+
 # Accuracy
 
 **After this lesson:** you can explain the core ideas in “Accuracy” and reproduce the examples here in your own notebook or environment.
@@ -36,10 +45,6 @@ Accuracy is the ratio of correct predictions to total predictions:
 
 #### Compute accuracy on a held-out set (binary)
 
-**Purpose:** Relate the accuracy formula to `sklearn.metrics.accuracy_score` for a logistic regression on synthetic balanced data.
-
-**Walkthrough:** `make_classification` builds a toy dataset; compare `y_test` to `y_pred` from `model.predict`.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -69,7 +74,6 @@ print(f"Accuracy: {accuracy:.3f}")
 Accuracy: 0.810
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-10" data-tint="1">
@@ -93,19 +97,9 @@ Accuracy: 0.810
 </aside>
 </div>
 
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Accuracy: 0.810
-```
-
 ### 2. Multi-class Classification
 
 #### Accuracy with three classes (Iris)
-
-**Purpose:** Show that accuracy generalizes to multi-class: fraction of samples where predicted class equals true class.
-
-**Walkthrough:** `RandomForestClassifier` predicts class indices; chance baseline is roughly $1/\text{n\_classes}$ when uniform.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -136,7 +130,6 @@ print(f"Accuracy: {accuracy:.3f}")
 Accuracy: 1.000
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-10" data-tint="1">
@@ -159,12 +152,6 @@ Accuracy: 1.000
   </div>
 </aside>
 </div>
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Accuracy: 1.000
-```
 
 ## Interpreting Accuracy
 
@@ -231,9 +218,6 @@ Let's analyze accuracy for a credit risk prediction model:
 
 #### Pipeline accuracy vs majority baseline
 
-- **Purpose:** Report **accuracy** on tabular credit-like data and compare to the **majority-class** baseline (always predicting the more common label).
-- **Walkthrough:** `Pipeline` scales then fits `RandomForestClassifier`; baseline is `max(P(y=1), P(y=0))` on the test labels.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -289,7 +273,6 @@ print(f"Baseline Accuracy: {baseline_accuracy:.3f}")
 Accuracy: 0.970
 Baseline Accuracy: 0.555
 ```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

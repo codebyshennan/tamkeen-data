@@ -1,3 +1,12 @@
+---
+reading_minutes: 6
+objectives:
+  - "Distinguish **bias** (error from over-simplifying assumptions) from **variance** (error from sensitivity to training data) and place a model on the underfit–overfit axis."
+  - "Recognise the tradeoff: low-bias models tend to be high-variance and vice versa, so total error has a U-shape in model complexity."
+  - "Diagnose which side of the tradeoff a model is on by comparing **train vs validation error** — close and high = bias; large gap = variance."
+  - "Counter high bias with more capacity / better features; counter high variance with regularisation, more data, or simpler models."
+---
+
 # Bias-Variance Tradeoff
 
 **After this lesson:** you can explain the core ideas in “Bias-Variance Tradeoff” and reproduce the examples here in your own notebook or environment.
@@ -31,8 +40,6 @@ Variance refers to the model's sensitivity to fluctuations in the training data.
 Finding the right balance between bias and variance is key to creating effective models. Too much bias leads to underfitting, while too much variance leads to overfitting.
 
 {% include mermaid-diagram.html src="5-ml-fundamentals/5.5-model-eval/diagrams/bias-variance-1.mmd" %}
-
-> **Figure (add screenshot or diagram):** The classic bias-variance decomposition curve: x-axis = model complexity, two curves for bias² (decreasing) and variance (increasing), their sum forming a U-shape, with the minimum labelled "optimal complexity".
 
 ## Practical Examples
 

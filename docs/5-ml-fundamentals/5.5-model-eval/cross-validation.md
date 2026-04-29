@@ -1,3 +1,12 @@
+---
+reading_minutes: 22
+objectives:
+  - "Replace a single train/test split with **k-fold cross-validation** to get a lower-variance estimate of out-of-sample performance."
+  - "Pick the right CV variant: `KFold` for iid data, `StratifiedKFold` for class imbalance, `GroupKFold` for grouped samples, `TimeSeriesSplit` for temporal data."
+  - "Use `cross_val_score` / `cross_validate` with a `Pipeline` so preprocessing is fit on each train fold only — never on the validation fold."
+  - "Avoid the everyday traps: leakage from pre-split scaling, the wrong CV strategy for time series, and reading a single fold's score as the model's true performance."
+---
+
 # Cross-Validation
 
 **After this lesson:** you can explain the core ideas in “Cross-Validation” and reproduce the examples here in your own notebook or environment.
@@ -70,10 +79,6 @@ The data is divided into k subsets (called "folds"), and the holdout method is r
 
 #### K-fold CV with `cross_val_score`
 
-**Purpose:** Train/evaluate the same estimator on 5 disjoint validation folds and summarize mean and variability of the score.
-
-**Walkthrough:** `KFold(..., shuffle=True)` randomizes row order before splitting; `cross_val_score` uses the estimator’s default scoring (accuracy for classifiers).
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -102,7 +107,6 @@ Cross-validation scores: [0.55 0.6  0.45 0.6  0.35]
 Mean CV score: 0.510 (+/- 0.194)
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-7" data-tint="1">
@@ -126,13 +130,6 @@ Mean CV score: 0.510 (+/- 0.194)
 </aside>
 </div>
 
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Cross-validation scores: [0.55 0.6  0.45 0.6  0.35]
-Mean CV score: 0.510 (+/- 0.194)
-```
-
 ### Leave-One-Out Cross-Validation (LOOCV)
 
 Each observation is used once as a validation set while the remaining observations form the training set. This is equivalent to k-fold where k equals the number of samples.
@@ -145,10 +142,6 @@ Each observation is used once as a validation set while the remaining observatio
 **Example:**
 
 #### Leave-one-out CV
-
-**Purpose:** Use every point once as validation—maximum training data per round, feasible only for small $n$.
-
-**Walkthrough:** `LeaveOneOut` yields $n$ splits; `cross_val_score` averages scores across all rounds (expensive when $n$ is large).
 
 ```python
 import numpy as np
@@ -165,12 +158,6 @@ scores = cross_val_score(model, X, y, cv=loo)
 print(f"LOOCV mean score: {scores.mean():.3f}")
 ```
 
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-LOOCV mean score: 0.540
-```
-
 ### Stratified K-Fold Cross-Validation
 
 Similar to K-Fold but ensures that the proportions of samples for each class are the same in each fold. This is crucial for imbalanced datasets.
@@ -185,10 +172,6 @@ Similar to K-Fold but ensures that the proportions of samples for each class are
 **Example:**
 
 #### Stratified vs ordinary K-fold on imbalanced labels
-
-**Purpose:** Preserve class proportions in each fold so minority classes don’t disappear from validation.
-
-**Walkthrough:** `StratifiedKFold.split(X, y)` needs `y`; compare mean/std of scores against plain `KFold` on the same `X_imbalanced`, `y_imbalanced`.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -220,7 +203,6 @@ print(f"Regular CV: {regular_scores.mean():.3f} (+/- {regular_scores.std() * 2:.
 Stratified CV: 0.760 (+/- 0.172)
 Regular CV: 0.770 (+/- 0.080)
 ```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -254,13 +236,6 @@ Regular CV: 0.770 (+/- 0.080)
 </aside>
 </div>
 
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Stratified CV: 0.760 (+/- 0.172)
-Regular CV: 0.770 (+/- 0.080)
-```
-
 ### Time Series Cross-Validation
 
 For time series data, we need to respect the temporal order and avoid using future data to predict the past.
@@ -275,10 +250,6 @@ For time series data, we need to respect the temporal order and avoid using futu
 **Example:**
 
 #### Time-ordered splits with `TimeSeriesSplit`
-
-**Purpose:** Avoid leakage in temporal data: validation segments always come after training segments.
-
-**Walkthrough:** Loop prints index ranges for each fold—train blocks grow as folds advance (expanding window).
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -318,7 +289,6 @@ Fold 5:
   Val indices: [84 85 86 87 88]...[95 96 97 98 99]
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-8" data-tint="1">
@@ -341,26 +311,6 @@ Fold 5:
   </div>
 </aside>
 </div>
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Fold 1:
-  Train indices: [0 1 2 3 4]...[15 16 17 18 19]
-  Val indices: [20 21 22 23 24]...[31 32 33 34 35]
-Fold 2:
-  Train indices: [0 1 2 3 4]...[31 32 33 34 35]
-  Val indices: [36 37 38 39 40]...[47 48 49 50 51]
-Fold 3:
-  Train indices: [0 1 2 3 4]...[47 48 49 50 51]
-  Val indices: [52 53 54 55 56]...[63 64 65 66 67]
-Fold 4:
-  Train indices: [0 1 2 3 4]...[63 64 65 66 67]
-  Val indices: [68 69 70 71 72]...[79 80 81 82 83]
-Fold 5:
-  Train indices: [0 1 2 3 4]...[79 80 81 82 83]
-  Val indices: [84 85 86 87 88]...[95 96 97 98 99]
-```
 
 ## Benefits of Cross-Validation
 
@@ -385,10 +335,6 @@ Fold 5:
 Let's see how cross validation helps in a real-world scenario:
 
 #### Manual fold loop with a pipeline (credit risk sketch)
-
-**Purpose:** Mirror production evaluation: fit `StandardScaler` + `RandomForestClassifier` inside each fold without touching other folds’ data.
-
-**Walkthrough:** `StratifiedKFold.split` returns indices; `pipeline.score` on each validation fold builds a list of fold accuracies.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -443,7 +389,6 @@ Fold 5: 0.985
 Mean CV score: 0.981 (+/- 0.007)
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-18" data-tint="1">
@@ -476,27 +421,11 @@ Mean CV score: 0.981 (+/- 0.007)
 </aside>
 </div>
 
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Fold 1: 0.980
-Fold 2: 0.980
-Fold 3: 0.985
-Fold 4: 0.975
-Fold 5: 0.985
-
-Mean CV score: 0.981 (+/- 0.007)
-```
-
 ## Best Practices
 
 ### 1. Choosing the Right Number of Folds
 
 #### Sweep k and plot mean score with error bars
-
-**Purpose:** Visualize bias–variance of the CV estimate as fold count changes; useful for picking $k$ when data are limited.
-
-**Walkthrough:** `cross_val_score(..., cv=k)` uses $k$-fold; `errorbar` plots mean $\pm$ std across folds.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -509,7 +438,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.datasets import make_classification
 
 X, y = make_classification(n_samples=800, n_features=20, random_state=42)
-
 
 def choose_optimal_k(X, y, k_range=range(2, 11)):
     scores = []
@@ -540,7 +468,6 @@ choose_optimal_k(X, y)
 <img src="assets/cross-validation_fig_1.png" alt="cross-validation" />
 <figcaption>Figure 1: Impact of K on Cross-validation</figcaption>
 </figure>
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

@@ -1,3 +1,12 @@
+---
+reading_minutes: 14
+objectives:
+  - "Read a 2×2 confusion matrix (TP, FP, TN, FN) and extend the same idea to multi-class — each off-diagonal cell tells you which classes the model confuses."
+  - "Generate one with `sklearn.metrics.confusion_matrix` and visualise it with `ConfusionMatrixDisplay` (or a seaborn heatmap)."
+  - "Derive accuracy, precision, recall, and F1 from the matrix instead of treating those metrics as separate computations."
+  - "Choose row vs column normalisation deliberately so percentages answer the question you actually have (per-true-class recall vs per-predicted-class precision)."
+---
+
 # Confusion Matrix
 
 **After this lesson:** you can explain the core ideas in “Confusion Matrix” and reproduce the examples here in your own notebook or environment.
@@ -51,9 +60,6 @@ Imagine a model predicting whether a patient has a disease:
 
 #### Logistic regression + heatmap
 
-- **Purpose:** Build a **2×2** confusion matrix from a trained classifier and visualize counts with **seaborn**—rows = true class, columns = predicted.
-- **Walkthrough:** `confusion_matrix(y_test, y_pred)`; `annot=True` writes cell counts; compare diagonal vs off-diagonal for error patterns.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -94,7 +100,6 @@ plt.show()
 <figcaption>Figure 1: Confusion Matrix</figcaption>
 </figure>
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-8" data-tint="1">
@@ -127,13 +132,9 @@ plt.show()
 </aside>
 </div>
 
-
 ### 2. Multi-class Classification
 
 #### Iris: 3×3 confusion matrix
-
-- **Purpose:** Same API extends to **multi-class**: off-diagonal cells show **which classes get confused** (e.g. versicolor vs virginica).
-- **Walkthrough:** `confusion_matrix` shape is `(n_classes, n_classes)`; row i = true class i.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -171,7 +172,6 @@ plt.show()
 <figcaption>Figure 2: Multi-class Confusion Matrix</figcaption>
 </figure>
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-8" data-tint="1">
@@ -203,7 +203,6 @@ plt.show()
   </div>
 </aside>
 </div>
-
 
 ## Interpreting Confusion Matrices
 
@@ -274,9 +273,6 @@ Let's analyze a confusion matrix for a credit risk prediction model:
 
 #### Synthetic credit features + pipeline + CM
 
-- **Purpose:** Tie a **tabular** binary problem to a confusion matrix after **scaling + RandomForest**—closer to a real sklearn pipeline than raw matrices alone.
-- **Walkthrough:** Rule-based `y` from score-like features; `Pipeline` avoids scaling leakage when you CV properly in practice; heatmap reads like the binary case but with business labels (approve/reject) in narrative text below.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -339,7 +335,6 @@ plt.show()
 <figcaption>Figure 3: Confusion Matrix for Credit Risk Prediction</figcaption>
 </figure>
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-9" data-tint="1">
@@ -380,7 +375,6 @@ plt.show()
   </div>
 </aside>
 </div>
-
 
 ## Gotchas
 

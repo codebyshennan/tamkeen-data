@@ -1,3 +1,12 @@
+---
+reading_minutes: 9
+objectives:
+  - "Define **overfitting** (memorising noise; train ≫ validation) and **underfitting** (failing to learn signal; both train and validation poor)."
+  - "Diagnose which one you have by comparing train and validation error, then by inspecting learning curves."
+  - "Counter overfitting with more data, regularisation, simpler models, or early stopping; counter underfitting with more capacity or better features."
+  - "Avoid the everyday traps: declaring overfit from one bad fold, leaking the validation set, and \"fixing\" overfit by just adding training data without verifying."
+---
+
 # Overfitting and Underfitting
 
 **After this lesson:** you can explain the core ideas in “Overfitting and Underfitting” and reproduce the examples here in your own notebook or environment.
@@ -82,9 +91,6 @@ Model fitting is like weather forecasting:
 
 #### Polynomial degree vs test MSE
 
-- **Purpose:** On **noisy linear** data, compare **too-simple** (linear), **reasonable** (low-degree poly), and **too-flexible** (high-degree poly) models by **test MSE**.
-- **Walkthrough:** `PolynomialFeatures` + `LinearRegression`; high degree fits training noise → larger error on `X_test`.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -141,7 +147,6 @@ plt.show()
 <figcaption>Figure 1: Model Performance Comparison</figcaption>
 </figure>
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-16" data-tint="1">
@@ -182,7 +187,6 @@ plt.show()
   </div>
 </aside>
 </div>
-
 
 ## Best Practices
 

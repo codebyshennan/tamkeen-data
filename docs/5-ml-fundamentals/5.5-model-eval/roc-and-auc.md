@@ -1,3 +1,12 @@
+---
+reading_minutes: 32
+objectives:
+  - "Define the **ROC curve** as TPR vs FPR over all thresholds, and **AUC** as the probability the model ranks a random positive above a random negative."
+  - "Plot ROC and compute AUC with `roc_curve` / `roc_auc_score`; read curve shapes (diagonal = random, top-left elbow = good ranker)."
+  - "Pick an operating threshold from the curve using cost-weighted criteria (Youden's J, F1 max, business cost matrix) — not the default 0.5."
+  - "Know when ROC misleads: with severe class imbalance, AUC can stay high while precision is awful — switch to **PR-AUC** (or report both)."
+---
+
 # ROC Curves and AUC: Complete Guide
 
 **After this lesson:** you can explain the core ideas in “ROC Curves and AUC: Complete Guide” and reproduce the examples here in your own notebook or environment.
@@ -43,8 +52,6 @@ Imagine you're a doctor diagnosing a disease:
 ROC and AUC help us find the right balance between catching all cases and avoiding false alarms.
 
 {% include mermaid-diagram.html src="5-ml-fundamentals/5.5-model-eval/diagrams/roc-and-auc-1.mmd" %}
-
-> **Figure (add screenshot or diagram):** ROC curve plot with x-axis FPR (0–1), y-axis TPR (0–1): a diagonal dashed line for a random classifier, and a curve bowing toward the top-left for a good model, with the AUC shaded in green.
 
 ## Technical Definitions
 
@@ -93,9 +100,6 @@ The AUC measures the model's ability to distinguish between classes:
 ### 1. Basic ROC Curve for Binary Classification
 
 #### Train a model and plot one ROC curve
-
-- **Purpose:** End-to-end minimal example: synthetic binary data, `predict_proba` scores, `roc_curve` / `auc`, and a plot—this is the pattern you will reuse on real projects.
-- **Walkthrough:** `y_pred_proba[:, 1]` is P(class 1); `roc_curve` returns aligned `fpr`, `tpr`, `thresholds`; `auc(fpr, tpr)` matches the integral of the plotted curve.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -161,7 +165,6 @@ plot_roc_curve(fpr, tpr, roc_auc)
 AUC Score: 0.914
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-22" data-tint="1">
@@ -193,7 +196,6 @@ AUC Score: 0.914
   </div>
 </aside>
 </div>
-
 
 ```
 AUC Score: 0.914
@@ -238,9 +240,6 @@ False Positive Rate | True Positive Rate | Threshold
 ### 2. Comparing Multiple Models
 
 #### Overlay ROC curves for several classifiers
-
-- **Purpose:** Compare **ranking quality** (AUC) across algorithms on the **same** train/test split so the curves are comparable.
-- **Walkthrough:** `SVC(probability=True)` enables `predict_proba`; loop fits each model, plots `(fpr, tpr)` with a legend label including AUC; dashed diagonal = random baseline.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -287,7 +286,6 @@ plt.show()
 <figcaption>Figure 2: ROC Curves for Multiple Models</figcaption>
 </figure>
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-12" data-tint="1">
@@ -320,7 +318,6 @@ plt.show()
 </aside>
 </div>
 
-
 **Output:**
 ```
 Model Performance Comparison:
@@ -341,9 +338,6 @@ Model Ranking by AUC:
 ### 3. Multi-class ROC Curves
 
 #### One-vs-rest ROC on Iris
-
-- **Purpose:** For **multi-class** problems, plot a **binary ROC per class** using **label binarization**—each class is “positive” vs all others.
-- **Walkthrough:** `label_binarize` makes shape `(n_samples, n_classes)`; loop applies `roc_curve` to each column of `y_test_bin` against the matching column of `predict_proba`.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -401,7 +395,6 @@ plt.show()
 <figcaption>Figure 3: Multi-class ROC Curves</figcaption>
 </figure>
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-11" data-tint="1">
@@ -434,7 +427,6 @@ plt.show()
 </aside>
 </div>
 
-
 **Output:**
 ```
 Multi-class Dataset Summary:
@@ -465,9 +457,6 @@ Model Accuracy: 100.0%
 Understanding how different thresholds affect model performance is crucial for practical applications.
 
 #### Sweep thresholds and plot precision/recall vs TPR/FPR
-
-- **Purpose:** Show how **precision, recall, F1, TPR, and FPR** change as you raise the classification threshold—helps pick an operating point, not only AUC.
-- **Walkthrough:** `analyze_thresholds` binarizes scores at each threshold, uses `confusion_matrix(...).ravel()` for tn,fp,fn,tp (binary case), then plots two subplots. Requires **binary** `y_true`; extend carefully for multiclass.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -586,9 +575,6 @@ plt.show()
 Let's apply ROC and AUC analysis to a realistic credit risk prediction scenario:
 
 #### Synthetic credit data, pipeline, and four-panel analysis
-
-- **Purpose:** Tie ROC to a **tabular** workflow: engineered features, **stratified** split, **`Pipeline`** (scale + forest), then ROC, threshold curves, and related plots in one figure.
-- **Walkthrough:** Target is built via a logistic-style linear form + sigmoid + binomial draw; `analyze_thresholds` is reused from above—run the earlier cells so `analyze_thresholds` and imports exist in the notebook.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -737,7 +723,6 @@ Actual default rate: 25.75%
 Predicted default rate (threshold=0.5): 13.00%
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-46" data-tint="1">
@@ -769,7 +754,6 @@ Predicted default rate (threshold=0.5): 13.00%
   </div>
 </aside>
 </div>
-
 
 ```
 Default rate: 25.65%
@@ -919,9 +903,6 @@ Recommendations:
 
 #### Bootstrap CI for a single AUC
 
-- **Purpose:** Quantify **uncertainty** in AUC by resampling rows with replacement and recomputing `roc_auc_score`—wide intervals mean unstable estimates (small $n$ or noisy scores).
-- **Walkthrough:** Inner loop skips resamples where only one class appears (`ValueError`); percentile bands give a **nominal** CI; for reporting, align bootstrap design with your team's stats practice.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -962,7 +943,6 @@ print(f"AUC: {auc_mean:.3f} (95% CI: {auc_lower:.3f} - {auc_upper:.3f})")
 ```
 AUC: 0.734 (95% CI: 0.677 - 0.787)
 ```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -1023,9 +1003,6 @@ Confidence Interval Interpretation:
 ### 2. Cross-Validation with ROC/AUC
 
 #### Stratified K-fold mean `roc_auc`
-
-- **Purpose:** Report **mean ± spread** of AUC across folds—more stable than a single split when data are limited.
-- **Walkthrough:** `cross_val_score(..., scoring='roc_auc')` uses the unfitted `pipeline` and training matrix `X_train`, `y_train` from the credit example; `StratifiedKFold` preserves class balance per fold.
 
 ```python
 from sklearn.model_selection import cross_val_score, StratifiedKFold

@@ -1,3 +1,12 @@
+---
+reading_minutes: 22
+objectives:
+  - "Compose preprocessing + model into a `Pipeline` (or `ColumnTransformer` for mixed-type tables) so `fit` / `predict` run as a single estimator."
+  - "Eliminate leakage: every transformer in the pipeline is fit on training folds only when it sits inside `cross_val_score` / `GridSearchCV`."
+  - "Persist the whole pipeline with `joblib.dump` so the prediction-time preprocessing exactly matches training."
+  - "Use named steps and `set_params(step__hyper=...)` so a single search tunes transformer and model hyperparameters together."
+---
+
 # Scikit-learn Pipelines
 
 **After this lesson:** you can explain the core ideas in “Scikit-learn Pipelines” and reproduce the examples here in your own notebook or environment.
@@ -26,10 +35,6 @@ Pipelines help us:
 *Without a pipeline, if you `StandardScaler.fit(X_all)` before splitting, test-set statistics leak into the scaler — the pipeline prevents this by fitting each step only on training data.*
 
 #### Minimal `Pipeline`: scale then classify
-
-**Purpose:** Show the canonical pattern: preprocessing steps run inside `fit`/`predict`, so the same transformations apply on train and test without leakage.
-
-**Walkthrough:** Steps are named tuples; `StandardScaler` learns on `X_train` only inside `pipeline.fit`; `score` evaluates held-out accuracy.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -73,7 +78,6 @@ print(f"Pipeline score: {pipeline.score(X_test, y_test):.3f}")
 Pipeline score: 0.990
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-7" data-tint="1">
@@ -106,12 +110,6 @@ Pipeline score: 0.990
 </aside>
 </div>
 
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Pipeline score: 0.990
-```
-
 ## Building Complex Pipelines
 
 ### Feature Unions
@@ -119,10 +117,6 @@ Pipeline score: 0.990
 Combine multiple feature processing steps:
 
 #### Parallel feature branches with `FeatureUnion`
-
-**Purpose:** Concatenate outputs from PCA and univariate selection so the classifier sees a wider engineered view of `X` in one `Pipeline`.
-
-**Walkthrough:** `FeatureUnion` runs `pca` and `select_best` on the same input and stacks columns; the final `LogisticRegression` consumes the combined matrix.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -156,7 +150,6 @@ print(f"Feature union score: {union_pipeline.score(X_test, y_test):.3f}")
 Feature union score: 0.980
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-3" data-tint="1">
@@ -189,21 +182,11 @@ Feature union score: 0.980
 </aside>
 </div>
 
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Feature union score: 0.980
-```
-
 ### Custom Transformers
 
 Create your own preprocessing steps:
 
 #### Custom `TransformerMixin` for outlier clipping
-
-**Purpose:** Extend sklearn with domain-specific steps while staying compatible with `Pipeline` (implement `fit` / `transform`).
-
-**Walkthrough:** `fit` stores column means/stds; `transform` caps extreme z-scores by replacing masked cells—pair with `StandardScaler` + classifier as usual.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -275,10 +258,6 @@ print(f"Custom pipeline score: {pipeline_with_custom.score(X_test, y_test):.3f}"
 ## Real-World Example: Text Classification
 
 #### Text preprocessing + TF–IDF + logistic regression in one `Pipeline`
-
-**Purpose:** Chain token cleanup, sparse vectorization, and a linear model so raw strings never bypass the same path used at training time.
-
-**Walkthrough:** `FunctionTransformer` wraps list-wise `preprocess_text`; `TfidfVectorizer` builds sparse features; `train_test_split` on lists works like tabular splits.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -371,10 +350,6 @@ Save and load pipelines:
 
 #### Serialize a fitted pipeline with `joblib`
 
-**Purpose:** Deploy or resume training by dumping the entire estimator graph—including any fitted preprocessing—to disk.
-
-**Walkthrough:** `joblib.dump` / `load` preserves Python objects; use the same sklearn version when unpickling in production.
-
 ```python
 import joblib
 
@@ -396,10 +371,6 @@ loaded_pipeline = load_pipeline('model_pipeline.joblib')
 ### 1. Memory Caching
 
 #### Cache intermediate pipeline outputs on disk
-
-**Purpose:** Speed up repeated fits during tuning by memoizing transformers when inputs are unchanged (large grids or CV).
-
-**Walkthrough:** Prefer `from joblib import Memory` on current sklearn; `memory=` attaches to the `Pipeline` so steps reuse cached transforms when possible.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -448,10 +419,6 @@ cached_pipeline = Pipeline([
 ### 2. Parameter Grid Search
 
 #### Tune nested steps with `__` hyperparameter names
-
-**Purpose:** Search preprocessing and model settings jointly while respecting pipeline ordering—no manual refits between steps.
-
-**Walkthrough:** Keys use **`step__param`** to reach nested estimators; this example adds a **`PCA`** step so `pca__n_components` is valid. Uses `X_train` and `y_train` from the **minimal Pipeline** section at the top of this page.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -517,10 +484,6 @@ grid_search.fit(X_train, y_train)
 
 #### Different transformers per column group
 
-**Purpose:** Apply numeric scaling and one-hot encoding in parallel, then feed the concatenated matrix to a single estimator—essential for mixed-type tables.
-
-**Walkthrough:** Indices `[0,1]` / `[2]` are placeholders; replace with column names + `ColumnTransformer(..., remainder='drop')` in real projects.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -582,10 +545,6 @@ column_pipeline = Pipeline([
 
 #### Readable step names for grids and debugging
 
-**Purpose:** Names appear in `get_params()`, error traces, and `GridSearchCV` keys—clear labels save time when pipelines grow.
-
-**Walkthrough:** Order matches execution left-to-right; each name must be unique in the `Pipeline` list.
-
 ```python
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
@@ -606,13 +565,8 @@ pipeline = Pipeline([
 
 #### Illustrative try/except inside `transform`
 
-**Purpose:** Show a pattern for failing soft on bad batches; production code should log and validate inputs explicitly.
-
-**Walkthrough:** `transformed_X` is not defined in the stub—replace with real logic; fallback returns `X` unchanged.
-
 ```python
 from sklearn.base import BaseEstimator, TransformerMixin
-
 
 class RobustTransformer(BaseEstimator, TransformerMixin):
     def transform(self, X):
@@ -628,10 +582,6 @@ class RobustTransformer(BaseEstimator, TransformerMixin):
 ### 3. Validation
 
 #### CV helper for any pipeline object
-
-**Purpose:** Score the full pipeline out-of-fold so preprocessing is refit each fold—mirrors honest generalization.
-
-**Walkthrough:** `cross_val_score` clones `pipeline` per fold; function prints fold scores plus mean $\pm$2 std.
 
 ```python
 from sklearn.model_selection import cross_val_score
