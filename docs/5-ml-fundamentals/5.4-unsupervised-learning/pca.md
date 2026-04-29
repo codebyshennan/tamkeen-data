@@ -1,3 +1,12 @@
+---
+reading_minutes: 22
+objectives:
+  - "Define principal components as orthogonal directions of maximum variance and connect them to eigenvectors of the covariance matrix."
+  - "Standardise before fitting `PCA`, then read `explained_variance_ratio_` and its cumulative sum to choose `n_components`."
+  - "Use `fit_transform` and `inverse_transform` for projection, reconstruction, and image-style compression — and treat reconstruction MSE as the lossiness measure."
+  - "Avoid leakage and over-interpretation: fit PCA on training data only, never name a PC after a single feature, and switch to non-linear methods (kernel PCA, t-SNE, UMAP) when the manifold is curved."
+---
+
 # Principal Component Analysis (PCA): Simplifying Complex Data
 
 **After this lesson:** you can explain the core ideas in “Principal Component Analysis (PCA): Simplifying Complex Data” and reproduce the examples here in your own notebook or environment.
@@ -43,9 +52,6 @@ Let's break it down into simple steps:
 Let's see this in action with a simple example:
 
 #### 2D toy cloud: scale, fit PCA, three subplots
-
-- **Purpose:** Walk through **standardize → `PCA().fit_transform` → explained variance ratio** on a noisy ring-like 2D dataset.
-- **Walkthrough:** Left: scaled $xy$; middle: same points with **principal axes** as red arrows; right: data in **PC coordinates** (orthogonal axes). `explained_variance_ratio_` sums to 1.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -162,9 +168,6 @@ Let's see how PCA can help compress images while maintaining quality:
 
 #### Digits reconstruction vs number of components
 
-- **Purpose:** Show **compression** as low-rank PCA reconstruction: fewer components ⇒ blurrier digit, with **cumulative variance** noted in the title.
-- **Walkthrough:** `PCA(n_components=k)` fit on full `X`; `inverse_transform` maps back to pixel space for the first sample; top row repeats the **original** for comparison.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -245,9 +248,6 @@ Think of this like a pie chart showing how much each component contributes to th
 
 #### Cumulative explained variance curve
 
-- **Purpose:** Choose $k$ by **elbow** on **cumulative** `explained_variance_ratio_`—how many components capture most variance.
-- **Walkthrough:** Full `PCA()` on `X` (digits data from above); `np.cumsum` drives the y-axis.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -303,9 +303,6 @@ plot_explained_variance(X)
 This is like looking at the "steepness" of the information gain:
 
 #### Scree plot (per-component variance)
-
-- **Purpose:** Plot **each** PC’s share of variance (`explained_variance_ratio_`) to spot where marginal gain drops—often used for an **elbow** (subjective).
-- **Walkthrough:** Same full PCA fit as above; x-axis is PC index.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -367,9 +364,6 @@ plot_scree(X)
 
 #### Preprocess helper: impute NaNs, then scale
 
-- **Purpose:** Standard **PCA prep**: replace NaNs with `nan_to_num`, then **`StandardScaler`** so PCs are not dominated by large-scale features.
-- **Walkthrough:** `fit_transform` learns scaling on the matrix you pass; use the same scaler for any new rows.
-
 ```python
 import numpy as np
 from sklearn.preprocessing import StandardScaler
@@ -388,9 +382,6 @@ def preprocess_for_pca(X):
 2. **Validate Your Results**:
 
 #### Train/test reconstruction error
-
-- **Purpose:** Fit PCA on **training** data only, then compare **MSE** of reconstruction on train vs test—large test gap can mean overfitting $k$ or distribution shift.
-- **Walkthrough:** `train_test_split` from `sklearn.model_selection` (import in notebook); `inverse_transform` measures how well $k$ dims recover the original pixels.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
