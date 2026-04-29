@@ -1,3 +1,12 @@
+---
+reading_minutes: 20
+objectives:
+  - "Distinguish K-means, hierarchical, and DBSCAN by the kinds of data and questions each suits — known k vs unknown, spherical vs arbitrary shape, with vs without noise."
+  - "Preprocess for distance-based clustering: handle NaNs and standardise so no single feature dominates Euclidean distance."
+  - "Pick a sensible number of clusters using the elbow method on inertia, then sanity-check with silhouette score or domain knowledge."
+  - "Avoid the everyday traps: comparing raw cluster-label values across runs, forgetting to scale, and treating clusters as ground-truth classes."
+---
+
 # Clustering: Finding Natural Groups in Data
 
 **After this lesson:** you can explain the core ideas in “Clustering: Finding Natural Groups in Data” and reproduce the examples here in your own notebook or environment.
