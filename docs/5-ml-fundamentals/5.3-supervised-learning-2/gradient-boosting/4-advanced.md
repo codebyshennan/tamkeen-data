@@ -1,3 +1,11 @@
+---
+reading_minutes: 25
+objectives:
+  - "Tune `learning_rate` and `n_estimators` jointly, recognising that lower learning rate requires more trees to reach the same loss."
+  - "Apply monotone constraints, custom objectives, and SHAP-based feature attribution to make a model both accurate and explainable."
+  - "Configure histogram-based training (`hist`), GPU acceleration, and column/row subsampling to scale to larger datasets without losing reproducibility."
+---
+
 # Advanced Gradient Boosting Techniques
 
 **After this lesson:** you can explain the core ideas in “Advanced Gradient Boosting Techniques” and reproduce the examples here in your own notebook or environment.

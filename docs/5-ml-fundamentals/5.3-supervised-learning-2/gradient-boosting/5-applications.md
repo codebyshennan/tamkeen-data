@@ -1,3 +1,11 @@
+---
+reading_minutes: 20
+objectives:
+  - "Build end-to-end gradient-boosting pipelines for structured-data tasks like churn prediction, credit risk, and demand forecasting."
+  - "Combine threshold tuning, calibrated probabilities, and class weighting to handle imbalanced binary classification."
+  - "Estimate inference latency and model size to decide whether a boosted ensemble is shippable in your serving environment."
+---
+
 # Real-World Applications of Gradient Boosting
 
 **After this lesson:** you can explain the core ideas in “Real-World Applications of Gradient Boosting” and reproduce the examples here in your own notebook or environment.

@@ -1,3 +1,11 @@
+---
+reading_minutes: 25
+objectives:
+  - "Train an XGBoost classifier with `DMatrix`, `xgb.train`, and `early_stopping_rounds`, and read the eval log to spot the best round."
+  - "Fit sklearn's `GradientBoostingRegressor` / `GradientBoostingClassifier` with sensible defaults (`learning_rate`, `n_estimators`, `max_depth`) and tune via `GridSearchCV`."
+  - "Plot training vs validation loss curves to confirm early stopping triggered before overfitting."
+---
+
 # Implementing Gradient Boosting
 
 **After this lesson:** you can explain the core ideas in “Implementing Gradient Boosting” and reproduce the examples here in your own notebook or environment.
@@ -29,9 +37,6 @@ Here's how we'll do it step by step:
 ![Learning Curve](assets/learning_curve.png)
 
 #### XGBoost: `DMatrix`, `train`, early stopping
-
-- **Purpose:** End-to-end **binary classification** with the native **`xgb.train`** API: `DMatrix` wraps arrays, `evals` tracks train/test log loss, **`early_stopping_rounds`** caps boosting rounds.
-- **Walkthrough:** Requires **`pip install xgboost`**; `eta` is learning rate; `predict` returns probabilities for `binary:logistic`.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -176,9 +181,6 @@ Let's implement this step by step:
 
 #### LightGBM regression: `Dataset`, RMSE, $R^2$
 
-- **Purpose:** Train a **gradient boosting regressor** with LightGBM’s **`Dataset`** and validation sets; compare to sklearn with **RMSE** and **$R^2$**.
-- **Walkthrough:** Requires **`pip install lightgbm`**; `make_regression` builds synthetic tabular targets; `early_stopping` callback stops when validation RMSE stalls.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -282,9 +284,6 @@ Let's implement this step by step:
 
 #### CatBoost: `Pool` + categorical feature indices
 
-- **Purpose:** Train on **mixed numeric and categorical** columns without manual one-hot encoding—**`cat_features`** tells CatBoost which columns to treat as categories.
-- **Walkthrough:** Requires **`pip install catboost`**; `Pool` bundles `X`, `y`, and metadata; `classification_report` summarizes precision/recall on the test split.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -381,9 +380,6 @@ Let's implement this step by step:
 ![Customer Tenure Distribution](assets/churn_prediction.png)
 
 #### Churn model: `fit` with `cat_features`, importance, risk bins
-
-- **Purpose:** Fit **CatBoost** on a churn table, inspect **`feature_importances_`**, and bucket **predicted probabilities** into Low/Medium/High risk tiers.
-- **Walkthrough:** `predict_proba` column `[:, 1]` is P(churn); `pd.cut` labels segments for prioritization (thresholds are illustrative).
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">

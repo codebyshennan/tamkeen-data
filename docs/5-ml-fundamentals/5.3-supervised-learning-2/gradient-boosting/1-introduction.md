@@ -1,3 +1,11 @@
+---
+reading_minutes: 15
+objectives:
+  - "Explain how gradient boosting trains weak learners *sequentially* on residuals, in contrast with random forest's parallel bagging."
+  - "Identify problems where gradient boosting shines (tabular data, mixed feature types, ranking) and where it doesn't (real-time low-latency inference, hard interpretability constraints)."
+  - "Compare XGBoost, LightGBM, and CatBoost at a high level — which to reach for given dataset shape and categorical-handling needs."
+---
+
 # Introduction to Gradient Boosting
 
 **After this lesson:** you can explain the core ideas in “Introduction to Gradient Boosting” and reproduce the examples here in your own notebook or environment.
