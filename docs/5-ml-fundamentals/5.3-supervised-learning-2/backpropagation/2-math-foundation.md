@@ -1,3 +1,11 @@
+---
+reading_minutes: 20
+objectives:
+  - "Apply the chain rule to compute the gradient of the loss with respect to each weight, layer by layer, for a small fully-connected network."
+  - "Recognise the forward-pass pattern (weighted sum, then activation) at each layer and identify what every term contributes."
+  - "Compute local derivatives for sigmoid, ReLU, and tanh activations, and recognise where their slopes squash gradients toward zero."
+---
+
 # Mathematical Foundations of Backpropagation
 
 **After this lesson:** you can explain the core ideas in “Mathematical Foundations of Backpropagation” and reproduce the examples here in your own notebook or environment.
