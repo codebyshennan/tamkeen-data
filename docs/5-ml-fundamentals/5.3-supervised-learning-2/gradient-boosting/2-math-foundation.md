@@ -1,3 +1,11 @@
+---
+reading_minutes: 20
+objectives:
+  - "State the additive-model equation behind boosting and explain the role of residuals, learning rate, and tree count."
+  - "Compute residuals as the *negative gradient* of the loss (not raw `y - y_hat` except for MSE) for both regression and classification objectives."
+  - "Read the XGBoost split-gain formula and explain why a positive lambda regularization term prevents overly deep, overfit trees."
+---
+
 # Mathematical Foundation of Gradient Boosting
 
 **After this lesson:** you can explain the core ideas in “Mathematical Foundation of Gradient Boosting” and reproduce the examples here in your own notebook or environment.
