@@ -1,3 +1,11 @@
+---
+reading_minutes: 20
+objectives:
+  - "State the regularized loss as `loss + lambda * penalty(weights)` for Ridge (sum of squared weights), Lasso (sum of absolute weights), and Elastic Net (a mix)."
+  - "Explain *why* L1's geometry (corners on the constraint diamond) drives some coefficients exactly to zero while L2 only shrinks them."
+  - "Use cross-validation to pick the regularization strength along the path and recognise the bias-variance trade-off in the resulting curves."
+---
+
 # Mathematical Foundation of Regularization
 
 **After this lesson:** you can explain the core ideas in “Mathematical Foundation of Regularization” and reproduce the examples here in your own notebook or environment.
