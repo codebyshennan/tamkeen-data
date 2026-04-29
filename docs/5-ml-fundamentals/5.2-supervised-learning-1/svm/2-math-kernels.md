@@ -1,3 +1,10 @@
+---
+reading_minutes: 20
+objectives:
+  - "Write the maximum-margin objective and explain the role of slack variables in soft-margin SVMs."
+  - "Use the kernel trick to fit nonlinear boundaries without explicitly mapping features to higher dimensions."
+  - "Pick between linear, polynomial, and RBF kernels based on data shape, and tune `C` and `gamma` against under- and overfitting."
+---
 # Mathematical Foundation and Kernels in SVM
 
 **After this lesson:** you can explain the core ideas in “Mathematical Foundation and Kernels in SVM” and reproduce the examples here in your own notebook or environment.
@@ -13,17 +20,6 @@ Develops the **margin**, slack variables, and **kernels** (linear, polynomial, R
 Crash Course AI: supervised learning for classical algorithms.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-## Learning Objectives 🎯
-
-By the end of this section, you will be able to:
-
-- Understand the basic math behind SVM
-- Explain how kernels work and why they're important
-- Choose the right kernel for different problems
-- Implement and tune kernel parameters
-
-{% include mermaid-diagram.html src="5-ml-fundamentals/5.2-supervised-learning-1/svm/diagrams/2-math-kernels-1.mmd" %}
 
 ## The Maximum Margin Concept
 
@@ -90,7 +86,6 @@ Sometimes data isn't linearly separable, and we need to transform it into a high
 1. **Linear Kernel**
 
    #### Linear kernel (dot product)
-   **Purpose:** Show the closed-form inner-product kernel used by a linear SVM.
 
    ```python
    import numpy as np
@@ -106,7 +101,6 @@ Sometimes data isn't linearly separable, and we need to transform it into a high
 2. **RBF (Radial Basis Function) Kernel**
 
    #### RBF kernel
-   **Purpose:** Express the Gaussian radial basis function used for flexible, smooth decision boundaries.
 
    ```python
    import numpy as np
@@ -122,7 +116,6 @@ Sometimes data isn't linearly separable, and we need to transform it into a high
 3. **Polynomial Kernel**
 
    #### Polynomial kernel
-   **Purpose:** Encode polynomial interactions between features via \\((x_1^\top x_2 + r)^d\\).
 
    ```python
    import numpy as np
@@ -138,9 +131,6 @@ Sometimes data isn't linearly separable, and we need to transform it into a high
 ### Visualizing Kernel Effects
 
 #### Compare kernel decision regions
-**Purpose:** Fit three SVMs with different `kernel` settings and plot their 2D decision regions side by side.
-
-**Walkthrough:** Same data and mesh grid; only the kernel string changes so you can compare boundaries.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -216,7 +206,6 @@ Sometimes data isn't perfectly separable. That's where soft margin comes in:
 2. **The C Parameter**
 
    #### Sweep the soft-margin parameter C
-   **Purpose:** Illustrate training separate SVC models with different `C` on the same scaled data.
 
    ```python
    from sklearn.svm import SVC
@@ -239,7 +228,6 @@ Sometimes data isn't perfectly separable. That's where soft margin comes in:
 1. **Gamma (γ)**
 
    #### RBF gamma and the decision boundary (sketch)
-   **Purpose:** Show the loop structure for comparing several `gamma` values; fill in mesh prediction/plotting like the other examples.
 
    ```python
    from sklearn.svm import SVC
@@ -265,7 +253,6 @@ Sometimes data isn't perfectly separable. That's where soft margin comes in:
 1. **Degree**
 
    #### Polynomial degree and the decision boundary (sketch)
-   **Purpose:** Compare polynomial kernels of different `degree` on the same data.
 
    ```python
    from sklearn.svm import SVC
@@ -302,7 +289,6 @@ Sometimes data isn't perfectly separable. That's where soft margin comes in:
 2. **Parameter Tuning**
 
    #### Grid search over C, gamma, and kernel
-   **Purpose:** Find best hyperparameters with cross-validated `GridSearchCV`.
 
    ```python
    from sklearn.model_selection import GridSearchCV

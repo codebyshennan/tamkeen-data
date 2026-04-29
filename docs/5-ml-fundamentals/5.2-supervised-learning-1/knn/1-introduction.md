@@ -1,3 +1,10 @@
+---
+reading_minutes: 15
+objectives:
+  - "Describe kNN as a lazy learner: store training data, defer all work to prediction time."
+  - "Choose between classification (majority vote) and regression (neighbour average) for a given problem."
+  - "Identify the three knobs that change kNN behaviour: `k`, distance metric, and feature scaling."
+---
 # Introduction to k-Nearest Neighbors (KNN)
 
 **After this lesson:** you can explain the core ideas in “Introduction to k-Nearest Neighbors (KNN)” and reproduce the examples here in your own notebook or environment.
@@ -68,10 +75,6 @@ Let's break it down into simple steps:
 *At prediction time KNN does all the work — it never builds an explicit model. That's why it's called a **lazy** learner.*
 
 #### Minimal `KNeighborsClassifier` usage
-
-**Purpose:** See the lazy-learning API: `fit` stores references; `predict` queries the stored `X_train` at inference time.
-
-**Walkthrough:** Requires `X_train`, `y_train`, `X_test` from your split; `n_neighbors=3` sets the vote size.
 
 ```python
 # Simple KNN Example

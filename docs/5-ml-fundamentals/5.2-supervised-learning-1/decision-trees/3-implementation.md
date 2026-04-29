@@ -1,3 +1,10 @@
+---
+reading_minutes: 25
+objectives:
+  - "Train and predict with `DecisionTreeClassifier` and `DecisionTreeRegressor` on tabular data."
+  - "Visualise a fitted tree with `plot_tree` to walk the decision path for any individual prediction."
+  - "Pick sensible defaults for `max_depth` and `min_samples_leaf` and avoid the \"no scaling needed but unrestricted depth\" trap."
+---
 # Building Your First Decision Tree
 
 **After this lesson:** you can explain the core ideas in “Building Your First Decision Tree” and reproduce the examples here in your own notebook or environment.
@@ -24,8 +31,6 @@ First, make sure you have scikit-learn installed:
 
 #### Install scikit-learn
 
-**Purpose:** Ensure `sklearn` is available locally or in your course environment before running the examples.
-
 ```bash
 pip install scikit-learn
 ```
@@ -37,10 +42,6 @@ Let's build a simple system that helps diagnose whether someone might be sick ba
 ### Step 1: Prepare the Data
 
 #### Toy patient feature matrix and string labels
-
-**Purpose:** Represent symptoms as numeric columns and outcomes as class names for `DecisionTreeClassifier` (supports string targets).
-
-**Walkthrough:** Rows are patients; columns are temperature, cough, fatigue (0/1 except temperature).
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -103,10 +104,6 @@ This code sets up our sample patient data with three features: body temperature,
 ### Step 2: Create and Train the Model
 
 #### Fit `DecisionTreeClassifier` and plot with `plot_tree`
-
-**Purpose:** Control depth and leaf rules with hyperparameters, then visualize the learned splits.
-
-**Walkthrough:** `class_names` order should match alphabetical or `np.unique` order—here `['healthy','sick']` matches sklearn’s internal encoding.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -180,10 +177,6 @@ In this step, we create a decision tree classifier with specific settings to con
 
 #### `predict` and `predict_proba` for a new row
 
-**Purpose:** Return the majority class and leaf class proportions (confidence) for diagnosis-style outputs.
-
-**Walkthrough:** `predict_proba` rows sum to 1; `max` picks the winning class probability.
-
 ```python
 # New patient data
 new_patient = np.array([[100, 1, 1]])  # Temperature: 100, Cough: Yes, Fatigue: Yes
@@ -195,13 +188,6 @@ print(f"Diagnosis: {prediction[0]}")
 # Get prediction probabilities
 probabilities = clf.predict_proba(new_patient)
 print(f"Confidence: {max(probabilities[0]) * 100:.1f}%")
-```
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Diagnosis: healthy
-Confidence: 100.0%
 ```
 
 Here we use our trained model to diagnose a new patient. We input their symptoms (temperature, cough, fatigue) and the model returns a prediction. We also calculate the confidence level of this prediction.
@@ -222,10 +208,6 @@ This visual representation helps us understand exactly how the model makes decis
 Let's try another example with the famous Iris dataset, which is built into scikit-learn:
 
 #### Iris: train/test split, accuracy, and tree plot
-
-**Purpose:** Standard sklearn workflow on a built-in multiclass dataset with real feature names.
-
-**Walkthrough:** `train_test_split` with `random_state=42`; `score` is mean accuracy on `X_test`.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -318,13 +300,6 @@ Accuracy: 100.0%
 </aside>
 </div>
 
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Accuracy: 100.0%
-```
-
 This example demonstrates how to work with a real dataset. We:
 1. Load the built-in Iris dataset with measurements of different Iris flowers
 2. Split the data into training and testing sets
@@ -337,10 +312,6 @@ This example demonstrates how to work with a real dataset. We:
 Now let's try a regression problem - predicting house prices:
 
 #### `DecisionTreeRegressor` with R² and feature importances
-
-**Purpose:** Predict a continuous target (price) and compare train vs test $R^2$; bar-chart importances for interpretation.
-
-**Walkthrough:** Uses `train_test_split` from the Iris section if run top-to-bottom; in isolation add `from sklearn.model_selection import train_test_split`.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -453,15 +424,6 @@ Predicted price: $220.00k
 </aside>
 </div>
 
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Training R² Score: 1.000
-Testing R² Score: 0.782
-Predicted price: $220.00k
-```
-
 This example shows:
 1. How to use decision trees for regression (predicting numeric values)
 2. How to create and train a DecisionTreeRegressor
@@ -473,10 +435,6 @@ This example shows:
 For a better understanding, let's create a simple 2D visualization of how decision trees create boundaries:
 
 ##### Noisy 2D rule + axis-aligned decision regions
-
-**Purpose:** Show piecewise-constant regions (`contourf`) from a shallow tree on synthetic data.
-
-**Walkthrough:** Labels derive from $x_0+x_1>1$ with random flips; mesh predictions illustrate rectangles.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -583,10 +541,6 @@ This visualization shows:
 
 #### Compare unconstrained depth vs `max_depth=3` on Iris split
 
-**Purpose:** Show train-perfect / test-weak behavior when the tree memorizes (illustrative scores depend on the small toy splits above).
-
-**Walkthrough:** Reuses `X_train`, `X_test`, `y_train`, `y_test` from the Iris example—run that cell first.
-
 ```python
 # Bad: Tree too deep - will memorize training data
 deep_tree = DecisionTreeClassifier(max_depth=None)
@@ -601,15 +555,6 @@ print(f"Training score: {good_tree.score(X_train, y_train):.3f}")
 print(f"Testing score: {good_tree.score(X_test, y_test):.3f}")
 ```
 
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Training score: 1.000
-Testing score: 0.000
-Training score: 0.571
-Testing score: 0.000
-```
-
 Overfitting happens when your tree becomes too complex and starts memorizing the training data instead of learning general patterns. This is why we limit the tree depth and use other parameters to control complexity.
 
 ### 2. Ignoring Feature Scaling
@@ -617,10 +562,6 @@ Overfitting happens when your tree becomes too complex and starts memorizing the
 Decision trees don't require feature scaling, which is a benefit compared to many other algorithms:
 
 #### Optional `StandardScaler` (trees are scale-invariant)
-
-**Purpose:** Confirm that affine-invariant tree splits give identical accuracy with or without scaling for axis-aligned trees.
-
-**Walkthrough:** Fit scaler on train only; same `max_depth` on raw vs scaled matrices.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -670,13 +611,6 @@ With scaling: 0.000
   </div>
 </aside>
 </div>
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Without scaling: 0.000
-With scaling: 0.000
-```
 
 This is a key advantage of decision trees - they don't require feature scaling because they make decisions based on greater than/less than comparisons, not distances between points.
 

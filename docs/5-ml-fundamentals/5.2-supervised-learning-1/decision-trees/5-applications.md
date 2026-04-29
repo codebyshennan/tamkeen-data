@@ -1,3 +1,10 @@
+---
+reading_minutes: 35
+objectives:
+  - "Frame a real-world classification task (medical diagnosis, churn, credit scoring) as a tabular tree problem."
+  - "Choose evaluation metrics (precision, recall, ROC-AUC) appropriate to each application's cost asymmetry."
+  - "Communicate a tree's decision path to stakeholders who need to audit individual predictions."
+---
 # Real-World Applications of Decision Trees
 
 **After this lesson:** you can explain the core ideas in “Real-World Applications of Decision Trees” and reproduce the examples here in your own notebook or environment.
@@ -19,10 +26,6 @@ Imagine you're building a system to help doctors diagnose patients. Decision tre
 ### Step-by-Step Implementation
 
 #### Toy multi-class diagnosis with `class_weight` and path trace
-
-**Purpose:** Show explainable prediction: `predict_proba`, human-readable path reasoning—**not** a clinical system; labels are illustrative only.
-
-**Walkthrough:** Ordinal symptom encodings feed `DecisionTreeClassifier`; `decision_path` walks internal nodes for narrative output.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -176,26 +179,6 @@ Diagnosis reasoning:
 </aside>
 </div>
 
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Diagnosis: flu
-Confidence levels:
-  allergies: 0.00
-  cold: 0.00
-  covid: 0.00
-  flu: 1.00
-  healthy: 0.00
-  pneumonia: 0.00
-
-Diagnosis reasoning:
-- Patient has moderate cough, which is > mild
-- Patient has normal blood pressure, which is <= normal
-- Patient has normal blood pressure, which is > low
-- Patient has mild breathing difficulty, which is > moderate
-```
-
 In this example, we:
 
 1. Create a simple dataset of patients with different symptoms and diagnoses
@@ -211,10 +194,6 @@ The decision tree makes medical diagnosis transparent, which is crucial for heal
 Banks use decision trees to evaluate loan applications and assess credit risk. Let's build a simple credit scoring model:
 
 #### Credit approval: train/test report + importances + new applicant risk band
-
-**Purpose:** Tie interpretable splits to business outputs: confusion matrix, `classification_report`, feature ranking, and probability-based risk tier.
-
-**Walkthrough:** Small synthetic $X$—real lending needs more rows, fairness review, and calibration.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -392,37 +371,6 @@ Risk assessment: Low Risk
 </aside>
 </div>
 
-
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Confusion Matrix:
-[[4 0]
- [1 0]]
-
-Classification Report:
-              precision    recall  f1-score   support
-
-           0       0.80      1.00      0.89         4
-           1       0.00      0.00      0.00         1
-
-    accuracy                           0.80         5
-   macro avg       0.40      0.50      0.44         5
-weighted avg       0.64      0.80      0.71         5
-
-
-Feature ranking:
-1. Income (k$): 1.0000
-2. Previous Defaults: 0.0000
-3. Debt to Income Ratio: 0.0000
-4. Employment Years: 0.0000
-5. Credit Score: 0.0000
-
-New applicant approval probability: 1.00
-Risk assessment: Low Risk
-```
-
 This example demonstrates:
 
 1. How to build a credit risk model using decision trees
@@ -437,10 +385,6 @@ This approach provides transparency in lending decisions, which is important for
 Businesses use decision trees to predict which customers might leave. Let's build a simple churn prediction system:
 
 #### Churn model with retention rules from churn probability
-
-**Purpose:** Map churn probability tiers to retention actions; feature ranking shows which contract/usage signals dominate on this toy data.
-
-**Walkthrough:** Imports include `roc_curve`/`auc` but this block focuses on reports + `predict_proba` for two new profiles.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -618,39 +562,6 @@ Customer 2 churn probability: 0.00
 </aside>
 </div>
 
-
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Confusion Matrix:
-[[1 0]
- [0 4]]
-
-Classification Report:
-              precision    recall  f1-score   support
-
-           0       1.00      1.00      1.00         1
-           1       1.00      1.00      1.00         4
-
-    accuracy                           1.00         5
-   macro avg       1.00      1.00      1.00         5
-weighted avg       1.00      1.00      1.00         5
-
-
-Feature ranking for churn prediction:
-1. Contract Length: 1.0000
-2. Service Issues: 0.0000
-3. Support Calls: 0.0000
-4. Total Charges: 0.0000
-5. Monthly Charges: 0.0000
-6. Tenure (months): 0.0000
-Customer 1 churn probability: 1.00
-  High risk - Immediate contact needed, offer special retention package
-Customer 2 churn probability: 0.00
-  Low risk - Maintain regular engagement
-```
-
 This example demonstrates:
 
 1. How to build a customer churn prediction model
@@ -665,10 +576,6 @@ By predicting which customers are at risk of leaving, businesses can take proact
 Let's create a simple fraud detection model using decision trees:
 
 #### Fraud: `class_weight`, precision–recall curve, and threshold tuning
-
-**Purpose:** Stress precision/recall for rare fraud; use `precision_recall_curve` and an F1-based threshold pick (not accuracy alone).
-
-**Walkthrough:** `stratify=y` keeps fraud rate; `class_weight={0:1, 1:5}` upsamples fraud importance; `best_threshold` drives alert logic.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -853,34 +760,6 @@ Transaction 2 fraud probability: 0.000
 </aside>
 </div>
 
-
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Confusion Matrix:
-[[3 0]
- [0 2]]
-
-Classification Report:
-              precision    recall  f1-score   support
-
-           0       1.00      1.00      1.00         3
-           1       1.00      1.00      1.00         2
-
-    accuracy                           1.00         5
-   macro avg       1.00      1.00      1.00         5
-weighted avg       1.00      1.00      1.00         5
-
-Optimal threshold: 1.000
-At this threshold - Precision: 1.000, Recall: 1.000
-Transaction 1 fraud probability: 1.000
-  ALERT: Likely fraudulent transaction
-  Action: Block transaction and contact customer
-Transaction 2 fraud probability: 0.000
-  Status: Transaction appears legitimate
-```
-
 This example shows:
 
 1. How to build a fraud detection model that handles the imbalanced nature of fraud data
@@ -895,10 +774,6 @@ The decision tree approach allows analysts to understand exactly why a transacti
 Manufacturing companies use decision trees to predict when machines need maintenance:
 
 #### Multiclass maintenance states from sensor vectors
-
-**Purpose:** Classify {ok, soon, urgent} with interpretable importances and action scripts per predicted class.
-
-**Walkthrough:** Fit on full toy table (no holdout—illustrative); `predict_proba` drives per-machine recommendations and optional percentile checks.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -1064,30 +939,6 @@ Machine C status: Urgent Maintenance
   </div>
 </aside>
 </div>
-
-
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Feature ranking for maintenance prediction:
-1. Power Consumption (kW): 0.6691
-2. Temperature (°C): 0.3309
-3. Sound Level (dB): 0.0000
-4. Runtime Hours: 0.0000
-5. Pressure (psi): 0.0000
-6. Vibration (mm/s): 0.0000
-Machine A status: No Maintenance
-  Probability breakdown: No Maintenance: 1.00, Soon: 0.00, Urgent: 0.00
-  Recommendation: Continue normal operation, next check in 30 days
-Machine B status: Maintenance Soon
-  Probability breakdown: No Maintenance: 0.00, Soon: 1.00, Urgent: 0.00
-  Recommendation: Schedule maintenance within 2 weeks, order parts now
-Machine C status: Urgent Maintenance
-  Probability breakdown: No Maintenance: 0.00, Soon: 0.00, Urgent: 1.00
-  Recommendation: URGENT - Schedule maintenance immediately!
-  Alert: Potential failure imminent if operation continues
-```
 
 This example shows:
 

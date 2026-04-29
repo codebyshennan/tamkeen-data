@@ -1,3 +1,11 @@
+---
+reading_minutes: 25
+objectives:
+  - "Engineer text and numeric features (n-grams, log transforms, binning) to lift NB accuracy on real data."
+  - "Handle missing values with sklearn imputers inside the pipeline rather than ad-hoc dropping."
+  - "Combine NB into a `VotingClassifier` or `StackingClassifier` to recover from the independence assumption."
+  - "Tune `alpha` (smoothing) with `GridSearchCV` and persist the fitted pipeline with `joblib` for deployment."
+---
 # Advanced Topics in Naive Bayes
 
 **After this lesson:** you can explain the core ideas in “Advanced Topics in Naive Bayes” and reproduce the examples here in your own notebook or environment.
@@ -29,12 +37,6 @@ Feature engineering is like being a chef who transforms basic ingredients into a
 Let's say you're building a spam detector. Instead of just using raw words, you can create smarter features:
 
 #### TF-IDF pipeline with custom preprocessing
-
-**Purpose:** Show a `Pipeline` of `TfidfVectorizer` (with a callable `preprocessor` for cleaning) plus `MultinomialNB`, without extra NLP dependencies.
-
-**Walkthrough:**
-- `normalize_text` lowercases and strips non-letters (keeping `!?.`).
-- `TfidfVectorizer(preprocessor=..., ngram_range=(1, 3), max_features=1000)` feeds `MultinomialNB`.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -97,11 +99,6 @@ When working with numbers (like age or income), you can transform them to better
 
 #### Power transform + Gaussian NB
 
-**Purpose:** Pipeline `PowerTransformer` (Yeo–Johnson) before `GaussianNB` when features are skewed.
-
-**Walkthrough:**
-- `PowerTransformer(method='yeo-johnson')` learns a per-feature transform; `GaussianNB` then fits on the transformed space.
-
 ```python
 from sklearn.preprocessing import PowerTransformer
 from sklearn.naive_bayes import GaussianNB
@@ -126,11 +123,6 @@ Imagine you're a doctor with incomplete patient records. You can't just ignore m
 ### Smart Ways to Handle Missing Data
 
 #### KNN imputer + scaler + Gaussian NB (sketch)
-
-**Purpose:** Illustrate plugging `KNNImputer` (or `IterativeImputer`) ahead of scaling and `GaussianNB` in a `Pipeline`.
-
-**Walkthrough:**
-- `KNNImputer(n_neighbors=5)` fills missing numeric cells; `StandardScaler` then `GaussianNB` for the final classifier.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -199,11 +191,6 @@ An ensemble is like a team of experts working together. Instead of relying on on
 
 #### VotingClassifier with multiple NB variants (illustrative)
 
-**Purpose:** Show how `VotingClassifier` combines estimators; in practice each base learner must see compatible features (often separate pipelines per modality).
-
-**Walkthrough:**
-- List named steps (`multinomial`, `gaussian`, `bernoulli`); `voting='soft'` averages predicted probabilities.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -251,11 +238,6 @@ def create_naive_bayes_team():
 ### Stacking Classifier
 
 #### StackingClassifier with logistic meta-learner
-
-**Purpose:** Stack several Naive Bayes variants with `LogisticRegression` as the final estimator (conceptual; feature alignment across bases is required in real use).
-
-**Walkthrough:**
-- `StackingClassifier(estimators=..., final_estimator=LogisticRegression(), cv=5)`.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -308,11 +290,6 @@ def create_stacked_model():
 ### Saving Your Model
 
 #### Persist estimator with joblib and sidecar JSON
-
-**Purpose:** Save a fitted model to disk with `joblib` and optional metadata for deployment.
-
-**Walkthrough:**
-- `joblib.dump` the estimator; write `model_info.json`; `load` reverses the steps.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -371,11 +348,6 @@ class ModelSaver:
 ### Monitoring Your Model
 
 #### Track predictions for simple drift-style checks
-
-**Purpose:** Keep a lightweight log of predictions (and optional labels) to compute rolling accuracy offline.
-
-**Walkthrough:**
-- Append dicts with `features`, `prediction`, optional `actual`, and `datetime.now()`.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -439,11 +411,6 @@ Hyperparameters are like the settings on your camera. You need to adjust them to
 ### Finding the Best Settings
 
 #### RandomizedSearchCV over vectorizer + MultinomialNB
-
-**Purpose:** Search `max_features`, `ngram_range`, and `alpha` on a text pipeline with cross-validation.
-
-**Walkthrough:**
-- `param_options` uses `randint` / `uniform` distributions; `RandomizedSearchCV(..., n_iter=20, cv=3)`; return `best_params_`.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -540,8 +507,6 @@ When one class is much more common than others:
 
 #### Normalize balanced weights to `class_prior`
 
-**Purpose:** Turn `compute_class_weight` outputs into a proper prior vector summing to 1 for `MultinomialNB`.
-
 ```python
 import numpy as np
 from sklearn.utils.class_weight import compute_class_weight
@@ -558,11 +523,6 @@ model = MultinomialNB(class_prior=priors)
 When you have too many features:
 
 #### Chi-squared feature selection before NB
-
-**Purpose:** Reduce dimensionality with `SelectKBest` and `chi2` (non-negative counts required).
-
-**Walkthrough:**
-- `SelectKBest(chi2, k=1000).fit_transform(X, y)` returns a reduced sparse or dense matrix.
 
 ```python
 import numpy as np
@@ -582,11 +542,6 @@ X_new = selector.fit_transform(X, y)
 When dealing with very small probabilities:
 
 #### Argmax on `predict_log_proba`
-
-**Purpose:** Use log-probabilities for numerical stability when comparing classes (equivalent argmax to `predict` for many models).
-
-**Walkthrough:**
-- Fit `BernoulliNB` on a tiny binary matrix; `predict_log_proba` then `np.argmax` along classes.
 
 ```python
 import numpy as np

@@ -1,3 +1,10 @@
+---
+reading_minutes: 15
+objectives:
+  - "Explain SVM as a maximum-margin classifier: fit the boundary that maximises distance to the nearest training points."
+  - "Identify support vectors, the hyperplane, and the margin in a 2D scatter, and explain why only the support vectors define the boundary."
+  - "Recognise where SVMs win (small-to-medium tabular data, high-dimensional text) and where they struggle (very large `n`, calibrated probabilities)."
+---
 # Introduction to Support Vector Machines (SVM)
 
 **After this lesson:** you can explain the core ideas in “Introduction to Support Vector Machines (SVM)” and reproduce the examples here in your own notebook or environment.
@@ -11,15 +18,6 @@
 Crash Course AI: supervised learning for classical algorithms.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-## Learning Objectives
-
-By the end of this section, you will be able to:
-
-- Explain what SVM is and why it's useful
-- Understand the key concepts of hyperplanes, support vectors, and margins
-- Identify when to use SVM in real-world problems
-- Recognize the advantages and limitations of SVM
 
 ## What is SVM?
 

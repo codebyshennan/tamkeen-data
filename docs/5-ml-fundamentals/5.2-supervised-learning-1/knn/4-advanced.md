@@ -1,3 +1,11 @@
+---
+reading_minutes: 20
+objectives:
+  - "Switch to `weights='distance'` so closer neighbours count more when class densities vary."
+  - "Apply PCA before kNN when `p` is large to fight the curse of dimensionality."
+  - "Tune `n_neighbors` with `GridSearchCV` and stratified k-fold to avoid noisy single-split estimates."
+  - "Trade exact for fast neighbour search using `algorithm='kd_tree'` or `'ball_tree'` on larger datasets."
+---
 # Advanced KNN Techniques: Taking Your Skills to the Next Level
 
 **After this lesson:** you can explain the core ideas in “Advanced KNN Techniques: Taking Your Skills to the Next Level” and reproduce the examples here in your own notebook or environment.
@@ -31,11 +39,6 @@ Think of weighted KNN like asking your friends for movie recommendations:
 ### How Weighted KNN Works
 
 #### `weights='distance'` on synthetic genre features
-
-**Purpose:** Builds a `KNeighborsClassifier` that weights closer neighbors more heavily, fits it on 3D feature vectors, and predicts a genre for a new point.
-
-**Walkthrough:**
-- `KNeighborsClassifier(..., weights='distance')`; `fit` on `X_train`, `y_train`; `predict` for `new_movie`; needs NumPy for `X_train` / `new_movie`.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -98,12 +101,6 @@ Predicted genre: Action
 </aside>
 </div>
 
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Predicted genre: Action
-```
-
 ## 2. Dimensionality Reduction: Making Complex Data Simpler
 
 Sometimes your data has too many features, making KNN slow and less accurate. Dimensionality reduction helps by:
@@ -115,11 +112,6 @@ Sometimes your data has too many features, making KNN slow and less accurate. Di
 ### Using PCA (Principal Component Analysis)
 
 #### PCA to 2D and scatter-plot Iris by class
-
-**Purpose:** Projects Iris features onto the first two principal components and colors points by label for visualization.
-
-**Walkthrough:**
-- `PCA(n_components=2).fit_transform`; `plt.scatter` with `c=y`, `colorbar`, `plt.show()`.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -187,11 +179,6 @@ Choosing the right number of neighbors (k) is crucial. Too few can lead to noise
 ### Cross-Validation for k Selection
 
 #### Sweep `k` with 5-fold CV and plot accuracy vs `k`
-
-**Purpose:** Trains a fresh `KNeighborsClassifier` for each `k`, records mean CV accuracy, plots the curve, and prints the `k` with the highest score.
-
-**Walkthrough:**
-- Loop over `k_values`; `cross_val_score(..., cv=5).mean()`; `np.argmax` on scores; `plt.plot` with markers.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -271,23 +258,11 @@ Best k value: 6
 </aside>
 </div>
 
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Best k value: 6
-```
-
 ## 4. Handling Imbalanced Data
 
 When one class is much more common than others, KNN can be biased. Here's how to fix it:
 
 #### SMOTE + KNN pipeline with cross-validated accuracy
-
-**Purpose:** Chains SMOTE oversampling with `KNeighborsClassifier` so CV evaluates the full preprocessing+model pipeline on imbalanced data.
-
-**Walkthrough:**
-- `Pipeline([('smote', SMOTE(...)), ('knn', KNeighborsClassifier(...))])`; `cross_val_score(pipeline, X, y, cv=5)`.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -346,11 +321,6 @@ model = handle_imbalanced_data(X_imbalanced, y_imbalanced)
 For large datasets, KNN can be slow. Tree structures help speed it up:
 
 #### `BallTree`-backed k-NN with majority vote via `bincount`
-
-**Purpose:** Stores training points in a `BallTree` for fast `k` neighbor queries, then labels each query by the mode of neighbor class indices (integer labels).
-
-**Walkthrough:**
-- `BallTree(X)` in `fit`; `tree.query(X, k=self.k)` returns distances and indices; `np.bincount` / `argmax` for voting.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -426,11 +396,6 @@ predictions = fast_knn.predict(X_test)
 
    #### Scale features when using `weights='distance'`
 
-   **Purpose:** Distance-based weighting is meaningless if raw feature scales differ—`StandardScaler` aligns scales before `fit`.
-
-   **Walkthrough:**
-   - `StandardScaler().fit_transform(X)` then `knn.fit(X_scaled, y)`.
-
    ```python
    #  Wrong way
    knn = KNeighborsClassifier(weights='distance')
@@ -447,11 +412,6 @@ predictions = fast_knn.predict(X_test)
 
    #### Fixed 1-D PCA vs variance threshold
 
-   **Purpose:** Contrasts an overly aggressive single-component PCA with retaining enough components to preserve most variance (`n_components=0.95`).
-
-   **Walkthrough:**
-   - `PCA(n_components=1)` vs `PCA(n_components=0.95)`.
-
    ```python
    #  Wrong way
    pca = PCA(n_components=1)  # Too few components
@@ -463,11 +423,6 @@ predictions = fast_knn.predict(X_test)
 3. **Ignoring Class Imbalance**
 
    #### Train on raw imbalance vs SMOTE-resampled data
-
-   **Purpose:** Shows fitting KNN on skewed class counts versus balancing with SMOTE before `fit` so neighbors aren’t dominated by the majority class.
-
-   **Walkthrough:**
-   - `SMOTE().fit_resample` then `knn.fit(X_balanced, y_balanced)`.
 
    ```python
    #  Wrong way
@@ -487,11 +442,6 @@ predictions = fast_knn.predict(X_test)
 
    #### `StandardScaler` on `X`
 
-   **Purpose:** Standardizes every column so distance-based models aren’t dominated by large-magnitude features.
-
-   **Walkthrough:**
-   - `StandardScaler().fit_transform(X)`.
-
    ```python
    from sklearn.preprocessing import StandardScaler
    scaler = StandardScaler()
@@ -502,31 +452,15 @@ predictions = fast_knn.predict(X_test)
 
    #### Mean 5-fold accuracy for `knn` on scaled data
 
-   **Purpose:** Reports the average CV accuracy of the current KNN estimator on `X_scaled` and `y`.
-
-   **Walkthrough:**
-   - `cross_val_score(..., cv=5)`; `scores.mean()` in an f-string.
-
    ```python
    from sklearn.model_selection import cross_val_score
    scores = cross_val_score(knn, X_scaled, y, cv=5)
    print(f"Average accuracy: {scores.mean():.3f}")
    ```
 
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Average accuracy: 0.960
-```
-
 3. **Try Different Distance Metrics**
 
    #### Compare `metric` strings with the same CV setup
-
-   **Purpose:** Loops over Euclidean, Manhattan, and cosine metrics, each time measuring mean CV accuracy to see which metric fits the data geometry.
-
-   **Walkthrough:**
-   - `KNeighborsClassifier(metric=metric)`; `cross_val_score(...).mean()`; formatted print per metric.
 
    ```python
    metrics = ['euclidean', 'manhattan', 'cosine']
@@ -535,14 +469,6 @@ Average accuracy: 0.960
        score = cross_val_score(knn, X_scaled, y, cv=5).mean()
        print(f"{metric}: {score:.3f}")
    ```
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-euclidean: 0.960
-manhattan: 0.947
-cosine: 0.860
-```
 
 ## Gotchas
 

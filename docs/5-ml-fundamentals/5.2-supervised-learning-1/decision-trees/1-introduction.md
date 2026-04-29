@@ -1,3 +1,10 @@
+---
+reading_minutes: 20
+objectives:
+  - "Distinguish a decision tree's root, decision, and leaf nodes from the if/else rules they encode."
+  - "Fit a `DecisionTreeClassifier` to a small tabular dataset and read `feature_importances_` to see which features drove the splits."
+  - "Recognise where decision trees shine (interpretable rules, mixed feature types) and where they struggle (smooth boundaries, very high dimensions)."
+---
 # Introduction to Decision Trees
 
 **After this lesson:** you can explain the core ideas in “Introduction to Decision Trees” and reproduce the examples here in your own notebook or environment.
@@ -53,10 +60,6 @@ This is exactly how a decision tree works! It's a series of yes/no questions tha
 Let's break down the parts of a decision tree using a simple example:
 
 #### Train a toy tree and inspect structure
-
-**Purpose:** Connect the walking-decision story to `DecisionTreeClassifier`, `plot_tree`, a prediction, and `feature_importances_`.
-
-**Walkthrough:** Rows of `X` are `[is_raining, temp_F, have_time]`; `plot_tree` labels nodes; importances sum to 1 over features used in splits.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -158,16 +161,6 @@ Have Time: 0.00
 </aside>
 </div>
 
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Decision: Go for a walk
-Is Raining: 0.49
-Temperature: 0.51
-Have Time: 0.00
-```
-
 In this decision tree:
 
 1. **Root Node**: The starting point at the top, representing the entire dataset.
@@ -195,10 +188,6 @@ In this decision tree:
 Decision trees learn by finding the best questions to ask that separate the data most effectively:
 
 #### 2D synthetic data: decision surface + tree diagram
-
-**Purpose:** Visualize axis-aligned decision regions from `make_classification` and compare to the exported tree structure.
-
-**Walkthrough:** `plot_decision_boundary` fills class regions on a mesh; second `plot_tree` shows the splits that produced those rectangles.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -346,12 +335,6 @@ Try building a simple decision tree on your own:
 
 #### Exercise: student pass/fail (`5.2-dt-1-intro-exercise`)
 
-**Purpose:** Practice fitting and predicting on a tiny table; read which feature the tree relies on most via `feature_importances_`.
-
-**Walkthrough:** Four numeric features → binary label; `np.argmax` picks the top importance—extend with train/test split in your own notebook.
-
-**Exercise:** `5.2-dt-1-intro-exercise` — complete in your environment; compare your predictions to the captured run below.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -420,13 +403,6 @@ Most important factor: Previous Score
   </div>
 </aside>
 </div>
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Prediction: Pass
-Most important factor: Previous Score
-```
 
 ## Gotchas
 

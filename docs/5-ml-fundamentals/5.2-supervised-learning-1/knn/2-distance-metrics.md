@@ -1,3 +1,10 @@
+---
+reading_minutes: 15
+objectives:
+  - "Compute Euclidean, Manhattan, and cosine distances by hand on a 2D example."
+  - "Pick a metric that fits the data: Euclidean for raw geometry, Manhattan for grid-like features, cosine for direction (text and embeddings)."
+  - "Always scale features before kNN with `StandardScaler` or `MinMaxScaler` so large-range columns do not dominate distance."
+---
 # Understanding Distance Metrics in KNN
 
 **After this lesson:** you can explain the core ideas in “Understanding Distance Metrics in KNN” and reproduce the examples here in your own notebook or environment.
@@ -41,10 +48,6 @@ Think of this as measuring distance "as the crow flies" - the shortest possible 
 
 ##### Euclidean distance in $\mathbb{R}^2$
 
-**Purpose:** Implement $d=\sqrt{\sum_i (x_i-y_i)^2}$ to match sklearn’s default `metric='euclidean'` for continuous vectors.
-
-**Walkthrough:** `np.sqrt` of sum of squared differences; lat/lon “units” here are arbitrary degrees—great-circle distance would use haversine in production.
-
 ```python
 # Simple Example: Distance between two points on a map
 import numpy as np
@@ -58,12 +61,6 @@ ny = np.array([40.7, -74.0])
 boston = np.array([42.3, -71.0])
 distance = euclidean_distance(ny, boston)
 print(f"Distance between NY and Boston: {distance:.2f} units")
-```
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Distance between NY and Boston: 3.40 units
 ```
 
 **When to Use:**
@@ -83,10 +80,6 @@ This is like walking through a city grid - you can only move along the streets, 
 
 ##### Manhattan ($L_1$) distance
 
-**Purpose:** Sum absolute coordinate differences—matches `metric='manhattan'` and is robust when axes aren’t commensurate without scaling.
-
-**Walkthrough:** `np.sum(np.abs(...))`; on a grid, this counts blocks walked.
-
 ```python
 def manhattan_distance(point1, point2):
     """Calculate distance moving only along grid lines"""
@@ -97,12 +90,6 @@ start = np.array([0, 0])  # Starting at intersection
 end = np.array([3, 4])    # Destination
 distance = manhattan_distance(start, end)
 print(f"Walking distance: {distance} blocks")
-```
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Walking distance: 7 blocks
 ```
 
 **When to Use:**
@@ -122,10 +109,6 @@ This measures how similar two things are based on the angle between them, ignori
 
 ##### Cosine similarity (not a metric distance; use `1 - cosine` for distance)
 
-**Purpose:** Measure alignment of vectors ignoring magnitude—standard for sparse text or bag-of-words features.
-
-**Walkthrough:** Dot product divided by product of L2 norms; parallel vectors yield 1 even if one is scaled.
-
 ```python
 def cosine_similarity(point1, point2):
     """Calculate similarity based on angle between vectors"""
@@ -139,12 +122,6 @@ product1 = np.array([1, 0, 1, 1])  # Features: [price, quality, popularity, revi
 product2 = np.array([2, 0, 2, 2])  # Same pattern, just larger numbers
 similarity = cosine_similarity(product1, product2)
 print(f"Similarity between products: {similarity:.2f}")
-```
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Similarity between products: 1.00
 ```
 
 **When to Use:**
@@ -197,10 +174,6 @@ Let's say you're predicting house prices using these features:
 - Year built
 
 #### Compare metrics on scaled features (sketch—define `X`, `y`, splits in your notebook)
-
-**Purpose:** Show that `KNeighborsRegressor` accepts `metric=`; scaling avoids one feature dominating Euclidean distance.
-
-**Walkthrough:** Expect `X`, `y`, `train_test_split`, and `X_test_scaled = scaler.transform(X_test)` to exist—snippet is illustrative glue code.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">

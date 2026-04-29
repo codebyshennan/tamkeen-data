@@ -1,3 +1,10 @@
+---
+reading_minutes: 25
+objectives:
+  - "Reframe recommendation, image retrieval, and fraud detection as nearest-neighbour search over feature vectors."
+  - "Combine scaling, dimensionality reduction, and weighted voting to make kNN viable on real datasets."
+  - "Recognise when a domain is wrong for kNN (very high `p` with sparse text, latency-critical inference)."
+---
 # Real-World Applications of KNN: From Theory to Practice
 
 **After this lesson:** you can explain the core ideas in “Real-World Applications of KNN: From Theory to Practice” and reproduce the examples here in your own notebook or environment.
@@ -28,11 +35,6 @@ Imagine you're building a movie streaming service. You want to recommend movies 
 ### How It Works
 
 #### Item–item `NearestNeighbors` on a ratings matrix
-
-**Purpose:** Scales user-rating vectors per movie, indexes them with `NearestNeighbors`, and returns the closest movies (excluding self) with a simple similarity score.
-
-**Walkthrough:**
-- `MovieRecommender` stores `StandardScaler` and `NearestNeighbors(k+1)`; `recommend` uses `kneighbors` on the query row and strips the first neighbor (self).
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -144,11 +146,6 @@ KNN can help doctors make better diagnoses by comparing new patients with simila
 
 #### `Pipeline` with scaling and distance-weighted KNN + `predict_proba`
 
-**Purpose:** Wraps `StandardScaler` and `KNeighborsClassifier(weights='distance')` so vitals are scaled before neighbors are found; exposes diagnosis labels and confidence from max class probability.
-
-**Walkthrough:**
-- `Pipeline([('scaler', ...), ('classifier', ...)])`; `predict_proba` / `predict` on new patient rows.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -252,11 +249,6 @@ KNN can help find similar images, useful for photo organization or product searc
 ### Building an Image Finder
 
 #### Pixel-vector index with `NearestNeighbors`
-
-**Purpose:** Loads images, resizes to 64×64 grayscale, flattens pixels to vectors, and uses `NearestNeighbors` to retrieve the nearest stored images by distance.
-
-**Walkthrough:**
-- `Image.open`, `resize`, `convert('L')`, `np.array(...).flatten()`; `model.fit(features)`; `kneighbors` on query features; similarity as `1 - distance`.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -371,11 +363,6 @@ KNN can help identify unusual patterns that might indicate fraud.
 
 #### `LocalOutlierFactor` for anomaly scores and ranked fraud cases
 
-**Purpose:** Fits LOF on transaction features to label inliers vs outliers (`-1`) and ranks negative-outlier-factor scores for inspection.
-
-**Walkthrough:**
-- `LocalOutlierFactor(n_neighbors=20, contamination=...)`; `fit_predict`; `negative_outlier_factor_`; `np.where` for anomaly indices.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -479,23 +466,11 @@ Transaction 1: Score 1.01
 </aside>
 </div>
 
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Potential fraud cases:
-Transaction 1: Score 1.01
-```
-
 ## Common Challenges and Solutions
 
 1. **Handling Large Datasets**
 
    #### `algorithm='ball_tree'` for faster neighbor queries
-
-   **Purpose:** Uses scikit-learn’s ball-tree backend (with tunable `leaf_size`) to accelerate neighbor search on large dense training sets.
-
-   **Walkthrough:**
-   - `KNeighborsClassifier(..., algorithm='ball_tree', leaf_size=30)`.
 
    ```python
    # Use ball tree for faster searches
@@ -510,11 +485,6 @@ Transaction 1: Score 1.01
 
    #### SMOTE oversampling before fitting KNN
 
-   **Purpose:** Synthesizes minority-class examples so `X_balanced` / `y_balanced` have more balanced class counts for distance-based learning.
-
-   **Walkthrough:**
-   - `SMOTE().fit_resample(X, y)`.
-
    ```python
    from imblearn.over_sampling import SMOTE
    
@@ -526,11 +496,6 @@ Transaction 1: Score 1.01
 3. **Choosing the Right Distance Metric**
 
    #### Cosine vs Euclidean for different feature types
-
-   **Purpose:** Illustrates picking `cosine` when vectors are sparse or direction matters (e.g. text) and `euclidean` for dense numeric magnitude features.
-
-   **Walkthrough:**
-   - `KNeighborsClassifier(metric='cosine')` vs `metric='euclidean'`.
 
    ```python
    # For text data
@@ -546,11 +511,6 @@ Transaction 1: Score 1.01
 
    #### Standardize `X` before KNN
 
-   **Purpose:** Applies zero-mean unit-variance scaling across columns so no single feature dominates distance.
-
-   **Walkthrough:**
-   - `StandardScaler().fit_transform(X)`.
-
    ```python
    from sklearn.preprocessing import StandardScaler
    scaler = StandardScaler()
@@ -561,11 +521,6 @@ Transaction 1: Score 1.01
 
    #### 5-fold CV mean accuracy
 
-   **Purpose:** Estimates generalization of the KNN on scaled features with stratified (default) k-fold CV.
-
-   **Walkthrough:**
-   - `cross_val_score(knn, X_scaled, y, cv=5)`; `scores.mean()`.
-
    ```python
    from sklearn.model_selection import cross_val_score
    scores = cross_val_score(knn, X_scaled, y, cv=5)
@@ -575,11 +530,6 @@ Transaction 1: Score 1.01
 3. **Monitor Performance**
 
    #### Per-class metrics from `classification_report`
-
-   **Purpose:** Prints precision, recall, and F1 per class and aggregates for the test predictions vs `y_test`.
-
-   **Walkthrough:**
-   - `knn.predict(X_test)`; `classification_report(y_test, y_pred)`.
 
    ```python
    from sklearn.metrics import classification_report

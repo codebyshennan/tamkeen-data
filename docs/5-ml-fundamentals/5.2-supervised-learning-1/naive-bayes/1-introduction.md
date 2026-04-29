@@ -1,3 +1,10 @@
+---
+reading_minutes: 15
+objectives:
+  - "Explain why naive Bayes is \"naive\": features are assumed conditionally independent given the class."
+  - "Identify the three classic NB applications (spam, news categorisation, medical screening) and what makes them NB-friendly."
+  - "Map any NB classifier to two phases: learn class priors and feature likelihoods, then predict by posterior maximisation."
+---
 # Introduction to Naive Bayes Classification
 
 **After this lesson:** you can explain the core ideas in “Introduction to Naive Bayes Classification” and reproduce the examples here in your own notebook or environment.

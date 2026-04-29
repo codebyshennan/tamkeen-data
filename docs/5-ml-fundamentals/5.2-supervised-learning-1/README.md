@@ -90,10 +90,6 @@ Use the sketch below as a **first guess**, then validate with cross-validation a
 
 #### Heuristic mapping from data traits to a first algorithm
 
-**Purpose:** Give learners a memorable decision stub—not a rule—linking text data, interpretability, dimensionality, and geometry to Naive Bayes, trees, SVM, or kNN.
-
-**Walkthrough:** Replace `data_characteristics` with your real checks (imbalance, $n$, latency); always validate with CV and baselines.
-
 ```python
 def select_classifier(data_characteristics):
     if data_characteristics.text_data:
@@ -107,12 +103,6 @@ def select_classifier(data_characteristics):
     else:
         return "Try multiple and compare"
 ```
-
-
-<figure>
-<img src="assets/README_fig_1.png" alt="README" />
-<figcaption>Figure 1: Generated visualization</figcaption>
-</figure>
 
 ### Performance Comparison
 
@@ -140,8 +130,6 @@ Before diving in, ensure you're comfortable with:
 
 #### Core imports for this module
 
-**Purpose:** Align vocabulary with the rest of the course: NumPy/Pandas for data, scikit-learn for estimators, Matplotlib for plots.
-
 ```python
 # Essential Python libraries
 import numpy as np          # Numerical operations
@@ -149,12 +137,6 @@ import pandas as pd         # Data manipulation
 import sklearn             # Machine learning tools
 import matplotlib.pyplot as plt  # Visualization
 ```
-
-
-<figure>
-<img src="assets/README_fig_1.png" alt="README" />
-<figcaption>Figure 1: Generated visualization</figcaption>
-</figure>
 
 ### 3. Concepts
 
@@ -169,10 +151,6 @@ import matplotlib.pyplot as plt  # Visualization
 
 #### Text pipeline sketch: TF–IDF + multinomial Naive Bayes
 
-**Purpose:** Show the usual spam/sentiment stack—sparse word counts or TF–IDF feeding a fast generative classifier.
-
-**Walkthrough:** `TfidfVectorizer` must `fit_transform` on training text only; `MultinomialNB` is a common default for word counts.
-
 ```python
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -183,24 +161,10 @@ classifier = MultinomialNB()
 ```
 
 
-<figure>
-<img src="assets/README_fig_1.png" alt="README" />
-<figcaption>Figure 1: Are Our Errors Random? (They Should Be!)</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/README_fig_2.png" alt="README" />
-<figcaption>Figure 2: Generated visualization</figcaption>
-</figure>
 
 ### 2. Medical Diagnosis
 
 #### Nonlinear SVM with RBF kernel (illustrative)
-
-**Purpose:** Recall that margin-based classifiers with kernels handle nonlinear boundaries when features are mapped implicitly.
-
-**Walkthrough:** `C` trades margin width vs violations; kernel choice and calibration matter—this is only a starting point.
 
 ```python
 from sklearn.svm import SVC
@@ -210,24 +174,10 @@ svm_classifier = SVC(kernel='rbf', C=1.0)
 ```
 
 
-<figure>
-<img src="assets/README_fig_1.png" alt="README" />
-<figcaption>Figure 1: Are Our Errors Random? (They Should Be!)</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/README_fig_2.png" alt="README" />
-<figcaption>Figure 2: Generated visualization</figcaption>
-</figure>
 
 ### 3. Credit Risk Assessment
 
 #### Shallow tree for interpretable credit decisions
-
-**Purpose:** Emphasize transparency and rule-like splits for regulated or explainable use cases.
-
-**Walkthrough:** `max_depth` limits complexity; pair with cost-sensitive metrics if classes are imbalanced.
 
 ```python
 from sklearn.tree import DecisionTreeClassifier
@@ -237,24 +187,10 @@ dt_classifier = DecisionTreeClassifier(max_depth=5)
 ```
 
 
-<figure>
-<img src="assets/README_fig_1.png" alt="README" />
-<figcaption>Figure 1: Are Our Errors Random? (They Should Be!)</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/README_fig_2.png" alt="README" />
-<figcaption>Figure 2: Generated visualization</figcaption>
-</figure>
 
 ### 4. Recommendation Systems
 
 #### kNN as a lazy learner for similarity-style classification
-
-**Purpose:** Connect user–item or content similarity ideas to a distance-based vote among neighbors.
-
-**Walkthrough:** Scale features first; `n_neighbors` and distance metric heavily affect results.
 
 ```python
 from sklearn.neighbors import KNeighborsClassifier
@@ -264,16 +200,6 @@ knn_classifier = KNeighborsClassifier(n_neighbors=5)
 ```
 
 
-<figure>
-<img src="assets/README_fig_1.png" alt="README" />
-<figcaption>Figure 1: Are Our Errors Random? (They Should Be!)</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/README_fig_2.png" alt="README" />
-<figcaption>Figure 2: Generated visualization</figcaption>
-</figure>
 
 ## Learning Path
 
@@ -302,8 +228,6 @@ Suggested order follows the nav: start simple and build geometry and splitting i
 
 #### Install scientific Python stack (example)
 
-**Purpose:** One-line environment setup aligned with the lessons; use `uv`/`conda` in your own workflow if preferred.
-
 ```bash
 # Install required packages
 pip install numpy pandas scikit-learn matplotlib seaborn
@@ -312,10 +236,6 @@ pip install numpy pandas scikit-learn matplotlib seaborn
 ### Recommended IDE Setup
 
 #### Notebook starter imports and reproducibility
-
-**Purpose:** Standardize evaluation imports and fixed randomness so notebooks reruns match teaching outputs.
-
-**Walkthrough:** `train_test_split` + `accuracy_score` / `classification_report` cover common classification reporting; extend with your metric of record.
 
 ```python
 # Standard imports for all notebooks

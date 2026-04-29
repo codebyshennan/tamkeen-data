@@ -1,3 +1,10 @@
+---
+reading_minutes: 25
+objectives:
+  - "Build a sklearn `Pipeline` (vectoriser → NB) for text classification with `TfidfVectorizer` and `MultinomialNB`."
+  - "Apply `GaussianNB` to scaled tabular medical data and read `predict_proba` outputs critically (NB probabilities are poorly calibrated)."
+  - "Avoid the listed gotchas: `min_df=2` on tiny corpora, `stop_words='english'` killing negations, mis-summed `class_prior`."
+---
 # Implementing Naive Bayes in Practice
 
 **After this lesson:** you can explain the core ideas in “Implementing Naive Bayes in Practice” and reproduce the examples here in your own notebook or environment.
@@ -22,10 +29,6 @@ First, let's make sure you have everything you need:
 
 #### Imports for Naive Bayes workflows
 
-**Purpose:** Import NumPy, pandas, the three common Naive Bayes variants, and basic train/eval helpers used in the projects below.
-
-**Walkthrough:**
-- Install stack once (`pip` / `uv`) if needed, then import `GaussianNB`, `MultinomialNB`, `BernoulliNB`, `train_test_split`, and metrics.
 ```python
 # Imports for the examples below; install deps with pip if needed.
 import numpy as np
@@ -45,10 +48,6 @@ Imagine you're building a spam filter for your email. You want to automatically 
 
 #### Toy spam labels and train/test split
 
-**Purpose:** Build a tiny labeled email list and hold out 20% for testing with a fixed random seed.
-
-**Walkthrough:**
-- Parallel `emails` and `labels` (1=spam, 0=ham); `train_test_split(..., test_size=0.2, random_state=42)`.
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -97,10 +96,6 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 #### TF-IDF + MultinomialNB spam pipeline
 
-**Purpose:** Define a `Pipeline` that turns raw email strings into TF-IDF features and applies `MultinomialNB` with Laplace smoothing.
-
-**Walkthrough:**
-- `TfidfVectorizer` with lowercase, English stop words, bigrams, `min_df=2`; `MultinomialNB(alpha=1.0)`.
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -152,10 +147,6 @@ def create_spam_classifier():
 
 #### Train spam pipeline and print metrics
 
-**Purpose:** Fit the pipeline on training email strings and report accuracy and a per-class classification report on the test split.
-
-**Walkthrough:**
-- `model.fit(X_train, y_train)`; `predict` / `predict_proba` on `X_test`; `accuracy_score` and `classification_report` with `zero_division=0` to keep metrics stable on tiny splits.
 ```python
 # skip-output
 # Create and train the model
@@ -193,10 +184,6 @@ weighted avg       0.25      0.50      0.33         2
 
 #### Predict spam on held-out phrasing
 
-**Purpose:** Run `predict` and `predict_proba` on new email strings and print human-readable labels and confidence.
-
-**Walkthrough:**
-- Loop `zip(new_emails, predictions, probabilities)`; map 1/0 to Spam/Not Spam; `max(prob)` as confidence.
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -266,10 +253,6 @@ Let's build a system that helps doctors predict whether a patient has a certain 
 
 #### Patient vitals and stratified-style split
 
-**Purpose:** Hold numeric rows and sick/healthy labels, then split into train/test for the medical example.
-
-**Walkthrough:**
-- `patient_data` rows match `conditions` (1=sick, 0=healthy); `train_test_split` with `random_state=42`.
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -318,10 +301,6 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 #### StandardScaler + GaussianNB pipeline
 
-**Purpose:** Scale continuous vitals before `GaussianNB`, which assumes normal-like features per class.
-
-**Walkthrough:**
-- `Pipeline` with `StandardScaler` then `GaussianNB()`; same pattern as production numeric NB.
 ```python
 from sklearn.preprocessing import StandardScaler
 
@@ -339,10 +318,6 @@ def create_medical_classifier():
 
 #### Train medical pipeline and print metrics
 
-**Purpose:** Fit the scaler+GaussianNB pipeline on training patients and print accuracy and report on the test fold.
-
-**Walkthrough:**
-- Same evaluation pattern as spam; `classification_report` with `zero_division=0` for tiny test sets.
 ```python
 # skip-output
 # Create and train the model
@@ -380,10 +355,6 @@ weighted avg       0.00      0.00      0.00       1.0
 
 #### Diagnose one new patient row
 
-**Purpose:** Apply the already-fitted pipeline to a single new vital-sign vector and print label and confidence.
-
-**Walkthrough:**
-- `predict` and `predict_proba` on `new_patient`; map class 1/0 to Sick/Healthy.
 ```python
 # skip-output
 # New patient data
@@ -416,10 +387,6 @@ Let's build a system that automatically categorizes products based on their desc
 
 #### Product descriptions and category labels
 
-**Purpose:** Split short product strings and their category labels for a tiny text classification demo.
-
-**Walkthrough:**
-- `products` and `categories` align row-wise; `train_test_split` with `random_state=42`.
 ```python
 # Sample product data
 products = [
@@ -441,10 +408,6 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 #### CountVectorizer + MultinomialNB for products
 
-**Purpose:** Turn product text into bag-of-n-grams and classify with `MultinomialNB`.
-
-**Walkthrough:**
-- `CountVectorizer(ngram_range=(1, 2), stop_words='english')` feeds `MultinomialNB()`.
 ```python
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.pipeline import Pipeline
@@ -466,10 +429,6 @@ def create_product_classifier():
 
 #### Train product pipeline and print metrics
 
-**Purpose:** Fit on training product lines and report accuracy and per-class metrics on the test split.
-
-**Walkthrough:**
-- `model.fit(X_train, y_train)`; `predict` on `X_test`; `classification_report(..., zero_division=0)`.
 ```python
 # skip-output
 # Create and train the model
@@ -506,10 +465,6 @@ weighted avg       0.00      0.00      0.00       1.0
 
 #### Predict category for a new product line
 
-**Purpose:** Classify a single new product description using the fitted pipeline.
-
-**Walkthrough:**
-- `model.predict(new_product)` returns one label string from training categories.
 ```python
 # skip-output
 # New product
@@ -556,7 +511,6 @@ Use multiple metrics to evaluate your model:
 
    #### Scale numeric columns before Gaussian NB
 
-   **Purpose:** Remind that `GaussianNB` is sensitive to feature scale; use `StandardScaler` on continuous inputs.
    ```python
    import numpy as np
    from sklearn.preprocessing import StandardScaler
@@ -572,10 +526,6 @@ Use multiple metrics to evaluate your model:
 
    #### Map balanced weights to `class_prior`
 
-   **Purpose:** Show how `compute_class_weight` yields relative weights that you normalize into a proper prior vector for `MultinomialNB`.
-
-   **Walkthrough:**
-   - `compute_class_weight('balanced', ...)` then `priors = class_weights / class_weights.sum()` so probabilities sum to 1.
    ```python
    # Handle imbalanced classes
    import numpy as np
@@ -592,10 +542,6 @@ Use multiple metrics to evaluate your model:
 
    #### Cross-validate a MultinomialNB baseline
 
-   **Purpose:** Estimate generalization with `cross_val_score` on a small synthetic count matrix.
-
-   **Walkthrough:**
-   - Build random integer `X` and binary `y`, fit `MultinomialNB`, run 5-fold CV, print mean accuracy.
    ```python
    # skip-output
    # Always use cross-validation

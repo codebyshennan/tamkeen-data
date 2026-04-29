@@ -1,3 +1,11 @@
+---
+reading_minutes: 35
+objectives:
+  - "Apply cost-complexity pruning (`ccp_alpha`) after fitting, choosing alpha from a validation curve."
+  - "Use a tree's `feature_importances_` to drop low-signal columns before retraining."
+  - "Compare a single tree against `RandomForestClassifier` and `GradientBoostingClassifier` baselines to motivate ensembles."
+  - "Handle class imbalance with `class_weight='balanced'` and validate with stratified k-fold cross-validation."
+---
 # Advanced Decision Tree Techniques
 
 **After this lesson:** you can explain the core ideas in “Advanced Decision Tree Techniques” and reproduce the examples here in your own notebook or environment.
@@ -37,10 +45,6 @@ Think of pruning like trimming a tree in your garden. You remove unnecessary bra
 This is like setting rules before the tree starts growing:
 
 ##### Pre-pruning hyperparameters on Iris
-
-**Purpose:** Limit growth up front (`max_depth`, `min_samples_*`, `max_features`, `min_impurity_decrease`) and check generalization with CV.
-
-**Walkthrough:** `cross_val_score(..., cv=5)` estimates accuracy; `plot_tree` shows the smaller resulting structure.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -137,13 +141,6 @@ Average accuracy: 0.940
 </aside>
 </div>
 
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Average accuracy: 0.940
-```
-
 Pre-pruning is a preventative approach where we set limits before training the tree. This prevents the tree from growing too complex in the first place. The parameters used above control different aspects of tree complexity:
 
 - <code>max_depth</code>: Limits how deep the tree can grow
@@ -157,10 +154,6 @@ Pre-pruning is a preventative approach where we set limits before training the t
 This is like trimming the tree after it's grown:
 
 ##### Cost-complexity pruning path (`ccp_alpha`)
-
-**Purpose:** Sweep minimal cost-complexity values, refit trees, and pick `alpha` that maximizes held-out accuracy while shrinking node count.
-
-**Walkthrough:** `cost_complexity_pruning_path` yields `ccp_alphas`; loop stores `train_scores`/`test_scores` and `node_counts`; `argmax(test_scores)` selects `best_alpha`.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -297,17 +290,6 @@ Tree size: 19 nodes
 </aside>
 </div>
 
-
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Best pruning parameter: 0.004915
-Training accuracy: 0.990
-Testing accuracy: 0.965
-Tree size: 19 nodes
-```
-
 Post-pruning is a corrective approach where we first grow a full tree and then trim it back. The `ccp_alpha` parameter controls the strength of pruning:
 - Higher values lead to more pruning (smaller trees)
 - Lower values lead to less pruning (larger trees)
@@ -321,10 +303,6 @@ The optimal pruning strength balances underfitting and overfitting, maximizing p
 This example shows how to implement and use a custom impurity function:
 
 ##### Toy “cubic” impurity vs `gini` / `entropy` trees
-
-**Purpose:** Illustrate that sklearn fixes the splitting criterion—but comparing custom node purity to built-in trees builds intuition.
-
-**Walkthrough:** `calculate_custom_impurity` uses $1-\sum p_k^3$; loop fits full trees with `criterion='gini'|'entropy'` and reports in-sample accuracy and size.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -413,16 +391,6 @@ Entropy criterion - Accuracy: 1.000, Nodes: 117
 </aside>
 </div>
 
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Sample 1 impurity: 0.480
-Sample 2 impurity: 0.720
-Sample 3 impurity: 0.720
-Gini criterion - Accuracy: 1.000, Nodes: 127
-Entropy criterion - Accuracy: 1.000, Nodes: 117
-```
-
 While scikit-learn doesn't allow us to directly use custom impurity functions in its implementation, we can understand how different impurity measures affect tree performance. The built-in options are:
 
 - <code>gini</code>: Measures how "mixed" the classes are (based on squared probabilities)
@@ -435,10 +403,6 @@ Different impurity measures can lead to different tree structures and decisions.
 Decision trees can help us identify which features are most important:
 
 ##### Wine: importances and a reduced feature subset
-
-**Purpose:** Rank features with `feature_importances_`, retrain on top-5 columns, and compare test accuracy (often similar with fewer inputs).
-
-**Walkthrough:** `argsort` descending; slice `X_train[:, top_features]`; same `max_depth` for fair comparison.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -543,15 +507,6 @@ Top 5 features: flavanoids, color_intensity, proline, ash, alcohol
 </aside>
 </div>
 
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Accuracy with all features: 0.963
-Accuracy with top 5 features: 0.963
-Top 5 features: flavanoids, color_intensity, proline, ash, alcohol
-```
-
 This technique shows how we can:
 1. Identify which features are most important in our decision tree
 2. Use this information to create simpler models with fewer features
@@ -566,10 +521,6 @@ Think of ensembles like a team of experts working together. Each expert (tree) m
 ### 1. Random Forest Preview
 
 ##### Single tree vs `RandomForestClassifier` (CV boxplot)
-
-**Purpose:** Preview why bagging reduces variance: compare 5-fold scores of one shallow tree vs an ensemble of trees.
-
-**Walkthrough:** Same `max_depth=3` cap on base learners; forest adds bootstrap + feature subsampling per split.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -658,14 +609,6 @@ Random Forest Average: 0.954
 </aside>
 </div>
 
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Single Tree Average: 0.917
-Random Forest Average: 0.954
-```
-
 Random Forest creates many diverse decision trees by:
 1. Training each tree on a random subset of the data (bootstrapping)
 2. Considering only a random subset of features at each split
@@ -676,10 +619,6 @@ This diversity helps the ensemble overcome individual tree weaknesses and produc
 ### 2. Gradient Boosting Preview
 
 ##### `make_circles`: sequential boosting with refits per `n_estimators`
-
-**Purpose:** Show accuracy vs stage count on a nonlinear boundary; boosting adds trees to correct residual errors.
-
-**Walkthrough:** Loop mutates `boosting.n_estimators` and refits from scratch each iteration—slower than staged_predict; picks best test score in the range.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -790,14 +729,6 @@ Best accuracy: 0.827
 </aside>
 </div>
 
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Optimal number of trees: 6
-Best accuracy: 0.827
-```
-
 Gradient Boosting works by:
 1. Starting with a simple model
 2. Identifying where this model makes mistakes
@@ -811,10 +742,6 @@ This sequential learning process allows the model to focus on the difficult case
 ### Decision Path Highlighter
 
 ##### `decision_path` and printing split rules for one sample
-
-**Purpose:** Audit interpretability—trace which thresholds fire for row `sample_idx` and compare to `predict`.
-
-**Walkthrough:** Sparse `decision_path` → `path.indices`; skip sentinel leaves; compare `sample[0, feature]` to `tree_.threshold`.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -936,19 +863,6 @@ Step 2: Is petal length (cm) > -2.00? No
 </aside>
 </div>
 
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Sample features: [4.4 3.2 1.3 0.2]
-True class: setosa
-Predicted class: setosa
-
-Decision path:
-Step 1: Is petal length (cm) <= 2.45? Yes
-Step 2: Is petal length (cm) > -2.00? No
-```
-
 This visualization helps us understand exactly how a decision tree makes a specific prediction by:
 1. Tracing the path from the root to the leaf for a specific sample
 2. Showing each decision point along the way
@@ -961,10 +875,6 @@ This transparency is one of the major advantages of decision trees over black-bo
 ### 1. Handling Imbalanced Data
 
 ##### `class_weight='balanced'` vs default on synthetic imbalance
-
-**Purpose:** Show how reweighting changes confusion matrix and minority-class recall/precision.
-
-**Walkthrough:** `stratify=y` preserves 90/10 in splits; compare `classification_report` rows for class 1.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -1071,35 +981,6 @@ weighted avg       0.92      0.92      0.92       300
 </aside>
 </div>
 
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Regular Tree:
-[[256  13]
- [ 13  18]]
-              precision    recall  f1-score   support
-
-           0       0.95      0.95      0.95       269
-           1       0.58      0.58      0.58        31
-
-    accuracy                           0.91       300
-   macro avg       0.77      0.77      0.77       300
-weighted avg       0.91      0.91      0.91       300
-
-
-Weighted Tree:
-[[260   9]
- [ 14  17]]
-              precision    recall  f1-score   support
-
-           0       0.95      0.97      0.96       269
-           1       0.65      0.55      0.60        31
-
-    accuracy                           0.92       300
-   macro avg       0.80      0.76      0.78       300
-weighted avg       0.92      0.92      0.92       300
-```
-
 When dealing with imbalanced data (where some classes are much more common than others), we can:
 1. Use <code>class_weight='balanced'</code> to automatically adjust weights inversely proportional to class frequencies
 2. Manually specify weights for each class using a dictionary, e.g., <code>class_weight={0: 1, 1: 9}</code>
@@ -1110,10 +991,6 @@ These techniques help ensure the model pays attention to minority classes instea
 ### 2. Cross-Validation
 
 ##### `KFold` vs `StratifiedKFold` on breast cancer
-
-**Purpose:** Contrast unstratified vs stratified folds for binary classification stability.
-
-**Walkthrough:** Same estimator and `cv=5`; print per-fold scores and mean/std—stratification often reduces variance in class balance per fold.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -1184,16 +1061,6 @@ Average: 0.924, Std Dev: 0.021
   </div>
 </aside>
 </div>
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Regular K-Fold CV scores: [0.94736842 0.95614035 0.9122807  0.92105263 0.9380531 ]
-Average: 0.935, Std Dev: 0.016
-
-Stratified K-Fold CV scores: [0.92105263 0.88596491 0.94736842 0.92982456 0.9380531 ]
-Average: 0.924, Std Dev: 0.021
-```
 
 Cross-validation helps us get a more reliable estimate of model performance by:
 1. Splitting the data into multiple folds

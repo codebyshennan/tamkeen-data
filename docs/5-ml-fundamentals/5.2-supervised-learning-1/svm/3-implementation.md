@@ -1,3 +1,11 @@
+---
+reading_minutes: 40
+objectives:
+  - "Train `SVC` and `SVR` end-to-end with `StandardScaler` (always) and a held-out split."
+  - "Tune `C`, `gamma`, and `kernel` with `GridSearchCV` over a stratified k-fold split."
+  - "Handle multiclass with one-vs-rest / one-vs-one and class imbalance with `class_weight='balanced'` or SMOTE."
+  - "Apply linear SVM to high-dimensional text by piping through `TfidfVectorizer`."
+---
 # Implementing SVM with Scikit-learn
 
 **After this lesson:** you can explain the core ideas in “Implementing SVM with Scikit-learn” and reproduce the examples here in your own notebook or environment.
@@ -12,15 +20,6 @@ Crash Course AI: supervised learning for classical algorithms.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## Learning Objectives
-
-By the end of this section, you will be able to:
-
-- Implement SVM for classification and regression
-- Preprocess data for SVM
-- Tune SVM parameters
-- Handle common challenges in SVM implementation
-
 ## Getting Started with SVM
 
 ### Basic Setup
@@ -28,7 +27,6 @@ By the end of this section, you will be able to:
 First, let's import the necessary libraries:
 
 #### Core imports for SVM in scikit-learn
-**Purpose:** Pull in SVM estimators, scaling, splitting, and plotting used throughout the section.
 
 ```python
 # Essential imports
@@ -52,9 +50,6 @@ import matplotlib.pyplot as plt
 Let's implement a complete binary classification example:
 
 #### Binary classification with scaling and RBF SVC
-**Purpose:** Train a 2D toy classifier, report test accuracy, and optionally plot the decision regions.
-
-**Walkthrough:** `StandardScaler` fit on train only; `SVC` on scaled data; `plot_decision_boundary` is ready to uncomment.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -171,12 +166,6 @@ Model accuracy: 1.00
 </aside>
 </div>
 
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Model accuracy: 1.00
-```
-
 **Explanation:**
 1. **Data Creation**: We create a simple 2D dataset with two clearly separated classes
 2. **Data Splitting**: We divide the data into training (75%) and testing (25%) sets
@@ -192,7 +181,6 @@ Note that scaling is performed separately on the training and testing data to pr
 SVM naturally extends to multiple classes. Let's implement a complete example using the Iris dataset:
 
 #### Multiclass Iris classification
-**Purpose:** Train `SVC` on scaled Iris features with one-vs-one multiclass handling and a full classification report.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -360,21 +348,6 @@ weighted avg       1.00      1.00      1.00        38
 </aside>
 </div>
 
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Classification Report:
-              precision    recall  f1-score   support
-
-      setosa       1.00      1.00      1.00        15
-  versicolor       1.00      1.00      1.00        11
-   virginica       1.00      1.00      1.00        12
-
-    accuracy                           1.00        38
-   macro avg       1.00      1.00      1.00        38
-weighted avg       1.00      1.00      1.00        38
-```
-
 **Explanation:**
 1. **Dataset**: We use the famous Iris dataset which has 3 classes (setosa, versicolor, virginica) and 4 features
 2. **Scaling**: Again, we scale the features which is particularly important for SVM
@@ -389,7 +362,6 @@ This example demonstrates how SVM naturally handles multiclass problems, despite
 SVM can also be used for regression tasks using Support Vector Regression (SVR):
 
 #### Support Vector Regression on synthetic housing data
-**Purpose:** Fit `SVR`, report MSE and R², predict a new house, and optionally plot a 1D SVR curve.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -558,15 +530,6 @@ Predicted price for new house: $261.62k
 </aside>
 </div>
 
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Training MSE: 65.36
-Testing MSE: 208.60
-R² Score: 0.83
-Predicted price for new house: $261.62k
-```
-
 **Explanation:**
 1. **Data**: We create a dataset of house features (square footage, bedrooms, age) and their prices
 2. **Scaling**: As with classification, feature scaling is crucial for SVR
@@ -585,7 +548,6 @@ SVR works by finding a function that deviates from the observed targets by at mo
 Finding the optimal parameters is crucial for SVM performance. Here's how to use Grid Search:
 
 #### GridSearchCV for SVC hyperparameters
-**Purpose:** Search `C`, `gamma`, and `kernel` with 5-fold CV and compare the best estimator to defaults on the test set.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -763,16 +725,6 @@ Test accuracy with default model: 1.000
 </aside>
 </div>
 
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Fitting 5 folds for each of 32 candidates, totalling 160 fits
-Best parameters: {'C': 0.1, 'gamma': 'scale', 'kernel': 'linear'}
-Best cross-validation score: 0.973
-Test accuracy with best model: 0.960
-Test accuracy with default model: 1.000
-```
-
 **Explanation:**
 1. **Grid Search**:
    - We create a grid of parameter combinations to try systematically
@@ -783,7 +735,6 @@ Test accuracy with default model: 1.000
 Cross-validation helps prevent overfitting by evaluating model performance on multiple data splits:
 
 #### K-fold cross-validation scores for SVC
-**Purpose:** Run `cross_val_score` on scaled data and print per-fold accuracy and mean ± 2σ.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -892,13 +843,6 @@ Mean CV score: 0.979 (+/- 0.014)
 </aside>
 </div>
 
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Cross-validation scores: [0.97368421 0.98245614 0.97368421 0.99122807 0.97345133]
-Mean CV score: 0.979 (+/- 0.014)
-```
-
 **Explanation:**
 1. **Cross-Validation**:
    - Instead of a single train-test split, we use multiple splits (folds)
@@ -915,7 +859,6 @@ These techniques help prevent overfitting and ensure your model will generalize 
 Feature scaling is essential for SVM performance:
 
 #### Fit scaler on train, transform test
-**Purpose:** Show the canonical `StandardScaler` pattern to avoid leakage.
 
 ```python
 from sklearn.preprocessing import StandardScaler
@@ -936,7 +879,6 @@ X_test_scaled = scaler.transform(X_test)
 When dealing with imbalanced classes, use class weights or SMOTE:
 
 #### Class weights vs SMOTE for imbalanced labels
-**Purpose:** Compare `class_weight='balanced'` against SMOTE-resampled training data on the same test set.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -1054,7 +996,6 @@ print(classification_report(y_test, model_smote.predict(X_test_scaled)))
 For text data, combine SVM with TF-IDF vectorization:
 
 #### Linear SVC on TF-IDF text features
-**Purpose:** Vectorize short documents, train a linear-kernel `SVC`, and report per-class metrics.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -1193,7 +1134,6 @@ def show_important_features(model, vectorizer, n=10):
 1. **Forgetting to Scale Features**
 
    #### Anti-pattern: unscaled fit vs scaled fit
-   **Purpose:** Contrast forgetting scaling with the recommended pipeline.
 
    ```python
    # Wrong
@@ -1211,7 +1151,6 @@ def show_important_features(model, vectorizer, n=10):
 2. **Ignoring Class Imbalance**
 
    #### Anti-pattern: ignoring imbalance
-   **Purpose:** Show enabling `class_weight='balanced'` when classes differ in frequency.
 
    ```python
    # Wrong
@@ -1224,7 +1163,6 @@ def show_important_features(model, vectorizer, n=10):
 3. **Using Wrong Kernel**
 
    #### Anti-pattern: RBF on sparse high-dimensional text
-   **Purpose:** Prefer a linear kernel for bag-of-words / TF-IDF features.
 
    ```python
    # Wrong for text data

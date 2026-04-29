@@ -1,3 +1,11 @@
+---
+reading_minutes: 40
+objectives:
+  - "Compute Gini impurity and entropy by hand on a few example label vectors and explain why both peak at $p=0.5$."
+  - "Trace the splitting algorithm: scan candidate thresholds, score each by information gain, pick the highest-gain split."
+  - "Use `max_depth`, `min_samples_leaf`, and `min_samples_split` as first-line stopping rules so the tree does not memorise noise."
+  - "Diagnose under- vs overfitting from a depth-vs-accuracy curve on training and validation data."
+---
 # Understanding How Decision Trees Work
 
 **After this lesson:** you can explain the core ideas in “Understanding How Decision Trees Work” and reproduce the examples here in your own notebook or environment.
@@ -53,10 +61,6 @@ We use special measures to decide how to split the data:
 Gini impurity measures how "mixed" a group is. A lower Gini value means the group is more "pure" (contains more of one class).
 
 ##### Implement Gini from class counts
-
-**Purpose:** See the formula $1 - \sum_k p_k^2$ in code and how purity (one class) vs balance raises impurity.
-
-**Walkthrough:** `np.unique` with `return_counts` gets frequencies; probabilities are `counts / len(y)`.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -120,14 +124,6 @@ Balanced group Gini: 0.5000
 </aside>
 </div>
 
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Perfect group Gini: 0.0000
-Mixed group Gini: 0.6400
-Balanced group Gini: 0.5000
-```
-
 When we run this code, we'll see:
 - Perfect group has Gini = 0 (completely pure)
 - Balanced group has higher Gini (more mixed)
@@ -138,10 +134,6 @@ When we run this code, we'll see:
 Entropy measures "uncertainty" or "disorder" in a group. Lower entropy means more certainty about the class.
 
 ##### Shannon entropy for a label vector
-
-**Purpose:** Compare entropy to Gini on the same toy groups; entropy uses $-\sum p_k \log_2 p_k$ with a tiny epsilon for numerical safety.
-
-**Walkthrough:** Same `perfect_group` / `mixed_group` / `balanced_group` as the Gini demo.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -200,14 +192,6 @@ Balanced group entropy: 1.0000
 </aside>
 </div>
 
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Perfect group entropy: -0.0000
-Mixed group entropy: 1.5219
-Balanced group entropy: 1.0000
-```
-
 When we run this code, we'll see:
 - Perfect group has entropy = 0 (complete certainty)
 - Balanced group has higher entropy (more uncertainty)
@@ -218,10 +202,6 @@ When we run this code, we'll see:
 Let's visualize how these measures behave for different class distributions:
 
 ##### Plot Gini vs entropy for binary class probability $p$
-
-**Purpose:** Show both impurity curves peak at $p=0.5$ and hit zero at pure nodes—building intuition for split quality.
-
-**Walkthrough:** `gini_values` uses the two-class closed form; `entropy_values` uses the binary entropy formula along `p`.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -295,15 +275,6 @@ Entropy penalizes highly imbalanced splits slightly more than Gini.
 </aside>
 </div>
 
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-When the split is 50/50 (p=0.5), both measures show maximum impurity.
-When the split is pure (p=0 or p=1), both measures show zero impurity.
-Entropy penalizes highly imbalanced splits slightly more than Gini.
-```
-
 This visualization helps us understand that both measures:
 1. Reach their maximum when classes are evenly split (most impure/uncertain)
 2. Reach zero when only one class is present (pure/certain)
@@ -318,10 +289,6 @@ How does a decision tree find the best question to ask? It tries all possible fe
 Let's implement a simple version of this search:
 
 ##### Greedy search for one split (maximize information gain)
-
-**Purpose:** Tie together parent Gini, weighted child Gini, and information gain $= G_{\text{parent}} - G_{\text{weighted children}}$ over all feature/threshold pairs.
-
-**Walkthrough:** Nested loops over features and unique values; skip empty sides; `best_gain` picks the split with largest gain on this toy matrix.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -456,22 +423,6 @@ Right group (> threshold):
 </aside>
 </div>
 
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Best split: temperature <= 1
-Information gain: 0.1800
-
-Left group (≤ threshold):
-  Sample 3: temperature=1, class=bad
-
-Right group (> threshold):
-  Sample 1: temperature=3, class=good
-  Sample 2: temperature=2, class=good
-  Sample 4: temperature=4, class=bad
-  Sample 5: temperature=5, class=good
-```
-
 This example shows:
 1. How to calculate information gain for different splits
 2. How to find the best split across all features and thresholds
@@ -482,10 +433,6 @@ This example shows:
 Let's visualize the splitting process on a 2D dataset:
 
 ##### First split of a tree (`max_depth=1` stump)
-
-**Purpose:** Read the root split from `tree_.feature` / `tree_.threshold` and overlay it on the scatter; print parent/child Gini to quantify improvement.
-
-**Walkthrough:** `DecisionTreeClassifier(max_depth=1)` is a single split; vertical vs horizontal line uses `feature == 0` vs else.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -607,16 +554,6 @@ Gini impurity of right child: 0.0000
 </aside>
 </div>
 
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Best split: Feature 1 <= -0.2393
-Gini impurity before split: 0.5000
-Gini impurity of left child: 0.0740
-Gini impurity of right child: 0.0000
-```
-
 This visualization helps us see:
 1. Which feature the tree chose to split on first
 2. Where the threshold is placed
@@ -630,10 +567,6 @@ This visualization helps us see:
 Just like a tree in nature, we need to know when to stop growing our decision tree. Here are some common stopping rules:
 
 ##### Iris: train/test accuracy and tree size vs `max_depth`
-
-**Purpose:** Show the classic bias–variance tradeoff—training accuracy rises with depth while test accuracy may peak then drop.
-
-**Walkthrough:** Manual 70/30 shuffle; `tree_.node_count` and `n_leaves` quantify complexity; `argmax(test_scores)` picks a depth (use CV in practice).
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -779,17 +712,6 @@ Number of leaves at best depth: 8
 </aside>
 </div>
 
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Best maximum depth: 5
-Training accuracy at best depth: 1.0000
-Testing accuracy at best depth: 0.9556
-Number of nodes at best depth: 15
-Number of leaves at best depth: 8
-```
-
 This example demonstrates:
 
 1. **Maximum Depth**: Limits how deep the tree can grow
@@ -804,10 +726,6 @@ This example demonstrates:
 Let's also explore other stopping criteria:
 
 ##### `min_samples_split` and `min_samples_leaf` vs unrestricted tree
-
-**Purpose:** Compare regularization knobs that limit splits without fixing `max_depth` alone.
-
-**Walkthrough:** Uses same `X`/`y` Iris arrays; prints a table of train/test accuracy and tree size for each setting.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -920,24 +838,6 @@ Min Samples Leaf=20       0.9619     0.9333     5          3
 </aside>
 </div>
 
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Stopping Criteria Comparison:
-
-Criterion                 Train Acc  Test Acc   Nodes      Leaves    
------------------------------------------------------------------
-Unrestricted              1.0000     0.9556     15         8         
-Min Samples Split=2       1.0000     0.9556     15         8         
-Min Samples Split=5       0.9810     0.9111     11         6         
-Min Samples Split=10      0.9619     0.9333     9          5         
-Min Samples Split=20      0.9619     0.9333     9          5         
-Min Samples Leaf=1        1.0000     0.9556     15         8         
-Min Samples Leaf=5        0.9619     0.9333     9          5         
-Min Samples Leaf=10       0.9619     0.9333     9          5         
-Min Samples Leaf=20       0.9619     0.9333     5          3
-```
-
 This demonstrates two additional stopping criteria:
 
 1. **Minimum Samples Split**: The minimum number of samples required to split a node
@@ -953,10 +853,6 @@ This demonstrates two additional stopping criteria:
 ### 1. Overfitting
 
 ##### `make_moons`: shallow vs deep decision boundaries
-
-**Purpose:** Visualize underfitting (too shallow), a middle depth, and jagged overfitting on the same noisy data.
-
-**Walkthrough:** `plot_decision_boundary` overlays train/test accuracy in the corner; depths 2, 4, 10 are compared side by side.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -1070,10 +966,6 @@ Decision trees can help us identify which features are most important:
 
 ##### Wine dataset: `feature_importances_` bar chart
 
-**Purpose:** Use the tree’s impurity-based importance to rank physicochemical features for cultivar classification.
-
-**Walkthrough:** `argsort` descending; bar chart uses sorted feature names; top-5 print matches the figure.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -1160,18 +1052,6 @@ Top 5 most important features:
 </aside>
 </div>
 
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Top 5 most important features:
-1. proline: 0.3825
-2. od280/od315_of_diluted_wines: 0.3120
-3. flavanoids: 0.1414
-4. hue: 0.0838
-5. alcohol: 0.0473
-```
-
 This example demonstrates:
 1. How decision trees naturally assign importance to features
 2. How to identify which features are most useful for prediction
@@ -1182,12 +1062,6 @@ This example demonstrates:
 Try building a simple decision tree by hand:
 
 #### Exercise: Iris 2D scatter + candidate split counts (`5.2-dt-2-structure-exercise`)
-
-**Purpose:** Practice eyeballing splits on real data; the loop prints class histograms left/right for midpoints between sorted feature values.
-
-**Walkthrough:** Uses sepal length and petal length only; extend by computing Gini for each candidate in code.
-
-**Exercise:** `5.2-dt-2-structure-exercise` — compute Gini for each printed split and pick the best first split by hand or in code.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -1318,50 +1192,6 @@ Potential thresholds for petal length (cm):
   </div>
 </aside>
 </div>
-
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Exercise: Try building a decision tree by hand!
-1. What would be a good first split?
-2. Calculate the Gini impurity for each potential split
-3. Draw your decision tree on paper and test it
-
-Potential thresholds for sepal length (cm):
-  Split at 4.4:
-    Left:  [4 0 0] (total: 4)
-    Right: [46 50 50] (total: 146)
-  Split at 4.4:
-    Left:  [4 0 0] (total: 4)
-    Right: [46 50 50] (total: 146)
-  Split at 4.6:
-    Left:  [9 0 0] (total: 9)
-    Right: [41 50 50] (total: 141)
-  Split at 4.6:
-    Left:  [9 0 0] (total: 9)
-    Right: [41 50 50] (total: 141)
-  Split at 4.8:
-    Left:  [16  0  0] (total: 16)
-    Right: [34 50 50] (total: 134)
-
-Potential thresholds for petal length (cm):
-  Split at 1.0:
-    Left:  [1 0 0] (total: 1)
-    Right: [49 50 50] (total: 149)
-  Split at 1.2:
-    Left:  [4 0 0] (total: 4)
-    Right: [46 50 50] (total: 146)
-  Split at 1.2:
-    Left:  [4 0 0] (total: 4)
-    Right: [46 50 50] (total: 146)
-  Split at 1.4:
-    Left:  [24  0  0] (total: 24)
-    Right: [26 50 50] (total: 126)
-  Split at 1.4:
-    Left:  [24  0  0] (total: 24)
-    Right: [26 50 50] (total: 126)
-```
 
 This exercise lets you:
 1. Visualize a real dataset
