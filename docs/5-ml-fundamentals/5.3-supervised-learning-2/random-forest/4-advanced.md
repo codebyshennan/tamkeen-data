@@ -1,3 +1,11 @@
+---
+reading_minutes: 30
+objectives:
+  - "Use `ExtraTreesClassifier` / `ExtraTreesRegressor` and recognise when extra randomization helps over standard random forests."
+  - "Handle class imbalance with `class_weight`, `sample_weight`, and resampling strategies (e.g., SMOTE) inside a forest pipeline."
+  - "Plug a random forest into a serving pipeline — estimate model size, run batch inference, and persist with pickle/joblib."
+---
+
 # Advanced Random Forest Techniques
 
 **After this lesson:** you can explain the core ideas in “Advanced Random Forest Techniques” and reproduce the examples here in your own notebook or environment.

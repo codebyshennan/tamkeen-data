@@ -1,3 +1,11 @@
+---
+reading_minutes: 20
+objectives:
+  - "Walk through bootstrap aggregating (bagging) with replacement and explain how it reduces variance compared with a single tree."
+  - "Compute Gini impurity / entropy at a split, and understand why limiting `max_features` decorrelates trees."
+  - "Read out-of-bag (OOB) error as a free validation estimate, and rank features with Mean Decrease in Impurity vs Permutation Importance."
+---
+
 # Mathematical Foundation of Random Forest
 
 **After this lesson:** you can explain the core ideas in “Mathematical Foundation of Random Forest” and reproduce the examples here in your own notebook or environment.

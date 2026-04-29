@@ -1,3 +1,11 @@
+---
+reading_minutes: 25
+objectives:
+  - "Build random-forest baselines for tabular problems in finance, healthcare, and marketing — and use feature importance to explain predictions to stakeholders."
+  - "Use a forest as a *feature screen* before training a more expensive model (e.g., gradient boosting or neural network)."
+  - "Recognise when a boosted ensemble would beat a forest on the same data, and when it wouldn't."
+---
+
 # Real-World Applications of Random Forest
 
 **After this lesson:** you can explain the core ideas in “Real-World Applications of Random Forest” and reproduce the examples here in your own notebook or environment.

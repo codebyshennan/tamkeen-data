@@ -1,3 +1,11 @@
+---
+reading_minutes: 15
+objectives:
+  - "Define a random forest as bagged decision trees with random feature subsets at each split, and explain why decorrelated trees lower variance."
+  - "Identify problems where random forests excel (tabular data with mixed types, when interpretable feature importance is wanted) and their limits (very high-dimensional sparse data, extrapolation outside the training range)."
+  - "Anticipate trade-offs vs a single tree (stronger generalisation, more memory, slower inference)."
+---
+
 # Introduction to Random Forest
 
 **After this lesson:** you can explain the core ideas in “Introduction to Random Forest” and reproduce the examples here in your own notebook or environment.
