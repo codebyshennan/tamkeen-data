@@ -1,3 +1,12 @@
+---
+reading_minutes: 5
+objectives:
+  - "Walk through Lloyd's algorithm: assign each point to the nearest centroid, recompute centroids, repeat until labels stabilise."
+  - "State when k-means is a reasonable choice (roughly spherical clusters of similar size, k known in advance) and when it isn't."
+  - "Use `KMeans(n_clusters=k, random_state=...)` and read `labels_`, `cluster_centers_`, and `inertia_` from the fitted estimator."
+  - "Recognise common pitfalls: random-seed sensitivity, unscaled features dominating distance, and inertia decreasing monotonically with k."
+---
+
 # K-means Clustering
 
 **After this lesson:** you can explain the core ideas in “K-means Clustering” and reproduce the examples here in your own notebook or environment.
