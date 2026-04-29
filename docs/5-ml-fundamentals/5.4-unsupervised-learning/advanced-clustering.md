@@ -1,3 +1,12 @@
+---
+reading_minutes: 25
+objectives:
+  - "Pick the right tool when k-means / DBSCAN fall short — HDBSCAN for varying density, GMM for soft / overlapping clusters, spectral for non-convex shapes."
+  - "Read GMM outputs as soft membership: use `predict_proba` for cluster confidence and remember `n_components` is a Gaussian count, not a true cluster count."
+  - "Tune HDBSCAN's `min_cluster_size` and `min_samples` with silhouette score, excluding `-1` noise points before scoring."
+  - "Recognise the practical edges: spectral clustering's O(n²) memory wall, GMM convergence collapse without `reg_covar`, and why naive label-vote ensembles fail."
+---
+
 # Advanced Clustering Techniques
 
 **After this lesson:** you can explain the core ideas in “Advanced Clustering Techniques” and reproduce the examples here in your own notebook or environment.
