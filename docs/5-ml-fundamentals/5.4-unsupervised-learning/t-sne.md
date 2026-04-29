@@ -1,3 +1,12 @@
+---
+reading_minutes: 6
+objectives:
+  - "Describe t-SNE as a neighbour-preserving 2D embedding — what it shows (local structure) and what it deliberately distorts (cluster sizes and inter-cluster distances)."
+  - "Pick a `perplexity` appropriate to dataset size and read `kl_divergence_` after fitting to spot unconverged runs."
+  - "Run `TSNE(n_components=2, perplexity=..., random_state=...).fit_transform(X)` on scaled data and visualise the embedding."
+  - "Avoid common over-interpretations and remember that sklearn's `TSNE` has no `transform`, so new points cannot be embedded without refitting."
+---
+
 # t-SNE (t-Distributed Stochastic Neighbor Embedding)
 
 **After this lesson:** you can explain the core ideas in “t-SNE (t-Distributed Stochastic Neighbor Embedding)” and reproduce the examples here in your own notebook or environment.
