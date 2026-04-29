@@ -1,3 +1,12 @@
+---
+reading_minutes: 6
+objectives:
+  - "Describe DBSCAN's core / border / noise classification and how `eps` and `min_samples` shape the result."
+  - "Identify when density clustering beats k-means: arbitrary cluster shapes, varying cluster counts, and explicit outlier handling."
+  - "Run `DBSCAN(eps=..., min_samples=...).fit_predict(X)` on scaled data and interpret the `-1` noise label."
+  - "Diagnose the two common failure modes — everything-noise and one-giant-cluster — using a k-distance plot to set `eps`."
+---
+
 # DBSCAN (Density-Based Spatial Clustering)
 
 **After this lesson:** you can explain the core ideas in “DBSCAN (Density-Based Spatial Clustering)” and reproduce the examples here in your own notebook or environment.
