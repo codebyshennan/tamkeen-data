@@ -1,3 +1,11 @@
+---
+reading_minutes: 15
+objectives:
+  - "Define regularization as a penalty on model complexity that trades a little bias for less variance, tying back to the bias-variance picture from 5.1."
+  - "Distinguish L1 (Lasso, sparsity), L2 (Ridge, shrinkage), and Elastic Net (a mix), and pick which to use for a given problem."
+  - "Recognise other regularizers in everyday use — tree depth limits, early stopping, dropout — as the same idea applied to different model families."
+---
+
 # Introduction to Regularization
 
 **After this lesson:** you can explain the core ideas in “Introduction to Regularization” and reproduce the examples here in your own notebook or environment.

@@ -1,3 +1,11 @@
+---
+reading_minutes: 25
+objectives:
+  - "Fit `Ridge`, `Lasso`, and `ElasticNet` from sklearn inside a `Pipeline` with `StandardScaler` and a held-out split."
+  - "Use `RidgeCV` / `LassoCV` / `ElasticNetCV` to pick `alpha` (and the L1/L2 mix) automatically."
+  - "Read Lasso coefficient paths to drop unimportant features and produce a sparser, faster model."
+---
+
 # Implementing Regularization
 
 **After this lesson:** you can explain the core ideas in “Implementing Regularization” and reproduce the examples here in your own notebook or environment.
@@ -19,9 +27,6 @@ Crash Course AI: supervised learning framing (~15 min).
 Let's start with a basic example that shows how to implement Ridge Regression, one of the most common regularization techniques.
 
 #### Ridge on scaled features (regression)
-
-- **Purpose:** Fit **L2-penalized** linear regression after **`StandardScaler`** so penalties apply fairly across feature scales.
-- **Walkthrough:** `alpha` controls penalty strength; predictions use **`X_test_scaled`** with the **fitted** scaler.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -78,9 +83,6 @@ y_pred = ridge.predict(X_test_scaled)
 Let's look at a more practical example that you might encounter in the real world - predicting house prices.
 
 #### Compare Lasso, Ridge, ElasticNet coefficients
-
-- **Purpose:** On the **same scaled** train/test split, compare **$R^2$**, **RMSE**, and **coefficient vectors**—L1 may zero noisy columns.
-- **Walkthrough:** Bar chart overlays coefficients per feature; requires **`Ridge`**, **`Lasso`**, **`ElasticNet`** and **`numpy`** for vector math.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -276,9 +278,6 @@ Finding the right regularization strength (alpha) is like finding the right amou
 
 #### `GridSearchCV` for `Ridge` `alpha`
 
-- **Purpose:** Pick **`alpha`** by **5-fold CV** on **negative MSE** (maximize implied RMSE reduction).
-- **Walkthrough:** Uses **`X_train`**, **`y_train`** from the house-pricing cell (already scaled features).
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -338,9 +337,6 @@ Best alpha: 1
 Lasso regularization is particularly good at feature selection - it's like having a strict teacher who helps you focus on the most important subjects.
 
 #### Nonzero Lasso coefficients as feature selection
-
-- **Purpose:** List features whose **Lasso** coefficients remain nonzero at a given **`alpha`**—a simple embedded selector.
-- **Walkthrough:** Expects **`X`** as a **`DataFrame`** with column names; uses training labels **`y_train`**.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -420,9 +416,6 @@ noise_feature2: 2136.7192
 Cross-validation is like taking multiple tests to ensure you really understand the material, not just memorizing the answers.
 
 #### CV RMSE vs `alpha` for three linear models
-
-- **Purpose:** Sweep **`alpha`** and compare **5-fold neg-MSE** → RMSE for **Ridge**, **Lasso**, and **ElasticNet** on the same `(X, y)`.
-- **Walkthrough:** Uses **`X_scaled`** and **`y`** from the house example; returns a **`DataFrame`** for quick plotting.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -523,9 +516,6 @@ Evaluating your model is like checking your work after solving a problem - it he
 
 #### Train vs test $R^2$, RMSE, sparsity
 
-- **Purpose:** Summarize **fit vs generalization** and count **nonzero weights** for interpretability.
-- **Walkthrough:** Works for **linear** models with **`coef_`**; uses **`r2_score`** and **`mean_squared_error`**.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -591,9 +581,6 @@ def evaluate_regularized_model(model, X_train, X_test, y_train, y_test):
 Always scale your features before applying regularization. This is like converting different currencies to a common standard before comparing them.
 
 #### Fit `StandardScaler` on feature matrix
-
-- **Purpose:** Reminder snippet: **fit** scaler on training data only; here `X` stands in for the full design matrix before splitting.
-- **Walkthrough:** In production, call **`fit_transform`** on train and **`transform`** on test.
 
 ```python
 from sklearn.preprocessing import StandardScaler

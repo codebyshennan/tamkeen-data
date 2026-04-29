@@ -1,3 +1,11 @@
+---
+reading_minutes: 20
+objectives:
+  - "Combine adaptive regularization (Adaptive Lasso, group lasso) with stratified or grouped cross-validation when groups in the data should be respected."
+  - "Apply dropout and weight decay in neural networks, and explain why dropout's masking behaves like noisy ensembling."
+  - "Decide when to *combine* regularizers (e.g., L2 + dropout in a deep model) and when one is enough."
+---
+
 # Advanced Regularization Techniques
 
 **After this lesson:** you can explain the core ideas in “Advanced Regularization Techniques” and reproduce the examples here in your own notebook or environment.

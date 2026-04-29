@@ -1,3 +1,11 @@
+---
+reading_minutes: 25
+objectives:
+  - "Apply regularized linear models in high-dimensional, noisy settings — credit risk, gene expression, marketing-mix modelling — where plain OLS over-fits."
+  - "Use Lasso to do feature selection in a real workflow, then retrain a denser model on the kept features."
+  - "Calibrate regularization strength against business cost: too much regularization underfits real signal; too little chases noise."
+---
+
 # Real-World Applications of Regularization
 
 **After this lesson:** you can explain the core ideas in “Real-World Applications of Regularization” and reproduce the examples here in your own notebook or environment.
