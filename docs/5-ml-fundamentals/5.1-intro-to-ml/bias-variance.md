@@ -1,3 +1,12 @@
+---
+reading_minutes: 30
+objectives:
+  - Name the failure mode (high bias vs high variance) from a learning curve and a train/validation gap.
+  - Pick a corrective lever — polynomial features, more data, regularization, or pruning — that targets the right side of the tradeoff.
+  - Use cross-validation, grid search, and validation curves to compare hyperparameters without peeking at the test set.
+  - Avoid the standard pitfalls (tuning on the test set, judging by training accuracy, mistaking a small gap at low scores for a good fit).
+---
+
 # Understanding Bias and Variance in Machine Learning
 
 **After this lesson:** you can explain the core ideas in “Understanding Bias and Variance in Machine Learning” and reproduce the examples here in your own notebook or environment.
@@ -30,10 +39,6 @@ In machine learning, we face similar challenges. Understanding bias and variance
 ## What are Bias and Variance?
 
 {% include mermaid-diagram.html src="5-ml-fundamentals/5.1-intro-to-ml/diagrams/bias-variance-1.mmd" %}
-
-> **Figure (add screenshot or diagram):** The classic dart-board analogy — four panels: low bias/low variance (tight cluster on bullseye), low bias/high variance (spread around bullseye), high bias/low variance (tight cluster off-centre), high bias/high variance (spread and off-centre).
-
-> **Figure (add screenshot or diagram):** The classic bias-variance tradeoff U-curve — x-axis is model complexity, y-axis is error; training error decreases monotonically while test error forms a U-shape, with the sweet spot labeled at the minimum test error and the underfitting/overfitting zones annotated on each side.
 
 ### Bias: The Consistent Mistake
 
@@ -101,8 +106,6 @@ The image above shows three scenarios:
 
 Learning curves are like progress reports for your model. They show how well your model is learning and whether it's learning the right things.
 
-> **Figure (add screenshot or diagram):** Three learning curve plots side by side: (1) High Bias — both training and CV scores are low and converge near each other at a low value; (2) Good Fit — scores converge near a high value with a small gap; (3) High Variance — training score is high but CV score is much lower, with a persistent gap even at large training set sizes.
-
 - **Training Score**: How well the model performs on the data it's seen (like a student's performance on practice tests)
 - **Cross-validation Score**: How well the model performs on new data (like a student's performance on the actual exam)
 
@@ -136,10 +139,6 @@ Learning curves are like progress reports for your model. They show how well you
 Think of high bias like trying to predict the weather using only temperature. You're missing important factors like humidity and wind speed. Here's how to fix it:
 
 1. **Increase Model Complexity**
-
-   **Purpose:** Reduce underfitting by letting the decision boundary bend (polynomial features) when the relationship is nonlinear.
-
-   **Walkthrough:** `PolynomialFeatures` expands inputs; `LinearRegression` on `X_poly` fits a curve; swap in your real `X` / `y` from the notebook.
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
@@ -201,10 +200,6 @@ Think of high bias like trying to predict the weather using only temperature. Yo
 
 2. **Add More Features**
 
-   **Purpose:** Inject domain knowledge via interactions and derived columns so a linear or additive model can represent more than one raw input.
-
-   **Walkthrough:** `add_interactions` is illustrative—`calculate_distance` must be defined elsewhere or replaced with a real geo feature.
-
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
 
@@ -251,10 +246,6 @@ Think of high bias like trying to predict the weather using only temperature. Yo
 
 3. **Reduce Regularization**
 
-   **Purpose:** When Ridge/Lasso penalty is too strong, sweep smaller `alpha` values to let coefficients grow and reduce bias.
-
-   **Walkthrough:** Loop prints validation `score` per `alpha`; pick the best without peeking at the test set.
-
    ```python
    # Regularization is like putting training wheels on your model
    # Sometimes we need to take them off
@@ -278,10 +269,6 @@ Think of high variance like a student who memorizes every detail of their notes 
    - Like showing more examples of cats to help someone learn what makes a cat a cat
 
 2. **Reduce Model Complexity**
-
-   **Purpose:** Constrain tree depth and leaf size to lower variance when the forest memorizes noise.
-
-   **Walkthrough:** Compare `max_depth`, `min_samples_leaf`, and `n_estimators` settings side by side on the same split.
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
@@ -338,10 +325,6 @@ Think of high variance like a student who memorizes every detail of their notes 
 
 3. **Add Regularization**
 
-   **Purpose:** Use L1 (`Lasso`) to shrink some coefficients to zero—automatic feature selection plus variance control.
-
-   **Walkthrough:** Nonzero entries in `model.coef_` after `fit` show which columns survived at this `alpha`.
-
    ```python
    # Regularization helps prevent overfitting
    from sklearn.linear_model import Lasso
@@ -356,10 +339,6 @@ Think of high variance like a student who memorizes every detail of their notes 
    ```
 
 4. **Feature Selection**
-
-   **Purpose:** Drop weak inputs so the model cannot fit spurious patterns in irrelevant columns.
-
-   **Walkthrough:** `SelectKBest` scores features against `y`; `get_support` maps back to original column names.
 
    ```python
    # Sometimes less is more
@@ -383,10 +362,6 @@ Think of model tuning like tuning a guitar - you need to adjust each string (par
 Cross-validation is like taking multiple practice tests before the real exam. It helps ensure your model's performance is reliable.
 
 #### Cross-validate and plot fold scores
-
-**Purpose:** Estimate mean performance and variability across folds—wider spread suggests higher variance or unstable data splits.
-
-**Walkthrough:** `cross_val_score` returns one score per fold; the horizontal red line marks the mean for quick eyeballing.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -459,10 +434,6 @@ scores = evaluate_model(model, X, y)
 Grid search is like trying different combinations of ingredients to find the perfect recipe. It systematically tries different parameter combinations to find the best one.
 
 #### Grid-search hyperparameters with nested CV scoring
-
-**Purpose:** Jointly tune forest depth, tree count, and split thresholds while guarding against lucky single splits via `cv=5`.
-
-**Walkthrough:** `best_params_` / `best_score_` come from inner CV; the heatmap pivots `cv_results_`—requires `pandas` and `seaborn` in the environment.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -554,10 +525,6 @@ plt.show()
 Validation curves help you understand how your model behaves as you change a single parameter. It's like testing how a car performs at different speeds.
 
 #### Validation curve for one hyperparameter
-
-**Purpose:** Separate bias and variance contributions of a single knob (here `max_depth`): training vs CV gap shows overfitting onset.
-
-**Walkthrough:** `validation_curve` fixes other params on `model`; shaded bands are $\pm$1 std across folds.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">

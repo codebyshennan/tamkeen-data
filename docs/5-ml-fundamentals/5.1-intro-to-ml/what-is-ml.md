@@ -1,3 +1,12 @@
+---
+reading_minutes: 15
+objectives:
+  - Distinguish supervised, unsupervised, and reinforcement learning by example.
+  - Outline the seven-step machine-learning lifecycle from problem definition to deployment.
+  - Recognise the bias–variance tradeoff and read learning curves to diagnose under- and overfitting at a glance.
+  - Run a four-line sklearn `fit`/`predict` loop on toy data to anchor the supervised-learning idea in code.
+---
+
 # Introduction to Machine Learning
 
 **After this lesson:** you can explain the core ideas in “Introduction to Machine Learning” and reproduce the examples here in your own notebook or environment.
@@ -22,8 +31,6 @@ Crash Course AI: how supervised learning fits into ML workflows.
 
 Machine Learning (ML) is a way to teach computers to learn from experience without being explicitly programmed. Instead of writing detailed rules for every situation, we show the computer examples and let it figure out the patterns on its own.
 
-> **Figure (add screenshot or diagram):** Side-by-side comparison of Traditional Programming (rules + data → output) versus Machine Learning (data + output → rules learned automatically) — two flowchart boxes with contrasting arrows.
-
 ### The Key Difference
 
 - **Traditional Programming**: We write specific rules (program) to convert input into output
@@ -39,8 +46,6 @@ There are three main types of machine learning:
 
 In supervised learning, we provide the computer with labeled examples to learn from. It's like learning with a teacher who shows you the correct answers.
 
-> **Figure (add screenshot or diagram):** Three supervised learning examples side by side: a labeled email dataset with Spam/Not Spam tags, a house price regression scatter plot, and an image with bounding-box labels — each showing the labeled training data concept.
-
 **Examples:**
 
 - Predicting house prices based on features (size, location, etc.)
@@ -50,8 +55,6 @@ In supervised learning, we provide the computer with labeled examples to learn f
 ### 2. Unsupervised Learning
 
 In unsupervised learning, we let the computer find patterns in data without providing labels. It's like discovering groups or patterns naturally.
-
-> **Figure (add screenshot or diagram):** Scatter plot of unlabeled customer data points that separate into three visible clusters (colored differently), representing k-means or GMM finding structure without labels.
 
 **Examples:**
 
@@ -73,8 +76,6 @@ In reinforcement learning, an agent learns by interacting with an environment an
 
 The process of building a machine learning solution follows a systematic workflow:
 
-> **Figure (add screenshot or diagram):** Circular workflow diagram showing the 7-step ML process: Problem Definition → Data Collection → Data Preparation → Model Selection → Model Training → Evaluation → Deployment → (back to Problem Definition), with numbered arrows connecting each stage.
-
 1. **Problem Definition**: Clearly define what you want to achieve
 2. **Data Collection**: Gather relevant data
 3. **Data Preparation**: Clean and prepare the data
@@ -89,8 +90,6 @@ The process of building a machine learning solution follows a systematic workflo
 
 One of the fundamental challenges in machine learning is finding the right balance between bias and variance:
 
-> **Figure (add screenshot or diagram):** The classic bias-variance tradeoff curve — x-axis is model complexity, y-axis is error; two U-shaped curves for training error and test error crossing, marking the sweet spot, and the underfitting zone (left) vs overfitting zone (right) labeled.
-
 - **Underfitting (High Bias)**: Model is too simple and misses important patterns
 - **Good Fit**: Model captures the underlying patterns well
 - **Overfitting (High Variance)**: Model is too complex and captures noise in the data
@@ -98,8 +97,6 @@ One of the fundamental challenges in machine learning is finding the right balan
 ### Learning Curves
 
 Learning curves help us understand how well our model is learning:
-
-> **Figure (add screenshot or diagram):** Two learning curve plots side by side: one showing an underfitting model (both training and CV scores low and converging near the same low value) and one showing an overfitting model (training score high, CV score much lower with a persistent gap).
 
 - **Training Score**: How well the model performs on training data
 - **Cross-validation Score**: How well the model performs on new, unseen data
@@ -118,10 +115,6 @@ To get started with machine learning, you should have:
 
 #### Core imports used across ML notebooks
 
-**Purpose:** Recognize the usual Python stack for numeric data, modeling, and plots so you can read later lessons without getting stuck on imports.
-
-**Walkthrough:** `numpy` / `pandas` for arrays and tables; `sklearn` for estimators and metrics; `matplotlib.pyplot` for quick plots.
-
 ```python
 import numpy as np        # For numerical computations
 import pandas as pd       # For data manipulation
@@ -129,14 +122,9 @@ import sklearn           # For machine learning algorithms
 import matplotlib.pyplot as plt  # For visualization
 ```
 
-
 ### Simple Example: Predicting House Prices
 
 #### Fit a linear model on toy house data
-
-**Purpose:** See the full supervised-learning loop in miniature: features `X`, target `y`, `fit`, then `predict` for a new input.
-
-**Walkthrough:** `LinearRegression` learns coefficients from `sizes` → `prices`; `predict` extrapolates to 1750 sq ft.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -167,7 +155,6 @@ print(f"Predicted price for {new_size[0][0]} sq ft: ${predicted_price[0]:,.2f}")
 Predicted price for 1750 sq ft: $350,000.00
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-5" data-tint="1">
@@ -190,12 +177,6 @@ Predicted price for 1750 sq ft: $350,000.00
   </div>
 </aside>
 </div>
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Predicted price for 1750 sq ft: $350,000.00
-```
 
 ## Gotchas
 

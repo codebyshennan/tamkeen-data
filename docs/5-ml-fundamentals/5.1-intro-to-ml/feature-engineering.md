@@ -1,3 +1,12 @@
+---
+reading_minutes: 30
+objectives:
+  - Identify a feature as numerical (continuous/discrete), categorical (nominal/ordinal), temporal, or text and pick the right preprocessing.
+  - Apply `StandardScaler` and `MinMaxScaler` correctly — fit on training data only, transform both train and test.
+  - One-hot encode nominal categories with `pd.get_dummies` and reserve label encoding for ordinals with a real order.
+  - Avoid the common pitfalls (fitting before splitting, false ordering on nominals, high-cardinality blow-up).
+---
+
 # Feature Engineering in Machine Learning: A Beginner's Guide
 
 **After this lesson:** you can explain the core ideas in “Feature Engineering in Machine Learning: A Beginner's Guide” and reproduce the examples here in your own notebook or environment.
@@ -124,10 +133,6 @@ Where:
 
 #### Standardize numeric columns with `StandardScaler`
 
-**Purpose:** See how z-score scaling shifts features to mean 0 and variance 1, and how scatter plots change relative spread (not the relationship shape).
-
-**Walkthrough:** `fit_transform` on `df` learns $\mu$ and $\sigma$ per column; `pd.DataFrame` restores column names for plotting.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -206,7 +211,6 @@ Scaled Data:
 4   1.414214   1.414214
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-7" data-tint="1">
@@ -248,27 +252,6 @@ Scaled Data:
 </aside>
 </div>
 
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Original Data:
-   height_cm  weight_kg
-0        150         45
-1        160         55
-2        170         65
-3        180         75
-4        190         85
-
-Scaled Data:
-   height_cm  weight_kg
-0  -1.414214  -1.414214
-1  -0.707107  -0.707107
-2   0.000000   0.000000
-3   0.707107   0.707107
-4   1.414214   1.414214
-```
-
 #### Min-Max Scaling
 
 This is like converting a temperature range to a 0-1 scale. It's useful when you need all values to be between 0 and 1.
@@ -285,10 +268,6 @@ Where:
 **Real-world analogy**: It's like converting a test score to a percentage (0-100%)
 
 #### Map features into the `[0, 1]` range with `MinMaxScaler`
-
-**Purpose:** Compare standard scaling with min–max scaling when you need bounded inputs (e.g., neural nets) or interpretable 0–1 magnitudes.
-
-**Walkthrough:** Same `df` as before; `MinMaxScaler` squeezes each column between min and max of the training set.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -344,7 +323,6 @@ Min-Max Scaled Data:
 4       1.00       1.00
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-8" data-tint="1">
@@ -376,20 +354,6 @@ Min-Max Scaled Data:
   </div>
 </aside>
 </div>
-
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-
-Min-Max Scaled Data:
-   height_cm  weight_kg
-0       0.00       0.00
-1       0.25       0.25
-2       0.50       0.50
-3       0.75       0.75
-4       1.00       1.00
-```
 
 ### When to Use Which Scaling Method?
 
@@ -423,10 +387,6 @@ Think of this like creating separate sections in your store for each category. I
 **Real-world analogy**: It's like having separate checkboxes for each size (S, M, L) instead of one dropdown menu
 
 #### One-hot encode nominal columns with `pd.get_dummies`
-
-**Purpose:** Turn categorical columns into binary columns so linear models and tree ensembles can consume them without assuming a fake ordering.
-
-**Walkthrough:** `get_dummies` expands `product` and `size`; the bar chart compares category counts before vs summed indicator columns after.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -496,7 +456,6 @@ One-Hot Encoded Data:
 4           True          False          False   False   False    True
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-10" data-tint="1">
@@ -529,27 +488,6 @@ One-Hot Encoded Data:
 </aside>
 </div>
 
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-Original Data:
-  product size
-0   shirt    S
-1   pants    M
-2   shoes    L
-3   shirt    M
-4   pants    S
-
-One-Hot Encoded Data:
-   product_pants  product_shirt  product_shoes  size_L  size_M  size_S
-0          False           True          False   False   False    True
-1           True          False          False   False    True   False
-2          False          False           True    True   False   False
-3          False           True          False   False    True   False
-4           True          False          False   False   False    True
-```
-
 #### Label Encoding: Assigning Numbers to Categories
 
 This is like giving each category a unique number. It's simpler than one-hot encoding but works best when categories have a natural order.
@@ -557,10 +495,6 @@ This is like giving each category a unique number. It's simpler than one-hot enc
 **Real-world analogy**: It's like assigning numbers to race positions (1st, 2nd, 3rd)
 
 #### Integer codes for categories with `LabelEncoder`
-
-**Purpose:** Use when order is meaningful or tree models will split on integer codes; know that ordinals can be misused for nominal data (false ordering).
-
-**Walkthrough:** Separate `LabelEncoder` per column; `fit_transform` maps each string category to an integer in arbitrary order—check `classes_` when interpreting.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -613,7 +547,6 @@ Label Encoded Data:
 4   pants                0    S             2
 ```
 
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-6" data-tint="1">
@@ -645,20 +578,6 @@ Label Encoded Data:
   </div>
 </aside>
 </div>
-
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-
-Label Encoded Data:
-  product  product_encoded size  size_encoded
-0   shirt                1    S             2
-1   pants                0    M             1
-2   shoes                2    L             0
-3   shirt                1    M             1
-4   pants                0    S             2
-```
 
 ### When to Use Which Encoding Method?
 

@@ -1,3 +1,13 @@
+---
+reading_minutes: 35
+objectives:
+  - Translate a business question into a problem statement that names goal, type, metric, data needs, and success criteria.
+  - Run a data audit (shape, dtypes, missingness, target distribution, correlation heatmap) before any modeling.
+  - Apply a reusable cleaning pattern (median/mode imputation, z-score outlier filtering) without leaking test statistics.
+  - Compare baseline regressors with a single MAE/R² helper on a held-out validation fold.
+  - Persist the model, scaler, and feature list together so inference reconstructs the training pipeline exactly.
+---
+
 # Machine Learning Workflow: A Step-by-Step Guide
 
 **After this lesson:** you can explain the core ideas in “Machine Learning Workflow: A Step-by-Step Guide” and reproduce the examples here in your own notebook or environment.
@@ -21,8 +31,6 @@ Crash Course AI: how supervised learning fits into ML workflows.
 ## What is a Machine Learning Workflow?
 
 A machine learning workflow is a systematic process that helps us build effective ML solutions. Think of it as a recipe for creating machine learning models. Just like a recipe has specific steps to follow, the ML workflow has clear stages that help us build better models.
-
-> **Figure (add screenshot or diagram):** Linear diagram of the 6-step ML workflow — Problem Definition → Data Collection → Data Preparation → Model Training → Evaluation → Deployment — with feedback arrows from Evaluation back to Data Preparation and from Deployment back to Problem Definition.
 
 ## Why is a Workflow Important?
 
@@ -89,10 +97,6 @@ Let's look at a concrete example:
 
 #### Document the problem before writing modeling code
 
-**Purpose:** Practice writing a short problem spec (goal, problem type, metric, data needs, business impact) so downstream choices stay aligned with the task.
-
-**Walkthrough:** The triple-quoted string is documentation only—running it prints the same text via stdout in the build pipeline.
-
 ```python
 """
 Problem Statement Example:
@@ -102,18 +106,6 @@ Success Metric: Predictions within $50,000 of actual price
 Required Data: House features (size, location, etc.)
 Business Impact: Help real estate agents price houses accurately
 """
-```
-
-**Captured stdout** (from running the snippet above; may be auto-injected on build):
-
-```
-
-Problem Statement Example:
-Goal: Predict house prices
-Type: Regression problem
-Success Metric: Predictions within $50,000 of actual price
-Required Data: House features (size, location, etc.)
-Business Impact: Help real estate agents price houses accurately
 ```
 
 ## 2. Data Collection and Exploration
@@ -127,10 +119,6 @@ Before we can build a model, we need to understand our data. This is like gettin
 Let's start by loading and examining our data:
 
 #### Load CSV and inspect shape, dtypes, and missing values
-
-**Purpose:** Know how to sanity-check a new dataset: dimensions, column types, missingness, and `describe()` for numeric ranges.
-
-**Walkthrough:** Adjust `house_data.csv` to your path; `isnull().sum()` counts gaps per column before imputation.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -182,10 +170,6 @@ print(df.describe())
 EDA helps us understand patterns and relationships in our data:
 
 #### Visualize the target and feature correlations
-
-**Purpose:** Connect EDA to modeling—distribution of `price` and a correlation heatmap highlight skew, outliers, and redundant features.
-
-**Walkthrough:** `histplot` for univariate shape; `heatmap` on `df.corr()` for linear relationships (nonlinear links may still hide).
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -242,10 +226,6 @@ Data preparation is like preparing ingredients for cooking. We need to clean and
 Let's create a helper class to clean our data:
 
 #### Encapsulate imputation and outlier clipping
-
-**Purpose:** See a reusable cleaning pattern: median/mode imputation by dtype, then z-score filtering on a chosen column.
-
-**Walkthrough:** `select_dtypes` splits numeric vs object columns; `remove_outliers` keeps rows within `n_std` standard deviations of the mean for one column.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -335,10 +315,6 @@ Feature engineering is about creating new features that might help our model:
 
 #### Derive ratios, totals, and one-hot encodings
 
-**Purpose:** Practice turning domain ideas (price per sqft, room counts, renovation flag) into columns models can use; encode categoricals with `get_dummies`.
-
-**Walkthrough:** `price_per_sqft` and `total_rooms` combine existing fields; `get_dummies` expands `view` and `condition` into binary columns.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -392,10 +368,6 @@ We need to split our data to evaluate our model properly. Think of it as having 
 
 #### Train / validation / test split for honest evaluation
 
-**Purpose:** Reserve held-out data for final evaluation while keeping a validation fold for model comparison and tuning.
-
-**Walkthrough:** First `train_test_split` peels off 30% as `X_temp`/`y_temp`; second split halves that into validation and test (15% each of original when sizes match).
-
 ```python
 from sklearn.model_selection import train_test_split
 
@@ -413,10 +385,6 @@ X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.5, r
 Let's try different models to find the best one:
 
 #### Compare baselines with the same MAE / R² reporting
-
-**Purpose:** Train several regressors with one evaluation helper so you compare on validation MAE and R² without copy-paste bugs.
-
-**Walkthrough:** `train_evaluate_model` fits each model, predicts train and val sets, then packs `mean_absolute_error` and `r2_score` into a dict; the loop fills `results` per model name.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -499,10 +467,6 @@ Evaluation helps us understand how well our model performs and where it needs im
 
 #### Metrics plus an actual-vs-predicted scatter on the test set
 
-**Purpose:** Report error scalars (MAE, RMSE, R²) and visualize systematic bias or heteroscedasticity in residuals via a scatter plot.
-
-**Walkthrough:** `mean_squared_error` with `sqrt` gives RMSE; the red diagonal line is perfect calibration.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -574,10 +538,6 @@ Learning curves help us understand if our model is learning well:
 
 #### Plot learning curves to spot under- vs overfitting
 
-**Purpose:** See whether adding training data would help (large gap) or the model is too simple (both curves low).
-
-**Walkthrough:** `learning_curve` returns scores per train size; plotting mean train vs mean CV score shows the bias–variance story.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -637,10 +597,6 @@ Deployment makes our model available for real-world use. It's like opening a res
 
 #### Persist estimator and preprocessing artifacts
 
-**Purpose:** Serialize the trained model and related objects so scoring code can reload the exact same pipeline later.
-
-**Walkthrough:** `joblib.dump` writes binary blobs under `model/`; paths are illustrative—match your deployment layout.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -687,10 +643,6 @@ save_model(best_model, scaler, X.columns)
 ### Making Predictions
 
 #### Load artifacts and score new rows
-
-**Purpose:** Show the inference path: load model + scaler + feature list, align columns, transform, then `predict`.
-
-**Walkthrough:** Column order must match training; `scaler.transform` expects the same feature matrix shape the scaler saw at fit time.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
