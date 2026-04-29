@@ -1,3 +1,12 @@
+---
+reading_minutes: 18
+objectives:
+  - "Compare t-SNE and UMAP on what they preserve (local neighbourhoods) and how they differ on speed, global structure, and `transform` support for new points."
+  - "Preprocess high-dimensional data before either method: scale, then optionally PCA down to ~50 dimensions to cut runtime and noise."
+  - "Run both on the same data and tune key parameters — `perplexity` for t-SNE, `n_neighbors` / `min_dist` for UMAP — by checking visual stability across seeds."
+  - "Avoid over-interpreting embeddings: cluster sizes and inter-cluster distances are not meaningful, and UMAP can find structure even in pure noise."
+---
+
 # t-SNE and UMAP: Visualizing Complex Data in 2D
 
 **After this lesson:** you can explain the core ideas in “t-SNE and UMAP: Visualizing Complex Data in 2D” and reproduce the examples here in your own notebook or environment.
