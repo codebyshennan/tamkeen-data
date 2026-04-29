@@ -1,3 +1,11 @@
+---
+reading_minutes: 20
+objectives:
+  - "Diagnose vanishing and exploding gradients from training-loss curves and gradient norms, and pick the right mitigation (ReLU, Xavier/He init, batch norm, residual connections, gradient clipping)."
+  - "Apply Xavier vs He initialization with the activation function you're using (Xavier with tanh/sigmoid, He with ReLU)."
+  - "Use early stopping, dropout, and L2 regularization to keep deep networks from memorising training data."
+---
+
 # Challenges and Solutions in Backpropagation
 
 **After this lesson:** you can explain the core ideas in “Challenges and Solutions in Backpropagation” and reproduce the examples here in your own notebook or environment.

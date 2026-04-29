@@ -1,3 +1,11 @@
+---
+reading_minutes: 25
+objectives:
+  - "Implement `forward_pass` and `backward_pass` against a cached activations dict and verify shapes match each layer's weights."
+  - "Combine activation derivatives (sigmoid/ReLU/tanh) with the upstream `dz` to produce `dW`, `db`, and the next layer's `dz`."
+  - "Wire init/forward/backward/update into a small neural-network class and train it on a toy dataset to confirm the loss decreases."
+---
+
 # Implementing Backpropagation
 
 **After this lesson:** you can explain the core ideas in “Implementing Backpropagation” and reproduce the examples here in your own notebook or environment.
@@ -21,9 +29,6 @@ Before we dive into the code, let's understand what we're building. We'll create
 Let's start with a basic implementation of backpropagation. This is like the core recipe for our neural network:
 
 #### `backward_pass` skeleton
-
-- **Purpose:** Show the **reverse loop** over layers: start from output error `dz`, compute `dW`/`db`, then propagate `dz` backward with **`Wᵀ`** and the **derivative of the activation** at the pre-activation `z`.
-- **Walkthrough:** Expects `cache` to store activations `a` and pre-activations `z`; `activation_derivative` and `sigmoid` must exist in your module—this snippet is a teaching scaffold, not a drop-in for arbitrary architectures.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -116,9 +121,6 @@ These are like the rules for how the network should adjust its thinking:
 
 #### Activation derivatives (elementwise)
 
-- **Purpose:** Local **chain-rule** pieces for common activations: **sigmoid**, **ReLU**, **tanh**—multiply these by upstream `dz` during backprop.
-- **Walkthrough:** `sigmoid` must be defined elsewhere; ReLU uses `np.where`; tanh derivative uses $1 - \tanh^2(x)$.
-
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -189,9 +191,6 @@ def tanh_derivative(x):
 Now, let's put it all together in a complete neural network class:
 
 #### `NeuralNetwork` class (educational)
-
-- **Purpose:** Wire **init** / **forward** / **backward** / **update** into one object so you can train small fully connected nets in a notebook; read the methods below for the full forward/backprop story.
-- **Walkthrough:** Lists `weights`/`biases` per layer; training loop typically computes loss, calls backward, then SGD-style updates—**align tensor shapes** with your `layer_sizes` when you adapt this code.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
