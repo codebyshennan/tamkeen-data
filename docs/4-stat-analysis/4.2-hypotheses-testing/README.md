@@ -85,41 +85,8 @@ Hypothesis testing is not only for academic papers. The same structure applies w
 - [Effect Size Calculator](https://www.psychometrica.de/effect_size.html)
 - [Power Analysis Tools](https://www.statmethods.net/stats/power.html)
 
-## Learning path
+## Getting Started
 
-Work through the [Topics covered](#topics-covered-lesson-order) list in order: design and hypotheses before test selection, then A/B specifics, then interpretation and reporting.
-
-## Key Diagrams
-
-Here are all the key diagrams and assets referenced in this module:
-
-- ![Scientific Method Flowchart](assets/scientific_method.png)
-- ![Statistical Test Decision Tree](assets/statistical_test_tree.png)
-- ![A/B Testing Timeline](assets/ab_testing_timeline.png)
-- ![Effect Sizes](assets/effect_sizes.png)
-- ![Confidence Intervals](assets/confidence_intervals.png)
-- ![Experimental Design Flowchart](assets/experimental_design_flowchart.png)
-- ![Sample Size Determination](assets/sample_size_determination.png)
-- ![Results Dashboard](assets/results_dashboard.png)
-- ![Decision Framework](assets/decision_framework.png)
-- ![Null vs Alternative Distribution](assets/null_vs_alternative.png)
-- ![Hypothesis Testing Flowchart](assets/hypothesis_testing_flowchart.png)
-- ![Multiple Testing Correction](assets/multiple_testing.png)
-
----
-
-## Example Statistical Test Formula
-
-The t-test statistic for comparing two means is:
-
-\\[
-t = \frac{\bar x_1 - \bar x_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}
-\\]
-
-where:
-
-- \\( \bar x_1, \bar x_2 \\): sample means
-- \\( s_1^2, s_2^2 \\): sample variances
-- \\( n_1, n_2 \\): sample sizes
+Begin with [Experimental design](./experimental-design.md). Each lesson assumes familiarity with the previous one in [Topics covered](#topics-covered-lesson-order).
 
 Remember: Good hypothesis testing is about asking the right questions and using the right tools to find reliable answers!
