@@ -436,12 +436,6 @@ Spearman correlation: 0.85, P-value: 0.031. Significant correlation at alpha=0.0
 - **Statistical Power:** The probability that a test will detect an effect if there is one. Higher power reduces the risk of false negatives. Plan your sample size to achieve adequate power (commonly 0.8 or higher).
 - **Confidence Intervals:** Provide a range of plausible values for your estimate (e.g., mean difference, correlation). Narrow intervals indicate more precise estimates.
 
-**Visuals:**
-
-- ![Effect Sizes](assets/effect_sizes.png)
-- ![Power Analysis](assets/power_analysis.png)
-- ![Confidence Intervals](assets/confidence_intervals.png)
-
 ## Common Mistakes to Avoid
 
 1. **Choosing the Wrong Test:** Match your test to your data type and research question.
