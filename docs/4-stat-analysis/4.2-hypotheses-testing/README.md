@@ -14,12 +14,6 @@ Core ideas behind hypothesis tests and the null hypothesis.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/0oc49DyA3hU" title="Hypothesis Testing and The Null Hypothesis, Clearly Explained" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## Introduction: The Scientific Method in Action
-
-Welcome to the world of hypothesis testing! This guide is designed to help you understand how to turn questions into answers through systematic experimentation. Whether you're optimizing a website, developing a new drug, or researching customer behavior, hypothesis testing provides the framework for making data-driven decisions with confidence.
-
-![Scientific Method Flowchart](assets/scientific_method.png)
-
 ## Learning Objectives
 
 By the end of this module, you will be able to:
