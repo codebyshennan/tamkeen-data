@@ -15,12 +15,6 @@ objectives:
 
 A/B testing is the product-facing form of a two-arm experiment: **control** vs **treatment**, a clear **metric**, random assignment when possible, and rules for how long to run and how to read uncertainty. You already know how to phrase hypotheses and pick tests; here the focus is workflow, metrics, and interpretation in a live or simulated environment.
 
-## Helpful video
-
-Core ideas behind hypothesis tests and the null hypothesis.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/0oc49DyA3hU" title="Hypothesis Testing and The Null Hypothesis, Clearly Explained" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 ## Why this matters
 
 - You will run **controlled comparisons** of two variants and interpret results without fooling yourself.
