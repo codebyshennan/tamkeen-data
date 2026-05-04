@@ -127,9 +127,7 @@ class SignificanceAnalyzer:
         plt.title('Statistical Significance Visualization')
         plt.legend()
         plt.grid(True, alpha=0.3)
-
-        plt.savefig('docs/4-stat-analysis/4.2-hypotheses-testing/assets/significance_viz.png')
-        plt.close()
+        plt.show()
 {% endhighlight %}
 
 </div>
