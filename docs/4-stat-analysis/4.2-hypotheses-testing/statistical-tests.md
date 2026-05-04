@@ -51,8 +51,6 @@ Choosing the correct test depends on your research question, the type of data yo
 
 {% include mermaid-diagram.html src="4-stat-analysis/4.2-hypotheses-testing/diagrams/statistical-tests-1.mmd" %}
 
-> **Figure (add screenshot or diagram):** Full statistical test decision tree poster — numeric vs categorical, parametric vs non-parametric, one-sample vs two-sample vs k-sample branches.
-
 - **Numerical data (means):** Use t-tests or ANOVA.
 - **Categorical data (counts/frequencies):** Use chi-square tests.
 - **Relationships between variables:** Use correlation or regression tests.
