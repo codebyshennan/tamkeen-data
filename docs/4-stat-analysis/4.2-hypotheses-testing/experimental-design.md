@@ -319,9 +319,7 @@ Shady_4: A
 
 ## Statistical Considerations
 
-Choosing the right statistical test for your design is crucial. The test you use depends on your data type, number of groups, and design.
-
-![Statistical Test Decision Tree](assets/statistical_test_tree.png)
+Choosing the right statistical test for your design is crucial. The test you use depends on your data type, number of groups, and design — see [Statistical tests](./statistical-tests.md) for the full decision tree.
 
 > **Tip:**
 > Always check the assumptions of your chosen test (e.g., normality, equal variances).
