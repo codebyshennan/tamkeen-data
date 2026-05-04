@@ -335,8 +335,6 @@ Choosing the right statistical test for your design is crucial. The test you use
 
 If your sample is too small, you might miss real effects. If it's too large, you might waste resources.
 
-![Effect Sizes](assets/effect_sizes.png)
-
 ### Sample Size Determination
 
 The required sample size for comparing two means can be calculated as:
