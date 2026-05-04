@@ -349,8 +349,6 @@ where:
 - \\( z_{\beta} \\): critical value for desired power
 - \\( d \\): effect size (Cohen's d)
 
-![Sample Size Determination](assets/sample_size_determination.png)
-
 > **Best Practice:** Use a power analysis tool (like G*Power or Python's `statsmodels`) to calculate sample size before you start collecting data — running underpowered tests means you may not detect real effects.
 
 ---
