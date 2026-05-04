@@ -329,9 +329,6 @@ print(result){% endhighlight %}
 - **Directional (one-tailed):** Specifies the direction of effect (e.g., H₁: μ₁ > μ₂)
 - **Non-directional (two-tailed):** Only specifies there is an effect (e.g., H₁: μ₁ ≠ μ₂)
 
-**Visual:**
-![Hypothesis Testing Flowchart](assets/hypothesis_testing_flowchart.png)
-
 ## Type I and Type II Errors
 
 Every hypothesis test makes one of two types of mistake. Knowing which one you're trading off against helps you set α and design the study.
