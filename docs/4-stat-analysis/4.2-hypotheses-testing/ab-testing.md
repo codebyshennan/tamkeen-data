@@ -166,7 +166,7 @@ class ABTest:
       <span class="code-callout__title">Effect size, save, and return</span>
     </div>
     <div class="code-callout__body">
-      <p>(Treatment mean − Control mean) ÷ Control std is a Cohen's d–style effect size. Unlike a p-value, it tells you <em>how large</em> the difference is in standard deviation units. <code>savefig</code> writes the three-panel figure to disk; returning <code>self</code> allows method chaining.</p>
+      <p>(Treatment mean − Control mean) ÷ Control std is a Cohen's d–style effect size. Unlike a p-value, it tells you <em>how large</em> the difference is in standard deviation units. Returning <code>self</code> allows method chaining.</p>
     </div>
   </div>
 </aside>
