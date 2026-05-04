@@ -39,12 +39,6 @@ A hypothesis is your scientific roadmap—it guides your investigation and helps
 
 *StatQuest: Hypothesis Testing and The Null Hypothesis, Clearly Explained!!! by Josh Starmer*
 
-<div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/5koKb5B_YWo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-*StatQuest: Alternative Hypotheses: Main Ideas!!! by Josh Starmer*
-
 {% include mermaid-diagram.html src="4-stat-analysis/4.2-hypotheses-testing/diagrams/hypothesis-formulation-1.mmd" %}
 
 *Choose your hypotheses before you look at the data. Peeking (p-hacking) inflates Type I error.*
