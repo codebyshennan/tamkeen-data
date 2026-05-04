@@ -220,8 +220,7 @@ class EffectSizeAnalyzer:
         self._plot_practical_impact(effect_size, type)
 
         plt.tight_layout()
-        plt.savefig('docs/4-stat-analysis/4.2-hypotheses-testing/assets/effect_size_viz.png')
-        plt.close()
+        plt.show()
 
         return interpretation
 
