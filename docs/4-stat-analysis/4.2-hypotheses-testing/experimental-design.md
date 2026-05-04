@@ -42,10 +42,6 @@ Imagine you're baking a cake. You need a recipe, the right ingredients, and a pl
 
 This guide will help you understand the basics of experimental design, with simple explanations, real-world examples, and easy-to-follow code. Whether you're new to experiments or just want a refresher, you'll find practical tips and best practices here.
 
-![Scientific Method Flowchart](assets/scientific_method.png)
-
----
-
 {% include mermaid-diagram.html src="4-stat-analysis/4.2-hypotheses-testing/diagrams/experimental-design-1.mmd" %}
 
 ## The Three Pillars of Experimental Design
