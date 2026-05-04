@@ -117,8 +117,7 @@ class ABTest:
         plt.title('Standardized Effect Size')
         
         plt.tight_layout()
-        plt.savefig('docs/4-stat-analysis/4.2-hypotheses-testing/assets/ab_test_results.png')
-        plt.close()
+        plt.show()
 
         return self
 {% endhighlight %}
