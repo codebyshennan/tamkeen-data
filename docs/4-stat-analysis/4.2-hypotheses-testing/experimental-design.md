@@ -137,8 +137,6 @@ Treatment group: ['P3' 'P10' 'P5' 'P4' 'P7']
 - **Multiple trials**: Do the experiment several times.
 - **Sample size calculations**: Figure out how many samples you need to be sure of your results.
 
-![Power Analysis](assets/power_analysis.png)
-
 ---
 
 ## Types of Experimental Designs
