@@ -484,7 +484,8 @@ def process_markdown_file(
             return
 
         insertion = "".join(parts)
-        replacements.append((end, insertion))
+        insert_at = _wrapper_aware_insertion_point(text, start, end)
+        replacements.append((insert_at, insertion))
 
     for m in PYTHON_BLOCK.finditer(text):
         _process_python_block(m.group("body"), m.start(), m.end())
