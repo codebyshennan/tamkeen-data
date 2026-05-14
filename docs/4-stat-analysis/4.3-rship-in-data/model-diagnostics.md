@@ -59,6 +59,11 @@ To make sure your model is healthy, we need to check four main assumptions. Thin
 
 **How to check it**: Look at a "residual plot" - a graph showing the difference between our predictions and the actual values.
 
+<figure>
+<img src="assets/model-diagnostics_question1.png" alt="Healthy residuals-vs-fitted scatter beside a problematic curved one" />
+<figcaption>Linearity check: a healthy residual plot scatters randomly around zero (left); a clear curve means the relationship isn't straight (right).</figcaption>
+</figure>
+
 **Residuals vs fitted for the linear mean structure**
 
 <div class="code-explainer" data-code-explainer>
