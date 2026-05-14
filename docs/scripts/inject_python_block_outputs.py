@@ -357,6 +357,32 @@ def _strip_liquid_raw_if_wrapped(code: str) -> str:
     return code
 
 
+_DIV_TAG = re.compile(r"</?div\b")
+
+
+def _wrapper_aware_insertion_point(text: str, start: int, end: int) -> int:
+    """If the block sits inside a ``<div class="code-explainer">`` wrapper, return
+    the offset just past that wrapper's closing ``</div>`` so injected output
+    (figures, stdout) lands *outside* the wrapper rather than inside the
+    ``code-explainer__code`` div. Otherwise return ``end`` unchanged.
+    """
+    ce_open = text.rfind('<div class="code-explainer"', 0, start)
+    if ce_open == -1:
+        return end
+    depth = 0
+    for m in _DIV_TAG.finditer(text, ce_open):
+        depth += -1 if m.group().startswith("</") else 1
+        if depth == 0:
+            close_end = text.find(">", m.start())
+            close_end = close_end + 1 if close_end != -1 else m.end()
+            if close_end <= start:
+                return end  # wrapper closed before this block — not wrapped
+            if close_end < len(text) and text[close_end] == "\n":
+                close_end += 1
+            return close_end
+    return end
+
+
 def process_markdown_file(
     path: Path, dry_run: bool, log: argparse.FileType | None
 ) -> bool:
