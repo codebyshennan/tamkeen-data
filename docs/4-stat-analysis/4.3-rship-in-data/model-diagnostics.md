@@ -566,6 +566,31 @@ results = give_model_complete_checkup(model, X, y)
 </aside>
 </div>
 
+<figure>
+<img src="assets/model-diagnostics_fig_1.png" alt="Residuals vs predicted values scatter plot" />
+<figcaption>Figure 1: Are Our Errors Random? (They Should Be!)</figcaption>
+</figure>
+
+<figure>
+<img src="assets/model-diagnostics_fig_2.png" alt="Absolute residuals vs predicted values scatter plot" />
+<figcaption>Figure 2: Is Our Error Spread Consistent?</figcaption>
+</figure>
+
+<figure>
+<img src="assets/model-diagnostics_fig_3.png" alt="Histogram of residuals and Q-Q plot" />
+<figcaption>Figure 3: Distribution of Errors (Should Look Like a Bell Curve)</figcaption>
+</figure>
+
+<figure>
+<img src="assets/model-diagnostics_fig_4.png" alt="Cook's distance stem plot with threshold line" />
+<figcaption>Figure 4: Which Points Have Too Much Influence?</figcaption>
+</figure>
+
+<figure>
+<img src="assets/model-diagnostics_fig_5.png" alt="Leverage stem plot with threshold line" />
+<figcaption>Figure 5: Which Points Have Unusual X Values?</figcaption>
+</figure>
+
 ```
 === MODEL CHECK-UP RESULTS ===
 
