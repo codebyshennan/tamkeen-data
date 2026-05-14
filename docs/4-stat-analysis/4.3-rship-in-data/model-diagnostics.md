@@ -214,6 +214,13 @@ def check_if_error_spread_is_even(model, X, y):
 
 **How to check it**: We look at the distribution of errors with histograms and what's called a "Q-Q plot."
 
+**What's a Q-Q plot?** "Q-Q" is short for **quantile–quantile**. It compares two distributions by plotting their quantiles (think percentiles) against each other. For a normality check, we plot the quantiles of our residuals against the quantiles of a theoretical normal distribution. If the two distributions have the same shape, the points fall along a straight diagonal line — so reading a Q-Q plot is just asking "how far do the points stray from that line?"
+
+- **Points hug the line** → residuals are approximately normal.
+- **Points curve away, especially at the ends** → skewness, heavy tails, or outliers.
+
+The same idea works beyond residuals: you can put one dataset's quantiles on each axis to check whether two samples come from the same underlying distribution.
+
 **Histogram, Q-Q plot, and Shapiro–Wilk on residuals**
 
 <div class="code-explainer" data-code-explainer>
