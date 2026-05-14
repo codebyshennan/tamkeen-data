@@ -180,6 +180,22 @@ def check_predictor_similarity(X):
 print("\nMulticollinearity Check (VIF values):")
 print(check_predictor_similarity(X))
 {% endhighlight %}
+```
+Contribution of each factor:
+study_hours: 1.82 points
+prev_gpa: 2.96 points
+sleep_hours: 1.53 points
+
+Starting point (intercept): 0.09
+Model accuracy (R-squared): 0.94
+
+Multicollinearity Check (VIF values):
+      Variable       VIF
+0  study_hours  1.053354
+1     prev_gpa  1.019570
+2  sleep_hours  1.034520
+```
+
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
