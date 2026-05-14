@@ -644,6 +644,11 @@ Let's look at common problems you might discover and what to do about them:
 
 **Real-world example**: When predicting salaries, errors might not follow a bell curve because salaries have a lower bound (they can't be negative) but no upper bound.
 
+<figure>
+<img src="assets/model-diagnostics_problem3.png" alt="Q-Q plot with points curving away from the line, then points hugging the line after a log transform" />
+<figcaption>Left: right-skewed residuals pull the Q-Q points away from the line. Right: modelling log(y) brings them back onto it.</figcaption>
+</figure>
+
 ### Problem 4: Troublemaker Points with Too Much Influence
 
 **Signs of this problem**:
