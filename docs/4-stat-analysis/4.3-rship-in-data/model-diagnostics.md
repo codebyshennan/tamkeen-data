@@ -608,6 +608,11 @@ Let's look at common problems you might discover and what to do about them:
 
 **Real-world example**: When predicting house prices, the relationship between size and price might not be straight - each additional square foot might add less value as houses get very large.
 
+<figure>
+<img src="assets/model-diagnostics_problem1.png" alt="Residual plot with a curved pattern, then a random scatter after adding a quadratic term" />
+<figcaption>Left: a straight-line model leaves a clear curve in the residuals. Right: adding a quadratic term removes the pattern.</figcaption>
+</figure>
+
 ### Problem 2: Inconsistent Error Spread
 
 **Signs of this problem**:
