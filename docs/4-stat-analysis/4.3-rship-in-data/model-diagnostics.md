@@ -164,6 +164,11 @@ def check_if_points_are_independent(errors):
 
 **How to check it**: We look at how the size of errors changes across different predicted values.
 
+<figure>
+<img src="assets/model-diagnostics_question3.png" alt="Even error spread beside a funnel-shaped spread that grows with fitted values" />
+<figcaption>Homoscedasticity check: a healthy plot keeps the error size roughly constant across fitted values (left); a funnel shape means the spread grows with the prediction (right).</figcaption>
+</figure>
+
 **Absolute residuals vs fitted (scale-location style)**
 
 <div class="code-explainer" data-code-explainer>
