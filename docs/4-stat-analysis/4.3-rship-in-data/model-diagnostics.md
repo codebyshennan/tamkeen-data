@@ -236,6 +236,11 @@ def check_if_error_spread_is_even(model, X, y):
 
 The same idea works beyond residuals: you can put one dataset's quantiles on each axis to check whether two samples come from the same underlying distribution.
 
+<figure>
+<img src="assets/model-diagnostics_question4.png" alt="Q-Q plot with points on the diagonal beside one where points curve away at the ends" />
+<figcaption>Normality check: healthy residuals hug the diagonal line (left); points curving away at the ends indicate skew or heavy tails (right).</figcaption>
+</figure>
+
 **Histogram, Q-Q plot, and Shapiro–Wilk on residuals**
 
 <div class="code-explainer" data-code-explainer>
