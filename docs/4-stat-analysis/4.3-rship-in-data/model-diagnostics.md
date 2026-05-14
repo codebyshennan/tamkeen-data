@@ -626,6 +626,11 @@ Let's look at common problems you might discover and what to do about them:
 
 **Real-world example**: When predicting company revenue, errors might be bigger for large companies than for small ones.
 
+<figure>
+<img src="assets/model-diagnostics_problem2.png" alt="Scale-location plot with a funnel shape, then an even band after a log transform" />
+<figcaption>Left: residual spread fans out as fitted values grow. Right: modelling log(y) makes the spread roughly even.</figcaption>
+</figure>
+
 ### Problem 3: Errors Don't Follow a Bell Curve
 
 **Signs of this problem**:
