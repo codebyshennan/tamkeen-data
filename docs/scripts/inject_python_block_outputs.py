@@ -74,7 +74,7 @@ OUTPUT_FENCE_LANGS = frozenset({"", "text", "console", "plaintext", "output", "t
 
 # Match ```python ... ``` with optional indent or blockquote (`> `) on each line (GFM)
 PYTHON_BLOCK = re.compile(
-    r"(?ms)^(?P<prefix>[>\s]*)(?:```python|``` py)\s*\n(?P<body>.*?)^(?P=prefix)```[ \t]*(?:\n|$)",
+    r"(?ms)^(?P<prefix>[> \t]*)(?:```python|``` py)[ \t]*\n(?P<body>.*?)^(?P=prefix)```[ \t]*(?:\n|$)",
     re.DOTALL,
 )
 
