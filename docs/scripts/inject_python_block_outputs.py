@@ -416,7 +416,10 @@ def process_markdown_file(
             return
         # Always execute so the shared namespace stays populated for downstream
         # blocks; only suppress the output insertion when the page already has it.
-        has_output = _has_following_output_or_figure(text, end)
+        # For code-explainer blocks, output lands *after* the wrapper, so the
+        # "already has output" check must look there too.
+        insert_at = _wrapper_aware_insertion_point(text, start, end)
+        has_output = _has_following_output_or_figure(text, insert_at)
 
         # Capture pragma caption before code is mutated by execution helpers
         pragma_caption = _parse_fig_caption_pragma(code)
