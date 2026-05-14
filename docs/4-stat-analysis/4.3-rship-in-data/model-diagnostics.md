@@ -534,68 +534,6 @@ model.fit(X, y)
 results = give_model_complete_checkup(model, X, y)
 {% endhighlight %}
 
-<figure>
-<img src="assets/model-diagnostics_fig_1.png" alt="model-diagnostics" />
-<figcaption>Figure 1: Are Our Errors Random? (They Should Be!)</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/model-diagnostics_fig_2.png" alt="model-diagnostics" />
-<figcaption>Figure 2: Is Our Error Spread Consistent?</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/model-diagnostics_fig_3.png" alt="model-diagnostics" />
-<figcaption>Figure 3: Distribution of Errors (Should Look Like a Bell Curve)</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/model-diagnostics_fig_4.png" alt="model-diagnostics" />
-<figcaption>Figure 4: Which Points Have Too Much Influence?</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/model-diagnostics_fig_5.png" alt="model-diagnostics" />
-<figcaption>Figure 5: Which Points Have Unusual X Values?</figcaption>
-</figure>
-
-```
-=== MODEL CHECK-UP RESULTS ===
-
-✅ CHECKING IF RELATIONSHIP IS STRAIGHT...
-What to look for:
-✓ GOOD: Random scatter around the zero line with no pattern
-✗ BAD: Any curves, funnels, or patterns in the dots
-
-✅ CHECKING IF POINTS ARE INDEPENDENT...
-Durbin-Watson test result: 2.03
-
-How to interpret this number:
-Around 2.0 = Good (errors are independent)
-Below 1.0 = Bad (adjacent errors tend to be similar)
-Above 3.0 = Bad (adjacent errors tend to be opposite)
-
-✅ CHECKING IF ERROR SPREAD IS CONSISTENT...
-What to look for:
-✓ GOOD: Random scatter with consistent spread throughout
-✗ BAD: Fan or funnel shapes that get wider or narrower
-
-✅ CHECKING IF ERRORS FOLLOW A BELL CURVE...
-Bell curve test p-value: 0.0000
-If p-value < 0.05, errors likely don't follow a bell curve
-
-✅ FINDING TROUBLEMAKER POINTS...
-
-=== SUMMARY OF POTENTIAL ISSUES ===
-Points with unusual X values: 4
-Points with too much overall influence: 8
-```
-
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-7" data-tint="1">
