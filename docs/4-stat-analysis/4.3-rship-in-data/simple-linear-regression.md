@@ -306,6 +306,11 @@ def plot_diagnostics(X, y, y_pred):
 plot_diagnostics(X, y, y_pred)
 ```
 
+<figure>
+<img src="assets/simple-linear-regression_fig_2.png" alt="Four-panel regression diagnostic plots" />
+<figcaption>Figure 2: Diagnostic plots — residuals vs predicted, Q-Q, scale-location, residuals vs leverage</figcaption>
+</figure>
+
 ### What to Look for in Diagnostic Plots:
 ### 1. Residuals vs Predicted/Fitted (Top Left)
 - **What it shows:**  
