@@ -370,6 +370,11 @@ def check_model_validity(model, X, y):
 check_model_validity(model, X, y)
 ```
 
+<figure>
+<img src="assets/multiple-linear-regression_fig_4.png" alt="Residual diagnostic panels and predictor correlation heatmap" />
+<figcaption>Figure 4: Residual panels — residuals vs fitted, Q-Q, scale-location — plus the predictor correlation heatmap</figcaption>
+</figure>
+
 ### What Good Diagnostic Plots Look Like:
 
 1. **Residuals vs Fitted (top left)**:
