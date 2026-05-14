@@ -131,6 +131,11 @@ def check_if_relationship_is_straight(model, X, y):
 
 **How to check it**: For time-based data, we can use a test called the Durbin-Watson test to check for patterns over time.
 
+<figure>
+<img src="assets/model-diagnostics_question2.png" alt="Independent residuals in order beside autocorrelated ones that drift in runs" />
+<figcaption>Independence check: healthy residuals show no run pattern in observation order, giving a Durbin-Watson statistic near 2 (left); residuals that drift in runs signal autocorrelation and a statistic well below 1 (right).</figcaption>
+</figure>
+
 **Durbin–Watson statistic on a residual series**
 
 ```python
