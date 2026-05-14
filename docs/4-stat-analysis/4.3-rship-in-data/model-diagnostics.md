@@ -663,6 +663,11 @@ Let's look at common problems you might discover and what to do about them:
 
 **Real-world example**: In a customer spending analysis, a few ultra-high-net-worth individuals might have too much influence on your model if not handled properly.
 
+<figure>
+<img src="assets/model-diagnostics_problem4.png" alt="Regression line dragged by one influential point, then a corrected fit after removing it" />
+<figcaption>Left: a single high-leverage point pulls the fitted line away from the data. Right: after confirming it was a data-entry error, the refit follows the real pattern.</figcaption>
+</figure>
+
 ## Your Turn: Practice Exercise
 
 Try running a model check-up on a dataset you're working with. Here are the steps:
