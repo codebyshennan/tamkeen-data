@@ -32,12 +32,14 @@ Every module, submodule, and linked lesson in one place. For objectives and cont
 
 ### 1. Data Fundamentals
 
-* [Module 1 Assignment](1-data-fundamentals/assignments/module-assignment.md)
+All assignments: [Assignments index](assignments.md).
+
 * [1.1 Introduction to Data Analytics](1-data-fundamentals/1.1-intro-data-analytics/README.md)
   * [Workflow Concepts](1-data-fundamentals/1.1-intro-data-analytics/workflow-concepts.md)
   * [Data Collection](1-data-fundamentals/1.1-intro-data-analytics/data-collection.md)
   * [Data Privacy](1-data-fundamentals/1.1-intro-data-analytics/data-privacy.md)
   * [Data Security](1-data-fundamentals/1.1-intro-data-analytics/data-security.md)
+  * [Assignment: Quiz](1-data-fundamentals/1.1-intro-data-analytics/assignments/quiz.md)
 * [1.2 Introduction to Python](1-data-fundamentals/1.2-intro-python/README.md)
   * [Basic Syntax and Data Types](1-data-fundamentals/1.2-intro-python/basic-syntax-data-types.md)
   * [Data Structures](1-data-fundamentals/1.2-intro-python/data-structures.md)
