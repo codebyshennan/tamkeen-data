@@ -86,7 +86,7 @@
     saveHistory();
 
     sendBtn.disabled = true;
-    const assistantEl = addMessage('assistant', '');
+    const assistantEl = addMessage('assistant', '…');
     let accumulated = '';
     try {
       const resp = await fetch(cfg.endpoint, {
@@ -94,35 +94,44 @@
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ lesson_key: cfg.lessonKey, messages }),
       });
-      if (!resp.ok || !resp.body) {
+      const ct = resp.headers.get('content-type') || '';
+      if (!resp.ok) {
         const detail = await resp.text().catch(() => '');
         throw new Error(`HTTP ${resp.status}: ${detail.slice(0, 200)}`);
       }
-      const reader = resp.body.getReader();
-      const decoder = new TextDecoder();
-      let buf = '';
-      while (true) {
-        const { value, done } = await reader.read();
-        if (done) break;
-        buf += decoder.decode(value, { stream: true });
-        const lines = buf.split('\n');
-        buf = lines.pop() || '';
-        for (const line of lines) {
-          if (!line.startsWith('data: ')) continue;
-          const payload = line.slice(6).trim();
-          if (payload === '[DONE]') continue;
-          try {
-            const json = JSON.parse(payload);
-            const delta = json.choices?.[0]?.delta?.content;
-            if (delta) {
-              accumulated += delta;
-              assistantEl.innerHTML = renderMarkdown(accumulated);
-              messagesEl.scrollTop = messagesEl.scrollHeight;
-            }
-          } catch { /* ignore parse errors mid-stream */ }
+      if (ct.includes('text/event-stream') && resp.body) {
+        // Streaming SSE path (used if/when the endpoint streams).
+        const reader = resp.body.getReader();
+        const decoder = new TextDecoder();
+        let buf = '';
+        while (true) {
+          const { value, done } = await reader.read();
+          if (done) break;
+          buf += decoder.decode(value, { stream: true });
+          const lines = buf.split('\n');
+          buf = lines.pop() || '';
+          for (const line of lines) {
+            if (!line.startsWith('data: ')) continue;
+            const payload = line.slice(6).trim();
+            if (payload === '[DONE]') continue;
+            try {
+              const json = JSON.parse(payload);
+              const delta = json.choices?.[0]?.delta?.content;
+              if (delta) {
+                accumulated += delta;
+                assistantEl.innerHTML = renderMarkdown(accumulated);
+                messagesEl.scrollTop = messagesEl.scrollHeight;
+              }
+            } catch { /* ignore parse errors mid-stream */ }
+          }
         }
+      } else {
+        // Non-streaming JSON path (current Vercel Node serverless default).
+        const json = await resp.json();
+        accumulated = json.choices?.[0]?.message?.content || '';
+        assistantEl.innerHTML = renderMarkdown(accumulated);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
       }
-      // Persist the completed assistant turn.
       if (accumulated) {
         messages.push({ role: 'assistant', content: accumulated });
         saveHistory();
