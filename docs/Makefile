@@ -103,8 +103,10 @@ bundle-install: _ruby33
 
 # Auto-include _config.local.yml when present (used for local-only overrides
 # like the chatbot endpoint pointing at vercel dev).
+# $(comma) trick lets us put a literal comma inside a Make function arg.
+comma := ,
 LOCAL_CONFIG := $(wildcard _config.local.yml)
-CONFIG_FLAG := $(if $(LOCAL_CONFIG),--config _config.yml,_config.local.yml,)
+CONFIG_FLAG := $(if $(LOCAL_CONFIG),--config _config.yml$(comma)_config.local.yml,)
 
 jekyll-build: _ruby33
 	@PATH="$(RUBY33_BIN):$$PATH" bundle exec jekyll build $(CONFIG_FLAG)
