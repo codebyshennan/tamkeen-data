@@ -4,7 +4,7 @@
 
 **Mandatory** • 10 questions • Covers SQL, Data Wrangling, EDA, and Data Engineering.
 
-Try each question closed-book first. Click **Show answer** to check your work.
+Try each question closed-book first. Click **Show hint** if you get stuck — hints point you at the relevant lesson section and how to think about it, without naming the answer. If a hint isn't enough, open the chatbot (bottom-right) and ask for a deeper explanation.
 
 ---
 
@@ -16,13 +16,14 @@ Try each question closed-book first. Click **Show answer** to check your work.
 - ORDER BY
 
 <details>
-<summary>Show answer</summary>
+<summary>Show hint</summary>
 
-**FROM**
+- **Where:** [SQL basics](../2.1-sql/README.md) — anatomy of a `SELECT` statement.
+- **Think:** Walk through what each clause does. One picks columns, one filters rows, one sorts. The remaining clause names the **source** the query reads from.
 
 </details>
 
-**Q2.** What SQL keyword is used to make table aliases make queries more readable, especially with multiple joins?
+**Q2.** What SQL keyword is used to make table aliases more readable, especially with multiple joins?
 
 - SELECT
 - INSERT
@@ -30,13 +31,14 @@ Try each question closed-book first. Click **Show answer** to check your work.
 - AS
 
 <details>
-<summary>Show answer</summary>
+<summary>Show hint</summary>
 
-**AS**
+- **Where:** [SQL basics](../2.1-sql/README.md) — aliases and joins.
+- **Think:** Aliases rename something for the rest of the query (e.g. `customers c`). Which keyword reads naturally as "this table, **named as** something shorter"?
 
 </details>
 
-**Q3.** What DataFrame method returns a Series containing column sums?
+**Q3.** What pandas DataFrame method returns a Series containing column sums?
 
 - `mean()`
 - `median()`
@@ -44,13 +46,14 @@ Try each question closed-book first. Click **Show answer** to check your work.
 - `mode()`
 
 <details>
-<summary>Show answer</summary>
+<summary>Show hint</summary>
 
-**`sum()`**
+- **Where:** [Data wrangling with pandas](../2.2-data-wrangling/README.md) — reductions.
+- **Think:** Each option does what its name says. Pick the one whose name literally describes "adding values together".
 
 </details>
 
-**Q4.** What method on a Series accepts a function or dict-like object containing a mapping?
+**Q4.** What method on a Series accepts a function or dict-like mapping to transform values?
 
 - `apply`
 - `groupby`
@@ -58,9 +61,10 @@ Try each question closed-book first. Click **Show answer** to check your work.
 - `map`
 
 <details>
-<summary>Show answer</summary>
+<summary>Show hint</summary>
 
-**`map`**
+- **Where:** [Data wrangling with pandas](../2.2-data-wrangling/README.md) — element-wise transforms.
+- **Think:** `groupby` and `filter` don't take a dict. Of the two remaining, one is specifically the **Series**-level transform that accepts either a function **or** a dict — the other lives on DataFrames and on Series but is more general.
 
 </details>
 
@@ -72,9 +76,10 @@ Try each question closed-book first. Click **Show answer** to check your work.
 - `numpy.random.permutation`
 
 <details>
-<summary>Show answer</summary>
+<summary>Show hint</summary>
 
-**`numpy.random.permutation`**
+- **Where:** [Data wrangling with pandas](../2.2-data-wrangling/README.md) — sampling and shuffling.
+- **Think:** `transpose` swaps axes (not a shuffle). One option doesn't exist in NumPy. Of the two real shuffles, one mutates **in place** and returns nothing — the other **returns** a new permuted array, which is what you want for indexing rows.
 
 </details>
 
@@ -86,13 +91,14 @@ Try each question closed-book first. Click **Show answer** to check your work.
 - Covariance
 
 <details>
-<summary>Show answer</summary>
+<summary>Show hint</summary>
 
-**Covariance**
+- **Where:** [EDA](../2.3-eda/README.md) — relationships between variables.
+- **Think:** Three options describe a **single** variable's centre or spread. Only one captures the **joint** behaviour of two variables — and its name starts with the prefix meaning "together".
 
 </details>
 
-**Q7.** The correlation coefficient is a value that indicates the strength of the relationship between variables. The coefficient can take any values from what to what?
+**Q7.** The correlation coefficient indicates the strength of a linear relationship between variables. What range can it take?
 
 - -2 to 2
 - 0 to 1
@@ -100,13 +106,14 @@ Try each question closed-book first. Click **Show answer** to check your work.
 - 0 to infinity
 
 <details>
-<summary>Show answer</summary>
+<summary>Show hint</summary>
 
-**-1 to 1**
+- **Where:** [EDA](../2.3-eda/README.md) — Pearson correlation.
+- **Think:** Correlation captures **direction** (positive or negative) and **strength** (how close to perfect). So the range must be **symmetric around zero** and **bounded on both sides**.
 
 </details>
 
-**Q8.** What method connects rows in DataFrames based on one or more keys?
+**Q8.** What pandas method connects rows in DataFrames based on one or more keys?
 
 - `pivot()`
 - `groupby()`
@@ -114,9 +121,10 @@ Try each question closed-book first. Click **Show answer** to check your work.
 - `transform()`
 
 <details>
-<summary>Show answer</summary>
+<summary>Show hint</summary>
 
-**`merge()`**
+- **Where:** [Data wrangling with pandas](../2.2-data-wrangling/README.md) — combining DataFrames.
+- **Think:** Three options reshape or aggregate a **single** DataFrame. Only one joins **two** DataFrames together on key columns — its name mirrors the SQL operation that does the same thing.
 
 </details>
 
@@ -128,9 +136,10 @@ Try each question closed-book first. Click **Show answer** to check your work.
 - Data release
 
 <details>
-<summary>Show answer</summary>
+<summary>Show hint</summary>
 
-**Data release**
+- **Where:** [Data engineering overview](../2.2-data-wrangling/README.md) — pipeline stages.
+- **Think:** A pipeline takes data **in**, does something **to** it, and puts it **somewhere**. One of these options uses a verb that isn't part of that standard vocabulary — pipelines don't "release" data, they store / serve / publish it.
 
 </details>
 
@@ -142,8 +151,9 @@ Try each question closed-book first. Click **Show answer** to check your work.
 - Extract, Transform, Load
 
 <details>
-<summary>Show answer</summary>
+<summary>Show hint</summary>
 
-**Extract, Transform, Load**
+- **Where:** [Data engineering](../2.2-data-wrangling/README.md) — ETL.
+- **Think:** Read each option's letters. The middle word is the same in two options — that's a strong clue it's correct. Between those two, which **first** word matches "pull data out of a source"?
 
 </details>
