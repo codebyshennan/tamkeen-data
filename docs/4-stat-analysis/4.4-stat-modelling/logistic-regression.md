@@ -190,15 +190,6 @@ print(exam_data.head())
 </aside>
 </div>
 
-```
-   StudyHours  AptitudeScore  Passed
-0    5.993428      43.769439       0
-1    4.723471      58.690320       1
-2    6.295377      59.859282       1
-3    8.046060      52.965841       1
-4    4.531693      62.580714       0
-```
-
 This code generates and visualizes a dataset representing student exam results based on study hours and aptitude scores.
 
 In this plot:

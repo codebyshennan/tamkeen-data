@@ -408,16 +408,6 @@ Polynomial Feature Transformation (degree=2):
 </aside>
 </div>
 
-```
-Polynomial Feature Transformation (degree=2):
-   Original x    x    x^2
-0          1  1.0   1.0
-1          2  2.0   4.0
-2          3  3.0   9.0
-3          4  4.0  16.0
-4          5  5.0  25.0
-```
-
 ![Feature Transformation](assets/feature_transformation.png)
 
 This shows how:
@@ -607,11 +597,6 @@ def prepare_polynomial_data(X, y, degree=2):
 
     return X_train_scaled, X_test_scaled, y_train, y_test, poly, scaler
 {% endhighlight %}
-
-<figure>
-<img src="assets/polynomial-regression_fig_1.png" alt="polynomial-regression" />
-<figcaption>Figure 1: Are Our Errors Random? (They Should Be!)</figcaption>
-</figure>
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
