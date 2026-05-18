@@ -116,7 +116,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: MODEL,
-        stream: true,
+        stream: false,
         temperature: 0.4,
         messages: [
           { role: 'system', content: buildSystemMessage(bundle) },
