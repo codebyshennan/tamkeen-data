@@ -95,7 +95,7 @@ def main(files=None):
         
         print("\n" + "="*70)
         print("These tags are not supported by GitHub Pages Jekyll.")
-        print("Run 'python3 docs/fix_liquid_tags.py' to automatically fix them.")
+        print("Run 'python3 docs/scripts/fix_liquid_tags.py' to automatically fix them.")
         print("="*70 + "\n")
         
         return 1
