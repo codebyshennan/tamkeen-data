@@ -28,6 +28,34 @@ Each lesson below has an assignment page with hints revealed on click. Try each 
 | 2.2 — Data wrangling | [Coding tasks](2-data-wrangling/2.2-data-wrangling/assignments/coding.md) | 5 task groups |
 | 2.3 — Exploratory data analysis | [Coding tasks](2-data-wrangling/2.3-eda/assignments/coding.md) | 6 task groups |
 
+## Module 3 — Data visualization
+
+| Lesson | Assignment | Format |
+|---|---|---|
+| 3.1 — Intro to data viz | [Coding tasks](3-data-visualization/3.1-intro-data-viz/assignments/coding.md) | 4 task groups |
+| 3.2 — Advanced data viz | [Coding tasks](3-data-visualization/3.2-adv-data-viz/assignments/coding.md) | 4 task groups |
+| 3.3 — BI with Tableau | [Quiz](3-data-visualization/3.3-bi-with-tableau/assignments/quiz.md) | 12 MCQs |
+| 3.4 — Data storytelling | [Quiz](3-data-visualization/3.4-data-storytelling/assignments/quiz.md) | 10 MCQs |
+
+## Module 4 — Statistical analysis
+
+| Lesson | Assignment | Format |
+|---|---|---|
+| 4.1 — Inferential statistics | [Quiz](4-stat-analysis/4.1-inferential-stats/assignments/quiz.md) | 12 MCQs |
+| 4.2 — Hypothesis testing | [Coding tasks](4-stat-analysis/4.2-hypotheses-testing/assignments/coding.md) | 4 task groups |
+| 4.3 — Relationships in data | [Coding tasks](4-stat-analysis/4.3-rship-in-data/assignments/coding.md) | 4 task groups |
+| 4.4 — Statistical modelling | [Coding tasks](4-stat-analysis/4.4-stat-modelling/assignments/coding.md) | 4 task groups |
+
+## Module 5 — Machine learning fundamentals
+
+| Lesson | Assignment | Format |
+|---|---|---|
+| 5.1 — Intro to ML | [Quiz](5-ml-fundamentals/5.1-intro-to-ml/assignments/quiz.md) | 12 MCQs |
+| 5.2 — Supervised learning 1 | [Coding tasks](5-ml-fundamentals/5.2-supervised-learning-1/assignments/coding.md) | 4 task groups |
+| 5.3 — Supervised learning 2 | [Coding tasks](5-ml-fundamentals/5.3-supervised-learning-2/assignments/coding.md) | 4 task groups |
+| 5.4 — Unsupervised learning | [Coding tasks](5-ml-fundamentals/5.4-unsupervised-learning/assignments/coding.md) | 4 task groups |
+| 5.5 — Model evaluation | [Coding tasks](5-ml-fundamentals/5.5-model-eval/assignments/coding.md) | 4 task groups |
+
 ## Module assessments
 
 Mandatory module-level MCQ assessments. Try each question closed-book first; click **Show hint** for a nudge that points at the relevant lesson section without naming the answer.
