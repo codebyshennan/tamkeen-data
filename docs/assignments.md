@@ -30,7 +30,7 @@ Each lesson below has an assignment page with hints revealed on click. Try each 
 
 ## Module assessments
 
-Mandatory module-level MCQ assessments. Questions are combined with answers on one page — try each question closed-book first, then click **Show answer** to check.
+Mandatory module-level MCQ assessments. Try each question closed-book first; click **Show hint** for a nudge that points at the relevant lesson section without naming the answer.
 
 | Module | Assessment | Length |
 |---|---|---|
