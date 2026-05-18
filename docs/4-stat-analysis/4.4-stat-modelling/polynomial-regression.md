@@ -173,8 +173,6 @@ plt.show()
 </aside>
 </div>
 
-![Non-linear Relationship](assets/nonlinear_relationship.png)
-
 Looking at the plot, you can observe:
 
 1. Scores increase rapidly in the initial study hours (0-4 hours)
@@ -291,8 +289,6 @@ compare_linear_polynomial()
   </div>
 </aside>
 </div>
-
-![Linear vs Polynomial](assets/linear_vs_polynomial.png)
 
 This visualization clearly shows that:
 
@@ -541,8 +537,6 @@ plot_different_degrees()
   </div>
 </aside>
 </div>
-
-![Polynomial Degrees](assets/polynomial_degrees.png)
 
 This visualization shows:
 

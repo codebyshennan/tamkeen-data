@@ -211,10 +211,6 @@ plt.show()
 </aside>
 </div>
 
-![Overfitting Data](assets/overfitting_data.png)
-
-![Overfitting Example](assets/overfitting_example.png)
-
 From this visualization, you can observe:
 
 1. The **linear model** (blue) underfits the data - it's too simple to capture the curved pattern
@@ -369,7 +365,6 @@ plot_regularization_effects()
 </aside>
 </div>
 
-![Regularization Effects](assets/regularization_effects.png)
 
 This visualization shows how:
 
@@ -534,7 +529,6 @@ plot_constraint_spaces()
 </aside>
 </div>
 
-![Constraint Spaces](assets/constraint_spaces.png)
 
 This geometric interpretation explains:
 
@@ -729,7 +723,6 @@ Training R²: 0.9102
 Test R²: 0.9056
 ```
 
-![Ridge Coefficients](assets/ridge_coefficients.png)
 
 ### 2. Lasso Regression (L1)
 
@@ -865,7 +858,6 @@ Test R²: 0.9058
 Number of features selected: 4 out of 5
 ```
 
-![Lasso Coefficients](assets/lasso_coefficients.png)
 
 Notice how Lasso tends to select a subset of features by setting some coefficients to exactly zero.
 
@@ -1006,7 +998,6 @@ Test R²: 0.9055
 Number of features selected: 4 out of 5
 ```
 
-![Elastic Net Coefficients](assets/elastic_net_coefficients.png)
 
 ## Choosing the Right Regularization
 
@@ -1293,7 +1284,6 @@ print(comparison)
 </aside>
 </div>
 
-![Regularization Comparison](assets/regularization_comparison.png)
 
 And you'll get output like:
 

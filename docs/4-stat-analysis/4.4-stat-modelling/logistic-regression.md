@@ -199,8 +199,7 @@ print(exam_data.head())
 4    4.531693      62.580714       0
 ```
 
-This code generates and visualizes a dataset representing student exam results based on study hours and aptitude scores:
-![Binary Classification Example](assets/binary_classification_example.png)
+This code generates and visualizes a dataset representing student exam results based on study hours and aptitude scores.
 
 In this plot:
 
@@ -320,8 +319,6 @@ plot_logistic_curve()
 </aside>
 </div>
 
-![Logistic Curve Annotated](assets/logistic_curve_annotated.png)
-
 Key characteristics of the logistic function:
 
 1. **Range**: Always between 0 and 1 (perfect for representing probabilities)
@@ -430,8 +427,6 @@ plot_coefficient_effects()
 </aside>
 </div>
 
-![Coefficient Effects](assets/coefficient_effects.png)
-
 From this visualization, you can see that:
 
 1. **Strong coefficients** (β=2 or β=-2) create a steep curve, meaning the probability changes quickly over a small range of X
@@ -539,8 +534,6 @@ plot_odds_ratios()
   </div>
 </aside>
 </div>
-
-![Odds Ratios](assets/odds_ratios.png)
 
 This visualization shows:
 
@@ -797,8 +790,6 @@ plot_decision_boundary(X_scaled, y, model, scaler)
   </div>
 </aside>
 </div>
-
-![Logistic Decision Boundary](assets/logistic_decision_boundary.png)
 
 In this plot:
 
@@ -1218,8 +1209,6 @@ plot_feature_importance(loan_model, X_loan.columns)
   </div>
 </aside>
 </div>
-
-![Feature Importance](assets/feature_importance.png)
 
 ### 3. Handling Class Imbalance
 

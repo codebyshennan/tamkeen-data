@@ -251,7 +251,6 @@ plot_bias_variance_tradeoff()
 </aside>
 </div>
 
-![Bias-Variance Tradeoff](assets/bias_variance_tradeoff.png)
 
 This plot illustrates:
 
@@ -392,7 +391,6 @@ Train MSE: 16.92, Test MSE: 16.23</figcaption>
 </aside>
 </div>
 
-![Overfitting vs Underfitting](assets/overfitting_underfitting.png)
 
 This visualization shows three key scenarios:
 
