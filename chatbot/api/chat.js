@@ -1,9 +1,10 @@
-// Vercel Node serverless function: proxies chat completions to OpenRouter
-// with per-lesson context injected as the system prompt. The widget POSTs:
+// Vercel Node serverless function (legacy req/res signature). Proxies
+// chat completions to OpenRouter with per-lesson context injected as
+// the system prompt. The widget POSTs:
 //   { lesson_key: "1.2-intro-python", messages: [{role, content}, ...] }
 //
-// We load the matching bundle from chatbot/context/<lesson_key>.json and
-// stream the assistant response back as Server-Sent Events.
+// Bundles in chatbot/context/<lesson_key>.json are picked up via the
+// includeFiles entry in vercel.json.
 
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -17,8 +18,6 @@ const ALLOWED = new Set(manifest.lessons.map(l => l.key));
 const MODEL = process.env.OPENROUTER_MODEL || 'anthropic/claude-haiku-4.5';
 const MAX_HISTORY_TURNS = 20;
 const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
-
-export const config = { runtime: 'nodejs' };
 
 const SYSTEM_PROMPT = `
 You are a tutor for the Tamkeen Data Science & AI course. The student is working on an assignment for a specific lesson. Your job is to GUIDE their thinking without revealing the answer.
@@ -61,82 +60,93 @@ function loadBundle(lessonKey) {
   return bundle;
 }
 
-function jsonResponse(status, body) {
-  return new Response(JSON.stringify(body), {
-    status,
-    headers: {
-      'content-type': 'application/json',
-      'access-control-allow-origin': '*',
-    },
-  });
+function setCorsHeaders(res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 }
 
-export default async function handler(req) {
+function sendJson(res, status, payload) {
+  setCorsHeaders(res);
+  res.statusCode = status;
+  res.setHeader('content-type', 'application/json');
+  res.end(JSON.stringify(payload));
+}
+
+export default async function handler(req, res) {
+  setCorsHeaders(res);
+
   if (req.method === 'OPTIONS') {
-    return new Response(null, {
-      status: 204,
-      headers: {
-        'access-control-allow-origin': '*',
-        'access-control-allow-methods': 'POST, OPTIONS',
-        'access-control-allow-headers': 'content-type',
-      },
-    });
+    res.statusCode = 204;
+    res.end();
+    return;
   }
-  if (req.method !== 'POST') return jsonResponse(405, { error: 'POST only' });
+  if (req.method !== 'POST') return sendJson(res, 405, { error: 'POST only' });
 
   const apiKey = process.env.OPENROUTER_API_KEY;
-  if (!apiKey) return jsonResponse(500, { error: 'OPENROUTER_API_KEY not configured' });
+  if (!apiKey) return sendJson(res, 500, { error: 'OPENROUTER_API_KEY not configured' });
 
-  let body;
-  try { body = await req.json(); }
-  catch { return jsonResponse(400, { error: 'invalid JSON body' }); }
+  // Vercel auto-parses JSON when content-type is application/json.
+  const body = typeof req.body === 'object' && req.body !== null ? req.body : null;
+  if (!body) return sendJson(res, 400, { error: 'JSON body required' });
 
   const { lesson_key, messages } = body;
-  if (!lesson_key || typeof lesson_key !== 'string') return jsonResponse(400, { error: 'lesson_key required' });
-  if (!ALLOWED.has(lesson_key)) return jsonResponse(400, { error: `unknown lesson_key: ${lesson_key}` });
-  if (!Array.isArray(messages) || messages.length === 0) return jsonResponse(400, { error: 'messages array required' });
+  if (!lesson_key || typeof lesson_key !== 'string') return sendJson(res, 400, { error: 'lesson_key required' });
+  if (!ALLOWED.has(lesson_key)) return sendJson(res, 400, { error: `unknown lesson_key: ${lesson_key}` });
+  if (!Array.isArray(messages) || messages.length === 0) return sendJson(res, 400, { error: 'messages array required' });
 
   const trimmed = messages
     .filter(m => m && (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string')
     .slice(-MAX_HISTORY_TURNS);
-  if (trimmed.length === 0) return jsonResponse(400, { error: 'no valid messages' });
+  if (trimmed.length === 0) return sendJson(res, 400, { error: 'no valid messages' });
 
   let bundle;
   try { bundle = loadBundle(lesson_key); }
-  catch (e) { return jsonResponse(500, { error: `context load failed: ${e.message}` }); }
+  catch (e) { return sendJson(res, 500, { error: `context load failed: ${e.message}` }); }
 
-  const upstream = await fetch(OPENROUTER_URL, {
-    method: 'POST',
-    headers: {
-      'authorization': `Bearer ${apiKey}`,
-      'content-type': 'application/json',
-      'http-referer': process.env.OPENROUTER_REFERRER || 'https://codebyshennan.github.io/dsai',
-      'x-title': 'Tamkeen DSAI Assignment Tutor',
-    },
-    body: JSON.stringify({
-      model: MODEL,
-      stream: true,
-      temperature: 0.4,
-      messages: [
-        { role: 'system', content: buildSystemMessage(bundle) },
-        ...trimmed,
-      ],
-    }),
-  });
+  let upstream;
+  try {
+    upstream = await fetch(OPENROUTER_URL, {
+      method: 'POST',
+      headers: {
+        'authorization': `Bearer ${apiKey}`,
+        'content-type': 'application/json',
+        'http-referer': process.env.OPENROUTER_REFERRER || 'https://codebyshennan.github.io/dsai',
+        'x-title': 'Tamkeen DSAI Assignment Tutor',
+      },
+      body: JSON.stringify({
+        model: MODEL,
+        stream: true,
+        temperature: 0.4,
+        messages: [
+          { role: 'system', content: buildSystemMessage(bundle) },
+          ...trimmed,
+        ],
+      }),
+    });
+  } catch (e) {
+    return sendJson(res, 502, { error: `fetch failed: ${e.message}` });
+  }
 
   if (!upstream.ok || !upstream.body) {
     const text = await upstream.text().catch(() => '');
-    return jsonResponse(502, { error: `upstream ${upstream.status}`, detail: text.slice(0, 500) });
+    return sendJson(res, 502, { error: `upstream ${upstream.status}`, detail: text.slice(0, 500) });
   }
 
-  // Re-stream OpenRouter SSE directly to the client.
-  return new Response(upstream.body, {
-    status: 200,
-    headers: {
-      'content-type': 'text/event-stream',
-      'cache-control': 'no-cache, no-transform',
-      'connection': 'keep-alive',
-      'access-control-allow-origin': '*',
-    },
-  });
+  // Stream OpenRouter SSE directly to the client.
+  res.statusCode = 200;
+  res.setHeader('content-type', 'text/event-stream');
+  res.setHeader('cache-control', 'no-cache, no-transform');
+  res.setHeader('connection', 'keep-alive');
+
+  const reader = upstream.body.getReader();
+  try {
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      res.write(value);
+    }
+  } finally {
+    res.end();
+  }
 }
