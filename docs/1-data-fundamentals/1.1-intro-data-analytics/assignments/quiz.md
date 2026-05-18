@@ -8,10 +8,10 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 
 1. What is the primary purpose of data collection?
 
-- a. To analyze data
-- b. To gather raw material for analysis
-- c. To ensure data accuracy
-- d. To visualize data
+- [ ] To analyze data
+- [ ] To gather raw material for analysis
+- [ ] To ensure data accuracy
+- [ ] To visualize data
 
 <details>
 <summary>Show hint</summary>
@@ -23,10 +23,10 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 
 2. Which of the following is an example of first-party data?
 
-- a. Social media insights
-- b. Market research reports
-- c. Customer interactions
-- d. Data aggregators
+- [ ] Social media insights
+- [ ] Market research reports
+- [ ] Customer interactions
+- [ ] Data aggregators
 
 <details>
 <summary>Show hint</summary>
@@ -38,10 +38,10 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 
 3. What does GDPR stand for?
 
-- a. General Data Protection Regulation
-- b. General Data Privacy Regulation
-- c. General Data Protection Regulation
-- d. Global Data Protection Regulation
+- [ ] General Data Protection Regulation
+- [ ] General Data Privacy Regulation
+- [ ] General Data Protection Regulation
+- [ ] Global Data Protection Regulation
 
 <details>
 <summary>Show hint</summary>
@@ -53,10 +53,10 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 
 4. Which method is used for gathering qualitative data?
 
-- a. Surveys
-- b. Data logging
-- c. Interviews
-- d. Web scraping
+- [ ] Surveys
+- [ ] Data logging
+- [ ] Interviews
+- [ ] Web scraping
 
 <details>
 <summary>Show hint</summary>
@@ -68,10 +68,10 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 
 5. What is the main focus of predictive analytics?
 
-- a. Understanding past events
-- b. Analyzing current data
-- c. Forecasting future outcomes
-- d. Summarizing data
+- [ ] Understanding past events
+- [ ] Analyzing current data
+- [ ] Forecasting future outcomes
+- [ ] Summarizing data
 
 <details>
 <summary>Show hint</summary>
@@ -83,10 +83,10 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 
 6. What does PII stand for?
 
-- a. Personal Information Identifier
-- b. Protected Information Index
-- c. Personally Identifiable Information
-- d. Private Information Indicator
+- [ ] Personal Information Identifier
+- [ ] Protected Information Index
+- [ ] Personally Identifiable Information
+- [ ] Private Information Indicator
 
 <details>
 <summary>Show hint</summary>
@@ -98,10 +98,10 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 
 7. Which of the following is a key principle of data security?
 
-- a. Data Minimization
-- b. Purpose Limitation
-- c. Confidentiality
-- d. Data Portability
+- [ ] Data Minimization
+- [ ] Purpose Limitation
+- [ ] Confidentiality
+- [ ] Data Portability
 
 <details>
 <summary>Show hint</summary>
@@ -113,10 +113,10 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 
 8. What is the purpose of data encryption?
 
-- a. To analyze data
-- b. To visualize data
-- c. To prevent unauthorized access
-- d. To store data
+- [ ] To analyze data
+- [ ] To visualize data
+- [ ] To prevent unauthorized access
+- [ ] To store data
 
 <details>
 <summary>Show hint</summary>
@@ -128,10 +128,10 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 
 9. Which lifecycle stage involves removing records with missing data?
 
-- a. Data Cleaning
-- b. Data Exploration
-- c. Data Collection
-- d. Data Analysis
+- [ ] Data Cleaning
+- [ ] Data Exploration
+- [ ] Data Collection
+- [ ] Data Analysis
 
 <details>
 <summary>Show hint</summary>
@@ -143,10 +143,10 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 
 10. What is the main goal of data cleaning?
 
-- a. To visualize data
-- b. To collect data
-- c. To remove inaccuracies
-- d. To analyze data
+- [ ] To visualize data
+- [ ] To collect data
+- [ ] To remove inaccuracies
+- [ ] To analyze data
 
 <details>
 <summary>Show hint</summary>
@@ -158,10 +158,10 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 
 11. What is the role of feature engineering in data science?
 
-- a. To collect data
-- b. To clean data
-- c. To create new features
-- d. To visualize data
+- [ ] To collect data
+- [ ] To clean data
+- [ ] To create new features
+- [ ] To visualize data
 
 <details>
 <summary>Show hint</summary>
@@ -173,10 +173,10 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 
 12. Which of the following is a type of secondary data analysis?
 
-- a. Surveys
-- b. Interviews
-- c. Analyzing existing datasets
-- d. Observations
+- [ ] Surveys
+- [ ] Interviews
+- [ ] Analyzing existing datasets
+- [ ] Observations
 
 <details>
 <summary>Show hint</summary>
@@ -188,10 +188,10 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 
 13. What is the primary focus of the Data Science Lifecycle?
 
-- a. Data Collection
-- b. Data Cleaning
-- c. Developing and delivering data science projects
-- d. Data Visualization
+- [ ] Data Collection
+- [ ] Data Cleaning
+- [ ] Developing and delivering data science projects
+- [ ] Data Visualization
 
 <details>
 <summary>Show hint</summary>
@@ -203,10 +203,10 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 
 14. What does the term "data minimization" refer to?
 
-- a. Collecting as much data as possible
-- b. Storing data indefinitely
-- c. Collecting only necessary data
-- d. Analyzing data
+- [ ] Collecting as much data as possible
+- [ ] Storing data indefinitely
+- [ ] Collecting only necessary data
+- [ ] Analyzing data
 
 <details>
 <summary>Show hint</summary>
@@ -218,10 +218,10 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 
 15. Which of the following is a threat to data security?
 
-- a. Data encryption
-- b. Data backup
-- c. Malware
-- d. Access control
+- [ ] Data encryption
+- [ ] Data backup
+- [ ] Malware
+- [ ] Access control
 
 <details>
 <summary>Show hint</summary>
@@ -233,10 +233,10 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 
 16. What is the purpose of a feedback loop in data analytics?
 
-- a. To collect data
-- b. To clean data
-- c. To refine the analysis process
-- d. To visualize data
+- [ ] To collect data
+- [ ] To clean data
+- [ ] To refine the analysis process
+- [ ] To visualize data
 
 <details>
 <summary>Show hint</summary>
@@ -248,10 +248,10 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 
 17. Which of the following is an example of third-party data?
 
-- a. CRM data
-- b. Customer interactions
-- c. Data from data aggregators
-- d. Surveys
+- [ ] CRM data
+- [ ] Customer interactions
+- [ ] Data from data aggregators
+- [ ] Surveys
 
 <details>
 <summary>Show hint</summary>
@@ -263,10 +263,10 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 
 18. What is the main benefit of using web scraping?
 
-- a. To analyze data
-- b. To conduct interviews
-- c. To collect large datasets quickly
-- d. To visualize data
+- [ ] To analyze data
+- [ ] To conduct interviews
+- [ ] To collect large datasets quickly
+- [ ] To visualize data
 
 <details>
 <summary>Show hint</summary>
@@ -278,10 +278,10 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 
 19. What is the significance of the right to erasure under data privacy laws?
 
-- a. Individuals can access their data
-- b. Individuals can correct their data
-- c. Individuals can request deletion of their data
-- d. Individuals can transfer their data
+- [ ] Individuals can access their data
+- [ ] Individuals can correct their data
+- [ ] Individuals can request deletion of their data
+- [ ] Individuals can transfer their data
 
 <details>
 <summary>Show hint</summary>
@@ -293,10 +293,10 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 
 20. Which of the following best describes the role of data visualization?
 
-- a. To collect data
-- b. To clean data
-- c. To present data and analysis results
-- d. To analyze data
+- [ ] To collect data
+- [ ] To clean data
+- [ ] To present data and analysis results
+- [ ] To analyze data
 
 <details>
 <summary>Show hint</summary>
