@@ -4,6 +4,8 @@
 // Events from /api/chat, which proxies OpenRouter with per-lesson context.
 
 (function () {
+  if (new URLSearchParams(window.location.search).get('embed') === '1') return;
+
   const cfg = window.TAMKEEN_CHATBOT;
   if (!cfg || !cfg.lessonKey || !cfg.endpoint) return;
 
