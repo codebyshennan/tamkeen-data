@@ -4,7 +4,7 @@
 
 **Mandatory** • 6 questions • Covers Inferential Statistics, Hypothesis Testing, and A/B Testing.
 
-Try each question closed-book first. Click **Show hint** if you get stuck — hints point you at the relevant lesson section and how to think about it, without naming the answer. If a hint isn't enough, open the chatbot (bottom-right) and ask for a deeper explanation.
+Try each question closed-book first. Click **Show hint** if you get stuck — hints point you at the relevant lesson section and how to think about it, without naming the answer.
 
 ---
 
