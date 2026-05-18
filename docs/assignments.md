@@ -1,14 +1,14 @@
 ---
 layout: default
 title: Assignments
-description: All per-lesson assignments from the upstream tamkeen-data source, in one place.
+description: All per-lesson assignments in one place.
 ---
 
 # Assignments
 
-These are the assignments shipped by the upstream [`SkillsUnion/tamkeen-data`](https://github.com/SkillsUnion/tamkeen-data) curriculum, mirrored here lesson-by-lesson. Each assignment has a companion **Hints** page that points you at the relevant lesson section and suggests how to think about each question — without giving the answer away.
+Each lesson below has an assignment plus a companion **Hints** page that points you at the relevant lesson section and suggests how to think about each question — without giving the answer away.
 
-> **Scope.** Only assignments from the upstream source are listed below. Earlier docsite-authored assignments are kept under each module's `assignments/archive/` for reference but are not part of the active curriculum.
+> **Submit your work on Skills Union →** <https://skillsu.com/member/assessment>
 
 ## Module 1 — Data fundamentals
 
@@ -30,17 +30,11 @@ These are the assignments shipped by the upstream [`SkillsUnion/tamkeen-data`](h
 
 ## Modules 3 – 5
 
-The upstream `tamkeen-data` repo does not yet ship assignments for the visualization, statistical-analysis, or ML modules. When those land upstream they will be mirrored here.
+Assignments for the visualization, statistical-analysis, and ML modules will be added here as they become available.
 
 ## How to use these
 
 - **Skim the lesson README first**, then attempt the assignment closed-book to gauge recall.
 - It is normal to **look up syntax** — these are not closed-book exams.
 - When you get stuck, open the **Hints** page in another tab. Each hint points at a lesson section and offers a way to think about the problem; none of them name the correct option or hand you a finished solution.
-- Submit code as a Python script or Jupyter notebook per the assignment instructions.
-
-## For instructors
-
-Solutions for the coding assignments live alongside the source files in [`tamkeen-data`](https://github.com/SkillsUnion/tamkeen-data) under each lesson's `assignment.md` — the docsite copies strip the `## Solutions` block. MCQ answer markers (`_b. ..._`) are preserved in source; the docsite strips them.
-
-Authored-but-not-from-source assignments (the previous monolithic module quizzes, the BI dashboard project, the 4.x practice quizzes) are kept under `<module>/assignments/archive/` rather than deleted.
+- Submit your work on **[Skills Union](https://skillsu.com/member/assessment)** per the assignment instructions.
