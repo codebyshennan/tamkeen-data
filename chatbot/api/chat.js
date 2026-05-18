@@ -133,20 +133,7 @@ export default async function handler(req, res) {
     return sendJson(res, 502, { error: `upstream ${upstream.status}`, detail: text.slice(0, 500) });
   }
 
-  // Stream OpenRouter SSE directly to the client.
-  res.statusCode = 200;
-  res.setHeader('content-type', 'text/event-stream');
-  res.setHeader('cache-control', 'no-cache, no-transform');
-  res.setHeader('connection', 'keep-alive');
-
-  const reader = upstream.body.getReader();
-  try {
-    while (true) {
-      const { value, done } = await reader.read();
-      if (done) break;
-      res.write(value);
-    }
-  } finally {
-    res.end();
-  }
+  // Non-streaming: return the full JSON response.
+  const json = await upstream.json();
+  return sendJson(res, 200, json);
 }
