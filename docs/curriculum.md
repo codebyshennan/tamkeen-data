@@ -78,7 +78,8 @@ All assignments: [Assignments index](assignments.md).
 
 ### 2. Data Wrangling
 
-* [Module Assignment](2-data-wrangling/assignments/module-assignment-student.md)
+All assignments: [Assignments index](assignments.md).
+
 * [2.1 SQL](2-data-wrangling/2.1-sql/README.md)
   * [Introduction to Databases](2-data-wrangling/2.1-sql/intro-databases.md)
   * [Basic Operations](2-data-wrangling/2.1-sql/basic-operations.md)
@@ -86,17 +87,20 @@ All assignments: [Assignments index](assignments.md).
   * [Aggregations](2-data-wrangling/2.1-sql/aggregations.md)
   * [Advanced Concepts](2-data-wrangling/2.1-sql/advanced-concepts.md)
   * [Project](2-data-wrangling/2.1-sql/project.md)
+  * [Assignment: SQL exercises](2-data-wrangling/2.1-sql/assignments/coding.md)
 * [2.2 Data Wrangling](2-data-wrangling/2.2-data-wrangling/README.md)
   * [Data Quality](2-data-wrangling/2.2-data-wrangling/data-quality.md)
   * [Missing Values](2-data-wrangling/2.2-data-wrangling/missing-values.md)
   * [Outliers](2-data-wrangling/2.2-data-wrangling/outliers.md)
   * [Transformations](2-data-wrangling/2.2-data-wrangling/transformations.md)
   * [Project](2-data-wrangling/2.2-data-wrangling/project.md)
+  * [Assignment: Coding tasks](2-data-wrangling/2.2-data-wrangling/assignments/coding.md)
 * [2.3 Exploratory Data Analysis](2-data-wrangling/2.3-eda/README.md)
   * [Distributions](2-data-wrangling/2.3-eda/distributions.md)
   * [Relationships](2-data-wrangling/2.3-eda/relationships.md)
   * [Time Series](2-data-wrangling/2.3-eda/time-series.md)
   * [Project](2-data-wrangling/2.3-eda/project.md)
+  * [Assignment: Coding tasks](2-data-wrangling/2.3-eda/assignments/coding.md)
 * [2.4 Data Engineering](2-data-wrangling/2.4-data-engineering/README.md)
   * [ETL Fundamentals](2-data-wrangling/2.4-data-engineering/etl-fundamentals.md)
   * [Data Storage](2-data-wrangling/2.4-data-engineering/data-storage.md)
