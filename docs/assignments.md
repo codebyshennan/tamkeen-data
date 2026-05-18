@@ -28,9 +28,16 @@ Each lesson below has an assignment plus a companion **Hints** page that points 
 | 2.2 — Data wrangling | [Coding tasks](2-data-wrangling/2.2-data-wrangling/assignments/coding.md) | 5 task groups | [Hints](2-data-wrangling/2.2-data-wrangling/assignments/coding-hints.md) |
 | 2.3 — Exploratory data analysis | [Coding tasks](2-data-wrangling/2.3-eda/assignments/coding.md) | 6 task groups | [Hints](2-data-wrangling/2.3-eda/assignments/coding-hints.md) |
 
-## Modules 3 – 5
+## Module assessments
 
-Assignments for the visualization, statistical-analysis, and ML modules will be added here as they become available.
+Mandatory module-level MCQ assessments. Questions are combined with answers on one page — try each question closed-book first, then click **Show answer** to check.
+
+| Module | Assessment | Length |
+|---|---|---|
+| Module 2 — Data wrangling | [Module 2 Assessment](2-data-wrangling/assignments/assessment.md) | 10 questions |
+| Module 3 — Data visualization | [Module 3 Assessment](3-data-visualization/assignments/assessment.md) | 10 questions |
+| Module 4 — Statistical analysis | [Module 4 Assessment](4-stat-analysis/assignments/assessment.md) | 6 questions |
+| Module 5 — Machine learning | [Module 5 Assessment](5-ml-fundamentals/assignments/assessment.md) | 6 questions |
 
 ## How to use these
 
