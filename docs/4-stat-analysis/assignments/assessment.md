@@ -4,7 +4,7 @@
 
 **Mandatory** • 6 questions • Covers Inferential Statistics, Hypothesis Testing, and A/B Testing.
 
-Try each question closed-book first. Click **Show answer** to check your work.
+Try each question closed-book first. Click **Show hint** if you get stuck — hints point you at the relevant lesson section and how to think about it, without naming the answer. If a hint isn't enough, open the chatbot (bottom-right) and ask for a deeper explanation.
 
 ---
 
@@ -16,9 +16,10 @@ Try each question closed-book first. Click **Show answer** to check your work.
 - Control group
 
 <details>
-<summary>Show answer</summary>
+<summary>Show hint</summary>
 
-**Population**
+- **Where:** [Inferential statistics](../4.1-inferential-stats/README.md) — population vs sample.
+- **Think:** A *sample* is a **subset** of something larger. A *variable* is a measured attribute. A *control group* is an experiment role. The word you want describes the **entire group** the subset is drawn from.
 
 </details>
 
@@ -30,9 +31,10 @@ Try each question closed-book first. Click **Show answer** to check your work.
 - Data point
 
 <details>
-<summary>Show answer</summary>
+<summary>Show hint</summary>
 
-**Statistic**
+- **Where:** [Inferential statistics](../4.1-inferential-stats/README.md) — parameter vs statistic.
+- **Think:** Statisticians use two paired terms: one for a number that summarises a **population**, one for a number that summarises a **sample**. Greek letters describe the population number; Roman letters describe the sample number.
 
 </details>
 
@@ -44,9 +46,10 @@ Try each question closed-book first. Click **Show answer** to check your work.
 - A distribution of a statistic over many samples drawn from the same population
 
 <details>
-<summary>Show answer</summary>
+<summary>Show hint</summary>
 
-**A distribution of a statistic over many samples drawn from the same population**
+- **Where:** [Inferential statistics](../4.1-inferential-stats/README.md) — sampling distributions.
+- **Think:** The word *sampling* (gerund) is the giveaway — it's about the **act of repeatedly sampling**. The answer must talk about **many** samples, not one.
 
 </details>
 
@@ -58,9 +61,10 @@ Try each question closed-book first. Click **Show answer** to check your work.
 - None of the above
 
 <details>
-<summary>Show answer</summary>
+<summary>Show hint</summary>
 
-**None of the above**
+- **Where:** [Inferential statistics](../4.1-inferential-stats/README.md) — CLT.
+- **Think:** Read each of the first three carefully. They are all things the CLT actually claims (normal limit, works for any underlying distribution, sampling-distribution-of-the-mean). If all three are correct statements of the CLT, what does that leave?
 
 </details>
 
@@ -72,9 +76,10 @@ Try each question closed-book first. Click **Show answer** to check your work.
 - UNOVA
 
 <details>
-<summary>Show answer</summary>
+<summary>Show hint</summary>
 
-**UNOVA**
+- **Where:** [Hypothesis testing](../4.2-hypothesis-testing/README.md) — common tests.
+- **Think:** Three of these are textbook tests you'll meet in any stats course. The fourth is a made-up name that sounds similar to a real one — check which acronym you've never actually seen used.
 
 </details>
 
@@ -86,8 +91,9 @@ Try each question closed-book first. Click **Show answer** to check your work.
 - All of the above
 
 <details>
-<summary>Show answer</summary>
+<summary>Show hint</summary>
 
-**All of the above**
+- **Where:** [A/B testing](../4.3-ab-testing/README.md) — use cases.
+- **Think:** A/B testing works anywhere you can split traffic and measure an outcome. Email subject lines, app UI variants, and price points all meet that bar. If each option is valid on its own, the umbrella answer wins.
 
 </details>
