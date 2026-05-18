@@ -1,19 +1,24 @@
-// Edge function: proxies chat completions to OpenRouter with per-lesson
-// context injected as the system prompt. The widget POSTs:
+// Vercel Node serverless function: proxies chat completions to OpenRouter
+// with per-lesson context injected as the system prompt. The widget POSTs:
 //   { lesson_key: "1.2-intro-python", messages: [{role, content}, ...] }
 //
-// We load the matching bundle from chatbot/context/<lesson_key>.json,
-// prepend the Socratic system prompt + lesson context as a single system
-// message, and stream the assistant response back as Server-Sent Events.
+// We load the matching bundle from chatbot/context/<lesson_key>.json and
+// stream the assistant response back as Server-Sent Events.
 
-import manifest from '../context/manifest.json' with { type: 'json' };
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const CONTEXT_DIR = path.resolve(__dirname, '..', 'context');
+
+const manifest = JSON.parse(readFileSync(path.join(CONTEXT_DIR, 'manifest.json'), 'utf8'));
 const ALLOWED = new Set(manifest.lessons.map(l => l.key));
 const MODEL = process.env.OPENROUTER_MODEL || 'anthropic/claude-haiku-4.5';
 const MAX_HISTORY_TURNS = 20;
 const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
 
-export const config = { runtime: 'edge' };
+export const config = { runtime: 'nodejs20.x' };
 
 const SYSTEM_PROMPT = `
 You are a tutor for the Tamkeen Data Science & AI course. The student is working on an assignment for a specific lesson. Your job is to GUIDE their thinking without revealing the answer.
@@ -48,17 +53,21 @@ function buildSystemMessage(bundle) {
 }
 
 const bundleCache = new Map();
-async function loadBundle(lessonKey) {
+function loadBundle(lessonKey) {
   if (bundleCache.has(lessonKey)) return bundleCache.get(lessonKey);
-  const mod = await import(`../context/${lessonKey}.json`, { with: { type: 'json' } });
-  bundleCache.set(lessonKey, mod.default);
-  return mod.default;
+  const file = path.join(CONTEXT_DIR, `${lessonKey}.json`);
+  const bundle = JSON.parse(readFileSync(file, 'utf8'));
+  bundleCache.set(lessonKey, bundle);
+  return bundle;
 }
 
 function jsonResponse(status, body) {
   return new Response(JSON.stringify(body), {
     status,
-    headers: { 'content-type': 'application/json', 'access-control-allow-origin': '*' },
+    headers: {
+      'content-type': 'application/json',
+      'access-control-allow-origin': '*',
+    },
   });
 }
 
@@ -93,7 +102,7 @@ export default async function handler(req) {
   if (trimmed.length === 0) return jsonResponse(400, { error: 'no valid messages' });
 
   let bundle;
-  try { bundle = await loadBundle(lesson_key); }
+  try { bundle = loadBundle(lesson_key); }
   catch (e) { return jsonResponse(500, { error: `context load failed: ${e.message}` }); }
 
   const upstream = await fetch(OPENROUTER_URL, {
