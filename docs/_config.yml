@@ -22,6 +22,7 @@ commonmark:
     - table
     - strikethrough
     - autolink
+    - tasklist
 # Theme via gem (see `theme:` below); do not use `remote_theme` here — it downloads from
 # GitHub at build time and can fail on flaky networks or SSL issues. Gem matches Pages.
 # Keep in sync with GitHub Pages defaults (see Gemfile / https://pages.github.com/versions/)
