@@ -110,7 +110,6 @@ All assignments: [Assignments index](assignments.md).
 ### 3. Data Visualization
 
 * [Quick Start Guide](3-data-visualization/quick-start.md)
-* [Module Assignment](3-data-visualization/assignments/module-assignment.md)
 * [3.1 Introduction to Data Visualization](3-data-visualization/3.1-intro-data-viz/README.md)
   * [Visualization Principles](3-data-visualization/3.1-intro-data-viz/visualization-principles.md)
   * [Matplotlib Basics](3-data-visualization/3.1-intro-data-viz/matplotlib-basics.md)
@@ -138,7 +137,6 @@ All assignments: [Assignments index](assignments.md).
 
 ### 4. Statistical Analysis
 
-* [Module Assignment](4-stat-analysis/assignments/module-assignment.md)
 * [4.1 Inferential Statistics](4-stat-analysis/4.1-inferential-stats/README.md)
   * [Population and Sample](4-stat-analysis/4.1-inferential-stats/population-sample.md)
   * [Parameters and Statistics](4-stat-analysis/4.1-inferential-stats/parameters-statistics.md)
@@ -166,7 +164,6 @@ All assignments: [Assignments index](assignments.md).
 
 ### 5. Machine Learning Fundamentals
 
-* [Module Assignment](5-ml-fundamentals/assignments/module-assignment.md)
 * [5.1 Introduction to Machine Learning](5-ml-fundamentals/5.1-intro-to-ml/README.md)
   * [What is Machine Learning?](5-ml-fundamentals/5.1-intro-to-ml/what-is-ml.md)
   * [ML Workflow](5-ml-fundamentals/5.1-intro-to-ml/ml-workflow.md)
