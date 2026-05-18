@@ -2301,3 +2301,14 @@ html[data-embed="true"] .page-toc {
 html[data-embed="true"] .page-layout__main {
     grid-column: 1 / -1;
 }
+
+/* GFM task lists (quiz options): drop the bullet on items that contain a checkbox */
+.markdown-body li:has(> input[type="checkbox"]) {
+    list-style: none;
+    margin-left: -1.25em;
+}
+.markdown-body li > input[type="checkbox"] {
+    margin-right: 0.4em;
+    cursor: pointer;
+    transform: translateY(1px);
+}
