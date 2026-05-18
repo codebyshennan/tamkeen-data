@@ -13,6 +13,8 @@ This assignment is multiple choice (100 points total). Use your notes and the mo
 
 > **Time needed:** About 60–90 minutes for a careful first pass; less if you are reviewing.
 
+> **Stuck on a question?** See the [hints page](./module-assignment-hints.md) — it points you at the relevant lesson section and a way to think about each question, without giving the answer away.
+
 ## Part 1: Introduction to Data Analytics (20 points)
 
 1. What is the primary purpose of data collection?
