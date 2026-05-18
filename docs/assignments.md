@@ -6,7 +6,7 @@ description: All per-lesson assignments in one place.
 
 # Assignments
 
-Each lesson below has an assignment page with hints (or, for module assessments, answers) revealed on click. Try each item closed-book first.
+Each lesson below has an assignment page with hints revealed on click. Try each item closed-book first.
 
 > **Submit your work on Skills Union →** <https://skillsu.com/member/assessment>
 
