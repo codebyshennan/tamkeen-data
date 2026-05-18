@@ -40,7 +40,7 @@ Without inference and disciplined comparisons, analytics stays descriptive: char
 
 ## Practice and assessment
 
-- [Module assignments](./_assignments/module-assignment.md) — consolidated assignment for module 4.
+- [Module assignments](./assignments/module-assignment.md) — consolidated assignment for module 4.
 
 ## Next steps
 

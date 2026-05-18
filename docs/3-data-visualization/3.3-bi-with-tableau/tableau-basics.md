@@ -340,7 +340,7 @@ These are the errors almost every beginner makes. Read them now so you don't hav
 ## Next steps
 
 - Continue with [Tableau case study](tableau-case-study.md) or [advanced analytics](advanced-analytics.md).
-- See the submodule overview in [README](README.md) and the [module assignment](../_assignments/module-assignment.md) when you are ready for a graded exercise.
+- See the submodule overview in [README](README.md) and the [module assignment](../assignments/module-assignment.md) when you are ready for a graded exercise.
 
 ### Additional Resources
 

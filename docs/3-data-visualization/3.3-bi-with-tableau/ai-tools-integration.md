@@ -227,7 +227,7 @@ Add the Tableau block, replacing the placeholder values:
 {
   "mcpServers": {
     "tableau": {
-      "command": "npx",
+      "command": "pnpm exec",
       "args": ["-y", "@salesforce/mcp-server-tableau"],
       "env": {
         "TABLEAU_SERVER_URL": "https://your-tableau-server.com",

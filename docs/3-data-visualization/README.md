@@ -32,7 +32,7 @@ By the end of this module, you should be able to choose chart types for a goal, 
 
 ## Assignment
 
-- [Module assignment](_assignments/module-assignment.md)
+- [Module assignment](assignments/module-assignment.md)
 
 ## Next steps
 

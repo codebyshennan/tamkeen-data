@@ -2337,7 +2337,7 @@ Try applying these model interpretation techniques to your own dataset:
 
 ## Next steps
 
-- Try the [module 4 assignments](../_assignments/module-assignment.md) to consolidate inference, testing, relationships, and modelling.
+- Try the [module 4 assignments](../assignments/module-assignment.md) to consolidate inference, testing, relationships, and modelling.
 
 ## Gotchas
 

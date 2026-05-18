@@ -101,7 +101,7 @@ pnpm run notebook-index
 
 Edit curriculum order in `scripts/generate-lesson-nav-order.mjs` (`OVERRIDES` map), then re-run that command. Folders without an override use `README.md` first, then other `.md` files alphabetically by filename. The generator includes **every** `*.md` in each submodule directory (including maintainer notes, TODO, generated outputs, and `slides/` when present). Set `lesson_nav: false` in front matter to hide the bar on a page.
 
-The bar appears on **all** built lesson pages that use the default layout; only the site home (`index.md`) and repo-root `README.md` omit it. If a file is missing from the YAML (e.g. before you re-run the generator), prev/next fall back to **all pages in the same folder**, sorted by path. Pages under `<module>/_assignments/` link “Back to module root” to that module’s directory index (`…/`, built from `README.md` as `index.html`). When slides and/or notebooks exist for that submodule, `_includes/lesson-slides-top.html` renders a **resource bar** at the **top** of every page in the submodule (below breadcrumbs) with **Slides** and/or **Notebook** (Google Colab) buttons. Additional per-page resource buttons (datasets, starter code, etc.) can be added via `lesson_resources` front matter — see below. Progress shows **Lesson *n* of *m*** in the bottom bar when ordering is known.
+The bar appears on **all** built lesson pages that use the default layout; only the site home (`index.md`) and repo-root `README.md` omit it. If a file is missing from the YAML (e.g. before you re-run the generator), prev/next fall back to **all pages in the same folder**, sorted by path. Pages under `<module>/assignments/` link “Back to module root” to that module’s directory index (`…/`, built from `README.md` as `index.html`). When slides and/or notebooks exist for that submodule, `_includes/lesson-slides-top.html` renders a **resource bar** at the **top** of every page in the submodule (below breadcrumbs) with **Slides** and/or **Notebook** (Google Colab) buttons. Additional per-page resource buttons (datasets, starter code, etc.) can be added via `lesson_resources` front matter — see below. Progress shows **Lesson *n* of *m*** in the bottom bar when ordering is known.
 
 **Optional lesson front matter** (YAML in pages that use it): `reading_minutes: 15`, `objectives: [“…”, “…”]`, `lesson_meta: false` to hide the optional meta block. `notebook_url: “https://…”` overrides the auto-generated Colab URL for that page. `lesson_resources` adds extra resource buttons to the top bar:
 
@@ -128,7 +128,7 @@ The script appends a bare ` ``` ` block after ` ```python ` when execution print
 
 **Helpful video (YouTube) blocks:** To add a standard `## Helpful video` iframe section to lessons that lack one, from `docs/` run `pnpm run helpful-videos` (see `scripts/add_helpful_videos.py` and `meta/DOCUMENTATION_GUIDELINES.md`). Use `--dry-run` to preview.
 
-**Learner outcome lines:** To migrate `**Primary outcome:**` or add missing outcome lines across lesson files, run `pnpm run after-outcomes` (wraps `scripts/add_after_outcomes.py`; skips `0-prep/`, `_assignments/`, `slides/`, `meta/`).
+**Learner outcome lines:** To migrate `**Primary outcome:**` or add missing outcome lines across lesson files, run `pnpm run after-outcomes` (wraps `scripts/add_after_outcomes.py`; skips `0-prep/`, `assignments/`, `slides/`, `meta/`).
 
 **ML code block audit:** To audit fenced code blocks in `5-ml-fundamentals/` for missing outputs or wrap candidates, run `pnpm run audit-ml-code-blocks` (see `scripts/audit_ml_fundamentals_code_blocks.py`).
 
@@ -141,7 +141,7 @@ The script appends a bare ` ``` ` block after ` ```python ` when execution print
   - Markdown content files (tutorials, concepts)
   - `slides/data.json` - Slide definitions for Reveal.js
   - `slides/index.html` - Generated presentations (do not edit directly)
-  - `_assignments/` - Practical exercises
+  - `assignments/` - Practical exercises
 
 ### Slide Generation System
 1. Define slides in `<module>/slides/data.json` with type (`title` or `content`)

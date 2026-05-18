@@ -32,7 +32,7 @@ For every **lesson page** and **module/submodule README** under `docs/` (modules
 
 Prefer moving an existing `**Primary outcome:**` from the Overview section up to this position (and delete the duplicate under Overview) so success criteria appear before scrolling.
 
-**Maintainer script:** `scripts/add_after_outcomes.py` migrates `**Primary outcome:**` and fills missing pages with a short generic line. It skips `0-prep/`, `_assignments/`, `slides/`, `meta/`, `.venv/`, `TODO.md`, and similar. Re-run after bulk adds:
+**Maintainer script:** `scripts/add_after_outcomes.py` migrates `**Primary outcome:**` and fills missing pages with a short generic line. It skips `0-prep/`, `assignments/`, `slides/`, `meta/`, `.venv/`, `TODO.md`, and similar. Re-run after bulk adds:
 
 `uv run python scripts/add_after_outcomes.py` (from `docs/`).
 

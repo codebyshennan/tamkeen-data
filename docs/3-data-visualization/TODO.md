@@ -30,4 +30,4 @@ Internal checklist for **assets and enhancements** beyond the current lesson mar
 
 ## Assessment
 
-- Extend [module assignment](_assignments/module-assignment.md) or add a separate project brief if the program requires a portfolio piece.
+- Extend [module assignment](assignments/module-assignment.md) or add a separate project brief if the program requires a portfolio piece.

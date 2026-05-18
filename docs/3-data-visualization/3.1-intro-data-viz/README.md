@@ -221,6 +221,6 @@ See how a basic plot can be enhanced with proper styling and annotations:
 1. Work through [Visualization principles](visualization-principles.md), then [Preparing data for visualization](data-prep-for-visualization.md), then [Matplotlib basics](matplotlib-basics.md).
 2. Use [Annotations and highlighting](annotations-and-highlighting.md) to turn a correct chart into a communicative one, and use [Troubleshooting guide](troubleshooting-guide.md) when plots misbehave.
 3. Continue to [3.2 Advanced data visualization](../3.2-adv-data-viz/README.md) for Seaborn, Plotly, time-series work, and a case-study workflow.
-4. Use the [module assignment](../_assignments/module-assignment.md) when assigned.
+4. Use the [module assignment](../assignments/module-assignment.md) when assigned.
 
 Remember: The best visualizations tell a story. Focus on clarity and purpose, and let your data speak for itself.

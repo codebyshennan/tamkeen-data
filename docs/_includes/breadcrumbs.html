@@ -26,7 +26,7 @@
         {% unless crumb_page %}
           {% assign crumb_page = site.docs | where: 'path', readme_path | first %}
         {% endunless %}
-        {% if seg == '_assignments' %}
+        {% if seg == 'assignments' %}
           {% assign crumb_label = 'Assignments' %}
           {% assign crumb_short = 'Asst' %}
         {% elsif crumb_page %}

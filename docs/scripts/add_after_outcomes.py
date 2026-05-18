@@ -17,7 +17,7 @@ DOCS = Path(__file__).resolve().parent.parent
 
 SKIP_DIR_PARTS = frozenset(
     {
-        "_assignments",
+        "assignments",
         "slides",
         "meta",
         "_site",
@@ -36,7 +36,7 @@ SKIP_FILES = frozenset(
         "TODO.md",
         "IMPROVEMENTS.md",
         "GENERATED_RESOURCES_SUMMARY.md",
-        "_assignments.md",
+        "assignments.md",
     }
 )
 SKIP_PREFIXES = ("module-assignment",)

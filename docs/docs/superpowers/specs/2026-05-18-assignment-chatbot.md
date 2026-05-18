@@ -36,7 +36,7 @@ assignment page  →   /api/chat (Edge runtime)            pgvector (Supabase)
 ### Retrieval (RAG)
 
 **Indexed sources:**
-- All `*.md` under `docs/<module>/<submodule>/` except `_assignments/` and `meta/`.
+- All `*.md` under `docs/<module>/<submodule>/` except `assignments/` and `meta/`.
 - `module-assignment-hints.md` files (the **authoritative** guidance source for questions).
 - Lesson sections chunked by H2/H3 (~500 tokens, 50-token overlap).
 
@@ -96,7 +96,7 @@ The guardrail is the last line of defense; the system prompt and the hints layer
 
 ### Where it lives
 
-- Floating widget (bottom-right) injected on every page under `*/_assignments/*`.
+- Floating widget (bottom-right) injected on every page under `*/assignments/*`.
 - Hidden elsewhere. The page passes the **current question number** via a `data-q="part1.q3"` attribute on the question container.
 - Dedicated full-page view at `/assignments/chat/` for users who prefer it.
 

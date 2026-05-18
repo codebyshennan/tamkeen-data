@@ -199,7 +199,7 @@ SKIP_NAME_SUBSTR = (
     "module-assignment.md",
     "module-assignment-key.md",
     "module-assignment-student.md",
-    "_assignments.md",
+    "assignments.md",
     "slides/",
     "assets/README.md",
 )

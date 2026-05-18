@@ -216,7 +216,7 @@ def _collect_paths(docs_root: Path, targets: list[str]) -> list[Path]:
             out.append(p)
         elif p.is_dir():
             for f in sorted(p.rglob("*.md")):
-                if "_assignments" in f.parts:
+                if "assignments" in f.parts:
                     continue
                 if f.name == "TODO.md":
                     continue

@@ -617,4 +617,4 @@ Remember:
 ## Next steps
 
 - Continue with [Interactive visualization with Plotly](plotly-guide.md).
-- Review the [3.2 Advanced data visualization](README.md) overview and the [module assignment](../_assignments/module-assignment.md) when assigned.
+- Review the [3.2 Advanced data visualization](README.md) overview and the [module assignment](../assignments/module-assignment.md) when assigned.

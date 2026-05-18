@@ -530,6 +530,6 @@ encoded shape: (120, 10)
 
 ## Assignment
 
-Ready to practice your data wrangling skills? Head over to the [Module 2 assignment (student version)](../_assignments/module-assignment-student.md) to apply what you have learned.
+Ready to practice your data wrangling skills? Head over to the [Module 2 assignment (student version)](../assignments/module-assignment-student.md) to apply what you have learned.
 
 Let's transform messy data into analysis-ready datasets!

@@ -54,7 +54,7 @@ This submodule is **UI-first**: you will connect data and build views in **Table
 | [AI Tools Integration](ai-tools-integration.md) | Use Claude/ChatGPT to write formulas and debug faster |
 | [Power BI Case Study](powerbi-case-study.md) | Build a report in Power BI with DAX and Power Query |
 | [Looker Studio Case Study](looker-studio-case-study.md) | Build a dashboard in Looker Studio from a Google Sheet |
-| [Assignment](/_assignments/bi-dashboard-project.md) | Build your own dashboard answering 3 business questions |
+| [Assignment](/assignments/bi-dashboard-project.md) | Build your own dashboard answering 3 business questions |
 
 ## Prerequisites
 
@@ -308,7 +308,7 @@ This submodule runs over **two sessions**.
 
 - Work through the [Tableau case study](tableau-case-study.md) — end-to-end Superstore dashboard
 - Compare tools: [Looker Studio case study](looker-studio-case-study.md) and [Power BI case study](powerbi-case-study.md)
-- Complete the [module assignment](../_assignments/module-assignment.md)
+- Complete the [module assignment](../assignments/module-assignment.md)
 
 ## Using AI Tools with Tableau
 
@@ -316,7 +316,7 @@ See [ai-tools-integration.md](ai-tools-integration.md) for a practical guide on 
 
 ## Assignment
 
-Use the [module assignment](../_assignments/module-assignment.md) when you are ready for the graded work.
+Use the [module assignment](../assignments/module-assignment.md) when you are ready for the graded work.
 
 ## Resources
 

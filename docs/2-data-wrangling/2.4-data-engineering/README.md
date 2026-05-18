@@ -769,6 +769,6 @@ Airflow is the industry-standard workflow orchestration platform covered in this
 
 ## Assignment
 
-Ready to practice your data engineering skills? Head over to the [Module 2 assignment (student version)](../_assignments/module-assignment-student.md) to apply what you have learned.
+Ready to practice your data engineering skills? Head over to the [Module 2 assignment (student version)](../assignments/module-assignment-student.md) to apply what you have learned.
 
 Let's dive into the world of data engineering and learn how to build robust, scalable data pipelines!

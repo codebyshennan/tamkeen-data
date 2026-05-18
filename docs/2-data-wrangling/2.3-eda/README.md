@@ -756,7 +756,7 @@ def create_interactive_dashboard(df):
 
 ## Assignment
 
-Ready to practice your EDA skills? Head over to the [Module 2 assignment (student version)](../_assignments/module-assignment-student.md) to apply what you have learned.
+Ready to practice your EDA skills? Head over to the [Module 2 assignment (student version)](../assignments/module-assignment-student.md) to apply what you have learned.
 
 Remember: "EDA is not just about looking at data, it's about understanding the story it tells!"
 

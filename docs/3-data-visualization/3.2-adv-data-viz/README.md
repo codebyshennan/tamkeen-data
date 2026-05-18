@@ -617,7 +617,7 @@ Principles:
 
 ## Assignment
 
-When you are ready, use the [module assignment](../_assignments/module-assignment.md) (covers the full Module 3 scope).
+When you are ready, use the [module assignment](../assignments/module-assignment.md) (covers the full Module 3 scope).
 
 ## Resources
 

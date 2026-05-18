@@ -936,7 +936,7 @@ FROM sales_growth;
 
 ## Assignment
 
-Ready to test your SQL skills? Head over to the [Module 2 assignment (student version)](../_assignments/module-assignment-student.md) to apply what you have learned.
+Ready to test your SQL skills? Head over to the [Module 2 assignment (student version)](../assignments/module-assignment-student.md) to apply what you have learned.
 
 ## What's Next?
 

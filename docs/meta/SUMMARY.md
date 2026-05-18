@@ -16,7 +16,7 @@
 
 ## 1. Data Fundamentals
 
-* [Module 1 Assignment](1-data-fundamentals/_assignments/module-assignment.md)
+* [Module 1 Assignment](1-data-fundamentals/assignments/module-assignment.md)
 * [1.1 Introduction to Data Analytics](1-data-fundamentals/1.1-intro-data-analytics/README.md)
   * [Workflow Concepts](1-data-fundamentals/1.1-intro-data-analytics/workflow-concepts.md)
   * [Data Collection](1-data-fundamentals/1.1-intro-data-analytics/data-collection.md)

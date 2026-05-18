@@ -153,13 +153,13 @@
   {% comment %}
     Root href: for submodule pages, point to the submodule's own directory index (its README).
     For README pages (which are the submodule root), point up to the course index.
-    For _assignments pages, point to the parent module's directory index.
+    For assignments pages, point to the parent module's directory index.
   {% endcomment %}
   {% if page.name == 'README.md' %}
     {% assign root_href = '/' %}
     {% assign root_label = 'Course index' %}
-  {% elsif dir_key contains '/_assignments' %}
-    {% assign mod_root = dir_key | split: '/_assignments' | first %}
+  {% elsif dir_key contains '/assignments' %}
+    {% assign mod_root = dir_key | split: '/assignments' | first %}
     {% assign root_href = '/' | append: mod_root | append: '/' %}
     {% assign root_label = 'Back to module' %}
   {% elsif dir_key contains '/' %}
@@ -172,7 +172,7 @@
 
   {% comment %} Safety: if root_href directory has no README, fall back to course index {% endcomment %}
   {% unless root_href == '/' %}
-    {% if dir_key contains '/_assignments' %}
+    {% if dir_key contains '/assignments' %}
       {% assign _check_path = mod_root | append: '/README.md' %}
     {% else %}
       {% assign _check_path = dir_key | append: '/README.md' %}

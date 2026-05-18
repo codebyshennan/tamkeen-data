@@ -74,7 +74,7 @@ Before starting this section, you should be familiar with:
 
 ## Assignment
 
-Ready to apply your knowledge? The module assignment (concepts plus implementation) is in [Module 5 assignment](../_assignments/module-assignment.md).
+Ready to apply your knowledge? The module assignment (concepts plus implementation) is in [Module 5 assignment](../assignments/module-assignment.md).
 
 ## Getting Started
 

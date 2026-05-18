@@ -246,6 +246,6 @@ Story Elements:
 
 1. Read [Narrative techniques](narrative-techniques.md) and [Visual storytelling](visual-storytelling.md).
 2. Work through [Case studies](case-studies.md) with a critical eye on clarity and audience.
-3. Try the [module assignment](../_assignments/module-assignment.md) when your instructor assigns it.
+3. Try the [module assignment](../assignments/module-assignment.md) when your instructor assigns it.
 
 Remember: The best data stories make complex information simple and actionable. Start small, practice often, and iterate from feedback.

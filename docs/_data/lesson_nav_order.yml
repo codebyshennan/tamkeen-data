@@ -19,10 +19,6 @@
 "1-data-fundamentals":
   - "README.md"
 
-"1-data-fundamentals/_assignments":
-  - "module-assignment.md"
-  - "module-assignment-key.md"
-
 "1-data-fundamentals/1.1-intro-data-analytics":
   - "README.md"
   - "data-collection.md"
@@ -70,12 +66,13 @@
   - "arithmetic-alignment.md"
   - "function-mapping.md"
 
+"1-data-fundamentals/assignments":
+  - "module-assignment.md"
+  - "module-assignment-hints.md"
+  - "module-assignment-key.md"
+
 "2-data-wrangling":
   - "README.md"
-
-"2-data-wrangling/_assignments":
-  - "module-assignment-student.md"
-  - "module-assignment-key.md"
 
 "2-data-wrangling/2.1-sql":
   - "README.md"
@@ -108,6 +105,10 @@
   - "etl-fundamentals.md"
   - "project.md"
 
+"2-data-wrangling/assignments":
+  - "module-assignment-student.md"
+  - "module-assignment-key.md"
+
 "3-data-visualization":
   - "README.md"
   - "beginners-guide.md"
@@ -117,10 +118,6 @@
   - "FAQ.md"
   - "glossary.md"
   - "quick-start.md"
-
-"3-data-visualization/_assignments":
-  - "module-assignment.md"
-  - "module-assignment-key.md"
 
 "3-data-visualization/3.1-intro-data-viz":
   - "README.md"
@@ -146,12 +143,12 @@
   - "advanced-analytics.md"
   - "ai-tools-integration.md"
 
-"3-data-visualization/3.3-bi-with-tableau/_assignments":
-  - "README.md"
-  - "bi-dashboard-project.md"
-
 "3-data-visualization/3.3-bi-with-tableau/assets":
   - "README.md"
+
+"3-data-visualization/3.3-bi-with-tableau/assignments":
+  - "README.md"
+  - "bi-dashboard-project.md"
 
 "3-data-visualization/3.4-data-storytelling":
   - "README.md"
@@ -159,12 +156,12 @@
   - "narrative-techniques.md"
   - "case-studies.md"
 
-"4-stat-analysis":
-  - "README.md"
-
-"4-stat-analysis/_assignments":
+"3-data-visualization/assignments":
   - "module-assignment.md"
   - "module-assignment-key.md"
+
+"4-stat-analysis":
+  - "README.md"
 
 "4-stat-analysis/4.1-inferential-stats":
   - "README.md"
@@ -174,7 +171,7 @@
   - "p-values.md"
   - "parameters-statistics.md"
 
-"4-stat-analysis/4.1-inferential-stats/_assignments":
+"4-stat-analysis/4.1-inferential-stats/assignments":
   - "practice-quiz.md"
 
 "4-stat-analysis/4.2-hypotheses-testing":
@@ -185,7 +182,7 @@
   - "ab-testing.md"
   - "results-analysis.md"
 
-"4-stat-analysis/4.2-hypotheses-testing/_assignments":
+"4-stat-analysis/4.2-hypotheses-testing/assignments":
   - "practice-quiz.md"
 
 "4-stat-analysis/4.3-rship-in-data":
@@ -196,7 +193,7 @@
   - "multiple-linear-regression.md"
   - "model-diagnostics.md"
 
-"4-stat-analysis/4.3-rship-in-data/_assignments":
+"4-stat-analysis/4.3-rship-in-data/assignments":
   - "practice-quiz.md"
 
 "4-stat-analysis/4.4-stat-modelling":
@@ -207,15 +204,15 @@
   - "regularization.md"
   - "model-interpretation.md"
 
-"4-stat-analysis/4.4-stat-modelling/_assignments":
+"4-stat-analysis/4.4-stat-modelling/assignments":
   - "practice-quiz.md"
+
+"4-stat-analysis/assignments":
+  - "module-assignment.md"
+  - "module-assignment-key.md"
 
 "5-ml-fundamentals":
   - "README.md"
-
-"5-ml-fundamentals/_assignments":
-  - "module-assignment.md"
-  - "module-assignment-key.md"
 
 "5-ml-fundamentals/5.1-intro-to-ml":
   - "README.md"
@@ -336,6 +333,10 @@
 
 "5-ml-fundamentals/5.5-model-eval/exercises":
   - "README.md"
+
+"5-ml-fundamentals/assignments":
+  - "module-assignment.md"
+  - "module-assignment-key.md"
 
 "6-capstone":
   - "README.md"

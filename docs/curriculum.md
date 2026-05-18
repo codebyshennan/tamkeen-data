@@ -32,7 +32,7 @@ Every module, submodule, and linked lesson in one place. For objectives and cont
 
 ### 1. Data Fundamentals
 
-* [Module 1 Assignment](1-data-fundamentals/_assignments/module-assignment.md)
+* [Module 1 Assignment](1-data-fundamentals/assignments/module-assignment.md)
 * [1.1 Introduction to Data Analytics](1-data-fundamentals/1.1-intro-data-analytics/README.md)
   * [Workflow Concepts](1-data-fundamentals/1.1-intro-data-analytics/workflow-concepts.md)
   * [Data Collection](1-data-fundamentals/1.1-intro-data-analytics/data-collection.md)
@@ -72,7 +72,7 @@ Every module, submodule, and linked lesson in one place. For objectives and cont
 
 ### 2. Data Wrangling
 
-* [Module Assignment](2-data-wrangling/_assignments/module-assignment-student.md)
+* [Module Assignment](2-data-wrangling/assignments/module-assignment-student.md)
 * [2.1 SQL](2-data-wrangling/2.1-sql/README.md)
   * [Introduction to Databases](2-data-wrangling/2.1-sql/intro-databases.md)
   * [Basic Operations](2-data-wrangling/2.1-sql/basic-operations.md)
@@ -100,7 +100,7 @@ Every module, submodule, and linked lesson in one place. For objectives and cont
 ### 3. Data Visualization
 
 * [Quick Start Guide](3-data-visualization/quick-start.md)
-* [Module Assignment](3-data-visualization/_assignments/module-assignment.md)
+* [Module Assignment](3-data-visualization/assignments/module-assignment.md)
 * [3.1 Introduction to Data Visualization](3-data-visualization/3.1-intro-data-viz/README.md)
   * [Visualization Principles](3-data-visualization/3.1-intro-data-viz/visualization-principles.md)
   * [Matplotlib Basics](3-data-visualization/3.1-intro-data-viz/matplotlib-basics.md)
@@ -128,7 +128,7 @@ Every module, submodule, and linked lesson in one place. For objectives and cont
 
 ### 4. Statistical Analysis
 
-* [Module Assignment](4-stat-analysis/_assignments/module-assignment.md)
+* [Module Assignment](4-stat-analysis/assignments/module-assignment.md)
 * [4.1 Inferential Statistics](4-stat-analysis/4.1-inferential-stats/README.md)
   * [Population and Sample](4-stat-analysis/4.1-inferential-stats/population-sample.md)
   * [Parameters and Statistics](4-stat-analysis/4.1-inferential-stats/parameters-statistics.md)
@@ -156,7 +156,7 @@ Every module, submodule, and linked lesson in one place. For objectives and cont
 
 ### 5. Machine Learning Fundamentals
 
-* [Module Assignment](5-ml-fundamentals/_assignments/module-assignment.md)
+* [Module Assignment](5-ml-fundamentals/assignments/module-assignment.md)
 * [5.1 Introduction to Machine Learning](5-ml-fundamentals/5.1-intro-to-ml/README.md)
   * [What is Machine Learning?](5-ml-fundamentals/5.1-intro-to-ml/what-is-ml.md)
   * [ML Workflow](5-ml-fundamentals/5.1-intro-to-ml/ml-workflow.md)

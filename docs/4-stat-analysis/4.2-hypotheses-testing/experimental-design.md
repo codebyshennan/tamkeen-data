@@ -251,8 +251,8 @@ def randomized_block_design(treatments, blocks):
     for block, units in blocks.items():
         reps = len(units) // len(treatments)
         block_treatments = (treatments * reps)[:len(units)]
-        block_assignments = np.random.permutation(block_treatments)
-        assignments.update(dict(zip(units, block_assignments)))
+        blockassignments = np.random.permutation(block_treatments)
+        assignments.update(dict(zip(units, blockassignments)))
     return assignments
 
 # Example usage:

@@ -664,5 +664,5 @@ For any real visualization task:
 ## Next steps
 
 1. [3.4 Data storytelling](../3.4-data-storytelling/README.md) — turn case-study evidence into a polished narrative.
-2. [Module assignment](../_assignments/module-assignment.md) — a fuller end-to-end practice task.
+2. [Module assignment](../assignments/module-assignment.md) — a fuller end-to-end practice task.
 3. [Annotations and highlighting](../3.1-intro-data-viz/annotations-and-highlighting.md) — if your final charts still need too much verbal explanation.

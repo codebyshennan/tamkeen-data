@@ -286,7 +286,7 @@ np.random.seed(42)
 
 ## Assignment
 
-Ready to apply your supervised learning knowledge? The questions are in [Module 5 assignment](../_assignments/module-assignment.md) (see Section 2 for **5.2**); self-check answers are in [_assignments.md](../_assignments.md).
+Ready to apply your supervised learning knowledge? The questions are in [Module 5 assignment](../assignments/module-assignment.md) (see Section 2 for **5.2**); self-check answers are in [assignments.md](../assignments.md).
 
 ## Ready to Begin?
 
