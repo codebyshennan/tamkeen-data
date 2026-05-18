@@ -20,5 +20,8 @@ docs/5-ml-fundamentals/5.5-model-eval/best_params.txt
 docs/5-ml-fundamentals/5.5-model-eval/hyperparameter_tuning_results.csv
 docs/5-ml-fundamentals/5.5-model-eval/model_pipeline.joblib
 
+# Playwright MCP runtime artifacts
+.playwright-mcp/
+
 # Git worktrees
 .worktrees/
