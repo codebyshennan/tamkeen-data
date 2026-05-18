@@ -1,43 +1,46 @@
 ---
 layout: default
 title: Assignments
-description: All module and lesson assignments in one place.
+description: All per-lesson assignments from the upstream tamkeen-data source, in one place.
 ---
 
 # Assignments
 
-Every module ends with a graded assignment, and a few submodules have additional practice quizzes or projects. Use the table below to jump straight to the one you need. Each module assignment is multiple choice unless noted; estimated time is for a careful first pass.
+These are the assignments shipped by the upstream [`SkillsUnion/tamkeen-data`](https://github.com/SkillsUnion/tamkeen-data) curriculum, mirrored here lesson-by-lesson. Each assignment has a companion **Hints** page that points you at the relevant lesson section and suggests how to think about each question — without giving the answer away.
 
-## Module assignments
+> **Scope.** Only assignments from the upstream source are listed below. Earlier docsite-authored assignments are kept under each module's `assignments/archive/` for reference but are not part of the active curriculum.
 
-| Module | Assignment | Format | Time |
+## Module 1 — Data fundamentals
+
+| Lesson | Assignment | Format | Hints |
 |---|---|---|---|
-| 1 — Data fundamentals | [Module 1 assignment](1-data-fundamentals/assignments/module-assignment.md) | MCQ, 100 pts | 60–90 min |
-| 2 — Data wrangling | [Module 2 assignment](2-data-wrangling/assignments/module-assignment-student.md) | MCQ + short answer | 60–90 min |
-| 3 — Data visualization | [Module 3 assignment](3-data-visualization/assignments/module-assignment.md) | MCQ | 45–60 min |
-| 4 — Statistical analysis | [Module 4 assignment](4-stat-analysis/assignments/module-assignment.md) | MCQ | 60–90 min |
-| 5 — Machine learning | [Module 5 assignment](5-ml-fundamentals/assignments/module-assignment.md) | Two-part: MCQ + applied | 90–120 min |
+| 1.1 — Intro to data analytics | [Quiz](1-data-fundamentals/1.1-intro-data-analytics/assignments/quiz.md) | 20 MCQs | [Hints](1-data-fundamentals/1.1-intro-data-analytics/assignments/quiz-hints.md) |
+| 1.2 — Intro to Python | [Coding tasks](1-data-fundamentals/1.2-intro-python/assignments/coding.md) | Functions + class | [Hints](1-data-fundamentals/1.2-intro-python/assignments/coding-hints.md) |
+| 1.3 — Intro to statistics | [Quiz](1-data-fundamentals/1.3-intro-statistics/assignments/quiz.md) | 20 MCQs | [Hints](1-data-fundamentals/1.3-intro-statistics/assignments/quiz-hints.md) |
+| 1.4 — Linear algebra & NumPy | [Coding tasks](1-data-fundamentals/1.4-data-foundation-linear-algebra/assignments/coding.md) | 4 task groups + bonus | [Hints](1-data-fundamentals/1.4-data-foundation-linear-algebra/assignments/coding-hints.md) |
+| 1.5 — Data analysis with pandas | [Coding tasks](1-data-fundamentals/1.5-data-analysis-pandas/assignments/coding.md) | 5 task groups | [Hints](1-data-fundamentals/1.5-data-analysis-pandas/assignments/coding-hints.md) |
 
-## Submodule practice and projects
+## Module 2 — Data wrangling
 
-| Submodule | Assignment |
-|---|---|
-| 3.3 — BI with Tableau | [Build your first BI dashboard](3-data-visualization/3.3-bi-with-tableau/assignments/bi-dashboard-project.md) — 2–3 hr project |
-| 4.1 — Inferential statistics | [Practice quiz](4-stat-analysis/4.1-inferential-stats/assignments/practice-quiz.md) |
-| 4.2 — Hypothesis testing | [Practice quiz](4-stat-analysis/4.2-hypotheses-testing/assignments/practice-quiz.md) |
-| 4.3 — Relationships in data | [Practice quiz](4-stat-analysis/4.3-rship-in-data/assignments/practice-quiz.md) |
-| 4.4 — Statistical modelling | [Practice quiz](4-stat-analysis/4.4-stat-modelling/assignments/practice-quiz.md) |
+| Lesson | Assignment | Format | Hints |
+|---|---|---|---|
+| 2.1 — SQL | [SQL exercises](2-data-wrangling/2.1-sql/assignments/coding.md) | 4 query groups | [Hints](2-data-wrangling/2.1-sql/assignments/coding-hints.md) |
+| 2.2 — Data wrangling | [Coding tasks](2-data-wrangling/2.2-data-wrangling/assignments/coding.md) | 5 task groups | [Hints](2-data-wrangling/2.2-data-wrangling/assignments/coding-hints.md) |
+| 2.3 — Exploratory data analysis | [Coding tasks](2-data-wrangling/2.3-eda/assignments/coding.md) | 6 task groups | [Hints](2-data-wrangling/2.3-eda/assignments/coding-hints.md) |
+
+## Modules 3 – 5
+
+The upstream `tamkeen-data` repo does not yet ship assignments for the visualization, statistical-analysis, or ML modules. When those land upstream they will be mirrored here.
 
 ## How to use these
 
-- **Skim the lesson READMEs first**, then attempt the assignment closed-book to gauge recall.
-- It is normal to **look up syntax** you have not memorized; this is not a closed-book exam.
-- Each module assignment ships with a sibling **answer key** (visible in the repo) for instructors — students should attempt the assignment first.
-- Stuck on a question? Look for the **hints file** (where available) next to the assignment, which points to the lesson section that covers the concept and offers a way to think about it without giving the answer.
+- **Skim the lesson README first**, then attempt the assignment closed-book to gauge recall.
+- It is normal to **look up syntax** — these are not closed-book exams.
+- When you get stuck, open the **Hints** page in another tab. Each hint points at a lesson section and offers a way to think about the problem; none of them name the correct option or hand you a finished solution.
+- Submit code as a Python script or Jupyter notebook per the assignment instructions.
 
 ## For instructors
 
-- Answer keys are at `module-assignment-key.md` in each `assignments/` folder.
-- Quiz items follow the style in `docs/meta/DOCUMENTATION_GUIDELINES.md`.
-- Module 1 has a worked example of the **hints** companion file at [`1-data-fundamentals/assignments/module-assignment-hints.md`](1-data-fundamentals/assignments/module-assignment-hints.md); reuse the pattern for other modules.
+Solutions for the coding assignments live alongside the source files in [`tamkeen-data`](https://github.com/SkillsUnion/tamkeen-data) under each lesson's `assignment.md` — the docsite copies strip the `## Solutions` block. MCQ answer markers (`_b. ..._`) are preserved in source; the docsite strips them.
 
+Authored-but-not-from-source assignments (the previous monolithic module quizzes, the BI dashboard project, the 4.x practice quizzes) are kept under `<module>/assignments/archive/` rather than deleted.
