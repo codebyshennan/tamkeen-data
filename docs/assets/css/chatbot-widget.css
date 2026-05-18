@@ -1,0 +1,130 @@
+/* Assignment chatbot widget — floating bottom-right launcher + panel. */
+.cb-launcher {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9000;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--color-accent, #2563eb);
+  color: white;
+  font-size: 1.4rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease;
+}
+.cb-launcher:hover { transform: translateY(-2px); }
+.cb-launcher[aria-expanded="true"] { background: var(--color-muted, #6b7280); }
+
+.cb-panel {
+  position: fixed;
+  bottom: 6rem;
+  right: 1.5rem;
+  z-index: 9001;
+  width: min(420px, calc(100vw - 3rem));
+  height: min(640px, calc(100vh - 8rem));
+  background: var(--color-bg, #fff);
+  color: var(--color-fg, #111);
+  border: 1px solid var(--color-border, #e5e7eb);
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: inherit;
+}
+.cb-panel[data-open="true"] { display: flex; }
+[data-theme="dark"] .cb-panel { background: #0f172a; color: #e2e8f0; border-color: #1e293b; }
+
+.cb-header {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--color-border, #e5e7eb);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+[data-theme="dark"] .cb-header { border-color: #1e293b; }
+.cb-title { font-weight: 600; font-size: 0.95rem; margin: 0; }
+.cb-subtitle { font-size: 0.75rem; opacity: 0.65; margin: 0; }
+.cb-close { background: none; border: 0; cursor: pointer; font-size: 1.2rem; color: inherit; padding: 0.25rem 0.5rem; }
+
+.cb-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+.cb-msg { padding: 0.6rem 0.85rem; border-radius: 10px; max-width: 88%; white-space: pre-wrap; word-wrap: break-word; }
+.cb-msg pre, .cb-msg code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.85em; }
+.cb-msg pre { background: rgba(0,0,0,0.06); padding: 0.5rem 0.65rem; border-radius: 6px; overflow-x: auto; }
+[data-theme="dark"] .cb-msg pre { background: rgba(255,255,255,0.08); }
+.cb-msg-user { align-self: flex-end; background: var(--color-accent, #2563eb); color: white; }
+.cb-msg-user pre { background: rgba(0,0,0,0.25); }
+.cb-msg-assistant { align-self: flex-start; background: rgba(0,0,0,0.05); }
+[data-theme="dark"] .cb-msg-assistant { background: rgba(255,255,255,0.06); }
+.cb-msg-error { align-self: stretch; background: #fee2e2; color: #991b1b; font-size: 0.85rem; }
+
+.cb-quick {
+  padding: 0.5rem 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.cb-quick button {
+  text-align: left;
+  background: transparent;
+  border: 1px solid var(--color-border, #e5e7eb);
+  border-radius: 8px;
+  padding: 0.5rem 0.65rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: inherit;
+}
+.cb-quick button:hover { background: rgba(0,0,0,0.04); }
+[data-theme="dark"] .cb-quick button { border-color: #1e293b; }
+[data-theme="dark"] .cb-quick button:hover { background: rgba(255,255,255,0.06); }
+
+.cb-input-row {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--color-border, #e5e7eb);
+}
+[data-theme="dark"] .cb-input-row { border-color: #1e293b; }
+.cb-input {
+  flex: 1;
+  border: 1px solid var(--color-border, #e5e7eb);
+  border-radius: 8px;
+  padding: 0.5rem 0.65rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  resize: none;
+  min-height: 38px;
+  max-height: 120px;
+  background: var(--color-bg, #fff);
+  color: inherit;
+}
+[data-theme="dark"] .cb-input { background: #1e293b; border-color: #334155; }
+.cb-send {
+  background: var(--color-accent, #2563eb);
+  color: white;
+  border: 0;
+  border-radius: 8px;
+  padding: 0 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+.cb-send:disabled { opacity: 0.5; cursor: not-allowed; }
+
+@media print { .cb-launcher, .cb-panel { display: none !important; } }

@@ -1,0 +1,14 @@
+{
+  "name": "tamkeen-assignment-chatbot",
+  "version": "0.1.0",
+  "description": "Socratic assignment tutor for the DSAI docsite. Proxies OpenRouter, with per-lesson context injected from bundled lesson markdown.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "bundle": "node scripts/bundle.mjs",
+    "dev": "vercel dev"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

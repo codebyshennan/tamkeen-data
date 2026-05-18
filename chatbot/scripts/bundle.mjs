@@ -1,0 +1,127 @@
+#!/usr/bin/env node
+// Bundle per-lesson context for the assignment chatbot.
+//
+// For every assignment page that the docsite ships (quiz.md or coding.md
+// under <module>/<submodule>/assignments/), produce a JSON file containing:
+//   - lesson_key       e.g. "1.2-intro-python"
+//   - title            human-readable lesson title (from README front matter or H1)
+//   - assignment       the stripped student-facing assignment file
+//   - hints            the companion hints file
+//   - lesson_pages[]   { name, body } for every lesson .md in the submodule
+//                      (excludes the assignments/ folder, archives, slides, notebooks)
+//
+// Output: chatbot/context/<lesson_key>.json
+//
+// The Edge endpoint loads the file matching the lesson_key sent by the widget
+// and prepends it to the system prompt. This means the bot's context is
+// strictly scoped to the lesson the student is on — no cross-module leakage.
+
+import { promises as fs } from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = path.resolve(__dirname, '..', '..');
+const DOCS = path.join(ROOT, 'docs');
+const OUT = path.join(__dirname, '..', 'context');
+
+const LESSONS = [
+  // Module 1
+  { key: '1.1-intro-data-analytics',          submodule: '1-data-fundamentals/1.1-intro-data-analytics',          assignment: 'quiz.md' },
+  { key: '1.2-intro-python',                  submodule: '1-data-fundamentals/1.2-intro-python',                  assignment: 'coding.md' },
+  { key: '1.3-intro-statistics',              submodule: '1-data-fundamentals/1.3-intro-statistics',              assignment: 'quiz.md' },
+  { key: '1.4-data-foundation-linear-algebra', submodule: '1-data-fundamentals/1.4-data-foundation-linear-algebra', assignment: 'coding.md' },
+  { key: '1.5-data-analysis-pandas',          submodule: '1-data-fundamentals/1.5-data-analysis-pandas',          assignment: 'coding.md' },
+  // Module 2
+  { key: '2.1-sql',                           submodule: '2-data-wrangling/2.1-sql',                              assignment: 'coding.md' },
+  { key: '2.2-data-wrangling',                submodule: '2-data-wrangling/2.2-data-wrangling',                   assignment: 'coding.md' },
+  { key: '2.3-eda',                           submodule: '2-data-wrangling/2.3-eda',                              assignment: 'coding.md' },
+];
+
+const EXCLUDED_FILENAMES = new Set([
+  'REVIEW-ENHANCEMENTS.md',
+  'CODE-BLOCK-PATTERN.md',
+  'TODO.md',
+]);
+
+async function readIfExists(p) {
+  try { return await fs.readFile(p, 'utf8'); }
+  catch (e) { if (e.code === 'ENOENT') return null; throw e; }
+}
+
+function deriveTitle(readme, fallback) {
+  if (!readme) return fallback;
+  const fmMatch = readme.match(/^---\n([\s\S]*?)\n---/);
+  if (fmMatch) {
+    const titleLine = fmMatch[1].split('\n').find(l => /^title:/.test(l));
+    if (titleLine) return titleLine.replace(/^title:\s*/, '').replace(/^["']|["']$/g, '').trim();
+  }
+  const h1 = readme.split('\n').find(l => l.startsWith('# '));
+  if (h1) return h1.replace(/^#\s+/, '').trim();
+  return fallback;
+}
+
+async function collectLessonPages(submoduleDir) {
+  const entries = await fs.readdir(submoduleDir, { withFileTypes: true });
+  const pages = [];
+  for (const e of entries) {
+    if (!e.isFile() || !e.name.endsWith('.md')) continue;
+    if (EXCLUDED_FILENAMES.has(e.name)) continue;
+    const body = await fs.readFile(path.join(submoduleDir, e.name), 'utf8');
+    pages.push({ name: e.name, body });
+  }
+  pages.sort((a, b) => a.name === 'README.md' ? -1 : b.name === 'README.md' ? 1 : a.name.localeCompare(b.name));
+  return pages;
+}
+
+async function bundleOne(lesson) {
+  const submoduleDir = path.join(DOCS, lesson.submodule);
+  const asgDir = path.join(submoduleDir, 'assignments');
+  const asgFile = path.join(asgDir, lesson.assignment);
+  const hintsFile = path.join(asgDir, lesson.assignment.replace(/\.md$/, '-hints.md'));
+
+  const [assignment, hints, readme, pages] = await Promise.all([
+    readIfExists(asgFile),
+    readIfExists(hintsFile),
+    readIfExists(path.join(submoduleDir, 'README.md')),
+    collectLessonPages(submoduleDir),
+  ]);
+
+  if (!assignment) throw new Error(`Missing assignment file: ${asgFile}`);
+
+  return {
+    lesson_key: lesson.key,
+    submodule: lesson.submodule,
+    title: deriveTitle(readme, lesson.key),
+    assignment_filename: lesson.assignment,
+    assignment,
+    hints,
+    lesson_pages: pages,
+    generated_at: new Date().toISOString(),
+  };
+}
+
+async function main() {
+  await fs.mkdir(OUT, { recursive: true });
+  const summary = [];
+  for (const lesson of LESSONS) {
+    try {
+      const bundle = await bundleOne(lesson);
+      const outPath = path.join(OUT, `${lesson.key}.json`);
+      await fs.writeFile(outPath, JSON.stringify(bundle, null, 2));
+      const tokenEstimate = Math.round(JSON.stringify(bundle).length / 4);
+      summary.push({ key: lesson.key, pages: bundle.lesson_pages.length, hints: !!bundle.hints, est_tokens: tokenEstimate });
+      console.log(`  ✓ ${lesson.key.padEnd(40)} ${bundle.lesson_pages.length} pages, ~${tokenEstimate.toLocaleString()} tokens`);
+    } catch (e) {
+      console.error(`  ✗ ${lesson.key}: ${e.message}`);
+      process.exitCode = 1;
+    }
+  }
+  // Also write a manifest so the endpoint can validate lesson_keys.
+  await fs.writeFile(
+    path.join(OUT, 'manifest.json'),
+    JSON.stringify({ lessons: summary, generated_at: new Date().toISOString() }, null, 2),
+  );
+}
+
+main().catch(e => { console.error(e); process.exit(1); });
