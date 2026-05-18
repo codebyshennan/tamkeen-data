@@ -1,5 +1,7 @@
 # Quiz: Introduction to Statistics
 
+> **Submit your work on Skills Union →** <https://skillsu.com/member/assessment>
+
 ## Questions
 
 1. In a dataset with values [2, 4, 4, 6, 8, 8, 8, 10], what is the mode?

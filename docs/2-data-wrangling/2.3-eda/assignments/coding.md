@@ -1,5 +1,7 @@
 # Exploratory Data Analysis Assignment
 
+> **Submit your work on Skills Union →** <https://skillsu.com/member/assessment>
+
 In this assignment, you'll work with a dataset containing information about flights. You'll apply various data analysis techniques covered in the lessons.
 
 ## Setup

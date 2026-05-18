@@ -1,5 +1,7 @@
 # Quiz: Introduction to Data Analytics and Data Science
 
+> **Submit your work on Skills Union →** <https://skillsu.com/member/assessment>
+
 ## Questions
 
 1. What is the primary purpose of data collection?

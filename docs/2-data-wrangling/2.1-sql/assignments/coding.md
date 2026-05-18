@@ -1,5 +1,7 @@
 # Assignment: Data Querying with SQL
 
+> **Submit your work on Skills Union →** <https://skillsu.com/member/assessment>
+
 ## Setup
 
 1. Connect to the `chinook` database using DBeaver as explained in the lessons

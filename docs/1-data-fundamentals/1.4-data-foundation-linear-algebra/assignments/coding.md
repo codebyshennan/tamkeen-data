@@ -1,5 +1,7 @@
 # Assignment: Data Foundation with Numpy
 
+> **Submit your work on Skills Union →** <https://skillsu.com/member/assessment>
+
 ## Setup
 
 First, import numpy and create the following arrays:

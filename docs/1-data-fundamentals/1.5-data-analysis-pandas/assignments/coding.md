@@ -1,5 +1,7 @@
 # Assignment: Data Analysis with Pandas
 
+> **Submit your work on Skills Union →** <https://skillsu.com/member/assessment>
+
 ## Setup
 
 First, create the following mock e-commerce dataset using this code:

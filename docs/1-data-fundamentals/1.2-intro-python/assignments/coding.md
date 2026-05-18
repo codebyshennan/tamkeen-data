@@ -1,5 +1,7 @@
 # **Assignment: Introduction to Python**
 
+> **Submit your work on Skills Union →** <https://skillsu.com/member/assessment>
+
 ## **Objective**
 
 Test your understanding of the majority of the concepts covered in the Python fundamentals lessons.
