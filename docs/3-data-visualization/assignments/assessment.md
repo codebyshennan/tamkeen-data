@@ -4,7 +4,7 @@
 
 **Mandatory** • 10 questions • Covers Data Visualization, Matplotlib, Seaborn, Tableau, and Storytelling.
 
-Try each question closed-book first. Click **Show hint** if you get stuck — hints point you at the relevant lesson section and how to think about it, without naming the answer. If a hint isn't enough, open the chatbot (bottom-right) and ask for a deeper explanation.
+Try each question closed-book first. Click **Show hint** if you get stuck — hints point you at the relevant lesson section and how to think about it, without naming the answer.
 
 ---
 
