@@ -34,10 +34,10 @@ Polynomial regression is a powerful extension of linear regression that allows u
 ### Video Tutorial: Introduction to Polynomial Regression
 
 <div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/15W63X2q_Dc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/OJB5dIZ9Ngg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*Polynomial Regression Explained by StatQuest with Josh Starmer*
+*Polynomial Regression - Complete Tutorial (CampusX)*
 
 ### From Linear to Polynomial Regression
 
@@ -556,10 +556,10 @@ This visualization shows:
 ### Video Tutorial: Implementing Polynomial Regression
 
 <div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/15W63X2q_Dc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/OJB5dIZ9Ngg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*Polynomial Regression Tutorial in Python*
+*Polynomial Regression - Complete Tutorial (CampusX): walks through implementation with bias-variance tradeoff*
 
 Now, let's walk through the process of building a polynomial regression model step-by-step.
 
