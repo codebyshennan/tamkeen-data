@@ -50,12 +50,14 @@ All assignments: [Assignments index](assignments.md).
   * **Learning Resources:**
     * [Video Resources Guide](1-data-fundamentals/1.2-intro-python/video-resources.md) - Curated videos with timestamps
     * [Interactive Notebooks](1-data-fundamentals/1.2-intro-python/notebooks/README.md) - Practice in Google Colab
+  * [Assignment: Coding tasks](1-data-fundamentals/1.2-intro-python/assignments/coding.md)
 * [1.3 Introduction to Statistics](1-data-fundamentals/1.3-intro-statistics/README.md)
   * [Probability Fundamentals](1-data-fundamentals/1.3-intro-statistics/probability-fundamentals.md)
   * [One Variable Statistics](1-data-fundamentals/1.3-intro-statistics/one-variable-statistics.md)
   * [Two Variable Statistics](1-data-fundamentals/1.3-intro-statistics/two-variable-statistics.md)
   * [Probability Distributions](1-data-fundamentals/1.3-intro-statistics/probability-distributions.md)
   * [Probability Distribution Families](1-data-fundamentals/1.3-intro-statistics/probability-distribution-families.md)
+  * [Assignment: Quiz](1-data-fundamentals/1.3-intro-statistics/assignments/quiz.md)
 * [1.4 Data Foundation & Linear Algebra](1-data-fundamentals/1.4-data-foundation-linear-algebra/README.md)
   * [Introduction to NumPy](1-data-fundamentals/1.4-data-foundation-linear-algebra/intro-numpy.md)
   * [N-dimensional Arrays](1-data-fundamentals/1.4-data-foundation-linear-algebra/ndarray.md)
@@ -63,6 +65,7 @@ All assignments: [Assignments index](assignments.md).
   * [NDArray Methods](1-data-fundamentals/1.4-data-foundation-linear-algebra/ndarray-methods.md)
   * [Boolean Indexing](1-data-fundamentals/1.4-data-foundation-linear-algebra/boolean-indexing.md)
   * [Linear Algebra](1-data-fundamentals/1.4-data-foundation-linear-algebra/linear-algebra.md)
+  * [Assignment: Coding tasks](1-data-fundamentals/1.4-data-foundation-linear-algebra/assignments/coding.md)
 * [1.5 Data Analysis with Pandas](1-data-fundamentals/1.5-data-analysis-pandas/README.md)
   * [Series](1-data-fundamentals/1.5-data-analysis-pandas/series.md)
   * [DataFrame](1-data-fundamentals/1.5-data-analysis-pandas/dataframe.md)
@@ -71,6 +74,7 @@ All assignments: [Assignments index](assignments.md).
   * [Arithmetic and Alignment](1-data-fundamentals/1.5-data-analysis-pandas/arithmetic-alignment.md)
   * [Function Mapping](1-data-fundamentals/1.5-data-analysis-pandas/function-mapping.md)
   * [Sorting and Ranking](1-data-fundamentals/1.5-data-analysis-pandas/sorting-ranking.md)
+  * [Assignment: Coding tasks](1-data-fundamentals/1.5-data-analysis-pandas/assignments/coding.md)
 
 ### 2. Data Wrangling
 
