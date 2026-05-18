@@ -101,14 +101,19 @@ _ruby33:
 bundle-install: _ruby33
 	PATH="$(RUBY33_BIN):$$PATH" bundle install
 
+# Auto-include _config.local.yml when present (used for local-only overrides
+# like the chatbot endpoint pointing at vercel dev).
+LOCAL_CONFIG := $(wildcard _config.local.yml)
+CONFIG_FLAG := $(if $(LOCAL_CONFIG),--config _config.yml,_config.local.yml,)
+
 jekyll-build: _ruby33
-	@PATH="$(RUBY33_BIN):$$PATH" bundle exec jekyll build
+	@PATH="$(RUBY33_BIN):$$PATH" bundle exec jekyll build $(CONFIG_FLAG)
 
 jekyll-serve: _ruby33
-	@PATH="$(RUBY33_BIN):$$PATH" bundle exec jekyll serve --livereload
+	@PATH="$(RUBY33_BIN):$$PATH" bundle exec jekyll serve --livereload $(CONFIG_FLAG)
 
 jekyll-build-with-search: _ruby33
-	@PATH="$(RUBY33_BIN):$$PATH" bundle exec jekyll build
+	@PATH="$(RUBY33_BIN):$$PATH" bundle exec jekyll build $(CONFIG_FLAG)
 	pnpm exec pagefind --site _site --output-path _site/pagefind
 
 # Validate all .mmd diagram files
