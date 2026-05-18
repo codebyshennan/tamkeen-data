@@ -12,3 +12,8 @@ plugins:
   - jekyll-default-layout
 
 github: {}
+
+# Point the widget at the local Vercel dev server.
+# Start it with: cd chatbot && vercel dev
+chatbot:
+  endpoint: "http://localhost:3000/api/chat"
