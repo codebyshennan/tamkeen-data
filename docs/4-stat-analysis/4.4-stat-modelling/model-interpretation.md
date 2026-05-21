@@ -1833,7 +1833,7 @@ create_audience_specific_interpretations(model, X, y)
       <p>Translate the same coefficients into bullet-point business language: "each square foot increases value by $X" rather than raw numbers.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="57-83" data-tint="3">
+  <div class="code-callout" data-lines="62-89" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Homeowner Audience</span>
