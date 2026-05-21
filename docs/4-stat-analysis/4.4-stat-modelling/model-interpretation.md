@@ -214,7 +214,7 @@ Number of Rooms: $28010.98 - For each additional room, the house price increases
       <p>Simulate 200 houses with known price drivers: size adds $120/sqft, each year of age subtracts $2 000, downtown distance costs $15 000/mile, and each room adds $25 000.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="38-54" data-tint="3">
+  <div class="code-callout" data-lines="39-54" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Fit and Rank</span>
