@@ -1282,7 +1282,7 @@ print(comparison)
       <span class="code-callout__title">For name, model in models.items():</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 29–42: follow this band in the snippet.</p>
+      <p>Loops over each model, fits it, and records train R², test R², and feature count.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="43-56" data-tint="4">
