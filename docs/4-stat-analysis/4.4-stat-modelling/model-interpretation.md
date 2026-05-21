@@ -2349,6 +2349,12 @@ print(complexity_comparison)
 </aside>
 </div>
 
+> **🎯 Key points**
+>
+> - An important feature is not necessarily a causal one — confounders can make spurious predictors look significant.
+> - Features can interact; their combined effect may differ from the sum of individual effects, so add interaction terms when needed.
+> - The more complex the model, the harder it is to interpret — interpretability typically falls as accuracy and complexity rise.
+
 ## Practice Exercise
 
 Try applying these model interpretation techniques to your own dataset:
