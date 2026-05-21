@@ -2001,7 +2001,7 @@ Interpretation Challenge:
       <p>Show all three relationships side-by-side: causal Temperature→Sales, causal Temperature→Shorts, and spurious Shorts→Sales (violin plot).</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="65-76" data-tint="4">
+  <div class="code-callout" data-lines="71-77" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Interpretation Note</span>
