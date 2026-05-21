@@ -1739,7 +1739,7 @@ X_train, X_test, y_train, y_test = train_test_split(
       <span class="code-callout__title">Garage = np.clip(garage, 0, 2)</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 15–28: follow this band in the snippet.</p>
+      <p>Derives correlated features (bathrooms, garden, garage) and adds two pure-noise features.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="29-42" data-tint="3">
