@@ -1519,6 +1519,14 @@ Here's a practical framework for model selection:
    - Consider the business or research context
    - Ensure the model is practical to deploy and maintain
 
+> **🎯 Key points**
+>
+> - Start simple, establish a baseline, and add complexity only when it earns its keep.
+> - Use several selection methods and look for consensus rather than trusting one number.
+> - Always validate with cross-validation across multiple metrics and data splits.
+> - Weigh accuracy against interpretability, runtime, and data-collection cost.
+> - Document every model tried so your selection process is reproducible.
+
 ## Practice Exercise
 
 Try building a model to predict student performance based on various features. Consider:
