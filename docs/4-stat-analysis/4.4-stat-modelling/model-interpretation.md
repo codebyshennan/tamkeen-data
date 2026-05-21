@@ -1205,7 +1205,7 @@ Glucose: 1.032 - For each additional unit of glucose, the odds of diabetes incre
       <p>Generate a binary outcome using a known logistic model where age, BMI, glucose, and family history each contribute specified log-odds increments.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="32-45" data-tint="2">
+  <div class="code-callout" data-lines="37-45" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Fit and Compute Odds Ratios</span>
