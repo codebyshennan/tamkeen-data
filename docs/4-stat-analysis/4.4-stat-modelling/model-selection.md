@@ -1436,7 +1436,7 @@ Optimal features: ['Feature 1', 'Feature 2', 'Feature 3']
       <p>Plot error curves vs remaining features and a bar chart of elimination order, then find the optimal subset by minimising test error.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="104-106" data-tint="1">
+  <div class="code-callout" data-lines="121-121" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Run Example</span>
