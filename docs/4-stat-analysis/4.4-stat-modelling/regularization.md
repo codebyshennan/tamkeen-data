@@ -721,7 +721,7 @@ Test R²: 0.9573
       <span class="code-callout__title">Np.random.seed(42)</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 55–67: follow this band in the snippet.</p>
+      <p>Defines the data generator and creates independent features plus one collinear feature.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="68-81" data-tint="2">
