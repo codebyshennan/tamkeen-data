@@ -1556,7 +1556,7 @@ print(f"Optimal Ridge alpha: {ridge_cv.alpha_:.4f}")
       <span class="code-callout__title">From sklearn.linear_model import RidgeCV, Las…</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–14: follow this band in the snippet.</p>
+      <p>Fits RidgeCV with RepeatedKFold over a wide alpha range and prints the optimal alpha.</p>
     </div>
   </div>
 </aside>
