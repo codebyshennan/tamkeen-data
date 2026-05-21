@@ -1350,7 +1350,7 @@ Leaf node 10: Predicted value = 52388.22
       <p>Fit a shallow decision tree (max depth 3) and render it with <code>plot_tree</code>—colour-filled nodes make the split rules immediately readable.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="15-28" data-tint="2">
+  <div class="code-callout" data-lines="15-19" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Feature Importance</span>
