@@ -605,7 +605,7 @@ MaritalStatus_Single: $3295.10 - This category increases the loan amount by $329
       <p>Plot a centred bar chart (baseline at 0) showing each category's loan adjustment relative to the dropped reference level.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="86-92" data-tint="1">
+  <div class="code-callout" data-lines="88-93" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Print Contrasts</span>
