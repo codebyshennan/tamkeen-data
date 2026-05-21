@@ -2153,7 +2153,7 @@ explore_feature_interactions()
       <p>Fit one model with only Feature1 and Feature2, and a second with the explicit <code>Feature1_x_Feature2</code> product term added; compare R².</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="46-62" data-tint="3">
+  <div class="code-callout" data-lines="38-63" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Print R² and Coefficients</span>
