@@ -1377,7 +1377,7 @@ Leaf node 10: Predicted value = 52388.22
       <p>For every internal node on the path, print the feature name, sample value, threshold, and direction taken; stop and report the leaf's predicted value.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="70-72" data-tint="1">
+  <div class="code-callout" data-lines="76-76" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Run Example</span>
