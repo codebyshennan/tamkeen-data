@@ -1992,7 +1992,7 @@ Interpretation Challenge:
       <p>Fit linear regression using both Temperature and Shorts_Wearing as predictors; both will appear significant even though only Temperature is causal.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="37-63" data-tint="3">
+  <div class="code-callout" data-lines="43-61" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Three-Panel Plot</span>
