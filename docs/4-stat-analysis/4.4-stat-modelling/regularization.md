@@ -1309,7 +1309,7 @@ print(comparison)
       <span class="code-callout__title">Plt.xticks(x, [r[&#x27;Model&#x27;].split(&#x27; (&#x27;)[0] for…</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 71–84: follow this band in the snippet.</p>
+      <p>Draws the bottom subplot of feature counts, saves the figure, and returns the results DataFrame.</p>
     </div>
   </div>
 </aside>
