@@ -1005,7 +1005,7 @@ Number of features selected: 4 out of 5
       <span class="code-callout__title">Plt.tight_layout()</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 43–57: follow this band in the snippet.</p>
+      <p>Saves the plot, returns the results dict, and applies Elastic Net to the collinear data.</p>
     </div>
   </div>
 </aside>
