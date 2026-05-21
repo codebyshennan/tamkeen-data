@@ -2310,7 +2310,7 @@ print(complexity_comparison)
       <p>Sweep tree depths 1, 2, 3, 5, 10, and unlimited plus two random forest sizes to cover the full complexity spectrum.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="22-42" data-tint="2">
+  <div class="code-callout" data-lines="33-41" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Measure Complexity</span>
