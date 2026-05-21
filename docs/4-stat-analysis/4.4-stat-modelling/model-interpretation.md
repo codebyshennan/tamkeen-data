@@ -223,7 +223,7 @@ Number of Rooms: $28010.98 - For each additional room, the house price increases
       <p>Fit <code>LinearRegression</code>, extract <code>coef_</code> into a DataFrame, and sort by absolute magnitude to find the most influential features.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="56-67" data-tint="4">
+  <div class="code-callout" data-lines="58-59" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Visualise Coefficients</span>
