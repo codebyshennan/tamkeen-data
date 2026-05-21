@@ -1623,7 +1623,7 @@ print(std_coefs)
 {% endhighlight %}
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-14" data-tint="1">
+  <div class="code-callout" data-lines="5-11" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Get standardized coefficients</span>
@@ -1632,7 +1632,7 @@ print(std_coefs)
       <p>Defines the function and reads the raw coefficients and feature scales from the scaler.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="15-28" data-tint="2">
+  <div class="code-callout" data-lines="14-25" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">If feature_names is None:</span>
