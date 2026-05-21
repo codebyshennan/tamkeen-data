@@ -1300,7 +1300,7 @@ print(comparison)
       <span class="code-callout__title">Plt.subplot(211)</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 57–70: follow this band in the snippet.</p>
+      <p>Draws the top subplot comparing train and test R² across the models as grouped bars.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="71-84" data-tint="2">
