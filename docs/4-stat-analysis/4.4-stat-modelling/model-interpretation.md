@@ -1693,7 +1693,7 @@ multiple_interpretations = apply_multiple_interpretation_techniques(rf_model, X,
       <p>Identify the top 2 features by permutation importance and compute partial dependence plots to show their average marginal effect on predictions.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="50-56" data-tint="4">
+  <div class="code-callout" data-lines="49-55" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Return and Run</span>
