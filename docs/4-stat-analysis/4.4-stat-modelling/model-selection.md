@@ -1190,7 +1190,7 @@ Optimal features: ['Feature 1', 'Feature 3', 'Feature 2']
       <p>Draw train/test error curves vs feature count and a bar chart of the feature selection order, then save to <code>forward_selection.png</code>.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="90-97" data-tint="1">
+  <div class="code-callout" data-lines="98-104" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Find Optimum</span>
