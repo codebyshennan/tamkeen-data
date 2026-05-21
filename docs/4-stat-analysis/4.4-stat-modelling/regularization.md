@@ -838,7 +838,7 @@ Number of features selected: 5 out of 5
       <span class="code-callout__title">Def implement_lasso(X, y, alphas=np.logspace(…</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–14: follow this band in the snippet.</p>
+      <p>Defines the function, splits the data, and scales train and test features.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="15-29" data-tint="2">
