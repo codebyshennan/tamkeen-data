@@ -217,7 +217,7 @@ plot_bias_variance_tradeoff()
       <p>Generate stylised bias (decreasing) and variance (increasing) curves along a complexity axis; their sum gives total error.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="23-31" data-tint="3">
+  <div class="code-callout" data-lines="24-30" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Plot Lines</span>
