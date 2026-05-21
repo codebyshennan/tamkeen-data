@@ -1552,7 +1552,7 @@ Model Interpretability Comparison:
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-22" data-tint="1">
+  <div class="code-callout" data-lines="9-22" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Model Zoo</span>
