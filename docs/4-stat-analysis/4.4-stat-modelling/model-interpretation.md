@@ -338,7 +338,7 @@ distance_downtown: -14857.72 - A one standard deviation increase in distance_dow
       <p>Store both standardised and original coefficients side-by-side and sort by the absolute standardised coefficient for ranking.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="23-32" data-tint="3">
+  <div class="code-callout" data-lines="24-25" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Plot Standardised Bars</span>
