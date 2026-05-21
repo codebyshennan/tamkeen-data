@@ -1570,7 +1570,7 @@ Model Interpretability Comparison:
       <p>Fit each model, compute test MSE and R², and assign a coarse interpretability tier (High / Medium / Low) based on model family.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="56-78" data-tint="3">
+  <div class="code-callout" data-lines="68-76" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Scatter Plot</span>
