@@ -987,7 +987,7 @@ Number of features selected: 4 out of 5
       <span class="code-callout__title">Fit model</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 15–28: follow this band in the snippet.</p>
+      <p>Fits ElasticNetCV over the alpha and l1_ratio grid and counts non-zero coefficients.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="29-42" data-tint="3">
