@@ -978,7 +978,7 @@ Number of features selected: 4 out of 5
       <span class="code-callout__title">Def implement_elastic_net(X, y, l1_ratios=[.1…</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–14: follow this band in the snippet.</p>
+      <p>Defines the function, splits the data, and scales train and test features.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="15-28" data-tint="2">
