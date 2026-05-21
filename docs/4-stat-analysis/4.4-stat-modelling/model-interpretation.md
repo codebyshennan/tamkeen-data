@@ -1854,6 +1854,12 @@ create_audience_specific_interpretations(model, X, y)
 </aside>
 </div>
 
+> **🎯 Key points**
+>
+> - Start simple: simpler models are more interpretable, and the accuracy-interpretability tradeoff is often modest.
+> - Combine multiple techniques — built-in importance, permutation importance, and partial dependence — for complementary views.
+> - Tailor the explanation to the audience: detailed metrics for data scientists, key drivers for executives, actionable counterfactuals for end users.
+
 ## Common Challenges in Model Interpretation
 
 ### 1. Correlation vs. Causation
