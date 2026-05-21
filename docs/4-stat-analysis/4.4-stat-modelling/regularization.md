@@ -832,7 +832,7 @@ Number of features selected: 5 out of 5
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-14" data-tint="1">
+  <div class="code-callout" data-lines="8-13" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Def implement_lasso(X, y, alphas=np.logspace(…</span>
@@ -841,7 +841,7 @@ Number of features selected: 5 out of 5
       <p>Defines the function, splits the data, and scales train and test features.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="15-29" data-tint="2">
+  <div class="code-callout" data-lines="16-24" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Fit model with cross-validation</span>
@@ -850,7 +850,7 @@ Number of features selected: 5 out of 5
       <p>Fits LassoCV to pick the best alpha and counts how many coefficients are non-zero.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="30-43" data-tint="3">
+  <div class="code-callout" data-lines="26-39" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Print(f&quot;Number of features selected: {n_nonze…</span>
@@ -859,7 +859,7 @@ Number of features selected: 5 out of 5
       <p>Prints the results and, for few features, plots the fitted coefficients as a bar chart.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="44-58" data-tint="4">
+  <div class="code-callout" data-lines="48-58" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Plt.tight_layout()</span>
