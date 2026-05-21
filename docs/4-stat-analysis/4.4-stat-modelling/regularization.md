@@ -1139,7 +1139,7 @@ param_selection = select_regularization_parameter(X_collinear, y_collinear)
       <span class="code-callout__title">Plt.title(&#x27;Regularization Parameter Selection&#x27;)</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 43–57: follow this band in the snippet.</p>
+      <p>Marks the chosen alphas, saves the plot, and returns the alphas and scores.</p>
     </div>
   </div>
 </aside>
