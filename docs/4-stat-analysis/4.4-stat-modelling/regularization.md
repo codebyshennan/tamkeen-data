@@ -1121,7 +1121,7 @@ param_selection = select_regularization_parameter(X_collinear, y_collinear)
       <span class="code-callout__title">Kf = KFold(n_splits=5, shuffle=True, random_s…</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 15–28: follow this band in the snippet.</p>
+      <p>Sets up shared K-fold cross-validation and fits both RidgeCV and LassoCV with it.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="29-42" data-tint="3">
