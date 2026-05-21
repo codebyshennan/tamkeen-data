@@ -71,32 +71,11 @@ The question is: which one should you choose? That's where model selection comes
 
 Let's explore some scenarios where model selection is crucial:
 
-1. **Medical Diagnosis**
-   - **Simple model**: Using only age to predict disease risk
-     - Advantages: Easy to communicate, requires minimal data
-     - Disadvantages: Might miss important risk factors
-   - **Complex model**: Using age, weight, blood pressure, family history, genetic markers, etc.
-     - Advantages: Potentially more accurate predictions
-     - Disadvantages: Requires more data, harder to interpret, risk of overfitting
-   - **Best choice depends on**: Available data, need for interpretability, critical importance of capturing rare conditions
+1. **Medical Diagnosis** — A simple age-only model is easy to communicate but misses risk factors; a complex model (weight, blood pressure, family history, genetic markers) is potentially more accurate but needs more data and risks overfitting. The right choice depends on available data, interpretability needs, and the cost of missing rare conditions.
 
-2. **Marketing Campaigns**
-   - **Basic model**: Customer demographics only
-     - Advantages: Simple implementation, clear target segments
-     - Disadvantages: Might miss behavioral patterns
-   - **Advanced model**: Demographics + purchase history + browsing behavior + social media activity
-     - Advantages: More personalized targeting
-     - Disadvantages: Higher data collection and processing costs
-   - **Best choice depends on**: Marketing budget, expected ROI, data privacy constraints
+2. **Marketing Campaigns** — A demographics-only model is simple with clear segments but misses behavioral patterns; adding purchase history, browsing, and social activity enables personalized targeting at higher data and processing cost. The right choice depends on budget, expected ROI, and privacy constraints.
 
-3. **Financial Forecasting**
-   - **Simple model**: Historical averages and trends
-     - Advantages: Robust to noise, easy to implement
-     - Disadvantages: Might miss complex market dynamics
-   - **Complex model**: Multiple economic indicators with non-linear interactions
-     - Advantages: Can potentially capture market subtleties
-     - Disadvantages: Risk of fitting to random market fluctuations
-   - **Best choice depends on**: Forecasting horizon, market volatility, risk tolerance
+3. **Financial Forecasting** — Historical averages are robust to noise and easy to implement but miss complex market dynamics; multiple economic indicators with non-linear interactions can capture subtleties but risk fitting random fluctuations. The right choice depends on forecasting horizon, volatility, and risk tolerance.
 
 ### The Key Questions in Model Selection
 
