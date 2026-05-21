@@ -694,7 +694,7 @@ Test R²: 0.9573
       <span class="code-callout__title">Fit model with cross-validation to select the…</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 14–27: follow this band in the snippet.</p>
+      <p>Fits RidgeCV to pick the best alpha and prints the chosen alpha and train/test R².</p>
     </div>
   </div>
   <div class="code-callout" data-lines="28-40" data-tint="3">
