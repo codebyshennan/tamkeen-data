@@ -1666,7 +1666,7 @@ multiple_interpretations = apply_multiple_interpretation_techniques(rf_model, X,
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-15" data-tint="1">
+  <div class="code-callout" data-lines="4-15" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Built-in Importance</span>
@@ -1675,7 +1675,7 @@ multiple_interpretations = apply_multiple_interpretation_techniques(rf_model, X,
       <p>Check whether the model has <code>feature_importances_</code> or <code>coef_</code> and rank features accordingly—works for trees and linear models.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="17-27" data-tint="2">
+  <div class="code-callout" data-lines="20-24" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Permutation Importance</span>
