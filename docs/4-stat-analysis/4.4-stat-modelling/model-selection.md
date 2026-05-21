@@ -349,7 +349,7 @@ Train MSE: 16.92, Test MSE: 16.23</figcaption>
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-16" data-tint="1">
+  <div class="code-callout" data-lines="4-12" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Data Generation</span>
@@ -358,7 +358,7 @@ Train MSE: 16.92, Test MSE: 16.23</figcaption>
       <p>Create a noisy sinusoidal dataset and split it 70/30 into train and test sets.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="18-30" data-tint="2">
+  <div class="code-callout" data-lines="14-29" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Fit Three Models</span>
