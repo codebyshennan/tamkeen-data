@@ -1730,7 +1730,7 @@ X_train, X_test, y_train, y_test = train_test_split(
       <span class="code-callout__title">Generate synthetic housing data</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–14: follow this band in the snippet.</p>
+      <p>Sets the seed and generates the base housing features: size, rooms, age, and distance.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="15-28" data-tint="2">
