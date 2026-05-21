@@ -1022,6 +1022,13 @@ Number of features selected: 4 out of 5
 
 ![Elastic Net Coefficients](assets/elastic_net_coefficients.png)
 
+> **🎯 Key points**
+>
+> - Use `RidgeCV`, `LassoCV`, and `ElasticNetCV` to fit each method and tune `alpha` by cross-validation.
+> - Always scale features with `StandardScaler` before fitting a penalized model.
+> - Ridge keeps all features; Lasso zeros out redundant ones for automatic feature selection.
+> - Elastic Net tunes both `alpha` and `l1_ratio`, blending Ridge and Lasso behavior.
+
 ## Choosing the Right Regularization
 
 How do you choose the best type of regularization and its strength? Here's a comprehensive approach:
