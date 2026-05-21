@@ -706,7 +706,7 @@ for feature in features_to_plot:
       <p>Import and fit a <code>GradientBoostingRegressor</code> on the loan data—a more complex model that benefits from PDP-style post-hoc interpretation.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="10-22" data-tint="2">
+  <div class="code-callout" data-lines="11-16" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Built-in PDP Plot</span>
