@@ -530,7 +530,7 @@ Test MSE: 0.8728
       <p>Fit <code>LinearRegression</code> on training data only, then compute MSE on both train and test sets to check for overfitting.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="30-47" data-tint="3">
+  <div class="code-callout" data-lines="35-41" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Visualize Split</span>
