@@ -1044,6 +1044,7 @@ How do you choose the best type of regularization and its strength? Here's a com
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
+<!-- NOTE: instructor — ridge.cv_values_ is only populated when RidgeCV is built with store_cv_values=True AND cv=None; this call passes cv=kf, so ridge.cv_values_ will not exist and the snippet will raise AttributeError. Flag this when walking through the example. -->
 {% highlight python %}
 def select_regularization_parameter(X, y):
     """Select optimal regularization parameter using cross-validation"""
