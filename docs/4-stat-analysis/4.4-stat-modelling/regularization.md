@@ -516,7 +516,7 @@ plot_constraint_spaces()
       <span class="code-callout__title">Plt.plot([1], [0], &#x27;ko&#x27;, markersize=8)</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 25–36: follow this band in the snippet.</p>
+      <p>Marks and annotates the sparse corner solution on the L1 constraint plot.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="37-48" data-tint="4">
