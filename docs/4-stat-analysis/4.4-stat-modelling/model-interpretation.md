@@ -672,7 +672,7 @@ from sklearn.inspection import partial_dependence, PartialDependenceDisplay
 gbm = GradientBoostingRegressor(random_state=42)
 gbm.fit(X, y)
 
-# Create partial dependence plots (sklearn 1.5+ uses PartialDependenceDisplay)
+# Create partial dependence plots (PartialDependenceDisplay, sklearn 1.0+)
 features_to_plot = ['Income', 'Age']
 fig, ax = plt.subplots(figsize=(12, 8))
 PartialDependenceDisplay.from_estimator(
