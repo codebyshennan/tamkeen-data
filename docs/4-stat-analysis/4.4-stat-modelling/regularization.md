@@ -336,7 +336,7 @@ plot_regularization_effects()
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-13" data-tint="1">
+  <div class="code-callout" data-lines="4-12" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Def plot_regularization_effects():</span>
@@ -345,7 +345,7 @@ plot_regularization_effects()
       <p>Defines the function, generates noisy linear data, and lists the alpha values to test.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="14-26" data-tint="2">
+  <div class="code-callout" data-lines="18-23" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Plt.figure(figsize=(15, 6))</span>
@@ -354,7 +354,7 @@ plot_regularization_effects()
       <p>Fits a Ridge model at each alpha in the left subplot and plots its predicted line.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="27-39" data-tint="3">
+  <div class="code-callout" data-lines="34-37" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Plt.xlabel(&#x27;Feature Value&#x27;)</span>
@@ -363,7 +363,7 @@ plot_regularization_effects()
       <p>Labels the Ridge subplot and begins the Lasso subplot, fitting Lasso at each alpha.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="40-53" data-tint="4">
+  <div class="code-callout" data-lines="53-53" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Plt.scatter(x, y, alpha=0.3, color=&#x27;black&#x27;)</span>
