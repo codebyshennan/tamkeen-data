@@ -1983,7 +1983,7 @@ Interpretation Challenge:
       <p>Temperature causally drives both ice cream sales and whether people wear shorts—shorts-wearing is a confounder, not a cause.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="22-35" data-tint="2">
+  <div class="code-callout" data-lines="23-27" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Fit Naive Model</span>
