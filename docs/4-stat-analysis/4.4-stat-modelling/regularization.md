@@ -342,7 +342,7 @@ plot_regularization_effects()
       <span class="code-callout__title">Def plot_regularization_effects():</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–13: follow this band in the snippet.</p>
+      <p>Defines the function, generates noisy linear data, and lists the alpha values to test.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="14-26" data-tint="2">
