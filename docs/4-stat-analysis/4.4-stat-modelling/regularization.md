@@ -1748,7 +1748,7 @@ X_train, X_test, y_train, y_test = train_test_split(
       <span class="code-callout__title">8000 * garage +                # Garage adds…</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 29–42: follow this band in the snippet.</p>
+      <p>Builds the house-price target with a nonlinear distance term plus random noise.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="43-56" data-tint="4">
