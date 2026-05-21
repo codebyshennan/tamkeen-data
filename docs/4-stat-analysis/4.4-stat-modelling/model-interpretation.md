@@ -1561,7 +1561,7 @@ Model Interpretability Comparison:
       <p>Define six estimators spanning the interpretability spectrum—from simple linear regression to a neural network—and split the housing data 70/30.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="24-54" data-tint="2">
+  <div class="code-callout" data-lines="24-56" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Score and Label</span>
