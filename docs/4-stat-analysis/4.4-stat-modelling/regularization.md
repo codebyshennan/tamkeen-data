@@ -712,7 +712,7 @@ Test R²: 0.9573
       <span class="code-callout__title">Plt.savefig(&#x27;ridge_coefficients.png&#x27;)</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 41–54: follow this band in the snippet.</p>
+      <p>Saves the coefficient plot and returns the model, best alpha, coefficients, and scores.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="55-67" data-tint="1">
