@@ -1685,7 +1685,7 @@ plt.show()
       <p>Generate 200 student records with non-linear score relationships (quadratic for previous score and sleep hours) and clip scores to 0–100.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="36-53" data-tint="2">
+  <div class="code-callout" data-lines="47-55" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Model Zoo</span>
