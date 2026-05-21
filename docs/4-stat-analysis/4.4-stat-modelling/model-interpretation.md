@@ -587,7 +587,7 @@ MaritalStatus_Single: $3295.10 - This category increases the loan amount by $329
       <p>Use <code>pd.get_dummies(..., drop_first=True)</code> to convert categories into binary columns, dropping one level per variable as the baseline reference.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="62-71" data-tint="3">
+  <div class="code-callout" data-lines="64-71" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Extract Dummy Coefficients</span>
