@@ -261,10 +261,10 @@ This plot illustrates:
 ### Video Tutorial: Overfitting and Underfitting
 
 <div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/U3jGdnRL3KI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/EuBBz3bI-aA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*Overfitting and Underfitting by StatQuest with Josh Starmer*
+*Machine Learning Fundamentals: Bias and Variance by StatQuest with Josh Starmer*
 
 Let's explore these concepts further with a concrete example of different models applied to the same dataset:
 
