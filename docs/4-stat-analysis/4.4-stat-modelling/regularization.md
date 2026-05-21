@@ -679,7 +679,7 @@ Test R²: 0.9573
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-13" data-tint="1">
+  <div class="code-callout" data-lines="8-13" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Def implement_ridge(X, y, alphas=np.logspace(…</span>
@@ -688,7 +688,7 @@ Test R²: 0.9573
       <p>Defines the function, splits the data, and scales train and test features with StandardScaler.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="14-27" data-tint="2">
+  <div class="code-callout" data-lines="16-26" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Fit model with cross-validation to select the…</span>
@@ -697,7 +697,7 @@ Test R²: 0.9573
       <p>Fits RidgeCV to pick the best alpha and prints the chosen alpha and train/test R².</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="28-40" data-tint="3">
+  <div class="code-callout" data-lines="29-35" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Visualize coefficients</span>
@@ -706,7 +706,7 @@ Test R²: 0.9573
       <p>If there are few features, builds a horizontal bar chart of the fitted coefficients.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="41-54" data-tint="4">
+  <div class="code-callout" data-lines="44-50" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Plt.savefig(&#x27;ridge_coefficients.png&#x27;)</span>
@@ -715,7 +715,7 @@ Test R²: 0.9573
       <p>Saves the coefficient plot and returns the model, best alpha, coefficients, and scores.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="55-67" data-tint="1">
+  <div class="code-callout" data-lines="58-62" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Np.random.seed(42)</span>
@@ -724,7 +724,7 @@ Test R²: 0.9573
       <p>Defines the data generator and creates independent features plus one collinear feature.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="68-81" data-tint="2">
+  <div class="code-callout" data-lines="69-81" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Combine features</span>
