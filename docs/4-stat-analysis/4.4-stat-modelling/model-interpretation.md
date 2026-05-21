@@ -1640,7 +1640,7 @@ def apply_multiple_interpretation_techniques(model, X, y, feature_names):
 
         # Plot
         plt.figure(figsize=(8, 6))
-        plt.plot(pd_result['values'][0], pd_result['average'][0])
+        plt.plot((pd_result.get('grid_values') or pd_result.get('values'))[0], pd_result['average'][0])
         plt.xlabel(feature)
         plt.ylabel('Partial Dependence')
         plt.title(f'Partial Dependence of Target on {feature}')
