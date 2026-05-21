@@ -410,6 +410,14 @@ This visualization shows three key scenarios:
    - The model "memorizes" the training data but fails to generalize
    - Signs: Excellent performance on training data but poor performance on test data
 
+> **🎯 Key points**
+>
+> - Bias is error from a model too simple to capture the pattern (underfitting).
+> - Variance is error from a model so complex it fits noise (overfitting).
+> - You cannot minimise both at once; total error is lowest at an intermediate complexity.
+> - Underfitting shows high train and test error; overfitting shows low train but high test error.
+> - A good fit performs similarly well on both training and test data.
+
 ## Model Selection Techniques
 
 Now that we understand the conceptual background, let's examine specific techniques for model selection.
