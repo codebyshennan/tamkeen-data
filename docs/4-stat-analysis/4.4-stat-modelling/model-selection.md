@@ -235,7 +235,7 @@ plot_bias_variance_tradeoff()
       <p>Add arrows labelling the underfitting (left) and overfitting (right) regions for clarity, then save and display the figure.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="46-49" data-tint="1">
+  <div class="code-callout" data-lines="48-48" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Run It</span>
