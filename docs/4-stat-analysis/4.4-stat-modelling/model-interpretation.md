@@ -1214,7 +1214,7 @@ Glucose: 1.032 - For each additional unit of glucose, the odds of diabetes incre
       <p>Fit <code>LogisticRegression</code>, then compute odds ratios as <code>exp(coef_)</code>—values greater than 1 increase diabetes risk, less than 1 decrease it.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="47-57" data-tint="3">
+  <div class="code-callout" data-lines="50-53" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Plot on Log Scale</span>
