@@ -578,7 +578,7 @@ MaritalStatus_Single: $3295.10 - This category increases the loan amount by $329
       <p>Create 300 borrowers with known education and marital status effects baked in, plus numeric income and age predictors.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="40-60" data-tint="2">
+  <div class="code-callout" data-lines="50-50" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Dummy Encoding</span>
