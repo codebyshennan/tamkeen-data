@@ -839,7 +839,7 @@ for feature in ['Income', 'Age']:
       <p>Average the ICE curves to draw the PDP in red, then save each feature's plot as <code>ice_&lt;feature&gt;.png</code>.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="51-53" data-tint="1">
+  <div class="code-callout" data-lines="51-52" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Run Both Features</span>
