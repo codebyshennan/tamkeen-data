@@ -2301,7 +2301,7 @@ print(complexity_comparison)
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-20" data-tint="1">
+  <div class="code-callout" data-lines="7-16" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Build Model Range</span>
