@@ -988,6 +988,14 @@ Information criteria work by:
 - Use **AIC** when your primary goal is prediction
 - Use **BIC** when your primary goal is explanation and identifying the true underlying model
 
+> **🎯 Key points**
+>
+> - A train-test split is quick but sensitive to which split you happen to draw.
+> - K-fold cross-validation rotates the validation fold, giving more stable estimates from all the data.
+> - When CV scores are close, prefer the simpler model and check the fold-to-fold standard deviation.
+> - Information criteria (AIC, BIC) reward fit while penalising the number of parameters.
+> - Prefer AIC for prediction; prefer BIC, with its heavier penalty, for finding the true model.
+
 ## Feature Selection Methods
 
 Another important aspect of model selection is determining which features to include. Here are two common approaches.
