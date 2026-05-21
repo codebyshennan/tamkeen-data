@@ -944,7 +944,7 @@ Best model according to BIC: Degree 5.0 polynomial
       <p>Plot AIC and BIC vs polynomial degree on the top panel and training MSE on the bottom panel to show the complexity penalty in action.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="62-69" data-tint="4">
+  <div class="code-callout" data-lines="66-70" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Find Best Models</span>
