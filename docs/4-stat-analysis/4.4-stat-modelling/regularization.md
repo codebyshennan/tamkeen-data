@@ -369,7 +369,7 @@ plot_regularization_effects()
       <span class="code-callout__title">Plt.scatter(x, y, alpha=0.3, color=&#x27;black&#x27;)</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 40–53: follow this band in the snippet.</p>
+      <p>Labels the Lasso subplot, saves the figure, and calls the function to run it.</p>
     </div>
   </div>
 </aside>
