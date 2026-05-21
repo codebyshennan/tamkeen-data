@@ -763,7 +763,7 @@ Degree 2 wins — it matches the true data-generating process (which is quadrati
       <p>Add a final bar chart of per-fold MSEs with a horizontal dashed line at the mean, then save the figure.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="66-69" data-tint="1">
+  <div class="code-callout" data-lines="68-75" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Return Stats</span>
