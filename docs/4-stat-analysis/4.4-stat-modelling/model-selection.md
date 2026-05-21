@@ -926,7 +926,7 @@ Best model according to BIC: Degree 5.0 polynomial
       <p>Optionally create a sinusoidal dataset, then initialise an empty results list and record sample size <code>n</code>.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="12-37" data-tint="2">
+  <div class="code-callout" data-lines="13-37" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Compute AIC/BIC</span>
