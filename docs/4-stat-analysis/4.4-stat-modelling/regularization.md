@@ -1376,7 +1376,7 @@ print(f"Best score: {-grid.best_score_:.4f} MSE")
       <span class="code-callout__title">From sklearn.linear_model import Ridge</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–13: follow this band in the snippet.</p>
+      <p>Runs GridSearchCV over a log-spaced alpha grid for Ridge and prints the best alpha and MSE.</p>
     </div>
   </div>
 </aside>
