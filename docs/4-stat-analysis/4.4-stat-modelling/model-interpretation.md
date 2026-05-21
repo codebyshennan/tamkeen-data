@@ -933,7 +933,7 @@ plt.show()
       <p>Install <code>shap</code>, train a GBM on a 100-row subset, then create a Tree explainer and compute SHAP values for every sample.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="16-30" data-tint="2">
+  <div class="code-callout" data-lines="19-27" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Global Summary Plots</span>
