@@ -745,7 +745,7 @@ Degree 2 wins — it matches the true data-generating process (which is quadrati
       <p>For each fold, index into X and y, fit a fresh <code>LinearRegression</code>, predict on the held-out fold, and record its MSE.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="37-51" data-tint="3">
+  <div class="code-callout" data-lines="37-44" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Plot Each Fold</span>
