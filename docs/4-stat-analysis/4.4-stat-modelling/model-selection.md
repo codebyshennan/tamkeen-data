@@ -539,7 +539,7 @@ Test MSE: 0.8728
       <p>Scatter train and test points in different colours and overlay the model's prediction line across the full data range.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="51-58" data-tint="4">
+  <div class="code-callout" data-lines="51-56" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Run Example</span>
