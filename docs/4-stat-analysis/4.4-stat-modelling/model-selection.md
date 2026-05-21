@@ -754,7 +754,7 @@ Degree 2 wins — it matches the true data-generating process (which is quadrati
       <p>Show all data in grey, highlight train vs validation points, and draw the fitted line for that fold in a subplot grid.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="53-64" data-tint="4">
+  <div class="code-callout" data-lines="55-57" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Summary Subplot</span>
