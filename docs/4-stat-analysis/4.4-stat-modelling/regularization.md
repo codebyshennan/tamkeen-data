@@ -847,7 +847,7 @@ Number of features selected: 5 out of 5
       <span class="code-callout__title">Fit model with cross-validation</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 15–29: follow this band in the snippet.</p>
+      <p>Fits LassoCV to pick the best alpha and counts how many coefficients are non-zero.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="30-43" data-tint="3">
