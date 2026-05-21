@@ -11,6 +11,16 @@ objectives:
 
 **After this lesson:** you can fit, tune, and choose between Ridge, Lasso, and Elastic Net models to control overfitting and stabilise coefficients.
 
+## TLDR
+
+- **Why regularize?** Prevent overfitting by penalising large coefficients — constrains the model's freedom to memorise noise.
+- **Ridge (L2):** adds `α × Σβ²` to the loss. Shrinks all coefficients toward zero smoothly; never zeros them out. Best when features are correlated.
+- **Lasso (L1):** adds `α × Σ|β|`. Can zero out irrelevant features entirely — automatic feature selection. Best when only a few features truly matter.
+- **Elastic Net:** blend of L1 + L2, controlled by `l1_ratio`. Use when you're unsure which to choose.
+- **Always scale features first** (`StandardScaler`) — penalties are not unit-invariant, so raw feature scale skews which coefficients get shrunk.
+- **Tune `alpha` with cross-validation** (`RidgeCV`, `LassoCV`) — never accept the default `alpha=1.0`.
+- **sklearn naming:** `alpha` in Ridge/Lasso = λ. In `LogisticRegression`, `C = 1/α` — smaller `C` means *more* regularization.
+
 ## Overview
 
 Regularization adds a **penalty** on coefficient size (or count) to the usual sum of squared errors or log-likelihood. Ridge pulls weights smoothly toward zero; Lasso can zero some out entirely. Both reduce variance when predictors are noisy or correlated—common in real tables—and need sensible scaling and tuning, topics you began in [model selection](./model-selection.md).
