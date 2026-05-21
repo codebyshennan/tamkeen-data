@@ -433,7 +433,7 @@ age: 0.1044 - Contributes 10.4% to the model's decisions
       <p>Sort features by importance and display a horizontal bar chart saved to <code>feature_importance.png</code>.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="24-26" data-tint="3">
+  <div class="code-callout" data-lines="23-25" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Print Percentages</span>
