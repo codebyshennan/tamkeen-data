@@ -942,7 +942,7 @@ plt.show()
       <p>Produce a bar chart of mean absolute SHAP values (global importance) and a beeswarm plot showing the direction and magnitude per feature.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="32-40" data-tint="3">
+  <div class="code-callout" data-lines="34-40" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Dependence Plots</span>
