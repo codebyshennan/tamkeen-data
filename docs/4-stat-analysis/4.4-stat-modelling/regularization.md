@@ -972,7 +972,7 @@ Number of features selected: 4 out of 5
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-14" data-tint="1">
+  <div class="code-callout" data-lines="8-13" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Def implement_elastic_net(X, y, l1_ratios=[.1…</span>
@@ -981,7 +981,7 @@ Number of features selected: 4 out of 5
       <p>Defines the function, splits the data, and scales train and test features.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="15-28" data-tint="2">
+  <div class="code-callout" data-lines="16-22" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Fit model</span>
@@ -990,7 +990,7 @@ Number of features selected: 4 out of 5
       <p>Fits ElasticNetCV over the alpha and l1_ratio grid and counts non-zero coefficients.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="29-42" data-tint="3">
+  <div class="code-callout" data-lines="24-38" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Print(f&quot;Number of features selected: {n_nonze…</span>
@@ -999,7 +999,7 @@ Number of features selected: 4 out of 5
       <p>Prints the tuned alpha and l1_ratio and, for few features, plots the coefficients.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="43-57" data-tint="4">
+  <div class="code-callout" data-lines="47-57" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Plt.tight_layout()</span>
