@@ -1461,7 +1461,7 @@ print(f"Best l1_ratio: {elastic_net.l1_ratio_:.2f}")
       <span class="code-callout__title">From sklearn.linear_model import ElasticNetCV</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–13: follow this band in the snippet.</p>
+      <p>Fits ElasticNetCV over the l1_ratio and alpha grid and prints the tuned values.</p>
     </div>
   </div>
 </aside>
