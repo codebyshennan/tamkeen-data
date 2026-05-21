@@ -693,7 +693,7 @@ for feature in features_to_plot:
 
     # Plot
     plt.figure(figsize=(8, 6))
-    plt.plot(pdp_result['grid_values'][0], pdp_result['average'][0], '-', linewidth=2)
+    plt.plot((pdp_result.get('grid_values') or pdp_result.get('values'))[0], pdp_result['average'][0], '-', linewidth=2)
     plt.xlabel(feature)
     plt.ylabel('Partial Dependence')
     plt.title(f'Partial Dependence of Loan Amount on {feature}')
