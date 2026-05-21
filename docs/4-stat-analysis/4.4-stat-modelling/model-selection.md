@@ -935,7 +935,7 @@ Best model according to BIC: Degree 5.0 polynomial
       <p>For each polynomial degree, expand features, fit the model, and compute approximate AIC (<code>n·log(MSE) + 2k</code>) and BIC (<code>n·log(MSE) + k·log(n)</code>).</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="39-60" data-tint="3">
+  <div class="code-callout" data-lines="46-55" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Plot Criteria</span>
