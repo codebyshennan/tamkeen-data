@@ -188,7 +188,7 @@ plt.show()
       <span class="code-callout__title">Y_true = x**2</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 15–28: follow this band in the snippet.</p>
+      <p>Plots the scatter of noisy data against the true quadratic function and saves the figure.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="29-43" data-tint="3">
