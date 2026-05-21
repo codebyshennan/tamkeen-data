@@ -45,7 +45,7 @@ Model interpretation is the process of understanding and explaining how your sta
 ### Video Tutorial: Introduction to Model Interpretation
 
 <div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/VB9uV-xFgtU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/MQ6fFDwjuco" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 *SHAP Values Explained by StatQuest with Josh Starmer*
@@ -633,7 +633,7 @@ This approach shows the effect of each category compared to a reference category
 ### Video Tutorial: SHAP and LIME for Model Interpretation
 
 <div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/VB9uV-xFgtU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/MQ6fFDwjuco" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 *SHAP Values Explained by StatQuest with Josh Starmer*
