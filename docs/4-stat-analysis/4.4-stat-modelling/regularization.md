@@ -1264,7 +1264,7 @@ print(comparison)
       <span class="code-callout__title">Def compare_regularization_methods(X, y):</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–14: follow this band in the snippet.</p>
+      <p>Defines the function, splits the data, and scales train and test features.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="15-28" data-tint="2">
