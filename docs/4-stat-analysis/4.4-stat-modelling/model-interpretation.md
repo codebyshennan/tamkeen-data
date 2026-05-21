@@ -2337,7 +2337,7 @@ print(complexity_comparison)
       <p>Plot complexity (log x) vs test R² (y) with colour showing interpretability score using the RdYlGn colourmap—green is interpretable, red is opaque.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="99-102" data-tint="1">
+  <div class="code-callout" data-lines="105-107" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Run and Print</span>
