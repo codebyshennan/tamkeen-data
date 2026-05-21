@@ -329,7 +329,7 @@ distance_downtown: -14857.72 - A one standard deviation increase in distance_dow
       <p>Apply <code>StandardScaler</code> so every feature has mean 0 and standard deviation 1, then fit a second linear model on the scaled data.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="11-21" data-tint="2">
+  <div class="code-callout" data-lines="12-20" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Build Comparison Table</span>
