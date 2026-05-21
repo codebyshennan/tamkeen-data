@@ -11,6 +11,16 @@ objectives:
 
 **After this lesson:** you can compare candidate models honestly with cross-validation and information criteria, and select features without leaking validation data.
 
+## TLDR
+
+- **Goal:** pick the model that *generalises* to new data — not the one with the lowest training error.
+- **Golden rule:** fit on training data, evaluate on test data — never use the same data for both.
+- **Bias-variance tradeoff:** simple models underfit (high bias); complex models overfit (high variance). The sweet spot minimises total error on unseen data.
+- **Cross-validation (k-fold):** rotates which fold acts as the test set across k rounds — far more reliable than a single split, especially on small datasets.
+- **Information criteria (AIC/BIC):** reward fit while penalising the number of parameters. BIC penalises complexity more heavily — prefer it when you want the "true" model, not just the best predictor.
+- **Feature selection (forward/backward):** greedy search that adds/removes one feature at a time; stop where test error is lowest.
+- **Gotcha:** every time you adjust your model based on test performance, you're effectively training on the test set. Use CV for all tuning decisions.
+
 ## Overview
 
 Training error almost always rewards **more** complexity; generalization asks which model predicts well on **new** data. This lesson covers cross-validation, holdout discipline, and criteria like AIC/BIC-style thinking—so you pick structure (polynomial degree, feature subsets) without fooling yourself. It pairs naturally with [regularization](./regularization.md), which penalizes complexity inside a single optimization instead of comparing many separate fits.
