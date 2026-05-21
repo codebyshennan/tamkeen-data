@@ -206,7 +206,7 @@ plt.show()
       <span class="code-callout__title">Fit models of different complexity</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 44–57: follow this band in the snippet.</p>
+      <p>Sets up the comparison plot and loops over each polynomial degree to fit a pipeline.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="58-72" data-tint="1">
