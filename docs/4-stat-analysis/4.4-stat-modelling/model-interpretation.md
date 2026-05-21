@@ -951,7 +951,7 @@ plt.show()
       <p>Show how each feature's SHAP value varies with the feature itself, revealing non-linearities and potential interactions automatically coloured by a second feature.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="42-49" data-tint="4">
+  <div class="code-callout" data-lines="45-45" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Waterfall (Local)</span>
