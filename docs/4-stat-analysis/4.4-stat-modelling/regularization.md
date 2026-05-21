@@ -179,7 +179,7 @@ plt.show()
       <span class="code-callout__title">Import numpy as np</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–14: follow this band in the snippet.</p>
+      <p>Imports the libraries, sets a random seed, and generates noisy quadratic data y = x² + noise.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="15-28" data-tint="2">
