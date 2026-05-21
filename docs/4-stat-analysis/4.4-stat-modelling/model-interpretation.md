@@ -48,7 +48,7 @@ Model interpretation is the process of understanding and explaining how your sta
 <iframe width="560" height="315" src="https://www.youtube.com/embed/MQ6fFDwjuco" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*SHAP Values Explained by StatQuest with Josh Starmer*
+*SHAP values for beginners — what they mean and their applications, by A Data Odyssey*
 
 <div class="video-embed">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/dQ_jvRkzN1Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -636,7 +636,7 @@ This approach shows the effect of each category compared to a reference category
 <iframe width="560" height="315" src="https://www.youtube.com/embed/MQ6fFDwjuco" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*SHAP Values Explained by StatQuest with Josh Starmer*
+*SHAP values for beginners — what they mean and their applications, by A Data Odyssey*
 
 <div class="video-embed">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/dQ_jvRkzN1Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
