@@ -1629,7 +1629,7 @@ print(std_coefs)
       <span class="code-callout__title">Get standardized coefficients</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–14: follow this band in the snippet.</p>
+      <p>Defines the function and reads the raw coefficients and feature scales from the scaler.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="15-28" data-tint="2">
