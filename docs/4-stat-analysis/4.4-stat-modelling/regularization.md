@@ -173,7 +173,7 @@ plt.show()
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-14" data-tint="1">
+  <div class="code-callout" data-lines="1-16" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Import numpy as np</span>
@@ -182,7 +182,7 @@ plt.show()
       <p>Imports the libraries, sets a random seed, and generates noisy quadratic data y = x² + noise.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="15-28" data-tint="2">
+  <div class="code-callout" data-lines="20-21" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Y_true = x**2</span>
@@ -191,7 +191,7 @@ plt.show()
       <p>Plots the scatter of noisy data against the true quadratic function and saves the figure.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="29-43" data-tint="3">
+  <div class="code-callout" data-lines="31-37" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Split the data into train and test sets</span>
@@ -200,7 +200,7 @@ plt.show()
       <p>Splits the data into train and test sets and defines the polynomial degrees to compare.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="44-57" data-tint="4">
+  <div class="code-callout" data-lines="46-52" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Fit models of different complexity</span>
@@ -209,7 +209,7 @@ plt.show()
       <p>Sets up the comparison plot and loops over each polynomial degree to fit a pipeline.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="58-72" data-tint="1">
+  <div class="code-callout" data-lines="58-63" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Train_error = mean_squared_error(y_train, mod…</span>
