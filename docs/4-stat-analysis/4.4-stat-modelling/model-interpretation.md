@@ -76,23 +76,15 @@ Model interpretation transforms "black box" predictions into actionable insights
 
 ### Real-world Examples
 
-#### 1. Credit Scoring
+- **Credit Scoring** — Without interpretation a bank can deny a loan but not say why; with it, the bank can point to the high debt-to-income ratio and advise what to improve.
+- **Medical Diagnosis** — Without interpretation a model flags high heart-disease risk with no reason; with it, the doctor sees that elevated blood pressure and family history drove the prediction, enabling targeted treatment.
+- **Customer Churn** — Without interpretation a company knows *who* will leave but not *why*; with it, they spot price sensitivity and service issues and can act to retain customers.
 
-**Without interpretation**: A bank uses a complex model to deny a loan but can't explain why.
-
-**With interpretation**: The bank can tell the applicant their high debt-to-income ratio was the primary factor, and what they can do to improve their chances next time.
-
-#### 2. Medical Diagnosis
-
-**Without interpretation**: A model predicts a patient has a high risk of heart disease but doesn't explain why.
-
-**With interpretation**: The doctor can see that elevated blood pressure and family history were the main factors, allowing for targeted treatment plans.
-
-#### 3. Customer Churn Prediction
-
-**Without interpretation**: A company knows which customers are likely to leave but doesn't know why.
-
-**With interpretation**: They can identify that price sensitivity and recent service issues are driving churn, allowing them to take preventive actions.
+> **🎯 Key points**
+>
+> - Model interpretation explains *how* and *why* a model makes its predictions, not just how accurate it is.
+> - Interpretation builds stakeholder trust, exposes bias, guides improvements, and satisfies regulations like GDPR's "right to explanation".
+> - An unexplainable model has limited value in high-stakes settings such as lending, medicine, and customer retention.
 
 ## Understanding Model Outputs
 
