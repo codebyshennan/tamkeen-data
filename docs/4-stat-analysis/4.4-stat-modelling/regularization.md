@@ -1130,7 +1130,7 @@ param_selection = select_regularization_parameter(X_collinear, y_collinear)
       <span class="code-callout__title">Ridge_alphas = ridge.alphas</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 29–42: follow this band in the snippet.</p>
+      <p>Extracts mean CV error for each method and plots both MSE paths against alpha.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="43-57" data-tint="4">
