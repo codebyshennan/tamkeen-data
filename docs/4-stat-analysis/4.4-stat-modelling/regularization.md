@@ -498,7 +498,7 @@ plot_constraint_spaces()
       <span class="code-callout__title">Def plot_constraint_spaces():</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–12: follow this band in the snippet.</p>
+      <p>Builds a 2D coefficient grid and computes the L1 and L2 constraint values over it.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="13-24" data-tint="2">
