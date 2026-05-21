@@ -856,7 +856,7 @@ Number of features selected: 5 out of 5
       <span class="code-callout__title">Print(f&quot;Number of features selected: {n_nonze…</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 30–43: follow this band in the snippet.</p>
+      <p>Prints the results and, for few features, plots the fitted coefficients as a bar chart.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="44-58" data-tint="4">
