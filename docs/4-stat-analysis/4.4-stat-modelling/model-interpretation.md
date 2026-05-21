@@ -1842,7 +1842,7 @@ create_audience_specific_interpretations(model, X, y)
       <p>Predict price for a sample house, then re-predict after simulated renovations (+5 years younger) and adding a room to show counterfactual value changes.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="85-86" data-tint="4">
+  <div class="code-callout" data-lines="92-92" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Run Example</span>
