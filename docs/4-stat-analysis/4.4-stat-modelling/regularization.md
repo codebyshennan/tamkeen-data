@@ -1106,7 +1106,7 @@ param_selection = select_regularization_parameter(X_collinear, y_collinear)
 {% endhighlight %}
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-14" data-tint="1">
+  <div class="code-callout" data-lines="8-12" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Def select_regularization_parameter(X, y):</span>
@@ -1115,7 +1115,7 @@ param_selection = select_regularization_parameter(X_collinear, y_collinear)
       <p>Defines the function, scales the features, and lists the alpha values to test.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="15-28" data-tint="2">
+  <div class="code-callout" data-lines="15-23" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Kf = KFold(n_splits=5, shuffle=True, random_s…</span>
@@ -1124,7 +1124,7 @@ param_selection = select_regularization_parameter(X_collinear, y_collinear)
       <p>Sets up shared K-fold cross-validation and fits both RidgeCV and LassoCV with it.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="29-42" data-tint="3">
+  <div class="code-callout" data-lines="29-36" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Ridge_alphas = ridge.alphas</span>
@@ -1133,7 +1133,7 @@ param_selection = select_regularization_parameter(X_collinear, y_collinear)
       <p>Extracts mean CV error for each method and plots both MSE paths against alpha.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="43-57" data-tint="4">
+  <div class="code-callout" data-lines="37-54" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Plt.title(&#x27;Regularization Parameter Selection&#x27;)</span>
