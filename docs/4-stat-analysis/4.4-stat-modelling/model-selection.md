@@ -1181,7 +1181,7 @@ Optimal features: ['Feature 1', 'Feature 3', 'Feature 2']
       <p>Append the best feature, refit the model with the growing selected set, and record train and test MSE at each step.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="70-88" data-tint="4">
+  <div class="code-callout" data-lines="75-89" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Plot Results</span>
