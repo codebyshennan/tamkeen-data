@@ -424,7 +424,7 @@ age: 0.1044 - Contributes 10.4% to the model's decisions
       <p>Train a 100-tree <code>RandomForestRegressor</code> on the same housing data and read the built-in Gini-based <code>feature_importances_</code>.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="14-22" data-tint="2">
+  <div class="code-callout" data-lines="8-12" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Plot Importances</span>
