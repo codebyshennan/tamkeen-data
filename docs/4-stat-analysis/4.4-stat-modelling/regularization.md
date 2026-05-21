@@ -1502,7 +1502,7 @@ y_pred = pipeline.predict(X_test)
       <span class="code-callout__title">From sklearn.preprocessing import StandardScaler</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–12: follow this band in the snippet.</p>
+      <p>Builds a Pipeline of StandardScaler then Ridge so scaling is applied consistently on fit and predict.</p>
     </div>
   </div>
 </aside>
