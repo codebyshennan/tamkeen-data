@@ -1078,7 +1078,7 @@ print(linear_interpretation)
       <p>If SEs were computed, use <code>plt.errorbar</code> to show coefficients with horizontal CI whiskers; otherwise fall back to a plain colour-coded bar chart.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="52-61" data-tint="3">
+  <div class="code-callout" data-lines="61-63" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Run and Print</span>
