@@ -1163,7 +1163,7 @@ Optimal features: ['Feature 1', 'Feature 3', 'Feature 2']
       <p>Generate or accept data, split 70/30, and set up empty tracking lists and feature name labels.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="32-53" data-tint="2">
+  <div class="code-callout" data-lines="33-53" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Greedy Search</span>
