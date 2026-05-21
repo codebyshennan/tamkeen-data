@@ -389,7 +389,7 @@ For those who are interested in the mathematical explanation, here's how regular
 
 #### Standard Linear Regression (Ordinary Least Squares)
 
-$$\min_{\beta} \sum_{i=1}^n (y_i - \hat{y}_i)^2$$
+$$\min\_{\beta} \sum\_{i=1}^n (y\_i - \hat{y}\_i)^2$$
 
 #### Ridge Regression (L2)
 
