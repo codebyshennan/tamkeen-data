@@ -54,7 +54,7 @@ Model interpretation is the process of understanding and explaining how your sta
 <iframe width="560" height="315" src="https://www.youtube.com/embed/dQ_jvRkzN1Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*LIME: Explaining Machine Learning Models by StatQuest with Josh Starmer*
+*An introduction to LIME for local interpretations, by A Data Odyssey*
 
 ### Why Interpretation Matters
 
@@ -642,7 +642,7 @@ This approach shows the effect of each category compared to a reference category
 <iframe width="560" height="315" src="https://www.youtube.com/embed/dQ_jvRkzN1Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*LIME: Explaining Machine Learning Models by StatQuest with Josh Starmer*
+*An introduction to LIME for local interpretations, by A Data Odyssey*
 
 ### 1. Partial Dependence Plots (PDPs)
 
