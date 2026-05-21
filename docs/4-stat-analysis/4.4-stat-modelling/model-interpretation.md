@@ -1579,7 +1579,7 @@ Model Interpretability Comparison:
       <p>Plot R² vs MSE, colour-coding points by interpretability tier and labelling each model, to visualise the accuracy-interpretability tradeoff.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="80-96" data-tint="4">
+  <div class="code-callout" data-lines="99-101" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Legend and Run</span>
