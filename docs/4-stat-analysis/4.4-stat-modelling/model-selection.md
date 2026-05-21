@@ -208,7 +208,7 @@ plot_bias_variance_tradeoff()
       <p>Load NumPy, Matplotlib, pandas, and the key scikit-learn helpers we'll use throughout this lesson.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="10-21" data-tint="2">
+  <div class="code-callout" data-lines="13-18" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Simulate Curves</span>
