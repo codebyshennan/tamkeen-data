@@ -347,7 +347,7 @@ distance_downtown: -14857.72 - A one standard deviation increase in distance_dow
       <p>Reuse the same green/red colour scheme and save the bar chart to <code>standardized_coefficients.png</code> for comparison with raw coefficients.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="34-37" data-tint="4">
+  <div class="code-callout" data-lines="33-36" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Print Per-SD Effect</span>
