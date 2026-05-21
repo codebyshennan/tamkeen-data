@@ -525,7 +525,7 @@ plot_constraint_spaces()
       <span class="code-callout__title">Plt.contour(B1, B2, l2, levels=[1], colors=&#x27;b…</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 37–48: follow this band in the snippet.</p>
+      <p>Draws the L2 circle constraint with the same MSE contours and marks its non-sparse solution.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="49-61" data-tint="1">
