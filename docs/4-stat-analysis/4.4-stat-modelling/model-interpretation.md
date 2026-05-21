@@ -1223,7 +1223,7 @@ Glucose: 1.032 - For each additional unit of glucose, the odds of diabetes incre
       <p>Horizontal bar chart with a log x-axis and reference line at OR = 1 (no effect), making it easy to compare multiplicative effects across features.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="59-70" data-tint="4">
+  <div class="code-callout" data-lines="61-72" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Plain-English Output</span>
