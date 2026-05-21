@@ -996,7 +996,7 @@ Number of features selected: 4 out of 5
       <span class="code-callout__title">Print(f&quot;Number of features selected: {n_nonze…</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 29–42: follow this band in the snippet.</p>
+      <p>Prints the tuned alpha and l1_ratio and, for few features, plots the coefficients.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="43-57" data-tint="4">
