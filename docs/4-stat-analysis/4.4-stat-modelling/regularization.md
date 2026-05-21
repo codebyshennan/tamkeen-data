@@ -492,7 +492,7 @@ plot_constraint_spaces()
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-12" data-tint="1">
+  <div class="code-callout" data-lines="4-10" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Def plot_constraint_spaces():</span>
@@ -501,7 +501,7 @@ plot_constraint_spaces()
       <p>Builds a 2D coefficient grid and computes the L1 and L2 constraint values over it.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="13-24" data-tint="2">
+  <div class="code-callout" data-lines="17-22" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Plt.figure(figsize=(12, 6))</span>
@@ -510,7 +510,7 @@ plot_constraint_spaces()
       <p>Draws the L1 diamond constraint with overlaid circular MSE loss contours.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="25-36" data-tint="3">
+  <div class="code-callout" data-lines="25-33" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Plt.plot([1], [0], &#x27;ko&#x27;, markersize=8)</span>
@@ -519,7 +519,7 @@ plot_constraint_spaces()
       <p>Marks and annotates the sparse corner solution on the L1 constraint plot.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="37-48" data-tint="4">
+  <div class="code-callout" data-lines="37-45" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Plt.contour(B1, B2, l2, levels=[1], colors=&#x27;b…</span>
@@ -528,7 +528,7 @@ plot_constraint_spaces()
       <p>Draws the L2 circle constraint with the same MSE contours and marks its non-sparse solution.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="49-61" data-tint="1">
+  <div class="code-callout" data-lines="52-61" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Plt.ylabel(&#x27;Coefficient β₂&#x27;)</span>
