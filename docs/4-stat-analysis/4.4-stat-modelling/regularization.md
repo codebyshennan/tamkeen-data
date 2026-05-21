@@ -1455,7 +1455,7 @@ print(f"Best l1_ratio: {elastic_net.l1_ratio_:.2f}")
 {% endhighlight %}
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-13" data-tint="1">
+  <div class="code-callout" data-lines="4-13" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">From sklearn.linear_model import ElasticNetCV</span>
