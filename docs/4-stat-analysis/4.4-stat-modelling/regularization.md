@@ -703,7 +703,7 @@ Test R²: 0.9573
       <span class="code-callout__title">Visualize coefficients</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 28–40: follow this band in the snippet.</p>
+      <p>If there are few features, builds a horizontal bar chart of the fitted coefficients.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="41-54" data-tint="4">
