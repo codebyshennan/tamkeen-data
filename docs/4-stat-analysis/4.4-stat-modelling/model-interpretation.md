@@ -1359,7 +1359,7 @@ Leaf node 10: Predicted value = 52388.22
       <p>Extract <code>feature_importances_</code> (Gini-based reduction) from the tree and plot a sorted bar chart saved as <code>tree_feature_importance.png</code>.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="30-51" data-tint="3">
+  <div class="code-callout" data-lines="34-44" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Trace Decision Path</span>
