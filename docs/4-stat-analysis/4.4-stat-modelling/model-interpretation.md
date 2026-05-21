@@ -621,6 +621,13 @@ MaritalStatus_Single: $3295.10 - This category increases the loan amount by $329
 
 This approach shows the effect of each category compared to a reference category (usually the first level alphabetically).
 
+> **🎯 Key points**
+>
+> - A regression coefficient is the change in the prediction per one-unit increase in that feature, holding others fixed.
+> - Standardise features before comparing coefficient magnitudes, since raw coefficients depend on each feature's scale.
+> - Tree-based models expose `feature_importances_`, ranking features by their contribution to the model's decisions.
+> - Dummy-encoded categorical coefficients are read as a contrast against the dropped baseline level.
+
 ## Advanced Interpretation Techniques
 
 ### Video Tutorial: SHAP and LIME for Model Interpretation
