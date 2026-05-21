@@ -1757,7 +1757,7 @@ X_train, X_test, y_train, y_test = train_test_split(
       <span class="code-callout__title">&#x27;Random Feature 1&#x27;, &#x27;Random Feature 2&#x27;</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 43–56: follow this band in the snippet.</p>
+      <p>Stacks the features, names them, and splits into train/test, leaving the modeling to the student.</p>
     </div>
   </div>
 </aside>
