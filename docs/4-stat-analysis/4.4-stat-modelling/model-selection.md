@@ -376,7 +376,7 @@ Train MSE: 16.92, Test MSE: 16.23</figcaption>
       <p>Scatter the data points, overlay the true curve and model prediction, and title each subplot with the degree's MSE values to contrast under-, good-, and over-fit.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="52-58" data-tint="4">
+  <div class="code-callout" data-lines="57-57" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Save and Run</span>
