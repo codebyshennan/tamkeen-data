@@ -226,7 +226,7 @@ plot_bias_variance_tradeoff()
       <p>Draw the three curves and mark the optimal complexity point where total error is minimised using <code>np.argmin</code>.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="33-43" data-tint="4">
+  <div class="code-callout" data-lines="33-36" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Annotate Regions</span>
