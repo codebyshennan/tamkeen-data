@@ -1507,6 +1507,13 @@ y_pred = pipeline.predict(X_test)
 </aside>
 </div>
 
+> **🎯 Key points**
+>
+> - Start with Ridge: it is stable, handles multicollinearity, and keeps useful features.
+> - Use Lasso when you suspect some features are irrelevant and want automatic selection.
+> - Reach for Elastic Net when unsure which to use, tuning both `alpha` and `l1_ratio`.
+> - Always wrap scaling and the model in a `Pipeline` so scaling is applied consistently.
+
 ## Common Challenges and Solutions
 
 ### 1. Selecting the Optimal Regularization Strength
