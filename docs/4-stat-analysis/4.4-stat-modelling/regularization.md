@@ -1326,6 +1326,13 @@ And you'll get output like:
 3             Elastic Net (L1 + L2)         0.9086   0.9055              4
 ```
 
+> **🎯 Key points**
+>
+> - Pick `alpha` with cross-validation across a wide log-spaced range, not a single split.
+> - Plotting CV error vs `alpha` shows the trade-off and the best value for each method.
+> - Compare OLS against tuned Ridge, Lasso, and Elastic Net on both test R² and feature count.
+> - Penalized models often match OLS accuracy while using fewer features and being more stable.
+
 ## Practical Tips for Using Regularization
 
 ### 1. Start with Ridge Regression
