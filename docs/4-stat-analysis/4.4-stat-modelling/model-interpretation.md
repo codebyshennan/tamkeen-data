@@ -11,6 +11,17 @@ objectives:
 
 **After this lesson:** you can explain what a fitted model is doing in terms a stakeholder can act on — coefficients, partial dependence, permutation importance, and SHAP-style attributions.
 
+## TLDR
+
+- **Why it matters:** an accurate model no one can explain won't be trusted — especially in medical, financial, or legal decisions.
+- **Linear regression coefficients:** `β` = change in ŷ per 1-unit increase in that feature, all others held fixed. Always interpret in the feature's original units.
+- **Standardised coefficients:** refit on `StandardScaler`-transformed features so magnitudes are comparable across features regardless of scale.
+- **Logistic regression odds ratios:** `exp(β)` = how each feature multiplies the *odds* of the positive class. OR > 1 raises probability; OR < 1 lowers it.
+- **Permutation importance:** shuffle one feature at a time on the test set and measure the accuracy drop — model-agnostic and reflects true predictive value.
+- **Partial dependence plots (PDP):** show the average marginal effect of one feature across all observations — works on any model, including black boxes.
+- **SHAP values:** principled per-prediction attributions — each feature gets credit for pushing a prediction up or down from the baseline. Requires `pip install shap`.
+- **Interpretability spectrum:** linear/logistic > decision tree > random forest > gradient boosting > neural network. More powerful ≠ more explainable.
+
 ## Overview
 
 Accuracy on a leaderboard is not enough for high-stakes use: teams need **consistent stories** about drivers of predictions—coefficients where the model is linear, marginal and partial plots where it is not, and modern attribution tools when features interact. This lesson sits last so you interpret models **after** you know how they were fit, selected, and possibly regularized.
