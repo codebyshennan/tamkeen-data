@@ -2328,7 +2328,7 @@ print(complexity_comparison)
       <p>Assign a subjective 1–10 interpretability score based on model family and depth; deeper / larger ensembles score lower.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="65-97" data-tint="4">
+  <div class="code-callout" data-lines="75-92" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">3-Axis Scatter</span>
