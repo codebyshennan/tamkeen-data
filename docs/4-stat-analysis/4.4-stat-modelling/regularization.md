@@ -215,7 +215,7 @@ plt.show()
       <span class="code-callout__title">Train_error = mean_squared_error(y_train, mod…</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 58–72: follow this band in the snippet.</p>
+      <p>Computes train and test MSE for each model and overlays its predictions on the plot.</p>
     </div>
   </div>
 </aside>
