@@ -1824,7 +1824,7 @@ create_audience_specific_interpretations(model, X, y)
       <p>Compute R², MSE, RMSE, and MAE and print the top 3 features with their importance scores or coefficients—exactly what a data scientist needs.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="34-55" data-tint="2">
+  <div class="code-callout" data-lines="41-57" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Business Audience</span>
