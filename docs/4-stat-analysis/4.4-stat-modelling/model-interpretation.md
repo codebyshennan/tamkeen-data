@@ -1069,7 +1069,7 @@ print(linear_interpretation)
       <p>Compute OLS standard errors manually via <code>(X'X)^{-1}</code> and the residual MSE, then compute 95% CIs using <code>scipy.stats.t.ppf</code>.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="31-50" data-tint="2">
+  <div class="code-callout" data-lines="36-48" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Error Bar Plot</span>
