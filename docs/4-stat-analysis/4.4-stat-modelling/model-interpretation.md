@@ -1410,6 +1410,13 @@ Decision trees are excellent for interpretation because:
 - They intuitively separate data into segments
 - The structure mirrors human decision-making
 
+> **🎯 Key points**
+>
+> - Linear regression is interpreted directly through its coefficients, optionally with confidence intervals.
+> - Logistic regression coefficients become odds ratios via `exp(coef)`: above 1 raises the odds, below 1 lowers them.
+> - Decision trees are inherently interpretable — you can trace the exact split path for any prediction.
+> - Each model family has its own native interpretation tool that needs no post-hoc method.
+
 ## Practical Tips for Model Interpretation
 
 ### 1. Start with a Simple Model
