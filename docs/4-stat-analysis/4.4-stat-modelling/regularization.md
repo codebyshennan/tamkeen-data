@@ -1638,7 +1638,7 @@ print(std_coefs)
       <span class="code-callout__title">If feature_names is None:</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 15–28: follow this band in the snippet.</p>
+      <p>Computes standardized coefficients and returns them in a DataFrame sorted by magnitude.</p>
     </div>
   </div>
 </aside>
