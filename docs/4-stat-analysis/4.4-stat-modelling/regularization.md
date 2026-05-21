@@ -507,7 +507,7 @@ plot_constraint_spaces()
       <span class="code-callout__title">Plt.figure(figsize=(12, 6))</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 13–24: follow this band in the snippet.</p>
+      <p>Draws the L1 diamond constraint with overlaid circular MSE loss contours.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="25-36" data-tint="3">
