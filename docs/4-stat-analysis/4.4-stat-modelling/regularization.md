@@ -1291,7 +1291,7 @@ print(comparison)
       <span class="code-callout__title">Results.append({</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 43–56: follow this band in the snippet.</p>
+      <p>Collects each model's metrics into a list and converts it to a DataFrame.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="57-70" data-tint="1">
