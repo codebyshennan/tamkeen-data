@@ -95,6 +95,13 @@ When selecting a model, we need to consider:
    - Interpretability requirements
    - Implementation timeline
 
+> **🎯 Key points**
+>
+> - Model selection means choosing the best model from a set of candidates.
+> - The core trade-off is simplicity vs. flexibility; the real goal is generalising to new data.
+> - More features can capture more patterns but add cost and overfitting risk.
+> - Let your goal, your data, and your practical constraints guide the choice.
+
 ## Understanding Model Complexity
 
 ### The Bias-Variance Tradeoff
