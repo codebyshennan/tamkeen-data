@@ -1694,7 +1694,7 @@ plt.show()
       <p>Define four candidates: plain linear regression, Ridge, Lasso, and a polynomial (degree 2) + Ridge pipeline to capture the non-linear effects.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="55-76" data-tint="3">
+  <div class="code-callout" data-lines="58-86" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Evaluate and Compare</span>
