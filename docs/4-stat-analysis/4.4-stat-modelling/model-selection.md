@@ -1409,7 +1409,7 @@ Optimal features: ['Feature 1', 'Feature 2', 'Feature 3']
       <p>Generate or accept data, split 70/30, start with all features selected, and record the baseline train/test MSE.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="41-62" data-tint="2">
+  <div class="code-callout" data-lines="43-62" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Greedy Removal</span>
