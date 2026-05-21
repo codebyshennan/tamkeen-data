@@ -1112,7 +1112,7 @@ param_selection = select_regularization_parameter(X_collinear, y_collinear)
       <span class="code-callout__title">Def select_regularization_parameter(X, y):</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–14: follow this band in the snippet.</p>
+      <p>Defines the function, scales the features, and lists the alpha values to test.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="15-28" data-tint="2">
