@@ -1400,7 +1400,7 @@ Optimal features: ['Feature 1', 'Feature 2', 'Feature 3']
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-39" data-tint="1">
+  <div class="code-callout" data-lines="7-40" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Initialise Full Model</span>
