@@ -1368,7 +1368,7 @@ Leaf node 10: Predicted value = 52388.22
       <p>Use <code>decision_path</code> to get the nodes visited for one sample, then walk them to print each split condition and which branch was taken.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="53-68" data-tint="4">
+  <div class="code-callout" data-lines="57-73" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Print Each Split</span>
