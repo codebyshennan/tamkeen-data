@@ -351,7 +351,7 @@ plot_regularization_effects()
       <span class="code-callout__title">Plt.figure(figsize=(15, 6))</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 14–26: follow this band in the snippet.</p>
+      <p>Fits a Ridge model at each alpha in the left subplot and plots its predicted line.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="27-39" data-tint="3">
