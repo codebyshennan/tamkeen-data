@@ -1676,7 +1676,7 @@ plt.show()
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-34" data-tint="1">
+  <div class="code-callout" data-lines="5-21" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Synthetic Dataset</span>
