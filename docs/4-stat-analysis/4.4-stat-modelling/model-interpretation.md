@@ -1684,7 +1684,7 @@ multiple_interpretations = apply_multiple_interpretation_techniques(rf_model, X,
       <p>Run <code>permutation_importance</code> which works for any model: randomly shuffle each feature and measure the resulting drop in score across 10 repeats.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="29-48" data-tint="3">
+  <div class="code-callout" data-lines="33-47" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">PDP for Top Features</span>
