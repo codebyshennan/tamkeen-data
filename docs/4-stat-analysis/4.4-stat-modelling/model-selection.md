@@ -1172,7 +1172,7 @@ Optimal features: ['Feature 1', 'Feature 3', 'Feature 2']
       <p>At each step, try adding every remaining feature, fit a linear model, and keep the candidate that minimises training MSE.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="55-68" data-tint="3">
+  <div class="code-callout" data-lines="56-67" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Track Progress</span>
