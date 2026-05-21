@@ -521,7 +521,7 @@ Test MSE: 0.8728
       <p>Optionally generate synthetic data, then use <code>train_test_split</code> to reserve a holdout set for evaluation.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="16-28" data-tint="2">
+  <div class="code-callout" data-lines="17-29" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Fit and Score</span>
