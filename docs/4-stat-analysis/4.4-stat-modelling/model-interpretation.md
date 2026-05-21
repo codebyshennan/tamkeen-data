@@ -2144,7 +2144,7 @@ explore_feature_interactions()
       <p>Generate target = feature1 × feature2 + noise—a pure multiplicative interaction that a main-effects-only linear model cannot capture.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="28-44" data-tint="2">
+  <div class="code-callout" data-lines="23-35" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Two Models</span>
