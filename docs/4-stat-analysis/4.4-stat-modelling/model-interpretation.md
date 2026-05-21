@@ -1196,7 +1196,7 @@ Glucose: 1.032 - For each additional unit of glucose, the odds of diabetes incre
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-30" data-tint="1">
+  <div class="code-callout" data-lines="6-30" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Simulate Diabetes Data</span>
