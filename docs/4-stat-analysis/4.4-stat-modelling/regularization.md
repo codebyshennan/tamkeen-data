@@ -550,6 +550,14 @@ This geometric interpretation explains:
 
 3. **How regularization works**: The optimization finds the point where the loss function contours (blue dashed lines) touch the constraint region.
 
+> **🎯 Key points**
+>
+> - Regularization adds a penalty term to the loss function the model minimizes.
+> - L1 (Lasso) penalizes the sum of absolute coefficients and can drive some to exactly zero — feature selection.
+> - L2 (Ridge) penalizes the sum of squared coefficients and shrinks them smoothly, rarely to zero.
+> - Stronger penalty (larger α) means a simpler model; at high α both methods approach the mean.
+> - Geometrically, L1's diamond constraint hits corners (sparsity) while L2's circle usually does not.
+
 ## Implementing Regularization
 
 ### Video Tutorial: Elastic Net Regularization
