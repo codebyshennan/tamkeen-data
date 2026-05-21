@@ -232,7 +232,7 @@ Number of Rooms: $28010.98 - For each additional room, the house price increases
       <p>Horizontal bar chart coloured green (positive) / red (negative) to show which features raise or lower price, then save to <code>coefficient_interpretation.png</code>.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="69-87" data-tint="1">
+  <div class="code-callout" data-lines="78-86" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Print Interpretations</span>
