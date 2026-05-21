@@ -1448,6 +1448,14 @@ Optimal features: ['Feature 1', 'Feature 2', 'Feature 3']
 </aside>
 </div>
 
+> **🎯 Key points**
+>
+> - Feature selection decides which features to include, not just how complex the model is.
+> - Forward selection starts empty and adds the most helpful feature one at a time.
+> - Backward elimination starts with all features and drops the least useful one at a time.
+> - Both are greedy: they can miss optimal combinations and may struggle with correlated features.
+> - Pick the subset size by lowest out-of-sample error, not training error.
+
 ## Practical Tips
 
 When selecting models in practice, follow these steps:
