@@ -830,7 +830,7 @@ for feature in ['Income', 'Age']:
       <p>For each sample, copy its row, swap in each grid value for the feature, and collect model predictions—forming one blue ICE curve per sample.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="38-49" data-tint="4">
+  <div class="code-callout" data-lines="39-40" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">PDP Overlay</span>
