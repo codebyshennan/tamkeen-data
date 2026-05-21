@@ -736,7 +736,7 @@ Degree 2 wins — it matches the true data-generating process (which is quadrati
       <p>Initialise <code>KFold</code> with shuffling and pre-compute all split index pairs so we can iterate over them.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="21-35" data-tint="2">
+  <div class="code-callout" data-lines="22-33" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Per-Fold Training</span>
