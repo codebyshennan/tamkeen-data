@@ -730,7 +730,7 @@ Test R²: 0.9573
       <span class="code-callout__title">Combine features</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 68–81: follow this band in the snippet.</p>
+      <p>Stacks features, builds the target from true coefficients plus noise, and runs implement_ridge.</p>
     </div>
   </div>
 </aside>
