@@ -970,6 +970,13 @@ SHAP values are especially powerful because they:
 - Show feature interactions and non-linear effects
 - Can explain any model's predictions
 
+> **🎯 Key points**
+>
+> - Partial dependence plots (PDPs) show the average marginal effect of one feature across all observations, on any model.
+> - ICE plots show the per-observation effect; non-parallel ICE curves reveal feature interactions.
+> - SHAP values give principled, additive per-prediction attributions relative to a baseline output.
+> - These post-hoc methods work on black-box models, supplying both global and local explanations.
+
 ## Model-Specific Interpretation
 
 ### 1. Linear Regression
