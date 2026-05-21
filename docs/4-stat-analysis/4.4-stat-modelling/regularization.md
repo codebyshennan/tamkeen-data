@@ -360,7 +360,7 @@ plot_regularization_effects()
       <span class="code-callout__title">Plt.xlabel(&#x27;Feature Value&#x27;)</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 27–39: follow this band in the snippet.</p>
+      <p>Labels the Ridge subplot and begins the Lasso subplot, fitting Lasso at each alpha.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="40-53" data-tint="4">
