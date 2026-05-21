@@ -685,7 +685,7 @@ Test R²: 0.9573
       <span class="code-callout__title">Def implement_ridge(X, y, alphas=np.logspace(…</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–13: follow this band in the snippet.</p>
+      <p>Defines the function, splits the data, and scales train and test features with StandardScaler.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="14-27" data-tint="2">
