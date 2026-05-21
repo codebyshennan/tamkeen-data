@@ -807,10 +807,10 @@ For more formal model comparison, especially in statistical modeling, we can use
 ### Video Tutorial: AIC and BIC
 
 <div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/-BR4WElPIXg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/mjpAvKfaaQg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*Statistics 101: Multiple Regression, AIC, AICc, and BIC Basics*
+*Model Selection with AIC and BIC (and a few other things too!) by Lizzy Sgambelluri*
 
 <div class="video-embed">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/McEN54l3EPU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
