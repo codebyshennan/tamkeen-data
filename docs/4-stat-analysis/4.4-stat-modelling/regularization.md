@@ -1643,6 +1643,13 @@ print(std_coefs)
 </aside>
 </div>
 
+> **🎯 Key points**
+>
+> - Choose `alpha` with cross-validation over a wide range; `RepeatedKFold` makes the estimate more robust.
+> - For highly correlated features, prefer Ridge or reduce dimensions (e.g. PCA) before modeling.
+> - Regularized coefficients are biased — fine for prediction, but interpret cautiously for causal claims.
+> - Multiply coefficients by feature scales to recover comparable, standardized effect sizes.
+
 ## Practice Exercise
 
 Let's apply regularization to improve a model for housing price prediction:
