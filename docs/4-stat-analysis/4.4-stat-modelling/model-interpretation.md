@@ -51,7 +51,7 @@ Model interpretation is the process of understanding and explaining how your sta
 *SHAP Values Explained by StatQuest with Josh Starmer*
 
 <div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/MREiHgHgl0k" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dQ_jvRkzN1Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 *LIME: Explaining Machine Learning Models by StatQuest with Josh Starmer*
@@ -639,7 +639,7 @@ This approach shows the effect of each category compared to a reference category
 *SHAP Values Explained by StatQuest with Josh Starmer*
 
 <div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/MREiHgHgl0k" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/dQ_jvRkzN1Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 *LIME: Explaining Machine Learning Models by StatQuest with Josh Starmer*
