@@ -812,7 +812,7 @@ for feature in ['Income', 'Age']:
       <p>Select 15 random rows from X to keep the ICE plot readable—one line per sample would be too cluttered with hundreds of rows.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="10-19" data-tint="2">
+  <div class="code-callout" data-lines="15-16" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Build Grid</span>
