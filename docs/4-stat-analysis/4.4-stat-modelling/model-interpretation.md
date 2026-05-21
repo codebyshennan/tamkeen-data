@@ -596,7 +596,7 @@ MaritalStatus_Single: $3295.10 - This category increases the loan amount by $329
       <p>Separate dummy columns from numeric ones and build a coefficient DataFrame for the categorical features only.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="73-84" data-tint="4">
+  <div class="code-callout" data-lines="75-81" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Visualise Category Effects</span>
