@@ -205,7 +205,7 @@ Number of Rooms: $28010.98 - For each additional room, the house price increases
       <p>Load NumPy, Matplotlib, pandas, scikit-learn models, and seaborn for this lesson's examples.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="12-36" data-tint="2">
+  <div class="code-callout" data-lines="14-36" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Generate Housing Data</span>
