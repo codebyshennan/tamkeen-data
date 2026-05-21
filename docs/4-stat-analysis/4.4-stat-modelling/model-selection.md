@@ -1418,7 +1418,7 @@ Optimal features: ['Feature 1', 'Feature 2', 'Feature 3']
       <p>At each step, try removing every current feature and keep the deletion that least harms (most improves) training MSE.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="64-78" data-tint="3">
+  <div class="code-callout" data-lines="65-77" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Track Removal</span>
