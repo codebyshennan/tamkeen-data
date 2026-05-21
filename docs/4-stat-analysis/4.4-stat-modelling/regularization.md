@@ -1419,7 +1419,7 @@ for feature, coef in important_features:
       <span class="code-callout__title">From sklearn.linear_model import Lasso</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–14: follow this band in the snippet.</p>
+      <p>Refits Lasso at the tuned alpha and prints each feature with a non-zero coefficient.</p>
     </div>
   </div>
 </aside>
