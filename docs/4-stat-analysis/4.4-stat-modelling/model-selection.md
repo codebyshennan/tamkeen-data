@@ -1703,7 +1703,7 @@ plt.show()
       <p>Train each model, compute train MSE, test MSE, and test R², collect results in a DataFrame, and plot an R² bar chart.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="83-107" data-tint="4">
+  <div class="code-callout" data-lines="96-113" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Inspect Coefficients</span>
