@@ -197,7 +197,7 @@ plt.show()
       <span class="code-callout__title">Split the data into train and test sets</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 29–43: follow this band in the snippet.</p>
+      <p>Splits the data into train and test sets and defines the polynomial degrees to compare.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="44-57" data-tint="4">
