@@ -865,7 +865,7 @@ Number of features selected: 5 out of 5
       <span class="code-callout__title">Plt.tight_layout()</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 44–58: follow this band in the snippet.</p>
+      <p>Saves the plot, returns the results dict, and applies Lasso to the collinear data.</p>
     </div>
   </div>
 </aside>
