@@ -1724,7 +1724,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 {% endhighlight %}
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-14" data-tint="1">
+  <div class="code-callout" data-lines="2-9" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Generate synthetic housing data</span>
@@ -1733,7 +1733,7 @@ X_train, X_test, y_train, y_test = train_test_split(
       <p>Sets the seed and generates the base housing features: size, rooms, age, and distance.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="15-28" data-tint="2">
+  <div class="code-callout" data-lines="12-19" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Garage = np.clip(garage, 0, 2)</span>
@@ -1742,7 +1742,7 @@ X_train, X_test, y_train, y_test = train_test_split(
       <p>Derives correlated features (bathrooms, garden, garage) and adds two pure-noise features.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="29-42" data-tint="3">
+  <div class="code-callout" data-lines="22-31" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">8000 * garage +                # Garage adds…</span>
@@ -1751,7 +1751,7 @@ X_train, X_test, y_train, y_test = train_test_split(
       <p>Builds the house-price target with a nonlinear distance term plus random noise.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="43-56" data-tint="4">
+  <div class="code-callout" data-lines="34-49" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">&#x27;Random Feature 1&#x27;, &#x27;Random Feature 2&#x27;</span>
