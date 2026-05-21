@@ -2162,7 +2162,7 @@ explore_feature_interactions()
       <p>Print both models' R² and coefficient tables to show how adding the interaction term dramatically improves fit and reveals the interaction coefficient.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="64-93" data-tint="4">
+  <div class="code-callout" data-lines="70-91" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">3D Surface + Contour</span>
