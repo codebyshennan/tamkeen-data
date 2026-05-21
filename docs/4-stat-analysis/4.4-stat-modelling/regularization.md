@@ -1258,7 +1258,7 @@ print(comparison)
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-14" data-tint="1">
+  <div class="code-callout" data-lines="8-13" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Def compare_regularization_methods(X, y):</span>
@@ -1267,7 +1267,7 @@ print(comparison)
       <p>Defines the function, splits the data, and scales train and test features.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="15-28" data-tint="2">
+  <div class="code-callout" data-lines="16-25" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Define models to compare</span>
@@ -1276,7 +1276,7 @@ print(comparison)
       <p>Builds a dict of OLS, Ridge, Lasso, and Elastic Net using the tuned alphas from earlier.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="29-42" data-tint="3">
+  <div class="code-callout" data-lines="29-41" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">For name, model in models.items():</span>
@@ -1285,7 +1285,7 @@ print(comparison)
       <p>Loops over each model, fits it, and records train R², test R², and feature count.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="43-56" data-tint="4">
+  <div class="code-callout" data-lines="43-51" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Results.append({</span>
@@ -1294,7 +1294,7 @@ print(comparison)
       <p>Collects each model's metrics into a list and converts it to a DataFrame.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="57-70" data-tint="1">
+  <div class="code-callout" data-lines="58-61" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Plt.subplot(211)</span>
@@ -1303,7 +1303,7 @@ print(comparison)
       <p>Draws the top subplot comparing train and test R² across the models as grouped bars.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="71-84" data-tint="2">
+  <div class="code-callout" data-lines="70-80" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Plt.xticks(x, [r[&#x27;Model&#x27;].split(&#x27; (&#x27;)[0] for…</span>
