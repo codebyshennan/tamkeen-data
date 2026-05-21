@@ -233,22 +233,18 @@ From this visualization, you can observe:
 
 ### Real-world Examples
 
-Let's explore some scenarios where regularization is essential:
+Some scenarios where regularization is essential:
 
-1. **Medical Diagnosis**
-   - **Problem**: Medical datasets often have many features (symptoms, test results) but limited samples
-   - **Risk without regularization**: Model might focus on coincidental patterns rather than true medical relationships
-   - **Benefit of regularization**: Identifies truly important risk factors and makes more reliable predictions
+1. **Medical Diagnosis** — Datasets have many features but few samples; regularization finds true risk factors instead of coincidental patterns.
+2. **Financial Forecasting** — Markets mix real signal with noise; regularization yields stable models focused on persistent patterns rather than historical fluctuations.
+3. **Image Recognition** — Images have thousands of pixel features; regularization improves generalization instead of memorizing specific training images.
 
-2. **Financial Forecasting**
-   - **Problem**: Financial data contains both fundamental signals and random market noise
-   - **Risk without regularization**: Model overfits to historical fluctuations that won't repeat
-   - **Benefit of regularization**: Creates more stable models that focus on persistent patterns
-
-3. **Image Recognition**
-   - **Problem**: Images have thousands of pixel features with complex relationships
-   - **Risk without regularization**: Model memorizes specific training images rather than learning general patterns
-   - **Benefit of regularization**: Improves generalization to new, unseen images
+> **🎯 Key points**
+>
+> - Regularization adds a penalty on coefficient size to stop a model from memorizing noise.
+> - It reduces complexity, prevents overfitting, improves generalization, and stabilizes correlated features.
+> - Overfitting (e.g. a degree-15 polynomial) fits training noise and fails on new data.
+> - It is most valuable when you have many features, few samples, or noisy data.
 
 ## Understanding Regularization
 
