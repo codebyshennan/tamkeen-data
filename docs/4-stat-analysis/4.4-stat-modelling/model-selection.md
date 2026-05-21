@@ -367,7 +367,7 @@ Train MSE: 16.92, Test MSE: 16.23</figcaption>
       <p>Loop over degrees 1, 3, and 15. Each iteration builds a <code>PolynomialFeatures + LinearRegression</code> pipeline and computes train/test MSE.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="32-50" data-tint="3">
+  <div class="code-callout" data-lines="34-50" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Plot Each Fit</span>
