@@ -1427,7 +1427,7 @@ Optimal features: ['Feature 1', 'Feature 2', 'Feature 3']
       <p>Pop the chosen feature from the selected list, refit, and append train/test MSE to the score history.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="80-98" data-tint="4">
+  <div class="code-callout" data-lines="85-113" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Plot and Report</span>
