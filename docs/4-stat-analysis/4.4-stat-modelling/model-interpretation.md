@@ -2319,7 +2319,7 @@ print(complexity_comparison)
       <p>Use <code>tree_.node_count</code> for individual trees and sum it across all estimators for forests as a structural complexity proxy.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="44-63" data-tint="3">
+  <div class="code-callout" data-lines="44-59" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Score Interpretability</span>
