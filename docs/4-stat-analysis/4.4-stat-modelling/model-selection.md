@@ -1199,7 +1199,7 @@ Optimal features: ['Feature 1', 'Feature 3', 'Feature 2']
       <p>Use <code>argmin</code> on test errors to identify the optimal subset size, print it, and return all tracking data.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="99-106" data-tint="2">
+  <div class="code-callout" data-lines="107-114" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Run Example</span>
