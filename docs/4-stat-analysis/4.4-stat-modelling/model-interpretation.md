@@ -821,7 +821,7 @@ for feature in ['Income', 'Age']:
       <p>Find the observed range for the chosen feature and create 50 evenly-spaced grid points to sweep across.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="21-36" data-tint="3">
+  <div class="code-callout" data-lines="25-36" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Per-Sample Curves</span>
