@@ -397,7 +397,7 @@ $$\min\_{\beta} \sum\_{i=1}^n (y\_i - \hat{y}\_i)^2 + \lambda \sum\_{j=1}^p \bet
 
 #### Lasso Regression (L1)
 
-$$\min_{\beta} \sum_{i=1}^n (y_i - \hat{y}_i)^2 + \lambda \sum_{j=1}^p |\beta_j|$$
+$$\min\_{\beta} \sum\_{i=1}^n (y\_i - \hat{y}\_i)^2 + \lambda \sum\_{j=1}^p |\beta\_j|$$
 
 Where:
 
