@@ -534,7 +534,7 @@ plot_constraint_spaces()
       <span class="code-callout__title">Plt.ylabel(&#x27;Coefficient β₂&#x27;)</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 49–61: follow this band in the snippet.</p>
+      <p>Annotates the L2 non-sparse solution, saves the figure, and runs the function.</p>
     </div>
   </div>
 </aside>
