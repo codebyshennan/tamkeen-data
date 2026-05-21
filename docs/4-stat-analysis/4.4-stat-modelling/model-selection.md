@@ -953,7 +953,7 @@ Best model according to BIC: Degree 5.0 polynomial
       <p>Use <code>idxmin</code> to identify the degree minimising each criterion and print the results.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="71-78" data-tint="1">
+  <div class="code-callout" data-lines="75-80" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Run Example</span>
