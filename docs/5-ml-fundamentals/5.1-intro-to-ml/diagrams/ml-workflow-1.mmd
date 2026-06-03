@@ -1,9 +1,21 @@
 flowchart TD
-    P["1. Problem definition Business/research question Define success metric"]
-    P --> D["`2. Data collection & EDA Gather, explore, understand bias / quality / volume`"]
-    D --> PR["3. Data preparation Clean, transform, split Train / Val / Test — no leakage!"]
-    PR --> M["`4. Model selection & training Baseline → complexity Fit on train only`"]
-    M --> E["5. Evaluation Val set performance Hyperparameter tuning"]
-    E --> DEP["`6. Deployment & monitoring Serve predictions Monitor for drift`"]
+    P["`1\. Problem definition
+Business/research question
+Define success metric`"]
+    P --> D["`2\. Data collection & EDA
+Gather, explore, understand
+bias / quality / volume`"]
+    D --> PR["`3\. Data preparation
+Clean, transform, split
+Train / Val / Test — no leakage!`"]
+    PR --> M["`4\. Model selection & training
+Baseline → complexity
+Fit on train only`"]
+    M --> E["`5\. Evaluation
+Val set performance
+Hyperparameter tuning`"]
+    E --> DEP["`6\. Deployment & monitoring
+Serve predictions
+Monitor for drift`"]
     E -->|"Performance not good enough"| PR
     DEP -->|"Data changes / degradation"| P
