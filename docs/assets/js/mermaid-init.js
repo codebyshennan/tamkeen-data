@@ -7,7 +7,11 @@
 (function () {
   'use strict';
 
-  var CDN = 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';
+  // Pinned to 11.4.0 to match the mmdc version used by scripts/validate-mermaid.sh.
+  // 11.4.1 + htmlLabels:false mis-parses labels starting with "N." or "+" as markdown
+  // lists ("Unsupported markdown: list"); keeping live and validator in lockstep avoids
+  // that whole class of bug going undetected. See node_modules/mermaid (^11.4.1 resolves to 11.4.0).
+  var CDN = 'https://cdn.jsdelivr.net/npm/mermaid@11.4.0/dist/mermaid.esm.min.mjs';
   var mermaid = null;
   var idCounter = 0;
 
