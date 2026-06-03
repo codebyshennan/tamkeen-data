@@ -1,7 +1,7 @@
 flowchart TD
-    INIT["`1. Choose k Initialise k centroids (random or k-means++)`"]
-    INIT --> ASSIGN["`2. Assign Each point → nearest centroid (Euclidean distance)`"]
-    ASSIGN --> UPDATE["3. Update Recompute centroid as cluster mean"]
+    INIT["`1\. Choose k Initialise k centroids (random or k-means++)`"]
+    INIT --> ASSIGN["`2\. Assign Each point → nearest centroid (Euclidean distance)`"]
+    ASSIGN --> UPDATE["`3\. Update Recompute centroid as cluster mean`"]
     UPDATE --> CHECK{Centroids changed?}
     CHECK -->|Yes| ASSIGN
     CHECK -->|No| DONE["Converged Return labels + centroids"]
