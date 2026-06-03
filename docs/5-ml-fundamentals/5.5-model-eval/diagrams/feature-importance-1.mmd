@@ -5,9 +5,9 @@ flowchart LR
         T2 --> T3["Caveat: biased toward high-cardinality features Correlated features split importance"]
     end
     subgraph PERM["`Permutation importance  (reliable)`"]
-        P1["1. Evaluate baseline score"]
-        P1 --> P2["2. Shuffle one feature column"]
-        P2 --> P3["3. Score drop = importance"]
+        P1["`1\. Evaluate baseline score`"]
+        P1 --> P2["`2\. Shuffle one feature column`"]
+        P2 --> P3["`3\. Score drop = importance`"]
         P3 --> P4["Repeat for each feature n_repeats times"]
         P4 --> P5["Model-agnostic Works on any fitted estimator"]
     end
