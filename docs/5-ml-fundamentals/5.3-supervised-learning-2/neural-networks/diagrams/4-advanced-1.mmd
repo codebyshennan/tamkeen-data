@@ -1,7 +1,7 @@
 flowchart TD
     subgraph RESNET["ResNet — Skip connections"]
         R1["Input x"] --> R2["Conv → BN → ReLU Conv → BN"]
-        R1 -->|"shortcut (identity or 1×1 conv)"| R3["`+  (add)`"]
+        R1 -->|"shortcut (identity or 1×1 conv)"| R3["`\+  (add)`"]
         R2 --> R3
         R3 --> R4["ReLU → next block"]
     end
