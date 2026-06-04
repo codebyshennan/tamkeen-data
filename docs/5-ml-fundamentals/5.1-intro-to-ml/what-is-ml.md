@@ -130,6 +130,7 @@ import matplotlib.pyplot as plt  # For visualization
 <div class="code-explainer__code">
 
 {% highlight python %}
+import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 
 # Sample data: house size (sq ft) and price ($)
@@ -144,11 +145,23 @@ model.fit(sizes, prices)
 new_size = [[1750]]
 predicted_price = model.predict(new_size)
 print(f"Predicted price for {new_size[0][0]} sq ft: ${predicted_price[0]:,.2f}")
+
+# Plot the toy data, the fitted line, and the new prediction
+xs = [s[0] for s in sizes]
+plt.scatter(xs, prices, color="#2563eb", label="Training data")
+plt.plot(xs, model.predict(sizes), color="#16a34a", label="Fitted line")
+plt.scatter(new_size[0], predicted_price, color="#dc2626", marker="*",
+            s=220, zorder=5, label="Prediction (1750 sq ft)")
+plt.xlabel("Size (sq ft)")
+plt.ylabel("Price ($)")
+plt.title("Linear regression on toy house data")
+plt.legend()
+plt.show()
 {% endhighlight %}
 
 <figure>
-<img src="assets/what-is-ml_fig_1.png" alt="what-is-ml" />
-<figcaption>Figure 1: Generated visualization</figcaption>
+<img src="assets/what-is-ml_fig_1.png" alt="Scatter plot of four toy house (size, price) points with the fitted regression line and the predicted price for 1750 sq ft marked as a star" />
+<figcaption>Figure 1: The fitted line passes through the toy data; the star marks the predicted price for a 1750 sq ft house.</figcaption>
 </figure>
 
 ```
@@ -157,7 +170,7 @@ Predicted price for 1750 sq ft: $350,000.00
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-5" data-tint="1">
+  <div class="code-callout" data-lines="1-6" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Data Preparation</span>
@@ -166,13 +179,22 @@ Predicted price for 1750 sq ft: $350,000.00
       <p>Four (size, price) pairs serve as toy training data; <code>sizes</code> is a list of lists because sklearn expects a 2D feature matrix even for a single feature.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="7-14" data-tint="2">
+  <div class="code-callout" data-lines="8-15" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Fit and Predict</span>
     </div>
     <div class="code-callout__body">
       <p><code>model.fit</code> learns the slope and intercept; <code>predict</code> extrapolates to 1750 sq ft — this is the complete supervised learning loop in four lines.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="17-27" data-tint="3">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Visualize the Fit</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Plotting the data, the fitted line, and the prediction makes the linear relationship concrete — the star lands on the line at 1750 sq ft, exactly where the model interpolates.</p>
     </div>
   </div>
 </aside>
