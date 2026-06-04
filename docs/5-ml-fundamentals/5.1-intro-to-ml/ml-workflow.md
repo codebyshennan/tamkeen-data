@@ -520,7 +520,7 @@ evaluate_model(best_model, X_test, y_test)
       <p>The scatter plot shows each test sample; the red dashed diagonal is perfect calibration—points above or below reveal systematic over- or under-prediction.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="26-28" data-tint="3">
+  <div class="code-callout" data-lines="26-27" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Run on Best Model</span>
