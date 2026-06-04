@@ -1,10 +1,10 @@
 ---
 reading_minutes: 18
 objectives:
-  - Tell high bias (underfitting) from high variance (overfitting) using a train-vs-validation gap or a learning curve.
+  - Tell high bias (underfitting) from high variance (overfitting) using a train-vs-validation gap.
   - Pick the right fix for each side of the tradeoff — more/fewer features, more data, or regularization.
   - Explain regularization as a penalty on large coefficients, and tell L1 (Lasso, drops features) from L2 (Ridge, shrinks features).
-  - Tune the regularization strength (`alpha`) with cross-validation instead of guessing.
+  - Tune the regularization strength (`alpha`) with a validation curve instead of guessing.
 ---
 
 # Bias, Variance, and Regularization — the Simple Version
@@ -15,10 +15,10 @@ objectives:
 
 Every model can be wrong in two opposite ways:
 
-- **Bias** — the model is **too simple** and misses the real pattern (this is called **underfitting**).
-- **Variance** — the model is **too sensitive** and chases the noise in this particular dataset (this is called **overfitting**).
+- **Bias** — the model is **too simple** and misses the real pattern. This is called **underfitting**.
+- **Variance** — the model is **too sensitive** and chases the noise in this particular dataset. This is called **overfitting**.
 
-You cannot usually remove both at once — pushing one down tends to push the other up. That push-and-pull is the **bias–variance tradeoff**, and **regularization** is one of the cleanest ways to steer it.
+You usually can't remove both at once — pushing one down tends to push the other up. That push-and-pull is the **bias–variance tradeoff**, and **regularization** is one of the cleanest ways to steer it.
 
 **Prerequisites:** [What is ML?](what-is-ml.md) and the [workflow](ml-workflow.md) lesson. A deeper treatment lives in [5.5 Model evaluation](../5.5-model-eval/regularization.md).
 
@@ -44,9 +44,9 @@ Imagine throwing darts at a bullseye:
 
 ## Seeing it in code
 
-Let's make a tiny dataset where we *know* the true answer, then watch models of different complexity succeed and fail on it. Every code block below shows its real output, so you can see exactly what each change does.
+Let's make a tiny dataset where we *know* the true answer, then watch models of different complexity succeed and fail on it. Every code block below shows its **real output**, so you can see exactly what each change does.
 
-First, the data: a smooth wave with some random noise sprinkled on top. In real life we only ever see the noisy dots — never the clean line.
+First, the data: a smooth wave with some random noise sprinkled on top. In real life we only ever see the noisy dots — never the clean line underneath.
 
 ```python
 import numpy as np
@@ -75,7 +75,7 @@ plt.show()
 
 ### Too simple, just right, too complex
 
-We now fit the same data three times, changing only **one knob**: the polynomial *degree* (how wiggly the model is allowed to be). Degree 1 is a straight line; degree 15 can bend almost anywhere.
+Now fit the same data three times, changing only **one knob**: the polynomial *degree* (how wiggly the model is allowed to be). Degree 1 is a straight line; degree 15 can bend almost anywhere.
 
 ```python
 from sklearn.preprocessing import PolynomialFeatures
@@ -109,10 +109,12 @@ Read the three panels left to right:
 
 ### Putting numbers on it
 
-Eyeballing curves is fine for one feature, but normally you can't plot the data. The reliable signal is the **gap between training error and validation error**. We measure error with RMSE (lower is better): how the model does on data it *trained on* vs data it has *never seen* (via cross-validation).
+Eyeballing curves is fine for one feature, but normally you can't plot the data. The reliable signal is the **gap between training error and validation error**. We measure error with RMSE (lower is better) on data the model *trained on* versus data it has *never seen* — using `cross_val_score` to estimate the unseen-data error. (We shuffle the folds because our `X` is sorted.)
 
 ```python
-from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import cross_val_score, KFold
+
+folds = KFold(n_splits=5, shuffle=True, random_state=0)
 
 print(f"{'degree':>6} | {'train RMSE':>10} | {'cross-val RMSE':>14}")
 print("-" * 38)
@@ -120,12 +122,12 @@ for degree in [1, 4, 15]:
     model = make_pipeline(PolynomialFeatures(degree, include_bias=False), LinearRegression())
     model.fit(Xc, y)
     train_rmse = np.sqrt(np.mean((model.predict(Xc) - y) ** 2))
-    cv_rmse = -cross_val_score(model, Xc, y, cv=5,
+    cv_rmse = -cross_val_score(model, Xc, y, cv=folds,
                                scoring="neg_root_mean_squared_error").mean()
     print(f"{degree:>6} | {train_rmse:>10.3f} | {cv_rmse:>14.3f}")
 ```
 
-The pattern in those numbers is the whole lesson:
+That little table *is* the whole lesson. Notice the degree-15 model has the **lowest training error** but a cross-validation error in the hundreds — it memorised the noise and falls apart on new data.
 
 | Symptom in the numbers | Diagnosis | What it means |
 | --- | --- | --- |
@@ -135,33 +137,12 @@ The pattern in those numbers is the whole lesson:
 
 > A small gap alone is **not** good news. Two *high* errors that are close together still means underfitting. Both errors must be low **and** close.
 
-### Learning curves: does more data help?
+### Would more data help?
 
-A **learning curve** plots score against the amount of training data. It answers a practical question: *would collecting more data fix this?*
+A quick rule of thumb for the two failure modes:
 
-```python
-from sklearn.model_selection import learning_curve
-
-# Larger sample so the curves are smooth
-np.random.seed(1)
-X_big = np.sort(np.random.rand(200)).reshape(-1, 1)
-y_big = true_pattern(X_big.ravel()) + np.random.normal(0, 0.15, size=200)
-
-model = make_pipeline(PolynomialFeatures(15, include_bias=False), LinearRegression())
-sizes, train_scores, val_scores = learning_curve(
-    model, X_big, y_big, cv=5, train_sizes=np.linspace(0.1, 1.0, 8))
-
-plt.figure(figsize=(6, 4))
-plt.plot(sizes, train_scores.mean(axis=1), "o-", color="#2563eb", label="Training score")
-plt.plot(sizes, val_scores.mean(axis=1), "o-", color="#dc2626", label="Validation score")
-plt.ylim(0, 1.05)
-plt.title("Learning curve: the gap shrinks as data grows")
-plt.xlabel("Training examples"); plt.ylabel("R² score"); plt.legend()
-plt.show()
-```
-
-- A **wide gap** that closes as you add data → **high variance**. More data helps.
-- Both curves **flat and low**, close together → **high bias**. More data won't help; you need a better model or features.
+- **High variance (overfitting):** collecting **more data helps**. With more examples the model can no longer memorise the noise, so the train/validation gap shrinks. (Plotting error against training-set size — a *learning curve* — shows this gap closing.)
+- **High bias (underfitting):** more data **won't help**. A straight line stays a straight line no matter how many points you feed it. You need a more flexible model or better features instead.
 
 ## The fix menu
 
@@ -180,22 +161,22 @@ That last row is what the rest of this page is about.
 
 Look again at the degree-15 curve — it had to swing violently up and down to thread every noisy point. To swing that hard, it needs **huge coefficients**. That's the tell: **overfit models tend to have large coefficients.**
 
-**Regularization adds a penalty for large coefficients** to what the model is trying to minimise. Now the model has to balance two goals: *fit the data* **and** *keep coefficients small*. Made to choose, it gives up the wild swings and settles on a smoother curve — trading a tiny bit of training accuracy for much better generalization.
+**Regularization adds a penalty for large coefficients** to what the model is trying to minimise. Now the model balances two goals: *fit the data* **and** *keep coefficients small*. Forced to choose, it gives up the wild swings and settles on a smoother curve — trading a tiny bit of training accuracy for much better generalization.
 
 A single knob, **`alpha`** (sometimes written λ), controls how hard you push:
 
 - `alpha = 0` → no penalty, back to the plain overfit model.
-- small `alpha` → gentle nudge toward simplicity.
-- large `alpha` → strong push; go too far and you *underfit*.
+- small `alpha` → a gentle nudge toward simplicity.
+- large `alpha` → a strong push; go too far and you *underfit*.
 
 There are two common flavours, and the difference is exactly how they measure "large coefficients."
 
 ### L2 (Ridge) vs L1 (Lasso)
 
-- **L2 — Ridge** penalises the **sum of squared** coefficients. Squaring punishes big coefficients hard but never *quite* reaches zero, so Ridge **shrinks every coefficient toward zero but keeps them all**. Use it when you think many features each contribute a little.
-- **L1 — Lasso** penalises the **sum of absolute** coefficients. This shape lets it push weak coefficients **exactly to zero**, which effectively **deletes those features** — automatic feature selection. Use it when you think only a few features really matter.
+- **L2 — Ridge** penalises the **sum of squared** coefficients. Squaring punishes big coefficients hard but never *quite* drives them to zero, so Ridge **shrinks every coefficient toward zero but keeps them all**. Reach for it when you think many features each contribute a little.
+- **L1 — Lasso** penalises the **sum of absolute** coefficients. That shape lets it push weak coefficients **exactly to zero**, which effectively **deletes those features** — automatic feature selection. Reach for it when you think only a few features really matter.
 
-Watch both calm the same wild curve:
+Watch both calm the same wild curve (a light penalty is enough here):
 
 ```python
 from sklearn.linear_model import Ridge, Lasso
@@ -246,23 +227,41 @@ print(f"Lasso (L1): {count_zero(lasso_coefs):2d} coefficients set to zero  -> dr
 | Effect on coefficients | shrinks all toward zero | pushes weak ones to **exactly zero** |
 | Feature selection? | No — keeps every feature | **Yes** — drops features for free |
 | Best when | many features each matter a bit | only a few features matter |
-| (Want both? | use **ElasticNet** — a blend of L1 and L2) | |
+
+> **Want both?** **ElasticNet** blends L1 and L2 — some shrinkage, some feature-dropping. See the [5.5 deep dive](../5.5-model-eval/regularization.md).
 
 > **Always standardize first.** The penalty compares coefficients directly, so features must be on the same scale — otherwise a feature measured in small units gets unfairly punished. That's why the pipeline above includes `StandardScaler`.
 
 ### Choosing `alpha` without guessing
 
-Don't hand-pick `alpha`. Let cross-validation try a range and keep the best — `RidgeCV` (and `LassoCV`) do exactly this:
+Don't hand-pick `alpha`. Sweep a range of values and let cross-validation show you the effect — a **validation curve**. The training error always falls as you weaken the penalty (small `alpha`), but the validation error is what you actually care about:
 
 ```python
-from sklearn.linear_model import RidgeCV
+from sklearn.model_selection import validation_curve
 
-alphas = np.logspace(-3, 2, 30)  # 0.001 ... 100
-model = make_pipeline(PolynomialFeatures(15, include_bias=False),
-                     StandardScaler(), RidgeCV(alphas=alphas))
-model.fit(Xc, y)
-print(f"Cross-validation tried 30 values and picked alpha = {model.named_steps['ridgecv'].alpha_:.3f}")
+alphas = np.logspace(-3, 2, 12)   # 0.001 ... 100
+base = make_pipeline(PolynomialFeatures(15, include_bias=False), StandardScaler(), Ridge())
+
+train_scores, val_scores = validation_curve(
+    base, Xc, y, param_name="ridge__alpha", param_range=alphas,
+    cv=KFold(n_splits=5, shuffle=True, random_state=0),
+    scoring="neg_root_mean_squared_error")
+
+plt.figure(figsize=(6, 4))
+plt.plot(alphas, -train_scores.mean(axis=1), "o-", color="#2563eb", label="Training error")
+plt.plot(alphas, -val_scores.mean(axis=1), "o-", color="#dc2626", label="Validation error")
+plt.xscale("log")
+plt.xlabel("alpha (regularization strength)"); plt.ylabel("RMSE")
+plt.title("Validation curve: too much regularization underfits")
+plt.legend()
+plt.show()
 ```
+
+Read it like a dial:
+
+- **Far right (large `alpha`):** both errors climb — the penalty is so strong the model underfits.
+- **Far left (tiny `alpha`):** the gap between training and validation error is widest — the model is starting to overfit.
+- **Best `alpha`:** wherever the **validation** error is lowest. For this fairly clean data that's near the left; on noisier data the low point sits further right. `RidgeCV` and `LassoCV` find it for you automatically.
 
 ## Gotchas
 
@@ -270,11 +269,11 @@ print(f"Cross-validation tried 30 values and picked alpha = {model.named_steps['
 - **Reading a small gap as "good fit"** — a small gap is necessary but not sufficient. Both scores must also be *good*. Two poor scores close together is high bias, not success.
 - **Tuning on the test set** — every peek at the test set leaks information and inflates your estimate. Tune with cross-validation; touch the test set once, at the very end.
 - **Forgetting to standardize before regularizing** — without it the penalty is uneven across features, and `alpha` means different things for different columns.
-- **Setting `alpha` too high** — regularization fixes overfitting, but overdo it and you swing all the way to underfitting. Let cross-validation pick the value.
+- **Setting `alpha` too high** — regularization fixes overfitting, but overdo it and you swing all the way to underfitting. Let the validation curve pick the value.
 
 ## Next steps
 
-- Go deeper on the math and on ElasticNet in [5.5 Model evaluation → Regularization](../5.5-model-eval/regularization.md).
+- Go deeper on the math, ElasticNet, and `RidgeCV`/`LassoCV` in [5.5 Model evaluation → Regularization](../5.5-model-eval/regularization.md).
 - Try the same degree-sweep on a dataset you care about, and keep a short log of how the train/validation gap moves as you change each knob.
 
 Remember: name the failure mode first (bias or variance), *then* pick the fix. Half the battle is reading the symptom correctly.
