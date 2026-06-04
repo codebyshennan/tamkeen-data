@@ -84,6 +84,6 @@ Ready to apply your knowledge? The module assignment (concepts plus implementati
 
 ## Getting Started
 
-Begin with [What is Machine Learning?](./what-is-ml.md) to build a strong foundation in ML concepts. Each subsequent topic builds upon previous ones, so it's recommended to follow the order presented.
+Begin with [What is Machine Learning?](./what-is-ml.md) to build a strong foundation in ML concepts. Each subsequent topic builds upon previous ones, so it's recommended to follow the order presented, ending with [Machine Learning in Production](./ml-in-production.md) to see where a model goes after it is trained.
 
 Let's embark on your machine learning journey!
