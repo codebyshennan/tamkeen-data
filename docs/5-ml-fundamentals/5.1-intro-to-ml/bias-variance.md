@@ -138,126 +138,126 @@ Learning curves are like progress reports for your model. They show how well you
 
 Think of high bias like trying to predict the weather using only temperature. You're missing important factors like humidity and wind speed. Here's how to fix it:
 
-1. **Increase Model Complexity**
+#### Increase Model Complexity
 
-   <div class="code-explainer" data-code-explainer>
-   <div class="code-explainer__code">
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
 
-   {% highlight python %}
-   # Let's say we're trying to predict house prices
-   # First, let's see what our data looks like
-   import pandas as pd
-   import matplotlib.pyplot as plt
+{% highlight python %}
+# Let's say we're trying to predict house prices
+# First, let's see what our data looks like
+import pandas as pd
+import matplotlib.pyplot as plt
 
-   # Load and visualize the data
-   df = pd.read_csv('house_prices.csv')
-   plt.scatter(df['sqft_living'], df['price'])
-   plt.xlabel('Square Feet')
-   plt.ylabel('Price')
-   plt.show()
+# Load and visualize the data
+df = pd.read_csv('house_prices.csv')
+plt.scatter(df['sqft_living'], df['price'])
+plt.xlabel('Square Feet')
+plt.ylabel('Price')
+plt.show()
 
-   # If the relationship looks curved, we need a more complex model
-   from sklearn.preprocessing import PolynomialFeatures
-   from sklearn.linear_model import LinearRegression
+# If the relationship looks curved, we need a more complex model
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
 
-   # Create polynomial features (like x², x³, etc.)
-   # This helps capture curved relationships
-   poly = PolynomialFeatures(degree=2)  # Try different degrees
-   X_poly = poly.fit_transform(X)
+# Create polynomial features (like x², x³, etc.)
+# This helps capture curved relationships
+poly = PolynomialFeatures(degree=2)  # Try different degrees
+X_poly = poly.fit_transform(X)
 
-   # Fit the model
-   model = LinearRegression()
-   model.fit(X_poly, y)
+# Fit the model
+model = LinearRegression()
+model.fit(X_poly, y)
 
-   # Visualize the results
-   plt.scatter(X, y)
-   plt.plot(X, model.predict(X_poly), color='red')
-   plt.show()
-   {% endhighlight %}
+# Visualize the results
+plt.scatter(X, y)
+plt.plot(X, model.predict(X_poly), color='red')
+plt.show()
+{% endhighlight %}
 
-   </div>
-   <aside class="code-explainer__callouts" aria-label="Code walkthrough">
-     <div class="code-callout" data-lines="1-13" data-tint="1">
-       <div class="code-callout__meta">
-         <span class="code-callout__lines"></span>
-         <span class="code-callout__title">Load and Visualize</span>
-       </div>
-       <div class="code-callout__body">
-         <p>Load house price data and scatter-plot size vs price to visually check whether the relationship is linear or curved before choosing a model.</p>
-       </div>
-     </div>
-     <div class="code-callout" data-lines="15-31" data-tint="2">
-       <div class="code-callout__meta">
-         <span class="code-callout__lines"></span>
-         <span class="code-callout__title">Polynomial Features</span>
-       </div>
-       <div class="code-callout__body">
-         <p><code>PolynomialFeatures(degree=2)</code> expands inputs to include x² terms; fitting <code>LinearRegression</code> on the expanded matrix lets the model follow a curved trend.</p>
-       </div>
-     </div>
-   </aside>
-   </div>
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-13" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Load and Visualize</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Load house price data and scatter-plot size vs price to visually check whether the relationship is linear or curved before choosing a model.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="14-29" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Polynomial Features</span>
+    </div>
+    <div class="code-callout__body">
+      <p><code>PolynomialFeatures(degree=2)</code> expands inputs to include x² terms; fitting <code>LinearRegression</code> on the expanded matrix lets the model follow a curved trend.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
-2. **Add More Features**
+#### Add More Features
 
-   <div class="code-explainer" data-code-explainer>
-   <div class="code-explainer__code">
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
 
-   {% highlight python %}
-   # Let's add some meaningful combinations of features
-   def add_interactions(df):
-       # Size per room might be important
-       df['size_rooms'] = df['sqft_living'] / df['bedrooms']
+{% highlight python %}
+# Let's add some meaningful combinations of features
+def add_interactions(df):
+    # Size per room might be important
+    df['size_rooms'] = df['sqft_living'] / df['bedrooms']
 
-       # Age and condition together might matter
-       df['age_condition'] = df['age'] * df['condition']
+    # Age and condition together might matter
+    df['age_condition'] = df['age'] * df['condition']
 
-       # Location might be important
-       df['distance_to_city'] = calculate_distance(df['latitude'], df['longitude'])
+    # Location might be important
+    df['distance_to_city'] = calculate_distance(df['latitude'], df['longitude'])
 
-       return df
+    return df
 
-   # Apply the transformations
-   df = add_interactions(df)
-   {% endhighlight %}
+# Apply the transformations
+df = add_interactions(df)
+{% endhighlight %}
 
-   </div>
-   <aside class="code-explainer__callouts" aria-label="Code walkthrough">
-     <div class="code-callout" data-lines="1-12" data-tint="1">
-       <div class="code-callout__meta">
-         <span class="code-callout__lines"></span>
-         <span class="code-callout__title">Interaction Features</span>
-       </div>
-       <div class="code-callout__body">
-         <p>Derive size-per-room (efficiency ratio), age × condition (combined wear metric), and distance to city — each encodes domain knowledge that a linear model cannot capture from raw columns alone.</p>
-       </div>
-     </div>
-     <div class="code-callout" data-lines="14-16" data-tint="2">
-       <div class="code-callout__meta">
-         <span class="code-callout__lines"></span>
-         <span class="code-callout__title">Apply Transform</span>
-       </div>
-       <div class="code-callout__body">
-         <p>Call <code>add_interactions</code> on the dataframe to expand the feature matrix in-place; note that <code>calculate_distance</code> must be defined in the environment or replaced with a real geo utility.</p>
-       </div>
-     </div>
-   </aside>
-   </div>
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-12" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Interaction Features</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Derive size-per-room (efficiency ratio), age × condition (combined wear metric), and distance to city — each encodes domain knowledge that a linear model cannot capture from raw columns alone.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="14-15" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Apply Transform</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Call <code>add_interactions</code> on the dataframe to expand the feature matrix in-place; note that <code>calculate_distance</code> must be defined in the environment or replaced with a real geo utility.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
-3. **Reduce Regularization**
+#### Reduce Regularization
 
-   ```python
-   # Regularization is like putting training wheels on your model
-   # Sometimes we need to take them off
-   from sklearn.linear_model import Ridge
-   
-   # Try different levels of regularization
-   alphas = [0.1, 1.0, 10.0]
-   for alpha in alphas:
-       model = Ridge(alpha=alpha)
-       model.fit(X_train, y_train)
-       print(f"Alpha={alpha}, Score={model.score(X_val, y_val)}")
-   ```
+```python
+# Regularization is like putting training wheels on your model
+# Sometimes we need to take them off
+from sklearn.linear_model import Ridge
+
+# Try different levels of regularization
+alphas = [0.1, 1.0, 10.0]
+for alpha in alphas:
+    model = Ridge(alpha=alpha)
+    model.fit(X_train, y_train)
+    print(f"Alpha={alpha}, Score={model.score(X_val, y_val)}")
+```
 
 ### Dealing with High Variance: When Your Model is Too Complex
 
