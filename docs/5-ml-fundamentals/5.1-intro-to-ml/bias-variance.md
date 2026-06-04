@@ -73,6 +73,12 @@ plt.xlabel("x"); plt.ylabel("y"); plt.legend()
 plt.show()
 ```
 
+
+<figure>
+<img src="assets/bias-variance_fig_1.png" alt="bias-variance" />
+<figcaption>Figure 1: A smooth pattern hidden under noise</figcaption>
+</figure>
+
 ### Too simple, just right, too complex
 
 Now fit the same data three times, changing only **one knob**: the polynomial *degree* (how wiggly the model is allowed to be). Degree 1 is a straight line; degree 15 can bend almost anywhere.
@@ -101,6 +107,12 @@ fig.suptitle("Same data, three levels of model complexity")
 plt.show()
 ```
 
+
+<figure>
+<img src="assets/bias-variance_fig_2.png" alt="bias-variance" />
+<figcaption>Figure 2: Same data, three levels of model complexity</figcaption>
+</figure>
+
 Read the three panels left to right:
 
 - **Degree 1 (high bias):** a straight line can't bend to follow a wave, so it's wrong almost everywhere — but it would be wrong in the *same* way on any sample.
@@ -125,6 +137,14 @@ for degree in [1, 4, 15]:
     cv_rmse = -cross_val_score(model, Xc, y, cv=folds,
                                scoring="neg_root_mean_squared_error").mean()
     print(f"{degree:>6} | {train_rmse:>10.3f} | {cv_rmse:>14.3f}")
+```
+
+```
+degree | train RMSE | cross-val RMSE
+--------------------------------------
+     1 |      0.426 |          0.440
+     4 |      0.176 |          0.231
+    15 |      0.106 |        390.401
 ```
 
 That little table *is* the whole lesson. Notice the degree-15 model has the **lowest training error** but a cross-validation error in the hundreds — it memorised the noise and falls apart on new data.
@@ -204,6 +224,12 @@ fig.suptitle("Regularization calms the wild degree-15 curve")
 plt.show()
 ```
 
+
+<figure>
+<img src="assets/bias-variance_fig_3.png" alt="bias-variance" />
+<figcaption>Figure 3: Regularization calms the wild degree-15 curve</figcaption>
+</figure>
+
 The left panel is the same overfit mess as before. The middle and right panels — *same degree-15 model*, only a penalty added — recover a smooth, sensible curve.
 
 Now the headline difference between L1 and L2. Both shrink coefficients; only L1 sets them to **exactly zero**:
@@ -219,6 +245,12 @@ count_zero = lambda c: int(np.sum(np.abs(c) < 1e-4))
 print(f"15 polynomial features in total")
 print(f"Ridge (L2): {count_zero(ridge_coefs):2d} coefficients set to zero  -> keeps every feature, just smaller")
 print(f"Lasso (L1): {count_zero(lasso_coefs):2d} coefficients set to zero  -> drops features automatically")
+```
+
+```
+15 polynomial features in total
+Ridge (L2):  0 coefficients set to zero  -> keeps every feature, just smaller
+Lasso (L1): 13 coefficients set to zero  -> drops features automatically
 ```
 
 | | L2 — Ridge | L1 — Lasso |
@@ -237,7 +269,7 @@ print(f"Lasso (L1): {count_zero(lasso_coefs):2d} coefficients set to zero  -> dr
 Don't hand-pick `alpha`. Sweep a range of values and let cross-validation show you the effect — a **validation curve**. The training error always falls as you weaken the penalty (small `alpha`), but the validation error is what you actually care about:
 
 ```python
-from sklearn.model_selection import validation_curve
+from sklearn.model_selection import validation_curve, KFold
 
 alphas = np.logspace(-3, 2, 12)   # 0.001 ... 100
 base = make_pipeline(PolynomialFeatures(15, include_bias=False), StandardScaler(), Ridge())
@@ -256,6 +288,12 @@ plt.title("Validation curve: too much regularization underfits")
 plt.legend()
 plt.show()
 ```
+
+
+<figure>
+<img src="assets/bias-variance_fig_4.png" alt="bias-variance" />
+<figcaption>Figure 4: Validation curve: too much regularization underfits</figcaption>
+</figure>
 
 Read it like a dial:
 
