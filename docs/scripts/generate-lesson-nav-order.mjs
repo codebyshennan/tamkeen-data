@@ -242,6 +242,7 @@ const OVERRIDES = {
     "ml-workflow.md",
     "feature-engineering.md",
     "bias-variance.md",
+    "ml-in-production.md",
   ],
   "5-ml-fundamentals/5.4-unsupervised-learning": [
     "README.md",
