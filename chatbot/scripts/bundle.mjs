@@ -63,6 +63,13 @@ const EXCLUDED_FILENAMES = new Set([
   'TODO.md',
 ]);
 
+// Subdirectories never treated as lesson content. assignments/ holds the
+// student-facing task (bundled separately) plus answer keys; the rest are
+// non-prose. Everything else is descended into so submodules that nest their
+// lessons in topic folders (e.g. 5.2/decision-trees, 5.3/neural-networks)
+// still contribute their content to the bot's context.
+const EXCLUDED_DIRS = new Set(['assignments', 'slides', 'archive', 'assets']);
+
 async function readIfExists(p) {
   try { return await fs.readFile(p, 'utf8'); }
   catch (e) { if (e.code === 'ENOENT') return null; throw e; }
