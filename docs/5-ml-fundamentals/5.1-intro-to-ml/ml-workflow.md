@@ -297,7 +297,7 @@ cleaner.remove_outliers('price')
       <p>Rows whose value on the chosen column falls beyond <code>n_std</code> standard deviations from the mean are dropped via z-score filtering.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="33-36" data-tint="4">
+  <div class="code-callout" data-lines="33-35" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Usage Example</span>
