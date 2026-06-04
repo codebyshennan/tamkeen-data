@@ -24,6 +24,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
 const DOCS = path.join(ROOT, 'docs');
 const OUT = path.join(__dirname, '..', 'context');
+// Jekyll data file so the docsite widget can derive its allow-list from the
+// same source of truth instead of a hand-maintained copy (prevents drift).
+const DATA_OUT = path.join(DOCS, '_data', 'chatbot_lessons.json');
 
 const LESSONS = [
   // Module 1
@@ -36,6 +39,22 @@ const LESSONS = [
   { key: '2.1-sql',                           submodule: '2-data-wrangling/2.1-sql',                              assignment: 'coding.md' },
   { key: '2.2-data-wrangling',                submodule: '2-data-wrangling/2.2-data-wrangling',                   assignment: 'coding.md' },
   { key: '2.3-eda',                           submodule: '2-data-wrangling/2.3-eda',                              assignment: 'coding.md' },
+  // Module 3
+  { key: '3.1-intro-data-viz',                submodule: '3-data-visualization/3.1-intro-data-viz',               assignment: 'coding.md' },
+  { key: '3.2-adv-data-viz',                  submodule: '3-data-visualization/3.2-adv-data-viz',                 assignment: 'coding.md' },
+  { key: '3.3-bi-with-tableau',               submodule: '3-data-visualization/3.3-bi-with-tableau',              assignment: 'quiz.md' },
+  { key: '3.4-data-storytelling',             submodule: '3-data-visualization/3.4-data-storytelling',            assignment: 'quiz.md' },
+  // Module 4
+  { key: '4.1-inferential-stats',             submodule: '4-stat-analysis/4.1-inferential-stats',                 assignment: 'quiz.md' },
+  { key: '4.2-hypotheses-testing',            submodule: '4-stat-analysis/4.2-hypotheses-testing',                assignment: 'coding.md' },
+  { key: '4.3-rship-in-data',                 submodule: '4-stat-analysis/4.3-rship-in-data',                     assignment: 'coding.md' },
+  { key: '4.4-stat-modelling',                submodule: '4-stat-analysis/4.4-stat-modelling',                    assignment: 'coding.md' },
+  // Module 5
+  { key: '5.1-intro-to-ml',                   submodule: '5-ml-fundamentals/5.1-intro-to-ml',                     assignment: 'quiz.md' },
+  { key: '5.2-supervised-learning-1',         submodule: '5-ml-fundamentals/5.2-supervised-learning-1',           assignment: 'coding.md' },
+  { key: '5.3-supervised-learning-2',         submodule: '5-ml-fundamentals/5.3-supervised-learning-2',           assignment: 'coding.md' },
+  { key: '5.4-unsupervised-learning',         submodule: '5-ml-fundamentals/5.4-unsupervised-learning',           assignment: 'coding.md' },
+  { key: '5.5-model-eval',                    submodule: '5-ml-fundamentals/5.5-model-eval',                      assignment: 'coding.md' },
 ];
 
 const EXCLUDED_FILENAMES = new Set([
