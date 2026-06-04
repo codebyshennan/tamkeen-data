@@ -87,15 +87,23 @@ function deriveTitle(readme, fallback) {
   return fallback;
 }
 
-async function collectLessonPages(submoduleDir) {
-  const entries = await fs.readdir(submoduleDir, { withFileTypes: true });
-  const pages = [];
+async function collectLessonPages(submoduleDir, dir = submoduleDir, pages = []) {
+  const entries = await fs.readdir(dir, { withFileTypes: true });
   for (const e of entries) {
+    const full = path.join(dir, e.name);
+    if (e.isDirectory()) {
+      if (EXCLUDED_DIRS.has(e.name)) continue;
+      await collectLessonPages(submoduleDir, full, pages);
+      continue;
+    }
     if (!e.isFile() || !e.name.endsWith('.md')) continue;
     if (EXCLUDED_FILENAMES.has(e.name)) continue;
-    const body = await fs.readFile(path.join(submoduleDir, e.name), 'utf8');
-    pages.push({ name: e.name, body });
+    // name is the path relative to the submodule so nested files in different
+    // topic folders (each with its own README/1-introduction) stay distinct.
+    const name = path.relative(submoduleDir, full);
+    pages.push({ name, body: await fs.readFile(full, 'utf8') });
   }
+  // Root README first (the submodule overview), then alphabetical by path.
   pages.sort((a, b) => a.name === 'README.md' ? -1 : b.name === 'README.md' ? 1 : a.name.localeCompare(b.name));
   return pages;
 }
