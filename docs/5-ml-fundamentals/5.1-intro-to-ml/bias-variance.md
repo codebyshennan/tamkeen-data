@@ -263,95 +263,95 @@ for alpha in alphas:
 
 Think of high variance like a student who memorizes every detail of their notes but can't apply the concepts to new problems. Here's how to fix it:
 
-1. **Collect More Data**
+#### Collect More Data
 
-   - More training examples help the model learn the true pattern
-   - Like showing more examples of cats to help someone learn what makes a cat a cat
+- More training examples help the model learn the true pattern
+- Like showing more examples of cats to help someone learn what makes a cat a cat
 
-2. **Reduce Model Complexity**
+#### Reduce Model Complexity
 
-   <div class="code-explainer" data-code-explainer>
-   <div class="code-explainer__code">
+<div class="code-explainer" data-code-explainer>
+<div class="code-explainer__code">
 
-   {% highlight python %}
-   # Let's say we're using a random forest that's overfitting
-   from sklearn.ensemble import RandomForestRegressor
+{% highlight python %}
+# Let's say we're using a random forest that's overfitting
+from sklearn.ensemble import RandomForestRegressor
 
-   # Start with a simpler model
-   model = RandomForestRegressor(
-       n_estimators=100,    # Fewer trees
-       max_depth=5,         # Shorter trees
-       min_samples_leaf=5   # More samples per leaf
-   )
+# Start with a simpler model
+model = RandomForestRegressor(
+    n_estimators=100,    # Fewer trees
+    max_depth=5,         # Shorter trees
+    min_samples_leaf=5   # More samples per leaf
+)
 
-   # Compare with the complex model
-   complex_model = RandomForestRegressor(
-       n_estimators=500,
-       max_depth=None,
-       min_samples_leaf=1
-   )
+# Compare with the complex model
+complex_model = RandomForestRegressor(
+    n_estimators=500,
+    max_depth=None,
+    min_samples_leaf=1
+)
 
-   # Train both models
-   model.fit(X_train, y_train)
-   complex_model.fit(X_train, y_train)
+# Train both models
+model.fit(X_train, y_train)
+complex_model.fit(X_train, y_train)
 
-   # Compare their performance
-   print(f"Simple model score: {model.score(X_val, y_val)}")
-   print(f"Complex model score: {complex_model.score(X_val, y_val)}")
-   {% endhighlight %}
+# Compare their performance
+print(f"Simple model score: {model.score(X_val, y_val)}")
+print(f"Complex model score: {complex_model.score(X_val, y_val)}")
+{% endhighlight %}
 
-   </div>
-   <aside class="code-explainer__callouts" aria-label="Code walkthrough">
-     <div class="code-callout" data-lines="1-17" data-tint="1">
-       <div class="code-callout__meta">
-         <span class="code-callout__lines"></span>
-         <span class="code-callout__title">Simple vs Complex Forest</span>
-       </div>
-       <div class="code-callout__body">
-         <p>Two <code>RandomForestRegressor</code> instances differ in depth, tree count, and leaf size — the constrained model reduces variance while the unconstrained one is prone to overfitting.</p>
-       </div>
-     </div>
-     <div class="code-callout" data-lines="19-25" data-tint="2">
-       <div class="code-callout__meta">
-         <span class="code-callout__lines"></span>
-         <span class="code-callout__title">Fit and Compare</span>
-       </div>
-       <div class="code-callout__body">
-         <p>Both models train on the same data; comparing validation scores reveals whether the extra complexity buys real predictive power or just memorizes the training set.</p>
-       </div>
-     </div>
-   </aside>
-   </div>
+</div>
+<aside class="code-explainer__callouts" aria-label="Code walkthrough">
+  <div class="code-callout" data-lines="1-17" data-tint="1">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Simple vs Complex Forest</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Two <code>RandomForestRegressor</code> instances differ in depth, tree count, and leaf size — the constrained model reduces variance while the unconstrained one is prone to overfitting.</p>
+    </div>
+  </div>
+  <div class="code-callout" data-lines="18-24" data-tint="2">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Fit and Compare</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Both models train on the same data; comparing validation scores reveals whether the extra complexity buys real predictive power or just memorizes the training set.</p>
+    </div>
+  </div>
+</aside>
+</div>
 
-3. **Add Regularization**
+#### Add Regularization
 
-   ```python
-   # Regularization helps prevent overfitting
-   from sklearn.linear_model import Lasso
-   
-   # L1 regularization (Lasso) can help by setting some coefficients to zero
-   model = Lasso(alpha=1.0)
-   model.fit(X_train, y_train)
-   
-   # See which features were kept
-   important_features = [col for col, coef in zip(X.columns, model.coef_) if coef != 0]
-   print("Important features:", important_features)
-   ```
+```python
+# Regularization helps prevent overfitting
+from sklearn.linear_model import Lasso
 
-4. **Feature Selection**
+# L1 regularization (Lasso) can help by setting some coefficients to zero
+model = Lasso(alpha=1.0)
+model.fit(X_train, y_train)
 
-   ```python
-   # Sometimes less is more
-   from sklearn.feature_selection import SelectKBest
-   
-   # Select the top k most important features
-   selector = SelectKBest(k=10)
-   X_selected = selector.fit_transform(X, y)
-   
-   # See which features were selected
-   selected_features = [X.columns[i] for i in selector.get_support(indices=True)]
-   print("Selected features:", selected_features)
-   ```
+# See which features were kept
+important_features = [col for col, coef in zip(X.columns, model.coef_) if coef != 0]
+print("Important features:", important_features)
+```
+
+#### Feature Selection
+
+```python
+# Sometimes less is more
+from sklearn.feature_selection import SelectKBest
+
+# Select the top k most important features
+selector = SelectKBest(k=10)
+X_selected = selector.fit_transform(X, y)
+
+# See which features were selected
+selected_features = [X.columns[i] for i in selector.get_support(indices=True)]
+print("Selected features:", selected_features)
+```
 
 ## Best Practices for Model Tuning: A Step-by-Step Guide
 
