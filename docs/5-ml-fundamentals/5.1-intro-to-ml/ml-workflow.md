@@ -153,7 +153,7 @@ print(df.describe())
       <p>Standard ML imports — pandas for the dataframe, numpy for numerics, matplotlib and seaborn for plots; <code>read_csv</code> loads the raw house dataset.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="10-17" data-tint="2">
+  <div class="code-callout" data-lines="9-16" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Shape and Missingness</span>
