@@ -137,9 +137,17 @@ async function main() {
     }
   }
   // Also write a manifest so the endpoint can validate lesson_keys.
+  const generatedAt = new Date().toISOString();
   await fs.writeFile(
     path.join(OUT, 'manifest.json'),
-    JSON.stringify({ lessons: summary, generated_at: new Date().toISOString() }, null, 2),
+    JSON.stringify({ lessons: summary, generated_at: generatedAt }, null, 2),
+  );
+  // Mirror the lesson list into the docsite's _data so the widget include
+  // gates on the same set the endpoint serves. Generated — do not hand-edit.
+  await fs.mkdir(path.dirname(DATA_OUT), { recursive: true });
+  await fs.writeFile(
+    DATA_OUT,
+    JSON.stringify({ lessons: summary, generated_at: generatedAt }, null, 2),
   );
 }
 
