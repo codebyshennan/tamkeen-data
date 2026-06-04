@@ -201,7 +201,7 @@ plt.show()
       <p><code>histplot</code> shows whether house prices are skewed or multimodal — skew suggests a log transform may help the model; multimodal peaks can indicate distinct market segments.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="9-14" data-tint="2">
+  <div class="code-callout" data-lines="9-13" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Correlation Heatmap</span>
