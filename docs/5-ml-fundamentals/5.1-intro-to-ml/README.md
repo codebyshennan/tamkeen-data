@@ -55,6 +55,12 @@ By the end of this section, you will be able to:
    - Finding the sweet spot
    - Model validation techniques
 
+5. [Machine Learning in Production](./ml-in-production.md)
+   - The model is the smallest box in the system
+   - Offline training vs online serving
+   - Serving patterns: batch, online, streaming, edge
+   - Monitoring, drift, and continuous training (MLOps)
+
 ## Why This Matters
 
 Machine learning is transforming industries and solving complex problems that were previously impossible to tackle. Understanding these fundamentals will help you:
