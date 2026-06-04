@@ -346,7 +346,7 @@ df = create_features(df)
       <p>Three derived numeric columns — price per sqft, total rooms, and a renovation flag — encode domain knowledge that raw columns alone cannot express for a linear model.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="11-15" data-tint="2">
+  <div class="code-callout" data-lines="11-14" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Categorical Encoding</span>
