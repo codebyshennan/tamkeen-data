@@ -156,12 +156,18 @@
   - "annotations-and-highlighting.md"
   - "troubleshooting-guide.md"
 
+"3-data-visualization/3.1-intro-data-viz/assignments":
+  - "coding.md"
+
 "3-data-visualization/3.2-adv-data-viz":
   - "README.md"
   - "seaborn-guide.md"
   - "plotly-guide.md"
   - "time-series-visualization.md"
   - "real-world-case-study.md"
+
+"3-data-visualization/3.2-adv-data-viz/assignments":
+  - "coding.md"
 
 "3-data-visualization/3.3-bi-with-tableau":
   - "README.md"
@@ -175,6 +181,9 @@
 "3-data-visualization/3.3-bi-with-tableau/assets":
   - "README.md"
 
+"3-data-visualization/3.3-bi-with-tableau/assignments":
+  - "quiz.md"
+
 "3-data-visualization/3.3-bi-with-tableau/assignments/archive":
   - "README.md"
   - "bi-dashboard-project.md"
@@ -184,6 +193,9 @@
   - "visual-storytelling.md"
   - "narrative-techniques.md"
   - "case-studies.md"
+
+"3-data-visualization/3.4-data-storytelling/assignments":
+  - "quiz.md"
 
 "3-data-visualization/assignments":
   - "assessment.md"
@@ -204,6 +216,9 @@
   - "p-values.md"
   - "parameters-statistics.md"
 
+"4-stat-analysis/4.1-inferential-stats/assignments":
+  - "quiz.md"
+
 "4-stat-analysis/4.1-inferential-stats/assignments/archive":
   - "README.md"
   - "practice-quiz.md"
@@ -215,6 +230,9 @@
   - "statistical-tests.md"
   - "ab-testing.md"
   - "results-analysis.md"
+
+"4-stat-analysis/4.2-hypotheses-testing/assignments":
+  - "coding.md"
 
 "4-stat-analysis/4.2-hypotheses-testing/assignments/archive":
   - "README.md"
@@ -228,6 +246,9 @@
   - "multiple-linear-regression.md"
   - "model-diagnostics.md"
 
+"4-stat-analysis/4.3-rship-in-data/assignments":
+  - "coding.md"
+
 "4-stat-analysis/4.3-rship-in-data/assignments/archive":
   - "README.md"
   - "practice-quiz.md"
@@ -239,6 +260,9 @@
   - "model-selection.md"
   - "regularization.md"
   - "model-interpretation.md"
+
+"4-stat-analysis/4.4-stat-modelling/assignments":
+  - "coding.md"
 
 "4-stat-analysis/4.4-stat-modelling/assignments/archive":
   - "README.md"
@@ -261,9 +285,16 @@
   - "ml-workflow.md"
   - "feature-engineering.md"
   - "bias-variance.md"
+  - "ml-in-production.md"
+
+"5-ml-fundamentals/5.1-intro-to-ml/assignments":
+  - "quiz.md"
 
 "5-ml-fundamentals/5.2-supervised-learning-1":
   - "README.md"
+
+"5-ml-fundamentals/5.2-supervised-learning-1/assignments":
+  - "coding.md"
 
 "5-ml-fundamentals/5.2-supervised-learning-1/decision-trees":
   - "README.md"
@@ -299,6 +330,9 @@
 
 "5-ml-fundamentals/5.3-supervised-learning-2":
   - "README.md"
+
+"5-ml-fundamentals/5.3-supervised-learning-2/assignments":
+  - "coding.md"
 
 "5-ml-fundamentals/5.3-supervised-learning-2/backpropagation":
   - "README.md"
@@ -353,6 +387,9 @@
   - "t-sne.md"
   - "tsne-umap.md"
 
+"5-ml-fundamentals/5.4-unsupervised-learning/assignments":
+  - "coding.md"
+
 "5-ml-fundamentals/5.5-model-eval":
   - "README.md"
   - "overfitting-underfitting.md"
@@ -371,6 +408,9 @@
   - "hyperparameter-tuning.md"
   - "feature-importance.md"
   - "sklearn-pipelines.md"
+
+"5-ml-fundamentals/5.5-model-eval/assignments":
+  - "coding.md"
 
 "5-ml-fundamentals/5.5-model-eval/exercises":
   - "README.md"

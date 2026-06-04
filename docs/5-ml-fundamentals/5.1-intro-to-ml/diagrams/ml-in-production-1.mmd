@@ -1,0 +1,30 @@
+flowchart LR
+    subgraph OFF["Offline: training world (hours to days)"]
+        direction TB
+        D["Raw data sources"]
+        V["Validate and clean"]
+        FE["Engineer features"]
+        TR["Train model"]
+        EV["Evaluate (CV and holdout test)"]
+        D --> V --> FE --> TR --> EV
+    end
+
+    subgraph ON["Online: serving world (milliseconds)"]
+        direction TB
+        REQ["New request"]
+        SVC["Model service"]
+        OUT["Prediction returned"]
+        REQ --> SVC --> OUT
+    end
+
+    REG[("Model registry: versioned models")]
+    FS[("Feature store: shared transforms")]
+    MON["Monitoring: drift, latency, accuracy"]
+
+    EV -->|"register best model"| REG
+    REG -->|"deploy or roll back"| SVC
+    FE -.->|"same transform logic"| FS
+    FS -.->|"consistent features"| SVC
+    OUT --> MON
+    MON -->|"outcomes become new data"| D
+    MON -->|"drift detected, retrain"| TR
