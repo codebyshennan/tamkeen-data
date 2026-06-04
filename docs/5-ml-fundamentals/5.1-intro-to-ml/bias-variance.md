@@ -1,25 +1,30 @@
 ---
-reading_minutes: 30
+reading_minutes: 18
 objectives:
-  - Name the failure mode (high bias vs high variance) from a learning curve and a train/validation gap.
-  - Pick a corrective lever — polynomial features, more data, regularization, or pruning — that targets the right side of the tradeoff.
-  - Use cross-validation, grid search, and validation curves to compare hyperparameters without peeking at the test set.
-  - Avoid the standard pitfalls (tuning on the test set, judging by training accuracy, mistaking a small gap at low scores for a good fit).
+  - Tell high bias (underfitting) from high variance (overfitting) using a train-vs-validation gap or a learning curve.
+  - Pick the right fix for each side of the tradeoff — more/fewer features, more data, or regularization.
+  - Explain regularization as a penalty on large coefficients, and tell L1 (Lasso, drops features) from L2 (Ridge, shrinks features).
+  - Tune the regularization strength (`alpha`) with cross-validation instead of guessing.
 ---
 
-# Understanding Bias and Variance in Machine Learning
+# Bias, Variance, and Regularization — the Simple Version
 
-**After this lesson:** you can explain the core ideas in “Understanding Bias and Variance in Machine Learning” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can look at a model's behaviour, name *why* it is wrong (too simple or too sensitive), and reach for the right fix — including the regularization dial that L1 and L2 turn.
 
 ## Overview
 
-**Bias** is systematic error (the model is too simple or too constrained). **Variance** is sensitivity to the particular training sample (the model is too flexible). You will see this tradeoff in learning curves, cross-validation, and regularization—topics developed further in [5.5 Model evaluation](../5.5-model-eval/). **Prerequisites:** [What is ML?](what-is-ml.md) and the [workflow](ml-workflow.md) lesson; basic sklearn from this page’s examples.
+Every model can be wrong in two opposite ways:
+
+- **Bias** — the model is **too simple** and misses the real pattern (this is called **underfitting**).
+- **Variance** — the model is **too sensitive** and chases the noise in this particular dataset (this is called **overfitting**).
+
+You cannot usually remove both at once — pushing one down tends to push the other up. That push-and-pull is the **bias–variance tradeoff**, and **regularization** is one of the cleanest ways to steer it.
+
+**Prerequisites:** [What is ML?](what-is-ml.md) and the [workflow](ml-workflow.md) lesson. A deeper treatment lives in [5.5 Model evaluation](../5.5-model-eval/regularization.md).
 
 ## Why this matters
 
-Almost every modeling decision—adding features, deepening trees, increasing regularization—pushes bias and variance in different directions. Naming the failure mode (underfitting vs overfitting) is the first step toward fixing it.
-
-Welcome to the world of machine learning! If you're just starting out, you might have heard terms like "bias" and "variance" thrown around. Don't worry - we're going to break these concepts down in a way that makes sense, even if you're completely new to the field.
+Almost every modelling decision — adding features, growing a deeper tree, turning regularization up or down — moves bias and variance in opposite directions. If you can *name* which one is hurting you, the fix is usually obvious. If you can't, you end up guessing.
 
 ## Helpful video
 
@@ -27,661 +32,249 @@ Crash Course AI: how supervised learning fits into ML workflows.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-## Why Should You Care About Bias and Variance?
+## The dartboard picture
 
-Imagine you're learning to play darts. There are two main ways you could be doing poorly:
+Imagine throwing darts at a bullseye:
 
-1. You consistently miss the bullseye in the same direction (bias)
-2. Your throws are all over the place (variance)
-
-In machine learning, we face similar challenges. Understanding bias and variance helps us create models that make accurate predictions, just like understanding your dart throwing helps you hit the bullseye more often.
-
-## What are Bias and Variance?
+- **High bias** — your darts land tightly together, but in the *wrong* spot. Consistent, but consistently off. (The model is too rigid.)
+- **High variance** — your darts scatter all over the board. Sometimes close, sometimes wild. (The model reacts too much to small changes.)
+- **The goal** — a tight cluster *on* the bullseye: low bias **and** low variance.
 
 {% include mermaid-diagram.html src="5-ml-fundamentals/5.1-intro-to-ml/diagrams/bias-variance-1.mmd" %}
 
-### Bias: The Consistent Mistake
+## Seeing it in code
 
-Think of bias like a scale that's always off by 2 pounds. No matter what you weigh, it's always wrong by the same amount. In machine learning:
+Let's make a tiny dataset where we *know* the true answer, then watch models of different complexity succeed and fail on it. Every code block below shows its real output, so you can see exactly what each change does.
 
-- **High Bias (Underfitting)**
-  - Like trying to fit a straight line through a curvy pattern
-  - The model is too simple to capture the real patterns
-  - Makes similar mistakes across different datasets
-  - Example: Using a linear model for non-linear data (like trying to predict house prices using only square footage)
+First, the data: a smooth wave with some random noise sprinkled on top. In real life we only ever see the noisy dots — never the clean line.
 
-- **Low Bias**
-  - Like having a flexible measuring tape that can follow any shape
-  - Captures the underlying patterns well
-  - Makes predictions closer to the true values
-  - Can handle complexity in the data
-
-### Variance: The Inconsistent Performance
-
-Think of variance like a weather forecast that changes dramatically with small changes in input data. In machine learning:
-
-- **High Variance (Overfitting)**
-  - Like memorizing answers instead of learning the pattern
-  - The model is too complex and captures noise
-  - Performs very differently on different datasets
-  - Example: Using a very complex model with too few data points (like trying to predict stock prices with only a week of data)
-
-- **Low Variance**
-  - Like a reliable weather forecast that doesn't change much with small data changes
-  - Model is stable
-  - Predictions don't change much with different training data
-  - Generalizes well to new data
-
-## The Tradeoff Explained: Finding the Sweet Spot
-
-### Why the Tradeoff Matters
-
-Imagine you're teaching someone to recognize cats in photos:
-
-- If you only show them one type of cat (high bias), they might miss other cat breeds
-- If you show them every possible variation (high variance), they might start calling dogs cats too!
-
-The goal is to find the perfect balance - just enough examples to recognize cats reliably, but not so many that they get confused.
-
-### Visual Example
-
-The image above shows three scenarios:
-
-1. **Underfitting (High Bias)**
-   - Like trying to draw a perfect circle with only 4 points
-   - The model is too simple and misses the pattern
-   - Example: Predicting house prices using only square footage, ignoring location and amenities
-
-2. **Good Fit**
-   - Like drawing a circle with just enough points to capture its shape
-   - The model captures the true pattern well
-   - Example: Predicting house prices using relevant features like size, location, and condition
-
-3. **Overfitting (High Variance)**
-   - Like trying to draw a circle by connecting every single pixel
-   - The model is too complex and fits the noise
-   - Example: Predicting house prices using every possible feature, including irrelevant ones like the color of the front door
-
-### Learning Curves: Your Model's Report Card
-
-Learning curves are like progress reports for your model. They show how well your model is learning and whether it's learning the right things.
-
-- **Training Score**: How well the model performs on the data it's seen (like a student's performance on practice tests)
-- **Cross-validation Score**: How well the model performs on new data (like a student's performance on the actual exam)
-
-### Interpreting Learning Curves: What Your Model is Telling You
-
-1. **High Bias (Underfitting)**
-   - Both training and validation scores are low
-   - Like a student who's not studying enough
-   - Small gap between training and validation scores
-   - Adding more data doesn't help much
-   - Solution: Try a more complex model or add more features
-
-2. **High Variance (Overfitting)**
-   - High training score, low validation score
-   - Like a student who memorizes answers but doesn't understand concepts
-   - Large gap between training and validation scores
-   - Adding more data helps
-   - Solution: Simplify the model or get more training data
-
-3. **Good Fit**
-   - Both scores are reasonably high
-   - Like a student who understands the material well
-   - Small gap between training and validation scores
-   - Scores converge as we add more data
-   - Solution: You've found a good model! Keep it as is
-
-## Practical Solutions: Fixing Common Problems
-
-### Dealing with High Bias: When Your Model is Too Simple
-
-Think of high bias like trying to predict the weather using only temperature. You're missing important factors like humidity and wind speed. Here's how to fix it:
-
-#### Increase Model Complexity
-
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
-
-{% highlight python %}
-# Let's say we're trying to predict house prices
-# First, let's see what our data looks like
-import pandas as pd
+```python
+import numpy as np
 import matplotlib.pyplot as plt
 
-# Load and visualize the data
-df = pd.read_csv('house_prices.csv')
-plt.scatter(df['sqft_living'], df['price'])
-plt.xlabel('Square Feet')
-plt.ylabel('Price')
-plt.show()
+np.random.seed(0)
 
-# If the relationship looks curved, we need a more complex model
+# The TRUE pattern we want to learn (in real life we never see this directly)
+def true_pattern(x):
+    return np.sin(2 * np.pi * x)
+
+# What we actually observe: the true pattern plus random noise
+X = np.sort(np.random.rand(30))
+y = true_pattern(X) + np.random.normal(0, 0.15, size=30)
+
+Xc = X.reshape(-1, 1)          # sklearn wants a 2-D column
+grid = np.linspace(0, 1, 200)  # smooth x-axis for drawing curves
+
+plt.figure(figsize=(6, 4))
+plt.scatter(X, y, color="#2563eb", label="Data we observe (noisy)")
+plt.plot(grid, true_pattern(grid), "--", color="#6b7280", label="True pattern (hidden)")
+plt.title("A smooth pattern hidden under noise")
+plt.xlabel("x"); plt.ylabel("y"); plt.legend()
+plt.show()
+```
+
+### Too simple, just right, too complex
+
+We now fit the same data three times, changing only **one knob**: the polynomial *degree* (how wiggly the model is allowed to be). Degree 1 is a straight line; degree 15 can bend almost anywhere.
+
+```python
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
+from sklearn.pipeline import make_pipeline
 
-# Create polynomial features (like x², x³, etc.)
-# This helps capture curved relationships
-poly = PolynomialFeatures(degree=2)  # Try different degrees
-X_poly = poly.fit_transform(X)
+settings = [
+    (1,  "Degree 1 - underfit (high bias)"),
+    (4,  "Degree 4 - just right"),
+    (15, "Degree 15 - overfit (high variance)"),
+]
 
-# Fit the model
-model = LinearRegression()
-model.fit(X_poly, y)
-
-# Visualize the results
-plt.scatter(X, y)
-plt.plot(X, model.predict(X_poly), color='red')
+fig, axes = plt.subplots(1, 3, figsize=(15, 4))
+for ax, (degree, title) in zip(axes, settings):
+    model = make_pipeline(PolynomialFeatures(degree, include_bias=False), LinearRegression())
+    model.fit(Xc, y)
+    ax.scatter(X, y, color="#2563eb", s=20)
+    ax.plot(grid, model.predict(grid.reshape(-1, 1)), color="#dc2626", lw=2, label="Model")
+    ax.plot(grid, true_pattern(grid), "--", color="#6b7280", label="True pattern")
+    ax.set_ylim(-1.6, 1.6); ax.set_title(title)
+axes[0].legend(loc="lower center")
+fig.suptitle("Same data, three levels of model complexity")
 plt.show()
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-13" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Load and Visualize</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Load house price data and scatter-plot size vs price to visually check whether the relationship is linear or curved before choosing a model.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="14-29" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Polynomial Features</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>PolynomialFeatures(degree=2)</code> expands inputs to include x² terms; fitting <code>LinearRegression</code> on the expanded matrix lets the model follow a curved trend.</p>
-    </div>
-  </div>
-</aside>
-</div>
-
-#### Add More Features
-
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
-
-{% highlight python %}
-# Let's add some meaningful combinations of features
-def add_interactions(df):
-    # Size per room might be important
-    df['size_rooms'] = df['sqft_living'] / df['bedrooms']
-
-    # Age and condition together might matter
-    df['age_condition'] = df['age'] * df['condition']
-
-    # Location might be important
-    df['distance_to_city'] = calculate_distance(df['latitude'], df['longitude'])
-
-    return df
-
-# Apply the transformations
-df = add_interactions(df)
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-12" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Interaction Features</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Derive size-per-room (efficiency ratio), age × condition (combined wear metric), and distance to city — each encodes domain knowledge that a linear model cannot capture from raw columns alone.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="14-15" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Apply Transform</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Call <code>add_interactions</code> on the dataframe to expand the feature matrix in-place; note that <code>calculate_distance</code> must be defined in the environment or replaced with a real geo utility.</p>
-    </div>
-  </div>
-</aside>
-</div>
-
-#### Reduce Regularization
-
-```python
-# Regularization is like putting training wheels on your model
-# Sometimes we need to take them off
-from sklearn.linear_model import Ridge
-
-# Try different levels of regularization
-alphas = [0.1, 1.0, 10.0]
-for alpha in alphas:
-    model = Ridge(alpha=alpha)
-    model.fit(X_train, y_train)
-    print(f"Alpha={alpha}, Score={model.score(X_val, y_val)}")
 ```
 
-### Dealing with High Variance: When Your Model is Too Complex
+Read the three panels left to right:
 
-Think of high variance like a student who memorizes every detail of their notes but can't apply the concepts to new problems. Here's how to fix it:
+- **Degree 1 (high bias):** a straight line can't bend to follow a wave, so it's wrong almost everywhere — but it would be wrong in the *same* way on any sample.
+- **Degree 4 (just right):** flexible enough to trace the true wave, not so flexible that it chases every dot.
+- **Degree 15 (high variance):** the curve twists through individual noisy points. It nails *this* data and would look completely different on a fresh sample.
 
-#### Collect More Data
+### Putting numbers on it
 
-- More training examples help the model learn the true pattern
-- Like showing more examples of cats to help someone learn what makes a cat a cat
-
-#### Reduce Model Complexity
-
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
-
-{% highlight python %}
-# Let's say we're using a random forest that's overfitting
-from sklearn.ensemble import RandomForestRegressor
-
-# Start with a simpler model
-model = RandomForestRegressor(
-    n_estimators=100,    # Fewer trees
-    max_depth=5,         # Shorter trees
-    min_samples_leaf=5   # More samples per leaf
-)
-
-# Compare with the complex model
-complex_model = RandomForestRegressor(
-    n_estimators=500,
-    max_depth=None,
-    min_samples_leaf=1
-)
-
-# Train both models
-model.fit(X_train, y_train)
-complex_model.fit(X_train, y_train)
-
-# Compare their performance
-print(f"Simple model score: {model.score(X_val, y_val)}")
-print(f"Complex model score: {complex_model.score(X_val, y_val)}")
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-17" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Simple vs Complex Forest</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Two <code>RandomForestRegressor</code> instances differ in depth, tree count, and leaf size — the constrained model reduces variance while the unconstrained one is prone to overfitting.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="18-24" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Fit and Compare</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Both models train on the same data; comparing validation scores reveals whether the extra complexity buys real predictive power or just memorizes the training set.</p>
-    </div>
-  </div>
-</aside>
-</div>
-
-#### Add Regularization
+Eyeballing curves is fine for one feature, but normally you can't plot the data. The reliable signal is the **gap between training error and validation error**. We measure error with RMSE (lower is better): how the model does on data it *trained on* vs data it has *never seen* (via cross-validation).
 
 ```python
-# Regularization helps prevent overfitting
-from sklearn.linear_model import Lasso
-
-# L1 regularization (Lasso) can help by setting some coefficients to zero
-model = Lasso(alpha=1.0)
-model.fit(X_train, y_train)
-
-# See which features were kept
-important_features = [col for col, coef in zip(X.columns, model.coef_) if coef != 0]
-print("Important features:", important_features)
-```
-
-#### Feature Selection
-
-```python
-# Sometimes less is more
-from sklearn.feature_selection import SelectKBest
-
-# Select the top k most important features
-selector = SelectKBest(k=10)
-X_selected = selector.fit_transform(X, y)
-
-# See which features were selected
-selected_features = [X.columns[i] for i in selector.get_support(indices=True)]
-print("Selected features:", selected_features)
-```
-
-## Best Practices for Model Tuning: A Step-by-Step Guide
-
-Think of model tuning like tuning a guitar - you need to adjust each string (parameter) carefully to get the perfect sound. Here's how to do it systematically:
-
-### 1. Cross-Validation: Testing Your Model's True Performance
-
-Cross-validation is like taking multiple practice tests before the real exam. It helps ensure your model's performance is reliable.
-
-#### Cross-validate and plot fold scores
-
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
-
-{% highlight python %}
 from sklearn.model_selection import cross_val_score
-import numpy as np
 
-def evaluate_model(model, X, y, cv=5):
-    """
-    Evaluate a model using cross-validation
-    This is like taking multiple practice tests to ensure consistent performance
-    """
-    # Get scores from cross-validation
-    scores = cross_val_score(model, X, y, cv=cv)
+print(f"{'degree':>6} | {'train RMSE':>10} | {'cross-val RMSE':>14}")
+print("-" * 38)
+for degree in [1, 4, 15]:
+    model = make_pipeline(PolynomialFeatures(degree, include_bias=False), LinearRegression())
+    model.fit(Xc, y)
+    train_rmse = np.sqrt(np.mean((model.predict(Xc) - y) ** 2))
+    cv_rmse = -cross_val_score(model, Xc, y, cv=5,
+                               scoring="neg_root_mean_squared_error").mean()
+    print(f"{degree:>6} | {train_rmse:>10.3f} | {cv_rmse:>14.3f}")
+```
 
-    # Print the results in a readable format
-    print(f"Mean Score: {scores.mean():.3f} (+/- {scores.std() * 2:.3f})")
-    print(f"Individual scores: {scores}")
+The pattern in those numbers is the whole lesson:
 
-    # Visualize the scores
-    plt.figure(figsize=(10, 4))
-    plt.bar(range(1, cv+1), scores)
-    plt.axhline(y=scores.mean(), color='r', linestyle='-')
-    plt.title('Cross-Validation Scores')
-    plt.xlabel('Fold')
-    plt.ylabel('Score')
-    plt.show()
+| Symptom in the numbers | Diagnosis | What it means |
+| --- | --- | --- |
+| Train **and** validation error both high | **High bias** (underfit) | Model is too simple — it can't even fit the data it has seen. |
+| Train error low, validation error **much** higher | **High variance** (overfit) | Model memorised the training noise and falls apart on new data. |
+| Both low and **close together** | **Good fit** | This is what you want. |
 
-    return scores
+> A small gap alone is **not** good news. Two *high* errors that are close together still means underfitting. Both errors must be low **and** close.
 
-# Example usage
-scores = evaluate_model(model, X, y)
-{% endhighlight %}
+### Learning curves: does more data help?
 
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-3" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Imports</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Import <code>cross_val_score</code> and numpy to run k-fold evaluation and summarize results.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="5-14" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Function and CV</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>cross_val_score</code> returns one accuracy per fold; mean and ±2 std give a reliable performance interval.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="16-25" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Bar Plot</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Bar chart per fold with a red horizontal mean line makes it easy to spot unusually high or low folds at a glance.</p>
-    </div>
-  </div>
-</aside>
-</div>
+A **learning curve** plots score against the amount of training data. It answers a practical question: *would collecting more data fix this?*
 
-### 2. Grid Search: Finding the Best Parameters
+```python
+from sklearn.model_selection import learning_curve
 
-Grid search is like trying different combinations of ingredients to find the perfect recipe. It systematically tries different parameter combinations to find the best one.
+# Larger sample so the curves are smooth
+np.random.seed(1)
+X_big = np.sort(np.random.rand(200)).reshape(-1, 1)
+y_big = true_pattern(X_big.ravel()) + np.random.normal(0, 0.15, size=200)
 
-#### Grid-search hyperparameters with nested CV scoring
+model = make_pipeline(PolynomialFeatures(15, include_bias=False), LinearRegression())
+sizes, train_scores, val_scores = learning_curve(
+    model, X_big, y_big, cv=5, train_sizes=np.linspace(0.1, 1.0, 8))
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
-
-{% highlight python %}
-from sklearn.model_selection import GridSearchCV
-from sklearn.ensemble import RandomForestRegressor
-
-# Define the parameter grid
-# Think of this as creating a recipe book of different combinations
-param_grid = {
-    'n_estimators': [100, 200, 300],  # Number of trees
-    'max_depth': [5, 10, None],       # How deep each tree can grow
-    'min_samples_split': [2, 5, 10]   # Minimum samples needed to split a node
-}
-
-# Create the grid search
-# This is like having a chef try all the recipes
-grid_search = GridSearchCV(
-    RandomForestRegressor(),
-    param_grid,
-    cv=5,  # Use 5-fold cross-validation
-    scoring='neg_mean_squared_error',  # We want to minimize error
-    n_jobs=-1  # Use all available CPU cores
-)
-
-# Fit the grid search
-print("Starting grid search...")
-grid_search.fit(X_train, y_train)
-
-# Print the results
-print("\nBest parameters:", grid_search.best_params_)
-print("Best score:", -grid_search.best_score_)  # Convert back to positive MSE
-
-# Visualize the results
-results = pd.DataFrame(grid_search.cv_results_)
-plt.figure(figsize=(12, 6))
-sns.heatmap(results.pivot_table(index='param_max_depth',
-                              columns='param_n_estimators',
-                              values='mean_test_score'),
-           annot=True, fmt='.3f')
-plt.title('Grid Search Results')
+plt.figure(figsize=(6, 4))
+plt.plot(sizes, train_scores.mean(axis=1), "o-", color="#2563eb", label="Training score")
+plt.plot(sizes, val_scores.mean(axis=1), "o-", color="#dc2626", label="Validation score")
+plt.ylim(0, 1.05)
+plt.title("Learning curve: the gap shrinks as data grows")
+plt.xlabel("Training examples"); plt.ylabel("R² score"); plt.legend()
 plt.show()
-{% endhighlight %}
+```
 
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-10" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Parameter Grid</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Define a dict of hyperparameter lists; <code>GridSearchCV</code> will try every combination—here 3×3×3 = 27 configurations.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="13-20" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">GridSearchCV Setup</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Wrap the estimator with the grid; <code>cv=5</code> gives inner cross-validation per combination; <code>n_jobs=-1</code> parallelizes across CPU cores.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="22-29" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Fit and Report</span>
-    </div>
-    <div class="code-callout__body">
-      <p>After <code>fit</code>, <code>best_params_</code> and <code>best_score_</code> expose the winning combination; negate the score to recover positive MSE.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="31-38" data-tint="4">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Heatmap</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Pivot the <code>cv_results_</code> DataFrame and plot as a heatmap to compare score by depth vs tree count at a glance.</p>
-    </div>
-  </div>
-</aside>
-</div>
+- A **wide gap** that closes as you add data → **high variance**. More data helps.
+- Both curves **flat and low**, close together → **high bias**. More data won't help; you need a better model or features.
 
-### 3. Validation Curves: Understanding Your Model's Behavior
+## The fix menu
 
-Validation curves help you understand how your model behaves as you change a single parameter. It's like testing how a car performs at different speeds.
+Once you've named the problem, the fix is short:
 
-#### Validation curve for one hyperparameter
+| If you have… | High bias (underfit) | High variance (overfit) |
+| --- | --- | --- |
+| Model complexity | **Increase** it (higher degree, deeper tree) | **Decrease** it (lower degree, prune the tree) |
+| Features | **Add** useful ones | **Remove** irrelevant ones |
+| More data | Won't help much | **Helps** |
+| Regularization | **Less** of it | **More** of it |
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+That last row is what the rest of this page is about.
 
-{% highlight python %}
-from sklearn.model_selection import validation_curve
-import matplotlib.pyplot as plt
-import seaborn as sns
+## Regularization: a dial that fights overfitting
 
-def plot_validation_curve(model, X, y, param_name, param_range):
-    """
-    Plot how model performance changes with a single parameter
-    This helps you understand the bias-variance tradeoff for that parameter
-    """
-    # Get training and validation scores
-    train_scores, val_scores = validation_curve(
-        model, X, y,
-        param_name=param_name,
-        param_range=param_range,
-        cv=5
-    )
+Look again at the degree-15 curve — it had to swing violently up and down to thread every noisy point. To swing that hard, it needs **huge coefficients**. That's the tell: **overfit models tend to have large coefficients.**
 
-    # Calculate mean and standard deviation
-    train_mean = np.mean(train_scores, axis=1)
-    train_std = np.std(train_scores, axis=1)
-    val_mean = np.mean(val_scores, axis=1)
-    val_std = np.std(val_scores, axis=1)
+**Regularization adds a penalty for large coefficients** to what the model is trying to minimise. Now the model has to balance two goals: *fit the data* **and** *keep coefficients small*. Made to choose, it gives up the wild swings and settles on a smoother curve — trading a tiny bit of training accuracy for much better generalization.
 
-    # Plot the results
-    plt.figure(figsize=(10, 6))
-    plt.plot(param_range, train_mean, 'o-', color='blue', label='Training score')
-    plt.plot(param_range, val_mean, 'o-', color='red', label='Cross-validation score')
+A single knob, **`alpha`** (sometimes written λ), controls how hard you push:
 
-    # Add error bands
-    plt.fill_between(param_range, train_mean - train_std, train_mean + train_std, alpha=0.1, color='blue')
-    plt.fill_between(param_range, val_mean - val_std, val_mean + val_std, alpha=0.1, color='red')
+- `alpha = 0` → no penalty, back to the plain overfit model.
+- small `alpha` → gentle nudge toward simplicity.
+- large `alpha` → strong push; go too far and you *underfit*.
 
-    plt.xlabel(param_name)
-    plt.ylabel('Score')
-    plt.legend()
-    plt.title(f'Validation Curve for {param_name}')
-    plt.grid(True)
-    plt.show()
+There are two common flavours, and the difference is exactly how they measure "large coefficients."
 
-# Example usage
-plot_validation_curve(
-    RandomForestRegressor(),
-    X, y,
-    param_name='max_depth',
-    param_range=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-)
-{% endhighlight %}
+### L2 (Ridge) vs L1 (Lasso)
 
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-16" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Validation Curve</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>validation_curve</code> sweeps <code>param_range</code> values for a single hyperparameter and returns train/val score arrays; rows are param values, columns are CV folds.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="18-22" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Means and Stds</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Averaging across folds (axis=1) gives one mean score per param value; standard deviation quantifies instability across folds.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="24-38" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Plot with Bands</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Shaded ±1 std bands around train and CV curves visually separate the bias (both low) and variance (train high, CV low) regions.</p>
-    </div>
-  </div>
-</aside>
-</div>
+- **L2 — Ridge** penalises the **sum of squared** coefficients. Squaring punishes big coefficients hard but never *quite* reaches zero, so Ridge **shrinks every coefficient toward zero but keeps them all**. Use it when you think many features each contribute a little.
+- **L1 — Lasso** penalises the **sum of absolute** coefficients. This shape lets it push weak coefficients **exactly to zero**, which effectively **deletes those features** — automatic feature selection. Use it when you think only a few features really matter.
 
-## Common Pitfalls to Avoid
+Watch both calm the same wild curve:
 
-These mistakes often show up as “great training score, poor test score” or unstable metrics across folds. Use them as a checklist when something looks off.
+```python
+from sklearn.linear_model import Ridge, Lasso
+from sklearn.preprocessing import StandardScaler
 
-1. **Not Splitting Data Properly**
-   - Always use separate training, validation, and test sets
-   - Use stratification for imbalanced datasets
-   - Example: If you're predicting rare events, make sure your validation set has a similar proportion of rare events
+def poly_model(estimator):
+    # degree-15 features, standardized so the penalty hits each term fairly
+    return make_pipeline(PolynomialFeatures(15, include_bias=False),
+                         StandardScaler(), estimator)
 
-2. **Overfitting to the Validation Set**
-   - Don't tune hyperparameters based on test set performance
-   - Use cross-validation for model selection
-   - Example: If you keep trying different models until you get a good score on the validation set, you're likely overfitting to that set
+fits = [
+    ("No penalty (overfits)",   poly_model(LinearRegression())),
+    ("Ridge - L2 (alpha=0.1)",  poly_model(Ridge(alpha=0.1))),
+    ("Lasso - L1 (alpha=0.01)", poly_model(Lasso(alpha=0.01, max_iter=10000))),
+]
 
-3. **Ignoring Domain Knowledge**
-   - Balance statistical metrics with business requirements
-   - Consider model interpretability needs
-   - Example: A complex model might have slightly better accuracy, but if stakeholders can't understand it, they won't trust it
+fig, axes = plt.subplots(1, 3, figsize=(15, 4))
+for ax, (title, model) in zip(axes, fits):
+    model.fit(Xc, y)
+    ax.scatter(X, y, color="#2563eb", s=20)
+    ax.plot(grid, model.predict(grid.reshape(-1, 1)), color="#dc2626", lw=2)
+    ax.plot(grid, true_pattern(grid), "--", color="#6b7280")
+    ax.set_ylim(-1.6, 1.6); ax.set_title(title)
+fig.suptitle("Regularization calms the wild degree-15 curve")
+plt.show()
+```
 
-## Next Steps
+The left panel is the same overfit mess as before. The middle and right panels — *same degree-15 model*, only a penalty added — recover a smooth, sensible curve.
 
-When you are ready to go deeper, apply the same ideas on a dataset you care about, compare a few families of models, and keep a simple log of what changed and how metrics moved.
+Now the headline difference between L1 and L2. Both shrink coefficients; only L1 sets them to **exactly zero**:
 
-1. **Practice with Real Data**
-   - Try these techniques on a dataset you're familiar with
-   - Start with simple models and gradually increase complexity
-   - Example: Use the Boston Housing dataset to practice model tuning
+```python
+ridge = poly_model(Ridge(alpha=0.1)).fit(Xc, y)
+lasso = poly_model(Lasso(alpha=0.01, max_iter=10000)).fit(Xc, y)
 
-2. **Experiment with Different Models**
-   - Try different algorithms to see how they handle bias and variance
-   - Compare linear models, tree-based models, and neural networks
-   - Example: Compare a linear regression with a random forest on the same data
+ridge_coefs = ridge.named_steps["ridge"].coef_
+lasso_coefs = lasso.named_steps["lasso"].coef_
 
-3. **Learn from Mistakes**
-   - Keep track of what works and what doesn't
-   - Document your experiments and results
-   - Example: Create a notebook documenting your model tuning process
+count_zero = lambda c: int(np.sum(np.abs(c) < 1e-4))
+print(f"15 polynomial features in total")
+print(f"Ridge (L2): {count_zero(ridge_coefs):2d} coefficients set to zero  -> keeps every feature, just smaller")
+print(f"Lasso (L1): {count_zero(lasso_coefs):2d} coefficients set to zero  -> drops features automatically")
+```
 
-4. **Join the Community**
-   - Participate in Kaggle competitions
-   - Join machine learning forums and groups
-   - Example: Try solving a Kaggle competition using these techniques
+| | L2 — Ridge | L1 — Lasso |
+| --- | --- | --- |
+| Penalty | sum of **squared** coefficients | sum of **absolute** coefficients |
+| Effect on coefficients | shrinks all toward zero | pushes weak ones to **exactly zero** |
+| Feature selection? | No — keeps every feature | **Yes** — drops features for free |
+| Best when | many features each matter a bit | only a few features matter |
+| (Want both? | use **ElasticNet** — a blend of L1 and L2) | |
 
-Remember: Finding the right balance between bias and variance is an iterative process. Don't be afraid to experiment and learn from the results!
+> **Always standardize first.** The penalty compares coefficients directly, so features must be on the same scale — otherwise a feature measured in small units gets unfairly punished. That's why the pipeline above includes `StandardScaler`.
+
+### Choosing `alpha` without guessing
+
+Don't hand-pick `alpha`. Let cross-validation try a range and keep the best — `RidgeCV` (and `LassoCV`) do exactly this:
+
+```python
+from sklearn.linear_model import RidgeCV
+
+alphas = np.logspace(-3, 2, 30)  # 0.001 ... 100
+model = make_pipeline(PolynomialFeatures(15, include_bias=False),
+                     StandardScaler(), RidgeCV(alphas=alphas))
+model.fit(Xc, y)
+print(f"Cross-validation tried 30 values and picked alpha = {model.named_steps['ridgecv'].alpha_:.3f}")
+```
 
 ## Gotchas
 
-- **Evaluating bias and variance using only training accuracy** — a perfect training score says nothing about variance; you need to compare training and validation scores side by side via learning curves or cross-validation before you can name the failure mode.
-- **Tuning hyperparameters on the test set** — every peek at test-set performance leaks information and inflates your estimate of how well the model generalises; reserve the test set for a single final evaluation and use cross-validation for all tuning decisions.
-- **Treating the cross-validation mean as a single fixed number** — `cross_val_score` returns one score per fold; a high mean with high standard deviation (±0.1 or more) often signals that the model is unstable or the dataset is too small, not just that the model is good.
-- **Adding polynomial features without re-checking variance** — going from `degree=1` to `degree=3` reduces bias but can dramatically increase variance; always compare cross-validation scores before and after the expansion, not just training accuracy.
-- **Conflating GridSearchCV's `best_score_` with test performance** — `best_score_` is the mean CV score across inner folds, which is optimistic relative to a held-out test set because you searched the grid to maximise it; always report the final model score on a separate test split.
-- **Interpreting a small training–validation gap as "good fit"** — a small gap is necessary but not sufficient; both scores must also be *high*. Two low scores close together indicate high bias (underfitting), not a well-calibrated model.
+- **Judging a model by its training score alone** — a perfect training score tells you *nothing* about variance. Always compare training and validation scores side by side before naming the problem.
+- **Reading a small gap as "good fit"** — a small gap is necessary but not sufficient. Both scores must also be *good*. Two poor scores close together is high bias, not success.
+- **Tuning on the test set** — every peek at the test set leaks information and inflates your estimate. Tune with cross-validation; touch the test set once, at the very end.
+- **Forgetting to standardize before regularizing** — without it the penalty is uneven across features, and `alpha` means different things for different columns.
+- **Setting `alpha` too high** — regularization fixes overfitting, but overdo it and you swing all the way to underfitting. Let cross-validation pick the value.
 
-## Additional Resources
+## Next steps
 
-1. **Books**
-   - "Introduction to Statistical Learning" by Gareth James et al.
-   - "Hands-On Machine Learning with Scikit-Learn and TensorFlow" by Aurélien Géron
+- Go deeper on the math and on ElasticNet in [5.5 Model evaluation → Regularization](../5.5-model-eval/regularization.md).
+- Try the same degree-sweep on a dataset you care about, and keep a short log of how the train/validation gap moves as you change each knob.
 
-2. **Online Courses**
-   - Coursera's Machine Learning by Andrew Ng
-   - Fast.ai's Practical Deep Learning for Coders
-
-3. **Practice Datasets**
-   - UCI Machine Learning Repository
-   - Kaggle Datasets
-   - scikit-learn's built-in datasets
-
-4. **Tools and Libraries**
-   - scikit-learn's model selection module
-   - Yellowbrick for visualization
-   - Optuna for hyperparameter optimization
-
-Happy modeling!
+Remember: name the failure mode first (bias or variance), *then* pick the fix. Half the battle is reading the symptom correctly.
