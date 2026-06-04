@@ -445,7 +445,7 @@ for name, model in models.items():
       <p>The helper fits any sklearn estimator, predicts on both splits, and returns a dict of four metrics to detect train/val divergence.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="25-34" data-tint="3">
+  <div class="code-callout" data-lines="25-33" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Model Comparison Loop</span>
