@@ -295,11 +295,11 @@ plt.show()
 <figcaption>Figure 4: Validation curve: too much regularization underfits</figcaption>
 </figure>
 
-Read it like a dial:
+Read it like a dial, following the **validation** (red) line:
 
 - **Far right (large `alpha`):** both errors climb — the penalty is so strong the model underfits.
-- **Far left (tiny `alpha`):** the gap between training and validation error is widest — the model is starting to overfit.
-- **Best `alpha`:** wherever the **validation** error is lowest. For this fairly clean data that's near the left; on noisier data the low point sits further right. `RidgeCV` and `LassoCV` find it for you automatically.
+- **Moving left:** validation error falls, then flattens out. Pick the `alpha` at its lowest point.
+- **Honest note for this data:** it's clean enough that lighter penalties keep helping, so the low point sits at the left edge. On noisier data the validation line would turn back *up* at very small `alpha` (overfitting again), putting the best `alpha` somewhere in the middle. `RidgeCV` and `LassoCV` find that point for you automatically.
 
 ## Gotchas
 
