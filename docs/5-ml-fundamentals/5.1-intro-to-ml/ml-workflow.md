@@ -698,7 +698,7 @@ print(f"\nPredicted House Price: ${predicted_price:,.2f}")
       <p>Columns are reordered to match training, then the same scaler is applied so new data arrives in the same numeric range the model saw at fit time.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="18-29" data-tint="3">
+  <div class="code-callout" data-lines="18-28" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Predict New House</span>
