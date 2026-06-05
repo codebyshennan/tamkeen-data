@@ -24,6 +24,18 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..', '..');
 const DOCS = path.join(ROOT, 'docs');
 const OUT = path.join(__dirname, '..', 'context');
+// Live docsite base (GitHub Pages: url + baseurl from docs/_config.yml). Used to
+// give the bot a real, clickable location for every page it references. README
+// files serve as their folder index ("…/"); other pages serve as "…/<name>.html"
+// (verified against the live site — the trailing-slash form 404s).
+const SITE = 'https://codebyshennan.github.io/dsai';
+
+function pageUrl(submodule, relPath) {
+  const noExt = relPath.replace(/\.md$/, '');
+  if (noExt === 'README') return `${SITE}/${submodule}/`;
+  if (noExt.endsWith('/README')) return `${SITE}/${submodule}/${noExt.slice(0, -'/README'.length)}/`;
+  return `${SITE}/${submodule}/${noExt}.html`;
+}
 // Jekyll data file so the docsite widget can derive its allow-list from the
 // same source of truth instead of a hand-maintained copy (prevents drift).
 const DATA_OUT = path.join(DOCS, '_data', 'chatbot_lessons.json');
@@ -128,9 +140,10 @@ async function bundleOne(lesson) {
     submodule: lesson.submodule,
     title: deriveTitle(readme, lesson.key),
     assignment_filename: lesson.assignment,
+    assignment_url: `${SITE}/${lesson.submodule}/assignments/${lesson.assignment.replace(/\.md$/, '.html')}`,
     assignment,
     hints,
-    lesson_pages: pages,
+    lesson_pages: pages.map(p => ({ name: p.name, url: pageUrl(lesson.submodule, p.name), body: p.body })),
     generated_at: new Date().toISOString(),
   };
 }

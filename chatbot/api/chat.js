@@ -36,19 +36,30 @@ Behaviour:
 - If the student asks you to just give the answer, decline politely and offer one more nudge.
 - Keep responses concise (under 200 words usually). Use markdown sparingly. Code blocks for code only.
 - If a question is outside the scope of THIS lesson, say so and redirect to the lesson README.
+
+Pointing to sources (IMPORTANT):
+- Whenever you reference lesson material, tell the student EXACTLY where to find it as a clickable markdown link, and name the section, e.g. "see [Bias–Variance → The Dartboard Picture](URL#the-dartboard-picture)".
+- Each LESSON PAGE below is labelled "### <path> — <URL>". Use that exact URL — never invent or guess one. To point at the task itself, use the ASSIGNMENT URL.
+- To deep-link a section, append "#" + the heading as a slug: lowercase it, turn spaces into hyphens, drop punctuation (e.g. "## The Dartboard Picture" → "#the-dartboard-picture"). If unsure of the slug, link the page without an anchor — the page alone is still correct.
 `.trim();
 
+// Returns the system message content as a single large text block flagged for
+// prompt caching. The lesson context is identical across every turn of a
+// conversation AND across students on the same lesson, so caching this ~80k-token
+// prefix (ephemeral, ~5min TTL) collapses repeat latency and cost. OpenRouter
+// forwards cache_control to Anthropic for Claude models.
 function buildSystemMessage(bundle) {
   const pages = bundle.lesson_pages
-    .map(p => `### ${p.name}\n\n${p.body}`)
+    .map(p => `### ${p.name} — ${p.url}\n\n${p.body}`)
     .join('\n\n---\n\n');
-  return [
+  const text = [
     SYSTEM_PROMPT,
     `\n\n=== LESSON: ${bundle.title} (${bundle.lesson_key}) ===\n`,
-    `=== ASSIGNMENT (${bundle.assignment_filename}) ===\n\n${bundle.assignment}`,
+    `=== ASSIGNMENT (${bundle.assignment_filename}) — ${bundle.assignment_url} ===\n\n${bundle.assignment}`,
     bundle.hints ? `\n\n=== AUTHORED HINTS ===\n\n${bundle.hints}` : '',
-    `\n\n=== LESSON PAGES ===\n\n${pages}`,
+    `\n\n=== LESSON PAGES (cite these URLs) ===\n\n${pages}`,
   ].join('');
+  return [{ type: 'text', text, cache_control: { type: 'ephemeral' } }];
 }
 
 const bundleCache = new Map();
@@ -116,7 +127,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: MODEL,
-        stream: false,
+        stream: true,
         temperature: 0.4,
         messages: [
           { role: 'system', content: buildSystemMessage(bundle) },
@@ -133,7 +144,24 @@ export default async function handler(req, res) {
     return sendJson(res, 502, { error: `upstream ${upstream.status}`, detail: text.slice(0, 500) });
   }
 
-  // Non-streaming: return the full JSON response.
-  const json = await upstream.json();
-  return sendJson(res, 200, json);
+  // Stream the OpenRouter SSE straight through. The widget consumes
+  // `data: {choices:[{delta:{content}}]}` chunks (and the terminal [DONE]),
+  // so a byte-for-byte passthrough is all that's needed — no re-framing.
+  res.statusCode = 200;
+  res.setHeader('content-type', 'text/event-stream; charset=utf-8');
+  res.setHeader('cache-control', 'no-cache, no-transform');
+  res.setHeader('connection', 'keep-alive');
+
+  const reader = upstream.body.getReader();
+  try {
+    for (;;) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      res.write(value);
+    }
+  } catch (e) {
+    // Mid-stream upstream failure: surface as an SSE comment, then close.
+    res.write(`: stream error ${String(e.message).slice(0, 200)}\n\n`);
+  }
+  res.end();
 }
