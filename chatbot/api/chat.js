@@ -63,7 +63,7 @@ export function buildSystemMessage(bundle) {
 }
 
 const bundleCache = new Map();
-function loadBundle(lessonKey) {
+export function loadBundle(lessonKey) {
   if (bundleCache.has(lessonKey)) return bundleCache.get(lessonKey);
   const file = path.join(CONTEXT_DIR, `${lessonKey}.json`);
   const bundle = JSON.parse(readFileSync(file, 'utf8'));
