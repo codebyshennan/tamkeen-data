@@ -19,7 +19,7 @@ const MODEL = process.env.OPENROUTER_MODEL || 'anthropic/claude-haiku-4.5';
 const MAX_HISTORY_TURNS = 20;
 const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
 
-const SYSTEM_PROMPT = `
+export const SYSTEM_PROMPT = `
 You are a tutor for the Tamkeen Data Science & AI course. The student is working on an assignment for a specific lesson. Your job is to GUIDE their thinking without revealing the answer.
 
 Hard rules (do NOT break these):
