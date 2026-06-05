@@ -64,10 +64,24 @@
   font-size: 0.9rem;
   line-height: 1.45;
 }
-.cb-msg { padding: 0.6rem 0.85rem; border-radius: 10px; max-width: 88%; white-space: pre-wrap; word-wrap: break-word; }
+.cb-msg { padding: 0.6rem 0.85rem; border-radius: 10px; max-width: 88%; word-wrap: break-word; }
 .cb-msg pre, .cb-msg code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.85em; }
-.cb-msg pre { background: rgba(0,0,0,0.06); padding: 0.5rem 0.65rem; border-radius: 6px; overflow-x: auto; }
+.cb-msg pre { background: rgba(0,0,0,0.06); padding: 0.5rem 0.65rem; border-radius: 6px; overflow-x: auto; white-space: pre; }
 [data-theme="dark"] .cb-msg pre { background: rgba(255,255,255,0.08); }
+
+/* Rendered markdown blocks inside assistant bubbles. */
+.cb-msg > :first-child { margin-top: 0; }
+.cb-msg > :last-child { margin-bottom: 0; }
+.cb-msg p { margin: 0 0 0.5rem; }
+.cb-msg ul, .cb-msg ol { margin: 0 0 0.5rem; padding-left: 1.25rem; }
+.cb-msg li { margin: 0.15rem 0; }
+.cb-msg li > code { word-break: break-word; }
+.cb-msg h1, .cb-msg h2, .cb-msg h3,
+.cb-msg h4, .cb-msg h5, .cb-msg h6 { margin: 0.5rem 0 0.3rem; font-size: 1em; font-weight: 600; line-height: 1.3; }
+.cb-msg blockquote { margin: 0 0 0.5rem; padding-left: 0.6rem; border-left: 3px solid currentColor; opacity: 0.85; }
+.cb-msg hr { border: 0; border-top: 1px solid currentColor; opacity: 0.25; margin: 0.5rem 0; }
+.cb-msg a { color: inherit; text-decoration: underline; }
+.cb-msg pre { margin: 0 0 0.5rem; }
 .cb-msg-user { align-self: flex-end; background: var(--color-accent, #2563eb); color: white; }
 .cb-msg-user pre { background: rgba(0,0,0,0.25); }
 .cb-msg-assistant { align-self: flex-start; background: rgba(0,0,0,0.05); }
