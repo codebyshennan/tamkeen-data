@@ -48,7 +48,7 @@ Pointing to sources (IMPORTANT):
 // conversation AND across students on the same lesson, so caching this ~80k-token
 // prefix (ephemeral, ~5min TTL) collapses repeat latency and cost. OpenRouter
 // forwards cache_control to Anthropic for Claude models.
-function buildSystemMessage(bundle) {
+export function buildSystemMessage(bundle) {
   const pages = bundle.lesson_pages
     .map(p => `### ${p.name} — ${p.url}\n\n${p.body}`)
     .join('\n\n---\n\n');
