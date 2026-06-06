@@ -15,7 +15,11 @@ const CONTEXT_DIR = path.resolve(__dirname, '..', 'context');
 
 const manifest = JSON.parse(readFileSync(path.join(CONTEXT_DIR, 'manifest.json'), 'utf8'));
 const ALLOWED = new Set(manifest.lessons.map(l => l.key));
-const MODEL = process.env.OPENROUTER_MODEL || 'anthropic/claude-haiku-4.5';
+// Default model chosen via the Phase 2 leak-eval (chatbot/eval/FINDINGS.md):
+// Gemini 2.5 Flash matched Haiku 4.5 on guardrail-holding (post prompt-fix) while
+// being ~2.3x faster, ~3.4x cheaper, and slightly more helpful. Override per-env
+// with OPENROUTER_MODEL (e.g. set it back to anthropic/claude-haiku-4.5 to revert).
+const MODEL = process.env.OPENROUTER_MODEL || 'google/gemini-2.5-flash';
 const MAX_HISTORY_TURNS = 20;
 const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
 
