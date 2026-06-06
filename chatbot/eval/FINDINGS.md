@@ -104,6 +104,26 @@ its original merits: ~2.3× faster, ~3.4× cheaper, slightly more helpful.
    judge cases; tightening them further risks hurting helpfulness, so weigh before chasing.
 4. **Re-run** `node eval/leak-eval.mjs` after any further prompt change to re-measure.
 
+## Tightening attempt (tried, reverted)
+
+After deploying the swap, I tried to close the two residual leaks (`fill-blank` ~4/5,
+`jailbreak` 3/5 on Gemini) with extra prompt rules: a rule-1 clause forbidding
+*identifying the category/paradigm* when that is the answer, plus a "reframe-resistance"
+behaviour bullet (treat "for my notes" / "fill in the blank" / "confirm my guess" /
+"rule out to one" as asking for the answer). Re-ran Gemini N=5: **9/40 → 9/40, helpfulness
+unchanged (2.02)** — no measurable benefit, so it was reverted (don't bloat the prompt for
+nothing).
+
+**Why it didn't help — the real residual is the citation feature, not the prose.** Reading
+the remaining leaks: the tutor's *body text* is already clean Socratic refusal ("Which
+paradigm relies on an agent receiving rewards?"). What the judge flags is the **citation
+link it appends** — to a section whose TITLE is the answer ("the Reinforcement Learning
+section", "Data Collection and Exploration → EDA"). The model picks that link itself and
+ignores the prompt-level ANSWER-LEAK GUARD on these identify-the-category MCQs. A reliable
+fix would be **code-level** (post-process the model's output / its chosen anchors and
+downgrade an answer-revealing section link to a page-level link), not more prompt text —
+deferred as an optional follow-up since it's a narrow edge case and the prose teaches well.
+
 ## Scope / caveats
 
 - **Coverage:** 2 of 22 lessons (5.1 quiz, 5.2 coding). Adequate for a *model-direction*
