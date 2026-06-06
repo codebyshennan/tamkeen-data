@@ -9,6 +9,7 @@
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { extractOptionPhrases, createCitationFilter } from './citation-guard.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const CONTEXT_DIR = path.resolve(__dirname, '..', 'context');
@@ -149,24 +150,46 @@ export default async function handler(req, res) {
     return sendJson(res, 502, { error: `upstream ${upstream.status}`, detail: text.slice(0, 500) });
   }
 
-  // Stream the OpenRouter SSE straight through. The widget consumes
-  // `data: {choices:[{delta:{content}}]}` chunks (and the terminal [DONE]),
-  // so a byte-for-byte passthrough is all that's needed — no re-framing.
+  // Stream OpenRouter's SSE, routing each content delta through the citation
+  // guard (api/citation-guard.js) so a link whose text/anchor names the answer is
+  // downgraded before it reaches the student. We re-frame into minimal
+  // `data: {choices:[{delta:{content}}]}` events plus a terminal [DONE] — the
+  // widget only reads delta.content. The guard holds back bytes only while inside
+  // a markdown link, so prose still streams with near-zero added latency.
   res.statusCode = 200;
   res.setHeader('content-type', 'text/event-stream; charset=utf-8');
   res.setHeader('cache-control', 'no-cache, no-transform');
   res.setHeader('connection', 'keep-alive');
 
+  const filter = createCitationFilter(extractOptionPhrases(bundle.assignment));
+  const emit = (text) => { if (text) res.write(`data: ${JSON.stringify({ choices: [{ delta: { content: text } }] })}\n\n`); };
+
   const reader = upstream.body.getReader();
+  const decoder = new TextDecoder();
+  let sse = '';
   try {
     for (;;) {
       const { value, done } = await reader.read();
       if (done) break;
-      res.write(value);
+      sse += decoder.decode(value, { stream: true });
+      let nl;
+      while ((nl = sse.indexOf('\n')) >= 0) {
+        const line = sse.slice(0, nl).trim();
+        sse = sse.slice(nl + 1);
+        if (!line.startsWith('data:')) continue;
+        const data = line.slice(5).trim();
+        if (data === '[DONE]') continue;
+        let json; try { json = JSON.parse(data); } catch { continue; }
+        const delta = json.choices?.[0]?.delta?.content;
+        if (delta) emit(filter.feed(delta));
+      }
     }
+    emit(filter.end()); // flush any text held mid-link
   } catch (e) {
-    // Mid-stream upstream failure: surface as an SSE comment, then close.
+    // Mid-stream upstream failure: flush, surface as an SSE comment, then close.
+    emit(filter.end());
     res.write(`: stream error ${String(e.message).slice(0, 200)}\n\n`);
   }
+  res.write('data: [DONE]\n\n');
   res.end();
 }

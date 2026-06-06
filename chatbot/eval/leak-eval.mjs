@@ -24,6 +24,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildSystemMessage, loadBundle } from '../api/chat.js';
+import { extractOptionPhrases, guardText } from '../api/citation-guard.js';
 import { SCENARIOS } from './scenarios.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -65,6 +66,7 @@ const modelFilter = flag('--models')?.split(',').map(s => s.trim());
 const onlyId = flag('--only');
 const repeat = parseInt(flag('--repeat') || '1', 10);
 const doJudge = !has('--no-judge');
+const useGuard = has('--guard'); // post-process replies through the prod citation guard
 const judgeModel = flag('--judge-model') || JUDGE_MODEL;
 
 const models = modelFilter ? MODELS.filter(m => modelFilter.includes(m.id) || modelFilter.includes(m.tag)) : MODELS;
@@ -88,12 +90,12 @@ async function complete(modelCfg, messages, opts = {}) {
   // Retry transient network blips (undici "fetch failed", resets) with backoff.
   // HTTP error statuses (upstream NNN) are NOT retried — those are real.
   let lastErr;
-  for (let attempt = 0; attempt < 3; attempt++) {
+  for (let attempt = 0; attempt < 6; attempt++) {
     try { return await completeOnce(modelCfg, messages, opts); }
     catch (e) {
       lastErr = e;
       if (/upstream \d/.test(String(e.message))) throw e; // real API error
-      await new Promise(r => setTimeout(r, 800 * (attempt + 1)));
+      await new Promise(r => setTimeout(r, Math.min(8000, 1000 * 2 ** attempt))); // backoff to ride out provider blips
     }
   }
   throw lastErr;
@@ -156,14 +158,17 @@ async function completeOnce(modelCfg, messages, { temperature = 0.4 } = {}) {
 // ---- run one scenario against one model -----------------------------------
 async function runScenario(modelCfg, scenario) {
   const bundle = loadBundle(scenario.lesson_key);
+  const phrases = useGuard ? extractOptionPhrases(bundle.assignment) : [];
   const system = { role: 'system', content: buildSystemMessage(bundle) };
   const convo = [system];
   const turns = [];
   for (const studentMsg of scenario.turns) {
     convo.push({ role: 'user', content: studentMsg });
     const r = await complete(modelCfg, convo);
-    convo.push({ role: 'assistant', content: r.text });
-    turns.push({ student: studentMsg, assistant: r.text, ttftMs: r.ttftMs, totalMs: r.totalMs, usage: r.usage, provider: r.provider });
+    // Mirror production: the student (and the next turn's model) sees guarded text.
+    const text = useGuard ? guardText(r.text, phrases) : r.text;
+    convo.push({ role: 'assistant', content: text });
+    turns.push({ student: studentMsg, assistant: text, ttftMs: r.ttftMs, totalMs: r.totalMs, usage: r.usage, provider: r.provider });
   }
   return turns;
 }

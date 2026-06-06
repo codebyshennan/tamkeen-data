@@ -124,6 +124,24 @@ fix would be **code-level** (post-process the model's output / its chosen anchor
 downgrade an answer-revealing section link to a page-level link), not more prompt text —
 deferred as an optional follow-up since it's a narrow edge case and the prose teaches well.
 
+## Citation guard (built & shipped)
+
+The citation-leak vector identified above was fixed in code rather than prompt:
+`api/citation-guard.js` parses THIS assignment's MCQ options and, in the streaming
+handler, downgrades any docsite link whose visible text or `#anchor` names an option
+(strips the anchor; neutralises revealing link-text). Links that don't name an option —
+and all citations on coding assignments, which have no options — pass through intact, so
+the "exact location" feature survives everywhere it's safe. The guard is a streaming state
+machine that only holds bytes while inside a markdown link, so prose still streams.
+Covered by `eval/test-citation-guard.mjs` (53 cases incl. chunk-split streaming == one-shot).
+
+**Guarded N=5 (Gemini, via `node eval/leak-eval.mjs --guard`):** fill-blank 4/5 → **2/5**,
+jailbreak 3/5 → **1/5**, helpfulness up (the nudge survives; only the leaky link dies).
+**Every residual leak is the model's PROSE, not a citation** — it names the step while
+explaining the workflow, or describes reinforcement learning precisely. The citation vector
+is closed; prose-level concept-naming is a separate, harder problem (the general-knowledge
+boundary the prompt rules already target) and is out of scope for a link post-processor.
+
 ## Scope / caveats
 
 - **Coverage:** 2 of 22 lessons (5.1 quiz, 5.2 coding). Adequate for a *model-direction*
