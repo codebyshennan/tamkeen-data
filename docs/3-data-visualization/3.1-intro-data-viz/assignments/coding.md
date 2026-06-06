@@ -42,6 +42,16 @@ print("Dataset ready.")
 print(sales.head())
 ```
 
+```
+Dataset ready.
+       month  Electronics  Clothing  Food
+0 2023-01-01        129.6      77.7  66.4
+1 2023-02-01        119.0      76.2  68.0
+2 2023-03-01        135.2      83.5  71.3
+3 2023-04-01        154.3      89.2  77.3
+4 2023-05-01        130.1      95.3  66.7
+```
+
 ## Tasks
 
 ### 1. Line chart — multi-series trend

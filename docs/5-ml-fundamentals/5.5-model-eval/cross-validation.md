@@ -130,6 +130,11 @@ Mean CV score: 0.510 (+/- 0.194)
 </aside>
 </div>
 
+```
+Cross-validation scores: [0.6  0.65 0.7  0.7  0.5 ]
+Mean CV score: 0.630 (+/- 0.150)
+```
+
 ### Leave-One-Out Cross-Validation (LOOCV)
 
 Each observation is used once as a validation set while the remaining observations form the training set. This is equivalent to k-fold where k equals the number of samples.
@@ -156,6 +161,10 @@ model = RandomForestClassifier(random_state=42)
 loo = LeaveOneOut()
 scores = cross_val_score(model, X, y, cv=loo)
 print(f"LOOCV mean score: {scores.mean():.3f}")
+```
+
+```
+LOOCV mean score: 0.540
 ```
 
 ### Stratified K-Fold Cross-Validation
@@ -236,6 +245,11 @@ Regular CV: 0.770 (+/- 0.080)
 </aside>
 </div>
 
+```
+Stratified CV: 0.740 (+/- 0.075)
+Regular CV: 0.750 (+/- 0.063)
+```
+
 ### Time Series Cross-Validation
 
 For time series data, we need to respect the temporal order and avoid using future data to predict the past.
@@ -311,6 +325,24 @@ Fold 5:
   </div>
 </aside>
 </div>
+
+```
+Fold 1:
+  Train indices: [0 1 2 3 4]...[15 16 17 18 19]
+  Val indices: [20 21 22 23 24]...[31 32 33 34 35]
+Fold 2:
+  Train indices: [0 1 2 3 4]...[31 32 33 34 35]
+  Val indices: [36 37 38 39 40]...[47 48 49 50 51]
+Fold 3:
+  Train indices: [0 1 2 3 4]...[47 48 49 50 51]
+  Val indices: [52 53 54 55 56]...[63 64 65 66 67]
+Fold 4:
+  Train indices: [0 1 2 3 4]...[63 64 65 66 67]
+  Val indices: [68 69 70 71 72]...[79 80 81 82 83]
+Fold 5:
+  Train indices: [0 1 2 3 4]...[79 80 81 82 83]
+  Val indices: [84 85 86 87 88]...[95 96 97 98 99]
+```
 
 ## Benefits of Cross-Validation
 
@@ -421,6 +453,16 @@ Mean CV score: 0.981 (+/- 0.007)
 </aside>
 </div>
 
+```
+Fold 1: 0.980
+Fold 2: 0.980
+Fold 3: 0.985
+Fold 4: 0.975
+Fold 5: 0.985
+
+Mean CV score: 0.981 (+/- 0.007)
+```
+
 ## Best Practices
 
 ### 1. Choosing the Right Number of Folds
@@ -500,6 +542,12 @@ choose_optimal_k(X, y)
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/cross-validation_fig_1.png" alt="cross-validation" />
+<figcaption>Figure 1: Impact of K on Cross-validation</figcaption>
+</figure>
 
 ## Gotchas
 

@@ -56,6 +56,18 @@ print(matrix)
 print("Shape:", matrix.shape)  # (2, 3) means 2 rows, 3 columns
 ```
 
+```
+Original data: [ 1.5 -0.1  3. ]
+Multiplied by 10: [15. -1. 30.]
+Added to itself: [ 3.  -0.2  6. ]
+Square root: [1.22474487 0.31622777 1.73205081]
+
+2D array (matrix):
+[[1 2 3]
+ [4 5 6]]
+Shape: (2, 3)
+```
+
 ---
 
 ### Why It's Cool
@@ -113,6 +125,10 @@ array_1d = np.array(simple_list)
 print(array_1d)  # [6.  7.5  8.  0.  1. ]
 ```
 
+```
+[6.  7.5 8.  0.  1. ]
+```
+
 ---
 
 ### 2D Arrays (Like a Table)
@@ -125,6 +141,11 @@ table_data = [
 ]
 array_2d = np.array(table_data)
 print(array_2d)
+```
+
+```
+[[1 2 3 4]
+ [5 6 7 8]]
 ```
 
 Looks like:
@@ -144,6 +165,12 @@ Looks like:
 print(array_2d.shape)   # (2, 4) means 2 rows, 4 columns
 print(array_2d.dtype)   # int64 means whole numbers
 print(array_2d.ndim)    # 2 means two-dimensional
+```
+
+```
+(2, 4)
+int64
+2
 ```
 
 ## Quick Array Creation

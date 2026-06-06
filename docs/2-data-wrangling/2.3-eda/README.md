@@ -460,6 +460,31 @@ dtype: object, 'memory_usage': np.float64(0.003177642822265625)}
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/README_fig_1.png" alt="README" />
+<figcaption>Figure 1: order_id Distribution</figcaption>
+</figure>
+
+
+<figure>
+<img src="assets/README_fig_2.png" alt="README" />
+<figcaption>Figure 2: Observed Sales</figcaption>
+</figure>
+
+```
+Data Summary:
+{'shape': (50, 8), 'dtypes': order_id         int64
+customer_id      int64
+product_id       int64
+order_date         str
+amount         float64
+quantity       float64
+category           str
+rating         float64
+dtype: object, 'memory_usage': np.float64(0.003177642822265625)}
+```
+
 ## Performance Optimization Tips
 
 When working with large datasets, performance optimization becomes crucial. Here are some battle-tested strategies to make your EDA more efficient:

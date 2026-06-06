@@ -81,6 +81,14 @@ grades = pd.Series([85, 90, 88, 92])
 print(grades)
 ```
 
+```
+0    85
+1    90
+2    88
+3    92
+dtype: int64
+```
+
 Output:
 
 ```
@@ -105,6 +113,13 @@ student_data = pd.DataFrame({
     'Grade': [85, 90, 88]
 })
 print(student_data)
+```
+
+```
+      Name  Age  Grade
+0    Alice   20     85
+1      Bob   22     90
+2  Charlie   21     88
 ```
 
 Output:

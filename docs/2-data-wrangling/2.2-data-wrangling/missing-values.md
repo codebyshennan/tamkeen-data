@@ -244,6 +244,38 @@ rating                   5                10.0   float64
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/missing-values_fig_1.png" alt="missing-values" />
+<figcaption>Figure 1: Missing Value Patterns</figcaption>
+</figure>
+
+
+<figure>
+<img src="assets/missing-values_fig_2.png" alt="missing-values" />
+<figcaption>Figure 2: Generated visualization</figcaption>
+</figure>
+
+
+<figure>
+<img src="assets/missing-values_fig_3.png" alt="missing-values" />
+<figcaption>Figure 3: Missing Value Correlation</figcaption>
+</figure>
+
+```
+
+Missing Value Statistics:
+             Missing Count  Missing Percentage Data Type
+order_id                 0                 0.0     int64
+customer_id              0                 0.0     int64
+product_id               0                 0.0     int64
+order_date               0                 0.0       str
+amount                   8                16.0   float64
+quantity                 0                 0.0   float64
+category                 0                 0.0       str
+rating                   5                10.0   float64
+```
+
 ## Imputation Strategies Decision Tree
 
 {% include mermaid-diagram.html src="2-data-wrangling/2.2-data-wrangling/diagrams/missing-values-2.mmd" %}

@@ -34,6 +34,11 @@ y = 3.14  # float
 print(y)  # output: 3.14
 ```
 
+```
+5
+3.14
+```
+
 ## **Task 2: Functions and Classes**
 
 Complete the following Python codes at the "replace with your code" comments.

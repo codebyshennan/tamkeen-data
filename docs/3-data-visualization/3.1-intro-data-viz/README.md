@@ -143,6 +143,12 @@ plt.show()
 </div>
 
 
+<figure>
+<img src="assets/README_fig_1.png" alt="README" />
+<figcaption>Figure 1: My First Plot</figcaption>
+</figure>
+
+
 ### Before and After
 
 See how a basic plot can be enhanced with proper styling and annotations:

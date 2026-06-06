@@ -944,6 +944,36 @@ weighted avg       0.86      0.76      0.76        25
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/logistic-regression_fig_6.png" alt="logistic-regression" />
+<figcaption>Figure 6: Confusion Matrix</figcaption>
+</figure>
+
+
+<figure>
+<img src="assets/logistic-regression_fig_7.png" alt="logistic-regression" />
+<figcaption>Figure 7: ROC Curve</figcaption>
+</figure>
+
+```
+Model Accuracy: 0.7600
+
+Confusion Matrix:
+[[10  6]
+ [ 0  9]]
+
+Classification Report:
+              precision    recall  f1-score   support
+
+      Failed       1.00      0.62      0.77        16
+      Passed       0.60      1.00      0.75         9
+
+    accuracy                           0.76        25
+   macro avg       0.80      0.81      0.76        25
+weighted avg       0.86      0.76      0.76        25
+```
+
 The figures above are the confusion matrix and ROC curve. The recall values tell the story: 10 of 16 failures and 9 of 9 passes were classified correctly. Six failures slipped through as false positives — typical when the cut-off probability sits at 0.5 and one class is over-represented. Adjusting the threshold (or applying class weights, [later in this lesson](#1-handling-imbalanced-datasets)) trades these false alarms for some missed passes.
 
 ## Practical Applications and Extensions
@@ -1128,6 +1158,56 @@ weighted avg       0.95      0.94      0.92       125
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/logistic-regression_fig_8.png" alt="logistic-regression" />
+<figcaption>Figure 8: Confusion Matrix</figcaption>
+</figure>
+
+
+<figure>
+<img src="assets/logistic-regression_fig_9.png" alt="logistic-regression" />
+<figcaption>Figure 9: ROC Curve</figcaption>
+</figure>
+
+```
+Loan approval dataset created.
+              Age        Income  ...  CreditScore    Approved
+count  500.000000    500.000000  ...   500.000000  500.000000
+mean    35.068380  50477.391756  ...   849.351735    0.046000
+std      9.812532  14669.957928  ...     6.854254    0.209695
+min      2.587327   9546.700356  ...   738.183677    0.000000
+25%     27.996926  41070.623902  ...   850.000000    0.000000
+50%     35.127971  50427.973993  ...   850.000000    0.000000
+75%     41.367833  59768.634463  ...   850.000000    0.000000
+max     73.527315  89485.730973  ...   850.000000    1.000000
+
+[8 rows x 6 columns]
+
+Loan Approval Model Coefficients:
+          Feature  Coefficient  Odds_Ratio
+0             Age     0.630864    1.879233
+1          Income     0.583599    1.792477
+2  EducationYears     0.460648    1.585101
+4     CreditScore     0.042793    1.043722
+3    DebtToIncome    -0.244546    0.783060
+Model Accuracy: 0.9440
+
+Confusion Matrix:
+[[117   0]
+ [  7   1]]
+
+Classification Report:
+              precision    recall  f1-score   support
+
+      Denied       0.94      1.00      0.97       117
+    Approved       1.00      0.12      0.22         8
+
+    accuracy                           0.94       125
+   macro avg       0.97      0.56      0.60       125
+weighted avg       0.95      0.94      0.92       125
+```
 
 The 0.94 accuracy looks impressive but the recall on the **Approved** class is only 0.12 — the model defaults to predicting "Denied" because that class dominates the training data (only 4.6 % approved). This is a textbook **class-imbalance** failure; the next subsection on `class_weight='balanced'` is the standard fix.
 
@@ -1621,6 +1701,11 @@ Shape of probability matrix: (45, 3)
 </aside>
 </div>
 
+```
+Accuracy on multi-class problem: 0.9556
+Shape of probability matrix: (45, 3)
+```
+
 ### 2. Multinomial Logistic Regression (Softmax Regression)
 
 Generalizes logistic regression to multiple classes using the softmax function. In sklearn ≥ 1.5 the default behaviour for `LogisticRegression` on a multi-class target is multinomial; the explicit `multi_class` argument was deprecated in 1.5 and removed in 1.7.
@@ -1660,6 +1745,10 @@ Multinomial (Softmax) accuracy: 1.0000
   </div>
 </aside>
 </div>
+
+```
+Multinomial (Softmax) accuracy: 1.0000
+```
 
 ## Interactive Example: Predict Customer Purchase
 
@@ -1750,6 +1839,12 @@ Action: No special offer needed.
   </div>
 </aside>
 </div>
+
+```
+Customer profile: 28 years old, 5 mins on site, viewed 8 pages, returning customer: True
+Probability of purchase: 4.46%
+Action: No special offer needed.
+```
 
 ## Practice Exercise
 

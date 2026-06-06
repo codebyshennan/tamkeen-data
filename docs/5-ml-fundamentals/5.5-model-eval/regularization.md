@@ -103,6 +103,10 @@ L1 Regularization Score: 0.989
 </aside>
 </div>
 
+```
+L1 Regularization Score: 0.989
+```
+
 ### 2. L2 Regularization (Ridge)
 
 L2 regularization adds the squared value of coefficients to the loss function:
@@ -303,6 +307,12 @@ plt.show()
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/regularization_fig_1.png" alt="regularization" />
+<figcaption>Figure 1: Regularization Comparison</figcaption>
+</figure>
 
 ## Gotchas
 

@@ -110,6 +110,10 @@ Pipeline score: 0.990
 </aside>
 </div>
 
+```
+Pipeline score: 0.990
+```
+
 ## Building Complex Pipelines
 
 ### Feature Unions
@@ -181,6 +185,10 @@ Feature union score: 0.980
   </div>
 </aside>
 </div>
+
+```
+Feature union score: 0.980
+```
 
 ### Custom Transformers
 

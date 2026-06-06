@@ -178,6 +178,12 @@ Confidence: 0.16
 </aside>
 </div>
 
+```
+Accuracy: 0.33
+Email classified as: NOT SPAM
+Confidence: 0.16
+```
+
 **Explanation:**
 - This example demonstrates a complete spam detection system using SVM
 - We use TF-IDF vectorization to convert email text into numerical features
@@ -370,6 +376,12 @@ Confidence: 0.99
   </div>
 </aside>
 </div>
+
+```
+Accuracy: 1.00
+Classified as: Dog
+Confidence: 0.99
+```
 
 **Explanation:**
 - This example demonstrates an image classifier using SVM with an RBF kernel
@@ -564,6 +576,19 @@ Recommendation: Refer to specialist
   </div>
 </aside>
 </div>
+
+```
+Cross-validation ROC-AUC: 1.00 ± 0.00
+Test ROC-AUC: 1.00
+Sensitivity: 1.00
+Specificity: 1.00
+
+Patient Diagnosis:
+Diagnosis: POSITIVE
+Disease Probability: 0.92
+Risk Level: Very High Risk
+Recommendation: Refer to specialist
+```
 
 **Explanation:**
 - This example shows how SVM can be used to create a medical diagnosis system
@@ -771,6 +796,29 @@ Suggested Interest Rate: Low
 </aside>
 </div>
 
+```
+Credit Risk Model Evaluation:
+              precision    recall  f1-score   support
+
+    Low Risk       1.00      1.00      1.00        50
+   High Risk       1.00      1.00      1.00        25
+
+    accuracy                           1.00        75
+   macro avg       1.00      1.00      1.00        75
+weighted avg       1.00      1.00      1.00        75
+
+
+Confusion Matrix:
+[[50  0]
+ [ 0 25]]
+
+New Applicant Risk Assessment:
+Risk Level: Very Low Risk
+Risk Probability: 0.12
+Recommendation: Approve
+Suggested Interest Rate: Low
+```
+
 **Explanation:**
 - This example demonstrates using SVM for credit risk assessment
 - We use synthetic data with features like income, credit score, employment history, and debt ratio
@@ -873,6 +921,20 @@ Data after imputation:
   </div>
 </aside>
 </div>
+
+```
+Original data with missing values:
+[[ 1.  2. nan  4.]
+ [ 5. nan nan  8.]
+ [ 9. 10. 11. 12.]
+ [nan 14. 15. 16.]]
+
+Data after imputation:
+[[ 1.          2.         13.          4.        ]
+ [ 5.          8.66666667 13.          8.        ]
+ [ 9.         10.         11.         12.        ]
+ [ 5.         14.         15.         16.        ]]
+```
 
 **Explanation:**
 - Missing data is common in real-world applications and must be handled before using SVM
@@ -1029,6 +1091,32 @@ Max: [1. 1.]
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/5-applications_fig_1.png" alt="5-applications" />
+<figcaption>Figure 1: Original Data (Unscaled)</figcaption>
+</figure>
+
+```
+Original data statistics:
+Mean: [-1.15564255e+02  3.40223244e-03]
+Std: [8.52020887e+02 9.93851716e-02]
+Min: [-2.61974510e+03 -1.98756891e-01]
+Max: [1.88618590e+03 2.72016917e-01]
+
+StandardScaler statistics:
+Mean: [ 6.57807142e-17 -2.44249065e-17]
+Std: [1. 1.]
+Min: [-2.93910735 -2.03409745]
+Max: [2.34941442 2.7027642 ]
+
+MinMaxScaler statistics:
+Mean: [0.55575215 0.4294188 ]
+Std: [0.18908876 0.21111024]
+Min: [0. 0.]
+Max: [1. 1.]
+```
 
 **Explanation:**
 - Feature scaling is crucial for SVM performance as it's sensitive to the scale of input features

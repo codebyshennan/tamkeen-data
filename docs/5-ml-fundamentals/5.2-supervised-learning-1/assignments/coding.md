@@ -28,6 +28,13 @@ print(f"Features:         {X_train.shape[1]}")
 print(f"Classes:          {len(np.unique(y))}")
 ```
 
+```
+Training samples: 1437
+Test samples:     360
+Features:         64
+Classes:          10
+```
+
 ## Tasks
 
 ### 1. Naive Bayes Classifier

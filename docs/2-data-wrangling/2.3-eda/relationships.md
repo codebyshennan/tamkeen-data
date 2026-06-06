@@ -406,6 +406,48 @@ Effect Size (): 0.006
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/relationships_fig_1.png" alt="relationships" />
+<figcaption>Figure 1: Linear Relationship</figcaption>
+</figure>
+
+
+<figure>
+<img src="assets/relationships_fig_2.png" alt="relationships" />
+<figcaption>Figure 2: Contingency Table</figcaption>
+</figure>
+
+
+<figure>
+<img src="assets/relationships_fig_3.png" alt="relationships" />
+<figcaption>Figure 3: Generated visualization</figcaption>
+</figure>
+
+
+<figure>
+<img src="assets/relationships_fig_4.png" alt="relationships" />
+<figcaption>Figure 4: Stacked Proportions</figcaption>
+</figure>
+
+
+<figure>
+<img src="assets/relationships_fig_5.png" alt="relationships" />
+<figcaption>Figure 5: Distribution by Category</figcaption>
+</figure>
+
+```
+
+Spending vs Age Analysis:
+Correlation: -0.122 (p=0.454)
+
+Category vs Loyalty Analysis:
+Cramer's V: 0.223
+
+Spending by Segment Analysis:
+Effect Size (): 0.015
+```
+
 ## Performance Optimization Tips: Handling Large-Scale Relationship Analysis
 
 Optimize your analysis for large datasets:

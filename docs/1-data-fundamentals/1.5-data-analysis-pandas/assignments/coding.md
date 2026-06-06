@@ -27,6 +27,20 @@ df = pd.DataFrame(data)
 print(df)
 ```
 
+```
+   order_id  customer_id  product_id  quantity      price order_date
+0         1         1008         105         3  29.325423 2021-01-01
+1         2         1000         101         4  32.731698 2021-01-02
+2         3         1000         107         2  67.374953 2021-01-03
+3         4         1004         107         3  53.093335 2021-01-04
+4         5         1009         106         4  74.511018 2021-01-05
+5         6         1001         102         3  70.628991 2021-01-06
+6         7         1003         107         4  48.263789 2021-01-07
+7         8         1010         109         2  71.342279 2021-01-08
+8         9         1002         106         2  66.276559 2021-01-09
+9        10         1000         104         2  70.429624 2021-01-10
+```
+
 ## Tasks
 
 ### 1. Basic Data Exploration
@@ -95,6 +109,27 @@ Your notebook should be well-organized with markdown cells or comments in code e
   print(df['quantity'].agg(['mean', 'min', 'max']))
   print(df.isnull().sum())
   ```
+
+```
+order_id                int64
+customer_id             int64
+product_id              int64
+quantity                int64
+price                 float64
+order_date     datetime64[us]
+dtype: object
+mean    2.9
+min     2.0
+max     4.0
+Name: quantity, dtype: float64
+order_id       0
+customer_id    0
+product_id     0
+quantity       0
+price          0
+order_date     0
+dtype: int64
+```
 
 ## 2. Data manipulation & arithmetic
 - **Where:** [DataFrame](../dataframe.md), [Function mapping](../function-mapping.md), [Arithmetic alignment](../arithmetic-alignment.md).

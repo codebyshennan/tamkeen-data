@@ -318,6 +318,12 @@ plt.show()
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/roc-and-auc_fig_2.png" alt="roc-and-auc" />
+<figcaption>Figure 2: ROC Curves for Multiple Models</figcaption>
+</figure>
+
 **Output:**
 ```
 Model Performance Comparison:
@@ -426,6 +432,12 @@ plt.show()
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/roc-and-auc_fig_3.png" alt="roc-and-auc" />
+<figcaption>Figure 3: Multi-class ROC Curves</figcaption>
+</figure>
 
 **Output:**
 ```

@@ -1147,6 +1147,11 @@ Number of features selected: 4 out of 30
 </aside>
 </div>
 
+```
+Original dataset shape: (569, 30)
+Number of features selected: 4 out of 30
+```
+
 **Explanation:**
 - We use LinearSVC with L1 regularization to encourage sparsity (many coefficients become zero)
 - The SelectFromModel transformer keeps only features with importance above a threshold

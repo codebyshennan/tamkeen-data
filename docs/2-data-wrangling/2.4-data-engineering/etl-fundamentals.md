@@ -1293,6 +1293,10 @@ Pipeline failed: [Errno 2] No such file or directory: 'data.csv'
 </aside>
 </div>
 
+```
+Pipeline failed: [Errno 2] No such file or directory: 'data.csv'
+```
+
 ## Gotchas
 
 - **`catchup=False` silently skips all historical runs** — when you first deploy an Airflow DAG with a past `start_date`, Airflow will back-fill by default; setting `catchup=False` prevents this, but if you forget it on a pipeline that processes yesterday's data you may ship incomplete history without any error.

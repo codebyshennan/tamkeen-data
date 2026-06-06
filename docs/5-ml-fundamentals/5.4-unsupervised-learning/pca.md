@@ -158,6 +158,10 @@ Explained variance ratio: [0.50565666 0.49434334]
 </aside>
 </div>
 
+```
+Explained variance ratio: [0.50565666 0.49434334]
+```
+
 ## Real-World Example: Image Compression
 
 Let's see how PCA can help compress images while maintaining quality:

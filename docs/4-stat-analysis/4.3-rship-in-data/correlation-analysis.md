@@ -281,6 +281,12 @@ plt.show()
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/correlation-analysis_fig_1.png" alt="correlation-analysis" />
+<figcaption>Figure 1: Correlation Matrix</figcaption>
+</figure>
+
 **How to read this**: Each cell shows the correlation between the row and column variable. Red indicates positive correlation, blue indicates negative correlation, and the intensity of the color shows the strength.
 
 ### What This Matrix Tells Us:
@@ -358,6 +364,12 @@ plt.show()
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/correlation-analysis_fig_2.png" alt="correlation-analysis" />
+<figcaption>Figure 2: Temperature vs. Ice Cream Sales</figcaption>
+</figure>
 
 **What this shows**: There's a strong positive correlation (0.72) between temperature and ice cream sales. As temperature goes up, ice cream sales tend to increase as well.
 

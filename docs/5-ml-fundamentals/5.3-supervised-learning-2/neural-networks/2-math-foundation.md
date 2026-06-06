@@ -512,6 +512,12 @@ plt.show()
 </div>
 
 
+<figure>
+<img src="assets/2-math-foundation_fig_1.png" alt="2-math-foundation" />
+<figcaption>Figure 1: Sigmoid</figcaption>
+</figure>
+
+
 ## Gotchas
 
 - **Applying He initialization to sigmoid/tanh layers** — `he_init` divides by $n_{in}$ and is designed for ReLU networks (where neurons are "half dead"). Using it with sigmoid or tanh causes over-large initial activations that push neurons into saturation immediately, making early gradients near zero before any training begins.

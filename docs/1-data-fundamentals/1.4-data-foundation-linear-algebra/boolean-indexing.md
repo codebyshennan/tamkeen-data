@@ -63,6 +63,23 @@ print("Math:", scores[:, 0].mean())    # First column (math)
 print("Science:", scores[:, 1].mean())  # Second column (science)
 ```
 
+```
+Students: ['Bob' 'Joe' 'Will' 'Bob' 'Will' 'Joe' 'Joe']
+
+Scores:
+[[ 75  80]
+ [ 85  90]
+ [ 95 100]
+ [100  77]
+ [ 85  92]
+ [ 95  80]
+ [ 72  80]]
+
+Average scores:
+Math: 86.71428571428571
+Science: 85.57142857142857
+```
+
 Real-world scenario - Finding high performers:
 
 ```python
@@ -71,6 +88,18 @@ high_scores = (scores >= 90).any(axis=1)
 print("\nHigh achievers:")
 print("Names:", names[high_scores])
 print("Their scores:\n", scores[high_scores])
+```
+
+```
+
+High achievers:
+Names: ['Joe' 'Will' 'Bob' 'Will' 'Joe']
+Their scores:
+ [[ 85  90]
+ [ 95 100]
+ [100  77]
+ [ 85  92]
+ [ 95  80]]
 ```
 
 ---
@@ -98,6 +127,19 @@ best_subject = subjects[bob_scores.mean(axis=0).argmax()]
 print(f"Bob's best subject: {best_subject}")
 ```
 
+```
+Bob mask: [ True False False  True False False False]
+
+Bob's scores:
+[[ 75  80]
+ [100  77]]
+
+Bob's averages:
+Math: 87.5
+Science: 78.5
+Bob's best subject: Math
+```
+
 ## Cool Filtering Tricks
 
 ---
@@ -114,6 +156,19 @@ also_not_bob = (names != "Bob")
 print(scores[also_not_bob])
 ```
 
+```
+[[ 85  90]
+ [ 95 100]
+ [ 85  92]
+ [ 95  80]
+ [ 72  80]]
+[[ 85  90]
+ [ 95 100]
+ [ 85  92]
+ [ 95  80]
+ [ 72  80]]
+```
+
 ---
 
 ### Multiple Conditions
@@ -127,6 +182,21 @@ print(scores[bob_or_will])
 high_scores = scores > 80
 print("High scores mask:")
 print(high_scores)
+```
+
+```
+[[ 75  80]
+ [ 95 100]
+ [100  77]
+ [ 85  92]]
+High scores mask:
+[[False False]
+ [ True  True]
+ [ True  True]
+ [ True False]
+ [ True  True]
+ [ True False]
+ [False False]]
 ```
 
 ---

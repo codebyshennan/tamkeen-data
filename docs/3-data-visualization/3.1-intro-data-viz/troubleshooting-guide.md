@@ -253,6 +253,12 @@ def normalize(data):
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/troubleshooting-guide_fig_4.png" alt="troubleshooting-guide" />
+<figcaption>Figure 4: Generated visualization</figcaption>
+</figure>
+
 ### 4. Memory Management
 
 #### Memory Leaks
@@ -267,6 +273,7 @@ Think of this as leaving too many windows open on your computer:
 <div class="code-explainer__code">
 
 {% highlight python %}
+# skip-output
 #  Problem: Memory growing with multiple plots - like leaving windows open
 for i in range(100):
     plt.figure()
@@ -1319,4 +1326,3 @@ Remember: The best way to learn is by doing. Start with simple plots and gradual
 - [Matplotlib documentation](https://matplotlib.org/stable/)
 - [Matplotlib FAQ](https://matplotlib.org/stable/faq/index.html)
 - [Matplotlib backends](https://matplotlib.org/stable/users/explain/figure/backends.html)
-

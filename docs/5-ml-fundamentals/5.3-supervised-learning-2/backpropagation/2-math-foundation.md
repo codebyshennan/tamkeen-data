@@ -104,6 +104,12 @@ plot_chain_rule_example()
 </div>
 
 
+<figure>
+<img src="assets/2-math-foundation_fig_1.png" alt="2-math-foundation" />
+<figcaption>Figure 1: Chain Rule Visualization</figcaption>
+</figure>
+
+
 ## Forward Pass
 
 ### What is the Forward Pass?
@@ -196,6 +202,12 @@ plot_forward_pass()
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/2-math-foundation_fig_2.png" alt="2-math-foundation" />
+<figcaption>Figure 2: Forward Pass Visualization</figcaption>
+</figure>
 
 
 ## Backward Pass
@@ -343,6 +355,12 @@ plot_activation_functions()
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/2-math-foundation_fig_3.png" alt="2-math-foundation" />
+<figcaption>Figure 3: Activation Functions</figcaption>
+</figure>
 
 
 ## Loss Functions

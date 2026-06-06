@@ -151,6 +151,12 @@ plt.show()
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/precision-recall_fig_1.png" alt="precision-recall" />
+<figcaption>Figure 1: Precision-Recall Curve</figcaption>
+</figure>
+
 ### 2. Multi-class Classification
 
 #### One-vs-rest PR curves (Iris)
@@ -241,6 +247,12 @@ plt.show()
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/precision-recall_fig_2.png" alt="precision-recall" />
+<figcaption>Figure 2: Multi-class Precision-Recall Curves</figcaption>
+</figure>
 
 ## Interpreting Precision-Recall Curves
 
@@ -415,6 +427,12 @@ plt.show()
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/precision-recall_fig_3.png" alt="precision-recall" />
+<figcaption>Figure 3: Precision-Recall Curve for Credit Risk Prediction</figcaption>
+</figure>
 
 ## Gotchas
 

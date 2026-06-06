@@ -296,6 +296,21 @@ weighted avg       1.00      1.00      1.00        30
 </aside>
 </div>
 
+```
+Accuracy: 1.0
+
+Detailed Report:
+              precision    recall  f1-score   support
+
+      setosa       1.00      1.00      1.00        10
+  versicolor       1.00      1.00      1.00         9
+   virginica       1.00      1.00      1.00        11
+
+    accuracy                           1.00        30
+   macro avg       1.00      1.00      1.00        30
+weighted avg       1.00      1.00      1.00        30
+```
+
 ## Common Mistakes to Avoid
 
 1. **Forgetting to Scale Features**

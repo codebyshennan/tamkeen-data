@@ -38,6 +38,11 @@ print("Setup complete.")
 print(f"Test set size: {len(y_test)} samples, {y_test.sum()} malignant, {(y_test==0).sum()} benign")
 ```
 
+```
+Setup complete.
+Test set size: 114 samples, 72 malignant, 42 benign
+```
+
 ## Tasks
 
 ### 1. Confusion Matrix and Derived Metrics

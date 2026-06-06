@@ -416,6 +416,12 @@ results = compare_models(models, X_train, X_test, y_train, y_test)
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/model-selection_fig_4.png" alt="model-selection" />
+<figcaption>Figure 4: Model Comparison</figcaption>
+</figure>
+
 **Output:**
 ```
 Linear Accuracy: 0.825
@@ -525,6 +531,12 @@ results = compare_models(pipelines, X_train, X_test, y_train, y_test)
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/model-selection_fig_5.png" alt="model-selection" />
+<figcaption>Figure 5: Model Comparison</figcaption>
+</figure>
 
 **Output:**
 ```

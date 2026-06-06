@@ -59,6 +59,12 @@ print(f"NumPy time: {numpy_time:.4f} seconds")
 print(f"NumPy is {python_time/numpy_time:.1f}x faster!")
 ```
 
+```
+Python time: 0.0117 seconds
+NumPy time: 0.0007 seconds
+NumPy is 16.6x faster!
+```
+
 Key advantages of NumPy:
 
 1. Vectorization: Operates on entire arrays at once

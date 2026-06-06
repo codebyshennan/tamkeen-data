@@ -166,6 +166,10 @@ Model accuracy: 1.00
 </aside>
 </div>
 
+```
+Model accuracy: 1.00
+```
+
 **Explanation:**
 1. **Data Creation**: We create a simple 2D dataset with two clearly separated classes
 2. **Data Splitting**: We divide the data into training (75%) and testing (25%) sets
@@ -348,6 +352,19 @@ weighted avg       1.00      1.00      1.00        38
 </aside>
 </div>
 
+```
+Classification Report:
+              precision    recall  f1-score   support
+
+      setosa       1.00      1.00      1.00        15
+  versicolor       1.00      1.00      1.00        11
+   virginica       1.00      1.00      1.00        12
+
+    accuracy                           1.00        38
+   macro avg       1.00      1.00      1.00        38
+weighted avg       1.00      1.00      1.00        38
+```
+
 **Explanation:**
 1. **Dataset**: We use the famous Iris dataset which has 3 classes (setosa, versicolor, virginica) and 4 features
 2. **Scaling**: Again, we scale the features which is particularly important for SVM
@@ -529,6 +546,13 @@ Predicted price for new house: $261.62k
   </div>
 </aside>
 </div>
+
+```
+Training MSE: 65.36
+Testing MSE: 208.60
+R² Score: 0.83
+Predicted price for new house: $261.62k
+```
 
 **Explanation:**
 1. **Data**: We create a dataset of house features (square footage, bedrooms, age) and their prices
@@ -725,6 +749,14 @@ Test accuracy with default model: 1.000
 </aside>
 </div>
 
+```
+Fitting 5 folds for each of 32 candidates, totalling 160 fits
+Best parameters: {'C': 0.1, 'gamma': 'scale', 'kernel': 'linear'}
+Best cross-validation score: 0.973
+Test accuracy with best model: 0.960
+Test accuracy with default model: 1.000
+```
+
 **Explanation:**
 1. **Grid Search**:
    - We create a grid of parameter combinations to try systematically
@@ -842,6 +874,11 @@ Mean CV score: 0.979 (+/- 0.014)
   </div>
 </aside>
 </div>
+
+```
+Cross-validation scores: [0.97368421 0.98245614 0.97368421 0.99122807 0.97345133]
+Mean CV score: 0.979 (+/- 0.014)
+```
 
 **Explanation:**
 1. **Cross-Validation**:

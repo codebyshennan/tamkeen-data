@@ -109,6 +109,12 @@ plt.show()
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/validation-curves_fig_1.png" alt="validation-curves" />
+<figcaption>Figure 1: Validation Curves (Model Complexity)</figcaption>
+</figure>
+
 ### 2. Regularization Strength
 
 #### Logistic `C` on a log scale
@@ -174,6 +180,12 @@ plt.show()
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/validation-curves_fig_2.png" alt="validation-curves" />
+<figcaption>Figure 2: Validation Curves (Regularization)</figcaption>
+</figure>
+
 ### 3. Learning Rate
 
 #### Gradient boosting `learning_rate`
@@ -238,6 +250,12 @@ plt.show()
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/validation-curves_fig_3.png" alt="validation-curves" />
+<figcaption>Figure 3: Validation Curves (Learning Rate)</figcaption>
+</figure>
 
 ## Interpreting Validation Curves
 
@@ -404,6 +422,12 @@ plt.show()
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/validation-curves_fig_4.png" alt="validation-curves" />
+<figcaption>Figure 4: Validation Curves for Credit Risk Prediction</figcaption>
+</figure>
 
 ## Gotchas
 

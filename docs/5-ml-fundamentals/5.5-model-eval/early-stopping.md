@@ -130,6 +130,10 @@ Early stopping at epoch 11
 </aside>
 </div>
 
+```
+Early stopping at epoch 11
+```
+
 ### 2. Using Scikit-learn's Early Stopping
 
 #### `SGDClassifier(early_stopping=True)`
@@ -186,6 +190,10 @@ Early Stopping Score: 0.815
   </div>
 </aside>
 </div>
+
+```
+Early Stopping Score: 0.815
+```
 
 ### 3. Custom Early Stopping Class
 
@@ -276,6 +284,10 @@ Early stopping at epoch 28
   </div>
 </aside>
 </div>
+
+```
+Early stopping at epoch 28
+```
 
 ## Best Practices
 

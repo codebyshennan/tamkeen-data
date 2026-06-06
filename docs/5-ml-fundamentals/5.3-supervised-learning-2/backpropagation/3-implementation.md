@@ -626,6 +626,12 @@ plot_training_process(network, X, y)
 </div>
 
 
+<figure>
+<img src="assets/3-implementation_fig_1.png" alt="3-implementation" />
+<figcaption>Figure 1: Training Loss Over Time</figcaption>
+</figure>
+
+
 ## Best Practices
 
 1. **Gradient Checking**

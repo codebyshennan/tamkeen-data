@@ -252,6 +252,30 @@ Scaled Data:
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/feature-engineering_fig_1.png" alt="feature-engineering" />
+<figcaption>Figure 1: Before Scaling</figcaption>
+</figure>
+
+```
+Original Data:
+   height_cm  weight_kg
+0        150         45
+1        160         55
+2        170         65
+3        180         75
+4        190         85
+
+Scaled Data:
+   height_cm  weight_kg
+0  -1.414214  -1.414214
+1  -0.707107  -0.707107
+2   0.000000   0.000000
+3   0.707107   0.707107
+4   1.414214   1.414214
+```
+
 #### Min-Max Scaling
 
 This is like converting a temperature range to a 0-1 scale. It's useful when you need all values to be between 0 and 1.
@@ -354,6 +378,23 @@ Min-Max Scaled Data:
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/feature-engineering_fig_2.png" alt="feature-engineering" />
+<figcaption>Figure 2: Before Min-Max Scaling</figcaption>
+</figure>
+
+```
+
+Min-Max Scaled Data:
+   height_cm  weight_kg
+0       0.00       0.00
+1       0.25       0.25
+2       0.50       0.50
+3       0.75       0.75
+4       1.00       1.00
+```
 
 ### When to Use Which Scaling Method?
 
@@ -488,6 +529,30 @@ One-Hot Encoded Data:
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/feature-engineering_fig_3.png" alt="feature-engineering" />
+<figcaption>Figure 3: Original Categories</figcaption>
+</figure>
+
+```
+Original Data:
+  product size
+0   shirt    S
+1   pants    M
+2   shoes    L
+3   shirt    M
+4   pants    S
+
+One-Hot Encoded Data:
+   product_pants  product_shirt  product_shoes  size_L  size_M  size_S
+0          False           True          False   False   False    True
+1           True          False          False   False    True   False
+2          False          False           True    True   False   False
+3          False           True          False   False    True   False
+4           True          False          False   False   False    True
+```
+
 #### Label Encoding: Assigning Numbers to Categories
 
 This is like giving each category a unique number. It's simpler than one-hot encoding but works best when categories have a natural order.
@@ -578,6 +643,23 @@ Label Encoded Data:
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/feature-engineering_fig_4.png" alt="feature-engineering" />
+<figcaption>Figure 4: Original Sizes</figcaption>
+</figure>
+
+```
+
+Label Encoded Data:
+  product  product_encoded size  size_encoded
+0   shirt                1    S             2
+1   pants                0    M             1
+2   shoes                2    L             0
+3   shirt                1    M             1
+4   pants                0    S             2
+```
 
 ### When to Use Which Encoding Method?
 

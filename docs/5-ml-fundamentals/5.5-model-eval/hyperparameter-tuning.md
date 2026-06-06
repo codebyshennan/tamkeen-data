@@ -592,6 +592,10 @@ Unbiased performance estimate: 0.8970 ± 0.0279
 </aside>
 </div>
 
+```
+Unbiased performance estimate: 0.8970 ± 0.0279
+```
+
 ## Best Practices
 
 ### 1. Start with Broad Ranges

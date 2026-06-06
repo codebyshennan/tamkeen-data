@@ -79,6 +79,18 @@ print("Naive model (always predicts 0):")
 print(classification_report(y_true, y_pred_naive, target_names=['stay', 'churn']))
 # Shows: accuracy=0.95, but recall for churn = 0.00
 ```
+
+```
+Naive model (always predicts 0):
+              precision    recall  f1-score   support
+
+        stay       0.95      1.00      0.97       950
+       churn       0.00      0.00      0.00        50
+
+    accuracy                           0.95      1000
+   macro avg       0.47      0.50      0.49      1000
+weighted avg       0.90      0.95      0.93      1000
+```
 </details>
 
 ---
@@ -131,6 +143,30 @@ threshold = 0.3
 y_pred_adj = (probs >= threshold).astype(int)
 print(f"\nAdjusted threshold ({threshold}):")
 print(classification_report(y_test, y_pred_adj, target_names=['stay', 'churn']))
+```
+
+```
+Default threshold (0.5):
+              precision    recall  f1-score   support
+
+        stay       0.82      0.84      0.83       240
+       churn       0.75      0.72      0.73       160
+
+    accuracy                           0.79       400
+   macro avg       0.78      0.78      0.78       400
+weighted avg       0.79      0.79      0.79       400
+
+ROC-AUC: 0.877
+
+Adjusted threshold (0.3):
+              precision    recall  f1-score   support
+
+        stay       0.92      0.55      0.69       240
+       churn       0.58      0.93      0.71       160
+
+    accuracy                           0.70       400
+   macro avg       0.75      0.74      0.70       400
+weighted avg       0.78      0.70      0.70       400
 ```
 
 **Key insight:** Lowering the threshold (e.g., 0.5 → 0.3) increases recall (catches more churners) at the cost of lower precision (more false alarms). The right threshold depends on the business cost of missing a churner vs. the cost of an unnecessary retention offer.
@@ -197,6 +233,10 @@ scores = cross_val_score(Ridge(), X_scaled, y, cv=5)
 print("Leaked scores:", -scores.mean())  # Optimistic
 ```
 
+```
+Leaked scores: -0.770032365713268
+```
+
 ```python
 # CORRECT — pipeline ensures preprocessing is re-fit per fold only on training data
 from sklearn.pipeline import make_pipeline
@@ -204,6 +244,10 @@ from sklearn.pipeline import make_pipeline
 pipeline = make_pipeline(StandardScaler(), Ridge())
 scores = cross_val_score(pipeline, X, y, cv=5)
 print("Correct scores:", -scores.mean())
+```
+
+```
+Correct scores: -0.7699797506797866
 ```
 
 The same applies to: `SelectKBest`, `PCA`, imputation, encoding. **Whenever a transformation "learns" from the data, it must be inside the pipeline.**
@@ -271,6 +315,11 @@ ridge = Ridge(alpha=0.1).fit(X, y)
 
 print(f"Lasso non-zero coefs: {(lasso.coef_ != 0).sum()}")    # ~5
 print(f"Ridge non-zero coefs: {(ridge.coef_ != 0).sum()}")    # 20
+```
+
+```
+Lasso non-zero coefs: 7
+Ridge non-zero coefs: 20
 ```
 </details>
 

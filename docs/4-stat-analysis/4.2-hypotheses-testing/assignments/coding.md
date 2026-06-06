@@ -96,6 +96,10 @@ Submit your solution as a Python script with:
   print(f"t = {t_stat:.3f}, p = {p_val:.4f}")
   ```
 
+```
+t = -6.376, p = 0.0000
+```
+
 ### Task 3: Chi-squared test
 - **Where:** [Statistical Tests](../statistical-tests.md) — "Chi-Square Tests: Testing for Independence".
 - **Think:**
@@ -108,6 +112,13 @@ Submit your solution as a Python script with:
   print(f"chi2 = {chi2:.3f}, p = {p:.4f}, dof = {dof}")
   print("Expected frequencies:\n", expected)
   ```
+
+```
+chi2 = 5.145, p = 0.0233, dof = 1
+Expected frequencies:
+ [[53.5 46.5]
+ [53.5 46.5]]
+```
 
 ### Task 4: Paired t-test and summary
 - **Where:** [Statistical Tests](../statistical-tests.md) — "T-Tests: Comparing Means" (paired variant) and [Experimental Design](../experimental-design.md) — "The Three Pillars of Experimental Design".

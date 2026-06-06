@@ -671,6 +671,12 @@ pc.plot_results(results)
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/probability-fundamentals_fig_5.png" alt="probability-fundamentals" />
+<figcaption>Figure 5: Confusion Matrix</figcaption>
+</figure>
+
 ## Practice exercises
 
 Try these probability programming exercises:

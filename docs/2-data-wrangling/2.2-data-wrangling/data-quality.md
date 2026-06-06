@@ -136,6 +136,19 @@ email: 99.17%
 </aside>
 </div>
 
+```
+
+Completeness Scores (%):
+date: 100.0%
+order_date: 100.0%
+sales: 100.0%
+revenue: 100.0%
+price: 99.17%
+quantity: 99.17%
+category: 100.0%
+email: 99.17%
+```
+
 ### 2. Accuracy Score
 
 <div class="code-explainer" data-code-explainer>
@@ -310,6 +323,18 @@ email: 99.17%
 </aside>
 </div>
 
+```
+Completeness Scores (%):
+date: 100.0%
+order_date: 100.0%
+sales: 100.0%
+revenue: 100.0%
+price: 99.17%
+quantity: 99.17%
+category: 100.0%
+email: 99.17%
+```
+
 ### 2. Accuracy Score
 
 $Accuracy = \frac{Correct\space Values}{Total\space Values} \times 100$
@@ -422,6 +447,20 @@ Name: count, dtype: int64
   </div>
 </aside>
 </div>
+
+```
+Dataset Overview
+==================================================
+Total Records: 120
+Total Features: 8
+
+Memory Usage: 0.007450103759765625 MB
+
+Data Types:
+str        4
+float64    4
+Name: count, dtype: int64
+```
 
 ### Comprehensive Quality Assessment
 
@@ -544,6 +583,12 @@ report = quality_assessment.generate_report()
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/data-quality_fig_1.png" alt="data-quality" />
+<figcaption>Figure 1: Missing Values Heatmap</figcaption>
+</figure>
 
 ## Advanced Quality Metrics
 
@@ -944,6 +989,12 @@ report = assess_ecommerce_data('../_data/sales_data.csv')
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/data-quality_fig_2.png" alt="data-quality" />
+<figcaption>Figure 2: Missing Values Heatmap</figcaption>
+</figure>
 
 Remember: "Data quality is not a destination, but a continuous journey of improvement!"
 

@@ -727,6 +727,24 @@ for feature in features_to_plot:
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/model-interpretation_fig_5.png" alt="model-interpretation" />
+<figcaption>Figure 5: Partial Dependence of Loan Amount on Selected Features</figcaption>
+</figure>
+
+
+<figure>
+<img src="assets/model-interpretation_fig_6.png" alt="model-interpretation" />
+<figcaption>Figure 6: Partial Dependence of Loan Amount on Income</figcaption>
+</figure>
+
+
+<figure>
+<img src="assets/model-interpretation_fig_7.png" alt="model-interpretation" />
+<figcaption>Figure 7: Partial Dependence of Loan Amount on Age</figcaption>
+</figure>
+
 PDPs are powerful because they:
 
 - Work with any model, even complex "black box" models
@@ -850,6 +868,18 @@ for feature in ['Income', 'Age']:
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/model-interpretation_fig_8.png" alt="model-interpretation" />
+<figcaption>Figure 8: ICE Plots for Income (Each blue line is one sample)</figcaption>
+</figure>
+
+
+<figure>
+<img src="assets/model-interpretation_fig_9.png" alt="model-interpretation" />
+<figcaption>Figure 9: ICE Plots for Age (Each blue line is one sample)</figcaption>
+</figure>
 
 ICE plots show:
 

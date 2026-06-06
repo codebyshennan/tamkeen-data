@@ -108,6 +108,10 @@ print(stats)
 </aside>
 </div>
 
+```
+{'mean': np.float64(2.75), 'median': np.float64(2.5), 'std': np.float64(1.707825127659933), 'skew': np.float64(0.7528371991317256), 'missing': np.int64(1)}
+```
+
 > **Visualize Function Calls:**
 > Paste this simpler version into Python Tutor to see how functions work:
 > ```python
@@ -631,6 +635,25 @@ Distribution:
 </aside>
 </div>
 
+```
+
+Statistics:
+  mean: 0.019332055822325486
+  median: 0.02530061223488824
+  std: 0.9787262077473543
+  skew: 0.1168008311053351
+  kurtosis: 0.06620589292148393
+
+Normality_Test:
+  statistic: 0.9986092190571157
+  p_value: 0.627257829024364
+  is_normal: True
+
+Distribution:
+  type: normal
+  parameters: {'loc': np.float64(0.019332055822325486), 'scale': np.float64(0.9787262077473543)}
+```
+
 ## Advanced Data Analysis Functions
 
 ---
@@ -756,6 +779,11 @@ Error: Non-numeric columns found: Index(['B'], dtype='str')
   </div>
 </aside>
 </div>
+
+```
+1.0
+Error: Non-numeric columns found: Index(['B'], dtype='str')
+```
 
 ---
 
@@ -911,6 +939,19 @@ Column B:
   </div>
 </aside>
 </div>
+
+```
+
+Column A:
+  mean: -0.00
+  std: 1.00
+  median: -0.00
+
+Column B:
+  mean: 5.03
+  std: 2.00
+  median: 5.03
+```
 
 ## Best Practices for Data Analysis Functions
 
@@ -1372,6 +1413,10 @@ None
 </aside>
 </div>
 
+```
+None
+```
+
 > **Visualize:** Paste into Python Tutor to see how your function processes the list
 > **Get Help:** "Show me how to calculate median in Python"
 
@@ -1423,6 +1468,10 @@ None
   </div>
 </aside>
 </div>
+
+```
+None
+```
 
 > **Debug Visually:** If something breaks, paste into Python Tutor to see where
 > **Prompt:** "Help me handle edge cases in this data cleaning function"
@@ -1677,6 +1726,11 @@ print(result) # Use returned value
   </div>
 </aside>
 </div>
+
+```
+5
+10
+```
 
 > **See Scope:** Python Tutor visualizes function scope perfectly!
 

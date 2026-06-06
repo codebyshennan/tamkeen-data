@@ -161,6 +161,19 @@ Have Time: 0.00
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/1-introduction_fig_1.png" alt="1-introduction" />
+<figcaption>Figure 1: Decision Tree for Walking Decision</figcaption>
+</figure>
+
+```
+Decision: Go for a walk
+Is Raining: 0.49
+Temperature: 0.51
+Have Time: 0.00
+```
+
 In this decision tree:
 
 1. **Root Node**: The starting point at the top, representing the entire dataset.
@@ -296,6 +309,18 @@ plt.show()
 </div>
 
 
+<figure>
+<img src="assets/1-introduction_fig_2.png" alt="1-introduction" />
+<figcaption>Figure 2: Decision Tree Boundary</figcaption>
+</figure>
+
+
+<figure>
+<img src="assets/1-introduction_fig_3.png" alt="1-introduction" />
+<figcaption>Figure 3: Decision Tree Structure</figcaption>
+</figure>
+
+
 
 The tree learning process:
 
@@ -403,6 +428,11 @@ Most important factor: Previous Score
   </div>
 </aside>
 </div>
+
+```
+Prediction: Pass
+Most important factor: Previous Score
+```
 
 ## Gotchas
 

@@ -101,6 +101,10 @@ Predicted genre: Action
 </aside>
 </div>
 
+```
+Predicted genre: Action
+```
+
 ## 2. Dimensionality Reduction: Making Complex Data Simpler
 
 Sometimes your data has too many features, making KNN slow and less accurate. Dimensionality reduction helps by:
@@ -170,6 +174,12 @@ visualize_data(X, y)
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/4-advanced_fig_1.png" alt="4-advanced" />
+<figcaption>Figure 1: Data Visualization After PCA</figcaption>
+</figure>
 
 
 ## 3. Finding the Best k Value
@@ -257,6 +267,16 @@ Best k value: 6
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/4-advanced_fig_2.png" alt="4-advanced" />
+<figcaption>Figure 2: Finding the Best k Value</figcaption>
+</figure>
+
+```
+Best k value: 6
+```
 
 ## 4. Handling Imbalanced Data
 

@@ -34,6 +34,14 @@ print(f"Feature names    : {list(data.feature_names[:5])} ...")
 print(f"Classes          : {list(data.target_names)}")
 ```
 
+```
+Training samples : 455
+Test samples     : 114
+Features         : 30
+Feature names    : [np.str_('mean radius'), np.str_('mean texture'), np.str_('mean perimeter'), np.str_('mean area'), np.str_('mean smoothness')] ...
+Classes          : [np.str_('malignant'), np.str_('benign')]
+```
+
 ## Tasks
 
 ### 1. Random Forest — Feature Importances

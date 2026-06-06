@@ -776,6 +776,23 @@ First few coefficients: [ 6.50706898 -7.72810022  9.60710778]
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/polynomial-regression_fig_5.png" alt="polynomial-regression" />
+<figcaption>Figure 5: Example Dataset for Polynomial Regression</figcaption>
+</figure>
+
+```
+Original feature shape: (160, 1)
+Polynomial feature shape: (160, 3)
+New feature names:
+['x^1', 'x^2', 'x^3']
+Model trained successfully!
+Intercept (β₀): -6.0711
+Number of coefficients: 3
+First few coefficients: [ 6.50706898 -7.72810022  9.60710778]
+```
+
 The intercept and coefficients above are reported on the **scaled** polynomial features, so they are not directly comparable to the data-generating equation `y = 2 + x − 0.5 x² + 0.3 x³`. To inspect coefficients in original units, refit `LinearRegression` on `poly.fit_transform(X)` without scaling, or invert the scaler after fitting.
 
 ### Step 3: Make Predictions and Evaluate the Model

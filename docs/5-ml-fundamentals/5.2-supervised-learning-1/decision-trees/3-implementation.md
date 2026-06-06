@@ -171,6 +171,12 @@ plt.show()
 </div>
 
 
+<figure>
+<img src="assets/3-implementation_fig_1.png" alt="3-implementation" />
+<figcaption>Figure 1: Disease Diagnosis Decision Tree</figcaption>
+</figure>
+
+
 In this step, we create a decision tree classifier with specific settings to control its complexity. We then train the model using our patient data and visualize the resulting tree to understand how it makes decisions. The visualization shows which features (temperature, cough, fatigue) the tree uses to classify patients.
 
 ### Step 3: Make Predictions
@@ -300,6 +306,16 @@ Accuracy: 100.0%
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/3-implementation_fig_2.png" alt="3-implementation" />
+<figcaption>Figure 2: Iris Classification Tree</figcaption>
+</figure>
+
+```
+Accuracy: 100.0%
+```
+
 This example demonstrates how to work with a real dataset. We:
 1. Load the built-in Iris dataset with measurements of different Iris flowers
 2. Split the data into training and testing sets
@@ -424,6 +440,18 @@ Predicted price: $220.00k
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/3-implementation_fig_3.png" alt="3-implementation" />
+<figcaption>Figure 3: Feature Importance for House Price Prediction</figcaption>
+</figure>
+
+```
+Training R² Score: 1.000
+Testing R² Score: 0.782
+Predicted price: $220.00k
+```
+
 This example shows:
 1. How to use decision trees for regression (predicting numeric values)
 2. How to create and train a DecisionTreeRegressor
@@ -530,6 +558,12 @@ plt.show()
 </div>
 
 
+<figure>
+<img src="assets/3-implementation_fig_4.png" alt="3-implementation" />
+<figcaption>Figure 4: Decision Tree Decision Boundary</figcaption>
+</figure>
+
+
 This visualization shows:
 1. How the decision tree divides the feature space into regions
 2. How these regions form a "decision boundary" between different classes
@@ -611,6 +645,11 @@ With scaling: 0.000
   </div>
 </aside>
 </div>
+
+```
+Without scaling: 0.000
+With scaling: 0.000
+```
 
 This is a key advantage of decision trees - they don't require feature scaling because they make decisions based on greater than/less than comparisons, not distances between points.
 

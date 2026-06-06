@@ -200,6 +200,16 @@ Predicted price for 1750 sq ft: $350,000.00
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/what-is-ml_fig_1.png" alt="what-is-ml" />
+<figcaption>Figure 1: Linear regression on toy house data</figcaption>
+</figure>
+
+```
+Predicted price for 1750 sq ft: $350,000.00
+```
+
 ## Gotchas
 
 - **Passing a 1D array to sklearn estimators** — `model.fit(sizes, prices)` requires `sizes` to be 2D (shape `(n, 1)`), which is why the example uses `[[1000], [1500], …]`; passing a plain list like `[1000, 1500, …]` raises a `ValueError` about a 1D feature array that confuses many beginners.

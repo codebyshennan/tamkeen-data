@@ -97,6 +97,10 @@ Accuracy: 0.810
 </aside>
 </div>
 
+```
+Accuracy: 0.810
+```
+
 ### 2. Multi-class Classification
 
 #### Accuracy with three classes (Iris)
@@ -152,6 +156,10 @@ Accuracy: 1.000
   </div>
 </aside>
 </div>
+
+```
+Accuracy: 1.000
+```
 
 ## Interpreting Accuracy
 

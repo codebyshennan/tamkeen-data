@@ -226,6 +226,15 @@ built this way would capture the true mean; this one is (96.90, 102.82) feet
 </aside>
 </div>
 
+```
+
+Confidence Interval Analysis
+95.0% Confidence Interval:
+(96.90, 102.82) feet
+Interpretation: across repeated samples, 95.0% of intervals
+built this way would capture the true mean; this one is (96.90, 102.82) feet
+```
+
 ## What Makes a Good Estimator?
 
 ### 1. Unbiasedness: Hitting the Target on Average
@@ -662,6 +671,12 @@ print(f"Bootstrap mean:  {np.mean(boot_means):.2f}")
 print(f"Bootstrap SE:    {np.std(boot_means):.2f}")
 ci = np.percentile(boot_means, [2.5, 97.5])
 print(f"95% bootstrap CI: ({ci[0]:.2f}, {ci[1]:.2f})")
+```
+
+```
+Bootstrap mean:  49.69
+Bootstrap SE:    0.62
+95% bootstrap CI: (48.49, 50.88)
 ```
 
 **Why it's powerful:**

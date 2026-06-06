@@ -179,6 +179,29 @@ Diagnosis reasoning:
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/5-applications_fig_1.png" alt="5-applications" />
+<figcaption>Figure 1: Medical Diagnosis Decision Tree</figcaption>
+</figure>
+
+```
+Diagnosis: flu
+Confidence levels:
+  allergies: 0.00
+  cold: 0.00
+  covid: 0.00
+  flu: 1.00
+  healthy: 0.00
+  pneumonia: 0.00
+
+Diagnosis reasoning:
+- Patient has moderate fever, which is > mild
+- Patient has normal blood pressure, which is <= normal
+- Patient has mild breathing difficulty, which is <= mild
+- Patient has mild breathing difficulty, which is > moderate
+```
+
 In this example, we:
 
 1. Create a simple dataset of patients with different symptoms and diagnoses
@@ -371,6 +394,45 @@ Risk assessment: Low Risk
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/5-applications_fig_2.png" alt="5-applications" />
+<figcaption>Figure 2: Credit Risk Decision Tree</figcaption>
+</figure>
+
+
+<figure>
+<img src="assets/5-applications_fig_3.png" alt="5-applications" />
+<figcaption>Figure 3: Feature Importance for Credit Risk Assessment</figcaption>
+</figure>
+
+```
+Confusion Matrix:
+[[4 0]
+ [1 0]]
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.80      1.00      0.89         4
+           1       0.00      0.00      0.00         1
+
+    accuracy                           0.80         5
+   macro avg       0.40      0.50      0.44         5
+weighted avg       0.64      0.80      0.71         5
+
+
+Feature ranking:
+1. Credit Score: 1.0000
+2. Previous Defaults: 0.0000
+3. Debt to Income Ratio: 0.0000
+4. Employment Years: 0.0000
+5. Income (k$): 0.0000
+
+New applicant approval probability: 1.00
+Risk assessment: Low Risk
+```
+
 This example demonstrates:
 
 1. How to build a credit risk model using decision trees
@@ -561,6 +623,47 @@ Customer 2 churn probability: 0.00
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/5-applications_fig_4.png" alt="5-applications" />
+<figcaption>Figure 4: Customer Churn Decision Tree</figcaption>
+</figure>
+
+
+<figure>
+<img src="assets/5-applications_fig_5.png" alt="5-applications" />
+<figcaption>Figure 5: Feature Importance for Churn Prediction</figcaption>
+</figure>
+
+```
+Confusion Matrix:
+[[1 0]
+ [0 4]]
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00         1
+           1       1.00      1.00      1.00         4
+
+    accuracy                           1.00         5
+   macro avg       1.00      1.00      1.00         5
+weighted avg       1.00      1.00      1.00         5
+
+
+Feature ranking for churn prediction:
+1. Support Calls: 1.0000
+2. Service Issues: 0.0000
+3. Contract Length: 0.0000
+4. Total Charges: 0.0000
+5. Monthly Charges: 0.0000
+6. Tenure (months): 0.0000
+Customer 1 churn probability: 1.00
+  High risk - Immediate contact needed, offer special retention package
+Customer 2 churn probability: 0.00
+  Low risk - Maintain regular engagement
+```
 
 This example demonstrates:
 
@@ -760,6 +863,42 @@ Transaction 2 fraud probability: 0.000
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/5-applications_fig_6.png" alt="5-applications" />
+<figcaption>Figure 6: Fraud Detection Decision Tree</figcaption>
+</figure>
+
+
+<figure>
+<img src="assets/5-applications_fig_7.png" alt="5-applications" />
+<figcaption>Figure 7: Precision-Recall Curve for Fraud Detection</figcaption>
+</figure>
+
+```
+Confusion Matrix:
+[[3 0]
+ [0 2]]
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00         3
+           1       1.00      1.00      1.00         2
+
+    accuracy                           1.00         5
+   macro avg       1.00      1.00      1.00         5
+weighted avg       1.00      1.00      1.00         5
+
+Optimal threshold: 1.000
+At this threshold - Precision: 1.000, Recall: 1.000
+Transaction 1 fraud probability: 1.000
+  ALERT: Likely fraudulent transaction
+  Action: Block transaction and contact customer
+Transaction 2 fraud probability: 0.000
+  Status: Transaction appears legitimate
+```
+
 This example shows:
 
 1. How to build a fraud detection model that handles the imbalanced nature of fraud data
@@ -939,6 +1078,38 @@ Machine C status: Urgent Maintenance
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/5-applications_fig_8.png" alt="5-applications" />
+<figcaption>Figure 8: Equipment Maintenance Decision Tree</figcaption>
+</figure>
+
+
+<figure>
+<img src="assets/5-applications_fig_9.png" alt="5-applications" />
+<figcaption>Figure 9: Feature Importance for Maintenance Prediction</figcaption>
+</figure>
+
+```
+Feature ranking for maintenance prediction:
+1. Power Consumption (kW): 0.6691
+2. Temperature (°C): 0.3309
+3. Sound Level (dB): 0.0000
+4. Runtime Hours: 0.0000
+5. Pressure (psi): 0.0000
+6. Vibration (mm/s): 0.0000
+Machine A status: No Maintenance
+  Probability breakdown: No Maintenance: 1.00, Soon: 0.00, Urgent: 0.00
+  Recommendation: Continue normal operation, next check in 30 days
+Machine B status: Maintenance Soon
+  Probability breakdown: No Maintenance: 0.00, Soon: 1.00, Urgent: 0.00
+  Recommendation: Schedule maintenance within 2 weeks, order parts now
+Machine C status: Urgent Maintenance
+  Probability breakdown: No Maintenance: 0.00, Soon: 0.00, Urgent: 1.00
+  Recommendation: URGENT - Schedule maintenance immediately!
+  Alert: Potential failure imminent if operation continues
+```
 
 This example shows:
 

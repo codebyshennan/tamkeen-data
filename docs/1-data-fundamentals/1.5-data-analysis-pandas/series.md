@@ -79,6 +79,43 @@ print("\nAverage temperature:", temperatures.mean())
 print("Highest temperature:", temperatures.max())
 ```
 
+```
+Simple Series:
+0    5
+1    6
+2   -3
+3    2
+dtype: int64
+
+Type: int64
+Size: 4
+Shape: (4,)
+
+From NumPy array:
+0    1.1
+1    2.2
+2    3.3
+3    4.4
+dtype: float64
+
+Constant value Series:
+a    5
+b    5
+c    5
+dtype: int64
+
+Weekly Temperatures:
+Mon    20.5
+Tue    22.1
+Wed    23.4
+Thu    21.8
+Fri    20.9
+dtype: float64
+
+Average temperature: 21.74
+Highest temperature: 23.4
+```
+
 Notice how Pandas automatically creates numbered labels (0, 1, 2, 3) for each value!
 
 ---
@@ -97,6 +134,14 @@ You can create your own labels (called an index) for each value:
 grades = pd.Series([90, 85, 95, 78], 
                   index=['Alice', 'Bob', 'Charlie', 'David'])
 print(grades)
+```
+
+```
+Alice      90
+Bob        85
+Charlie    95
+David      78
+dtype: int64
 ```
 
 Output:
@@ -135,6 +180,18 @@ print("\nStudents with A grades:")
 print(passing_grades)
 ```
 
+```
+Charlie's grade: 95
+Alice    90
+Bob      85
+dtype: int64
+
+Students with A grades:
+Alice      90
+Charlie    95
+dtype: int64
+```
+
 ## Series from Dictionary
 
 ---
@@ -160,6 +217,14 @@ population = pd.Series({
     'Paris': 2.2
 })
 print(population)
+```
+
+```
+New York     8.4
+London       9.0
+Tokyo       37.4
+Paris        2.2
+dtype: float64
 ```
 
 Output:
@@ -189,9 +254,17 @@ pop_dict = population.to_dict()
 print(pop_dict)
 ```
 
+```
+{'New York': 8.4, 'London': 9.0, 'Tokyo': 37.4, 'Paris': 2.2}
+```
+
 Output:
 
 ```python
+{'New York': 8.4, 'London': 9.0, 'Tokyo': 37.4, 'Paris': 2.2}
+```
+
+```
 {'New York': 8.4, 'London': 9.0, 'Tokyo': 37.4, 'Paris': 2.2}
 ```
 
@@ -212,6 +285,14 @@ In the real world, data is often incomplete. Pandas uses `NaN` (Not a Number) to
 # Series with missing data
 scores = pd.Series({'Math': 90, 'English': 85, 'Science': None, 'History': 88})
 print(scores)
+```
+
+```
+Math       90.0
+English    85.0
+Science     NaN
+History    88.0
+dtype: float64
 ```
 
 Output:
@@ -247,6 +328,28 @@ print(scores.dropna())
 # Fill missing values
 print("\nScores with filled values (0):")
 print(scores.fillna(0))
+```
+
+```
+Missing values?
+Math       False
+English    False
+Science     True
+History    False
+dtype: bool
+
+Scores without missing values:
+Math       90.0
+English    85.0
+History    88.0
+dtype: float64
+
+Scores with filled values (0):
+Math       90.0
+English    85.0
+Science     0.0
+History    88.0
+dtype: float64
 ```
 
 ## Series Operations

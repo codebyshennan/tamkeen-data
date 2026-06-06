@@ -230,6 +230,12 @@ dist_fig = plot_distribution_suite(tips, "total_bill")
 </div>
 
 
+<figure>
+<img src="assets/seaborn-guide_fig_7.png" alt="seaborn-guide" />
+<figcaption>Figure 7: Distribution of total_bill</figcaption>
+</figure>
+
+
 ### 2. Categorical Distributions
 
 Show how a numeric outcome varies across a category using box, violin, strip, and swarm plots.

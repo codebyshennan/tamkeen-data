@@ -63,6 +63,10 @@ distance = euclidean_distance(ny, boston)
 print(f"Distance between NY and Boston: {distance:.2f} units")
 ```
 
+```
+Distance between NY and Boston: 3.40 units
+```
+
 **When to Use:**
 
 - When you want the shortest possible distance
@@ -90,6 +94,10 @@ start = np.array([0, 0])  # Starting at intersection
 end = np.array([3, 4])    # Destination
 distance = manhattan_distance(start, end)
 print(f"Walking distance: {distance} blocks")
+```
+
+```
+Walking distance: 7 blocks
 ```
 
 **When to Use:**
@@ -122,6 +130,10 @@ product1 = np.array([1, 0, 1, 1])  # Features: [price, quality, popularity, revi
 product2 = np.array([2, 0, 2, 2])  # Same pattern, just larger numbers
 similarity = cosine_similarity(product1, product2)
 print(f"Similarity between products: {similarity:.2f}")
+```
+
+```
+Similarity between products: 1.00
 ```
 
 **When to Use:**

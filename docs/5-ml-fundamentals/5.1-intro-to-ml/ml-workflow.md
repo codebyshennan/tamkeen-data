@@ -108,6 +108,16 @@ Business Impact: Help real estate agents price houses accurately
 """
 ```
 
+```
+
+Problem Statement Example:
+Goal: Predict house prices
+Type: Regression problem
+Success Metric: Predictions within $50,000 of actual price
+Required Data: House features (size, location, etc.)
+Business Impact: Help real estate agents price houses accurately
+```
+
 ## 2. Data Collection and Exploration
 
 ### Understanding Your Data

@@ -228,6 +228,16 @@ Name: count, dtype: int64
 </aside>
 </div>
 
+```
+Out-of-bag score: 0.998
+
+Risk Distribution:
+Low       77
+Medium     0
+High      14
+Name: count, dtype: int64
+```
+
 ## Feature Importance Analysis
 
 Understanding which features are most important for making predictions:
@@ -427,6 +437,10 @@ F-0.5 scores: [0.98214286 1.         1.         1.         0.94339623]
 </aside>
 </div>
 
+```
+F-0.5 scores: [0.98214286 1.         1.         1.         0.94339623]
+```
+
 ### 2. Feature Selection
 
 Selecting only the most important features:
@@ -479,6 +493,11 @@ Selected features: ['employment_length', 'debt_ratio', 'credit_score']
   </div>
 </aside>
 </div>
+
+```
+Selected 3 features
+Selected features: ['employment_length', 'debt_ratio', 'credit_score']
+```
 
 ### 3. Handling Imbalanced Data
 

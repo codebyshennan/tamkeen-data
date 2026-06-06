@@ -115,6 +115,12 @@ plt.show()
 </div>
 
 
+<figure>
+<img src="assets/beginners-guide_fig_3.png" alt="beginners-guide" />
+<figcaption>Figure 3: My Daily Steps This Week</figcaption>
+</figure>
+
+
 **When to use:**
 
 - Tracking daily activities
@@ -185,6 +191,12 @@ plt.show()
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/beginners-guide_fig_4.png" alt="beginners-guide" />
+<figcaption>Figure 4: Favorite Ice Cream Flavors</figcaption>
+</figure>
 
 
 **When to use:**

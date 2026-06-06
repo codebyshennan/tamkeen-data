@@ -141,6 +141,16 @@ Average accuracy: 0.940
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/4-advanced_fig_1.png" alt="4-advanced" />
+<figcaption>Figure 1: Pre-pruned Decision Tree</figcaption>
+</figure>
+
+```
+Average accuracy: 0.940
+```
+
 Pre-pruning is a preventative approach where we set limits before training the tree. This prevents the tree from growing too complex in the first place. The parameters used above control different aspects of tree complexity:
 
 - <code>max_depth</code>: Limits how deep the tree can grow
@@ -290,6 +300,25 @@ Tree size: 19 nodes
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/4-advanced_fig_2.png" alt="4-advanced" />
+<figcaption>Figure 2: Accuracy vs Pruning Strength</figcaption>
+</figure>
+
+
+<figure>
+<img src="assets/4-advanced_fig_3.png" alt="4-advanced" />
+<figcaption>Figure 3: Tree Size vs Pruning Strength</figcaption>
+</figure>
+
+```
+Best pruning parameter: 0.004915
+Training accuracy: 0.990
+Testing accuracy: 0.965
+Tree size: 19 nodes
+```
+
 Post-pruning is a corrective approach where we first grow a full tree and then trim it back. The `ccp_alpha` parameter controls the strength of pruning:
 - Higher values lead to more pruning (smaller trees)
 - Lower values lead to less pruning (larger trees)
@@ -390,6 +419,14 @@ Entropy criterion - Accuracy: 1.000, Nodes: 117
   </div>
 </aside>
 </div>
+
+```
+Sample 1 impurity: 0.480
+Sample 2 impurity: 0.720
+Sample 3 impurity: 0.720
+Gini criterion - Accuracy: 1.000, Nodes: 127
+Entropy criterion - Accuracy: 1.000, Nodes: 117
+```
 
 While scikit-learn doesn't allow us to directly use custom impurity functions in its implementation, we can understand how different impurity measures affect tree performance. The built-in options are:
 
@@ -507,6 +544,18 @@ Top 5 features: flavanoids, color_intensity, proline, ash, alcohol
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/4-advanced_fig_4.png" alt="4-advanced" />
+<figcaption>Figure 4: Feature Importance</figcaption>
+</figure>
+
+```
+Accuracy with all features: 0.963
+Accuracy with top 5 features: 0.963
+Top 5 features: flavanoids, color_intensity, proline, ash, alcohol
+```
+
 This technique shows how we can:
 1. Identify which features are most important in our decision tree
 2. Use this information to create simpler models with fewer features
@@ -608,6 +657,17 @@ Random Forest Average: 0.954
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/4-advanced_fig_5.png" alt="4-advanced" />
+<figcaption>Figure 5: Which is Better: One Expert or Many?</figcaption>
+</figure>
+
+```
+Single Tree Average: 0.924
+Random Forest Average: 0.954
+```
 
 Random Forest creates many diverse decision trees by:
 1. Training each tree on a random subset of the data (bootstrapping)
@@ -728,6 +788,17 @@ Best accuracy: 0.827
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/4-advanced_fig_6.png" alt="4-advanced" />
+<figcaption>Figure 6: Learning from Mistakes Over Time</figcaption>
+</figure>
+
+```
+Optimal number of trees: 6
+Best accuracy: 0.827
+```
 
 Gradient Boosting works by:
 1. Starting with a simple model
@@ -863,6 +934,22 @@ Step 2: Is petal length (cm) > -2.00? No
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/4-advanced_fig_7.png" alt="4-advanced" />
+<figcaption>Figure 7: Decision Tree with Highlighted Path</figcaption>
+</figure>
+
+```
+Sample features: [4.4 3.2 1.3 0.2]
+True class: setosa
+Predicted class: setosa
+
+Decision path:
+Step 1: Is petal length (cm) <= 2.45? Yes
+Step 2: Is petal length (cm) > -2.00? No
+```
+
 This visualization helps us understand exactly how a decision tree makes a specific prediction by:
 1. Tracing the path from the root to the leaf for a specific sample
 2. Showing each decision point along the way
@@ -981,6 +1068,33 @@ weighted avg       0.92      0.92      0.92       300
 </aside>
 </div>
 
+```
+Regular Tree:
+[[256  13]
+ [ 13  18]]
+              precision    recall  f1-score   support
+
+           0       0.95      0.95      0.95       269
+           1       0.58      0.58      0.58        31
+
+    accuracy                           0.91       300
+   macro avg       0.77      0.77      0.77       300
+weighted avg       0.91      0.91      0.91       300
+
+
+Weighted Tree:
+[[260   9]
+ [ 14  17]]
+              precision    recall  f1-score   support
+
+           0       0.95      0.97      0.96       269
+           1       0.65      0.55      0.60        31
+
+    accuracy                           0.92       300
+   macro avg       0.80      0.76      0.78       300
+weighted avg       0.92      0.92      0.92       300
+```
+
 When dealing with imbalanced data (where some classes are much more common than others), we can:
 1. Use <code>class_weight='balanced'</code> to automatically adjust weights inversely proportional to class frequencies
 2. Manually specify weights for each class using a dictionary, e.g., <code>class_weight={0: 1, 1: 9}</code>
@@ -1061,6 +1175,14 @@ Average: 0.924, Std Dev: 0.021
   </div>
 </aside>
 </div>
+
+```
+Regular K-Fold CV scores: [0.94736842 0.95614035 0.9122807  0.92105263 0.9380531 ]
+Average: 0.935, Std Dev: 0.016
+
+Stratified K-Fold CV scores: [0.92105263 0.88596491 0.94736842 0.92982456 0.9380531 ]
+Average: 0.924, Std Dev: 0.021
+```
 
 Cross-validation helps us get a more reliable estimate of model performance by:
 1. Splitting the data into multiple folds

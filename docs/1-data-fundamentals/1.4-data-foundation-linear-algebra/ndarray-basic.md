@@ -64,6 +64,36 @@ print("\nExponential (e^x) of every number:")
 print(np.exp(arr))
 ```
 
+```
+Original array:
+[[1. 2. 3.]
+ [4. 5. 6.]]
+
+Addition (add 10 to everything):
+[[11. 12. 13.]
+ [14. 15. 16.]]
+
+Multiplication (multiply everything by 2):
+[[ 2.  4.  6.]
+ [ 8. 10. 12.]]
+
+Power (square everything):
+[[ 1.  4.  9.]
+ [16. 25. 36.]]
+
+Division (divide everything by 2):
+[[0.5 1.  1.5]
+ [2.  2.5 3. ]]
+
+Square root of every number:
+[[1.         1.41421356 1.73205081]
+ [2.         2.23606798 2.44948974]]
+
+Exponential (e^x) of every number:
+[[  2.71828183   7.3890561   20.08553692]
+ [ 54.59815003 148.4131591  403.42879349]]
+```
+
 Real-world example - Converting temperatures:
 
 ```python
@@ -75,6 +105,11 @@ fahrenheit = (celsius * 9/5) + 32
 
 print("Celsius:", celsius)
 print("Fahrenheit:", fahrenheit)
+```
+
+```
+Celsius: [ 0 15 30 45]
+Fahrenheit: [ 32.  59.  86. 113.]
 ```
 
 ---
@@ -113,6 +148,11 @@ print(arr + np.array([1, 1, 1]))
 #  [5. 6. 7.]]
 ```
 
+```
+[[2. 3. 4.]
+ [5. 6. 7.]]
+```
+
 ---
 
 ### Magic with Numbers
@@ -128,6 +168,12 @@ print(arr1 ** 2)  # [1, 4, 9, 16]
 
 # Divide 1 by everything
 print(1 / arr1)  # [1.0, 0.5, 0.33, 0.25]
+```
+
+```
+[5 6 7 8]
+[ 1  4  9 16]
+[1.         0.5        0.33333333 0.25      ]
 ```
 
 ---
@@ -159,6 +205,11 @@ print(arr2 > arr)
 #  [ True False  True]]
 ```
 
+```
+[[False  True False]
+ [ True False  True]]
+```
+
 ---
 
 ### Understanding the Result
@@ -188,6 +239,11 @@ print(arr[5])      # 5
 print(arr[5:8])    # [5 6 7]
 ```
 
+```
+5
+[5 6 7]
+```
+
 ---
 
 ### Changing Values
@@ -201,6 +257,11 @@ print(arr)  # [0 1 2 3 4 12 12 12 8 9]
 arr_slice = arr[5:8]
 arr_slice[1] = 10
 print(arr)  # [0 1 2 3 4 12 10 12 8 9]
+```
+
+```
+[ 0  1  2  3  4 12 12 12  8  9]
+[ 0  1  2  3  4 12 10 12  8  9]
 ```
 
 ---
@@ -242,6 +303,12 @@ print(arr2d[1, 2])  # 6 (row 1, column 2)
 print(arr2d[1][2])  # Same thing!
 ```
 
+```
+[4 5 6]
+6
+6
+```
+
 ---
 
 ### Slicing 2D Arrays
@@ -256,6 +323,13 @@ print(arr2d[:2])
 print(arr2d[:2, 1:])
 # [[2 3]
 #  [5 6]]
+```
+
+```
+[[1 2 3]
+ [4 5 6]]
+[[2 3]
+ [5 6]]
 ```
 
 ---

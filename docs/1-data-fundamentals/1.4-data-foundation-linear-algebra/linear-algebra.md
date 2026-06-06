@@ -68,6 +68,16 @@ unique_categories = np.unique(sales_data[:, 0])  # Get unique product categories
 print("\nUnique product categories:", unique_categories)
 ```
 
+```
+Unique names: ['Bob' 'Joe' 'Will']
+Counts: [2 3 2]
+
+Unique numbers: [1 2 3 4]
+Counts: [2 2 3 2]
+
+Unique product categories: ['Books' 'Clothing' 'Electronics']
+```
+
 ---
 
 ### Testing Membership
@@ -121,6 +131,11 @@ y = np.array([
 # Let them dance!
 result = x @ y  # or np.dot(x, y)
 print(result)
+```
+
+```
+[[ 28  64]
+ [ 67 181]]
 ```
 
 ---
@@ -178,6 +193,14 @@ print("Inverse:\n", inv)
 b = np.array([5, 11])
 x = np.linalg.solve(a, b)
 print("Solution:", x)
+```
+
+```
+Determinant: -2.0000000000000004
+Inverse:
+ [[-2.   1. ]
+ [ 1.5 -0.5]]
+Solution: [1. 2.]
 ```
 
 ---

@@ -157,6 +157,12 @@ plt.show()
 </div>
 
 
+<figure>
+<img src="assets/advanced-clustering_fig_1.png" alt="advanced-clustering" />
+<figcaption>Figure 1: GMM Cluster Assignments</figcaption>
+</figure>
+
+
 ## Spectral Clustering
 
 Spectral clustering is like finding communities in a social network:
@@ -216,6 +222,12 @@ plt.show()
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/advanced-clustering_fig_2.png" alt="advanced-clustering" />
+<figcaption>Figure 2: Spectral Clustering</figcaption>
+</figure>
 
 
 ## Real-World Applications

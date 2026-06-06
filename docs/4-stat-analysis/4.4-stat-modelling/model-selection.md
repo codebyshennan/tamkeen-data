@@ -1448,6 +1448,25 @@ Optimal features: ['Feature 1', 'Feature 2', 'Feature 3']
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/model-selection_fig_7.png" alt="model-selection" />
+<figcaption>Figure 7: Error vs Number of Features</figcaption>
+</figure>
+
+```
+Step 1: Removed Feature 8, Train MSE: 0.6808, Test MSE: 1.3277
+Step 2: Removed Feature 6, Train MSE: 0.6839, Test MSE: 1.3159
+Step 3: Removed Feature 7, Train MSE: 0.6876, Test MSE: 1.3434
+Step 4: Removed Feature 5, Train MSE: 0.6916, Test MSE: 1.3233
+Step 5: Removed Feature 4, Train MSE: 0.7323, Test MSE: 1.1629
+Step 6: Removed Feature 2, Train MSE: 3.2018, Test MSE: 9.5926
+Step 7: Removed Feature 3, Train MSE: 9.2499, Test MSE: 23.3469
+
+Optimal number of features: 3
+Optimal features: ['Feature 1', 'Feature 2', 'Feature 3']
+```
+
 > **🎯 Key points**
 >
 > - Feature selection decides which features to include, not just how complex the model is.

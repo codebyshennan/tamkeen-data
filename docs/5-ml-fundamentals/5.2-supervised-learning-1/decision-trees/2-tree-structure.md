@@ -56,7 +56,7 @@ Imagine you're a teacher trying to group students by their performance. You want
 
 We use special measures to decide how to split the data:
 
-#### 1. Gini Impurity 
+#### 1. Gini Impurity
 
 Gini impurity measures how "mixed" a group is. A lower Gini value means the group is more "pure" (contains more of one class).
 
@@ -123,6 +123,12 @@ Balanced group Gini: 0.5000
   </div>
 </aside>
 </div>
+
+```
+Perfect group Gini: 0.0000
+Mixed group Gini: 0.6400
+Balanced group Gini: 0.5000
+```
 
 When we run this code, we'll see:
 - Perfect group has Gini = 0 (completely pure)
@@ -191,6 +197,12 @@ Balanced group entropy: 1.0000
   </div>
 </aside>
 </div>
+
+```
+Perfect group entropy: -0.0000
+Mixed group entropy: 1.5219
+Balanced group entropy: 1.0000
+```
 
 When we run this code, we'll see:
 - Perfect group has entropy = 0 (complete certainty)
@@ -274,6 +286,18 @@ Entropy penalizes highly imbalanced splits slightly more than Gini.
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/2-tree-structure_fig_1.png" alt="2-tree-structure" />
+<figcaption>Figure 1: Comparison of Impurity Measures</figcaption>
+</figure>
+
+```
+When the split is 50/50 (p=0.5), both measures show maximum impurity.
+When the split is pure (p=0 or p=1), both measures show zero impurity.
+Entropy penalizes highly imbalanced splits slightly more than Gini.
+```
 
 This visualization helps us understand that both measures:
 1. Reach their maximum when classes are evenly split (most impure/uncertain)
@@ -423,6 +447,20 @@ Right group (> threshold):
 </aside>
 </div>
 
+```
+Best split: temperature <= 1
+Information gain: 0.1800
+
+Left group (≤ threshold):
+  Sample 3: temperature=1, class=bad
+
+Right group (> threshold):
+  Sample 1: temperature=3, class=good
+  Sample 2: temperature=2, class=good
+  Sample 4: temperature=4, class=bad
+  Sample 5: temperature=5, class=good
+```
+
 This example shows:
 1. How to calculate information gain for different splits
 2. How to find the best split across all features and thresholds
@@ -553,6 +591,19 @@ Gini impurity of right child: 0.0000
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/2-tree-structure_fig_2.png" alt="2-tree-structure" />
+<figcaption>Figure 2: Decision Tree First Split Visualization</figcaption>
+</figure>
+
+```
+Best split: Feature 1 <= -0.2393
+Gini impurity before split: 0.5000
+Gini impurity of left child: 0.0740
+Gini impurity of right child: 0.0000
+```
 
 This visualization helps us see:
 1. Which feature the tree chose to split on first
@@ -712,6 +763,20 @@ Number of leaves at best depth: 8
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/2-tree-structure_fig_3.png" alt="2-tree-structure" />
+<figcaption>Figure 3: Accuracy vs Tree Depth</figcaption>
+</figure>
+
+```
+Best maximum depth: 5
+Training accuracy at best depth: 1.0000
+Testing accuracy at best depth: 0.9556
+Number of nodes at best depth: 15
+Number of leaves at best depth: 8
+```
+
 This example demonstrates:
 
 1. **Maximum Depth**: Limits how deep the tree can grow
@@ -792,16 +857,16 @@ for name, stats in stopping_results.items():
 ```
 Stopping Criteria Comparison:
 
-Criterion                 Train Acc  Test Acc   Nodes      Leaves    
+Criterion                 Train Acc  Test Acc   Nodes      Leaves
 -----------------------------------------------------------------
-Unrestricted              1.0000     0.9556     15         8         
-Min Samples Split=2       1.0000     0.9556     15         8         
-Min Samples Split=5       0.9810     0.9111     11         6         
-Min Samples Split=10      0.9619     0.9333     9          5         
-Min Samples Split=20      0.9619     0.9333     9          5         
-Min Samples Leaf=1        1.0000     0.9556     15         8         
-Min Samples Leaf=5        0.9619     0.9333     9          5         
-Min Samples Leaf=10       0.9619     0.9333     9          5         
+Unrestricted              1.0000     0.9556     15         8
+Min Samples Split=2       1.0000     0.9556     15         8
+Min Samples Split=5       0.9810     0.9111     11         6
+Min Samples Split=10      0.9619     0.9333     9          5
+Min Samples Split=20      0.9619     0.9333     9          5
+Min Samples Leaf=1        1.0000     0.9556     15         8
+Min Samples Leaf=5        0.9619     0.9333     9          5
+Min Samples Leaf=10       0.9619     0.9333     9          5
 Min Samples Leaf=20       0.9619     0.9333     5          3
 ```
 
@@ -837,6 +902,22 @@ Min Samples Leaf=20       0.9619     0.9333     5          3
   </div>
 </aside>
 </div>
+
+```
+Stopping Criteria Comparison:
+
+Criterion                 Train Acc  Test Acc   Nodes      Leaves
+-----------------------------------------------------------------
+Unrestricted              1.0000     0.9556     15         8
+Min Samples Split=2       1.0000     0.9556     15         8
+Min Samples Split=5       0.9810     0.9111     11         6
+Min Samples Split=10      0.9619     0.9333     9          5
+Min Samples Split=20      0.9619     0.9333     9          5
+Min Samples Leaf=1        1.0000     0.9556     15         8
+Min Samples Leaf=5        0.9619     0.9333     9          5
+Min Samples Leaf=10       0.9619     0.9333     9          5
+Min Samples Leaf=20       0.9619     0.9333     5          3
+```
 
 This demonstrates two additional stopping criteria:
 
@@ -954,6 +1035,12 @@ plt.show()
 </div>
 
 
+<figure>
+<img src="assets/2-tree-structure_fig_4.png" alt="2-tree-structure" />
+<figcaption>Figure 4: Underfitting (max_depth=2)</figcaption>
+</figure>
+
+
 This visualization clearly shows:
 
 1. **Underfitting**: The shallow tree is too simple and misses important patterns
@@ -1051,6 +1138,21 @@ Top 5 most important features:
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/2-tree-structure_fig_5.png" alt="2-tree-structure" />
+<figcaption>Figure 5: Feature Importance in Wine Classification</figcaption>
+</figure>
+
+```
+Top 5 most important features:
+1. proline: 0.3825
+2. od280/od315_of_diluted_wines: 0.3120
+3. flavanoids: 0.1414
+4. hue: 0.0838
+5. alcohol: 0.0473
+```
 
 This example demonstrates:
 1. How decision trees naturally assign importance to features
@@ -1192,6 +1294,53 @@ Potential thresholds for petal length (cm):
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/2-tree-structure_fig_6.png" alt="2-tree-structure" />
+<figcaption>Figure 6: Iris Dataset: Sepal Length vs Petal Length</figcaption>
+</figure>
+
+```
+Exercise: Try building a decision tree by hand!
+1. What would be a good first split?
+2. Calculate the Gini impurity for each potential split
+3. Draw your decision tree on paper and test it
+
+Potential thresholds for sepal length (cm):
+  Split at 4.4:
+    Left:  [4 0 0] (total: 4)
+    Right: [46 50 50] (total: 146)
+  Split at 4.4:
+    Left:  [4 0 0] (total: 4)
+    Right: [46 50 50] (total: 146)
+  Split at 4.6:
+    Left:  [9 0 0] (total: 9)
+    Right: [41 50 50] (total: 141)
+  Split at 4.6:
+    Left:  [9 0 0] (total: 9)
+    Right: [41 50 50] (total: 141)
+  Split at 4.8:
+    Left:  [16  0  0] (total: 16)
+    Right: [34 50 50] (total: 134)
+
+Potential thresholds for petal length (cm):
+  Split at 1.0:
+    Left:  [1 0 0] (total: 1)
+    Right: [49 50 50] (total: 149)
+  Split at 1.2:
+    Left:  [4 0 0] (total: 4)
+    Right: [46 50 50] (total: 146)
+  Split at 1.2:
+    Left:  [4 0 0] (total: 4)
+    Right: [46 50 50] (total: 146)
+  Split at 1.4:
+    Left:  [24  0  0] (total: 24)
+    Right: [26 50 50] (total: 126)
+  Split at 1.4:
+    Left:  [24  0  0] (total: 24)
+    Right: [26 50 50] (total: 126)
+```
 
 This exercise lets you:
 1. Visualize a real dataset

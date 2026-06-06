@@ -140,6 +140,13 @@ Submit your solution as a Python script with:
       print(f"Degree {d}: train R²={train_r2:.3f}, CV R²={cv_r2.mean():.3f} ± {cv_r2.std():.3f}")
   ```
 
+```
+Degree 1: train R²=0.040, CV R²=-8.098 ± 5.749
+Degree 2: train R²=0.880, CV R²=0.464 ± 0.318
+Degree 4: train R²=0.881, CV R²=-0.038 ± 0.589
+Degree 8: train R²=0.651, CV R²=-61.628 ± 119.277
+```
+
 ### Task 3: Ridge vs Lasso
 - **Where:** [Regularization](../regularization.md) — "Ridge (L2) vs Lasso (L1)" and "Bias-Variance Tradeoff".
 - **Think:**
@@ -155,6 +162,11 @@ Submit your solution as a Python script with:
   print("Ridge zeros:", np.sum(ridge.coef_ == 0))
   print("Lasso zeros:", np.sum(lasso.coef_ == 0))
   ```
+
+```
+Ridge zeros: 0
+Lasso zeros: 17
+```
 
 ### Task 4: Model selection
 - **Where:** [Model Selection](../model-selection.md) — "Cross-Validation" and "Comparing Candidate Models".
@@ -174,6 +186,13 @@ Submit your solution as a Python script with:
       scores = cross_val_score(m, X_sc, y_reg, cv=5, scoring='r2')
       print(f"{name}: CV R² = {scores.mean():.3f} ± {scores.std():.3f}")
   ```
+
+```
+Linear: CV R² = 0.755 ± 0.108
+Ridge: CV R² = 0.755 ± 0.107
+Lasso: CV R² = 0.753 ± 0.077
+Poly2+Ridge: CV R² = -0.241 ± 0.376
+```
 
 ### Common pitfalls
 - Calling `scaler.fit_transform` on the test set leaks information from the test distribution into training; always fit the scaler on train data only and call `.transform` on test.

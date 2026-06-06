@@ -98,6 +98,11 @@ print(f"Mean of sample means: {np.mean(sample_means):.3f}")   # ≈ 10.0
 print(f"SD of sample means:   {np.std(sample_means):.3f}")    # ≈ 0.071
 ```
 
+```
+Mean of sample means: 9.999
+SD of sample means:   0.070
+```
+
 The rule of thumb: CLT applies well for n ≥ 30 from mildly skewed distributions; heavier tails require larger n.
 </details>
 
@@ -172,6 +177,10 @@ t_star = stats.t.ppf(0.975, df=n-1)  # ≈ 2.03
 ci = (x_bar - t_star * se, x_bar + t_star * se)
 print(f"95% CI: ({ci[0]:.2f}, {ci[1]:.2f})")
 # 95% CI: (45.94, 54.06)  — width ≈ 8.1 minutes
+```
+
+```
+95% CI: (45.94, 54.06)
 ```
 
 **a) n = 144:** SE = 12/√144 = 1.0 (halved). CI becomes approximately (47.97, 52.03) — half the width.
@@ -250,6 +259,11 @@ d_B = 1 / (5 * np.sqrt(2))   # same assumed SD
 
 print(f"Study A Cohen's d ≈ {d_A:.2f}")  # ≈ 0.71 (large)
 print(f"Study B Cohen's d ≈ {d_B:.2f}")  # ≈ 0.14 (small)
+```
+
+```
+Study A Cohen's d ≈ 0.71
+Study B Cohen's d ≈ 0.14
 ```
 </details>
 

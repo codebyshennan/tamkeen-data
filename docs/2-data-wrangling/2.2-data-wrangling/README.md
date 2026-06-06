@@ -199,6 +199,25 @@ Data validation passed!
 </aside>
 </div>
 
+```
+Data Quality Report
+--------------------------------------------------
+Total Records: 120
+Missing Values:
+date          0
+order_date    0
+sales         0
+revenue       0
+price         1
+quantity      1
+category      0
+email         1
+dtype: int64
+
+Duplicate Records: 0
+Data validation passed!
+```
+
 ## Common Data Quality Issues and Solutions
 
 Here's a comprehensive guide to handling common data quality challenges:
@@ -269,6 +288,15 @@ print(df[['price', 'scaled_price', 'normalized_price']].head())
 </aside>
 </div>
 
+```
+        price  scaled_price  normalized_price
+0  445.942283      1.371460          0.908062
+1  447.256087      1.380197          0.910811
+2  261.834888      0.147135          0.522892
+3  161.384881     -0.520863          0.312740
+4         NaN           NaN               NaN
+```
+
 ### 2. Encoding Categorical Variables
 
 <div class="code-explainer" data-code-explainer>
@@ -321,6 +349,16 @@ encoded shape: (120, 10)
   </div>
 </aside>
 </div>
+
+```
+      category  encoded_category
+0  Electronics                 1
+1         Home                 2
+2         Home                 2
+3  Electronics                 1
+4         Home                 2
+encoded shape: (120, 10)
+```
 
 ## Best Practices for Data Wrangling
 

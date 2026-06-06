@@ -132,6 +132,12 @@ plt.show()
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/confusion-matrix_fig_1.png" alt="confusion-matrix" />
+<figcaption>Figure 1: Confusion Matrix</figcaption>
+</figure>
+
 ### 2. Multi-class Classification
 
 #### Iris: 3×3 confusion matrix
@@ -203,6 +209,12 @@ plt.show()
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/confusion-matrix_fig_2.png" alt="confusion-matrix" />
+<figcaption>Figure 2: Multi-class Confusion Matrix</figcaption>
+</figure>
 
 ## Interpreting Confusion Matrices
 
@@ -375,6 +387,12 @@ plt.show()
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/confusion-matrix_fig_3.png" alt="confusion-matrix" />
+<figcaption>Figure 3: Confusion Matrix for Credit Risk Prediction</figcaption>
+</figure>
 
 ## Gotchas
 

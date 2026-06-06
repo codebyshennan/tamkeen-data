@@ -110,6 +110,12 @@ plt.show()
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/feature-importance_fig_1.png" alt="feature-importance" />
+<figcaption>Figure 1: Feature Importances</figcaption>
+</figure>
+
 ### 2. Permutation Importance
 
 #### Model-agnostic drop in score

@@ -173,6 +173,12 @@ demonstrate_precision_recall_tradeoff()
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/metrics_fig_1.png" alt="metrics" />
+<figcaption>Figure 1: Precision vs Recall Trade-off for Different Model Types</figcaption>
+</figure>
+
 #### When to Use Which Metric: Decision Tree
 
 ```
@@ -500,6 +506,12 @@ plot_roc_curve(y_test, y_pred_proba)
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/metrics_fig_4.png" alt="metrics" />
+<figcaption>Figure 4: Receiver Operating Characteristic (ROC) Curve</figcaption>
+</figure>
 
 **Output:**
 ```

@@ -27,6 +27,12 @@ print(f"Feature names  : {feature_names}")
 print(f"Unique classes : {np.unique(true_labels)}  (3 iris species)")
 ```
 
+```
+Dataset shape  : (150, 4)
+Feature names  : ['sepal length (cm)', 'sepal width (cm)', 'petal length (cm)', 'petal width (cm)']
+Unique classes : [0 1 2]  (3 iris species)
+```
+
 ## Tasks
 
 ### 1. K-Means Clustering — Find the Elbow

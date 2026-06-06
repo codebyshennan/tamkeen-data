@@ -124,6 +124,10 @@ chi2, p, dof, expected = chi2_contingency([control, treatment])
 print(f"Chi-square: {chi2:.3f}, p-value: {p:.4f}")
 # Chi-square: 14.545, p-value: 0.0001
 ```
+
+```
+Chi-square: 5.708, p-value: 0.0169
+```
 </details>
 
 ---
@@ -165,6 +169,19 @@ rejected, corrected_p, _, _ = multipletests(p_values, alpha=0.05, method='bonfer
 
 for i, (orig, corr, rej) in enumerate(zip(p_values, corrected_p, rejected)):
     print(f"Test {i+1}: p={orig:.3f} → adjusted p={corr:.3f} | reject={rej}")
+```
+
+```
+Test 1: p=0.030 → adjusted p=0.300 | reject=False
+Test 2: p=0.070 → adjusted p=0.700 | reject=False
+Test 3: p=0.002 → adjusted p=0.020 | reject=True
+Test 4: p=0.150 → adjusted p=1.000 | reject=False
+Test 5: p=0.040 → adjusted p=0.400 | reject=False
+Test 6: p=0.090 → adjusted p=0.900 | reject=False
+Test 7: p=0.001 → adjusted p=0.010 | reject=True
+Test 8: p=0.120 → adjusted p=1.000 | reject=False
+Test 9: p=0.050 → adjusted p=0.500 | reject=False
+Test 10: p=0.080 → adjusted p=0.800 | reject=False
 ```
 </details>
 
@@ -230,6 +247,10 @@ observed = [4200, 3800]
 
 _, p = chisquare(observed, expected)
 print(f"SRM p-value: {p:.4f}")  # p ≈ 0.0004 — highly significant mismatch
+```
+
+```
+SRM p-value: 0.0000
 ```
 
 A p-value near 0 on the assignment check means the split was not random — something in your randomisation or traffic allocation is broken. Common causes: caching layers serving one variant more often, bot traffic, users switching between variants. Do not interpret test results until the cause is identified and fixed.

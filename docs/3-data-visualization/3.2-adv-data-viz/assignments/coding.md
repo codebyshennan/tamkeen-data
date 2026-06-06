@@ -45,6 +45,11 @@ print("Setup complete.")
 print(f"tips: {tips.shape}  |  gapminder_2007: {gapminder_2007.shape}  |  flights: {flights.shape}")
 ```
 
+```
+Setup complete.
+tips: (244, 7)  |  gapminder_2007: (142, 8)  |  flights: (144, 5)
+```
+
 ## Tasks
 
 ### 1. Seaborn distribution charts

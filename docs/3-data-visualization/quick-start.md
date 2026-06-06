@@ -70,6 +70,12 @@ plt.show()  # Display the chart
 ```
 
 
+<figure>
+<img src="assets/quick-start_fig_1.png" alt="quick-start" />
+<figcaption>Figure 1: Monthly Sales</figcaption>
+</figure>
+
+
 ### Step 3: Make it Look Better
 
 **Purpose:** See how color, line width, and title typography change the same data without changing the numbers.
@@ -85,6 +91,12 @@ plt.ylabel('Sales ($)', fontsize=12)
 plt.grid(True, linestyle='--', alpha=0.7)
 plt.show()
 ```
+
+
+<figure>
+<img src="assets/quick-start_fig_2.png" alt="quick-start" />
+<figcaption>Figure 2: Monthly Sales</figcaption>
+</figure>
 
 
 ## Three Most Common Chart Types
@@ -106,6 +118,12 @@ plt.show()
 ```
 
 
+<figure>
+<img src="assets/quick-start_fig_3.png" alt="quick-start" />
+<figcaption>Figure 3: Sales Trend</figcaption>
+</figure>
+
+
 ### 2. Bar Chart
 
 **Best for:** Comparing categories
@@ -123,6 +141,12 @@ plt.show()
 ```
 
 
+<figure>
+<img src="assets/quick-start_fig_4.png" alt="quick-start" />
+<figcaption>Figure 4: Sales by Month</figcaption>
+</figure>
+
+
 ### 3. Pie Chart
 
 **Best for:** Showing parts of a whole
@@ -138,6 +162,12 @@ plt.pie(sales, labels=months, autopct='%1.1f%%')
 plt.title('Sales Distribution')
 plt.show()
 ```
+
+
+<figure>
+<img src="assets/quick-start_fig_5.png" alt="quick-start" />
+<figcaption>Figure 5: Sales Distribution</figcaption>
+</figure>
 
 
 ## Quick Tips for Better Charts

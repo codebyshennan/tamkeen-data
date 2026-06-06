@@ -69,6 +69,28 @@ flattened = image_data.reshape(-1)  # -1 means "figure out this dimension"
 print("Flattened shape:", flattened.shape)  # (48,)
 ```
 
+```
+Original: [ 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14]
+Shape: (15,)
+
+Reshaped to 3x5:
+[[ 0  1  2  3  4]
+ [ 5  6  7  8  9]
+ [10 11 12 13 14]]
+New shape: (3, 5)
+
+Reshaped to 5x3:
+[[ 0  1  2]
+ [ 3  4  5]
+ [ 6  7  8]
+ [ 9 10 11]
+ [12 13 14]]
+New shape: (5, 3)
+
+Original image shape: (4, 4, 3)
+Flattened shape: (48,)
+```
+
 ---
 
 ### Visual Guide to Reshaping
@@ -116,6 +138,13 @@ print(arr.T)  # or arr.transpose()
 #  [3 6]]
 ```
 
+```
+Transposed:
+[[1 4]
+ [2 5]
+ [3 6]]
+```
+
 ---
 
 ### Visual Guide to Transposing
@@ -149,6 +178,15 @@ print("Square roots:", np.sqrt(arr))
 print("Exponentials:", np.exp(arr))
 ```
 
+```
+Original: [0 1 2 3 4 5 6 7 8 9]
+Square roots: [0.         1.         1.41421356 1.73205081 2.         2.23606798
+ 2.44948974 2.64575131 2.82842712 3.        ]
+Exponentials: [1.00000000e+00 2.71828183e+00 7.38905610e+00 2.00855369e+01
+ 5.45981500e+01 1.48413159e+02 4.03428793e+02 1.09663316e+03
+ 2.98095799e+03 8.10308393e+03]
+```
+
 ---
 
 ### One Array vs Two Arrays
@@ -162,6 +200,11 @@ print("Square roots:", np.sqrt(x))  # [1, 2, 3]
 a = np.array([3, 7, 15, 5, 12])
 b = np.array([11, 2, 4, 6, 8])
 print("Maximum values:", np.maximum(a, b))
+```
+
+```
+Square roots: [1. 2. 3.]
+Maximum values: [11  7 15  6 12]
 ```
 
 ---
@@ -201,6 +244,10 @@ print("Result:", result)
 # [1.1 2.2 1.3 1.4 2.5]
 ```
 
+```
+Result: [1.1 2.2 1.3 1.4 2.5]
+```
+
 ---
 
 ### Visual Guide to where()
@@ -232,6 +279,13 @@ print("Min:", arr.min())
 print("Max:", arr.max())
 ```
 
+```
+Mean: 5.0
+Sum: 45
+Min: 1
+Max: 9
+```
+
 ---
 
 ### Computing Along Axes
@@ -242,6 +296,11 @@ print("Row means:", arr.mean(axis=1))
 
 # Mean of each column (axis=0)
 print("Column means:", arr.mean(axis=0))
+```
+
+```
+Row means: [2. 5. 8.]
+Column means: [4. 5. 6.]
 ```
 
 Visual guide to axes:

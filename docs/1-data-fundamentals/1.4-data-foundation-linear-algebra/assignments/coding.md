@@ -70,6 +70,20 @@ for name, avg in zip(names, average_scores):
     print(f"{name}: {avg:.2f}")
 ```
 
+```
+Average scores: [85.         91.         76.66666667 91.66666667 68.33333333 89.33333333
+ 81.66666667 90.33333333]
+Students and their averages:
+Alice: 85.00
+Bob: 91.00
+Charlie: 76.67
+David: 91.67
+Eve: 68.33
+Frank: 89.33
+Grace: 81.67
+Henry: 90.33
+```
+
 ## Bonus Challenge
 
 Create a function that takes a student's name as input and returns:

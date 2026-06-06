@@ -466,6 +466,11 @@ Transaction 1: Score 1.01
 </aside>
 </div>
 
+```
+Potential fraud cases:
+Transaction 1: Score 1.01
+```
+
 ## Common Challenges and Solutions
 
 1. **Handling Large Datasets**

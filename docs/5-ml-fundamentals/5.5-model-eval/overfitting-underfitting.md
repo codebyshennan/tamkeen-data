@@ -188,6 +188,12 @@ plt.show()
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/overfitting-underfitting_fig_1.png" alt="overfitting-underfitting" />
+<figcaption>Figure 1: Model Performance Comparison</figcaption>
+</figure>
+
 ## Best Practices
 
 1. **Data Preparation**

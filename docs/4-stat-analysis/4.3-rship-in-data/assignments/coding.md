@@ -97,6 +97,12 @@ Submit your solution as a Python script with:
       print(f"{col}: r = {r:.3f}, p = {p:.4f}")
   ```
 
+```
+study_hours: r = 0.847, p = 0.0000
+sleep_hours: r = 0.041, p = 0.7201
+prior_score: r = 0.212, p = 0.0590
+```
+
 ### Task 2: Simple linear regression
 - **Where:** [Simple Linear Regression](../simple-linear-regression.md) — "Fitting the model" and "Interpreting coefficients".
 - **Think:**
@@ -112,6 +118,11 @@ Submit your solution as a Python script with:
   print(f"Intercept: {model.intercept_:.2f}, Slope: {model.coef_[0]:.2f}")
   print(f"R² = {model.score(X, y):.3f}")
   ```
+
+```
+Intercept: 42.54, Slope: 4.45
+R² = 0.717
+```
 
 ### Task 3: Multiple linear regression
 - **Where:** [Multiple Linear Regression](../multiple-linear-regression.md) — "Interpreting Coefficients" and "Model Evaluation".

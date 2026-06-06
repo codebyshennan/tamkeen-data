@@ -143,6 +143,12 @@ plt.show()
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/learning-curves_fig_1.png" alt="learning-curves" />
+<figcaption>Figure 1: Learning Curves</figcaption>
+</figure>
+
 ### 2. Overfitting Learning Curve
 
 #### Larger MLP (typical gap)
@@ -218,6 +224,12 @@ plt.show()
 </aside>
 </div>
 
+
+<figure>
+<img src="assets/learning-curves_fig_2.png" alt="learning-curves" />
+<figcaption>Figure 2: Overfitting Learning Curves</figcaption>
+</figure>
+
 ### 3. Underfitting Learning Curve
 
 #### Dummy baseline (high bias)
@@ -292,6 +304,12 @@ plt.show()
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/learning-curves_fig_3.png" alt="learning-curves" />
+<figcaption>Figure 3: Underfitting Learning Curves</figcaption>
+</figure>
 
 ## Interpreting Learning Curves
 
