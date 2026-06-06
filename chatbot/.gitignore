@@ -3,3 +3,6 @@ node_modules/
 .env
 .env.local
 .vercel
+
+# Leak-eval run artifacts (transcripts/logs) — regenerate with eval/leak-eval.mjs
+eval/results/
