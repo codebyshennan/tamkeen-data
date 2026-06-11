@@ -13,11 +13,6 @@ objectives:
 
 **SVMs** fit a **maximum-margin** boundary between classes (or regress with an $\varepsilon$-insensitive tube); **kernels** lift features so nonlinear boundaries are possible. **Prerequisites:** [5.2 README](../README.md); comfort with vectors from Module 1 helps for [2-math-kernels.md](2-math-kernels.md).
 
-## Helpful video
-
-Crash Course AI: supervised learning for classical algorithms.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## What is SVM?
 

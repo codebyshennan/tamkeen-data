@@ -16,11 +16,6 @@ objectives:
 
 See [implementation](3-implementation.md) for baseline code paths.
 
-## Helpful video
-
-Crash Course AI: supervised learning for classical algorithms.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Understanding Tree Pruning
 
@@ -89,16 +84,6 @@ plot_tree(
 plt.title('Pre-pruned Decision Tree')
 plt.show()
 {% endhighlight %}
-
-<figure>
-<img src="assets/4-advanced_fig_1.png" alt="4-advanced" />
-<figcaption>Figure 1: Pre-pruned Decision Tree</figcaption>
-</figure>
-
-```
-Average accuracy: 0.940
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -240,25 +225,6 @@ print(f"Testing accuracy: {test_scores[best_alpha_idx]:.3f}")
 print(f"Tree size: {node_counts[best_alpha_idx]} nodes")
 {% endhighlight %}
 
-<figure>
-<img src="assets/4-advanced_fig_2.png" alt="4-advanced" />
-<figcaption>Figure 2: Accuracy vs Pruning Strength</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/4-advanced_fig_3.png" alt="4-advanced" />
-<figcaption>Figure 3: Tree Size vs Pruning Strength</figcaption>
-</figure>
-
-```
-Best pruning parameter: 0.004915
-Training accuracy: 0.990
-Testing accuracy: 0.965
-Tree size: 19 nodes
-```
-
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-24" data-tint="1">
@@ -379,14 +345,6 @@ for criterion in ['gini', 'entropy']:
     nodes = tree.tree_.node_count
     print(f"{criterion.capitalize()} criterion - Accuracy: {accuracy:.3f}, Nodes: {nodes}")
 {% endhighlight %}
-```
-Sample 1 impurity: 0.480
-Sample 2 impurity: 0.720
-Sample 3 impurity: 0.720
-Gini criterion - Accuracy: 1.000, Nodes: 127
-Entropy criterion - Accuracy: 1.000, Nodes: 117
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -500,18 +458,6 @@ print(f"Accuracy with top 5 features: {top_accuracy:.3f}")
 print(f"Top 5 features: {', '.join([feature_names[i] for i in top_features])}")
 {% endhighlight %}
 
-<figure>
-<img src="assets/4-advanced_fig_4.png" alt="4-advanced" />
-<figcaption>Figure 4: Feature Importance</figcaption>
-</figure>
-
-```
-Accuracy with all features: 0.963
-Accuracy with top 5 features: 0.963
-Top 5 features: flavanoids, color_intensity, proline, ash, alcohol
-```
-
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-20" data-tint="1">
@@ -614,17 +560,6 @@ plt.show()
 print(f"Single Tree Average: {tree_scores.mean():.3f}")
 print(f"Random Forest Average: {forest_scores.mean():.3f}")
 {% endhighlight %}
-
-<figure>
-<img src="assets/4-advanced_fig_5.png" alt="4-advanced" />
-<figcaption>Figure 5: Which is Better: One Expert or Many?</figcaption>
-</figure>
-
-```
-Single Tree Average: 0.924
-Random Forest Average: 0.954
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -736,17 +671,6 @@ best_n_estimators = n_estimators_range[np.argmax(test_scores)]
 print(f"Optimal number of trees: {best_n_estimators}")
 print(f"Best accuracy: {max(test_scores):.3f}")
 {% endhighlight %}
-
-<figure>
-<img src="assets/4-advanced_fig_6.png" alt="4-advanced" />
-<figcaption>Figure 6: Learning from Mistakes Over Time</figcaption>
-</figure>
-
-```
-Optimal number of trees: 6
-Best accuracy: 0.827
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -877,22 +801,6 @@ plt.title('Decision Tree with Highlighted Path')
 plt.show()
 {% endhighlight %}
 
-<figure>
-<img src="assets/4-advanced_fig_7.png" alt="4-advanced" />
-<figcaption>Figure 7: Decision Tree with Highlighted Path</figcaption>
-</figure>
-
-```
-Sample features: [4.4 3.2 1.3 0.2]
-True class: setosa
-Predicted class: setosa
-
-Decision path:
-Step 1: Is petal length (cm) <= 2.45? Yes
-Step 2: Is petal length (cm) > -2.00? No
-```
-
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-18" data-tint="1">
@@ -1008,33 +916,6 @@ y_pred_weighted = weighted_tree.predict(X_test)
 print(confusion_matrix(y_test, y_pred_weighted))
 print(classification_report(y_test, y_pred_weighted))
 {% endhighlight %}
-```
-Regular Tree:
-[[256  13]
- [ 13  18]]
-              precision    recall  f1-score   support
-
-           0       0.95      0.95      0.95       269
-           1       0.58      0.58      0.58        31
-
-    accuracy                           0.91       300
-   macro avg       0.77      0.77      0.77       300
-weighted avg       0.91      0.91      0.91       300
-
-
-Weighted Tree:
-[[260   9]
- [ 14  17]]
-              precision    recall  f1-score   support
-
-           0       0.95      0.97      0.96       269
-           1       0.65      0.55      0.60        31
-
-    accuracy                           0.92       300
-   macro avg       0.80      0.76      0.78       300
-weighted avg       0.92      0.92      0.92       300
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -1135,14 +1016,6 @@ print(f"Average: {scores_kf.mean():.3f}, Std Dev: {scores_kf.std():.3f}")
 print("\nStratified K-Fold CV scores:", scores_skf)
 print(f"Average: {scores_skf.mean():.3f}, Std Dev: {scores_skf.std():.3f}")
 {% endhighlight %}
-```
-Regular K-Fold CV scores: [0.94736842 0.95614035 0.9122807  0.92105263 0.9380531 ]
-Average: 0.935, Std Dev: 0.016
-
-Stratified K-Fold CV scores: [0.92105263 0.88596491 0.94736842 0.92982456 0.9380531 ]
-Average: 0.924, Std Dev: 0.021
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

@@ -13,11 +13,6 @@ objectives:
 
 A **decision tree** splits the data with nested if/else rules on features until it reaches a prediction—easy to visualize and explain. This page uses a tiny “go for a walk” example; follow with [tree structure](2-tree-structure.md) and [implementation](3-implementation.md). **Prerequisites:** [Supervised learning 5.2](../README.md); sklearn `fit` / `predict` from [5.1 workflow](../../5.1-intro-to-ml/ml-workflow.md).
 
-## Helpful video
-
-Crash Course AI: supervised learning for classical algorithms.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Why Learn Decision Trees?
 
@@ -115,19 +110,6 @@ features = ['Is Raining', 'Temperature', 'Have Time']
 for i, importance in enumerate(feature_importance):
     print(f"{features[i]}: {importance:.2f}")
 {% endhighlight %}
-
-<figure>
-<img src="assets/1-introduction_fig_1.png" alt="1-introduction" />
-<figcaption>Figure 1: Decision Tree for Walking Decision</figcaption>
-</figure>
-
-```
-Decision: Go for a walk
-Is Raining: 0.49
-Temperature: 0.51
-Have Time: 0.00
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -264,18 +246,6 @@ plt.title('Decision Tree Structure')
 plt.show()
 {% endhighlight %}
 
-<figure>
-<img src="assets/1-introduction_fig_2.png" alt="1-introduction" />
-<figcaption>Figure 2: Decision Tree Boundary</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/1-introduction_fig_3.png" alt="1-introduction" />
-<figcaption>Figure 3: Decision Tree Structure</figcaption>
-</figure>
-
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-19" data-tint="1">
@@ -400,11 +370,6 @@ importances = student_model.feature_importances_
 most_important = features[np.argmax(importances)]
 print(f"Most important factor: {most_important}")
 {% endhighlight %}
-```
-Prediction: Pass
-Most important factor: Previous Score
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

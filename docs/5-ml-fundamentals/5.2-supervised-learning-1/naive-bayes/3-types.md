@@ -9,11 +9,6 @@ objectives:
 
 **After this lesson:** you can explain the core ideas in “Types of Naive Bayes Classifiers” and reproduce the examples here in your own notebook or environment.
 
-## Helpful video
-
-Crash Course AI: supervised learning for classical algorithms.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Overview
 

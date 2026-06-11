@@ -13,11 +13,6 @@ objectives:
 
 **Gaussian**, **multinomial**, and **Bernoulli** Naive Bayes in scikit-learn: APIs, inputs each variant expects, and smoothing (`alpha`).
 
-## Helpful video
-
-Crash Course AI: supervised learning for classical algorithms.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Welcome to Hands-On Naive Bayes
 
@@ -247,7 +242,7 @@ Confidence: 50.00%
 
 ### Understanding the Problem
 
-Let's build a system that helps doctors predict whether a patient has a certain disease based on their symptoms and test results.
+Let's build a toy screening example that predicts a synthetic sick/healthy label from a few patient-like measurements. The goal is to practise Gaussian Naive Bayes and probability outputs, not to build a clinically valid diagnosis tool.
 
 ### Step 1: Prepare Your Data
 

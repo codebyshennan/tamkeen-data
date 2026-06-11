@@ -13,11 +13,6 @@ objectives:
 
 **`KNeighborsClassifier` / `Regressor`** in scikit-learn: `n_neighbors`, weights, and brute vs KD-tree ball queries at a high level.
 
-## Helpful video
-
-Crash Course AI: supervised learning for classical algorithms.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Understanding k in KNN
 
@@ -83,12 +78,15 @@ class SimpleKNN:
 
 ### Step 2: Add Prediction Logic
 
-#### Predict with Euclidean distance and majority vote
+#### `SimpleKNN` prediction methods
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
 {% highlight python %}
+class SimpleKNN:
+    # Continuation of the class skeleton from Step 1
+
     def predict(self, X):
         """Make predictions for new data points"""
         return np.array([self._predict_single(x) for x in X])
@@ -119,7 +117,7 @@ class SimpleKNN:
       <p><code>predict</code> maps <code>_predict_single</code> over every row of <code>X</code> and packs the results into a NumPy array, giving the same interface as scikit-learn estimators.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="5-17" data-tint="2">
+  <div class="code-callout" data-lines="8-20" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Distance and Majority Vote</span>
@@ -248,21 +246,6 @@ def classify_iris_flowers():
 # Run the example
 model, scaler = classify_iris_flowers()
 {% endhighlight %}
-```
-Accuracy: 1.0
-
-Detailed Report:
-              precision    recall  f1-score   support
-
-      setosa       1.00      1.00      1.00        10
-  versicolor       1.00      1.00      1.00         9
-   virginica       1.00      1.00      1.00        11
-
-    accuracy                           1.00        30
-   macro avg       1.00      1.00      1.00        30
-weighted avg       1.00      1.00      1.00        30
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

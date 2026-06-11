@@ -13,11 +13,6 @@ objectives:
 
 **Naive Bayes** classifiers use **Bayes’ theorem** and assume features are **conditionally independent** given the label—fast, closed-form training and strong baselines for text and categorical data. **Prerequisites:** [5.2 README](../README.md); probability notation from [Module 4](../../../4-stat-analysis/README.md) helps before [2-math-foundation.md](2-math-foundation.md).
 
-## Helpful video
-
-Crash Course AI: supervised learning for classical algorithms.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Welcome to Naive Bayes
 
@@ -61,7 +56,7 @@ Let's look at some everyday examples where Naive Bayes is used:
 
 - How it works: Uses symptoms and test results to predict diseases
 - Why it's good: Can handle multiple symptoms at once
-- Real impact: Helps doctors make faster, more accurate diagnoses
+   - Teaching use: a toy screening pattern for discussing probabilities, not a deployable clinical system
 
 ### 3. News Article Categorization
 

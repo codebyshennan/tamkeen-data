@@ -14,11 +14,6 @@ objectives:
 
 Deeper optimization and modeling notes (e.g. class weights, nu-SVM hooks)—use when defaults are not enough.
 
-## Helpful video
-
-Crash Course AI: supervised learning for classical algorithms.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Advanced Optimization Techniques
 
@@ -1091,11 +1086,6 @@ def evaluate_feature_selection():
 # Uncomment to evaluate feature selection
 # evaluate_feature_selection()
 {% endhighlight %}
-```
-Original dataset shape: (569, 30)
-Number of features selected: 4 out of 30
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

@@ -13,15 +13,10 @@ objectives:
 
 Applies decision trees to **explainable** domains—rules stakeholders can audit—plus pointers on metrics and validation.
 
-## Helpful video
-
-Crash Course AI: supervised learning for classical algorithms.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## 1. Medical Diagnosis System
 
-Imagine you're building a system to help doctors diagnose patients. Decision trees are perfect for this because they're easy to understand and explain.
+Imagine a toy clinical screening dataset where each row has simple symptom-like features. Decision trees are useful for demonstrating transparent rules here, but this example is not a clinically validated diagnosis system.
 
 ### Step-by-Step Implementation
 
@@ -115,29 +110,6 @@ for node_idx in node_indices:
         print(f"- Patient has {severity_text} {symptom.lower()}, which is {comparison} {threshold_text}")
 {% endhighlight %}
 
-<figure>
-<img src="assets/5-applications_fig_1.png" alt="5-applications" />
-<figcaption>Figure 1: Medical Diagnosis Decision Tree</figcaption>
-</figure>
-
-```
-Diagnosis: flu
-Confidence levels:
-  allergies: 0.00
-  cold: 0.00
-  covid: 0.00
-  flu: 1.00
-  healthy: 0.00
-  pneumonia: 0.00
-
-Diagnosis reasoning:
-- Patient has moderate fever, which is > mild
-- Patient has normal blood pressure, which is <= normal
-- Patient has mild breathing difficulty, which is <= mild
-- Patient has mild breathing difficulty, which is > moderate
-```
-
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-28" data-tint="1">
@@ -214,7 +186,7 @@ The decision tree makes medical diagnosis transparent, which is crucial for heal
 
 ## 2. Credit Risk Assessment
 
-Banks use decision trees to evaluate loan applications and assess credit risk. Let's build a simple credit scoring model:
+Decision trees can illustrate how credit-risk rules are learned from tabular features. The dataset below is synthetic and tiny, so use it to study model behaviour rather than to justify real lending decisions:
 
 #### Credit approval: train/test report + importances + new applicant risk band
 
@@ -313,45 +285,6 @@ else:
 
 print(f"Risk assessment: {risk}")
 {% endhighlight %}
-
-<figure>
-<img src="assets/5-applications_fig_2.png" alt="5-applications" />
-<figcaption>Figure 2: Credit Risk Decision Tree</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/5-applications_fig_3.png" alt="5-applications" />
-<figcaption>Figure 3: Feature Importance for Credit Risk Assessment</figcaption>
-</figure>
-
-```
-Confusion Matrix:
-[[4 0]
- [1 0]]
-
-Classification Report:
-              precision    recall  f1-score   support
-
-           0       0.80      1.00      0.89         4
-           1       0.00      0.00      0.00         1
-
-    accuracy                           0.80         5
-   macro avg       0.40      0.50      0.44         5
-weighted avg       0.64      0.80      0.71         5
-
-
-Feature ranking:
-1. Credit Score: 1.0000
-2. Previous Defaults: 0.0000
-3. Debt to Income Ratio: 0.0000
-4. Employment Years: 0.0000
-5. Income (k$): 0.0000
-
-New applicant approval probability: 1.00
-Risk assessment: Low Risk
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -551,47 +484,6 @@ for i, prob in enumerate(churn_probs):
         print("  Low risk - Maintain regular engagement")
 {% endhighlight %}
 
-<figure>
-<img src="assets/5-applications_fig_4.png" alt="5-applications" />
-<figcaption>Figure 4: Customer Churn Decision Tree</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/5-applications_fig_5.png" alt="5-applications" />
-<figcaption>Figure 5: Feature Importance for Churn Prediction</figcaption>
-</figure>
-
-```
-Confusion Matrix:
-[[1 0]
- [0 4]]
-
-Classification Report:
-              precision    recall  f1-score   support
-
-           0       1.00      1.00      1.00         1
-           1       1.00      1.00      1.00         4
-
-    accuracy                           1.00         5
-   macro avg       1.00      1.00      1.00         5
-weighted avg       1.00      1.00      1.00         5
-
-
-Feature ranking for churn prediction:
-1. Support Calls: 1.0000
-2. Service Issues: 0.0000
-3. Contract Length: 0.0000
-4. Total Charges: 0.0000
-5. Monthly Charges: 0.0000
-6. Tenure (months): 0.0000
-Customer 1 churn probability: 1.00
-  High risk - Immediate contact needed, offer special retention package
-Customer 2 churn probability: 0.00
-  Low risk - Maintain regular engagement
-```
-
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-40" data-tint="1">
@@ -676,7 +568,7 @@ By predicting which customers are at risk of leaving, businesses can take proact
 
 ## 4. Fraud Detection
 
-Let's create a simple fraud detection model using decision trees:
+Let's create a simple fraud-detection pattern using decision trees. The data is synthetic, and the thresholds are for teaching precision/recall tradeoffs rather than production fraud operations:
 
 #### Fraud: `class_weight`, precision–recall curve, and threshold tuning
 
@@ -785,42 +677,6 @@ for i, prob in enumerate(fraud_probs):
         if prob > 0.3:
             print("  Note: Some unusual characteristics - flag for review")
 {% endhighlight %}
-
-<figure>
-<img src="assets/5-applications_fig_6.png" alt="5-applications" />
-<figcaption>Figure 6: Fraud Detection Decision Tree</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/5-applications_fig_7.png" alt="5-applications" />
-<figcaption>Figure 7: Precision-Recall Curve for Fraud Detection</figcaption>
-</figure>
-
-```
-Confusion Matrix:
-[[3 0]
- [0 2]]
-
-Classification Report:
-              precision    recall  f1-score   support
-
-           0       1.00      1.00      1.00         3
-           1       1.00      1.00      1.00         2
-
-    accuracy                           1.00         5
-   macro avg       1.00      1.00      1.00         5
-weighted avg       1.00      1.00      1.00         5
-
-Optimal threshold: 1.000
-At this threshold - Precision: 1.000, Recall: 1.000
-Transaction 1 fraud probability: 1.000
-  ALERT: Likely fraudulent transaction
-  Action: Block transaction and contact customer
-Transaction 2 fraud probability: 0.000
-  Status: Transaction appears legitimate
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -1014,38 +870,6 @@ for i, (pred, probs) in enumerate(zip(maintenance_preds, maintenance_probs)):
         print("  Recommendation: URGENT - Schedule maintenance immediately!")
         print("  Alert: Potential failure imminent if operation continues")
 {% endhighlight %}
-
-<figure>
-<img src="assets/5-applications_fig_8.png" alt="5-applications" />
-<figcaption>Figure 8: Equipment Maintenance Decision Tree</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/5-applications_fig_9.png" alt="5-applications" />
-<figcaption>Figure 9: Feature Importance for Maintenance Prediction</figcaption>
-</figure>
-
-```
-Feature ranking for maintenance prediction:
-1. Power Consumption (kW): 0.6691
-2. Temperature (°C): 0.3309
-3. Sound Level (dB): 0.0000
-4. Runtime Hours: 0.0000
-5. Pressure (psi): 0.0000
-6. Vibration (mm/s): 0.0000
-Machine A status: No Maintenance
-  Probability breakdown: No Maintenance: 1.00, Soon: 0.00, Urgent: 0.00
-  Recommendation: Continue normal operation, next check in 30 days
-Machine B status: Maintenance Soon
-  Probability breakdown: No Maintenance: 0.00, Soon: 1.00, Urgent: 0.00
-  Recommendation: Schedule maintenance within 2 weeks, order parts now
-Machine C status: Urgent Maintenance
-  Probability breakdown: No Maintenance: 0.00, Soon: 0.00, Urgent: 1.00
-  Recommendation: URGENT - Schedule maintenance immediately!
-  Alert: Potential failure imminent if operation continues
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

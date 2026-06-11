@@ -288,6 +288,8 @@ np.random.seed(42)
 
 Ready to apply your supervised learning knowledge? The questions are in [Module 5 assignment](../assignments/module-assignment.md) (see Section 2 for **5.2**); self-check answers are in [assignments.md](../assignments.md).
 
+The companion notebook demonstrates all four algorithms, including SVM. The coding assignment focuses on Naive Bayes, kNN, and Decision Trees so the assessed work stays short enough for one practice block.
+
 ## Ready to Begin?
 
 Start your journey with [Naive Bayes](naive-bayes/1-introduction.md) to build a strong foundation in probabilistic classification. Each algorithm builds upon previous concepts, so following the suggested order will maximize your learning experience.

@@ -16,11 +16,6 @@ Walks through **Bayes' theorem**, likelihoods under the independence assumption,
 
 [Introduction](1-introduction.md); probability from Module 4 smooths the notation.
 
-## Helpful video
-
-Crash Course AI: supervised learning for classical algorithms.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Welcome to the Math Behind Naive Bayes
 

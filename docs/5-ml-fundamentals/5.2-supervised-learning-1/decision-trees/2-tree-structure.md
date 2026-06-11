@@ -16,11 +16,6 @@ Here we go deeper on **how** a tree chooses splits: impurity measures (e.g. Gini
 
 Start from [Introduction](1-introduction.md) if the basic picture is still fuzzy; the submodule hub is [here](../README.md).
 
-## Helpful video
-
-Crash Course AI: supervised learning for classical algorithms.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## The Tree Building Process
 
@@ -94,12 +89,6 @@ print(f"Perfect group Gini: {calculate_gini(perfect_group):.4f}")
 print(f"Mixed group Gini: {calculate_gini(mixed_group):.4f}")
 print(f"Balanced group Gini: {calculate_gini(balanced_group):.4f}")
 {% endhighlight %}
-```
-Perfect group Gini: 0.0000
-Mixed group Gini: 0.6400
-Balanced group Gini: 0.5000
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -168,12 +157,6 @@ print(f"Perfect group entropy: {calculate_entropy(perfect_group):.4f}")
 print(f"Mixed group entropy: {calculate_entropy(mixed_group):.4f}")
 print(f"Balanced group entropy: {calculate_entropy(balanced_group):.4f}")
 {% endhighlight %}
-```
-Perfect group entropy: -0.0000
-Mixed group entropy: 1.5219
-Balanced group entropy: 1.0000
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -242,18 +225,6 @@ print("When the split is 50/50 (p=0.5), both measures show maximum impurity.")
 print("When the split is pure (p=0 or p=1), both measures show zero impurity.")
 print("Entropy penalizes highly imbalanced splits slightly more than Gini.")
 {% endhighlight %}
-
-<figure>
-<img src="assets/2-tree-structure_fig_1.png" alt="2-tree-structure" />
-<figcaption>Figure 1: Comparison of Impurity Measures</figcaption>
-</figure>
-
-```
-When the split is 50/50 (p=0.5), both measures show maximum impurity.
-When the split is pure (p=0 or p=1), both measures show zero impurity.
-Entropy penalizes highly imbalanced splits slightly more than Gini.
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -400,20 +371,6 @@ if best_feature is not None:
         if right_mask[i]:
             print(f"  Sample {i+1}: {feature_names[best_feature]}={X[i, best_feature]}, class={y[i]}")
 {% endhighlight %}
-```
-Best split: temperature <= 1
-Information gain: 0.1800
-
-Left group (≤ threshold):
-  Sample 3: temperature=1, class=bad
-
-Right group (> threshold):
-  Sample 1: temperature=3, class=good
-  Sample 2: temperature=2, class=good
-  Sample 4: temperature=4, class=bad
-  Sample 5: temperature=5, class=good
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -537,19 +494,6 @@ right_gini = 1 - np.sum((np.bincount(y[right_mask]) / len(y[right_mask]))**2)
 print(f"Gini impurity of left child: {left_gini:.4f}")
 print(f"Gini impurity of right child: {right_gini:.4f}")
 {% endhighlight %}
-
-<figure>
-<img src="assets/2-tree-structure_fig_2.png" alt="2-tree-structure" />
-<figcaption>Figure 2: Decision Tree First Split Visualization</figcaption>
-</figure>
-
-```
-Best split: Feature 1 <= -0.2393
-Gini impurity before split: 0.5000
-Gini impurity of left child: 0.0740
-Gini impurity of right child: 0.0000
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -708,20 +652,6 @@ print(f"Number of nodes at best depth: {node_counts[best_depth-1]}")
 print(f"Number of leaves at best depth: {leaf_counts[best_depth-1]}")
 {% endhighlight %}
 
-<figure>
-<img src="assets/2-tree-structure_fig_3.png" alt="2-tree-structure" />
-<figcaption>Figure 3: Accuracy vs Tree Depth</figcaption>
-</figure>
-
-```
-Best maximum depth: 5
-Training accuracy at best depth: 1.0000
-Testing accuracy at best depth: 0.9556
-Number of nodes at best depth: 15
-Number of leaves at best depth: 8
-```
-
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-46" data-tint="1">
@@ -854,22 +784,6 @@ print('-' * 65)
 for name, stats in stopping_results.items():
     print(f"{name:<25} {stats['train_score']:.4f}     {stats['test_score']:.4f}     {stats['nodes']:<10} {stats['leaves']:<10}")
 {% endhighlight %}
-```
-Stopping Criteria Comparison:
-
-Criterion                 Train Acc  Test Acc   Nodes      Leaves
------------------------------------------------------------------
-Unrestricted              1.0000     0.9556     15         8
-Min Samples Split=2       1.0000     0.9556     15         8
-Min Samples Split=5       0.9810     0.9111     11         6
-Min Samples Split=10      0.9619     0.9333     9          5
-Min Samples Split=20      0.9619     0.9333     9          5
-Min Samples Leaf=1        1.0000     0.9556     15         8
-Min Samples Leaf=5        0.9619     0.9333     9          5
-Min Samples Leaf=10       0.9619     0.9333     9          5
-Min Samples Leaf=20       0.9619     0.9333     5          3
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -996,12 +910,6 @@ plt.tight_layout()
 plt.show()
 {% endhighlight %}
 
-<figure>
-<img src="assets/2-tree-structure_fig_4.png" alt="2-tree-structure" />
-<figcaption>Figure 4: Underfitting (max_depth=2)</figcaption>
-</figure>
-
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-9" data-tint="1">
@@ -1091,21 +999,6 @@ print("Top 5 most important features:")
 for i in range(5):
     print(f"{i+1}. {feature_names[indices[i]]}: {importances[indices[i]]:.4f}")
 {% endhighlight %}
-
-<figure>
-<img src="assets/2-tree-structure_fig_5.png" alt="2-tree-structure" />
-<figcaption>Figure 5: Feature Importance in Wine Classification</figcaption>
-</figure>
-
-```
-Top 5 most important features:
-1. proline: 0.3825
-2. od280/od315_of_diluted_wines: 0.3120
-3. flavanoids: 0.1414
-4. hue: 0.0838
-5. alcohol: 0.0473
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -1215,53 +1108,6 @@ for feature_idx, feature_name in enumerate(feature_names):
         print(f"    Left:  {left_counts} (total: {sum(left_counts)})")
         print(f"    Right: {right_counts} (total: {sum(right_counts)})")
 {% endhighlight %}
-
-<figure>
-<img src="assets/2-tree-structure_fig_6.png" alt="2-tree-structure" />
-<figcaption>Figure 6: Iris Dataset: Sepal Length vs Petal Length</figcaption>
-</figure>
-
-```
-Exercise: Try building a decision tree by hand!
-1. What would be a good first split?
-2. Calculate the Gini impurity for each potential split
-3. Draw your decision tree on paper and test it
-
-Potential thresholds for sepal length (cm):
-  Split at 4.4:
-    Left:  [4 0 0] (total: 4)
-    Right: [46 50 50] (total: 146)
-  Split at 4.4:
-    Left:  [4 0 0] (total: 4)
-    Right: [46 50 50] (total: 146)
-  Split at 4.6:
-    Left:  [9 0 0] (total: 9)
-    Right: [41 50 50] (total: 141)
-  Split at 4.6:
-    Left:  [9 0 0] (total: 9)
-    Right: [41 50 50] (total: 141)
-  Split at 4.8:
-    Left:  [16  0  0] (total: 16)
-    Right: [34 50 50] (total: 134)
-
-Potential thresholds for petal length (cm):
-  Split at 1.0:
-    Left:  [1 0 0] (total: 1)
-    Right: [49 50 50] (total: 149)
-  Split at 1.2:
-    Left:  [4 0 0] (total: 4)
-    Right: [46 50 50] (total: 146)
-  Split at 1.2:
-    Left:  [4 0 0] (total: 4)
-    Right: [46 50 50] (total: 146)
-  Split at 1.4:
-    Left:  [24  0  0] (total: 24)
-    Right: [26 50 50] (total: 126)
-  Split at 1.4:
-    Left:  [24  0  0] (total: 24)
-    Right: [26 50 50] (total: 126)
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

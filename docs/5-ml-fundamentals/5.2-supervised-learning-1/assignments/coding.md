@@ -2,6 +2,8 @@
 
 > **Submit your work on Skills Union →** <https://skillsu.com/member/assessment>
 
+This assessment uses the digits dataset and covers Naive Bayes, kNN, and Decision Trees. SVM appears in the lesson notebook as a comparison demo, but it is not required for this assignment.
+
 ## Setup
 
 Run the following code to load the dataset and prepare for all tasks:

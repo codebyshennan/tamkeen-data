@@ -14,11 +14,6 @@ objectives:
 
 **`SVC` / `SVR`** usage in scikit-learn: scaling, `C`, `gamma`, multiclass strategy, and calibration at a glance.
 
-## Helpful video
-
-Crash Course AI: supervised learning for classical algorithms.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Getting Started with SVM
 
@@ -120,10 +115,6 @@ def plot_decision_boundary(X, y, model, scaler):
 # Uncomment the line below to visualize the decision boundary
 # plot_decision_boundary(X, y, svm_model, scaler)
 {% endhighlight %}
-```
-Model accuracy: 1.00
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -279,19 +270,6 @@ def plot_iris_decision_boundary(X, y, model, scaler, feature_idx=(0, 1)):
 # Uncomment the line below to visualize the decision boundary using two features
 # plot_iris_decision_boundary(X, y, svm_model, scaler, feature_idx=(0, 1))
 {% endhighlight %}
-```
-Classification Report:
-              precision    recall  f1-score   support
-
-      setosa       1.00      1.00      1.00        15
-  versicolor       1.00      1.00      1.00        11
-   virginica       1.00      1.00      1.00        12
-
-    accuracy                           1.00        38
-   macro avg       1.00      1.00      1.00        38
-weighted avg       1.00      1.00      1.00        38
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -480,13 +458,6 @@ def plot_svr_results():
 # Uncomment the line below to visualize the SVR results
 # plot_svr_results()
 {% endhighlight %}
-```
-Training MSE: 65.36
-Testing MSE: 208.60
-R² Score: 0.83
-Predicted price for new house: $261.62k
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -681,14 +652,6 @@ def plot_param_performance():
 # Uncomment the line below to visualize parameter performance
 # plot_param_performance()
 {% endhighlight %}
-```
-Fitting 5 folds for each of 32 candidates, totalling 160 fits
-Best parameters: {'C': 0.1, 'gamma': 'scale', 'kernel': 'linear'}
-Best cross-validation score: 0.973
-Test accuracy with best model: 0.960
-Test accuracy with default model: 1.000
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -828,11 +791,6 @@ def compare_c_values():
 # Uncomment the line below to compare different C values
 # compare_c_values()
 {% endhighlight %}
-```
-Cross-validation scores: [0.97368421 0.98245614 0.97368421 0.99122807 0.97345133]
-Mean CV score: 0.979 (+/- 0.014)
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

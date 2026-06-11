@@ -15,11 +15,6 @@ Hands-on **scikit-learn**: `DecisionTreeClassifier` / `DecisionTreeRegressor`, f
 
 Pairs with [tree structure](2-tree-structure.md); context in [5.2 README](../README.md).
 
-## Helpful video
-
-Crash Course AI: supervised learning for classical algorithms.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Getting Started with Scikit-learn
 
@@ -131,12 +126,6 @@ plot_tree(
 plt.title('Disease Diagnosis Decision Tree')
 plt.show()
 {% endhighlight %}
-
-<figure>
-<img src="assets/3-implementation_fig_1.png" alt="3-implementation" />
-<figcaption>Figure 1: Disease Diagnosis Decision Tree</figcaption>
-</figure>
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -254,16 +243,6 @@ plot_tree(
 plt.title('Iris Classification Tree')
 plt.show()
 {% endhighlight %}
-
-<figure>
-<img src="assets/3-implementation_fig_2.png" alt="3-implementation" />
-<figcaption>Figure 2: Iris Classification Tree</figcaption>
-</figure>
-
-```
-Accuracy: 100.0%
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -387,18 +366,6 @@ plt.ylabel('Importance')
 plt.show()
 {% endhighlight %}
 
-<figure>
-<img src="assets/3-implementation_fig_3.png" alt="3-implementation" />
-<figcaption>Figure 3: Feature Importance for House Price Prediction</figcaption>
-</figure>
-
-```
-Training R² Score: 1.000
-Testing R² Score: 0.782
-Predicted price: $220.00k
-```
-
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-21" data-tint="1">
@@ -510,12 +477,6 @@ plt.ylabel('Feature 2')
 plt.show()
 {% endhighlight %}
 
-<figure>
-<img src="assets/3-implementation_fig_4.png" alt="3-implementation" />
-<figcaption>Figure 4: Decision Tree Decision Boundary</figcaption>
-</figure>
-
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-13" data-tint="1">
@@ -617,11 +578,6 @@ tree_with_scaling = DecisionTreeClassifier(max_depth=3)
 tree_with_scaling.fit(X_train_scaled, y_train)
 print(f"With scaling: {tree_with_scaling.score(X_test_scaled, y_test):.3f}")
 {% endhighlight %}
-```
-Without scaling: 0.000
-With scaling: 0.000
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

@@ -18,11 +18,6 @@ Welcome to your journey into k-Nearest Neighbors (KNN)! This algorithm is one of
 ![KNN Decision Boundary](assets/knn_decision_boundary.png)
 *Figure: KNN Decision Boundary showing how the algorithm classifies different regions*
 
-## Helpful video
-
-Crash Course AI: supervised learning for classical algorithms.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## What is KNN?
 

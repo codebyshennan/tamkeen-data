@@ -13,11 +13,6 @@ objectives:
 
 Worked-style scenarios (recommendation-style similarity, small tabular problems) with evaluation caveats.
 
-## Helpful video
-
-Crash Course AI: supervised learning for classical algorithms.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Why Applications Matter
 
@@ -140,7 +135,7 @@ for movie_id, similarity in recommendations:
 
 ## 2. Medical Diagnosis Assistant
 
-KNN can help doctors make better diagnoses by comparing new patients with similar cases from the past.
+KNN can illustrate how case-based medical screening might compare a new record with similar historical records. This example uses three synthetic patients, so treat it as a modelling pattern rather than a diagnostic tool.
 
 ### Building a Diagnosis System
 
@@ -357,7 +352,7 @@ for path, similarity in similar_images:
 
 ## 4. Fraud Detection System
 
-KNN can help identify unusual patterns that might indicate fraud.
+KNN-style anomaly methods can illustrate how unusual transaction patterns might be ranked for review. This tiny example is a fraud-detection pattern, not evidence of production fraud performance.
 
 ### Building a Fraud Detector
 
@@ -419,11 +414,6 @@ print("Potential fraud cases:")
 for case in fraud_cases:
     print(f"Transaction {case['transaction_id']}: Score {case['fraud_score']:.2f}")
 {% endhighlight %}
-```
-Potential fraud cases:
-Transaction 1: Score 1.01
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

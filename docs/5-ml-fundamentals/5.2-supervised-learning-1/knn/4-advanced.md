@@ -14,11 +14,6 @@ objectives:
 
 Touches **curse of dimensionality**, approximate neighbors, and practical tuning when $p$ is large or classes are imbalanced.
 
-## Helpful video
-
-Crash Course AI: supervised learning for classical algorithms.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Why Advanced Techniques Matter
 
@@ -73,10 +68,6 @@ new_movie = np.array([4, 4, 3])  # Mix of all genres
 prediction = knn.predict([new_movie])
 print(f"Predicted genre: {prediction[0]}")
 {% endhighlight %}
-```
-Predicted genre: Action
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -145,12 +136,6 @@ iris = load_iris()
 X, y = iris.data, iris.target
 visualize_data(X, y)
 {% endhighlight %}
-
-<figure>
-<img src="assets/4-advanced_fig_1.png" alt="4-advanced" />
-<figcaption>Figure 1: Data Visualization After PCA</figcaption>
-</figure>
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -225,16 +210,6 @@ def find_best_k(X, y, max_k=20):
 # Example usage
 best_k = find_best_k(X, y)
 {% endhighlight %}
-
-<figure>
-<img src="assets/4-advanced_fig_2.png" alt="4-advanced" />
-<figcaption>Figure 2: Finding the Best k Value</figcaption>
-</figure>
-
-```
-Best k value: 6
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

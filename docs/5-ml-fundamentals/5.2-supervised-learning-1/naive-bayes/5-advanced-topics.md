@@ -14,11 +14,6 @@ objectives:
 
 Discusses **smoothing**, correlated features breaking the assumption, and mitigations—without losing the fast baseline story.
 
-## Helpful video
-
-Crash Course AI: supervised learning for classical algorithms.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Welcome to Advanced Naive Bayes
 
