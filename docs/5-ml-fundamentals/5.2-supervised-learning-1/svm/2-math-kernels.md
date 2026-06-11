@@ -220,9 +220,15 @@ Sometimes data isn't perfectly separable. That's where soft margin comes in:
 
 ## Kernel Parameters and Tuning
 
+Use `C` to control how much the model tolerates margin violations, and use kernel-specific parameters like `gamma` or `degree` to control how flexible the boundary can become.
+
+{% include mermaid-diagram.html src="5-ml-fundamentals/5.2-supervised-learning-1/svm/diagrams/2-math-kernels-4.mmd" %}
+
 ### RBF Kernel Parameters
 
 1. **Gamma (γ)**
+
+{% include mermaid-diagram.html src="5-ml-fundamentals/5.2-supervised-learning-1/svm/diagrams/2-math-kernels-5.mmd" %}
 
    #### RBF gamma and the decision boundary (sketch)
 
@@ -248,6 +254,8 @@ Sometimes data isn't perfectly separable. That's where soft margin comes in:
 ### Polynomial Kernel Parameters
 
 1. **Degree**
+
+{% include mermaid-diagram.html src="5-ml-fundamentals/5.2-supervised-learning-1/svm/diagrams/2-math-kernels-6.mmd" %}
 
    #### Polynomial degree and the decision boundary (sketch)
 

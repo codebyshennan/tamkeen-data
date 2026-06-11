@@ -1,0 +1,21 @@
+flowchart TD
+    A["Kernel parameter tuning"] --> B["C controls penalty for mistakes"]
+    A --> C["Kernel parameter controls boundary shape"]
+
+    B --> B1["Low C: wide margin, accepts more errors"]
+    B --> B2["High C: narrow margin, tries to classify training points"]
+
+    C --> C1["RBF gamma: how local each point's influence is"]
+    C --> C2["Polynomial degree: how many bends the boundary can express"]
+
+    B1 --> U["Underfit risk: boundary too simple"]
+    C1 --> GLOW["Low gamma: smooth global boundary"]
+    C1 --> GHIGH["High gamma: tight local boundary"]
+    C2 --> DLOW["Low degree: simple curve"]
+    C2 --> DHIGH["High degree: complex curve"]
+
+    B2 --> O["Overfit risk: boundary too sensitive"]
+    GHIGH --> O
+    DHIGH --> O
+    GLOW --> U
+    DLOW --> U

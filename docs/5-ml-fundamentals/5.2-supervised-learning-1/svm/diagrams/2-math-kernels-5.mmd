@@ -1,0 +1,20 @@
+flowchart LR
+    subgraph LOW["gamma = 0.1"]
+        L1["Each point has broad influence"]
+        L2["Boundary stays smooth"]
+        L3["Can underfit local pockets"]
+    end
+
+    subgraph MID["gamma = 1"]
+        M1["Influence radius is balanced"]
+        M2["Boundary follows main structure"]
+        M3["Good starting region"]
+    end
+
+    subgraph HIGH["gamma = 10"]
+        H1["Each point has narrow influence"]
+        H2["Boundary becomes wiggly"]
+        H3["Can memorize noise"]
+    end
+
+    LOW --> MID --> HIGH

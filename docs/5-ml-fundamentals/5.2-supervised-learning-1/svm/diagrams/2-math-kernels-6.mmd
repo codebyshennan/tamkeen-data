@@ -1,0 +1,20 @@
+flowchart LR
+    subgraph DEG2["degree = 2"]
+        A1["Quadratic curve"]
+        A2["Simple bend"]
+        A3["Lower variance"]
+    end
+
+    subgraph DEG3["degree = 3"]
+        B1["Cubic curve"]
+        B2["More shape flexibility"]
+        B3["Often a practical upper bound"]
+    end
+
+    subgraph DEG4["degree = 4+"]
+        C1["High-order curve"]
+        C2["Can form sharp bends"]
+        C3["Higher overfit and numeric risk"]
+    end
+
+    DEG2 --> DEG3 --> DEG4
