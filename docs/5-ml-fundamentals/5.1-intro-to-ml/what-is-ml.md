@@ -21,11 +21,6 @@ If you can name the problem type and the main workflow steps, you can follow tut
 
 Welcome to the exciting world of Machine Learning! This guide is designed to help you understand the fundamentals of machine learning in a clear and approachable way.
 
-## Helpful video
-
-Crash Course AI: how supervised learning fits into ML workflows.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## What is Machine Learning?
 
@@ -158,15 +153,6 @@ plt.title("Linear regression on toy house data")
 plt.legend()
 plt.show()
 {% endhighlight %}
-
-<figure>
-<img src="assets/what-is-ml_fig_1.png" alt="Scatter plot of four toy house (size, price) points with the fitted regression line and the predicted price for 1750 sq ft marked as a star" />
-<figcaption>Figure 1: The fitted line passes through the toy data; the star marks the predicted price for a 1750 sq ft house.</figcaption>
-</figure>
-
-```
-Predicted price for 1750 sq ft: $350,000.00
-```
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

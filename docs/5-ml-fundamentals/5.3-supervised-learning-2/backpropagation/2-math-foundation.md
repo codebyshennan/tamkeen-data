@@ -16,11 +16,6 @@ Chain rule, local derivatives for activations and losses, and assembling **$\par
 
 [Introduction](1-introduction.md); [neural networks intro](../neural-networks/1-introduction.md) for forward-pass context.
 
-## Helpful video
-
-Crash Course AI: supervised learning framing (~15 min).
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Understanding the Chain Rule
 
@@ -64,12 +59,6 @@ def plot_chain_rule_example():
 
 plot_chain_rule_example()
 {% endhighlight %}
-
-<figure>
-<img src="assets/2-math-foundation_fig_1.png" alt="2-math-foundation" />
-<figcaption>Figure 1: Chain Rule Visualization</figcaption>
-</figure>
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -164,12 +153,6 @@ def plot_forward_pass():
 
 plot_forward_pass()
 {% endhighlight %}
-
-<figure>
-<img src="assets/2-math-foundation_fig_2.png" alt="2-math-foundation" />
-<figcaption>Figure 2: Forward Pass Visualization</figcaption>
-</figure>
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -317,12 +300,6 @@ def plot_activation_functions():
 
 plot_activation_functions()
 {% endhighlight %}
-
-<figure>
-<img src="assets/2-math-foundation_fig_3.png" alt="2-math-foundation" />
-<figcaption>Figure 3: Activation Functions</figcaption>
-</figure>
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

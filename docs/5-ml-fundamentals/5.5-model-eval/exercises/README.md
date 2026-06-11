@@ -6,11 +6,8 @@
 
 These notebooks practice [cross-validation](../cross-validation.md), [metrics](../metrics.md), and [tuning](../hyperparameter-tuning.md) in increasing difficulty.
 
-## Helpful video
+Exercise notebooks are intentionally provided with TODO placeholders and blank answer fields. They are not pre-executed like the worked lesson notebooks.
 
-StatQuest: why cross-validation matters for model evaluation.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/fSytzGwwBVw" title="Machine Learning Fundamentals: Cross Validation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Available exercises
 

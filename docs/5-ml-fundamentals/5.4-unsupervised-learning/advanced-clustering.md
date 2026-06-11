@@ -15,11 +15,6 @@ objectives:
 
 Spectral / mixture-model angles and practical checks when basic k-means or DBSCAN are not enough.
 
-## Helpful video
-
-StatQuest overview of K-means clustering.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4b5d3muPQmA" title="K-means Clustering, Clearly Explained" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## HDBSCAN: Advanced Density-Based Clustering
 
@@ -127,12 +122,6 @@ plt.tight_layout()
 plt.show()
 {% endhighlight %}
 
-<figure>
-<img src="assets/advanced-clustering_fig_1.png" alt="advanced-clustering" />
-<figcaption>Figure 1: GMM Cluster Assignments</figcaption>
-</figure>
-
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-11" data-tint="1">
@@ -193,12 +182,6 @@ plt.title('Spectral Clustering')
 plt.colorbar(scatter)
 plt.show()
 {% endhighlight %}
-
-<figure>
-<img src="assets/advanced-clustering_fig_2.png" alt="advanced-clustering" />
-<figcaption>Figure 2: Spectral Clustering</figcaption>
-</figure>
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -264,28 +247,6 @@ for doc, label, probs in zip(documents, doc_labels, doc_probs):
     print(f"Topic: {label}")
     print(f"Topic Probabilities: {probs}\n")
 {% endhighlight %}
-```
-Document: machine learning algorithms classification
-Topic: 0
-Topic Probabilities: [1. 0.]
-
-Document: neural networks deep learning
-Topic: 0
-Topic Probabilities: [1. 0.]
-
-Document: clustering unsupervised learning
-Topic: 1
-Topic Probabilities: [0. 1.]
-
-Document: deep neural networks training
-Topic: 0
-Topic Probabilities: [1. 0.]
-
-Document: kmeans clustering algorithm
-Topic: 1
-Topic Probabilities: [0. 1.]
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

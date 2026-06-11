@@ -19,11 +19,6 @@ Imagine you're learning to ride a bicycle. At first, you might use training whee
 ![Regularization Path](assets/regularization_path.png)
 *Figure 1: How regularization affects model coefficients as the regularization strength () changes*
 
-## Helpful video
-
-Crash Course AI: supervised learning framing (~15 min).
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## What is Regularization?
 
@@ -60,7 +55,7 @@ Without regularization, models can become like students who memorize answers wit
 
 ### 1. L1 Regularization (Lasso)
 
-```python
+```text
 Loss = MSE + λ * Σ|w|  # Sum of absolute weights
 ```
 
@@ -74,7 +69,7 @@ Features:
 
 ### 2. L2 Regularization (Ridge)
 
-```python
+```text
 Loss = MSE + λ * Σw²  # Sum of squared weights
 ```
 
@@ -88,7 +83,7 @@ Features:
 
 ### 3. Elastic Net
 
-```python
+```text
 Loss = MSE + λ₁ * Σ|w| + λ₂ * Σw²  # Combination of L1 and L2
 ```
 

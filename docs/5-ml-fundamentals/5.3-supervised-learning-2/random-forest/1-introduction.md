@@ -19,11 +19,6 @@ Imagine you're trying to make an important decision, like choosing a new car. In
 ![Decision Tree vs Random Forest](assets/decision_tree_boundary.png)
 *Figure 1: A single decision tree (left) makes simple, piecewise linear decisions, while a Random Forest (right) combines multiple trees to create more complex decision boundaries.*
 
-## Helpful video
-
-Crash Course AI: supervised learning framing (~15 min).
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## What is Random Forest?
 

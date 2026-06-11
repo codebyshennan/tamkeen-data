@@ -14,11 +14,6 @@ objectives:
 
 Numerical vs symbolic gradients, modular layers, and debugging shape mistakes when implementing backward passes.
 
-## Helpful video
-
-Crash Course AI: supervised learning framing (~15 min).
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Getting Started
 
@@ -464,19 +459,6 @@ network.train(X, y, learning_rate=0.01, epochs=1000)
 # This is like the student solving new problems
 predictions = network.forward(X)['a' + str(len(network.weights))]
 {% endhighlight %}
-```
-Epoch 0, Loss: 1.2398897398986224
-Epoch 100, Loss: 0.9784079619497448
-Epoch 200, Loss: 0.978407981338456
-Epoch 300, Loss: 0.9784079813400142
-Epoch 400, Loss: 0.9784079813400143
-Epoch 500, Loss: 0.9784079813400143
-Epoch 600, Loss: 0.9784079813400143
-Epoch 700, Loss: 0.9784079813400143
-Epoch 800, Loss: 0.9784079813400143
-Epoch 900, Loss: 0.9784079813400143
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -577,12 +559,6 @@ X = np.random.randn(2, 1000)
 y = np.random.randn(1, 1000)
 plot_training_process(network, X, y)
 {% endhighlight %}
-
-<figure>
-<img src="assets/3-implementation_fig_1.png" alt="3-implementation" />
-<figcaption>Figure 1: Training Loss Over Time</figcaption>
-</figure>
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

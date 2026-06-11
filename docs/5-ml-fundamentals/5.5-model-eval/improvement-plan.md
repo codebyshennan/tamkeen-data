@@ -9,11 +9,6 @@ published: false
 
 A structured checklist when scores stall: data, features, model family, metrics, and leakage audit.
 
-## Helpful video
-
-StatQuest: why cross-validation matters for model evaluation.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/fSytzGwwBVw" title="Machine Learning Fundamentals: Cross Validation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Executive Summary
 

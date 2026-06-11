@@ -14,11 +14,6 @@ objectives:
 
 Libraries and APIs (e.g. **hist** gradient boosting in sklearn, XGBoost/LightGBM/CatBoost at overview level): key parameters and fit patterns.
 
-## Helpful video
-
-Crash Course AI: supervised learning framing (~15 min).
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Getting Started: Basic Implementation with XGBoost
 

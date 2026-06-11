@@ -112,10 +112,6 @@ plt.close()
 # Print explained variance
 print("Explained variance ratio:", pca.explained_variance_ratio_)
 {% endhighlight %}
-```
-Explained variance ratio: [0.50565666 0.49434334]
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

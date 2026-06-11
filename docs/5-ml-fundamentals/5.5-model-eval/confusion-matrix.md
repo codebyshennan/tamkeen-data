@@ -95,11 +95,6 @@ plt.xlabel('Predicted Label')
 plt.show()
 {% endhighlight %}
 
-<figure>
-<img src="assets/confusion-matrix_fig_1.png" alt="confusion-matrix" />
-<figcaption>Figure 1: Confusion Matrix</figcaption>
-</figure>
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-8" data-tint="1">
@@ -172,11 +167,6 @@ plt.ylabel('True Label')
 plt.xlabel('Predicted Label')
 plt.show()
 {% endhighlight %}
-
-<figure>
-<img src="assets/confusion-matrix_fig_2.png" alt="confusion-matrix" />
-<figcaption>Figure 2: Multi-class Confusion Matrix</figcaption>
-</figure>
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -341,11 +331,6 @@ plt.ylabel('True Label')
 plt.xlabel('Predicted Label')
 plt.show()
 {% endhighlight %}
-
-<figure>
-<img src="assets/confusion-matrix_fig_3.png" alt="confusion-matrix" />
-<figcaption>Figure 3: Confusion Matrix for Credit Risk Prediction</figcaption>
-</figure>
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

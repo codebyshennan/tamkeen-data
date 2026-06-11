@@ -17,11 +17,6 @@ Evaluation-focused view of **bias–variance** and what different validation des
 
 Connects to [5.1 bias–variance](../5.1-intro-to-ml/bias-variance.md) intuition.
 
-## Helpful video
-
-StatQuest: why cross-validation matters for model evaluation.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/fSytzGwwBVw" title="Machine Learning Fundamentals: Cross Validation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Introduction
 

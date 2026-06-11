@@ -15,11 +15,6 @@ objectives:
 
 **Agglomerative** clustering: linkage criteria, dendrograms, and choosing a cut.
 
-## Helpful video
-
-StatQuest overview of K-means clustering.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4b5d3muPQmA" title="K-means Clustering, Clearly Explained" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Quick Reference
 

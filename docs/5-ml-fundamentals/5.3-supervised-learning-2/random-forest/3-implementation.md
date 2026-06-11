@@ -14,11 +14,6 @@ objectives:
 
 `RandomForestClassifier` / `Regressor`: `n_estimators`, `max_features`, out-of-bag estimates, and feature importances.
 
-## Helpful video
-
-Crash Course AI: supervised learning framing (~15 min).
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Basic Implementation
 
@@ -63,17 +58,6 @@ rf.fit(X_train, y_train)
 y_pred = rf.predict(X_test)
 print(classification_report(y_test, y_pred))
 {% endhighlight %}
-```
-              precision    recall  f1-score   support
-
-           0       0.91      0.90      0.90       106
-           1       0.89      0.90      0.89        94
-
-    accuracy                           0.90       200
-   macro avg       0.90      0.90      0.90       200
-weighted avg       0.90      0.90      0.90       200
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -176,16 +160,6 @@ risk_categories = pd.cut(
 print("\nRisk Distribution:")
 print(risk_categories.value_counts())
 {% endhighlight %}
-```
-Out-of-bag score: 0.998
-
-Risk Distribution:
-Low       77
-Medium     0
-High      14
-Name: count, dtype: int64
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -281,12 +255,6 @@ def plot_feature_importance(model, feature_names):
 plot_feature_importance(rf, X.columns)
 {% endhighlight %}
 
-<figure>
-<img src="assets/3-implementation_fig_1.png" alt="3-implementation" />
-<figcaption>Figure 1: Feature Importances</figcaption>
-</figure>
-
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-14" data-tint="1">
@@ -351,11 +319,6 @@ random_search.fit(X_train, y_train)
 print("Best parameters:", random_search.best_params_)
 print("Best score:", random_search.best_score_)
 {% endhighlight %}
-```
-Best parameters: {'bootstrap': True, 'max_depth': 30, 'max_features': 'sqrt', 'min_samples_leaf': 8, 'min_samples_split': 8, 'n_estimators': 221}
-Best score: 1.0
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -409,10 +372,6 @@ scores = cross_val_score(
 )
 print(f"F-{beta} scores:", scores)
 {% endhighlight %}
-```
-F-0.5 scores: [0.98214286 1.         1.         1.         0.94339623]
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -465,11 +424,6 @@ print(f"Selected {X_selected.shape[1]} features")
 selected_features = X.columns[selector.get_support()].tolist()
 print("Selected features:", selected_features)
 {% endhighlight %}
-```
-Selected 3 features
-Selected features: ['employment_length', 'debt_ratio', 'credit_score']
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

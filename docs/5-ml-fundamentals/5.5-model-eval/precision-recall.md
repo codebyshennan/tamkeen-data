@@ -114,11 +114,6 @@ plt.grid(True)
 plt.show()
 {% endhighlight %}
 
-<figure>
-<img src="assets/precision-recall_fig_1.png" alt="precision-recall" />
-<figcaption>Figure 1: Precision-Recall Curve</figcaption>
-</figure>
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-14" data-tint="1">
@@ -210,11 +205,6 @@ plt.legend(loc="lower left")
 plt.grid(True)
 plt.show()
 {% endhighlight %}
-
-<figure>
-<img src="assets/precision-recall_fig_2.png" alt="precision-recall" />
-<figcaption>Figure 2: Multi-class Precision-Recall Curves</figcaption>
-</figure>
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -390,11 +380,6 @@ plt.legend(loc="lower left")
 plt.grid(True)
 plt.show()
 {% endhighlight %}
-
-<figure>
-<img src="assets/precision-recall_fig_3.png" alt="precision-recall" />
-<figcaption>Figure 3: Precision-Recall Curve for Credit Risk Prediction</figcaption>
-</figure>
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

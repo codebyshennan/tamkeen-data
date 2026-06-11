@@ -15,11 +15,6 @@ objectives:
 
 **Validation curves** for a single hyperparameter: where the train/CV gap blows up (overfitting onset).
 
-## Helpful video
-
-StatQuest: why cross-validation matters for model evaluation.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/fSytzGwwBVw" title="Machine Learning Fundamentals: Cross Validation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Introduction
 
@@ -80,11 +75,6 @@ plt.legend(loc='best')
 plt.grid(True)
 plt.show()
 {% endhighlight %}
-
-<figure>
-<img src="assets/validation-curves_fig_1.png" alt="validation-curves" />
-<figcaption>Figure 1: Validation Curves (Model Complexity)</figcaption>
-</figure>
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -152,11 +142,6 @@ plt.grid(True)
 plt.show()
 {% endhighlight %}
 
-<figure>
-<img src="assets/validation-curves_fig_2.png" alt="validation-curves" />
-<figcaption>Figure 2: Validation Curves (Regularization)</figcaption>
-</figure>
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-11" data-tint="1">
@@ -222,11 +207,6 @@ plt.legend(loc='best')
 plt.grid(True)
 plt.show()
 {% endhighlight %}
-
-<figure>
-<img src="assets/validation-curves_fig_3.png" alt="validation-curves" />
-<figcaption>Figure 3: Validation Curves (Learning Rate)</figcaption>
-</figure>
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -385,11 +365,6 @@ plt.legend(loc='best')
 plt.grid(True)
 plt.show()
 {% endhighlight %}
-
-<figure>
-<img src="assets/validation-curves_fig_4.png" alt="validation-curves" />
-<figcaption>Figure 4: Validation Curves for Credit Risk Prediction</figcaption>
-</figure>
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

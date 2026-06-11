@@ -14,11 +14,6 @@ objectives:
 
 High-dimensional and noisy settings where regularization is the main lever.
 
-## Helpful video
-
-Crash Course AI: supervised learning framing (~15 min).
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 {% include mermaid-diagram.html src="5-ml-fundamentals/5.3-supervised-learning-2/regularization/diagrams/5-applications-1.mmd" %}
 
@@ -79,17 +74,6 @@ model.fit(X_train_scaled, y_train)
 y_pred = model.predict(X_test_scaled)
 print(classification_report(y_test, y_pred))
 {% endhighlight %}
-```
-              precision    recall  f1-score   support
-
-           0       0.93      1.00      0.96       126
-           1       1.00      0.86      0.93        74
-
-    accuracy                           0.95       200
-   macro avg       0.96      0.93      0.94       200
-weighted avg       0.95      0.95      0.95       200
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

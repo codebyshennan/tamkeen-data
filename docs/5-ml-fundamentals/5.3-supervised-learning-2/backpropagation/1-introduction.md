@@ -14,11 +14,6 @@ objectives:
 
 **Backpropagation** applies the **chain rule** to propagate loss gradients backward through the network so each weight can be updated efficiently. This sequence pairs with [neural networks](../neural-networks/1-introduction.md). **Prerequisites:** derivatives at the level of [Module 1 calculus refresh](../../../1-data-fundamentals/README.md); comfort with matrix shapes.
 
-## Helpful video
-
-Crash Course AI: supervised learning framing (~15 min).
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## What is Backpropagation?
 

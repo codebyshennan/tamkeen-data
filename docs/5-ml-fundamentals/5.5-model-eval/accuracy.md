@@ -17,11 +17,6 @@ objectives:
 
 Relates to [confusion matrix](confusion-matrix.md) and [metrics](metrics.md).
 
-## Helpful video
-
-StatQuest: why cross-validation matters for model evaluation.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/fSytzGwwBVw" title="Machine Learning Fundamentals: Cross Validation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Introduction
 
@@ -70,9 +65,6 @@ y_pred = model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 print(f"Accuracy: {accuracy:.3f}")
 {% endhighlight %}
-```
-Accuracy: 0.810
-```
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -130,9 +122,6 @@ y_pred = model.predict(X_test)
 accuracy = accuracy_score(y_test, y_pred)
 print(f"Accuracy: {accuracy:.3f}")
 {% endhighlight %}
-```
-Accuracy: 1.000
-```
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -277,10 +266,6 @@ print(f"Accuracy: {accuracy:.3f}")
 baseline_accuracy = max(y_test.mean(), 1 - y_test.mean())
 print(f"Baseline Accuracy: {baseline_accuracy:.3f}")
 {% endhighlight %}
-```
-Accuracy: 0.970
-Baseline Accuracy: 0.555
-```
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

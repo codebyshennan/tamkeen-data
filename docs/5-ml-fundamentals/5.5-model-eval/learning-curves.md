@@ -15,11 +15,6 @@ objectives:
 
 **Learning curves**: training vs validation error vs sample size—diagnosing bias, variance, and data needs.
 
-## Helpful video
-
-StatQuest: why cross-validation matters for model evaluation.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/fSytzGwwBVw" title="Machine Learning Fundamentals: Cross Validation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Introduction
 
@@ -106,11 +101,6 @@ plt.grid(True)
 plt.show()
 {% endhighlight %}
 
-<figure>
-<img src="assets/learning-curves_fig_1.png" alt="learning-curves" />
-<figcaption>Figure 1: Learning Curves</figcaption>
-</figure>
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-10" data-tint="1">
@@ -187,11 +177,6 @@ plt.grid(True)
 plt.show()
 {% endhighlight %}
 
-<figure>
-<img src="assets/learning-curves_fig_2.png" alt="learning-curves" />
-<figcaption>Figure 2: Overfitting Learning Curves</figcaption>
-</figure>
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-11" data-tint="1">
@@ -267,11 +252,6 @@ plt.legend(loc='best')
 plt.grid(True)
 plt.show()
 {% endhighlight %}
-
-<figure>
-<img src="assets/learning-curves_fig_3.png" alt="learning-curves" />
-<figcaption>Figure 3: Underfitting Learning Curves</figcaption>
-</figure>
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

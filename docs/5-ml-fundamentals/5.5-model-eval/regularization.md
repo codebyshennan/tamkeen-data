@@ -17,11 +17,6 @@ Evaluation chapter angle on **regularization** choices and how they interact wit
 
 Distinct from [5.3 regularization lesson](../5.3-supervised-learning-2/regularization/1-introduction.md)—this page is about choosing and measuring effects.
 
-## Helpful video
-
-StatQuest: why cross-validation matters for model evaluation.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/fSytzGwwBVw" title="Machine Learning Fundamentals: Cross Validation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Introduction
 
@@ -76,9 +71,6 @@ pipeline = Pipeline([
 pipeline.fit(X_train, y_train)
 print(f"L1 Regularization Score: {pipeline.score(X_test, y_test):.3f}")
 {% endhighlight %}
-```
-L1 Regularization Score: 0.989
-```
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -270,11 +262,6 @@ plt.title('Regularization Comparison')
 plt.ylabel('Accuracy')
 plt.show()
 {% endhighlight %}
-
-<figure>
-<img src="assets/regularization_fig_1.png" alt="regularization" />
-<figcaption>Figure 1: Regularization Comparison</figcaption>
-</figure>
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

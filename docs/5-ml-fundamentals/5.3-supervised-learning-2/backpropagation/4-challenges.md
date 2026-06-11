@@ -14,11 +14,6 @@ objectives:
 
 **Vanishing/exploding** gradients, initialization, and mitigations you will see in modern optimizers and architectures.
 
-## Helpful video
-
-Crash Course AI: supervised learning framing (~15 min).
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 {% include mermaid-diagram.html src="5-ml-fundamentals/5.3-supervised-learning-2/backpropagation/diagrams/4-challenges-1.mmd" %}
 

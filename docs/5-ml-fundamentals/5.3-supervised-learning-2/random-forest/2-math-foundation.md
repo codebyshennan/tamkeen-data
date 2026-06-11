@@ -16,11 +16,6 @@ Explains **bagging**, random subspaces at each split, and why variance drops whe
 
 [Introduction](1-introduction.md); compare with [decision trees in 5.2](../../5.2-supervised-learning-1/decision-trees/1-introduction.md).
 
-## Helpful video
-
-Crash Course AI: supervised learning framing (~15 min).
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Bootstrap Aggregating (Bagging)
 
@@ -61,12 +56,6 @@ def bootstrap_sample(X, y):
     idxs = np.random.choice(n_samples, size=n_samples, replace=True)
     return X[idxs], y[idxs]
 {% endhighlight %}
-
-<figure>
-<img src="assets/2-math-foundation_fig_1.png" alt="2-math-foundation" />
-<figcaption>Figure 1: Generated visualization</figcaption>
-</figure>
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -140,12 +129,6 @@ def get_random_features(n_features, n_select):
     )
 {% endhighlight %}
 
-<figure>
-<img src="assets/2-math-foundation_fig_1.png" alt="2-math-foundation" />
-<figcaption>Figure 1: Generated visualization</figcaption>
-</figure>
-
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-11" data-tint="1">
@@ -214,12 +197,6 @@ def gini_impurity(y):
     probabilities = counts / len(y)
     return 1 - np.sum(probabilities ** 2)
 {% endhighlight %}
-
-<figure>
-<img src="assets/2-math-foundation_fig_1.png" alt="2-math-foundation" />
-<figcaption>Figure 1: Generated visualization</figcaption>
-</figure>
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -298,12 +275,6 @@ def information_gain(parent, left, right):
     )
     return gain
 {% endhighlight %}
-
-<figure>
-<img src="assets/2-math-foundation_fig_1.png" alt="2-math-foundation" />
-<figcaption>Figure 1: Generated visualization</figcaption>
-</figure>
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

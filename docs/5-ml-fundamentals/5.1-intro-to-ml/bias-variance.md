@@ -26,11 +26,6 @@ You usually can't remove both at once — pushing one down tends to push the oth
 
 Almost every modelling decision — adding features, growing a deeper tree, turning regularization up or down — moves bias and variance in opposite directions. If you can *name* which one is hurting you, the fix is usually obvious. If you can't, you end up guessing.
 
-## Helpful video
-
-Crash Course AI: how supervised learning fits into ML workflows.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## The dartboard picture
 

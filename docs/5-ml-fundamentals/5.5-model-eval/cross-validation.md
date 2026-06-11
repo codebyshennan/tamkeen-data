@@ -102,10 +102,6 @@ scores = cross_val_score(model, X, y, cv=kf)
 print(f"Cross-validation scores: {scores}")
 print(f"Mean CV score: {scores.mean():.3f} (+/- {scores.std() * 2:.3f})")
 {% endhighlight %}
-```
-Cross-validation scores: [0.55 0.6  0.45 0.6  0.35]
-Mean CV score: 0.510 (+/- 0.194)
-```
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -208,10 +204,6 @@ regular_scores = cross_val_score(model, X_imbalanced, y_imbalanced, cv=kf)
 print(f"Stratified CV: {stratified_scores.mean():.3f} (+/- {stratified_scores.std() * 2:.3f})")
 print(f"Regular CV: {regular_scores.mean():.3f} (+/- {regular_scores.std() * 2:.3f})")
 {% endhighlight %}
-```
-Stratified CV: 0.760 (+/- 0.172)
-Regular CV: 0.770 (+/- 0.080)
-```
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -285,23 +277,6 @@ for fold, (train_idx, val_idx) in enumerate(tscv.split(X)):
     print(f"  Train indices: {train_idx[:5]}...{train_idx[-5:]}")
     print(f"  Val indices: {val_idx[:5]}...{val_idx[-5:]}")
 {% endhighlight %}
-```
-Fold 1:
-  Train indices: [0 1 2 3 4]...[15 16 17 18 19]
-  Val indices: [20 21 22 23 24]...[31 32 33 34 35]
-Fold 2:
-  Train indices: [0 1 2 3 4]...[31 32 33 34 35]
-  Val indices: [36 37 38 39 40]...[47 48 49 50 51]
-Fold 3:
-  Train indices: [0 1 2 3 4]...[47 48 49 50 51]
-  Val indices: [52 53 54 55 56]...[63 64 65 66 67]
-Fold 4:
-  Train indices: [0 1 2 3 4]...[63 64 65 66 67]
-  Val indices: [68 69 70 71 72]...[79 80 81 82 83]
-Fold 5:
-  Train indices: [0 1 2 3 4]...[79 80 81 82 83]
-  Val indices: [84 85 86 87 88]...[95 96 97 98 99]
-```
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -411,15 +386,6 @@ for fold, (train_idx, val_idx) in enumerate(skf.split(X, y)):
 
 print(f"\nMean CV score: {np.mean(scores):.3f} (+/- {np.std(scores) * 2:.3f})")
 {% endhighlight %}
-```
-Fold 1: 0.980
-Fold 2: 0.980
-Fold 3: 0.985
-Fold 4: 0.975
-Fold 5: 0.985
-
-Mean CV score: 0.981 (+/- 0.007)
-```
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
@@ -505,11 +471,6 @@ def choose_optimal_k(X, y, k_range=range(2, 11)):
 
 choose_optimal_k(X, y)
 {% endhighlight %}
-
-<figure>
-<img src="assets/cross-validation_fig_1.png" alt="cross-validation" />
-<figcaption>Figure 1: Impact of K on Cross-validation</figcaption>
-</figure>
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

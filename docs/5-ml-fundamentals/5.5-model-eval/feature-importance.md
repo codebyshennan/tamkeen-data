@@ -15,11 +15,6 @@ objectives:
 
 Tree importances, permutation importance, and caveats—correlation and baseline comparisons matter.
 
-## Helpful video
-
-StatQuest: why cross-validation matters for model evaluation.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/fSytzGwwBVw" title="Machine Learning Fundamentals: Cross Validation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Introduction
 
@@ -72,11 +67,6 @@ plt.xticks(range(X.shape[1]), [f'Feature {i}' for i in indices], rotation=45)
 plt.tight_layout()
 plt.show()
 {% endhighlight %}
-
-<figure>
-<img src="assets/feature-importance_fig_1.png" alt="feature-importance" />
-<figcaption>Figure 1: Feature Importances</figcaption>
-</figure>
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

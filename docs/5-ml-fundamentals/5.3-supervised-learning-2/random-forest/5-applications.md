@@ -14,11 +14,6 @@ objectives:
 
 Tabular benchmarks, feature screening, and when a forest beats boosting—or does not.
 
-## Helpful video
-
-Crash Course AI: supervised learning framing (~15 min).
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## 1. Financial Applications
 
@@ -97,16 +92,6 @@ risk_scores = calculate_risk_score(rf, scaler, X_test)
 print("Risk Score Distribution:")
 print(pd.qcut(risk_scores, q=5).value_counts())
 {% endhighlight %}
-```
-Risk Score Distribution:
-(0.947, 8.496]      40
-(8.496, 82.808]     40
-(82.808, 93.794]    40
-(93.794, 96.665]    40
-(96.665, 99.376]    40
-Name: count, dtype: int64
-```
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

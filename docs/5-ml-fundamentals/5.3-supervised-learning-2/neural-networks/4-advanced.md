@@ -14,11 +14,6 @@ objectives:
 
 Architectures and training refinements (initialization, batch norm sketch, etc.) at intro-plus level.
 
-## Helpful video
-
-Crash Course AI: supervised learning framing (~15 min).
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Welcome to Advanced Neural Networks
 
@@ -226,12 +221,6 @@ def scaled_dot_product_attention(q, k, v, mask=None):
     return output, attention_weights
 {% endhighlight %}
 
-<figure>
-<img src="assets/4-advanced_fig_1.png" alt="4-advanced" />
-<figcaption>Figure 1: Generated visualization</figcaption>
-</figure>
-
-
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
   <div class="code-callout" data-lines="1-9" data-tint="1">
@@ -302,12 +291,6 @@ class CurriculumDataGenerator:
 
         return eligible_data[indices], eligible_labels[indices]
 {% endhighlight %}
-
-<figure>
-<img src="assets/4-advanced_fig_1.png" alt="4-advanced" />
-<figcaption>Figure 1: Generated visualization</figcaption>
-</figure>
-
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">

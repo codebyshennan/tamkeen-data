@@ -14,11 +14,6 @@ objectives:
 
 **Neural networks** stack differentiable layers of units; training adjusts **weights** to reduce a **loss** (usually via gradient-based optimization—see [backpropagation](../backpropagation/1-introduction.md)). **Prerequisites:** vectors and matrices from Module 1; [5.3 README](../README.md).
 
-## Helpful video
-
-Crash Course AI: supervised learning framing (~15 min).
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Welcome to Neural Networks
 
