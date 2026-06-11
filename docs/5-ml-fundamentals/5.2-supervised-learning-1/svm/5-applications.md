@@ -30,6 +30,8 @@ Let's build a simple spam detector that can classify emails:
 
 #### TF-IDF + linear SVC spam classifier
 
+{% include mermaid-diagram.html src="5-ml-fundamentals/5.2-supervised-learning-1/svm/diagrams/5-applications-1.mmd" %}
+
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -188,6 +190,8 @@ Confidence: 0.16
 Let's create a simple image classifier using SVM:
 
 #### Synthetic 2D features and RBF SVC for two classes
+
+{% include mermaid-diagram.html src="5-ml-fundamentals/5.2-supervised-learning-1/svm/diagrams/5-applications-2.mmd" %}
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -382,6 +386,8 @@ Confidence: 0.99
 Here's how SVM can be used to demonstrate a medical-screening workflow on synthetic vitals. The example is for practising ROC-AUC, sensitivity, and specificity, not for clinical decision-making.
 
 #### Synthetic vitals + ROC-AUC, sensitivity, and specificity
+
+{% include mermaid-diagram.html src="5-ml-fundamentals/5.2-supervised-learning-1/svm/diagrams/5-applications-3.mmd" %}
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -582,6 +588,8 @@ Recommendation: Refer to specialist
 Here's how SVM can demonstrate a credit-risk workflow on synthetic applicant data. The model and thresholds are teaching examples, not lending-policy recommendations.
 
 #### Credit risk labels and `assess_credit_risk` helper
+
+{% include mermaid-diagram.html src="5-ml-fundamentals/5.2-supervised-learning-1/svm/diagrams/5-applications-4.mmd" %}
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -789,6 +797,8 @@ Here's a simple solution for handling missing values:
 
 #### Mean imputation before modeling
 
+{% include mermaid-diagram.html src="5-ml-fundamentals/5.2-supervised-learning-1/svm/diagrams/5-applications-5.mmd" %}
+
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -881,6 +891,8 @@ Data after imputation:
 Proper feature scaling is essential for SVM:
 
 #### StandardScaler vs MinMaxScaler on mixed-scale features
+
+{% include mermaid-diagram.html src="5-ml-fundamentals/5.2-supervised-learning-1/svm/diagrams/5-applications-6.mmd" %}
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -1040,6 +1052,8 @@ Max: [1. 1.]
 Handling imbalanced classes in SVM:
 
 #### Standard SVM vs `class_weight` vs SMOTE
+
+{% include mermaid-diagram.html src="5-ml-fundamentals/5.2-supervised-learning-1/svm/diagrams/5-applications-7.mmd" %}
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">

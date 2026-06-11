@@ -1,0 +1,10 @@
+flowchart TD
+    A["Two moons dataset"] --> B["Scale features"]
+    B --> C["Fit RBF SVC"]
+    C --> D["Create dense mesh grid"]
+    D --> E["Predict class regions"]
+    D --> F["Compute decision function values"]
+    E --> G["Plot filled decision surface"]
+    F --> H["Draw margins at -1, 0, and +1"]
+    C --> I["Overlay support vectors"]
+    I --> J["Report support-vector percentage"]

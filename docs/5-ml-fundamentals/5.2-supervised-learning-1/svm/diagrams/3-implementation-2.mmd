@@ -1,0 +1,10 @@
+flowchart TD
+    A["Load Iris dataset"] --> B["Use petal length and width for plotting"]
+    B --> C["Split train and test"]
+    C --> D["Standardize features"]
+    D --> E["Train multiclass SVC"]
+    E --> F["One-vs-one classifiers separate class pairs"]
+    F --> G["Predict test classes"]
+    G --> H["Confusion matrix and classification report"]
+    E --> I["Optional 2D mesh"]
+    I --> J["Plot three decision regions"]

@@ -1,0 +1,9 @@
+flowchart TD
+    A["Scaled classification dataset"] --> B["Parameter grid"]
+    B --> C["Expand grid with itertools.product"]
+    C --> D["Dispatch each tuple with joblib Parallel"]
+    D --> E["Each worker runs 5-fold cross_val_score"]
+    E --> F["Return params, score, duration"]
+    F --> G["Choose highest mean score"]
+    G --> H["Train final SVC with best params"]
+    F --> I["Optional score and timing plot"]

@@ -1,0 +1,9 @@
+flowchart TD
+    A["Email text samples"] --> B["Train/test split"]
+    B --> C["Fit TF-IDF vectorizer on train"]
+    C --> D["Transform train and test emails"]
+    D --> E["Train linear SVC"]
+    E --> F["Predict spam labels and probabilities"]
+    F --> G["Report accuracy"]
+    E --> H["classify_email helper"]
+    H --> I["Threshold probability and flag uncertainty"]

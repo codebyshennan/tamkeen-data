@@ -1,0 +1,11 @@
+flowchart TD
+    A["Small 2D binary dataset"] --> B["Train/test split"]
+    B --> C["Fit StandardScaler on train only"]
+    C --> D["Transform train and test features"]
+    D --> E["Fit RBF SVC"]
+    E --> F["Predict held-out labels"]
+    F --> G["Score test accuracy"]
+    E --> H["Optional mesh grid"]
+    H --> I["Scale grid points"]
+    I --> J["Predict grid classes"]
+    J --> K["Plot decision boundary"]

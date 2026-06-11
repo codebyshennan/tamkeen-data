@@ -1,0 +1,9 @@
+flowchart TD
+    A["Large synthetic dataset"] --> B["Process rows in chunks"]
+    B --> C["Fit scaler pattern"]
+    C --> D["Transform features"]
+    D --> E["Train LinearSVC"]
+    E --> F["dual=false for many samples and few features"]
+    F --> G["Report accuracy and iterations"]
+    E --> H["Reusable prediction helper"]
+    H --> I["Scale new rows before predict"]

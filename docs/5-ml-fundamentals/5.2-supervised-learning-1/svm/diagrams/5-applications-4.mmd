@@ -1,0 +1,9 @@
+flowchart TD
+    A["Synthetic applicant records"] --> B["Labels: low risk or high risk"]
+    B --> C["Stratified train/test split"]
+    C --> D["Scale income, score, employment, debt ratio"]
+    D --> E["Fit balanced RBF SVC"]
+    E --> F["Classification report and confusion matrix"]
+    E --> G["assess_credit_risk helper"]
+    G --> H["Map probability to risk tier"]
+    H --> I["Recommendation, rate band, manual review flag"]

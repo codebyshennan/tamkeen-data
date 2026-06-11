@@ -1,0 +1,10 @@
+flowchart TD
+    A["Imbalanced 10-to-1 dataset"] --> B["Stratified train/test split"]
+    B --> C["Path 1: standard RBF SVC"]
+    B --> D["Path 2: class_weight balanced"]
+    B --> E["Path 3: SMOTE training resample"]
+    E --> F["Fit RBF SVC on resampled train set"]
+    C --> G["Predict same test set"]
+    D --> G
+    F --> G
+    G --> H["Compare classification reports"]

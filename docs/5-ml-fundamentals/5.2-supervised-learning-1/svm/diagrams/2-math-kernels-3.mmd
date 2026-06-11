@@ -1,0 +1,8 @@
+flowchart LR
+    A["Input: two numeric features and labels"] --> B["Loop over kernels: linear, RBF, polynomial"]
+    B --> C["Fit one SVC per kernel"]
+    C --> D["Build dense mesh grid across feature space"]
+    D --> E["Predict a class for every grid point"]
+    E --> F["Reshape predictions into decision regions"]
+    F --> G["Plot filled regions plus original samples"]
+    G --> H["Compare straight vs curved boundaries"]

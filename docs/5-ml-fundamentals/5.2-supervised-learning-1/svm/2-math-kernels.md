@@ -127,6 +127,8 @@ Sometimes data isn't linearly separable, and we need to transform it into a high
 
 #### Compare kernel decision regions
 
+{% include mermaid-diagram.html src="5-ml-fundamentals/5.2-supervised-learning-1/svm/diagrams/2-math-kernels-3.mmd" %}
+
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 

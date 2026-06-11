@@ -11,7 +11,7 @@ objectives:
 
 ## Overview
 
-**SVMs** fit a **maximum-margin** boundary between classes (or regress with an $\varepsilon$-insensitive tube); **kernels** lift features so nonlinear boundaries are possible. **Prerequisites:** [5.2 README](../README.md); comfort with vectors from Module 1 helps for [2-math-kernels.md](2-math-kernels.md).
+**SVMs** fit a **maximum-margin** boundary between classes (or regress with an \\(\\varepsilon\\)-insensitive tube); **kernels** lift features so nonlinear boundaries are possible. **Prerequisites:** [5.2 README](../README.md); comfort with vectors from Module 1 helps for [2-math-kernels.md](2-math-kernels.md).
 
 
 ## What is SVM?

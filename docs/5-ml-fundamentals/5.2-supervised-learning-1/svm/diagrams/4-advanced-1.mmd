@@ -1,0 +1,10 @@
+flowchart TD
+    A["Noisy overlapping 2D data"] --> B["Train/test split and scaling"]
+    B --> C["Loop over C values"]
+    C --> D["Fit RBF SVC for each C"]
+    D --> E["Plot decision regions and support vectors"]
+    E --> F["Low C: wider margin"]
+    E --> G["High C: tighter fit"]
+    B --> H["Early-stopping sketch"]
+    H --> I["Increase max_iter step by step"]
+    I --> J["Stop when score change is below tolerance"]

@@ -1,0 +1,10 @@
+flowchart TD
+    A["Create 5-to-1 imbalanced labels"] --> B["Train/test split"]
+    B --> C["Scale train and test"]
+    C --> D["Path 1: class_weight balanced"]
+    D --> E["Fit weighted SVC"]
+    C --> F["Path 2: SMOTE on train only"]
+    F --> G["Fit standard SVC on resampled data"]
+    E --> H["Predict untouched test set"]
+    G --> H
+    H --> I["Compare per-class precision and recall"]

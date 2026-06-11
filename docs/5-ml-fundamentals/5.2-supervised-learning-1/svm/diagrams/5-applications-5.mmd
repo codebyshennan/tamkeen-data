@@ -1,0 +1,6 @@
+flowchart TD
+    A["Feature matrix with NaN values"] --> B["Create SimpleImputer"]
+    B --> C["Compute column means"]
+    C --> D["Replace missing values"]
+    D --> E["Print before and after arrays"]
+    E --> F["Return SVM-ready dense feature matrix"]

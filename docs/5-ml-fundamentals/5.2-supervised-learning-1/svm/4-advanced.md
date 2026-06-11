@@ -43,6 +43,8 @@ Here's a complete example showing the impact of different C values:
 
 #### Effect of C on RBF SVC (and optional early stopping sketch)
 
+{% include mermaid-diagram.html src="5-ml-fundamentals/5.2-supervised-learning-1/svm/diagrams/4-advanced-1.mmd" %}
+
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -244,6 +246,8 @@ def train_svm_with_early_stopping(X, y, max_iter=100, tolerance=1e-3):
 Sometimes you need a special kernel for your specific problem. Here's a complete example with a custom kernel:
 
 #### Hybrid RBF + polynomial kernel via `kernel='precomputed'`
+
+{% include mermaid-diagram.html src="5-ml-fundamentals/5.2-supervised-learning-1/svm/diagrams/4-advanced-2.mmd" %}
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -450,6 +454,8 @@ Visualizing decision boundaries helps understand how SVM works:
 
 #### Decision surface, margins, and support vectors on two moons
 
+{% include mermaid-diagram.html src="5-ml-fundamentals/5.2-supervised-learning-1/svm/diagrams/4-advanced-3.mmd" %}
+
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -615,6 +621,8 @@ For large datasets, memory efficiency is crucial:
 
 #### Chunked scaling sketch and `LinearSVC(dual=False)`
 
+{% include mermaid-diagram.html src="5-ml-fundamentals/5.2-supervised-learning-1/svm/diagrams/4-advanced-4.mmd" %}
+
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -760,6 +768,8 @@ def predict_efficiently(model, scaler, new_data):
 Speed up training with parallel processing:
 
 #### Parallel evaluation of SVC hyperparameter tuples
+
+{% include mermaid-diagram.html src="5-ml-fundamentals/5.2-supervised-learning-1/svm/diagrams/4-advanced-5.mmd" %}
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -970,6 +980,8 @@ Select the most important features with SVM-based feature selection:
 
 #### L1 `LinearSVC` + `SelectFromModel`
 
+{% include mermaid-diagram.html src="5-ml-fundamentals/5.2-supervised-learning-1/svm/diagrams/4-advanced-6.mmd" %}
+
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -1155,5 +1167,4 @@ Number of features selected: 4 out of 30
 - **Comparing parallel grid search results with `GridSearchCV` scores directly** — The parallel parameter search in the performance optimization section uses manual `cross_val_score` calls. These results may differ slightly from `GridSearchCV` because of different random state handling, fold stratification, and pre-dispatch ordering. They are not drop-in replacements for evaluating best parameters.
 - **Using `NuSVC` and treating `nu` as equivalent to `1/C`** — `NuSVC` takes a `nu` parameter (0, 1] controlling the upper bound on the fraction of margin errors and the lower bound on the fraction of support vectors. It is not simply the inverse of `C`; the two formulations optimize different objective functions and will produce different decision boundaries on the same data.
 - **Applying `PCA` for visualization after fitting SVM on the full feature space** — If you train an SVM on 30 features and then project to 2D with PCA for a decision boundary plot, the 2D projection does not correspond to the SVM's actual decision boundary (which lives in 30D). The plot is misleading because the SVM never saw or used the 2D coordinates.
-
 

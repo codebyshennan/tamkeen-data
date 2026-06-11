@@ -1,0 +1,9 @@
+flowchart TD
+    A["Synthetic classification data"] --> B["Split and scale"]
+    B --> C["Define grid: C, gamma, kernel"]
+    C --> D["GridSearchCV with 5 folds"]
+    D --> E["Fit every parameter combination"]
+    E --> F["Select best cross-validation score"]
+    F --> G["Refit best estimator on full train set"]
+    G --> H["Evaluate held-out test accuracy"]
+    E --> I["Optional heatmap of RBF scores"]

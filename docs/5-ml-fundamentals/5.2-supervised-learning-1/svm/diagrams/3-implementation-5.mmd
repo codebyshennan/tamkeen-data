@@ -1,0 +1,9 @@
+flowchart TD
+    A["Load breast cancer dataset"] --> B["Scale all features for CV demo"]
+    B --> C["Create RBF SVC"]
+    C --> D["KFold with five shuffled splits"]
+    D --> E["cross_val_score trains five models"]
+    E --> F["Collect five accuracy scores"]
+    F --> G["Report mean and spread"]
+    C --> H["Optional C sweep"]
+    H --> I["Plot CV accuracy vs C on log scale"]

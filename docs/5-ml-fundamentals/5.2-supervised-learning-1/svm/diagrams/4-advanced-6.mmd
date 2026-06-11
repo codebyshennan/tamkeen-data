@@ -1,0 +1,11 @@
+flowchart TD
+    A["Breast cancer dataset: 30 features"] --> B["Train/test split and scaling"]
+    B --> C["Fit LinearSVC with L1 penalty"]
+    C --> D["Compute absolute coefficient magnitudes"]
+    D --> E["SelectFromModel keeps important columns"]
+    E --> F["Transform train and test"]
+    F --> G["Train model on selected features"]
+    B --> H["Train baseline on all features"]
+    G --> I["Compare test accuracies"]
+    H --> I
+    D --> J["Plot feature importances"]

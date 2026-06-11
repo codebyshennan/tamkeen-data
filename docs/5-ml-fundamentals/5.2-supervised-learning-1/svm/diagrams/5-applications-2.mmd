@@ -1,0 +1,10 @@
+flowchart TD
+    A["Synthetic image feature clusters"] --> B["Combine cat and dog labels"]
+    B --> C["Train/test split"]
+    C --> D["Standardize feature vectors"]
+    D --> E["Fit RBF SVC with probabilities"]
+    E --> F["Evaluate test accuracy"]
+    E --> G["classify_image helper"]
+    G --> H["Return class, confidence, probabilities"]
+    E --> I["Optional decision-boundary plot"]
+    I --> J["Overlay support vectors and new image"]

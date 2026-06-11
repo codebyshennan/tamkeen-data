@@ -1,0 +1,10 @@
+flowchart TD
+    A["Synthetic housing features"] --> B["Target: price in thousands"]
+    B --> C["Train/test split"]
+    C --> D["Scale numeric features"]
+    D --> E["Fit RBF SVR"]
+    E --> F["Predict test prices"]
+    F --> G["Evaluate MSE and R squared"]
+    E --> H["Predict a new house"]
+    E --> I["Optional one-feature SVR curve"]
+    I --> J["Show epsilon tube behavior"]

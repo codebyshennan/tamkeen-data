@@ -1,0 +1,9 @@
+flowchart TD
+    A["Synthetic healthy and sick vitals"] --> B["Stratified train/test split"]
+    B --> C["Scale medical measurements"]
+    C --> D["RBF SVC with balanced class weights"]
+    D --> E["5-fold ROC-AUC cross-validation"]
+    E --> F["Fit final model"]
+    F --> G["Test ROC-AUC, sensitivity, specificity"]
+    F --> H["diagnose_patient helper"]
+    H --> I["Risk band, review flag, recommendation"]

@@ -1,0 +1,11 @@
+flowchart TD
+    A["Complex spiral-like dataset"] --> B["Split and scale"]
+    B --> C["CustomKernelSVM wrapper"]
+    C --> D["Build RBF kernel matrix"]
+    C --> E["Build polynomial kernel matrix"]
+    D --> F["Weighted hybrid Gram matrix"]
+    E --> F
+    F --> G["Fit SVC with precomputed kernel"]
+    G --> H["Predict using test-vs-train kernel matrix"]
+    B --> I["Compare RBF, polynomial, hybrid"]
+    I --> J["Plot three decision regions"]

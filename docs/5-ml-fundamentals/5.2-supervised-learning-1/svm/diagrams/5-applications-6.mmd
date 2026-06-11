@@ -1,0 +1,9 @@
+flowchart TD
+    A["Mixed-scale two-feature data"] --> B["Fit StandardScaler"]
+    A --> C["Fit MinMaxScaler"]
+    B --> D["Centered data: mean 0, std 1"]
+    C --> E["Bounded data: range 0 to 1"]
+    D --> F["Print summary statistics"]
+    E --> F
+    F --> G["Plot original, standard-scaled, min-max-scaled"]
+    G --> H["Return all scaled datasets"]

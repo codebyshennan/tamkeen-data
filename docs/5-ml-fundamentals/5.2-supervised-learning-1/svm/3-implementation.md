@@ -46,6 +46,8 @@ Let's implement a complete binary classification example:
 
 #### Binary classification with scaling and RBF SVC
 
+{% include mermaid-diagram.html src="5-ml-fundamentals/5.2-supervised-learning-1/svm/diagrams/3-implementation-1.mmd" %}
+
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -176,6 +178,8 @@ Note that scaling is performed separately on the training and testing data to pr
 SVM naturally extends to multiple classes. Let's implement a complete example using the Iris dataset:
 
 #### Multiclass Iris classification
+
+{% include mermaid-diagram.html src="5-ml-fundamentals/5.2-supervised-learning-1/svm/diagrams/3-implementation-2.mmd" %}
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -357,6 +361,8 @@ This example demonstrates how SVM naturally handles multiclass problems, despite
 SVM can also be used for regression tasks using Support Vector Regression (SVR):
 
 #### Support Vector Regression on synthetic housing data
+
+{% include mermaid-diagram.html src="5-ml-fundamentals/5.2-supervised-learning-1/svm/diagrams/3-implementation-3.mmd" %}
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -543,6 +549,8 @@ SVR works by finding a function that deviates from the observed targets by at mo
 Finding the optimal parameters is crucial for SVM performance. Here's how to use Grid Search:
 
 #### GridSearchCV for SVC hyperparameters
+
+{% include mermaid-diagram.html src="5-ml-fundamentals/5.2-supervised-learning-1/svm/diagrams/3-implementation-4.mmd" %}
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -731,6 +739,8 @@ Cross-validation helps prevent overfitting by evaluating model performance on mu
 
 #### K-fold cross-validation scores for SVC
 
+{% include mermaid-diagram.html src="5-ml-fundamentals/5.2-supervised-learning-1/svm/diagrams/3-implementation-5.mmd" %}
+
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -874,6 +884,8 @@ X_test_scaled = scaler.transform(X_test)
 When dealing with imbalanced classes, use class weights or SMOTE:
 
 #### Class weights vs SMOTE for imbalanced labels
+
+{% include mermaid-diagram.html src="5-ml-fundamentals/5.2-supervised-learning-1/svm/diagrams/3-implementation-6.mmd" %}
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
