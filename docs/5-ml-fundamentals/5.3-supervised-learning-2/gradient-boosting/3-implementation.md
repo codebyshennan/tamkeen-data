@@ -174,7 +174,7 @@ Let's implement this step by step:
 
 ![Feature Importance](assets/feature_importance.png)
 
-#### LightGBM regression: `Dataset`, RMSE, $R^2$
+#### LightGBM regression: `Dataset`, RMSE, \\(R^2\\)
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">

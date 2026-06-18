@@ -352,7 +352,7 @@ print("Best score:", random_search.best_score_)
 
 Creating a custom scoring metric that favors precision over recall:
 
-#### `make_scorer` + $F_\beta$ ($\beta<1$ favors precision)
+#### `make_scorer` + \\(F_\beta\\) (\\(\beta<1\\) favors precision)
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">

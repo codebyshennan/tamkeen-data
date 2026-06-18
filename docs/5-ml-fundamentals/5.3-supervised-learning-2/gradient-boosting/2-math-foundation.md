@@ -29,10 +29,10 @@ $$F_M(x) = \sum_{m=1}^M \gamma_m h_m(x)$$
 
 Let's break this down:
 
-- $F_M(x)$ is your final prediction (like the total price)
-- $h_m(x)$ are simple models (like individual features: location, size, etc.)
-- $\gamma_m$ are weights (how important each feature is)
-- $M$ is how many models we use
+- \\(F_M(x)\\) is your final prediction (like the total price)
+- \\(h_m(x)\\) are simple models (like individual features: location, size, etc.)
+- \\(\gamma_m\\) are weights (how important each feature is)
+- \\(M\\) is how many models we use
 
 **Why This Matters**: This approach is like having multiple experts review a house - each focusing on different aspects, then combining their opinions for a better overall assessment.
 
@@ -65,7 +65,7 @@ def log_loss(y_true, y_pred):
 
 Residuals are like the mistakes our current model makes. Each new model tries to fix these mistakes:
 
-$$r_{im} = -\left[\frac{\partial L(y_i, F(x_i))}{\partial F(x_i)}\right]_{F=F_{m-1}}$$
+$$r_{im} = -\left[\frac{\partial L(y_i, F(x_i))}{\partial F(x_i)}\right]\_{F=F_{m-1}}$$
 
 ```python
 def compute_residuals(y_true, y_pred, loss='mse'):
@@ -82,7 +82,7 @@ def compute_residuals(y_true, y_pred, loss='mse'):
 
 ### The Learning Rate Parameter
 
-The learning rate ($\nu$) controls how much each new model can change the predictions:
+The learning rate (\\(\nu\\)) controls how much each new model can change the predictions:
 
 ![Learning Curve](assets/learning_curve.png)
 
@@ -90,8 +90,8 @@ $$F_m(x) = F_{m-1}(x) + \nu \gamma_m h_m(x)$$
 
 Think of it like adjusting the volume on your TV:
 
-- Too high (large $\nu$): You might overshoot the perfect volume
-- Too low (small $\nu$): It takes forever to reach the right volume
+- Too high (large \\(\nu\\)): You might overshoot the perfect volume
+- Too low (small \\(\nu\\)): It takes forever to reach the right volume
 - Just right: You make smooth, precise adjustments
 
 ```python
@@ -110,9 +110,9 @@ $$\text{Gain}(s) = \frac{1}{2} \left[\frac{G_L^2}{H_L + \lambda} + \frac{G_R^2}{
 
 **Analogy**: It's like organizing a library:
 
-- $G$ tells us how many books are in each section
-- $H$ tells us how diverse the books are
-- $\lambda$ prevents us from creating too many tiny sections
+- \\(G\\) tells us how many books are in each section
+- \\(H\\) tells us how diverse the books are
+- \\(\lambda\\) prevents us from creating too many tiny sections
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -182,7 +182,7 @@ def find_best_split(gradients, hessians, feature_values):
 
 Regularization helps prevent our model from memorizing the training data:
 
-$$\text{Obj} = \sum_{i=1}^n L(y_i, \hat{y}_i) + \sum_{k=1}^K \Omega(f_k)$$
+$$\text{Obj} = \sum_{i=1}^n L(y_i, \hat{y}\_i) + \sum_{k=1}^K \Omega(f_k)$$
 
 **Why This Matters**: It's like having a budget when shopping:
 
@@ -284,9 +284,9 @@ Now that you understand the mathematics behind Gradient Boosting, let's move on 
 
 ## Gotchas
 
-- **The residual formula uses negative gradients, not raw errors** — The residual $r_{im} = -\partial L / \partial F(x_i)$ is the *negative gradient* of the loss, not simply $y - \hat{y}$. For MSE these are equal, but for other losses (e.g., MAE, log-loss) they differ. Using raw errors with a non-MSE loss function is a frequent implementation mistake.
-- **Learning rate and number of trees must be tuned jointly** — A small $\nu$ (learning rate) requires a large $M$ (number of trees) to reach the same loss; a large $\nu$ converges faster but overshoots. Setting learning rate without adjusting tree count produces a misleadingly poor model, not a true assessment of the method's capability.
-- **The $\lambda$ regularization term in the split gain formula is easy to overlook** — The gain formula has $\lambda$ in the denominator. Setting $\lambda = 0$ makes all splits look maximally beneficial and leads to extremely deep, overfit trees. Most practitioners leave it at the library default (1 in XGBoost) but should understand it controls leaf weight shrinkage.
+- **The residual formula uses negative gradients, not raw errors** — The residual \\(r_{im} = -\partial L / \partial F(x_i)\\) is the *negative gradient* of the loss, not simply \\(y - \hat{y}\\). For MSE these are equal, but for other losses (e.g., MAE, log-loss) they differ. Using raw errors with a non-MSE loss function is a frequent implementation mistake.
+- **Learning rate and number of trees must be tuned jointly** — A small \\(\nu\\) (learning rate) requires a large \\(M\\) (number of trees) to reach the same loss; a large \\(\nu\\) converges faster but overshoots. Setting learning rate without adjusting tree count produces a misleadingly poor model, not a true assessment of the method's capability.
+- **The \\(\lambda\\) regularization term in the split gain formula is easy to overlook** — The gain formula has \\(\lambda\\) in the denominator. Setting \\(\lambda = 0\\) makes all splits look maximally beneficial and leads to extremely deep, overfit trees. Most practitioners leave it at the library default (1 in XGBoost) but should understand it controls leaf weight shrinkage.
 - **`EarlyStopping` tracks validation loss, not training loss** — The `EarlyStopping` class monitors `val_loss`. If you accidentally pass training loss, the counter never increments (training loss almost always improves), so early stopping effectively never fires and you train the full number of rounds.
 - **Feature importance summed over trees doesn't account for split frequency vs. split quality** — The gain-based importance formula sums *gain*, not the number of times a feature is used. A feature that appears in every tree with tiny gain can score lower than a rarely-used feature with one large gain split. This is expected behavior, but learners often assume high-gain = high-frequency.
 - **Subsampling reduces variance but introduces non-determinism** — `feature_fraction` (column subsampling) and `subsample` (row subsampling) in LightGBM/XGBoost make results non-reproducible unless you set a `seed`/`random_state`. Always fix the seed when comparing runs.

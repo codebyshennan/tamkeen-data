@@ -465,7 +465,7 @@ print(results_df)
 
 Evaluating your model is like checking your work after solving a problem - it helps you understand how well you're doing.
 
-#### Train vs test $R^2$, RMSE, sparsity
+#### Train vs test \\(R^2\\), RMSE, sparsity
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">

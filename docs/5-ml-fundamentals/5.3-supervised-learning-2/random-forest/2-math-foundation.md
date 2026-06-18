@@ -103,9 +103,9 @@ This is how Random Forest selects features - each tree only considers a random s
 
 At each split in a tree, we only consider a random subset of features:
 
-- For classification: typically $\sqrt{p}$ features
-- For regression: typically $p/3$ features
-where $p$ is the total number of features.
+- For classification: typically \\(\sqrt{p}\\) features
+- For regression: typically \\(p/3\\) features
+where \\(p\\) is the total number of features.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">

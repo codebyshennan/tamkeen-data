@@ -36,6 +36,8 @@ Computer vision is like giving computers the ability to understand and interpret
 
 Image classification is like teaching a computer to recognize different types of objects in photos. For example, identifying whether an image contains a cat or a dog.
 
+> **Illustrative reference — not runnable as-is.** Loads ResNet50 ImageNet weights (auto-downloaded) and expects a `train_dir/` of labelled images. Study the transfer-learning structure rather than executing it; for a network you can run end-to-end, see the [MNIST demo](1-introduction.md).
+
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -147,6 +149,8 @@ history = model.fit(
 
 Object detection is like teaching a computer to not only recognize objects but also find where they are in an image. This is useful for applications like self-driving cars or security systems.
 
+> **Illustrative reference — not runnable as-is.** Needs the `ultralytics` package, a `data.yaml` dataset config, and a YOLO-weights download on first run.
+
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -215,6 +219,8 @@ NLP is like teaching computers to understand and work with human language, from 
 ### Text Classification: Understanding Sentiment
 
 Text classification helps computers understand the meaning or sentiment of text, like determining if a product review is positive or negative.
+
+> **Illustrative reference — not runnable as-is.** Needs the `transformers` package and downloads `bert-base-uncased` (~400 MB).
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -302,9 +308,19 @@ model.fit(
 </aside>
 </div>
 
+**Representative output** (illustrative — these snippets are not executed during the site build). After fine-tuning, classifying the three example reviews would look like:
+
+```text
+"This product is amazing! I love it!"              -> Positive (0.97)
+"Terrible customer service, would not recommend."  -> Negative (0.95)
+"It's okay, nothing special."                      -> Neutral  (0.86)
+```
+
 ### Machine Translation: Breaking Language Barriers
 
 Machine translation helps computers translate text from one language to another, like having a digital translator in your pocket.
+
+> **Illustrative reference — not runnable as-is.** Needs the `transformers` package and downloads the Helsinki-NLP MarianMT weights.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -375,6 +391,13 @@ print(f"French: {translation}")
 </aside>
 </div>
 
+**Representative output** (illustrative — not executed during the site build):
+
+```text
+English: Hello, how are you today?
+French: Bonjour, comment allez-vous aujourd'hui ?
+```
+
 ## 3. Time Series Analysis: Predicting the Future
 
 Time series analysis helps computers understand and predict patterns in data that changes over time, like stock prices or weather patterns.
@@ -382,6 +405,8 @@ Time series analysis helps computers understand and predict patterns in data tha
 ### Stock Price Prediction
 
 Predicting stock prices is like trying to forecast the weather - we use past patterns to predict future movements.
+
+> **Illustrative reference — not runnable as-is.** Needs the `yfinance` package and live internet access to fetch AAPL prices.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">

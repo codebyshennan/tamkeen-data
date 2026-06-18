@@ -12,7 +12,7 @@ objectives:
 
 ## Overview
 
-Chain rule, local derivatives for activations and losses, and assembling **$\partial L/\partial w$** layer by layer.
+Chain rule, local derivatives for activations and losses, and assembling **\\(\partial L/\partial w\\)** layer by layer.
 
 [Introduction](1-introduction.md); [neural networks intro](../neural-networks/1-introduction.md) for forward-pass context.
 
@@ -23,7 +23,7 @@ Chain rule, local derivatives for activations and losses, and assembling **$\par
 
 Imagine you're trying to find out how a small change in the temperature affects the amount of ice cream sold. The chain rule helps us understand how changes in one variable affect another through a series of connected steps.
 
-In technical terms, the chain rule is the mathematical foundation of backpropagation. For a function $f(g(x))$, its derivative is:
+In technical terms, the chain rule is the mathematical foundation of backpropagation. For a function \\(f(g(x))\\), its derivative is:
 
 $$\frac{df}{dx} = \frac{df}{dg} \cdot \frac{dg}{dx}$$
 
@@ -112,11 +112,11 @@ $$a^{(l)} = f(z^{(l)})$$
 
 where:
 
-- $z^{(l)}$ is the weighted sum (like mixing ingredients)
-- $W^{(l)}$ are the weights (like recipe proportions)
-- $a^{(l-1)}$ is the activation from the previous layer (like intermediate results)
-- $b^{(l)}$ is the bias (like seasoning)
-- $f$ is the activation function (like cooking method)
+- \\(z^{(l)}\\) is the weighted sum (like mixing ingredients)
+- \\(W^{(l)}\\) are the weights (like recipe proportions)
+- \\(a^{(l-1)}\\) is the activation from the previous layer (like intermediate results)
+- \\(b^{(l)}\\) is the bias (like seasoning)
+- \\(f\\) is the activation function (like cooking method)
 
 ### Visual Example
 
@@ -201,19 +201,19 @@ The backward pass is like learning from your mistakes. If your recipe didn't tur
 
 ### Output Layer Error
 
-For the output layer $L$, the error is:
+For the output layer \\(L\\), the error is:
 
 $$\delta^{(L)} = \frac{\partial L}{\partial a^{(L)}} \cdot f'(z^{(L)})$$
 
 where:
 
-- $L$ is the loss function (how wrong we were)
-- $a^{(L)}$ is the output activation (our prediction)
-- $f'$ is the derivative of the activation function (how sensitive we are to changes)
+- \\(L\\) is the loss function (how wrong we were)
+- \\(a^{(L)}\\) is the output activation (our prediction)
+- \\(f'\\) is the derivative of the activation function (how sensitive we are to changes)
 
 ### Hidden Layer Error
 
-For hidden layer $l$, the error is:
+For hidden layer \\(l\\), the error is:
 
 $$\delta^{(l)} = (W^{(l+1)})^T \delta^{(l+1)} \cdot f'(z^{(l)})$$
 
@@ -349,13 +349,17 @@ Loss functions measure how wrong our predictions are. Think of them like a score
 ### Common Loss Functions
 
 1. **Mean Squared Error (MSE)**
+
    $$L_{\text{MSE}} = \frac{1}{n}\sum_{i=1}^n (y_i - \hat{y}_i)^2$$
+
    $$\frac{\partial L_{\text{MSE}}}{\partial \hat{y}_i} = -\frac{2}{n}(y_i - \hat{y}_i)$$
 
    Like measuring the average distance from the target.
 
 2. **Binary Cross-Entropy**
+
    $$L_{\text{BCE}} = -\frac{1}{n}\sum_{i=1}^n [y_i\log(\hat{y}_i) + (1-y_i)\log(1-\hat{y}_i)]$$
+
    $$\frac{\partial L_{\text{BCE}}}{\partial \hat{y}_i} = -\frac{y_i}{\hat{y}_i} + \frac{1-y_i}{1-\hat{y}_i}$$
 
    Like measuring how surprised we are by the wrong predictions.
@@ -430,7 +434,7 @@ plot_loss_functions()
 
 Matrix formulation is like a recipe written in a compact form. Instead of writing out each step separately, we use matrices to represent the entire process at once.
 
-For a batch of inputs $X$ with shape $(n, d)$:
+For a batch of inputs \\(X\\) with shape \\((n, d)\\):
 
 1. Forward pass:
    $$Z^{(l)} = W^{(l)}A^{(l-1)} + b^{(l)}$$
@@ -446,9 +450,9 @@ For a batch of inputs $X$ with shape $(n, d)$:
 
 where:
 
-- $\odot$ represents element-wise multiplication
-- $n$ is the batch size
-- $d$ is the input dimension
+- \\(\odot\\) represents element-wise multiplication
+- \\(n\\) is the batch size
+- \\(d\\) is the input dimension
 
 ### Why This Matters
 
@@ -477,11 +481,11 @@ Matrix formulation is important because:
 
 ## Gotchas
 
-- **Applying the chain rule in the wrong order** — The chain rule requires multiplying $\partial f/\partial g$ by $\partial g/\partial x$, not the reverse. Swapping the order produces incorrect gradients that still have plausible-looking magnitudes, making this mistake hard to spot without gradient checking.
-- **Using the pre-activation $z$ where the activation $a$ is expected (or vice versa)** — The weight gradient is $\delta^{(l)} (a^{(l-1)})^T$, using the previous layer's *activation*. Accidentally substituting $z$ produces subtly wrong gradients that converge more slowly or not at all.
-- **Overlooking the element-wise vs. matrix multiplication distinction** — The $\odot$ (Hadamard) product in $\Delta^{(l)} = (W^{(l+1)})^T\Delta^{(l+1)} \odot f'(Z^{(l)})$ is element-wise, not a dot product. Using `np.dot` here silently produces wrong shapes or values.
+- **Applying the chain rule in the wrong order** — The chain rule requires multiplying \\(\partial f/\partial g\\) by \\(\partial g/\partial x\\), not the reverse. Swapping the order produces incorrect gradients that still have plausible-looking magnitudes, making this mistake hard to spot without gradient checking.
+- **Using the pre-activation \\(z\\) where the activation \\(a\\) is expected (or vice versa)** — The weight gradient is \\(\delta^{(l)} (a^{(l-1)})^T\\), using the previous layer's *activation*. Accidentally substituting \\(z\\) produces subtly wrong gradients that converge more slowly or not at all.
+- **Overlooking the element-wise vs. matrix multiplication distinction** — The \\(\odot\\) (Hadamard) product in \\(\Delta^{(l)} = (W^{(l+1)})^T\Delta^{(l+1)} \odot f'(Z^{(l)})\\) is element-wise, not a dot product. Using `np.dot` here silently produces wrong shapes or values.
 - **Sigmoid's vanishing gradient in deep networks** — The sigmoid derivative peaks at 0.25, so multiplying it through many layers shrinks gradients exponentially. The math in this file shows this clearly in the activation derivative plots; in practice, switching to ReLU for hidden layers is the standard fix.
-- **Forgetting to sum bias gradients across the batch** — The bias gradient is $\sum_i \Delta^{(l)}_i$, a sum over the batch dimension. Missing the sum gives a gradient shaped (batch, neurons) instead of (neurons,), causing a shape error or (worse) silent broadcasting.
+- **Forgetting to sum bias gradients across the batch** — The bias gradient is \\(\sum_i \Delta^{(l)}_i\\), a sum over the batch dimension. Missing the sum gives a gradient shaped (batch, neurons) instead of (neurons,), causing a shape error or (worse) silent broadcasting.
 - **Using MSE loss with a sigmoid output for classification** — MSE paired with sigmoid produces a non-convex loss surface with slow-moving gradients near 0 and 1. Use binary cross-entropy instead, whose derivative cancels the sigmoid's saturation and gives a cleaner gradient signal.
 
 ## Additional Resources
