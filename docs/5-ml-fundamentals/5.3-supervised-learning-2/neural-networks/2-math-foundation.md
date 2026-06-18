@@ -108,7 +108,9 @@ def tanh_derivative(x):
 ### Common Loss Functions
 
 1. **Mean Squared Error (MSE)**
+
    $$L_{\text{MSE}} = \frac{1}{n}\sum_{i=1}^n (y_i - \hat{y}_i)^2$$
+
    $$\frac{\partial L_{\text{MSE}}}{\partial \hat{y}_i} = -\frac{2}{n}(y_i - \hat{y}_i)$$
 
 ```python
@@ -120,7 +122,9 @@ def mse_derivative(y_true, y_pred):
 ```
 
 2. **Binary Cross-Entropy**
+
    $$L_{\text{BCE}} = -\frac{1}{n}\sum_{i=1}^n [y_i\log(\hat{y}_i) + (1-y_i)\log(1-\hat{y}_i)]$$
+
    $$\frac{\partial L_{\text{BCE}}}{\partial \hat{y}_i} = -\frac{y_i}{\hat{y}_i} + \frac{1-y_i}{1-\hat{y}_i}$$
 
 ```python

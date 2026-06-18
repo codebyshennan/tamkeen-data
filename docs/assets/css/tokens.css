@@ -1,0 +1,71 @@
+/* ============================================================================
+   Design tokens — single source of truth for color/theme.
+   Loaded BEFORE every other stylesheet (see _layouts/default.html).
+   Rebrand = edit this file only. style.css / callouts.css / chatbot-widget.css
+   all consume these via var(--token).
+   ========================================================================== */
+:root {
+    --bg-page: #ffffff;
+    --bg-card: #ffffff;
+    --text: #24292e;
+    --text-muted: #57606a;
+    --border: #d0d7de;
+    /* SkillsU brand — magenta. --brand is the vivid identity color (decorative:
+       accent bars, fills, focus rings, hover tints). --link is a deepened brand
+       shade tuned for body-text contrast (4.76:1 on #fff, WCAG AA). */
+    --brand: #ea3399;
+    --brand-rgb: 234, 51, 153;
+    --link: #d81b85;
+    --header-bg: #ffffff;
+    --code-bg: #f6f8fa;
+    --shadow: rgba(0, 0, 0, 0.1);
+    /* Lesson callouts (aside.lesson-callout): accent bar + optional tints */
+    --lesson-callout-accent: #ea3399;
+    --lesson-callout-accent-rgb: 234, 51, 153;
+    --lesson-callout-surface: #f6f8fa;
+    /* Markdown tables */
+    --table-border: #d0d7de;
+    --table-header-bg: #f6f8fa;
+    --table-row-alt: rgba(175, 184, 193, 0.12);
+    --table-row-hover: rgba(234, 51, 153, 0.06);
+    /* Module timeline colors (mod-1 = brand; mod-2..6 stay as wayfinding hues) */
+    --mod-0: #6e7781;
+    --mod-1: #ea3399;
+    --mod-2: #0e8a6e;
+    --mod-3: #8250df;
+    --mod-4: #bf6b00;
+    --mod-5: #1a7f37;
+    --mod-6: #cf222e;
+    --timeline-line: rgba(234, 51, 153, 0.25);
+}
+
+:root[data-theme="dark"] {
+    --bg-page: #0d1117;
+    --bg-card: #161b22;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --border: #30363d;
+    /* Brand magenta, lightened for dark surfaces (#f778ba ≈ 7.3:1 on #0d1117). */
+    --brand: #f778ba;
+    --brand-rgb: 247, 120, 186;
+    --link: #f778ba;
+    --header-bg: #161b22;
+    --code-bg: #0d1117;
+    --shadow: rgba(0, 0, 0, 0.45);
+    --lesson-callout-accent: #f778ba;
+    --lesson-callout-accent-rgb: 247, 120, 186;
+    --lesson-callout-surface: #161b22;
+    --table-border: #30363d;
+    --table-header-bg: #21262d;
+    --table-row-alt: rgba(110, 118, 129, 0.14);
+    --table-row-hover: rgba(247, 120, 186, 0.08);
+    /* Module timeline colors */
+    --mod-0: #8b949e;
+    --mod-1: #f778ba;
+    --mod-2: #3fb68b;
+    --mod-3: #b87fff;
+    --mod-4: #d29922;
+    --mod-5: #56d364;
+    --mod-6: #f47067;
+    --timeline-line: rgba(247, 120, 186, 0.25);
+}

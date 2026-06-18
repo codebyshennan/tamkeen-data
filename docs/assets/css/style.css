@@ -1,61 +1,6 @@
-/* Main styles for the site */
-:root {
-    --bg-page: #f6f8fa;
-    --bg-card: #ffffff;
-    --text: #24292e;
-    --text-muted: #57606a;
-    --border: #d0d7de;
-    --link: #0969da;
-    --header-bg: #ffffff;
-    --code-bg: #f6f8fa;
-    --shadow: rgba(0, 0, 0, 0.1);
-    /* Lesson callouts (aside.lesson-callout): accent bar + optional tints */
-    --lesson-callout-accent: #0969da;
-    --lesson-callout-accent-rgb: 9, 105, 218;
-    --lesson-callout-surface: #f6f8fa;
-    /* Markdown tables */
-    --table-border: #d0d7de;
-    --table-header-bg: #f6f8fa;
-    --table-row-alt: rgba(175, 184, 193, 0.12);
-    --table-row-hover: rgba(9, 105, 218, 0.06);
-    /* Module timeline colors */
-    --mod-0: #6e7781;
-    --mod-1: #0969da;
-    --mod-2: #0e8a6e;
-    --mod-3: #8250df;
-    --mod-4: #bf6b00;
-    --mod-5: #1a7f37;
-    --mod-6: #cf222e;
-    --timeline-line: rgba(9, 105, 218, 0.25);
-}
-
-:root[data-theme="dark"] {
-    --bg-page: #0d1117;
-    --bg-card: #161b22;
-    --text: #e6edf3;
-    --text-muted: #8b949e;
-    --border: #30363d;
-    --link: #58a6ff;
-    --header-bg: #161b22;
-    --code-bg: #0d1117;
-    --shadow: rgba(0, 0, 0, 0.45);
-    --lesson-callout-accent: #58a6ff;
-    --lesson-callout-accent-rgb: 88, 166, 255;
-    --lesson-callout-surface: #161b22;
-    --table-border: #30363d;
-    --table-header-bg: #21262d;
-    --table-row-alt: rgba(110, 118, 129, 0.14);
-    --table-row-hover: rgba(88, 166, 255, 0.08);
-    /* Module timeline colors */
-    --mod-0: #8b949e;
-    --mod-1: #58a6ff;
-    --mod-2: #3fb68b;
-    --mod-3: #b87fff;
-    --mod-4: #d29922;
-    --mod-5: #56d364;
-    --mod-6: #f47067;
-    --timeline-line: rgba(88, 166, 255, 0.25);
-}
+/* Main styles for the site.
+   Design tokens (:root color/theme variables) now live in tokens.css, which is
+   loaded first in _layouts/default.html. Rebrand there, not here. */
 
 body {
     background-color: var(--bg-page);
@@ -171,7 +116,7 @@ body {
 }
 
 .markdown-body .code-block__copy:focus-visible {
-    outline: 2px solid #0969da;
+    outline: 2px solid var(--brand, #ea3399);
     outline-offset: 2px;
 }
 
@@ -547,7 +492,7 @@ body {
 }
 
 .breadcrumb-nav a {
-    color: #0969da;
+    color: var(--link, #d81b85);
     text-decoration: none;
 }
 
@@ -580,22 +525,22 @@ body {
     font-size: 0.9375rem;
     font-weight: 600;
     line-height: 1.2;
-    color: var(--link, #0969da);
+    color: var(--link, #d81b85);
     text-decoration: none;
     border-radius: 8px;
-    border: 1px solid color-mix(in srgb, var(--link, #0969da) 28%, transparent);
-    background: color-mix(in srgb, var(--link, #0969da) 9%, var(--bg-page, #fff));
+    border: 1px solid color-mix(in srgb, var(--link, #d81b85) 28%, transparent);
+    background: color-mix(in srgb, var(--link, #d81b85) 9%, var(--bg-page, #fff));
     transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .lesson-slides-top__link:hover {
     text-decoration: none;
-    background: color-mix(in srgb, var(--link, #0969da) 16%, var(--bg-page, #fff));
-    border-color: color-mix(in srgb, var(--link, #0969da) 40%, transparent);
+    background: color-mix(in srgb, var(--link, #d81b85) 16%, var(--bg-page, #fff));
+    border-color: color-mix(in srgb, var(--link, #d81b85) 40%, transparent);
 }
 
 .lesson-slides-top__link:focus-visible {
-    outline: 2px solid var(--link, #0969da);
+    outline: 2px solid var(--link, #d81b85);
     outline-offset: 2px;
 }
 
@@ -650,13 +595,13 @@ body {
 
 /* Slides — blue */
 .lesson-resource-btn--slides {
-    color: var(--link, #0969da);
-    border-color: color-mix(in srgb, var(--link, #0969da) 28%, transparent);
-    background: color-mix(in srgb, var(--link, #0969da) 9%, var(--bg-page, #fff));
+    color: var(--link, #d81b85);
+    border-color: color-mix(in srgb, var(--link, #d81b85) 28%, transparent);
+    background: color-mix(in srgb, var(--link, #d81b85) 9%, var(--bg-page, #fff));
 }
 .lesson-resource-btn--slides:hover {
-    background: color-mix(in srgb, var(--link, #0969da) 16%, var(--bg-page, #fff));
-    border-color: color-mix(in srgb, var(--link, #0969da) 40%, transparent);
+    background: color-mix(in srgb, var(--link, #d81b85) 16%, var(--bg-page, #fff));
+    border-color: color-mix(in srgb, var(--link, #d81b85) 40%, transparent);
 }
 
 /* Notebook — orange (Colab palette) */
@@ -1017,20 +962,20 @@ body {
     right: 0;
     box-sizing: border-box;
     border-radius: 0 5px 5px 0;
-    border-left: 3px solid var(--code-explainer-accent, #0969da);
+    border-left: 3px solid var(--code-explainer-accent, #ea3399);
     /* Solid rgba so highlights show even without color-mix() support */
-    background: var(--code-explainer-bg, rgba(9, 105, 218, 0.2));
+    background: var(--code-explainer-bg, rgba(234, 51, 153, 0.2));
     transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .markdown-body .code-explainer__line-highlight.is-active {
-    background: var(--code-explainer-bg-active, rgba(9, 105, 218, 0.32));
+    background: var(--code-explainer-bg-active, rgba(234, 51, 153, 0.32));
 }
 
 .markdown-body .code-explainer__line-highlight--tint-1 {
-    --code-explainer-accent: #0969da;
-    --code-explainer-bg: rgba(9, 105, 218, 0.2);
-    --code-explainer-bg-active: rgba(9, 105, 218, 0.34);
+    --code-explainer-accent: #ea3399;
+    --code-explainer-bg: rgba(234, 51, 153, 0.2);
+    --code-explainer-bg-active: rgba(234, 51, 153, 0.34);
 }
 
 .markdown-body .code-explainer__line-highlight--tint-2 {
@@ -1096,11 +1041,11 @@ body {
     width: 22px;
     height: 3px;
     border-radius: 2px;
-    background: var(--callout-accent-title, #0969da);
+    background: var(--callout-accent-title, #ea3399);
 }
 
 .markdown-body .code-callout[data-tint="1"] .code-callout__title::before {
-    background: #0969da;
+    background: #ea3399;
 }
 
 .markdown-body .code-callout[data-tint="2"] .code-callout__title::before {
@@ -1152,8 +1097,8 @@ body {
 }
 
 .markdown-body .code-callout[data-tint="1"] .code-callout__lines {
-    background: color-mix(in srgb, #0969da 12%, #eaeef2);
-    color: #0550ae;
+    background: color-mix(in srgb, #ea3399 12%, #eaeef2);
+    color: #a01563;
 }
 
 .markdown-body .code-callout[data-tint="2"] .code-callout__lines {
@@ -1929,14 +1874,14 @@ body.site-search-open {
     border-radius: 0;
     border: none;
     border-bottom: 1px solid var(--border);
-    background: radial-gradient(ellipse at 50% 0%, rgba(9, 105, 218, 0.08) 0%, transparent 70%),
+    background: radial-gradient(ellipse at 50% 0%, rgba(234, 51, 153, 0.08) 0%, transparent 70%),
                 linear-gradient(180deg, var(--bg-card) 0%, var(--bg-page) 100%);
     box-shadow: none;
     text-align: center;
 }
 
 :root[data-theme="dark"] .home-page .home-hero {
-    background: radial-gradient(ellipse at 50% 0%, rgba(88, 166, 255, 0.1) 0%, transparent 70%),
+    background: radial-gradient(ellipse at 50% 0%, rgba(247, 120, 186, 0.1) 0%, transparent 70%),
                 linear-gradient(180deg, var(--bg-card) 0%, var(--bg-page) 100%);
 }
 
@@ -2213,7 +2158,8 @@ body.site-search-open {
 .site-header__logo-icon {
     display: block;
     flex-shrink: 0;
-    color: var(--text);
+    /* Brand magenta — mirrors SkillsU's mark for cross-product continuity */
+    color: var(--brand);
 }
 
 .site-header__logo-text {

@@ -33,7 +33,7 @@
 
 .markdown-body blockquote[data-callout-type="note"],
 .markdown-body .lesson-callout[data-callout-type="note"] {
-  --callout-type-accent: #0969da;
+  --callout-type-accent: #ea3399;
   --callout-type-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22black%22%3E%3Cpath%20d%3D%22M12%202C6.48%202%202%206.48%202%2012s4.48%2010%2010%2010%2010-4.48%2010-10S17.52%202%2012%202zm1%2015h-2v-6h2v6zm0-8h-2V7h2v2z%22%2F%3E%3C%2Fsvg%3E");
 }
 .markdown-body blockquote[data-callout-type="warning"],
