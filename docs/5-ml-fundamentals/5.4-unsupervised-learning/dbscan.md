@@ -1,5 +1,5 @@
 ---
-reading_minutes: 11
+reading_minutes: 15
 objectives:
   - "Describe DBSCAN's core / border / noise classification and how `eps` and `min_samples` shape the result."
   - "Identify when density clustering beats k-means: arbitrary cluster shapes, unknown cluster count, and explicit outlier handling."
@@ -20,6 +20,10 @@ DBSCAN finds dense neighborhoods in feature space. Unlike K-Means, it does not a
 
 Points in dense areas become clusters. Points that are too isolated are labeled `-1`, meaning noise or outlier.
 
+This makes DBSCAN useful when the shape of the group matters. K-Means draws boundaries around centroids, so it prefers round groups. DBSCAN follows connected dense regions, so it can find crescents, rings, and irregular geographic or behavioral patterns.
+
+The tradeoff is parameter sensitivity. DBSCAN does not need `k`, but it does need a good distance scale.
+
 ## Quick Reference
 
 {% include mermaid-diagram.html src="5-ml-fundamentals/5.4-unsupervised-learning/diagrams/dbscan-1.mmd" %}
@@ -30,6 +34,18 @@ DBSCAN is ideal when:
 - You need to identify noise or outliers.
 - You do not know the number of clusters.
 - The dataset is scaled and distance is meaningful.
+
+## Core, Border, and Noise Points
+
+DBSCAN classifies points by density:
+
+| Point type | Meaning | What happens |
+| --- | --- | --- |
+| Core point | Has at least `min_samples` points within distance `eps` | Starts or expands a cluster |
+| Border point | Is close to a core point but does not have enough neighbors itself | Joins a nearby cluster |
+| Noise point | Is not close enough to any core point | Receives label `-1` |
+
+Clusters form by connecting core points that can reach each other through dense neighborhoods. This is why DBSCAN can follow curved shapes without using centroids.
 
 ## Worked Example
 
@@ -71,6 +87,18 @@ plt.close()
 <figcaption>Figure 1: DBSCAN separates curved groups because it follows density instead of centroid distance.</figcaption>
 </figure>
 
+## How to Read the Chart
+
+The two moons are not round. A centroid method would tend to split the shape with straight-ish regions. DBSCAN instead asks whether points are connected through nearby dense neighborhoods.
+
+When reading a DBSCAN plot:
+
+- Same-colored points are connected by density.
+- A `-1` color means noise or outlier.
+- Curved clusters are acceptable; DBSCAN does not require spherical groups.
+- If one visible group is split into many fragments, `eps` is probably too small.
+- If several visible groups merge together, `eps` is probably too large.
+
 ## Interpreting Labels
 
 DBSCAN labels are still arbitrary integers, but `-1` has a special meaning:
@@ -111,6 +139,42 @@ plt.close()
 </figure>
 
 For a more systematic choice, plot each point's distance to its `min_samples`-th nearest neighbor and look for the elbow. Use that distance as a starting point for `eps`, then inspect the clusters visually.
+
+## Choosing `min_samples`
+
+`min_samples` controls how dense a region must be before it can become a cluster.
+
+- Smaller values make DBSCAN more willing to form clusters.
+- Larger values make DBSCAN stricter and label more points as noise.
+- A common starting point is `min_samples = 2 * number_of_features`.
+
+For a two-dimensional teaching dataset, `min_samples=5` is a reasonable default. For real data, tune it together with `eps` and always report the noise fraction.
+
+## Beginner Workflow
+
+Use this sequence when trying DBSCAN:
+
+1. Choose numeric features where distance has a meaningful interpretation.
+2. Scale the features with `StandardScaler`.
+3. Start with `min_samples=5` for small 2D examples, or `2 * n_features` for larger tabular data.
+4. Sweep a few `eps` values and plot the result.
+5. Count clusters and noise points.
+6. Inspect whether the noise points are plausible outliers or just a bad parameter setting.
+
+## Mini Practice
+
+Use the same `make_moons` dataset and try:
+
+- `eps=0.10`
+- `eps=0.25`
+- `eps=0.60`
+
+For each setting, answer:
+
+1. How many clusters were found?
+2. What fraction of points were labeled `-1`?
+3. Does the result match the visible moon shapes?
+4. Which setting would you keep, and why?
 
 ## Gotchas
 

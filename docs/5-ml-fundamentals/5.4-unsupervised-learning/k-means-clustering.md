@@ -1,5 +1,5 @@
 ---
-reading_minutes: 10
+reading_minutes: 15
 objectives:
   - "Walk through Lloyd's algorithm: assign each point to the nearest centroid, recompute centroids, repeat until labels stabilise."
   - "State when k-means is a reasonable choice: roughly spherical clusters of similar size, with `k` known in advance."
@@ -20,6 +20,14 @@ K-Means is a centroid-based clustering algorithm. It tries to divide points into
 
 It works best when the groups are compact, round-ish, and similar in size. It is a poor fit for long curved shapes, heavy outliers, or datasets where you do not have a reasonable guess for `k`.
 
+In a real project, K-Means is usually a first clustering baseline. It gives you a fast answer to questions like:
+
+- Are there natural customer segments in this table?
+- Can similar products be grouped by price, size, or usage features?
+- Do sensor readings fall into a few common operating states?
+
+The important phrase is **fast answer**, not final truth. K-Means will always return clusters if you ask it to, even when the data does not contain meaningful groups. Your job is to inspect the result and decide whether the clusters make sense.
+
 ## Helpful video
 
 StatQuest overview of K-means clustering.
@@ -37,6 +45,25 @@ K-Means alternates between assignment and update steps:
 - **Repeat:** stop when assignments stop changing or the maximum iterations are reached.
 
 The final cluster labels are arbitrary integers. Cluster `0` does not mean "first", "best", or "smallest"; it only names one discovered group.
+
+## What K-Means Optimizes
+
+K-Means tries to minimize the total squared distance between each point and the centroid assigned to it. Scikit-learn reports this value as `inertia_`.
+
+Lower inertia means points are closer to their centroids, but inertia alone does not prove that the clusters are meaningful. If you increase `k`, inertia almost always goes down because each centroid has fewer points to cover. That is why the elbow method looks for the point where adding another cluster stops helping much.
+
+## Step-by-Step Workflow
+
+For beginner projects, use this sequence:
+
+1. Select numeric features that describe the behavior you care about.
+2. Scale the features with `StandardScaler`.
+3. Pick a small range of `k` values to try.
+4. Fit K-Means for each `k`.
+5. Compare inertia, silhouette score, and the actual cluster profiles.
+6. Visualise the clusters in two dimensions with PCA or UMAP if the data has many features.
+
+Do not start by searching for the "perfect" `k`. Start by asking what cluster result would be useful for the problem.
 
 ## Worked Example
 
@@ -93,6 +120,19 @@ plt.close()
 <figcaption>Figure 1: K-Means recovers compact blob-shaped groups and marks each centroid with a red X.</figcaption>
 </figure>
 
+## How to Read the Chart
+
+The left plot shows the synthetic groups used to create the data. In real unsupervised learning you usually do not have these true labels; they are included here so you can learn what a good recovery looks like.
+
+The right plot shows K-Means assignments:
+
+- Points with the same color belong to the same learned cluster.
+- Red X markers are centroids.
+- A point is assigned to the nearest centroid, not to the visually closest color region.
+- If centroids sit between two visible groups, K-Means may be merging groups that should stay separate.
+
+When you inspect your own clusters, ask: do the colored groups form coherent regions, and do their feature averages make sense?
+
 ## Reading the Fitted Model
 
 After fitting, the estimator stores useful attributes:
@@ -112,6 +152,18 @@ print("Inertia:", round(kmeans.inertia_, 2))
 
 Start with a domain guess, then compare it with an elbow plot from the full [Clustering Guide](clustering.md). If `k=4` and `k=5` have similar inertia, prefer the simpler result unless domain knowledge says the fifth group matters.
 
+<figure>
+<img src="assets/elbow_method.png" alt="Elbow plot of K-Means inertia against number of clusters" />
+<figcaption>Figure 2: The elbow method looks for the point where the inertia curve starts flattening.</figcaption>
+</figure>
+
+The elbow plot is a heuristic. It is helpful when the bend is obvious. If the line decreases smoothly with no clear bend, use another signal:
+
+- **Silhouette score:** are points closer to their own cluster than to other clusters?
+- **Cluster sizes:** are some clusters tiny because they only contain outliers?
+- **Cluster profiles:** do the average feature values tell a useful story?
+- **Business constraint:** do stakeholders need 3 segments, 5 segments, or a small number that is easy to act on?
+
 Use K-Means when:
 
 - You can choose a reasonable `k`.
@@ -124,6 +176,30 @@ Avoid K-Means when:
 - Clusters are crescent-shaped, ring-shaped, or strongly elongated.
 - Outliers are important instead of noise to ignore.
 - Cluster density varies a lot across the dataset.
+
+## Beginner Checklist
+
+Before you trust a K-Means result, check:
+
+- Did you scale numeric features?
+- Did you set `random_state` for reproducibility?
+- Did you set `n_init` so the model tries multiple starts?
+- Did you compare at least a few `k` values?
+- Did you inspect the cluster centers in original feature units?
+- Did you avoid treating cluster labels as true class labels?
+
+## Mini Practice
+
+Use the Iris dataset and try `k=2`, `k=3`, and `k=4`.
+
+For each value:
+
+1. Fit K-Means on scaled features.
+2. Record `inertia_`.
+3. Plot the clusters after PCA to two dimensions.
+4. Compare the cluster profiles by taking the mean of each original feature per cluster.
+
+Then answer: which `k` gives the most interpretable grouping, and why?
 
 ## Gotchas
 

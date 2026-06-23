@@ -1,5 +1,5 @@
 ---
-reading_minutes: 11
+reading_minutes: 15
 objectives:
   - "Explain bottom-up agglomerative clustering and how a dendrogram encodes the order in which clusters merge."
   - "Compare ward / complete / average / single linkage and how each shapes the resulting cluster geometry."
@@ -22,6 +22,14 @@ Hierarchical clustering builds a tree of relationships between observations. The
 
 This is useful when you care about the nested structure of the data, not just one flat clustering result.
 
+Think of this as a clustering method that keeps a history. K-Means gives you one final partition. Hierarchical clustering gives you the sequence of merges that led to the final partition, which is why the dendrogram is central to the method.
+
+Use it when you want to ask questions like:
+
+- Which customers are similar at a broad level, and which are similar only within a narrow subgroup?
+- Are there two big groups that split naturally into smaller groups?
+- At what distance do separate groups start merging together?
+
 ## Quick Reference
 
 {% include mermaid-diagram.html src="5-ml-fundamentals/5.4-unsupervised-learning/diagrams/hierarchical-clustering-1.mmd" %}
@@ -32,6 +40,14 @@ Hierarchical clustering is ideal when:
 - You do not know the number of clusters in advance.
 - You have a small to medium dataset.
 - You need a dendrogram to explain how groups relate.
+
+## What the Dendrogram Adds
+
+A flat clustering result only says "these rows belong together." A dendrogram also shows **when** they were joined.
+
+Low merge height means two points or groups were very similar. High merge height means the algorithm had to connect groups that were farther apart. The most useful cut is often just below a large jump in merge height.
+
+That makes hierarchical clustering especially useful as an exploratory tool before choosing a final number of clusters.
 
 ## Worked Example
 
@@ -84,6 +100,19 @@ plt.close()
 <figcaption>Figure 1: The dendrogram shows the merge history. Large vertical gaps suggest natural cut heights.</figcaption>
 </figure>
 
+## How to Read the Chart
+
+The first panel shows the synthetic groups used to create the example. The second panel shows the flat labels from `AgglomerativeClustering(n_clusters=4)`. The third panel shows the dendrogram.
+
+Read the dendrogram from bottom to top:
+
+- At the bottom, each point starts separate.
+- Short branches merge very similar points.
+- Taller branches merge larger groups.
+- A horizontal cut across the tree gives the final number of clusters.
+
+If you cut the tree lower, you get more clusters. If you cut it higher, smaller groups merge into fewer broader clusters.
+
 ## Reading a Dendrogram
 
 In a dendrogram:
@@ -108,6 +137,17 @@ The linkage method defines "distance between clusters":
 
 Use `ward` as a clean default for numeric, scaled Euclidean data. Try `complete` or `average` when the dendrogram looks too chained.
 
+## Choosing the Number of Clusters
+
+There are two common ways to choose the final grouping:
+
+- Set `n_clusters` directly in `AgglomerativeClustering`.
+- Choose a cut height from the dendrogram and use that as the cluster boundary.
+
+For beginners, start with the dendrogram. Look for a large vertical gap where no horizontal branches cross. Cutting through that gap often separates groups before the algorithm starts merging dissimilar clusters.
+
+After choosing the number of clusters, inspect the cluster profiles just like you would for K-Means. A visually clean dendrogram is not enough; the resulting groups still need to make sense in the original feature space.
+
 ## Beginner Workflow
 
 1. Scale numeric features first.
@@ -115,6 +155,24 @@ Use `ward` as a clean default for numeric, scaled Euclidean data. Try `complete`
 3. Pick a cut height or `n_clusters`.
 4. Fit `AgglomerativeClustering`.
 5. Visualise the cluster assignments in PCA/UMAP space if the original data has many features.
+
+## Mini Practice
+
+Take the same blob dataset and try three linkage methods:
+
+```python
+for linkage_name in ["ward", "complete", "average"]:
+    model = AgglomerativeClustering(n_clusters=4, linkage=linkage_name)
+    labels = model.fit_predict(X)
+    print(linkage_name, labels[:10])
+```
+
+Then answer:
+
+1. Do the cluster assignments change?
+2. Which linkage gives the cleanest separation?
+3. Does the dendrogram show one obvious cut height?
+4. Would this method still be practical if you had 100,000 rows?
 
 ## Gotchas
 

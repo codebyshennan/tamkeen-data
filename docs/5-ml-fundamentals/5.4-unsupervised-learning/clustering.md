@@ -107,6 +107,11 @@ plt.close()
 </aside>
 </div>
 
+<figure>
+<img src="assets/kmeans_example.png" alt="Side-by-side scatter plots of original synthetic groups and K-Means cluster assignments with centroid markers" />
+<figcaption>Figure 1: K-Means works well on compact, blob-shaped clusters and marks each learned centroid with a red X.</figcaption>
+</figure>
+
 ### 2. Hierarchical Clustering
 
 Think of Hierarchical Clustering as building a family tree of your data:
@@ -179,6 +184,11 @@ plt.close()
 </aside>
 </div>
 
+<figure>
+<img src="assets/hierarchical_clustering.png" alt="Original groups, hierarchical clustering assignments, and a dendrogram showing merge distances" />
+<figcaption>Figure 2: Hierarchical clustering produces both flat cluster labels and a dendrogram that shows how groups merge as distance increases.</figcaption>
+</figure>
+
 ### 3. DBSCAN (Density-Based Spatial Clustering of Applications with Noise)
 
 Think of DBSCAN as a smart city planner who:
@@ -192,13 +202,17 @@ Think of DBSCAN as a smart city planner who:
 
 {% highlight python %}
 from sklearn.cluster import DBSCAN
+from sklearn.datasets import make_moons
 from sklearn.preprocessing import StandardScaler
 
+# Create curved clusters that are difficult for centroid-based methods
+X_moons, y_moons = make_moons(n_samples=300, noise=0.06, random_state=42)
+
 # DBSCAN uses Euclidean distance — scale first (see Gotchas)
-X_scaled = StandardScaler().fit_transform(X)
+X_scaled = StandardScaler().fit_transform(X_moons)
 
 # Apply DBSCAN (eps is in scaled units)
-dbscan = DBSCAN(eps=0.3, min_samples=5)
+dbscan = DBSCAN(eps=0.25, min_samples=5)
 y_dbscan = dbscan.fit_predict(X_scaled)
 
 # Create visualization
@@ -206,14 +220,14 @@ plt.figure(figsize=(10, 5))
 
 # Original data
 plt.subplot(121)
-plt.scatter(X[:, 0], X[:, 1], c=y, cmap='viridis')
-plt.title('Original Data')
+plt.scatter(X_moons[:, 0], X_moons[:, 1], c=y_moons, cmap='viridis')
+plt.title('Original Moon-Shaped Groups')
 plt.xlabel('Feature 1')
 plt.ylabel('Feature 2')
 
 # DBSCAN clusters
 plt.subplot(122)
-plt.scatter(X[:, 0], X[:, 1], c=y_dbscan, cmap='viridis')
+plt.scatter(X_moons[:, 0], X_moons[:, 1], c=y_dbscan, cmap='viridis')
 plt.title('DBSCAN Clustering')
 plt.xlabel('Feature 1')
 plt.ylabel('Feature 2')
@@ -225,16 +239,16 @@ plt.close()
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-9" data-tint="1">
+  <div class="code-callout" data-lines="1-12" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">DBSCAN Parameters</span>
     </div>
     <div class="code-callout__body">
-      <p><code>eps=0.3</code> sets the neighborhood radius; <code>min_samples=5</code> sets the density threshold; points labeled -1 by <code>fit_predict</code> are noise (outliers not in any cluster).</p>
+      <p><code>eps=0.25</code> sets the neighborhood radius; <code>min_samples=5</code> sets the density threshold; points labeled -1 by <code>fit_predict</code> are noise (outliers not in any cluster).</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="11-30" data-tint="2">
+  <div class="code-callout" data-lines="14-33" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Visualize Results</span>
@@ -245,6 +259,11 @@ plt.close()
   </div>
 </aside>
 </div>
+
+<figure>
+<img src="assets/dbscan_example.png" alt="Side-by-side scatter plots of moon-shaped data and DBSCAN cluster labels" />
+<figcaption>Figure 3: DBSCAN follows dense regions, so it can separate curved clusters without being told the number of clusters.</figcaption>
+</figure>
 
 ## How to Choose the Right Algorithm
 
@@ -329,6 +348,11 @@ def find_optimal_clusters(X, max_clusters=10):
   </div>
 </aside>
 </div>
+
+<figure>
+<img src="assets/elbow_method.png" alt="Elbow plot of K-Means inertia against number of clusters" />
+<figcaption>Figure 4: The elbow method looks for the point where adding another cluster stops reducing inertia substantially.</figcaption>
+</figure>
 
 ## Common Mistakes to Avoid
 
