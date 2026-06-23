@@ -13,7 +13,8 @@
     <h2 class="lesson-meta__objectives-title">In this lesson</h2>
     <ul class="lesson-meta__objectives-list">
       {% for obj in page.objectives %}
-      <li>{{ obj | escape }}</li>
+      {% capture objective_html %}{{ obj | markdownify }}{% endcapture %}
+      <li>{{ objective_html | replace: '<p>', '' | replace: '</p>', '' | strip }}</li>
       {% endfor %}
     </ul>
   </div>

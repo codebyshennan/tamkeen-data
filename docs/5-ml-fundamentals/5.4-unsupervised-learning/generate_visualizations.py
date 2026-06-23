@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import umap
 from scipy.cluster.hierarchy import dendrogram, linkage
-from sklearn.cluster import DBSCAN, AgglomerativeClustering, KMeans
-from sklearn.datasets import load_digits, make_blobs
+from sklearn.cluster import DBSCAN, AgglomerativeClustering, HDBSCAN, KMeans
+from sklearn.datasets import load_digits, make_blobs, make_moons
 from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
 from sklearn.preprocessing import StandardScaler
@@ -256,26 +256,41 @@ def generate_clustering_visualizations():
     plt.savefig("assets/hierarchical_clustering.png")
     plt.close()
 
-    # DBSCAN — scale first (Euclidean distance is scale-sensitive)
-    X_scaled = StandardScaler().fit_transform(X)
-    dbscan = DBSCAN(eps=0.3, min_samples=5)
+    # DBSCAN — use a curved dataset so the density behavior is visible.
+    X_moons, y_moons = make_moons(n_samples=300, noise=0.06, random_state=42)
+    X_scaled = StandardScaler().fit_transform(X_moons)
+    dbscan = DBSCAN(eps=0.25, min_samples=5)
     y_dbscan = dbscan.fit_predict(X_scaled)
 
     plt.figure(figsize=(10, 5))
     plt.subplot(121)
-    plt.scatter(X[:, 0], X[:, 1], c=y, cmap="viridis")
-    plt.title("Original Data")
+    plt.scatter(X_moons[:, 0], X_moons[:, 1], c=y_moons, cmap="viridis")
+    plt.title("Original Moon-Shaped Groups")
     plt.xlabel("Feature 1")
     plt.ylabel("Feature 2")
 
     plt.subplot(122)
-    plt.scatter(X[:, 0], X[:, 1], c=y_dbscan, cmap="viridis")
+    plt.scatter(X_moons[:, 0], X_moons[:, 1], c=y_dbscan, cmap="viridis")
     plt.title("DBSCAN Clustering")
     plt.xlabel("Feature 1")
     plt.ylabel("Feature 2")
 
     plt.tight_layout()
     plt.savefig("assets/dbscan_example.png")
+    plt.close()
+
+    # DBSCAN eps sweep for beginner parameter tuning.
+    eps_values = [0.12, 0.25, 0.50]
+    fig, axes = plt.subplots(1, len(eps_values), figsize=(15, 4))
+    for ax, eps in zip(axes, eps_values):
+        labels = DBSCAN(eps=eps, min_samples=5).fit_predict(X_scaled)
+        ax.scatter(X_moons[:, 0], X_moons[:, 1], c=labels, cmap="viridis")
+        ax.set_title(f"eps={eps}")
+        ax.set_xlabel("Feature 1")
+        ax.set_ylabel("Feature 2")
+
+    plt.tight_layout()
+    plt.savefig("assets/dbscan_eps_sweep.png")
     plt.close()
 
     # Elbow method
@@ -292,6 +307,46 @@ def generate_clustering_visualizations():
     plt.title("Elbow Method")
     plt.grid(True)
     plt.savefig("assets/elbow_method.png")
+    plt.close()
+
+    # HDBSCAN advanced density example.
+    X1, _ = make_moons(n_samples=200, noise=0.05, random_state=42)
+    X2, _ = make_blobs(
+        n_samples=100,
+        centers=[[2, 0]],
+        cluster_std=0.5,
+        random_state=42,
+    )
+    X_hdbscan = np.vstack([X1, X2])
+
+    clusterer = HDBSCAN(min_cluster_size=5, min_samples=3)
+    cluster_labels = clusterer.fit_predict(X_hdbscan)
+
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
+    scatter1 = ax1.scatter(
+        X_hdbscan[:, 0],
+        X_hdbscan[:, 1],
+        c=cluster_labels,
+        cmap="viridis",
+    )
+    ax1.set_title("HDBSCAN Cluster Labels")
+    ax1.set_xlabel("Feature 1")
+    ax1.set_ylabel("Feature 2")
+    plt.colorbar(scatter1, ax=ax1)
+
+    scatter2 = ax2.scatter(
+        X_hdbscan[:, 0],
+        X_hdbscan[:, 1],
+        c=clusterer.probabilities_,
+        cmap="viridis",
+    )
+    ax2.set_title("HDBSCAN Membership Probabilities")
+    ax2.set_xlabel("Feature 1")
+    ax2.set_ylabel("Feature 2")
+    plt.colorbar(scatter2, ax=ax2)
+
+    plt.tight_layout()
+    plt.savefig("assets/hdbscan_example.png")
     plt.close()
 
 

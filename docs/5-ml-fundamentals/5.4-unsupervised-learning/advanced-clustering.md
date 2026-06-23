@@ -42,20 +42,25 @@ X = np.vstack([X1, X2])
 clusterer = HDBSCAN(min_cluster_size=5, min_samples=3)
 cluster_labels = clusterer.fit_predict(X)
 
-# Plot results
-plt.figure(figsize=(10, 8))
-scatter = plt.scatter(X[:, 0], X[:, 1], c=cluster_labels, cmap='viridis')
-plt.title('HDBSCAN Clustering')
-plt.colorbar(scatter)
-plt.show()
+# Plot hard labels and soft membership confidence side by side
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
 
-# Plot cluster probabilities
-plt.figure(figsize=(10, 8))
-scatter = plt.scatter(X[:, 0], X[:, 1],
-                     c=clusterer.probabilities_, cmap='viridis')
-plt.title('HDBSCAN Cluster Membership Probabilities')
-plt.colorbar(scatter)
-plt.show()
+scatter1 = ax1.scatter(X[:, 0], X[:, 1], c=cluster_labels, cmap='viridis')
+ax1.set_title('HDBSCAN Cluster Labels')
+ax1.set_xlabel('Feature 1')
+ax1.set_ylabel('Feature 2')
+plt.colorbar(scatter1, ax=ax1)
+
+scatter2 = ax2.scatter(X[:, 0], X[:, 1],
+                       c=clusterer.probabilities_, cmap='viridis')
+ax2.set_title('HDBSCAN Membership Probabilities')
+ax2.set_xlabel('Feature 1')
+ax2.set_ylabel('Feature 2')
+plt.colorbar(scatter2, ax=ax2)
+
+plt.tight_layout()
+plt.savefig('assets/hdbscan_example.png')
+plt.close()
 {% endhighlight %}
 
 </div>
@@ -69,7 +74,7 @@ plt.show()
       <p>Stack a moon-shaped and a blob-shaped distribution to create a dataset with varying density; HDBSCAN finds clusters without requiring an epsilon radius by adapting to local density.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="15-29" data-tint="2">
+  <div class="code-callout" data-lines="15-34" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Labels and Probabilities</span>
@@ -80,6 +85,11 @@ plt.show()
   </div>
 </aside>
 </div>
+
+<figure>
+<img src="assets/hdbscan_example.png" alt="HDBSCAN labels and membership probabilities on a dataset with moons and a blob" />
+<figcaption>Figure 1: HDBSCAN adapts to curved and blob-shaped density regions, while membership probabilities show how confidently each point belongs to its cluster.</figcaption>
+</figure>
 
 ## Gaussian Mixture Models (GMM)
 
@@ -148,7 +158,7 @@ plt.show()
 
 <figure>
 <img src="assets/advanced-clustering_fig_1.png" alt="advanced-clustering" />
-<figcaption>Figure 1: GMM Cluster Assignments</figcaption>
+<figcaption>Figure 2: GMM Cluster Assignments</figcaption>
 </figure>
 
 
@@ -209,7 +219,7 @@ plt.show()
 
 <figure>
 <img src="assets/advanced-clustering_fig_2.png" alt="advanced-clustering" />
-<figcaption>Figure 2: Spectral Clustering</figcaption>
+<figcaption>Figure 3: Spectral Clustering</figcaption>
 </figure>
 
 
