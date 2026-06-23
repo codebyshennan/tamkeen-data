@@ -55,7 +55,7 @@ from sklearn.datasets import make_blobs
 X, y = make_blobs(n_samples=300, centers=4, cluster_std=0.60, random_state=0)
 
 # Apply K-Means
-kmeans = KMeans(n_clusters=4, random_state=42)
+kmeans = KMeans(n_clusters=4, n_init=10, random_state=42)
 kmeans.fit(X)
 y_kmeans = kmeans.predict(X)
 
@@ -111,6 +111,18 @@ plt.close()
 <img src="assets/kmeans_example.png" alt="Side-by-side scatter plots of original synthetic groups and K-Means cluster assignments with centroid markers" />
 <figcaption>Figure 1: K-Means works well on compact, blob-shaped clusters and marks each learned centroid with a red X.</figcaption>
 </figure>
+
+Expected prediction output:
+
+```text
+First 10 labels: [0 2 1 2 0 0 3 1 2 2]
+Centroids:
+[[ 1.98  0.87]
+ [ 0.95  4.42]
+ [-1.37  7.75]
+ [-1.58  2.83]]
+Inertia: 212.01
+```
 
 ### 2. Hierarchical Clustering
 
@@ -189,6 +201,14 @@ plt.close()
 <figcaption>Figure 2: Hierarchical clustering produces both flat cluster labels and a dendrogram that shows how groups merge as distance increases.</figcaption>
 </figure>
 
+Expected prediction output:
+
+```text
+First 10 labels: [2 0 1 0 2 2 3 1 0 0]
+Cluster ids: [0 1 2 3]
+Cluster counts: [75 75 75 75]
+```
+
 ### 3. DBSCAN (Density-Based Spatial Clustering of Applications with Noise)
 
 Think of DBSCAN as a smart city planner who:
@@ -265,6 +285,14 @@ plt.close()
 <figcaption>Figure 3: DBSCAN follows dense regions, so it can separate curved clusters without being told the number of clusters.</figcaption>
 </figure>
 
+Expected prediction output:
+
+```text
+Cluster ids: [0 1]
+Cluster counts: [150 150]
+Noise fraction: 0.0
+```
+
 ## How to Choose the Right Algorithm
 
 ### Use K-Means when
@@ -311,7 +339,7 @@ def find_optimal_clusters(X, max_clusters=10):
     # Calculate inertia for different numbers of clusters
     inertias = []
     for k in range(1, max_clusters + 1):
-        kmeans = KMeans(n_clusters=k, random_state=42)
+        kmeans = KMeans(n_clusters=k, n_init=10, random_state=42)
         kmeans.fit(X)
         inertias.append(kmeans.inertia_)
 
@@ -353,6 +381,12 @@ def find_optimal_clusters(X, max_clusters=10):
 <img src="assets/elbow_method.png" alt="Elbow plot of K-Means inertia against number of clusters" />
 <figcaption>Figure 4: The elbow method looks for the point where adding another cluster stops reducing inertia substantially.</figcaption>
 </figure>
+
+Expected numeric output for `k=1..10`:
+
+```text
+[2812.1, 1190.8, 546.9, 212.0, 188.8, 170.1, 154.0, 138.2, 126.6, 112.8]
+```
 
 ## Common Mistakes to Avoid
 

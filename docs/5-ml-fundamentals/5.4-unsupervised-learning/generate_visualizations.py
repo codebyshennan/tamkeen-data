@@ -197,7 +197,7 @@ def generate_clustering_visualizations():
     X, y = make_blobs(n_samples=300, centers=4, cluster_std=0.60, random_state=0)
 
     # K-Means
-    kmeans = KMeans(n_clusters=4, random_state=42)
+    kmeans = KMeans(n_clusters=4, n_init=10, random_state=42)
     kmeans.fit(X)
     y_kmeans = kmeans.predict(X)
 
@@ -296,7 +296,7 @@ def generate_clustering_visualizations():
     # Elbow method
     inertias = []
     for k in range(1, 11):
-        kmeans = KMeans(n_clusters=k, random_state=42)
+        kmeans = KMeans(n_clusters=k, n_init=10, random_state=42)
         kmeans.fit(X)
         inertias.append(kmeans.inertia_)
 

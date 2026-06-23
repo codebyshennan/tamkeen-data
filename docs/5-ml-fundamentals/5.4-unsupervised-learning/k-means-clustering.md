@@ -140,8 +140,20 @@ After fitting, the estimator stores useful attributes:
 ```python
 print("Cluster labels:", predicted_labels[:10])
 print("Centroids:")
-print(kmeans.cluster_centers_)
+print(kmeans.cluster_centers_.round(2))
 print("Inertia:", round(kmeans.inertia_, 2))
+```
+
+Expected output:
+
+```text
+Cluster labels: [0 2 1 2 0 0 3 1 2 2]
+Centroids:
+[[ 1.98  0.87]
+ [ 0.95  4.42]
+ [-1.37  7.75]
+ [-1.58  2.83]]
+Inertia: 212.01
 ```
 
 - `labels_` or `fit_predict(X)` gives one cluster id per row.

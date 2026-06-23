@@ -104,11 +104,22 @@ When reading a DBSCAN plot:
 DBSCAN labels are still arbitrary integers, but `-1` has a special meaning:
 
 ```python
-cluster_ids = set(predicted_labels)
+import numpy as np
+
+cluster_ids, cluster_counts = np.unique(predicted_labels, return_counts=True)
 noise_fraction = (predicted_labels == -1).mean()
 
 print("Cluster ids:", cluster_ids)
+print("Cluster counts:", cluster_counts)
 print("Noise fraction:", round(noise_fraction, 3))
+```
+
+Expected output:
+
+```text
+Cluster ids: [0 1]
+Cluster counts: [150 150]
+Noise fraction: 0.0
 ```
 
 If almost everything is `-1`, `eps` is probably too small or `min_samples` is too high. If almost everything is one label, `eps` is probably too large.

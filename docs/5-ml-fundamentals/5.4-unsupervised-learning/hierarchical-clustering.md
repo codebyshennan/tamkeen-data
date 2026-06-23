@@ -113,6 +113,30 @@ Read the dendrogram from bottom to top:
 
 If you cut the tree lower, you get more clusters. If you cut it higher, smaller groups merge into fewer broader clusters.
 
+## Reading the Fitted Labels
+
+`AgglomerativeClustering` returns one label per row when you call `fit_predict`.
+
+```python
+import numpy as np
+
+cluster_ids, cluster_counts = np.unique(predicted_labels, return_counts=True)
+
+print("Cluster labels:", predicted_labels[:10])
+print("Cluster ids:", cluster_ids)
+print("Cluster counts:", cluster_counts)
+```
+
+Expected output:
+
+```text
+Cluster labels: [2 0 1 0 2 2 3 1 0 0]
+Cluster ids: [0 1 2 3]
+Cluster counts: [75 75 75 75]
+```
+
+The label numbers are arbitrary, just like K-Means. The useful information is the grouping pattern and the cluster profiles, not whether a point is assigned to label `0` or label `2`.
+
 ## Reading a Dendrogram
 
 In a dendrogram:
@@ -165,6 +189,14 @@ for linkage_name in ["ward", "complete", "average"]:
     model = AgglomerativeClustering(n_clusters=4, linkage=linkage_name)
     labels = model.fit_predict(X)
     print(linkage_name, labels[:10])
+```
+
+Expected output:
+
+```text
+ward [2 0 1 0 2 2 3 1 0 0]
+complete [2 1 3 1 2 2 0 3 1 1]
+average [2 0 3 0 2 2 1 3 0 0]
 ```
 
 Then answer:
