@@ -192,10 +192,14 @@ Think of DBSCAN as a smart city planner who:
 
 {% highlight python %}
 from sklearn.cluster import DBSCAN
+from sklearn.preprocessing import StandardScaler
 
-# Apply DBSCAN
+# DBSCAN uses Euclidean distance — scale first (see Gotchas)
+X_scaled = StandardScaler().fit_transform(X)
+
+# Apply DBSCAN (eps is in scaled units)
 dbscan = DBSCAN(eps=0.3, min_samples=5)
-y_dbscan = dbscan.fit_predict(X)
+y_dbscan = dbscan.fit_predict(X_scaled)
 
 # Create visualization
 plt.figure(figsize=(10, 5))
@@ -221,7 +225,7 @@ plt.close()
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-5" data-tint="1">
+  <div class="code-callout" data-lines="1-9" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">DBSCAN Parameters</span>
@@ -230,7 +234,7 @@ plt.close()
       <p><code>eps=0.3</code> sets the neighborhood radius; <code>min_samples=5</code> sets the density threshold; points labeled -1 by <code>fit_predict</code> are noise (outliers not in any cluster).</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="7-26" data-tint="2">
+  <div class="code-callout" data-lines="11-30" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Visualize Results</span>

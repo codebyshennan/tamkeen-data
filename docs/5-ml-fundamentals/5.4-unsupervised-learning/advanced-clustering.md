@@ -31,7 +31,7 @@ HDBSCAN improves on DBSCAN by:
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.datasets import make_moons, make_blobs
-import hdbscan
+from sklearn.cluster import HDBSCAN
 
 # Create complex dataset
 X1, _ = make_moons(n_samples=200, noise=0.05, random_state=42)
@@ -39,7 +39,7 @@ X2, _ = make_blobs(n_samples=100, centers=[[2, 0]], cluster_std=0.5, random_stat
 X = np.vstack([X1, X2])
 
 # Apply HDBSCAN
-clusterer = hdbscan.HDBSCAN(min_cluster_size=5, min_samples=3)
+clusterer = HDBSCAN(min_cluster_size=5, min_samples=3)
 cluster_labels = clusterer.fit_predict(X)
 
 # Plot results
@@ -217,6 +217,8 @@ plt.show()
 
 ### 1. Topic Modeling with GMM
 
+> *Illustrative only:* in practice, topic modeling uses LDA or NMF (`sklearn.decomposition.LatentDirichletAllocation` / `NMF`). GMM on TF-IDF vectors is shown here to demonstrate soft membership, not as a recommended topic-modeling approach.
+
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -307,7 +309,7 @@ image = io.imread('sample_image.jpg')
 pixels = rgb2lab(image).reshape(-1, 3)
 
 # Apply HDBSCAN
-clusterer = hdbscan.HDBSCAN(min_cluster_size=50, min_samples=10)
+clusterer = HDBSCAN(min_cluster_size=50, min_samples=10)
 labels = clusterer.fit_predict(pixels)
 
 # Reshape and display results
@@ -352,10 +354,10 @@ plt.show()
 <div class="code-explainer__code">
 
 {% highlight python %}
-def ensemble_clustering(X, n_members=5):
+def ensemble_clustering(X):
     # Create ensemble members
     clusterers = [
-        hdbscan.HDBSCAN(min_cluster_size=5),
+        HDBSCAN(min_cluster_size=5),
         GaussianMixture(n_components=3),
         SpectralClustering(n_clusters=3),
     ]
@@ -399,17 +401,19 @@ def ensemble_clustering(X, n_members=5):
 
 ```python
 def semi_supervised_gmm(X, labeled_indices, true_labels):
-    # Initialize GMM
-    gmm = GaussianMixture(n_components=len(np.unique(true_labels)))
-    
-    # Partial fit with labeled data
-    X_labeled = X[labeled_indices]
-    gmm.fit(X_labeled, true_labels[labeled_indices])
-    
-    # Predict remaining points
-    labels = gmm.predict(X)
-    
-    return labels
+    # NOTE: GaussianMixture.fit(X, y) ignores y — it is unsupervised.
+    # To actually use the labels, seed each Gaussian with the mean of a
+    # labeled class via means_init (this is what makes it semi-supervised).
+    y_known = true_labels[labeled_indices]
+    classes = np.unique(y_known)
+    means_init = np.array([
+        X[labeled_indices][y_known == c].mean(axis=0) for c in classes
+    ])
+
+    gmm = GaussianMixture(n_components=len(classes),
+                          means_init=means_init, random_state=42)
+    gmm.fit(X)              # fit on all data, guided by the labeled class means
+    return gmm.predict(X)
 ```
 
 ### 3. Online Clustering
@@ -457,7 +461,7 @@ def optimize_hdbscan(X):
 
     for min_cluster_size in [5, 10, 15, 20]:
         for min_samples in [5, 10, 15]:
-            clusterer = hdbscan.HDBSCAN(
+            clusterer = HDBSCAN(
                 min_cluster_size=min_cluster_size,
                 min_samples=min_samples
             )
@@ -520,10 +524,10 @@ def optimize_hdbscan(X):
 - **Ensemble clustering with naive majority voting is broken by label misalignment** — different clustering algorithms assign arbitrary integers to clusters, so cluster "0" in HDBSCAN and cluster "0" in GMM may refer to completely different groups. A majority vote on raw labels is meaningless; use a proper consensus method like co-association matrices.
 - **GMM's `n_components` is not the same as the true number of clusters** — GMM fits a mixture of Gaussians regardless of whether your data is actually Gaussian. Setting `n_components` too high causes it to split one real cluster into multiple Gaussian blobs, inflating the apparent cluster count.
 - **HDBSCAN's `min_cluster_size` has a large impact on results** — setting it too small produces many tiny clusters and noise, too large merges distinct groups. Unlike DBSCAN's `eps`, there is no k-distance plot guide; validate with silhouette scores while excluding noise points (`labels != -1`).
-- **Spectral clustering is not scalable** — it computes an n×n affinity matrix, making it O(n²) in memory and O(n³) in the eigendecomposition. On more than a few thousand points it becomes impractical; use `SpectralClustering(n_components=..., eigen_solver='amg')` or switch to HDBSCAN for large datasets.
+- **Spectral clustering is not scalable** — it builds an n×n affinity matrix, making it O(n²) in memory and up to O(n³) in the eigendecomposition. On more than a few thousand points it becomes impractical; cluster a representative subsample, or switch to a scalable method (HDBSCAN, MiniBatchKMeans). The faster `eigen_solver='amg'` path exists but requires the optional `pyamg` package.
 - **`GaussianMixture.fit` can fail to converge** — EM for GMM can collapse when a Gaussian component shrinks to fit a single point (covariance → 0). Add `reg_covar=1e-6` to regularize covariance matrices and prevent `ConvergenceWarning` or `NaN` outputs.
 - **`MiniBatchKMeans` for online clustering produces slightly different centroids each run** — mini-batch updates introduce randomness beyond the initial seed; results will vary across runs even with `random_state` set, which is expected behavior, not a bug.
 
 ## Next Steps
 
-Now that you've mastered clustering techniques, try the [assignment](./assignment.md) to apply these concepts to real-world problems!
+Now that you've mastered clustering techniques, try the [assignment](./assignments/coding.md) to apply these concepts to real-world problems!

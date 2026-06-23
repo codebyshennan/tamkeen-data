@@ -256,9 +256,10 @@ def generate_clustering_visualizations():
     plt.savefig("assets/hierarchical_clustering.png")
     plt.close()
 
-    # DBSCAN
+    # DBSCAN — scale first (Euclidean distance is scale-sensitive)
+    X_scaled = StandardScaler().fit_transform(X)
     dbscan = DBSCAN(eps=0.3, min_samples=5)
-    y_dbscan = dbscan.fit_predict(X)
+    y_dbscan = dbscan.fit_predict(X_scaled)
 
     plt.figure(figsize=(10, 5))
     plt.subplot(121)

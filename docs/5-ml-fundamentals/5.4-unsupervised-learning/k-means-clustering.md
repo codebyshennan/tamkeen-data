@@ -42,8 +42,8 @@ For the complete tutorial, see [Clustering Guide](clustering.md).
 
 ## Gotchas
 
-- **Random initialization can produce poor local minima** — K-Means converges to the nearest local optimum; two runs with different random seeds can give very different cluster assignments. Use `n_init` (default 10 in sklearn) to run multiple restarts and pick the best inertia.
+- **Random initialization can produce poor local minima** — K-Means converges to the nearest local optimum; two runs with different random seeds can give very different cluster assignments. Set `n_init=10` explicitly to run multiple restarts and keep the best inertia — current scikit-learn defaults to `n_init='auto'`, which runs only **1** restart with the default `k-means++` init, so don't rely on the old "10 by default" behaviour.
 - **K-Means assumes spherical, equally-sized clusters** — if your real clusters are elongated, ring-shaped, or very different in size, K-Means will split or merge them incorrectly. Always visualize the result and consider DBSCAN or GMM for non-spherical data.
-- **`fit_predict` on the same data vs `predict` on new data** — K-Means assigns training points during `fit`, but calling `predict` on held-out data uses nearest-centroid assignment, which differs subtly from the training loop result; the two are equivalent after convergence but learners sometimes mix up when to use each.
+- **`fit_predict` vs `predict`** — on the *same* data, `fit_predict(X)` (or reading `labels_`) and `predict(X)` return identical labels, because both assign each point to its nearest final centroid. Use `predict` only to assign *new* points to the already-learned centroids without refitting.
 - **Inertia always decreases with more clusters** — K=n (one cluster per point) gives inertia=0, which is useless. The elbow method helps, but if there's no clear elbow, silhouette score or domain constraints should guide the final k choice.
 - **Not scaling before K-Means** — a feature with large magnitude will dominate the Euclidean distance calculation, causing K-Means to effectively ignore smaller-magnitude features entirely.
