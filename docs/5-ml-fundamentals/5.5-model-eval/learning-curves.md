@@ -51,7 +51,7 @@ Learning curves are like sports training:
 
 ## Understanding Learning Curves
 
-{% include mermaid-diagram.html src="5-ml-fundamentals/5.5-model-eval/diagrams/learning-curves-1.mmd" %}
+{% include model-eval-html-diagram.html diagram="learning-curves" title="Learning curve diagnosis diagram" %}
 
 ### 1. Ideal Learning Curve
 

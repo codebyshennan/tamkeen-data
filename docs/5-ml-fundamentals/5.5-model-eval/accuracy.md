@@ -30,7 +30,7 @@ Accuracy is the ratio of correct predictions to total predictions:
 \text{Accuracy} = \frac{\text{Number of Correct Predictions}}{\text{Total Number of Predictions}}
 \\]
 
-{% include mermaid-diagram.html src="5-ml-fundamentals/5.5-model-eval/diagrams/accuracy-1.mmd" %}
+{% include model-eval-html-diagram.html diagram="accuracy" title="Accuracy decision diagram" %}
 
 *Rule of thumb: if your dataset has < 80% majority class, accuracy is still OK as a sanity check. Beyond that, always report at least one additional metric.*
 

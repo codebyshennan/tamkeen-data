@@ -51,7 +51,7 @@ Imagine you're a doctor diagnosing a disease:
 
 ROC and AUC help us find the right balance between catching all cases and avoiding false alarms.
 
-{% include mermaid-diagram.html src="5-ml-fundamentals/5.5-model-eval/diagrams/roc-and-auc-1.mmd" %}
+{% include model-eval-html-diagram.html diagram="roc-and-auc" title="ROC and AUC interpretation diagram" %}
 
 ## Technical Definitions
 
@@ -455,7 +455,21 @@ Understanding how different thresholds affect model performance is crucial for p
 <div class="code-explainer__code">
 
 {% highlight python %}
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import make_classification
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score
+from sklearn.model_selection import train_test_split
+
+X, y = make_classification(n_samples=1000, n_features=20,
+                           n_informative=15, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+model = LogisticRegression(max_iter=1000, random_state=42)
+model.fit(X_train, y_train)
+y_pred_proba = model.predict_proba(X_test)[:, 1]
 
 def analyze_thresholds(y_true, y_pred_proba, thresholds=None):
     """Analyze model performance across different thresholds."""
@@ -562,6 +576,12 @@ plt.show()
   </div>
 </aside>
 </div>
+
+
+<figure>
+<img src="assets/roc-and-auc_fig_4.png" alt="roc-and-auc" />
+<figcaption>Figure 4: Precision, Recall, and F1-Score vs Threshold</figcaption>
+</figure>
 
 ## Practical Example: Credit Risk Assessment
 
@@ -979,12 +999,25 @@ Confidence Interval Interpretation:
 
 #### Stratified K-fold mean `roc_auc`
 
+**Purpose:** Compute ROC-AUC across stratified folds so the reported score is not tied to a single split.
+
 ```python
+from sklearn.datasets import make_classification
+from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import cross_val_score, StratifiedKFold
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+
+X, y = make_classification(n_samples=1000, n_features=20,
+                           n_informative=15, random_state=42)
+pipeline = Pipeline([
+    ("scaler", StandardScaler()),
+    ("classifier", LogisticRegression(max_iter=1000, random_state=42))
+])
 
 # Perform cross-validation
 cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
-cv_scores = cross_val_score(pipeline, X_train, y_train, cv=cv, scoring='roc_auc')
+cv_scores = cross_val_score(pipeline, X, y, cv=cv, scoring='roc_auc')
 
 print(f"Cross-validation AUC scores: {cv_scores}")
 print(f"Mean CV AUC: {cv_scores.mean():.3f} (+/- {cv_scores.std() * 2:.3f})")

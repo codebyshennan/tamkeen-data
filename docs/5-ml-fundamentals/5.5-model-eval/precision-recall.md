@@ -29,7 +29,7 @@ Precision and Recall are fundamental metrics in machine learning for evaluating 
 
 ## What are Precision and Recall?
 
-{% include mermaid-diagram.html src="5-ml-fundamentals/5.5-model-eval/diagrams/precision-recall-1.mmd" %}
+{% include model-eval-html-diagram.html diagram="precision-recall" title="Precision recall formula diagram" %}
 
 ![Precision-Recall Curve](assets/precision_recall_curve.png)
 

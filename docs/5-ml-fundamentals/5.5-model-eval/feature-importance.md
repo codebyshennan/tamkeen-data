@@ -29,7 +29,7 @@ Feature importance measures how much each feature contributes to the model's pre
 3. Understand model behavior
 4. Validate domain knowledge
 
-{% include mermaid-diagram.html src="5-ml-fundamentals/5.5-model-eval/diagrams/feature-importance-1.mmd" %}
+{% include model-eval-html-diagram.html diagram="feature-importance" title="Feature importance method comparison diagram" %}
 
 ## Types of Feature Importance
 
@@ -102,7 +102,7 @@ plt.show()
 
 
 <figure>
-<img src="assets/feature-importance_fig_1.png" alt="feature-importance" />
+<img src="assets/feature-importance_fig_2.png" alt="feature-importance" />
 <figcaption>Figure 1: Feature Importances</figcaption>
 </figure>
 
@@ -110,8 +110,20 @@ plt.show()
 
 #### Model-agnostic drop in score
 
+**Purpose:** Fit the same random forest, shuffle each feature repeatedly, and plot how much the score drops.
+
 ```python
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import make_classification
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.inspection import permutation_importance
+
+X, y = make_classification(n_samples=1000, n_features=10,
+                           n_informative=5, n_redundant=2,
+                           random_state=42)
+rf = RandomForestClassifier(n_estimators=100, random_state=42)
+rf.fit(X, y)
 
 # Calculate permutation importance
 result = permutation_importance(rf, X, y, n_repeats=10, random_state=42)
@@ -125,11 +137,20 @@ plt.tight_layout()
 plt.show()
 ```
 
+
+<figure>
+<img src="assets/feature-importance_fig_1.png" alt="feature-importance" />
+<figcaption>Figure 1: Permutation Importances</figcaption>
+</figure>
+
 ### 3. SHAP Values
 
 #### TreeExplainer + summary plot
 
+**Purpose:** Illustrate the SHAP workflow; this is marked no-output because it requires the optional `shap` package and a fitted model from the previous example.
+
 ```python
+# no-output
 import shap
 
 # Calculate SHAP values
@@ -192,6 +213,7 @@ Let's analyze feature importance in a credit risk prediction task:
 <div class="code-explainer__code">
 
 {% highlight python %}
+# no-output
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt

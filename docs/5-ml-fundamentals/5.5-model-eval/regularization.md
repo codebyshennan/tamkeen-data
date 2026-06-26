@@ -35,7 +35,7 @@ Regularization adds a penalty term to the model's loss function to discourage co
 
 ## Types of Regularization
 
-{% include mermaid-diagram.html src="5-ml-fundamentals/5.5-model-eval/diagrams/regularization-1.mmd" %}
+{% include model-eval-html-diagram.html diagram="regularization" title="Regularization choice diagram" %}
 
 *Higher `alpha` (λ) = stronger penalty = simpler model. Too high and you underfit. Use `RidgeCV` or `LassoCV` to search automatically.*
 
@@ -43,7 +43,7 @@ Regularization adds a penalty term to the model's loss function to discourage co
 
 L1 regularization adds the absolute value of coefficients to the loss function:
 
-#### Lasso pipeline (regression $R^2$)
+#### Lasso pipeline (regression \(R^2\))
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -105,10 +105,19 @@ L2 regularization adds the squared value of coefficients to the loss function:
 
 #### Ridge pipeline (same synthetic split)
 
+**Purpose:** Recreate the regression split and evaluate an L2-regularized Ridge pipeline.
+
 ```python
+from sklearn.datasets import make_regression
 from sklearn.linear_model import Ridge
+from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
+
+X, y = make_regression(n_samples=500, n_features=20, noise=15, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
 
 # Create pipeline with L2 regularization
 pipeline = Pipeline([
@@ -121,16 +130,29 @@ pipeline.fit(X_train, y_train)
 print(f"L2 Regularization Score: {pipeline.score(X_test, y_test):.3f}")
 ```
 
+```
+L2 Regularization Score: 0.989
+```
+
 ### 3. Elastic Net
 
 Elastic Net combines L1 and L2 regularization:
 
 #### Elastic Net (`l1_ratio` mixes L1 vs L2)
 
+**Purpose:** Recreate the same regression setup and evaluate a model that blends L1 and L2 penalties.
+
 ```python
+from sklearn.datasets import make_regression
 from sklearn.linear_model import ElasticNet
+from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
+
+X, y = make_regression(n_samples=500, n_features=20, noise=15, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
 
 # Create pipeline with Elastic Net
 pipeline = Pipeline([
@@ -141,6 +163,10 @@ pipeline = Pipeline([
 # Fit and evaluate
 pipeline.fit(X_train, y_train)
 print(f"Elastic Net Score: {pipeline.score(X_test, y_test):.3f}")
+```
+
+```
+Elastic Net Score: 0.989
 ```
 
 ## Real-World Analogies

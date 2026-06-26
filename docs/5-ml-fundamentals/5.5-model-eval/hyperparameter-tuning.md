@@ -30,7 +30,7 @@ Hyperparameter tuning is crucial for several reasons:
 4. **Ensures model stability**: Consistent hyperparameters lead to reproducible results
 5. **Maximizes resource utilization**: Efficient parameter settings make better use of computational resources
 
-{% include mermaid-diagram.html src="5-ml-fundamentals/5.5-model-eval/diagrams/hyperparameter-tuning-1.mmd" %}
+{% include model-eval-html-diagram.html diagram="hyperparameter-tuning" title="Hyperparameter tuning workflow diagram" %}
 
 *Always fit the search object on train data only. The test set is touched once, at the very end, to report final performance.*
 
@@ -369,6 +369,7 @@ Bayesian optimization uses probabilistic models to guide the search for optimal 
 <div class="code-explainer__code">
 
 {% highlight python %}
+# no-output
 # Note: Requires scikit-optimize: pip install scikit-optimize
 from sklearn.ensemble import RandomForestClassifier
 from skopt import BayesSearchCV
@@ -470,7 +471,10 @@ print(f"Test set accuracy: {test_score:.4f}")
 
 #### Coarse then fine grids
 
+**Purpose:** Define staged search spaces: a wide first pass, then a narrow second pass around the first pass winner.
+
 ```python
+# no-output
 # Stage 1: Coarse search with wide ranges
 coarse_grid = {
     'n_estimators': [50, 100, 200, 500],
@@ -488,7 +492,10 @@ fine_grid = {
 
 #### Gradient boosting with `n_iter_no_change`
 
+**Purpose:** Show the parameter pattern for using early stopping during iterative model tuning.
+
 ```python
+# no-output
 from sklearn.ensemble import GradientBoostingClassifier
 
 # Use validation_fraction for early stopping
@@ -590,7 +597,10 @@ Unbiased performance estimate: 0.8970 ± 0.0279
 
 #### Wall-clock for one tuning run
 
+**Purpose:** Time a completed grid search and report how many hyperparameter combinations were evaluated.
+
 ```python
+# no-output
 import time
 
 start_time = time.time()
@@ -616,7 +626,10 @@ Evaluated 108 combinations
 
 #### Export `cv_results_` and best params
 
+**Purpose:** Persist the full search table and the winning parameters so tuning decisions are auditable later.
+
 ```python
+# no-output
 import pandas as pd
 
 # Save results for analysis
@@ -744,6 +757,7 @@ with open('best_params.txt', 'w') as f:
 <div class="code-explainer__code">
 
 {% highlight python %}
+# no-output
 import optuna
 from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split, cross_val_score

@@ -1,0 +1,228 @@
+{% assign diagram = include.diagram %}
+
+<figure class="html-diagram html-diagram--{{ diagram }}" role="group" aria-label="{{ include.title | default: 'Model evaluation concept diagram' }}">
+{% case diagram %}
+{% when "accuracy" %}
+<figcaption>Accuracy starts with the confusion matrix, then asks whether class balance makes that single number trustworthy.</figcaption>
+<div class="html-diagram__row">
+<section class="html-diagram__panel">
+<h3>Confusion matrix</h3>
+<ul>
+<li><strong>TP</strong> correct positive</li>
+<li><strong>TN</strong> correct negative</li>
+<li><strong>FP</strong> false alarm</li>
+<li><strong>FN</strong> missed positive</li>
+</ul>
+</section>
+<div class="html-diagram__arrow" aria-hidden="true">→</div>
+<section class="html-diagram__panel html-diagram__panel--formula">
+<h3>Accuracy</h3>
+<p><code>(TP + TN) / (TP + TN + FP + FN)</code></p>
+</section>
+<div class="html-diagram__arrow" aria-hidden="true">→</div>
+<section class="html-diagram__panel">
+<h3>Check before trusting</h3>
+<p>99% negative data can produce 99% accuracy by predicting all negatives.</p>
+<p>Use precision, recall, F1, or PR-AUC when imbalance matters.</p>
+</section>
+</div>
+
+{% when "bias-variance" %}
+<figcaption>Bias and variance are the two model-error levers you can usually influence.</figcaption>
+<div class="html-diagram__row html-diagram__row--three">
+<section class="html-diagram__panel">
+<h3>High bias</h3>
+<p>Model is too simple; train and validation errors are both high with a small gap.</p>
+<p><strong>Fix:</strong> add features, increase capacity, or reduce regularization.</p>
+</section>
+<section class="html-diagram__panel html-diagram__panel--success">
+<h3>Sweet spot</h3>
+<p>Complexity is balanced; train and validation errors are both low with a small gap.</p>
+</section>
+<section class="html-diagram__panel">
+<h3>High variance</h3>
+<p>Model is too complex; train error is low but validation error is high.</p>
+<p><strong>Fix:</strong> add data, regularize, prune, or simplify the model.</p>
+</section>
+</div>
+<p class="html-diagram__note"><strong>Total error:</strong> bias squared + variance + irreducible noise.</p>
+
+{% when "cross-validation" %}
+<figcaption>Cross-validation rotates the validation fold so every row is tested out of sample.</figcaption>
+<div class="html-diagram__stack">
+<section class="html-diagram__panel">
+<h3>5-fold CV</h3>
+<ol class="html-diagram__folds">
+<li><span>Val</span><span>Train</span><span>Train</span><span>Train</span><span>Train</span></li>
+<li><span>Train</span><span>Val</span><span>Train</span><span>Train</span><span>Train</span></li>
+<li><span>Train</span><span>Train</span><span>Val</span><span>Train</span><span>Train</span></li>
+<li><span>Train</span><span>Train</span><span>Train</span><span>Val</span><span>Train</span></li>
+<li><span>Train</span><span>Train</span><span>Train</span><span>Train</span><span>Val</span></li>
+</ol>
+<p>Report the average score plus the standard deviation across folds.</p>
+</section>
+<div class="html-diagram__grid">
+<section class="html-diagram__panel"><h3>Stratified k-fold</h3><p>Preserves class proportions in each fold; use for imbalanced classification.</p></section>
+<section class="html-diagram__panel"><h3>TimeSeriesSplit</h3><p>Trains on the past and validates on the future; required for ordered data.</p></section>
+<section class="html-diagram__panel"><h3>Leave-one-out</h3><p>Uses one row as validation each time; useful for tiny datasets, but expensive.</p></section>
+</div>
+</div>
+
+{% when "early-stopping" %}
+<figcaption>Early stopping watches validation loss during training and restores the best checkpoint.</figcaption>
+<ol class="html-diagram__steps">
+<li><strong>Train epoch</strong><span>Run the next epoch or boosting iteration.</span></li>
+<li><strong>Measure validation loss</strong><span>Compare the current score with the best score so far.</span></li>
+<li><strong>If better</strong><span>Save a checkpoint and reset the patience counter.</span></li>
+<li><strong>If not better</strong><span>Increment patience; continue only while patience remains.</span></li>
+<li><strong>Stop</strong><span>Restore the best checkpoint when patience is exhausted.</span></li>
+</ol>
+
+{% when "feature-importance" %}
+<figcaption>Feature importance methods trade speed, reliability, and interpretability.</figcaption>
+<div class="html-diagram__row html-diagram__row--three">
+<section class="html-diagram__panel">
+<h3>Tree / MDI</h3>
+<p>Uses mean impurity decrease from tree splits.</p>
+<p><strong>Best for:</strong> a quick baseline from <code>feature_importances_</code>.</p>
+<p><strong>Caveat:</strong> can favor high-cardinality or correlated features.</p>
+</section>
+<section class="html-diagram__panel">
+<h3>Permutation</h3>
+<p>Shuffle one column, rescore the model, and treat the score drop as importance.</p>
+<p><strong>Best for:</strong> model-agnostic reliability checks.</p>
+</section>
+<section class="html-diagram__panel">
+<h3>SHAP</h3>
+<p>Assigns per-feature credit for individual predictions and global summaries.</p>
+<p><strong>Best for:</strong> stakeholder or regulatory explanations.</p>
+</section>
+</div>
+
+{% when "hyperparameter-tuning" %}
+<figcaption>Tuning searches hyperparameters inside cross-validation, then evaluates the final choice once.</figcaption>
+<div class="html-diagram__grid">
+<section class="html-diagram__panel"><h3>Grid search</h3><p>Tries every combination. Safe and exhaustive, but slow.</p></section>
+<section class="html-diagram__panel"><h3>Random search</h3><p>Samples a fixed number of combinations. Often competitive for less compute.</p></section>
+<section class="html-diagram__panel"><h3>Bayesian optimization</h3><p>Learns from previous trials. Best when each model fit is expensive.</p></section>
+</div>
+<ol class="html-diagram__steps">
+<li><strong>Train set</strong><span>Hold the test set aside.</span></li>
+<li><strong>Inner CV</strong><span>Find the best hyperparameters with GridSearchCV or RandomizedSearchCV.</span></li>
+<li><strong>Refit</strong><span>Train the chosen model on the full training set.</span></li>
+<li><strong>Test once</strong><span>Report the untouched held-out test score.</span></li>
+</ol>
+
+{% when "learning-curves" %}
+<figcaption>Learning curves show whether more data is likely to improve the model.</figcaption>
+<div class="html-diagram__row html-diagram__row--three">
+<section class="html-diagram__panel"><h3>High bias</h3><p>Train and validation errors are both high and close together.</p><p>More data rarely helps; increase capacity.</p></section>
+<section class="html-diagram__panel html-diagram__panel--success"><h3>Good fit</h3><p>Train and validation errors are both low and converge as data grows.</p></section>
+<section class="html-diagram__panel"><h3>High variance</h3><p>Train error is low, validation error is high, and the gap is large.</p><p>More data or stronger regularization can help.</p></section>
+</div>
+
+{% when "metrics" %}
+<figcaption>Choose metrics from the problem type and the cost of errors.</figcaption>
+<div class="html-diagram__decision">
+<section class="html-diagram__panel">
+<h3>Classification</h3>
+<ul>
+<li><strong>Balanced classes:</strong> accuracy can be a sanity check.</li>
+<li><strong>False positives costly:</strong> precision.</li>
+<li><strong>False negatives costly:</strong> recall.</li>
+<li><strong>Need one balanced score:</strong> F1.</li>
+<li><strong>Threshold sweep:</strong> ROC-AUC or PR-AUC.</li>
+<li><strong>Imbalanced positives:</strong> PR-AUC or F1.</li>
+</ul>
+</section>
+<section class="html-diagram__panel">
+<h3>Regression</h3>
+<ul>
+<li><strong>Outliers matter less:</strong> MAE.</li>
+<li><strong>Large errors matter more:</strong> RMSE or MSE.</li>
+<li><strong>Variance explained:</strong> R².</li>
+<li><strong>Percentage interpretation:</strong> MAPE, only when targets are far from zero.</li>
+</ul>
+</section>
+</div>
+
+{% when "model-selection" %}
+<figcaption>Model selection compares candidate families without peeking at the final test set.</figcaption>
+<div class="html-diagram__grid">
+<section class="html-diagram__panel"><h3>Selection criteria</h3><p>Compare predictive performance, interpretability, inference speed, and available data size.</p></section>
+<section class="html-diagram__panel"><h3>Safe workflow</h3><p>Split data, compare candidates on validation or nested CV, tune the selected family, then test once.</p></section>
+<section class="html-diagram__panel"><h3>Common mistakes</h3><p>Peeking at the test set, skipping a naive baseline, or reporting validation score as final performance.</p></section>
+</div>
+
+{% when "overfitting-underfitting" %}
+<figcaption>Compare train and test performance to diagnose model complexity.</figcaption>
+<div class="html-diagram__row html-diagram__row--three">
+<section class="html-diagram__panel"><h3>Underfitting</h3><p>Model too simple; train and test accuracy are both low.</p><p>Fix with more features, a larger model, or less regularization.</p></section>
+<section class="html-diagram__panel html-diagram__panel--success"><h3>Good fit</h3><p>Right complexity; train and test accuracy are both high with a small gap.</p></section>
+<section class="html-diagram__panel"><h3>Overfitting</h3><p>Model too complex; train accuracy is very high while test accuracy drops.</p><p>Fix with more data, dropout, pruning, or stronger regularization.</p></section>
+</div>
+
+{% when "precision-recall" %}
+<figcaption>Precision and recall answer different questions about the positive class.</figcaption>
+<div class="html-diagram__grid">
+<section class="html-diagram__panel"><h3>Precision</h3><p><code>TP / (TP + FP)</code></p><p>Of predicted positives, how many were right? Optimize when false positives are costly.</p></section>
+<section class="html-diagram__panel"><h3>Recall</h3><p><code>TP / (TP + FN)</code></p><p>Of actual positives, how many did we catch? Optimize when false negatives are costly.</p></section>
+<section class="html-diagram__panel"><h3>F1 score</h3><p><code>2 * (P * R) / (P + R)</code></p><p>Harmonic mean of precision and recall for imbalanced classification.</p></section>
+</div>
+
+{% when "regularization" %}
+<figcaption>Regularization reduces overfitting by penalizing complexity and choosing penalty strength with CV.</figcaption>
+<div class="html-diagram__row">
+<section class="html-diagram__panel"><h3>Train score much higher than validation score</h3><p>The model is likely overfitting.</p></section>
+<div class="html-diagram__arrow" aria-hidden="true">→</div>
+<section class="html-diagram__panel"><h3>Choose penalty</h3><p><strong>L1:</strong> sparse weights. <strong>L2:</strong> smaller weights. <strong>Elastic Net:</strong> both, useful with correlated features.</p></section>
+<div class="html-diagram__arrow" aria-hidden="true">→</div>
+<section class="html-diagram__panel"><h3>Tune with CV</h3><p>Plot validation score against log(alpha) and choose the peak.</p></section>
+</div>
+
+{% when "roc-and-auc" %}
+<figcaption>ROC curves vary the threshold; AUC summarizes ranking quality across thresholds.</figcaption>
+<div class="html-diagram__decision">
+<section class="html-diagram__panel">
+<h3>ROC curve</h3>
+<ul>
+<li><strong>x-axis:</strong> FPR = FP / (FP + TN), the false alarm rate.</li>
+<li><strong>y-axis:</strong> TPR = TP / (TP + FN), sensitivity or recall.</li>
+<li><strong>Low threshold:</strong> high TPR and high FPR.</li>
+<li><strong>High threshold:</strong> low FPR but more missed positives.</li>
+</ul>
+</section>
+<section class="html-diagram__panel">
+<h3>AUC interpretation</h3>
+<ul>
+<li><strong>1.0:</strong> perfect ranking.</li>
+<li><strong>About 0.5:</strong> random classifier.</li>
+<li><strong>Below 0.5:</strong> worse than random; inspect label direction.</li>
+<li><strong>0.7 to 0.8:</strong> often acceptable for tabular baselines.</li>
+</ul>
+</section>
+</div>
+
+{% when "sklearn-pipelines" %}
+<figcaption>A pipeline keeps preprocessing and prediction in one leakage-free estimator.</figcaption>
+<ol class="html-diagram__steps">
+<li><strong>Raw training data</strong><span>Pass untransformed <code>X_train</code> and <code>y_train</code>.</span></li>
+<li><strong>Step 1: scaler</strong><span>Fit train-only statistics.</span></li>
+<li><strong>Step 2: selector or PCA</strong><span>Optional feature processing, also fit on training data only.</span></li>
+<li><strong>Step 3: model</strong><span>Fit classifier or regressor on processed training features.</span></li>
+<li><strong>Raw test data</strong><span>Call <code>pipeline.predict(X_test)</code>; fitted transforms are reused without leakage.</span></li>
+</ol>
+
+{% when "validation-curves" %}
+<figcaption>Validation curves sweep one hyperparameter to find underfitting, fit, and overfitting regions.</figcaption>
+<div class="html-diagram__row html-diagram__row--three">
+<section class="html-diagram__panel"><h3>Low complexity</h3><p>Small depth or large alpha. Train and validation scores are both weak.</p></section>
+<section class="html-diagram__panel html-diagram__panel--success"><h3>Optimal point</h3><p>Validation score peaks while the train-validation gap remains small.</p></section>
+<section class="html-diagram__panel"><h3>High complexity</h3><p>Large depth or small alpha. Train score remains high but validation score drops.</p></section>
+</div>
+<p class="html-diagram__note"><strong>Validation curve:</strong> x-axis is a hyperparameter. <strong>Learning curve:</strong> x-axis is training-set size.</p>
+
+{% else %}
+<figcaption>Model evaluation diagram unavailable.</figcaption>
+{% endcase %}
+</figure>

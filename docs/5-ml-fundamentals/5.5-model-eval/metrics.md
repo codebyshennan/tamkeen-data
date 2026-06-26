@@ -53,7 +53,7 @@ Model evaluation is like weather forecasting:
 
 ## Metrics Comparison and Selection Guide
 
-{% include mermaid-diagram.html src="5-ml-fundamentals/5.5-model-eval/diagrams/metrics-1.mmd" %}
+{% include model-eval-html-diagram.html diagram="metrics" title="Metric selection diagram" %}
 
 *Always report more than one metric — a model with high accuracy on an imbalanced dataset can still be nearly useless.*
 

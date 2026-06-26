@@ -58,7 +58,7 @@ Model selection is like building a sports team:
 - You need to consider team chemistry (model ensemble)
 - You want the best performance within your budget
 
-{% include mermaid-diagram.html src="5-ml-fundamentals/5.5-model-eval/diagrams/model-selection-1.mmd" %}
+{% include model-eval-html-diagram.html diagram="model-selection" title="Model selection workflow diagram" %}
 
 *The test set is touched exactly once. Any decision made by looking at it inflates your reported performance.*
 

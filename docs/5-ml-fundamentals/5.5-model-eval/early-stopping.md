@@ -24,7 +24,7 @@ Early stopping is a regularization technique that helps prevent overfitting by m
 
 Early stopping works by monitoring the model's performance on a validation set during training. When the performance stops improving or starts to degrade, training is stopped to prevent overfitting.
 
-{% include mermaid-diagram.html src="5-ml-fundamentals/5.5-model-eval/diagrams/early-stopping-1.mmd" %}
+{% include model-eval-html-diagram.html diagram="early-stopping" title="Early stopping loop diagram" %}
 
 *`patience` controls how many epochs of no-improvement you tolerate before stopping. Typical values: 5–20 for neural networks, 10–50 for gradient boosting.*
 

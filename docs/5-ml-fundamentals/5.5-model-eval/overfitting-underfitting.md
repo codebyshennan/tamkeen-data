@@ -42,7 +42,7 @@ Underfitting happens when a model is too simple to capture the underlying patter
 3. Model fails to capture important patterns
 4. Simple decision boundaries
 
-{% include mermaid-diagram.html src="5-ml-fundamentals/5.5-model-eval/diagrams/overfitting-underfitting-1.mmd" %}
+{% include model-eval-html-diagram.html diagram="overfitting-underfitting" title="Overfitting and underfitting diagnosis diagram" %}
 
 *The learning curve is the fastest diagnostic: plot train and validation error vs training set size. A large gap between the two curves signals overfitting; both curves high signals underfitting.*
 

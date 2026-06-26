@@ -58,7 +58,7 @@ Think of cross validation like a sports team's practice games:
 - The validation data is like the practice game
 - The final model is like your team going into the real season
 
-{% include mermaid-diagram.html src="5-ml-fundamentals/5.5-model-eval/diagrams/cross-validation-1.mmd" %}
+{% include model-eval-html-diagram.html diagram="cross-validation" title="Cross-validation fold diagram" %}
 
 ## Types of Cross-Validation
 
@@ -143,6 +143,8 @@ Each observation is used once as a validation set while the remaining observatio
 **Example:**
 
 #### Leave-one-out CV
+
+**Purpose:** Show the exhaustive CV version where each individual sample becomes the validation set once.
 
 ```python
 import numpy as np

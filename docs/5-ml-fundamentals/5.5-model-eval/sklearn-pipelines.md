@@ -25,7 +25,7 @@ Pipelines help us:
 3. Simplify model deployment
 4. Make code more maintainable
 
-{% include mermaid-diagram.html src="5-ml-fundamentals/5.5-model-eval/diagrams/sklearn-pipelines-1.mmd" %}
+{% include model-eval-html-diagram.html diagram="sklearn-pipelines" title="Scikit-learn pipeline workflow diagram" %}
 
 *Without a pipeline, if you `StandardScaler.fit(X_all)` before splitting, test-set statistics leak into the scaler — the pipeline prevents this by fitting each step only on training data.*
 
@@ -206,7 +206,8 @@ class OutlierHandler(BaseEstimator, TransformerMixin):
         z_scores = np.abs((X - self.mean_) / self.std_)
         mask = z_scores > self.threshold
         X_copy = X.copy()
-        X_copy[mask] = np.take(self.mean_, range(X.shape[1]))
+        _, col_idx = np.where(mask)
+        X_copy[mask] = self.mean_[col_idx]
         return X_copy
 
 # Use custom transformer in pipeline
@@ -252,6 +253,10 @@ print(f"Custom pipeline score: {pipeline_with_custom.score(X_test, y_test):.3f}"
 </aside>
 </div>
 
+```
+Custom pipeline score: 0.970
+```
+
 ## Real-World Example: Text Classification
 
 #### Text preprocessing + TF–IDF + logistic regression in one `Pipeline`
@@ -269,9 +274,13 @@ texts = [
     "Machine learning is fascinating",
     "Deep neural networks are powerful",
     "Data science is growing rapidly",
-    "AI transforms industries"
+    "AI transforms industries",
+    "The model missed too many fraud cases",
+    "This pipeline leaks test data",
+    "The baseline accuracy is misleading",
+    "Production monitoring caught model drift"
 ]
-labels = [1, 1, 1, 1]  # Positive class for all
+labels = [1, 1, 1, 1, 0, 0, 0, 0]
 
 def preprocess_text(text):
     """Basic text preprocessing"""
@@ -298,6 +307,8 @@ text_pipeline.fit(X_train, y_train)
 
 # Make predictions
 predictions = text_pipeline.predict(X_test)
+print(f"Predictions: {predictions.tolist()}")
+print(f"Test labels: {y_test}")
 {% endhighlight %}
 
 </div>
@@ -341,13 +352,21 @@ predictions = text_pipeline.predict(X_test)
 </aside>
 </div>
 
+```
+Predictions: [1, 1]
+Test labels: [1, 0]
+```
+
 ## Pipeline Persistence
 
 Save and load pipelines:
 
 #### Serialize a fitted pipeline with `joblib`
 
+**Purpose:** Show the persistence helper pattern; this is no-output because it writes and reads model files.
+
 ```python
+# no-output
 import joblib
 
 def save_pipeline(pipeline, filename):
@@ -422,10 +441,17 @@ cached_pipeline = Pipeline([
 
 {% highlight python %}
 from sklearn.decomposition import PCA
+from sklearn.datasets import make_classification
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
+
+X, y = make_classification(n_samples=500, n_features=6, n_informative=4, random_state=42)
+grid_X_train, grid_X_test, grid_y_train, grid_y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
 
 grid_pipeline = Pipeline([
     ('scaler', StandardScaler()),
@@ -442,7 +468,10 @@ param_grid = {
 
 # Perform grid search
 grid_search = GridSearchCV(grid_pipeline, param_grid, cv=5)
-grid_search.fit(X_train, y_train)
+grid_search.fit(grid_X_train, grid_y_train)
+print(f"Best parameters: {grid_search.best_params_}")
+print(f"Best CV score: {grid_search.best_score_:.3f}")
+print(f"Test score: {grid_search.score(grid_X_test, grid_y_test):.3f}")
 {% endhighlight %}
 
 </div>
@@ -476,6 +505,12 @@ grid_search.fit(X_train, y_train)
   </div>
 </aside>
 </div>
+
+```
+Best parameters: {'classifier__C': 0.1, 'pca__n_components': 4, 'scaler__with_mean': True}
+Best CV score: 0.685
+Test score: 0.710
+```
 
 ### 3. Column Transformer
 
@@ -542,7 +577,10 @@ column_pipeline = Pipeline([
 
 #### Readable step names for grids and debugging
 
+**Purpose:** Demonstrate descriptive step names that make pipeline grids and error messages easier to read.
+
 ```python
+# no-output
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
@@ -562,7 +600,10 @@ pipeline = Pipeline([
 
 #### Illustrative try/except inside `transform`
 
+**Purpose:** Sketch a defensive transformer pattern; the placeholder `transformed_X` marks it as illustrative rather than runnable.
+
 ```python
+# no-output
 from sklearn.base import BaseEstimator, TransformerMixin
 
 class RobustTransformer(BaseEstimator, TransformerMixin):
@@ -580,7 +621,10 @@ class RobustTransformer(BaseEstimator, TransformerMixin):
 
 #### CV helper for any pipeline object
 
+**Purpose:** Wrap cross-validation reporting in one helper that can be reused with any sklearn-compatible pipeline.
+
 ```python
+# no-output
 from sklearn.model_selection import cross_val_score
 
 def validate_pipeline(pipeline, X, y, cv=5):

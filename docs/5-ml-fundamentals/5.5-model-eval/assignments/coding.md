@@ -6,6 +6,8 @@
 
 Run the following code to prepare a classifier and dataset for all tasks:
 
+**Purpose:** Build one reusable train/test split, fitted classifier, predictions, and class probabilities for the assignment tasks below.
+
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
@@ -81,6 +83,7 @@ Test set size: 114 samples, 72 malignant, 42 benign
 
 - Import `GridSearchCV` from `sklearn.model_selection`.
 - Define a parameter grid for `RandomForestClassifier`:
+  **Purpose:** Search both the forest size and maximum tree depth during cross-validated tuning.
   ```python
   param_grid = {
       'n_estimators': [50, 100, 200],

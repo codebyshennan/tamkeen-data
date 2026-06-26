@@ -28,7 +28,7 @@ Validation curves plot the model's performance (typically error or accuracy) aga
 2. Validation score
 3. The relationship between them
 
-{% include mermaid-diagram.html src="5-ml-fundamentals/5.5-model-eval/diagrams/validation-curves-1.mmd" %}
+{% include model-eval-html-diagram.html diagram="validation-curves" title="Validation curve diagnosis diagram" %}
 
 ## Types of Validation Curves
 

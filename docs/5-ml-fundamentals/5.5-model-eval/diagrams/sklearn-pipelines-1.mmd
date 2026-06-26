@@ -1,9 +1,0 @@
-flowchart LR
-    subgraph PIPELINE["sklearn Pipeline"]
-        direction LR
-        S1["`Step 1 StandardScaler (fit on train only)`"] --> S2["`Step 2 PCA / Selector (optional)`"] --> S3["Step 3 Classifier / Regressor"]
-    end
-    RAW["Raw X_train"] --> PIPELINE
-    PIPELINE -->|"pipeline.fit(X_train, y_train)"| MODEL["`Fitted pipeline (all steps learned)`"]
-    RAWTST["Raw X_test"] --> MODEL
-    MODEL -->|"pipeline.predict(X_test)"| PRED["`Predictions (leakage-free)`"]

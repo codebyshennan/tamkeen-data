@@ -34,7 +34,7 @@ Variance refers to the model's sensitivity to fluctuations in the training data.
 
 Finding the right balance between bias and variance is key to creating effective models. Too much bias leads to underfitting, while too much variance leads to overfitting.
 
-{% include mermaid-diagram.html src="5-ml-fundamentals/5.5-model-eval/diagrams/bias-variance-1.mmd" %}
+{% include model-eval-html-diagram.html diagram="bias-variance" title="Bias variance trade-off diagram" %}
 
 ## Practical Examples
 
