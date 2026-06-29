@@ -407,6 +407,13 @@ cached_pipeline = Pipeline([
     ('pca', PCA(n_components=2)),
     ('classifier', LogisticRegression())
 ], memory=memory)
+
+# Fit once to populate the cache; identical inputs reuse cached transforms
+from sklearn.datasets import make_classification
+X, y = make_classification(n_samples=300, n_features=6, random_state=42)
+cached_pipeline.fit(X, y)
+print("Pipeline steps:", list(cached_pipeline.named_steps))
+print(f"Training accuracy: {cached_pipeline.score(X, y):.3f}")
 {% endhighlight %}
 
 </div>
@@ -429,8 +436,22 @@ cached_pipeline = Pipeline([
       <p>Pass <code>memory=memory</code> to <code>Pipeline</code>; this tells sklearn to serialize each fitted transformer step so repeated grid-search folds skip redundant transforms.</p>
     </div>
   </div>
+  <div class="code-callout" data-lines="17-22" data-tint="3">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Fit and Reuse</span>
+    </div>
+    <div class="code-callout__body">
+      <p>The first fit computes every step and writes its output to the cache; later fits with identical input reuse it instead of recomputing.</p>
+    </div>
+  </div>
 </aside>
 </div>
+
+```
+Pipeline steps: ['scaler', 'pca', 'classifier']
+Training accuracy: 0.930
+```
 
 ### 2. Parameter Grid Search
 
@@ -537,6 +558,15 @@ column_pipeline = Pipeline([
     ('preprocessor', preprocessor),
     ('classifier', LogisticRegression())
 ])
+
+# Fit on a small mixed-type dataset: 2 numeric columns + 1 categorical column
+import numpy as np
+X = np.array([[1.2, 3.4, 0], [2.1, 1.0, 1], [0.5, 2.2, 2],
+              [1.8, 0.7, 1], [2.5, 3.1, 0], [0.3, 1.5, 2]])
+y = np.array([0, 1, 0, 1, 0, 1])
+column_pipeline.fit(X, y)
+print("Transformed feature count:", preprocessor.fit_transform(X).shape[1])
+print(f"Training accuracy: {column_pipeline.score(X, y):.3f}")
 {% endhighlight %}
 
 </div>
@@ -568,8 +598,22 @@ column_pipeline = Pipeline([
       <p>The preprocessor becomes a single named step; the classifier operates on the fully-transformed matrix from both numeric and categorical branches.</p>
     </div>
   </div>
+  <div class="code-callout" data-lines="19-26" data-tint="4">
+    <div class="code-callout__meta">
+      <span class="code-callout__lines"></span>
+      <span class="code-callout__title">Fit and Check</span>
+    </div>
+    <div class="code-callout__body">
+      <p>Fitting confirms the wiring: the 3 input columns expand to 5 features (2 scaled numeric + 3 one-hot categories) before the classifier sees them.</p>
+    </div>
+  </div>
 </aside>
 </div>
+
+```
+Transformed feature count: 5
+Training accuracy: 1.000
+```
 
 ## Best Practices
 
