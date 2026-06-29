@@ -13,7 +13,7 @@ objectives:
 
 ## Overview
 
-**Cross-validation** repeatedly trains on a subset of the data and validates on held-out folds so the score reflects **generalization**, not one lucky split. Use it for model comparison and tuning; reserve a final **test** set (or outer CV) for unbiased reporting. **Prerequisites:** [ML workflow](../../5.1-intro-to-ml/ml-workflow.md); later lessons such as [hyperparameter tuning](hyperparameter-tuning.md) build on the same splits.
+**Cross-validation** repeatedly trains on a subset of the data and validates on held-out folds so the score reflects **generalization**, not one lucky split. Use it for model comparison and tuning; reserve a final **test** set (or outer CV) for unbiased reporting. **Prerequisites:** [ML workflow](../5.1-intro-to-ml/ml-workflow.md); later lessons such as [hyperparameter tuning](hyperparameter-tuning.md) build on the same splits.
 
 ## What is Cross-Validation?
 
@@ -88,6 +88,7 @@ from sklearn.ensemble import RandomForestClassifier
 import numpy as np
 
 # Create sample data
+np.random.seed(42)
 X = np.random.randn(100, 4)
 y = np.random.randint(0, 2, 100)
 
@@ -127,8 +128,8 @@ print(f"Mean CV score: {scores.mean():.3f} (+/- {scores.std() * 2:.3f})")
 </div>
 
 ```
-Cross-validation scores: [0.6  0.65 0.7  0.7  0.5 ]
-Mean CV score: 0.630 (+/- 0.150)
+Cross-validation scores: [0.5  0.45 0.6  0.55 0.5 ]
+Mean CV score: 0.520 (+/- 0.102)
 ```
 
 ### Leave-One-Out Cross-Validation (LOOCV)
@@ -152,6 +153,7 @@ from sklearn.model_selection import LeaveOneOut, cross_val_score
 from sklearn.ensemble import RandomForestClassifier
 
 # Same toy X, y as k-fold example above (or define here)
+np.random.seed(42)
 X = np.random.randn(100, 4)
 y = np.random.randint(0, 2, 100)
 model = RandomForestClassifier(random_state=42)
@@ -162,7 +164,7 @@ print(f"LOOCV mean score: {scores.mean():.3f}")
 ```
 
 ```
-LOOCV mean score: 0.540
+LOOCV mean score: 0.490
 ```
 
 ### Stratified K-Fold Cross-Validation
@@ -185,18 +187,24 @@ Similar to K-Fold but ensures that the proportions of samples for each class are
 
 {% highlight python %}
 import numpy as np
+from sklearn.datasets import make_classification
 from sklearn.model_selection import StratifiedKFold, KFold, cross_val_score
 from sklearn.ensemble import RandomForestClassifier
 
+np.random.seed(42)
 model = RandomForestClassifier(random_state=42)
 
-# Create imbalanced dataset
-y_imbalanced = np.concatenate([np.zeros(80), np.ones(20)])
-X_imbalanced = np.random.randn(100, 4)
+# Imbalanced dataset (80/20) with real signal, then sort so classes are grouped
+X_imbalanced, y_imbalanced = make_classification(
+    n_samples=200, n_features=6, n_informative=4,
+    weights=[0.8, 0.2], random_state=0
+)
+order = np.argsort(y_imbalanced)
+X_imbalanced, y_imbalanced = X_imbalanced[order], y_imbalanced[order]
 
-# Compare regular vs stratified k-fold
-skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
-kf = KFold(n_splits=5, shuffle=True, random_state=42)
+# Compare regular vs stratified k-fold (no shuffle, so order matters)
+skf = StratifiedKFold(n_splits=5)
+kf = KFold(n_splits=5, shuffle=False)
 
 # Stratified scores
 stratified_scores = cross_val_score(model, X_imbalanced, y_imbalanced, cv=skf)
@@ -209,25 +217,25 @@ print(f"Regular CV: {regular_scores.mean():.3f} (+/- {regular_scores.std() * 2:.
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-9" data-tint="1">
+  <div class="code-callout" data-lines="1-15" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Imbalanced Dataset</span>
     </div>
     <div class="code-callout__body">
-      <p>Create a dataset with an 80/20 class split so the difference between stratified and regular k-fold is visible — minority class is easily lost in regular splits.</p>
+      <p>Use <code>make_classification</code> with <code>weights=[0.8, 0.2]</code> to build an 80/20 split with real signal, then sort by label so the classes are grouped — this is where regular k-fold goes wrong and the minority class is easily lost.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="11-18" data-tint="2">
+  <div class="code-callout" data-lines="17-24" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Two Splitter Strategies</span>
     </div>
     <div class="code-callout__body">
-      <p><code>StratifiedKFold</code> keeps ~20% minority class in each fold; plain <code>KFold</code> may concentrate them unevenly, inflating or deflating scores.</p>
+      <p><code>StratifiedKFold</code> keeps ~20% minority class in each fold; plain <code>KFold(shuffle=False)</code> on label-sorted data concentrates each class into separate folds, producing wildly variable scores.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="20-21" data-tint="3">
+  <div class="code-callout" data-lines="26-27" data-tint="3">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Compare Results</span>
@@ -240,8 +248,8 @@ print(f"Regular CV: {regular_scores.mean():.3f} (+/- {regular_scores.std() * 2:.
 </div>
 
 ```
-Stratified CV: 0.740 (+/- 0.075)
-Regular CV: 0.750 (+/- 0.063)
+Stratified CV: 0.885 (+/- 0.081)
+Regular CV: 0.760 (+/- 0.761)
 ```
 
 ### Time Series Cross-Validation
@@ -518,7 +526,7 @@ choose_optimal_k(X, y)
 - **Using plain `KFold` on imbalanced classification data** — Random splits can create folds where a minority class appears in only one or two folds, causing wildly variable CV scores; use `StratifiedKFold` for classification tasks so each fold preserves the original class distribution.
 - **Shuffling time-series data before CV** — For temporal data, randomly shuffling rows before `KFold` creates future-leakage: the model trains on data from next week and validates on data from last week; use `TimeSeriesSplit` to ensure validation always comes after the training window.
 - **Treating cross-validation score as an unbiased test set estimate** — CV score is an unbiased estimate of *model-selection* performance, but if you use it to also pick hyperparameters, the score is optimistic; use nested CV or a held-out test set that is never touched during model selection.
-- **Choosing `k=2` or `k=3` to save time** — Very small `k` means each fold uses only 33–50% of the data for training, producing high-variance score estimates with wide confidence intervals; `k=5` or `k=10` is standard and typically adds little extra computation for tabular data.
+- **Choosing `k=2` or `k=3` to save time** — Very small `k` means each fold trains on only 50–67% of the data (k=2 trains on 50%, k=3 on 67%) and validates on the remaining 33–50%, producing high-variance score estimates with wide confidence intervals; `k=5` or `k=10` is standard and typically adds little extra computation for tabular data.
 - **Ignoring the standard deviation across folds** — Reporting only mean CV accuracy hides instability; a mean of 0.85 with std of 0.12 is far less trustworthy than a mean of 0.83 with std of 0.02; always report `mean ± 2*std` to convey the reliability of the estimate.
 
 ## Additional Resources

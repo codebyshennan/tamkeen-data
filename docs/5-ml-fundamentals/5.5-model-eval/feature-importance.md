@@ -117,21 +117,26 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.datasets import make_classification
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
 from sklearn.inspection import permutation_importance
 
 X, y = make_classification(n_samples=1000, n_features=10,
                            n_informative=5, n_redundant=2,
                            random_state=42)
+# Hold out a test set: permutation importance must be measured on data the
+# model did not train on, otherwise it reflects memorisation, not generalisation.
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42)
 rf = RandomForestClassifier(n_estimators=100, random_state=42)
-rf.fit(X, y)
+rf.fit(X_train, y_train)
 
-# Calculate permutation importance
-result = permutation_importance(rf, X, y, n_repeats=10, random_state=42)
+# Calculate permutation importance on the held-out test set
+result = permutation_importance(rf, X_test, y_test, n_repeats=10, random_state=42)
 
 # Plot results
 plt.figure(figsize=(10, 6))
 plt.title('Permutation Importances')
-plt.boxplot(result.importances.T, labels=[f'Feature {i}' for i in range(X.shape[1])])
+plt.boxplot(result.importances.T, tick_labels=[f'Feature {i}' for i in range(X.shape[1])])
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
@@ -140,7 +145,7 @@ plt.show()
 
 <figure>
 <img src="assets/feature-importance_fig_1.png" alt="feature-importance" />
-<figcaption>Figure 1: Permutation Importances</figcaption>
+<figcaption>Figure 2: Permutation Importances</figcaption>
 </figure>
 
 ### 3. SHAP Values
@@ -259,7 +264,13 @@ plt.xticks(range(X.shape[1]), X.columns[indices], rotation=45)
 plt.tight_layout()
 plt.show()
 
-# Calculate and plot SHAP values
+# Calculate and plot SHAP values.
+# Note: StandardScaler is a no-op for tree ensembles (splits are scale-invariant),
+# so it adds nothing here. It also creates a subtle mismatch — the forest was
+# trained on *scaled* features, so feeding raw `X` to TreeExplainer explains the
+# model in a different space than it sees. SHAP should receive data in the same
+# space the model was fit on (e.g. pipeline[:-1].transform(X)). For a pure tree
+# model, the cleanest fix is to drop the scaler and explain on the raw features.
 explainer = shap.TreeExplainer(pipeline.named_steps['classifier'])
 shap_values = explainer.shap_values(X)
 

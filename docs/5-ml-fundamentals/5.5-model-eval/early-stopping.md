@@ -149,7 +149,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 # Create pipeline with early stopping
 pipeline = Pipeline([
     ('scaler', StandardScaler()),
-    ('classifier', SGDClassifier(early_stopping=True, validation_fraction=0.2))
+    ('classifier', SGDClassifier(early_stopping=True, validation_fraction=0.2, random_state=42))
 ])
 
 # Fit and evaluate
@@ -181,7 +181,7 @@ print(f"Early Stopping Score: {pipeline.score(X_test, y_test):.3f}")
 </div>
 
 ```
-Early Stopping Score: 0.815
+Early Stopping Score: 0.775
 ```
 
 ### 3. Custom Early Stopping Class

@@ -26,7 +26,7 @@ Take the **[Quick Assessment](./quick_assessment.ipynb)** to check your understa
 
 1. **[Take the Quick Assessment](./quick_assessment.ipynb)** (5 minutes)
 2. **Work through Level 1** in order
-3. Apply what you've learned in the [Module 5 assignment](../../assignments/module-assignment.md)
+3. Apply what you've learned in the [Module 5 assignment](../../assignments/assessment.md)
 
 ## Technical requirements
 

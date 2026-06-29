@@ -19,13 +19,15 @@ objectives:
 
 Precision and Recall are fundamental metrics in machine learning for evaluating classification models. They provide insights into a model's performance in terms of accuracy and completeness.
 
-### Video Tutorial: Precision and Recall Explained
+### Video Tutorial: Sensitivity and Specificity Explained
 
 <div class="video-embed">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/vP06aMoz4v8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 *StatQuest: Machine Learning Fundamentals: Sensitivity and Specificity by Josh Starmer*
+
+Note: **sensitivity** is exactly the same metric as **recall** (TP / (TP + FN)), so this video builds the intuition you need before we layer precision on top.
 
 ## What are Precision and Recall?
 
@@ -248,11 +250,10 @@ plt.show()
 
 ### 1. Binary Classification
 
-- Area Under Curve (AUC): Overall model performance
+- Area Under Curve (AUC / Average Precision): Overall model performance
 - Perfect classifier: AUC = 1.0
-- Random classifier: AUC = 0.5
-- Good classifier: AUC > 0.8
-- Poor classifier: AUC < 0.6
+- Random classifier: Average Precision ≈ the positive-class prevalence (the fraction of positives), **not** 0.5 — that 0.5 baseline belongs to the ROC curve, not the PR curve
+- Quality is judged **relative to the prevalence baseline**: a "good" model sits well above prevalence, a "poor" model sits near or below it. Fixed 0.6/0.8 cutoffs are misleading because, on a rare positive class, even a strong model may have a modest absolute AP.
 
 ### 2. Multi-class Classification
 
@@ -264,11 +265,9 @@ plt.show()
 ### 3. Average Precision
 
 - Range: 0 to 1
-- 0.5: Random classifier
+- ≈ positive-class prevalence: random classifier
 - 1.0: Perfect classifier
-- 0.7-0.8: Good classifier
-- 0.8-0.9: Very good classifier
-- 0.9+: Excellent classifier
+- The 0.7-0.8 (good), 0.8-0.9 (very good), and 0.9+ (excellent) bands are only meaningful **relative to that prevalence baseline** — an AP of 0.7 is excellent when positives are 5% of the data but unremarkable when they are 60%.
 
 ## Best Practices
 
@@ -422,7 +421,7 @@ plt.show()
 ## Gotchas
 
 - **Calling `precision_recall_curve` with hard predictions instead of probabilities** — `precision_recall_curve` requires continuous probability scores from `predict_proba[:, 1]`, not binary `predict` output; with hard labels the function returns only two operating points and the resulting "curve" cannot guide threshold selection.
-- **Average Precision is not the same as area under a smoothed PR curve** — `average_precision_score` uses a step-function interpolation (trapezoidal with right endpoints), which is slightly different from integrating a smooth curve; do not compare AP scores computed by different libraries that may interpolate differently.
+- **Average Precision is not the same as area under a smoothed PR curve** — AP is a weighted step sum of precision at each recall increment (Σ (Rₙ − Rₙ₋₁)·Pₙ) — deliberately *not* the trapezoidal interpolation used by `auc(recall, precision)`, which can be over-optimistic; do not mix the two, and do not compare AP scores computed by different libraries that may interpolate differently.
 - **Precision is undefined when the model predicts zero positives** — If your threshold is so high that the model never predicts the positive class, `TP + FP = 0` and precision is undefined (sklearn returns 0 with a warning); this silent 0 can mislead if you scan thresholds programmatically without checking prediction counts.
 - **F1 score hides severe imbalance in precision and recall** — An F1 of 0.67 could represent precision=1.0, recall=0.5 (never wrong but misses half) or precision=0.5, recall=1.0 (catches everything but half are false alarms); always report precision and recall separately in addition to F1 so the direction of the tradeoff is visible.
 - **Interpreting a high-recall model as "safe" for all use cases** — A spam filter with recall=0.99 for spam sounds great, but if precision=0.30 then 70% of flagged emails are legitimate; high recall at low precision is only acceptable when the cost of false negatives vastly outweighs false positives.

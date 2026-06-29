@@ -174,7 +174,7 @@ These are like following a decision tree - more complex but often more powerful.
 from sklearn.ensemble import RandomForestClassifier
 
 # Train tree-based model
-tree_model = RandomForestClassifier()
+tree_model = RandomForestClassifier(random_state=42)
 tree_model.fit(X_train, y_train)
 
 # Make predictions
@@ -224,7 +224,7 @@ plot_feature_importance(tree_model, [f'Feature {i+1}' for i in range(X.shape[1])
 </div>
 
 ```
-Tree Model Accuracy: 0.910
+Tree Model Accuracy: 0.900
 ```
 
 **Output:**
@@ -245,7 +245,7 @@ These are like having multiple layers of decision-making - very powerful but mor
 from sklearn.neural_network import MLPClassifier
 
 # Train neural network
-nn_model = MLPClassifier(hidden_layer_sizes=(100, 50))
+nn_model = MLPClassifier(hidden_layer_sizes=(100, 50), random_state=42)
 nn_model.fit(X_train, y_train)
 
 # Make predictions
@@ -307,7 +307,7 @@ plot_learning_curve(nn_model, X, y)
 </div>
 
 ```
-Neural Network Accuracy: 0.950
+Neural Network Accuracy: 0.945
 ```
 
 **Output:**
@@ -349,11 +349,12 @@ def compare_models(models, X_train, X_test, y_train, y_test):
 # Compare models
 models = {
     'Linear': LogisticRegression(),
-    'Tree': RandomForestClassifier(),
-    'Neural Network': MLPClassifier(hidden_layer_sizes=(100, 50))
+    'Tree': RandomForestClassifier(random_state=42),
+    'Neural Network': MLPClassifier(hidden_layer_sizes=(100, 50), random_state=42)
 }
 
 results = compare_models(models, X_train, X_test, y_train, y_test)
+print(results)
 {% endhighlight %}
 
 </div>
@@ -380,19 +381,15 @@ results = compare_models(models, X_train, X_test, y_train, y_test)
 </div>
 
 
+**Output:**
+```
+{'Linear': 0.825, 'Tree': 0.9, 'Neural Network': 0.945}
+```
+
 <figure>
 <img src="assets/model-selection_fig_4.png" alt="model-selection" />
 <figcaption>Figure 4: Model Comparison</figcaption>
 </figure>
-
-**Output:**
-```
-Linear Accuracy: 0.825
-Random Forest Accuracy: 0.900
-Neural Network Accuracy: 0.945
-```
-
-![Model Comparison](assets/model_comparison.png)
 
 The comparison shows that the Neural Network performs best on this dataset, followed by Random Forest, then Linear Regression.
 
@@ -455,16 +452,17 @@ pipelines = {
     ]),
     'Tree': Pipeline([
         ('scaler', StandardScaler()),
-        ('classifier', RandomForestClassifier())
+        ('classifier', RandomForestClassifier(random_state=42))
     ]),
     'Neural Network': Pipeline([
         ('scaler', StandardScaler()),
-        ('classifier', MLPClassifier(hidden_layer_sizes=(100, 50)))
+        ('classifier', MLPClassifier(hidden_layer_sizes=(100, 50), random_state=42))
     ])
 }
 
 # Compare pipelines
 results = compare_models(pipelines, X_train, X_test, y_train, y_test)
+print(results)
 {% endhighlight %}
 
 </div>
@@ -491,19 +489,15 @@ results = compare_models(pipelines, X_train, X_test, y_train, y_test)
 </div>
 
 
+**Output:**
+```
+{'Linear': 0.99, 'Tree': 0.98, 'Neural Network': 0.995}
+```
+
 <figure>
 <img src="assets/model-selection_fig_5.png" alt="model-selection" />
 <figcaption>Figure 5: Model Comparison</figcaption>
 </figure>
-
-**Output:**
-```
-Linear Accuracy: 0.990
-Random Forest Accuracy: 0.980
-Neural Network Accuracy: 0.995
-```
-
-![Credit Risk Model Comparison](assets/credit_risk_model_comparison.png)
 
 For the credit risk prediction task, all models perform exceptionally well, with the Neural Network achieving the highest accuracy.
 
@@ -531,8 +525,8 @@ def model_selection_process(X, y):
     # Define models (same keys as compare_models example above)
     models = {
         "Linear": LogisticRegression(),
-        "Tree": RandomForestClassifier(),
-        "Neural Network": MLPClassifier(hidden_layer_sizes=(100, 50)),
+        "Tree": RandomForestClassifier(random_state=42),
+        "Neural Network": MLPClassifier(hidden_layer_sizes=(100, 50), random_state=42),
     }
 
     # Compare models (requires compare_models + accuracy_score from earlier cells)
@@ -571,21 +565,12 @@ model_selection_process(X, y)
 </div>
 
 ```
-{'Linear': 0.995, 'Tree': 0.98, 'Neural Network': 0.455}
-```
-
-**Output:**
-```
-Linear Accuracy: 0.825
-Random Forest Accuracy: 0.900
-Neural Network Accuracy: 0.945
-
-Best model: Neural Network with accuracy: 0.945
+{'Linear': 0.995, 'Tree': 0.98, 'Neural Network': 0.55}
 ```
 
 ![Comprehensive Learning Curves](assets/comprehensive_learning_curves.png)
 
-The model selection process identifies the Neural Network as the best performing model and shows learning curves for all three model types, helping us understand their behavior with different amounts of training data.
+On this credit-risk data the function returns the results dict above and selects `Linear` (0.995) via `max(results, key=results.get)`, then plots its learning curve. The MLP underperforms here (0.55) because the raw, unscaled features make optimisation hard for a neural network — a reminder that the "best" model depends on preprocessing, not just model family.
 
 ## Gotchas
 

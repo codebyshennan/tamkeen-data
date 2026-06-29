@@ -192,42 +192,6 @@ plot_roc_curve(fpr, tpr, roc_auc)
 AUC Score: 0.914
 ```
 
-**Output:**
-```
-Training samples: 800
-Test samples: 200
-Features: 20
-Classes: 2
-
-AUC Score: 0.914
-
-Performance Metrics:
-Accuracy: 0.825
-Precision: 0.817
-Recall: 0.809
-F1-Score: 0.813
-
-Confusion Matrix:
-                Predicted
-                Neg    Pos
-Actual Neg       89     17
-       Pos       18     76
-
-ROC Curve Data (first 10 points):
-False Positive Rate | True Positive Rate | Threshold
---------------------------------------------------
-             0.000 |             0.000 |      inf
-             0.000 |             0.011 |    0.998
-             0.000 |             0.223 |    0.969
-             0.009 |             0.223 |    0.965
-             0.009 |             0.255 |    0.963
-             0.019 |             0.255 |    0.962
-             0.019 |             0.574 |    0.827
-             0.028 |             0.574 |    0.827
-             0.028 |             0.596 |    0.811
-             0.057 |             0.596 |    0.781
-```
-
 ### 2. Comparing Multiple Models
 
 #### Overlay ROC curves for several classifiers
@@ -432,10 +396,10 @@ Multi-class ROC Results:
 Class        | AUC Score
 --------------------------
 setosa       |     1.000
-versicolor   |     0.944
-virginica    |     0.944
+versicolor   |     1.000
+virginica    |     1.000
 
-Average AUC: 0.963
+Average AUC: 1.000
 
 Class Distribution in Test Set:
 setosa: 10 samples (33.3%)
@@ -738,7 +702,7 @@ print(f"Predicted default rate (threshold=0.5): {(y_pred_proba >= 0.5).mean():.2
       <span class="code-callout__title">Stratified Split and Pipeline</span>
     </div>
     <div class="code-callout__body">
-      <p><code>stratify=y</code> preserves the default rate in both splits; the scaler+forest pipeline prevents leakage and produces calibrated probability scores via <code>predict_proba[:, 1]</code>.</p>
+      <p><code>stratify=y</code> preserves the default rate in both splits; the scaler+forest pipeline prevents leakage and produces ranking scores (not necessarily calibrated) via <code>predict_proba[:, 1]</code> — ROC/AUC only needs the scores to rank positives above negatives correctly.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="66-118" data-tint="3">
@@ -761,66 +725,6 @@ AUC Score: 0.734
 Number of test samples: 400
 Actual default rate: 25.75%
 Predicted default rate (threshold=0.5): 13.00%
-```
-
-**Output:**
-```
-Default rate: 25.65%
-
-Dataset Summary:
-Total samples: 2,000
-Training samples: 1,600
-Test samples: 400
-Features: 7
-Default rate (overall): 25.65%
-Default rate (test): 25.75%
-
-Feature Statistics:
-Feature              | Mean      | Std       | Min       | Max
------------------------------------------------------------------
-age                 |     35.89 |     11.17 |     18.00 |     80.00
-income              |  50038.09 |  49297.23 |   3243.44 | 839859.73
-credit_score        |    642.10 |    115.14 |    300.00 |    850.00
-debt_to_income      |      0.28 |      0.16 |      0.01 |      0.82
-employment_years    |      5.16 |      4.90 |      0.00 |     34.26
-num_credit_accounts |      3.05 |      1.77 |      0.00 |     11.00
-credit_utilization  |      0.41 |      0.20 |      0.01 |      0.96
-
-Credit Risk Model Performance:
-AUC Score: 0.734
-Number of test samples: 400
-Actual default rate: 25.75%
-Predicted default rate (threshold=0.5): 8.50%
-
-Model Performance:
-Accuracy: 0.740
-Precision: 0.490
-Recall: 0.233
-F1-Score: 0.316
-
-Feature Importance Ranking:
-Rank | Feature              | Importance
-----------------------------------------
-   1 | credit_score        |      0.288
-   2 | income              |      0.144
-   3 | credit_utilization  |      0.131
-   4 | debt_to_income      |      0.127
-   5 | age                 |      0.125
-   6 | employment_years    |      0.123
-   7 | num_credit_accounts |      0.063
-
-Business Insights:
-Key Risk Factors:
-1. Credit utilization is the strongest predictor
-2. Credit score has significant negative correlation with default
-3. Income level provides moderate protection against default
-4. Employment stability (years) reduces default risk
-
-Recommendations:
-- Focus on applicants with credit utilization < 50%
-- Require minimum credit score of 600
-- Consider income-to-debt ratio in approval decisions
-- Weight employment history in risk assessment
 ```
 
 ## Best Practices
@@ -975,26 +879,6 @@ print(f"AUC: {auc_mean:.3f} (95% CI: {auc_lower:.3f} - {auc_upper:.3f})")
 AUC: 0.734 (95% CI: 0.677 - 0.787)
 ```
 
-**Output:**
-```
-Bootstrap Analysis Results:
-Number of bootstrap samples: 1000
-Original AUC: 0.734
-
-Bootstrap AUC Statistics:
-Mean: 0.734
-Standard Deviation: 0.028
-Min: 0.651
-Max: 0.798
-
-AUC: 0.734 (95% CI: 0.681 - 0.787)
-
-Confidence Interval Interpretation:
-- We can be 95% confident that the true AUC lies between 0.681 and 0.787
-- The confidence interval width is 0.106, indicating moderate uncertainty
-- This suggests the model performance is reasonably stable
-```
-
 ### 2. Cross-Validation with ROC/AUC
 
 #### Stratified K-fold mean `roc_auc`
@@ -1024,29 +908,8 @@ print(f"Mean CV AUC: {cv_scores.mean():.3f} (+/- {cv_scores.std() * 2:.3f})")
 ```
 
 ```
-Cross-validation AUC scores: [0.73913712 0.7770291  0.71420885 0.70780385 0.77948862]
-Mean CV AUC: 0.744 (+/- 0.060)
-```
-
-**Output:**
-```
-Cross-Validation Results:
-Fold 1 AUC: 0.742
-Fold 2 AUC: 0.728
-Fold 3 AUC: 0.751
-Fold 4 AUC: 0.739
-Fold 5 AUC: 0.745
-
-Cross-validation AUC scores: [0.742 0.728 0.751 0.739 0.745]
-Mean CV AUC: 0.741 (+/- 0.018)
-
-Cross-Validation Analysis:
-- Mean AUC: 0.741
-- Standard Deviation: 0.009
-- Coefficient of Variation: 1.2%
-- All folds within 2 standard deviations
-- Model shows consistent performance across folds
-- Low variance indicates stable model
+Cross-validation AUC scores: [0.9393     0.8851     0.8594     0.9161     0.88758876]
+Mean CV AUC: 0.897 (+/- 0.055)
 ```
 
 ## Summary

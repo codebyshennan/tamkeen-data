@@ -3,7 +3,7 @@ reading_minutes: 12
 objectives:
   - "Explain regularisation as a penalty on weight magnitude that trades a small training-error increase for a large variance reduction."
   - "Distinguish **L2** (Ridge — shrinks weights, all features kept), **L1** (Lasso — sparsity / implicit feature selection), and **ElasticNet** (a blend of the two)."
-  - "Tune the regularisation strength (`alpha` / `C`) with cross-validated search; standardise features first, or the penalty is uneven across features."
+  - "Tune the regularisation strength with cross-validated search, watching the direction of the knob: for `Lasso`/`Ridge` a larger `alpha` means MORE regularisation, but for `LogisticRegression`/`SVC` a larger `C` means LESS regularisation (`C` = 1/λ); standardise features first, or the penalty is uneven across features."
   - "Apply the same intuition to deep learning (weight decay, dropout) and gradient boosting (`min_samples_leaf`, `max_depth`, `reg_alpha`)."
 ---
 
@@ -131,7 +131,7 @@ print(f"L2 Regularization Score: {pipeline.score(X_test, y_test):.3f}")
 ```
 
 ```
-L2 Regularization Score: 0.989
+L2 Regularization Score: 0.988
 ```
 
 ### 3. Elastic Net
@@ -166,7 +166,7 @@ print(f"Elastic Net Score: {pipeline.score(X_test, y_test):.3f}")
 ```
 
 ```
-Elastic Net Score: 0.989
+Elastic Net Score: 0.984
 ```
 
 ## Real-World Analogies
@@ -229,6 +229,8 @@ Regularization is like traffic control:
 ## Practical Example: Credit Risk Prediction
 
 Let's see how regularization helps in a credit risk prediction task:
+
+> **Watch the direction of the knob.** `LogisticRegression` (and `SVC`) is tuned with `C`, not `alpha`, and `C` is the *inverse* regularisation strength (`C` = 1/λ). So a **larger `C` means LESS regularisation**, the opposite of `Lasso`/`Ridge`, where a **larger `alpha` means MORE regularisation**.
 
 #### Logistic penalties (L1 / L2 / elastic-net)
 

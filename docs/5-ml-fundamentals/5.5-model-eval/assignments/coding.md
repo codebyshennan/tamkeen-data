@@ -18,7 +18,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 # Load data
 data = load_breast_cancer()
-X, y = data.data, data.target   # y: 1 = malignant, 0 = benign
+X, y = data.data, data.target   # y: 0 = malignant, 1 = benign
 
 # Split
 X_train, X_test, y_train, y_test = train_test_split(
@@ -37,12 +37,12 @@ y_pred = clf.predict(X_test_s)
 y_prob = clf.predict_proba(X_test_s)[:, 1]   # probability of class 1
 
 print("Setup complete.")
-print(f"Test set size: {len(y_test)} samples, {y_test.sum()} malignant, {(y_test==0).sum()} benign")
+print(f"Test set size: {len(y_test)} samples, {y_test.sum()} benign, {(y_test==0).sum()} malignant")
 ```
 
 ```
 Setup complete.
-Test set size: 114 samples, 72 malignant, 42 benign
+Test set size: 114 samples, 72 benign, 42 malignant
 ```
 
 ## Tasks
@@ -51,7 +51,7 @@ Test set size: 114 samples, 72 malignant, 42 benign
 
 - Import `confusion_matrix` and `ConfusionMatrixDisplay` from `sklearn.metrics`.
 - Compute the confusion matrix from `y_test` and `y_pred`.
-- Plot it with `ConfusionMatrixDisplay` (display labels: `["benign", "malignant"]`).
+- Plot it with `ConfusionMatrixDisplay` (display labels: `["malignant", "benign"]`).
 - From the confusion matrix values (TP, TN, FP, FN), manually compute and print:
   - Accuracy  = (TP + TN) / (TP + TN + FP + FN)
   - Precision = TP / (TP + FP)
@@ -112,7 +112,7 @@ Submit a single Python script that:
 
 ### 1. Confusion Matrix
 - **Where:** [Confusion Matrix](../confusion-matrix.md) — "What is a Confusion Matrix? → TP/TN/FP/FN"; [Metrics](../metrics.md) — "Classification Metrics Comparison Table".
-- **Think:** `confusion_matrix` returns a 2×2 array for binary classification. Unpack it as `[[TN, FP], [FN, TP]] = cm.ravel()` if you want named variables. Then plug into the formulas exactly as written in the lesson's table. The `classification_report` output should match your manual values (small floating-point differences are expected).
+- **Think:** `confusion_matrix` returns a 2×2 array for binary classification. Unpack it as `TN, FP, FN, TP = cm.ravel()` if you want named variables. Then plug into the formulas exactly as written in the lesson's table. The `classification_report` output should match your manual values (small floating-point differences are expected).
 
 ### 2. k-Fold Cross-Validation
 - **Where:** [Cross-Validation](../cross-validation.md) — "Why Cross-Validation Matters"; "k-fold" variants.

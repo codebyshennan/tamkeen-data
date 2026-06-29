@@ -218,15 +218,6 @@ Best cross-validation score: 0.9075
 Test set accuracy: 0.9450
 ```
 
-**Expected Output:**
-```
-Starting grid search...
-Fitting 5 folds for each of 144 candidates, totalling 720 fits
-Best parameters: {'max_depth': 20, 'min_samples_leaf': 1, 'min_samples_split': 2, 'n_estimators': 300}
-Best cross-validation score: 0.8875
-Test set accuracy: 0.8900
-```
-
 ### 2. Random Search
 
 Random search samples hyperparameter combinations randomly from specified distributions.

@@ -143,6 +143,8 @@ plt.show()
 
 #### Larger MLP (typical gap)
 
+> This example reuses `X, y` (and the imported `np`/`plt`) from the first block above.
+
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -151,7 +153,7 @@ from sklearn.neural_network import MLPClassifier
 
 # Calculate learning curves for a complex model
 train_sizes, train_scores, val_scores = learning_curve(
-    MLPClassifier(hidden_layer_sizes=(100, 50)),
+    MLPClassifier(hidden_layer_sizes=(100, 50), max_iter=500, random_state=42),
     X, y,
     cv=5,
     n_jobs=-1,
@@ -218,6 +220,8 @@ plt.show()
 ### 3. Underfitting Learning Curve
 
 #### Dummy baseline (high bias)
+
+> This example reuses `X, y` (and the imported `np`/`plt`) from the first block above.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">

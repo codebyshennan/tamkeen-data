@@ -227,7 +227,7 @@ plt.show()
 - Accuracy: (TP + TN) / (TP + TN + FP + FN)
 - Precision: TP / (TP + FP)
 - Recall: TP / (TP + FN)
-- F1 Score: 2 *(Precision* Recall) / (Precision + Recall)
+- F1 Score: `2 * (Precision * Recall) / (Precision + Recall)`
 
 ## Best Practices
 

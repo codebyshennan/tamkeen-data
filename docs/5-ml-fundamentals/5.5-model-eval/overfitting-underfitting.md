@@ -166,13 +166,13 @@ plt.show()
       <p>For polynomial models, features are expanded with <code>fit_transform</code> (train only), then a fresh <code>LinearRegression</code> fits the expanded training set and scores on test.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="40-46" data-tint="4">
+  <div class="code-callout" data-lines="40-45" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">MSE Bar Chart</span>
     </div>
     <div class="code-callout__body">
-      <p>A bar chart of test MSE across the three models visually confirms that degree-15 produces the largest error despite fitting training data perfectly.</p>
+      <p>A bar chart of test MSE across the three models visually confirms that degree-15 produces the largest error despite fitting the training data far more closely.</p>
     </div>
   </div>
 </aside>

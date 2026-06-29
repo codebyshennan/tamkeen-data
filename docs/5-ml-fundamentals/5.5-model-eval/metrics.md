@@ -13,7 +13,7 @@ objectives:
 
 ## Overview
 
-**Metrics** turn predictions and labels into comparable numbers: accuracy, error rates, calibration, ranking scores, and more. This hub orients you before the dedicated pages on [confusion matrix](confusion-matrix.md), [precision/recall](precision-recall.md), [ROC/AUC](roc-and-auc.md), and [accuracy](accuracy.md). **Prerequisites:** supervised setup from [5.1](../../5.1-intro-to-ml/what-is-ml.md); class imbalance intuition helps when accuracy misleads.
+**Metrics** turn predictions and labels into comparable numbers: accuracy, error rates, calibration, ranking scores, and more. This hub orients you before the dedicated pages on [confusion matrix](confusion-matrix.md), [precision/recall](precision-recall.md), [ROC/AUC](roc-and-auc.md), and [accuracy](accuracy.md). **Prerequisites:** supervised setup from [5.1](../5.1-intro-to-ml/what-is-ml.md); class imbalance intuition helps when accuracy misleads.
 
 ## What are Evaluation Metrics?
 
@@ -76,7 +76,7 @@ Model evaluation is like weather forecasting:
 | **RMSE** | √(MSE) | 0-∞ | 0 | Same units as target | Interpretable units | Sensitive to outliers |
 | **MAE** | Σ\|y_true - y_pred\|/n | 0-∞ | 0 | Robust to outliers | Less sensitive to outliers | Less differentiable |
 | **R²** | 1 - SS_res/SS_tot | -∞-1 | 1.0 | Measure explained variance | Normalized, interpretable | Can be negative |
-| **MAPE** | Σ\|y_true - y_pred\|/y_true/n | 0-∞ | 0 | Percentage errors matter | Scale-independent | Undefined for zero values |
+| **MAPE** | (1/n)·Σ(\|y_true − y_pred\| / \|y_true\|) | 0-∞ | 0 | Percentage errors matter | Scale-independent | Undefined for zero values |
 
 ### Metric Relationships and Trade-offs
 
@@ -747,7 +747,7 @@ y = (credit_score + income/1000 + age > 800).astype(int)  # Binary target
 # Create pipeline
 pipeline = Pipeline([
     ('scaler', StandardScaler()),
-    ('classifier', RandomForestClassifier())
+    ('classifier', RandomForestClassifier(random_state=42))
 ])
 
 # Split data
@@ -805,45 +805,10 @@ plot_roc_curve(y_test, y_pred_proba)
 </div>
 
 ```
-Accuracy: 0.970
-Precision: 0.946
+Accuracy: 0.980
+Precision: 0.967
 Recall: 0.989
-F1 Score: 0.967
-```
-
-**Output:**
-```
-Credit Risk Dataset Summary:
-Training samples: 800
-Test samples: 200
-Features: 3 (age, income, credit_score)
-Target distribution: 62.5% approved, 37.5% rejected
-
-Model Performance:
-Accuracy: 0.915
-Precision: 0.889
-Recall: 0.889
-F1 Score: 0.889
-AUC Score: 0.967
-
-Confusion Matrix:
-                Predicted
-                Reject  Approve
-Actual Reject      67       8
-       Approve     9      116
-
-Feature Importance:
-1. credit_score: 0.542
-2. income: 0.289
-3. age: 0.169
-
-Business Insights:
-- Credit score is the strongest predictor (54.2% importance)
-- Income provides significant additional information (28.9%)
-- Age has moderate predictive power (16.9%)
-- Model shows excellent discrimination (AUC = 0.967)
-- Low false positive rate (6.4%) minimizes bad loans
-- Low false negative rate (7.2%) maximizes good customers
+F1 Score: 0.978
 ```
 
 ## Best Practices
@@ -869,7 +834,7 @@ Business Insights:
 - **Using MSE to compare models trained on different target scales** — MSE for house prices measured in dollars will dwarf MSE for a model predicting prices in thousands of dollars, even if the models are equally good; always report RMSE in the target's original units, or use R² to make scale-independent comparisons.
 - **MAPE silently breaks on zero-valued targets** — `mean_absolute_percentage_error` divides by the true value; if any `y_true` element is 0 the result is infinite or undefined, often silently returning `NaN`; check your target distribution for zeros before choosing MAPE.
 - **Choosing a metric after seeing results** — Deciding to switch from accuracy to F1 after noticing that accuracy looks bad is p-hacking for ML; choose your primary metric before training, based on the business problem, and stick to it as the final decision criterion.
-- **Passing hard predictions to `roc_auc_score`** — `roc_auc_score` requires probability scores, not binary predictions; passing `model.predict(X_test)` instead of `model.predict_proba(X_test)[:, 1]` will compute a degenerate AUC of 0.5 or raise a warning, silently giving a wrong result.
+- **Passing hard predictions to `roc_auc_score`** — `roc_auc_score` needs probability scores or decision-function values, not binary predictions. Passing `model.predict(X_test)` does **not** error or warn and does **not** return 0.5 — it silently computes a wrong-but-plausible value equal to the *balanced accuracy* of the hard predictions, which understates the model's true ranking AUC. In the logistic-regression example on this page, `roc_auc_score(y_test, model.predict(X_test))` returns **0.824** (the balanced accuracy of the 0/1 predictions) with no warning, while the correct `roc_auc_score(y_test, model.predict_proba(X_test)[:, 1])` returns **0.914**. A silent, believable wrong number is more dangerous than an obvious 0.5, so always pass probabilities or scores.
 - **Treating R² near 1.0 as proof of a good model** — On a dataset with a strong linear trend, even a bad model can achieve R²=0.95 because the metric measures variance explained relative to the mean, not prediction error in absolute terms; always inspect residual plots alongside R² to detect heteroscedasticity or systematic bias.
 
 ## Additional Resources

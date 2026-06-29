@@ -63,7 +63,7 @@ Based on a comprehensive review of the model evaluation learning materials, this
 - ✅ hyperparameter-tuning.md (3 visualizations integrated)
 - ✅ cross-validation.md (3 visualizations integrated)
 - ✅ confusion-matrix.md (enhanced with visualization)
-- ✅ roc-auc-comprehensive.md (consolidated from roc-and-auc.md, roc-auc.md, and roc-curve.md)
+- ✅ roc-and-auc.md (ROC/AUC visualizations integrated)
 - ✅ precision-recall.md (trade-off visualization)
 - ✅ metrics.md (comparison visualizations)
 
@@ -91,7 +91,7 @@ Based on a comprehensive review of the model evaluation learning materials, this
 
 #### Phase 2.1: Enhanced Tutorial Notebook - **COMPLETED** ✅
 **Achievements**:
-- ✅ Completely restructured tutorial.ipynb with educational best practices
+- ✅ Completely restructured model-eval.ipynb with educational best practices
 - ✅ Added comprehensive "What we're doing and why" sections
 - ✅ Included reflection questions and practice exercises
 - ✅ Added troubleshooting sections and interpretation guides
@@ -310,10 +310,10 @@ Based on a comprehensive review of the model evaluation learning materials, this
 1. **hyperparameter-tuning.md** - Complete rewrite (1,500 → 15,000+ words)
 2. **cross-validation.md** - Enhanced with visualizations and structure
 3. **confusion-matrix.md** - Improved with real-world context
-4. **roc-and-auc.md** - Consolidated ROC/AUC content with comprehensive interpretation guides
+4. **roc-and-auc.md** - ROC/AUC content with comprehensive interpretation guides
 5. **precision-recall.md** - Enhanced with trade-off analysis
 6. **metrics.md** - Added comparison tables and relationships
-7. **tutorial.ipynb** - Completely restructured with educational best practices
+7. **model-eval.ipynb** - Completely restructured with educational best practices
 
 ### Impact Assessment:
 - **Learning accessibility**: Significantly improved for beginners

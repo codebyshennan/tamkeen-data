@@ -319,7 +319,7 @@ print(f"Test labels: {y_test}")
       <span class="code-callout__title">Text Data and Imports</span>
     </div>
     <div class="code-callout__body">
-      <p>Four toy sentences with positive labels; <code>TfidfVectorizer</code> and <code>FunctionTransformer</code> will handle text → numeric conversion inside the pipeline.</p>
+      <p>Eight sentences with binary labels; <code>TfidfVectorizer</code> and <code>FunctionTransformer</code> will handle text → numeric conversion inside the pipeline.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="14-20" data-tint="2">

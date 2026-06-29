@@ -109,6 +109,8 @@ plt.show()
 
 #### Logistic `C` on a log scale
 
+> This example reuses `X, y` (and the imported `np`/`plt`) from the first block above.
+
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
@@ -174,6 +176,8 @@ plt.show()
 ### 3. Learning Rate
 
 #### Gradient boosting `learning_rate`
+
+> This example reuses `X, y` (and the imported `np`/`plt`) from the first block above.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
