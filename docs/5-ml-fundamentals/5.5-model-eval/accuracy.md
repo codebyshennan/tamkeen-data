@@ -173,24 +173,24 @@ Accuracy: 1.000
 ## Best Practices
 
 1. **Choose Appropriate Metrics**
-   - Consider class distribution
-   - Use multiple metrics
-   - Look at confusion matrix
+   - Check class distribution before trusting accuracy. If 95% of examples are negative, a model can score 95% by predicting negative every time.
+   - Pair accuracy with precision, recall, F1, or ROC/PR metrics when mistakes have asymmetric costs.
+   - Inspect the confusion matrix because it shows which classes are being confused; accuracy hides whether errors are concentrated in the most important class.
 
 2. **Handle Class Imbalance**
-   - Use weighted accuracy
-   - Consider other metrics
-   - Apply resampling
+   - Use class weights or balanced accuracy when each class should contribute fairly to evaluation.
+   - Consider recall or precision for the minority class because that is often where the business risk sits.
+   - Apply resampling only inside the training fold of a pipeline; resampling before splitting leaks information and inflates performance.
 
 3. **Validate Results**
-   - Use cross-validation
-   - Check for overfitting
-   - Compare with baseline
+   - Use cross-validation to see whether accuracy is stable across different train/test splits.
+   - Compare training and validation accuracy to detect overfitting; a large gap means the model is memorising training data.
+   - Compare with a simple baseline such as the majority-class classifier. A model that barely beats the baseline may not be useful.
 
 4. **Consider Business Impact**
-   - Cost of errors
-   - Risk tolerance
-   - Decision thresholds
+   - Estimate the cost of false positives and false negatives before selecting a threshold.
+   - Align the metric with risk tolerance: a screening model may prefer high recall, while an automated action may require high precision.
+   - Tune the decision threshold on validation data rather than accepting the default 0.5 cutoff.
 
 ## Common Mistakes to Avoid
 

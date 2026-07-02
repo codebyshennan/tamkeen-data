@@ -193,24 +193,24 @@ plt.show()
 ## Best Practices
 
 1. **Use Multiple Methods**
-   - Combine different importance measures
-   - Cross-validate results
-   - Consider domain knowledge
+   - Compare impurity-based, permutation, and model-specific explanations because each answers a slightly different question.
+   - Check importance across folds or repeated runs; a feature that ranks first only once may be a sampling accident rather than a reliable driver.
+   - Bring in domain knowledge before acting on the ranking: a high-importance feature can be a proxy, leakage source, or post-outcome variable that should not be used.
 
 2. **Handle Correlated Features**
-   - Group correlated features
-   - Use appropriate methods
-   - Consider feature interactions
+   - Group highly correlated features when interpreting importance because the model may split signal across them, making each individual bar look less important.
+   - Prefer permutation tests or grouped permutation when correlation is high; simple tree importances can overstate variables that offer many split points.
+   - Check interactions when the model is non-linear. A feature can matter only in combination with another feature and still look modest in a one-feature ranking.
 
 3. **Validate Results**
-   - Use cross-validation
-   - Check stability
-   - Compare with domain knowledge
+   - Recompute importance on validation folds or a holdout set so the ranking reflects generalisation, not memorisation of training quirks.
+   - Look for stable top features across seeds; unstable rankings are a signal to simplify the model, collect more data, or avoid strong claims.
+   - Compare the ranking with expected causal direction. If "loan approved" predicts "default", for example, the model may be seeing information that would not exist at prediction time.
 
 4. **Visualize Effectively**
-   - Use appropriate plots
-   - Show confidence intervals
-   - Include feature names
+   - Sort bars descending and highlight the top feature so the viewer can immediately see the main driver.
+   - Show error bars or repeated-run variation for permutation importance; small differences without uncertainty bands should not be overinterpreted.
+   - Use meaningful feature names instead of column numbers whenever possible, otherwise the chart is not actionable for debugging or stakeholder review.
 
 ## Common Mistakes to Avoid
 

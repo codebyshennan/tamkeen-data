@@ -232,25 +232,25 @@ plt.show()
 ## Best Practices
 
 1. **Choose Appropriate Visualization**
-   - Clear labels and title
-   - Proper color scheme
-   - Informative annotations
-   - Grid lines
+   - Use clear axis labels so readers know which side is predicted and which side is actual; swapping them changes the interpretation.
+   - Choose a colour scale that makes large errors visible without hiding smaller but important minority-class mistakes.
+   - Annotate counts and percentages when useful: counts show operational volume, while percentages show rates across classes of different sizes.
+   - Keep grid lines or cell boundaries visible so individual error cells are easy to locate.
 
 2. **Consider Class Imbalance**
-   - Use appropriate metrics
-   - Consider cost-sensitive learning
-   - Apply class weighting
+   - Normalise by true class when class sizes differ; otherwise the majority class dominates the visual impression.
+   - Consider cost-sensitive learning if one type of error is much more expensive than another.
+   - Apply class weighting when the model should pay more attention to rare but important classes.
 
 3. **Interpret Results Carefully**
-   - Look for patterns
-   - Identify systematic errors
-   - Consider business impact
+   - Look for repeated off-diagonal patterns because they show systematic confusion, not random noise.
+   - Identify whether errors are concentrated in one class; this points to missing features, label ambiguity, or threshold issues.
+   - Translate error cells into business impact so stakeholders can decide which mistake is tolerable.
 
 4. **Use Multiple Metrics**
-   - Don't rely on accuracy alone
-   - Consider precision and recall
-   - Use F1 score for balance
+   - Do not rely on accuracy alone because the matrix can reveal severe minority-class failure behind a strong overall score.
+   - Use precision when false positives are costly and recall when false negatives are costly.
+   - Use F1 when you need one summary number that balances precision and recall, but still inspect the matrix before making decisions.
 
 ## Common Mistakes to Avoid
 

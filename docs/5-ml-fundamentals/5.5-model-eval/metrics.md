@@ -814,19 +814,19 @@ F1 Score: 0.978
 ## Best Practices
 
 1. **Choose Appropriate Metrics**
-   - Consider business objectives
-   - Account for data characteristics
-   - Use multiple metrics when needed
+   - Start from the business objective because the metric should reward the behaviour you actually want.
+   - Account for data characteristics such as class imbalance, target scale, outliers, and zero-valued targets before choosing a metric.
+   - Use multiple supporting metrics when one number hides an important trade-off, but declare one primary metric before tuning.
 
 2. **Validate Thoroughly**
-   - Use cross-validation
-   - Check multiple data splits
-   - Test on holdout data
+   - Use cross-validation to estimate how much the metric varies across splits.
+   - Check multiple data splits when the dataset is small or noisy; unstable metrics should be reported with uncertainty.
+   - Test on holdout data only after model and threshold choices are fixed, otherwise the holdout becomes another validation set.
 
 3. **Monitor Over Time**
-   - Track metric stability
-   - Watch for degradation
-   - Update baselines as needed
+   - Track metric stability after deployment because real data distribution can shift away from the training sample.
+   - Watch for degradation by segment, not just overall; a model can remain stable on average while failing for one group.
+   - Update baselines when the population, product, or labelling process changes so comparisons remain meaningful.
 
 ## Gotchas
 

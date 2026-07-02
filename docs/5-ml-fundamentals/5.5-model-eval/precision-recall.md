@@ -272,28 +272,28 @@ plt.show()
 ## Best Practices
 
 1. **Choose Appropriate Threshold**
-   - Consider business costs
-   - Balance precision and recall
-   - Use domain knowledge
-   - Validate with stakeholders
+   - Choose the threshold from business costs, not from the default 0.5 probability cutoff.
+   - Move the threshold up when false positives are expensive and down when false negatives are expensive.
+   - Use domain knowledge to identify realistic operating points; a medical screening tool and a marketing lead scorer should not use the same trade-off.
+   - Validate the selected threshold with stakeholders because they own the practical consequences of the errors.
 
 2. **Handle Class Imbalance**
-   - Use appropriate sampling
-   - Consider class weights
-   - Apply cost-sensitive learning
-   - Use balanced metrics
+   - Use precision-recall curves for imbalanced problems because they focus on positive-class retrieval instead of true negatives.
+   - Apply sampling or class weights inside the training process only; changing the validation distribution can make precision look better than it will be in production.
+   - Use cost-sensitive learning when one class is rare but operationally important.
+   - Compare against the positive-class prevalence baseline, since average precision is meaningful only relative to that baseline.
 
 3. **Validate Results**
-   - Use cross-validation
-   - Check for overfitting
-   - Compare with baseline
-   - Consider multiple metrics
+   - Use cross-validation to check whether the curve shape is stable across folds.
+   - Check for overfitting by comparing train and validation curves; a large separation means the threshold analysis is optimistic.
+   - Compare with a baseline classifier so the PR curve improvement has context.
+   - Consider multiple metrics because the best threshold for F1 may not be the best threshold for cost or recall.
 
 4. **Visualize Effectively**
-   - Clear labels and title
-   - Proper color scheme
-   - Informative legend
-   - Grid lines
+   - Label the baseline prevalence line so viewers know what a random or trivial classifier would achieve.
+   - Mark candidate operating thresholds directly on the curve; otherwise readers see the trade-off but not the decision point.
+   - Include a legend when comparing models so the winning curve is identifiable without colour memory.
+   - Use grid lines or threshold labels sparingly to make recall/precision trade-offs readable.
 
 ## Common Mistakes to Avoid
 

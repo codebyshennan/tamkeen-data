@@ -306,24 +306,24 @@ plt.show()
 ## Best Practices
 
 1. **Choose Appropriate Range**
-   - Wide enough to see trends
-   - Fine enough for precision
-   - Log scale when needed
+   - Start wide enough that the validation curve shows both sides of the decision: a region where the model underfits and a region where extra complexity stops helping.
+   - Refine around the highest cross-validation score only after the first plot shows the peak; otherwise a narrow grid can make an edge value look "best" simply because better values were never tested.
+   - Use a log scale for parameters such as `C`, `alpha`, or learning rate because their effect is usually multiplicative; testing `0.001, 0.01, 0.1, 1, 10` is more informative than testing `1, 2, 3, 4, 5`.
 
 2. **Use Cross-Validation**
-   - Multiple folds
-   - Stratified sampling
-   - Appropriate metrics
+   - Plot cross-validation means rather than one validation split so the curve reflects a repeatable pattern, not a lucky or unlucky split.
+   - Use stratified folds for classification when class balance matters; without stratification, some folds may contain too few minority-class examples and create artificial dips in the curve.
+   - Match the metric to the cost of mistakes: accuracy can hide bad minority-class performance, while recall, precision, F1, or AUC may reveal the actual trade-off.
 
 3. **Plot Confidence Intervals**
-   - Show standard deviation
-   - Multiple runs
-   - Clear visualization
+   - Add standard-deviation bands so students can distinguish a real improvement from noise; if two settings have overlapping bands, the simpler or cheaper setting is usually safer.
+   - Repeat the curve with different random seeds when the model is unstable, especially for random forests, neural networks, or small datasets.
+   - Keep the chart readable: highlight the selected value and label underfit/overfit regions directly on the graph so the conclusion is visible without rereading the code.
 
 4. **Consider Multiple Parameters**
-   - Grid search
-   - Random search
-   - Bayesian optimization
+   - A validation curve isolates one parameter, so use it to build intuition before running a multi-parameter search.
+   - Use grid search when there are few parameters and you need full coverage; use random search when many parameters matter unevenly and compute is limited.
+   - Use Bayesian optimisation only after the metric, search bounds, and validation setup are trustworthy; otherwise it can optimise a noisy or misleading target very efficiently.
 
 ## Common Mistakes to Avoid
 

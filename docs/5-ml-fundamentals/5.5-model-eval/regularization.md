@@ -198,24 +198,24 @@ Regularization is like traffic control:
 ## Best Practices
 
 1. **Choose the Right Type**
-   - L1 for feature selection
-   - L2 for general regularization
-   - Elastic Net for balanced approach
+   - Use L1 when you want a sparse model because it can drive weak coefficients to exactly zero, making the selected features easier to inspect.
+   - Use L2 when most features may carry some signal because it shrinks coefficients smoothly instead of removing them completely.
+   - Use Elastic Net when features are correlated: L1 may pick one correlated feature arbitrarily, while the L2 component helps keep groups of related features stable.
 
 2. **Tune Regularization Strength**
-   - Use cross-validation
-   - Start with small values
-   - Monitor model performance
+   - Tune strength with cross-validation because the right amount of penalty is the one that improves held-out performance, not the one that looks neat on training data.
+   - Sweep values on a log scale; small changes near zero can be less important than order-of-magnitude changes in `alpha` or inverse-strength `C`.
+   - Check where the selected value sits in the search range. If the best value is at the boundary, extend the range before treating it as a real optimum.
 
 3. **Preprocess Data**
-   - Scale features
-   - Handle outliers
-   - Remove multicollinearity
+   - Scale numeric features before regularised linear models so the penalty treats coefficients comparably; otherwise large-scale features can be penalised differently for purely numeric reasons.
+   - Handle extreme outliers because they can force large coefficients that regularisation then shrinks in a way that hides the actual data-quality issue.
+   - Diagnose multicollinearity because correlated predictors make coefficients unstable; regularisation reduces the problem but does not explain which correlated feature is causally important.
 
 4. **Monitor Results**
-   - Track training and validation metrics
-   - Check feature importance
-   - Validate on new data
+   - Track both training and validation scores: if both are low, the penalty is probably too strong; if training is high and validation is low, it is probably too weak.
+   - Inspect coefficients or feature importance after tuning to confirm that regularisation changed the model in a plausible direction.
+   - Validate on fresh data before deployment because a penalty tuned on one sample can still fail when the feature distribution shifts.
 
 ## Common Mistakes to Avoid
 

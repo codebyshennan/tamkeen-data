@@ -286,24 +286,24 @@ Early stopping at epoch 28
 ## Best Practices
 
 1. **Choose Appropriate Metrics**
-   - Use validation metrics
-   - Consider business objectives
-   - Monitor multiple metrics
+   - Stop on validation metrics, not training loss, because the goal is to stop when generalisation stops improving.
+   - Choose a metric that matches the business cost. In fraud or credit risk, recall or precision may matter more than accuracy, so stopping on accuracy can freeze the wrong model.
+   - Monitor a secondary metric to catch trade-offs; for example, validation AUC may improve while minority-class recall gets worse.
 
 2. **Set Proper Parameters**
-   - Choose appropriate patience
-   - Set minimum improvement threshold
-   - Consider computational resources
+   - Set patience long enough to ignore normal validation noise; a patience of 1 can stop before the model recovers from a temporary dip.
+   - Set a minimum improvement threshold so tiny random metric changes do not reset the patience counter indefinitely.
+   - Tie the maximum number of iterations to the compute budget so training has a hard stop even if the metric keeps fluctuating.
 
 3. **Monitor Training**
-   - Track training progress
-   - Visualize learning curves
-   - Save best model
+   - Track train and validation curves together; if training keeps improving while validation flattens, the stopping point is doing useful regularisation.
+   - Visualise the best epoch or estimator count directly on the curve so the selected checkpoint can be audited later.
+   - Save the best validation checkpoint, not the last checkpoint, because the final iteration may already be past the best generalisation point.
 
 4. **Validate Results**
-   - Test on holdout set
-   - Compare with baseline
-   - Check for overfitting
+   - Evaluate the stopped model once on a holdout test set after tuning patience and thresholds.
+   - Compare against a no-early-stopping baseline; early stopping is useful only if it preserves or improves validation/test performance while reducing overfit or compute.
+   - Check whether the selected stop point is stable across seeds. If it jumps widely, the validation signal may be too noisy for a confident stopping rule.
 
 ## Common Mistakes to Avoid
 

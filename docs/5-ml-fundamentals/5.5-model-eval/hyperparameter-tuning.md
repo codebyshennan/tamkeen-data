@@ -589,14 +589,14 @@ Unbiased performance estimate: 0.8970 ± 0.0279
 ## Best Practices
 
 ### 1. Start with Broad Ranges
-- Begin with wide parameter ranges to understand the landscape
-- Gradually narrow down to promising regions
-- Use domain knowledge to set reasonable bounds
+- Begin with wide parameter ranges to understand the landscape. A first pass should reveal whether the best value is near the middle, stuck at an edge, or part of a flat plateau.
+- Narrow down only after the first search identifies a promising region; otherwise you may spend compute precisely searching the wrong area.
+- Use domain knowledge and documentation to set reasonable bounds. For example, learning rates often need log-scale ranges, while tree depth has practical limits from interpretability and overfitting.
 
 ### 2. Use Appropriate Cross-Validation
-- **Stratified K-Fold**: For classification with imbalanced classes
-- **Time Series Split**: For temporal data
-- **Group K-Fold**: When samples are grouped (e.g., by patient, location)
+- **Stratified K-Fold**: Use this for classification with imbalanced classes so each fold preserves the class distribution that the production model will face.
+- **Time Series Split**: Use this for temporal data because random folds let the model train on future observations and validate on the past.
+- **Group K-Fold**: Use this when samples are grouped (for example, by patient, customer, school, or location) so related records do not appear in both train and validation folds.
 
 ### 3. Monitor Computational Resources
 
@@ -625,9 +625,9 @@ Evaluated 108 combinations
 > **Read the output:** wall-clock time is part of model quality in real projects. If a modest grid already takes this long, widen the search with random search, successive halving, or a smaller first-pass grid before spending more compute.
 
 ### 4. Consider Early Stopping
-- Stop tuning when performance plateaus
-- Use learning curves to detect convergence
-- Set time or iteration budgets
+- Stop tuning when performance plateaus across several trials, not after one non-improving run; noisy metrics can briefly dip even when the search is still useful.
+- Use learning or validation curves to detect convergence. If the curve is flat and uncertainty bands overlap, additional search is unlikely to change the decision.
+- Set time or iteration budgets before starting large searches so compute cost is a controlled design choice rather than an accident.
 
 ### 5. Document All Experiments
 
@@ -656,43 +656,43 @@ with open('best_params.txt', 'w') as f:
 **Problem**: Repeatedly tuning on the same validation set can lead to overfitting.
 
 **Solution**: 
-- Use nested cross-validation for unbiased estimates
-- Hold out a separate test set that's never used for tuning
-- Limit the number of hyperparameter combinations tested
+- Use nested cross-validation for unbiased estimates because the outer folds evaluate the full tuning process, not one chosen model.
+- Hold out a separate test set that is never used for tuning so the final score remains a true final estimate.
+- Limit the number of hyperparameter combinations tested when using one validation set; every extra trial is another chance to fit validation noise.
 
 ### 2. Insufficient Parameter Ranges
 **Problem**: Setting ranges too narrow misses optimal values.
 
 **Solution**:
-- Start with wide ranges based on literature/documentation
-- Use log scales for parameters that vary by orders of magnitude
-- Extend ranges if best values are at boundaries
+- Start with wide ranges based on literature or documentation so the search has a plausible chance of containing useful values.
+- Use log scales for parameters that vary by orders of magnitude because linear spacing wastes trials in the wrong part of the range.
+- Extend ranges if best values are at boundaries; a boundary winner means the true optimum may sit outside the current search space.
 
 ### 3. Computational Inefficiency
 **Problem**: Wasting resources on unpromising parameter combinations.
 
 **Solution**:
-- Use random search or Bayesian optimization for large spaces
-- Implement early stopping for iterative algorithms
-- Use parallel processing (<code>n_jobs=-1</code>)
-- Consider approximate methods for initial screening
+- Use random search or Bayesian optimisation for large spaces because full grids grow exponentially with each added parameter.
+- Implement early stopping for iterative algorithms so clearly unpromising settings stop consuming compute.
+- Use parallel processing (`n_jobs=-1`) when memory allows; parallel fits can multiply RAM usage.
+- Consider approximate methods for initial screening, then reserve expensive exhaustive searches for the narrowed region.
 
 ### 4. Ignoring Model Assumptions
 **Problem**: Tuning parameters without understanding their impact.
 
 **Solution**:
-- Study algorithm documentation and theory
-- Understand parameter interactions
-- Use visualization to understand parameter effects
+- Study algorithm documentation and theory so each parameter change has an expected effect to verify.
+- Understand parameter interactions because tuning one parameter at a time can miss combinations such as tree depth plus minimum leaf size.
+- Use visualisation to understand parameter effects; plots reveal plateaus, unstable regions, and boundary optima faster than tables.
 
 ### 5. Not Considering Practical Constraints
 **Problem**: Optimizing only for accuracy without considering other factors.
 
 **Solution**:
-- Include inference time in evaluation
-- Consider memory requirements
-- Balance accuracy vs. interpretability
-- Account for training time constraints
+- Include inference time in evaluation when the model will serve real-time predictions.
+- Consider memory requirements because a slightly more accurate model may be too large for deployment.
+- Balance accuracy versus interpretability when decisions need explanation, auditability, or user trust.
+- Account for training time constraints so retraining remains practical as data grows.
 
 ## Troubleshooting Common Issues
 
@@ -720,28 +720,28 @@ with open('best_params.txt', 'w') as f:
 ## Practical Guidelines for Different Scenarios
 
 ### Small Datasets (< 1,000 samples)
-- Use simple models with few hyperparameters
-- Prefer grid search with small grids
-- Use leave-one-out or stratified k-fold CV
-- Focus on regularization parameters
+- Use simple models with few hyperparameters because small datasets cannot support high-capacity search spaces reliably.
+- Prefer grid search with small grids when every trial is cheap and coverage matters.
+- Use leave-one-out or stratified k-fold CV when each sample matters, but report uncertainty because estimates can still vary.
+- Focus on regularisation parameters because they directly control overfitting risk in low-data settings.
 
 ### Large Datasets (> 100,000 samples)
-- Use random search or Bayesian optimization
-- Consider early stopping
-- Use validation holdout instead of cross-validation
-- Parallelize across multiple machines if possible
+- Use random search or Bayesian optimisation because exhaustive grids become expensive quickly.
+- Consider early stopping to prevent weak candidates from consuming full training budgets.
+- Use a validation holdout instead of cross-validation when the dataset is large enough for a stable split.
+- Parallelise across multiple machines if possible, but keep seeds, versions, and result logging consistent.
 
 ### Time-Constrained Projects
-- Start with random search (quick exploration)
-- Use default parameters as baseline
-- Focus on most impactful parameters first
-- Consider pre-trained models or transfer learning
+- Start with random search for quick exploration because it gives broad coverage with a fixed trial budget.
+- Use default parameters as a baseline so tuning effort has a clear reference point.
+- Focus on the most impactful parameters first, such as regularisation strength, tree depth, or learning rate.
+- Consider pre-trained models or transfer learning when model choice matters more than fine-grained tuning.
 
 ### Research/Competition Settings
-- Use nested cross-validation for unbiased estimates
-- Combine multiple tuning methods
-- Extensive documentation and reproducibility
-- Consider ensemble methods
+- Use nested cross-validation for unbiased estimates when the reported score itself will be scrutinised.
+- Combine multiple tuning methods only after establishing strong baselines; otherwise complexity can hide weak evaluation.
+- Keep extensive documentation and reproducibility artifacts so experiments can be rerun and audited.
+- Consider ensemble methods when marginal gains matter and deployment simplicity is not the main constraint.
 
 ## Tools and Libraries
 

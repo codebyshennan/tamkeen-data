@@ -57,11 +57,11 @@ Let's look at some real-world examples:
 
 ## Best Practices
 
-1. Use cross-validation to assess model performance
-2. Monitor learning curves to detect bias/variance issues
-3. Try different model complexities
-4. Use regularization techniques
-5. Consider ensemble methods
+1. **Use cross-validation to assess model performance.** Bias and variance are properties of generalisation, so one train/test split is too fragile; cross-validation shows whether the error pattern repeats across folds.
+2. **Monitor learning curves to detect bias/variance issues.** High train and validation error suggests high bias, while low train error with high validation error suggests high variance.
+3. **Try different model complexities.** Complexity is the main knob in the trade-off: simpler models reduce variance but can increase bias; richer models can reduce bias but may increase variance.
+4. **Use regularisation techniques.** Regularisation intentionally adds bias to reduce variance, which is useful when the validation gap is larger than the training error.
+5. **Consider ensemble methods.** Bagging methods such as random forests reduce variance by averaging unstable learners, while boosting can reduce bias by combining many weak learners carefully.
 
 ## Gotchas
 

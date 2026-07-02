@@ -187,24 +187,24 @@ plt.show()
 ## Best Practices
 
 1. **Data Preparation**
-   - Use sufficient training data
-   - Clean and preprocess data
-   - Handle outliers appropriately
+   - Use enough training data to represent the variation the model will see later; tiny samples make both overfitting and underfitting diagnoses unstable.
+   - Clean and preprocess data before comparing models so differences in performance reflect model behaviour rather than inconsistent inputs.
+   - Investigate outliers because a model can either memorise them (overfitting) or flatten the whole pattern to accommodate them (underfitting).
 
 2. **Model Selection**
-   - Start with simple models
-   - Gradually increase complexity
-   - Use cross-validation
+   - Start with simple models to establish whether the signal is easy to learn.
+   - Increase complexity only when both training and validation performance are poor; if only validation is poor, the problem is variance, not insufficient capacity.
+   - Use cross-validation because one split can make a model look overfit or underfit due to sampling luck.
 
 3. **Regularization**
-   - Apply appropriate regularization
-   - Tune regularization parameters
-   - Monitor validation performance
+   - Add regularisation when training performance is much better than validation performance; that gap is the evidence that complexity needs control.
+   - Tune regularisation strength instead of guessing; too much penalty creates underfitting and too little leaves overfitting unchanged.
+   - Monitor validation performance because the best regularisation level is the one that improves generalisation, not the one that makes coefficients smallest.
 
 4. **Monitoring**
-   - Track training and validation metrics
-   - Use learning curves
-   - Implement early stopping
+   - Track training and validation metrics together because the diagnosis depends on both the absolute score and the gap.
+   - Use learning curves to decide whether the next lever is more data, a simpler model, or a more expressive model.
+   - Implement early stopping for iterative models when validation performance stops improving before training performance does.
 
 ## Common Mistakes to Avoid
 

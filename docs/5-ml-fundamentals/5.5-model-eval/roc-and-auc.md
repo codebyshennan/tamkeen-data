@@ -730,34 +730,34 @@ Predicted default rate (threshold=0.5): 13.00%
 ## Best Practices
 
 ### 1. Data Preparation
-- **Handle missing values** appropriately
-- **Scale features** when necessary
-- **Address class imbalance** if present
-- **Validate data quality** before modeling
+- **Handle missing values** before modelling because some estimators drop or error on missing rows, and silent row loss changes the class distribution.
+- **Scale features** when necessary, especially for distance-based and linear models; otherwise ROC differences may reflect optimisation difficulty rather than model quality.
+- **Address class imbalance** explicitly. ROC can look strong even when precision is poor on rare positives, so pair it with PR analysis when positives are scarce.
+- **Validate data quality** before modelling because leakage, duplicate rows, and temporal ordering can all inflate AUC.
 
 ### 2. Model Development
-- **Use cross-validation** for robust evaluation
-- **Compare multiple models** systematically
-- **Consider model complexity** vs. performance trade-offs
-- **Validate on holdout data** for final assessment
+- **Use cross-validation** for robust evaluation so the ROC curve is not driven by one lucky split.
+- **Compare multiple models** systematically with the same preprocessing and folds; otherwise AUC differences may come from the evaluation setup.
+- **Consider model complexity** versus performance trade-offs because a tiny AUC gain may not justify slower inference or lower interpretability.
+- **Validate on holdout data** once at the end so the reported AUC is not biased by repeated tuning.
 
 ### 3. ROC/AUC Analysis
-- **Examine the full ROC curve**, not just AUC
-- **Consider the shape** of the curve for insights
-- **Analyze threshold sensitivity** for practical deployment
-- **Use domain knowledge** for threshold selection
+- **Examine the full ROC curve**, not just AUC, because two models can have the same AUC but perform differently in the false-positive region you actually use.
+- **Consider the shape** of the curve for insights; steep early lift is valuable when you can tolerate only a small false-positive rate.
+- **Analyze threshold sensitivity** for practical deployment because the operating threshold determines the final confusion matrix.
+- **Use domain knowledge** for threshold selection so the chosen point reflects real costs, capacity, and risk tolerance.
 
 ### 4. Threshold Selection
-- **Consider business costs** of false positives vs. false negatives
-- **Involve stakeholders** in threshold decisions
-- **Document the rationale** for chosen thresholds
-- **Monitor performance** in production
+- **Consider business costs** of false positives versus false negatives before choosing an operating point.
+- **Involve stakeholders** in threshold decisions because they understand the acceptable trade-off better than the metric alone.
+- **Document the rationale** for chosen thresholds so future reviewers know whether the decision was driven by cost, capacity, safety, or regulation.
+- **Monitor performance** in production because score distributions and class prevalence can drift after deployment.
 
 ### 5. Reporting and Communication
-- **Provide context** for AUC scores
-- **Explain trade-offs** clearly to stakeholders
-- **Use visualizations** effectively
-- **Include confidence intervals** when possible
+- **Provide context** for AUC scores by comparing against a baseline and the use-case requirement.
+- **Explain trade-offs** clearly to stakeholders: higher true-positive rate usually comes with more false positives.
+- **Use visualizations** effectively by marking the selected operating point, not just showing the curve.
+- **Include confidence intervals** when possible so small AUC differences are not overstated.
 
 ## Common Mistakes to Avoid
 

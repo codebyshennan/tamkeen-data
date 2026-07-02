@@ -343,24 +343,24 @@ plt.show()
 ## Best Practices
 
 1. **Data Preparation**
-   - Use sufficient training data
-   - Clean and preprocess data
-   - Handle outliers appropriately
+   - Use training sizes that cover both small-data and near-full-data regimes; the left side shows how quickly the model learns, while the right side shows whether more data is still likely to help.
+   - Put preprocessing inside the cross-validation pipeline so each fold learns scaling, imputation, and encoding from its own training subset only.
+   - Investigate extreme outliers before plotting; a few corrupted rows can make the early training-size points look unstable and lead to the wrong diagnosis.
 
 2. **Model Selection**
-   - Start with simple models
-   - Gradually increase complexity
-   - Use cross-validation
+   - Start with a simple baseline because its curve tells you whether the dataset is learnable before adding model complexity.
+   - Increase complexity only when the simple model plateaus at low train and validation scores; if the simple model already has a high validation plateau, extra complexity mostly adds variance risk.
+   - Use cross-validation curves rather than one split so the final gap reflects typical behaviour across folds.
 
 3. **Regularization**
-   - Apply appropriate regularization
-   - Tune regularization parameters
-   - Monitor validation performance
+   - If the training curve stays high but the validation curve remains much lower, add regularisation or simplify the model; the gap is evidence that the model is memorising patterns that do not transfer.
+   - Tune regularisation with validation curves after reading the learning curve; the learning curve tells you whether regularisation is the right lever.
+   - Watch the validation curve, not only training score: stronger regularisation is useful only if validation performance improves or becomes more stable.
 
 4. **Monitoring**
-   - Track training and validation metrics
-   - Use learning curves
-   - Implement early stopping
+   - Track train and validation scores together because each score alone is ambiguous: low validation score could mean underfitting, overfitting, or a noisy split.
+   - Replot the curve after major feature-engineering or modelling changes so the diagnosis stays current.
+   - Use early stopping when validation performance stops improving while training performance continues to rise; this is the point where additional training begins to buy memorisation rather than generalisation.
 
 ## Common Mistakes to Avoid
 

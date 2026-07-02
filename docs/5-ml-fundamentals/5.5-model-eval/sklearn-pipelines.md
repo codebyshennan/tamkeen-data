@@ -635,6 +635,8 @@ Training accuracy: 1.000
 
 ### 1. Naming Conventions
 
+Use step names that describe the job of each transformer, not just its class. Those names become the handles for grid-search parameters such as `classifier__C`, appear in error messages, and make notebooks easier to debug months later.
+
 #### Readable step names for grids and debugging
 
 **Purpose:** Demonstrate descriptive step names that make pipeline grids and error messages easier to read.
@@ -658,6 +660,8 @@ pipeline = Pipeline([
 
 ### 2. Error Handling
 
+Custom transformers fail most often because production data contains a type, category, or missing-value pattern that was absent during development. Handle errors close to the transformer so the failing step is obvious, but avoid silently swallowing data problems in production code.
+
 #### Illustrative try/except inside `transform`
 
 **Purpose:** Sketch a defensive transformer pattern; the placeholder `transformed_X` marks it as illustrative rather than runnable.
@@ -679,6 +683,8 @@ class RobustTransformer(BaseEstimator, TransformerMixin):
 
 ### 3. Validation
 
+Validate the full pipeline, not only the estimator at the end. Cross-validation must refit preprocessing inside each fold, otherwise scaling, imputation, feature selection, or encoding can leak information from validation folds into training.
+
 #### CV helper for any pipeline object
 
 **Purpose:** Wrap cross-validation reporting in one helper that can be reused with any sklearn-compatible pipeline.
@@ -699,19 +705,19 @@ def validate_pipeline(pipeline, X, y, cv=5):
 ## Common Pitfalls and Solutions
 
 1. **Data Leakage**
-   - Keep all preprocessing in pipeline
-   - Use ColumnTransformer for mixed data
-   - Validate transformation order
+   - Keep all preprocessing in the pipeline so cross-validation refits every transformation on the training fold only.
+   - Use `ColumnTransformer` for mixed data so numeric and categorical columns receive separate, explicit preprocessing paths.
+   - Validate transformation order because feature selection, scaling, and encoding can change the meaning of downstream columns.
 
 2. **Memory Issues**
-   - Use memory caching
-   - Implement batch processing
-   - Monitor memory usage
+   - Use memory caching when expensive deterministic transformers are recomputed across many grid-search candidates.
+   - Implement batch processing for large transformations so the pipeline does not require the full transformed matrix in memory at once.
+   - Monitor memory usage because sparse one-hot features can accidentally become dense and exceed available RAM.
 
 3. **Performance**
-   - Profile pipeline steps
-   - Optimize transformers
-   - Use parallel processing
+   - Profile pipeline steps before optimising; the slowest transformer is often not the final estimator.
+   - Optimise custom transformers by avoiding repeated Python loops over rows when vectorised pandas or numpy operations are available.
+   - Use parallel processing when estimators and cross-validation folds are independent, but check memory pressure before setting `n_jobs=-1`.
 
 ## Gotchas
 

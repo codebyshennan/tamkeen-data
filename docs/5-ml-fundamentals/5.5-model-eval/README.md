@@ -128,22 +128,22 @@ Begin with [Cross Validation](./cross-validation.md) to understand how to proper
 ## Best Practices Overview
 
 1. **Cross Validation**
-   - Always use stratification for classification
-   - Consider temporal aspects for time series
-   - Use appropriate folds for your data size
-   - Validate assumptions about data independence
+   - Use stratification for classification when class balance matters so each fold represents the same class mix as the full dataset.
+   - Respect temporal order for time series because training on future data and validating on the past creates leakage.
+   - Choose folds based on data size: too few folds gives a noisy estimate, while too many folds increases compute and can make each validation fold tiny.
+   - Validate assumptions about data independence; grouped records from the same customer, patient, or location should not be split across train and validation folds.
 
 2. **Hyperparameter Tuning**
-   - Start with broad parameter ranges
-   - Use random search for initial exploration
-   - Apply Bayesian optimization for refinement
-   - Monitor computational resources
+   - Start with broad parameter ranges so the first pass can reveal whether the best value is inside the range or stuck on a boundary.
+   - Use random search for initial exploration when many parameters are possible, because only a few usually drive most of the performance.
+   - Apply Bayesian optimisation for refinement after the metric and bounds are trustworthy; otherwise it efficiently chases a noisy target.
+   - Monitor computational resources because tuning quality must be balanced against wall-clock time, memory, and reproducibility.
 
 3. **Pipeline Development**
-   - Keep transformations inside pipeline
-   - Use custom transformers for clarity
-   - Implement proper error handling
-   - Document pipeline components
+   - Keep transformations inside the pipeline so preprocessing is refit inside each cross-validation fold instead of leaking validation statistics.
+   - Use custom transformers when repeated feature logic needs a named, testable component rather than hidden notebook code.
+   - Implement error handling around fragile transformations so schema, type, or missing-value problems fail at the right step.
+   - Document pipeline components so later reviewers can tell which steps affect features, targets, and evaluation.
 
 ## Common Pitfalls to Avoid
 
