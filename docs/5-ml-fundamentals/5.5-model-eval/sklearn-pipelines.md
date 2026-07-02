@@ -29,6 +29,8 @@ Pipelines help us:
 
 *Without a pipeline, if you `StandardScaler.fit(X_all)` before splitting, test-set statistics leak into the scaler — the pipeline prevents this by fitting each step only on training data.*
 
+> **Read the diagram:** raw data enters the pipeline once. During `fit`, every preprocessing step learns only from the training data before the model trains. During `predict`, those learned transformations are reused unchanged on new data.
+
 #### Minimal `Pipeline`: scale then classify
 
 <div class="code-explainer" data-code-explainer>
@@ -106,6 +108,8 @@ print(f"Pipeline score: {pipeline.score(X_test, y_test):.3f}")
 Pipeline score: 0.990
 ```
 
+> **Read the output:** this is the score of the entire pipeline, not just the classifier. The scaler was fit on `X_train` and then reused for `X_test`, which is the leakage-free behavior you want.
+
 ## Building Complex Pipelines
 
 ### Feature Unions
@@ -178,6 +182,8 @@ print(f"Feature union score: {union_pipeline.score(X_test, y_test):.3f}")
 ```
 Feature union score: 0.980
 ```
+
+> **Read the output:** the score reflects a classifier trained on the concatenated PCA and SelectKBest features. A lower score than the minimal pipeline means the extra feature processing did not help this simple dataset enough to justify the complexity.
 
 ### Custom Transformers
 
@@ -256,6 +262,8 @@ print(f"Custom pipeline score: {pipeline_with_custom.score(X_test, y_test):.3f}"
 ```
 Custom pipeline score: 0.970
 ```
+
+> **Read the output:** the custom outlier handler changed the training signal before scaling and classification. If the score drops, inspect whether the threshold is replacing useful extreme values rather than only noisy outliers.
 
 ## Real-World Example: Text Classification
 
@@ -357,6 +365,8 @@ Predictions: [1, 1]
 Test labels: [1, 0]
 ```
 
+> **Read the output:** the first test example was classified correctly and the second was a false positive. Because the dataset has only eight sentences, the result is a pipeline demonstration rather than a reliable text-model evaluation.
+
 ## Pipeline Persistence
 
 Save and load pipelines:
@@ -453,6 +463,8 @@ Pipeline steps: ['scaler', 'pca', 'classifier']
 Training accuracy: 0.930
 ```
 
+> **Read the output:** the printed step names confirm the cached pipeline is wired as expected. The training accuracy is a quick smoke test only; use cross-validation or a holdout set before trusting performance.
+
 ### 2. Parameter Grid Search
 
 #### Tune nested steps with `__` hyperparameter names
@@ -532,6 +544,8 @@ Best parameters: {'classifier__C': 0.1, 'pca__n_components': 4, 'scaler__with_me
 Best CV score: 0.685
 Test score: 0.710
 ```
+
+> **Read the output:** the `step__param` keys show that preprocessing and model choices were tuned together inside CV. The test score being close to the CV score suggests the selected pipeline generalized about as expected.
 
 ### 3. Column Transformer
 
@@ -614,6 +628,8 @@ print(f"Training accuracy: {column_pipeline.score(X, y):.3f}")
 Transformed feature count: 5
 Training accuracy: 1.000
 ```
+
+> **Read the output:** the two numeric columns stay as two scaled features, while the categorical column expands into three one-hot columns, giving five transformed features total. The perfect training accuracy is expected on this tiny toy dataset and should not be treated as deployment evidence.
 
 ## Best Practices
 

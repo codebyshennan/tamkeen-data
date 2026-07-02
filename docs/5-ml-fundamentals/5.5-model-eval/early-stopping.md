@@ -28,6 +28,8 @@ Early stopping works by monitoring the model's performance on a validation set d
 
 *`patience` controls how many epochs of no-improvement you tolerate before stopping. Typical values: 5–20 for neural networks, 10–50 for gradient boosting.*
 
+> **Read the diagram:** each loop represents one more epoch or boosting iteration. Training continues only while validation performance is improving often enough. The saved checkpoint is the best validation checkpoint, not necessarily the final epoch before stopping.
+
 ### Why Early Stopping Matters
 
 1. Prevents overfitting
@@ -126,6 +128,8 @@ for epoch in range(1000):
 Early stopping at epoch 11
 ```
 
+> **Read the output:** the model saw five consecutive epochs without validation improvement by epoch 11, so the patience rule stopped training early. This is a warning to keep the best validation checkpoint; the final epoch is only the point where patience ran out.
+
 ### 2. Using Scikit-learn's Early Stopping
 
 #### `SGDClassifier(early_stopping=True)`
@@ -183,6 +187,8 @@ print(f"Early Stopping Score: {pipeline.score(X_test, y_test):.3f}")
 ```
 Early Stopping Score: 0.775
 ```
+
+> **Read the output:** this is the held-out test score after `SGDClassifier` internally reserved part of the training set for early stopping. If the score is weaker than expected, check whether `validation_fraction` left too little data for fitting.
 
 ### 3. Custom Early Stopping Class
 
@@ -275,6 +281,8 @@ for epoch in range(1000):
 Early stopping at epoch 28
 ```
 
+> **Read the output:** the custom tracker allowed more training than the first manual loop because the validation-score pattern differed. The important part is not the exact epoch number; it is that the same patience logic can be reused and audited.
+
 ## Best Practices
 
 1. **Choose Appropriate Metrics**
@@ -348,25 +356,28 @@ pipeline = Pipeline([
     ('classifier', RandomForestClassifier(n_estimators=100, max_depth=10))
 ])
 
-# Split data
-X_train, X_test, y_train, y_test = train_test_split(
+# Split data: train for fitting, validation for stopping, test for final reporting
+X_train_full, X_test, y_train_full, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
+X_train, X_val, y_train, y_val = train_test_split(
+    X_train_full, y_train_full, test_size=0.25, random_state=42
+)
 
-# Train with early stopping
+# Monitor the validation set during the tree-count sweep
 best_score = 0
-best_model = None
+best_n_estimators = None
 patience = 5
 no_improvement = 0
 
 for n_estimators in range(10, 100, 10):
     pipeline.set_params(classifier__n_estimators=n_estimators)
     pipeline.fit(X_train, y_train)
-    score = pipeline.score(X_test, y_test)
+    val_score = pipeline.score(X_val, y_val)
 
-    if score > best_score:
-        best_score = score
-        best_model = pipeline
+    if val_score > best_score:
+        best_score = val_score
+        best_n_estimators = n_estimators
         no_improvement = 0
     else:
         no_improvement += 1
@@ -375,7 +386,19 @@ for n_estimators in range(10, 100, 10):
         print(f"Early stopping at {n_estimators} trees")
         break
 
-print(f"Best model score: {best_score:.3f}")
+# Refit the selected model on all non-test data, then test once
+best_model = Pipeline([
+    ('scaler', StandardScaler()),
+    ('classifier', RandomForestClassifier(
+        n_estimators=best_n_estimators, max_depth=10, random_state=42
+    ))
+])
+best_model.fit(X_train_full, y_train_full)
+test_score = best_model.score(X_test, y_test)
+
+print(f"Best validation score: {best_score:.3f}")
+print(f"Selected n_estimators: {best_n_estimators}")
+print(f"Final test score: {test_score:.3f}")
 {% endhighlight %}
 
 </div>
@@ -389,22 +412,26 @@ print(f"Best model score: {best_score:.3f}")
       <p>Generate synthetic credit features, derive a binary label, and wrap a RandomForest in a scaler pipeline; the forest's <code>n_estimators</code> will be updated each iteration to simulate an epoch-by-epoch training process.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="30-52" data-tint="2">
+  <div class="code-callout" data-lines="30-69" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Tree-count Patience Loop</span>
     </div>
     <div class="code-callout__body">
-      <p><code>set_params(classifier__n_estimators=...)</code> grows the forest incrementally; the patience counter triggers early stopping when test score stops improving — pedagogical note: use a validation fold rather than the test set in production.</p>
+      <p><code>set_params(classifier__n_estimators=...)</code> grows the forest incrementally; the patience counter watches validation score only, then the selected tree count is refit on all non-test data before one final test evaluation.</p>
     </div>
   </div>
 </aside>
 </div>
 
 ```
-Early stopping at 90 trees
-Best model score: 0.985
+Early stopping at 80 trees
+Best validation score: 0.985
+Selected n_estimators: 30
+Final test score: 0.985
 ```
+
+> **Read the output:** validation score first peaked at 30 trees, then failed to improve for five checked tree counts, so the loop stopped at 80 trees. The final test score is reported only after refitting the selected 30-tree model on all non-test data.
 
 ## Gotchas
 
@@ -417,6 +444,6 @@ Best model score: 0.985
 
 ## Additional Resources
 
-1. Scikit-learn documentation
-2. Research papers on early stopping
-3. Online tutorials on model training
+1. [Scikit-learn: early stopping in stochastic gradient descent](https://scikit-learn.org/stable/auto_examples/linear_model/plot_sgd_early_stopping.html)
+2. [Scikit-learn: `MLPClassifier` early-stopping parameters](https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html)
+3. [Scikit-learn: gradient boosting early stopping example](https://scikit-learn.org/stable/auto_examples/ensemble/plot_gradient_boosting_early_stopping.html)

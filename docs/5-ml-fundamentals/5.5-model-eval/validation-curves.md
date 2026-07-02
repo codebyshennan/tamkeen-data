@@ -30,6 +30,8 @@ Validation curves plot the model's performance (typically error or accuracy) aga
 
 {% include model-eval-html-diagram.html diagram="validation-curves" title="Validation curve diagnosis diagram" %}
 
+> **Read the diagram:** move from left to right as the hyperparameter makes the model more flexible. The best region is not where the training score is highest; it is where the validation score is highest and the train-validation gap is still small.
+
 ## Types of Validation Curves
 
 ### 1. Model Complexity
@@ -105,6 +107,8 @@ plt.show()
 <figcaption>Figure 1: Validation Curves (Model Complexity)</figcaption>
 </figure>
 
+> **Read Figure 1:** the x-axis is tree depth. Shallow trees underfit because both curves are lower. As depth increases, the training score keeps rising, but the cross-validation score eventually flattens or drops. Choose a depth near the validation-score peak, before the gap becomes large.
+
 ### 2. Regularization Strength
 
 #### Logistic `C` on a log scale
@@ -173,6 +177,8 @@ plt.show()
 <figcaption>Figure 2: Validation Curves (Regularization)</figcaption>
 </figure>
 
+> **Read Figure 2:** `C` is inverse regularization strength. Very small `C` means heavy regularization and can underfit. Very large `C` means weak regularization and can overfit. The useful region is the middle plateau where validation performance is strong and stable.
+
 ### 3. Learning Rate
 
 #### Gradient boosting `learning_rate`
@@ -240,6 +246,8 @@ plt.show()
 <img src="assets/validation-curves_fig_3.png" alt="validation-curves" />
 <figcaption>Figure 3: Validation Curves (Learning Rate)</figcaption>
 </figure>
+
+> **Read Figure 3:** the learning rate controls how aggressively boosting corrects previous mistakes. A tiny value may learn too slowly for the fixed number of estimators. A large value can fit training data too sharply. Prefer the range where the validation curve peaks before the training curve separates.
 
 ## Interpreting Validation Curves
 
@@ -408,6 +416,8 @@ plt.show()
 <figcaption>Figure 4: Validation Curves for Credit Risk Prediction</figcaption>
 </figure>
 
+> **Read Figure 4:** this is the same depth sweep in a business-style credit-risk pipeline. If a deeper forest gives almost no validation gain but increases the training-validation gap, the extra depth is complexity without reliable generalization. In a real credit setting, prefer the simpler depth with nearly the same validation score.
+
 ## Gotchas
 
 - **Misreading the y-axis direction** — `validation_curve` returns scores (higher is better), not errors; a rising training curve that diverges from a flat validation curve signals overfitting, but learners who expect an error plot may reverse their interpretation and increase complexity when they should reduce it.
@@ -419,7 +429,7 @@ plt.show()
 
 ## Additional Resources
 
-1. Scikit-learn documentation on validation curves
-2. Research papers on hyperparameter tuning
-3. Online tutorials on model evaluation
-4. Books on machine learning optimization
+1. [Scikit-learn: validation curve user guide](https://scikit-learn.org/stable/modules/learning_curve.html#validation-curve)
+2. [Scikit-learn: `validation_curve` API](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.validation_curve.html)
+3. [Scikit-learn example: plotting validation curves](https://scikit-learn.org/stable/auto_examples/model_selection/plot_validation_curve.html)
+4. [Scikit-learn: tuning estimator hyperparameters](https://scikit-learn.org/stable/modules/grid_search.html)

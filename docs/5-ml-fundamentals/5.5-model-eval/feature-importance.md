@@ -31,6 +31,8 @@ Feature importance measures how much each feature contributes to the model's pre
 
 {% include model-eval-html-diagram.html diagram="feature-importance" title="Feature importance method comparison diagram" %}
 
+> **Read the diagram:** each method answers a slightly different question. Tree importance asks how the fitted trees split. Permutation importance asks how much score drops when a feature is broken. SHAP asks how features contributed to individual predictions and then summarizes those effects.
+
 ## Types of Feature Importance
 
 ### 1. Tree-Based Methods
@@ -106,6 +108,8 @@ plt.show()
 <figcaption>Figure 1: Feature Importances</figcaption>
 </figure>
 
+> **Read Figure 1:** the bars are normalized impurity importances from the fitted forest. Taller bars mean the model often used that feature for useful splits, but continuous or high-cardinality features can be favored even when their true signal is not stronger.
+
 ### 2. Permutation Importance
 
 #### Model-agnostic drop in score
@@ -147,6 +151,8 @@ plt.show()
 <img src="assets/feature-importance_fig_1.png" alt="feature-importance" />
 <figcaption>Figure 2: Permutation Importances</figcaption>
 </figure>
+
+> **Read Figure 2:** each box shows the score drop across repeated shuffles of one feature. A large positive drop means the model relies on that feature for held-out performance. A box near zero means shuffling that feature barely changes predictions.
 
 ### 3. SHAP Values
 
@@ -332,7 +338,7 @@ plt.show()
 
 ## Additional Resources
 
-1. Scikit-learn documentation on feature importance
-2. SHAP documentation and examples
-3. Research papers on feature selection
-4. Online tutorials on model interpretability
+1. [Scikit-learn: feature importance user guide](https://scikit-learn.org/stable/modules/permutation_importance.html)
+2. [Scikit-learn: permutation importance API](https://scikit-learn.org/stable/modules/generated/sklearn.inspection.permutation_importance.html)
+3. [Scikit-learn example: impurity vs permutation importance](https://scikit-learn.org/stable/auto_examples/inspection/plot_permutation_importance.html)
+4. [SHAP documentation](https://shap.readthedocs.io/)

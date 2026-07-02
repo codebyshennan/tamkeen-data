@@ -62,6 +62,8 @@ Model selection is like building a sports team:
 
 *The test set is touched exactly once. Any decision made by looking at it inflates your reported performance.*
 
+> **Read the diagram:** model selection is a funnel. Use training data for fitting, validation or cross-validation for choosing, and the test set only for the final report. If a decision changes because of the test score, the test set has become part of training.
+
 ## Types of Models
 
 ### 1. Linear Models
@@ -86,19 +88,22 @@ X, y = make_classification(n_samples=1000, n_features=20,
                          n_informative=15, n_redundant=5,
                          random_state=42)
 
-# Split data
-X_train, X_test, y_train, y_test = train_test_split(
+# Split data: validation is for comparison; test is held back for final reporting
+X_train_full, X_test, y_train_full, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
+)
+X_train, X_val, y_train, y_val = train_test_split(
+    X_train_full, y_train_full, test_size=0.25, random_state=42
 )
 
 # Train linear model
 linear_model = LogisticRegression()
 linear_model.fit(X_train, y_train)
 
-# Make predictions
-y_pred_linear = linear_model.predict(X_test)
-print(f"Linear Model Accuracy: {accuracy_score(y_test, y_pred_linear):.3f}")
-# Output: Linear Model Accuracy: 0.825
+# Make validation predictions
+y_pred_linear = linear_model.predict(X_val)
+print(f"Linear Validation Accuracy: {accuracy_score(y_val, y_pred_linear):.3f}")
+# Output: Linear Validation Accuracy: 0.800
 
 # Visualize decision boundary
 def plot_decision_boundary(model, X, y):
@@ -137,7 +142,7 @@ plot_decision_boundary(linear_model, X, y)
       <span class="code-callout__title">Data, Split, and Accuracy</span>
     </div>
     <div class="code-callout__body">
-      <p>Generate a 20-feature binary dataset, split 80/20, fit logistic regression on all features, and print accuracy; <code>X_train</code>/<code>y_train</code> from this block are reused in the tree and MLP examples below.</p>
+      <p>Generate a 20-feature binary dataset, hold back a final test set, then split the remaining data into train and validation; <code>X_train</code>/<code>y_train</code> from this block are reused in the tree and MLP examples below.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="26-53" data-tint="2">
@@ -153,13 +158,15 @@ plot_decision_boundary(linear_model, X, y)
 </div>
 
 ```
-Linear Model Accuracy: 0.825
+Linear Validation Accuracy: 0.800
 ```
 
 **Output:**
 ![Linear Decision Boundary](assets/linear_decision_boundary.png)
 
 The linear model creates a straight decision boundary, which works well for linearly separable data but may struggle with more complex patterns.
+
+> **Read the chart:** the shaded regions show which class the model predicts in each part of the two-feature space. Because logistic regression draws a straight boundary, curved or interleaved class patterns would be misclassified near the border.
 
 ### 2. Tree-Based Models
 
@@ -177,10 +184,10 @@ from sklearn.ensemble import RandomForestClassifier
 tree_model = RandomForestClassifier(random_state=42)
 tree_model.fit(X_train, y_train)
 
-# Make predictions
-y_pred_tree = tree_model.predict(X_test)
-print(f"Tree Model Accuracy: {accuracy_score(y_test, y_pred_tree):.3f}")
-# Output: Tree Model Accuracy: 0.900
+# Make validation predictions
+y_pred_tree = tree_model.predict(X_val)
+print(f"Tree Validation Accuracy: {accuracy_score(y_val, y_pred_tree):.3f}")
+# Output: Tree Validation Accuracy: 0.890
 
 # Visualize feature importance
 def plot_feature_importance(model, feature_names):
@@ -208,7 +215,7 @@ plot_feature_importance(tree_model, [f'Feature {i+1}' for i in range(X.shape[1])
       <span class="code-callout__title">Forest Fit and Accuracy</span>
     </div>
     <div class="code-callout__body">
-      <p>Fit a Random Forest on the same train split from the logistic example; compare accuracy to see how the nonlinear ensemble performs versus a linear baseline on the same 20-feature dataset.</p>
+      <p>Fit a Random Forest on the same train split from the logistic example; compare validation accuracy to see how the nonlinear ensemble performs versus a linear baseline on the same 20-feature dataset.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="13-27" data-tint="2">
@@ -224,13 +231,15 @@ plot_feature_importance(tree_model, [f'Feature {i+1}' for i in range(X.shape[1])
 </div>
 
 ```
-Tree Model Accuracy: 0.900
+Tree Validation Accuracy: 0.890
 ```
 
 **Output:**
 ![Feature Importance](assets/feature_importance.png)
 
 The Random Forest model shows which features are most important for making predictions. This helps us understand what the model is focusing on and can guide feature engineering efforts.
+
+> **Read the chart:** taller bars mean the forest used that feature more often to reduce impurity across its trees. Treat this as model behavior, not causal truth; correlated features can split importance and make each one look weaker.
 
 ### 3. Neural Networks
 
@@ -248,10 +257,10 @@ from sklearn.neural_network import MLPClassifier
 nn_model = MLPClassifier(hidden_layer_sizes=(100, 50), random_state=42)
 nn_model.fit(X_train, y_train)
 
-# Make predictions
-y_pred_nn = nn_model.predict(X_test)
-print(f"Neural Network Accuracy: {accuracy_score(y_test, y_pred_nn):.3f}")
-# Output: Neural Network Accuracy: 0.945
+# Make validation predictions
+y_pred_nn = nn_model.predict(X_val)
+print(f"Neural Network Validation Accuracy: {accuracy_score(y_val, y_pred_nn):.3f}")
+# Output: Neural Network Validation Accuracy: 0.945
 
 # Visualize learning curve
 def plot_learning_curve(model, X, y):
@@ -307,7 +316,7 @@ plot_learning_curve(nn_model, X, y)
 </div>
 
 ```
-Neural Network Accuracy: 0.945
+Neural Network Validation Accuracy: 0.945
 ```
 
 **Output:**
@@ -315,30 +324,32 @@ Neural Network Accuracy: 0.945
 
 The learning curve shows how the model's performance improves with more training data. The gap between training and validation scores indicates potential overfitting.
 
+> **Read the chart:** look at the right edge first. If validation is still climbing, more data may help. If the training curve is much higher than validation, the neural network is likely too flexible for the available data.
+
 ## Model Comparison
 
 Let's compare different models:
 
-#### Bar chart of test accuracies
+#### Bar chart of validation accuracies
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
 {% highlight python %}
-def compare_models(models, X_train, X_test, y_train, y_test):
+def compare_models(models, X_train, X_eval, y_train, y_eval, label="Validation"):
     results = {}
 
     for name, model in models.items():
         model.fit(X_train, y_train)
-        y_pred = model.predict(X_test)
-        results[name] = accuracy_score(y_test, y_pred)
+        y_pred = model.predict(X_eval)
+        results[name] = accuracy_score(y_eval, y_pred)
 
     # Plot comparison
     plt.figure(figsize=(10, 6))
     plt.bar(results.keys(), results.values())
     plt.xlabel('Model')
-    plt.ylabel('Accuracy')
-    plt.title('Model Comparison')
+    plt.ylabel(f'{label} Accuracy')
+    plt.title(f'Model Comparison ({label})')
     plt.xticks(rotation=45)
     plt.tight_layout()
     plt.savefig('assets/model_comparison.png')
@@ -353,7 +364,7 @@ models = {
     'Neural Network': MLPClassifier(hidden_layer_sizes=(100, 50), random_state=42)
 }
 
-results = compare_models(models, X_train, X_test, y_train, y_test)
+results = compare_models(models, X_train, X_val, y_train, y_val)
 print(results)
 {% endhighlight %}
 
@@ -365,7 +376,7 @@ print(results)
       <span class="code-callout__title">Compare Models Helper</span>
     </div>
     <div class="code-callout__body">
-      <p>Define <code>compare_models</code>: fit each estimator in the dict, collect test accuracy in a results dict, then plot a bar chart; the function is reused later in the credit risk example.</p>
+      <p>Define <code>compare_models</code>: fit each estimator in the dict, collect validation accuracy in a results dict, then plot a bar chart; the function is reused later in the credit risk example.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="22-28" data-tint="2">
@@ -374,7 +385,7 @@ print(results)
       <span class="code-callout__title">Three-model Comparison</span>
     </div>
     <div class="code-callout__body">
-      <p>Pass logistic regression, random forest, and MLP into the helper; the bar heights directly compare performance on the held-out test split from the earlier sections.</p>
+      <p>Pass logistic regression, random forest, and MLP into the helper; the bar heights directly compare performance on the validation split from the earlier sections.</p>
     </div>
   </div>
 </aside>
@@ -383,7 +394,7 @@ print(results)
 
 **Output:**
 ```
-{'Linear': 0.825, 'Tree': 0.9, 'Neural Network': 0.945}
+{'Linear': 0.8, 'Tree': 0.89, 'Neural Network': 0.945}
 ```
 
 <figure>
@@ -391,7 +402,9 @@ print(results)
 <figcaption>Figure 4: Model Comparison</figcaption>
 </figure>
 
-The comparison shows that the Neural Network performs best on this dataset, followed by Random Forest, then Linear Regression.
+The comparison shows that the Neural Network performs best on the validation split, followed by Random Forest, then Logistic Regression.
+
+> **Read the chart:** the bar chart is a quick comparison on one validation split. A higher bar is useful evidence, but not enough by itself; use cross-validation or repeated splits before declaring a model family the winner.
 
 ## Common Mistakes to Avoid
 
@@ -440,15 +453,18 @@ credit_score = np.random.normal(700, 100, n_samples)
 X = np.column_stack([age, income, credit_score])
 y = (credit_score + income/1000 + age > 800).astype(int)  # Binary target
 
-X_train, X_test, y_train, y_test = train_test_split(
+X_train_full, X_test, y_train_full, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
+)
+X_train, X_val, y_train, y_val = train_test_split(
+    X_train_full, y_train_full, test_size=0.25, random_state=42
 )
 
 # Create pipelines
 pipelines = {
     'Linear': Pipeline([
         ('scaler', StandardScaler()),
-        ('classifier', LogisticRegression())
+        ('classifier', LogisticRegression(max_iter=1000))
     ]),
     'Tree': Pipeline([
         ('scaler', StandardScaler()),
@@ -456,12 +472,12 @@ pipelines = {
     ]),
     'Neural Network': Pipeline([
         ('scaler', StandardScaler()),
-        ('classifier', MLPClassifier(hidden_layer_sizes=(100, 50), random_state=42))
+        ('classifier', MLPClassifier(hidden_layer_sizes=(100, 50), max_iter=1000, random_state=42))
     ])
 }
 
-# Compare pipelines
-results = compare_models(pipelines, X_train, X_test, y_train, y_test)
+# Compare pipelines on validation data, not the final test set
+results = compare_models(pipelines, X_train, X_val, y_train, y_val)
 print(results)
 {% endhighlight %}
 
@@ -473,7 +489,7 @@ print(results)
       <span class="code-callout__title">Credit Dataset and Split</span>
     </div>
     <div class="code-callout__body">
-      <p>Stack three financial features into a numpy array and split 80/20; the synthetic label (threshold on credit score + income + age) makes all three model families near-perfect on this separable task.</p>
+      <p>Stack three financial features into a numpy array, hold back a final test set, then split the remaining data into train and validation; the synthetic label makes the task nearly separable.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="24-41" data-tint="2">
@@ -482,7 +498,7 @@ print(results)
       <span class="code-callout__title">Three Scaled Pipelines</span>
     </div>
     <div class="code-callout__body">
-      <p>Wrap each classifier in a scaler pipeline so all models see normalized features; passing the dict to <code>compare_models</code> yields a bar chart comparing their test accuracies in one call.</p>
+      <p>Wrap each classifier in a scaler pipeline so all models see normalized features; passing the dict to <code>compare_models</code> yields a bar chart comparing validation accuracies in one call.</p>
     </div>
   </div>
 </aside>
@@ -491,7 +507,7 @@ print(results)
 
 **Output:**
 ```
-{'Linear': 0.99, 'Tree': 0.98, 'Neural Network': 0.995}
+{'Linear': 1.0, 'Tree': 0.98, 'Neural Network': 1.0}
 ```
 
 <figure>
@@ -499,7 +515,9 @@ print(results)
 <figcaption>Figure 5: Model Comparison</figcaption>
 </figure>
 
-For the credit risk prediction task, all models perform exceptionally well, with the Neural Network achieving the highest accuracy.
+For the credit risk prediction task, all models perform exceptionally well, with Linear and Neural Network tied on this validation split.
+
+> **Read the chart:** all bars are near the ceiling, so the practical difference is small. In that situation, prefer the simpler and more explainable model unless the more complex model gives a stable advantage across repeated validation.
 
 ## Best Practices
 
@@ -515,62 +533,79 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neural_network import MLPClassifier
+from pprint import pprint
 
 def model_selection_process(X, y):
-    # Split data
-    X_train, X_test, y_train, y_test = train_test_split(
+    # Split data: validation chooses the model, test reports it once
+    X_train_full, X_test, y_train_full, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42
+    )
+    X_train, X_val, y_train, y_val = train_test_split(
+        X_train_full, y_train_full, test_size=0.25, random_state=42
     )
 
     # Define models (same keys as compare_models example above)
     models = {
-        "Linear": LogisticRegression(),
+        "Linear": LogisticRegression(max_iter=1000),
         "Tree": RandomForestClassifier(random_state=42),
         "Neural Network": MLPClassifier(hidden_layer_sizes=(100, 50), random_state=42),
     }
 
-    # Compare models (requires compare_models + accuracy_score from earlier cells)
-    results = compare_models(models, X_train, X_test, y_train, y_test)
+    # Compare models on validation data (requires compare_models from earlier cells)
+    validation_scores = compare_models(models, X_train, X_val, y_train, y_val)
 
     # Plot learning curves for best model (requires plot_learning_curve from §3)
-    best_model_name = max(results, key=results.get)
+    best_model_name = max(validation_scores, key=validation_scores.get)
     plot_learning_curve(models[best_model_name], X, y)
 
-    return results
+    # Refit the selected family on all non-test data, then evaluate once on test
+    final_model = models[best_model_name]
+    final_model.fit(X_train_full, y_train_full)
+    final_test_score = accuracy_score(y_test, final_model.predict(X_test))
 
-model_selection_process(X, y)
+    return {
+        "validation_scores": validation_scores,
+        "selected_model": best_model_name,
+        "final_test_score": final_test_score,
+    }
+
+pprint(model_selection_process(X, y), sort_dicts=False)
 {% endhighlight %}
 
 </div>
 <aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-26" data-tint="1">
+  <div class="code-callout" data-lines="1-39" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">End-to-end Workflow</span>
     </div>
     <div class="code-callout__body">
-      <p>Bundle split → compare → diagnose in one function; <code>compare_models</code> and <code>plot_learning_curve</code> are helpers defined in earlier cells of the same session.</p>
+      <p>Bundle split → validate → diagnose → final-test into one function; <code>compare_models</code>, <code>plot_learning_curve</code>, and <code>accuracy_score</code> are helpers/imports defined in earlier cells of the same session.</p>
     </div>
   </div>
-  <div class="code-callout" data-lines="22-26" data-tint="2">
+  <div class="code-callout" data-lines="25-39" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
       <span class="code-callout__title">Auto-select Best Model</span>
     </div>
     <div class="code-callout__body">
-      <p><code>max(results, key=results.get)</code> picks the top-accuracy model name; passing that fitted estimator to <code>plot_learning_curve</code> shows whether adding more data would further improve the winner.</p>
+      <p><code>max(validation_scores, key=validation_scores.get)</code> picks the top validation model; the selected family is refit on all non-test data before the one final test score is returned.</p>
     </div>
   </div>
 </aside>
 </div>
 
 ```
-{'Linear': 0.995, 'Tree': 0.98, 'Neural Network': 0.55}
+{'validation_scores': {'Linear': 1.0, 'Tree': 0.98, 'Neural Network': 0.515},
+ 'selected_model': 'Linear',
+ 'final_test_score': 0.99}
 ```
 
 ![Comprehensive Learning Curves](assets/comprehensive_learning_curves.png)
 
-On this credit-risk data the function returns the results dict above and selects `Linear` (0.995) via `max(results, key=results.get)`, then plots its learning curve. The MLP underperforms here (0.55) because the raw, unscaled features make optimisation hard for a neural network — a reminder that the "best" model depends on preprocessing, not just model family.
+On this credit-risk data the function selects `Linear` from validation scores, then reports one final test score after refitting on all non-test data. The unscaled MLP underperforms here because raw feature magnitudes make optimisation hard for a neural network — a reminder that the "best" model depends on preprocessing, not just model family.
+
+> **Read the final curve:** this chart is a sanity check after picking the apparent winner. If the chosen model's validation curve has already plateaued near the training curve, additional data is unlikely to change the ranking much. If it is still rising, collect more data or repeat model selection after expanding the dataset.
 
 ## Gotchas
 
@@ -583,17 +618,10 @@ On this credit-risk data the function returns the results dict above and selects
 
 ## Additional Resources
 
-1. **Online Courses**
-   - Coursera: Machine Learning by Andrew Ng
-   - edX: Introduction to Machine Learning
-
-2. **Books**
-   - "Introduction to Machine Learning with Python" by Andreas Müller
-   - "Hands-On Machine Learning with Scikit-Learn" by Aurélien Géron
-
-3. **Documentation**
-   - [Scikit-learn Model Selection](https://scikit-learn.org/stable/model_selection.html)
-   - [Model Comparison](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html)
+1. [Scikit-learn: model selection and evaluation](https://scikit-learn.org/stable/model_selection.html)
+2. [Scikit-learn: comparing classifiers example](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html)
+3. [Scikit-learn: cross-validation user guide](https://scikit-learn.org/stable/modules/cross_validation.html)
+4. [Scikit-learn: tuning estimator hyperparameters](https://scikit-learn.org/stable/modules/grid_search.html)
 
 ## Next Steps
 

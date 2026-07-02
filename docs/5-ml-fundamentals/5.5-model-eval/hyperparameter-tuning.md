@@ -34,6 +34,8 @@ Hyperparameter tuning is crucial for several reasons:
 
 *Always fit the search object on train data only. The test set is touched once, at the very end, to report final performance.*
 
+> **Read the diagram:** tuning is a nested decision process. The search object repeatedly trains candidate models inside cross-validation, chooses the best candidate from validation scores, refits that candidate on the full training set, and only then evaluates once on the held-out test set.
+
 ## Understanding Hyperparameters vs Parameters
 
 | Aspect | Parameters | Hyperparameters |
@@ -101,6 +103,8 @@ Hyperparameter tuning is crucial for several reasons:
 Grid search exhaustively searches through a manually specified subset of hyperparameter space.
 
 ![Grid Search Results](assets/grid_search_results.png)
+
+> **Read the diagram:** grid search is like checking every point on a fixed board. It is easy to audit because every combination is known in advance, but the number of model fits multiplies quickly as you add more parameters or values.
 
 **How it works:**
 1. Define a grid of hyperparameter values
@@ -218,11 +222,15 @@ Best cross-validation score: 0.9075
 Test set accuracy: 0.9450
 ```
 
+> **Read the output:** `540 fits` comes from 108 parameter combinations times 5 CV folds. The CV score selected the hyperparameters; the test accuracy is the separate final check and should not be used to keep tuning the grid.
+
 ### 2. Random Search
 
 Random search samples hyperparameter combinations randomly from specified distributions.
 
 ![Random Search Results](assets/random_search_results.png)
+
+> **Read the diagram:** random search spends a fixed trial budget on scattered points in the search space. It often finds good regions faster than grid search when only a few hyperparameters strongly affect performance.
 
 **How it works:**
 1. Define probability distributions for each hyperparameter
@@ -328,11 +336,15 @@ Best cross-validation score: 0.9037
 Test set accuracy: 0.9500
 ```
 
+> **Read the output:** the random search tried fewer candidates than the grid search but reached a similar or better test score on this run. That does not prove random search is always better; it shows why random search is attractive when broad exploration matters.
+
 ### 3. Bayesian Optimization
 
 Bayesian optimization uses probabilistic models to guide the search for optimal hyperparameters.
 
 ![Bayesian Optimization](assets/bayesian_optimization.png)
+
+> **Read the diagram:** Bayesian optimization uses previous trials to decide where to look next. Early trials explore broadly; later trials exploit promising regions predicted by the surrogate model.
 
 **How it works:**
 1. Build a probabilistic model of the objective function
@@ -572,6 +584,8 @@ print(
 Unbiased performance estimate: 0.8970 ± 0.0279
 ```
 
+> **Read the output:** the mean is the estimated generalization score after repeating selection across outer folds. The `±` value shows how much performance varied across folds; a wide spread means model ranking is unstable.
+
 ## Best Practices
 
 ### 1. Start with Broad Ranges
@@ -607,6 +621,8 @@ Fitting 5 folds for each of 108 candidates, totalling 540 fits
 Tuning took 14.01 seconds
 Evaluated 108 combinations
 ```
+
+> **Read the output:** wall-clock time is part of model quality in real projects. If a modest grid already takes this long, widen the search with random search, successive halving, or a smaller first-pass grid before spending more compute.
 
 ### 4. Consider Early Stopping
 - Stop tuning when performance plateaus
@@ -848,7 +864,7 @@ Remember that hyperparameter tuning is just one part of the machine learning pip
 - "Practical Bayesian Optimization of Machine Learning Algorithms" (Snoek et al., 2012)
 - "Hyperband: A Novel Bandit-Based Approach to Hyperparameter Optimization" (Li et al., 2017)
 
-### Online Courses and Tutorials
-- Fast.ai Practical Deep Learning Course
-- Coursera Machine Learning Specialization
-- Kaggle Learn Intermediate Machine Learning
+### Worked Examples
+- [Scikit-learn example: randomized search vs grid search](https://scikit-learn.org/stable/auto_examples/model_selection/plot_randomized_search.html)
+- [Scikit-learn example: successive halving iterations](https://scikit-learn.org/stable/auto_examples/model_selection/plot_successive_halving_iterations.html)
+- [Optuna tutorial: first optimization](https://optuna.readthedocs.io/en/stable/tutorial/10_key_features/001_first.html)

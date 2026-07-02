@@ -53,6 +53,8 @@ Learning curves are like sports training:
 
 {% include model-eval-html-diagram.html diagram="learning-curves" title="Learning curve diagnosis diagram" %}
 
+> **Read the diagram:** the x-axis is training-set size, not model complexity. Read the final right-hand side first: if both curves end low, the model is underfitting; if the training curve stays much higher than validation, it is overfitting; if both end high and close together, the model is generalizing.
+
 ### 1. Ideal Learning Curve
 
 #### `learning_curve` with logistic regression
@@ -139,6 +141,8 @@ plt.show()
 <figcaption>Figure 1: Learning Curves</figcaption>
 </figure>
 
+> **Read Figure 1:** the training score usually starts high because small training sets are easy to memorize. The validation score should rise as more examples are added. A useful curve ends with the two lines close together at a strong score, which means the model has enough data to generalize.
+
 ### 2. Overfitting Learning Curve
 
 #### Larger MLP (typical gap)
@@ -216,6 +220,8 @@ plt.show()
 <img src="assets/learning-curves_fig_2.png" alt="learning-curves" />
 <figcaption>Figure 2: Overfitting Learning Curves</figcaption>
 </figure>
+
+> **Read Figure 2:** the training curve remaining high while the validation curve stays lower is the key warning sign. More data may help if the validation curve is still climbing at the right edge, but regularization or a simpler model is usually the faster first response.
 
 ### 3. Underfitting Learning Curve
 
@@ -295,6 +301,8 @@ plt.show()
 <figcaption>Figure 3: Underfitting Learning Curves</figcaption>
 </figure>
 
+> **Read Figure 3:** both curves are close together, but that is not automatically good. Because they plateau at a weak score, the model is too simple to learn the pattern. Adding more rows will not fix the main problem; add better features or use a stronger model.
+
 ## Interpreting Learning Curves
 
 ### 1. High Bias (Underfitting)
@@ -360,6 +368,7 @@ plt.show()
 
 ## Additional Resources
 
-1. Scikit-learn documentation
-2. Research papers on model complexity
-3. Online tutorials on regularization
+1. [Scikit-learn: learning curve user guide](https://scikit-learn.org/stable/modules/learning_curve.html#learning-curve)
+2. [Scikit-learn: `learning_curve` API](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.learning_curve.html)
+3. [Scikit-learn example: plotting learning curves](https://scikit-learn.org/stable/auto_examples/model_selection/plot_learning_curve.html)
+4. [Scikit-learn: underfitting vs overfitting example](https://scikit-learn.org/stable/auto_examples/model_selection/plot_underfitting_overfitting.html)

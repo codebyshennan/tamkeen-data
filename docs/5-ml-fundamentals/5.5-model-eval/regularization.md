@@ -39,6 +39,8 @@ Regularization adds a penalty term to the model's loss function to discourage co
 
 *Higher `alpha` (λ) = stronger penalty = simpler model. Too high and you underfit. Use `RidgeCV` or `LassoCV` to search automatically.*
 
+> **Read the diagram:** start from the symptom. If training score is much higher than validation score, add regularization. Then choose the penalty shape: L1 can drop features, L2 shrinks all weights, and Elastic Net combines both.
+
 ### 1. L1 Regularization (Lasso)
 
 L1 regularization adds the absolute value of coefficients to the loss function:
@@ -99,6 +101,8 @@ print(f"L1 Regularization Score: {pipeline.score(X_test, y_test):.3f}")
 L1 Regularization Score: 0.989
 ```
 
+> **Read the output:** this is an \(R^2\) score, so values close to 1 mean the model explains most target variation on the test split. Lasso also tends to push some coefficients exactly to zero, so it can double as a feature-selection tool.
+
 ### 2. L2 Regularization (Ridge)
 
 L2 regularization adds the squared value of coefficients to the loss function:
@@ -134,6 +138,8 @@ print(f"L2 Regularization Score: {pipeline.score(X_test, y_test):.3f}")
 L2 Regularization Score: 0.988
 ```
 
+> **Read the output:** Ridge reaches almost the same test \(R^2\) as Lasso here, but it usually keeps all features with smaller coefficients. Prefer Ridge when many features carry small, shared signal rather than a few features dominating.
+
 ### 3. Elastic Net
 
 Elastic Net combines L1 and L2 regularization:
@@ -168,6 +174,8 @@ print(f"Elastic Net Score: {pipeline.score(X_test, y_test):.3f}")
 ```
 Elastic Net Score: 0.984
 ```
+
+> **Read the output:** Elastic Net is slightly lower on this synthetic split, but still strong. The point is the tradeoff: it can behave like Lasso when sparsity helps and like Ridge when correlated features should share weight.
 
 ## Real-World Analogies
 
@@ -329,6 +337,8 @@ plt.show()
 <figcaption>Figure 1: Regularization Comparison</figcaption>
 </figure>
 
+> **Read Figure 1:** compare the bar heights as test accuracy, not as proof that one penalty is universally better. When the bars are close, choose based on secondary needs: L1 for simpler feature sets, L2 for stable coefficients, and Elastic Net when features are correlated.
+
 ## Gotchas
 
 - **Applying regularization without scaling features** — L1 and L2 penalties are applied to raw coefficient magnitudes, so a feature with a large numeric range (e.g., income in thousands) will attract a disproportionately large penalty compared to a small-range feature; always run `StandardScaler` before regularized models.
@@ -340,6 +350,7 @@ plt.show()
 
 ## Additional Resources
 
-1. Scikit-learn documentation
-2. Research papers on regularization
-3. Online tutorials on model tuning
+1. [Scikit-learn: linear models and regularization](https://scikit-learn.org/stable/modules/linear_model.html)
+2. [Scikit-learn: `RidgeCV`](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.RidgeCV.html)
+3. [Scikit-learn: `LassoCV`](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LassoCV.html)
+4. [Scikit-learn: logistic regression regularization path example](https://scikit-learn.org/stable/auto_examples/linear_model/plot_logistic_l1_l2_sparsity.html)
