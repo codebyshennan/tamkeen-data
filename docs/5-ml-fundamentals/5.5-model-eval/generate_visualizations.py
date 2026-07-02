@@ -133,9 +133,17 @@ def generate_hp_tuning_visualizations():
 
     plt.figure(figsize=(10, 6))
     plt.plot(param_range, grid_scores, "bo-", alpha=0.6)
+    best_idx = np.argmax(grid_scores)
+    plt.axvline(param_range[best_idx], color="green", linestyle="--", linewidth=2,
+                label=f"Best grid value = {param_range[best_idx]:.2f}")
+    plt.scatter(param_range[best_idx], grid_scores[best_idx], s=120, color="green", zorder=5)
+    plt.annotate("best tried point", xy=(param_range[best_idx], grid_scores[best_idx]),
+                 xytext=(param_range[best_idx] + 1.0, grid_scores[best_idx] - 0.15),
+                 arrowprops=dict(arrowstyle="->", color="green"), color="darkgreen")
     plt.xlabel("Hyperparameter Value")
     plt.ylabel("Validation Score")
     plt.title("Grid Search Results")
+    plt.legend()
     plt.grid(True)
     plt.tight_layout()
     plt.savefig("assets/grid_search_results.png")
@@ -150,9 +158,16 @@ def generate_hp_tuning_visualizations():
 
     plt.figure(figsize=(10, 6))
     plt.scatter(random_params, random_scores, c="red", alpha=0.6)
+    best_idx = np.argmax(random_scores)
+    plt.scatter(random_params[best_idx], random_scores[best_idx], s=140,
+                color="green", edgecolor="black", zorder=5, label="Best sampled point")
+    plt.annotate("best random draw", xy=(random_params[best_idx], random_scores[best_idx]),
+                 xytext=(random_params[best_idx] + 1.0, random_scores[best_idx] - 0.18),
+                 arrowprops=dict(arrowstyle="->", color="green"), color="darkgreen")
     plt.xlabel("Hyperparameter Value")
     plt.ylabel("Validation Score")
     plt.title("Random Search Results")
+    plt.legend()
     plt.grid(True)
     plt.tight_layout()
     plt.savefig("assets/random_search_results.png")
@@ -170,6 +185,12 @@ def generate_hp_tuning_visualizations():
         x, mean - 2 * std, mean + 2 * std, color="b", alpha=0.2, label="Uncertainty"
     )
     plt.scatter(x[::10], mean[::10], c="red", alpha=0.6, label="Observations")
+    next_idx = np.argmax(mean + 2 * std)
+    plt.axvline(x[next_idx], color="green", linestyle="--", linewidth=2,
+                label="Next promising trial")
+    plt.annotate("exploit high mean\n+ uncertainty", xy=(x[next_idx], mean[next_idx]),
+                 xytext=(x[next_idx] + 1.0, mean[next_idx] - 0.25),
+                 arrowprops=dict(arrowstyle="->", color="green"), color="darkgreen")
     plt.xlabel("Hyperparameter Value")
     plt.ylabel("Objective")
     plt.title("Bayesian Optimization")

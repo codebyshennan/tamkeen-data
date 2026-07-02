@@ -293,9 +293,22 @@ for name, pipeline in pipelines.items():
 
 # Plot results
 plt.figure(figsize=(10, 6))
-plt.bar(results.keys(), results.values())
+bars = plt.bar(results.keys(), results.values())
+best_name = max(results, key=results.get)
+best_score = results[best_name]
+for bar in bars:
+    height = bar.get_height()
+    plt.text(bar.get_x() + bar.get_width() / 2, height + 0.01,
+             f'{height:.3f}', ha='center', va='bottom')
+plt.axhline(best_score, color='green', linestyle='--', linewidth=2,
+            label=f'Best: {best_name}')
+plt.annotate('prefer simpler penalty if scores tie', xy=(0, best_score),
+             xytext=(0.15, best_score - 0.08),
+             arrowprops=dict(arrowstyle='->', color='green'), color='darkgreen')
 plt.title('Regularization Comparison')
 plt.ylabel('Accuracy')
+plt.ylim(0, 1.08)
+plt.legend()
 plt.show()
 {% endhighlight %}
 

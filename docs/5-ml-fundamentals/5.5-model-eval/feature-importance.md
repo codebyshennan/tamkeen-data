@@ -64,8 +64,17 @@ indices = np.argsort(importances)[::-1]
 # Plot feature importances
 plt.figure(figsize=(10, 6))
 plt.title('Feature Importances')
-plt.bar(range(X.shape[1]), importances[indices])
+bars = plt.bar(range(X.shape[1]), importances[indices])
 plt.xticks(range(X.shape[1]), [f'Feature {i}' for i in indices], rotation=45)
+top_pos = 0
+top_feature = indices[0]
+top_importance = importances[indices][0]
+plt.axhline(0.05, color='gray', linestyle='--', linewidth=1, label='Low-importance guide')
+bars[top_pos].set_color('tab:green')
+plt.annotate(f'top driver: Feature {top_feature}', xy=(top_pos, top_importance),
+             xytext=(top_pos + 1.0, top_importance - 0.03),
+             arrowprops=dict(arrowstyle='->', color='green'), color='darkgreen')
+plt.legend()
 plt.tight_layout()
 plt.show()
 {% endhighlight %}
@@ -141,6 +150,12 @@ result = permutation_importance(rf, X_test, y_test, n_repeats=10, random_state=4
 plt.figure(figsize=(10, 6))
 plt.title('Permutation Importances')
 plt.boxplot(result.importances.T, tick_labels=[f'Feature {i}' for i in range(X.shape[1])])
+top_feature = int(np.argmax(result.importances_mean))
+top_drop = result.importances_mean[top_feature]
+plt.axhline(0, color='gray', linestyle='--', linewidth=1)
+plt.annotate(f'largest score drop: Feature {top_feature}', xy=(top_feature + 1, top_drop),
+             xytext=(top_feature + 1.4, top_drop + 0.03),
+             arrowprops=dict(arrowstyle='->', color='green'), color='darkgreen')
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()

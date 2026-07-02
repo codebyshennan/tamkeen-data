@@ -95,6 +95,12 @@ plt.plot(train_sizes, train_mean, label='Training score')
 plt.plot(train_sizes, val_mean, label='Cross-validation score')
 plt.fill_between(train_sizes, train_mean - train_std, train_mean + train_std, alpha=0.1)
 plt.fill_between(train_sizes, val_mean - val_std, val_mean + val_std, alpha=0.1)
+final_gap = train_mean[-1] - val_mean[-1]
+plt.scatter([train_sizes[-1]], [val_mean[-1]], color='green', s=80, zorder=5,
+            label='Final CV score')
+plt.annotate(f'final gap ≈ {final_gap:.2f}', xy=(train_sizes[-1], val_mean[-1]),
+             xytext=(train_sizes[-4], val_mean[-1] - 0.08),
+             arrowprops=dict(arrowstyle='->', color='green'), color='darkgreen')
 plt.xlabel('Training Examples')
 plt.ylabel('Score')
 plt.title('Learning Curves')
@@ -175,6 +181,11 @@ plt.plot(train_sizes, train_mean, label='Training score')
 plt.plot(train_sizes, val_mean, label='Cross-validation score')
 plt.fill_between(train_sizes, train_mean - train_std, train_mean + train_std, alpha=0.1)
 plt.fill_between(train_sizes, val_mean - val_std, val_mean + val_std, alpha=0.1)
+plt.annotate('large generalization gap', xy=(train_sizes[-1], val_mean[-1]),
+             xytext=(train_sizes[-5], train_mean[-1] - 0.06),
+             arrowprops=dict(arrowstyle='<->', color='red'), color='darkred')
+plt.scatter([train_sizes[-1]], [train_mean[-1]], color='red', s=60, zorder=5)
+plt.scatter([train_sizes[-1]], [val_mean[-1]], color='red', s=60, zorder=5)
 plt.xlabel('Training Examples')
 plt.ylabel('Score')
 plt.title('Overfitting Learning Curves')
@@ -255,6 +266,12 @@ plt.plot(train_sizes, train_mean, label='Training score')
 plt.plot(train_sizes, val_mean, label='Cross-validation score')
 plt.fill_between(train_sizes, train_mean - train_std, train_mean + train_std, alpha=0.1)
 plt.fill_between(train_sizes, val_mean - val_std, val_mean + val_std, alpha=0.1)
+plateau = (train_mean[-1] + val_mean[-1]) / 2
+plt.axhline(plateau, color='red', linestyle='--', linewidth=2,
+            label='Low plateau')
+plt.annotate('both curves stuck low', xy=(train_sizes[-1], plateau),
+             xytext=(train_sizes[-5], plateau + 0.08),
+             arrowprops=dict(arrowstyle='->', color='red'), color='darkred')
 plt.xlabel('Training Examples')
 plt.ylabel('Score')
 plt.title('Underfitting Learning Curves')

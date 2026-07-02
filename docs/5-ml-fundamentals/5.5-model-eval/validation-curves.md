@@ -70,6 +70,17 @@ plt.plot(param_range, train_mean, label='Training score')
 plt.plot(param_range, val_mean, label='Cross-validation score')
 plt.fill_between(param_range, train_mean - train_std, train_mean + train_std, alpha=0.1)
 plt.fill_between(param_range, val_mean - val_std, val_mean + val_std, alpha=0.1)
+best_idx = np.argmax(val_mean)
+best_depth = param_range[best_idx]
+plt.axvline(best_depth, color='green', linestyle='--', linewidth=2,
+            label=f'Best CV depth = {best_depth}')
+plt.axvspan(param_range[0], best_depth - 0.5, color='orange', alpha=0.08)
+plt.axvspan(best_depth + 0.5, param_range[-1], color='red', alpha=0.06)
+plt.annotate('underfit region', xy=(1.4, val_mean[0]), xytext=(1.2, val_mean.max() - 0.08),
+             arrowprops=dict(arrowstyle='->', color='orange'), color='darkorange')
+plt.annotate('large train-CV gap', xy=(param_range[-1], val_mean[-1]),
+             xytext=(param_range[-4], val_mean.min() + 0.02),
+             arrowprops=dict(arrowstyle='->', color='red'), color='darkred')
 plt.xlabel('Max Depth')
 plt.ylabel('Score')
 plt.title('Validation Curves (Model Complexity)')
@@ -140,6 +151,16 @@ plt.semilogx(param_range, train_mean, label='Training score')
 plt.semilogx(param_range, val_mean, label='Cross-validation score')
 plt.fill_between(param_range, train_mean - train_std, train_mean + train_std, alpha=0.1)
 plt.fill_between(param_range, val_mean - val_std, val_mean + val_std, alpha=0.1)
+best_idx = np.argmax(val_mean)
+best_c = param_range[best_idx]
+plt.axvline(best_c, color='green', linestyle='--', linewidth=2,
+            label=f'Best CV C = {best_c:g}')
+plt.annotate('too much regularization', xy=(param_range[0], val_mean[0]),
+             xytext=(param_range[0] * 3, val_mean.max() - 0.10),
+             arrowprops=dict(arrowstyle='->', color='orange'), color='darkorange')
+plt.annotate('weak regularization', xy=(param_range[-1], val_mean[-1]),
+             xytext=(param_range[-1] / 300, val_mean.min() + 0.03),
+             arrowprops=dict(arrowstyle='->', color='red'), color='darkred')
 plt.xlabel('C (Inverse Regularization Strength)')
 plt.ylabel('Score')
 plt.title('Validation Curves (Regularization)')
@@ -210,6 +231,16 @@ plt.semilogx(param_range, train_mean, label='Training score')
 plt.semilogx(param_range, val_mean, label='Cross-validation score')
 plt.fill_between(param_range, train_mean - train_std, train_mean + train_std, alpha=0.1)
 plt.fill_between(param_range, val_mean - val_std, val_mean + val_std, alpha=0.1)
+best_idx = np.argmax(val_mean)
+best_lr = param_range[best_idx]
+plt.axvline(best_lr, color='green', linestyle='--', linewidth=2,
+            label=f'Best CV rate = {best_lr:.3f}')
+plt.annotate('too slow', xy=(param_range[0], val_mean[0]),
+             xytext=(param_range[0] * 3, val_mean.max() - 0.06),
+             arrowprops=dict(arrowstyle='->', color='orange'), color='darkorange')
+plt.annotate('too aggressive', xy=(param_range[-1], val_mean[-1]),
+             xytext=(param_range[-1] / 25, val_mean.min() + 0.02),
+             arrowprops=dict(arrowstyle='->', color='red'), color='darkred')
 plt.xlabel('Learning Rate')
 plt.ylabel('Score')
 plt.title('Validation Curves (Learning Rate)')
@@ -370,6 +401,16 @@ plt.plot(param_range, train_mean, label='Training score')
 plt.plot(param_range, val_mean, label='Cross-validation score')
 plt.fill_between(param_range, train_mean - train_std, train_mean + train_std, alpha=0.1)
 plt.fill_between(param_range, val_mean - val_std, val_mean + val_std, alpha=0.1)
+best_idx = np.argmax(val_mean)
+best_depth = param_range[best_idx]
+plt.axvline(best_depth, color='green', linestyle='--', linewidth=2,
+            label=f'Best CV depth = {best_depth}')
+plt.annotate('choose near this peak', xy=(best_depth, val_mean[best_idx]),
+             xytext=(best_depth + 2, val_mean[best_idx] - 0.08),
+             arrowprops=dict(arrowstyle='->', color='green'), color='darkgreen')
+plt.annotate('extra depth adds variance', xy=(param_range[-1], val_mean[-1]),
+             xytext=(best_depth + 4, val_mean.min() + 0.03),
+             arrowprops=dict(arrowstyle='->', color='red'), color='darkred')
 plt.xlabel('Max Depth')
 plt.ylabel('Accuracy')
 plt.title('Validation Curves for Credit Risk Prediction')

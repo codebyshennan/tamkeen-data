@@ -62,6 +62,11 @@ def plot_decision_boundary(model, X, y, filename):
     plt.figure(figsize=(10, 8))
     plt.contourf(xx, yy, Z, alpha=0.4, cmap='RdYlBu')
     scatter = plt.scatter(X_2d[:, 0], X_2d[:, 1], c=y, alpha=0.8, cmap='RdYlBu', edgecolors='black')
+    plt.annotate('straight boundary\n(linear model limit)', xy=(0.55, 0.55),
+                 xycoords='axes fraction', xytext=(0.08, 0.88),
+                 textcoords='axes fraction',
+                 arrowprops=dict(arrowstyle='->', color='black'),
+                 bbox=dict(boxstyle='round,pad=0.3', fc='white', alpha=0.85))
     plt.xlabel('Feature 1')
     plt.ylabel('Feature 2')
     plt.title('Linear Model Decision Boundary')
@@ -90,11 +95,18 @@ def plot_feature_importance(model, feature_names, filename):
     plt.title('Feature Importance (Random Forest)', fontsize=14, fontweight='bold')
     bars = plt.bar(range(len(importances)), importances[indices], 
                    color='skyblue', edgecolor='navy', alpha=0.7)
+    bars[0].set_color('tab:green')
+    plt.axhline(0.05, color='gray', linestyle='--', linewidth=1,
+                label='Low-importance guide')
+    plt.annotate('top feature', xy=(0, importances[indices][0]),
+                 xytext=(1.2, importances[indices][0] - 0.018),
+                 arrowprops=dict(arrowstyle='->', color='green'), color='darkgreen')
     plt.xticks(range(len(importances)), 
                [f'Feature {i+1}' for i in indices], 
                rotation=45, ha='right')
     plt.xlabel('Features')
     plt.ylabel('Importance')
+    plt.legend()
     plt.grid(True, alpha=0.3, axis='y')
     
     # Add value labels on bars
@@ -135,6 +147,12 @@ def plot_learning_curve(model, X, y, filename):
     plt.plot(train_sizes, val_mean, 'o-', label='Cross-validation score', color='red', linewidth=2)
     plt.fill_between(train_sizes, train_mean - train_std, train_mean + train_std, alpha=0.2, color='blue')
     plt.fill_between(train_sizes, val_mean - val_std, val_mean + val_std, alpha=0.2, color='red')
+    final_gap = train_mean[-1] - val_mean[-1]
+    plt.scatter([train_sizes[-1]], [train_mean[-1]], color='red', s=60, zorder=5)
+    plt.scatter([train_sizes[-1]], [val_mean[-1]], color='red', s=60, zorder=5)
+    plt.annotate(f'final gap ≈ {final_gap:.2f}', xy=(train_sizes[-1], val_mean[-1]),
+                 xytext=(train_sizes[-4], val_mean[-1] - 0.08),
+                 arrowprops=dict(arrowstyle='->', color='red'), color='darkred')
     plt.xlabel('Training Examples')
     plt.ylabel('Score')
     plt.title('Learning Curve - Neural Network')
@@ -162,10 +180,17 @@ def compare_models(models, X_train, X_test, y_train, y_test, filename):
     bars = plt.bar(list(results.keys()), list(results.values()), 
                    color=['lightblue', 'lightgreen', 'lightcoral'],
                    edgecolor='black', alpha=0.8)
+    best_name = max(results, key=results.get)
+    for bar, name in zip(bars, results.keys()):
+        if name == best_name:
+            bar.set_color('tab:green')
+    plt.axhline(results[best_name], color='green', linestyle='--', linewidth=2,
+                label=f'Selected: {best_name}')
     plt.xlabel('Model')
     plt.ylabel('Accuracy')
     plt.title('Model Comparison', fontsize=14, fontweight='bold')
     plt.xticks(rotation=0)
+    plt.legend()
     plt.grid(True, alpha=0.3, axis='y')
     
     # Add value labels on bars
@@ -269,6 +294,13 @@ def model_selection_process(X, y):
         axes[idx].plot(train_sizes, val_mean, 'o-', label='Cross-validation score', color='red')
         axes[idx].fill_between(train_sizes, train_mean - train_std, train_mean + train_std, alpha=0.2, color='blue')
         axes[idx].fill_between(train_sizes, val_mean - val_std, val_mean + val_std, alpha=0.2, color='red')
+        final_gap = train_mean[-1] - val_mean[-1]
+        axes[idx].scatter([train_sizes[-1]], [train_mean[-1]], color='red', s=40, zorder=5)
+        axes[idx].scatter([train_sizes[-1]], [val_mean[-1]], color='red', s=40, zorder=5)
+        axes[idx].annotate(f'gap {final_gap:.2f}', xy=(train_sizes[-1], val_mean[-1]),
+                           xytext=(train_sizes[-5], val_mean[-1] - 0.08),
+                           arrowprops=dict(arrowstyle='->', color='red'),
+                           color='darkred', fontsize=8)
         axes[idx].set_xlabel('Training Examples')
         axes[idx].set_ylabel('Score')
         axes[idx].set_title(f'Learning Curve - {name}')
