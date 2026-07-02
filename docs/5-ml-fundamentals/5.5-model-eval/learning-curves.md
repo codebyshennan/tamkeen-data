@@ -20,16 +20,18 @@ objectives:
 
 Learning curves are powerful tools for diagnosing model performance and understanding how our model learns from data. They help us identify issues like overfitting and underfitting, and guide us in making better decisions about model complexity and data requirements.
 
+> **Key idea:** learning curves answer **"will more data help?"** They do not tune a hyperparameter directly.
+
 ## What are Learning Curves?
 
 Learning curves plot the model's performance (e.g., accuracy or error) against the amount of training data. They show us how the model's performance changes as we add more training examples.
 
 ### Why Learning Curves Matter
 
-1. Diagnose model performance issues
-2. Determine if more data would help
-3. Identify overfitting or underfitting
-4. Guide model selection and tuning
+1. Diagnose **model performance issues**
+2. Determine whether **more data** would help
+3. Identify **overfitting or underfitting**
+4. Guide **model selection and tuning**
 
 ## Real-World Analogies
 

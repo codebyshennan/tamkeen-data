@@ -19,6 +19,8 @@ objectives:
 
 Think of evaluation metrics as the "scorecard" or "report card" for your machine learning model. Just like how a teacher uses different tests and assignments to evaluate a student's performance, we use different metrics to evaluate how well our model is performing.
 
+> **Key idea:** choose the metric before tuning. Picking the metric after seeing results makes evaluation drift toward the number that looks best.
+
 ### Video Tutorial: Model Evaluation Metrics
 
 <div class="video-embed">
@@ -56,6 +58,8 @@ Model evaluation is like weather forecasting:
 {% include model-eval-html-diagram.html diagram="metrics" title="Metric selection diagram" %}
 
 *Always report more than one metric — a model with high accuracy on an imbalanced dataset can still be nearly useless.*
+
+> **Highlight:** a metric is only meaningful against a **baseline** and a **decision context**. Report what a trivial model would score before interpreting a trained model.
 
 ### Classification Metrics Comparison Table
 

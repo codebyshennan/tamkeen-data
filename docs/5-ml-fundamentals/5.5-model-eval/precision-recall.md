@@ -35,6 +35,8 @@ Note: **sensitivity** is exactly the same metric as **recall** (TP / (TP + FN)),
 
 ![Precision-Recall Curve](assets/precision_recall_curve.png)
 
+> **Key idea:** **precision** asks whether positive predictions are trustworthy; **recall** asks whether real positives are being found.
+
 ### Precision
 
 - **Definition**: Ratio of true positives to all predicted positives
@@ -58,6 +60,8 @@ There's typically a trade-off between precision and recall:
 - **High Precision, Low Recall**: Very conservative model - when it says "positive," it's usually right, but it misses many positive cases
 - **Low Precision, High Recall**: Very liberal model - catches most positive cases but also flags many false positives
 - **Balanced**: Moderate precision and recall - good overall performance
+
+> **Threshold rule:** raising the threshold usually increases **precision** and lowers **recall**; lowering the threshold usually increases **recall** and lowers **precision**.
 
 ### Real-World Examples
 

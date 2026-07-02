@@ -12,6 +12,8 @@ A strong model with sloppy evaluation is misleading; a simple model measured hon
 
 Welcome to the model evaluation section! Here you'll learn how to properly assess your models' performance, tune their parameters for optimal results, and build efficient machine learning pipelines. These skills are crucial for developing robust and reliable machine learning solutions.
 
+> **Key idea:** evaluation is a decision system. Every score should answer **which model should I trust, tune, deploy, or reject?**
+
 ## Helpful video
 
 StatQuest: why cross-validation matters for model evaluation.
@@ -66,22 +68,22 @@ Before starting this section, you should be familiar with:
 Each topic we'll cover has crucial importance:
 
 - **Cross Validation**:
-  - Provides reliable performance estimates
-  - Helps detect overfitting
-  - Ensures model generalization
-  - Validates model stability
+  - Provides **reliable performance estimates**
+  - Helps detect **overfitting**
+  - Checks whether the model **generalizes**
+  - Validates **model stability** across splits
 
 - **Hyperparameter Tuning**:
-  - Optimizes model performance
-  - Automates parameter selection
-  - Saves development time
-  - Improves model robustness
+  - Optimizes **model performance**
+  - Automates **parameter selection**
+  - Saves development time by avoiding manual trial-and-error
+  - Improves **model robustness** when paired with proper validation
 
 - **Scikit-learn Pipelines**:
-  - Ensures reproducibility
-  - Prevents data leakage
-  - Streamlines deployment
-  - Improves code organization
+  - Ensures **reproducibility**
+  - Prevents **data leakage**
+  - Streamlines deployment by packaging preprocessing and prediction together
+  - Improves code organization with named, inspectable steps
 
 ## Tools and Libraries
 

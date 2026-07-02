@@ -45,6 +45,8 @@ Setup complete.
 Test set size: 114 samples, 72 benign, 42 malignant
 ```
 
+> **Important:** the assignment uses **class 1 = benign** as the positive class because `y_prob = predict_proba(...)[:, 1]`. Keep that convention consistent when computing precision, recall, F1, ROC, and AUC.
+
 ## Tasks
 
 ### 1. Confusion Matrix and Derived Metrics
@@ -67,6 +69,8 @@ Test set size: 114 samples, 72 benign, 42 malignant
 - Print the per-fold accuracy and F1 scores.
 - Print the mean and standard deviation for both metrics.
 - In a comment, note whether the standard deviation suggests the model is stable across folds.
+
+> **Highlight:** report the **mean and standard deviation** together. A high mean with a large fold-to-fold spread is less trustworthy than a slightly lower but stable score.
 
 ### 3. ROC Curve and AUC
 
@@ -104,6 +108,8 @@ Submit a single Python script that:
 2. Produces the three required plots (confusion matrix display, ROC curve; the CV bar chart is optional).
 3. Prints clearly labelled numeric results for each task.
 4. Includes comments comparing manual metric calculations to `classification_report` outputs and explaining the GridSearchCV workflow.
+
+> **Submission check:** do not report `grid_search.best_score_` as the final result. The final result is the score of `best_estimator_` on the held-out test set.
 
 ## Hints
 

@@ -36,6 +36,8 @@ Think of cross validation like a student taking multiple practice tests before t
 3. Compare different models fairly
 4. Make sure our model is stable and reliable
 
+> **Key idea:** cross-validation is for **choosing and estimating**. Keep a final **test set** untouched when you need one unbiased final report.
+
 ## Real-World Analogies
 
 ### The Restaurant Menu Analogy
@@ -74,6 +76,8 @@ The data is divided into k subsets (called "folds"), and the holdout method is r
    - Train model on k-1 folds
    - Validate on the remaining fold
 3. Average the k validation scores
+
+> **Read the mean and spread together:** the mean estimates performance; the spread tells you whether that estimate is stable enough to trust.
 
 **Example with k=5:**
 

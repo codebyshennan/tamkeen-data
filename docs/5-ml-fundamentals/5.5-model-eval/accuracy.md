@@ -32,7 +32,9 @@ Accuracy is the ratio of correct predictions to total predictions:
 
 {% include model-eval-html-diagram.html diagram="accuracy" title="Accuracy decision diagram" %}
 
-*Rule of thumb: if your dataset has < 80% majority class, accuracy is still OK as a sanity check. Beyond that, always report at least one additional metric.*
+> **Key idea:** accuracy answers **"how often was the model correct overall?"** It does not answer **which class was missed** or **which mistake is expensive**.
+
+**Rule of thumb:** if your dataset has < 80% majority class, accuracy is still OK as a sanity check. Beyond that, always report at least one additional metric.
 
 ## Types of Accuracy
 
@@ -169,6 +171,8 @@ Accuracy: 1.000
 - Balanced: Accuracy is meaningful
 - Imbalanced: May be misleading
 - Consider other metrics
+
+> **Highlight:** compare accuracy to the **majority-class baseline** before celebrating. If 90% of cases are negative, a 90% accurate model may have learned nothing useful.
 
 ## Best Practices
 

@@ -40,6 +40,8 @@ The confusion matrix shows four key components for binary classification:
 - **False Positives (FP)**: Incorrectly predicted positive cases - "We said YES, but it was NO" (Type I Error)
 - **False Negatives (FN)**: Incorrectly predicted negative cases - "We said NO, but it was YES" (Type II Error)
 
+> **Key idea:** the off-diagonal cells are the errors. Read **FP** and **FN** first when the cost of mistakes matters.
+
 ### Real-World Example: Medical Diagnosis
 
 Imagine a model predicting whether a patient has a disease:
@@ -53,6 +55,8 @@ Imagine a model predicting whether a patient has a disease:
 - **False Negatives (FN)**: Missing a sick patient could be life-threatening
 - **False Positives (FP)**: Unnecessary worry and treatment for healthy patients
 - The cost of each error type is different!
+
+> **Highlight:** the "best" model is not always the one with the highest accuracy; it is the one with the most acceptable **error profile** for the real decision.
 
 ## Types of Confusion Matrices
 

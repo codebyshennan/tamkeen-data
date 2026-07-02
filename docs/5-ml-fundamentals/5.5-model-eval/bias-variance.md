@@ -24,17 +24,19 @@ Understanding the bias-variance tradeoff is crucial in machine learning. It help
 
 ## What is Bias?
 
-Bias is the error introduced by approximating a real-world problem with a simplified model. It represents how far off our model's predictions are from the true values, on average.
+**Bias** is the error introduced by approximating a real-world problem with a simplified model. It represents how far off our model's predictions are from the true values, on average.
 
 ## What is Variance?
 
-Variance refers to the model's sensitivity to fluctuations in the training data. It measures how much our model's predictions vary when trained on different datasets.
+**Variance** refers to the model's sensitivity to fluctuations in the training data. It measures how much our model's predictions vary when trained on different datasets.
 
 ## The Tradeoff
 
 Finding the right balance between bias and variance is key to creating effective models. Too much bias leads to underfitting, while too much variance leads to overfitting.
 
 {% include model-eval-html-diagram.html diagram="bias-variance" title="Bias variance trade-off diagram" %}
+
+> **Diagnostic shortcut:** **high train error + high validation error = bias**. **low train error + high validation error = variance**.
 
 ## Practical Examples
 

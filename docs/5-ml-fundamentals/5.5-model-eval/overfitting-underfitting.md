@@ -20,15 +20,17 @@ Recognizing **over** vs **under**fitting from learning curves and error gaps—n
 
 Understanding overfitting and underfitting is crucial for building effective machine learning models. These concepts help us diagnose model performance and make better decisions about model complexity.
 
+> **Key idea:** diagnose from **train vs validation** behaviour, not from training score alone.
+
 ## What is Overfitting?
 
 Overfitting occurs when a model learns the training data too well, including its noise and outliers. Think of it like memorizing answers for a test without understanding the underlying concepts.
 
 ### Signs of Overfitting
 
-1. High training accuracy but low test accuracy
-2. Model performs poorly on new data
-3. Model captures noise in the training data
+1. **High training accuracy but low test accuracy**
+2. **Poor performance on new data**
+3. Model captures **noise** in the training data
 4. Complex decision boundaries
 
 ## What is Underfitting?
@@ -37,14 +39,16 @@ Underfitting happens when a model is too simple to capture the underlying patter
 
 ### Signs of Underfitting
 
-1. Low training accuracy
-2. Low test accuracy
+1. **Low training accuracy**
+2. **Low test accuracy**
 3. Model fails to capture important patterns
-4. Simple decision boundaries
+4. Overly simple decision boundaries
 
 {% include model-eval-html-diagram.html diagram="overfitting-underfitting" title="Overfitting and underfitting diagnosis diagram" %}
 
 *The learning curve is the fastest diagnostic: plot train and validation error vs training set size. A large gap between the two curves signals overfitting; both curves high signals underfitting.*
+
+> **Highlight:** **large gap = overfitting**; **both poor = underfitting**; **both strong and close = good fit**.
 
 ## Real-World Analogies
 

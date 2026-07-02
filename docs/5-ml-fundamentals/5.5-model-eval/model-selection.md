@@ -20,6 +20,8 @@ Choosing among models and hyperparameters using **nested** or carefully staged v
 
 Think of model selection like choosing the right tool for a job. Just as you wouldn't use a hammer to screw in a bolt, you need to choose the right machine learning model for your specific problem. Model selection helps us find the best model that balances performance, complexity, and practical considerations.
 
+> **Key idea:** the winning model is the one that balances **validation performance**, **simplicity**, **latency**, **interpretability**, and **deployment cost**.
+
 ### Why Model Selection Matters
 
 Imagine you're planning a road trip. You wouldn't just pick any vehicle - you'd consider factors like:
@@ -60,7 +62,7 @@ Model selection is like building a sports team:
 
 {% include model-eval-html-diagram.html diagram="model-selection" title="Model selection workflow diagram" %}
 
-*The test set is touched exactly once. Any decision made by looking at it inflates your reported performance.*
+> **Highlight:** the **test set is touched exactly once**. Any decision made by looking at it inflates your reported performance.
 
 > **Read the diagram:** model selection is a funnel. Use training data for fitting, validation or cross-validation for choosing, and the test set only for the final report. If a decision changes because of the test score, the test set has become part of training.
 

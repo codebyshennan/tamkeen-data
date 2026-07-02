@@ -8,6 +8,7 @@ These notebooks practice [cross-validation](../cross-validation.md), [metrics](.
 
 Exercise notebooks are intentionally provided with TODO placeholders and blank answer fields. They are not pre-executed like the worked lesson notebooks.
 
+> **How to use these:** complete the TODOs first, then compare your outputs to the lesson expectations. The goal is not just to get a number, but to explain **why the score is trustworthy or not**.
 
 ## Available exercises
 
@@ -15,8 +16,8 @@ Exercise notebooks are intentionally provided with TODO placeholders and blank a
 
 1. **[Basic Cross-Validation](./level1_basic_cross_validation.ipynb)**
    - Simple k-fold implementation
-   - Understanding train/validation splits
-   - Interpreting CV scores
+   - Understanding **train/validation splits**
+   - Interpreting **CV mean and spread**
 
 ### Self-assessment
 

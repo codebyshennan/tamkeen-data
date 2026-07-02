@@ -20,13 +20,15 @@ objectives:
 
 Validation curves are essential tools in machine learning for understanding how a model's performance changes with different hyperparameter values. They help us find the optimal hyperparameter settings and diagnose issues like overfitting and underfitting.
 
+> **Key idea:** validation curves answer **"which value of this hyperparameter is reasonable?"** while holding the rest of the setup fixed.
+
 ## What are Validation Curves?
 
 Validation curves plot the model's performance (typically error or accuracy) against different values of a hyperparameter. They show:
 
-1. Training score
-2. Validation score
-3. The relationship between them
+1. **Training score**
+2. **Validation score**
+3. The **gap** between them
 
 {% include model-eval-html-diagram.html diagram="validation-curves" title="Validation curve diagnosis diagram" %}
 

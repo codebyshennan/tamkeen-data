@@ -20,14 +20,16 @@ Tree importances, permutation importance, and caveats—correlation and baseline
 
 Feature importance is a crucial concept in machine learning that helps us understand which features contribute most to our model's predictions. This understanding is essential for model interpretability, feature selection, and domain knowledge validation.
 
+> **Key idea:** feature importance explains **model behaviour**, not truth about the world. Treat it as evidence to investigate, not proof of causality.
+
 ## What is Feature Importance?
 
 Feature importance measures how much each feature contributes to the model's predictions. It helps us:
 
 1. Identify the most influential features
 2. Remove irrelevant features
-3. Understand model behavior
-4. Validate domain knowledge
+3. Understand **model behavior**
+4. Challenge or validate **domain knowledge**
 
 {% include model-eval-html-diagram.html diagram="feature-importance" title="Feature importance method comparison diagram" %}
 

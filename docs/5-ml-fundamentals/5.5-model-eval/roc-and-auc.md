@@ -53,6 +53,8 @@ ROC and AUC help us find the right balance between catching all cases and avoidi
 
 {% include model-eval-html-diagram.html diagram="roc-and-auc" title="ROC and AUC interpretation diagram" %}
 
+> **Key idea:** ROC-AUC measures **ranking quality across thresholds**. It does not choose the final threshold for you.
+
 ## Technical Definitions
 
 ### ROC Curve Components
@@ -85,6 +87,8 @@ The AUC measures the model's ability to distinguish between classes:
 - **0.5 < AUC ≤ 0.6**: Poor
 - **AUC = 0.5**: Random
 
+> **Important:** these bands are only rough orientation. On rare-positive problems, also inspect **precision-recall** because ROC-AUC can look strong while precision is operationally poor.
+
 ## Understanding ROC Curve Shapes
 
 ![ROC Curve](assets/roc_curve.png)
@@ -94,6 +98,8 @@ The AUC measures the model's ability to distinguish between classes:
 - **Random Classifier**: Diagonal line from (0,0) to (1,1)
 - **Good Classifier**: Curve bows toward the upper-left corner
 - **Poor Classifier**: Curve below diagonal line
+
+> **Read first:** the useful region is often the **low-FPR** area on the left. A model can have decent AUC but still be unacceptable if it produces too many false positives at your operating point.
 
 ## Implementation Examples
 

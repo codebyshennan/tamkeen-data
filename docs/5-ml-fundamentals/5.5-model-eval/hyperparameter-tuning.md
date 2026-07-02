@@ -20,6 +20,8 @@ objectives:
 
 Hyperparameter tuning is the process of finding the optimal set of hyperparameters for a machine learning model. Think of it as fine-tuning a musical instrument - you need to adjust various knobs and settings to get the best sound. Unlike model parameters (which are learned during training), hyperparameters are set before training begins and control the learning process itself.
 
+> **Key idea:** tuning is model selection over settings. The validation score chooses settings; the test score reports the final result once.
+
 ## Why Hyperparameter Tuning Matters
 
 Hyperparameter tuning is crucial for several reasons:
@@ -32,7 +34,7 @@ Hyperparameter tuning is crucial for several reasons:
 
 {% include model-eval-html-diagram.html diagram="hyperparameter-tuning" title="Hyperparameter tuning workflow diagram" %}
 
-*Always fit the search object on train data only. The test set is touched once, at the very end, to report final performance.*
+> **Highlight:** always fit the search object on **train data only**. The **test set** is touched once, at the very end, to report final performance.
 
 > **Read the diagram:** tuning is a nested decision process. The search object repeatedly trains candidate models inside cross-validation, chooses the best candidate from validation scores, refits that candidate on the full training set, and only then evaluates once on the held-out test set.
 
@@ -44,6 +46,8 @@ Hyperparameter tuning is crucial for several reasons:
 | **Examples** | Weights, biases | Learning rate, tree depth |
 | **Control** | Algorithm determines | Human/automated tuning |
 | **Impact** | Direct model predictions | Control learning process |
+
+> **Remember:** parameters are the model's learned contents; hyperparameters are the knobs that control how those contents are learned.
 
 ## Common Hyperparameters by Algorithm
 

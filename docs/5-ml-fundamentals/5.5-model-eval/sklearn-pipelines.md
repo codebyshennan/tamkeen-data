@@ -20,14 +20,14 @@ objectives:
 
 Pipelines help us:
 
-1. Ensure preprocessing steps are consistent
-2. Prevent data leakage
-3. Simplify model deployment
+1. Ensure preprocessing steps are **consistent**
+2. Prevent **data leakage**
+3. Simplify **model deployment**
 4. Make code more maintainable
 
 {% include model-eval-html-diagram.html diagram="sklearn-pipelines" title="Scikit-learn pipeline workflow diagram" %}
 
-*Without a pipeline, if you `StandardScaler.fit(X_all)` before splitting, test-set statistics leak into the scaler — the pipeline prevents this by fitting each step only on training data.*
+> **Highlight:** without a pipeline, if you `StandardScaler.fit(X_all)` before splitting, test-set statistics leak into the scaler. The pipeline prevents this by fitting each step only on **training data**.
 
 > **Read the diagram:** raw data enters the pipeline once. During `fit`, every preprocessing step learns only from the training data before the model trains. During `predict`, those learned transformations are reused unchanged on new data.
 

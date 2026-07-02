@@ -22,22 +22,24 @@ Distinct from [5.3 regularization lesson](../5.3-supervised-learning-2/regulariz
 
 Regularization is a technique used to prevent overfitting in machine learning models. It helps us find the right balance between model complexity and generalization ability.
 
+> **Key idea:** regularization deliberately makes the model a little less flexible so it generalizes better.
+
 ## What is Regularization?
 
 Regularization adds a penalty term to the model's loss function to discourage complex models. Think of it like adding rules to a game to prevent players from exploiting loopholes.
 
 ### Why Regularization Matters
 
-1. Prevents overfitting
-2. Improves model generalization
-3. Handles multicollinearity
+1. Prevents **overfitting**
+2. Improves **model generalization**
+3. Handles **multicollinearity**
 4. Reduces model complexity
 
 ## Types of Regularization
 
 {% include model-eval-html-diagram.html diagram="regularization" title="Regularization choice diagram" %}
 
-*Higher `alpha` (λ) = stronger penalty = simpler model. Too high and you underfit. Use `RidgeCV` or `LassoCV` to search automatically.*
+> **Highlight:** higher `alpha` (λ) = **stronger penalty** = **simpler model**. Too high and you underfit. Use `RidgeCV` or `LassoCV` to search automatically.
 
 > **Read the diagram:** start from the symptom. If training score is much higher than validation score, add regularization. Then choose the penalty shape: L1 can drop features, L2 shrinks all weights, and Elastic Net combines both.
 
