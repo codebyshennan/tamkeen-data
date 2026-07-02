@@ -37,9 +37,9 @@ A strong capstone does not need the most complex model. It needs a coherent chai
 
 When you report model performance, match the metric to the task and explain the formula in plain language.
 
-- For regression, mean absolute error is \(MAE = \frac{1}{n}\sum_{i=1}^{n}|y_i-\hat{y}_i|\). It is the average absolute size of the prediction error in the original unit.
-- For classification, accuracy is \(Accuracy = \frac{TP + TN}{TP + TN + FP + FN}\). It is only reliable when classes are reasonably balanced.
-- For imbalanced classification, report precision \(Precision = \frac{TP}{TP + FP}\), recall \(Recall = \frac{TP}{TP + FN}\), or F1 score \(F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall}\).
+- For regression, mean absolute error is \\(MAE = \frac{1}{n}\sum_{i=1}^{n}|y_i-\hat{y}_i|\\). It is the average absolute size of the prediction error in the original unit.
+- For classification, accuracy is \\(Accuracy = \frac{TP + TN}{TP + TN + FP + FN}\\). It is only reliable when classes are reasonably balanced.
+- For imbalanced classification, report precision \\(Precision = \frac{TP}{TP + FP}\\), recall \\(Recall = \frac{TP}{TP + FN}\\), or F1 score \\(F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall}\\).
 
 ## Structured Project Options
 
