@@ -8,7 +8,7 @@ objectives:
 
 # Mathematical Foundation of Random Forest
 
-**After this lesson:** you can explain the core ideas in “Mathematical Foundation of Random Forest” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Mathematical Foundation of Random Forest and try the examples in your own notebook.
 
 ## Overview
 
@@ -65,7 +65,7 @@ def bootstrap_sample(X, y):
       <span class="code-callout__title">Function Signature</span>
     </div>
     <div class="code-callout__body">
-      <p>Takes feature matrix <code>X</code> and target <code>y</code>; the docstring documents inputs and outputs — critical since ~36.8% of samples will be left out (OOB) for each tree.</p>
+      <p>Takes feature matrix <code>X</code> and target <code>y</code>; the docstring documents inputs and outputs, critical since ~36.8% of samples will be left out (OOB) for each tree.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="13-19" data-tint="2">
@@ -74,7 +74,7 @@ def bootstrap_sample(X, y):
       <span class="code-callout__title">Sample with Replacement</span>
     </div>
     <div class="code-callout__body">
-      <p><code>np.random.choice(..., replace=True)</code> selects n indices from 0…n-1 allowing duplicates — this is bootstrapping, the core mechanism that makes each tree in the forest see different training data.</p>
+      <p><code>np.random.choice(..., replace=True)</code> selects n indices from 0…n-1 allowing duplicates, this is bootstrapping, the core mechanism that makes each tree in the forest see different training data.</p>
     </div>
   </div>
 </aside>
@@ -137,7 +137,7 @@ def get_random_features(n_features, n_select):
       <span class="code-callout__title">Parameters</span>
     </div>
     <div class="code-callout__body">
-      <p>Takes total feature count and how many to keep; the docstring clarifies that the return is feature <em>indices</em>, not values — these indices are then used to slice columns of <code>X</code> at each tree split.</p>
+      <p>Takes total feature count and how many to keep; the docstring clarifies that the return is feature <em>indices</em>, not values, these indices are then used to slice columns of <code>X</code> at each tree split.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="13-17" data-tint="2">
@@ -293,7 +293,7 @@ def information_gain(parent, left, right):
       <span class="code-callout__title">Weighted Impurity Reduction</span>
     </div>
     <div class="code-callout__body">
-      <p>Weights each child's Gini impurity by its fraction of the total samples (<code>n_l/n</code>, <code>n_r/n</code>); a larger gain means this split creates purer children — the tree picks the feature and threshold that maximizes this value.</p>
+      <p>Weights each child's Gini impurity by its fraction of the total samples (<code>n_l/n</code>, <code>n_r/n</code>); a larger gain means this split creates purer children, the tree picks the feature and threshold that maximizes this value.</p>
     </div>
   </div>
 </aside>
@@ -324,13 +324,13 @@ def information_gain(parent, left, right):
 
 ## Gotchas
 
-- **The 63.2% rule only holds for large datasets** — each bootstrap sample contains ~63.2% unique observations when n is large; for small datasets (n < 100) this fraction varies significantly, so OOB estimates become unreliable and a proper validation split is still needed.
-- **Gini importance double-counts correlated features** — when two features carry the same information, each will steal splits from the other across trees, making both appear less important than they truly are; this is why permutation importance on a held-out set is preferred.
-- **`max_features='sqrt'` is the default for classification but `max_features=1.0` is the default for regression** — forgetting that defaults differ between `RandomForestClassifier` and `RandomForestRegressor` leads to silently different variance-reduction behaviour.
-- **Information gain in this implementation uses Gini, not entropy** — sklearn's `RandomForestClassifier` uses Gini impurity by default; switching to `criterion='entropy'` changes split decisions and can produce slightly different trees, but neither is universally better.
-- **Adding trees beyond convergence wastes memory without reducing bias** — the Law of Large Numbers guarantees variance converges as tree count grows, but bias is fixed by individual tree depth; no amount of additional trees can fix underfitting caused by shallow `max_depth`.
-- **Feature importance scores sum to 1.0 but are not probabilities** — the normalised sum-to-one property is an artefact of the calculation, not a probabilistic statement; a feature with importance 0.4 is not "40% responsible" for predictions.
+- **The 63.2% rule only holds for large datasets**: each bootstrap sample contains ~63.2% unique observations when n is large; for small datasets (n < 100) this fraction varies significantly, so OOB estimates become unreliable and a proper validation split is still needed.
+- **Gini importance double-counts correlated features**: when two features carry the same information, each will steal splits from the other across trees, making both appear less important than they truly are; this is why permutation importance on a held-out set is preferred.
+- **`max_features='sqrt'` is the default for classification but `max_features=1.0` is the default for regression**: forgetting that defaults differ between `RandomForestClassifier` and `RandomForestRegressor` leads to silently different variance-reduction behaviour.
+- **Information gain in this implementation uses Gini, not entropy**: sklearn's `RandomForestClassifier` uses Gini impurity by default; switching to `criterion='entropy'` changes split decisions and can produce slightly different trees, but neither is universally better.
+- **Adding trees beyond convergence wastes memory without reducing bias**: the Law of Large Numbers guarantees variance converges as tree count grows, but bias is fixed by individual tree depth; no amount of additional trees can fix underfitting caused by shallow `max_depth`.
+- **Feature importance scores sum to 1.0 but are not probabilities**: the normalised sum-to-one property is an artefact of the calculation, not a probabilistic statement; a feature with importance 0.4 is not "40% responsible" for predictions.
 
 ## Next Steps
 
-Now that you understand the mathematics behind Random Forests, let's move on to [Implementation](3-implementation.md) to see how to put these concepts into practice!
+Now that you understand the mathematics behind Random Forests, move on to [Implementation](3-implementation.md) to see how to put these concepts into practice!

@@ -119,7 +119,7 @@ Submit your solution as a Python script with:
   ```
 
 ## 2. Array manipulation
-- **Where:** [ndarray basics](../ndarray-basic.md) — `reshape`, [ndarray methods](../ndarray-methods.md) — reductions and sorting.
+- **Where:** [ndarray basics](../ndarray-basic.md), `reshape`, [ndarray methods](../ndarray-methods.md), reductions and sorting.
 - **Think:**
   - **Reshape to 12×2:** the product 12×2 = 24 must equal the original 8×3 = 24. Use `reshape(12, 2)`.
   - **Standardize:** "(x − mean) / std" **per subject** ⇒ both reductions use `axis=0` so broadcasting lines up the columns.
@@ -145,22 +145,22 @@ Submit your solution as a Python script with:
   ```
 
 ## 4. Advanced operations
-- **Where:** [ndarray methods](../ndarray-methods.md) — broadcasting & unique, [boolean indexing](../boolean-indexing.md).
+- **Where:** [ndarray methods](../ndarray-methods.md), broadcasting & unique, [boolean indexing](../boolean-indexing.md).
 - **Think:**
   - **Broadcasting +5 to math column:** `scores[:, 0] += 5` adds a scalar to one column.
   - **Unique scores across all subjects:** `np.unique` flattens by default.
-  - **Above average in all subjects:** same pattern as Q1.4 — compare to the per-subject mean (`axis=0`), then reduce with `.all(axis=1)`.
+  - **Above average in all subjects:** same pattern as Q1.4, compare to the per-subject mean (`axis=0`), then reduce with `.all(axis=1)`.
 
-## Bonus — `student_analysis(name)`
-- **Where:** [boolean indexing](../boolean-indexing.md) — `np.where`.
+## Bonus: `student_analysis(name)`
+- **Where:** [boolean indexing](../boolean-indexing.md), `np.where`.
 - **Think:** Three parts: get scores, compute rankings per subject, check top-3 by average.
   - Locate the student row: `idx = np.where(names == name)[0][0]`.
   - Ranking per subject = number of students who scored ≥ this student in that column. `rankdata`-style logic; a simple `(scores[:, j] >= s).sum()` works.
   - Top-3 by average: `argsort(avg)[-3:]` gives the three highest indices.
 
 ## Common pitfalls
-- Mixing `axis=0` and `axis=1` — print `result.shape` after every reduction to confirm.
-- Forgetting that boolean indexing **returns a copy**, not a view — assigning into it does nothing.
-- Using `*` for matrix multiply (that's element-wise) — use `@` or `np.matmul`.
+- Mixing `axis=0` and `axis=1`, print `result.shape` after every reduction to confirm.
+- Forgetting that boolean indexing **returns a copy**, not a view, assigning into it does nothing.
+- Using `*` for matrix multiply (that's element-wise), use `@` or `np.matmul`.
 
 </details>

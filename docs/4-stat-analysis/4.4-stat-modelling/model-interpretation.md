@@ -9,22 +9,22 @@ objectives:
 
 # Model Interpretation
 
-**After this lesson:** you can explain what a fitted model is doing in terms a stakeholder can act on — coefficients, partial dependence, permutation importance, and SHAP-style attributions.
+**After this lesson:** you can explain what a fitted model is doing in terms a stakeholder can act on, coefficients, partial dependence, permutation importance, and SHAP-style attributions.
 
 ## TLDR
 
-- **Why it matters:** an accurate model no one can explain won't be trusted — especially in medical, financial, or legal decisions.
+- **Why it matters:** an accurate model no one can explain won't be trusted, especially in medical, financial, or legal decisions.
 - **Linear regression coefficients:** `β` = change in ŷ per 1-unit increase in that feature, all others held fixed. Always interpret in the feature's original units.
 - **Standardised coefficients:** refit on `StandardScaler`-transformed features so magnitudes are comparable across features regardless of scale.
 - **Logistic regression odds ratios:** `exp(β)` = how each feature multiplies the *odds* of the positive class. OR > 1 raises probability; OR < 1 lowers it.
-- **Permutation importance:** shuffle one feature at a time on the test set and measure the accuracy drop — model-agnostic and reflects true predictive value.
-- **Partial dependence plots (PDP):** show the average marginal effect of one feature across all observations — works on any model, including black boxes.
-- **SHAP values:** principled per-prediction attributions — each feature gets credit for pushing a prediction up or down from the baseline. Requires `pip install shap`.
+- **Permutation importance:** shuffle one feature at a time on the test set and measure the accuracy drop, model-agnostic and reflects true predictive value.
+- **Partial dependence plots (PDP):** show the average marginal effect of one feature across all observations, works on any model, including black boxes.
+- **SHAP values:** principled per-prediction attributions, each feature gets credit for pushing a prediction up or down from the baseline. Requires `pip install shap`.
 - **Interpretability spectrum:** linear/logistic > decision tree > random forest > gradient boosting > neural network. More powerful ≠ more explainable.
 
 ## Overview
 
-Accuracy on a leaderboard is not enough for high-stakes use: teams need **consistent stories** about drivers of predictions—coefficients where the model is linear, marginal and partial plots where it is not, and modern attribution tools when features interact. This lesson sits last so you interpret models **after** you know how they were fit, selected, and possibly regularized.
+Accuracy on a leaderboard is not enough for high-stakes use: teams need **consistent stories** about drivers of predictions, coefficients where the model is linear, marginal and partial plots where it is not, and modern attribution tools when features interact. This lesson sits last so you interpret models **after** you know how they were fit, selected, and possibly regularized.
 
 ## Why this matters
 
@@ -40,7 +40,7 @@ Accuracy on a leaderboard is not enough for high-stakes use: teams need **consis
 
 ## Introduction
 
-Model interpretation is the process of understanding and explaining how your statistical model makes predictions. It's a crucial skill for data scientists and analysts because even the most accurate model is of limited value if you can't explain how it works or why it makes certain predictions.
+Model interpretation is the process of understanding and explaining how your statistical model makes predictions. It's a important skill for data scientists and analysts because even the most accurate model is of limited value if you can't explain how it works or why it makes certain predictions.
 
 ### Video Tutorial: Introduction to Model Interpretation
 
@@ -48,7 +48,7 @@ Model interpretation is the process of understanding and explaining how your sta
 <iframe width="560" height="315" src="https://www.youtube.com/embed/MQ6fFDwjuco" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*SHAP values for beginners — what they mean and their applications, by A Data Odyssey*
+*SHAP values for beginners, what they mean and their applications, by A Data Odyssey*
 
 <div class="video-embed">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/dQ_jvRkzN1Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -70,9 +70,9 @@ Model interpretation turns "black box" predictions into actionable insights by:
 
 ### Real-world Examples
 
-- **Credit Scoring** — Without interpretation a bank can deny a loan but not say why; with it, the bank can point to the high debt-to-income ratio and advise what to improve.
-- **Medical Diagnosis** — Without interpretation a model flags high heart-disease risk with no reason; with it, the doctor sees that elevated blood pressure and family history drove the prediction, enabling targeted treatment.
-- **Customer Churn** — Without interpretation a company knows *who* will leave but not *why*; with it, they spot price sensitivity and service issues and can act to retain customers.
+- **Credit Scoring**: Without interpretation a bank can deny a loan but not say why; with it, the bank can point to the high debt-to-income ratio and advise what to improve.
+- **Medical Diagnosis**: Without interpretation a model flags high heart-disease risk with no reason; with it, the doctor sees that elevated blood pressure and family history drove the prediction, enabling targeted treatment.
+- **Customer Churn**: Without interpretation a company knows *who* will leave but not *why*; with it, they spot price sensitivity and service issues and can act to retain customers.
 
 > **🎯 Key points**
 >
@@ -259,7 +259,7 @@ Number of Rooms: $25233.23 - For each additional room, the house price increases
 
 #### Understanding Coefficient Scale and Units
 
-One challenge with interpreting coefficients is that they depend on the scale of the feature. Let's see how this works with standardized features:
+One challenge with interpreting coefficients is that they depend on the scale of the feature. Look at how this works with standardized features:
 
 **Standardized coefficients for comparable effect sizes**
 
@@ -636,7 +636,7 @@ This approach shows the effect of each category compared to a reference category
 <iframe width="560" height="315" src="https://www.youtube.com/embed/MQ6fFDwjuco" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*SHAP values for beginners — what they mean and their applications, by A Data Odyssey*
+*SHAP values for beginners, what they mean and their applications, by A Data Odyssey*
 
 <div class="video-embed">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/dQ_jvRkzN1Q" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -703,7 +703,7 @@ for feature in features_to_plot:
       <span class="code-callout__title">Fit GBM</span>
     </div>
     <div class="code-callout__body">
-      <p>Import and fit a <code>GradientBoostingRegressor</code> on the loan data—a more complex model that benefits from PDP-style post-hoc interpretation.</p>
+      <p>Import and fit a <code>GradientBoostingRegressor</code> on the loan data, a more complex model that benefits from PDP-style post-hoc interpretation.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="11-16" data-tint="2">
@@ -827,7 +827,7 @@ for feature in ['Income', 'Age']:
       <span class="code-callout__title">Sample Subset</span>
     </div>
     <div class="code-callout__body">
-      <p>Select 15 random rows from X to keep the ICE plot readable—one line per sample would be too cluttered with hundreds of rows.</p>
+      <p>Select 15 random rows from X to keep the ICE plot readable, one line per sample would be too cluttered with hundreds of rows.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="15-16" data-tint="2">
@@ -845,7 +845,7 @@ for feature in ['Income', 'Age']:
       <span class="code-callout__title">Per-Sample Curves</span>
     </div>
     <div class="code-callout__body">
-      <p>For each sample, copy its row, swap in each grid value for the feature, and collect model predictions—forming one blue ICE curve per sample.</p>
+      <p>For each sample, copy its row, swap in each grid value for the feature, and collect model predictions, forming one blue ICE curve per sample.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="39-40" data-tint="4">
@@ -943,7 +943,7 @@ for feature in ['Income', 'Age']:
     plt.show()
 
 # Local explanations for a single prediction
-# Let's explain the prediction for the first sample
+# Explain the prediction for the first sample
 plt.figure(figsize=(12, 5))
 shap.plots.waterfall(shap_values[0], show=False)
 plt.title('SHAP Waterfall Plot for First Sample')
@@ -1241,7 +1241,7 @@ Glucose: 1.032 - For each additional unit of glucose, the odds of diabetes incre
       <span class="code-callout__title">Fit and Compute Odds Ratios</span>
     </div>
     <div class="code-callout__body">
-      <p>Fit <code>LogisticRegression</code>, then compute odds ratios as <code>exp(coef_)</code>—values greater than 1 increase diabetes risk, less than 1 decrease it.</p>
+      <p>Fit <code>LogisticRegression</code>, then compute odds ratios as <code>exp(coef_)</code>-values greater than 1 increase diabetes risk, less than 1 decrease it.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="50-53" data-tint="3">
@@ -1377,7 +1377,7 @@ Leaf node 10: Predicted value = 52388.22
       <span class="code-callout__title">Fit and Visualise Tree</span>
     </div>
     <div class="code-callout__body">
-      <p>Fit a shallow decision tree (max depth 3) and render it with <code>plot_tree</code>—colour-filled nodes make the split rules immediately readable.</p>
+      <p>Fit a shallow decision tree (max depth 3) and render it with <code>plot_tree</code>-colour-filled nodes make the split rules immediately readable.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="15-19" data-tint="2">
@@ -1444,7 +1444,7 @@ Decision trees are excellent for interpretation because:
 >
 > - Linear regression is interpreted directly through its coefficients, optionally with confidence intervals.
 > - Logistic regression coefficients become odds ratios via `exp(coef)`: above 1 raises the odds, below 1 lowers them.
-> - Decision trees are inherently interpretable — you can trace the exact split path for any prediction.
+> - Decision trees are inherently interpretable, you can trace the exact split path for any prediction.
 > - Each model family has its own native interpretation tool that needs no post-hoc method.
 
 ## Practical Tips for Model Interpretation
@@ -1588,7 +1588,7 @@ Model Interpretability Comparison:
       <span class="code-callout__title">Model Zoo</span>
     </div>
     <div class="code-callout__body">
-      <p>Define six estimators spanning the interpretability spectrum—from simple linear regression to a neural network—and split the housing data 70/30.</p>
+      <p>Define six estimators spanning the interpretability spectrum, from simple linear regression to a neural network, and split the housing data 70/30.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="24-56" data-tint="2">
@@ -1702,7 +1702,7 @@ multiple_interpretations = apply_multiple_interpretation_techniques(rf_model, X,
       <span class="code-callout__title">Built-in Importance</span>
     </div>
     <div class="code-callout__body">
-      <p>Check whether the model has <code>feature_importances_</code> or <code>coef_</code> and rank features accordingly—works for trees and linear models.</p>
+      <p>Check whether the model has <code>feature_importances_</code> or <code>coef_</code> and rank features accordingly, works for trees and linear models.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="20-24" data-tint="2">
@@ -1739,7 +1739,7 @@ multiple_interpretations = apply_multiple_interpretation_techniques(rf_model, X,
 
 Tailor your interpretations to your audience:
 
-**Technical, business, and “homeowner” narratives from one regressor**
+**Technical, business, and "homeowner" narratives from one regressor**
 
 **Purpose:** Print regression metrics and top drivers for a technical audience, paraphrase business bullets from importances/coefficients, and show a counterfactual price for a sample house.
 
@@ -1802,14 +1802,14 @@ def create_audience_specific_interpretations(model, X, y):
         elif feature == 'age':
             business_insights.append(f"Property age impacts value - each year reduces value by approximately ${abs(model.coef_[1]):.2f}")
         elif feature == 'distance_downtown':
-            business_insights.append(f"Location is crucial - each mile from downtown reduces value by approximately ${abs(model.coef_[2]):.2f}")
+            business_insights.append(f"Location is important - each mile from downtown reduces value by approximately ${abs(model.coef_[2]):.2f}")
 
     for insight in business_insights:
         print(f"  • {insight}")
 
     # Customer audience: Personalized, actionable information
     print("\nCustomer Interpretation (for Homeowners/Buyers):")
-    # Let's create a sample case
+    # Create a sample case
     sample_house = {
         'sqft': 1800,
         'age': 15,
@@ -1851,7 +1851,7 @@ create_audience_specific_interpretations(model, X, y)
       <span class="code-callout__title">Technical Audience</span>
     </div>
     <div class="code-callout__body">
-      <p>Compute R², MSE, RMSE, and MAE and print the top 3 features with their importance scores or coefficients—exactly what a data scientist needs.</p>
+      <p>Compute R², MSE, RMSE, and MAE and print the top 3 features with their importance scores or coefficients, exactly what a data scientist needs.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="41-57" data-tint="2">
@@ -1887,7 +1887,7 @@ create_audience_specific_interpretations(model, X, y)
 > **🎯 Key points**
 >
 > - Start simple: simpler models are more interpretable, and the accuracy-interpretability tradeoff is often modest.
-> - Combine multiple techniques — built-in importance, permutation importance, and partial dependence — for complementary views.
+> - Combine multiple techniques, built-in importance, permutation importance, and partial dependence, for complementary views.
 > - Tailor the explanation to the audience: detailed metrics for data scientists, key drivers for executives, actionable counterfactuals for end users.
 
 ## Common Challenges in Model Interpretation
@@ -2010,7 +2010,7 @@ Interpretation Challenge:
       <span class="code-callout__title">Simulate Confounding</span>
     </div>
     <div class="code-callout__body">
-      <p>Temperature causally drives both ice cream sales and whether people wear shorts—shorts-wearing is a confounder, not a cause.</p>
+      <p>Temperature causally drives both ice cream sales and whether people wear shorts, shorts-wearing is a confounder, not a cause.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="23-27" data-tint="2">
@@ -2171,7 +2171,7 @@ explore_feature_interactions()
       <span class="code-callout__title">Simulate Interaction</span>
     </div>
     <div class="code-callout__body">
-      <p>Generate target = feature1 × feature2 + noise—a pure multiplicative interaction that a main-effects-only linear model cannot capture.</p>
+      <p>Generate target = feature1 × feature2 + noise, a pure multiplicative interaction that a main-effects-only linear model cannot capture.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="23-35" data-tint="2">
@@ -2355,7 +2355,7 @@ print(complexity_comparison)
       <span class="code-callout__title">Score Interpretability</span>
     </div>
     <div class="code-callout__body">
-      <p>Assign a subjective 1–10 interpretability score based on model family and depth; deeper / larger ensembles score lower.</p>
+      <p>Assign a subjective 1-10 interpretability score based on model family and depth; deeper / larger ensembles score lower.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="75-92" data-tint="4">
@@ -2364,7 +2364,7 @@ print(complexity_comparison)
       <span class="code-callout__title">3-Axis Scatter</span>
     </div>
     <div class="code-callout__body">
-      <p>Plot complexity (log x) vs test R² (y) with colour showing interpretability score using the RdYlGn colourmap—green is interpretable, red is opaque.</p>
+      <p>Plot complexity (log x) vs test R² (y) with colour showing interpretability score using the RdYlGn colourmap, green is interpretable, red is opaque.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="105-107" data-tint="1">
@@ -2381,9 +2381,9 @@ print(complexity_comparison)
 
 > **🎯 Key points**
 >
-> - An important feature is not necessarily a causal one — confounders can make spurious predictors look significant.
+> - An important feature is not necessarily a causal one, confounders can make spurious predictors look significant.
 > - Features can interact; their combined effect may differ from the sum of individual effects, so add interaction terms when needed.
-> - The more complex the model, the harder it is to interpret — interpretability typically falls as accuracy and complexity rise.
+> - The more complex the model, the harder it is to interpret, interpretability typically falls as accuracy and complexity rise.
 
 ## Practice Exercise
 
@@ -2401,12 +2401,12 @@ Try applying these model interpretation techniques to your own dataset:
 
 ## Gotchas
 
-- **Comparing raw coefficients across features with different scales** — A coefficient of 120 for square footage and 25,000 for number of rooms does not mean rooms matter more; square footage is measured in single units while rooms are counted in small integers. Standardise features before comparing coefficient magnitudes.
-- **Interpreting linear regression coefficients causally** — A positive coefficient for `distance_downtown` does not prove that moving farther from downtown raises house prices; it only describes the observed association given the other variables in the model. Omitting a correlated confounder (e.g., lot size) can reverse or inflate any coefficient.
-- **Treating feature importance from a bar chart as a ranking of causal drivers** — Permutation importance and coefficient magnitude both measure association within the fitted model, not independent causal effects. Features that are correlated with each other will split importance arbitrarily between them.
-- **Computing SHAP values and ignoring the baseline** — SHAP values are additive contributions *relative to the expected model output* (the base value). A positive SHAP of +5,000 means this observation pushes price $5,000 above the average prediction—not above zero or above the intercept.
-- **Using partial dependence plots when features are strongly correlated** — PDPs average predictions over the marginal distribution of other features, which can create unrealistic feature combinations (e.g., very high income with very young age). Use individual conditional expectation (ICE) plots or check feature correlation before trusting a PDP.
-- **Assuming a more complex model always gives more trustworthy SHAP explanations** — SHAP values faithfully explain whatever the model has learned, including its errors and biases. If the model itself overfits or captures a spurious pattern, the SHAP explanation will accurately describe a wrong model.
+- **Comparing raw coefficients across features with different scales**: A coefficient of 120 for square footage and 25,000 for number of rooms does not mean rooms matter more; square footage is measured in single units while rooms are counted in small integers. Standardise features before comparing coefficient magnitudes.
+- **Interpreting linear regression coefficients causally**: A positive coefficient for `distance_downtown` does not prove that moving farther from downtown raises house prices; it only describes the observed association given the other variables in the model. Omitting a correlated confounder (e.g., lot size) can reverse or inflate any coefficient.
+- **Treating feature importance from a bar chart as a ranking of causal drivers**: Permutation importance and coefficient magnitude both measure association within the fitted model, not independent causal effects. Features that are correlated with each other will split importance arbitrarily between them.
+- **Computing SHAP values and ignoring the baseline**: SHAP values are additive contributions *relative to the expected model output* (the base value). A positive SHAP of +5,000 means this observation pushes price $5,000 above the average prediction, not above zero or above the intercept.
+- **Using partial dependence plots when features are strongly correlated**: PDPs average predictions over the marginal distribution of other features, which can create unrealistic feature combinations (e.g., very high income with very young age). Use individual conditional expectation (ICE) plots or check feature correlation before trusting a PDP.
+- **Assuming a more complex model always gives more trustworthy SHAP explanations**: SHAP values faithfully explain whatever the model has learned, including its errors and biases. If the model itself overfits or captures a spurious pattern, the SHAP explanation will accurately describe a wrong model.
 
 ## Additional Resources
 

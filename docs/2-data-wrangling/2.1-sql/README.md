@@ -1,6 +1,6 @@
 # Data Querying with SQL: Your Gateway to Data Mastery
 
-**After this submodule:** You can read and write portable SQL against relational data—from **SELECT** and filters through **JOIN**s, aggregations, and introductory analytics patterns.
+**After this submodule:** You can read and write portable SQL against relational data, from **SELECT** and filters through **JOIN**s, aggregations, and introductory analytics patterns.
 
 ## Why this matters
 
@@ -22,12 +22,12 @@ High-level introduction to SQL and relational databases.
 
 Work through these pages in order unless your instructor assigns otherwise:
 
-1. [Intro to databases](intro-databases.md)  
-2. [Basic operations](basic-operations.md)  
-3. [Joins](joins.md)  
-4. [Aggregations](aggregations.md)  
-5. [Advanced concepts](advanced-concepts.md)  
-6. [SQL project](project.md)  
+1. [Intro to databases](intro-databases.md)
+2. [Basic operations](basic-operations.md)
+3. [Joins](joins.md)
+4. [Aggregations](aggregations.md)
+5. [Advanced concepts](advanced-concepts.md)
+6. [SQL project](project.md)
 
 Welcome to the fascinating world of SQL! Imagine having a conversation with your data - that's exactly what SQL allows you to do. Whether you're analyzing customer behavior, tracking business metrics, or uncovering hidden patterns, SQL is your trusted companion in the data journey.
 
@@ -111,7 +111,7 @@ Consider this real-world scenario:
 
 {% highlight sql %}
 -- A single query that provides valuable business insights
-SELECT 
+SELECT
     c.customer_segment,
     COUNT(DISTINCT o.customer_id) as num_customers,
     ROUND(AVG(o.total_amount), 2) as avg_order_value,
@@ -220,7 +220,7 @@ Master the fundamental operations with practical examples:
 
 {% highlight sql %}
 -- Find top-selling products this month
-SELECT 
+SELECT
     p.product_name,
     SUM(oi.quantity) as units_sold,
     SUM(oi.quantity * oi.price) as revenue,
@@ -261,13 +261,13 @@ Apple Watch     | 60         | 24000    | 58
       <span class="code-callout__title">Month filter and top five</span>
     </div>
     <div class="code-callout__body">
-      <p><strong>WHERE</strong> uses <code>DATE_TRUNC('month', …)</code> so “this month” aligns to calendar boundaries. <strong>ORDER BY units_sold DESC</strong> ranks products; <strong>LIMIT 5</strong> returns only the leaders. The comment shows example numeric output.</p>
+      <p><strong>WHERE</strong> uses <code>DATE_TRUNC('month', …)</code> so "this month" aligns to calendar boundaries. <strong>ORDER BY units_sold DESC</strong> ranks products; <strong>LIMIT 5</strong> returns only the leaders. The comment shows example numeric output.</p>
     </div>
   </div>
 </aside>
 </div>
 
-Notice how **JOIN** links products to line items and orders, **WHERE** limits to the current month, **GROUP BY** rolls up to each product, and **ORDER BY** with **LIMIT** surfaces the top sellers—one pipeline from fact tables to a ranking.
+Notice how **JOIN** links products to line items and orders, **WHERE** limits to the current month, **GROUP BY** rolls up to each product, and **ORDER BY** with **LIMIT** surfaces the top sellers, one pipeline from fact tables to a ranking.
 
 ### 3. Aggregations and Grouping
 
@@ -279,7 +279,7 @@ Transform raw data into actionable insights:
 {% highlight sql %}
 -- Customer cohort analysis
 WITH cohort_data AS (
-    SELECT 
+    SELECT
         DATE_TRUNC('month', first_order_date) as cohort_month,
         COUNT(DISTINCT customer_id) as cohort_size,
         SUM(total_spent) as total_revenue,
@@ -287,7 +287,7 @@ WITH cohort_data AS (
     FROM customer_metrics
     GROUP BY DATE_TRUNC('month', first_order_date)
 )
-SELECT 
+SELECT
     cohort_month,
     cohort_size,
     ROUND(total_revenue/cohort_size, 2) as revenue_per_customer,
@@ -312,7 +312,7 @@ ORDER BY cohort_month DESC;
       <span class="code-callout__title">Outer SELECT</span>
     </div>
     <div class="code-callout__body">
-      <p>The outer query only reshapes CTE rows: revenue per customer, rounded averages, and <strong>ORDER BY cohort_month DESC</strong> so the newest cohorts appear first—no extra joins needed.</p>
+      <p>The outer query only reshapes CTE rows: revenue per customer, rounded averages, and <strong>ORDER BY cohort_month DESC</strong> so the newest cohorts appear first, no extra joins needed.</p>
     </div>
   </div>
 </aside>
@@ -338,7 +338,7 @@ Example of complex joins:
 {% highlight sql %}
 -- Customer order history with product details
 WITH customer_orders AS (
-    SELECT 
+    SELECT
         c.customer_id,
         c.name as customer_name,
         o.order_id,
@@ -352,7 +352,7 @@ WITH customer_orders AS (
     LEFT JOIN order_items oi ON o.order_id = oi.order_id
     LEFT JOIN products p ON oi.product_id = p.product_id
 )
-SELECT 
+SELECT
     customer_name,
     COUNT(DISTINCT order_id) as total_orders,
     SUM(total_amount) as total_spent,
@@ -413,7 +413,7 @@ GROUP BY DATE_TRUNC('month', order_date);
       <span class="code-callout__title">Plan and monthly revenue</span>
     </div>
     <div class="code-callout__body">
-      <p><strong>EXPLAIN ANALYZE</strong> runs the query and prints the executor plan plus actual timings—use it to see index use vs sequential scans. The <strong>SELECT</strong> buckets <code>order_date</code> by month over the last year and aggregates order counts and revenue (hint comment suggests an index on <code>order_date</code>).</p>
+      <p><strong>EXPLAIN ANALYZE</strong> runs the query and prints the executor plan plus actual timings, use it to see index use vs sequential scans. The <strong>SELECT</strong> buckets <code>order_date</code> by month over the last year and aggregates order counts and revenue (hint comment suggests an index on <code>order_date</code>).</p>
     </div>
   </div>
 </aside>
@@ -425,7 +425,7 @@ GROUP BY DATE_TRUNC('month', order_date);
 <div class="code-explainer__code">
 
 {% highlight sql %}
-SELECT 
+SELECT
     category_name,
     product_name,
     price,
@@ -443,7 +443,7 @@ JOIN categories c ON p.category_id = c.category_id;
       <span class="code-callout__title">Partitioned windows</span>
     </div>
     <div class="code-callout__body">
-      <p><code>AVG(price) OVER (PARTITION BY category_name)</code> computes each row’s category average without collapsing rows. The next column subtracts that average from price (distance from typical). <code>RANK() … ORDER BY price DESC</code> ranks items inside each category.</p>
+      <p><code>AVG(price) OVER (PARTITION BY category_name)</code> computes each row's category average without collapsing rows. The next column subtracts that average from price (distance from typical). <code>RANK() … ORDER BY price DESC</code> ranks items inside each category.</p>
     </div>
   </div>
 </aside>
@@ -460,9 +460,9 @@ WITH RECURSIVE subordinates AS (
     SELECT employee_id, manager_id, name, 1 as level
     FROM employees
     WHERE manager_id = 1
-    
+
     UNION ALL
-    
+
     -- Recursive case: subordinates of subordinates
     SELECT e.employee_id, e.manager_id, e.name, s.level + 1
     FROM employees e
@@ -524,8 +524,8 @@ Before starting this journey, ensure you have:
 
 If you prefer to practice SQL directly in the browser without installing anything:
 
-- **SQLite Online** — [sqliteonline.com](https://sqliteonline.com/) — run SQL queries instantly in the browser
-- **DB Browser for SQLite** — [sqlitebrowser.org](https://sqlitebrowser.org/) — desktop GUI for SQLite databases
+- **SQLite Online**: [sqliteonline.com](https://sqliteonline.com/), run SQL queries instantly in the browser
+- **DB Browser for SQLite**: [sqlitebrowser.org](https://sqlitebrowser.org/), desktop GUI for SQLite databases
 
 **2. DBeaver Community Edition**
 
@@ -675,17 +675,17 @@ echo "*.tmp" >> .gitignore
 SELECT * FROM orders o, customers c WHERE o.customer_id=c.id;
 
 --  Good Practice
-SELECT 
+SELECT
     c.first_name,
     c.last_name,
     o.order_date,
     o.total_amount
 FROM orders o
-JOIN customers c 
+JOIN customers c
     ON o.customer_id = c.id
-WHERE 
+WHERE
     o.order_date >= CURRENT_DATE - INTERVAL '30 days'
-ORDER BY 
+ORDER BY
     o.order_date DESC;
 {% endhighlight %}
 </div>
@@ -696,7 +696,7 @@ ORDER BY
       <span class="code-callout__title">Implicit join (avoid)</span>
     </div>
     <div class="code-callout__body">
-      <p>The “comma join” with <strong>WHERE</strong> is easy to misread and easy to turn into a Cartesian product if you forget a predicate. Prefer explicit <strong>JOIN … ON</strong> so relationships stay visible in the <strong>FROM</strong> clause.</p>
+      <p>The "comma join" with <strong>WHERE</strong> is easy to misread and easy to turn into a Cartesian product if you forget a predicate. Prefer explicit <strong>JOIN … ON</strong> so relationships stay visible in the <strong>FROM</strong> clause.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-16" data-tint="2">
@@ -705,7 +705,7 @@ ORDER BY
       <span class="code-callout__title">Explicit JOIN and columns</span>
     </div>
     <div class="code-callout__body">
-      <p>Lists only needed columns, joins orders to customers on <code>customer_id</code>, filters recent orders, and orders by date—readable structure for reviewers and for the optimizer.</p>
+      <p>Lists only needed columns, joins orders to customers on <code>customer_id</code>, filters recent orders, and orders by date, readable structure for reviewers and for the optimizer.</p>
     </div>
   </div>
 </aside>
@@ -724,7 +724,7 @@ CREATE INDEX idx_orders_date ON orders(order_date);
 CREATE INDEX idx_orders_customer ON orders(customer_id);
 
 -- Use composite indexes for common query patterns
-CREATE INDEX idx_orders_customer_date 
+CREATE INDEX idx_orders_customer_date
 ON orders(customer_id, order_date);
 {% endhighlight %}
 </div>
@@ -735,7 +735,7 @@ ON orders(customer_id, order_date);
       <span class="code-callout__title">Single- and multi-column indexes</span>
     </div>
     <div class="code-callout__body">
-      <p>B-tree indexes on <code>order_date</code> and <code>customer_id</code> speed filters and joins. The composite index matches queries that filter by customer <em>and</em> date—column order should match your most selective predicates.</p>
+      <p>B-tree indexes on <code>order_date</code> and <code>customer_id</code> speed filters and joins. The composite index matches queries that filter by customer <em>and</em> date, column order should match your most selective predicates.</p>
     </div>
   </div>
 </aside>
@@ -748,12 +748,12 @@ ON orders(customer_id, order_date);
 
 {% highlight sql %}
 --  Bad: Full table scan
-SELECT * FROM orders 
+SELECT * FROM orders
 WHERE EXTRACT(YEAR FROM order_date) = 2023;
 
 --  Good: Uses index
-SELECT * FROM orders 
-WHERE order_date >= '2023-01-01' 
+SELECT * FROM orders
+WHERE order_date >= '2023-01-01'
   AND order_date < '2024-01-01';
 {% endhighlight %}
 </div>
@@ -807,24 +807,24 @@ CREATE TABLE products (
 {% highlight sql %}
 -- Use CTEs for complex queries
 WITH monthly_sales AS (
-    SELECT 
+    SELECT
         DATE_TRUNC('month', order_date) as month,
         SUM(total_amount) as revenue
     FROM orders
     GROUP BY DATE_TRUNC('month', order_date)
 ),
 sales_growth AS (
-    SELECT 
+    SELECT
         month,
         revenue,
         LAG(revenue) OVER (ORDER BY month) as prev_month_revenue
     FROM monthly_sales
 )
-SELECT 
+SELECT
     month,
     revenue,
     ROUND(
-        ((revenue - prev_month_revenue) / prev_month_revenue * 100)::numeric, 
+        ((revenue - prev_month_revenue) / prev_month_revenue * 100)::numeric,
         2
     ) as growth_rate
 FROM sales_growth;
@@ -837,7 +837,7 @@ FROM sales_growth;
       <span class="code-callout__title">Monthly revenue CTE</span>
     </div>
     <div class="code-callout__body">
-      <p>First CTE aggregates orders to one revenue row per calendar month. Second CTE uses <code>LAG(revenue) OVER (ORDER BY month)</code> to pull the previous month’s revenue on the same row—setup for period-over-period math.</p>
+      <p>First CTE aggregates orders to one revenue row per calendar month. Second CTE uses <code>LAG(revenue) OVER (ORDER BY month)</code> to pull the previous month's revenue on the same row, setup for period-over-period math.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="12-23" data-tint="2">
@@ -944,4 +944,4 @@ Get ready to embark on an exciting journey into the world of data querying! We'l
 
 Remember: "Data is the new oil, and SQL is the drill!"
 
-Let's dive in and master SQL together!
+Start with the first exercise.

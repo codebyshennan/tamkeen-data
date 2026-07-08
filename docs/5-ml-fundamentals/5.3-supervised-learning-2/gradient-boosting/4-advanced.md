@@ -8,7 +8,7 @@ objectives:
 
 # Advanced Gradient Boosting Techniques
 
-**After this lesson:** you can explain the core ideas in “Advanced Gradient Boosting Techniques” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Advanced Gradient Boosting Techniques and try the examples in your own notebook.
 
 ## Overview
 
@@ -65,7 +65,7 @@ def train_multi_output_model(X, y_multiple):
       <span class="code-callout__title">Multi-output Setup</span>
     </div>
     <div class="code-callout__body">
-      <p><code>MultiOutputRegressor</code> wraps any single-output estimator — here <code>XGBRegressor</code> — training one separate model per target column so each target's tree structure is independent.</p>
+      <p><code>MultiOutputRegressor</code> wraps any single-output estimator, here <code>XGBRegressor</code>, training one separate model per target column so each target's tree structure is independent.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="14-29" data-tint="2">
@@ -74,7 +74,7 @@ def train_multi_output_model(X, y_multiple):
       <span class="code-callout__title">Fit and Example Usage</span>
     </div>
     <div class="code-callout__body">
-      <p>Pass the 2D target matrix <code>y_multiple</code> directly; <code>model.predict</code> returns a 2D array where each column corresponds to one target — commented usage shows slicing temperature vs humidity predictions.</p>
+      <p>Pass the 2D target matrix <code>y_multiple</code> directly; <code>model.predict</code> returns a 2D array where each column corresponds to one target, commented usage shows slicing temperature vs humidity predictions.</p>
     </div>
   </div>
 </aside>
@@ -146,7 +146,7 @@ class HierarchicalGBM:
       <span class="code-callout__title">Fit and Weight</span>
     </div>
     <div class="code-callout__body">
-      <p><code>fit</code> trains a fresh tree per level with adaptive <code>sample_weight</code>; <code>_get_weights</code> doubles the weight of samples the previous level got right — focusing subsequent levels on harder examples.</p>
+      <p><code>fit</code> trains a fresh tree per level with adaptive <code>sample_weight</code>; <code>_get_weights</code> doubles the weight of samples the previous level got right, focusing subsequent levels on harder examples.</p>
     </div>
   </div>
 </aside>
@@ -241,7 +241,7 @@ def weighted_log_loss(y_true, y_pred, weights):
       <span class="code-callout__title">Docstring</span>
     </div>
     <div class="code-callout__body">
-      <p>Three parameters: true labels, predicted probabilities, and a per-sample weight vector — higher weights on minority or high-value samples steer the model to minimize their errors more aggressively.</p>
+      <p>Three parameters: true labels, predicted probabilities, and a per-sample weight vector, higher weights on minority or high-value samples steer the model to minimize their errors more aggressively.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-15" data-tint="2">
@@ -300,7 +300,7 @@ def create_interactions(X, degree=2):
       <span class="code-callout__title">Signature and Docstring</span>
     </div>
     <div class="code-callout__body">
-      <p>Takes a DataFrame and maximum interaction degree; the docstring shows the concrete new columns produced from features A and B at degree 2 — products and squares.</p>
+      <p>Takes a DataFrame and maximum interaction degree; the docstring shows the concrete new columns produced from features A and B at degree 2, products and squares.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="13-23" data-tint="2">
@@ -309,7 +309,7 @@ def create_interactions(X, degree=2):
       <span class="code-callout__title">Combinatorial Products</span>
     </div>
     <div class="code-callout__body">
-      <p><code>combinations(features, d)</code> generates all d-feature subsets; each new column starts at 1 and is multiplied by each feature in the combo — creating polynomial interaction terms without external libraries.</p>
+      <p><code>combinations(features, d)</code> generates all d-feature subsets; each new column starts at 1 and is multiplied by each feature in the combo, creating polynomial interaction terms without external libraries.</p>
     </div>
   </div>
 </aside>
@@ -354,7 +354,7 @@ def create_time_features(df, date_column):
       <span class="code-callout__title">Calendar Components</span>
     </div>
     <div class="code-callout__body">
-      <p>Extract hour, day, month, year, and day-of-week from a datetime column using pandas <code>.dt</code> accessor — these linear features give the model basic time awareness.</p>
+      <p>Extract hour, day, month, year, and day-of-week from a datetime column using pandas <code>.dt</code> accessor, these linear features give the model basic time awareness.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="17-23" data-tint="2">
@@ -363,7 +363,7 @@ def create_time_features(df, date_column):
       <span class="code-callout__title">Cyclical Encoding</span>
     </div>
     <div class="code-callout__body">
-      <p>Sin/cos encoding of hour maps 23→0 continuity: the model sees that hour 23 and hour 0 are adjacent — raw integer hour would treat them as far apart.</p>
+      <p>Sin/cos encoding of hour maps 23→0 continuity: the model sees that hour 23 and hour 0 are adjacent, raw integer hour would treat them as far apart.</p>
     </div>
   </div>
 </aside>
@@ -417,7 +417,7 @@ model = xgb.train(
       <span class="code-callout__title">Exponential Decay</span>
     </div>
     <div class="code-callout__body">
-      <p>Each call multiplies <code>initial_lr</code> by <code>decay^iteration</code>; with <code>decay=0.995</code> the rate decays ~40% after 200 rounds — early rounds take large steps, later rounds fine-tune.</p>
+      <p>Each call multiplies <code>initial_lr</code> by <code>decay^iteration</code>; with <code>decay=0.995</code> the rate decays ~40% after 200 rounds, early rounds take large steps, later rounds fine-tune.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="18-29" data-tint="2">
@@ -479,7 +479,7 @@ def calculate_partial_dependence(model, X, feature, grid_points=50):
       <span class="code-callout__title">Feature Grid</span>
     </div>
     <div class="code-callout__body">
-      <p><code>np.linspace</code> creates 50 evenly-spaced values from the feature's min to max — this grid will be swept while all other features remain at their real values.</p>
+      <p><code>np.linspace</code> creates 50 evenly-spaced values from the feature's min to max, this grid will be swept while all other features remain at their real values.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="17-26" data-tint="2">
@@ -488,7 +488,7 @@ def calculate_partial_dependence(model, X, feature, grid_points=50):
       <span class="code-callout__title">Marginal Effect</span>
     </div>
     <div class="code-callout__body">
-      <p>For each grid value, set the target feature to that value across all rows, predict, and average — the mean prediction at each grid point is the partial dependence, revealing the feature's marginal effect on output.</p>
+      <p>For each grid value, set the target feature to that value across all rows, predict, and average, the mean prediction at each grid point is the partial dependence, revealing the feature's marginal effect on output.</p>
     </div>
   </div>
 </aside>
@@ -540,7 +540,7 @@ def analyze_shap_interactions(model, X):
       <span class="code-callout__title">SHAP and Interactions</span>
     </div>
     <div class="code-callout__body">
-      <p><code>shap_values</code> gives each feature's contribution to each prediction; <code>shap_interaction_values</code> returns a 3D array showing pairwise feature interaction contributions — expensive but informative.</p>
+      <p><code>shap_values</code> gives each feature's contribution to each prediction; <code>shap_interaction_values</code> returns a 3D array showing pairwise feature interaction contributions, expensive but informative.</p>
     </div>
   </div>
 </aside>
@@ -569,12 +569,12 @@ Ready to try these advanced techniques? Start with one concept at a time and gra
 
 ## Gotchas
 
-- **`MultiOutputRegressor` trains independent models, not a joint model** — Wrapping `XGBRegressor` in `MultiOutputRegressor` trains one separate tree ensemble per target column. Correlations between targets are ignored. If your targets are tightly correlated, a native multi-output model (e.g., XGBoost's built-in multi-output support) or a shared representation layer will perform better.
-- **Custom objectives must return *per-sample* gradients and hessians, not scalars** — The `custom_objective` function must return arrays of shape `(n_samples,)` for both `grad` and `hess`. Returning a scalar (e.g., the mean loss) instead of per-sample values causes XGBoost to silently compute wrong tree splits.
-- **`create_interactions` grows exponentially with feature count** — For \\(p\\) features at degree 2, you get \\(\binom{p}{2} + p\\) new columns. With 100 features this adds ~5,000 columns; with 500 it adds ~125,000. Running this without filtering first can exhaust memory silently before fitting begins.
-- **`shap_interaction_values` is \\(O(n \cdot p^2)\\) in memory** — The interaction matrix returned by `explainer.shap_interaction_values(X)` has shape `(n_samples, n_features, n_features)`. For a dataset with 10,000 rows and 200 features, this is 10,000 × 200 × 200 floats ≈ 3.2 GB. Call it on a small representative sample, not the full dataset.
-- **Learning rate scheduling via `xgb.callback.reset_learning_rate` is version-dependent** — The callback API changed between XGBoost 1.x and 2.x. Code written for one version may fail silently (using the original learning rate throughout) on the other. Always verify the learning rate is actually changing by checking `model.get_params()` after training.
-- **Partial dependence averages out interaction effects** — The `calculate_partial_dependence` function marginalizes over all other features by holding them at their real values and averaging predictions. When two features interact strongly, the partial dependence of either feature individually can look flat even though the joint effect is large. Use ICE plots or SHAP interaction values to detect this.
+- **`MultiOutputRegressor` trains independent models, not a joint model**: Wrapping `XGBRegressor` in `MultiOutputRegressor` trains one separate tree ensemble per target column. Correlations between targets are ignored. If your targets are tightly correlated, a native multi-output model (e.g., XGBoost's built-in multi-output support) or a shared representation layer will perform better.
+- **Custom objectives must return *per-sample* gradients and hessians, not scalars**, The `custom_objective` function must return arrays of shape `(n_samples,)` for both `grad` and `hess`. Returning a scalar (e.g., the mean loss) instead of per-sample values causes XGBoost to silently compute wrong tree splits.
+- **`create_interactions` grows exponentially with feature count**: For \\(p\\) features at degree 2, you get \\(\binom{p}{2} + p\\) new columns. With 100 features this adds ~5,000 columns; with 500 it adds ~125,000. Running this without filtering first can exhaust memory silently before fitting begins.
+- **`shap_interaction_values` is \\(O(n \cdot p^2)\\) in memory**: The interaction matrix returned by `explainer.shap_interaction_values(X)` has shape `(n_samples, n_features, n_features)`. For a dataset with 10,000 rows and 200 features, this is 10,000 × 200 × 200 floats ≈ 3.2 GB. Call it on a small representative sample, not the full dataset.
+- **Learning rate scheduling via `xgb.callback.reset_learning_rate` is version-dependent**: The callback API changed between XGBoost 1.x and 2.x. Code written for one version may fail silently (using the original learning rate throughout) on the other. Always verify the learning rate is actually changing by checking `model.get_params()` after training.
+- **Partial dependence averages out interaction effects**: The `calculate_partial_dependence` function marginalizes over all other features by holding them at their real values and averaging predictions. When two features interact strongly, the partial dependence of either feature individually can look flat even though the joint effect is large. Use ICE plots or SHAP interaction values to detect this.
 
 ## Additional Resources
 

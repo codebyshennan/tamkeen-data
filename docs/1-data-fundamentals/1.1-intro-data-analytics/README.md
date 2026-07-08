@@ -4,7 +4,7 @@
 
 ## Overview
 
-In today’s data-driven world, understanding data analytics and data science is crucial for making informed decisions. This lesson introduces both fields, their methodologies, and typical applications. We define terms as they appear.
+In today's data-driven world, understanding data analytics and data science is important for making informed decisions. This lesson introduces both fields, their methodologies, and typical applications. We define terms as they appear.
 
 ### Video
 
@@ -12,7 +12,7 @@ In today’s data-driven world, understanding data analytics and data science is
 <iframe width="560" height="315" src="https://www.youtube.com/embed/9VamqHc7dRo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*Alex the Analyst — What does a data analyst do?*
+*Alex the Analyst, What does a data analyst do?*
 
 > **Contributors:** Authoring standards: `docs/meta/DOCUMENTATION_GUIDELINES.md` (`meta/` is excluded from the Jekyll build).
 
@@ -37,11 +37,11 @@ As you learn more statistics and machine learning, you will recognize **predicti
 
 Most analytics projects move through the same building blocks. Names differ by company, but the ideas recur:
 
-1. **Data sources** — Where numbers live: databases, spreadsheets, APIs, exports from SaaS tools. You need to know **provenance** (who generated the data and how).
-2. **Data processing** — **ETL** (extract, transform, load) or similar pipelines that clean, join, and reshape raw inputs into tables you can analyze reliably.
-3. **Analysis** — Applying statistics or rules to answer a **specific** question, not only computing every possible metric.
-4. **Visualization** — Charts and tables tuned to the audience; the goal is **clarity**, not chart junk.
-5. **Reporting** — Narrative plus evidence: what you measured, what you found, what you recommend, and what you are uncertain about.
+1. **Data sources**: Where numbers live: databases, spreadsheets, APIs, exports from SaaS tools. You need to know **provenance** (who generated the data and how).
+2. **Data processing**: **ETL** (extract, transform, load) or similar pipelines that clean, join, and reshape raw inputs into tables you can analyze reliably.
+3. **Analysis**: Applying statistics or rules to answer a **specific** question, not only computing every possible metric.
+4. **Visualization**: Charts and tables tuned to the audience; the goal is **clarity**, not chart junk.
+5. **Reporting**: Narrative plus evidence: what you measured, what you found, what you recommend, and what you are uncertain about.
 
 ### The Data Analytics Process
 
@@ -51,7 +51,7 @@ Most analytics projects move through the same building blocks. Names differ by c
 
 ### 1. Business Understanding
 
-**Example**: Let's just construct a very simple example. A retail store wants to:
+**Example**: Construct a very simple example. A retail store wants to:
 
 - Increase sales revenue
 - Reduce inventory costs
@@ -66,7 +66,7 @@ How can a store do all of that? Obviously, there needs to be a way to collect th
 
 **Implementation Example**:
 
-In order to construct a representative data structure for these business requirements, we can start with simple `JSON` (JavaScript Object Notation), so that it is organized in such a way that computers can understand. This is otherwise known as an `object` in some programming languages; in Python, this data structure is called a `dict` (short for dictionary).
+To construct a representative data structure for these business requirements, we can start with simple `JSON` (JavaScript Object Notation), so that it is organized in such a way that computers can understand. This is otherwise known as an `object` in some programming languages; in Python, this data structure is called a `dict` (short for dictionary).
 
 ```python
 # Define key performance indicators (KPIs)
@@ -120,20 +120,20 @@ These operations form a "chain" or a pipeline of transformations, in order to cl
 def prepare_sales_data(df):
     # Convert dates to datetime
     df['sale_date'] = pd.to_datetime(df['sale_date'])
-  
+
     # Calculate daily totals
     daily_sales = df.groupby('sale_date').agg({
         'revenue': 'sum',
         'transactions': 'count',
         'items_sold': 'sum'
     })
-  
+
     # Add derived metrics
     daily_sales['avg_transaction'] = (
-        daily_sales['revenue'] / 
+        daily_sales['revenue'] /
         daily_sales['transactions']
     )
-  
+
     return daily_sales
 ```
 
@@ -166,14 +166,14 @@ def analyze_peak_hours(sales_data):
         'revenue': 'mean',
         'transactions': 'mean'
     })
-  
+
     # Visualize peak hours
     plt.figure(figsize=(12, 6))
     hourly_sales['revenue'].plot(kind='bar')
     plt.title('Average Revenue by Hour')
     plt.xlabel('Hour of Day')
     plt.ylabel('Revenue')
-  
+
     return hourly_sales
 ```
 
@@ -199,32 +199,32 @@ Visualizations are informative in elucidating trends and patterns in data. In sc
 def plot_sales_drivers(df):
     """
     Create correlation heatmap for sales drivers
-  
+
     Parameters:
-    df (pandas.DataFrame): DataFrame containing 'sales', 'traffic', 
+    df (pandas.DataFrame): DataFrame containing 'sales', 'traffic',
                          'weather', and 'promotions' columns
     """
     # Calculate correlation matrix
-    correlation_matrix = df[['sales', 'traffic', 
+    correlation_matrix = df[['sales', 'traffic',
                            'weather', 'promotions']].corr()
-  
+
     # Create figure
     plt.figure(figsize=(10, 8))
-  
+
     # Create heatmap
-    sns.heatmap(correlation_matrix, 
+    sns.heatmap(correlation_matrix,
                 annot=True,  # Show correlation values
                 cmap='coolwarm',  # Blue-red diverging colormap
                 center=0,  # Center the colormap at 0
                 fmt='.2f',  # Format annotations to 2 decimal places
                 square=True,  # Make cells square
                 cbar_kws={'label': 'Correlation Coefficient'})
-  
+
     # Customize the plot
     plt.title('Sales Drivers Correlation Analysis', pad=20, size=14)
     plt.xticks(rotation=45)
     plt.yticks(rotation=0)
-  
+
     return plt.gcf()
 ```
 
@@ -256,29 +256,29 @@ import plotly.express as px
 
 def create_sales_dashboard(data):
     # Sales trend
-    fig1 = px.line(data, 
-                   x='date', 
+    fig1 = px.line(data,
+                   x='date',
                    y='revenue',
                    title='Daily Sales Trend')
-  
+
     # Category breakdown
     fig2 = px.pie(data,
                   values='sales',
                   names='category',
                   title='Sales by Category')
-  
+
     # Combine into dashboard
     dashboard = html.Div([
         dcc.Graph(figure=fig1),
         dcc.Graph(figure=fig2)
     ])
-  
+
     return dashboard
 ```
 
 ## Same four types, different emphasis
 
-The retail walkthrough earlier in this page is mostly **descriptive** (what sales and traffic look like) and **diagnostic** (what might explain peaks). When you see **forecasting** or **recommendation** systems in later modules, you are in **predictive** and **prescriptive** territory. If you remember only one thing: **start with a clear question**—the four types are just structured ways to answer different kinds of questions.
+The retail walkthrough earlier in this page is mostly **descriptive** (what sales and traffic look like) and **diagnostic** (what might explain peaks). When you see **forecasting** or **recommendation** systems in later modules, you are in **predictive** and **prescriptive** territory. If you remember only one thing: **start with a clear question**-the four types are just structured ways to answer different kinds of questions.
 
 ## Tools of the Trade
 
@@ -311,15 +311,15 @@ The retail walkthrough earlier in this page is mostly **descriptive** (what sale
 
 ## Best practices (habits that scale)
 
-Good analysis is **repeatable** and **honest** about limitations. The lists below are not chores to tick once—they are habits that save you from embarrassing mistakes.
+Good analysis is **repeatable** and **honest** about limitations. The lists below are not chores to tick once, they are habits that save you from embarrassing mistakes.
 
 ### Data quality
 
-**Trust but verify.** Check that sources match the business definition (e.g. “revenue” with or without taxes). Handle **missing** values explicitly—do not silently drop rows without saying so. **Deduplicate** with a rule you can explain. **Standardize** units and time zones. **Document** every assumption (“we excluded refunds before March”). **Validate** against spot checks or a second source when stakes are high. **Watch outliers**—they may be errors or the most important rows.
+**Trust but verify.** Check that sources match the business definition (e.g. "revenue" with or without taxes). Handle **missing** values explicitly, do not silently drop rows without saying so. **Deduplicate** with a rule you can explain. **Standardize** units and time zones. **Document** every assumption ("we excluded refunds before March"). **Validate** against spot checks or a second source when stakes are high. **Watch outliers**-they may be errors or the most important rows.
 
 ### Analysis
 
-**Start with the decision or question**, not with the fanciest method. Pick techniques that match the data type and sample size. **Write down** steps so a colleague can reproduce your results. **Test assumptions** (e.g. independence, seasonality) instead of treating every p-value as truth. **Place results in context**: a 2% lift may be huge in retail and noise in another domain. **Look for alternative explanations** before you claim you found “the” cause.
+**Start with the decision or question**, not with the fanciest method. Pick techniques that match the data type and sample size. **Write down** steps so a colleague can reproduce your results. **Test assumptions** (e.g. independence, seasonality) instead of treating every p-value as truth. **Place results in context**: a 2% lift may be huge in retail and noise in another domain. **Look for alternative explanations** before you claim you found "the" cause.
 
 ### Visualization
 
@@ -327,7 +327,7 @@ Good analysis is **repeatable** and **honest** about limitations. The lists belo
 
 ### Reporting
 
-**Audience first**—executives need the so-what and the risk; analysts may need appendices. Lead with **insights**, not with every query you ran. State **methodology** briefly enough to be credible. Tie recommendations to **evidence**. **Follow up** when actions were taken: did the metric move? **Invite feedback** so the next report is sharper.
+**Audience first**-executives need the so-what and the risk; analysts may need appendices. Lead with **insights**, not with every query you ran. State **methodology** briefly enough to be credible. Tie recommendations to **evidence**. **Follow up** when actions were taken: did the metric move? **Invite feedback** so the next report is sharper.
 
 ## What is Data Science?
 
@@ -386,10 +386,10 @@ viewing_data = {
 def clean_viewing_data(df):
     # Remove short sessions
     df = df[df['watch_duration'] >= 10]
-  
+
     # Standardize timestamps to UTC
     df['timestamp'] = pd.to_datetime(df['timestamp']).dt.tz_convert('UTC')
-  
+
     # Normalize device types
     df['device_type'] = df['device_type'].str.lower().replace({
         'iphone': 'mobile',
@@ -397,7 +397,7 @@ def clean_viewing_data(df):
         'smart_tv': 'tv',
         'roku': 'tv'
     })
-  
+
     return df
 ```
 
@@ -423,7 +423,7 @@ def clean_viewing_data(df):
 import seaborn as sns
 
 # Genre popularity by hour
-sns.heatmap(genre_hour_matrix, 
+sns.heatmap(genre_hour_matrix,
            cmap='YlOrRd',
            xticklabels=hours,
            yticklabels=genres)
@@ -456,9 +456,9 @@ from sklearn.ensemble import RandomForestClassifier
 # Train recommendation model
 def train_recommendation_model(user_data, content_data):
     model = RandomForestClassifier(n_estimators=100)
-    features = ['genre_score', 'duration_preference', 
+    features = ['genre_score', 'duration_preference',
                 'similar_content_rating', 'time_of_day_score']
-  
+
     model.fit(X_train[features], y_train['watched'])
     return model
 ```
@@ -491,7 +491,7 @@ def get_recommendations(user_id):
 
 ## Differences Between Data Analytics and Data Science
 
-Let's understand the differences through real-world examples from various industries:
+Understand the differences through real-world examples from various industries:
 
 ### Streaming Service (Netflix)
 

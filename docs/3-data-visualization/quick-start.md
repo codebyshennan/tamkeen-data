@@ -1,6 +1,6 @@
 # Data Visualization Quick Start Guide
 
-**After this lesson:** you can explain the core ideas in “Data Visualization Quick Start Guide” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Data Visualization Quick Start Guide and try the examples in your own notebook.
 
 ## Helpful video
 
@@ -21,7 +21,7 @@ In this quick start guide, you'll learn how to:
 - Python with **matplotlib** and **numpy** installed (see [0-prep](../0-prep/README.md) if you need an environment refresher).
 - A notebook or `.py` file where you can run the snippets.
 
-> **Time needed:** About **15–30 minutes** for a first pass, longer if you experiment with variants.
+> **Time needed:** About **15-30 minutes** for a first pass, longer if you experiment with variants.
 
 ## Your first visualization in about five minutes
 
@@ -107,7 +107,7 @@ plt.show()
 
 **Purpose:** Reuse `months` and `sales` in a minimal trend chart for comparison with bar and pie variants below.
 
-**Walkthrough:** Same `plot` call as Step 2 but stripped to essentials—good for copying into your own notebook.
+**Walkthrough:** Same `plot` call as Step 2 but stripped to essentials, good for copying into your own notebook.
 
 ```python
 # Line chart example
@@ -128,7 +128,7 @@ plt.show()
 
 **Best for:** Comparing categories
 
-**Purpose:** Encode the same values as bar heights—better than lines when categories are not ordered time.
+**Purpose:** Encode the same values as bar heights, better than lines when categories are not ordered time.
 
 **Walkthrough:** `plt.bar` maps each month to a rectangle; axis defaults treat `months` as categorical positions.
 
@@ -151,7 +151,7 @@ plt.show()
 
 **Best for:** Showing parts of a whole
 
-**Purpose:** Show each month’s share of total sales—use only when “part of a whole” is the actual question.
+**Purpose:** Show each month's share of total sales, use only when "part of a whole" is the actual question.
 
 **Walkthrough:** `autopct` formats wedge labels; `labels` ties slices back to month names.
 
@@ -279,7 +279,7 @@ plt.xticks(rotation=45)  # Rotate labels if needed
 ```
 
 
-**Captured output (notebook):** The cell above may print the return value of `plt.xticks(rotation=45)`—a tuple of tick locations and label objects. That repr is normal; the figure shows the rotated labels.
+**Captured output (notebook):** The cell above may print the return value of `plt.xticks(rotation=45)`-a tuple of tick locations and label objects. That repr is normal; the figure shows the rotated labels.
 
 ### Problem: Poor Color Choice
 
@@ -299,16 +299,16 @@ plt.plot(data, color='#2ecc71', alpha=0.7)
 
 ## Gotchas
 
-- **`plt.show()` clears the figure state** — any call to `plt.title`, `plt.ylabel`, or `plt.plot` made after `plt.show()` starts a brand-new blank figure; build the entire chart before calling `show()`.
-- **Pie charts distort perception when slices are close in size** — human eyes judge angles poorly, so values like 22% and 25% look nearly identical in a pie slice; use a bar chart instead when differences are small.
-- **Missing `plt.figure()` causes charts to stack on each other** — if you run multiple cells in a notebook without `plt.figure()` at the start of each, Matplotlib draws new elements onto the previous axes, producing a jumbled multi-series chart you did not intend.
-- **`figsize` is in inches, not pixels** — `figsize=(10, 6)` at 100 DPI produces a 1000×600 pixel image; at 72 DPI it produces 720×432; always pair `figsize` with an explicit `dpi` when pixel dimensions matter (e.g. for web exports).
-- **`plt.xticks(rotation=45)` does not right-align the rotated labels** — the default anchor point leaves labels off-center under their ticks; add `ha='right'` to `plt.xticks(rotation=45, ha='right')` for clean alignment.
-- **Line charts imply continuity between points** — connecting `months` list items with a line implies a meaningful progression between them; if the categories are unordered (e.g. cities, product names) use a bar chart to avoid implying a trend that does not exist.
+- **`plt.show()` clears the figure state**: any call to `plt.title`, `plt.ylabel`, or `plt.plot` made after `plt.show()` starts a brand-new blank figure; build the entire chart before calling `show()`.
+- **Pie charts distort perception when slices are close in size**: human eyes judge angles poorly, so values like 22% and 25% look nearly identical in a pie slice; use a bar chart instead when differences are small.
+- **Missing `plt.figure()` causes charts to stack on each other**: if you run multiple cells in a notebook without `plt.figure()` at the start of each, Matplotlib draws new elements onto the previous axes, producing a jumbled multi-series chart you did not intend.
+- **`figsize` is in inches, not pixels**: `figsize=(10, 6)` at 100 DPI produces a 1000×600 pixel image; at 72 DPI it produces 720×432; always pair `figsize` with an explicit `dpi` when pixel dimensions matter (e.g. for web exports).
+- **`plt.xticks(rotation=45)` does not right-align the rotated labels**: the default anchor point leaves labels off-center under their ticks; add `ha='right'` to `plt.xticks(rotation=45, ha='right')` for clean alignment.
+- **Line charts imply continuity between points**: connecting `months` list items with a line implies a meaningful progression between them; if the categories are unordered (e.g. cities, product names) use a bar chart to avoid implying a trend that does not exist.
 
 ## Practice Exercises
 
-**Note:** These are offline prompts—complete them in your own environment; there is no autograder in this repo.
+**Note:** These are offline prompts, complete them in your own environment; there is no autograder in this repo.
 
 1. **Basic Line Chart**
    Create a line chart showing temperature over a week

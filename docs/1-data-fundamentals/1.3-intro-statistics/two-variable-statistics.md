@@ -1,6 +1,6 @@
 # Two-Variable Statistics
 
-**After this lesson:** you can explain the core ideas in “Two-Variable Statistics” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Two-Variable Statistics and try the examples in your own notebook.
 
 ## Overview
 
@@ -16,7 +16,7 @@ Have you ever wondered:
 - Do taller people weigh more?
 - Does ice cream sales affect sunburn cases?
 
-Let's learn how to understand relationships between different variables!
+Learn how to understand relationships between different variables!
 
 ### Video
 
@@ -24,7 +24,7 @@ Let's learn how to understand relationships between different variables!
 <iframe width="560" height="315" src="https://www.youtube.com/embed/xZ_z8KWkhXE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*StatQuest with Josh Starmer — Correlation and covariance, clearly explained*
+*StatQuest with Josh Starmer, Correlation and covariance, clearly explained*
 
 ## Correlation vs. Causation
 
@@ -32,7 +32,7 @@ Let's learn how to understand relationships between different variables!
 
 ### What is Correlation?
 
-**Correlation** means “tendency to move together” on average—not proof that one variable causes the other. When two things tend to move together:
+**Correlation** means "tendency to move together" on average, not proof that one variable causes the other. When two things tend to move together:
 
 - **Positive**: Both increase together
   Example: Height and Weight
@@ -126,9 +126,9 @@ Other things that might affect results:
 ```
 Studying  Better Grades
 But what about:
-- Sleep quality 
-- Stress levels 
-- Teaching quality 
+- Sleep quality
+- Stress levels
+- Teaching quality
 ```
 
 ---
@@ -139,7 +139,7 @@ People might improve just because they THINK they got treatment!
 
 ```
 Sugar pill  Feel better
-Why? The mind is powerful! 
+Why? The mind is powerful!
 ```
 
 ## Different Ways to Study Relationships
@@ -218,7 +218,7 @@ Each dot = One pair of measurements
 
    ```
 
-2. **Negative**: Dots go down 
+2. **Negative**: Dots go down
    ```
 
    •
@@ -236,7 +236,7 @@ Each dot = One pair of measurements
 
    ```
 
-### Measuring Correlation 
+### Measuring Correlation
 
 ---
 
@@ -271,9 +271,9 @@ r = 0    → No correlation
 
 ## Common pitfalls
 
-- **Treating correlation as causation** — Confounders and reverse causality can produce misleading **r** values.
-- **Linear correlation for nonlinear relationships** — Pearson **r** can miss curved patterns; inspect the scatter plot.
-- **Outliers driving correlation** — One extreme point can inflate or flip the sign of a correlation.
+- **Treating correlation as causation**: Confounders and reverse causality can produce misleading **r** values.
+- **Linear correlation for nonlinear relationships**: Pearson **r** can miss curved patterns; inspect the scatter plot.
+- **Outliers driving correlation**: One extreme point can inflate or flip the sign of a correlation.
 
 ## Next steps
 

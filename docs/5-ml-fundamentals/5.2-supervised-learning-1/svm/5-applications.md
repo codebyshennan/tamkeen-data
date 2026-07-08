@@ -3,11 +3,11 @@ reading_minutes: 35
 objectives:
   - "Apply SVM to text (linear), small image vectors, medical screening, and credit-risk assessment with appropriate preprocessing."
   - "Choose evaluation metrics (precision, recall, ROC-AUC) that fit each domain's cost asymmetry."
-  - "Address the recurring real-world challenges — missing values, scaling, class imbalance — with a consistent preprocessing recipe."
+  - "Address the recurring real-world challenges, missing values, scaling, class imbalance, with a consistent preprocessing recipe."
 ---
 # Real-World Applications of SVM
 
-**After this lesson:** you can explain the core ideas in “Real-World Applications of SVM” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Real-World Applications of SVM and try the examples in your own notebook.
 
 ## Overview
 
@@ -26,7 +26,7 @@ SVM can be applied to various real-world problems, each requiring different conf
 
 ### Spam Detection System
 
-Let's build a simple spam detector that can classify emails:
+Build a simple spam detector that can classify emails:
 
 #### TF-IDF + linear SVC spam classifier
 
@@ -187,7 +187,7 @@ Confidence: 0.16
 
 ### Simple Image Classifier
 
-Let's create a simple image classifier using SVM:
+Create a simple image classifier using SVM:
 
 #### Synthetic 2D features and RBF SVC for two classes
 
@@ -377,7 +377,7 @@ Confidence: 0.99
 - The RBF kernel works well for image data as it can capture complex, non-linear patterns
 - We include a visualization function to see the decision boundary and support vectors
 - The classifier provides not just a prediction but also confidence scores
-- Feature scaling is crucial for SVM performance, especially with the RBF kernel
+- Feature scaling is important for SVM performance, especially with the RBF kernel
 
 ## 3. Medical Diagnosis
 
@@ -538,7 +538,7 @@ print(f"Recommendation: {diagnosis_result['recommendation']}")
       <span class="code-callout__title">Diagnose Patient</span>
     </div>
     <div class="code-callout__body">
-      <p><code>diagnose_patient</code> scales a new measurement vector, maps the disease probability to a four-level risk band, and flags borderline cases (0.4–0.6) for specialist review.</p>
+      <p><code>diagnose_patient</code> scales a new measurement vector, maps the disease probability to a four-level risk band, and flags borderline cases (0.4-0.6) for specialist review.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="103-110" data-tint="4">
@@ -573,7 +573,7 @@ Recommendation: Refer to specialist
   - ROC-AUC: Measures the model's ability to distinguish between classes
   - Sensitivity: Proportion of actual positives correctly identified (critical for not missing disease cases)
   - Specificity: Proportion of actual negatives correctly identified (important for avoiding unnecessary treatments)
-- Cross-validation is essential in medical applications to ensure the model is robust
+- Cross-validation is essential in medical applications to ensure the model is reliable
 - The <code>class_weight='balanced'</code> parameter helps handle class imbalance (usually fewer sick than healthy patients)
 - The diagnosis function provides not just a binary outcome but also:
   - Risk assessment on a scale
@@ -736,7 +736,7 @@ if risk_assessment['manual_review_required']:
       <span class="code-callout__title">Assess Credit Risk</span>
     </div>
     <div class="code-callout__body">
-      <p><code>assess_credit_risk</code> converts raw applicant data to a risk probability and maps it to five tiers—each tier carries a lending recommendation, interest rate band, and manual-review flag.</p>
+      <p><code>assess_credit_risk</code> converts raw applicant data to a risk probability and maps it to five tiers, each tier carries a lending recommendation, interest rate band, and manual-review flag.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="97-107" data-tint="4">
@@ -987,7 +987,7 @@ scaled_data = compare_scaling_methods(X_unscaled)
       <span class="code-callout__title">Mixed-Scale Data</span>
     </div>
     <div class="code-callout__body">
-      <p>Two features are artificially skewed—one scaled ×1000, the other ×0.1—to exaggerate the scale mismatch that motivates feature normalization before SVM training.</p>
+      <p>Two features are artificially skewed, one scaled ×1000, the other ×0.1, to exaggerate the scale mismatch that motivates feature normalization before SVM training.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="21-50" data-tint="2">
@@ -1038,7 +1038,7 @@ Max: [1. 1.]
 ```
 
 **Explanation:**
-- Feature scaling is crucial for SVM performance as it's sensitive to the scale of input features
+- Feature scaling is important for SVM performance as it's sensitive to the scale of input features
 - Two common scaling methods:
   - StandardScaler: Transforms features to have mean=0 and std=1
   - MinMaxScaler: Scales features to a specific range, typically [0,1]
@@ -1165,9 +1165,9 @@ print(classification_report(y_test, y_pred_smote))
 
 ## Gotchas
 
-- **Using `SVC` with TF-IDF features when `LinearSVC` is orders of magnitude faster** — TF-IDF produces sparse high-dimensional matrices. `SVC(kernel='linear')` densifies the kernel matrix internally (O(n²) in samples), making it impractical for thousands of documents. `LinearSVC` or `SGDClassifier(loss='hinge')` operate directly in the primal on sparse data and can be 100x faster on typical text corpora.
-- **Trusting high accuracy on medical diagnosis examples with tiny training sets** — The medical diagnosis examples in this file use only a handful of labeled patients. SVM (like all models) can overfit severely on small samples; the reported accuracy on a 1-2 patient test set has essentially zero statistical meaning. In real biomedical applications, nested cross-validation and proper power analysis are required before trusting any accuracy figure.
-- **Passing raw pixel arrays to SVM without normalization for image classification** — Pixel values range from 0 to 255. Without normalization, the SVM margin calculation is dominated by absolute pixel intensity differences rather than structural patterns. Always divide by 255.0 (or use `StandardScaler`) before fitting an SVM on pixel features.
-- **Interpreting `class_weight='balanced'` as solving all imbalance problems** — `class_weight='balanced'` adjusts the C penalty per class but does not change the decision threshold. On a 99:1 imbalanced dataset, you may still need to adjust the classification threshold (via `decision_function` scores) or use SMOTE to achieve acceptable recall on the minority class.
-- **Fitting SMOTE outside the cross-validation loop for financial or fraud data** — Applying `SMOTE.fit_resample(X, y)` before splitting into folds leaks synthetic minority samples across fold boundaries. This inflates CV performance estimates by up to 10–15 percentage points on heavily imbalanced datasets. Always use `imblearn.Pipeline` to apply SMOTE inside each CV fold.
-- **Assuming `confusion_matrix` row/column order matches class label order** — `confusion_matrix(y_true, y_pred)` orders rows and columns by sorted unique labels. If your binary labels are `[0, 1]`, row 0 = true negatives/false negatives and row 1 = false positives/true positives. Swapping rows and columns (a common mistake) flips precision and recall, leading to incorrect cost-benefit conclusions in applications like credit scoring.
+- **Using `SVC` with TF-IDF features when `LinearSVC` is orders of magnitude faster**: TF-IDF produces sparse high-dimensional matrices. `SVC(kernel='linear')` densifies the kernel matrix internally (O(n²) in samples), making it impractical for thousands of documents. `LinearSVC` or `SGDClassifier(loss='hinge')` operate directly in the primal on sparse data and can be 100x faster on typical text corpora.
+- **Trusting high accuracy on medical diagnosis examples with tiny training sets**: The medical diagnosis examples in this file use only a handful of labeled patients. SVM (like all models) can overfit severely on small samples; the reported accuracy on a 1-2 patient test set has essentially zero statistical meaning. In real biomedical applications, nested cross-validation and proper power analysis are required before trusting any accuracy figure.
+- **Passing raw pixel arrays to SVM without normalization for image classification**: Pixel values range from 0 to 255. Without normalization, the SVM margin calculation is dominated by absolute pixel intensity differences rather than structural patterns. Always divide by 255.0 (or use `StandardScaler`) before fitting an SVM on pixel features.
+- **Interpreting `class_weight='balanced'` as solving all imbalance problems**: `class_weight='balanced'` adjusts the C penalty per class but does not change the decision threshold. On a 99:1 imbalanced dataset, you may still need to adjust the classification threshold (via `decision_function` scores) or use SMOTE to achieve acceptable recall on the minority class.
+- **Fitting SMOTE outside the cross-validation loop for financial or fraud data**: Applying `SMOTE.fit_resample(X, y)` before splitting into folds leaks synthetic minority samples across fold boundaries. This inflates CV performance estimates by up to 10-15 percentage points on heavily imbalanced datasets. Always use `imblearn.Pipeline` to apply SMOTE inside each CV fold.
+- **Assuming `confusion_matrix` row/column order matches class label order**: `confusion_matrix(y_true, y_pred)` orders rows and columns by sorted unique labels. If your binary labels are `[0, 1]`, row 0 = true negatives/false negatives and row 1 = false positives/true positives. Swapping rows and columns (a common mistake) flips precision and recall, leading to incorrect cost-benefit conclusions in applications like credit scoring.

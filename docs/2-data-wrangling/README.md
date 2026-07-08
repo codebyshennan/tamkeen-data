@@ -4,7 +4,7 @@
 
 ## Overview
 
-Covers the full data preparation cycle — from structured query language through wrangling, EDA, and data engineering fundamentals. Prerequisites: Module 1.
+Covers the full data preparation cycle, from structured query language through wrangling, EDA, and data engineering fundamentals. Prerequisites: Module 1.
 
 ## Lesson Path
 

@@ -3,13 +3,13 @@ reading_minutes: 35
 objectives:
   - Map outcome type and number of groups to a t-test, ANOVA, chi-square, or correlation.
   - Check the assumption set (normality, equal variance, independence, expected counts) before reporting a p-value.
-  - Pair every test statistic with an effect size — Cohen's d, eta-squared, Cramer's V, or r.
+  - Pair every test statistic with an effect size, Cohen's d, eta-squared, Cramer's V, or r.
   - Recognize when to switch to non-parametric or paired alternatives.
 ---
 
 # Statistical Tests: Your Data Analysis Toolkit
 
-**After this lesson:** you can explain the core ideas in “Statistical Tests: Your Data Analysis Toolkit” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Statistical Tests: Your Data Analysis Toolkit and try the examples in your own notebook.
 
 ## Overview
 
@@ -419,7 +419,7 @@ print(result['explanation']){% endhighlight %}
       <span class="code-callout__title">Compare both metrics</span>
     </div>
     <div class="code-callout__body">
-      <p>Call the function twice—once for Pearson, once for Spearman—and print the explanation strings side by side to show how the two measures can give slightly different results.</p>
+      <p>Call the function twice - once for Pearson, once for Spearman - and print the explanation strings side by side to show how the two measures can give slightly different results.</p>
     </div>
   </div>
 </aside>
@@ -447,12 +447,12 @@ Spearman correlation: 0.85, P-value: 0.031. Significant correlation at alpha=0.0
 
 ## Gotchas
 
-- **Using `ttest_ind` for paired data** — if the same subjects are measured twice (before/after, left/right eye), using the independent t-test ignores the within-subject correlation and inflates the p-value. Use `scipy.stats.ttest_rel` for paired designs; the lesson's `ttest_ind` example is only correct when observations in the two groups are genuinely independent.
-- **Running ANOVA and concluding which groups differ** — `f_oneway` only tells you that *at least one* group mean is different; it does not say which pair. Following up with Tukey HSD or Bonferroni-corrected pairwise t-tests is required, and each extra comparison must be reported as part of the multiple-testing burden.
-- **Chi-square test on cells with expected counts below 5** — `chi2_contingency` can return misleading p-values when the expected frequency in any cell is small (< 5). The test's asymptotic approximation breaks down; switch to Fisher's exact test (`scipy.stats.fisher_exact`) for 2×2 tables or aggregate sparse categories before proceeding.
-- **Passing raw category *labels* instead of counts to `chisquare`** — `scipy.stats.chisquare(observed, expected)` expects numeric *frequency arrays*, not category names or raw rows. A common silent error is passing a list of strings or a 2D array when the function expects a 1D count vector.
-- **Conflating Pearson r significance with Pearson r magnitude** — `pearsonr` returns a p-value that is strongly influenced by sample size; with n=1000 even r=0.05 will be "significant" at α=0.05. Always report the correlation coefficient alongside the p-value, and remember that r² (the coefficient of determination) is what tells you how much variance is explained.
-- **Choosing Pearson when the relationship is monotonic but not linear** — if your scatter plot shows a clear but curved pattern, Pearson r will understate the association because it only captures linear relationships. Use Spearman's rank correlation (`spearmanr`) for monotonic relationships, or visualize first with a scatter plot before committing to a method.
+- **Using `ttest_ind` for paired data**: if the same subjects are measured twice (before/after, left/right eye), using the independent t-test ignores the within-subject correlation and inflates the p-value. Use `scipy.stats.ttest_rel` for paired designs; the lesson's `ttest_ind` example is only correct when observations in the two groups are genuinely independent.
+- **Running ANOVA and concluding which groups differ**: `f_oneway` only tells you that *at least one* group mean is different; it does not say which pair. Following up with Tukey HSD or Bonferroni-corrected pairwise t-tests is required, and each extra comparison must be reported as part of the multiple-testing burden.
+- **Chi-square test on cells with expected counts below 5**: `chi2_contingency` can return misleading p-values when the expected frequency in any cell is small (< 5). The test's asymptotic approximation breaks down; switch to Fisher's exact test (`scipy.stats.fisher_exact`) for 2×2 tables or aggregate sparse categories before proceeding.
+- **Passing raw category *labels* instead of counts to `chisquare`** - `scipy.stats.chisquare(observed, expected)` expects numeric *frequency arrays*, not category names or raw rows. A common silent error is passing a list of strings or a 2D array when the function expects a 1D count vector.
+- **Conflating Pearson r significance with Pearson r magnitude**: `pearsonr` returns a p-value that is strongly influenced by sample size; with n=1000 even r=0.05 will be "significant" at α=0.05. Always report the correlation coefficient alongside the p-value, and remember that r² (the coefficient of determination) is what tells you how much variance is explained.
+- **Choosing Pearson when the relationship is monotonic but not linear**: if your scatter plot shows a clear but curved pattern, Pearson r will understate the association because it only captures linear relationships. Use Spearman's rank correlation (`spearmanr`) for monotonic relationships, or visualize first with a scatter plot before committing to a method.
 
 ## Next steps
 
@@ -473,4 +473,4 @@ Spearman correlation: 0.85, P-value: 0.031. Significant correlation at alpha=0.0
 
 ---
 
-Remember: Statistical tests are like tools in a toolbox—choose the right one for your data and question, and always interpret results in context!
+Remember: Statistical tests are like tools in a toolbox - choose the right one for your data and question, and always interpret results in context!

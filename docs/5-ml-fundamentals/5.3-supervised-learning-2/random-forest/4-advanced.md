@@ -3,12 +3,12 @@ reading_minutes: 30
 objectives:
   - "Use `ExtraTreesClassifier` / `ExtraTreesRegressor` and recognise when extra randomization helps over standard random forests."
   - "Handle class imbalance with `class_weight`, `sample_weight`, and resampling strategies (e.g., SMOTE) inside a forest pipeline."
-  - "Plug a random forest into a serving pipeline — estimate model size, run batch inference, and persist with pickle/joblib."
+  - "Plug a random forest into a serving pipeline, estimate model size, run batch inference, and persist with pickle/joblib."
 ---
 
 # Advanced Random Forest Techniques
 
-**After this lesson:** you can explain the core ideas in “Advanced Random Forest Techniques” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Advanced Random Forest Techniques and try the examples in your own notebook.
 
 ## Overview
 
@@ -54,7 +54,7 @@ stacked_model.fit(X_train, y_train)
       <span class="code-callout__title">Three Forest Variants</span>
     </div>
     <div class="code-callout__body">
-      <p>Three <code>RandomForestClassifier</code> instances differ in depth, feature sampling strategy, and leaf size — diversity in the base models is key; similar models won't add information when stacked.</p>
+      <p>Three <code>RandomForestClassifier</code> instances differ in depth, feature sampling strategy, and leaf size, diversity in the base models is key; similar models won't add information when stacked.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="11-21" data-tint="2">
@@ -63,7 +63,7 @@ stacked_model.fit(X_train, y_train)
       <span class="code-callout__title">Stack and Fit</span>
     </div>
     <div class="code-callout__body">
-      <p><code>StackingClassifier</code> generates out-of-fold predictions from each base model with <code>cv=5</code>, then trains <code>LogisticRegression</code> to combine them — a learned ensemble that outperforms majority voting.</p>
+      <p><code>StackingClassifier</code> generates out-of-fold predictions from each base model with <code>cv=5</code>, then trains <code>LogisticRegression</code> to combine them, a learned ensemble that outperforms majority voting.</p>
     </div>
   </div>
 </aside>
@@ -198,7 +198,7 @@ def analyze_permutation_importance(model, X, y):
       <span class="code-callout__title">Permutation Importance</span>
     </div>
     <div class="code-callout__body">
-      <p><code>permutation_importance</code> shuffles each feature 10 times and measures the drop in model score — features that cause a large drop are important; those that don't can be dropped.</p>
+      <p><code>permutation_importance</code> shuffles each feature 10 times and measures the drop in model score, features that cause a large drop are important; those that don't can be dropped.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="13-20" data-tint="2">
@@ -207,7 +207,7 @@ def analyze_permutation_importance(model, X, y):
       <span class="code-callout__title">Importance DataFrame</span>
     </div>
     <div class="code-callout__body">
-      <p>Package mean and std importance into a sorted DataFrame — the std across 10 repeats shows how stable each feature's importance is, helping distinguish truly important features from noisy ones.</p>
+      <p>Package mean and std importance into a sorted DataFrame, the std across 10 repeats shows how stable each feature's importance is, helping distinguish truly important features from noisy ones.</p>
     </div>
   </div>
 </aside>
@@ -440,7 +440,7 @@ class AdvancedRFEvaluator:
       <span class="code-callout__title">Stability Score</span>
     </div>
     <div class="code-callout__body">
-      <p>The model is refit on 10 bootstrap samples; the standard deviation of importances across runs captures how consistently each feature is ranked, converted to a 0–1 stability score.</p>
+      <p>The model is refit on 10 bootstrap samples; the standard deviation of importances across runs captures how consistently each feature is ranked, converted to a 0-1 stability score.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="26-57" data-tint="3">
@@ -542,7 +542,7 @@ def analyze_shap_values(model, X):
       <span class="code-callout__title">TreeExplainer</span>
     </div>
     <div class="code-callout__body">
-      <p><code>shap.TreeExplainer</code> uses a tree-path algorithm to compute exact SHAP values efficiently for tree-based models — much faster than the model-agnostic kernel SHAP approach.</p>
+      <p><code>shap.TreeExplainer</code> uses a tree-path algorithm to compute exact SHAP values efficiently for tree-based models, much faster than the model-agnostic kernel SHAP approach.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-17" data-tint="2">
@@ -551,7 +551,7 @@ def analyze_shap_values(model, X):
       <span class="code-callout__title">Summary Plot</span>
     </div>
     <div class="code-callout__body">
-      <p><code>shap.summary_plot</code> shows a beeswarm of SHAP values per feature — each point is one sample, color encodes feature value, and x-position shows the impact on model output.</p>
+      <p><code>shap.summary_plot</code> shows a beeswarm of SHAP values per feature, each point is one sample, color encodes feature value, and x-position shows the impact on model output.</p>
     </div>
   </div>
 </aside>
@@ -695,12 +695,12 @@ class OnlineRandomForest:
 
 ## Gotchas
 
-- **`StackingClassifier` leaks if base models are trained on the full training set** — sklearn's `StackingClassifier` uses `cv` to generate out-of-fold predictions for the meta-learner by default; manually fitting base models on the whole training set and then stacking them allows the meta-learner to see training predictions, inflating performance estimates.
-- **Permutation importance can be misleading when features are correlated** — shuffling one correlated feature still leaves its information accessible through the correlated partner, so both features will look less important than they truly are; prefer partial dependence plots for correlated settings.
-- **The `DynamicFeatureSelector` refits on a subset without re-tuning hyperparameters** — after dropping low-importance features and refitting, the original `max_depth` or `n_estimators` may no longer be optimal for the reduced feature set; the two-pass approach needs its own hyperparameter validation.
-- **`OnlineRandomForest.partial_fit` loses all historical data on each buffer flush** — the implementation retrains from scratch on the current buffer window only, discarding older examples; this is not true online learning but windowed batch retraining, which can cause catastrophic forgetting on drifting data.
-- **SHAP's `TreeExplainer` returns a list of arrays for multi-class classifiers** — `shap_values` is a list of length `n_classes`, not a single 2D array; passing the raw return value to `shap.summary_plot` for a binary classifier will work, but for multi-class you must index into the list (e.g., `shap_values[1]` for class 1).
-- **`partial_dependence` with `kind='average'` averages over the marginal distribution of other features** — this can produce unrealistic feature combinations (e.g., a very high income with a very low credit score) that the model was never trained on, leading to extrapolated PDP curves that don't reflect real-world behaviour.
+- **`StackingClassifier` leaks if base models are trained on the full training set**: sklearn's `StackingClassifier` uses `cv` to generate out-of-fold predictions for the meta-learner by default; manually fitting base models on the whole training set and then stacking them allows the meta-learner to see training predictions, inflating performance estimates.
+- **Permutation importance can be misleading when features are correlated**: shuffling one correlated feature still leaves its information accessible through the correlated partner, so both features will look less important than they truly are; prefer partial dependence plots for correlated settings.
+- **The `DynamicFeatureSelector` refits on a subset without re-tuning hyperparameters**: after dropping low-importance features and refitting, the original `max_depth` or `n_estimators` may no longer be optimal for the reduced feature set; the two-pass approach needs its own hyperparameter validation.
+- **`OnlineRandomForest.partial_fit` loses all historical data on each buffer flush**: the implementation retrains from scratch on the current buffer window only, discarding older examples; this is not true online learning but windowed batch retraining, which can cause catastrophic forgetting on drifting data.
+- **SHAP's `TreeExplainer` returns a list of arrays for multi-class classifiers**: `shap_values` is a list of length `n_classes`, not a single 2D array; passing the raw return value to `shap.summary_plot` for a binary classifier will work, but for multi-class you must index into the list (e.g., `shap_values[1]` for class 1).
+- **`partial_dependence` with `kind='average'` averages over the marginal distribution of other features**: this can produce unrealistic feature combinations (e.g., a very high income with a very low credit score) that the model was never trained on, leading to extrapolated PDP curves that don't reflect real-world behaviour.
 
 ## Next Steps
 

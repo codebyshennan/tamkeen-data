@@ -18,7 +18,7 @@ High-level introduction to SQL and relational databases.
 
 ![SQL query execution order: FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT](assets/query_execution_order.png)
 
-Reports and dashboards almost never show raw rows—they show **counts**, **sums**, **averages**, and **breakdowns by group**. `GROUP BY` and `HAVING` are how you express “per region,” “per month,” or “top ten” directly in SQL instead of exporting everything to a spreadsheet.
+Reports and dashboards almost never show raw rows, they show **counts**, **sums**, **averages**, and **breakdowns by group**. `GROUP BY` and `HAVING` are how you express "per region," "per month," or "top ten" directly in SQL instead of exporting everything to a spreadsheet.
 
 ## Understanding Aggregations
 
@@ -39,18 +39,18 @@ Aggregations in SQL transform detailed data into meaningful summaries. Think of 
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight sql %}
       -- Different COUNT variations
-      SELECT 
+      SELECT
           COUNT(*) as total_rows,           -- All rows
           COUNT(1) as also_total_rows,      -- Same as COUNT(*)
           COUNT(column) as non_null_values,  -- Excludes NULL
           COUNT(DISTINCT column) as unique_values
       FROM table;
-      
+
       -- Example: Customer order analysis
-      SELECT 
+      SELECT
           customer_id,
           COUNT(*) as total_orders,
           COUNT(DISTINCT product_id) as unique_products,
@@ -66,7 +66,7 @@ Aggregations in SQL transform detailed data into meaningful summaries. Think of 
          <span class="code-callout__title">COUNT variations</span>
        </div>
        <div class="code-callout__body">
-         <p><code>COUNT(*)</code> and <code>COUNT(1)</code> count every row including NULLs. <code>COUNT(column)</code> skips NULLs. <code>COUNT(DISTINCT column)</code> counts unique non-null values — useful for unique buyer counts.</p>
+         <p><code>COUNT(*)</code> and <code>COUNT(1)</code> count every row including NULLs. <code>COUNT(column)</code> skips NULLs. <code>COUNT(DISTINCT column)</code> counts unique non-null values, useful for unique buyer counts.</p>
        </div>
      </div>
      <div class="code-callout" data-lines="8-16" data-tint="2">
@@ -87,22 +87,22 @@ Aggregations in SQL transform detailed data into meaningful summaries. Think of 
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight sql %}
       -- Sales Analysis
-      SELECT 
+      SELECT
           category,
           SUM(amount) as total_sales,
           SUM(amount) FILTER (WHERE status = 'completed') as completed_sales,
-          SUM(CASE 
-              WHEN status = 'completed' THEN amount 
-              ELSE 0 
+          SUM(CASE
+              WHEN status = 'completed' THEN amount
+              ELSE 0
           END) as another_way_completed_sales
       FROM sales
       GROUP BY category;
-      
+
       -- Running totals
-      SELECT 
+      SELECT
           order_date,
           amount,
           SUM(amount) OVER (
@@ -119,7 +119,7 @@ Aggregations in SQL transform detailed data into meaningful summaries. Think of 
          <span class="code-callout__title">Grouped sales totals</span>
        </div>
        <div class="code-callout__body">
-         <p><code>SUM(amount)</code> totals all sales per category. <code>FILTER (WHERE status = 'completed')</code> is a modern alternative to a <code>CASE</code> expression—it restricts the aggregate to completed rows only while keeping the full row set for the outer group.</p>
+         <p><code>SUM(amount)</code> totals all sales per category. <code>FILTER (WHERE status = 'completed')</code> is a modern alternative to a <code>CASE</code> expression, it restricts the aggregate to completed rows only while keeping the full row set for the outer group.</p>
        </div>
      </div>
      <div class="code-callout" data-lines="12-21" data-tint="2">
@@ -128,7 +128,7 @@ Aggregations in SQL transform detailed data into meaningful summaries. Think of 
          <span class="code-callout__title">Running total with window frame</span>
        </div>
        <div class="code-callout__body">
-         <p><code>SUM(amount) OVER (ORDER BY order_date ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)</code> keeps every row in the result and adds a cumulative total column—unlike <code>GROUP BY</code>, which would collapse rows.</p>
+         <p><code>SUM(amount) OVER (ORDER BY order_date ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)</code> keeps every row in the result and adds a cumulative total column, unlike <code>GROUP BY</code>, which would collapse rows.</p>
        </div>
      </div>
    </aside>
@@ -140,10 +140,10 @@ Aggregations in SQL transform detailed data into meaningful summaries. Think of 
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight sql %}
       -- Price Analysis with Standard Error
-      SELECT 
+      SELECT
           category,
           COUNT(*) as product_count,
           AVG(price) as mean_price,
@@ -152,9 +152,9 @@ Aggregations in SQL transform detailed data into meaningful summaries. Think of 
           AVG(price) + (STDDEV(price) / SQRT(COUNT(*)) * 1.96) as ci_upper
       FROM products
       GROUP BY category;
-      
+
       -- Moving averages
-      SELECT 
+      SELECT
           sale_date,
           amount,
           AVG(amount) OVER (
@@ -192,10 +192,10 @@ Aggregations in SQL transform detailed data into meaningful summaries. Think of 
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight sql %}
       -- Price Range Analysis
-      SELECT 
+      SELECT
           category,
           MIN(price) as min_price,
           MAX(price) as max_price,
@@ -206,9 +206,9 @@ Aggregations in SQL transform detailed data into meaningful summaries. Think of 
           ) as price_spread_percentage
       FROM products
       GROUP BY category;
-      
+
       -- First/Last values
-      SELECT 
+      SELECT
           customer_id,
           MIN(order_date) as first_order,
           MAX(order_date) as last_order,
@@ -224,7 +224,7 @@ Aggregations in SQL transform detailed data into meaningful summaries. Think of 
          <span class="code-callout__title">Price range and spread per category</span>
        </div>
        <div class="code-callout__body">
-         <p><code>MAX - MIN</code> is the raw price range. Dividing by <code>AVG</code> (guarded with <code>NULLIF</code> to avoid division by zero) gives the coefficient of variation as a percentage—useful for comparing price dispersion across categories of different scales.</p>
+         <p><code>MAX - MIN</code> is the raw price range. Dividing by <code>AVG</code> (guarded with <code>NULLIF</code> to avoid division by zero) gives the coefficient of variation as a percentage, useful for comparing price dispersion across categories of different scales.</p>
        </div>
      </div>
      <div class="code-callout" data-lines="13-21" data-tint="2">
@@ -233,7 +233,7 @@ Aggregations in SQL transform detailed data into meaningful summaries. Think of 
          <span class="code-callout__title">Customer lifespan via first and last order</span>
        </div>
        <div class="code-callout__body">
-         <p><code>MIN(order_date)</code> and <code>MAX(order_date)</code> return the first and most-recent order per customer. Subtracting them yields the customer lifespan as an interval—a simple retention signal before cohort analysis.</p>
+         <p><code>MIN(order_date)</code> and <code>MAX(order_date)</code> return the first and most-recent order per customer. Subtracting them yields the customer lifespan as an interval, a simple retention signal before cohort analysis.</p>
        </div>
      </div>
    </aside>
@@ -253,7 +253,7 @@ Window functions perform calculations across a set of table rows related to the 
 
 {% highlight sql %}
 -- Employee salary analysis by department
-SELECT 
+SELECT
     employee_name,
     department,
     salary,
@@ -264,7 +264,7 @@ SELECT
     ROW_NUMBER() OVER (PARTITION BY department ORDER BY salary DESC) as row_num,
     NTILE(4) OVER (PARTITION BY department ORDER BY salary) as salary_quartile,
     FIRST_VALUE(salary) OVER (
-        PARTITION BY department 
+        PARTITION BY department
         ORDER BY salary DESC
         ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
     ) as highest_salary_in_dept,
@@ -272,20 +272,20 @@ SELECT
 FROM employees;
 
 -- Running totals with different frame specifications
-SELECT 
+SELECT
     sale_date,
     amount,
     -- Running total (default frame)
     SUM(amount) OVER (ORDER BY sale_date) as running_total,
     -- Previous 7 days total
     SUM(amount) OVER (
-        ORDER BY sale_date 
+        ORDER BY sale_date
         ROWS BETWEEN 6 PRECEDING AND CURRENT ROW
     ) as rolling_7day_total,
     -- Previous month to next month
     SUM(amount) OVER (
-        ORDER BY sale_date 
-        RANGE BETWEEN INTERVAL '1' MONTH PRECEDING 
+        ORDER BY sale_date
+        RANGE BETWEEN INTERVAL '1' MONTH PRECEDING
         AND INTERVAL '1' MONTH FOLLOWING
     ) as three_month_window
 FROM sales;
@@ -316,7 +316,7 @@ FROM sales;
       <span class="code-callout__title">Running and rolling window totals</span>
     </div>
     <div class="code-callout__body">
-      <p>Three frame specifications on the same column: a cumulative running total (default frame), a 7-row rolling window (<code>ROWS BETWEEN 6 PRECEDING AND CURRENT ROW</code>), and a calendar-based 3-month window using <code>RANGE BETWEEN INTERVAL</code>—showing how frame type controls which rows contribute.</p>
+      <p>Three frame specifications on the same column: a cumulative running total (default frame), a 7-row rolling window (<code>ROWS BETWEEN 6 PRECEDING AND CURRENT ROW</code>), and a calendar-based 3-month window using <code>RANGE BETWEEN INTERVAL</code>-showing how frame type controls which rows contribute.</p>
     </div>
   </div>
 </aside>
@@ -332,7 +332,7 @@ FROM sales;
 -- HAVING filters groups after grouping
 
 -- Example: Find departments with high-performing sales teams
-SELECT 
+SELECT
     department,
     COUNT(*) as employee_count,
     AVG(sales) as avg_sales,
@@ -340,12 +340,12 @@ SELECT
 FROM employees
 WHERE status = 'active'  -- Filter individual employees first
 GROUP BY department
-HAVING 
+HAVING
     COUNT(*) >= 5 AND  -- Only departments with 5+ employees
     AVG(sales) > 50000;  -- And above-average sales
 
 -- Common mistake: Using WHERE for aggregate conditions
-SELECT 
+SELECT
     product_category,
     COUNT(*) as product_count,
     AVG(price) as avg_price
@@ -354,7 +354,7 @@ WHERE AVG(price) > 100  -- Wrong! Will cause error
 GROUP BY product_category;
 
 -- Correct version
-SELECT 
+SELECT
     product_category,
     COUNT(*) as product_count,
     AVG(price) as avg_price
@@ -370,7 +370,7 @@ HAVING AVG(price) > 100;  -- Correct! Filters after aggregation
       <span class="code-callout__title">Correct: WHERE then HAVING</span>
     </div>
     <div class="code-callout__body">
-      <p><strong>WHERE status = 'active'</strong> filters individual rows before grouping—only active employees enter the aggregate. <strong>HAVING</strong> then filters the grouped result: departments need 5+ employees and above-average sales to appear.</p>
+      <p><strong>WHERE status = 'active'</strong> filters individual rows before grouping, only active employees enter the aggregate. <strong>HAVING</strong> then filters the grouped result: departments need 5+ employees and above-average sales to appear.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="13-21" data-tint="2">
@@ -379,7 +379,7 @@ HAVING AVG(price) > 100;  -- Correct! Filters after aggregation
       <span class="code-callout__title">Wrong: aggregate in WHERE clause</span>
     </div>
     <div class="code-callout__body">
-      <p><code>WHERE AVG(price) &gt; 100</code> causes an error because aggregates are not allowed in a <strong>WHERE</strong> clause—the engine hasn't grouped yet at that point in execution.</p>
+      <p><code>WHERE AVG(price) &gt; 100</code> causes an error because aggregates are not allowed in a <strong>WHERE</strong> clause, the engine hasn't grouped yet at that point in execution.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="23-33" data-tint="3">
@@ -388,7 +388,7 @@ HAVING AVG(price) > 100;  -- Correct! Filters after aggregation
       <span class="code-callout__title">Correct fix: move aggregate to HAVING</span>
     </div>
     <div class="code-callout__body">
-      <p>The corrected version removes the <code>WHERE AVG</code> and replaces it with <code>HAVING AVG(price) &gt; 100</code>—which runs after grouping and can reference aggregate results.</p>
+      <p>The corrected version removes the <code>WHERE AVG</code> and replaces it with <code>HAVING AVG(price) &gt; 100</code>-which runs after grouping and can reference aggregate results.</p>
     </div>
   </div>
 </aside>
@@ -401,7 +401,7 @@ HAVING AVG(price) > 100;  -- Correct! Filters after aggregation
 
 {% highlight sql %}
 -- GROUP BY: Reduces rows, one row per group
-SELECT 
+SELECT
     department,
     COUNT(*) as employee_count,
     AVG(salary) as avg_salary
@@ -409,7 +409,7 @@ FROM employees
 GROUP BY department;
 
 -- PARTITION BY: Maintains rows, adds aggregate values
-SELECT 
+SELECT
     department,
     employee_name,
     salary,
@@ -419,14 +419,14 @@ FROM employees;
 
 -- Combined usage example
 WITH dept_stats AS (
-    SELECT 
+    SELECT
         department,
         COUNT(*) as employee_count,
         AVG(salary) as avg_salary
     FROM employees
     GROUP BY department
 )
-SELECT 
+SELECT
     e.department,
     e.employee_name,
     e.salary,
@@ -443,7 +443,7 @@ JOIN dept_stats ds ON e.department = ds.department;
       <span class="code-callout__title">GROUP BY collapses to one row per group</span>
     </div>
     <div class="code-callout__body">
-      <p><strong>GROUP BY department</strong> reduces the result to one row per department. Individual employee rows are gone—only the aggregated count and average survive in the output.</p>
+      <p><strong>GROUP BY department</strong> reduces the result to one row per department. Individual employee rows are gone, only the aggregated count and average survive in the output.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="10-22" data-tint="2">
@@ -461,7 +461,7 @@ JOIN dept_stats ds ON e.department = ds.department;
       <span class="code-callout__title">Combining GROUP BY and PARTITION BY with a CTE</span>
     </div>
     <div class="code-callout__body">
-      <p>The CTE uses <code>GROUP BY</code> to produce one summary row per department. The outer query joins back to the original <code>employees</code> table and adds a <code>RANK()</code> window to rank each employee within their department—combining both techniques.</p>
+      <p>The CTE uses <code>GROUP BY</code> to produce one summary row per department. The outer query joins back to the original <code>employees</code> table and adds a <code>RANK()</code> window to rank each employee within their department, combining both techniques.</p>
     </div>
   </div>
 </aside>
@@ -479,7 +479,7 @@ JOIN dept_stats ds ON e.department = ds.department;
 SELECT AVG(salary) FROM employees;  -- Might be misleading
 
 -- Good: Explicit NULL handling
-SELECT 
+SELECT
     COUNT(*) as total_employees,
     COUNT(salary) as employees_with_salary,
     COUNT(*) - COUNT(salary) as employees_missing_salary,
@@ -495,7 +495,7 @@ FROM employees;
       <span class="code-callout__title">Misleading AVG when salary has NULLs</span>
     </div>
     <div class="code-callout__body">
-      <p><code>AVG(salary)</code> automatically ignores <code>NULL</code> rows, so the result is the average of employees who <em>have</em> a salary on record—not of all employees. If many salaries are missing, the figure can be significantly inflated.</p>
+      <p><code>AVG(salary)</code> automatically ignores <code>NULL</code> rows, so the result is the average of employees who <em>have</em> a salary on record, not of all employees. If many salaries are missing, the figure can be significantly inflated.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="5-11" data-tint="2">
@@ -504,7 +504,7 @@ FROM employees;
       <span class="code-callout__title">Explicit NULL awareness</span>
     </div>
     <div class="code-callout__body">
-      <p><code>COUNT(*) - COUNT(salary)</code> surfaces the count of missing salaries. <code>AVG(COALESCE(salary, 0))</code> treats NULLs as zero—useful for payroll totals. Both figures together let you understand the gap and choose the right interpretation.</p>
+      <p><code>COUNT(*) - COUNT(salary)</code> surfaces the count of missing salaries. <code>AVG(COALESCE(salary, 0))</code> treats NULLs as zero, useful for payroll totals. Both figures together let you understand the gap and choose the right interpretation.</p>
     </div>
   </div>
 </aside>
@@ -517,9 +517,9 @@ FROM employees;
 
 {% highlight sql %}
 -- Bad: Unnecessary subquery
-SELECT 
+SELECT
     department,
-    (SELECT AVG(salary) FROM employees e2 
+    (SELECT AVG(salary) FROM employees e2
      WHERE e2.department = e1.department) as avg_salary
 FROM employees e1
 GROUP BY department;
@@ -538,7 +538,7 @@ FROM employees;
       <span class="code-callout__title">Slow: correlated subquery per group</span>
     </div>
     <div class="code-callout__body">
-      <p>The correlated subquery inside <code>SELECT</code> reruns <code>AVG(salary)</code> once per department row—<em>N</em> extra scans for <em>N</em> departments. Combined with <code>GROUP BY</code> this is redundant work.</p>
+      <p>The correlated subquery inside <code>SELECT</code> reruns <code>AVG(salary)</code> once per department row-<em>N</em> extra scans for <em>N</em> departments. Combined with <code>GROUP BY</code> this is redundant work.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-13" data-tint="2">
@@ -547,7 +547,7 @@ FROM employees;
       <span class="code-callout__title">Fast: window function in a single pass</span>
     </div>
     <div class="code-callout__body">
-      <p><code>AVG(salary) OVER (PARTITION BY department)</code> computes department averages in one pass. <code>SELECT DISTINCT</code> collapses duplicate rows so the result is still one row per department—faster and no subquery.</p>
+      <p><code>AVG(salary) OVER (PARTITION BY department)</code> computes department averages in one pass. <code>SELECT DISTINCT</code> collapses duplicate rows so the result is still one row per department, faster and no subquery.</p>
     </div>
   </div>
 </aside>
@@ -560,7 +560,7 @@ FROM employees;
 
 {% highlight sql %}
 -- Bad: Inconsistent decimal places
-SELECT 
+SELECT
     department,
     AVG(salary) as avg_salary,
     SUM(salary) as total_salary
@@ -568,7 +568,7 @@ FROM employees
 GROUP BY department;
 
 -- Good: Consistent decimal handling
-SELECT 
+SELECT
     department,
     ROUND(AVG(salary)::numeric, 2) as avg_salary,
     ROUND(SUM(salary)::numeric, 2) as total_salary
@@ -583,7 +583,7 @@ GROUP BY department;
       <span class="code-callout__title">Inconsistent output precision</span>
     </div>
     <div class="code-callout__body">
-      <p>Without explicit rounding, <code>AVG</code> and <code>SUM</code> return floating-point values whose precision varies by engine and column type—output like <code>75.333333...</code> looks unprofessional in reports.</p>
+      <p>Without explicit rounding, <code>AVG</code> and <code>SUM</code> return floating-point values whose precision varies by engine and column type, output like <code>75.333333...</code> looks unprofessional in reports.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-15" data-tint="2">
@@ -592,7 +592,7 @@ GROUP BY department;
       <span class="code-callout__title">Consistent 2-decimal-place output</span>
     </div>
     <div class="code-callout__body">
-      <p><code>ROUND(expr::numeric, 2)</code> casts to <code>NUMERIC</code> first (required in PostgreSQL for <code>ROUND</code> to accept a precision argument) then rounds to 2 decimal places—giving clean, consistent output for both average and total salary.</p>
+      <p><code>ROUND(expr::numeric, 2)</code> casts to <code>NUMERIC</code> first (required in PostgreSQL for <code>ROUND</code> to accept a precision argument) then rounds to 2 decimal places, giving clean, consistent output for both average and total salary.</p>
     </div>
   </div>
 </aside>
@@ -606,7 +606,7 @@ GROUP BY department;
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight sql %}
       -- Calculate monthly sales metrics
       -- Include: total sales, average order value, order count
@@ -633,7 +633,7 @@ GROUP BY department;
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight sql %}
       -- For each order:
       -- Calculate running total sales for the customer
@@ -661,7 +661,7 @@ GROUP BY department;
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight sql %}
       -- Create a sales summary with:
       -- Daily, weekly, monthly totals
@@ -689,7 +689,7 @@ GROUP BY department;
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight sql %}
       -- Customer cohort analysis
       -- Product affinity analysis
@@ -728,10 +728,10 @@ GROUP BY department;
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight sql %}
       -- Product price variation analysis
-      SELECT 
+      SELECT
           category,
           COUNT(*) as product_count,
           ROUND(AVG(price)::numeric, 2) as avg_price,
@@ -752,7 +752,7 @@ GROUP BY department;
          <span class="code-callout__title">Standard deviation and coefficient of variation</span>
        </div>
        <div class="code-callout__body">
-         <p><code>STDDEV(price)</code> measures absolute price spread. Dividing by <code>AVG</code> (guarded with <code>NULLIF</code>) and multiplying by 100 gives the coefficient of variation—a relative measure useful for comparing spread across categories at very different price levels. <strong>HAVING COUNT(*) >= 5</strong> excludes categories with too few products for meaningful statistics.</p>
+         <p><code>STDDEV(price)</code> measures absolute price spread. Dividing by <code>AVG</code> (guarded with <code>NULLIF</code>) and multiplying by 100 gives the coefficient of variation, a relative measure useful for comparing spread across categories at very different price levels. <strong>HAVING COUNT(*) >= 5</strong> excludes categories with too few products for meaningful statistics.</p>
        </div>
      </div>
    </aside>
@@ -764,10 +764,10 @@ GROUP BY department;
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight sql %}
       -- Price distribution by category
-      SELECT 
+      SELECT
           category,
           PERCENTILE_CONT(0.25) WITHIN GROUP (ORDER BY price) as p25,
           PERCENTILE_CONT(0.50) WITHIN GROUP (ORDER BY price) as median,
@@ -776,9 +776,9 @@ GROUP BY department;
           PERCENTILE_CONT(0.25) WITHIN GROUP (ORDER BY price) as iqr
       FROM products
       GROUP BY category;
-      
+
       -- Customer spending percentiles
-      SELECT 
+      SELECT
           ROUND(
               PERCENTILE_CONT(0.25) WITHIN GROUP (
                   ORDER BY total_spent
@@ -798,7 +798,7 @@ GROUP BY department;
               2
           ) as p75_spending
       FROM (
-          SELECT 
+          SELECT
               customer_id,
               SUM(amount) as total_spent
           FROM orders
@@ -813,7 +813,7 @@ GROUP BY department;
          <span class="code-callout__title">IQR per category</span>
        </div>
        <div class="code-callout__body">
-         <p><code>PERCENTILE_CONT(0.25/0.50/0.75) WITHIN GROUP (ORDER BY price)</code> computes exact percentiles using linear interpolation. Subtracting P25 from P75 gives the interquartile range (IQR)—a robust spread measure that ignores extreme prices at each end.</p>
+         <p><code>PERCENTILE_CONT(0.25/0.50/0.75) WITHIN GROUP (ORDER BY price)</code> computes exact percentiles using linear interpolation. Subtracting P25 from P75 gives the interquartile range (IQR), a reliable spread measure that ignores extreme prices at each end.</p>
        </div>
      </div>
      <div class="code-callout" data-lines="14-38" data-tint="2">
@@ -822,7 +822,7 @@ GROUP BY department;
          <span class="code-callout__title">Customer spending percentiles via subquery</span>
        </div>
        <div class="code-callout__body">
-         <p>The inline subquery aggregates total spend per customer first. The outer <code>SELECT</code> then calls <code>PERCENTILE_CONT</code> on those totals to find P25, median, and P75 spending thresholds across all customers—useful for defining low/mid/high spender tiers.</p>
+         <p>The inline subquery aggregates total spend per customer first. The outer <code>SELECT</code> then calls <code>PERCENTILE_CONT</code> on those totals to find P25, median, and P75 spending thresholds across all customers, useful for defining low/mid/high spender tiers.</p>
        </div>
      </div>
    </aside>
@@ -840,7 +840,7 @@ GROUP BY department;
 
 {% highlight sql %}
 WITH customer_metrics AS (
-    SELECT 
+    SELECT
         c.customer_id,
         COUNT(*) as order_count,
         SUM(o.total_amount) as total_spent,
@@ -848,17 +848,17 @@ WITH customer_metrics AS (
         MAX(o.order_date) as last_order_date,
         MIN(o.order_date) as first_order_date,
         COUNT(DISTINCT DATE_TRUNC('month', o.order_date)) as active_months,
-        SUM(o.total_amount) / 
+        SUM(o.total_amount) /
         NULLIF(COUNT(DISTINCT DATE_TRUNC('month', o.order_date)), 0) as avg_monthly_spend
     FROM customers c
     LEFT JOIN orders o ON c.customer_id = o.customer_id
     GROUP BY c.customer_id
 ),
 customer_segments AS (
-    SELECT 
+    SELECT
         *,
         NTILE(4) OVER (ORDER BY total_spent DESC) as spend_quartile,
-        CASE 
+        CASE
             WHEN last_order_date >= CURRENT_DATE - INTERVAL '30 days' THEN 'Active'
             WHEN last_order_date >= CURRENT_DATE - INTERVAL '90 days' THEN 'At Risk'
             WHEN last_order_date >= CURRENT_DATE - INTERVAL '180 days' THEN 'Churned'
@@ -866,7 +866,7 @@ customer_segments AS (
         END as recency_segment
     FROM customer_metrics
 )
-SELECT 
+SELECT
     recency_segment,
     spend_quartile,
     COUNT(*) as customer_count,
@@ -877,7 +877,7 @@ SELECT
     ROUND(AVG(avg_monthly_spend)::numeric, 2) as avg_monthly_spend
 FROM customer_segments
 GROUP BY recency_segment, spend_quartile
-ORDER BY 
+ORDER BY
     CASE recency_segment
         WHEN 'Active' THEN 1
         WHEN 'At Risk' THEN 2
@@ -925,7 +925,7 @@ ORDER BY
 
 {% highlight sql %}
 WITH product_metrics AS (
-    SELECT 
+    SELECT
         p.product_id,
         p.product_name,
         p.category,
@@ -941,7 +941,7 @@ WITH product_metrics AS (
     GROUP BY p.product_id, p.product_name, p.category
 ),
 product_rankings AS (
-    SELECT 
+    SELECT
         *,
         RANK() OVER (PARTITION BY category ORDER BY revenue DESC) as category_rank,
         PERCENT_RANK() OVER (ORDER BY revenue) as overall_percentile,
@@ -950,7 +950,7 @@ product_rankings AS (
         unique_customers / NULLIF(order_count, 0) as customer_order_ratio
     FROM product_metrics
 )
-SELECT 
+SELECT
     category,
     product_name,
     order_count,
@@ -959,14 +959,14 @@ SELECT
     ROUND(avg_selling_price::numeric, 2) as avg_price,
     unique_customers,
     category_rank,
-    CASE 
+    CASE
         WHEN category_rank = 1 THEN 'Category Best Seller'
         WHEN category_rank <= 3 THEN 'Category Top 3'
         WHEN overall_percentile >= 0.75 THEN 'Top 25%'
         ELSE 'Standard Performer'
     END as performance_tier
 FROM product_rankings
-ORDER BY 
+ORDER BY
     category,
     revenue DESC;
 {% endhighlight %}
@@ -1009,7 +1009,7 @@ ORDER BY
 
 {% highlight sql %}
 WITH daily_sales AS (
-    SELECT 
+    SELECT
         DATE_TRUNC('day', order_date) as sale_date,
         COUNT(*) as num_orders,
         COUNT(DISTINCT customer_id) as unique_customers,
@@ -1020,7 +1020,7 @@ WITH daily_sales AS (
     GROUP BY DATE_TRUNC('day', order_date)
 ),
 sales_stats AS (
-    SELECT 
+    SELECT
         sale_date,
         num_orders,
         unique_customers,
@@ -1037,7 +1037,7 @@ sales_stats AS (
         ) as moving_30day_median
     FROM daily_sales
 )
-SELECT 
+SELECT
     sale_date,
     num_orders,
     unique_customers,
@@ -1049,7 +1049,7 @@ SELECT
     ) as daily_growth_pct,
     ROUND(moving_7day_avg::numeric, 2) as moving_7day_avg,
     ROUND(moving_30day_median::numeric, 2) as moving_30day_median,
-    CASE 
+    CASE
         WHEN revenue > moving_30day_median * 1.5 THEN 'Exceptional Day'
         WHEN revenue > moving_30day_median * 1.2 THEN 'Strong Day'
         WHEN revenue < moving_30day_median * 0.8 THEN 'Weak Day'
@@ -1075,7 +1075,7 @@ ORDER BY sale_date DESC;
       <span class="code-callout__title">CTE 2: prior-day comparison and rolling averages</span>
     </div>
     <div class="code-callout__body">
-      <p><code>sales_stats</code> adds <code>LAG</code> for day-over-day comparison, a 7-day rolling <code>AVG</code>, and a 30-day rolling <code>PERCENTILE_CONT(0.5)</code> median—all as window functions over <code>daily_sales</code>.</p>
+      <p><code>sales_stats</code> adds <code>LAG</code> for day-over-day comparison, a 7-day rolling <code>AVG</code>, and a 30-day rolling <code>PERCENTILE_CONT(0.5)</code> median, all as window functions over <code>daily_sales</code>.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="30-49" data-tint="3">
@@ -1084,7 +1084,7 @@ ORDER BY sale_date DESC;
       <span class="code-callout__title">Outer query: daily performance report</span>
     </div>
     <div class="code-callout__body">
-      <p>Formats all columns with <code>ROUND</code> for clean output. A <code>CASE</code> expression compares revenue to the 30-day rolling median to classify each day as Exceptional, Strong, Weak, or Normal—giving an at-a-glance performance label.</p>
+      <p>Formats all columns with <code>ROUND</code> for clean output. A <code>CASE</code> expression compares revenue to the 30-day rolling median to classify each day as Exceptional, Strong, Weak, or Normal, giving an at-a-glance performance label.</p>
     </div>
   </div>
 </aside>
@@ -1094,6 +1094,6 @@ Remember: "Good aggregations tell a story about your data!"
 
 ## Next steps
 
-- [Advanced SQL concepts](advanced-concepts.md) — deeper window analytics and CTEs
-- [SQL project](project.md) — end-to-end practice brief
-- [Module README](README.md) — assignments and slides
+- [Advanced SQL concepts](advanced-concepts.md), deeper window analytics and CTEs
+- [SQL project](project.md), end-to-end practice brief
+- [Module README](README.md), assignments and slides

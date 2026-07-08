@@ -4,7 +4,7 @@
 
 **Mandatory** • 6 questions • Covers Machine Learning fundamentals.
 
-Try each question closed-book first. Click **Show hint** if you get stuck — hints point you at the relevant lesson section and how to think about it, without naming the answer.
+Try each question closed-book first. Click **Show hint** if you get stuck, hints point you at the relevant lesson section and how to think about it, without naming the answer.
 
 ---
 
@@ -18,8 +18,8 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Intro to ML](../5.1-intro-ml/README.md) — what ML is.
-- **Think:** Three options make absolute claims that are false on their face ("only web", "no data", "always faster"). The remaining option draws the textbook contrast — **rules written by humans** vs **patterns learned from data**.
+- **Where:** [Intro to ML](../5.1-intro-ml/README.md), what ML is.
+- **Think:** Three options make absolute claims that are false on their face ("only web", "no data", "always faster"). The remaining option draws the textbook contrast, **rules written by humans** vs **patterns learned from data**.
 
 </details>
 
@@ -33,7 +33,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Intro to ML](../5.1-intro-ml/README.md) — ML categories.
+- **Where:** [Intro to ML](../5.1-intro-ml/README.md), ML categories.
 - **Think:** The three classic ML categories all describe what kind of **feedback signal** the model gets (labels, no labels, rewards). One option uses a word that describes **randomness**, not a learning paradigm.
 
 </details>
@@ -48,7 +48,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [ML workflow](../5.1-intro-ml/README.md) — the ML pipeline.
+- **Where:** [ML workflow](../5.1-intro-ml/README.md), the ML pipeline.
 - **Think:** Read each option literally. Preprocessing cleans data, evaluation measures performance, tuning adjusts knobs. The one whose name **literally** describes "picking which model/algorithm" wins.
 
 </details>
@@ -64,7 +64,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <summary>Show hint</summary>
 
 - **Where:** [Feature engineering](../5.1-intro-ml/README.md).
-- **Think:** Standard feature engineering taxonomies group features by **data type** — text, categories, time. One option names a **domain** (geography), which is usually treated as a special case of one of the other types rather than its own category.
+- **Think:** Standard feature engineering taxonomies group features by **data type**, text, categories, time. One option names a **domain** (geography), which is usually treated as a special case of one of the other types rather than its own category.
 
 </details>
 
@@ -79,7 +79,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <summary>Show hint</summary>
 
 - **Where:** [Supervised vs unsupervised](../5.1-intro-ml/README.md).
-- **Think:** Supervised learning needs **labels**. *Clustering* groups data **without** labels. One option's name literally contains the word "clustering" — that's the giveaway.
+- **Think:** Supervised learning needs **labels**. *Clustering* groups data **without** labels. One option's name literally contains the word "clustering", that's the giveaway.
 
 </details>
 
@@ -93,7 +93,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Classification algorithms](../5.1-intro-ml/README.md) — KNN.
+- **Where:** [Classification algorithms](../5.1-intro-ml/README.md), KNN.
 - **Think:** The question literally says "the k closest examples". One option's name contains both the letter **k** and the words **nearest neighbors**.
 
 </details>

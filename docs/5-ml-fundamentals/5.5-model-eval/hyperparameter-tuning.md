@@ -2,14 +2,14 @@
 reading_minutes: 28
 objectives:
   - "Distinguish **parameters** (learned from data) from **hyperparameters** (set before training) and list the load-bearing ones for common algorithms."
-  - "Run `GridSearchCV`, `RandomizedSearchCV`, and Bayesian optimisation (e.g., scikit-optimize, Optuna) — and pick between them based on search-space size and compute budget."
+  - "Run `GridSearchCV`, `RandomizedSearchCV`, and Bayesian optimisation (e.g., scikit-optimize, Optuna), and pick between them based on search-space size and compute budget."
   - "Always wrap preprocessing + model in a `Pipeline` so the search refits transformers per fold without leaking validation data; use `step__param` keys."
   - "Avoid the common traps: tuning on the test set, optimising the wrong scoring metric, and reporting tuned CV scores as final test scores instead of held-out."
 ---
 
 # Hyperparameter Tuning
 
-**After this lesson:** you can explain the core ideas in “Hyperparameter Tuning” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Hyperparameter Tuning and try the examples in your own notebook.
 
 ## Overview
 
@@ -24,7 +24,7 @@ Hyperparameter tuning is the process of finding the optimal set of hyperparamete
 
 ## Why Hyperparameter Tuning Matters
 
-Hyperparameter tuning is crucial for several reasons:
+Hyperparameter tuning is important for several reasons:
 
 1. **Improves model performance**: Proper tuning can significantly boost accuracy, precision, recall, and other metrics
 2. **Prevents overfitting**: Well-tuned regularization parameters help models generalize better
@@ -185,7 +185,7 @@ print(f"Test set accuracy: {test_score:.4f}")
       <span class="code-callout__title">Data and Imports</span>
     </div>
     <div class="code-callout__body">
-      <p>Generate a 1000-sample classification problem and hold 20% back as the final test set — this test set is touched only once after the search finishes.</p>
+      <p>Generate a 1000-sample classification problem and hold 20% back as the final test set, this test set is touched only once after the search finishes.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="12-18" data-tint="2">
@@ -194,7 +194,7 @@ print(f"Test set accuracy: {test_score:.4f}")
       <span class="code-callout__title">Parameter Grid</span>
     </div>
     <div class="code-callout__body">
-      <p>Four hyperparameters with 3–4 values each — 108 total combinations that <code>GridSearchCV</code> will evaluate exhaustively.</p>
+      <p>Four hyperparameters with 3-4 values each, 108 total combinations that <code>GridSearchCV</code> will evaluate exhaustively.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="20-30" data-tint="3">
@@ -308,7 +308,7 @@ print(f"Test set accuracy: {test_score:.4f}")
       <span class="code-callout__title">Continuous Distributions</span>
     </div>
     <div class="code-callout__body">
-      <p>Instead of discrete grids, use scipy distributions — <code>randint</code> for integers and <code>uniform</code> for floats — to sample a richer parameter space with the same budget.</p>
+      <p>Instead of discrete grids, use scipy distributions, <code>randint</code> for integers and <code>uniform</code> for floats, to sample a richer parameter space with the same budget.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="14-25" data-tint="2">
@@ -659,7 +659,7 @@ with open('best_params.txt', 'w') as f:
 ### 1. Overfitting to Validation Set
 **Problem**: Repeatedly tuning on the same validation set can lead to overfitting.
 
-**Solution**: 
+**Solution**:
 - Use nested cross-validation for unbiased estimates because the outer folds evaluate the full tuning process, not one chosen model.
 - Hold out a separate test set that is never used for tuning so the final score remains a true final estimate.
 - Limit the number of hyperparameter combinations tested when using one validation set; every extra trial is another chance to fit validation noise.
@@ -849,12 +849,12 @@ Remember that hyperparameter tuning is just one part of the machine learning pip
 
 ## Gotchas
 
-- **Evaluating on the test set during tuning** — Running `best_estimator_.score(X_test, y_test)` after every trial and picking the highest-scoring trial effectively makes the test set a validation set; reserve the test set for a single final report after all tuning is done.
-- **Best CV score higher than test score is expected, not a bug** — Cross-validation optimistically inflates scores slightly because the search selects the best-scoring configuration; a small drop on the true held-out test is normal and not a sign of leakage.
-- **Grid boundaries that contain the optimum** — If the best parameter is at the edge of your grid (e.g., `max_depth=30` when you searched `[10, 20, 30]`), the true optimum likely lies outside the range; always inspect `best_params_` and extend ranges that hit boundaries.
-- **Forgetting `random_state` in `RandomizedSearchCV`** — Without a fixed seed, re-running the search yields different best parameters each time, making results non-reproducible; always pass `random_state=42` (or any fixed integer) when you need stable comparisons.
-- **Fitting preprocessing outside the search object** — Calling `scaler.fit_transform(X_train)` before passing data to `GridSearchCV` leaks validation-fold statistics into training; wrap the scaler in a `Pipeline` so it re-fits on each CV training fold independently.
-- **Combinatorial explosion with grid search** — Three hyperparameters with 5 values each and 5-fold CV already requires 375 model fits; adding a fourth 5-value parameter multiplies that to 1875 fits; use `RandomizedSearchCV` or Bayesian optimization once the grid exceeds ~100 combinations.
+- **Evaluating on the test set during tuning**: Running `best_estimator_.score(X_test, y_test)` after every trial and picking the highest-scoring trial effectively makes the test set a validation set; reserve the test set for a single final report after all tuning is done.
+- **Best CV score higher than test score is expected, not a bug**: Cross-validation optimistically inflates scores slightly because the search selects the best-scoring configuration; a small drop on the true held-out test is normal and not a sign of leakage.
+- **Grid boundaries that contain the optimum**: If the best parameter is at the edge of your grid (e.g., `max_depth=30` when you searched `[10, 20, 30]`), the true optimum likely lies outside the range; always inspect `best_params_` and extend ranges that hit boundaries.
+- **Forgetting `random_state` in `RandomizedSearchCV`**: Without a fixed seed, re-running the search yields different best parameters each time, making results non-reproducible; always pass `random_state=42` (or any fixed integer) when you need stable comparisons.
+- **Fitting preprocessing outside the search object**: Calling `scaler.fit_transform(X_train)` before passing data to `GridSearchCV` leaks validation-fold statistics into training; wrap the scaler in a `Pipeline` so it re-fits on each CV training fold independently.
+- **Combinatorial explosion with grid search**: Three hyperparameters with 5 values each and 5-fold CV already requires 375 model fits; adding a fourth 5-value parameter multiplies that to 1875 fits; use `RandomizedSearchCV` or Bayesian optimization once the grid exceeds ~100 combinations.
 
 ## Additional Resources
 

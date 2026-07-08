@@ -1,16 +1,16 @@
 # Matplotlib Troubleshooting Guide
 
-**After this lesson:** you can explain the core ideas in “Matplotlib Troubleshooting Guide” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Matplotlib Troubleshooting Guide and try the examples in your own notebook.
 
 Use this page when code runs but plots look wrong, fail to display, or raise backend errors. Pair it with [Matplotlib basics](matplotlib-basics.md) for API context.
 
-> **Tip:** Most “nothing shows” issues in notebooks are fixed with **inline mode** and **plt.show()** (see below).
+> **Tip:** Most "nothing shows" issues in notebooks are fixed with **inline mode** and **plt.show()** (see below).
 
 ## Helpful video
 
 Fixing one of the most common matplotlib pain points: controlling figure size and layout.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/UUy6_ElQXBY" title="Matplotlib Tips: Figure Size — Kimberly Fessel" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/UUy6_ElQXBY" title="Matplotlib Tips: Figure Size, Kimberly Fessel" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Common Issues and Solutions
 
@@ -92,7 +92,7 @@ Think of this as arranging pictures on a wall:
 fig, (ax1, ax2) = plt.subplots(2, 1)
 
 #  Solution: Add spacing - like adding space between pictures
-fig, (ax1, ax2) = plt.subplots(2, 1, 
+fig, (ax1, ax2) = plt.subplots(2, 1,
                               height_ratios=[1, 1],
                               gridspec_kw={'hspace': 0.3})
 ```
@@ -162,7 +162,7 @@ def handle_missing(data):
       <span class="code-callout__title">Problem Setup</span>
     </div>
     <div class="code-callout__body">
-      <p>A list with a <code>np.nan</code> in position 3—plotting this directly breaks line continuity.</p>
+      <p>A list with a <code>np.nan</code> in position 3, plotting this directly breaks line continuity.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="4-5" data-tint="2">
@@ -171,7 +171,7 @@ def handle_missing(data):
       <span class="code-callout__title">Filter Approach</span>
     </div>
     <div class="code-callout__body">
-      <p>List comprehension drops NaN values entirely—fast but loses the original index positions.</p>
+      <p>List comprehension drops NaN values entirely, fast but loses the original index positions.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="7-17" data-tint="3">
@@ -190,7 +190,7 @@ def handle_missing(data):
 
 Think of this as trying to compare very different things:
 
-**Purpose:** Plot series with very different magnitudes without misleading the reader—either twin axes or normalized units.
+**Purpose:** Plot series with very different magnitudes without misleading the reader, either twin axes or normalized units.
 
 **Walkthrough:** `twinx()` shares x but draws a second y-axis; normalization maps each series to [0, 1] for overlay comparison.
 
@@ -229,7 +229,7 @@ def normalize(data):
       <span class="code-callout__title">Mismatched Scales</span>
     </div>
     <div class="code-callout__body">
-      <p><code>y2</code> is 1000× larger than <code>y1</code>—on a single axis, <code>y1</code> would appear flat against the bottom.</p>
+      <p><code>y2</code> is 1000× larger than <code>y1</code>-on a single axis, <code>y1</code> would appear flat against the bottom.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="6-10" data-tint="2">
@@ -899,7 +899,7 @@ def plot_with_cleanup(data):
       <span class="code-callout__title">Memory Leak Pattern</span>
     </div>
     <div class="code-callout__body">
-      <p>Each loop iteration creates a figure object but never closes it—100 figures accumulate in memory.</p>
+      <p>Each loop iteration creates a figure object but never closes it, 100 figures accumulate in memory.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="7-15" data-tint="2">
@@ -961,7 +961,7 @@ def plot_large_dataset(x, y, max_points=10_000):
       <span class="code-callout__title">Large Dataset</span>
     </div>
     <div class="code-callout__body">
-      <p>One million random points—rendering all of them makes the scatter slow and the output visually saturated.</p>
+      <p>One million random points, rendering all of them makes the scatter slow and the output visually saturated.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="5-15" data-tint="2">
@@ -993,13 +993,13 @@ Think of this as trying to use a font that's not installed:
 
 **Purpose:** Set a preferred font while falling back to a generic family if the name is unavailable on the system.
 
-**Walkthrough:** `rcParams['font.family']` applies globally; wrapping in try/except is illustrative—production code often uses `font_manager` to list available fonts.
+**Walkthrough:** `rcParams['font.family']` applies globally; wrapping in try/except is illustrative, production code often uses `font_manager` to list available fonts.
 
 ```python
 #  Problem: Font not found - like trying to use a font you don't have
 plt.rcParams['font.family'] = 'NonExistentFont'
 
-#  Solution: Robust font handling - like having backup fonts
+#  Solution: reliable font handling - like having backup fonts
 def set_font_safely():
     """Set fonts with fallbacks"""
     try:
@@ -1127,7 +1127,7 @@ def print_plot_info():
       <span class="code-callout__title">Figure Properties</span>
     </div>
     <div class="code-callout__body">
-      <p>The dict collects size, DPI, axis limits, and child artist count—useful for diagnosing layout or clipping issues.</p>
+      <p>The dict collects size, DPI, axis limits, and child artist count, useful for diagnosing layout or clipping issues.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="14-18" data-tint="3">
@@ -1253,7 +1253,7 @@ def setup_professional_plot():
       <span class="code-callout__title">Style Application</span>
     </div>
     <div class="code-callout__body">
-      <p><code>plt.style.use('seaborn-v0_8-whitegrid')</code> applies a complete pre-built theme—clean backgrounds, muted palette, and subtle grid.</p>
+      <p><code>plt.style.use('seaborn-v0_8-whitegrid')</code> applies a complete pre-built theme, clean backgrounds, muted palette, and subtle grid.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="5-6" data-tint="2">
@@ -1312,12 +1312,12 @@ Remember: The best way to learn is by doing. Start with simple plots and gradual
 
 ## Gotchas
 
-- **`matplotlib.use('Agg')` must be called before any `import matplotlib.pyplot` statement** — once `pyplot` is imported, the backend is locked for the session; calling `matplotlib.use(...)` afterwards raises a warning and has no effect; if you cannot guarantee import order, restart the kernel and add the backend call to the very top of your script.
-- **`plt.close('all')` inside a `finally` block will also close figures you opened intentionally before the loop** — if you have a figure already displayed in a notebook and then run a loop with `plt.close('all')` in the cleanup, the previously open figure disappears silently; use `plt.close(fig)` to close only the specific figure you created in that iteration.
-- **`plt.tight_layout()` and `constrained_layout=True` cannot be used simultaneously** — enabling both will trigger a warning and constrained layout will be ignored; pick one: pass `layout='constrained'` to `plt.subplots()` for automatic spacing, or call `plt.tight_layout()` manually after plotting.
-- **`twinx()` creates a second y-axis that does not appear in `ax.legend()`** — the twin axis is a separate `Axes` object, so its lines only appear in `ax2.legend()`, not in `ax1.legend()`; to combine legends from both axes, collect handles and labels from both and pass them to one `legend()` call: `ax1.legend(*[a + b for a, b in zip(ax1.get_legend_handles_labels(), ax2.get_legend_handles_labels())])`.
-- **`np.interp` interpolation for missing data changes the shape of your chart** — filling NaN gaps with linearly interpolated values makes the line look continuous and smooth, but those values are invented; if the gap represents genuinely missing observations (e.g. a sensor outage), interpolating hides the gap and may mislead viewers into thinking data was collected continuously.
-- **`rcParams` changes are global and persist for the entire session** — calling `plt.rcParams['font.size'] = 12` inside a setup function affects every subsequent figure, including those created in other cells or functions; reset to defaults with `plt.rcdefaults()` or scope your changes using `plt.rc_context({'font.size': 12})` as a context manager.
+- **`matplotlib.use('Agg')` must be called before any `import matplotlib.pyplot` statement**: once `pyplot` is imported, the backend is locked for the session; calling `matplotlib.use(...)` afterwards raises a warning and has no effect; if you cannot guarantee import order, restart the kernel and add the backend call to the very top of your script.
+- **`plt.close('all')` inside a `finally` block will also close figures you opened intentionally before the loop**: if you have a figure already displayed in a notebook and then run a loop with `plt.close('all')` in the cleanup, the previously open figure disappears silently; use `plt.close(fig)` to close only the specific figure you created in that iteration.
+- **`plt.tight_layout()` and `constrained_layout=True` cannot be used simultaneously**: enabling both will trigger a warning and constrained layout will be ignored; pick one: pass `layout='constrained'` to `plt.subplots()` for automatic spacing, or call `plt.tight_layout()` manually after plotting.
+- **`twinx()` creates a second y-axis that does not appear in `ax.legend()`**: the twin axis is a separate `Axes` object, so its lines only appear in `ax2.legend()`, not in `ax1.legend()`; to combine legends from both axes, collect handles and labels from both and pass them to one `legend()` call: `ax1.legend(*[a + b for a, b in zip(ax1.get_legend_handles_labels(), ax2.get_legend_handles_labels())])`.
+- **`np.interp` interpolation for missing data changes the shape of your chart**: filling NaN gaps with linearly interpolated values makes the line look continuous and smooth, but those values are invented; if the gap represents genuinely missing observations (e.g. a sensor outage), interpolating hides the gap and may mislead viewers into thinking data was collected continuously.
+- **`rcParams` changes are global and persist for the entire session**: calling `plt.rcParams['font.size'] = 12` inside a setup function affects every subsequent figure, including those created in other cells or functions; reset to defaults with `plt.rcdefaults()` or scope your changes using `plt.rc_context({'font.size': 12})` as a context manager.
 
 ## Additional Resources
 

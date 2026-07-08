@@ -63,7 +63,7 @@ For each, decide **before** looking at any output whether you will use a one-sid
 
 - For Dataset 3 (paired data), run `scipy.stats.ttest_rel(before, after)` and print the result.
 - Build a summary table (as a printed DataFrame or formatted print statements) showing for all three tests: test name, test statistic, p-value, and your conclusion at α = 0.05.
-- Write a short comment (2–4 sentences) explaining why you used a different test for each dataset, connecting your choice to the type of data and study design.
+- Write a short comment (2-4 sentences) explaining why you used a different test for each dataset, connecting your choice to the type of data and study design.
 
 ## Deliverable
 
@@ -80,14 +80,14 @@ Submit your solution as a Python script with:
 <summary>Show hints</summary>
 
 ### Task 1: Formulating hypotheses
-- **Where:** [Hypothesis Formulation](../hypothesis-formulation.md) — "The Anatomy of a Hypothesis".
-- **Think:** The null always represents "no difference" or "no association." The alternative should reflect the specific research question — is there a directional expectation (one-sided) or just "any difference" (two-sided)?
-- **One vs two-sided:** [Hypothesis Formulation](../hypothesis-formulation.md) — "The Three Pillars of Good Hypotheses".
+- **Where:** [Hypothesis Formulation](../hypothesis-formulation.md), "The Anatomy of a Hypothesis".
+- **Think:** The null always represents "no difference" or "no association." The alternative should reflect the specific research question, is there a directional expectation (one-sided) or just "any difference" (two-sided)?
+- **One vs two-sided:** [Hypothesis Formulation](../hypothesis-formulation.md), "The Three Pillars of Good Hypotheses".
 
 ### Task 2: Two-sample t-test
-- **Where:** [Statistical Tests](../statistical-tests.md) — "T-Tests: Comparing Means".
+- **Where:** [Statistical Tests](../statistical-tests.md), "T-Tests: Comparing Means".
 - **Think:**
-  - `ttest_ind` assumes the two groups are independent — confirm that assumption holds for Dataset 1.
+  - `ttest_ind` assumes the two groups are independent, confirm that assumption holds for Dataset 1.
   - The function returns `(statistic, pvalue)`. Unpack both: `t_stat, p_val = stats.ttest_ind(...)`.
   - Compare `p_val` to your chosen α; write the conclusion before checking whether it aligns with intuition.
 - **Starter:**
@@ -101,7 +101,7 @@ t = -6.376, p = 0.0000
 ```
 
 ### Task 3: Chi-squared test
-- **Where:** [Statistical Tests](../statistical-tests.md) — "Chi-Square Tests: Testing for Independence".
+- **Where:** [Statistical Tests](../statistical-tests.md), "Chi-Square Tests: Testing for Independence".
 - **Think:**
   - `chi2_contingency` returns `(chi2, p, dof, expected)`. Capture all four values.
   - Print the `expected` array and check that every cell is ≥ 5; if not, Fisher's exact test would be more appropriate.
@@ -121,14 +121,14 @@ Expected frequencies:
 ```
 
 ### Task 4: Paired t-test and summary
-- **Where:** [Statistical Tests](../statistical-tests.md) — "T-Tests: Comparing Means" (paired variant) and [Experimental Design](../experimental-design.md) — "The Three Pillars of Experimental Design".
+- **Where:** [Statistical Tests](../statistical-tests.md), "T-Tests: Comparing Means" (paired variant) and [Experimental Design](../experimental-design.md), "The Three Pillars of Experimental Design".
 - **Think:**
   - `ttest_rel` is used when the same subjects are measured twice; the test operates on the differences `before - after`.
   - For the summary table, consider using a list of dicts fed into `pd.DataFrame(...)` so the table is tidy.
   - Test selection logic: independent continuous → `ttest_ind`; counts in categories → `chi2_contingency`; paired continuous → `ttest_rel`.
 
 ### Common pitfalls
-- Writing hypotheses after looking at results ("HARKing" — Hypothesizing After Results are Known) inflates Type I error.
+- Writing hypotheses after looking at results ("HARKing", Hypothesizing After Results are Known) inflates Type I error.
 - Using `ttest_ind` on the before/after data would ignore the pairing and lose statistical power.
 - Forgetting to check the expected-frequency assumption for chi-squared can produce unreliable p-values with small cell counts.
 - The two-sided p-value from `ttest_ind` should not be halved to get a one-sided p-value unless you pre-committed to a directional hypothesis before data collection.

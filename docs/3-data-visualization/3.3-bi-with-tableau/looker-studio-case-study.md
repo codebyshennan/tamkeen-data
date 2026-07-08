@@ -1,8 +1,8 @@
 # Learning Looker Studio Through a Real Example: SuperStore Analysis
 
-You have monthly sales data sitting in a Google Sheet. Your manager wants a live dashboard they can filter by region and date — by tomorrow. Here is how to build one in 30 minutes with zero code, using Google's free Looker Studio tool.
+You have monthly sales data sitting in a Google Sheet. Your manager wants a live dashboard they can filter by region and date, by tomorrow. Here is how to build one in 30 minutes with zero code, using Google's free Looker Studio tool.
 
-**After this lesson:** you can explain the core ideas in “Learning Looker Studio Through a Real Example: SuperStore Analysis” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Learning Looker Studio Through a Real Example: SuperStore Analysis and try the examples in your own notebook.
 
 > **Note:** This tutorial is **UI-first** (Looker Studio in the browser). You need a Google account and permission to connect a Google Sheet or similar source.
 
@@ -14,7 +14,7 @@ Watch the official [Google Looker Studio Getting Started guide](https://lookerst
 
 ## Key Terms
 
-Before diving in, get familiar with these words — you will see them throughout the interface.
+Before diving in, get familiar with these words, you will see them throughout the interface.
 
 | Term | Definition | Example |
 |------|-----------|---------|
@@ -101,7 +101,7 @@ We'll utilize the "Sample - Superstore" dataset adapted for Looker Studio. This 
 
 ### Data Structure Overview
 
-The dataset consists of four primary tables. The **Orders** table is the heart of the data — it records every transaction (~9,000 rows over 4 years) including the sale amount, profit, shipping mode, and the dates an order was placed and shipped. The **Products** table tells you what was sold, organising ~1,500 products into 3 categories (Furniture, Technology, Office Supplies) and 17 sub-categories. The **Customers** table tells you who bought it: each customer belongs to one of 3 segments (Consumer, Corporate, Home Office) and maps to one of 4 US regions. Finally, the **Returns** table is optional but useful — it flags the roughly 10% of orders that were returned, which you can blend in to calculate a clean "net sales" figure.
+The dataset consists of four primary tables. The **Orders** table is the heart of the data, it records every transaction (~9,000 rows over 4 years) including the sale amount, profit, shipping mode, and the dates an order was placed and shipped. The **Products** table tells you what was sold, organising ~1,500 products into 3 categories (Furniture, Technology, Office Supplies) and 17 sub-categories. The **Customers** table tells you who bought it: each customer belongs to one of 3 segments (Consumer, Corporate, Home Office) and maps to one of 4 US regions. Finally, the **Returns** table is optional but useful, it flags the roughly 10% of orders that were returned, which you can blend in to calculate a clean "net sales" figure.
 
 <!-- TODO: replace with a distinct screenshot showing the data source field configuration panel -->
 
@@ -175,7 +175,7 @@ The dataset consists of four primary tables. The **Orders** table is the heart o
 
 <!-- TODO: screenshot of the completed multi-chart dashboard canvas including a date range control and filter dropdown -->
 
-> **Try it:** Add a Date Range control to your dashboard (Insert > Date range control). Click the control in View mode and change the date window. Which charts update — and which do not? This is a good way to spot which charts share the same data source.
+> **Try it:** Add a Date Range control to your dashboard (Insert > Date range control). Click the control in View mode and change the date window. Which charts update, and which do not? This is a good way to spot which charts share the same data source.
 
 ---
 
@@ -379,7 +379,7 @@ END
 
 ```sql
 -- Example of a complex blend
-SELECT 
+SELECT
   o.OrderID,
   o.Sales,
   p.Category,
@@ -449,7 +449,7 @@ LEFT JOIN Returns r ON o.OrderID = r.OrderID
    - Responsive layouts
    - Mobile optimization
 
-<!-- TODO: screenshot demonstrating cross-filter in action — clicking a bar in one chart highlighting related data in another chart on the same page -->
+<!-- TODO: screenshot demonstrating cross-filter in action, clicking a bar in one chart highlighting related data in another chart on the same page -->
 
 
 ## Collaboration and Sharing
@@ -548,10 +548,10 @@ LEFT JOIN Returns r ON o.OrderID = r.OrderID
 
 Common problems and their fixes:
 
-- **Chart is blank** — check that both a Dimension and a Metric are assigned in the Data tab of the Properties panel. A chart with only a Dimension (and no Metric) has nothing to draw.
-- **Date filter not working** — the date range control and the chart must be connected to the same data source. If they differ, the control has no effect on that chart.
-- **"No data" error after blending** — check that the join keys (e.g. `Order ID`) exist in both sources and use exactly the same spelling and data type. A trailing space or mixed case will break the match.
-- **Numbers look wrong** — open the chart's Data tab and click the Metric field. Check the aggregation type: `SUM` totals all rows, `AVG` averages them, and `COUNT` counts rows. Switching from `SUM` to `AVG` on a Revenue field will give a very different (and usually incorrect) result.
+- **Chart is blank**: check that both a Dimension and a Metric are assigned in the Data tab of the Properties panel. A chart with only a Dimension (and no Metric) has nothing to draw.
+- **Date filter not working**: the date range control and the chart must be connected to the same data source. If they differ, the control has no effect on that chart.
+- **"No data" error after blending**: check that the join keys (e.g. `Order ID`) exist in both sources and use exactly the same spelling and data type. A trailing space or mixed case will break the match.
+- **Numbers look wrong**: open the chart's Data tab and click the Metric field. Check the aggregation type: `SUM` totals all rows, `AVG` averages them, and `COUNT` counts rows. Switching from `SUM` to `AVG` on a Revenue field will give a very different (and usually incorrect) result.
 
 ## Next Steps
 
@@ -566,10 +566,10 @@ Common problems and their fixes:
 
 ## Gotchas
 
-- **Data blending in Looker Studio is a left join by default and silently drops unmatched rows** — when you blend a Google Sheet with a BigQuery source, only rows where the join key matches both sources appear in the chart. Missing rows produce no warning. Always verify row counts before and after blending with a scorecard showing record count.
-- **Calculated fields that use `SUM()` are evaluated per-row before aggregation unless you explicitly aggregate** — `Profit / Sales` computes a ratio at row level and then Looker Studio averages those ratios, which is different from `SUM(Profit) / SUM(Sales)`. Use the latter form for accurate margin or rate calculations.
-- **Date range controls only filter charts that are connected to the same data source** — if your dashboard blends two sources, a date control wired to source A won't filter charts backed by source B. You need a separate date control for each distinct source, or reconfigure blending so both charts share one source.
-- **`@parameter` syntax for parameter references is only valid inside calculated fields, not in native filter widgets** — learners often try to write a filter condition using a parameter name directly in the filter dialog and get no result. Parameters must be consumed inside a `CASE` or conditional calculated field, which then drives the chart or filter.
-- **Scheduled email reports always send the cached snapshot, not a live query** — if your data refreshes every hour but your scheduled report runs at 6 AM, recipients get whatever the cache held at 6 AM, which may be hours stale. Set the data source refresh schedule to run just before the report time.
+- **Data blending in Looker Studio is a left join by default and silently drops unmatched rows**: when you blend a Google Sheet with a BigQuery source, only rows where the join key matches both sources appear in the chart. Missing rows produce no warning. Always verify row counts before and after blending with a scorecard showing record count.
+- **Calculated fields that use `SUM()` are evaluated per-row before aggregation unless you explicitly aggregate**: `Profit / Sales` computes a ratio at row level and then Looker Studio averages those ratios, which is different from `SUM(Profit) / SUM(Sales)`. Use the latter form for accurate margin or rate calculations.
+- **Date range controls only filter charts that are connected to the same data source**: if your dashboard blends two sources, a date control wired to source A won't filter charts backed by source B. You need a separate date control for each distinct source, or reconfigure blending so both charts share one source.
+- **`@parameter` syntax for parameter references is only valid inside calculated fields, not in native filter widgets**: learners often try to write a filter condition using a parameter name directly in the filter dialog and get no result. Parameters must be consumed inside a `CASE` or conditional calculated field, which then drives the chart or filter.
+- **Scheduled email reports always send the cached snapshot, not a live query**: if your data refreshes every hour but your scheduled report runs at 6 AM, recipients get whatever the cache held at 6 AM, which may be hours stale. Set the data source refresh schedule to run just before the report time.
 
 Remember: Practice makes perfect! Try recreating these visualizations and experiment with different options to build your Looker Studio skills.

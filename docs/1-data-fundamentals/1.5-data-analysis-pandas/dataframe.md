@@ -1,6 +1,6 @@
 # Understanding DataFrames
 
-**After this lesson:** you can explain the core ideas in “Understanding DataFrames” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Understanding DataFrames and try the examples in your own notebook.
 
 ### Video
 
@@ -8,7 +8,7 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/zmdjNSmRXF4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*Corey Schafer — Python pandas tutorial (part 2): DataFrame and Series basics*
+*Corey Schafer, Python pandas tutorial (part 2): DataFrame and Series basics*
 
 ## Overview
 
@@ -39,7 +39,7 @@ Real-world applications:
 
 ### Creating Your First DataFrame
 
-Let's explore different ways to create a DataFrame:
+we will look at different ways to create a DataFrame:
 
 **Build from dict, list of dicts, and ndarray**
 
@@ -74,7 +74,7 @@ print(transactions)
 
 # 3. From a NumPy array
 array_data = np.random.rand(3, 2)  # 3 rows, 2 columns of random numbers
-df_array = pd.DataFrame(array_data, 
+df_array = pd.DataFrame(array_data,
                        columns=['Value 1', 'Value 2'],
                        index=['Row 1', 'Row 2', 'Row 3'])
 print("\nFrom NumPy Array:")
@@ -94,10 +94,10 @@ RangeIndex: 3 entries, 0 to 2
 Data columns (total 4 columns):
  #   Column  Non-Null Count  Dtype
 ---  ------  --------------  -----
- 0   Name    3 non-null      str  
+ 0   Name    3 non-null      str
  1   Age     3 non-null      int64
  2   Grade   3 non-null      int64
- 3   Pass    3 non-null      bool 
+ 3   Pass    3 non-null      bool
 dtypes: bool(1), int64(2), str(1)
 memory usage: 207.0 bytes
 None
@@ -161,7 +161,7 @@ Pandas provides several ways to peek at your data:
 
 **Head, info, describe**
 
-- **Purpose:** Standard EDA trio—preview rows, schema/missing counts, and numeric summaries.
+- **Purpose:** Standard EDA trio, preview rows, schema/missing counts, and numeric summaries.
 - **Walkthrough:** `head(2)`, `info()`, `describe()` (numeric columns by default).
 
 ```python
@@ -190,10 +190,10 @@ RangeIndex: 3 entries, 0 to 2
 Data columns (total 4 columns):
  #   Column  Non-Null Count  Dtype
 ---  ------  --------------  -----
- 0   Name    3 non-null      str  
+ 0   Name    3 non-null      str
  1   Age     3 non-null      int64
  2   Grade   3 non-null      int64
- 3   Pass    3 non-null      bool 
+ 3   Pass    3 non-null      bool
 dtypes: bool(1), int64(2), str(1)
 memory usage: 207.0 bytes
 None
@@ -222,7 +222,7 @@ You can access columns in two ways:
 **Bracket vs dot, and multi-column selection**
 
 - **Purpose:** Select one column as a Series (`df['Name']`), use dot syntax when the name is a valid identifier, and pass a **list** for a sub-DataFrame.
-- **Walkthrough:** `df[['Name', 'Grade']]` keeps two columns—note the double brackets.
+- **Walkthrough:** `df[['Name', 'Grade']]` keeps two columns, note the double brackets.
 
 ```python
 # Get the 'Name' column
@@ -377,7 +377,7 @@ Real-world data often has missing values (shown as `NaN` in Pandas):
 
 **DataFrame with `None` / NaN cells**
 
-- **Purpose:** See missing values in a table—not just a Series—and how pandas displays them as `NaN`.
+- **Purpose:** See missing values in a table, not just a Series, and how pandas displays them as `NaN`.
 - **Walkthrough:** `None` in `Age`/`Grade` becomes float NaN in the printed frame.
 
 ```python
@@ -406,7 +406,7 @@ Pandas provides several ways to handle missing data:
 **Column-wise counts, dropna, fillna**
 
 - **Purpose:** Quantify missingness per column, optionally drop incomplete rows, or impute a constant.
-- **Walkthrough:** `isna().sum()` aggregates booleans; `dropna()` removes any row with a NaN; `fillna(0)` is a blunt default—use domain-appropriate fills in practice.
+- **Walkthrough:** `isna().sum()` aggregates booleans; `dropna()` removes any row with a NaN; `fillna(0)` is a blunt default, use domain-appropriate fills in practice.
 
 ```python
 # Check for missing values

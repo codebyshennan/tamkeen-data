@@ -4,7 +4,7 @@
 
 ## Helpful video
 
-Pandas DataFrames in a quick walkthrough—useful for cleaning and wrangling.
+Pandas DataFrames in a quick walkthrough, useful for cleaning and wrangling.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/m1_33jhhiLE" title="Learn PANDAS in 5 minutes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -16,7 +16,7 @@ Pandas DataFrames in a quick walkthrough—useful for cleaning and wrangling.
 
 ## Why this matters
 
-A single bad sensor reading or mistyped value can dominate means, distort plots, and mislead models. The goal is not always to delete extremes—sometimes the rare point *is* the insight—so you need **detection** plus a **decision** (keep, cap, investigate, or remove) tied to your question.
+A single bad sensor reading or mistyped value can dominate means, distort plots, and mislead models. The goal is not always to delete extremes, sometimes the rare point *is* the insight, so you need **detection** plus a **decision** (keep, cap, investigate, or remove) tied to your question.
 
 Outliers are observations that deviate significantly from the general pattern of a dataset. While they can sometimes represent errors, they may also contain valuable information about unusual but important phenomena.
 
@@ -54,11 +54,11 @@ Outliers can be classified into several types, each requiring different detectio
 def detect_outliers_zscore(data, threshold=3):
     """
     Detect outliers using Z-score method
-    
+
     Parameters:
     data (array-like): Input data
     threshold (float): Z-score threshold (default=3)
-    
+
     Returns:
     array: Boolean mask of outliers
     """
@@ -107,21 +107,21 @@ def detect_outliers_zscore(data, threshold=3):
 def detect_outliers_iqr(data, k=1.5):
     """
     Detect outliers using Interquartile Range method
-    
+
     Parameters:
     data (array-like): Input data
     k (float): IQR multiplier (default=1.5)
-    
+
     Returns:
     array: Boolean mask of outliers
     """
     Q1 = np.percentile(data, 25)
     Q3 = np.percentile(data, 75)
     IQR = Q3 - Q1
-    
+
     lower_bound = Q1 - k * IQR
     upper_bound = Q3 + k * IQR
-    
+
     return (data < lower_bound) | (data > upper_bound)
 
 # Mathematical representation:
@@ -137,7 +137,7 @@ def detect_outliers_iqr(data, k=1.5):
       <span class="code-callout__title">Function definition and docstring</span>
     </div>
     <div class="code-callout__body">
-      <p>Defines the function; <code>k=1.5</code> is the standard Tukey fence—larger values (e.g. 3.0) are more lenient and flag fewer points as outliers.</p>
+      <p>Defines the function; <code>k=1.5</code> is the standard Tukey fence, larger values (e.g. 3.0) are more lenient and flag fewer points as outliers.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="12-24" data-tint="2">
@@ -161,11 +161,11 @@ def detect_outliers_iqr(data, k=1.5):
 def detect_outliers_mad(data, threshold=3.5):
     """
     Detect outliers using Modified Z-score method
-    
+
     Parameters:
     data (array-like): Input data
     threshold (float): Modified Z-score threshold (default=3.5)
-    
+
     Returns:
     array: Boolean mask of outliers
     """
@@ -214,11 +214,11 @@ from sklearn.ensemble import IsolationForest
 def detect_outliers_iforest(data, contamination=0.1):
     """
     Detect outliers using Isolation Forest
-    
+
     Parameters:
     data (array-like): Input data
     contamination (float): Expected proportion of outliers
-    
+
     Returns:
     array: Boolean mask of outliers
     """
@@ -236,7 +236,7 @@ def detect_outliers_iforest(data, contamination=0.1):
       <span class="code-callout__title">Import and function signature</span>
     </div>
     <div class="code-callout__body">
-      <p>Imports IsolationForest and defines the function; <code>contamination</code> is the expected fraction of outliers—adjust it to your domain knowledge.</p>
+      <p>Imports IsolationForest and defines the function; <code>contamination</code> is the expected fraction of outliers, adjust it to your domain knowledge.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="14-18" data-tint="2">
@@ -262,11 +262,11 @@ from sklearn.neighbors import LocalOutlierFactor
 def detect_outliers_lof(data, contamination=0.1):
     """
     Detect outliers using Local Outlier Factor
-    
+
     Parameters:
     data (array-like): Input data
     contamination (float): Expected proportion of outliers
-    
+
     Returns:
     array: Boolean mask of outliers
     """
@@ -312,79 +312,79 @@ from sklearn.neighbors import LocalOutlierFactor
 
 class OutlierDetector:
     """Comprehensive outlier detection framework"""
-    
+
     def __init__(self, data, column):
         self.data = data[column]
         self.column = column
         self.outliers = {}
-        
+
     def detect_statistical_outliers(self):
         """Statistical outlier detection methods"""
         # Z-score method
         z_scores = np.abs(stats.zscore(self.data))
         self.outliers['zscore'] = z_scores > 3
-        
+
         # IQR method
         Q1 = self.data.quantile(0.25)
         Q3 = self.data.quantile(0.75)
         IQR = Q3 - Q1
         self.outliers['iqr'] = (
-            (self.data < (Q1 - 1.5 * IQR)) | 
+            (self.data < (Q1 - 1.5 * IQR)) |
             (self.data > (Q3 + 1.5 * IQR))
         )
-        
+
         # Modified Z-score method
         median = np.median(self.data)
         mad = np.median(np.abs(self.data - median))
         modified_z_scores = 0.6745 * (self.data - median) / mad
         self.outliers['modified_zscore'] = np.abs(modified_z_scores) > 3.5
-        
+
         return self.outliers
-    
+
     def detect_machine_learning_outliers(self):
         """Machine learning based outlier detection"""
         # Reshape data for sklearn
         X = self.data.values.reshape(-1, 1)
-        
+
         # Isolation Forest
         iso_forest = IsolationForest(contamination=0.1, random_state=42)
         self.outliers['isolation_forest'] = iso_forest.fit_predict(X) == -1
-        
+
         # Local Outlier Factor
         lof = LocalOutlierFactor(contamination=0.1)
         self.outliers['lof'] = lof.fit_predict(X) == -1
-        
+
         return self.outliers
-    
+
     def visualize_outliers(self):
         """Comprehensive outlier visualization"""
         plt.figure(figsize=(15, 10))
-        
+
         # Box plot
         plt.subplot(231)
         sns.boxplot(y=self.data)
         plt.title('Box Plot')
-        
+
         # Histogram
         plt.subplot(232)
         sns.histplot(self.data, kde=True)
         plt.title('Distribution')
-        
+
         # Q-Q plot
         plt.subplot(233)
         stats.probplot(self.data, dist="norm", plot=plt)
         plt.title('Q-Q Plot')
-        
+
         # Outlier comparison
         plt.subplot(234)
         outlier_counts = pd.Series({
-            method: sum(mask) 
+            method: sum(mask)
             for method, mask in self.outliers.items()
         })
         outlier_counts.plot(kind='bar')
         plt.title('Outliers by Method')
         plt.xticks(rotation=45)
-        
+
         # Scatter plot with outliers
         plt.subplot(235)
         plt.scatter(
@@ -394,7 +394,7 @@ class OutlierDetector:
             cmap='coolwarm'
         )
         plt.title('Z-score Outliers')
-        
+
         plt.tight_layout()
         plt.show()
 {% endhighlight %}
@@ -415,7 +415,7 @@ class OutlierDetector:
       <span class="code-callout__title">Statistical outlier detection (z-score, IQR, MAD)</span>
     </div>
     <div class="code-callout__body">
-      <p>Applies three statistical rules in sequence—standard z-score, Tukey IQR fences, and modified z-score (MAD)—storing a boolean mask for each in <code>self.outliers</code>.</p>
+      <p>Applies three statistical rules in sequence, standard z-score, Tukey IQR fences, and modified z-score (MAD), storing a boolean mask for each in <code>self.outliers</code>.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="40-53" data-tint="3">
@@ -441,14 +441,14 @@ class OutlierDetector:
 
 ## Advanced Treatment Strategies
 
-### 1. Robust Statistics
+### 1. reliable Statistics
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
 {% highlight python %}
 def calculate_robust_statistics(data):
-    """Calculate statistics robust to outliers"""
+    """Calculate statistics reliable to outliers"""
     return {
         'median': np.median(data),
         'mad': stats.median_abs_deviation(data),
@@ -464,7 +464,7 @@ def calculate_robust_statistics(data):
       <span class="code-callout__title">Four outlier-resistant summary statistics</span>
     </div>
     <div class="code-callout__body">
-      <p>Returns median, MAD, 10%-trimmed mean, and Winsorised mean (5th–95th percentile)—all of which are far less influenced by extreme values than their standard counterparts.</p>
+      <p>Returns median, MAD, 10%-trimmed mean, and Winsorised mean (5th-95th percentile), all of which are far less influenced by extreme values than their standard counterparts.</p>
     </div>
   </div>
 </aside>
@@ -484,7 +484,7 @@ def adaptive_capping(data, sensitivity=1.5):
         upper_bound = rolling_median + sensitivity * rolling_std
         lower_bound = rolling_median - sensitivity * rolling_std
         return lower_bound, upper_bound
-    
+
     lower, upper = estimate_local_bounds(data)
     return np.clip(data, lower, upper)
 {% endhighlight %}
@@ -511,20 +511,20 @@ def adaptive_capping(data, sensitivity=1.5):
 def engineer_outlier_features(data):
     """Create features from outlier information"""
     outlier_info = {}
-    
+
     # Distance from mean
     mean_dist = np.abs(data - np.mean(data))
     outlier_info['mean_distance'] = mean_dist / np.std(data)
-    
+
     # Distance from median
     median_dist = np.abs(data - np.median(data))
     mad = stats.median_abs_deviation(data)
     outlier_info['median_distance'] = median_dist / mad
-    
+
     # Local density
     kde = stats.gaussian_kde(data)
     outlier_info['density'] = kde.evaluate(data)
-    
+
     return pd.DataFrame(outlier_info)
 {% endhighlight %}
 </div>
@@ -535,7 +535,7 @@ def engineer_outlier_features(data):
       <span class="code-callout__title">Distance from mean (z-score)</span>
     </div>
     <div class="code-callout__body">
-      <p>Computes absolute deviation from the mean, normalised by standard deviation—equivalent to an unsigned z-score stored as a feature.</p>
+      <p>Computes absolute deviation from the mean, normalised by standard deviation, equivalent to an unsigned z-score stored as a feature.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-18" data-tint="2">
@@ -544,7 +544,7 @@ def engineer_outlier_features(data):
       <span class="code-callout__title">Distance from median and local density</span>
     </div>
     <div class="code-callout__body">
-      <p>Adds a MAD-normalised median distance for robustness, then uses a KDE to estimate each point's local probability density—low density indicates a potential outlier region.</p>
+      <p>Adds a MAD-normalised median distance for robustness, then uses a KDE to estimate each point's local probability density, low density indicates a potential outlier region.</p>
     </div>
   </div>
 </aside>
@@ -558,34 +558,34 @@ def engineer_outlier_features(data):
 {% highlight python %}
 def analyze_transaction_outliers(transactions_df):
     """Analyze outliers in e-commerce transactions"""
-    
+
     # Initialize detector
     detector = OutlierDetector(transactions_df, 'amount')
-    
+
     # Detect outliers using multiple methods
     statistical_outliers = detector.detect_statistical_outliers()
     ml_outliers = detector.detect_machine_learning_outliers()
-    
+
     # Analyze patterns
     time_patterns = transactions_df[
         statistical_outliers['zscore']
     ]['timestamp'].dt.hour.value_counts()
-    
+
     category_patterns = transactions_df[
         statistical_outliers['zscore']
     ]['category'].value_counts()
-    
+
     # Visualize patterns
     plt.figure(figsize=(15, 5))
-    
+
     plt.subplot(131)
     time_patterns.plot(kind='bar')
     plt.title('Outlier Transactions by Hour')
-    
+
     plt.subplot(132)
     category_patterns.plot(kind='bar')
     plt.title('Outlier Transactions by Category')
-    
+
     plt.subplot(133)
     sns.scatterplot(
         data=transactions_df,
@@ -594,10 +594,10 @@ def analyze_transaction_outliers(transactions_df):
         hue=statistical_outliers['zscore']
     )
     plt.title('Amount vs Frequency')
-    
+
     plt.tight_layout()
     plt.show()
-    
+
     return {
         'outliers': statistical_outliers,
         'time_patterns': time_patterns,
@@ -656,28 +656,28 @@ def analyze_outlier_impact(data, target, outlier_mask):
     from sklearn.model_selection import train_test_split
     from sklearn.linear_model import LinearRegression
     from sklearn.metrics import mean_squared_error, r2_score
-    
+
     # Split data
     X = data.drop(columns=[target])
     y = data[target]
-    
+
     # Train with and without outliers
     results = {}
     for name, mask in [('all_data', slice(None)), ('no_outliers', ~outlier_mask)]:
         X_train, X_test, y_train, y_test = train_test_split(
             X[mask], y[mask], test_size=0.2, random_state=42
         )
-        
+
         model = LinearRegression()
         model.fit(X_train, y_train)
         y_pred = model.predict(X_test)
-        
+
         results[name] = {
             'mse': mean_squared_error(y_test, y_pred),
             'r2': r2_score(y_test, y_pred),
             'coef_std': np.std(model.coef_)
         }
-    
+
     return results
 {% endhighlight %}
 </div>
@@ -697,7 +697,7 @@ def analyze_outlier_impact(data, target, outlier_mask):
       <span class="code-callout__title">Train each model and record metrics</span>
     </div>
     <div class="code-callout__body">
-      <p>For each model, applies the outlier mask or a full-data slice, splits into train/test, fits and predicts, then stores MSE, R², and coefficient std—showing the impact of outlier removal.</p>
+      <p>For each model, applies the outlier mask or a full-data slice, splits into train/test, fits and predicts, then stores MSE, R², and coefficient std, showing the impact of outlier removal.</p>
     </div>
   </div>
 </aside>
@@ -713,11 +713,11 @@ def analyze_outlier_impact(data, target, outlier_mask):
 {% highlight python %}
 def select_outlier_strategy(data):
     """Select appropriate outlier detection strategy"""
-    
+
     skewness = stats.skew(data)
     kurtosis = stats.kurtosis(data)
     sample_size = len(data)
-    
+
     if abs(skewness) > 2 or abs(kurtosis) > 7:
         return "Use robust methods (MAD, IQR)"
     elif sample_size < 30:
@@ -747,27 +747,27 @@ def select_outlier_strategy(data):
 {% highlight python %}
 def validate_outlier_treatment(original, treated):
     """Validate the impact of outlier treatment"""
-    
+
     validation = {}
-    
+
     # Distribution statistics
     validation['distribution'] = {
         'skewness_change': stats.skew(treated) - stats.skew(original),
         'kurtosis_change': stats.kurtosis(treated) - stats.kurtosis(original)
     }
-    
+
     # Range and spread
     validation['range'] = {
         'original': (np.min(original), np.max(original)),
         'treated': (np.min(treated), np.max(treated))
     }
-    
+
     # Correlation preservation
     if len(original.shape) > 1:
         orig_corr = np.corrcoef(original)
         treated_corr = np.corrcoef(treated)
         validation['correlation_change'] = np.abs(orig_corr - treated_corr).max()
-    
+
     return validation
 {% endhighlight %}
 </div>
@@ -778,7 +778,7 @@ def validate_outlier_treatment(original, treated):
       <span class="code-callout__title">Distribution shape change</span>
     </div>
     <div class="code-callout__body">
-      <p>Computes the change in skewness and kurtosis after treatment—large reductions confirm the outliers were distorting the distribution.</p>
+      <p>Computes the change in skewness and kurtosis after treatment, large reductions confirm the outliers were distorting the distribution.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="12-24" data-tint="2">
@@ -856,6 +856,6 @@ Remember: "Not all outliers are errors, and not all errors are outliers. Context
 
 ## Next steps
 
-- [Transformations](transformations.md) — when trimming or scaling after outlier work
-- [Distributions (EDA)](../2.3-eda/distributions.md) — see skew and tails on clean plots
+- [Transformations](transformations.md), when trimming or scaling after outlier work
+- [Distributions (EDA)](../2.3-eda/distributions.md), see skew and tails on clean plots
 - [Module README](README.md)

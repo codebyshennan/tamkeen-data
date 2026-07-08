@@ -1,8 +1,8 @@
 # Data Storytelling Case Studies: Learning from Real-World Examples
 
-Reading about storytelling principles is one thing. Seeing them applied — and seeing what happens when they aren't — is what actually builds intuition. Each case study here shows the same challenge presented two ways: the version that confuses, and the version that communicates. After reading this lesson, you'll be able to spot these patterns in real work and know exactly what to fix.
+Reading about storytelling principles is one thing. Seeing them applied, and seeing what happens when they aren't, is what actually builds intuition. Each case study here shows the same challenge presented two ways: the version that confuses, and the version that communicates. After reading this lesson, you'll be able to spot these patterns in real work and know exactly what to fix.
 
-**After this lesson:** you can explain the core ideas in "Data Storytelling Case Studies: Learning from Real-World Examples" and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Data Storytelling Case Studies: Learning from Real-World Examples and try the examples in your own notebook.
 
 > **Note:** Scenarios are illustrative. Replace figure placeholders with your own screenshots when you recreate similar views in your tool of choice.
 
@@ -10,26 +10,26 @@ Reading about storytelling principles is one thing. Seeing them applied — and 
 
 | Term | Plain-English Definition |
 |------|--------------------------|
-| **Before/after comparison** | Showing the same data presented poorly and then well — the contrast makes the improvement obvious |
-| **KPI (Key Performance Indicator)** | The specific metric that best measures progress toward a goal — not all metrics, just the right one |
+| **Before/after comparison** | Showing the same data presented poorly and then well, the contrast makes the improvement obvious |
+| **KPI (Key Performance Indicator)** | The specific metric that best measures progress toward a goal, not all metrics, just the right one |
 | **Funnel chart** | A chart showing how a large group of users/customers narrows step-by-step through a process (e.g., sign up → activate → retain) |
-| **ROAS (Return on Ad Spend)** | Revenue generated for every dollar spent on advertising — a key efficiency metric in marketing |
-| **Visual clutter** | Too many elements competing for attention — colors, metrics, labels — that make a chart hard to read |
+| **ROAS (Return on Ad Spend)** | Revenue generated for every dollar spent on advertising, a key efficiency metric in marketing |
+| **Visual clutter** | Too many elements competing for attention, colors, metrics, labels, that make a chart hard to read |
 | **Semantic color** | Color that carries meaning (red = bad, green = good) rather than being purely decorative |
 
 ## Helpful video
 
-Cole Nussbaumer Knaflic walks through her framework for turning data into stories that drive action — the principles behind every case study in this lesson.
+Cole Nussbaumer Knaflic walks through her framework for turning data into stories that drive action, the principles behind every case study in this lesson.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/8EMW7io4rSI" title="Cole Nussbaumer Knaflic: Storytelling with Data | Talks at Google" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Introduction: Why Case Studies Matter
 
-Think of case studies like watching game film in sports — they show you what works, what doesn't, and how to improve. These real-world examples will help you understand how to apply data storytelling principles in practice. The most important lesson isn't any single technique: it's the habit of asking "does this presentation serve my audience's understanding, or just show that I did a lot of work?"
+Think of case studies like watching game film in sports, they show you what works, what doesn't, and how to improve. These real-world examples will help you understand how to apply data storytelling principles in practice. The most important lesson isn't any single technique: it's the habit of asking "does this presentation serve my audience's understanding, or just show that I did a lot of work?"
 
 ---
 
-> **Try it yourself — Before You Read:**
+> **Try it yourself, Before You Read:**
 > Before studying each case study, look at the "Bad Version" image and write down in your own words: (1) What is this chart trying to show? (2) What makes it hard to read? Then compare your diagnosis to the analysis. This trains your eye for spotting problems in real work.
 
 ---
@@ -42,7 +42,7 @@ A large retail chain needs to communicate monthly sales performance to store man
 
 ### The Bad Version
 
-![Cluttered Walmart store analytics dashboard — the before state](assets/bad_dashboard.png)
+![Cluttered Walmart store analytics dashboard, the before state](assets/bad_dashboard.png)
 *Before: A dashboard overloaded with 50+ KPIs, inconsistent colors, and no visual hierarchy. Managers had to hunt for the metrics that mattered.*
 
 **Problems Explained:**
@@ -58,7 +58,7 @@ A large retail chain needs to communicate monthly sales performance to store man
 1. **Cluttered Metrics**
 
    ![Dashboard panel with 20+ numeric tiles all given equal visual weight](assets/bad_dashboard_metrics.png)
-   *Too many metrics displayed at equal prominence — the viewer must scan every tile to find what matters.*
+   *Too many metrics displayed at equal prominence, the viewer must scan every tile to find what matters.*
 
    - Too many metrics shown at once with no prioritization
    - Difficult to scan and understand at a glance
@@ -66,8 +66,8 @@ A large retail chain needs to communicate monthly sales performance to store man
 
 2. **Inconsistent Colors**
 
-   ![Bar chart with random colors — no semantic meaning](assets/bad_dashboard_colors.png)
-   *Random color choices with no consistent meaning — some categories appear red without being negative, others green without being positive.*
+   ![Bar chart with random colors, no semantic meaning](assets/bad_dashboard_colors.png)
+   *Random color choices with no consistent meaning, some categories appear red without being negative, others green without being positive.*
 
    - Random color choices carry no information
    - No consistent meaning across the dashboard
@@ -76,7 +76,7 @@ A large retail chain needs to communicate monthly sales performance to store man
 3. **Poor Hierarchy**
 
    ![Dashboard where all elements use the same font size and weight](assets/bad_dashboard_hierarchy.png)
-   *All KPIs, metrics, and footnotes use the same visual weight — nothing stands out as primary, making prioritization impossible at a glance.*
+   *All KPIs, metrics, and footnotes use the same visual weight, nothing stands out as primary, making prioritization impossible at a glance.*
 
    - All elements given equal visual importance
    - No visual cues for which metrics deserve attention first
@@ -84,7 +84,7 @@ A large retail chain needs to communicate monthly sales performance to store man
 
 ### The Good Version
 
-![Clean Walmart store analytics dashboard — the after state](assets/good_dashboard.png)
+![Clean Walmart store analytics dashboard, the after state](assets/good_dashboard.png)
 *After: Five prominent KPI cards, sparkline trends, semantic color (green/red for above/below target), and a clear top-to-bottom visual hierarchy. A manager can understand performance in seconds.*
 
 **Improvements Explained:**
@@ -100,15 +100,15 @@ A large retail chain needs to communicate monthly sales performance to store man
 1. **Focused Metrics**
 
    ![Three large KPI cards occupying the top row with bold numbers and sparklines](assets/good_dashboard_metrics.png)
-   *Daily Sales, Customer Count, and Avg. Basket occupy the top row — each has a bold number, a trend arrow, and a sparkline. Scannable in under 3 seconds.*
+   *Daily Sales, Customer Count, and Avg. Basket occupy the top row, each has a bold number, a trend arrow, and a sparkline. Scannable in under 3 seconds.*
 
    - Clear key performance indicators at the top
    - Easy to scan and understand instantly
-   - Supporting detail available below — not competing for attention
+   - Supporting detail available below, not competing for attention
 
 2. **Consistent Colors**
 
-   ![Bar chart using semantic color — green above target, red below, gray on-target](assets/good_dashboard_colors.png)
+   ![Bar chart using semantic color, green above target, red below, gray on-target](assets/good_dashboard_colors.png)
    *The same bar chart uses a consistent semantic color scheme: green = above target, red = below target, gray = on-target. Color now carries information.*
 
    - Meaningful color scheme applied consistently
@@ -132,7 +132,7 @@ A large retail chain needs to communicate monthly sales performance to store man
 
 ---
 
-> **Try it yourself — Dashboard Audit:**
+> **Try it yourself, Dashboard Audit:**
 > Find a dashboard you use regularly (or a public one on Tableau Public). Apply the three-problem framework from this case study: (1) Are there too many metrics? (2) Is color used consistently and meaningfully? (3) Is there a clear visual hierarchy?
 > Write down one specific change for each problem you find.
 
@@ -146,7 +146,7 @@ A music streaming service needs to understand why users are dropping off during 
 
 ### The Bad Version
 
-![Text-heavy Spotify onboarding analysis document — no visual flow](assets/bad_journey.png)
+![Text-heavy Spotify onboarding analysis document, no visual flow](assets/bad_journey.png)
 *Before: Dense paragraphs describing the user journey with no visual representation, no drop-off numbers highlighted, and no color-coding of problem stages.*
 
 **Problems Explained:**
@@ -161,8 +161,8 @@ A music streaming service needs to understand why users are dropping off during 
 
 1. **Text-Heavy Explanation**
 
-   ![Five paragraphs of text with no charts — the 40% drop-off is buried in a sentence](assets/bad_journey_text.png)
-   *Five paragraphs of text with no charts. The critical 40% drop-off rate is buried in the middle of a paragraph — readers must read everything to find it.*
+   ![Five paragraphs of text with no charts, the 40% drop-off is buried in a sentence](assets/bad_journey_text.png)
+   *Five paragraphs of text with no charts. The critical 40% drop-off rate is buried in the middle of a paragraph, readers must read everything to find it.*
 
    - Dense text requires reading every word to find the insight
    - Key numbers disappear into prose
@@ -170,7 +170,7 @@ A music streaming service needs to understand why users are dropping off during 
 
 2. **Missing Metrics**
 
-   ![Funnel chart with no percentage labels — bar heights change but no numbers shown](assets/bad_journey_metrics.png)
+   ![Funnel chart with no percentage labels, bar heights change but no numbers shown](assets/bad_journey_metrics.png)
    *A funnel chart without percentage labels. Bars get smaller step to step, but the viewer cannot tell if drop-off is 5% or 40% without reading footnotes.*
 
    - No clear drop-off rates at each step
@@ -180,7 +180,7 @@ A music streaming service needs to understand why users are dropping off during 
 3. **No Flow**
 
    ![Bullet list of onboarding steps with no connecting arrows or visual progression](assets/bad_journey_flow.png)
-   *Four onboarding steps listed as bullets with no connecting arrows or visual progression — they appear disconnected rather than as a sequential journey.*
+   *Four onboarding steps listed as bullets with no connecting arrows or visual progression, they appear disconnected rather than as a sequential journey.*
 
    - Disconnected steps without visual progression
    - No sense of which step leads to which
@@ -231,13 +231,13 @@ A music streaming service needs to understand why users are dropping off during 
 ### Key Learnings
 
 1. **Make It Visual**: Use flow diagrams. Visual journey maps are consistently found to be more effective at communicating insights than written descriptions.
-2. **Show the Data**: Include drop-off rates, time-on-step, and completion percentages — the numbers tell the story.
-3. **Drive Action**: Don't just show where problems are — propose specific fixes. A problem without a recommendation is just a complaint.
+2. **Show the Data**: Include drop-off rates, time-on-step, and completion percentages, the numbers tell the story.
+3. **Drive Action**: Don't just show where problems are, propose specific fixes. A problem without a recommendation is just a complaint.
 
 ---
 
-> **Try it yourself — Journey Mapping:**
-> Think of a multi-step process you interact with — signing up for a service, checking out from an online store, onboarding to a new app. Sketch a 4-5 step funnel diagram (boxes and arrows on paper or a whiteboard). Label each step. Now imagine you had data showing which step had the highest drop-off rate. Where would you put that callout? What recommendation would you make?
+> **Try it yourself, Journey Mapping:**
+> Think of a multi-step process you interact with, signing up for a service, checking out from an online store, onboarding to a new app. Sketch a 4-5 step funnel diagram (boxes and arrows on paper or a whiteboard). Label each step. Now imagine you had data showing which step had the highest drop-off rate. Where would you put that callout? What recommendation would you make?
 
 ---
 
@@ -250,7 +250,7 @@ A travel platform needs to report on the performance of their latest marketing c
 ### The Bad Version
 
 ![Airbnb marketing report showing a raw data table with 8 columns and 20 rows](assets/bad_campaign.png)
-*Before: A raw data table — 8 columns (Channel, Impressions, Clicks, CTR, CPA, Spend, Conversions, ROAS) with 20 rows of numbers, no charts, no color-coding, and no highlighted winners.*
+*Before: A raw data table, 8 columns (Channel, Impressions, Clicks, CTR, CPA, Spend, Conversions, ROAS) with 20 rows of numbers, no charts, no color-coding, and no highlighted winners.*
 
 **Problems Explained:**
 
@@ -264,8 +264,8 @@ A travel platform needs to report on the performance of their latest marketing c
 
 1. **Raw Data Dump**
 
-   ![Dense numeric table with no sorting, color, or highlights — all channels at equal visual weight](assets/bad_campaign_data.png)
-   *All channels and all metrics at the same visual weight. The reader must scan every cell to find the best performer — the table does no work for them.*
+   ![Dense numeric table with no sorting, color, or highlights, all channels at equal visual weight](assets/bad_campaign_data.png)
+   *All channels and all metrics at the same visual weight. The reader must scan every cell to find the best performer, the table does no work for them.*
 
    - Unprocessed data with no filtering or sorting
    - Forces the reader to do analytical work the presenter should have done
@@ -273,7 +273,7 @@ A travel platform needs to report on the performance of their latest marketing c
 
 2. **No Story**
 
-   ![Bar chart titled "Q3 Marketing Results" showing impressions by channel — no mention of revenue or objectives](assets/bad_campaign_story.png)
+   ![Bar chart titled "Q3 Marketing Results" showing impressions by channel, no mention of revenue or objectives](assets/bad_campaign_story.png)
    *A slide titled "Q3 Marketing Results" shows impressions by channel but no link to revenue, no campaign objective, and no next-step recommendation. Data without a story.*
 
    - Missing narrative connecting data to business outcomes
@@ -283,7 +283,7 @@ A travel platform needs to report on the performance of their latest marketing c
 3. **Missing Context**
 
    ![Channel performance table with ROAS values but no prior-period comparison or benchmarks](assets/bad_campaign_context.png)
-   *ROAS values are shown with no prior-period comparison. A 2.3x ROAS shown in isolation — is that good? Bad? Industry standard? The reader cannot tell.*
+   *ROAS values are shown with no prior-period comparison. A 2.3x ROAS shown in isolation, is that good? Bad? Industry standard? The reader cannot tell.*
 
    - Numbers without benchmarks are uninterpretable
    - No year-over-year or month-over-month comparison
@@ -298,7 +298,7 @@ A travel platform needs to report on the performance of their latest marketing c
 
 - **Clear narrative structure**: Started with objectives, showed results, ended with recommendations
 - **Channel comparisons**: Used a consistent metric (ROAS) to compare channels on equal footing
-- **Performance metrics**: Focused on ROI and customer acquisition cost — the metrics that drive budget decisions
+- **Performance metrics**: Focused on ROI and customer acquisition cost, the metrics that drive budget decisions
 - **Context added**: Year-over-year changes and industry benchmarks provided
 - **Actionable recommendations**: Specific budget allocation suggestions with projected impact
 
@@ -315,8 +315,8 @@ A travel platform needs to report on the performance of their latest marketing c
 
 2. **Channel Comparisons**
 
-   ![Horizontal bar chart of ROAS by channel sorted descending — all on a shared scale](assets/good_campaign_comparisons.png)
-   *ROAS by channel, sorted descending, all on a single shared scale. Relative performance is instantly visible — no need to scan a table or convert between metrics.*
+   ![Horizontal bar chart of ROAS by channel sorted descending, all on a shared scale](assets/good_campaign_comparisons.png)
+   *ROAS by channel, sorted descending, all on a single shared scale. Relative performance is instantly visible, no need to scan a table or convert between metrics.*
 
    - Consistent metric enables fair comparison
    - Sorted by performance so the answer is immediately obvious
@@ -339,7 +339,7 @@ A travel platform needs to report on the performance of their latest marketing c
 
 ---
 
-> **Try it yourself — Before/After Rewrite:**
+> **Try it yourself, Before/After Rewrite:**
 > You have this raw finding: "Email had a 3.2x ROAS, Social Media had 1.8x ROAS, and Paid Search had 4.1x ROAS. Total campaign spend was $500K."
 >
 > Write a one-paragraph story from this data that includes: (1) a narrative headline, (2) the key comparison, (3) context for what these numbers mean, and (4) a specific recommendation. Use the Airbnb "good version" as a model.
@@ -359,7 +359,7 @@ A company's finance team needs to present quarterly results to the board of dire
 
 **Problems Explained:**
 
-- **Too many numbers**: Overwhelmed audience with raw financial data — every cell demands equal attention
+- **Too many numbers**: Overwhelmed audience with raw financial data, every cell demands equal attention
 - **No visual aids**: Relied solely on tables and text
 - **Missing context**: Failed to explain the significance of the numbers
 - **Hard to understand trends**: Made it difficult to see performance patterns over time
@@ -369,20 +369,20 @@ A company's finance team needs to present quarterly results to the board of dire
 
 1. **Too Many Numbers**
 
-   ![Quarterly P&L table with 80 cells of numbers in size-10 font — no shading or highlights](assets/bad_financial_numbers.png)
+   ![Quarterly P&L table with 80 cells of numbers in size-10 font, no shading or highlights](assets/bad_financial_numbers.png)
    *10 rows × 8 quarters = 80 cells of numbers in size-10 font. No shading, no highlighted current quarter, no visual cue for which number is most important.*
 
    - Data overload: 80 numbers with no prioritization
-   - No filtering — all metrics treated as equally important
+   - No filtering, all metrics treated as equally important
    - Forces the board to do their own analysis during the presentation
 
 2. **No Visual Aids**
 
-   ![Slide with four bullet points describing revenue changes — trends buried in prose](assets/bad_financial_visuals.png)
+   ![Slide with four bullet points describing revenue changes, trends buried in prose](assets/bad_financial_visuals.png)
    *Four bullet points describing revenue changes ("Revenue grew 12% YoY… up from $19.3B…"). Trends that a simple line chart would communicate instantly are buried in prose.*
 
    - Text forces sequential reading instead of pattern recognition
-   - Trends are invisible — you can't "see" growth from a sentence
+   - Trends are invisible, you can't "see" growth from a sentence
    - Charts are faster, more memorable, and harder to misread
 
 3. **Missing Context**
@@ -401,7 +401,7 @@ A company's finance team needs to present quarterly results to the board of dire
 
 **Improvements Explained:**
 
-- **Key metrics highlighted**: Focused on revenue growth, profit margins, and cash flow — the three metrics boards care most about
+- **Key metrics highlighted**: Focused on revenue growth, profit margins, and cash flow, the three metrics boards care most about
 - **Visual trends**: Used line charts to show performance over time so patterns are immediately visible
 - **Year-over-year comparisons**: Added context through historical data
 - **Clear narrative**: Connected financial results to business strategy ("driven by record deliveries")
@@ -412,9 +412,9 @@ A company's finance team needs to present quarterly results to the board of dire
 1. **Key Metrics**
 
    ![Three large KPI cards: Revenue, Gross Margin, and Free Cash Flow with YoY deltas and sparklines](assets/good_financial_metrics.png)
-   *Three large KPI cards displaying Revenue, Gross Margin, and Free Cash Flow — each with a bold current value, a YoY delta in green/red, and a 4-quarter sparkline. The board gets the story in 5 seconds.*
+   *Three large KPI cards displaying Revenue, Gross Margin, and Free Cash Flow, each with a bold current value, a YoY delta in green/red, and a 4-quarter sparkline. The board gets the story in 5 seconds.*
 
-   - Three focused indicators — the minimum set to understand quarterly health
+   - Three focused indicators, the minimum set to understand quarterly health
    - YoY delta visible immediately (no mental math)
    - Sparklines show trend without adding a full chart
 
@@ -438,13 +438,13 @@ A company's finance team needs to present quarterly results to the board of dire
 
 ### Key Learnings
 
-1. **Simplify Complex Data**: Show 3 key metrics, not 80 cells. Boards make strategic decisions — give them the strategic view, not the accounting view.
+1. **Simplify Complex Data**: Show 3 key metrics, not 80 cells. Boards make strategic decisions, give them the strategic view, not the accounting view.
 2. **Show Trends**: Line charts and grouped bars communicate change over time instantly. Tables cannot.
-3. **Make It Actionable**: Every financial presentation should end with a recommendation or a decision request — not just "here's how we did."
+3. **Make It Actionable**: Every financial presentation should end with a recommendation or a decision request, not just "here's how we did."
 
 ---
 
-> **Try it yourself — Financial Storytelling:**
+> **Try it yourself, Financial Storytelling:**
 > Take this raw quarterly data: Q1: Revenue $18B, Q2: $20B, Q3: $22B, Q4: $24B. Gross Margin: Q1 16%, Q2 17%, Q3 17.5%, Q4 18%.
 >
 > Write a three-sentence narrative summary for a board audience: one sentence for the headline (what happened), one for the trend (why it matters), one for the recommendation (what to do next). Then sketch a simple KPI card and line chart you'd use to illustrate it.
@@ -464,7 +464,7 @@ A streaming platform needs to understand how users are interacting with their pr
 
 **Problems Explained:**
 
-- **Raw data tables**: Presented unprocessed usage statistics — data as produced by the database, not as designed for communication
+- **Raw data tables**: Presented unprocessed usage statistics, data as produced by the database, not as designed for communication
 - **No visualizations**: Failed to show patterns and trends
 - **Missing patterns**: Couldn't identify user behavior patterns from rows of numbers
 - **Hard to identify issues**: Made it difficult to spot engagement problems
@@ -475,7 +475,7 @@ A streaming platform needs to understand how users are interacting with their pr
 1. **Raw Data Tables**
 
    ![Spreadsheet grid of 200 rows × 12 columns of usage event data with no aggregation](assets/bad_usage_data.png)
-   *200 rows × 12 columns of usage events — timestamps, session IDs, feature codes. No aggregation or summarization. The analyst must write additional queries just to extract any insight.*
+   *200 rows × 12 columns of usage events, timestamps, session IDs, feature codes. No aggregation or summarization. The analyst must write additional queries just to extract any insight.*
 
    - Unaggregated data requires further processing before it can be understood
    - Forces the audience to do analysis work during the presentation
@@ -483,7 +483,7 @@ A streaming platform needs to understand how users are interacting with their pr
 
 2. **No Visualizations**
 
-   ![Slide listing feature names and session counts as a numbered list — no bar chart](assets/bad_usage_visuals.png)
+   ![Slide listing feature names and session counts as a numbered list, no bar chart](assets/bad_usage_visuals.png)
    *Feature names and session counts listed as a numbered list. Features that differ by 10× in usage look identical in the list. Without a bar chart, the differences are invisible.*
 
    - Features with 10x differences look the same in a list
@@ -492,8 +492,8 @@ A streaming platform needs to understand how users are interacting with their pr
 
 3. **Missing Patterns**
 
-   ![Line chart of daily active users with no seasonality annotations — weekend dips unlabeled](assets/bad_usage_patterns.png)
-   *Daily active users line chart with no annotations. The weekly dip on weekends is visible but unlabeled — viewers wonder whether the drop is a bug or expected behavior.*
+   ![Line chart of daily active users with no seasonality annotations, weekend dips unlabeled](assets/bad_usage_patterns.png)
+   *Daily active users line chart with no annotations. The weekly dip on weekends is visible but unlabeled, viewers wonder whether the drop is a bug or expected behavior.*
 
    - Visible patterns left unexplained
    - Audience fills the gap with their own (potentially wrong) interpretation
@@ -506,7 +506,7 @@ A streaming platform needs to understand how users are interacting with their pr
 
 **Improvements Explained:**
 
-- **User flow diagrams**: Showed how users navigated through the platform — which paths were common, which were dead ends
+- **User flow diagrams**: Showed how users navigated through the platform, which paths were common, which were dead ends
 - **Feature usage charts**: Highlighted most and least used features with clear visual ranking
 - **Time-based patterns**: Revealed when and how users engaged with content
 - **Clear insights**: Identified key opportunities for improvement (which features to promote, when to send push notifications)
@@ -517,25 +517,25 @@ A streaming platform needs to understand how users are interacting with their pr
 1. **User Flow**
 
    ![Sankey diagram of Netflix navigation flows with arrow widths proportional to user volume](assets/good_usage_flow.png)
-   *Sankey diagram: nodes for Home, Search, Browse, Play, and Exit; arrow widths proportional to users taking each path. The Home → Play direct path is the widest arrow — instantly showing the dominant behavior.*
+   *Sankey diagram: nodes for Home, Search, Browse, Play, and Exit; arrow widths proportional to users taking each path. The Home → Play direct path is the widest arrow, instantly showing the dominant behavior.*
 
-   - Arrow widths carry the data — no numbers needed to see which path dominates
+   - Arrow widths carry the data, no numbers needed to see which path dominates
    - Dead-end paths (paths that lead to Exit) immediately visible
    - Navigation strategy decisions visible at a glance
 
 2. **Feature Usage**
 
-   ![Horizontal bar chart of Netflix features ranked by weekly active users — top 3 highlighted in teal](assets/good_usage_features.png)
+   ![Horizontal bar chart of Netflix features ranked by weekly active users, top 3 highlighted in teal](assets/good_usage_features.png)
    *Features ranked by weekly active users, sorted descending, with top 3 highlighted in teal and bottom 2 in gray. "Invest vs. deprioritize" is instantly obvious.*
 
    - Sorted ranking makes priority obvious
    - Semantic color (teal = invest, gray = deprioritize) removes ambiguity
-   - Decision implied by the chart itself — no text explanation needed
+   - Decision implied by the chart itself, no text explanation needed
 
 3. **Time Patterns**
 
-   ![Heatmap of Netflix streaming sessions by hour of day and day of week — Friday/Saturday evenings darkest](assets/good_usage_patterns.png)
-   *Heatmap of sessions by hour (y-axis) and day (x-axis). Friday and Saturday evenings 8-10 PM appear darkest — peak engagement visible instantly. Tells the push notification and promotion scheduling story.*
+   ![Heatmap of Netflix streaming sessions by hour of day and day of week, Friday/Saturday evenings darkest](assets/good_usage_patterns.png)
+   *Heatmap of sessions by hour (y-axis) and day (x-axis). Friday and Saturday evenings 8-10 PM appear darkest, peak engagement visible instantly. Tells the push notification and promotion scheduling story.*
 
    - 168 cells (7 days × 24 hours) condensed into a scannable grid
    - High-engagement windows immediately visible (dark = high)
@@ -544,12 +544,12 @@ A streaming platform needs to understand how users are interacting with their pr
 ### Key Learnings
 
 1. **Visualize User Behavior**: Flow diagrams show navigation patterns in a way tables cannot. The shape of user behavior is data.
-2. **Make It Actionable**: Every insight should connect to a product or engineering decision — "feature X is unused" → "redesign discovery or remove it."
+2. **Make It Actionable**: Every insight should connect to a product or engineering decision, "feature X is unused" → "redesign discovery or remove it."
 3. **Annotate Patterns**: Any repeating pattern in a time series (weekly cycles, monthly spikes) must be labelled. Unlabelled patterns are interpreted as anomalies.
 
 ---
 
-> **Try it yourself — Usage Analysis:**
+> **Try it yourself, Usage Analysis:**
 > You have this feature usage data: Search: 2.4M weekly users, Continue Watching: 1.8M, Browse: 1.2M, My List: 400K, Downloads: 90K.
 >
 > (1) Sketch a horizontal bar chart (sorted by value, top to bottom). (2) Apply semantic color: highlight the top 2 in one color, the bottom 2 in another. (3) Write a one-sentence insight and one-sentence recommendation based on what the chart shows.
@@ -562,7 +562,7 @@ Looking across all five case studies, three patterns emerge in every "bad versio
 
 ### 1. The Power of Focus
 
-- **Bad versions show everything**: 50 KPIs, 200 rows, 15 columns — all data, no decisions
+- **Bad versions show everything**: 50 KPIs, 200 rows, 15 columns, all data, no decisions
 - **Good versions show what matters**: 5 KPIs, 3 key metrics, top-ranked features
 - **The lesson**: Before you present, ask "what decision is this presentation supporting?" Cut everything that doesn't help make that decision.
 
@@ -570,7 +570,7 @@ Looking across all five case studies, three patterns emerge in every "bad versio
 
 - **Bad versions show numbers in isolation**: ROAS of 2.3, net income of $1.1B, churn rate of 5%
 - **Good versions show comparisons**: ROAS 2.3x vs. 1.8x last campaign, net income up 12% YoY, churn 5% vs. industry average 3%
-- **The lesson**: A number without a benchmark is uninterpretable. Every metric needs a comparison point — prior period, competitor benchmark, internal target, or industry standard.
+- **The lesson**: A number without a benchmark is uninterpretable. Every metric needs a comparison point, prior period, competitor benchmark, internal target, or industry standard.
 
 ### 3. The Need for Action
 
@@ -585,15 +585,15 @@ Looking across all five case studies, three patterns emerge in every "bad versio
 
 ### 1. Start with Your Audience
 
-- **What do they need to know?**: Understand your audience's key concerns and questions — not what you want to tell them, but what they need to decide
+- **What do they need to know?**: Understand your audience's key concerns and questions, not what you want to tell them, but what they need to decide
 - **What decisions do they need to make?**: Focus on data that supports decision-making, not data that shows how much work you did
-- **How can you help them?**: Provide clear, actionable insights — the gift of a good data story is time saved
+- **How can you help them?**: Provide clear, actionable insights, the gift of a good data story is time saved
 
 ### 2. Focus on the Story
 
-- **What's the main message?** — If you can't say it in one sentence, the story isn't clear yet
-- **What evidence supports it?** — Use the minimum evidence needed to make the case convincingly
-- **What should happen next?** — Specific, named, dated recommendation
+- **What's the main message?**: If you can't say it in one sentence, the story isn't clear yet
+- **What evidence supports it?**: Use the minimum evidence needed to make the case convincingly
+- **What should happen next?**: Specific, named, dated recommendation
 
 ### 3. Make It Visual
 
@@ -620,22 +620,22 @@ Take any report, dashboard, or presentation you've completed. Ask:
 
 For each problem you found:
 - **For clutter**: Cut to the 3-5 most important metrics or findings
-- **For missing context**: Add a comparison — prior period, benchmark, or target
+- **For missing context**: Add a comparison, prior period, benchmark, or target
 - **For missing action**: Write one specific recommendation with a timeline
 
 ### Step 3: Get Feedback
 
-- **Show to a colleague**: Ask "What's the main message?" and "What would you do differently based on this?" — not "does this look okay?"
+- **Show to a colleague**: Ask "What's the main message?" and "What would you do differently based on this?", not "does this look okay?"
 - **Ask specific questions**: Vague questions get vague feedback
 - **Iterate**: Revise based on what they understood vs. what you intended
 
 ## Common Gotchas
 
-- **Reducing to "5-7 critical KPIs" only works if you've agreed on which ones matter** — the Walmart case shows a clean dashboard with five KPIs, but choosing the wrong five is worse than showing more. Consult the decision-maker before cutting metrics; stakeholders often have a "non-negotiable" KPI that looks secondary to an analyst.
-- **A funnel chart implies the same cohort flows through each step, which is often false** — in the Spotify case, the funnel shows absolute user counts per step. If different users enter at different steps (e.g., re-activation flows), the funnel overstates drop-off. Label whether it is a cohort funnel or a cross-sectional snapshot.
-- **Comparing channels on a single metric like ROAS hides the volume-efficiency trade-off** — the Airbnb case addresses this with the "ROI Focus" improvement, but a single ROAS bar chart can make a small high-ROAS channel look better than a large moderate-ROAS channel even when the latter generates more absolute profit. Show both dimensions or be explicit about what you're optimizing.
-- **Using "record X drove Y outcome" language on a board deck implies causation without a control** — the Tesla case frames quarterly results against prior periods, which is appropriate, but learners often copy this pattern into their own analyses and present correlation as causation. Always hedge with "consistent with" or "coinciding with" unless you have an experiment.
-- **Flow diagrams like the Netflix Sankey become misleading if path widths aren't proportional to the same unit** — if "Browse → Play" width encodes unique users but "Browse → Search" width encodes sessions, the chart looks comparable but isn't. Ensure a single consistent unit (users, sessions, or events) drives all path widths before publishing.
+- **Reducing to "5-7 critical KPIs" only works if you've agreed on which ones matter**: the Walmart case shows a clean dashboard with five KPIs, but choosing the wrong five is worse than showing more. Consult the decision-maker before cutting metrics; stakeholders often have a "non-negotiable" KPI that looks secondary to an analyst.
+- **A funnel chart implies the same cohort flows through each step, which is often false**: in the Spotify case, the funnel shows absolute user counts per step. If different users enter at different steps (e.g., re-activation flows), the funnel overstates drop-off. Label whether it is a cohort funnel or a cross-sectional snapshot.
+- **Comparing channels on a single metric like ROAS hides the volume-efficiency trade-off**: the Airbnb case addresses this with the "ROI Focus" improvement, but a single ROAS bar chart can make a small high-ROAS channel look better than a large moderate-ROAS channel even when the latter generates more absolute profit. Show both dimensions or be explicit about what you're optimizing.
+- **Using "record X drove Y outcome" language on a board deck implies causation without a control**: the Tesla case frames quarterly results against prior periods, which is appropriate, but learners often copy this pattern into their own analyses and present correlation as causation. Always hedge with "consistent with" or "coinciding with" unless you have an experiment.
+- **Flow diagrams like the Netflix Sankey become misleading if path widths aren't proportional to the same unit**: if "Browse → Play" width encodes unique users but "Browse → Search" width encodes sessions, the chart looks comparable but isn't. Ensure a single consistent unit (users, sessions, or events) drives all path widths before publishing.
 
 ## Next Steps
 

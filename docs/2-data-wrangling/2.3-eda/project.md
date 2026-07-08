@@ -1,10 +1,10 @@
 # Exploratory Data Analysis Assignment
 
-**After this lesson:** You produce a short EDA report (notebook or slides) with distributions, key relationships, and clear limitations—grounded in the [EDA README](README.md) workflow.
+**After this lesson:** You produce a short EDA report (notebook or slides) with distributions, key relationships, and clear limitations, grounded in the [EDA README](README.md) workflow.
 
 ## Helpful video
 
-Summarizing distributions with percentiles—common in exploratory analysis.
+Summarizing distributions with percentiles, common in exploratory analysis.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/IFKQLDmRK0Y" title="Quantiles and Percentiles, Clearly Explained" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -12,13 +12,13 @@ Summarizing distributions with percentiles—common in exploratory analysis.
 
 **Prerequisites:** [Distributions](distributions.md), [relationships](relationships.md), and [time series](time-series.md) readings (or parallel skimming). [Wrangling (Module 2.2)](../2.2-data-wrangling/README.md) should be done or in progress.
 
-> **Time needed:** Often 6–10 hours including polish.
+> **Time needed:** Often 6-10 hours including polish.
 
 ## Why this matters
 
 EDA deliverables should read like **evidence**, not a gallery of plots: each figure should answer a stated question, and the write-up should name **limitations** (time window, selection bias, missing fields) alongside conclusions.
 
-In this assignment, you perform exploratory data analysis on a realistic e-commerce-style dataset. You apply the workflow from the readings to uncover patterns, relationships, and trends—and to document what you cannot claim from the data alone.
+In this assignment, you perform exploratory data analysis on a realistic e-commerce-style dataset. You apply the workflow from the readings to uncover patterns, relationships, and trends, and to document what you cannot claim from the data alone.
 
 ## Dataset Description
 
@@ -161,10 +161,10 @@ def segment_customers(data):
     recency = # Calculate recency
     frequency = # Calculate frequency
     monetary = # Calculate monetary value
-    
+
     # Perform clustering
     # Your code here
-    
+
     return segments
 {% endhighlight %}
 </div>
@@ -184,7 +184,7 @@ def segment_customers(data):
       <span class="code-callout__title">Clustering stub</span>
     </div>
     <div class="code-callout__body">
-      <p>A placeholder for the clustering step—e.g. KMeans on the scaled RFM matrix—that assigns each customer a segment label returned as <code>segments</code>.</p>
+      <p>A placeholder for the clustering step, e.g. KMeans on the scaled RFM matrix, that assigns each customer a segment label returned as <code>segments</code>.</p>
     </div>
   </div>
 </aside>
@@ -265,13 +265,13 @@ def load_and_prepare_data():
     """
     # Load data
     df = pd.read_csv('../_data/ecommerce_data.csv')
-    
+
     # Basic cleaning
     df['date'] = pd.to_datetime(df['date'])
-    
+
     # Handle missing values
     # Your code here
-    
+
     return df
 
 # 2. Distribution Analysis
@@ -286,11 +286,11 @@ def analyze_distributions(data):
         sns.histplot(data[col], kde=True)
         plt.title(f'Distribution of {col}')
         plt.show()
-        
+
         # Calculate statistics
         print(f"\nStatistics for {col}:")
         print(data[col].describe())
-    
+
     # Categorical distributions
     categorical_cols = data.select_dtypes(include=['object']).columns
     for col in categorical_cols:
@@ -308,12 +308,12 @@ def analyze_relationships(data):
     # Correlation matrix
     numeric_data = data.select_dtypes(include=[np.number])
     correlation_matrix = numeric_data.corr()
-    
+
     plt.figure(figsize=(12, 8))
     sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')
     plt.title('Correlation Matrix')
     plt.show()
-    
+
     # Categorical relationships
     # Your code here
 
@@ -324,16 +324,16 @@ def analyze_time_series(data):
     """
     # Set date as index
     data = data.set_index('date')
-    
+
     # Daily patterns
     daily_sales = data.resample('D')['sales'].sum()
-    
+
     # Plot trends
     plt.figure(figsize=(15, 5))
     daily_sales.plot()
     plt.title('Daily Sales Trend')
     plt.show()
-    
+
     # Decomposition
     # Your code here
 
@@ -348,26 +348,26 @@ def generate_report(data, analysis_results):
         'time_series_patterns': analysis_results['temporal_patterns'],
         'key_findings': analysis_results['findings']
     }
-    
+
     return report
 
 # Main execution
 if __name__ == "__main__":
     # Load data
     df = load_and_prepare_data()
-    
+
     # Perform analyses
     analyze_distributions(df)
     analyze_relationships(df)
     analyze_time_series(df)
-    
+
     # Generate report
     results = {
         'correlations': None,  # Add your results
         'temporal_patterns': None,  # Add your results
         'findings': []  # Add your findings
     }
-    
+
     report = generate_report(df, results)
 {% endhighlight %}
 </div>
@@ -414,7 +414,7 @@ if __name__ == "__main__":
       <span class="code-callout__title">Report generation</span>
     </div>
     <div class="code-callout__body">
-      <p>Bundles summary statistics, correlation analysis, temporal patterns, and key findings into a single report dict—the deliverable for stakeholders.</p>
+      <p>Bundles summary statistics, correlation analysis, temporal patterns, and key findings into a single report dict, the deliverable for stakeholders.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="101-118" data-tint="2">
@@ -431,12 +431,12 @@ if __name__ == "__main__":
 
 ## Gotchas
 
-- **Pearson correlation hides non-linear relationships** — the default `numeric_data.corr()` only captures linear association; two variables with a clear U-shaped relationship will show near-zero Pearson r, so always pair the heatmap with scatter plots for suspicious pairs.
-- **`resample('D')['sales'].sum()` drops days with zero sales** — if a day has no transactions it simply doesn't appear in the daily Series, which distorts trend lines and decomposition; use `.asfreq('D', fill_value=0)` after resampling to make gaps explicit.
-- **Seasonal decomposition requires a complete, regular time series** — `seasonal_decompose` raises or produces garbage if there are missing dates or the period is shorter than two full cycles; ensure your date index is monotonic and dense before calling it.
-- **Plotting every numeric column in a loop pollutes the notebook** — calling `plt.show()` inside the distribution loop creates a new figure per column, which works fine locally but produces dozens of static images in a PDF report; aggregate small-multiple grids with `plt.subplots` for deliverables.
-- **Chi-square tests assume expected frequencies ≥ 5** — for sparse category combinations (rare product categories × rare countries), expected counts may fall below this threshold and the p-value becomes unreliable; collapse infrequent levels before running the test.
-- **Confusing correlation with causation in the executive summary** — EDA can only surface associations; writing "X causes Y" based on a correlation is a common grading deduction; always frame findings as "X is associated with Y" and flag what confounders might exist.
+- **Pearson correlation hides non-linear relationships**: the default `numeric_data.corr()` only captures linear association; two variables with a clear U-shaped relationship will show near-zero Pearson r, so always pair the heatmap with scatter plots for suspicious pairs.
+- **`resample('D')['sales'].sum()` drops days with zero sales**: if a day has no transactions it simply doesn't appear in the daily Series, which distorts trend lines and decomposition; use `.asfreq('D', fill_value=0)` after resampling to make gaps explicit.
+- **Seasonal decomposition requires a complete, regular time series**: `seasonal_decompose` raises or produces garbage if there are missing dates or the period is shorter than two full cycles; ensure your date index is monotonic and dense before calling it.
+- **Plotting every numeric column in a loop pollutes the notebook**: calling `plt.show()` inside the distribution loop creates a new figure per column, which works fine locally but produces dozens of static images in a PDF report; aggregate small-multiple grids with `plt.subplots` for deliverables.
+- **Chi-square tests assume expected frequencies ≥ 5**: for sparse category combinations (rare product categories × rare countries), expected counts may fall below this threshold and the p-value becomes unreliable; collapse infrequent levels before running the test.
+- **Confusing correlation with causation in the executive summary**: EDA can only surface associations; writing "X causes Y" based on a correlation is a common grading deduction; always frame findings as "X is associated with Y" and flag what confounders might exist.
 
 ## Tips for Success
 

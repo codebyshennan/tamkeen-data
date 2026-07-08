@@ -1,6 +1,6 @@
 # Function Application and Mapping in Pandas
 
-**After this lesson:** you can explain the core ideas in “Function Application and Mapping in Pandas” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Function Application and Mapping in Pandas and try the examples in your own notebook.
 
 ### Video
 
@@ -8,13 +8,13 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/DCDe29sIKcE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*Corey Schafer — Python pandas tutorial (part 5): updating rows and columns (maps, replaces, transforms)*
+*Corey Schafer, Python pandas tutorial (part 5): updating rows and columns (maps, replaces, transforms)*
 
 ## Overview
 
 **Prerequisites:** Python **functions** and [Series](./series.md) / [DataFrame](./dataframe.md) basics.
 
-**Why this lesson:** Real tables need row- or column-level rules: normalize strings, parse dates, clip outliers, or compute features. **apply**, **map**, **applymap** (older) / **map** + **assign**, and **transform** are the main ways to plug Python logic into pandas—knowing *when* each is appropriate keeps code fast and readable.
+**Why this lesson:** Real tables need row- or column-level rules: normalize strings, parse dates, clip outliers, or compute features. **apply**, **map**, **applymap** (older) / **map** + **assign**, and **transform** are the main ways to plug Python logic into pandas, knowing *when* each is appropriate keeps code fast and readable.
 
 ## Understanding Function Application
 
@@ -26,7 +26,7 @@ Function application in Pandas means applying a function to your data to transfo
 
 {% include mermaid-diagram.html src="1-data-fundamentals/1.5-data-analysis-pandas/diagrams/function-mapping-1.mmd" %}
 
-*`apply` is flexible but slow on large DataFrames — prefer built-in vectorised methods (`.str`, `.dt`, arithmetic) whenever they exist.*
+*`apply` is flexible but slow on large DataFrames, prefer built-in vectorised methods (`.str`, `.dt`, arithmetic) whenever they exist.*
 
 - A recipe that you apply to each ingredient
 - A rule that processes each piece of data
@@ -53,7 +53,7 @@ Real-world applications:
 
 ### Basic Function Application
 
-Let's explore with practical examples:
+we will look at with practical examples:
 
 **`Series.apply` for grades and cleaning**
 
@@ -141,7 +141,7 @@ Cleaned sales data:
       <span class="code-callout__title">Imports</span>
     </div>
     <div class="code-callout__body">
-      <p>Imports pandas and NumPy—the only two dependencies for basic function application examples.</p>
+      <p>Imports pandas and NumPy, the only two dependencies for basic function application examples.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="5-25" data-tint="2">
@@ -150,7 +150,7 @@ Cleaned sales data:
       <span class="code-callout__title">Grade Bucketing</span>
     </div>
     <div class="code-callout__body">
-      <p>Defines a letter-grade function and applies it to each numeric column with a loop—the simplest per-element apply pattern.</p>
+      <p>Defines a letter-grade function and applies it to each numeric column with a loop, the simplest per-element apply pattern.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="27-48" data-tint="3">
@@ -237,7 +237,7 @@ The **axis** parameter determines whether the function is applied to:
 
 **Element-wise formatting (use `map` in modern pandas for a single column)**
 
-- **Purpose:** Transform every cell—here format floats as strings with two decimals for display.
+- **Purpose:** Transform every cell, here format floats as strings with two decimals for display.
 - **Walkthrough:** `applymap` receives scalar `x` per cell; pandas 2.1+ prefers `DataFrame.map` for the same idea.
 
 ```python
@@ -264,7 +264,7 @@ For Series objects, use `map()` to transform values:
 
 **Dictionary lookup on a Series**
 
-- **Purpose:** Replace codes with human-readable labels using a dict—faster than nested `if` for large code tables.
+- **Purpose:** Replace codes with human-readable labels using a dict, faster than nested `if` for large code tables.
 - **Walkthrough:** `products.map(product_names)` aligns index to the original Series.
 
 ```python
@@ -311,7 +311,7 @@ Clean and standardize customer data:
 
 **Title-case names and normalize phones**
 
-- **Purpose:** Show per-column cleaning pipelines—string methods for names, digit extraction for phones.
+- **Purpose:** Show per-column cleaning pipelines, string methods for names, digit extraction for phones.
 - **Walkthrough:** `filter(str.isdigit, phone)` keeps digits before slicing into `XXX-XXX-XXXX`.
 
 ```python
@@ -357,7 +357,7 @@ Calculate statistics for student grades:
 
 **Return a Series per row from `apply`**
 
-- **Purpose:** Aggregate each student’s quiz columns into average, min, max, and a boolean trend flag in one pass.
+- **Purpose:** Aggregate each student's quiz columns into average, min, max, and a boolean trend flag in one pass.
 - **Walkthrough:** `analyze_grades` returns `pd.Series(...)`; `apply(..., axis=1)` stacks those into new columns.
 
 <div class="code-explainer" data-code-explainer>
@@ -424,7 +424,7 @@ Grade analysis:
       <span class="code-callout__title">Multi-Column Return</span>
     </div>
     <div class="code-callout__body">
-      <p>Returns a <code>pd.Series</code> with four metrics per row—mean, max, min, and an improvement boolean—so <code>apply</code> expands them into columns automatically.</p>
+      <p>Returns a <code>pd.Series</code> with four metrics per row, mean, max, min, and an improvement boolean, so <code>apply</code> expands them into columns automatically.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="19-24" data-tint="3">
@@ -466,7 +466,7 @@ Grade analysis:
    ```python
    # Slower: Using apply for simple operations
    df['Double'] = df['Value'].apply(lambda x: x * 2)
-   
+
    # Faster: Using vectorized operations
    df['Double'] = df['Value'] * 2
    ```
@@ -477,7 +477,7 @@ Grade analysis:
    # Use built-in methods when available
    # Instead of:
    df['Sum'] = df[['A', 'B']].apply(lambda x: x['A'] + x['B'], axis=1)
-   
+
    # Use:
    df['Sum'] = df['A'] + df['B']
    ```
@@ -509,7 +509,7 @@ Grade analysis:
            return 100 / x
        except ZeroDivisionError:
            return np.nan
-   
+
    df['Result'] = df['Value'].apply(safe_division)
    ```
 
@@ -522,7 +522,7 @@ Grade analysis:
    def bad_function(row):
        df.at[row.name, 'NewCol'] = row['Value'] * 2  # Don't do this
        return row
-   
+
    # Right: Return new values
    def good_function(row):
        return row['Value'] * 2
@@ -534,10 +534,10 @@ Grade analysis:
    # Remember:
    # axis=0 (default) -> apply function to each column
    # axis=1 -> apply function to each row
-   
+
    # For row operations:
    df.apply(func, axis=1)
-   
+
    # For column operations:
    df.apply(func, axis=0)  # or just df.apply(func)
    ```
@@ -548,7 +548,7 @@ Grade analysis:
    # If possible, use vectorized operations
    # Instead of:
    df['Celsius'] = df['Fahrenheit'].apply(lambda x: (x - 32) * 5/9)
-   
+
    # Use:
    df['Celsius'] = (df['Fahrenheit'] - 32) * 5/9
    ```

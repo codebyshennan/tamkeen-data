@@ -8,16 +8,16 @@ objectives:
 ---
 # Advanced Topics in Naive Bayes
 
-**After this lesson:** you can explain the core ideas in “Advanced Topics in Naive Bayes” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Advanced Topics in Naive Bayes and try the examples in your own notebook.
 
 ## Overview
 
-Discusses **smoothing**, correlated features breaking the assumption, and mitigations—without losing the fast baseline story.
+Discusses **smoothing**, correlated features breaking the assumption, and mitigations, without losing the fast baseline story.
 
 
 ## Welcome to Advanced Naive Bayes
 
-Now that you've mastered the basics, let's explore some advanced techniques that will make your Naive Bayes models even better. Think of this as adding special tools to your machine learning toolbox!
+Now that you've mastered the basics, we will look at some advanced techniques that will make your Naive Bayes models even better. Think of this as adding special tools to your machine learning toolbox!
 
 {% include mermaid-diagram.html src="5-ml-fundamentals/5.2-supervised-learning-1/naive-bayes/diagrams/5-advanced-topics-1.mmd" %}
 
@@ -29,7 +29,7 @@ Feature engineering is like being a chef who transforms basic ingredients into a
 
 ### Text Feature Engineering
 
-Let's say you're building a spam detector. Instead of just using raw words, you can create smarter features:
+Suppose you're building a spam detector. Instead of just using raw words, you can create smarter features:
 
 #### TF-IDF pipeline with custom preprocessing
 
@@ -73,7 +73,7 @@ pipeline = Pipeline(
       <span class="code-callout__title">Text Normalizer</span>
     </div>
     <div class="code-callout__body">
-      <p><code>normalize_text</code> lowercases and strips non-letter characters (preserving punctuation like <code>!?.</code>) before tokenization — passed as the <code>preprocessor</code> callable to <code>TfidfVectorizer</code>.</p>
+      <p><code>normalize_text</code> lowercases and strips non-letter characters (preserving punctuation like <code>!?.</code>) before tokenization, passed as the <code>preprocessor</code> callable to <code>TfidfVectorizer</code>.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="14-28" data-tint="2">
@@ -160,7 +160,7 @@ pipeline = Pipeline([
       <span class="code-callout__title">Imputer Class</span>
     </div>
     <div class="code-callout__body">
-      <p><code>SmartDataImputer</code> selects between KNN (neighbor-based) and iterative imputation; both strategies are sklearn's built-in imputers — the class is illustrative of the pattern.</p>
+      <p><code>SmartDataImputer</code> selects between KNN (neighbor-based) and iterative imputation; both strategies are sklearn's built-in imputers, the class is illustrative of the pattern.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="22-29" data-tint="2">
@@ -224,7 +224,7 @@ def create_naive_bayes_team():
       <span class="code-callout__title">Soft Voting</span>
     </div>
     <div class="code-callout__body">
-      <p><code>voting='soft'</code> averages predicted class probabilities from all estimators rather than majority-voting hard labels — note that in practice each base model needs compatible input features.</p>
+      <p><code>voting='soft'</code> averages predicted class probabilities from all estimators rather than majority-voting hard labels - note that in practice each base model needs compatible input features.</p>
     </div>
   </div>
 </aside>
@@ -325,7 +325,7 @@ class ModelSaver:
       <span class="code-callout__title">Class Init</span>
     </div>
     <div class="code-callout__body">
-      <p>Stores a reference to the fitted model and optional metadata dict (<code>info</code>) — the sidecar JSON lets you record version, training date, or feature names alongside the binary model.</p>
+      <p>Stores a reference to the fitted model and optional metadata dict (<code>info</code>) - the sidecar JSON lets you record version, training date, or feature names alongside the binary model.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-26" data-tint="2">
@@ -382,7 +382,7 @@ class ModelMonitor:
       <span class="code-callout__title">Track Predictions</span>
     </div>
     <div class="code-callout__body">
-      <p>Each prediction is stored as a dict with features, predicted label, optional true label, and timestamp — collecting these enables rolling accuracy checks without external logging infrastructure.</p>
+      <p>Each prediction is stored as a dict with features, predicted label, optional true label, and timestamp - collecting these enables rolling accuracy checks without external logging infrastructure.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="18-25" data-tint="2">
@@ -391,7 +391,7 @@ class ModelMonitor:
       <span class="code-callout__title">Rolling Accuracy</span>
     </div>
     <div class="code-callout__body">
-      <p><code>check_performance</code> slices the last <code>window</code> predictions and counts matches against actuals — a quick drift indicator when true labels arrive with delay.</p>
+      <p><code>check_performance</code> slices the last <code>window</code> predictions and counts matches against actuals - a quick drift indicator when true labels arrive with delay.</p>
     </div>
   </div>
 </aside>
@@ -479,7 +479,7 @@ best = find_best_settings(X_text, y_text)
       <span class="code-callout__title">Randomized Search</span>
     </div>
     <div class="code-callout__body">
-      <p><code>RandomizedSearchCV</code> with <code>n_iter=20</code> tries 20 random combinations instead of an exhaustive grid — much faster when the search space is large.</p>
+      <p><code>RandomizedSearchCV</code> with <code>n_iter=20</code> tries 20 random combinations instead of an exhaustive grid - much faster when the search space is large.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="35-50" data-tint="3">
@@ -552,12 +552,12 @@ predictions = np.argmax(log_probs, axis=1)
 
 ## Gotchas
 
-- **Using `VotingClassifier` with NB variants that expect different feature types** — The `create_naive_bayes_team` example lists `MultinomialNB`, `GaussianNB`, and `BernoulliNB` in one `VotingClassifier`. This only works if all three receive compatible input. In practice, each variant requires a different feature representation (counts, continuous values, binary), so a naive ensemble on a single feature matrix will raise errors or produce wrong results for at least two of the three.
-- **Applying `PowerTransformer` and then expecting `GaussianNB` to be perfectly calibrated** — `PowerTransformer(method='yeo-johnson')` makes features more Gaussian-like but does not guarantee true normality. `GaussianNB` still makes a Gaussian assumption per class; if the transformed distribution is still skewed or bimodal, the probability estimates will be poorly calibrated even after transformation.
-- **Using `IterativeImputer` without `enable_iterative_imputer`** — The `IterativeImputer` is experimental in scikit-learn and requires the `enable_iterative_imputer` import guard (`from sklearn.experimental import enable_iterative_imputer`). Omitting it raises an `ImportError` that looks like the class doesn't exist, which confuses learners who see it referenced in the docs.
-- **Tuning `alpha` near zero in `RandomizedSearchCV`** — If `uniform(0.1, 2.0)` is replaced with `uniform(0, 2.0)`, the search may sample `alpha` values very close to zero. Near-zero smoothing effectively removes Laplace correction, causing zero-probability terms for unseen tokens and potential numerical instability. Keep `alpha` strictly positive (typically ≥ 0.01).
-- **Saving a pipeline with `joblib` but loading it in a different scikit-learn version** — `joblib.dump` serializes the fitted estimator including internal attributes. If the scikit-learn version changes between save and load, internal attribute names may differ and `joblib.load` will either raise an error or silently return an object with broken state. Pin your dependency versions in deployment.
-- **Checking rolling accuracy in `ModelMonitor` when `actual` is `None`** — `check_performance` compares `p['prediction'] == p['actual']` for all recent records. If some records were logged without a true label (`actual=None`), those comparisons evaluate to `False` and drag down the accuracy score without any warning. Filter out records where `actual is None` before computing the window accuracy.
+- **Using `VotingClassifier` with NB variants that expect different feature types**: The `create_naive_bayes_team` example lists `MultinomialNB`, `GaussianNB`, and `BernoulliNB` in one `VotingClassifier`. This only works if all three receive compatible input. In practice, each variant requires a different feature representation (counts, continuous values, binary), so a naive ensemble on a single feature matrix will raise errors or produce wrong results for at least two of the three.
+- **Applying `PowerTransformer` and then expecting `GaussianNB` to be perfectly calibrated**: `PowerTransformer(method='yeo-johnson')` makes features more Gaussian-like but does not guarantee true normality. `GaussianNB` still makes a Gaussian assumption per class; if the transformed distribution is still skewed or bimodal, the probability estimates will be poorly calibrated even after transformation.
+- **Using `IterativeImputer` without `enable_iterative_imputer`**: The `IterativeImputer` is experimental in scikit-learn and requires the `enable_iterative_imputer` import guard (`from sklearn.experimental import enable_iterative_imputer`). Omitting it raises an `ImportError` that looks like the class doesn't exist, which confuses learners who see it referenced in the docs.
+- **Tuning `alpha` near zero in `RandomizedSearchCV`**: If `uniform(0.1, 2.0)` is replaced with `uniform(0, 2.0)`, the search may sample `alpha` values very close to zero. Near-zero smoothing effectively removes Laplace correction, causing zero-probability terms for unseen tokens and potential numerical instability. Keep `alpha` strictly positive (typically ≥ 0.01).
+- **Saving a pipeline with `joblib` but loading it in a different scikit-learn version**: `joblib.dump` serializes the fitted estimator including internal attributes. If the scikit-learn version changes between save and load, internal attribute names may differ and `joblib.load` will either raise an error or silently return an object with broken state. Pin your dependency versions in deployment.
+- **Checking rolling accuracy in `ModelMonitor` when `actual` is `None`**: `check_performance` compares `p['prediction'] == p['actual']` for all recent records. If some records were logged without a true label (`actual=None`), those comparisons evaluate to `False` and drag down the accuracy score without any warning. Filter out records where `actual is None` before computing the window accuracy.
 
 ## Next Steps
 

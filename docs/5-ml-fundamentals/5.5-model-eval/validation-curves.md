@@ -9,7 +9,7 @@ objectives:
 
 # Validation Curves
 
-**After this lesson:** you can explain the core ideas in “Validation Curves” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Validation Curves and try the examples in your own notebook.
 
 ## Overview
 
@@ -346,7 +346,7 @@ plt.show()
 
 ## Practical Example: Credit Risk Prediction
 
-Let's analyze validation curves for a credit risk prediction model:
+Analyze validation curves for a credit risk prediction model:
 
 #### Pipeline + `classifier__max_depth` sweep
 
@@ -447,7 +447,7 @@ plt.show()
       <span class="code-callout__title">Plot and Interpret</span>
     </div>
     <div class="code-callout__body">
-      <p>Plot mean ± std bands across depths 1–20; the depth where CV score peaks and the train-CV gap starts growing is the recommended operating depth for this credit model.</p>
+      <p>Plot mean ± std bands across depths 1-20; the depth where CV score peaks and the train-CV gap starts growing is the recommended operating depth for this credit model.</p>
     </div>
   </div>
 </aside>
@@ -463,12 +463,12 @@ plt.show()
 
 ## Gotchas
 
-- **Misreading the y-axis direction** — `validation_curve` returns scores (higher is better), not errors; a rising training curve that diverges from a flat validation curve signals overfitting, but learners who expect an error plot may reverse their interpretation and increase complexity when they should reduce it.
-- **Sweeping a linear range for parameters that need a log scale** — Regularization parameters like `C` in logistic regression span orders of magnitude; a linear sweep from 1 to 10 misses the critical low-`C` region where the model underfits; always use `np.logspace` for parameters whose effect is multiplicative.
-- **Confusing the validation curve peak with the final model** — The hyperparameter value where the CV score peaks on a validation curve was selected by looking at validation data; that score is optimistic; use a separate test set or nested CV to get an unbiased performance estimate for the chosen setting.
-- **Passing the full dataset to `validation_curve` and then also evaluating on a held-out test set drawn from the same data** — `validation_curve` uses internal cross-validation on whatever `X, y` you pass; if `X` already excludes your test split, this is fine, but passing all data and later claiming a separate test set breaks the independence requirement.
-- **Drawing conclusions from noisy `fill_between` bands** — Wide standard-deviation bands across folds indicate the validation curve estimate is unreliable (often due to small datasets); increasing `cv` folds or dataset size before reading the curve will give cleaner, more actionable results.
-- **Forgetting to use the `classifier__` prefix for pipeline parameters** — When the estimator is wrapped in a `Pipeline`, the `param_name` argument must use the double-underscore notation (e.g., `"classifier__max_depth"`); omitting the step prefix raises a `ValueError` that is easy to misread as a data problem.
+- **Misreading the y-axis direction**: `validation_curve` returns scores (higher is better), not errors; a rising training curve that diverges from a flat validation curve signals overfitting, but learners who expect an error plot may reverse their interpretation and increase complexity when they should reduce it.
+- **Sweeping a linear range for parameters that need a log scale**: Regularization parameters like `C` in logistic regression span orders of magnitude; a linear sweep from 1 to 10 misses the critical low-`C` region where the model underfits; always use `np.logspace` for parameters whose effect is multiplicative.
+- **Confusing the validation curve peak with the final model**: The hyperparameter value where the CV score peaks on a validation curve was selected by looking at validation data; that score is optimistic; use a separate test set or nested CV to get an unbiased performance estimate for the chosen setting.
+- **Passing the full dataset to `validation_curve` and then also evaluating on a held-out test set drawn from the same data**: `validation_curve` uses internal cross-validation on whatever `X, y` you pass; if `X` already excludes your test split, this is fine, but passing all data and later claiming a separate test set breaks the independence requirement.
+- **Drawing conclusions from noisy `fill_between` bands**: Wide standard-deviation bands across folds indicate the validation curve estimate is unreliable (often due to small datasets); increasing `cv` folds or dataset size before reading the curve will give cleaner, more actionable results.
+- **Forgetting to use the `classifier__` prefix for pipeline parameters**: When the estimator is wrapped in a `Pipeline`, the `param_name` argument must use the double-underscore notation (e.g., `"classifier__max_depth"`); omitting the step prefix raises a `ValueError` that is easy to misread as a data problem.
 
 ## Additional Resources
 

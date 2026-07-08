@@ -3,7 +3,7 @@ reading_minutes: 45
 objectives:
   - Distinguish classification from regression and recognise when a sigmoid link is appropriate.
   - Fit a logistic regression with sklearn, interpret coefficients as log-odds, and convert to odds ratios.
-  - Read a confusion matrix, ROC curve, and AUC; choose a threshold from precision–recall trade-offs.
+  - Read a confusion matrix, ROC curve, and AUC; choose a threshold from precision-recall trade-offs.
   - Extend binary logistic regression to multi-class classification and recognise common pitfalls (imbalance, separation, scaling).
 ---
 
@@ -24,7 +24,7 @@ When the outcome is a **label** (often two classes), ordinary least squares is t
 
 - [Regression basics and diagnostics (module 4.3)](../4.3-rship-in-data/README.md), especially [simple linear regression](../4.3-rship-in-data/simple-linear-regression.md).
 
-> **Note:** The name says “regression,” but the target is usually a class label, not a continuous number.
+> **Note:** The name says "regression," but the target is usually a class label, not a continuous number.
 
 ## Introduction
 
@@ -51,7 +51,7 @@ Logistic regression is a statistical method that:
 
 ### Real-world Examples
 
-Before diving into the technical details, let's look at some everyday examples where logistic regression is used:
+Before the technical details, look at some everyday examples where logistic regression is used:
 
 1. **Email Spam Detection**
    - **Input**: Email content, sender information, subject line characteristics
@@ -75,7 +75,7 @@ Before diving into the technical details, let's look at some everyday examples w
 
 ### Visualizing the Classification Problem
 
-Let's visualize a simple binary classification problem that logistic regression can solve:
+Visualize a simple binary classification problem that logistic regression can solve:
 
 **Synthetic pass/fail exam data and scatter plot**
 
@@ -118,11 +118,11 @@ exam_data = pd.DataFrame({
 
 # Plot the data
 plt.figure(figsize=(10, 6))
-plt.scatter(exam_data.StudyHours[exam_data.Passed == 1], 
-            exam_data.AptitudeScore[exam_data.Passed == 1], 
+plt.scatter(exam_data.StudyHours[exam_data.Passed == 1],
+            exam_data.AptitudeScore[exam_data.Passed == 1],
             c='green', marker='+', s=100, label='Passed')
-plt.scatter(exam_data.StudyHours[exam_data.Passed == 0], 
-            exam_data.AptitudeScore[exam_data.Passed == 0], 
+plt.scatter(exam_data.StudyHours[exam_data.Passed == 0],
+            exam_data.AptitudeScore[exam_data.Passed == 0],
             c='red', marker='x', s=100, label='Failed')
 plt.xlabel('Study Hours')
 plt.ylabel('Aptitude Score')
@@ -157,7 +157,7 @@ print(exam_data.head())
       <span class="code-callout__title">Import numpy as np</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–11: follow this band in the snippet.</p>
+      <p>Lines 1-11: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="12-23" data-tint="2">
@@ -166,7 +166,7 @@ print(exam_data.head())
       <span class="code-callout__title">Generate synthetic data for student exam results</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 12–23: follow this band in the snippet.</p>
+      <p>Lines 12-23: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="24-34" data-tint="3">
@@ -175,7 +175,7 @@ print(exam_data.head())
       <span class="code-callout__title">Exam_data = pd.DataFrame({</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 24–34: follow this band in the snippet.</p>
+      <p>Lines 24-34: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="35-46" data-tint="4">
@@ -184,7 +184,7 @@ print(exam_data.head())
       <span class="code-callout__title">Plt.scatter(exam_data.StudyHours[exam_data.Pa…</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 35–46: follow this band in the snippet.</p>
+      <p>Lines 35-46: follow this band in the snippet.</p>
     </div>
   </div>
 </aside>
@@ -220,7 +220,7 @@ In this plot:
 
 ### From Linear to Logistic Regression
 
-To understand how logistic regression works, let's start with what we know about linear regression:
+To understand how logistic regression works, start with what we know about linear regression:
 
 **Linear Regression:** \\(y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_n x_n\\).
 
@@ -238,7 +238,7 @@ Where:
 - \\(z\\) is the linear combination of features: \\(z = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_n x_n\\).
 - \\(e\\) is the base of natural logarithm (approximately 2.718).
 
-Let's visualize this function:
+Visualize this function:
 
 **Annotated plot of the standard logistic (sigmoid) curve**
 
@@ -254,10 +254,10 @@ def plot_logistic_curve():
     """Visualize the logistic function with annotations"""
     x = np.linspace(-6, 6, 100)
     y = 1 / (1 + np.exp(-x))
-    
+
     plt.figure(figsize=(12, 6))
     plt.plot(x, y, 'b-', linewidth=2)
-    
+
     # Add annotations
     plt.annotate('Almost Certain 0', xy=(-4, 0.02), xytext=(-5, 0.15),
                 arrowprops=dict(facecolor='black', shrink=0.05))
@@ -265,12 +265,12 @@ def plot_logistic_curve():
                 arrowprops=dict(facecolor='black', shrink=0.05))
     plt.annotate('Almost Certain 1', xy=(4, 0.98), xytext=(3, 0.8),
                 arrowprops=dict(facecolor='black', shrink=0.05))
-    
+
     # Add a horizontal line at p = 0.5
     plt.axhline(y=0.5, color='r', linestyle='--', alpha=0.3)
     # Add a vertical line at z = 0
     plt.axvline(x=0, color='r', linestyle='--', alpha=0.3)
-    
+
     plt.title('The Logistic (Sigmoid) Function')
     plt.xlabel('z = β₀ + β₁x₁ + β₂x₂ + ... + βₙxₙ')
     plt.ylabel('Probability p(z)')
@@ -296,7 +296,7 @@ plot_logistic_curve()
       <span class="code-callout__title">Def plot_logistic_curve():</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–10: follow this band in the snippet.</p>
+      <p>Lines 1-10: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="11-20" data-tint="2">
@@ -305,7 +305,7 @@ plot_logistic_curve()
       <span class="code-callout__title">Arrowprops=dict(facecolor=&#x27;black&#x27;, shrink=0.05))</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 11–20: follow this band in the snippet.</p>
+      <p>Lines 11-20: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="21-31" data-tint="3">
@@ -314,7 +314,7 @@ plot_logistic_curve()
       <span class="code-callout__title">Plt.title(&#x27;The Logistic (Sigmoid) Function&#x27;)</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 21–31: follow this band in the snippet.</p>
+      <p>Lines 21-31: follow this band in the snippet.</p>
     </div>
   </div>
 </aside>
@@ -360,7 +360,7 @@ Interpreting coefficients in logistic regression is slightly different than in l
 
 3. **Interpretation**: For a one-unit increase in feature Xᵢ, the log odds of the positive class change by βᵢ
 
-Let's visualize how different coefficients affect the probability curve:
+Visualize how different coefficients affect the probability curve:
 
 **Overlay logistic curves for different linear predictors \\(z=\beta x\\)**
 
@@ -375,7 +375,7 @@ Let's visualize how different coefficients affect the probability curve:
 def plot_coefficient_effects():
     """Visualize how coefficients affect the probability curve"""
     x = np.linspace(-6, 6, 100)
-    
+
     # Different coefficient scenarios
     scenarios = {
         'Strong Positive (β=2)': 2*x,
@@ -383,12 +383,12 @@ def plot_coefficient_effects():
         'Strong Negative (β=-2)': -2*x,
         'Weak Negative (β=-0.5)': -0.5*x
     }
-    
+
     plt.figure(figsize=(12, 8))
     for label, z in scenarios.items():
         y = 1 / (1 + np.exp(-z))
         plt.plot(x, y, linewidth=2, label=label)
-    
+
     plt.title('Effect of Different Coefficients on Probability Curve')
     plt.xlabel('Feature Value')
     plt.ylabel('Probability of Positive Class')
@@ -415,7 +415,7 @@ plot_coefficient_effects()
       <span class="code-callout__title">Def plot_coefficient_effects():</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–14: follow this band in the snippet.</p>
+      <p>Lines 1-14: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="15-28" data-tint="2">
@@ -424,7 +424,7 @@ plot_coefficient_effects()
       <span class="code-callout__title">Y = 1 / (1 + np.exp(-z))</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 15–28: follow this band in the snippet.</p>
+      <p>Lines 15-28: follow this band in the snippet.</p>
     </div>
   </div>
 </aside>
@@ -465,12 +465,12 @@ def plot_odds_ratios():
     coefficients = np.array([2.1, 0.8, 0.0, -0.5, -1.7])
     odds_ratios = np.exp(coefficients)
     feature_names = ['Feature A', 'Feature B', 'Feature C', 'Feature D', 'Feature E']
-    
+
     # Calculate confidence intervals (just for illustration)
     std_errors = np.array([0.3, 0.2, 0.15, 0.25, 0.4])
     ci_lower = np.exp(coefficients - 1.96 * std_errors)
     ci_upper = np.exp(coefficients + 1.96 * std_errors)
-    
+
     # Create DataFrame
     df = pd.DataFrame({
         'Feature': feature_names,
@@ -479,20 +479,20 @@ def plot_odds_ratios():
         'CI_Upper': ci_upper
     })
     df = df.sort_values('Odds_Ratio')
-    
+
     # Plot
     plt.figure(figsize=(10, 6))
-    plt.errorbar(df.Odds_Ratio, range(len(df)), 
+    plt.errorbar(df.Odds_Ratio, range(len(df)),
                  xerr=[df.Odds_Ratio - df.CI_Lower, df.CI_Upper - df.Odds_Ratio],
                  fmt='o', capsize=5)
-    
+
     plt.axvline(x=1, color='r', linestyle='--', label='No Effect Line')
     plt.yticks(range(len(df)), df.Feature)
     plt.xscale('log')  # Log scale makes interpretation easier
     plt.xlabel('Odds Ratio (log scale)')
     plt.title('Odds Ratios with 95% Confidence Intervals')
     plt.grid(True, alpha=0.3)
-    
+
     # Add annotations
     plt.text(0.2, -0.5, 'Decreases Odds', color='blue', fontsize=12)
     plt.text(2, -0.5, 'Increases Odds', color='blue', fontsize=12)
@@ -516,7 +516,7 @@ plot_odds_ratios()
       <span class="code-callout__title">Def plot_odds_ratios():</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–14: follow this band in the snippet.</p>
+      <p>Lines 1-14: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="15-28" data-tint="2">
@@ -525,7 +525,7 @@ plot_odds_ratios()
       <span class="code-callout__title">&#x27;Feature&#x27;: feature_names,</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 15–28: follow this band in the snippet.</p>
+      <p>Lines 15-28: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="29-42" data-tint="3">
@@ -534,7 +534,7 @@ plot_odds_ratios()
       <span class="code-callout__title">Plt.yticks(range(len(df)), df.Feature)</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 29–42: follow this band in the snippet.</p>
+      <p>Lines 29-42: follow this band in the snippet.</p>
     </div>
   </div>
 </aside>
@@ -558,7 +558,7 @@ This visualization shows:
 
 *Logistic Regression from Scratch in Python by AssemblyAI*
 
-Now, let's build a logistic regression model on our student exam data:
+Now, build a logistic regression model on our student exam data:
 
 ### Step 1: Prepare Your Data
 
@@ -579,7 +579,7 @@ Before building a model, you need to:
 <div class="code-explainer__code">
 
 {% highlight python %}
-# Let's use our exam data from earlier
+# Use the exam data from earlier
 X = exam_data[['StudyHours', 'AptitudeScore']]
 y = exam_data['Passed']
 
@@ -609,7 +609,7 @@ Test set shape: (25, 2)
       <span class="code-callout__title">Let&#x27;s use our exam data from earlier</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–7: follow this band in the snippet.</p>
+      <p>Lines 1-7: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="8-15" data-tint="2">
@@ -618,7 +618,7 @@ Test set shape: (25, 2)
       <span class="code-callout__title">Scale the features</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 8–15: follow this band in the snippet.</p>
+      <p>Lines 8-15: follow this band in the snippet.</p>
     </div>
   </div>
 </aside>
@@ -681,7 +681,7 @@ Intercept: 0.2269
       <span class="code-callout__title">Create and train the model</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–9: follow this band in the snippet.</p>
+      <p>Lines 1-9: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="10-19" data-tint="2">
@@ -690,7 +690,7 @@ Intercept: 0.2269
       <span class="code-callout__title">})</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 10–19: follow this band in the snippet.</p>
+      <p>Lines 10-19: follow this band in the snippet.</p>
     </div>
   </div>
 </aside>
@@ -727,28 +727,28 @@ def plot_decision_boundary(X, y, model, scaler):
     y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
     xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
                          np.arange(y_min, y_max, h))
-    
+
     # Scale the mesh points
     mesh_points_scaled = scaler.transform(np.c_[xx.ravel(), yy.ravel()])
-    
+
     # Get predictions for each point in the mesh
     Z = model.predict_proba(mesh_points_scaled)[:, 1]
     Z = Z.reshape(xx.shape)
-    
+
     # Plot the contour
     plt.figure(figsize=(10, 8))
-    
+
     # Plot decision regions
     contour = plt.contourf(xx, yy, Z, alpha=0.3, cmap=plt.cm.RdBu_r)
     plt.colorbar(contour, label='Probability of Passing')
-    
+
     # Plot decision boundary (where probability = 0.5)
     plt.contour(xx, yy, Z, levels=[0.5], linestyles='dashed', colors='k')
-    
+
     # Plot data points
     scatter = plt.scatter(X[:, 0], X[:, 1], c=y, edgecolor='k', cmap=plt.cm.RdBu_r)
     plt.legend(*scatter.legend_elements(), title="Exam Result")
-    
+
     plt.xlabel('Study Hours')
     plt.ylabel('Aptitude Score')
     plt.title('Logistic Regression Decision Boundary')
@@ -774,7 +774,7 @@ plot_decision_boundary(X_scaled, y, model, scaler)
       <span class="code-callout__title">Def plot_decision_boundary(X, y, model, scaler):</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–13: follow this band in the snippet.</p>
+      <p>Lines 1-13: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="14-26" data-tint="2">
@@ -783,7 +783,7 @@ plot_decision_boundary(X_scaled, y, model, scaler)
       <span class="code-callout__title">Z = model.predict_proba(mesh_points_scaled)[:…</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 14–26: follow this band in the snippet.</p>
+      <p>Lines 14-26: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="27-40" data-tint="3">
@@ -792,7 +792,7 @@ plot_decision_boundary(X_scaled, y, model, scaler)
       <span class="code-callout__title">Plot data points</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 27–40: follow this band in the snippet.</p>
+      <p>Lines 27-40: follow this band in the snippet.</p>
     </div>
   </div>
 </aside>
@@ -911,7 +911,7 @@ weighted avg       0.86      0.76      0.76        25
       <span class="code-callout__title">Def evaluate_model(model, X_test, y_test, cla…</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–13: follow this band in the snippet.</p>
+      <p>Lines 1-13: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="14-26" data-tint="2">
@@ -920,7 +920,7 @@ weighted avg       0.86      0.76      0.76        25
       <span class="code-callout__title">Cm = confusion_matrix(y_test, y_pred)</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 14–26: follow this band in the snippet.</p>
+      <p>Lines 14-26: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="27-39" data-tint="3">
@@ -929,7 +929,7 @@ weighted avg       0.86      0.76      0.76        25
       <span class="code-callout__title">Plt.ylabel(&#x27;Actual&#x27;)</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 27–39: follow this band in the snippet.</p>
+      <p>Lines 27-39: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="40-53" data-tint="4">
@@ -938,7 +938,7 @@ weighted avg       0.86      0.76      0.76        25
       <span class="code-callout__title">Plt.figure(figsize=(8, 6))</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 40–53: follow this band in the snippet.</p>
+      <p>Lines 40-53: follow this band in the snippet.</p>
     </div>
   </div>
 </aside>
@@ -974,13 +974,13 @@ Classification Report:
 weighted avg       0.86      0.76      0.76        25
 ```
 
-The figures above are the confusion matrix and ROC curve. The recall values tell the story: 10 of 16 failures and 9 of 9 passes were classified correctly. Six failures slipped through as false positives — typical when the cut-off probability sits at 0.5 and one class is over-represented. Adjusting the threshold (or applying class weights, [later in this lesson](#1-handling-imbalanced-datasets)) trades these false alarms for some missed passes.
+The figures above are the confusion matrix and ROC curve. The recall values tell the story: 10 of 16 failures and 9 of 9 passes were classified correctly. Six failures slipped through as false positives, typical when the cut-off probability sits at 0.5 and one class is over-represented. Adjusting the threshold (or applying class weights, [later in this lesson](#1-handling-imbalanced-datasets)) trades these false alarms for some missed passes.
 
 ## Practical Applications and Extensions
 
 ### 1. Handling Multiple Features
 
-Logistic regression can handle multiple features. Let's create an example with more variables:
+Logistic regression can handle multiple features. Create an example with more variables:
 
 **Loan approval simulation: multi-feature model and `evaluate_model`**
 
@@ -1117,7 +1117,7 @@ weighted avg       0.95      0.94      0.92       125
       <span class="code-callout__title">Generate a more complex dataset</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–13: follow this band in the snippet.</p>
+      <p>Lines 1-13: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="14-26" data-tint="2">
@@ -1126,7 +1126,7 @@ weighted avg       0.95      0.94      0.92       125
       <span class="code-callout__title">Create logit for probability of loan approval</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 14–26: follow this band in the snippet.</p>
+      <p>Lines 14-26: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="27-39" data-tint="3">
@@ -1135,7 +1135,7 @@ weighted avg       0.95      0.94      0.92       125
       <span class="code-callout__title">Create DataFrame</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 27–39: follow this band in the snippet.</p>
+      <p>Lines 27-39: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="40-52" data-tint="4">
@@ -1144,7 +1144,7 @@ weighted avg       0.95      0.94      0.92       125
       <span class="code-callout__title">Build a model with multiple features</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 40–52: follow this band in the snippet.</p>
+      <p>Lines 40-52: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="53-66" data-tint="1">
@@ -1153,7 +1153,7 @@ weighted avg       0.95      0.94      0.92       125
       <span class="code-callout__title">Show coefficients and odds ratios</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 53–66: follow this band in the snippet.</p>
+      <p>Lines 53-66: follow this band in the snippet.</p>
     </div>
   </div>
 </aside>
@@ -1209,7 +1209,7 @@ Classification Report:
 weighted avg       0.95      0.94      0.92       125
 ```
 
-The 0.94 accuracy looks impressive but the recall on the **Approved** class is only 0.12 — the model defaults to predicting "Denied" because that class dominates the training data (only 4.6 % approved). This is a textbook **class-imbalance** failure; the next subsection on `class_weight='balanced'` is the standard fix.
+The 0.94 accuracy looks impressive but the recall on the **Approved** class is only 0.12, the model defaults to predicting "Denied" because that class dominates the training data (only 4.6 % approved). This is a textbook **class-imbalance** failure; the next subsection on `class_weight='balanced'` is the standard fix.
 
 ### 2. Feature Importance and Interpretation
 
@@ -1228,7 +1228,7 @@ def plot_feature_importance(model, feature_names):
     # Get absolute coefficient values
     coefs = model.coef_[0]
     abs_coefs = np.abs(coefs)
-    
+
     # Create DataFrame
     importance_df = pd.DataFrame({
         'Feature': feature_names,
@@ -1237,7 +1237,7 @@ def plot_feature_importance(model, feature_names):
         'Odds_Ratio': np.exp(coefs)
     })
     importance_df = importance_df.sort_values('Absolute_Coefficient', ascending=False)
-    
+
     # Plot
     plt.figure(figsize=(10, 6))
     colors = ['green' if c > 0 else 'red' for c in importance_df['Coefficient']]
@@ -1245,7 +1245,7 @@ def plot_feature_importance(model, feature_names):
     plt.xlabel('Absolute Coefficient Value')
     plt.title('Feature Importance in Logistic Regression')
     plt.grid(True, alpha=0.3)
-    
+
     # Add a legend for the colors
     from matplotlib.patches import Patch
     legend_elements = [
@@ -1253,7 +1253,7 @@ def plot_feature_importance(model, feature_names):
         Patch(facecolor='red', label='Negative Effect (Decreases Probability)')
     ]
     plt.legend(handles=legend_elements)
-    
+
     plt.tight_layout()
     plt.savefig('feature_importance.png')
     plt.show()
@@ -1275,7 +1275,7 @@ plot_feature_importance(loan_model, X_loan.columns)
       <span class="code-callout__title">Def plot_feature_importance(model, feature_na…</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–12: follow this band in the snippet.</p>
+      <p>Lines 1-12: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="13-24" data-tint="2">
@@ -1284,7 +1284,7 @@ plot_feature_importance(loan_model, X_loan.columns)
       <span class="code-callout__title">})</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 13–24: follow this band in the snippet.</p>
+      <p>Lines 13-24: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="25-37" data-tint="3">
@@ -1293,7 +1293,7 @@ plot_feature_importance(loan_model, X_loan.columns)
       <span class="code-callout__title">From matplotlib.patches import Patch</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 25–37: follow this band in the snippet.</p>
+      <p>Lines 25-37: follow this band in the snippet.</p>
     </div>
   </div>
 </aside>
@@ -1307,7 +1307,7 @@ In many real-world applications, the classes are imbalanced (e.g., rare medical 
 
 **Imbalanced labels: `class_weight` vs default with ROC and PR curves**
 
-**Purpose:** Force a 10% positive rate, fit plain and `class_weight='balanced'` logistic models, and compare ROC and precision–recall curves plus classification reports.
+**Purpose:** Force a 10% positive rate, fit plain and `class_weight='balanced'` logistic models, and compare ROC and precision-recall curves plus classification reports.
 
 **Walkthrough:** `stratify` in `train_test_split`; `roc_curve`, `roc_auc_score`, `precision_recall_curve`, `average_precision_score`; subplot layout.
 
@@ -1355,7 +1355,7 @@ plt.show()
 # Split data
 X_imb = imbalanced_data[['Feature1', 'Feature2']]
 y_imb = imbalanced_data['Class']
-X_train, X_test, y_train, y_test = train_test_split(X_imb, y_imb, test_size=0.25, random_state=42, 
+X_train, X_test, y_train, y_test = train_test_split(X_imb, y_imb, test_size=0.25, random_state=42,
                                                     stratify=y_imb)  # Stratify to maintain class distribution
 
 # Create models
@@ -1371,9 +1371,9 @@ balanced_model.fit(X_train, y_train)
 def compare_models_on_imbalanced_data(models, X_test, y_test):
     """Compare different models on imbalanced data"""
     from sklearn.metrics import precision_recall_curve, average_precision_score
-    
+
     plt.figure(figsize=(12, 5))
-    
+
     # Plot ROC curves
     plt.subplot(121)
     for name, model in models.items():
@@ -1381,14 +1381,14 @@ def compare_models_on_imbalanced_data(models, X_test, y_test):
         fpr, tpr, _ = roc_curve(y_test, y_pred_prob)
         auc = roc_auc_score(y_test, y_pred_prob)
         plt.plot(fpr, tpr, label=f'{name} (AUC = {auc:.3f})')
-    
+
     plt.plot([0, 1], [0, 1], 'k--', label='Random')
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
     plt.title('ROC Curve')
     plt.legend()
     plt.grid(True, alpha=0.3)
-    
+
     # Plot precision-recall curves
     plt.subplot(122)
     for name, model in models.items():
@@ -1396,17 +1396,17 @@ def compare_models_on_imbalanced_data(models, X_test, y_test):
         precision, recall, _ = precision_recall_curve(y_test, y_pred_prob)
         ap = average_precision_score(y_test, y_pred_prob)
         plt.plot(recall, precision, label=f'{name} (AP = {ap:.3f})')
-    
+
     plt.xlabel('Recall')
     plt.ylabel('Precision')
     plt.title('Precision-Recall Curve')
     plt.legend()
     plt.grid(True, alpha=0.3)
-    
+
     plt.tight_layout()
     plt.savefig('imbalanced_comparison.png')
     plt.show()
-    
+
     # Print classification reports
     for name, model in models.items():
         print(f"\nClassification Report for {name}:")
@@ -1428,7 +1428,7 @@ compare_models_on_imbalanced_data(models, X_test, y_test)
       <span class="code-callout__title">Create an imbalanced dataset (10% positive cl…</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–17: follow this band in the snippet.</p>
+      <p>Lines 1-17: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="18-34" data-tint="2">
@@ -1437,7 +1437,7 @@ compare_models_on_imbalanced_data(models, X_test, y_test)
       <span class="code-callout__title">Create DataFrame</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 18–34: follow this band in the snippet.</p>
+      <p>Lines 18-34: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="35-52" data-tint="3">
@@ -1446,7 +1446,7 @@ compare_models_on_imbalanced_data(models, X_test, y_test)
       <span class="code-callout__title">Plt.savefig(&#x27;class_imbalance.png&#x27;)</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 35–52: follow this band in the snippet.</p>
+      <p>Lines 35-52: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="53-69" data-tint="4">
@@ -1455,7 +1455,7 @@ compare_models_on_imbalanced_data(models, X_test, y_test)
       <span class="code-callout__title">Compare models</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 53–69: follow this band in the snippet.</p>
+      <p>Lines 53-69: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="70-86" data-tint="1">
@@ -1464,7 +1464,7 @@ compare_models_on_imbalanced_data(models, X_test, y_test)
       <span class="code-callout__title">Plt.ylabel(&#x27;True Positive Rate&#x27;)</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 70–86: follow this band in the snippet.</p>
+      <p>Lines 70-86: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="87-104" data-tint="2">
@@ -1473,7 +1473,7 @@ compare_models_on_imbalanced_data(models, X_test, y_test)
       <span class="code-callout__title">Plt.grid(True, alpha=0.3)</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 87–104: follow this band in the snippet.</p>
+      <p>Lines 87-104: follow this band in the snippet.</p>
     </div>
   </div>
 </aside>
@@ -1483,7 +1483,7 @@ This comparison shows that:
 
 1. The **balanced model** (which gives more weight to the minority class) typically has better recall
 2. For imbalanced datasets, the **precision-recall curve** is often more informative than the ROC curve
-3. Using appropriate metrics like F1-score or average precision is crucial
+3. Using appropriate metrics like F1-score or average precision is important
 
 ## Common Pitfalls and Solutions
 
@@ -1525,7 +1525,7 @@ custom_weighted_model = LogisticRegression(class_weight=class_weights)
       <span class="code-callout__title">From sklearn.linear_model import LogisticRegr…</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–8: follow this band in the snippet.</p>
+      <p>Lines 1-8: follow this band in the snippet.</p>
     </div>
   </div>
 </aside>
@@ -1572,7 +1572,7 @@ l2_model = LogisticRegression(penalty='l2', C=0.1)
       <span class="code-callout__title">Example of using regularization to handle mul…</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–10: follow this band in the snippet.</p>
+      <p>Lines 1-10: follow this band in the snippet.</p>
     </div>
   </div>
 </aside>
@@ -1622,7 +1622,7 @@ Pipeline(steps=[('polynomialfeatures', PolynomialFeatures(include_bias=False)),
       <span class="code-callout__title">Example of adding polynomial features</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–10: follow this band in the snippet.</p>
+      <p>Lines 1-10: follow this band in the snippet.</p>
     </div>
   </div>
 </aside>
@@ -1686,7 +1686,7 @@ Shape of probability matrix: (45, 3)
       <span class="code-callout__title">From sklearn.linear_model import LogisticRegr…</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–10: follow this band in the snippet.</p>
+      <p>Lines 1-10: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="11-21" data-tint="2">
@@ -1695,7 +1695,7 @@ Shape of probability matrix: (45, 3)
       <span class="code-callout__title">One-vs-Rest with explicit wrapper</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 11–21: follow this band in the snippet.</p>
+      <p>Lines 11-21: follow this band in the snippet.</p>
     </div>
   </div>
 </aside>
@@ -1740,7 +1740,7 @@ Multinomial (Softmax) accuracy: 1.0000
       <span class="code-callout__title">Multinomial is the default for multi-class ta…</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–7: follow this band in the snippet.</p>
+      <p>Lines 1-7: follow this band in the snippet.</p>
     </div>
   </div>
 </aside>
@@ -1752,7 +1752,7 @@ Multinomial (Softmax) accuracy: 1.0000
 
 ## Interactive Example: Predict Customer Purchase
 
-Let's create an interactive example where we predict if a customer will make a purchase based on their behavior:
+Create an interactive example where we predict if a customer will make a purchase based on their behavior:
 
 **Toy `coef_` / `intercept_` and manual scaling for purchase probability**
 
@@ -1773,18 +1773,18 @@ def predict_purchase_probability(age, time_on_site, pages_visited, is_returning_
     model.coef_ = np.array([[0.03, 0.05, 0.1, 0.8]])
     model.intercept_ = np.array([-4])
     model.n_features_in_ = 4
-    
+
     # Create input features
     X = np.array([[age, time_on_site, pages_visited, int(is_returning_customer)]])
-    
+
     # Scale features (using typical means and stds)
     means = np.array([35, 3, 5, 0.5])
     stds = np.array([15, 2, 3, 0.5])
     X_scaled = (X - means) / stds
-    
+
     # Predict probability
     purchase_prob = model.predict_proba(X_scaled)[0, 1]
-    
+
     return purchase_prob
 
 # Example usage
@@ -1816,7 +1816,7 @@ Action: No special offer needed.
       <span class="code-callout__title">Create a function to predict purchase probabi…</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–11: follow this band in the snippet.</p>
+      <p>Lines 1-11: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="12-23" data-tint="2">
@@ -1825,7 +1825,7 @@ Action: No special offer needed.
       <span class="code-callout__title">Scale features (using typical means and stds)</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 12–23: follow this band in the snippet.</p>
+      <p>Lines 12-23: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="24-35" data-tint="3">
@@ -1834,7 +1834,7 @@ Action: No special offer needed.
       <span class="code-callout__title">Time_on_site = 5  # minutes</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 24–35: follow this band in the snippet.</p>
+      <p>Lines 24-35: follow this band in the snippet.</p>
     </div>
   </div>
 </aside>
@@ -1870,9 +1870,9 @@ from sklearn.metrics import classification_report, confusion_matrix
 
 # Download the dataset (you could use from sklearn.datasets or a direct URL)
 url = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv"
-column_names = ['Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness', 
+column_names = ['Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness',
                 'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age', 'Outcome']
-                
+
 diabetes_data = pd.read_csv(url, names=column_names)
 
 # Explore data
@@ -1916,17 +1916,17 @@ print(coefficients)
 <class 'pandas.DataFrame'>
 RangeIndex: 768 entries, 0 to 767
 Data columns (total 9 columns):
- #   Column                    Non-Null Count  Dtype  
----  ------                    --------------  -----  
- 0   Pregnancies               768 non-null    int64  
- 1   Glucose                   768 non-null    int64  
- 2   BloodPressure             768 non-null    int64  
- 3   SkinThickness             768 non-null    int64  
- 4   Insulin                   768 non-null    int64  
+ #   Column                    Non-Null Count  Dtype
+---  ------                    --------------  -----
+ 0   Pregnancies               768 non-null    int64
+ 1   Glucose                   768 non-null    int64
+ 2   BloodPressure             768 non-null    int64
+ 3   SkinThickness             768 non-null    int64
+ 4   Insulin                   768 non-null    int64
  5   BMI                       768 non-null    float64
  6   DiabetesPedigreeFunction  768 non-null    float64
- 7   Age                       768 non-null    int64  
- 8   Outcome                   768 non-null    int64  
+ 7   Age                       768 non-null    int64
+ 8   Outcome                   768 non-null    int64
 dtypes: float64(2), int64(7)
 memory usage: 54.1 KB
 None
@@ -1977,7 +1977,7 @@ Feature Importance:
       <span class="code-callout__title">Import libraries</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 1–12: follow this band in the snippet.</p>
+      <p>Lines 1-12: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="13-25" data-tint="2">
@@ -1986,7 +1986,7 @@ Feature Importance:
       <span class="code-callout__title">Diabetes_data = pd.read_csv(url, names=column…</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 13–25: follow this band in the snippet.</p>
+      <p>Lines 13-25: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="26-38" data-tint="3">
@@ -1995,7 +1995,7 @@ Feature Importance:
       <span class="code-callout__title">Scale features</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 26–38: follow this band in the snippet.</p>
+      <p>Lines 26-38: follow this band in the snippet.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="39-51" data-tint="4">
@@ -2004,7 +2004,7 @@ Feature Importance:
       <span class="code-callout__title">Print(confusion_matrix(y_test, y_pred))</span>
     </div>
     <div class="code-callout__body">
-      <p>Lines 39–51: follow this band in the snippet.</p>
+      <p>Lines 39-51: follow this band in the snippet.</p>
     </div>
   </div>
 </aside>
@@ -2014,17 +2014,17 @@ Feature Importance:
 <class 'pandas.DataFrame'>
 RangeIndex: 768 entries, 0 to 767
 Data columns (total 9 columns):
- #   Column                    Non-Null Count  Dtype  
----  ------                    --------------  -----  
- 0   Pregnancies               768 non-null    int64  
- 1   Glucose                   768 non-null    int64  
- 2   BloodPressure             768 non-null    int64  
- 3   SkinThickness             768 non-null    int64  
- 4   Insulin                   768 non-null    int64  
+ #   Column                    Non-Null Count  Dtype
+---  ------                    --------------  -----
+ 0   Pregnancies               768 non-null    int64
+ 1   Glucose                   768 non-null    int64
+ 2   BloodPressure             768 non-null    int64
+ 3   SkinThickness             768 non-null    int64
+ 4   Insulin                   768 non-null    int64
  5   BMI                       768 non-null    float64
  6   DiabetesPedigreeFunction  768 non-null    float64
- 7   Age                       768 non-null    int64  
- 8   Outcome                   768 non-null    int64  
+ 7   Age                       768 non-null    int64
+ 8   Outcome                   768 non-null    int64
 dtypes: float64(2), int64(7)
 memory usage: 54.1 KB
 None
@@ -2068,12 +2068,12 @@ Feature Importance:
 
 ## Gotchas
 
-- **Applying a 0.5 threshold blindly on imbalanced classes** — sklearn's default `predict` uses p ≥ 0.5 as the decision boundary. When the positive class is rare (e.g., 5% fraud), this threshold produces near-zero recall for the minority class. Evaluate the full ROC or precision-recall curve and choose a threshold that matches your business cost of false negatives vs. false positives.
-- **Forgetting to scale features** — Logistic regression uses gradient-based optimisation (or its equivalent); features on very different scales (e.g., income in thousands vs. age in tens) cause slow convergence and poorly comparable coefficients. Always apply `StandardScaler` before fitting.
-- **Interpreting coefficients as probabilities instead of log-odds** — A coefficient of 1.13 for Glucose means the log-odds of diabetes increases by 1.13 per unit—not that probability increases by 1.13. Convert to an odds ratio with `exp(coef)` and then back to a probability change only at a specific baseline.
-- **Using accuracy as the sole metric for imbalanced datasets** — A model that predicts "no diabetes" for every patient achieves 65% accuracy on the Pima dataset while being completely useless. Report precision, recall, F1, or AUC-ROC alongside accuracy.
-- **Assuming the model converges with the default `max_iter=100`** — sklearn will print a `ConvergenceWarning` silently if the solver hasn't converged, and the returned coefficients are unreliable. Increase `max_iter` or switch to `solver='lbfgs'` with looser tolerance after scaling features.
-- **Treating predicted probabilities as calibrated without checking** — A model that outputs p = 0.8 does not necessarily mean 80% of those cases are positive. Use `sklearn.calibration.calibration_curve` or Platt scaling to verify and fix probability calibration before using raw probabilities for ranking or thresholding.
+- **Applying a 0.5 threshold blindly on imbalanced classes**: sklearn's default `predict` uses p ≥ 0.5 as the decision boundary. When the positive class is rare (e.g., 5% fraud), this threshold produces near-zero recall for the minority class. Evaluate the full ROC or precision-recall curve and choose a threshold that matches your business cost of false negatives vs. false positives.
+- **Forgetting to scale features**: Logistic regression uses gradient-based optimisation (or its equivalent); features on very different scales (e.g., income in thousands vs. age in tens) cause slow convergence and poorly comparable coefficients. Always apply `StandardScaler` before fitting.
+- **Interpreting coefficients as probabilities instead of log-odds**: A coefficient of 1.13 for Glucose means the log-odds of diabetes increases by 1.13 per unit, not that probability increases by 1.13. Convert to an odds ratio with `exp(coef)` and then back to a probability change only at a specific baseline.
+- **Using accuracy as the sole metric for imbalanced datasets**: A model that predicts "no diabetes" for every patient achieves 65% accuracy on the Pima dataset while being completely useless. Report precision, recall, F1, or AUC-ROC alongside accuracy.
+- **Assuming the model converges with the default `max_iter=100`**: sklearn will print a `ConvergenceWarning` silently if the solver hasn't converged, and the returned coefficients are unreliable. Increase `max_iter` or switch to `solver='lbfgs'` with looser tolerance after scaling features.
+- **Treating predicted probabilities as calibrated without checking**: A model that outputs p = 0.8 does not necessarily mean 80% of those cases are positive. Use `sklearn.calibration.calibration_curve` or Platt scaling to verify and fix probability calibration before using raw probabilities for ranking or thresholding.
 
 ## Next steps
 

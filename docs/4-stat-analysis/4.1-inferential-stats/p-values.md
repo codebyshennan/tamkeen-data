@@ -9,11 +9,11 @@ objectives:
 
 # Understanding P-values: Your Statistical Detective Tool
 
-**After this lesson:** you can explain the core ideas in “Understanding P-values: Your Statistical Detective Tool” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Understanding P-values: Your Statistical Detective Tool and try the examples in your own notebook.
 
 ## Overview
 
-A **p-value** answers a narrow question: “If the null hypothesis were true, how often would we see a test statistic this extreme or more?” It is not a probability that a hypothesis is true, and it is not the same as effect size. This lesson connects the definition to plots and common misreadings; [parameters and statistics](./parameters-statistics.md) next revisits notation and estimators in one place.
+A **p-value** answers a narrow question: "If the null hypothesis were true, how often would we see a test statistic this extreme or more?" It is not a probability that a hypothesis is true, and it is not the same as effect size. This lesson connects the definition to plots and common misreadings; [parameters and statistics](./parameters-statistics.md) next revisits notation and estimators in one place.
 
 ## Why this matters
 
@@ -108,7 +108,7 @@ else:
 The definition above is narrow on purpose. Three of the most common misreadings flip the conditional, swap the question, or confuse statistical significance with practical importance:
 
 - **NOT the probability that H₀ is true.** The p-value is computed *assuming* H₀ is true; it cannot turn around and tell you the probability that H₀ itself is true. A Bayesian posterior probability answers that different question.
-- **NOT the probability the result is due to chance.** A p-value of 0.03 does not mean "there is a 3% chance the effect is random"—it means "if the null were true, results this extreme would happen about 3% of the time."
+- **NOT the probability the result is due to chance.** A p-value of 0.03 does not mean "there is a 3% chance the effect is random"-it means "if the null were true, results this extreme would happen about 3% of the time."
 - **NOT the probability of being wrong if you reject H₀.** That is a Type I error rate (\\(\alpha\\)) you set in advance for the procedure, not an attribute of one specific p-value.
 
 A separate trap, covered next, is treating a small p-value as evidence of a *large* effect; sample size alone can drive p-values down.
@@ -189,7 +189,7 @@ Result: Not significant
       <span class="code-callout__title">Decision rule</span>
     </div>
     <div class="code-callout__body">
-      <p>Compare p to α = 0.05. With this small sample the real 1-day difference may not cross the threshold — power matters.</p>
+      <p>Compare p to α = 0.05. With this small sample the real 1-day difference may not cross the threshold, power matters.</p>
     </div>
   </div>
 </aside>
@@ -374,7 +374,7 @@ n=1000: p=0.0000 Significant
       <span class="code-callout__title">Effect size held fixed</span>
     </div>
     <div class="code-callout__body">
-      <p>The real difference between groups stays at 0.2 SD across all four trials — only n changes.</p>
+      <p>The real difference between groups stays at 0.2 SD across all four trials, only n changes.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="8-10" data-tint="2">
@@ -394,11 +394,11 @@ n=1000: p=0.0000 Significant
 
 #### Interactive: same effect, different n
 
-The two groups in the left panel always differ by the same effect size (0.2 SD — small but real). Slide \\(n\\) from 10 to 2,000. Right panel: the resulting p-value plotted on a log scale, with the gold dot marking the current sample size. The red dashed line is the conventional \\(\alpha = 0.05\\) threshold.
+The two groups in the left panel always differ by the same effect size (0.2 SD, small but real). Slide \\(n\\) from 10 to 2,000. Right panel: the resulting p-value plotted on a log scale, with the gold dot marking the current sample size. The red dashed line is the conventional \\(\alpha = 0.05\\) threshold.
 
 <iframe src="assets/interactive/p_value_sample_size_simulation.html" width="100%" height="500" frameborder="0" loading="lazy" title="Interactive p-value vs sample size"></iframe>
 
-**Takeaway:** at \\(n = 10\\) the p-value is huge — the effect is real but invisible. At \\(n = 2{,}000\\) the same effect produces \\(p < 0.001\\). The effect didn't get bigger; we just bought more statistical power.
+**Takeaway:** at \\(n = 10\\) the p-value is huge, the effect is real but invisible. At \\(n = 2{,}000\\) the same effect produces \\(p < 0.001\\). The effect didn't get bigger; we just bought more statistical power.
 
 ### 2. Effect Size
 
@@ -516,8 +516,8 @@ Every test can be wrong in two different ways. Naming them is the easiest way to
 
 |   | Reality: H₀ true (no effect) | Reality: H₀ false (real effect) |
 |---|---|---|
-| **You reject H₀** | **Type I error** (false alarm) — probability \\(\alpha\\) | Correct rejection — probability \\(1 - \beta\\) = **power** |
-| **You fail to reject H₀** | Correct non-rejection — probability \\(1 - \alpha\\) | **Type II error** (missed effect) — probability \\(\beta\\) |
+| **You reject H₀** | **Type I error** (false alarm), probability \\(\alpha\\) | Correct rejection, probability \\(1 - \beta\\) = **power** |
+| **You fail to reject H₀** | Correct non-rejection, probability \\(1 - \alpha\\) | **Type II error** (missed effect), probability \\(\beta\\) |
 
 Three things to remember:
 
@@ -527,7 +527,7 @@ Three things to remember:
 
 ### The trade-off
 
-You can always lower \\(\alpha\\) (be stricter), but that **raises \\(\beta\\)** — you'll miss more real effects. The only way to lower *both* simultaneously is to increase the sample size, which is why power calculations and sample-size planning matter.
+You can always lower \\(\alpha\\) (be stricter), but that **raises \\(\beta\\)**, you'll miss more real effects. The only way to lower *both* simultaneously is to increase the sample size, which is why power calculations and sample-size planning matter.
 
 ### What drives power?
 
@@ -535,16 +535,16 @@ Power goes up when:
 
 | Lever | Effect on power |
 |---|---|
-| **Effect size grows** (the real difference is bigger) | ↑ — easier to detect |
-| **Sample size grows** | ↑ — less noise around the estimate |
-| **\\(\alpha\\) is more lenient** (e.g., 0.10 instead of 0.01) | ↑ — easier to "cross the line," but you accept more false alarms |
-| **Variability shrinks** (cleaner measurement) | ↑ — same effect against less noise |
+| **Effect size grows** (the real difference is bigger) | ↑, easier to detect |
+| **Sample size grows** | ↑, less noise around the estimate |
+| **\\(\alpha\\) is more lenient** (e.g., 0.10 instead of 0.01) | ↑, easier to "cross the line," but you accept more false alarms |
+| **Variability shrinks** (cleaner measurement) | ↑, same effect against less noise |
 
 ### Why this matters for reading results
 
 - A **non-significant** p-value (p > α) does **not** mean "no effect." It might mean the test was underpowered. Always ask: *"What size of effect would this study have been able to detect?"*
 - A **significant** result (p < α) doesn't mean the effect is large or important. It just means it's not zero given the noise.
-- When designing a study, you usually fix three of {effect size, n, α, power} and solve for the fourth. The most common case: "I want 80% power to detect a 5% lift at α = 0.05 — how many users do I need?"
+- When designing a study, you usually fix three of {effect size, n, α, power} and solve for the fourth. The most common case: "I want 80% power to detect a 5% lift at α = 0.05, how many users do I need?"
 
 ### Interactive: Power vs sample size and effect size
 
@@ -555,8 +555,8 @@ Move the sliders to set the true effect size (in standardized units) and the per
 **Try this:**
 
 - Set effect size = 0.2 (a small effect). Slide \\(n\\) up. How big does \\(n\\) need to be before power crosses 80%?
-- Set effect size = 0.5 (medium). Notice power crosses 80% much sooner — bigger effects are cheaper to detect.
-- Set α = 0.01 (stricter). Power drops at every \\(n\\) — the price of being more careful about false alarms.
+- Set effect size = 0.5 (medium). Notice power crosses 80% much sooner, bigger effects are cheaper to detect.
+- Set α = 0.01 (stricter). Power drops at every \\(n\\), the price of being more careful about false alarms.
 
 ## Best Practices for Using P-values
 
@@ -675,9 +675,9 @@ That's small enough that most analysts would say "the data are surprising under 
 
 What it does **not** mean:
 
-- ❌ "There's a 3% chance the null hypothesis is true." (You can't flip the conditional like that — see the misconceptions section.)
+- ❌ "There's a 3% chance the null hypothesis is true." (You can't flip the conditional like that, see the misconceptions section.)
 - ❌ "There's a 97% chance our finding is real." (Same flip, same error.)
-- ❌ "The effect is large." (p says nothing about size — it could be a tiny effect detected with a huge sample.)
+- ❌ "The effect is large." (p says nothing about size, it could be a tiny effect detected with a huge sample.)
 
 Practical reading: it's evidence against the null, but you should still report the **effect size and confidence interval** to know whether the effect is meaningful.
 
@@ -690,7 +690,7 @@ Practical reading: it's evidence against the null, but you should still report t
 
 The standard error shrinks like \\(1/\sqrt{n}\\), so test statistics like \\(t = \dfrac{\bar x - \mu_0}{s/\sqrt{n}}\\) get larger as \\(n\\) grows even if the actual difference \\(\bar x - \mu_0\\) is tiny. With \\(n = 10{,}000\\), almost any non-zero true effect is statistically detectable.
 
-Concrete example: a true effect of 0.01 standard deviations is detectable at p < 0.05 once \\(n\\) is around 40,000. That tells you the effect is real, not zero — but a 0.01 SD difference is almost always meaningless in business or clinical terms.
+Concrete example: a true effect of 0.01 standard deviations is detectable at p < 0.05 once \\(n\\) is around 40,000. That tells you the effect is real, not zero, but a 0.01 SD difference is almost always meaningless in business or clinical terms.
 
 Lesson: **always report effect size alongside p-values.** With huge samples, a p < 0.001 may be a triviality; with tiny samples, p = 0.20 may hide a real effect.
 
@@ -707,9 +707,9 @@ Lesson: **always report effect size alongside p-values.** With huge samples, a p
 2. **Compare against your minimum detectable effect (MDE).** Was 0.1% above what you considered worth pursuing when you designed the test? If not, this was an underpowered or over-powered test in the wrong direction.
 3. **Look for novelty and seasonality effects.** A one-week test catching a Monday holiday or a launch announcement can show small lifts that disappear later.
 4. **Consider business cost.** Engineering, QA, possible regression risk, and any user disruption all weigh against a 0.1% lift.
-5. **Re-run with proper sizing** if you genuinely care about a 0.1% lift — you'll likely need many more users to confirm it stably.
+5. **Re-run with proper sizing** if you genuinely care about a 0.1% lift, you'll likely need many more users to confirm it stably.
 
-The healthy default is "p < α is necessary but not sufficient — also need a meaningful effect size."
+The healthy default is "p < α is necessary but not sufficient, also need a meaningful effect size."
 
 </details>
 
@@ -718,16 +718,16 @@ The healthy default is "p < α is necessary but not sufficient — also need a m
 <details>
 <summary>Show answer</summary>
 
-> "Imagine the boring outcome — the new design has *no* real effect on conversions. Even if that's true, sometimes by pure luck the test will show a difference. The p-value is just: 'how often would we see a difference this big purely by luck if nothing was actually going on?'
+> "Imagine the boring outcome, the new design has *no* real effect on conversions. Even if that's true, sometimes by pure luck the test will show a difference. The p-value is just: 'how often would we see a difference this big purely by luck if nothing was actually going on?'
 >
-> A small p-value (say 0.03) means 'this would be quite surprising under "no effect" — only happens 3% of the time by luck — so we lean toward "something real is happening."'
+> A small p-value (say 0.03) means 'this would be quite surprising under "no effect", only happens 3% of the time by luck, so we lean toward "something real is happening."'
 >
-> A big p-value means 'this could easily be noise — we don't have enough evidence to claim something changed.'
+> A big p-value means 'this could easily be noise, we don't have enough evidence to claim something changed.'
 >
 > Two warnings:
 >
 > 1. A small p-value tells us 'real, not zero' but not '*how big*' the effect is. We need a separate number for that.
-> 2. A big p-value doesn't *prove* nothing's happening — sometimes our test is just too small to spot a real effect."
+> 2. A big p-value doesn't *prove* nothing's happening, sometimes our test is just too small to spot a real effect."
 
 </details>
 
@@ -746,7 +746,7 @@ Use a stricter \\(\alpha\\) when the cost of a false positive is high. Common ca
 | **High-stakes business decisions** | E.g., shutting down a product line. Cost of acting on a false positive is huge. |
 | **Physics, particle discovery** | The "5-sigma" rule (~3×10⁻⁷) is the standard for claiming new fundamental discoveries. |
 
-You **shouldn't** make α stricter just because you want to be "extra sure" — wider α tightens Type I but loosens Type II (you'll miss real effects). Match the threshold to the actual cost of each error type.
+You **shouldn't** make α stricter just because you want to be "extra sure", wider α tightens Type I but loosens Type II (you'll miss real effects). Match the threshold to the actual cost of each error type.
 
 </details>
 
@@ -762,12 +762,12 @@ You **shouldn't** make α stricter just because you want to be "extra sure" — 
 
 ## Gotchas
 
-- **Choosing α after seeing the data** — setting your significance threshold to 0.05 (or any value) *after* computing the p-value invalidates the Type I error guarantee. Always fix α before you run the test; changing it post-hoc to make a result "significant" is p-hacking.
-- **p = 0.049 is not meaningfully different from p = 0.051** — the binary significant/not-significant framing treats a bright line as though the underlying evidence is radically different on either side. Report exact p-values and consider the full context rather than the threshold alone.
-- **A large p-value does not prove the null hypothesis** — "fail to reject H₀" means the data are consistent with no effect, not that no effect exists. Underpowered studies routinely produce large p-values even when a real effect is present.
-- **Confusing p-value with the probability that H₀ is true** — the p-value is computed *assuming* H₀ is true; it cannot tell you how likely H₀ is. Bayesian posterior probabilities answer that different question.
-- **Running multiple tests without correction inflates false-positive rate** — if you run 20 independent tests at α=0.05, you expect about one false positive by chance alone. Use Bonferroni or FDR corrections (as shown in the lesson's `multipletests` example) whenever you test several hypotheses.
-- **Treating `ttest_ind` as the only option for comparing two groups** — `ttest_ind` assumes approximately normal data with independent observations. For paired measurements use `ttest_rel`; for non-normal data with small samples prefer `mannwhitneyu`; the wrong test can produce a misleading p-value silently.
+- **Choosing α after seeing the data**: setting your significance threshold to 0.05 (or any value) *after* computing the p-value invalidates the Type I error guarantee. Always fix α before you run the test; changing it post-hoc to make a result "significant" is p-hacking.
+- **p = 0.049 is not meaningfully different from p = 0.051**: the binary significant/not-significant framing treats a bright line as though the underlying evidence is radically different on either side. Report exact p-values and consider the full context rather than the threshold alone.
+- **A large p-value does not prove the null hypothesis**: "fail to reject H₀" means the data are consistent with no effect, not that no effect exists. Underpowered studies routinely produce large p-values even when a real effect is present.
+- **Confusing p-value with the probability that H₀ is true**: the p-value is computed *assuming* H₀ is true; it cannot tell you how likely H₀ is. Bayesian posterior probabilities answer that different question.
+- **Running multiple tests without correction inflates false-positive rate**: if you run 20 independent tests at α=0.05, you expect about one false positive by chance alone. Use Bonferroni or FDR corrections (as shown in the lesson's `multipletests` example) whenever you test several hypotheses.
+- **Treating `ttest_ind` as the only option for comparing two groups**: `ttest_ind` assumes approximately normal data with independent observations. For paired measurements use `ttest_rel`; for non-normal data with small samples prefer `mannwhitneyu`; the wrong test can produce a misleading p-value silently.
 
 ## Next steps
 

@@ -1,6 +1,6 @@
 # Arithmetic and Data Alignment in Pandas
 
-**After this lesson:** you can explain the core ideas in “Arithmetic and Data Alignment in Pandas” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Arithmetic and Data Alignment in Pandas and try the examples in your own notebook.
 
 ### Video
 
@@ -8,13 +8,13 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/zmdjNSmRXF4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*Corey Schafer — Python pandas tutorial (part 2): DataFrame and Series basics*
+*Corey Schafer, Python pandas tutorial (part 2): DataFrame and Series basics*
 
 ## Overview
 
 **Prerequisites:** [Series](./series.md) with labeled index; comfort with element-wise operations.
 
-**Why this lesson:** Pandas **aligns** Series and DataFrames by **index label** before it adds, subtracts, or multiplies. That prevents silent position-wise mistakes—but it also introduces **NaN** where labels do not match. Learning alignment is what makes pandas feel “smart” instead of “broken.”
+**Why this lesson:** Pandas **aligns** Series and DataFrames by **index label** before it adds, subtracts, or multiplies. That prevents silent position-wise mistakes, but it also introduces **NaN** where labels do not match. Learning alignment is what makes pandas feel "smart" instead of "broken."
 
 ## Understanding Data Alignment
 
@@ -51,7 +51,7 @@ Real-world applications:
 
 ### Basic Alignment Example
 
-Let's explore alignment with practical examples:
+we will look at alignment with practical examples:
 
 **Series subtraction with overlapping indexes**
 
@@ -143,12 +143,12 @@ Notice how:
 
 ### Basic DataFrame Operations
 
-Let's see how arithmetic works with DataFrames:
+Look at how arithmetic works with DataFrames:
 
 **Addition with aligned index and columns**
 
 - **Purpose:** Learn that `+` on DataFrames aligns on **both** row index and column names; missing combinations propagate as `NaN`.
-- **Walkthrough:** Compare `df1` and `df2` row/column overlap before reading `result`—only `B` at `row1`/`row2` lines up.
+- **Walkthrough:** Compare `df1` and `df2` row/column overlap before reading `result`-only `B` at `row1`/`row2` lines up.
 
 ```python
 # Create two DataFrames
@@ -210,7 +210,7 @@ You can specify a fill value for missing data during operations:
 **Using `fill_value` before alignment**
 
 - **Purpose:** Treat missing cells as a numeric default (here `0`) before the operation so you do not lose entire rows/columns to `NaN` when only one side is missing.
-- **Walkthrough:** `df1.add(df2, fill_value=0)` uses the `df1`/`df2` from the previous block—re-run that cell first in a notebook.
+- **Walkthrough:** `df1.add(df2, fill_value=0)` uses the `df1`/`df2` from the previous block, re-run that cell first in a notebook.
 
 ```python
 # Add with fill_value
@@ -246,7 +246,7 @@ Pandas provides several arithmetic methods:
 **Side-by-side DataFrames before `mul`**
 
 - **Purpose:** Print `prices` and `quantity` with default `0..n` index so you can see why naive multiplication needs a shared index (next block).
-- **Walkthrough:** `Item` is still a column here—`set_index` happens in the following snippet.
+- **Walkthrough:** `Item` is still a column here-`set_index` happens in the following snippet.
 
 ```python
 # Create sample DataFrames
@@ -328,7 +328,7 @@ The `fill_value` parameter helps handle missing data more gracefully than the de
 **Merge two overlapping tables**
 
 - **Purpose:** Use `combine_first` so `primary_data` wins where non-null, and `secondary_data` fills gaps.
-- **Walkthrough:** Compare `primary_data`/`secondary_data` before `combined`—note how `row3` only exists in `primary` and `row4` only in `secondary`.
+- **Walkthrough:** Compare `primary_data`/`secondary_data` before `combined`-note how `row3` only exists in `primary` and `row4` only in `secondary`.
 
 ```python
 # Create two DataFrames with some overlapping data
@@ -382,8 +382,8 @@ Here's a practical example using sales data:
 
 **Prefer primary store figures, backfill from store 2**
 
-- **Purpose:** Model reconciling two stores’ sales tables where one is authoritative and the other fills missing products.
-- **Walkthrough:** `combine_first` keeps Store 1’s `100` and `150`, fills `Orange` from Store 2, and adds `Grape` from Store 2.
+- **Purpose:** Model reconciling two stores' sales tables where one is authoritative and the other fills missing products.
+- **Walkthrough:** `combine_first` keeps Store 1's `100` and `150`, fills `Orange` from Store 2, and adds `Grape` from Store 2.
 
 ```python
 # Create two sources of sales data
@@ -411,21 +411,21 @@ print(combined_sales)
 ```
 Store 1 Sales:
          Sales
-Product       
+Product
 Apple    100.0
 Banana   150.0
 Orange     NaN
 
 Store 2 Sales:
          Sales
-Product       
+Product
 Apple       80
 Orange     120
 Grape       90
 
 Combined Sales Data:
          Sales
-Product       
+Product
 Apple    100.0
 Banana   150.0
 Grape     90.0
@@ -439,7 +439,7 @@ Orange   120.0
    **Quick NaN audit before arithmetic**
 
    - **Purpose:** Count missing values per column on `df1`/`df2` so you know whether alignment will explode into `NaN`s.
-   - **Walkthrough:** Uses `isna().sum()` on the same `df1`/`df2` from the “Basic DataFrame operations” example.
+   - **Walkthrough:** Uses `isna().sum()` on the same `df1`/`df2` from the "Basic DataFrame operations" example.
 
    ```python
    # Before operations, check for:
@@ -467,7 +467,7 @@ dtype: int64
    # Choose fill_value based on your data:
    # 0 for additive operations
    df1.add(df2, fill_value=0)
-   
+
    # 1 for multiplicative operations
    df1.mul(df2, fill_value=1)
    ```
@@ -484,7 +484,7 @@ row4  NaN   9.0  12.0
 
    **Force a common index**
 
-   - **Purpose:** When you intend row-wise operation only after matching labels, reindex one frame to the other’s index.
+   - **Purpose:** When you intend row-wise operation only after matching labels, reindex one frame to the other's index.
    - **Walkthrough:** Pick `df1.reindex(df2.index)` or the reverse depending on which index is canonical.
 
    ```python
@@ -499,7 +499,7 @@ row4  NaN   9.0  12.0
    **Comment the merge rule**
 
    - **Purpose:** Show that `combine_first` order encodes business logic (here: recent vs historical); comments should state that rule for readers.
-   - **Walkthrough:** `recent_data` / `historical_data` are placeholders—replace with your real DataFrames.
+   - **Walkthrough:** `recent_data` / `historical_data` are placeholders, replace with your real DataFrames.
 
    ```python
    # Add comments explaining your decisions
@@ -511,9 +511,9 @@ Remember: Data alignment is automatic in Pandas, but understanding how it works 
 
 ## Common pitfalls
 
-- **Accidental outer joins** — Adding two Series with different indexes creates union alignment; check lengths and **NaN** counts after the op.
-- **fill_value surprises** — **fill_value** in **add**/**mul** changes what “missing” means; document what you chose.
-- **Modifying views** — **SettingWithCopy** warnings often mean you chained indexing; assign with **.loc** on the intended object.
+- **Accidental outer joins**: Adding two Series with different indexes creates union alignment; check lengths and **NaN** counts after the op.
+- **fill_value surprises**: **fill_value** in **add**/**mul** changes what "missing" means; document what you chose.
+- **Modifying views**: **SettingWithCopy** warnings often mean you chained indexing; assign with **.loc** on the intended object.
 
 ## Next steps
 

@@ -3,17 +3,17 @@ reading_minutes: 12
 objectives:
   - "Define accuracy as the fraction of correct predictions and compute it for binary and multi-class problems with `sklearn.metrics.accuracy_score`."
   - "Recognise when accuracy is misleading: with class imbalance (>~80% majority), report at least one of precision/recall, F1, or a confusion matrix alongside it."
-  - "Compare your model's accuracy to the **majority-class baseline** before celebrating — beating \"always predict the most common label\" is the actual bar."
+  - "Compare your model's accuracy to the **majority-class baseline** before celebrating, beating \"always predict the most common label\" is the actual bar."
   - "Validate with cross-validation and a held-out test set, not the training set, to avoid mistaking memorisation for skill."
 ---
 
 # Accuracy
 
-**After this lesson:** you can explain the core ideas in “Accuracy” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Accuracy and try the examples in your own notebook.
 
 ## Overview
 
-**Accuracy** as a baseline fraction correct—when it is meaningful and when **class imbalance** makes it misleading.
+**Accuracy** as a baseline fraction correct, when it is meaningful and when **class imbalance** makes it misleading.
 
 Relates to [confusion matrix](confusion-matrix.md) and [metrics](metrics.md).
 
@@ -85,7 +85,7 @@ print(f"Accuracy: {accuracy:.3f}")
       <span class="code-callout__title">Train and Score</span>
     </div>
     <div class="code-callout__body">
-      <p>Fit logistic regression, call <code>predict</code> for hard labels, then pass both to <code>accuracy_score</code>—the fraction of matching indices across all test samples.</p>
+      <p>Fit logistic regression, call <code>predict</code> for hard labels, then pass both to <code>accuracy_score</code>-the fraction of matching indices across all test samples.</p>
     </div>
   </div>
 </aside>
@@ -215,7 +215,7 @@ Accuracy: 1.000
 
 ## Practical Example: Credit Risk Prediction
 
-Let's analyze accuracy for a credit risk prediction model:
+Analyze accuracy for a credit risk prediction model:
 
 #### Pipeline accuracy vs majority baseline
 
@@ -279,7 +279,7 @@ print(f"Baseline Accuracy: {baseline_accuracy:.3f}")
       <span class="code-callout__title">Credit Dataset</span>
     </div>
     <div class="code-callout__body">
-      <p>Generate five financial features and derive a binary approval label from a threshold on credit score, income, and age — the same synthetic credit setup reused across 5.5 examples.</p>
+      <p>Generate five financial features and derive a binary approval label from a threshold on credit score, income, and age, the same synthetic credit setup reused across 5.5 examples.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="26-40" data-tint="2">
@@ -310,11 +310,11 @@ Baseline Accuracy: 0.555
 
 ## Gotchas
 
-- **High accuracy on an imbalanced dataset feels like success** — A dataset with 95% negative samples lets a classifier that always predicts "negative" achieve 95% accuracy; this is the accuracy paradox, and the model has learned nothing; always compare model accuracy to the majority-class baseline before declaring success.
-- **`model.score(X_test, y_test)` returns accuracy by default for classifiers** — This is easy to overlook when you later switch to a regression problem where `.score` returns R², not MSE; explicitly call `accuracy_score` or the relevant metric function to make your intent clear and avoid silent metric changes.
-- **Balanced accuracy is not the same as accuracy on balanced data** — `sklearn.metrics.balanced_accuracy_score` averages recall per class and is appropriate for imbalanced data; it will differ from standard accuracy even on a balanced dataset if per-class recalls are unequal; choose the right function deliberately.
-- **Comparing accuracy across different test set sizes** — Accuracy from a 50-sample test is far noisier than accuracy from a 5000-sample test; a 2% gap between two models may be statistically insignificant on 50 samples; always report confidence intervals or use statistical tests when comparing models on small test sets.
-- **Using accuracy as the scoring metric inside `GridSearchCV` for imbalanced problems** — Setting `scoring='accuracy'` in `GridSearchCV` selects the model that maximises accuracy, which on imbalanced data rewards the model that best predicts the majority class; use `scoring='f1'`, `'roc_auc'`, or a custom scorer aligned with your actual objective.
+- **High accuracy on an imbalanced dataset feels like success**: A dataset with 95% negative samples lets a classifier that always predicts "negative" achieve 95% accuracy; this is the accuracy paradox, and the model has learned nothing; always compare model accuracy to the majority-class baseline before declaring success.
+- **`model.score(X_test, y_test)` returns accuracy by default for classifiers**: This is easy to overlook when you later switch to a regression problem where `.score` returns R², not MSE; explicitly call `accuracy_score` or the relevant metric function to make your intent clear and avoid silent metric changes.
+- **Balanced accuracy is not the same as accuracy on balanced data**: `sklearn.metrics.balanced_accuracy_score` averages recall per class and is appropriate for imbalanced data; it will differ from standard accuracy even on a balanced dataset if per-class recalls are unequal; choose the right function deliberately.
+- **Comparing accuracy across different test set sizes**: Accuracy from a 50-sample test is far noisier than accuracy from a 5000-sample test; a 2% gap between two models may be statistically insignificant on 50 samples; always report confidence intervals or use statistical tests when comparing models on small test sets.
+- **Using accuracy as the scoring metric inside `GridSearchCV` for imbalanced problems**: Setting `scoring='accuracy'` in `GridSearchCV` selects the model that maximises accuracy, which on imbalanced data rewards the model that best predicts the majority class; use `scoring='f1'`, `'roc_auc'`, or a custom scorer aligned with your actual objective.
 
 ## Additional Resources
 

@@ -7,7 +7,7 @@ objectives:
 ---
 # Mathematical Foundation and Kernels in SVM
 
-**After this lesson:** you can explain the core ideas in “Mathematical Foundation and Kernels in SVM” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Mathematical Foundation and Kernels in SVM and try the examples in your own notebook.
 
 ## Overview
 
@@ -34,7 +34,7 @@ Think of the optimal hyperplane as finding the best possible dividing line betwe
 
 ### Mathematical Formulation Made Simple
 
-Let's break down the math step by step:
+Break down the math step by step:
 
 1. **The Basic Equation**
 
@@ -174,7 +174,7 @@ def plot_kernel_effects(X, y):
       <span class="code-callout__title">Setup and Kernels List</span>
     </div>
     <div class="code-callout__body">
-      <p>Define three kernel strings (linear, RBF, polynomial) and create a 1×3 subplot grid — one panel per kernel for direct visual comparison.</p>
+      <p>Define three kernel strings (linear, RBF, polynomial) and create a 1×3 subplot grid, one panel per kernel for direct visual comparison.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="11-32" data-tint="2">
@@ -183,7 +183,7 @@ def plot_kernel_effects(X, y):
       <span class="code-callout__title">Mesh Grid and Plot</span>
     </div>
     <div class="code-callout__body">
-      <p>For each kernel, fit an SVC, build a fine meshgrid over the feature space, predict class at every point, then fill contour regions — axis-aligned regions for linear vs curved regions for RBF/poly.</p>
+      <p>For each kernel, fit an SVC, build a fine meshgrid over the feature space, predict class at every point, then fill contour regions, axis-aligned regions for linear vs curved regions for RBF/poly.</p>
     </div>
   </div>
 </aside>
@@ -239,7 +239,7 @@ Use `C` to control how much the model tolerates margin violations, and use kerne
    def visualize_gamma_effect(X, y):
        gammas = [0.1, 1, 10]
        fig, axes = plt.subplots(1, 3, figsize=(15, 5))
-       
+
        for ax, gamma in zip(axes, gammas):
            svm = SVC(kernel='rbf', gamma=gamma)
            svm.fit(X, y)
@@ -266,7 +266,7 @@ Use `C` to control how much the model tolerates margin violations, and use kerne
    def visualize_degree_effect(X, y):
        degrees = [2, 3, 4]
        fig, axes = plt.subplots(1, 3, figsize=(15, 5))
-       
+
        for ax, degree in zip(axes, degrees):
            svm = SVC(kernel='poly', degree=degree)
            svm.fit(X, y)
@@ -305,7 +305,7 @@ Use `C` to control how much the model tolerates margin violations, and use kerne
            'gamma': ['scale', 'auto', 0.1, 1],
            'kernel': ['rbf', 'linear', 'poly']
        }
-       
+
        grid_search = GridSearchCV(
            SVC(),
            param_grid,
@@ -335,12 +335,12 @@ Use `C` to control how much the model tolerates margin violations, and use kerne
 
 ## Gotchas
 
-- **Using `gamma='auto'` (deprecated default) instead of `gamma='scale'`** — In scikit-learn ≥ 0.22, `gamma='scale'` is the default (uses `1 / (n_features * X.var())`), replacing the old `'auto'` (`1 / n_features`). Code written before this change will produce a `FutureWarning` or silently use a different gamma, making results non-reproducible across versions. Always specify `gamma` explicitly or verify which default your version uses.
-- **Setting a high polynomial degree without checking for numerical overflow** — The polynomial kernel computes `(x1·x2 + r)^d`. For degree ≥ 4 with unscaled features, intermediate values can overflow 64-bit floats, producing `NaN` in the kernel matrix and causing training to fail silently or with confusing convergence warnings. Scale features and keep degree ≤ 3 unless you have a strong reason.
-- **Tuning `C` and `gamma` independently instead of together** — `C` and `gamma` interact strongly for the RBF kernel: high `C` + high `gamma` = extreme overfitting; low `C` + low `gamma` = extreme underfitting. Tuning them in separate 1D sweeps misses the optimal combination. Always use a 2D grid search (`GridSearchCV` over both simultaneously).
-- **Assuming the linear kernel is always fastest** — For very high-dimensional sparse data (e.g., text with TF-IDF), `SVC(kernel='linear')` builds an O(n²) kernel matrix and is slower than `LinearSVC`, which directly solves the primal. When you have more features than samples and a linear decision boundary is appropriate, use `LinearSVC` instead.
-- **Confusing `SVC` `decision_function` scores with probabilities** — `decision_function` returns signed distances from the hyperplane, not probabilities. Positive values indicate one class, negative the other, but the magnitude is not calibrated. Students sometimes interpret a distance of 2.5 as "2.5 times more likely to be class 1," which is incorrect.
-- **Forgetting to scale the mesh grid points before calling `svm.predict`** — The `plot_kernel_effects` function fits the SVM on raw `X` and predicts on raw mesh points, which is consistent. But if you fit on `X_scaled` and then forget to apply `scaler.transform` to the mesh grid points, the decision boundary plot will appear in the wrong location, creating a misleading visualization.
+- **Using `gamma='auto'` (deprecated default) instead of `gamma='scale'`**: In scikit-learn ≥ 0.22, `gamma='scale'` is the default (uses `1 / (n_features * X.var())`), replacing the old `'auto'` (`1 / n_features`). Code written before this change will produce a `FutureWarning` or silently use a different gamma, making results non-reproducible across versions. Always specify `gamma` explicitly or verify which default your version uses.
+- **Setting a high polynomial degree without checking for numerical overflow**: The polynomial kernel computes `(x1·x2 + r)^d`. For degree ≥ 4 with unscaled features, intermediate values can overflow 64-bit floats, producing `NaN` in the kernel matrix and causing training to fail silently or with confusing convergence warnings. Scale features and keep degree ≤ 3 unless you have a strong reason.
+- **Tuning `C` and `gamma` independently instead of together**: `C` and `gamma` interact strongly for the RBF kernel: high `C` + high `gamma` = extreme overfitting; low `C` + low `gamma` = extreme underfitting. Tuning them in separate 1D sweeps misses the optimal combination. Always use a 2D grid search (`GridSearchCV` over both simultaneously).
+- **Assuming the linear kernel is always fastest**: For very high-dimensional sparse data (e.g., text with TF-IDF), `SVC(kernel='linear')` builds an O(n²) kernel matrix and is slower than `LinearSVC`, which directly solves the primal. When you have more features than samples and a linear decision boundary is appropriate, use `LinearSVC` instead.
+- **Confusing `SVC` `decision_function` scores with probabilities**: `decision_function` returns signed distances from the hyperplane, not probabilities. Positive values indicate one class, negative the other, but the magnitude is not calibrated. Students sometimes interpret a distance of 2.5 as "2.5 times more likely to be class 1," which is incorrect.
+- **Forgetting to scale the mesh grid points before calling `svm.predict`**: The `plot_kernel_effects` function fits the SVM on raw `X` and predicts on raw mesh points, which is consistent. But if you fit on `X_scaled` and then forget to apply `scaler.transform` to the mesh grid points, the decision boundary plot will appear in the wrong location, creating a misleading visualization.
 
 ## Next Steps
 

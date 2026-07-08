@@ -55,7 +55,7 @@ y_reg = (2.5 * X_reg[:, 0]
 
 ## Tasks
 
-### Task 1: Logistic regression — fitting and interpreting
+### Task 1: Logistic regression: fitting and interpreting
 
 - Split `df_cls` into features `X` (income, credit_score, debt_ratio) and target `y` (approved). Use `train_test_split` with `test_size=0.25` and `random_state=7`.
 - Scale the features with `StandardScaler` before fitting `LogisticRegression`.
@@ -63,7 +63,7 @@ y_reg = (2.5 * X_reg[:, 0]
 - Convert each coefficient to an **odds ratio** (`np.exp(coef)`) and print both side by side.
 - Evaluate the model on the test set: print accuracy, the confusion matrix, and the full classification report.
 
-### Task 2: Polynomial regression — spotting overfitting
+### Task 2: Polynomial regression: spotting overfitting
 
 - Using the `rpm` and `mpg` arrays from Dataset 2, fit polynomial regression models of degrees 1, 2, 4, and 8 using `Pipeline([('poly', PolynomialFeatures(degree=d)), ('lr', LinearRegression())])`.
 - For each degree, compute the **training R²** and the **5-fold cross-validated R²** using `cross_val_score(..., cv=5, scoring='r2')`.
@@ -87,7 +87,7 @@ y_reg = (2.5 * X_reg[:, 0]
   3. Lasso with `alpha=0.5`
   4. Polynomial degree-2 + Ridge (`alpha=1.0`)
 - Print a summary table with model name and mean CV R² (± standard deviation).
-- Select the best model and justify the choice in a short comment (2–3 sentences).
+- Select the best model and justify the choice in a short comment (2-3 sentences).
 - For the best model, print the non-zero coefficients and their feature indices.
 
 ## Deliverable
@@ -106,7 +106,7 @@ Submit your solution as a Python script with:
 <summary>Show hints</summary>
 
 ### Task 1: Logistic regression
-- **Where:** [Logistic Regression](../logistic-regression.md) — "Interpreting Coefficients" and "Odds Ratios".
+- **Where:** [Logistic Regression](../logistic-regression.md), "Interpreting Coefficients" and "Odds Ratios".
 - **Think:**
   - Scale before fitting: `scaler = StandardScaler(); X_train_sc = scaler.fit_transform(X_train)`. Call `.transform` (not `.fit_transform`) on the test set.
   - Coefficients live at `model.coef_[0]` (a 1-D array); access names from `df_cls.columns[:3]`.
@@ -123,9 +123,9 @@ Submit your solution as a Python script with:
   ```
 
 ### Task 2: Polynomial regression and overfitting
-- **Where:** [Polynomial Regression](../polynomial-regression.md) — "Diagnosing Under- and Overfitting" and "Cross-Validation".
+- **Where:** [Polynomial Regression](../polynomial-regression.md), "Diagnosing Under- and Overfitting" and "Cross-Validation".
 - **Think:**
-  - Training R² always improves (or stays the same) as degree increases. CV R² will eventually fall — that's the overfitting signature.
+  - Training R² always improves (or stays the same) as degree increases. CV R² will eventually fall, that's the overfitting signature.
   - For the smooth prediction curve, create `x_plot = np.linspace(1000, 6000, 300).reshape(-1, 1)` and pass through each pipeline.
   - A degree-8 polynomial with only 60 data points will almost certainly overfit badly.
 - **Starter:**
@@ -148,9 +148,9 @@ Degree 8: train R²=0.651, CV R²=-61.628 ± 119.277
 ```
 
 ### Task 3: Ridge vs Lasso
-- **Where:** [Regularization](../regularization.md) — "Ridge (L2) vs Lasso (L1)" and "Bias-Variance Tradeoff".
+- **Where:** [Regularization](../regularization.md), "Ridge (L2) vs Lasso (L1)" and "Bias-Variance Tradeoff".
 - **Think:**
-  - Always scale features before Ridge or Lasso — the penalty is not scale-invariant.
+  - Always scale features before Ridge or Lasso, the penalty is not scale-invariant.
   - Check for exact zeros with `np.sum(model.coef_ == 0)`. Lasso sets some to exactly 0; Ridge never does (it shrinks toward 0 but not to it).
   - The lesson explains this geometrically: the L1 constraint diamond has corners on axes; the L2 ball does not.
 - **Starter:**
@@ -169,7 +169,7 @@ Lasso zeros: 17
 ```
 
 ### Task 4: Model selection
-- **Where:** [Model Selection](../model-selection.md) — "Cross-Validation" and "Comparing Candidate Models".
+- **Where:** [Model Selection](../model-selection.md), "Cross-Validation" and "Comparing Candidate Models".
 - **Think:**
   - Use the same `X_sc` (scaled) for all models so comparisons are fair.
   - Mean ± std of CV scores gives a sense of both performance and variability; prefer a model with high mean and low std.
@@ -196,9 +196,9 @@ Poly2+Ridge: CV R² = -0.241 ± 0.376
 
 ### Common pitfalls
 - Calling `scaler.fit_transform` on the test set leaks information from the test distribution into training; always fit the scaler on train data only and call `.transform` on test.
-- Using training R² alone to pick polynomial degree will always favour the highest degree — you need CV R² or a holdout set.
+- Using training R² alone to pick polynomial degree will always favour the highest degree, you need CV R² or a holdout set.
 - Passing a 1-D `y` array to sklearn models is usually fine, but double-check if you get a `DataConversionWarning`.
 - Lasso with very large alpha will shrink all coefficients to zero; if CV R² is near 0, try a smaller alpha.
-- `cross_val_score` with `scoring='r2'` can return negative values for very poor models — that is valid and means the model is worse than a horizontal line at the mean.
+- `cross_val_score` with `scoring='r2'` can return negative values for very poor models, that is valid and means the model is worse than a horizontal line at the mean.
 
 </details>

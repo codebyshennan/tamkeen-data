@@ -7,7 +7,7 @@ objectives:
 ---
 # Implementing KNN: A Step-by-Step Guide
 
-**After this lesson:** you can explain the core ideas in “Implementing KNN: A Step-by-Step Guide” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Implementing KNN: A Step-by-Step Guide and try the examples in your own notebook.
 
 ## Overview
 
@@ -16,7 +16,7 @@ objectives:
 
 ## Understanding k in KNN
 
-The parameter k in KNN (k-Nearest Neighbors) is a crucial hyperparameter that determines how many neighboring data points to consider when making a prediction. Here's what you need to know about k:
+The parameter k in KNN (k-Nearest Neighbors) is a important hyperparameter that determines how many neighboring data points to consider when making a prediction. about k:
 
 - **What is k?**: k is the number of nearest neighbors that the algorithm considers when making a prediction
 - **How it works**:
@@ -40,7 +40,7 @@ Think of k like asking for advice:
 
 ## Why Implementation Matters
 
-Understanding how to implement KNN is crucial because:
+Understanding how to implement KNN is important because:
 
 - It helps you understand how the algorithm works under the hood
 - You can customize it for your specific needs
@@ -49,7 +49,7 @@ Understanding how to implement KNN is crucial because:
 
 ## Implementation from Scratch
 
-Let's build a simple KNN classifier step by step. Think of it like building a recommendation system that asks your closest friends for advice.
+Build a simple KNN classifier step by step. Think of it like building a recommendation system that asks your closest friends for advice.
 
 ### Step 1: Create the Basic Structure
 
@@ -63,7 +63,7 @@ class SimpleKNN:
     def __init__(self, k=3):
         """Initialize with k neighbors (default: 3)"""
         self.k = k
-        
+
     def fit(self, X, y):
         """Store the training data - KNN doesn't actually train!"""
         self.X_train = X
@@ -192,7 +192,7 @@ print(f"Predicted genre: {prediction[0]}")
 
 ## Using Scikit-learn
 
-While implementing from scratch is educational, scikit-learn provides a robust, optimized version of KNN. Let's see how to use it for a real-world problem.
+While implementing from scratch is educational, scikit-learn provides a reliable, optimized version of KNN. Look at how to use it for a real-world problem.
 
 ### Example: Iris Flower Classification
 
@@ -213,17 +213,17 @@ def classify_iris_flowers():
     # Load the famous Iris dataset
     iris = load_iris()
     X, y = iris.data, iris.target
-    
+
     # Split into training and test sets
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42
     )
-    
+
     # Scale the features (important for KNN!)
     scaler = StandardScaler()
     X_train_scaled = scaler.fit_transform(X_train)
     X_test_scaled = scaler.transform(X_test)
-    
+
     # Create and train the model
     knn = KNeighborsClassifier(
         n_neighbors=5,          # Number of neighbors to consider
@@ -231,16 +231,16 @@ def classify_iris_flowers():
         metric='euclidean'      # Distance metric to use
     )
     knn.fit(X_train_scaled, y_train)
-    
+
     # Make predictions
     y_pred = knn.predict(X_test_scaled)
-    
+
     # Evaluate the model
     print("Accuracy:", accuracy_score(y_test, y_pred))
     print("\nDetailed Report:")
     print(classification_report(y_test, y_pred,
                               target_names=iris.target_names))
-    
+
     return knn, scaler
 
 # Run the example
@@ -252,10 +252,10 @@ model, scaler = classify_iris_flowers()
   <div class="code-callout" data-lines="18-21" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Scale before KNN — always</span>
+      <span class="code-callout__title">Scale before KNN, always</span>
     </div>
     <div class="code-callout__body">
-      <p>KNN computes distances between data points. If one feature spans 0–1000 and another spans 0–1, distances are dominated by the large-scale feature. <code>StandardScaler</code> puts all features on the same scale so every dimension contributes equally.</p>
+      <p>KNN computes distances between data points. If one feature spans 0-1000 and another spans 0-1, distances are dominated by the large-scale feature. <code>StandardScaler</code> puts all features on the same scale so every dimension contributes equally.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="23-29" data-tint="2">
@@ -264,7 +264,7 @@ model, scaler = classify_iris_flowers()
       <span class="code-callout__title">KNN parameters</span>
     </div>
     <div class="code-callout__body">
-      <p><code>n_neighbors=5</code> considers the 5 closest points for a majority vote. <code>weights='uniform'</code> treats all neighbors equally; try <code>'distance'</code> to weight closer points more. <code>metric='euclidean'</code> is the straight-line distance — other options include <code>'manhattan'</code>.</p>
+      <p><code>n_neighbors=5</code> considers the 5 closest points for a majority vote. <code>weights='uniform'</code> treats all neighbors equally; try <code>'distance'</code> to weight closer points more. <code>metric='euclidean'</code> is the straight-line distance, other options include <code>'manhattan'</code>.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="34-40" data-tint="3">
@@ -273,7 +273,7 @@ model, scaler = classify_iris_flowers()
       <span class="code-callout__title">Classification report</span>
     </div>
     <div class="code-callout__body">
-      <p><code>classification_report</code> shows per-class precision, recall, and F1 — more informative than a single accuracy number, especially when classes are imbalanced. <code>target_names</code> replaces numeric labels with human-readable names.</p>
+      <p><code>classification_report</code> shows per-class precision, recall, and F1, more informative than a single accuracy number, especially when classes are imbalanced. <code>target_names</code> replaces numeric labels with human-readable names.</p>
     </div>
   </div>
 </aside>
@@ -304,7 +304,7 @@ weighted avg       1.00      1.00      1.00        30
    #  Wrong way
    knn = KNeighborsClassifier()
    knn.fit(X_train, y_train)  # Features not scaled
-   
+
    #  Right way
    scaler = StandardScaler()
    X_train_scaled = scaler.fit_transform(X_train)
@@ -318,7 +318,7 @@ weighted avg       1.00      1.00      1.00        30
    ```python
    #  Using k=1 (too sensitive to noise)
    knn = KNeighborsClassifier(n_neighbors=1)
-   
+
    #  Try different values and use cross-validation
    from sklearn.model_selection import GridSearchCV
    param_grid = {'n_neighbors': [3, 5, 7, 9, 11]}
@@ -333,7 +333,7 @@ weighted avg       1.00      1.00      1.00        30
    ```python
    #  Using categorical features directly
    knn.fit(X_with_categories, y)
-   
+
    #  Encode categorical features first
    from sklearn.preprocessing import OneHotEncoder
    encoder = OneHotEncoder()
@@ -369,13 +369,13 @@ weighted avg       1.00      1.00      1.00        30
 
    ```python
    from sklearn.model_selection import GridSearchCV
-   
+
    param_grid = {
        'n_neighbors': [3, 5, 7, 9, 11],
        'weights': ['uniform', 'distance'],
        'metric': ['euclidean', 'manhattan']
    }
-   
+
    grid_search = GridSearchCV(knn, param_grid, cv=5)
    grid_search.fit(X_scaled, y)
    print(f"Best parameters: {grid_search.best_params_}")
@@ -397,10 +397,10 @@ weighted avg       1.00      1.00      1.00        30
      ```python
      # 1. Create the scaler
      scaler = StandardScaler()
-     
+
      # 2. Fit and transform training data
      X_train_scaled = scaler.fit_transform(X_train)
-     
+
      # 3. Transform test data (using same scaling as training)
      X_test_scaled = scaler.transform(X_test)
      ```
@@ -408,7 +408,7 @@ weighted avg       1.00      1.00      1.00        30
    - **Why StandardScaler Works**:
      - Transforms features to have mean = 0 and standard deviation = 1
      - Ensures all features contribute equally to distance calculations
-     - Makes the model more robust and interpretable
+     - Makes the model more reliable and interpretable
 
 2. **K Value Selection: Finding the Sweet Spot**
    - **Impact of Different k Values**:
@@ -428,14 +428,14 @@ weighted avg       1.00      1.00      1.00        30
 
      ```python
      from sklearn.model_selection import GridSearchCV
-     
+
      # Define parameter grid
      param_grid = {
          'n_neighbors': [3, 5, 7, 9, 11],
          'weights': ['uniform', 'distance'],
          'metric': ['euclidean', 'manhattan']
      }
-     
+
      # Create and run grid search
      grid_search = GridSearchCV(
          KNeighborsClassifier(),
@@ -489,23 +489,23 @@ weighted avg       1.00      1.00      1.00        30
 
      ```python
      from sklearn.model_selection import cross_validate
-     
+
      # Define multiple scoring metrics
      scoring = {
          'accuracy': 'accuracy',
          'f1': 'f1_weighted'
      }
-     
+
      # Perform cross-validation with multiple metrics
      scores = cross_validate(
-         knn, 
-         X_scaled, 
+         knn,
+         X_scaled,
          y,
          cv=5,
          scoring=scoring,
          return_train_score=True
      )
-     
+
      # Print detailed results
      print(f"Training Accuracy: {scores['train_accuracy'].mean():.3f} (+/- {scores['train_accuracy'].std() * 2:.3f})")
      print(f"Validation Accuracy: {scores['test_accuracy'].mean():.3f} (+/- {scores['test_accuracy'].std() * 2:.3f})")
@@ -527,7 +527,7 @@ weighted avg       1.00      1.00      1.00        30
 
      ```python
      from sklearn.model_selection import GridSearchCV
-     
+
      # Define extensive parameter grid
      param_grid = {
          'n_neighbors': [3, 5, 7, 9, 11, 13, 15],
@@ -535,7 +535,7 @@ weighted avg       1.00      1.00      1.00        30
          'metric': ['euclidean', 'manhattan', 'minkowski'],
          'p': [1, 2, 3]  # For Minkowski distance
      }
-     
+
      # Create and run grid search with parallel processing
      grid_search = GridSearchCV(
          KNeighborsClassifier(),
@@ -545,7 +545,7 @@ weighted avg       1.00      1.00      1.00        30
          n_jobs=-1,
          verbose=1
      )
-     
+
      # Fit and get best parameters
      grid_search.fit(X_scaled, y)
      print(f"Best parameters: {grid_search.best_params_}")
@@ -564,13 +564,13 @@ weighted avg       1.00      1.00      1.00        30
 
      ```python
      from sklearn.metrics import classification_report, confusion_matrix
-     
+
      # Get predictions
      y_pred = knn.predict(X_test_scaled)
-     
+
      # Print detailed classification report
      print(classification_report(y_test, y_pred))
-     
+
      # Create confusion matrix
      cm = confusion_matrix(y_test, y_pred)
      print("Confusion Matrix:")
@@ -587,12 +587,12 @@ Remember: Successful KNN implementation requires careful consideration of:
 
 ## Gotchas
 
-- **Calling `scaler.fit_transform` on `X_test`** — A very common bug in implementation. The scaler must be fitted on `X_train` only; applying `fit_transform` to `X_test` produces a differently scaled test set, invalidating any accuracy metric you compute afterward.
-- **Using `sparse=False` with `OneHotEncoder` in newer scikit-learn** — The `sparse` parameter was renamed to `sparse_output` in scikit-learn 1.2. Code using `sparse=False` raises a `TypeError` on newer versions; use `sparse_output=False` or let it default and call `.toarray()` on the result.
-- **Selecting k on the test set instead of via cross-validation** — The `GridSearchCV` examples use `fit(X_train_scaled, y_train)`, but if you check `best_score_` and then also evaluate on the same `X_test`, the test score is no longer a fair generalization estimate. The test set must be touched only after all parameter selection is final.
-- **Forgetting to pass `target_names` to `classification_report`** — Without `target_names`, the report prints numeric class indices (0, 1, 2…) instead of human-readable labels. On imbalanced datasets, misreading which index maps to which class leads to interpreting the wrong class's precision/recall.
-- **Passing `X_with_categories` (strings) directly to `KNeighborsClassifier`** — scikit-learn's KNN cannot compute distances on string features and will raise a `ValueError`. You must encode categorical columns first; skipping this step gives a clear error at `fit` time, but using `LabelEncoder` on nominal (unordered) categories creates false ordinal relationships.
-- **Comparing `GridSearchCV` scores from differently scaled data** — If you run one grid search on scaled data and another on raw data to compare, the `best_score_` values are not comparable. Always apply the same preprocessing pipeline inside `GridSearchCV` so all folds use the same feature distribution.
+- **Calling `scaler.fit_transform` on `X_test`**: A very common bug in implementation. The scaler must be fitted on `X_train` only; applying `fit_transform` to `X_test` produces a differently scaled test set, invalidating any accuracy metric you compute afterward.
+- **Using `sparse=False` with `OneHotEncoder` in newer scikit-learn**: The `sparse` parameter was renamed to `sparse_output` in scikit-learn 1.2. Code using `sparse=False` raises a `TypeError` on newer versions; use `sparse_output=False` or let it default and call `.toarray()` on the result.
+- **Selecting k on the test set instead of via cross-validation**: The `GridSearchCV` examples use `fit(X_train_scaled, y_train)`, but if you check `best_score_` and then also evaluate on the same `X_test`, the test score is no longer a fair generalization estimate. The test set must be touched only after all parameter selection is final.
+- **Forgetting to pass `target_names` to `classification_report`**: Without `target_names`, the report prints numeric class indices (0, 1, 2…) instead of human-readable labels. On imbalanced datasets, misreading which index maps to which class leads to interpreting the wrong class's precision/recall.
+- **Passing `X_with_categories` (strings) directly to `KNeighborsClassifier`**: scikit-learn's KNN cannot compute distances on string features and will raise a `ValueError`. You must encode categorical columns first; skipping this step gives a clear error at `fit` time, but using `LabelEncoder` on nominal (unordered) categories creates false ordinal relationships.
+- **Comparing `GridSearchCV` scores from differently scaled data**: If you run one grid search on scaled data and another on raw data to compare, the `best_score_` values are not comparable. Always apply the same preprocessing pipeline inside `GridSearchCV` so all folds use the same feature distribution.
 
 ## Additional Resources
 

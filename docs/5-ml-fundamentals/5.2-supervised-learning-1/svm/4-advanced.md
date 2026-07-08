@@ -8,11 +8,11 @@ objectives:
 ---
 # Advanced SVM Techniques
 
-**After this lesson:** you can explain the core ideas in “Advanced SVM Techniques” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Advanced SVM Techniques and try the examples in your own notebook.
 
 ## Overview
 
-Deeper optimization and modeling notes (e.g. class weights, nu-SVM hooks)—use when defaults are not enough.
+Deeper optimization and modeling notes (e.g. class weights, nu-SVM hooks), use when defaults are not enough.
 
 
 ## Advanced Optimization Techniques
@@ -405,7 +405,7 @@ def compare_kernels():
       <span class="code-callout__title">Spiraling dataset</span>
     </div>
     <div class="code-callout__body">
-      <p>Class 1 is a tightly wound trigonometric spiral — a shape where neither pure RBF nor pure polynomial excels, motivating the hybrid approach.</p>
+      <p>Class 1 is a tightly wound trigonometric spiral, a shape where neither pure RBF nor pure polynomial excels, motivating the hybrid approach.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="25-55" data-tint="3">
@@ -423,7 +423,7 @@ def compare_kernels():
       <span class="code-callout__title">Fit and predict</span>
     </div>
     <div class="code-callout__body">
-      <p>Training stores a copy of <code>X_train</code> so that at prediction time the kernel can be computed between the new points and all training points — this is required for precomputed kernels.</p>
+      <p>Training stores a copy of <code>X_train</code> so that at prediction time the kernel can be computed between the new points and all training points, this is required for precomputed kernels.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="75-115" data-tint="1">
@@ -563,7 +563,7 @@ def visualize_svm_details(X, y, model, scaler):
       <span class="code-callout__title">Imports</span>
     </div>
     <div class="code-callout__body">
-      <p>Brings in <code>make_moons</code> — a crescent-shaped dataset that produces a visually compelling non-linear decision boundary.</p>
+      <p>Brings in <code>make_moons</code>, a crescent-shaped dataset that produces a visually compelling non-linear decision boundary.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="7-16" data-tint="2">
@@ -572,7 +572,7 @@ def visualize_svm_details(X, y, model, scaler):
       <span class="code-callout__title">Moons dataset + fit</span>
     </div>
     <div class="code-callout__body">
-      <p>200 samples with mild noise. <code>gamma=10</code> is a high value that makes the RBF kernel very local — each support vector exerts influence only over a small area, producing a tight boundary.</p>
+      <p>200 samples with mild noise. <code>gamma=10</code> is a high value that makes the RBF kernel very local, each support vector exerts influence only over a small area, producing a tight boundary.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="18-47" data-tint="3">
@@ -599,7 +599,7 @@ def visualize_svm_details(X, y, model, scaler):
       <span class="code-callout__title">Support vector overlay</span>
     </div>
     <div class="code-callout__body">
-      <p>Support vectors are circled in red using <code>model.support_</code> indices. The percentage of all training points that are support vectors indicates model complexity — a high percentage can hint at overfitting.</p>
+      <p>Support vectors are circled in red using <code>model.support_</code> indices. The percentage of all training points that are support vectors indicates model complexity, a high percentage can hint at overfitting.</p>
     </div>
   </div>
 </aside>
@@ -617,7 +617,7 @@ def visualize_svm_details(X, y, model, scaler):
 
 ### Memory-Efficient Implementation
 
-For large datasets, memory efficiency is crucial:
+For large datasets, memory efficiency is important:
 
 #### Chunked scaling sketch and `LinearSVC(dual=False)`
 
@@ -714,7 +714,7 @@ def predict_efficiently(model, scaler, new_data):
       <span class="code-callout__title">Imports</span>
     </div>
     <div class="code-callout__body">
-      <p>Uses <code>LinearSVC</code> instead of <code>SVC</code> — the primal linear formulation that avoids the O(n²) kernel matrix, making it suitable for large datasets.</p>
+      <p>Uses <code>LinearSVC</code> instead of <code>SVC</code>, the primal linear formulation that avoids the O(n²) kernel matrix, making it suitable for large datasets.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="6-12" data-tint="2">
@@ -750,7 +750,7 @@ def predict_efficiently(model, scaler, new_data):
       <span class="code-callout__title">Efficient prediction</span>
     </div>
     <div class="code-callout__body">
-      <p>A lightweight wrapper that applies the fitted scaler before predicting — the same two-step pattern used throughout, but packaged as a reusable function.</p>
+      <p>A lightweight wrapper that applies the fitted scaler before predicting, the same two-step pattern used throughout, but packaged as a reusable function.</p>
     </div>
   </div>
 </aside>
@@ -923,7 +923,7 @@ def train_final_model(X, y, best_params):
       <span class="code-callout__title">Dataset and scaling</span>
     </div>
     <div class="code-callout__body">
-      <p>1,000 samples — large enough that running 32 CV evaluations sequentially would be noticeably slow, motivating the parallel approach.</p>
+      <p>1,000 samples, large enough that running 32 CV evaluations sequentially would be noticeably slow, motivating the parallel approach.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="34-42" data-tint="3">
@@ -1107,7 +1107,7 @@ def evaluate_feature_selection():
       <span class="code-callout__title">Imports</span>
     </div>
     <div class="code-callout__body">
-      <p>Adds <code>SelectFromModel</code> — scikit-learn's meta-transformer that uses a fitted estimator's feature importances to keep only the most relevant columns.</p>
+      <p>Adds <code>SelectFromModel</code>, scikit-learn's meta-transformer that uses a fitted estimator's feature importances to keep only the most relevant columns.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-23" data-tint="2">
@@ -1125,7 +1125,7 @@ def evaluate_feature_selection():
       <span class="code-callout__title">L1 feature selector</span>
     </div>
     <div class="code-callout__body">
-      <p><code>penalty='l1'</code> drives many coefficients to exactly zero — a built-in feature selector. <code>SelectFromModel(prefit=True)</code> then drops any feature whose absolute coefficient falls below the threshold.</p>
+      <p><code>penalty='l1'</code> drives many coefficients to exactly zero, a built-in feature selector. <code>SelectFromModel(prefit=True)</code> then drops any feature whose absolute coefficient falls below the threshold.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="66-70" data-tint="4">
@@ -1143,7 +1143,7 @@ def evaluate_feature_selection():
       <span class="code-callout__title">Accuracy comparison + plot</span>
     </div>
     <div class="code-callout__body">
-      <p>Trains two <code>LinearSVC</code> models — one on all 30 features, one on the selected subset — and prints their test accuracies. The bar chart highlights selected features in red so their relative importance is immediately visible.</p>
+      <p>Trains two <code>LinearSVC</code> models, one on all 30 features, one on the selected subset, and prints their test accuracies. The bar chart highlights selected features in red so their relative importance is immediately visible.</p>
     </div>
   </div>
 </aside>
@@ -1161,10 +1161,10 @@ Number of features selected: 4 out of 30
 
 ## Gotchas
 
-- **Setting `max_iter` in the early-stopping loop to a very low value** — The early-stopping sketch re-creates a new `SVC` with `max_iter=i` on every iteration, which is an expensive workaround. More critically, very small `max_iter` values (e.g., 1–5) will consistently trigger `ConvergenceWarning`, and the returned model's `score` reflects an unconverged fit, making the convergence check unreliable. Use `LinearSVC` with `max_iter` if you need true early-stopping behavior.
-- **Using `LinearSVC` with L1 penalty and forgetting that `dual=True` is incompatible** — `LinearSVC(penalty='l1')` requires `dual=False`. Leaving the default `dual=True` raises a `ValueError`. This is a common copy-paste error when switching between L1 and L2 regularization in the feature selection pipeline.
-- **Interpreting `SelectFromModel` threshold as a percentile** — The `threshold` parameter accepts absolute coefficient magnitude values or string shortcuts like `'mean'` or `'median'`. It does not accept percentile strings like `'75%'`. Passing a string other than `'mean'`/`'median'` raises a `ValueError` rather than silently selecting a fraction of features.
-- **Comparing parallel grid search results with `GridSearchCV` scores directly** — The parallel parameter search in the performance optimization section uses manual `cross_val_score` calls. These results may differ slightly from `GridSearchCV` because of different random state handling, fold stratification, and pre-dispatch ordering. They are not drop-in replacements for evaluating best parameters.
-- **Using `NuSVC` and treating `nu` as equivalent to `1/C`** — `NuSVC` takes a `nu` parameter (0, 1] controlling the upper bound on the fraction of margin errors and the lower bound on the fraction of support vectors. It is not simply the inverse of `C`; the two formulations optimize different objective functions and will produce different decision boundaries on the same data.
-- **Applying `PCA` for visualization after fitting SVM on the full feature space** — If you train an SVM on 30 features and then project to 2D with PCA for a decision boundary plot, the 2D projection does not correspond to the SVM's actual decision boundary (which lives in 30D). The plot is misleading because the SVM never saw or used the 2D coordinates.
+- **Setting `max_iter` in the early-stopping loop to a very low value**: The early-stopping sketch re-creates a new `SVC` with `max_iter=i` on every iteration, which is an expensive workaround. More critically, very small `max_iter` values (e.g., 1-5) will consistently trigger `ConvergenceWarning`, and the returned model's `score` reflects an unconverged fit, making the convergence check unreliable. Use `LinearSVC` with `max_iter` if you need true early-stopping behavior.
+- **Using `LinearSVC` with L1 penalty and forgetting that `dual=True` is incompatible**: `LinearSVC(penalty='l1')` requires `dual=False`. Leaving the default `dual=True` raises a `ValueError`. This is a common copy-paste error when switching between L1 and L2 regularization in the feature selection pipeline.
+- **Interpreting `SelectFromModel` threshold as a percentile**: The `threshold` parameter accepts absolute coefficient magnitude values or string shortcuts like `'mean'` or `'median'`. It does not accept percentile strings like `'75%'`. Passing a string other than `'mean'`/`'median'` raises a `ValueError` rather than silently selecting a fraction of features.
+- **Comparing parallel grid search results with `GridSearchCV` scores directly**: The parallel parameter search in the performance optimization section uses manual `cross_val_score` calls. These results may differ slightly from `GridSearchCV` because of different random state handling, fold stratification, and pre-dispatch ordering. They are not drop-in replacements for evaluating best parameters.
+- **Using `NuSVC` and treating `nu` as equivalent to `1/C`**: `NuSVC` takes a `nu` parameter (0, 1] controlling the upper bound on the fraction of margin errors and the lower bound on the fraction of support vectors. It is not simply the inverse of `C`; the two formulations optimize different objective functions and will produce different decision boundaries on the same data.
+- **Applying `PCA` for visualization after fitting SVM on the full feature space**: If you train an SVM on 30 features and then project to 2D with PCA for a decision boundary plot, the 2D projection does not correspond to the SVM's actual decision boundary (which lives in 30D). The plot is misleading because the SVM never saw or used the 2D coordinates.
 

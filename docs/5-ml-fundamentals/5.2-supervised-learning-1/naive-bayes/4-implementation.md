@@ -7,7 +7,7 @@ objectives:
 ---
 # Implementing Naive Bayes in Practice
 
-**After this lesson:** you can explain the core ideas in “Implementing Naive Bayes in Practice” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Implementing Naive Bayes in Practice and try the examples in your own notebook.
 
 ## Overview
 
@@ -16,11 +16,11 @@ objectives:
 
 ## Welcome to Hands-On Naive Bayes
 
-Now that you understand the theory, let's roll up our sleeves and implement Naive Bayes in real projects. We'll start with simple examples and gradually build up to more complex applications.
+Now that you understand the theory, implement Naive Bayes in real projects. We'll start with simple examples and gradually build up to more complex applications.
 
 ## Setting Up Your Environment
 
-First, let's make sure you have everything you need:
+First, make sure you have everything you need:
 
 #### Imports for Naive Bayes workflows
 
@@ -242,7 +242,7 @@ Confidence: 50.00%
 
 ### Understanding the Problem
 
-Let's build a toy screening example that predicts a synthetic sick/healthy label from a few patient-like measurements. The goal is to practise Gaussian Naive Bayes and probability outputs, not to build a clinically valid diagnosis tool.
+Build a toy screening example that predicts a synthetic sick/healthy label from a few patient-like measurements. The goal is to practise Gaussian Naive Bayes and probability outputs, not to build a clinically valid diagnosis tool.
 
 ### Step 1: Prepare Your Data
 
@@ -286,7 +286,7 @@ X_train, X_test, y_train, y_test = train_test_split(
       <span class="code-callout__title">Split</span>
     </div>
     <div class="code-callout__body">
-      <p>20% of the data is held out for evaluation; with only four samples this is one patient — enough to demonstrate the evaluation pattern even if statistical significance is limited.</p>
+      <p>20% of the data is held out for evaluation; with only four samples this is one patient, enough to demonstrate the evaluation pattern even if statistical significance is limited.</p>
     </div>
   </div>
 </aside>
@@ -376,7 +376,7 @@ Confidence: 100.00%
 
 ### Understanding the Problem
 
-Let's build a system that automatically categorizes products based on their descriptions. This is useful for e-commerce websites.
+Build a system that automatically categorizes products based on their descriptions. This is useful for e-commerce websites.
 
 ### Step 1: Prepare Your Data
 
@@ -560,12 +560,12 @@ Use multiple metrics to evaluate your model:
 
 ## Gotchas
 
-- **Using `min_df=2` in the spam classifier with a tiny training set** — The `TfidfVectorizer` is configured with `min_df=2`, meaning any word appearing in fewer than 2 training documents is dropped. With only 4-5 training emails, nearly every word is unique to one email, so the vocabulary becomes empty or near-empty. Set `min_df=1` for small datasets.
-- **Interpreting 50% confidence as "the model is unsure"** — The toy spam outputs show 50.00% confidence for both emails. This happens because the model learned almost nothing from 4-6 training examples (after the split). Probability outputs from Naive Bayes are notoriously poorly calibrated; even high-confidence predictions (e.g., 95%) may not reflect true accuracy. Use `CalibratedClassifierCV` for reliable probabilities.
-- **Normalizing class weights but not checking they sum to 1.0** — The `compute_class_weight` pattern divides by `class_weights.sum()`, but floating-point arithmetic can produce a sum slightly different from 1.0, causing scikit-learn's `class_prior` parameter to reject the array with a `ValueError`. Assert `np.isclose(priors.sum(), 1.0)` before passing.
-- **Calling `model.predict_proba` before fitting** — `Pipeline` objects expose `predict_proba` only if the final estimator supports it. `MultinomialNB` and `GaussianNB` support it by default, but if you swap in a `LinearSVC` or another estimator without probability support, calling `predict_proba` raises `AttributeError`. Check the estimator's docs before relying on probability outputs.
-- **Forgetting that `TfidfVectorizer` with `stop_words='english'` can remove important negations** — Words like "not", "no", and "never" are in the English stop-word list and will be removed, turning "not spam" into "spam" from the vectorizer's perspective. For sentiment analysis or spam detection where negation matters, either use a custom stop-word list or disable stop-word removal.
-- **Reusing the same `Pipeline` object without re-fitting when calling on new data** — After `model.fit(X_train, y_train)`, the pipeline's internal state is frozen. Passing new batches of data to `fit` again resets and overwrites the fitted vectorizer vocabulary. If you want to incrementally update the model, look into `partial_fit`, which is supported by all three NB variants.
+- **Using `min_df=2` in the spam classifier with a tiny training set**: The `TfidfVectorizer` is configured with `min_df=2`, meaning any word appearing in fewer than 2 training documents is dropped. With only 4-5 training emails, nearly every word is unique to one email, so the vocabulary becomes empty or near-empty. Set `min_df=1` for small datasets.
+- **Interpreting 50% confidence as "the model is unsure"**: The toy spam outputs show 50.00% confidence for both emails. This happens because the model learned almost nothing from 4-6 training examples (after the split). Probability outputs from Naive Bayes are notoriously poorly calibrated; even high-confidence predictions (e.g., 95%) may not reflect true accuracy. Use `CalibratedClassifierCV` for reliable probabilities.
+- **Normalizing class weights but not checking they sum to 1.0**: The `compute_class_weight` pattern divides by `class_weights.sum()`, but floating-point arithmetic can produce a sum slightly different from 1.0, causing scikit-learn's `class_prior` parameter to reject the array with a `ValueError`. Assert `np.isclose(priors.sum(), 1.0)` before passing.
+- **Calling `model.predict_proba` before fitting**: `Pipeline` objects expose `predict_proba` only if the final estimator supports it. `MultinomialNB` and `GaussianNB` support it by default, but if you swap in a `LinearSVC` or another estimator without probability support, calling `predict_proba` raises `AttributeError`. Check the estimator's docs before relying on probability outputs.
+- **Forgetting that `TfidfVectorizer` with `stop_words='english'` can remove important negations**: Words like "not", "no", and "never" are in the English stop-word list and will be removed, turning "not spam" into "spam" from the vectorizer's perspective. For sentiment analysis or spam detection where negation matters, either use a custom stop-word list or disable stop-word removal.
+- **Reusing the same `Pipeline` object without re-fitting when calling on new data**: After `model.fit(X_train, y_train)`, the pipeline's internal state is frozen. Passing new batches of data to `fit` again resets and overwrites the fitted vectorizer vocabulary. If you want to incrementally update the model, look into `partial_fit`, which is supported by all three NB variants.
 
 ## Next Steps
 

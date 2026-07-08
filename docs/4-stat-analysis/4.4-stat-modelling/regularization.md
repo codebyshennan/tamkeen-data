@@ -4,7 +4,7 @@ objectives:
   - Explain the bias-variance tradeoff and how penalising coefficients reduces variance.
   - Apply Ridge (L2), Lasso (L1), and Elastic Net with sklearn, scaling features beforehand.
   - Tune the penalty strength α with cross-validation rather than a single split.
-  - Read the qualitative difference between Ridge shrinkage and Lasso’s exact zeros for feature selection.
+  - Read the qualitative difference between Ridge shrinkage and Lasso's exact zeros for feature selection.
 ---
 
 # Regularization Techniques
@@ -13,21 +13,21 @@ objectives:
 
 ## TLDR
 
-- **Why regularize?** Prevent overfitting by penalising large coefficients — constrains the model's freedom to memorise noise.
+- **Why regularize?** Prevent overfitting by penalising large coefficients, constrains the model's freedom to memorise noise.
 - **Ridge (L2):** adds `α × Σβ²` to the loss. Shrinks all coefficients toward zero smoothly; never zeros them out. Best when features are correlated.
-- **Lasso (L1):** adds `α × Σ|β|`. Can zero out irrelevant features entirely — automatic feature selection. Best when only a few features truly matter.
+- **Lasso (L1):** adds `α × Σ|β|`. Can zero out irrelevant features entirely, automatic feature selection. Best when only a few features truly matter.
 - **Elastic Net:** blend of L1 + L2, controlled by `l1_ratio`. Use when you're unsure which to choose.
-- **Always scale features first** (`StandardScaler`) — penalties are not unit-invariant, so raw feature scale skews which coefficients get shrunk.
-- **Tune `alpha` with cross-validation** (`RidgeCV`, `LassoCV`) — never accept the default `alpha=1.0`.
-- **sklearn naming:** `alpha` in Ridge/Lasso = λ. In `LogisticRegression`, `C = 1/α` — smaller `C` means *more* regularization.
+- **Always scale features first** (`StandardScaler`), penalties are not unit-invariant, so raw feature scale skews which coefficients get shrunk.
+- **Tune `alpha` with cross-validation** (`RidgeCV`, `LassoCV`), never accept the default `alpha=1.0`.
+- **sklearn naming:** `alpha` in Ridge/Lasso = λ. In `LogisticRegression`, `C = 1/α`, smaller `C` means *more* regularization.
 
 ## Overview
 
-Regularization adds a **penalty** on coefficient size (or count) to the usual sum of squared errors or log-likelihood. Ridge pulls weights smoothly toward zero; Lasso can zero some out entirely. Both reduce variance when predictors are noisy or correlated—common in real tables—and need sensible scaling and tuning, topics you began in [model selection](./model-selection.md).
+Regularization adds a **penalty** on coefficient size (or count) to the usual sum of squared errors or log-likelihood. Ridge pulls weights smoothly toward zero; Lasso can zero some out entirely. Both reduce variance when predictors are noisy or correlated, common in real tables, and need sensible scaling and tuning, topics you began in [model selection](./model-selection.md).
 
 ## Why this matters
 
-- **Ridge** and **Lasso** shrink coefficients to reduce variance and, in Lasso’s case, perform feature selection.
+- **Ridge** and **Lasso** shrink coefficients to reduce variance and, in Lasso's case, perform feature selection.
 - You will tune penalty strength without guessing from a single train/test split.
 
 ## Prerequisites
@@ -39,7 +39,7 @@ Regularization adds a **penalty** on coefficient size (or count) to the usual su
 
 ## Introduction
 
-Regularization is a crucial technique in statistical modeling that helps prevent overfitting by adding a penalty term to the model's loss function. Think of it as a way to keep your model from becoming too complex and memorizing the training data instead of learning general patterns.
+Regularization is a important technique in statistical modeling that helps prevent overfitting by adding a penalty term to the model's loss function. Think of it as a way to keep your model from becoming too complex and memorizing the training data instead of learning general patterns.
 
 ### Video Tutorial: Introduction to Regularization
 
@@ -68,13 +68,13 @@ Imagine you're trying to predict house prices. Without regularization:
 Regularization helps by:
 
 1. **Reducing model complexity** - Encourages simpler models by penalizing large coefficients
-2. **Preventing overfitting** - Makes the model more robust to noise in the training data
+2. **Preventing overfitting** - Makes the model more reliable to noise in the training data
 3. **Improving generalization** - Helps the model perform better on new, unseen data
 4. **Handling multicollinearity** - Stabilizes coefficient estimates when features are correlated
 
 ### The Problem: Overfitting
 
-Before we dive into regularization techniques, let's understand the problem they solve. Overfitting occurs when a model learns the training data too well, including its noise and random fluctuations, rather than the underlying pattern.
+Before we dive into regularization techniques, get clear on the problem they solve. Overfitting occurs when a model learns the training data too well, including its noise and random fluctuations, rather than the underlying pattern.
 
 **Noisy quadratic data: polynomial pipelines and train vs test MSE**
 
@@ -138,16 +138,16 @@ for i, degree in enumerate(degrees):
         LinearRegression()
     )
     model.fit(X_train, y_train)
-    
+
     # Make predictions
     y_plot = model.predict(x_plot)
-    
+
     # Calculate errors
     train_error = mean_squared_error(y_train, model.predict(X_train))
     test_error = mean_squared_error(y_test, model.predict(X_test))
-    
+
     # Plot the model's predictions
-    plt.plot(x_plot, y_plot, c=colors[i], 
+    plt.plot(x_plot, y_plot, c=colors[i],
              label=f'{labels[i]}\nTrain MSE: {train_error:.2f}, Test MSE: {test_error:.2f}')
 
 plt.title('Overfitting Example: Different Polynomial Degrees')
@@ -235,9 +235,9 @@ From this visualization, you can observe:
 
 Some scenarios where regularization is essential:
 
-1. **Medical Diagnosis** — Datasets have many features but few samples; regularization finds true risk factors instead of coincidental patterns.
-2. **Financial Forecasting** — Markets mix real signal with noise; regularization yields stable models focused on persistent patterns rather than historical fluctuations.
-3. **Image Recognition** — Images have thousands of pixel features; regularization improves generalization instead of memorizing specific training images.
+1. **Medical Diagnosis**: Datasets have many features but few samples; regularization finds true risk factors instead of coincidental patterns.
+2. **Financial Forecasting**: Markets mix real signal with noise; regularization yields stable models focused on persistent patterns rather than historical fluctuations.
+3. **Image Recognition**: Images have thousands of pixel features; regularization improves generalization instead of memorizing specific training images.
 
 > **🎯 Key points**
 >
@@ -262,7 +262,7 @@ Regularization works by adding a penalty term to the loss function that the mode
    - Shrinks coefficients smoothly toward zero but rarely to exactly zero
    - Good for handling multicollinearity (correlated features)
 
-Let's visualize how these work:
+Visualize how these work:
 
 **Ridge vs Lasso predictions across penalty strengths on 1D data**
 
@@ -280,47 +280,47 @@ def plot_regularization_effects():
     np.random.seed(42)
     x = np.linspace(-5, 5, 100)
     y = 2*x + np.random.normal(0, 1, 100)
-    
+
     X = x.reshape(-1, 1)
-    
+
     # Set up different regularization strengths (alpha values)
     # alpha=0 means no regularization
     alphas = [0, 0.1, 1, 10]
-    
+
     plt.figure(figsize=(15, 6))
-    
+
     # Ridge Regression (L2)
     plt.subplot(121)
     for alpha in alphas:
         model = Ridge(alpha=alpha)
         model.fit(X, y)
         y_pred = model.predict(X)
-        plt.plot(x, y_pred, 
+        plt.plot(x, y_pred,
                 label=f'α={alpha}')
-    
+
     plt.scatter(x, y, alpha=0.3, color='black')
     plt.title('Ridge Regression (L2)')
     plt.xlabel('Feature Value')
     plt.ylabel('Prediction')
     plt.legend()
     plt.grid(True)
-    
+
     # Lasso Regression (L1)
     plt.subplot(122)
     for alpha in alphas:
         model = Lasso(alpha=alpha)
         model.fit(X, y)
         y_pred = model.predict(X)
-        plt.plot(x, y_pred, 
+        plt.plot(x, y_pred,
                 label=f'α={alpha}')
-    
+
     plt.scatter(x, y, alpha=0.3, color='black')
     plt.title('Lasso Regression (L1)')
     plt.xlabel('Feature Value')
     plt.ylabel('Prediction')
     plt.legend()
     plt.grid(True)
-    
+
     plt.tight_layout()
     plt.savefig('regularization_effects.png')
     plt.show()
@@ -428,26 +428,26 @@ def plot_constraint_spaces():
     beta1 = np.linspace(-2, 2, 100)
     beta2 = np.linspace(-2, 2, 100)
     B1, B2 = np.meshgrid(beta1, beta2)
-    
+
     # Calculate constraint regions
     l1 = np.abs(B1) + np.abs(B2)  # L1 constraint: |β1| + |β2| ≤ c
     l2 = B1**2 + B2**2            # L2 constraint: β1² + β2² ≤ c
-    
+
     # Create contour plots
     plt.figure(figsize=(12, 6))
-    
+
     # L1 Constraint (Diamond)
     plt.subplot(121)
     plt.contour(B1, B2, l1, levels=[1], colors='r', linewidths=2)
-    
+
     # Add loss function contours (circular contours representing MSE)
     for r in [0.4, 0.8, 1.2, 1.6]:
-        plt.contour(B1, B2, (B1-1)**2 + (B2-0.5)**2, levels=[r**2], 
+        plt.contour(B1, B2, (B1-1)**2 + (B2-0.5)**2, levels=[r**2],
                    colors='blue', alpha=0.5, linestyles='--')
-    
+
     # Highlight the corner intersection point
     plt.plot([1], [0], 'ko', markersize=8)
-    
+
     plt.title('L1 Constraint (Diamond)')
     plt.xlabel('Coefficient β₁')
     plt.ylabel('Coefficient β₂')
@@ -455,28 +455,28 @@ def plot_constraint_spaces():
     plt.grid(True)
     plt.annotate('Sparse Solution\n(β₂ = 0)', xy=(1, 0), xytext=(1, -1.5),
                 arrowprops=dict(facecolor='black', shrink=0.05))
-    
+
     # L2 Constraint (Circle)
     plt.subplot(122)
     plt.contour(B1, B2, l2, levels=[1], colors='b', linewidths=2)
-    
+
     # Add the same loss function contours
     for r in [0.4, 0.8, 1.2, 1.6]:
-        plt.contour(B1, B2, (B1-1)**2 + (B2-0.5)**2, levels=[r**2], 
+        plt.contour(B1, B2, (B1-1)**2 + (B2-0.5)**2, levels=[r**2],
                    colors='blue', alpha=0.5, linestyles='--')
-    
+
     # Highlight the non-sparse intersection point
     plt.plot([0.9], [0.45], 'ko', markersize=8)
-    
+
     plt.title('L2 Constraint (Circle)')
     plt.xlabel('Coefficient β₁')
     plt.ylabel('Coefficient β₂')
     plt.axis('equal')
     plt.grid(True)
-    plt.annotate('Non-sparse Solution\n(both β₁ and β₂ ≠ 0)', 
+    plt.annotate('Non-sparse Solution\n(both β₁ and β₂ ≠ 0)',
                 xy=(0.9, 0.45), xytext=(0.2, -1.5),
                 arrowprops=dict(facecolor='black', shrink=0.05))
-    
+
     plt.tight_layout()
     plt.savefig('constraint_spaces.png')
     plt.show()
@@ -553,7 +553,7 @@ This geometric interpretation explains:
 > **🎯 Key points**
 >
 > - Regularization adds a penalty term to the loss function the model minimizes.
-> - L1 (Lasso) penalizes the sum of absolute coefficients and can drive some to exactly zero — feature selection.
+> - L1 (Lasso) penalizes the sum of absolute coefficients and can drive some to exactly zero, feature selection.
 > - L2 (Ridge) penalizes the sum of squared coefficients and shrinks them smoothly, rarely to zero.
 > - Stronger penalty (larger α) means a simpler model; at high α both methods approach the mean.
 > - Geometrically, L1's diamond constraint hits corners (sparsity) while L2's circle usually does not.
@@ -568,7 +568,7 @@ This geometric interpretation explains:
 
 *StatQuest: Regularization Part 3: Elastic Net Regression by Josh Starmer*
 
-Now let's implement Ridge, Lasso, and Elastic Net regularization in Python:
+Now implement Ridge, Lasso, and Elastic Net regularization in Python:
 
 ### 1. Ridge Regression (L2)
 
@@ -587,33 +587,33 @@ def implement_ridge(X, y, alphas=np.logspace(-4, 4, 100)):
     from sklearn.linear_model import RidgeCV
     from sklearn.preprocessing import StandardScaler
     from sklearn.model_selection import train_test_split
-    
+
     # Split data
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
-    
+
     # Scale features
     scaler = StandardScaler()
     X_train_scaled = scaler.fit_transform(X_train)
     X_test_scaled = scaler.transform(X_test)
-    
+
     # Fit model with cross-validation to select the best alpha
     model = RidgeCV(alphas=alphas, cv=5, scoring='neg_mean_squared_error')
     model.fit(X_train_scaled, y_train)
-    
+
     # Evaluate model
     train_score = model.score(X_train_scaled, y_train)
     test_score = model.score(X_test_scaled, y_test)
-    
+
     print(f"Ridge Regression Results:")
     print(f"Best alpha: {model.alpha_:.4f}")
     print(f"Training R²: {train_score:.4f}")
     print(f"Test R²: {test_score:.4f}")
-    
+
     # Visualize coefficients
     if X.shape[1] <= 10:  # Only create visualization for relatively small number of features
         # Create dummy feature names if not provided
         feature_names = [f"Feature {i+1}" for i in range(X.shape[1])]
-        
+
         # Plot coefficients
         plt.figure(figsize=(10, 6))
         plt.barh(feature_names, model.coef_)
@@ -624,7 +624,7 @@ def implement_ridge(X, y, alphas=np.logspace(-4, 4, 100)):
         plt.tight_layout()
         plt.savefig('ridge_coefficients.png')
         plt.show()
-    
+
     return {
         'model': model,
         'best_alpha': model.alpha_,
@@ -637,27 +637,27 @@ def implement_ridge(X, y, alphas=np.logspace(-4, 4, 100)):
 def generate_collinear_data(n_samples=200, noise_level=0.5):
     """Generate synthetic data with collinearity"""
     np.random.seed(42)
-    
+
     # Generate independent features
     x1 = np.random.normal(0, 1, n_samples)
     x2 = np.random.normal(0, 1, n_samples)
-    
+
     # Generate collinear feature
     x3 = 0.7*x1 + 0.3*x2 + np.random.normal(0, 0.1, n_samples)  # Collinear with x1 and x2
-    
+
     # Two more independent features
     x4 = np.random.normal(0, 1, n_samples)
     x5 = np.random.normal(0, 1, n_samples)
-    
+
     # Combine features
     X = np.column_stack([x1, x2, x3, x4, x5])
-    
+
     # True coefficients (x3 should have small coefficient since it's redundant)
     true_coef = np.array([2, 1, 0.2, 0.5, 0])
-    
+
     # Generate target
     y = X @ true_coef + np.random.normal(0, noise_level, n_samples)
-    
+
     return X, y, true_coef
 
 # Generate data and apply Ridge regression
@@ -762,37 +762,37 @@ def implement_lasso(X, y, alphas=np.logspace(-4, 1, 100)):
     from sklearn.linear_model import LassoCV
     from sklearn.preprocessing import StandardScaler
     from sklearn.model_selection import train_test_split
-    
+
     # Split data
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
-    
+
     # Scale features
     scaler = StandardScaler()
     X_train_scaled = scaler.fit_transform(X_train)
     X_test_scaled = scaler.transform(X_test)
-    
+
     # Fit model with cross-validation
     model = LassoCV(alphas=alphas, cv=5, max_iter=10000, selection='random')
     model.fit(X_train_scaled, y_train)
-    
+
     # Evaluate model
     train_score = model.score(X_train_scaled, y_train)
     test_score = model.score(X_test_scaled, y_test)
-    
+
     # Count non-zero coefficients
     n_nonzero = np.sum(model.coef_ != 0)
-    
+
     print(f"Lasso Regression Results:")
     print(f"Best alpha: {model.alpha_:.4f}")
     print(f"Training R²: {train_score:.4f}")
     print(f"Test R²: {test_score:.4f}")
     print(f"Number of features selected: {n_nonzero} out of {X.shape[1]}")
-    
+
     # Visualize coefficients
     if X.shape[1] <= 10:
         # Create dummy feature names if not provided
         feature_names = [f"Feature {i+1}" for i in range(X.shape[1])]
-        
+
         # Plot coefficients
         plt.figure(figsize=(10, 6))
         plt.barh(feature_names, model.coef_)
@@ -803,7 +803,7 @@ def implement_lasso(X, y, alphas=np.logspace(-4, 1, 100)):
         plt.tight_layout()
         plt.savefig('lasso_coefficients.png')
         plt.show()
-    
+
     return {
         'model': model,
         'best_alpha': model.alpha_,
@@ -902,36 +902,36 @@ def implement_elastic_net(X, y, l1_ratios=[.1, .5, .7, .9, .95, .99, 1], alphas=
     from sklearn.linear_model import ElasticNetCV
     from sklearn.preprocessing import StandardScaler
     from sklearn.model_selection import train_test_split
-    
+
     # Split data
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
-    
+
     # Scale features
     scaler = StandardScaler()
     X_train_scaled = scaler.fit_transform(X_train)
     X_test_scaled = scaler.transform(X_test)
-    
+
     # Fit model
     model = ElasticNetCV(l1_ratio=l1_ratios, alphas=alphas, cv=5, max_iter=10000)
     model.fit(X_train_scaled, y_train)
-    
+
     # Evaluate model
     train_score = model.score(X_train_scaled, y_train)
     test_score = model.score(X_test_scaled, y_test)
     n_nonzero = np.sum(model.coef_ != 0)
-    
+
     print(f"Elastic Net Results:")
     print(f"Best alpha: {model.alpha_:.4f}")
     print(f"Best l1_ratio: {model.l1_ratio_:.2f}")
     print(f"Training R²: {train_score:.4f}")
     print(f"Test R²: {test_score:.4f}")
     print(f"Number of features selected: {n_nonzero} out of {X.shape[1]}")
-    
+
     # Visualize coefficients
     if X.shape[1] <= 10:
         # Create dummy feature names if not provided
         feature_names = [f"Feature {i+1}" for i in range(X.shape[1])]
-        
+
         # Plot coefficients
         plt.figure(figsize=(10, 6))
         plt.barh(feature_names, model.coef_)
@@ -942,7 +942,7 @@ def implement_elastic_net(X, y, l1_ratios=[.1, .5, .7, .9, .95, .99, 1], alphas=
         plt.tight_layout()
         plt.savefig('elastic_net_coefficients.png')
         plt.show()
-    
+
     return {
         'model': model,
         'best_alpha': model.alpha_,
@@ -1044,47 +1044,47 @@ How do you choose the best type of regularization and its strength? Here's a com
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
 
-<!-- NOTE: instructor — ridge.cv_values_ is only populated when RidgeCV is built with store_cv_values=True AND cv=None; this call passes cv=kf, so ridge.cv_values_ will not exist and the snippet will raise AttributeError. Flag this when walking through the example. -->
+<!-- NOTE: instructor, ridge.cv_values_ is only populated when RidgeCV is built with store_cv_values=True AND cv=None; this call passes cv=kf, so ridge.cv_values_ will not exist and the snippet will raise AttributeError. Flag this when walking through the example. -->
 {% highlight python %}
 def select_regularization_parameter(X, y):
     """Select optimal regularization parameter using cross-validation"""
     from sklearn.linear_model import RidgeCV, LassoCV
     from sklearn.preprocessing import StandardScaler
     from sklearn.model_selection import KFold
-    
+
     # Scale features
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
-    
+
     # Try different alphas
     alphas = np.logspace(-4, 4, 20)
-    
+
     # Initialize cross-validation
     kf = KFold(n_splits=5, shuffle=True, random_state=42)
-    
+
     # Ridge CV
     ridge = RidgeCV(alphas=alphas, cv=kf, scoring='neg_mean_squared_error')
     ridge.fit(X_scaled, y)
-    
+
     # Lasso CV
     lasso = LassoCV(alphas=alphas, cv=kf, max_iter=10000)
     lasso.fit(X_scaled, y)
-    
+
     # Plot results
     plt.figure(figsize=(12, 6))
-    
+
     # Convert MSE values from negative to positive
     ridge_alphas = ridge.alphas
     ridge_mse = -ridge.cv_values_.mean(axis=0)
-    
+
     lasso_alphas = lasso.alphas_
     lasso_mse = np.mean(lasso.mse_path_, axis=1)
-    
+
     plt.semilogx(ridge_alphas, ridge_mse, 'b-o', label='Ridge')
     plt.semilogx(lasso_alphas, lasso_mse, 'r-o', label='Lasso')
-    plt.axvline(ridge.alpha_, color='b', linestyle='--', 
+    plt.axvline(ridge.alpha_, color='b', linestyle='--',
                 label=f'Ridge Best α={ridge.alpha_:.2f}')
-    plt.axvline(lasso.alpha_, color='r', linestyle='--', 
+    plt.axvline(lasso.alpha_, color='r', linestyle='--',
                 label=f'Lasso Best α={lasso.alpha_:.2f}')
     plt.xlabel('Alpha (Regularization Strength)')
     plt.ylabel('Mean Squared Error (CV)')
@@ -1093,7 +1093,7 @@ def select_regularization_parameter(X, y):
     plt.grid(True)
     plt.savefig('regularization_selection.png')
     plt.show()
-    
+
     return {
         'ridge_alpha': ridge.alpha_,
         'lasso_alpha': lasso.alpha_,
@@ -1162,56 +1162,56 @@ def compare_regularization_methods(X, y):
     from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet
     from sklearn.preprocessing import StandardScaler
     from sklearn.model_selection import train_test_split, cross_val_score
-    
+
     # Split data
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
-    
+
     # Scale features
     scaler = StandardScaler()
     X_train_scaled = scaler.fit_transform(X_train)
     X_test_scaled = scaler.transform(X_test)
-    
+
     # Define models to compare
     models = {
         'Linear Regression (No Regularization)': LinearRegression(),
         'Ridge Regression (L2)': Ridge(alpha=ridge_results['best_alpha']),
         'Lasso Regression (L1)': Lasso(alpha=lasso_results['best_alpha'], max_iter=10000),
         'Elastic Net (L1 + L2)': ElasticNet(
-            alpha=elastic_net_results['best_alpha'], 
-            l1_ratio=elastic_net_results['best_l1_ratio'], 
+            alpha=elastic_net_results['best_alpha'],
+            l1_ratio=elastic_net_results['best_l1_ratio'],
             max_iter=10000
         )
     }
-    
+
     # Train and evaluate each model
     results = []
     for name, model in models.items():
         # Train model
         model.fit(X_train_scaled, y_train)
-        
+
         # Evaluate model
         train_score = model.score(X_train_scaled, y_train)
         test_score = model.score(X_test_scaled, y_test)
-        
+
         # Count non-zero coefficients (if applicable)
         if hasattr(model, 'coef_'):
             n_nonzero = np.sum(model.coef_ != 0)
         else:
             n_nonzero = X.shape[1]  # Assume all features used
-            
+
         results.append({
             'Model': name,
             'Train R²': train_score,
             'Test R²': test_score,
             'Features Used': n_nonzero
         })
-    
+
     # Convert to DataFrame for display
     results_df = pd.DataFrame(results)
-    
+
     # Plot results
     plt.figure(figsize=(12, 8))
-    
+
     # Plot R² scores
     plt.subplot(211)
     x = np.arange(len(results))
@@ -1223,7 +1223,7 @@ def compare_regularization_methods(X, y):
     plt.title('Model Performance Comparison')
     plt.legend()
     plt.grid(True, alpha=0.3)
-    
+
     # Plot feature counts
     plt.subplot(212)
     plt.bar(x, [r['Features Used'] for r in results], color='green', alpha=0.7)
@@ -1231,11 +1231,11 @@ def compare_regularization_methods(X, y):
     plt.ylabel('Number of Features Used')
     plt.title('Feature Selection Comparison')
     plt.grid(True, alpha=0.3)
-    
+
     plt.tight_layout()
     plt.savefig('regularization_comparison.png')
     plt.show()
-    
+
     return results_df
 
 # Compare all regularization methods
@@ -1445,7 +1445,7 @@ from sklearn.linear_model import ElasticNetCV
 elastic_net = ElasticNetCV(
     l1_ratio=[.1, .5, .7, .9, .95, .99, 1],
     alphas=np.logspace(-4, 1, 50),
-    cv=5, 
+    cv=5,
     max_iter=10000
 )
 elastic_net.fit(X_train_scaled, y_train)
@@ -1469,7 +1469,7 @@ print(f"Best l1_ratio: {elastic_net.l1_ratio_:.2f}")
 
 ### 4. Always Scale Your Features
 
-Regularization is sensitive to the scale of your features, so standardization is crucial:
+Regularization is sensitive to the scale of your features, so standardization is important:
 
 **Pipeline: scaler then `Ridge` for fit/predict**
 
@@ -1536,7 +1536,7 @@ y_pred = pipeline.predict(X_test)
 from sklearn.linear_model import RidgeCV, LassoCV
 from sklearn.model_selection import RepeatedKFold
 
-# Create a more robust cross-validation scheme
+# Create a more reliable cross-validation scheme
 cv = RepeatedKFold(n_splits=5, n_repeats=3, random_state=42)
 
 # Wide range of alphas on logarithmic scale
@@ -1597,19 +1597,19 @@ def get_standardized_coefs(model, scaler, feature_names=None):
     """Calculate standardized coefficients accounting for feature scaling"""
     # Get raw coefficients
     coefs = model.coef_
-    
+
     # Get feature standard deviations from scaler
     if hasattr(scaler, 'scale_'):
         scales = scaler.scale_
     else:
         scales = np.ones(len(coefs))
-    
+
     # Calculate standardized coefficients
     std_coefs = coefs * scales
-    
+
     if feature_names is None:
         feature_names = [f"Feature {i+1}" for i in range(len(coefs))]
-    
+
     # Return as DataFrame
     return pd.DataFrame({
         'Feature': feature_names,
@@ -1646,18 +1646,18 @@ print(std_coefs)
 
 > **🎯 Key points**
 >
-> - Choose `alpha` with cross-validation over a wide range; `RepeatedKFold` makes the estimate more robust.
+> - Choose `alpha` with cross-validation over a wide range; `RepeatedKFold` makes the estimate more reliable.
 > - For highly correlated features, prefer Ridge or reduce dimensions (e.g. PCA) before modeling.
-> - Regularized coefficients are biased — fine for prediction, but interpret cautiously for causal claims.
+> - Regularized coefficients are biased, fine for prediction, but interpret cautiously for causal claims.
 > - Multiply coefficients by feature scales to recover comparable, standardized effect sizes.
 
 ## Practice Exercise
 
-Let's apply regularization to improve a model for housing price prediction:
+Apply regularization to improve a model for housing price prediction:
 
 **Synthetic housing design matrix (starter scaffold for learners)**
 
-**Purpose:** Build correlated and noise features with a nonlinear price target, stack into `X_housing`, then `train_test_split`—comment prompts compare Linear/Ridge/Lasso/ElasticNet.
+**Purpose:** Build correlated and noise features with a nonlinear price target, stack into `X_housing`, then `train_test_split`-comment prompts compare Linear/Ridge/Lasso/ElasticNet.
 
 **Walkthrough:** `np.column_stack` + name list; exercise leaves modeling steps to the student.
 
@@ -1699,14 +1699,14 @@ price = (
 
 # Combine features
 X_housing = np.column_stack([
-    size, rooms, age, distance, bathrooms, garden_size, 
+    size, rooms, age, distance, bathrooms, garden_size,
     garage, random_feature1, random_feature2
 ])
 
 # Feature names for interpretation
 housing_feature_names = [
-    'Size (sq ft)', 'Rooms', 'Age (years)', 'Distance to City (miles)', 
-    'Bathrooms', 'Garden Size (sq ft)', 'Garage Spaces', 
+    'Size (sq ft)', 'Rooms', 'Age (years)', 'Distance to City (miles)',
+    'Bathrooms', 'Garden Size (sq ft)', 'Garage Spaces',
     'Random Feature 1', 'Random Feature 2'
 ]
 
@@ -1769,12 +1769,12 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 ## Gotchas
 
-- **Forgetting to scale features before Ridge or Lasso** — Both penalties shrink coefficients toward zero, but the penalty is applied to the raw coefficient values. A feature measured in thousands (e.g., income) gets a tiny coefficient and almost no shrinkage, while one measured in single digits gets shrunk aggressively. Always apply `StandardScaler` inside your pipeline before the regularised model.
-- **Treating `alpha=1.0` as a sensible default** — sklearn's default `alpha` is 1.0, which is arbitrary relative to your data's scale and noise level. The right alpha is data-dependent; always tune it with cross-validation (e.g., `RidgeCV`, `LassoCV`) rather than accepting the default.
-- **Using `cross_val_score` outside a Pipeline when preprocessing is involved** — If you scale the data before calling `cross_val_score`, the scaler has seen all folds including the test fold, leaking information. Wrap `StandardScaler` and `Ridge`/`Lasso` in a `make_pipeline` so preprocessing is re-fitted only on the training fold of each split.
-- **Assuming Lasso always performs feature selection** — Lasso sets coefficients to exactly zero only at sufficiently large alpha. At small alpha values, all coefficients remain non-zero and Lasso behaves more like Ridge. Check how many coefficients are truly zero at your chosen alpha before claiming features were "selected."
-- **Comparing Ridge and Lasso coefficients directly** — Ridge shrinks all coefficients smoothly and retains all features; Lasso can zero some out entirely. A coefficient of 0 from Lasso means the feature was excluded from the model, not that it has zero effect—it may still matter but be redundant with another predictor.
-- **Picking alpha from a path plot without accounting for standard error** — `LassoCV` selects the alpha that minimises mean CV error. The `alpha_1se` rule (largest alpha within one standard error of the minimum) often gives a simpler, similarly accurate model. Defaulting to the exact minimum risks selecting an overly complex solution.
+- **Forgetting to scale features before Ridge or Lasso**: Both penalties shrink coefficients toward zero, but the penalty is applied to the raw coefficient values. A feature measured in thousands (e.g., income) gets a tiny coefficient and almost no shrinkage, while one measured in single digits gets shrunk aggressively. Always apply `StandardScaler` inside your pipeline before the regularised model.
+- **Treating `alpha=1.0` as a sensible default**: sklearn's default `alpha` is 1.0, which is arbitrary relative to your data's scale and noise level. The right alpha is data-dependent; always tune it with cross-validation (e.g., `RidgeCV`, `LassoCV`) rather than accepting the default.
+- **Using `cross_val_score` outside a Pipeline when preprocessing is involved**: If you scale the data before calling `cross_val_score`, the scaler has seen all folds including the test fold, leaking information. Wrap `StandardScaler` and `Ridge`/`Lasso` in a `make_pipeline` so preprocessing is re-fitted only on the training fold of each split.
+- **Assuming Lasso always performs feature selection**: Lasso sets coefficients to exactly zero only at sufficiently large alpha. At small alpha values, all coefficients remain non-zero and Lasso behaves more like Ridge. Check how many coefficients are truly zero at your chosen alpha before claiming features were "selected."
+- **Comparing Ridge and Lasso coefficients directly**: Ridge shrinks all coefficients smoothly and retains all features; Lasso can zero some out entirely. A coefficient of 0 from Lasso means the feature was excluded from the model, not that it has zero effect, it may still matter but be redundant with another predictor.
+- **Picking alpha from a path plot without accounting for standard error**: `LassoCV` selects the alpha that minimises mean CV error. The `alpha_1se` rule (largest alpha within one standard error of the minimum) often gives a simpler, similarly accurate model. Defaulting to the exact minimum risks selecting an overly complex solution.
 
 ## Additional Resources
 

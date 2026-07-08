@@ -8,7 +8,7 @@
 
 A practical walkthrough of cleaning and reshaping a real dataset in pandas before visualization.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/bDhvCp3_lYw" title="Data Cleaning in Pandas — Alex the Analyst" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/bDhvCp3_lYw" title="Data Cleaning in Pandas, Alex the Analyst" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Why data prep matters
 
@@ -56,7 +56,7 @@ sales = pd.DataFrame({
 sales["order_date"] = pd.to_datetime(sales["order_date"])
 ```
 
-**Starting dataset — 10 rows, 6 columns:**
+**Starting dataset, 10 rows, 6 columns:**
 
 | order_id | order_date | status | category | revenue | product_name |
 |---|---|---|---|---|---|
@@ -160,7 +160,7 @@ print(category_summary.to_string(index=False))
         Food     55.0       2    27.500000
 ```
 
-7 transaction rows collapsed to 3 summary rows — one per category. Each row now represents one bar mark on the chart.
+7 transaction rows collapsed to 3 summary rows, one per category. Each row now represents one bar mark on the chart.
 
 ### 4. Sort for readability
 
@@ -339,12 +339,12 @@ Use this before every chart:
 
 ## Gotchas
 
-- **`groupby(...).agg(revenue=("revenue", "sum"))` silently drops rows with `NaN` in the aggregated column** — pandas excludes NaN values from `sum` and `mean` by default, so if A5's missing revenue is in the filtered dataset it simply vanishes from the total without any warning; verify your sums add up to the expected grand total after aggregation.
-- **`pd.to_datetime(sales["order_date"])` raises a `ParserError` on inconsistent date formats** — if a column mixes `"2025-03-01"` and `"01/03/2025"`, the conversion will fail or silently coerce bad rows to `NaT`; pass `format=` explicitly or use `errors='coerce'` and then inspect the resulting `NaT` rows before plotting.
-- **`.copy()` after `.loc[]` is not optional** — assigning new columns to a slice without `.copy()` raises a `SettingWithCopyWarning` and may not persist the change; always chain `.copy()` when you intend to modify the filtered DataFrame in subsequent steps.
-- **`melt` changes the number of rows, which can surprise downstream `.groupby` logic** — after melting a wide table into long form, the same original row now appears multiple times (once per melted column); if you then `groupby` the melted result and count rows, you will overcount observations unless you group by the correct id variable.
-- **Sorting before plotting does not persist unless you reset the index** — `sort_values("revenue", ascending=False)` returns a sorted copy but preserves the original integer index; some plotting functions (especially those that accept a DataFrame column by name) may re-sort by index internally; call `.reset_index(drop=True)` after sorting to guarantee the order is preserved.
-- **Using `where(..., "Other")` to group a long tail works only if the column dtype is `object`** — if `product_name` is a `Categorical` dtype, the new value `"Other"` may not be in the existing categories and will be set to `NaN` instead; cast the column with `.astype(str)` before applying the `where` pattern.
+- **`groupby(...).agg(revenue=("revenue", "sum"))` silently drops rows with `NaN` in the aggregated column**: pandas excludes NaN values from `sum` and `mean` by default, so if A5's missing revenue is in the filtered dataset it simply vanishes from the total without any warning; verify your sums add up to the expected grand total after aggregation.
+- **`pd.to_datetime(sales["order_date"])` raises a `ParserError` on inconsistent date formats**: if a column mixes `"2025-03-01"` and `"01/03/2025"`, the conversion will fail or silently coerce bad rows to `NaT`; pass `format=` explicitly or use `errors='coerce'` and then inspect the resulting `NaT` rows before plotting.
+- **`.copy()` after `.loc[]` is not optional**: assigning new columns to a slice without `.copy()` raises a `SettingWithCopyWarning` and may not persist the change; always chain `.copy()` when you intend to modify the filtered DataFrame in subsequent steps.
+- **`melt` changes the number of rows, which can surprise downstream `.groupby` logic**: after melting a wide table into long form, the same original row now appears multiple times (once per melted column); if you then `groupby` the melted result and count rows, you will overcount observations unless you group by the correct id variable.
+- **Sorting before plotting does not persist unless you reset the index**: `sort_values("revenue", ascending=False)` returns a sorted copy but preserves the original integer index; some plotting functions (especially those that accept a DataFrame column by name) may re-sort by index internally; call `.reset_index(drop=True)` after sorting to guarantee the order is preserved.
+- **Using `where(..., "Other")` to group a long tail works only if the column dtype is `object`**: if `product_name` is a `Categorical` dtype, the new value `"Other"` may not be in the existing categories and will be set to `NaN` instead; cast the column with `.astype(str)` before applying the `where` pattern.
 
 ## Next steps
 

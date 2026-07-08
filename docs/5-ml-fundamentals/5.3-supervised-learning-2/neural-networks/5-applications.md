@@ -8,7 +8,7 @@ objectives:
 
 # Real-World Applications of Neural Networks
 
-**After this lesson:** you can explain the core ideas in “Real-World Applications of Neural Networks” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Real-World Applications of Neural Networks and try the examples in your own notebook.
 
 ## Overview
 
@@ -17,7 +17,7 @@ Where fully connected nets still appear and when to reach for specialized archit
 
 ## Welcome to Neural Network Applications
 
-Neural networks are transforming industries and solving real-world problems every day. In this guide, we'll explore practical applications that you can implement and understand. Think of it like learning to cook different types of cuisine - each application has its own unique flavor and techniques!
+Neural networks are transforming industries and solving real-world problems every day. This guide covers practical applications that you can implement and understand. Think of it like learning to cook different types of cuisine - each application has its own unique flavor and techniques!
 
 ## Why Applications Matter
 
@@ -36,7 +36,7 @@ Computer vision is like giving computers the ability to understand and interpret
 
 Image classification is like teaching a computer to recognize different types of objects in photos. For example, identifying whether an image contains a cat or a dog.
 
-> **Illustrative reference — not runnable as-is.** Loads ResNet50 ImageNet weights (auto-downloaded) and expects a `train_dir/` of labelled images. Study the transfer-learning structure rather than executing it; for a network you can run end-to-end, see the [MNIST demo](1-introduction.md).
+> **Illustrative reference, not runnable as-is.** Loads ResNet50 ImageNet weights (auto-downloaded) and expects a `train_dir/` of labelled images. Study the transfer-learning structure rather than executing it; for a network you can run end-to-end, see the [MNIST demo](1-introduction.md).
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -149,7 +149,7 @@ history = model.fit(
 
 Object detection is like teaching a computer to not only recognize objects but also find where they are in an image. This is useful for applications like self-driving cars or security systems.
 
-> **Illustrative reference — not runnable as-is.** Needs the `ultralytics` package, a `data.yaml` dataset config, and a YOLO-weights download on first run.
+> **Illustrative reference, not runnable as-is.** Needs the `ultralytics` package, a `data.yaml` dataset config, and a YOLO-weights download on first run.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -220,7 +220,7 @@ NLP is like teaching computers to understand and work with human language, from 
 
 Text classification helps computers understand the meaning or sentiment of text, like determining if a product review is positive or negative.
 
-> **Illustrative reference — not runnable as-is.** Needs the `transformers` package and downloads `bert-base-uncased` (~400 MB).
+> **Illustrative reference, not runnable as-is.** Needs the `transformers` package and downloads `bert-base-uncased` (~400 MB).
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -308,7 +308,7 @@ model.fit(
 </aside>
 </div>
 
-**Representative output** (illustrative — these snippets are not executed during the site build). After fine-tuning, classifying the three example reviews would look like:
+**Representative output** (illustrative, these snippets are not executed during the site build). After fine-tuning, classifying the three example reviews would look like:
 
 ```text
 "This product is amazing! I love it!"              -> Positive (0.97)
@@ -320,7 +320,7 @@ model.fit(
 
 Machine translation helps computers translate text from one language to another, like having a digital translator in your pocket.
 
-> **Illustrative reference — not runnable as-is.** Needs the `transformers` package and downloads the Helsinki-NLP MarianMT weights.
+> **Illustrative reference, not runnable as-is.** Needs the `transformers` package and downloads the Helsinki-NLP MarianMT weights.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -391,7 +391,7 @@ print(f"French: {translation}")
 </aside>
 </div>
 
-**Representative output** (illustrative — not executed during the site build):
+**Representative output** (illustrative, not executed during the site build):
 
 ```text
 English: Hello, how are you today?
@@ -406,7 +406,7 @@ Time series analysis helps computers understand and predict patterns in data tha
 
 Predicting stock prices is like trying to forecast the weather - we use past patterns to predict future movements.
 
-> **Illustrative reference — not runnable as-is.** Needs the `yfinance` package and live internet access to fetch AAPL prices.
+> **Illustrative reference, not runnable as-is.** Needs the `yfinance` package and live internet access to fetch AAPL prices.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -539,9 +539,9 @@ Remember, the best way to learn is by doing! Start with a simple project and gra
 
 ## Gotchas
 
-- **Applying `preprocess_input` for ResNet50 to data that was already normalized to [0, 1]** — `ResNet50`'s `preprocess_input` expects pixel values in [0, 255] and subtracts ImageNet channel means. If you rescale to [0, 1] first (e.g., `rescale=1./255` in `ImageDataGenerator`) and then also call `preprocess_input`, the resulting values are in the range [-2, -1] rather than the expected [-124, 151], silently degrading accuracy.
-- **Fine-tuning BERT with a learning rate above 5e-5 destroys pretrained weights** — The example uses `learning_rate=2e-5`, which is standard for BERT fine-tuning. Using a default Adam rate of 1e-3 or 1e-4 causes catastrophic forgetting: the pretrained representations are overwritten within the first few batches, and the model performs no better than a randomly initialized one.
-- **LSTM with `activation='relu'` can produce exploding hidden states** — The stock predictor uses `LSTM(50, activation='relu')`. ReLU is not the standard LSTM activation (tanh is). With ReLU, large inputs can cause the hidden state to grow unboundedly across timesteps since there is no saturation. Use the default `activation='tanh'` unless you have a specific reason and gradient clipping in place.
-- **Walk-forward training leaks future data if the target shift is wrong** — `create_stock_features` sets `Target = df['Close'].shift(-1) / df['Close'] - 1`. Using this dataframe directly without careful index alignment can include tomorrow's price in today's feature row (look-ahead bias), producing unrealistically high backtest performance.
-- **`flow_from_directory` infers class labels from subdirectory names, not a CSV** — The image classification example assumes images live in subdirectories named by class. If your data is organized differently (e.g., a flat folder with a labels CSV), `flow_from_directory` will silently treat the entire folder as one class. Use `flow_from_dataframe` instead.
-- **`YOLO('yolov8n.pt')` downloads weights on first run and requires internet access** — In restricted environments (e.g., corporate networks, cloud VMs without egress), this call will hang or fail with a confusing timeout error. Download the checkpoint manually and pass the local path instead.
+- **Applying `preprocess_input` for ResNet50 to data that was already normalized to [0, 1]**: `ResNet50`'s `preprocess_input` expects pixel values in [0, 255] and subtracts ImageNet channel means. If you rescale to [0, 1] first (e.g., `rescale=1./255` in `ImageDataGenerator`) and then also call `preprocess_input`, the resulting values are in the range [-2, -1] rather than the expected [-124, 151], silently degrading accuracy.
+- **Fine-tuning BERT with a learning rate above 5e-5 destroys pretrained weights**: The example uses `learning_rate=2e-5`, which is standard for BERT fine-tuning. Using a default Adam rate of 1e-3 or 1e-4 causes catastrophic forgetting: the pretrained representations are overwritten within the first few batches, and the model performs no better than a randomly initialized one.
+- **LSTM with `activation='relu'` can produce exploding hidden states**: The stock predictor uses `LSTM(50, activation='relu')`. ReLU is not the standard LSTM activation (tanh is). With ReLU, large inputs can cause the hidden state to grow unboundedly across timesteps since there is no saturation. Use the default `activation='tanh'` unless you have a specific reason and gradient clipping in place.
+- **Walk-forward training leaks future data if the target shift is wrong**: `create_stock_features` sets `Target = df['Close'].shift(-1) / df['Close'] - 1`. Using this dataframe directly without careful index alignment can include tomorrow's price in today's feature row (look-ahead bias), producing unrealistically high backtest performance.
+- **`flow_from_directory` infers class labels from subdirectory names, not a CSV**: The image classification example assumes images live in subdirectories named by class. If your data is organized differently (e.g., a flat folder with a labels CSV), `flow_from_directory` will silently treat the entire folder as one class. Use `flow_from_dataframe` instead.
+- **`YOLO('yolov8n.pt')` downloads weights on first run and requires internet access**: In restricted environments (e.g., corporate networks, cloud VMs without egress), this call will hang or fail with a confusing timeout error. Download the checkpoint manually and pass the local path instead.

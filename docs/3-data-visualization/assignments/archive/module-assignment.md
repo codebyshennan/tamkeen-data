@@ -1,6 +1,6 @@
 # Module 3: Data Visualization Assignment
 
-Complete after you have reviewed the **3.1–3.4** lessons (or as your instructor directs). Each question has one best answer; optional short explanations help you learn.
+Complete after you have reviewed the **3.1-3.4** lessons (or as your instructor directs). Each question has one best answer; optional short explanations help you learn.
 
 ## Multiple Choice Questions
 

@@ -1,7 +1,7 @@
 ---
 reading_minutes: 14
 objectives:
-  - "Read a 2×2 confusion matrix (TP, FP, TN, FN) and extend the same idea to multi-class — each off-diagonal cell tells you which classes the model confuses."
+  - "Read a 2×2 confusion matrix (TP, FP, TN, FN) and extend the same idea to multi-class, each off-diagonal cell tells you which classes the model confuses."
   - "Generate one with `sklearn.metrics.confusion_matrix` and visualise it with `ConfusionMatrixDisplay` (or a seaborn heatmap)."
   - "Derive accuracy, precision, recall, and F1 from the matrix instead of treating those metrics as separate computations."
   - "Choose row vs column normalisation deliberately so percentages answer the question you actually have (per-true-class recall vs per-predicted-class precision)."
@@ -9,7 +9,7 @@ objectives:
 
 # Confusion Matrix
 
-**After this lesson:** you can explain the core ideas in “Confusion Matrix” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Confusion Matrix and try the examples in your own notebook.
 
 ## Overview
 
@@ -36,7 +36,7 @@ A confusion matrix is a table that describes the performance of a classification
 The confusion matrix shows four key components for binary classification:
 
 - **True Positives (TP)**: Correctly predicted positive cases - "We said YES, and it was YES"
-- **True Negatives (TN)**: Correctly predicted negative cases - "We said NO, and it was NO"  
+- **True Negatives (TN)**: Correctly predicted negative cases - "We said NO, and it was NO"
 - **False Positives (FP)**: Incorrectly predicted positive cases - "We said YES, but it was NO" (Type I Error)
 - **False Negatives (FN)**: Incorrectly predicted negative cases - "We said NO, but it was YES" (Type II Error)
 
@@ -198,7 +198,7 @@ plt.show()
       <span class="code-callout__title">Multi-class Heatmap</span>
     </div>
     <div class="code-callout__body">
-      <p>The 3×3 heatmap shows diagonal hits and off-diagonal confusions — off-diagonal entries reveal which class pairs the model struggles to separate.</p>
+      <p>The 3×3 heatmap shows diagonal hits and off-diagonal confusions, off-diagonal entries reveal which class pairs the model struggles to separate.</p>
     </div>
   </div>
 </aside>
@@ -275,7 +275,7 @@ plt.show()
 
 ## Practical Example: Credit Risk Prediction
 
-Let's analyze a confusion matrix for a credit risk prediction model:
+Analyze a confusion matrix for a credit risk prediction model:
 
 #### Synthetic credit features + pipeline + CM
 
@@ -344,7 +344,7 @@ plt.show()
       <span class="code-callout__title">Imports</span>
     </div>
     <div class="code-callout__body">
-      <p>Import pandas, sklearn pipeline components, and seaborn — everything needed to build, train, and visualize a real-world credit pipeline.</p>
+      <p>Import pandas, sklearn pipeline components, and seaborn, everything needed to build, train, and visualize a real-world credit pipeline.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="11-26" data-tint="2">
@@ -385,11 +385,11 @@ plt.show()
 
 ## Gotchas
 
-- **Row vs column orientation** — sklearn's `confusion_matrix` places **true labels on rows** and **predicted labels on columns** (the standard mathematical convention), but some plotting libraries and papers swap these axes; always label the heatmap explicitly and verify which axis is which before reading FP and FN counts.
-- **Raw counts mislead on imbalanced data** — A matrix showing 950 TNs and 5 TPs might look acceptable, but the model is nearly useless if there are 45 actual positives; always compute normalized rates (precision, recall) alongside raw counts when class sizes differ significantly.
-- **`sklearn.metrics.plot_confusion_matrix` is deprecated** — It was removed in sklearn 1.2; use `ConfusionMatrixDisplay.from_estimator` or `ConfusionMatrixDisplay.from_predictions` instead, otherwise your code silently breaks on updated environments.
-- **Multi-class off-diagonals require row-wise reading** — In an N×N matrix, row *i* shows all predictions for true class *i*; an off-diagonal at row 1, column 2 means true class 1 was predicted as class 2, not the reverse; confusing direction leads to misidentifying which classes are confused.
-- **Comparing confusion matrices across differently-sized test sets** — Absolute counts from a 200-sample test set cannot be compared directly to counts from a 2000-sample set; normalize by row (`normalize='true'` in sklearn) to compare recall rates on a level playing field.
+- **Row vs column orientation**: sklearn's `confusion_matrix` places **true labels on rows** and **predicted labels on columns** (the standard mathematical convention), but some plotting libraries and papers swap these axes; always label the heatmap explicitly and verify which axis is which before reading FP and FN counts.
+- **Raw counts mislead on imbalanced data**: A matrix showing 950 TNs and 5 TPs might look acceptable, but the model is nearly useless if there are 45 actual positives; always compute normalized rates (precision, recall) alongside raw counts when class sizes differ significantly.
+- **`sklearn.metrics.plot_confusion_matrix` is deprecated**: It was removed in sklearn 1.2; use `ConfusionMatrixDisplay.from_estimator` or `ConfusionMatrixDisplay.from_predictions` instead, otherwise your code silently breaks on updated environments.
+- **Multi-class off-diagonals require row-wise reading**: In an N×N matrix, row *i* shows all predictions for true class *i*; an off-diagonal at row 1, column 2 means true class 1 was predicted as class 2, not the reverse; confusing direction leads to misidentifying which classes are confused.
+- **Comparing confusion matrices across differently-sized test sets**: Absolute counts from a 200-sample test set cannot be compared directly to counts from a 2000-sample set; normalize by row (`normalize='true'` in sklearn) to compare recall rates on a level playing field.
 
 ## Additional Resources
 

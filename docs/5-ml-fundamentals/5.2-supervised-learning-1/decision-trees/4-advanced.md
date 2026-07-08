@@ -8,7 +8,7 @@ objectives:
 ---
 # Advanced Decision Tree Techniques
 
-**After this lesson:** you can explain the core ideas in “Advanced Decision Tree Techniques” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Advanced Decision Tree Techniques and try the examples in your own notebook.
 
 ## Overview
 
@@ -297,7 +297,7 @@ The optimal pruning strength balances underfitting and overfitting, maximizing p
 
 This example shows how to implement and use a custom impurity function:
 
-##### Toy “cubic” impurity vs `gini` / `entropy` trees
+##### Toy "cubic" impurity vs `gini` / `entropy` trees
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -327,7 +327,7 @@ def calculate_custom_impurity(y_classes):
     # Standard Gini would use squared probabilities
     return 1 - np.sum(probabilities ** 3)
 
-# Let's manually calculate impurity for some examples
+# Manually calculate impurity for some examples
 sample1 = np.array([0, 0, 0, 0, 1])  # 80% class 0, 20% class 1
 sample2 = np.array([0, 0, 1, 1, 1])  # 40% class 0, 60% class 1
 sample3 = np.array([0, 1, 0, 1, 0])  # 60% class 0, 40% class 1
@@ -440,7 +440,7 @@ plt.title('Feature Importance')
 plt.tight_layout()
 plt.show()
 
-# Let's use only the top 5 features
+# Use only the top 5 features
 top_features = indices[:5]
 X_train_top = X_train[:, top_features]
 X_test_top = X_test[:, top_features]
@@ -609,7 +609,7 @@ Random Forest creates many diverse decision trees by:
 2. Considering only a random subset of features at each split
 3. Combining their predictions through voting (for classification) or averaging (for regression)
 
-This diversity helps the ensemble overcome individual tree weaknesses and produce more robust predictions.
+This diversity helps the ensemble overcome individual tree weaknesses and produce more reliable predictions.
 
 ### 2. Gradient Boosting Preview
 
@@ -827,7 +827,7 @@ plt.show()
       <span class="code-callout__title">Visualize Full Tree</span>
     </div>
     <div class="code-callout__body">
-      <p><code>plot_tree</code> shows the complete structure; in practice you would color the path nodes—here the printed trace explains each split rule verbally.</p>
+      <p><code>plot_tree</code> shows the complete structure; in practice you would color the path nodes, here the printed trace explains each split rule verbally.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="38-55" data-tint="4">
@@ -1025,7 +1025,7 @@ print(f"Average: {scores_skf.mean():.3f}, Std Dev: {scores_skf.std():.3f}")
       <span class="code-callout__title">Load and Setup</span>
     </div>
     <div class="code-callout__body">
-      <p>Breast cancer is a binary dataset with ~63/37 class split — a realistic scenario where stratification matters for consistent fold class ratios.</p>
+      <p>Breast cancer is a binary dataset with ~63/37 class split, a realistic scenario where stratification matters for consistent fold class ratios.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="11-18" data-tint="2">
@@ -1066,12 +1066,12 @@ Stratified cross-validation specifically ensures that each fold maintains the sa
 
 ## Gotchas
 
-- **Choosing `ccp_alpha` from the pruning path without cross-validation** — the post-pruning example prints the optimal alpha based on a single 70/30 split; with small datasets, the "best" alpha can vary substantially across splits; use `cross_val_score` at several candidate alpha values before committing.
-- **Assuming `class_weight='balanced'` always improves results** — balanced weighting forces the model to pay equal attention to all classes regardless of their true prevalence; if the majority class is genuinely the correct answer most of the time, balanced weights can hurt both precision and overall accuracy by over-correcting.
-- **Comparing accuracy of Gini vs entropy trees on training data only** — both built-in criteria produce perfect 1.000 in-sample accuracy on the synthetic 1,000-sample dataset; the meaningful comparison is cross-validated test accuracy and tree compactness (node count), not in-sample score.
-- **Mutating `boosting.n_estimators` in a loop and calling `fit` each iteration** — this works but refits the full model from scratch each time, which is O(n × T) instead of O(T); the correct approach is to fit once with the maximum `n_estimators` and use `staged_predict` to extract scores at intermediate stages without re-fitting.
-- **Using the decision path trace as a full explanation of confidence** — `decision_path` shows which nodes fired for a sample, but a leaf with 1 sample from training has 100% confidence for the majority class even though no generalisation evidence supports that certainty; high `predict_proba` at a small-sample leaf is unreliable.
-- **Selecting features by tree importance and then using cross-validation on the reduced feature set without re-running the selection inside each fold** — fitting the feature selector on all data and then cross-validating inflates performance because the CV folds have already "seen" the importance ranking; the feature selection step must be inside the CV pipeline to avoid leakage.
+- **Choosing `ccp_alpha` from the pruning path without cross-validation**: the post-pruning example prints the optimal alpha based on a single 70/30 split; with small datasets, the "best" alpha can vary substantially across splits; use `cross_val_score` at several candidate alpha values before committing.
+- **Assuming `class_weight='balanced'` always improves results**: balanced weighting forces the model to pay equal attention to all classes regardless of their true prevalence; if the majority class is genuinely the correct answer most of the time, balanced weights can hurt both precision and overall accuracy by over-correcting.
+- **Comparing accuracy of Gini vs entropy trees on training data only**: both built-in criteria produce perfect 1.000 in-sample accuracy on the synthetic 1,000-sample dataset; the meaningful comparison is cross-validated test accuracy and tree compactness (node count), not in-sample score.
+- **Mutating `boosting.n_estimators` in a loop and calling `fit` each iteration**: this works but refits the full model from scratch each time, which is O(n × T) instead of O(T); the correct approach is to fit once with the maximum `n_estimators` and use `staged_predict` to extract scores at intermediate stages without re-fitting.
+- **Using the decision path trace as a full explanation of confidence**: `decision_path` shows which nodes fired for a sample, but a leaf with 1 sample from training has 100% confidence for the majority class even though no generalisation evidence supports that certainty; high `predict_proba` at a small-sample leaf is unreliable.
+- **Selecting features by tree importance and then using cross-validation on the reduced feature set without re-running the selection inside each fold**: fitting the feature selector on all data and then cross-validating inflates performance because the CV folds have already "seen" the importance ranking; the feature selection step must be inside the CV pipeline to avoid leakage.
 
 ## Practice Exercise
 

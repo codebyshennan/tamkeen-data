@@ -8,7 +8,7 @@ It now also includes a short lesson on [preparing data for visualization](data-p
 
 ## Helpful video
 
-How one animated chart, in four minutes, shows 200 years of global progress — and why visualization changes how we understand data.
+How one animated chart, in four minutes, shows 200 years of global progress, and why visualization changes how we understand data.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/jbkSRLYSojo" title="Hans Rosling: 200 Countries, 200 Years, 4 Minutes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 

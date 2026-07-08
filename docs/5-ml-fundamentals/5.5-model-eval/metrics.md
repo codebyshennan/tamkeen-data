@@ -4,12 +4,12 @@ objectives:
   - "Pick the right **classification** metric for the question: accuracy for balanced screening, precision/recall/F1 when classes are imbalanced or asymmetric, ROC-AUC for ranking, log loss for calibrated probabilities."
   - "Pick the right **regression** metric for the question: MAE for outlier robustness, RMSE when large errors matter more, R² for variance explained, MAPE only when targets are far from zero."
   - "Compute every metric here via `sklearn.metrics` and read its signature (`average=`, `greater_is_better`) without surprises."
-  - "Always report a baseline (majority class, mean predictor) alongside the model's metric — a number on its own is not interpretable."
+  - "Always report a baseline (majority class, mean predictor) alongside the model's metric, a number on its own is not interpretable."
 ---
 
 # Model Evaluation Metrics
 
-**After this lesson:** you can explain the core ideas in “Model Evaluation Metrics” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Model Evaluation Metrics and try the examples in your own notebook.
 
 ## Overview
 
@@ -57,7 +57,7 @@ Model evaluation is like weather forecasting:
 
 {% include model-eval-html-diagram.html diagram="metrics" title="Metric selection diagram" %}
 
-*Always report more than one metric — a model with high accuracy on an imbalanced dataset can still be nearly useless.*
+*Always report more than one metric, a model with high accuracy on an imbalanced dataset can still be nearly useless.*
 
 > **Highlight:** a metric is only meaningful against a **baseline** and a **decision context**. Report what a trivial model would score before interpreting a trained model.
 
@@ -78,7 +78,7 @@ Model evaluation is like weather forecasting:
 |--------|---------|-------|------------|----------|------|------|
 | **MSE** | Σ(y_true - y_pred)²/n | 0-∞ | 0 | Penalize large errors heavily | Differentiable, common | Sensitive to outliers |
 | **RMSE** | √(MSE) | 0-∞ | 0 | Same units as target | Interpretable units | Sensitive to outliers |
-| **MAE** | Σ\|y_true - y_pred\|/n | 0-∞ | 0 | Robust to outliers | Less sensitive to outliers | Less differentiable |
+| **MAE** | Σ\|y_true - y_pred\|/n | 0-∞ | 0 | reliable to outliers | Less sensitive to outliers | Less differentiable |
 | **R²** | 1 - SS_res/SS_tot | -∞-1 | 1.0 | Measure explained variance | Normalized, interpretable | Can be negative |
 | **MAPE** | (1/n)·Σ(\|y_true − y_pred\| / \|y_true\|) | 0-∞ | 0 | Percentage errors matter | Scale-independent | Undefined for zero values |
 
@@ -148,7 +148,7 @@ demonstrate_precision_recall_tradeoff()
       <span class="code-callout__title">Scenario Data</span>
     </div>
     <div class="code-callout__body">
-      <p>Hard-code three fictional precision/recall pairs at nine threshold values to represent conservative, aggressive, and balanced model behaviors — no real fit needed for this illustrative diagram.</p>
+      <p>Hard-code three fictional precision/recall pairs at nine threshold values to represent conservative, aggressive, and balanced model behaviors, no real fit needed for this illustrative diagram.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="19-29" data-tint="2">
@@ -157,7 +157,7 @@ demonstrate_precision_recall_tradeoff()
       <span class="code-callout__title">Overlay Three Curves</span>
     </div>
     <div class="code-callout__body">
-      <p>Loop over the scenarios dict to draw each model's recall-vs-precision path; both axes are bounded 0–1 so relative positions are immediately comparable.</p>
+      <p>Loop over the scenarios dict to draw each model's recall-vs-precision path; both axes are bounded 0-1 so relative positions are immediately comparable.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="31-45" data-tint="3">
@@ -334,7 +334,7 @@ weighted avg       0.82      0.82      0.82       200
 
 These are like the balance between being thorough and being accurate.
 
-#### Scalar P/R/F1 and precision–recall curve
+#### Scalar P/R/F1 and precision-recall curve
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -583,7 +583,7 @@ plot_regression_predictions(y_test, y_pred)
       <span class="code-callout__title">Prediction Scatter Plot</span>
     </div>
     <div class="code-callout__body">
-      <p>Scatter predicted vs true values; points hugging the red diagonal (y=x) indicate accurate predictions — any systematic deviation reveals model bias.</p>
+      <p>Scatter predicted vs true values; points hugging the red diagonal (y=x) indicate accurate predictions, any systematic deviation reveals model bias.</p>
     </div>
   </div>
 </aside>
@@ -683,7 +683,7 @@ plot_residuals(y_test, y_pred)
       <span class="code-callout__title">R² Score</span>
     </div>
     <div class="code-callout__body">
-      <p>Compute <code>r2_score</code> — the proportion of variance in <code>y_test</code> explained by the model; 1.0 is perfect fit, 0.0 means the model does no better than predicting the mean.</p>
+      <p>Compute <code>r2_score</code>, the proportion of variance in <code>y_test</code> explained by the model; 1.0 is perfect fit, 0.0 means the model does no better than predicting the mean.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="5-18" data-tint="2">
@@ -721,7 +721,7 @@ R-squared Score: 1.000
 
 ## Practical Example: Credit Risk Prediction
 
-Let's see how different metrics help evaluate a credit risk model:
+Look at how different metrics help evaluate a credit risk model:
 
 #### Pipeline + multiple classification metrics
 
@@ -784,7 +784,7 @@ plot_roc_curve(y_test, y_pred_proba)
       <span class="code-callout__title">Credit Dataset</span>
     </div>
     <div class="code-callout__body">
-      <p>Stack three financial features and derive a binary approval label from a threshold — the same synthetic credit setup used across 5.5 examples for consistent comparisons.</p>
+      <p>Stack three financial features and derive a binary approval label from a threshold, the same synthetic credit setup used across 5.5 examples for consistent comparisons.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="21-37" data-tint="2">
@@ -834,12 +834,12 @@ F1 Score: 0.978
 
 ## Gotchas
 
-- **Reporting only accuracy on an imbalanced dataset** — A model that predicts "no fraud" 100% of the time achieves 99% accuracy on a dataset with 1% fraud; the accuracy number looks excellent while the model provides zero value; always report at least precision, recall, or F1 alongside accuracy when classes are unequal.
-- **Using MSE to compare models trained on different target scales** — MSE for house prices measured in dollars will dwarf MSE for a model predicting prices in thousands of dollars, even if the models are equally good; always report RMSE in the target's original units, or use R² to make scale-independent comparisons.
-- **MAPE silently breaks on zero-valued targets** — `mean_absolute_percentage_error` divides by the true value; if any `y_true` element is 0 the result is infinite or undefined, often silently returning `NaN`; check your target distribution for zeros before choosing MAPE.
-- **Choosing a metric after seeing results** — Deciding to switch from accuracy to F1 after noticing that accuracy looks bad is p-hacking for ML; choose your primary metric before training, based on the business problem, and stick to it as the final decision criterion.
-- **Passing hard predictions to `roc_auc_score`** — `roc_auc_score` needs probability scores or decision-function values, not binary predictions. Passing `model.predict(X_test)` does **not** error or warn and does **not** return 0.5 — it silently computes a wrong-but-plausible value equal to the *balanced accuracy* of the hard predictions, which understates the model's true ranking AUC. In the logistic-regression example on this page, `roc_auc_score(y_test, model.predict(X_test))` returns **0.824** (the balanced accuracy of the 0/1 predictions) with no warning, while the correct `roc_auc_score(y_test, model.predict_proba(X_test)[:, 1])` returns **0.914**. A silent, believable wrong number is more dangerous than an obvious 0.5, so always pass probabilities or scores.
-- **Treating R² near 1.0 as proof of a good model** — On a dataset with a strong linear trend, even a bad model can achieve R²=0.95 because the metric measures variance explained relative to the mean, not prediction error in absolute terms; always inspect residual plots alongside R² to detect heteroscedasticity or systematic bias.
+- **Reporting only accuracy on an imbalanced dataset**: A model that predicts "no fraud" 100% of the time achieves 99% accuracy on a dataset with 1% fraud; the accuracy number looks excellent while the model provides zero value; always report at least precision, recall, or F1 alongside accuracy when classes are unequal.
+- **Using MSE to compare models trained on different target scales**: MSE for house prices measured in dollars will dwarf MSE for a model predicting prices in thousands of dollars, even if the models are equally good; always report RMSE in the target's original units, or use R² to make scale-independent comparisons.
+- **MAPE silently breaks on zero-valued targets**: `mean_absolute_percentage_error` divides by the true value; if any `y_true` element is 0 the result is infinite or undefined, often silently returning `NaN`; check your target distribution for zeros before choosing MAPE.
+- **Choosing a metric after seeing results**: Deciding to switch from accuracy to F1 after noticing that accuracy looks bad is p-hacking for ML; choose your primary metric before training, based on the business problem, and stick to it as the final decision criterion.
+- **Passing hard predictions to `roc_auc_score`**: `roc_auc_score` needs probability scores or decision-function values, not binary predictions. Passing `model.predict(X_test)` does **not** error or warn and does **not** return 0.5, it silently computes a wrong-but-plausible value equal to the *balanced accuracy* of the hard predictions, which understates the model's true ranking AUC. In the logistic-regression example on this page, `roc_auc_score(y_test, model.predict(X_test))` returns **0.824** (the balanced accuracy of the 0/1 predictions) with no warning, while the correct `roc_auc_score(y_test, model.predict_proba(X_test)[:, 1])` returns **0.914**. A silent, believable wrong number is more dangerous than an obvious 0.5, so always pass probabilities or scores.
+- **Treating R² near 1.0 as proof of a good model**: On a dataset with a strong linear trend, even a bad model can achieve R²=0.95 because the metric measures variance explained relative to the mean, not prediction error in absolute terms; always inspect residual plots alongside R² to detect heteroscedasticity or systematic bias.
 
 ## Additional Resources
 

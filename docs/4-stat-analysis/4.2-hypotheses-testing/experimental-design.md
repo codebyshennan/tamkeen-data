@@ -9,7 +9,7 @@ objectives:
 
 # Experimental Design: Building a Strong Foundation
 
-**After this lesson:** you can explain the core ideas in “Experimental Design: Building a Strong Foundation” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Experimental Design: Building a Strong Foundation and try the examples in your own notebook.
 
 ## Overview
 
@@ -186,7 +186,7 @@ for unit, treatment in assignment.items():
       <span class="code-callout__title">CRD function</span>
     </div>
     <div class="code-callout__body">
-      <p>Use <code>np.random.choice</code> to draw an independent treatment label for each unit—the simplest CRD, appropriate when units are exchangeable.</p>
+      <p>Use <code>np.random.choice</code> to draw an independent treatment label for each unit - the simplest CRD, appropriate when units are exchangeable.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="15-20" data-tint="2">
@@ -319,7 +319,7 @@ Shady_4: A
 
 ## Statistical Considerations
 
-Choosing the right statistical test for your design is crucial. The test you use depends on your data type, number of groups, and design — see [Statistical tests](./statistical-tests.md) for the full decision tree.
+Choosing the right statistical test for your design is important. The test you use depends on your data type, number of groups, and design - see [Statistical tests](./statistical-tests.md) for the full decision tree.
 
 > **Tip:**
 > Always check the assumptions of your chosen test (e.g., normality, equal variances).
@@ -349,28 +349,28 @@ where:
 - \\( z_{\beta} \\): critical value for desired power
 - \\( d \\): effect size (Cohen's d)
 
-> **Best Practice:** Use a power analysis tool (like G*Power or Python's `statsmodels`) to calculate sample size before you start collecting data — running underpowered tests means you may not detect real effects.
+> **Best Practice:** Use a power analysis tool (like G*Power or Python's `statsmodels`) to calculate sample size before you start collecting data - running underpowered tests means you may not detect real effects.
 
 ---
 
 ## Common Mistakes to Avoid
 
-1. **Insufficient sample size** – leads to low power and inconclusive results.
-2. **Poor randomization** – introduces bias.
-3. **Inadequate controls** – makes it hard to attribute effects to your treatment.
-4. **Confounding variables** – can mask or mimic treatment effects.
-5. **Measurement bias** – inaccurate or inconsistent measurements can ruin your study.
+1. **Insufficient sample size**: leads to low power and inconclusive results.
+2. **Poor randomization**: introduces bias.
+3. **Inadequate controls**: makes it hard to attribute effects to your treatment.
+4. **Confounding variables**: can mask or mimic treatment effects.
+5. **Measurement bias**: inaccurate or inconsistent measurements can ruin your study.
 
 ---
 
 ## Gotchas
 
-- **Setting a random seed only in demos, not in real assignment code** — the lesson uses `np.random.seed(42)` to make splits reproducible in course materials, but production randomization should use a *cryptographically secure* or independently auditable mechanism, not a fixed seed, to prevent anyone from predicting which group a user will land in.
-- **Completely randomized design when units are not exchangeable** — `np.random.choice(treatments, size=len(units))` in the CRD example draws each label independently, which can accidentally assign all of one treatment to the "sunny" side of your garden. If a known nuisance factor (location, time, batch) exists, you should block for it rather than hope randomization balances it by chance.
-- **Mistaking the block label for the treatment label** — in the `randomized_block_design` function, the dict key is the *unit ID*, not the block; when you later merge treatment assignments back to outcome data, joining on the wrong column silently assigns every unit the wrong condition.
-- **Under-powering by ignoring the effect of blocking on required sample size** — blocking reduces within-group variance, which typically allows a smaller n for the same power. Using the un-blocked formula `n = 2(z_α + z_β)²/d²` when you have a blocked design overestimates the required sample size; use a model that accounts for block variance instead.
-- **Confounding experimental units with observational units** — if you assign treatment at the *classroom* level but measure outcomes at the *student* level, students within the same classroom are not independent. Ignoring this clustering (i.e., treating each student as a separate replication) inflates degrees of freedom and produces misleadingly small p-values.
-- **Collecting data before finalizing the design** — deciding to add a third treatment arm or extend the study duration after seeing early results introduces bias that no amount of post-hoc correction fully removes. The experimental design, including stopping rules, must be locked before data collection begins.
+- **Setting a random seed only in demos, not in real assignment code**: the lesson uses `np.random.seed(42)` to make splits reproducible in course materials, but production randomization should use a *cryptographically secure* or independently auditable mechanism, not a fixed seed, to prevent anyone from predicting which group a user will land in.
+- **Completely randomized design when units are not exchangeable**: `np.random.choice(treatments, size=len(units))` in the CRD example draws each label independently, which can accidentally assign all of one treatment to the "sunny" side of your garden. If a known nuisance factor (location, time, batch) exists, you should block for it rather than hope randomization balances it by chance.
+- **Mistaking the block label for the treatment label**: in the `randomized_block_design` function, the dict key is the *unit ID*, not the block; when you later merge treatment assignments back to outcome data, joining on the wrong column silently assigns every unit the wrong condition.
+- **Under-powering by ignoring the effect of blocking on required sample size**: blocking reduces within-group variance, which typically allows a smaller n for the same power. Using the un-blocked formula `n = 2(z_α + z_β)²/d²` when you have a blocked design overestimates the required sample size; use a model that accounts for block variance instead.
+- **Confounding experimental units with observational units**: if you assign treatment at the *classroom* level but measure outcomes at the *student* level, students within the same classroom are not independent. Ignoring this clustering (i.e., treating each student as a separate replication) inflates degrees of freedom and produces misleadingly small p-values.
+- **Collecting data before finalizing the design**: deciding to add a third treatment arm or extend the study duration after seeing early results introduces bias that no amount of post-hoc correction fully removes. The experimental design, including stopping rules, must be locked before data collection begins.
 
 ## Next steps
 

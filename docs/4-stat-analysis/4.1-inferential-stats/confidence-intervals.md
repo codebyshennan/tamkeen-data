@@ -9,18 +9,18 @@ objectives:
 
 # Confidence Intervals: Quantifying Uncertainty in Statistics
 
-**After this lesson:** you can explain the core ideas in “Confidence Intervals: Quantifying Uncertainty in Statistics” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Confidence Intervals: Quantifying Uncertainty in Statistics and try the examples in your own notebook.
 
 ## Overview
 
-A **point estimate** (for example, a sample mean) is one number. A **confidence interval** adds a range: plausible values for an unknown population quantity, tied to a stated procedure and confidence level. This lesson builds on [population vs sample](./population-sample.md) and [sampling distributions](./sampling-distributions.md)—the standard error \\(\sigma/\sqrt{n}\\) you met there is what makes the margin of error shrink as \\(n\\) grows.
+A **point estimate** (for example, a sample mean) is one number. A **confidence interval** adds a range: plausible values for an unknown population quantity, tied to a stated procedure and confidence level. This lesson builds on [population vs sample](./population-sample.md) and [sampling distributions](./sampling-distributions.md), the standard error \\(\sigma/\sqrt{n}\\) you met there is what makes the margin of error shrink as \\(n\\) grows.
 
 ## Why this matters
 
 Reporting only \\(\bar x\\) hides how noisy the estimate might be. Intervals show **precision** as well as location. You will:
 
 - Report **ranges** for unknown parameters, not only point estimates.
-- Interpret intervals in plain language without overstating what “95% confidence” means.
+- Interpret intervals in plain language without overstating what "95% confidence" means.
 
 ## Prerequisites
 
@@ -69,7 +69,7 @@ The choice between the two reduces to a single question: **do you know the popul
 - **Almost never.** Use the t-distribution and the formula above with sample SD \\(s\\) and \\(n-1\\) degrees of freedom. Every example in this lesson is the t-case.
 - **You actually know \\(\sigma\\)** (rare, mostly textbook problems and a few process-control settings). Use the z-distribution and replace \\(t_{\alpha/2}\\) with \\(z_{\alpha/2}\\).
 
-The t and z critical values converge as \\(n\\) grows; for \\(n \geq 100\\) the difference is small. For \\(n \approx 10\\) it is meaningful—using \\(z\\) when you should use \\(t\\) produces an interval that is too narrow and a coverage rate below the advertised confidence level.
+The t and z critical values converge as \\(n\\) grows; for \\(n \geq 100\\) the difference is small. For \\(n \approx 10\\) it is meaningful, using \\(z\\) when you should use \\(t\\) produces an interval that is too narrow and a coverage rate below the advertised confidence level.
 
 ## Components of a Confidence Interval
 
@@ -218,18 +218,18 @@ The point estimate is our best guess.
 
 ### A note for the curious: Bayesian credible intervals
 
-If you have ever felt uneasy about the rule "you can't say 'there's a 95% chance the true value is in (a, b)' for a frequentist CI," you're not crazy — that's exactly the statement people *want* to make, and there is a different framework where it is correct.
+If you have ever felt uneasy about the rule "you can't say 'there's a 95% chance the true value is in (a, b)' for a frequentist CI," you're not crazy, that's exactly the statement people *want* to make, and there is a different framework where it is correct.
 
-In **Bayesian** statistics, you start with a **prior** belief about the parameter and update it with the data to get a **posterior** distribution. A **95% credible interval** is then the range that contains 95% of the posterior probability. For a credible interval, the statement "there's a 95% probability the true value is in this range" **is** valid — because in Bayesian thinking, the parameter is treated as random (reflecting our uncertainty), not fixed.
+In **Bayesian** statistics, you start with a **prior** belief about the parameter and update it with the data to get a **posterior** distribution. A **95% credible interval** is then the range that contains 95% of the posterior probability. For a credible interval, the statement "there's a 95% probability the true value is in this range" **is** valid, because in Bayesian thinking, the parameter is treated as random (reflecting our uncertainty), not fixed.
 
 | | Frequentist 95% CI | Bayesian 95% credible interval |
 |---|---|---|
 | What's random | The interval (parameter is fixed) | The parameter (interval is fixed) |
 | Needs a prior? | No | Yes |
 | Plain reading | "95% of intervals built this way contain the true value" | "Given my data and prior, there's a 95% probability the true value is in here" |
-| When they agree | Often, when priors are weak and \\(n\\) is large | — |
+| When they agree | Often, when priors are weak and \\(n\\) is large |, |
 
-For the rest of this submodule, every interval is frequentist (the standard in textbooks, software defaults, and regulatory work). But knowing the Bayesian alternative exists prevents a lot of low-grade confusion when learners read "the parameter is in this range with 95% probability" in a real paper — *that paper might be using a credible interval, and it's correct for them to say so.*
+For the rest of this submodule, every interval is frequentist (the standard in textbooks, software defaults, and regulatory work). But knowing the Bayesian alternative exists prevents a lot of low-grade confusion when learners read "the parameter is in this range with 95% probability" in a real paper, *that paper might be using a credible interval, and it's correct for them to say so.*
 
 ## Factors Affecting CI Width
 
@@ -329,7 +329,7 @@ Precision: ***************
       <span class="code-callout__title">Console output</span>
     </div>
     <div class="code-callout__body">
-      <p>Print the CI width for each n and a visual "precision stars" indicator—more stars means a narrower interval.</p>
+      <p>Print the CI width for each n and a visual "precision stars" indicator, more stars means a narrower interval.</p>
     </div>
   </div>
 </aside>
@@ -363,11 +363,11 @@ Precision: ***************
 
 #### Interactive: how the CI shrinks with n
 
-Move the slider to change \\(n\\). Left: the histogram of one sample with its 95% CI bounds (blue dotted). Right: the *width* of that CI plotted against \\(n\\) — the curve is the theoretical \\(2 t^* \sigma / \sqrt{n}\\) and the orange dot is the current sample's actual width.
+Move the slider to change \\(n\\). Left: the histogram of one sample with its 95% CI bounds (blue dotted). Right: the *width* of that CI plotted against \\(n\\), the curve is the theoretical \\(2 t^* \sigma / \sqrt{n}\\) and the orange dot is the current sample's actual width.
 
 <iframe src="assets/interactive/ci_sample_size_simulation.html" width="100%" height="480" frameborder="0" loading="lazy" title="Interactive CI sample size effect"></iframe>
 
-**Try this:** start at \\(n = 30\\), then jump to \\(n = 500\\). The CI width drops by roughly \\(\sqrt{500/30} \approx 4\\)× — exactly the square-root law in action.
+**Try this:** start at \\(n = 30\\), then jump to \\(n = 500\\). The CI width drops by roughly \\(\sqrt{500/30} \approx 4\\)×, exactly the square-root law in action.
 
 ### 2. Confidence Level Effect
 
@@ -601,7 +601,7 @@ Mean score: 77.4
 
 #### Why Wilson and not the simpler Wald interval?
 
-The textbook "Wald" interval for a proportion is \\(\hat p \pm z_{\alpha/2}\sqrt{\hat p(1-\hat p)/n}\\). It's easy to remember—but it behaves badly in two common situations:
+The textbook "Wald" interval for a proportion is \\(\hat p \pm z_{\alpha/2}\sqrt{\hat p(1-\hat p)/n}\\). It's easy to remember, but it behaves badly in two common situations:
 
 - **\\(\hat p\\) near 0 or 1**, where the Wald interval can extend below 0 or above 1, which is impossible for a probability.
 - **Small \\(n\\)**, where Wald's actual coverage rate often falls well below the advertised confidence level.
@@ -681,7 +681,7 @@ Response rate: 90.0%
       <span class="code-callout__title">Survey numbers</span>
     </div>
     <div class="code-callout__body">
-      <p>180 positive responses out of 200 — close to the upper boundary, where Wald would over-extend past 1 and Wilson stays well-behaved.</p>
+      <p>180 positive responses out of 200, close to the upper boundary, where Wald would over-extend past 1 and Wilson stays well-behaved.</p>
     </div>
   </div>
 </aside>
@@ -759,13 +759,13 @@ Mean difference: 0.1
       <span class="code-callout__title">Unpooled standard error</span>
     </div>
     <div class="code-callout__body">
-      <p>√(s₁²/n₁ + s₂²/n₂) — each group contributes its own variance, no equal-variance assumption.</p>
+      <p>√(s₁²/n₁ + s₂²/n₂), each group contributes its own variance, no equal-variance assumption.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="10" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Welch–Satterthwaite df</span>
+      <span class="code-callout__title">Welch-Satterthwaite df</span>
     </div>
     <div class="code-callout__body">
       <p>Approximate degrees of freedom when the two groups have unequal variances.</p>
@@ -840,7 +840,7 @@ What it does **not** mean:
 - ❌ "There's a 95% chance the true value is between 7.2 and 7.8." The truth is fixed; the *interval* is what's random.
 - ❌ "95% of customers rate satisfaction between 7.2 and 7.8." That's a description of individuals, not the mean.
 
-Practical takeaway: satisfaction is comfortably above neutral (5) but well short of "delighted" (9–10). If your business goal is 8.0+, you have work to do.
+Practical takeaway: satisfaction is comfortably above neutral (5) but well short of "delighted" (9-10). If your business goal is 8.0+, you have work to do.
 
 </details>
 
@@ -849,7 +849,7 @@ Practical takeaway: satisfaction is comfortably above neutral (5) but well short
 <details>
 <summary>Show answer</summary>
 
-When the cost of being wrong is high — patient harm, regulatory action, public health risk — we want a tighter guarantee that we're not over-claiming. Moving from 95% to 99% confidence:
+When the cost of being wrong is high, patient harm, regulatory action, public health risk, we want a tighter guarantee that we're not over-claiming. Moving from 95% to 99% confidence:
 
 - **Pros:** Fewer false claims of effectiveness; more rigorous safety bar.
 - **Cons:** Wider intervals (z goes from 1.96 to 2.58, so the margin grows ~32%). Real effects may go undetected unless the sample is big enough.
@@ -863,16 +863,16 @@ In safety-critical contexts the trade-off is usually worth it: you'd rather miss
 <details>
 <summary>Show answer</summary>
 
-> "If I survey 400 customers I get one number — say their average satisfaction is 7.5. But if I redo the survey with a fresh 400 customers I'd get a slightly different number, maybe 7.4 or 7.6.
+> "If I survey 400 customers I get one number, say their average satisfaction is 7.5. But if I redo the survey with a fresh 400 customers I'd get a slightly different number, maybe 7.4 or 7.6.
 >
 > A confidence interval is just an honest range that says 'the true average is probably in here.' The interval (7.2, 7.8) means: my best guess is 7.5, and given how much surveys wobble, I'd expect the truth to land somewhere between 7.2 and 7.8.
 >
 > Two things to know:
 >
 > 1. A wider interval means more uncertainty (we'd want more data).
-> 2. We say '95% confident' because the *method* of building these intervals captures the truth about 95 out of 100 times in the long run — not because *this specific* interval has a 95% chance."
+> 2. We say '95% confident' because the *method* of building these intervals captures the truth about 95 out of 100 times in the long run, not because *this specific* interval has a 95% chance."
 
-Avoid the phrase "there's a 95% probability the true mean is in this range" — it's the most common technical error people make.
+Avoid the phrase "there's a 95% probability the true mean is in this range", it's the most common technical error people make.
 
 </details>
 
@@ -922,12 +922,12 @@ Practical rule: start with the simplest interval that fits your data type, and o
 
 ## Gotchas
 
-- **"95% confidence" means the interval contains the parameter with 95% probability** — this is the most common misreading. The correct interpretation is that 95% of *intervals constructed this way* will contain the true parameter across repeated samples; any specific interval either contains it or it doesn't.
-- **Using `ddof=0` instead of `ddof=1` for the sample standard deviation** — `np.std(data)` defaults to population SD (`ddof=0`), which underestimates variability in small samples. Always pass `ddof=1` when computing a sample SD for a t-interval, or use `scipy.stats.sem` which handles this automatically.
-- **Plugging a z-critical value when you should use t** — when the population standard deviation is unknown (almost always), the t-distribution is correct for small-to-moderate samples. The z and t critical values converge only as n grows large; for n=10 the difference is substantial.
-- **Wider interval does not mean better estimate** — raising the confidence level from 95% to 99% makes the interval wider but does *not* make the point estimate more accurate; it only means you are casting a wider net.
-- **Treating a CI for the mean as a CI for individual values** — the interval bounds the *population mean*, not the range where most individual observations fall. A prediction interval is the right tool when you need to say where a new single observation will land.
-- **Interpreting a CI that excludes zero as proof of an important effect** — a CI that does not contain zero indicates statistical significance, but the interval bounds also need to be checked for practical relevance; a CI of (0.001, 0.003) excludes zero but may be meaningless in context.
+- **"95% confidence" means the interval contains the parameter with 95% probability**: this is the most common misreading. The correct interpretation is that 95% of *intervals constructed this way* will contain the true parameter across repeated samples; any specific interval either contains it or it doesn't.
+- **Using `ddof=0` instead of `ddof=1` for the sample standard deviation**: `np.std(data)` defaults to population SD (`ddof=0`), which underestimates variability in small samples. Always pass `ddof=1` when computing a sample SD for a t-interval, or use `scipy.stats.sem` which handles this automatically.
+- **Plugging a z-critical value when you should use t**: when the population standard deviation is unknown (almost always), the t-distribution is correct for small-to-moderate samples. The z and t critical values converge only as n grows large; for n=10 the difference is substantial.
+- **Wider interval does not mean better estimate**: raising the confidence level from 95% to 99% makes the interval wider but does *not* make the point estimate more accurate; it only means you are casting a wider net.
+- **Treating a CI for the mean as a CI for individual values**: the interval bounds the *population mean*, not the range where most individual observations fall. A prediction interval is the right tool when you need to say where a new single observation will land.
+- **Interpreting a CI that excludes zero as proof of an important effect**: a CI that does not contain zero indicates statistical significance, but the interval bounds also need to be checked for practical relevance; a CI of (0.001, 0.003) excludes zero but may be meaningless in context.
 
 ## Next steps
 

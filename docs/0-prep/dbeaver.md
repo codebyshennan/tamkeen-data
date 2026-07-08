@@ -36,7 +36,7 @@ Official **DBeaver** walkthrough: create a database connection with the wizard a
 
 - Windows 10/11, macOS 11 (Big Sur) or newer (current DBeaver builds target recent macOS), or Linux
 - 4GB RAM minimum (8GB recommended)
-- A **Java 17+** runtime (bundled with the official Community installers—no separate JDK install needed for most users)
+- A **Java 17+** runtime (bundled with the official Community installers, no separate JDK install needed for most users)
 - 500MB free disk space
 
 ## Key Features
@@ -93,7 +93,7 @@ Official **DBeaver** walkthrough: create a database connection with the wizard a
 6. Open **Applications** folder and double-click **DBeaver** to launch
 7. If macOS asks about security, go to **System Preferences → Security & Privacy** and click **"Open Anyway"**
 
-> **On screen:** macOS DMG — drag DBeaver to Applications.
+> **On screen:** macOS DMG, drag DBeaver to Applications.
 
 </details>
 
@@ -139,7 +139,7 @@ When you first open DBeaver, you might see a few popups:
    - OR click **"Database"** in the menu bar → **"New Database Connection"**
 2. A window will pop up showing different database types
 
-> **On screen:** New connection — choose database type.
+> **On screen:** New connection, choose database type.
 
 <details>
 <summary><b>SQLite (Recommended for Beginners)</b></summary>
@@ -219,13 +219,13 @@ When you first open DBeaver, you might see a few popups:
 
 ## Gotchas
 
-- **Java is bundled — don't install a separate JDK** — the official Community Edition installers include their own JRE. Installing a separate JDK can conflict with the bundled one and cause startup errors. Only install a JDK separately if DBeaver's own release notes require it.
-- **macOS Gatekeeper blocks first launch** — macOS may say "DBeaver can't be opened because it is from an unidentified developer." Go to **System Settings → Privacy & Security** and click **Open Anyway**. This is normal for unsigned apps distributed outside the App Store.
-- **Driver download fails on corporate/school networks** — DBeaver downloads JDBC drivers from the internet the first time you create a connection. If your network blocks this, go to **Help → Install New Driver** and download the JAR manually, or ask IT to whitelist `dbeaver.io` and `maven.org`.
-- **SQLite "database is locked"** — SQLite only allows one writer at a time. If DBeaver has the file open and another app (or another DBeaver window) also has it open, you'll get a locked error. Close all but one connection.
-- **PostgreSQL connection refused** — usually means the PostgreSQL service isn't running on your machine, or the port (default 5432) is blocked by a firewall. For remote databases, also check that your IP is allowed in `pg_hba.conf`.
-- **Auto-commit is off by default** — DBeaver wraps SQL in transactions. If your `INSERT`/`UPDATE` doesn't seem to persist, click the **Auto-commit** toggle in the SQL editor toolbar, or manually run `COMMIT`.
-- **Results not refreshing after edits** — right-click the table in the Database Navigator and choose **Refresh**, or press **F5**, to force DBeaver to reload metadata.
+- **Java is bundled, don't install a separate JDK**: the official Community Edition installers include their own JRE. Installing a separate JDK can conflict with the bundled one and cause startup errors. Only install a JDK separately if DBeaver's own release notes require it.
+- **macOS Gatekeeper blocks first launch**: macOS may say "DBeaver can't be opened because it is from an unidentified developer." Go to **System Settings → Privacy & Security** and click **Open Anyway**. This is normal for unsigned apps distributed outside the App Store.
+- **Driver download fails on corporate/school networks**: DBeaver downloads JDBC drivers from the internet the first time you create a connection. If your network blocks this, go to **Help → Install New Driver** and download the JAR manually, or ask IT to whitelist `dbeaver.io` and `maven.org`.
+- **SQLite "database is locked"**: SQLite only allows one writer at a time. If DBeaver has the file open and another app (or another DBeaver window) also has it open, you'll get a locked error. Close all but one connection.
+- **PostgreSQL connection refused**: usually means the PostgreSQL service isn't running on your machine, or the port (default 5432) is blocked by a firewall. For remote databases, also check that your IP is allowed in `pg_hba.conf`.
+- **Auto-commit is off by default**: DBeaver wraps SQL in transactions. If your `INSERT`/`UPDATE` doesn't seem to persist, click the **Auto-commit** toggle in the SQL editor toolbar, or manually run `COMMIT`.
+- **Results not refreshing after edits**: right-click the table in the Database Navigator and choose **Refresh**, or press **F5**, to force DBeaver to reload metadata.
 
 
 

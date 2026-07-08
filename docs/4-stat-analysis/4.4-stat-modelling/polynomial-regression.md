@@ -41,7 +41,7 @@ Polynomial regression is a powerful extension of linear regression that allows u
 
 ### From Linear to Polynomial Regression
 
-To understand polynomial regression, let's first recall the linear regression equation:
+To understand polynomial regression, start with the linear regression equation:
 
 **Linear regression:** \\(y = \beta_0 + \beta_1 x + \epsilon\\).
 
@@ -61,7 +61,7 @@ This lets the model fit curved patterns. The degree of the polynomial (the highe
 
 ### Real-world Examples
 
-Let's look at some scenarios where polynomial regression is useful:
+look at some scenarios where polynomial regression is useful:
 
 1. **Growth Patterns**
    - **Plant Growth**: Plants often show accelerated growth initially, followed by slower growth as they mature - a non-linear pattern
@@ -193,7 +193,7 @@ Linear regression uses a straight line to model relationships, which is often to
 2. **Creating flexible curves**: Can model complex, non-linear patterns
 3. **Maintaining linearity in parameters**: Despite the name, it's still a "linear model" because it's linear in the parameters (the β coefficients)
 
-Let's compare linear and polynomial fits to see the difference:
+Compare linear and polynomial fits to see the difference:
 
 **Linear vs degree-3 polynomial OLS on noisy cubic data**
 
@@ -268,7 +268,7 @@ compare_linear_polynomial()
       <span class="code-callout__title">Linear fit</span>
     </div>
     <div class="code-callout__body">
-      <p>Fit a plain <code>LinearRegression</code> on the raw x values and predict—this will miss the curvature and show a higher MSE.</p>
+      <p>Fit a plain <code>LinearRegression</code> on the raw x values and predict, this will miss the curvature and show a higher MSE.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="21-27" data-tint="3">
@@ -309,7 +309,7 @@ Polynomial regression works through a process called feature transformation. Her
 3. **New feature matrix:** \\(X = [1, x, x^2, x^3, \dots]\\).
 4. **Apply linear regression:** fit a linear model using these transformed features.
 
-Let's visualize this transformation process:
+Visualize this transformation process:
 
 **Print and plot `PolynomialFeatures(degree=2)` columns for small `x`**
 
@@ -388,7 +388,7 @@ Polynomial Feature Transformation (degree=2):
       <span class="code-callout__title">Create and transform</span>
     </div>
     <div class="code-callout__body">
-      <p>Build a small column vector [1–5] and use <code>PolynomialFeatures(degree=2, include_bias=False)</code> to produce the [x, x²] feature matrix.</p>
+      <p>Build a small column vector [1-5] and use <code>PolynomialFeatures(degree=2, include_bias=False)</code> to produce the [x, x²] feature matrix.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="12-19" data-tint="2">
@@ -451,7 +451,7 @@ The interaction term \\(x_1 x_2\\) lets the model capture how the effect of one 
 
 ### Choosing the Right Degree
 
-The degree of the polynomial is crucial. Too low, and you underfit the data. Too high, and you overfit. Let's visualize this tradeoff:
+The degree of the polynomial is important. Too low, and you underfit the data. Too high, and you overfit. Visualize this tradeoff:
 
 **Subplot grid: degrees 1, 2, 3, 10 vs known cubic truth**
 
@@ -561,7 +561,7 @@ This visualization shows:
 
 *Polynomial Regression - Complete Tutorial (CampusX): walks through implementation with bias-variance tradeoff*
 
-Now, let's walk through the process of building a polynomial regression model step-by-step.
+Now, walk through the process of building a polynomial regression model step-by-step.
 
 ### Step 1: Prepare the Data
 
@@ -704,7 +704,7 @@ def train_polynomial_model(X, y):
 
     return model
 
-# Let's create an example dataset and train a model
+# Create an example dataset and train a model
 def create_example_dataset():
     """Create a synthetic dataset for demonstration"""
     np.random.seed(42)
@@ -924,7 +924,7 @@ These plots and metrics tell us:
 
 ### Step 4: Finding the Optimal Polynomial Degree
 
-One of the most important steps in polynomial regression is selecting the right degree. Let's implement a method to find the optimal degree:
+One of the most important steps in polynomial regression is selecting the right degree. Implement a method to find the optimal degree:
 
 **5-fold CV MSE vs degree via `make_pipeline`**
 
@@ -1036,7 +1036,7 @@ This shows how the cross-validation error changes with different polynomial degr
 
 ## Common Challenges and Solutions
 
-Polynomial regression comes with several challenges. Let's explore these and discuss solutions:
+Polynomial regression comes with several challenges. we will look at these and discuss solutions:
 
 ### 1. Overfitting
 
@@ -1240,7 +1240,7 @@ demonstrate_regularization()
       <span class="code-callout__title">Data and degree-10 expansion</span>
     </div>
     <div class="code-callout__body">
-      <p>Generate noisy cubic data, split train/test, and expand to degree-10 polynomial features—deliberately high to create an over-parameterised setting.</p>
+      <p>Generate noisy cubic data, split train/test, and expand to degree-10 polynomial features, deliberately high to create an over-parameterised setting.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="20-27" data-tint="2">
@@ -1272,12 +1272,12 @@ This shows how regularization helps control the model's complexity, even with a 
 
 ## Gotchas
 
-- **Applying `PolynomialFeatures` before splitting data** — If you call `poly.fit_transform(X)` on the whole dataset and then split, you are computing polynomial statistics from test observations before training. Always place `PolynomialFeatures` inside a `Pipeline` so it is only fitted on the training fold.
-- **Selecting the polynomial degree by training error** — Training MSE decreases monotonically as degree increases; a degree-15 polynomial will appear better than degree-2 in training but catastrophically overfit. Always use cross-validated error or a held-out test set to pick the degree.
-- **Forgetting to scale features after polynomial expansion** — Adding x², x³, and interaction terms creates columns on wildly different scales (x is 0–10, x² is 0–100, x³ is 0–1000). Without `StandardScaler`, gradient-based solvers converge slowly and coefficient comparisons are meaningless.
-- **Interpreting polynomial coefficients directly** — The coefficient on x² in `y = β₀ + β₁x + β₂x²` does not mean "each unit increase in x² adds β₂ to y"; the marginal effect of x on y is `β₁ + 2β₂x` and varies at every point. Compute the first derivative to understand how y changes with x.
-- **Extrapolating polynomial fits beyond the training range** — High-degree polynomials often explode or dive steeply outside the observed data range (Runge's phenomenon). Even if the fit looks perfect in-sample, predictions for x-values beyond the training range should be treated with extreme caution.
-- **Confusing `PolynomialFeatures(degree=2)` output count with the original features** — For p original features, degree-2 expansion adds interaction terms and squares, producing `(p + 2)! / (2! × p!)` columns. With just 10 features, degree-2 expansion creates 66 columns; higher degrees explode combinatorially, making regularization essential.
+- **Applying `PolynomialFeatures` before splitting data**: If you call `poly.fit_transform(X)` on the whole dataset and then split, you are computing polynomial statistics from test observations before training. Always place `PolynomialFeatures` inside a `Pipeline` so it is only fitted on the training fold.
+- **Selecting the polynomial degree by training error**: Training MSE decreases monotonically as degree increases; a degree-15 polynomial will appear better than degree-2 in training but catastrophically overfit. Always use cross-validated error or a held-out test set to pick the degree.
+- **Forgetting to scale features after polynomial expansion**: Adding x², x³, and interaction terms creates columns on wildly different scales (x is 0-10, x² is 0-100, x³ is 0-1000). Without `StandardScaler`, gradient-based solvers converge slowly and coefficient comparisons are meaningless.
+- **Interpreting polynomial coefficients directly**: The coefficient on x² in `y = β₀ + β₁x + β₂x²` does not mean "each unit increase in x² adds β₂ to y"; the marginal effect of x on y is `β₁ + 2β₂x` and varies at every point. Compute the first derivative to understand how y changes with x.
+- **Extrapolating polynomial fits beyond the training range**: High-degree polynomials often explode or dive steeply outside the observed data range (Runge's phenomenon). Even if the fit looks perfect in-sample, predictions for x-values beyond the training range should be treated with extreme caution.
+- **Confusing `PolynomialFeatures(degree=2)` output count with the original features**: For p original features, degree-2 expansion adds interaction terms and squares, producing `(p + 2)! / (2! × p!)` columns. With just 10 features, degree-2 expansion creates 66 columns; higher degrees explode combinatorially, making regularization essential.
 
 ## Next steps
 

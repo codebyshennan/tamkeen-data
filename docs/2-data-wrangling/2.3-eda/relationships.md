@@ -1,10 +1,10 @@
-# Understanding Data Relationships: A Comprehensive Guide
+# Understanding Data Relationships: A guide
 
-**After this lesson:** You can choose sensible analyses for numeric–numeric, categorical–categorical, and mixed pairs, interpret correlation and effect size with caution, and avoid claiming causation from association alone.
+**After this lesson:** You can choose sensible analyses for numeric-numeric, categorical-categorical, and mixed pairs, interpret correlation and effect size with caution, and avoid claiming causation from association alone.
 
 ## Helpful video
 
-Summarizing distributions with percentiles—common in exploratory analysis.
+Summarizing distributions with percentiles, common in exploratory analysis.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/IFKQLDmRK0Y" title="Quantiles and Percentiles, Clearly Explained" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -12,13 +12,13 @@ Summarizing distributions with percentiles—common in exploratory analysis.
 
 **Prerequisites:** [Distributions](distributions.md) and [two-variable statistics](../../1-data-fundamentals/1.3-intro-statistics/two-variable-statistics.md). [Pandas](../../1-data-fundamentals/1.5-data-analysis-pandas/README.md) for plotting.
 
-> **Time needed:** About 60–90 minutes.
+> **Time needed:** About 60-90 minutes.
 
 ## Why this matters
 
 Association is easy to compute and easy to over-interpret: **correlation is not causation**, and lurking variables can create misleading patterns. This lesson helps you **pair** the right summaries and plots with each combination of variable types and to **qualify** what the evidence supports.
 
-Understanding relationships between variables is crucial for:
+Understanding relationships between variables is important for:
 
 - Making better predictions
 - Identifying key drivers
@@ -62,7 +62,7 @@ Choose the right correlation measure for your data:
   - Range: [-1, 1]
 
 - **Kendall's Tau**: $\tau = \frac{2(P - Q)}{n(n-1)}$ where P and Q are concordant and discordant pairs
-  - More robust than Spearman
+  - More reliable than Spearman
   - Better for small sample sizes
   - Handles tied ranks well
   - Range: [-1, 1]
@@ -109,7 +109,7 @@ from sklearn.metrics import mutual_info_score
 
 class RelationshipAnalyzer:
     """A comprehensive framework for analyzing relationships between variables.
-    
+
     This class provides methods to:
     - Detect and quantify relationships
     - Visualize patterns and associations
@@ -117,12 +117,12 @@ class RelationshipAnalyzer:
     - Handle different variable types
     - Generate insights and recommendations
     """
-    
+
     def __init__(self, data):
         self.data = data
         self.numeric_cols = data.select_dtypes(include=[np.number]).columns
         self.categorical_cols = data.select_dtypes(include=['object']).columns
-        
+
     def analyze_numeric_relationship(self, x, y):
         """Analyze relationship between numeric variables"""
         # Basic correlation measures
@@ -131,15 +131,15 @@ class RelationshipAnalyzer:
             'spearman': stats.spearmanr(self.data[x], self.data[y]),
             'kendall': stats.kendalltau(self.data[x], self.data[y])
         }
-        
+
         # Create visualization suite
         fig = plt.figure(figsize=(20, 5))
-        
+
         # Scatter plot with regression line
         plt.subplot(141)
         sns.regplot(data=self.data, x=x, y=y)
         plt.title('Linear Relationship')
-        
+
         # Residual plot
         model = np.polyfit(self.data[x], self.data[y], 1)
         residuals = self.data[y] - np.polyval(model, self.data[x])
@@ -147,71 +147,71 @@ class RelationshipAnalyzer:
         plt.scatter(self.data[x], residuals)
         plt.axhline(y=0, color='r', linestyle='--')
         plt.title('Residual Plot')
-        
+
         # Joint distribution
         plt.subplot(143)
         sns.kdeplot(data=self.data, x=x, y=y)
         plt.title('Joint Distribution')
-        
+
         # QQ plot of residuals
         plt.subplot(144)
         stats.probplot(residuals, dist="norm", plot=plt)
         plt.title('Q-Q Plot of Residuals')
-        
+
         plt.tight_layout()
         plt.show()
-        
+
         return correlations
-    
+
     def analyze_categorical_relationship(self, x, y):
         """Analyze relationship between categorical variables"""
         # Create contingency table
         contingency = pd.crosstab(self.data[x], self.data[y])
-        
+
         # Chi-square test
         chi2, p_value, dof, expected = stats.chi2_contingency(contingency)
-        
+
         # Cramer's V
         n = contingency.sum().sum()
         min_dim = min(contingency.shape) - 1
         cramer_v = np.sqrt(chi2 / (n * min_dim))
-        
+
         # Mutual information
         le = LabelEncoder()
         mi_score = mutual_info_score(
             le.fit_transform(self.data[x]),
             le.fit_transform(self.data[y])
         )
-        
+
         # Visualizations
         fig = plt.figure(figsize=(15, 5))
-        
+
         # Heatmap
         plt.subplot(131)
         sns.heatmap(contingency, annot=True, fmt='d', cmap='YlOrRd')
         plt.title('Contingency Table')
-        
+
         # Mosaic plot
         plt.subplot(132)
         from statsmodels.graphics.mosaicplot import mosaic
         mosaic(self.data, [x, y])
         plt.title('Mosaic Plot')
-        
+
         # Stacked bar
         plt.subplot(133)
         proportions = contingency.div(contingency.sum(axis=1), axis=0)
         proportions.plot(kind='bar', stacked=True)
         plt.title('Stacked Proportions')
-        
+
         plt.tight_layout()
         plt.show()
-        
+
         return {
             'chi_square': {'statistic': chi2, 'p_value': p_value},
             'cramers_v': cramer_v,
             'mutual_information': mi_score
         }
-    
+
     def analyze_mixed_relationship(self, numeric_col, categorical_col):
         """Analyze relationship between numeric and categorical variables"""
         # ANOVA
@@ -221,39 +221,39 @@ class RelationshipAnalyzer:
             for cat in categories
         ]
         f_stat, p_value = stats.f_oneway(*category_groups)
-        
+
         # Effect size (Eta-squared)
         df_total = len(self.data) - 1
         df_between = len(categories) - 1
-        ss_between = sum(len(group) * (group.mean() - self.data[numeric_col].mean())**2 
+        ss_between = sum(len(group) * (group.mean() - self.data[numeric_col].mean())**2
                         for group in category_groups)
         ss_total = sum((self.data[numeric_col] - self.data[numeric_col].mean())**2)
         eta_squared = ss_between / ss_total
-        
+
         # Visualizations
         fig = plt.figure(figsize=(15, 5))
-        
+
         # Box plot
         plt.subplot(131)
         sns.boxplot(data=self.data, x=categorical_col, y=numeric_col)
         plt.xticks(rotation=45)
         plt.title('Distribution by Category')
-        
+
         # Violin plot
         plt.subplot(132)
         sns.violinplot(data=self.data, x=categorical_col, y=numeric_col)
         plt.xticks(rotation=45)
         plt.title('Density by Category')
-        
+
         # Point plot with CI
         plt.subplot(133)
         sns.pointplot(data=self.data, x=categorical_col, y=numeric_col)
         plt.xticks(rotation=45)
         plt.title('Mean with CI')
-        
+
         plt.tight_layout()
         plt.show()
-        
+
         return {
             'anova': {'f_statistic': f_stat, 'p_value': p_value},
             'eta_squared': eta_squared
@@ -291,7 +291,7 @@ class RelationshipAnalyzer:
   <div class="code-callout" data-lines="115-132" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
-      <span class="code-callout__title">analyze_mixed_relationship — ANOVA and effect size</span>
+      <span class="code-callout__title">analyze_mixed_relationship, ANOVA and effect size</span>
     </div>
     <div class="code-callout__body">
       <p>Groups the numeric column by category, runs one-way ANOVA for the F-statistic and p-value, then computes eta-squared (SS_between / SS_total) as the effect size measure.</p>
@@ -317,7 +317,7 @@ class RelationshipAnalyzer:
 
 ## Real-World Case Study: Customer Analysis
 
-Let's analyze customer behavior to understand key relationships:
+Analyze customer behavior to understand key relationships:
 
 1. **Purchase Patterns**
    - Relationship between purchase amount and frequency
@@ -379,7 +379,7 @@ Effect Size (): 0.006
   <div class="code-callout" data-lines="1-6" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Load data and analyse numeric–numeric pair</span>
+      <span class="code-callout__title">Load data and analyse numeric-numeric pair</span>
     </div>
     <div class="code-callout__body">
       <p>Loads the CSV, creates the analyser, then runs <code>analyze_numeric_relationship</code> on spending vs age, printing the Pearson correlation and its p-value.</p>
@@ -388,7 +388,7 @@ Effect Size (): 0.006
   <div class="code-callout" data-lines="7-12" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Categorical–categorical pair</span>
+      <span class="code-callout__title">Categorical-categorical pair</span>
     </div>
     <div class="code-callout__body">
       <p>Analyses category vs loyalty using chi-square and Cramér's V, printing the effect size to judge practical significance beyond the p-value.</p>
@@ -484,7 +484,7 @@ def compute_correlations_efficiently(df, method='pearson'):
     else:
         # Use pandas for other methods
         corr_matrix = df.corr(method=method)
-    
+
     return pd.DataFrame(
         corr_matrix,
         index=df.columns,
@@ -525,7 +525,7 @@ def analyze_categories_efficiently(df, cat1, cat2, max_categories=50):
     # Check cardinality
     n_cat1 = df[cat1].nunique()
     n_cat2 = df[cat2].nunique()
-    
+
     if n_cat1 > max_categories or n_cat2 > max_categories:
         # Use sampling for high cardinality
         sample_size = min(len(df), 10000)
@@ -533,7 +533,7 @@ def analyze_categories_efficiently(df, cat1, cat2, max_categories=50):
         contingency = pd.crosstab(df_sample[cat1], df_sample[cat2])
     else:
         contingency = pd.crosstab(df[cat1], df[cat2])
-    
+
     return contingency
 {% endhighlight %}
 </div>
@@ -585,20 +585,20 @@ Avoid these common mistakes in relationship analysis:
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight python %}
       def check_confounding(df, x, y, potential_confounders):
           """Check for confounding variables"""
           # Original correlation
           original_corr = df[x].corr(df[y])
-          
+
           # Partial correlations
           partial_corrs = {}
           for conf in potential_confounders:
               # Calculate partial correlation
               partial_corr = partial_correlation(df[x], df[y], df[conf])
               partial_corrs[conf] = partial_corr
-          
+
           return {
               'original': original_corr,
               'partial': partial_corrs
@@ -612,7 +612,7 @@ Avoid these common mistakes in relationship analysis:
          <span class="code-callout__title">Original correlation</span>
        </div>
        <div class="code-callout__body">
-         <p>Records the raw Pearson correlation between x and y before controlling for anything—this is the number that looks causal but may not be.</p>
+         <p>Records the raw Pearson correlation between x and y before controlling for anything, this is the number that looks causal but may not be.</p>
        </div>
      </div>
      <div class="code-callout" data-lines="7-16" data-tint="2">
@@ -631,19 +631,19 @@ Avoid these common mistakes in relationship analysis:
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight python %}
       def check_nonlinearity(df, x, y):
           """Check for non-linear relationships"""
           # Linear correlation
           linear_corr = df[x].corr(df[y])
-          
+
           # Spearman correlation
           monotonic_corr = df[x].corr(df[y], method='spearman')
-          
+
           # Difference indicates non-linearity
           nonlinearity = abs(linear_corr - monotonic_corr)
-          
+
           return {
               'linear_corr': linear_corr,
               'monotonic_corr': monotonic_corr,
@@ -677,7 +677,7 @@ Avoid these common mistakes in relationship analysis:
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight python %}
       def adjust_for_sample_size(statistic, n, type='correlation'):
           """Adjust statistics for sample size"""
@@ -720,7 +720,7 @@ Remember: "Correlation is not causation, but it's a good place to start looking!
 
 ## Next steps
 
-- [Time series analysis](time-series.md) — temporal relationships
+- [Time series analysis](time-series.md), temporal relationships
 - [EDA project](project.md)
-- [Data engineering (Module 2.4)](../2.4-data-engineering/README.md) — pipelines after exploration
+- [Data engineering (Module 2.4)](../2.4-data-engineering/README.md), pipelines after exploration
 - [Module README](README.md)

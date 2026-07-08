@@ -10,7 +10,7 @@ Short Tableau Public install; pair with the written guides in this folder.
 
 ---
 
-You have data. Your manager wants answers. Business Intelligence tools like Tableau, Power BI, and Looker Studio let you go from raw numbers to interactive dashboards that anyone can explore — without writing a single line of SQL. By the end of this submodule, you'll have built real dashboards in at least one of these tools.
+You have data. Your manager wants answers. Business Intelligence tools like Tableau, Power BI, and Looker Studio let you go from raw numbers to interactive dashboards that anyone can explore, without writing a single line of SQL. By the end of this submodule, you'll have built real dashboards in at least one of these tools.
 
 ## First 30 Minutes
 
@@ -19,7 +19,7 @@ New to BI tools? Do these five steps before reading anything else:
 1. **Download and install Tableau Public** (free) from [public.tableau.com](https://public.tableau.com/en-us/s/download). Takes about 5 minutes.
 2. **Download the [Sample Superstore dataset](assets/sample_superstore.xls)** and save it to your Desktop. On the Tableau start screen, click **Microsoft Excel** under "To a File" and open it.
 3. **Drag `Sales` to the Rows shelf and `Category` to the Columns shelf.** You just made your first bar chart. Click "Show Me" on the top right to explore other chart types with the same fields.
-4. **Add a filter** — drag `Region` to the Filters shelf, select a couple of regions, and watch the chart update instantly.
+4. **Add a filter**: drag `Region` to the Filters shelf, select a couple of regions, and watch the chart update instantly.
 5. **Create a new Dashboard** (bottom tab menu → New Dashboard), drag your sheet onto the canvas, and share the URL. That's a real dashboard.
 
 You've now touched every major concept: data source, worksheet, chart, filter, dashboard. The rest of the submodule goes deeper on each.
@@ -67,7 +67,7 @@ Before diving in, make sure these terms are clear. You'll see them constantly.
 
 | Term | What it means | Example |
 |---|---|---|
-| **Dimension** | A categorical field — something you group or filter by | `Region`, `Product Category`, `Customer Name` |
+| **Dimension** | A categorical field, something you group or filter by | `Region`, `Product Category`, `Customer Name` |
 | **Measure** | A numeric field you aggregate (sum, average, count) | `Sales`, `Profit`, `Quantity` |
 | **Dashboard** | A canvas holding multiple charts that update together | A page showing sales KPIs + map + trend line |
 | **Filter** | A control that limits which rows appear in a view | Show only orders from 2023, or only the West region |
@@ -104,7 +104,7 @@ Every Tableau dashboard follows the same three-stage journey from raw numbers to
 
 | Stage | What happens | Example |
 |-------|-------------|---------|
-| **Data Source** | Tableau connects to your raw data — a file, a database, or a cloud service | An Excel spreadsheet, a PostgreSQL table, a Google Sheet |
+| **Data Source** | Tableau connects to your raw data, a file, a database, or a cloud service | An Excel spreadsheet, a PostgreSQL table, a Google Sheet |
 | **Extract / Process** | Tableau reads and optimises the data for fast querying (live or as a snapshot) | Tableau builds a `.hyper` extract file from your 500 k-row CSV |
 | **Visualization** | You drag fields onto shelves to build charts, filters, and dashboards | A bar chart showing profit by region, embedded in a team dashboard |
 
@@ -114,10 +114,10 @@ This pipeline runs every time you open a workbook or refresh an extract. Underst
 
 | | **Live Connection** | **Extract** |
 |---|---|---|
-| **Data freshness** | Always current — Tableau queries the source on every interaction | Snapshot taken at extract time; stale until you refresh |
-| **Performance** | Slower on large datasets; every filter triggers a new database query | Fast — Tableau reads from an optimised local `.hyper` file |
-| **Works offline** | No — requires a live network path to the data source | Yes — the extract file is stored locally |
-| **Storage needed** | None on the Tableau side | Yes — the `.hyper` file can be large for wide datasets |
+| **Data freshness** | Always current, Tableau queries the source on every interaction | Snapshot taken at extract time; stale until you refresh |
+| **Performance** | Slower on large datasets; every filter triggers a new database query | Fast, Tableau reads from an optimised local `.hyper` file |
+| **Works offline** | No, requires a live network path to the data source | Yes, the extract file is stored locally |
+| **Storage needed** | None on the Tableau side | Yes, the `.hyper` file can be large for wide datasets |
 | **Best for** | Real-time operational dashboards, small-to-medium data | Large datasets, shared published workbooks, scheduled refreshes |
 
 > **Rule of thumb:** start with a Live connection while you explore the data, then switch to an Extract before publishing so your colleagues get fast load times.
@@ -130,11 +130,11 @@ This pipeline runs every time you open a workbook or refresh an extract. Underst
 
 The Tableau workspace is where all the action happens. The left panel shows your fields (dimensions in blue, measures in green), the shelves at the top control the chart structure, and the Marks card controls color, size, and labels.
 
-<!-- TODO: screenshot — Tableau workspace showing the Rows/Columns shelves, Marks card, and field list panel -->
+<!-- TODO: screenshot, Tableau workspace showing the Rows/Columns shelves, Marks card, and field list panel -->
 
 Drag a field onto the canvas or onto a shelf to build a chart. Tableau's Show Me panel suggests chart types based on what you've dragged in.
 
-<!-- TODO: screenshot — Dragging a measure onto the Rows shelf to build a bar chart in Tableau -->
+<!-- TODO: screenshot, Dragging a measure onto the Rows shelf to build a bar chart in Tableau -->
 
 #### Basic Charts
 
@@ -149,7 +149,7 @@ Drag a field onto the canvas or onto a shelf to build a chart. Tableau's Show Me
 
 > **Ask AI (Claude or ChatGPT)**
 >
-> "I want to show [describe your goal, e.g. 'how monthly revenue has changed across 4 product categories over the past 2 years']. What chart type should I use in Tableau, and how do I set it up — which fields go on Rows, Columns, and Marks?"
+> "I want to show [describe your goal, e.g. 'how monthly revenue has changed across 4 product categories over the past 2 years']. What chart type should I use in Tableau, and how do I set it up, which fields go on Rows, Columns, and Marks?"
 
 #### Visual Best Practices
 
@@ -176,16 +176,16 @@ Drag a field onto the canvas or onto a shelf to build a chart. Tableau's Show Me
 
 ```sql
 -- Year-over-Year Growth
-YOY_Growth = 
-([Sales] - LOOKUP([Sales], -1)) / 
+YOY_Growth =
+([Sales] - LOOKUP([Sales], -1)) /
 LOOKUP([Sales], -1)
 
 -- Moving Average
-Moving_Avg = 
+Moving_Avg =
 WINDOW_AVG([Value], -3, 0)
 
 -- Running Total
-Running_Sum = 
+Running_Sum =
 RUNNING_SUM(SUM([Sales]))
 ```
 
@@ -238,7 +238,7 @@ T_TEST(
       <span class="code-callout__title">K-Means Clustering</span>
     </div>
     <div class="code-callout__body">
-      <p><code>KMEANS</code> partitions records into 3 clusters using Euclidean distance on two dimensions—requires Tableau's Analytics model.</p>
+      <p><code>KMEANS</code> partitions records into 3 clusters using Euclidean distance on two dimensions, requires Tableau's Analytics model.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="14-17" data-tint="3">
@@ -261,21 +261,21 @@ T_TEST(
 
 Two layouts cover most dashboards you will build:
 
-**1. Executive Dashboard** — for stakeholders who need quick answers at a glance
+**1. Executive Dashboard**, for stakeholders who need quick answers at a glance
 
-- **Top row:** 3–4 KPI tiles showing single numbers with a trend indicator (e.g. Total Sales: $1.2 M ▲ 8%)
-- **Middle:** one large primary chart — a bar, map, or trend line that answers the main question
+- **Top row:** 3-4 KPI tiles showing single numbers with a trend indicator (e.g. Total Sales: $1.2 M ▲ 8%)
+- **Middle:** one large primary chart, a bar, map, or trend line that answers the main question
 - **Bottom row:** supporting detail tables or secondary breakdowns that explain the primary chart
 
 Use this when your audience opens the dashboard for 30 seconds and needs to leave with one takeaway.
 
-**2. Analysis Dashboard** — for analysts who need to explore and drill down
+**2. Analysis Dashboard**, for analysts who need to explore and drill down
 
 - **Left sidebar:** dimension filters and quick-filter dropdowns (Region, Date range, Category)
 - **Top-right:** overview chart showing the big picture
-- **Bottom-right:** drill-down chart that responds to selections in the overview — clicking a region filters the detail below
+- **Bottom-right:** drill-down chart that responds to selections in the overview, clicking a region filters the detail below
 
-Use this when your audience wants to ask follow-up questions: "OK, the West region is down — but which sub-category?"
+Use this when your audience wants to ask follow-up questions: "OK, the West region is down, but which sub-category?"
 
 > **Ask AI (Claude or ChatGPT)**
 >
@@ -292,7 +292,7 @@ Use this when your audience wants to ask follow-up questions: "OK, the West regi
 
 ## What Your First Session Looks Like
 
-Here's a realistic picture of your first 35 minutes with Tableau and Sample Superstore. You open the app, connect to the data source, and immediately see a table of fields on the left. You drag `Order Date` to Columns and `Sales` to Rows — Tableau aggregates the data and draws a line chart by year without you asking. You right-click the date and break it down by month; the chart fills in across the timeline. You drag `Category` to the Color mark and suddenly three lines appear — one per product category — color-coded automatically. You notice the Technology line dips in February every year and wonder why. You add a Region filter to narrow it down. Ten minutes later you drag everything onto a new Dashboard sheet, resize the panels, and share the URL. It is rough, but it answers a real question. That moment — going from raw rows to a visual insight — is what the rest of this submodule helps you do faster and better.
+Here's a realistic picture of your first 35 minutes with Tableau and Sample Superstore. You open the app, connect to the data source, and immediately see a table of fields on the left. You drag `Order Date` to Columns and `Sales` to Rows, Tableau aggregates the data and draws a line chart by year without you asking. You right-click the date and break it down by month; the chart fills in across the timeline. You drag `Category` to the Color mark and suddenly three lines appear, one per product category, color-coded automatically. You notice the Technology line dips in February every year and wonder why. You add a Region filter to narrow it down. Ten minutes later you drag everything onto a new Dashboard sheet, resize the panels, and share the URL. It is rough, but it answers a real question. That moment, going from raw rows to a visual insight, is what the rest of this submodule helps you do faster and better.
 
 ## Learning Path
 
@@ -300,13 +300,13 @@ This submodule runs over **two sessions**.
 
 ### Session 1: Tableau foundations
 
-- Read [Tableau basics](tableau-basics.md) — interface, connecting Sample Superstore, first charts, calculated fields, LOD
-- Read [Advanced analytics](advanced-analytics.md) — table calculations, LOD types, combo charts, parameters, actions
+- Read [Tableau basics](tableau-basics.md), interface, connecting Sample Superstore, first charts, calculated fields, LOD
+- Read [Advanced analytics](advanced-analytics.md), table calculations, LOD types, combo charts, parameters, actions
 - Explore the [AI tools integration](ai-tools-integration.md) guide to use Claude or ChatGPT as a pair partner while building
 
 ### Session 2: Case studies and comparison
 
-- Work through the [Tableau case study](tableau-case-study.md) — end-to-end Superstore dashboard
+- Work through the [Tableau case study](tableau-case-study.md), end-to-end Superstore dashboard
 - Compare tools: [Looker Studio case study](looker-studio-case-study.md) and [Power BI case study](powerbi-case-study.md)
 - Complete the [module assignment](../assignments/module-assignment.md)
 

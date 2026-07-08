@@ -1,6 +1,6 @@
 # Python Classes and Objects in Data Science
 
-**After this lesson:** you can explain the core ideas in “Python Classes and Objects in Data Science” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Python Classes and Objects in Data Science and try the examples in your own notebook.
 
 > **Visualize OOP:** Python Tutor can show object creation and method calls!
 
@@ -14,7 +14,7 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ZDa-Z5JzLYM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*Corey Schafer — Python OOP: classes and instances*
+*Corey Schafer, Python OOP: classes and instances*
 
 ## Introduction to object-oriented programming
 
@@ -22,10 +22,10 @@
 
 ### Core OOP concepts
 
-- **Encapsulation** — Keep related fields and functions together (a `Dataset` class that knows how to validate itself) instead of scattering dicts across files.
-- **Inheritance** — Reuse and specialize behavior (`BaseModel` → `RegressionModel`) without duplicating every method.
-- **Polymorphism** — Call the same method name on different types (`fit`, `transform`) and let each class implement the details.
-- **Abstraction** — Expose a simple interface (`model.predict(X)`) while hiding optimization details inside the class.
+- **Encapsulation**: Keep related fields and functions together (a `Dataset` class that knows how to validate itself) instead of scattering dicts across files.
+- **Inheritance**: Reuse and specialize behavior (`BaseModel` → `RegressionModel`) without duplicating every method.
+- **Polymorphism**: Call the same method name on different types (`fit`, `transform`) and let each class implement the details.
+- **Abstraction**: Expose a simple interface (`model.predict(X)`) while hiding optimization details inside the class.
 
 {% include mermaid-diagram.html src="1-data-fundamentals/1.2-intro-python/diagrams/classes-objects-1.mmd" %}
 
@@ -99,7 +99,7 @@ class ModelFactory:
       <span class="code-callout__title">Abstract Base</span>
     </div>
     <div class="code-callout__body">
-      <p><code>Model</code> is an abstract class declaring <code>train</code> and <code>predict</code> as required — any subclass must implement both or Python raises a <code>TypeError</code>.</p>
+      <p><code>Model</code> is an abstract class declaring <code>train</code> and <code>predict</code> as required, any subclass must implement both or Python raises a <code>TypeError</code>.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="13-25" data-tint="3">
@@ -117,7 +117,7 @@ class ModelFactory:
       <span class="code-callout__title">Factory Class</span>
     </div>
     <div class="code-callout__body">
-      <p><code>ModelFactory</code> maps string names to classes. <code>create_model</code> looks up the right class and instantiates it — callers never import concrete model classes directly.</p>
+      <p><code>ModelFactory</code> maps string names to classes. <code>create_model</code> looks up the right class and instantiates it, callers never import concrete model classes directly.</p>
     </div>
   </div>
 </aside>
@@ -185,7 +185,7 @@ class FeatureEngineer:
       <span class="code-callout__title">Text Strategy</span>
     </div>
     <div class="code-callout__body">
-      <p><code>TextFeatures</code> computes character length and word count for string columns — simple proxies for text complexity.</p>
+      <p><code>TextFeatures</code> computes character length and word count for string columns, simple proxies for text complexity.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="22-28" data-tint="4">
@@ -194,7 +194,7 @@ class FeatureEngineer:
       <span class="code-callout__title">Context Class</span>
     </div>
     <div class="code-callout__body">
-      <p><code>FeatureEngineer</code> accepts a list of strategies and chains them in <code>apply_all</code>. Adding a new strategy requires no changes here — just pass it in at construction.</p>
+      <p><code>FeatureEngineer</code> accepts a list of strategies and chains them in <code>apply_all</code>. Adding a new strategy requires no changes here, just pass it in at construction.</p>
     </div>
   </div>
 </aside>
@@ -275,7 +275,7 @@ class ObservableModel:
       <span class="code-callout__title">Alert System</span>
     </div>
     <div class="code-callout__body">
-      <p>A second independent observer that fires an alert when error exceeds a configurable threshold — added without modifying any existing code.</p>
+      <p>A second independent observer that fires an alert when error exceeds a configurable threshold, added without modifying any existing code.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="33-41" data-tint="4">
@@ -415,7 +415,7 @@ class DebuggableTransformer(BaseTransformer):
       <span class="code-callout__title">Instrumented Transform</span>
     </div>
     <div class="code-callout__body">
-      <p>Logs data shape on entry, success on exit, and the exception message on failure before re-raising — so the caller still sees the error while the log captures full context.</p>
+      <p>Logs data shape on entry, success on exit, and the exception message on failure before re-raising, so the caller still sees the error while the log captures full context.</p>
     </div>
   </div>
 </aside>
@@ -468,7 +468,7 @@ class DataValidator:
       <span class="code-callout__title">Result Dataclass</span>
     </div>
     <div class="code-callout__body">
-      <p><code>DataValidationResult</code> is a typed container for validation output — separating hard errors from soft warnings lets callers decide how strict to be.</p>
+      <p><code>DataValidationResult</code> is a typed container for validation output, separating hard errors from soft warnings lets callers decide how strict to be.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="10-22" data-tint="2">
@@ -527,7 +527,7 @@ class TransformerError(PipelineError):
       <span class="code-callout__title">Base Exception</span>
     </div>
     <div class="code-callout__body">
-      <p><code>PipelineError</code> is the root of the hierarchy — callers can catch this single type to handle any pipeline failure.</p>
+      <p><code>PipelineError</code> is the root of the hierarchy, callers can catch this single type to handle any pipeline failure.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="5-12" data-tint="2">
@@ -536,7 +536,7 @@ class TransformerError(PipelineError):
       <span class="code-callout__title">Specialised Subclasses</span>
     </div>
     <div class="code-callout__body">
-      <p><code>DataValidationError</code> and <code>ModelError</code> are plain subclasses — their type alone communicates the failure category without any extra data.</p>
+      <p><code>DataValidationError</code> and <code>ModelError</code> are plain subclasses, their type alone communicates the failure category without any extra data.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="14-17" data-tint="3">
@@ -614,7 +614,7 @@ class RobustPipeline:
       <span class="code-callout__title">Input Validation</span>
     </div>
     <div class="code-callout__body">
-      <p>Runs <code>DataValidator</code> before any transformation — raises a typed <code>DataValidationError</code> immediately if the data doesn't meet requirements.</p>
+      <p>Runs <code>DataValidator</code> before any transformation, raises a typed <code>DataValidationError</code> immediately if the data doesn't meet requirements.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="15-28" data-tint="3">
@@ -1001,7 +1001,7 @@ print("\nPredictions:", predictions)
       <span class="code-callout__title">Outlier Handler</span>
     </div>
     <div class="code-callout__body">
-      <p>Computes IQR-based bounds per column during <code>fit</code>, then replaces outliers with <code>NaN</code> in <code>transform</code> — a common pre-processing step before imputation.</p>
+      <p>Computes IQR-based bounds per column during <code>fit</code>, then replaces outliers with <code>NaN</code> in <code>transform</code>, a common pre-processing step before imputation.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="87-118" data-tint="4">
@@ -1225,7 +1225,7 @@ Pipeline execution failed: [Errno 2] No such file or directory: 'data.csv'
       <span class="code-callout__title">Abstract Step</span>
     </div>
     <div class="code-callout__body">
-      <p><code>DataPipelineStep</code> mandates a <code>process</code> method and a <code>get_step_name</code> string on every concrete step — used for logging and error messages.</p>
+      <p><code>DataPipelineStep</code> mandates a <code>process</code> method and a <code>get_step_name</code> string on every concrete step, used for logging and error messages.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="22-38" data-tint="2">
@@ -1243,7 +1243,7 @@ Pipeline execution failed: [Errno 2] No such file or directory: 'data.csv'
       <span class="code-callout__title">Data Cleaner</span>
     </div>
     <div class="code-callout__body">
-      <p>Optionally drops duplicate rows, then fills numeric nulls with column means and categorical nulls with the mode — both controlled by constructor flags.</p>
+      <p>Optionally drops duplicate rows, then fills numeric nulls with column means and categorical nulls with the mode, both controlled by constructor flags.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="70-86" data-tint="4">
@@ -1372,9 +1372,9 @@ Perfect for visualizing:
 
 ## Common pitfalls
 
-- **Forgetting self** — Instance methods need **self** as the first parameter so Python can pass the object.
-- **Confusing class and instance attributes** — Mutable class-level defaults (like lists) are shared across instances unless you set them in **__init__**.
-- **Overusing inheritance** — Prefer composition when you only need to reuse behavior without an “is-a” relationship.
+- **Forgetting self**: Instance methods need **self** as the first parameter so Python can pass the object.
+- **Confusing class and instance attributes**: Mutable class-level defaults (like lists) are shared across instances unless you set them in **__init__**.
+- **Overusing inheritance**: Prefer composition when you only need to reuse behavior without an "is-a" relationship.
 
 ## Next steps
 

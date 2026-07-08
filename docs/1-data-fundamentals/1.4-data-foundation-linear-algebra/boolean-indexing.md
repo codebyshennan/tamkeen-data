@@ -1,6 +1,6 @@
 # Boolean Indexing: Smart Data Selection
 
-**After this lesson:** you can explain the core ideas in “Boolean Indexing: Smart Data Selection” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Boolean Indexing: Smart Data Selection and try the examples in your own notebook.
 
 ### Video
 
@@ -8,13 +8,13 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/QUT1VHiLmmI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*freeCodeCamp — Python NumPy tutorial for beginners*
+*freeCodeCamp, Python NumPy tutorial for beginners*
 
 ## Overview
 
 **Prerequisites:** [Introduction to NumPy](./intro-numpy.md) and [ndarray basics](./ndarray-basic.md) (creating arrays and slicing).
 
-**Why this lesson:** **Boolean indexing** selects elements with a mask of `True`/`False` the same shape as your data. It is how you express “keep rows where score ≥ 80” without slow Python loops—essential before pandas boolean filters.
+**Why this lesson:** **Boolean indexing** selects elements with a mask of `True`/`False` the same shape as your data. It is how you express "keep rows where score ≥ 80" without slow Python loops, essential before pandas boolean filters.
 
 ## What is Boolean Indexing?
 
@@ -231,7 +231,7 @@ Result: [Bob's data,      Bob's data]
 
 ```
 Condition 1:  [True,  False, True,  False]
-     AND (&)  
+     AND (&)
 Condition 2:  [True,  True,  False, False]
      =
     Result:   [True,  False, False, False]
@@ -247,9 +247,9 @@ Condition 2:  [True,  True,  False, False]
 
 ## Common pitfalls
 
-- **Chaining comparisons** — Write **(a < x) & (x < b)**; Python’s chained comparisons do not broadcast over arrays the way you might expect in all cases.
-- **Precedence** — **&** binds tighter than you expect; wrap each condition in parentheses.
-- **Non-boolean dtypes** — Masks must be boolean; compare with **==**, **<**, etc., not raw floats meant as probabilities unless you threshold.
+- **Chaining comparisons**: Write **(a < x) & (x < b)**; Python's chained comparisons do not broadcast over arrays the way you might expect in all cases.
+- **Precedence**: **&** binds tighter than you expect; wrap each condition in parentheses.
+- **Non-boolean dtypes**: Masks must be boolean; compare with **==**, **<**, etc., not raw floats meant as probabilities unless you threshold.
 
 ## Next steps
 

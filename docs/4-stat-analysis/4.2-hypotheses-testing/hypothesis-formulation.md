@@ -9,11 +9,11 @@ objectives:
 
 # Hypothesis Formulation: Asking the Right Scientific Questions
 
-**After this lesson:** you can explain the core ideas in “Hypothesis Formulation: Asking the Right Scientific Questions” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Hypothesis Formulation: Asking the Right Scientific Questions and try the examples in your own notebook.
 
 ## Overview
 
-A hypothesis ties a **decision** to a **testable claim**: what would the world look like if nothing interesting were happening (null), and what pattern would convince you otherwise (alternative)? Clear wording prevents “significant” results that no one can act on. This lesson follows [experimental design](./experimental-design.md) and feeds directly into [statistical tests](./statistical-tests.md).
+A hypothesis ties a **decision** to a **testable claim**: what would the world look like if nothing interesting were happening (null), and what pattern would convince you otherwise (alternative)? Clear wording prevents "significant" results that no one can act on. This lesson follows [experimental design](./experimental-design.md) and feeds directly into [statistical tests](./statistical-tests.md).
 
 ## Why this matters
 
@@ -29,7 +29,7 @@ A hypothesis ties a **decision** to a **testable claim**: what would the world l
 
 ## Introduction
 
-A hypothesis is your scientific roadmap—it guides your investigation and helps you reach meaningful conclusions. Whether you're testing a new drug, optimizing a website, or studying customer behavior, well-formulated hypotheses are essential for discovery and sound decision-making.
+A hypothesis is your scientific roadmap, it guides your investigation and helps you reach meaningful conclusions. Whether you're testing a new drug, optimizing a website, or studying customer behavior, well-formulated hypotheses are essential for discovery and sound decision-making.
 
 ### Video Tutorial: Hypothesis Testing Explained
 
@@ -174,7 +174,7 @@ print(result){% endhighlight %}
       <span class="code-callout__title">Descriptive metrics</span>
     </div>
     <div class="code-callout__body">
-      <p>Compute mean, median, std, proportion ≥ 4, and sample size into a single dict—these are the quantifiable measures that make the hypothesis testable.</p>
+      <p>Compute mean, median, std, proportion ≥ 4, and sample size into a single dict - these are the quantifiable measures that make the hypothesis testable.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="13-17" data-tint="2">
@@ -243,7 +243,7 @@ print(result){% endhighlight %}
       <span class="code-callout__title">Falsifiable inner function</span>
     </div>
     <div class="code-callout__body">
-      <p><code>test_mean_effect</code> uses <code>ttest_1samp</code> to produce a concrete Boolean—any dataset can in principle reject this claim, making it falsifiable.</p>
+      <p><code>test_mean_effect</code> uses <code>ttest_1samp</code> to produce a concrete Boolean - any dataset can in principle reject this claim, making it falsifiable.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-10" data-tint="2">
@@ -252,7 +252,7 @@ print(result){% endhighlight %}
       <span class="code-callout__title">Non-falsifiable contrast</span>
     </div>
     <div class="code-callout__body">
-      <p><code>vague_statement</code> returns a string regardless of the data—no statistical test can ever reject it, illustrating why vague hypotheses are scientifically useless.</p>
+      <p><code>vague_statement</code> returns a string regardless of the data - no statistical test can ever reject it, illustrating why vague hypotheses are scientifically useless.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="11-22" data-tint="3">
@@ -335,11 +335,11 @@ Every hypothesis test makes one of two types of mistake. Knowing which one you'r
 
 | | H₀ is actually true | H₀ is actually false |
 |---|---|---|
-| **Reject H₀** | **Type I error (false positive)** — rate = α | Correct (True Positive) — rate = power |
-| **Fail to reject H₀** | Correct (True Negative) | **Type II error (false negative)** — rate = β |
+| **Reject H₀** | **Type I error (false positive)** - rate = α | Correct (True Positive) - rate = power |
+| **Fail to reject H₀** | Correct (True Negative) | **Type II error (false negative)** - rate = β |
 
 - **α (significance level):** The rate at which you're willing to incorrectly reject a true null. Convention is 0.05, but the right value depends on the cost of false positives in your context.
-- **β:** The rate of missing a real effect. **Power = 1 − β** — the probability of detecting an effect when one truly exists.
+- **β:** The rate of missing a real effect. **Power = 1 − β** - the probability of detecting an effect when one truly exists.
 
 **The tradeoff:** Lowering α (stricter test) reduces false positives but increases false negatives. The only way to reduce both simultaneously is to collect more data.
 
@@ -383,7 +383,7 @@ for n in [30, 100, 300, 1000]:
 {'alpha': 0.05, 'beta': 0.017, 'power': 0.983, 'n_per_group': 1000}
 ```
 
-With n=30 and a 0.5-unit effect in a population with σ=2, power is only 8.5% — you'll miss the real effect 91.5% of the time. This is why sample size planning belongs in hypothesis formulation, not after data collection.
+With n=30 and a 0.5-unit effect in a population with σ=2, power is only 8.5% - you'll miss the real effect 91.5% of the time. This is why sample size planning belongs in hypothesis formulation, not after data collection.
 
 ### Interactive: see Type I, Type II, and power
 
@@ -395,7 +395,7 @@ The widget below shows the null and alternative distributions side by side. The 
 
 - Set d = 0.2 (small effect). How big does n need to get before power crosses 0.80?
 - Hold d = 0.5, increase n: power rises smoothly. This is the curve sample-size planning rides.
-- Switch α from 0.05 to 0.01 (dropdown). The critical value moves right, the red region shrinks, and the orange region grows — fewer false positives, more missed detections.
+- Switch α from 0.05 to 0.01 (dropdown). The critical value moves right, the red region shrinks, and the orange region grows - fewer false positives, more missed detections.
 
 ## Effect Size and Power
 
@@ -411,9 +411,9 @@ where \\(s_p\\) is the pooled standard deviation.
 
 | Cohen's d | Interpretation |
 |---|---|
-| 0.2 | Small — noticeable in large datasets |
-| 0.5 | Medium — visible to careful observation |
-| 0.8 | Large — visible to the naked eye |
+| 0.2 | Small - noticeable in large datasets |
+| 0.5 | Medium - visible to careful observation |
+| 0.8 | Large - visible to the naked eye |
 
 ```python
 def cohens_d(group1, group2):
@@ -462,12 +462,12 @@ Detecting a small effect (d=0.2) requires ~6x more data than a large effect (d=0
 
 ## Gotchas
 
-- **Choosing a one-tailed vs two-tailed test based on seeing the data** — the lesson's `test_specific_hypothesis` uses a one-tailed test because the alternative was stated as "reduces by *at least* 2 days" *before* data were collected. Switching from two-tailed to one-tailed after observing which direction the effect went halves the p-value without scientific justification.
-- **Writing the alternative hypothesis as the complement of the null** — `H₁: μ₁ ≠ μ₂` is not simply "H₀ is false"; it must be a specific, testable claim tied to a particular test and effect direction. Vague alternatives like "something changed" cannot guide test selection or power calculations.
-- **Testing whether the sample mean is above a target when the correct frame is a one-sample t-test** — `ttest_1samp(ratings, target_score)` in `measure_customer_satisfaction` is two-sided by default; if your hypothesis is directional (mean *above* 4.0), the p-value should be halved (or you should use `alternative='greater'` in newer SciPy versions) to match the stated H₁.
-- **Treating "statistically significant" as the same as "the hypothesis is correct"** — rejecting H₀ only means the data are unlikely under H₀; it does not confirm H₁ or rule out other explanations. The lesson's `falsifiable_result: True` means evidence exceeded the threshold, not that the mechanism is proven.
-- **Formulating composite hypotheses without a formal test for the range** — the lesson shows `95 <= mean <= 105` as a Python comparison, not a proper statistical equivalence test (TOST). For truly asserting that a parameter falls within bounds you need two one-sided tests; the simple range check is a descriptive screen, not a rigorous inference procedure.
-- **Forgetting to pre-register hypotheses before seeing outcomes** — the file warns explicitly against peeking, but in practice learners often run exploratory analysis first and then pick the hypothesis that matches the interesting result. Pre-registration (even in a notebook cell timestamped before data load) is the simplest safeguard.
+- **Choosing a one-tailed vs two-tailed test based on seeing the data**: the lesson's `test_specific_hypothesis` uses a one-tailed test because the alternative was stated as "reduces by *at least* 2 days" *before* data were collected. Switching from two-tailed to one-tailed after observing which direction the effect went halves the p-value without scientific justification.
+- **Writing the alternative hypothesis as the complement of the null**: `H₁: μ₁ ≠ μ₂` is not simply "H₀ is false"; it must be a specific, testable claim tied to a particular test and effect direction. Vague alternatives like "something changed" cannot guide test selection or power calculations.
+- **Testing whether the sample mean is above a target when the correct frame is a one-sample t-test**: `ttest_1samp(ratings, target_score)` in `measure_customer_satisfaction` is two-sided by default; if your hypothesis is directional (mean *above* 4.0), the p-value should be halved (or you should use `alternative='greater'` in newer SciPy versions) to match the stated H₁.
+- **Treating "statistically significant" as the same as "the hypothesis is correct"**: rejecting H₀ only means the data are unlikely under H₀; it does not confirm H₁ or rule out other explanations. The lesson's `falsifiable_result: True` means evidence exceeded the threshold, not that the mechanism is proven.
+- **Formulating composite hypotheses without a formal test for the range**: the lesson shows `95 <= mean <= 105` as a Python comparison, not a proper statistical equivalence test (TOST). For truly asserting that a parameter falls within bounds you need two one-sided tests; the simple range check is a descriptive screen, not a rigorous inference procedure.
+- **Forgetting to pre-register hypotheses before seeing outcomes**: the file warns explicitly against peeking, but in practice learners often run exploratory analysis first and then pick the hypothesis that matches the interesting result. Pre-registration (even in a notebook cell timestamped before data load) is the simplest safeguard.
 
 ## Next steps
 

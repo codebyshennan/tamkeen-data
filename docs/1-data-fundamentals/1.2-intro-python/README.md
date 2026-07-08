@@ -6,7 +6,7 @@
 
 ## Overview
 
-Welcome to Python! Whether you're new to programming or coming from another language, Python is an excellent choice for your data science journey. Let's understand why Python has become the de facto language for data science and analytics.
+Welcome to Python! Whether you're new to programming or coming from another language, Python is an excellent choice for your data science journey. Understand why Python has become the de facto language for data science and analytics.
 
 > **Note:** If you've never programmed before, don't worry! Python is known for being beginner-friendly, and we'll guide you through everything step by step.
 
@@ -16,7 +16,7 @@ Welcome to Python! Whether you're new to programming or coming from another lang
 <iframe width="560" height="315" src="https://www.youtube.com/embed/YYXdXT2l-Gg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*Corey Schafer — Python tutorial: install and setup*
+*Corey Schafer, Python tutorial: install and setup*
 
 > **Contributors:** Lesson authoring standards live in `docs/meta/DOCUMENTATION_GUIDELINES.md` (the `meta/` folder is excluded from the Jekyll site).
 
@@ -66,7 +66,7 @@ Before starting this module, you should have:
 
 ### What is Python?
 
-Python is a high-level, interpreted programming language that emphasizes code readability with its notable use of significant whitespace. In data science, Python serves as your Swiss Army knife: one language for **exploring** data in notebooks, **automating** extracts, and **shipping** models with surrounding tooling.
+Python is a high-level, interpreted programming language that emphasizes code readability with its notable use of significant whitespace. In data science, Python is your Swiss Army knife: one language for **exploring** data in notebooks, **automating** extracts, and **shipping** models with surrounding tooling.
 
 Typical uses:
 
@@ -101,7 +101,7 @@ plt.show()
 
 Python stands out because it:
 
-**Readable Syntax** — Compare these examples:
+**Readable Syntax**, Compare these examples:
 
 ```python
 # Python
@@ -113,7 +113,7 @@ sales_data <- read.csv('sales.csv')
 average_sales <- mean(sales_data$amount)
 ```
 
-**Rich Ecosystem** — Essential data science libraries:
+**Rich Ecosystem**, Essential data science libraries:
 
 ```python
 import numpy as np        # Numerical computations
@@ -123,7 +123,7 @@ import seaborn as sns    # Statistical visualization
 import sklearn  # Machine learning (scikit-learn)
 ```
 
-**Integration Capabilities** — Connect with various data sources:
+**Integration Capabilities**, Connect with various data sources:
 
 ```python
 # Database connection
@@ -266,11 +266,11 @@ def quick_eda(df: pd.DataFrame) -> None:
    # Basic statistics
    print("Basic Statistics:")
    print(df.describe())
-   
+
    # Missing values
    print("\nMissing Values:")
    print(df.isnull().sum())
-   
+
    # Correlations
    plt.figure(figsize=(10, 8))
    sns.heatmap(df.corr(), annot=True)
@@ -291,16 +291,16 @@ def create_interactive_dashboard(sales_data: pd.DataFrame) -> None:
    # Sales trend
    fig1 = px.line(sales_data, x='date', y='amount',
                   title='Sales Trend Over Time')
-   
+
    # Category distribution
    fig2 = px.pie(sales_data, values='amount', names='category',
                  title='Sales by Category')
-   
+
    # Geographic distribution
    fig3 = px.scatter_mapbox(sales_data, lat='latitude', lon='longitude',
                            size='amount', color='category',
                            title='Sales Geographic Distribution')
-   
+
    # Display dashboard
    fig1.show()
    fig2.show()
@@ -410,10 +410,10 @@ Create reusable data analysis components:
 def calculate_metrics(data: List[float]) -> Dict[str, float]:
    """
    Calculate basic statistical metrics
-   
+
    Parameters:
        data: List of numerical values
-   
+
    Returns:
        Dictionary of calculated metrics
    """
@@ -436,11 +436,11 @@ class DataCleaner:
    def __init__(self, data: pd.DataFrame):
        self.data = data
        self.original_shape = data.shape
-   
+
    def remove_missing_values(self) -> pd.DataFrame:
        """Remove rows with missing values"""
        return self.data.dropna()
-   
+
    def standardize_columns(self) -> pd.DataFrame:
        """Standardize column names"""
        self.data.columns = [
@@ -448,7 +448,7 @@ class DataCleaner:
            for col in self.data.columns
        ]
        return self.data
-   
+
    def get_cleaning_report(self) -> Dict:
        """Generate cleaning report"""
        return {
@@ -481,7 +481,7 @@ class DataAnalyzer:
            'std': data.std(),
            'skew': data.skew()
        }
-   
+
    @staticmethod
    def summarize_categorical(data: pd.Series) -> Dict:
        """Summarize categorical column"""
@@ -626,4 +626,4 @@ After completing this module, you'll move on to:
 2. **Data Foundation with NumPy** - Master numerical computing with Python
 3. **Data Analysis with Pandas** - Learn to manipulate and analyze data efficiently
 
-Let's begin your Python data science journey!
+Start here.

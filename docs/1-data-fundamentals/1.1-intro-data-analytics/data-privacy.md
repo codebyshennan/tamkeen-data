@@ -4,7 +4,7 @@
 
 ## Introduction
 
-**Data privacy** is about handling personal information in a way that respects people’s autonomy and meets legal obligations. It is not only “security” (locks and encryption) and not only “ethics” (doing the right thing)—it is the **rules and practices** for how data may be collected, used, and shared.
+**Data privacy** is about handling personal information in a way that respects people's autonomy and meets legal obligations. It is not only "security" (locks and encryption) and not only "ethics" (doing the right thing), it is the **rules and practices** for how data may be collected, used, and shared.
 
 ### Video
 
@@ -12,24 +12,24 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/mdNQYU8Xj4E" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*Simplilearn — GDPR explained*
+*Simplilearn, GDPR explained*
 
 ### Why privacy matters for analysts and scientists
 
-- **People** — Laws and company policies exist because misuse of data can harm individuals (discrimination, fraud, embarrassment). Your work is more trustworthy when it respects those boundaries.
-- **Trust** — Teams that are transparent about data use get better cooperation from customers and partners.
-- **Compliance** — Regulations like GDPR, CCPA, and sector rules (e.g. HIPAA) set hard requirements. **Ignorance is not a defense**; know what applies to your data and region.
-- **Risk** — Breaches and misuse lead to fines, lawsuits, and loss of reputation. Minimizing data and clarifying purpose reduces exposure.
+- **People**: Laws and company policies exist because misuse of data can harm individuals (discrimination, fraud, embarrassment). Your work is more trustworthy when it respects those boundaries.
+- **Trust**: Teams that are transparent about data use get better cooperation from customers and partners.
+- **Compliance**: Regulations like GDPR, CCPA, and sector rules (e.g. HIPAA) set hard requirements. **Ignorance is not a defense**; know what applies to your data and region.
+- **Risk**: Breaches and misuse lead to fines, lawsuits, and loss of reputation. Minimizing data and clarifying purpose reduces exposure.
 
 ## Key concepts
 
 ### Personally Identifiable Information (PII)
 
-**PII** is any information that can identify a person, either alone or in combination with other data you hold. A name plus email is clearly PII; a “unique” customer ID can be PII if it maps to a real person in another table.
+**PII** is any information that can identify a person, either alone or in combination with other data you hold. A name plus email is clearly PII; a "unique" customer ID can be PII if it maps to a real person in another table.
 
 **Common examples:** Name, postal address, phone number, email, government ID numbers, account numbers, and many financial identifiers.
 
-**Sensitive categories** (often called “special category” under GDPR) are a subset that can create **serious harm** if mishandled: racial or ethnic origin, political opinions, religious beliefs, health, sexual life, biometric data used to identify someone, and similar fields. **Do not collect these** unless you have a clear legal basis and safeguards.
+**Sensitive categories** (often called "special category" under GDPR) are a subset that can create **serious harm** if mishandled: racial or ethnic origin, political opinions, religious beliefs, health, sexual life, biometric data used to identify someone, and similar fields. **Do not collect these** unless you have a clear legal basis and safeguards.
 
 ### Protected Health Information (PHI)
 
@@ -41,10 +41,10 @@ If you work with PHI, assume **stricter access controls, training, and agreement
 
 Modern privacy laws give individuals **rights** over their data. Wording varies by law, but you will see these patterns:
 
-- **Access** — See what data you hold about them.
-- **Rectification** — Correct inaccurate or incomplete data.
-- **Erasure** — Request deletion (“right to be forgotten”) when the law allows.
-- **Portability** — Receive a machine-readable copy to move to another service.
+- **Access**: See what data you hold about them.
+- **Rectification**: Correct inaccurate or incomplete data.
+- **Erasure**: Request deletion ("right to be forgotten") when the law allows.
+- **Portability**: Receive a machine-readable copy to move to another service.
 
 **For beginners:** Treat these as **product and process** requirements, not footnotes. Someone will eventually ask for an export or deletion; your pipelines should not make that impossible.
 
@@ -52,14 +52,14 @@ Modern privacy laws give individuals **rights** over their data. Wording varies 
 
 These ideas appear in GDPR and similar frameworks:
 
-1. **Data minimization** — Collect only what you need for a **defined** purpose. “We might use it later” is a red flag.
-2. **Purpose limitation** — Use data only for the purposes you disclosed (and that the law allows). A new use case may need new consent or analysis.
-3. **Storage limitation** — Delete or anonymize when data is no longer needed for that purpose, per policy and law.
-4. **Integrity and confidentiality** — Keep data accurate enough for its use, and protect it against unauthorized access (see [Data security](./data-security.md)).
+1. **Data minimization**: Collect only what you need for a **defined** purpose. "We might use it later" is a red flag.
+2. **Purpose limitation**: Use data only for the purposes you disclosed (and that the law allows). A new use case may need new consent or analysis.
+3. **Storage limitation**: Delete or anonymize when data is no longer needed for that purpose, per policy and law.
+4. **Integrity and confidentiality**: Keep data accurate enough for its use, and protect it against unauthorized access (see [Data security](./data-security.md)).
 
 {% include mermaid-diagram.html src="1-data-fundamentals/1.1-intro-data-analytics/diagrams/data-privacy-1.mmd" %}
 
-*Treat sensitive categories and PHI as their own tier — stricter access controls, minimal retention, and often explicit legal basis before you even touch the data.*
+*Treat sensitive categories and PHI as their own tier, stricter access controls, minimal retention, and often explicit legal basis before you even touch the data.*
 
 ## Legal frameworks (high level)
 
@@ -85,16 +85,16 @@ This is **not** legal advice. It is a map so you know **what to look up** with c
 
 ## Best practices in practice
 
-1. **Privacy impact assessments (PIAs)** — Before a new collection or model, ask: What data? Why? Who sees it? What could go wrong? Document answers.
-2. **Privacy by design** — Build defaults that minimize data (e.g. short retention, role-based access) instead of bolting privacy on at the end.
-3. **Training** — Everyone who touches data should know your classification rules and escalation paths.
-4. **Anonymization and pseudonymization** — Remove or replace identifiers when analysis does not need names; understand that **anonymization is hard** when many fields are combined (see pitfalls below).
+1. **Privacy impact assessments (PIAs)**: Before a new collection or model, ask: What data? Why? Who sees it? What could go wrong? Document answers.
+2. **Privacy by design**: Build defaults that minimize data (e.g. short retention, role-based access) instead of bolting privacy on at the end.
+3. **Training**: Everyone who touches data should know your classification rules and escalation paths.
+4. **Anonymization and pseudonymization**: Remove or replace identifiers when analysis does not need names; understand that **anonymization is hard** when many fields are combined (see pitfalls below).
 
 ---
 
 ## Sensitive data: payments and health (illustrative code)
 
-The examples below are **teaching sketches**—not production security advice. They show *why* tokenization, encryption, and consent checks exist.
+The examples below are **teaching sketches**-not production security advice. They show *why* tokenization, encryption, and consent checks exist.
 
 ### Financial data
 
@@ -148,7 +148,7 @@ class SecurePaymentProcessor:
       <span class="code-callout__title">Tokenize Card</span>
     </div>
     <div class="code-callout__body">
-      <p>The raw card number is replaced by a token immediately—only the token is kept for future charges, limiting exposure.</p>
+      <p>The raw card number is replaced by a token immediately, only the token is kept for future charges, limiting exposure.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="15-22" data-tint="3">
@@ -166,7 +166,7 @@ class SecurePaymentProcessor:
       <span class="code-callout__title">Return Receipt</span>
     </div>
     <div class="code-callout__body">
-      <p>Only the transaction ID, status, and token are returned—no card number or raw amount leaves this method.</p>
+      <p>Only the transaction ID, status, and token are returned, no card number or raw amount leaves this method.</p>
     </div>
   </div>
 </aside>
@@ -309,7 +309,7 @@ class GDPRCompliance:
       <span class="code-callout__title">Subject Rights Dispatch</span>
     </div>
     <div class="code-callout__body">
-      <p>Routes the four GDPR subject rights—access, erasure, portability, rectification—to separate methods for clean separation.</p>
+      <p>Routes the four GDPR subject rights, access, erasure, portability, rectification, to separate methods for clean separation.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="17-27" data-tint="3">
@@ -318,7 +318,7 @@ class GDPRCompliance:
       <span class="code-callout__title">Consent Verification</span>
     </div>
     <div class="code-callout__body">
-      <p>Checks that consent exists, is not expired, and is specific and informed—GDPR requires all three conditions before processing.</p>
+      <p>Checks that consent exists, is not expired, and is specific and informed, GDPR requires all three conditions before processing.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="29-37" data-tint="4">
@@ -327,7 +327,7 @@ class GDPRCompliance:
       <span class="code-callout__title">Processing Log</span>
     </div>
     <div class="code-callout__body">
-      <p>Records each processing activity with timestamp, legal basis, and data categories—required for GDPR's records of processing activities.</p>
+      <p>Records each processing activity with timestamp, legal basis, and data categories, required for GDPR's records of processing activities.</p>
     </div>
   </div>
 </aside>
@@ -382,7 +382,7 @@ class CCPACompliance:
       <span class="code-callout__title">Consumer Rights Router</span>
     </div>
     <div class="code-callout__body">
-      <p>Routes the three CCPA rights—disclosure, deletion, and opt-out of sale—to their respective handlers.</p>
+      <p>Routes the three CCPA rights, disclosure, deletion, and opt-out of sale, to their respective handlers.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="16-21" data-tint="3">
@@ -399,7 +399,7 @@ class CCPACompliance:
 
 ## Practical tips (personal and work)
 
-**Personal use:** Reduce attack surface (strong, unique passwords; MFA). **Work use:** Follow governance—classification, retention, and least-privilege access. The code below illustrates patterns, not a complete program.
+**Personal use:** Reduce attack surface (strong, unique passwords; MFA). **Work use:** Follow governance, classification, retention, and least-privilege access. The code below illustrates patterns, not a complete program.
 
 ### For personal use
 
@@ -463,7 +463,7 @@ class PasswordManager:
       <span class="code-callout__title">Secure Generation</span>
     </div>
     <div class="code-callout__body">
-      <p>Uses the OS cryptographic random source via <code>secrets</code> to produce a URL-safe 16-byte token—suitable for temporary passwords.</p>
+      <p>Uses the OS cryptographic random source via <code>secrets</code> to produce a URL-safe 16-byte token, suitable for temporary passwords.</p>
     </div>
   </div>
 </aside>
@@ -521,7 +521,7 @@ class PersonalDataEncryption:
       <span class="code-callout__title">File Encryption</span>
     </div>
     <div class="code-callout__body">
-      <p>Reads the file in binary mode, encrypts the bytes, then writes a new <code>.encrypted</code> file—leaving the original for the caller to decide whether to delete.</p>
+      <p>Reads the file in binary mode, encrypts the bytes, then writes a new <code>.encrypted</code> file, leaving the original for the caller to decide whether to delete.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="17-21" data-tint="3">
@@ -583,7 +583,7 @@ class DataGovernance:
       <span class="code-callout__title">Data Classification</span>
     </div>
     <div class="code-callout__body">
-      <p>Scores sensitivity and maps it to a protection level—the result drives downstream controls like encryption and access restrictions.</p>
+      <p>Scores sensitivity and maps it to a protection level, the result drives downstream controls like encryption and access restrictions.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="11-17" data-tint="3">
@@ -648,7 +648,7 @@ class PrivacyImpactAssessment:
       <span class="code-callout__title">Risk Assessment</span>
     </div>
     <div class="code-callout__body">
-      <p>Identifies risks, calculates impact scores, and returns them together with a mitigation plan—the three-part structure of a standard privacy impact assessment.</p>
+      <p>Identifies risks, calculates impact scores, and returns them together with a mitigation plan, the three-part structure of a standard privacy impact assessment.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="17-19" data-tint="3">
@@ -672,9 +672,9 @@ class PrivacyImpactAssessment:
 
 ## Common pitfalls
 
-- **Collecting data “just in case”** — Extra fields increase risk and compliance scope; align collection to documented purposes.
-- **Mixing purposes** — Using data for a new goal without notice or consent breaks trust and can break law.
-- **Assuming anonymization is automatic** — Removing names is not always enough; combinations of fields can still identify people.
+- **Collecting data "just in case"**: Extra fields increase risk and compliance scope; align collection to documented purposes.
+- **Mixing purposes**: Using data for a new goal without notice or consent breaks trust and can break law.
+- **Assuming anonymization is automatic**: Removing names is not always enough; combinations of fields can still identify people.
 
 ## Next Steps
 
@@ -684,7 +684,7 @@ Continue to [Data security](./data-security.md), then [Workflow concepts](./work
 
 ### Going deeper on your own
 
-When you are ready to specialize, combine **technical depth** (encryption, identity, secure development) with **program management** (PIAs, vendor reviews, incident response) and **ongoing legal education**—privacy law changes, and your organization’s counsel is the source of truth for obligations.
+When you are ready to specialize, combine **technical depth** (encryption, identity, secure development) with **program management** (PIAs, vendor reviews, incident response) and **ongoing legal education**-privacy law changes, and your organization's counsel is the source of truth for obligations.
 
 ## Additional resources
 

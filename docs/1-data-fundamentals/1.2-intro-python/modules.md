@@ -1,6 +1,6 @@
 # Python Modules in Data Science
 
-**After this lesson:** you can explain the core ideas in “Python Modules in Data Science” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Python Modules in Data Science and try the examples in your own notebook.
 
 ### Video
 
@@ -8,7 +8,7 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/sugvnHA7ElY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*Corey Schafer — How Python runs modules and the `if __name__ == "__main__"` guard*
+*Corey Schafer, How Python runs modules and the `if __name__ == "__main__"` guard*
 
 > **AI Learning:** Ask "Explain Python modules using a library analogy"
 
@@ -18,14 +18,14 @@
 
 A **module** is a `.py` file (or package) that holds related code. In real projects you rarely put an entire pipeline in one notebook cell: you **import** functions and classes from modules so notebooks stay readable and tests can target one file at a time.
 
-### What lives in “data science” modules?
+### What lives in "data science" modules?
 
 Typical building blocks you might split out:
 
-- **Preprocessing** — Cleaning, type fixes, winsorizing outliers (used on every dataset refresh).
-- **Feature helpers** — Date parts, rolling windows, encodings shared across models.
-- **Evaluation** — Metrics and plots so train and validation use the same definitions.
-- **Plotting** — Brand-consistent chart defaults so reports look uniform.
+- **Preprocessing**: Cleaning, type fixes, winsorizing outliers (used on every dataset refresh).
+- **Feature helpers**: Date parts, rolling windows, encodings shared across models.
+- **Evaluation**: Metrics and plots so train and validation use the same definitions.
+- **Plotting**: Brand-consistent chart defaults so reports look uniform.
 
 Together these pieces form a **library** your team imports instead of copy-pasting cells.
 
@@ -106,7 +106,7 @@ def calculate_regression_metrics(
       <span class="code-callout__title">Numeric Cleaner</span>
     </div>
     <div class="code-callout__body">
-      <p>Replaces infinite values with NaN then fills NaN with the column median—a safe default for numeric pipelines.</p>
+      <p>Replaces infinite values with NaN then fills NaN with the column median, a safe default for numeric pipelines.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="21-33" data-tint="3">
@@ -244,7 +244,7 @@ plt.show()
       <span class="code-callout__title">NumPy Basics</span>
     </div>
     <div class="code-callout__body">
-      <p>Creates a 2D array and computes mean, standard deviation, and matrix multiplication—NumPy's core numeric operations.</p>
+      <p>Creates a 2D array and computes mean, standard deviation, and matrix multiplication, NumPy's core numeric operations.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="10-22" data-tint="2">
@@ -253,7 +253,7 @@ plt.show()
       <span class="code-callout__title">Pandas Wrangling</span>
     </div>
     <div class="code-callout__body">
-      <p>Reads a CSV, generates summary statistics, groups by category, and builds a pivot table—the typical EDA workflow.</p>
+      <p>Reads a CSV, generates summary statistics, groups by category, and builds a pivot table, the typical EDA workflow.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="24-36" data-tint="3">
@@ -262,7 +262,7 @@ plt.show()
       <span class="code-callout__title">Sklearn Pipeline</span>
     </div>
     <div class="code-callout__body">
-      <p>Splits data, scales features, then fits a RandomForest—the standard train/scale/fit pattern for classification.</p>
+      <p>Splits data, scales features, then fits a RandomForest, the standard train/scale/fit pattern for classification.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="38-45" data-tint="4">
@@ -271,7 +271,7 @@ plt.show()
       <span class="code-callout__title">Visualization</span>
     </div>
     <div class="code-callout__body">
-      <p>Creates a scatter plot coloured by category using Seaborn on top of Matplotlib—the most common plotting combo.</p>
+      <p>Creates a scatter plot coloured by category using Seaborn on top of Matplotlib, the most common plotting combo.</p>
     </div>
   </div>
 </aside>
@@ -372,7 +372,7 @@ fig.show()
       <span class="code-callout__title">Plotly Chart</span>
     </div>
     <div class="code-callout__body">
-      <p>Creates an interactive scatter plot where colour encodes category and point size encodes a numeric value—hover reveals the ID.</p>
+      <p>Creates an interactive scatter plot where colour encodes category and point size encodes a numeric value, hover reveals the ID.</p>
     </div>
   </div>
 </aside>
@@ -558,7 +558,7 @@ if __name__ == "__main__":
       <span class="code-callout__title">Entry Point</span>
     </div>
     <div class="code-callout__body">
-      <p>The <code>if __name__ == "__main__"</code> guard lets the module be imported without running the demo—a standard Python best practice.</p>
+      <p>The <code>if __name__ == "__main__"</code> guard lets the module be imported without running the demo, a standard Python best practice.</p>
     </div>
   </div>
 </aside>
@@ -833,7 +833,7 @@ def test_numeric_features():
       <span class="code-callout__title">Assert Output</span>
     </div>
     <div class="code-callout__body">
-      <p>Checks that z-score and normalised columns were created and that no nulls remain—covering both shape and correctness of the transformation.</p>
+      <p>Checks that z-score and normalised columns were created and that no nulls remain, covering both shape and correctness of the transformation.</p>
     </div>
   </div>
 </aside>
@@ -887,12 +887,12 @@ Remember:
 
 ## Common pitfalls
 
-- **Circular imports** — Two modules importing each other at load time causes errors; move shared code to a third module or defer imports.
-- **Name clashes** — **from m import *** pollutes your namespace; prefer **import m** or explicit names.
-- **Wrong working directory** — Relative file paths depend on where you run the script; use **pathlib** or pass paths explicitly.
+- **Circular imports**: Two modules importing each other at load time causes errors; move shared code to a third module or defer imports.
+- **Name clashes**: **from m import *** pollutes your namespace; prefer **import m** or explicit names.
+- **Wrong working directory**: Relative file paths depend on where you run the script; use **pathlib** or pass paths explicitly.
 
 ## Next steps
 
-Continue to [Introduction to Statistics](../1.3-intro-statistics/README.md), starting with [One-variable statistics](../1.3-intro-statistics/one-variable-statistics.md) (or follow your instructor’s order within submodule 1.3).
+Continue to [Introduction to Statistics](../1.3-intro-statistics/README.md), starting with [One-variable statistics](../1.3-intro-statistics/one-variable-statistics.md) (or follow your instructor's order within submodule 1.3).
 
 Happy coding!

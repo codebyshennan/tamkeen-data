@@ -1,6 +1,6 @@
 # Module 4: Statistical Analysis
 
-**After this module:** you have a map of this module’s units, prerequisites, and how they connect to the rest of the course—then work through each submodule in order unless your instructor says otherwise.
+**After this module:** you have a map of this module's units, prerequisites, and how they connect to the rest of the course, then work through each submodule in order unless your instructor says otherwise.
 
 ## Overview
 
@@ -40,7 +40,7 @@ Without inference and disciplined comparisons, analytics stays descriptive: char
 
 ## Practice and assessment
 
-- [Module assignments](./assignments/module-assignment.md) — consolidated assignment for module 4.
+- [Module assignments](./assignments/module-assignment.md), consolidated assignment for module 4.
 
 ## Next steps
 

@@ -4,13 +4,13 @@
 
 ## Overview
 
-This submodule is the course’s **measurement** layer: [cross-validation](cross-validation.md), [metrics](metrics.md) (including [accuracy](accuracy.md), [confusion matrix](confusion-matrix.md), [precision/recall](precision-recall.md), [ROC/AUC](roc-and-auc.md)), [bias–variance](bias-variance.md), [overfitting/underfitting](overfitting-underfitting.md), [learning curves](learning-curves.md), [validation curves](validation-curves.md), [hyperparameter tuning](hyperparameter-tuning.md), [early stopping](early-stopping.md), [regularization](regularization.md), [feature importance](feature-importance.md), [model selection](model-selection.md), [pipelines](sklearn-pipelines.md), and an [improvement plan](improvement-plan.md). **Prerequisites:** models from [5.1–5.3](../5.1-intro-to-ml/README.md); basic probability helps for ROC and calibration.
+This submodule is the course's **measurement** layer: [cross-validation](cross-validation.md), [metrics](metrics.md) (including [accuracy](accuracy.md), [confusion matrix](confusion-matrix.md), [precision/recall](precision-recall.md), [ROC/AUC](roc-and-auc.md)), [bias-variance](bias-variance.md), [overfitting/underfitting](overfitting-underfitting.md), [learning curves](learning-curves.md), [validation curves](validation-curves.md), [hyperparameter tuning](hyperparameter-tuning.md), [early stopping](early-stopping.md), [regularization](regularization.md), [feature importance](feature-importance.md), [model selection](model-selection.md), [pipelines](sklearn-pipelines.md), and an [improvement plan](improvement-plan.md). **Prerequisites:** models from [5.1-5.3](../5.1-intro-to-ml/README.md); basic probability helps for ROC and calibration.
 
 ## Why this matters
 
 A strong model with sloppy evaluation is misleading; a simple model measured honestly often wins in production. This material connects every algorithm lesson to **reproducible** scores and safer tuning.
 
-Welcome to the model evaluation section! Here you'll learn how to properly assess your models' performance, tune their parameters for optimal results, and build efficient machine learning pipelines. These skills are crucial for developing robust and reliable machine learning solutions.
+Welcome to the model evaluation section! Here you'll learn how to properly assess your models' performance, tune their parameters for optimal results, and build efficient machine learning pipelines. These skills are important for developing reliable and reliable machine learning solutions.
 
 > **Key idea:** evaluation is a decision system. Every score should answer **which model should I trust, tune, deploy, or reject?**
 
@@ -65,7 +65,7 @@ Before starting this section, you should be familiar with:
 
 ## Why These Topics Matter
 
-Each topic we'll cover has crucial importance:
+Each topic we'll cover has important importance:
 
 - **Cross Validation**:
   - Provides **reliable performance estimates**
@@ -177,4 +177,4 @@ Begin with [Cross Validation](./cross-validation.md) to understand how to proper
 
 Ready to dive in? Start with [Cross Validation](./cross-validation.md) to learn how to properly evaluate your machine learning models!
 
-Let's master model evaluation and tuning!
+Practice model evaluation and tuning!

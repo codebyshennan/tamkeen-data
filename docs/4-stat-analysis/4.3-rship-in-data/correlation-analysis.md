@@ -9,7 +9,7 @@ objectives:
 
 # Correlation Analysis: Measuring How Things Move Together
 
-**After this lesson:** you can explain the core ideas in “Correlation Analysis: Measuring How Things Move Together” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Correlation Analysis: Measuring How Things Move Together and try the examples in your own notebook.
 
 ## Overview
 
@@ -57,7 +57,7 @@ The result is a single number called a **correlation coefficient** that ranges f
 
 ### Real-World Example: Height and Weight
 
-Let's say we measure the height and weight of 100 adults:
+Suppose we measure the height and weight of 100 adults:
 - If taller people consistently weigh more, we'll get a positive correlation (maybe around +0.7)
 - If there's absolutely no pattern, we'd get a correlation near 0
 - If taller people somehow consistently weighed less (unlikely!), we'd get a negative correlation
@@ -72,7 +72,7 @@ Think of correlation like dance partners:
 
 ## Types of Correlation Measures: Different Tools for Different Jobs
 
-Just as you wouldn't use a hammer for every home repair job, we have different types of correlation measures for different situations. Let's explore them one by one:
+Just as you wouldn't use a hammer for every home repair job, we have different types of correlation measures for different situations. we will look at them one by one:
 
 ### 1. Pearson Correlation: The Most Common Method
 
@@ -153,7 +153,7 @@ The Spearman correlation of 1.00 tells us there's a perfect rank correlation - a
 
 **Everyday Analogy**: Imagine looking at all possible pairs of data points and asking, "Do these values move in the same direction, or do they move in opposite directions?"
 
-**Kendall’s tau for pairwise concordance**
+**Kendall's tau for pairwise concordance**
 
 ```python
 # Calculate Kendall correlation
@@ -171,7 +171,7 @@ The Kendall correlation of 1.00 also indicates a perfect agreement in the rankin
 
 ## Understanding What the Numbers Mean
 
-Let's decode what those correlation values actually tell us:
+Decode what those correlation values actually tell us:
 
 | Correlation Value | What It Means | Real-World Example |
 |-------------------|---------------|-------------------|
@@ -295,9 +295,9 @@ plt.show()
 - Sleep hours and exam scores have a positive correlation (+0.82)
 - Study time and stress level have a strong negative correlation (-0.98)
 
-## Let's Try It Together: Temperature and Ice Cream Sales
+## Try it together: Temperature and Ice Cream Sales
 
-Now let's apply what we've learned with a practical example:
+Now apply what we've learned with a practical example:
 
 **Scatter plot of temperature vs. ice cream sales with correlation annotation**
 
@@ -422,7 +422,7 @@ Whenever you find a correlation between X and Y, there are three possibilities b
 
 **1. Confounding (a third variable causes both)**
 
-Ice cream sales and drowning deaths both rise in summer — not because ice cream causes drowning, but because hot weather drives both. The confounder is temperature.
+Ice cream sales and drowning deaths both rise in summer, not because ice cream causes drowning, but because hot weather drives both. The confounder is temperature.
 
 ```
 Temperature → Ice cream sales
@@ -431,11 +431,11 @@ Temperature → Drowning deaths
 
 **2. Reverse causation**
 
-You observe: hospitalised patients are sicker than outpatients. Does hospitalisation cause sickness? No — being sick causes hospitalisation.
+You observe: hospitalised patients are sicker than outpatients. Does hospitalisation cause sickness? No, being sick causes hospitalisation.
 
 **3. Spurious correlation (coincidence)**
 
-With enough variables, chance produces convincing correlations. Nicolas Cage film releases correlate r=0.87 with drowning in swimming pools (1999–2009). The sample is too small and the variables too unrelated for this to reflect anything real.
+With enough variables, chance produces convincing correlations. Nicolas Cage film releases correlate r=0.87 with drowning in swimming pools (1999-2009). The sample is too small and the variables too unrelated for this to reflect anything real.
 
 ### A Practical Checklist Before Claiming Causation
 
@@ -449,7 +449,7 @@ With enough variables, chance produces convincing correlations. Nicolas Cage fil
 
 ### Controlling for Confounders with Partial Correlation
 
-Partial correlation measures the relationship between X and Y *after removing the effect of a third variable Z*. It's a lightweight way to ask: "Is the X–Y correlation explained by Z?"
+Partial correlation measures the relationship between X and Y *after removing the effect of a third variable Z*. It's a lightweight way to ask: "Is the X-Y correlation explained by Z?"
 
 ```python
 import numpy as np
@@ -488,7 +488,7 @@ Naive correlation (ice cream vs drowning):  r=0.847, p=0.0000
 Partial correlation (controlling for temp): r=0.007, p=0.9180
 ```
 
-The correlation drops from 0.847 to essentially zero when temperature is controlled for — confirming it was entirely explained by the confounder. This is the hallmark of confounding: the association vanishes when the third variable is removed.
+The correlation drops from 0.847 to essentially zero when temperature is controlled for, confirming it was entirely explained by the confounder. This is the hallmark of confounding: the association vanishes when the third variable is removed.
 
 ### When You Need Causal Claims: What to Do
 
@@ -507,12 +507,12 @@ For most product and business questions, the practical answer is: *run an A/B te
 
 ## Gotchas
 
-- **Pearson on non-normal or ordinal data** — Pearson's r assumes interval/ratio data with roughly normal distributions; applying it to Likert-scale survey ratings (1–5) or heavily skewed income data will produce a misleading coefficient. Use Spearman or Kendall instead.
-- **A near-zero r does not mean no relationship** — Pearson only detects linear association. Two variables can have a perfect U-shaped (quadratic) relationship and still return r ≈ 0. Always plot the scatterplot before interpreting the number.
-- **`df.corr()` silently drops NaN rows per pair** — Pandas computes pairwise correlations using only rows where both columns are non-null, so different cells in a correlation matrix may be based on different sample sizes. This can make some pairs appear stronger than they really are.
-- **Interpreting r² from a correlation as "explained variance" in a model** — r² from a Pearson correlation equals R² only in simple linear regression. Quoting it as "explained variance" in any other context (multiple predictors, non-linear models) is incorrect.
-- **Statistical significance ≠ practical significance** — With large samples (n > 1,000) a correlation of r = 0.05 can be statistically significant (tiny p-value) while being practically meaningless. Always report the coefficient value alongside the p-value.
-- **Correlation matrices inflate with repeated testing** — A 20-variable matrix contains 190 unique pairs; at α = 0.05 you expect roughly 9–10 spuriously significant correlations by chance alone. Apply a Bonferroni correction or treat exploratory results as hypotheses to confirm.
+- **Pearson on non-normal or ordinal data**: Pearson's r assumes interval/ratio data with roughly normal distributions; applying it to Likert-scale survey ratings (1-5) or heavily skewed income data will produce a misleading coefficient. Use Spearman or Kendall instead.
+- **A near-zero r does not mean no relationship**: Pearson only detects linear association. Two variables can have a perfect U-shaped (quadratic) relationship and still return r ≈ 0. Always plot the scatterplot before interpreting the number.
+- **`df.corr()` silently drops NaN rows per pair**: Pandas computes pairwise correlations using only rows where both columns are non-null, so different cells in a correlation matrix may be based on different sample sizes. This can make some pairs appear stronger than they really are.
+- **Interpreting r² from a correlation as "explained variance" in a model**: r² from a Pearson correlation equals R² only in simple linear regression. Quoting it as "explained variance" in any other context (multiple predictors, non-linear models) is incorrect.
+- **Statistical significance ≠ practical significance**: With large samples (n > 1,000) a correlation of r = 0.05 can be statistically significant (tiny p-value) while being practically meaningless. Always report the coefficient value alongside the p-value.
+- **Correlation matrices inflate with repeated testing**: A 20-variable matrix contains 190 unique pairs; at α = 0.05 you expect roughly 9-10 spuriously significant correlations by chance alone. Apply a Bonferroni correction or treat exploratory results as hypotheses to confirm.
 
 ## Additional Resources for the Curious
 

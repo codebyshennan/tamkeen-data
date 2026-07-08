@@ -29,7 +29,7 @@ Module Structure:
 
 | Task | Use |
 |---|---|
-| Statistical exploration — distributions, correlation, regression | **Seaborn** |
+| Statistical exploration, distributions, correlation, regression | **Seaborn** |
 | Faceted views comparing many categories side by side | **Seaborn** |
 | Charts that need zoom, hover, or interactive filtering | **Plotly** |
 | Time series with a range slider or date-range buttons | **Plotly** |
@@ -42,7 +42,7 @@ Rule of thumb: **Seaborn for understanding your data, Plotly for sharing it.**
 
 ### Moving beyond a single static line
 
-Compare a basic Matplotlib line to a Plotly scatter that encodes four extra dimensions — size, color, animation, and a trendline — all in one call.
+Compare a basic Matplotlib line to a Plotly scatter that encodes four extra dimensions, size, color, animation, and a trendline, all in one call.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -83,7 +83,7 @@ fig = px.scatter(data,
       <span class="code-callout__title">Basic Matplotlib Plot</span>
     </div>
     <div class="code-callout__body">
-      <p>Two lines with no color, animation, or interactivity—the baseline for comparison.</p>
+      <p>Two lines with no color, animation, or interactivity, the baseline for comparison.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-16" data-tint="3">
@@ -110,12 +110,12 @@ Techniques:
     - Bubble plots
     - 3D visualizations
     - Faceted plots
-    
+
   Interactive:
     - Zoom/Pan
     - Tooltips
     - Filters
-    
+
   Layered:
     - Multiple plots
     - Overlays
@@ -124,7 +124,7 @@ Techniques:
 
 #### 2. Interactive and real-time patterns
 
-A Plotly figure with an animation-style control — a useful starting pattern for streaming dashboards.
+A Plotly figure with an animation-style control, a useful starting pattern for streaming dashboards.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -178,7 +178,7 @@ def create_realtime_dashboard(data_stream):
       <span class="code-callout__title">Figure Initialization</span>
     </div>
     <div class="code-callout__body">
-      <p>A blank <code>go.Figure()</code> serves as the canvas; traces and layout are added incrementally.</p>
+      <p>A blank <code>go.Figure()</code> is the canvas; traces and layout are added incrementally.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="4-13" data-tint="2">
@@ -213,7 +213,7 @@ def create_realtime_dashboard(data_stream):
 
 #### 3. Statistical communication
 
-One 2×2 Seaborn panel covering the four most common statistical views — distribution, box, regression, and time series — in a single figure.
+One 2×2 Seaborn panel covering the four most common statistical views, distribution, box, regression, and time series, in a single figure.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -311,17 +311,17 @@ Topics:
     - Histograms and KDE
     - Box and Violin plots
     - ECDF plots
-    
+
   Relationship Analysis:
     - Scatter plots
     - Regression plots
     - Pair plots
-    
+
   Categorical Analysis:
     - Bar plots
     - Count plots
     - Strip plots
-    
+
   Matrix Analysis:
     - Heat maps
     - Cluster maps
@@ -338,12 +338,12 @@ Features:
     - Zoom/Pan
     - Hover tooltips
     - Click events
-    
+
   Advanced Features:
     - Animations
     - Custom controls
     - Real-time updates
-    
+
   Dashboard Creation:
     - Multiple plots
     - Linked views
@@ -352,13 +352,13 @@ Features:
 
 ## Learning path
 
-This submodule has two lessons followed by two applied pieces. Complete them in order — each builds on the previous.
+This submodule has two lessons followed by two applied pieces. Complete them in order, each builds on the previous.
 
-### Lesson 1: Seaborn — statistical visualization
+### Lesson 1: Seaborn: statistical visualization
 
 Start here. The Seaborn guide covers environment setup, all major chart families, and best practices for exploratory and academic output.
 
-A one-time environment setup aligning Seaborn theme, Matplotlib `rcParams`, and Plotly's default template — run once per notebook kernel.
+A one-time environment setup aligning Seaborn theme, Matplotlib `rcParams`, and Plotly's default template, run once per notebook kernel.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -411,7 +411,7 @@ def setup_visualization_env():
       <span class="code-callout__title">rcParams Update</span>
     </div>
     <div class="code-callout__body">
-      <p><code>plt.rcParams.update</code> overrides default figure size, DPI, and font sizes—run once per notebook kernel.</p>
+      <p><code>plt.rcParams.update</code> overrides default figure size, DPI, and font sizes, run once per notebook kernel.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="20-22" data-tint="3">
@@ -426,11 +426,11 @@ def setup_visualization_env():
 </aside>
 </div>
 
-### Lesson 2: Plotly — interactive visualization
+### Lesson 2: Plotly: interactive visualization
 
 Move here after Seaborn. The Plotly guide adds hover, animation, and web-ready output on top of the statistical understanding you built in Lesson 1.
 
-The example below shows Seaborn's composable `JointGrid` API — a good bridge concept before moving into Plotly's figure-and-trace model.
+The example below shows Seaborn's composable `JointGrid` API, a good bridge concept before moving into Plotly's figure-and-trace model.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -476,7 +476,7 @@ def create_advanced_visualization(data):
       <span class="code-callout__title">Joint and Marginals</span>
     </div>
     <div class="code-callout__body">
-      <p><code>plot_joint</code> fills the central scatter; <code>plot_marginals</code> fills the side histograms—both color by <code>hue</code>.</p>
+      <p><code>plot_joint</code> fills the central scatter; <code>plot_marginals</code> fills the side histograms, both color by <code>hue</code>.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="12-15" data-tint="3">
@@ -495,10 +495,10 @@ def create_advanced_visualization(data):
 
 After completing both lessons, work through the two applied pieces in order:
 
-- **[Time series visualization](time-series-visualization.md)** — apply both libraries to trend analysis, rolling averages, and event annotation on the built-in `flights` dataset.
-- **[Real-world case study](real-world-case-study.md)** — connect data prep, chart selection, and recommendation writing in one end-to-end e-commerce analysis.
+- **[Time series visualization](time-series-visualization.md)**: apply both libraries to trend analysis, rolling averages, and event annotation on the built-in `flights` dataset.
+- **[Real-world case study](real-world-case-study.md)**: connect data prep, chart selection, and recommendation writing in one end-to-end e-commerce analysis.
 
-The following shows a `make_subplots` dashboard combining mixed trace types — a preview of what the Plotly guide and case study build toward.
+The following shows a `make_subplots` dashboard combining mixed trace types, a preview of what the Plotly guide and case study build toward.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -544,7 +544,7 @@ def create_dashboard(data):
       <span class="code-callout__title">Mixed Subplot Types</span>
     </div>
     <div class="code-callout__body">
-      <p><code>specs</code> declares each cell's chart type—<code>scatter3d</code>, <code>heatmap</code>, and <code>bar</code> can coexist in one figure.</p>
+      <p><code>specs</code> declares each cell's chart type-<code>scatter3d</code>, <code>heatmap</code>, and <code>bar</code> can coexist in one figure.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="10-18" data-tint="2">
@@ -588,7 +588,7 @@ def optimize_visualization(data, max_points=10000):
 
 ### 2. Design Excellence
 
-High-level checklist spanning color, layout, and interaction — applies to Python and BI tools.
+High-level checklist spanning color, layout, and interaction, applies to Python and BI tools.
 
 ```yaml
 Principles:
@@ -596,12 +596,12 @@ Principles:
     - Purposeful encoding
     - Accessibility
     - Consistency
-    
+
   Layout:
     - Clear hierarchy
     - White space
     - Alignment
-    
+
   Interactivity:
     - Intuitive controls
     - Responsive feedback

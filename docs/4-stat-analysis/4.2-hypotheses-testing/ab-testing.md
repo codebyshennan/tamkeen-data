@@ -9,7 +9,7 @@ objectives:
 
 # A/B Testing: Making Data-Driven Decisions
 
-**After this lesson:** you can explain the core ideas in “A/B Testing: Making Data-Driven Decisions” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain A/B Testing: Making Data-Driven Decisions and try the examples in your own notebook.
 
 ## Overview
 
@@ -71,11 +71,11 @@ class ABTest:
         self.control = control_data
         self.treatment = treatment_data
         self.metric_name = metric_name
-        
+
         # Calculate basic statistics
         self.control_stats = self._calculate_stats(control_data)
         self.treatment_stats = self._calculate_stats(treatment_data)
-        
+
     def _calculate_stats(self, data):
         """Calculate key statistics for a group"""
         return {
@@ -83,17 +83,17 @@ class ABTest:
             'std': np.std(data),
             'size': len(data),
             'ci': stats.t.interval(
-                0.95, 
+                0.95,
                 len(data)-1,
                 loc=np.mean(data),
                 scale=stats.sem(data)
             )
         }
-    
+
     def visualize(self):
         """Create comprehensive visualization of results"""
         plt.figure(figsize=(15, 5))
-        
+
         # Distribution comparison
         plt.subplot(131)
         sns.kdeplot(self.control, label='Control (A)', shade=True)
@@ -101,13 +101,13 @@ class ABTest:
         plt.title('Distribution Comparison')
         plt.xlabel(self.metric_name)
         plt.legend()
-        
+
         # Box plot
         plt.subplot(132)
         sns.boxplot(data=[self.control, self.treatment])
         plt.xticks([0, 1], ['Control (A)', 'Treatment (B)'])
         plt.title('Box Plot Comparison')
-        
+
         # Effect size visualization
         plt.subplot(133)
         effect_size = (np.mean(self.treatment) - np.mean(self.control)) / \
@@ -115,7 +115,7 @@ class ABTest:
         plt.bar(['Effect Size'], [effect_size])
         plt.axhline(y=0, color='r', linestyle='--')
         plt.title('Standardized Effect Size')
-        
+
         plt.tight_layout()
         plt.show()
 
@@ -130,7 +130,7 @@ class ABTest:
       <span class="code-callout__title">Imports and class definition</span>
     </div>
     <div class="code-callout__body">
-      <p>Import NumPy, pandas, scipy stats, Matplotlib, and Seaborn — the standard stack for statistical analysis and visualization. The <code>ABTest</code> class wraps both arms of the experiment and the methods that operate on them, keeping the analysis self-contained.</p>
+      <p>Import NumPy, pandas, scipy stats, Matplotlib, and Seaborn, the standard stack for statistical analysis and visualization. The <code>ABTest</code> class wraps both arms of the experiment and the methods that operate on them, keeping the analysis self-contained.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="11-18" data-tint="2">
@@ -148,7 +148,7 @@ class ABTest:
       <span class="code-callout__title">95% confidence interval</span>
     </div>
     <div class="code-callout__body">
-      <p><code>stats.t.interval(0.95, ...)</code> returns a (lower, upper) interval using the t-distribution with <code>n-1</code> degrees of freedom. <code>stats.sem</code> computes the standard error of the mean — the CI shows the range where the true mean likely falls.</p>
+      <p><code>stats.t.interval(0.95, ...)</code> returns a (lower, upper) interval using the t-distribution with <code>n-1</code> degrees of freedom. <code>stats.sem</code> computes the standard error of the mean, the CI shows the range where the true mean likely falls.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="34-50" data-tint="4">
@@ -157,7 +157,7 @@ class ABTest:
       <span class="code-callout__title">Distribution &amp; box plot views</span>
     </div>
     <div class="code-callout__body">
-      <p>KDE plots reveal distributional shape (skew, bimodality) that summary stats hide. The box plot shows median, IQR, and outliers side by side — together they give a fuller picture than just comparing means.</p>
+      <p>KDE plots reveal distributional shape (skew, bimodality) that summary stats hide. The box plot shows median, IQR, and outliers side by side, together they give a fuller picture than just comparing means.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="52-64" data-tint="1">
@@ -166,7 +166,7 @@ class ABTest:
       <span class="code-callout__title">Effect size, save, and return</span>
     </div>
     <div class="code-callout__body">
-      <p>(Treatment mean − Control mean) ÷ Control std is a Cohen's d–style effect size. Unlike a p-value, it tells you <em>how large</em> the difference is in standard deviation units. Returning <code>self</code> allows method chaining.</p>
+      <p>(Treatment mean − Control mean) ÷ Control std is a Cohen's d-style effect size. Unlike a p-value, it tells you <em>how large</em> the difference is in standard deviation units. Returning <code>self</code> allows method chaining.</p>
     </div>
   </div>
 </aside>
@@ -189,7 +189,7 @@ def calculate_sample_size(
 ):
     """
     Calculate required sample size for A/B test
-    
+
     Parameters:
     -----------
     baseline_rate : float
@@ -200,7 +200,7 @@ def calculate_sample_size(
         Significance level (Type I error rate)
     power : float
         Statistical power (1 - Type II error rate)
-        
+
     Returns:
     --------
     dict with required sample sizes and test parameters
@@ -208,15 +208,15 @@ def calculate_sample_size(
     # Standard normal critical values
     z_alpha = stats.norm.ppf(1 - alpha/2)
     z_beta = stats.norm.ppf(power)
-    
+
     # Calculate pooled standard deviation
     p_pooled = baseline_rate + (baseline_rate * mde/2)
-    
+
     # Calculate sample size
     n = np.ceil(
         (2 * p_pooled * (1 - p_pooled) * (z_alpha + z_beta)**2) / mde**2
     )
-    
+
     return {
         'sample_size_per_group': int(n),
         'total_sample_size': int(2 * n),
@@ -247,7 +247,7 @@ Ensure fair comparison with proper randomization:
 def assign_to_groups(user_ids, split_ratio=0.5, seed=None):
     """
     Randomly assign users to control and treatment groups
-    
+
     Parameters:
     -----------
     user_ids : array-like
@@ -256,31 +256,31 @@ def assign_to_groups(user_ids, split_ratio=0.5, seed=None):
         Proportion to assign to treatment (default: 0.5)
     seed : int, optional
         Random seed for reproducibility
-    
+
     Returns:
     --------
     dict with group assignments
     """
     if seed is not None:
         np.random.seed(seed)
-    
+
     # Shuffle user IDs
     user_ids = np.array(user_ids)
     np.random.shuffle(user_ids)
-    
+
     # Split into groups
     split_point = int(len(user_ids) * split_ratio)
-    
+
     assignments = {
         'control': user_ids[:split_point],
         'treatment': user_ids[split_point:]
     }
-    
+
     # Verify split
     print(f"Control group size: {len(assignments['control'])}")
     print(f"Treatment group size: {len(assignments['treatment'])}")
     print(f"Actual split ratio: {len(assignments['treatment'])/len(user_ids):.2%}")
-    
+
     return assignments
 ```
 
@@ -297,7 +297,7 @@ class ABTestDataCollector:
     def __init__(self):
         self.data = []
         self.start_time = pd.Timestamp.now()
-        
+
     def record_observation(self, user_id, group, metric_value, metadata=None):
         """Record a single observation"""
         observation = {
@@ -307,22 +307,22 @@ class ABTestDataCollector:
             'timestamp': pd.Timestamp.now(),
             'days_in_test': (pd.Timestamp.now() - self.start_time).days
         }
-        
+
         if metadata:
             observation.update(metadata)
-            
+
         self.data.append(observation)
-    
+
     def get_results(self):
         """Get current test results"""
         df = pd.DataFrame(self.data)
-        
+
         # Calculate key metrics by group
         results = df.groupby('group').agg({
             'value': ['count', 'mean', 'std'],
             'user_id': 'nunique'
         })
-        
+
         return results
 ```
 
@@ -336,32 +336,32 @@ Watch your test without peeking too much:
 def monitor_test(data_collector, min_sample_size):
     """
     Monitor ongoing A/B test
-    
+
     Parameters:
     -----------
     data_collector : ABTestDataCollector
         Object containing test data
     min_sample_size : int
         Minimum required sample size
-        
+
     Returns:
     --------
     dict with monitoring metrics
     """
     results = data_collector.get_results()
-    
+
     # Check if we've reached minimum sample size
     current_size = results.loc[:, ('value', 'count')].min()
     size_reached = current_size >= min_sample_size
-    
+
     # Calculate current p-value
-    control_data = [x['value'] for x in data_collector.data 
+    control_data = [x['value'] for x in data_collector.data
                    if x['group'] == 'control']
-    treatment_data = [x['value'] for x in data_collector.data 
+    treatment_data = [x['value'] for x in data_collector.data
                      if x['group'] == 'treatment']
-    
+
     _, p_value = stats.ttest_ind(treatment_data, control_data)
-    
+
     return {
         'current_size': current_size,
         'target_size': min_sample_size,
@@ -383,7 +383,7 @@ Don't just look at the numbers - understand them:
 def analyze_results(control_data, treatment_data, alpha=0.05):
     """
     Comprehensive A/B test analysis
-    
+
     Returns:
     --------
     dict with test results and recommendations
@@ -391,22 +391,22 @@ def analyze_results(control_data, treatment_data, alpha=0.05):
     # Basic statistics
     control_mean = np.mean(control_data)
     treatment_mean = np.mean(treatment_data)
-    
+
     # Effect size (relative change)
     relative_change = (treatment_mean - control_mean) / control_mean
-    
+
     # Statistical test
     t_stat, p_value = stats.ttest_ind(treatment_data, control_data)
-    
+
     # Confidence interval for difference
     ci = stats.t.interval(
         1 - alpha,
         len(control_data) + len(treatment_data) - 2,
         loc=treatment_mean - control_mean,
-        scale=np.sqrt(np.var(treatment_data)/len(treatment_data) + 
+        scale=np.sqrt(np.var(treatment_data)/len(treatment_data) +
                      np.var(control_data)/len(control_data))
     )
-    
+
     return {
         'metrics': {
             'control_mean': control_mean,
@@ -419,7 +419,7 @@ def analyze_results(control_data, treatment_data, alpha=0.05):
             'p_value': p_value,
             'confidence_interval': ci
         },
-        'recommendation': 'accept' if p_value < alpha and relative_change > 0 
+        'recommendation': 'accept' if p_value < alpha and relative_change > 0
                          else 'reject'
     }
 ```
@@ -430,12 +430,12 @@ Statistical significance alone doesn't justify shipping. Use a two-axis check:
 
 | | Stat. significant | Not stat. significant |
 |---|---|---|
-| **Practically significant** | Ship it | Underpowered — re-run with more data |
-| **Not practically significant** | Don't ship — real but trivial | Don't ship |
+| **Practically significant** | Ship it | Underpowered, re-run with more data |
+| **Not practically significant** | Don't ship, real but trivial | Don't ship |
 
 **Step 1: Set a minimum practical effect upfront.** Before the test starts, define the smallest effect worth shipping (e.g., "≥ 2% lift in conversion"). Without this, any positive result feels meaningful.
 
-**Step 2: Read the confidence interval, not just the p-value.** A 95% CI of [0.001%, 3.9%] straddles a 2% threshold — you can't confidently claim the treatment meets your bar, even if p < 0.05.
+**Step 2: Read the confidence interval, not just the p-value.** A 95% CI of [0.001%, 3.9%] straddles a 2% threshold, you can't confidently claim the treatment meets your bar, even if p < 0.05.
 
 **Step 3: Factor in implementation costs.** A statistically and practically significant result still has an engineering and ops cost. Estimate the expected value before committing:
 
@@ -459,7 +459,7 @@ print(f"Expected 30-day value: ${ev:,.0f}")  # Expected 30-day value: $10,000
 Expected 30-day value: $-17,000
 ```
 
-**Step 4: Document the decision.** Record what you shipped and why — future tests on the same surface need this context to avoid re-testing the same thing.
+**Step 4: Document the decision.** Record what you shipped and why, future tests on the same surface need this context to avoid re-testing the same thing.
 
 **Decision checklist:**
 - [ ] p-value < α (statistical significance confirmed)
@@ -481,17 +481,17 @@ Don't keep checking results - it increases false positives!
 def adjust_for_peeking(p_values, total_looks):
     """Adjust significance level for multiple looks at the data"""
     from statsmodels.stats.multitest import multipletests
-    
+
     # Use Bonferroni correction
     alpha_per_peek = 0.05 / total_looks
-    
+
     # Adjust p-values
     rejected, adjusted_p_values, _, _ = multipletests(
-        p_values, 
-        alpha=alpha_per_peek, 
+        p_values,
+        alpha=alpha_per_peek,
         method='bonferroni'
     )
-    
+
     return {
         'original_p_values': p_values,
         'adjusted_p_values': adjusted_p_values,
@@ -510,20 +510,20 @@ Check if your randomization is working:
 def check_sample_ratio(control_size, treatment_size, expected_ratio=0.5):
     """
     Check if sample ratio matches expected split
-    
+
     Returns:
     --------
     dict with ratio analysis results
     """
     total = control_size + treatment_size
     actual_ratio = treatment_size / total
-    
+
     # Chi-square test for ratio
     expected = [total * (1-expected_ratio), total * expected_ratio]
     observed = [control_size, treatment_size]
-    
+
     _, p_value = stats.chisquare(observed, expected)
-    
+
     return {
         'expected_ratio': expected_ratio,
         'actual_ratio': actual_ratio,
@@ -536,12 +536,12 @@ def check_sample_ratio(control_size, treatment_size, expected_ratio=0.5):
 
 ## Gotchas
 
-- **Peeking at results and stopping early** — checking the p-value repeatedly as data accumulates inflates the false-positive rate well above your stated α. The lesson's `monitor_test` helper naively ANDs size and p-value; in production, use sequential methods (e.g., alpha spending functions or Bayesian stopping rules) instead of a plain `p < 0.05` gate.
-- **Calculating sample size after collecting data** — the `calculate_sample_size` function must be called *before* the experiment starts. Running it post-hoc and adjusting the target to match what you collected is p-hacking masquerading as power analysis.
-- **Sample ratio mismatch going undetected** — if your randomization mechanism is broken (e.g., a caching layer serves one variant more often), your observed groups will be unequal in ways that invalidate the independence assumption. Always run `check_sample_ratio` before interpreting results; a chi-square p-value below 0.05 on the assignment counts is a red flag.
-- **Using a t-test when your metric is a proportion** — the lesson's `analyze_results` function calls `ttest_ind` on raw arrays. For binary conversion outcomes (0/1), a two-proportion z-test or chi-square test on the contingency table (as shown in the A/B chi-square example) is the more principled choice, especially for small or imbalanced samples.
-- **Interpreting the `recommendation: 'accept'` flag as a deployment decision** — the flag in `analyze_results` fires when `p_value < alpha and relative_change > 0`. A positive relative change of 0.01% is statistically significant with enough traffic but may not justify the engineering cost; always pair the flag with a minimum practical effect threshold agreed on before the test.
-- **Ignoring novelty effect and network effects** — users interacting with a new variant immediately after launch may behave differently than they will once the novelty wears off, and in social or referral products, treatment users may influence control users. Both effects bias effect-size estimates and are invisible to standard two-arm analysis.
+- **Peeking at results and stopping early**: checking the p-value repeatedly as data accumulates inflates the false-positive rate well above your stated α. The lesson's `monitor_test` helper naively ANDs size and p-value; in production, use sequential methods (e.g., alpha spending functions or Bayesian stopping rules) instead of a plain `p < 0.05` gate.
+- **Calculating sample size after collecting data**: the `calculate_sample_size` function must be called *before* the experiment starts. Running it post-hoc and adjusting the target to match what you collected is p-hacking masquerading as power analysis.
+- **Sample ratio mismatch going undetected**: if your randomization mechanism is broken (e.g., a caching layer serves one variant more often), your observed groups will be unequal in ways that invalidate the independence assumption. Always run `check_sample_ratio` before interpreting results; a chi-square p-value below 0.05 on the assignment counts is a red flag.
+- **Using a t-test when your metric is a proportion**: the lesson's `analyze_results` function calls `ttest_ind` on raw arrays. For binary conversion outcomes (0/1), a two-proportion z-test or chi-square test on the contingency table (as shown in the A/B chi-square example) is the more principled choice, especially for small or imbalanced samples.
+- **Interpreting the `recommendation: 'accept'` flag as a deployment decision**: the flag in `analyze_results` fires when `p_value < alpha and relative_change > 0`. A positive relative change of 0.01% is statistically significant with enough traffic but may not justify the engineering cost; always pair the flag with a minimum practical effect threshold agreed on before the test.
+- **Ignoring novelty effect and network effects**: users interacting with a new variant immediately after launch may behave differently than they will once the novelty wears off, and in social or referral products, treatment users may influence control users. Both effects bias effect-size estimates and are invisible to standard two-arm analysis.
 
 ## Next steps
 

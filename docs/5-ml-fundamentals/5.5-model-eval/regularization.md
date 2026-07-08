@@ -2,20 +2,20 @@
 reading_minutes: 12
 objectives:
   - "Explain regularisation as a penalty on weight magnitude that trades a small training-error increase for a large variance reduction."
-  - "Distinguish **L2** (Ridge — shrinks weights, all features kept), **L1** (Lasso — sparsity / implicit feature selection), and **ElasticNet** (a blend of the two)."
+  - "Distinguish **L2** (Ridge, shrinks weights, all features kept), **L1** (Lasso, sparsity / implicit feature selection), and **ElasticNet** (a blend of the two)."
   - "Tune the regularisation strength with cross-validated search, watching the direction of the knob: for `Lasso`/`Ridge` a larger `alpha` means MORE regularisation, but for `LogisticRegression`/`SVC` a larger `C` means LESS regularisation (`C` = 1/λ); standardise features first, or the penalty is uneven across features."
   - "Apply the same intuition to deep learning (weight decay, dropout) and gradient boosting (`min_samples_leaf`, `max_depth`, `reg_alpha`)."
 ---
 
 # Regularization
 
-**After this lesson:** you can explain the core ideas in “Regularization” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Regularization and try the examples in your own notebook.
 
 ## Overview
 
 Evaluation chapter angle on **regularization** choices and how they interact with CV scores.
 
-Distinct from [5.3 regularization lesson](../5.3-supervised-learning-2/regularization/1-introduction.md)—this page is about choosing and measuring effects.
+Distinct from [5.3 regularization lesson](../5.3-supervised-learning-2/regularization/1-introduction.md), this page is about choosing and measuring effects.
 
 
 ## Introduction
@@ -238,7 +238,7 @@ Regularization is like traffic control:
 
 ## Practical Example: Credit Risk Prediction
 
-Let's see how regularization helps in a credit risk prediction task:
+Look at how regularization helps in a credit risk prediction task:
 
 > **Watch the direction of the knob.** `LogisticRegression` (and `SVC`) is tuned with `C`, not `alpha`, and `C` is the *inverse* regularisation strength (`C` = 1/λ). So a **larger `C` means LESS regularisation**, the opposite of `Lasso`/`Ridge`, where a **larger `alpha` means MORE regularisation**.
 
@@ -331,7 +331,7 @@ plt.show()
       <span class="code-callout__title">Three Penalty Pipelines</span>
     </div>
     <div class="code-callout__body">
-      <p>Build L1 (liblinear solver), L2, and Elastic Net logistic regression pipelines; the solver choice matters — <code>liblinear</code> for L1 and <code>saga</code> for elastic-net are sklearn requirements.</p>
+      <p>Build L1 (liblinear solver), L2, and Elastic Net logistic regression pipelines; the solver choice matters, <code>liblinear</code> for L1 and <code>saga</code> for elastic-net are sklearn requirements.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="44-52" data-tint="3">
@@ -356,12 +356,12 @@ plt.show()
 
 ## Gotchas
 
-- **Applying regularization without scaling features** — L1 and L2 penalties are applied to raw coefficient magnitudes, so a feature with a large numeric range (e.g., income in thousands) will attract a disproportionately large penalty compared to a small-range feature; always run `StandardScaler` before regularized models.
-- **Choosing the penalty type by name rather than task** — Lasso sets some coefficients to exactly zero (useful for feature selection), while Ridge keeps all features but shrinks them; using Ridge when you actually want to select features will give a denser, harder-to-interpret model with no zero coefficients.
-- **Treating `alpha=1.0` as a neutral default** — sklearn's default `alpha` for `Lasso` and `Ridge` is 1.0, which is often far too large for your specific dataset scale; always use `LassoCV` or `RidgeCV` to select alpha via cross-validation rather than accepting the default.
-- **Comparing regularized models without the same solver** — For `LogisticRegression`, switching from `penalty='l2'` (default solver `lbfgs`) to `penalty='l1'` (requires `solver='liblinear'` or `'saga'`) silently falls back or errors; always set the solver explicitly to match the penalty type.
-- **Expecting Elastic Net to always outperform L1 or L2 alone** — Elastic Net adds a second hyperparameter (`l1_ratio`) that must itself be tuned; with only a small dataset and no CV over `l1_ratio`, you can easily get a worse model than simple Lasso or Ridge.
-- **Forgetting that regularization interacts with the loss function** — The `alpha` that works well for MSE regression may be wildly inappropriate for logistic loss; re-tune the regularization strength whenever you change the model family or target type.
+- **Applying regularization without scaling features**: L1 and L2 penalties are applied to raw coefficient magnitudes, so a feature with a large numeric range (e.g., income in thousands) will attract a disproportionately large penalty compared to a small-range feature; always run `StandardScaler` before regularized models.
+- **Choosing the penalty type by name rather than task**: Lasso sets some coefficients to exactly zero (useful for feature selection), while Ridge keeps all features but shrinks them; using Ridge when you actually want to select features will give a denser, harder-to-interpret model with no zero coefficients.
+- **Treating `alpha=1.0` as a neutral default**: sklearn's default `alpha` for `Lasso` and `Ridge` is 1.0, which is often far too large for your specific dataset scale; always use `LassoCV` or `RidgeCV` to select alpha via cross-validation rather than accepting the default.
+- **Comparing regularized models without the same solver**: For `LogisticRegression`, switching from `penalty='l2'` (default solver `lbfgs`) to `penalty='l1'` (requires `solver='liblinear'` or `'saga'`) silently falls back or errors; always set the solver explicitly to match the penalty type.
+- **Expecting Elastic Net to always outperform L1 or L2 alone**: Elastic Net adds a second hyperparameter (`l1_ratio`) that must itself be tuned; with only a small dataset and no CV over `l1_ratio`, you can easily get a worse model than simple Lasso or Ridge.
+- **Forgetting that regularization interacts with the loss function**: The `alpha` that works well for MSE regression may be wildly inappropriate for logistic loss; re-tune the regularization strength whenever you change the model family or target type.
 
 ## Additional Resources
 

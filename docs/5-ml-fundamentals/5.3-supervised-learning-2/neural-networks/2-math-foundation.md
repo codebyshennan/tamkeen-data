@@ -2,17 +2,17 @@
 reading_minutes: 25
 objectives:
   - "Compute a forward pass through a fully connected network by hand for a tiny example, including activation choice (sigmoid/ReLU/tanh)."
-  - "Pick a loss function appropriate to the task — MSE for regression, cross-entropy for classification — and explain what its gradient says about training direction."
+  - "Pick a loss function appropriate to the task, MSE for regression, cross-entropy for classification, and explain what its gradient says about training direction."
   - "Sketch how backpropagation, weight initialization (Xavier/He), and regularization combine to make training tractable."
 ---
 
 # Mathematical Foundation of Neural Networks
 
-**After this lesson:** you can explain the core ideas in “Mathematical Foundation of Neural Networks” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Mathematical Foundation of Neural Networks and try the examples in your own notebook.
 
 ## Overview
 
-Layers, activations, loss functions, and forward pass notation—setup for training with gradients.
+Layers, activations, loss functions, and forward pass notation, setup for training with gradients.
 
 [Introduction](1-introduction.md); [backpropagation](../backpropagation/1-introduction.md) for the backward pass story.
 
@@ -132,7 +132,7 @@ def binary_cross_entropy(y_true, y_pred):
     epsilon = 1e-15  # Prevent log(0)
     y_pred = np.clip(y_pred, epsilon, 1 - epsilon)
     return -np.mean(
-        y_true * np.log(y_pred) + 
+        y_true * np.log(y_pred) +
         (1 - y_true) * np.log(1 - y_pred)
     )
 ```
@@ -298,7 +298,7 @@ class MomentumOptimizer:
       <span class="code-callout__title">Momentum Update</span>
     </div>
     <div class="code-callout__body">
-      <p>Blend the running velocity with the current gradient using <code>beta</code>, then nudge each parameter by the damped velocity — smoothing out oscillations.</p>
+      <p>Blend the running velocity with the current gradient using <code>beta</code>, then nudge each parameter by the damped velocity, smoothing out oscillations.</p>
     </div>
   </div>
 </aside>
@@ -437,7 +437,7 @@ def dropout_backward(dout, cache):
 
 ## Visualizing the Concepts
 
-Let's create some visualizations to help understand these concepts:
+Create some visualizations to help understand these concepts:
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -489,7 +489,7 @@ plt.show()
       <span class="code-callout__title">Sigmoid Plot</span>
     </div>
     <div class="code-callout__body">
-      <p>Plots <code>1/(1+e⁻ˣ)</code> — the S-shaped curve that squashes any input to (0, 1), used in binary output layers.</p>
+      <p>Plots <code>1/(1+e⁻ˣ)</code>, the S-shaped curve that squashes any input to (0, 1), used in binary output layers.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="14-18" data-tint="3">
@@ -513,13 +513,13 @@ plt.show()
 
 ## Gotchas
 
-- **Applying He initialization to sigmoid/tanh layers** — `he_init` divides by \\(n_{in}\\) and is designed for ReLU networks (where neurons are "half dead"). Using it with sigmoid or tanh causes over-large initial activations that push neurons into saturation immediately, making early gradients near zero before any training begins.
-- **Forgetting bias correction in Adam at the first few steps** — The bias correction terms `1 - beta1^t` and `1 - beta2^t` are close to 0 at step 1, making the corrected moments large. Skipping this correction in a custom Adam implementation causes a very large first step that can destabilize training — the effect disappears after ~10 steps but the model may never recover.
-- **Using `dropout_forward` during inference without removing the mask** — The `dropout_forward` function applies a random mask and rescales by `1 - p_drop` (inverted dropout). At inference time the mask must not be applied. Forgetting to disable dropout during evaluation produces predictions that are randomly noisy — the model appears to have high variance across identical inputs.
-- **Applying L2 regularization to biases** — The `l2_regularization` function sums squared norms over all weight matrices. Best practice is to regularize only weight matrices, not bias vectors; regularizing biases adds a spurious pull toward zero that can shift decision boundaries and is rarely helpful.
-- **Using a raw dot product for the single-neuron forward pass with batched input** — The `forward_neuron` snippet computes `np.dot(w, x)`. For a single sample this works fine, but with a batch of inputs \\(X\\) of shape `(n_features, batch_size)`, the dot should be `np.dot(w, X)` not `np.dot(X, w)`. The transposition error silently produces a scalar instead of a `(batch_size,)` vector.
-- **Momentum's `1 - beta` factor changes gradient contribution** — The update rule here is \\(v_t = \beta v_{t-1} + (1 - \beta)\nabla J\\). Some implementations omit `(1 - beta)` and write \\(v_t = \beta v_{t-1} + \nabla J\\) instead. The two formulations have the same fixed point but different effective learning rates; mixing them when porting code between frameworks silently changes convergence speed.
+- **Applying He initialization to sigmoid/tanh layers**: `he_init` divides by \\(n_{in}\\) and is designed for ReLU networks (where neurons are "half dead"). Using it with sigmoid or tanh causes over-large initial activations that push neurons into saturation immediately, making early gradients near zero before any training begins.
+- **Forgetting bias correction in Adam at the first few steps**: The bias correction terms `1 - beta1^t` and `1 - beta2^t` are close to 0 at step 1, making the corrected moments large. Skipping this correction in a custom Adam implementation causes a very large first step that can destabilize training, the effect disappears after ~10 steps but the model may never recover.
+- **Using `dropout_forward` during inference without removing the mask**: The `dropout_forward` function applies a random mask and rescales by `1 - p_drop` (inverted dropout). At inference time the mask must not be applied. Forgetting to disable dropout during evaluation produces predictions that are randomly noisy, the model appears to have high variance across identical inputs.
+- **Applying L2 regularization to biases**: The `l2_regularization` function sums squared norms over all weight matrices. Best practice is to regularize only weight matrices, not bias vectors; regularizing biases adds a spurious pull toward zero that can shift decision boundaries and is rarely helpful.
+- **Using a raw dot product for the single-neuron forward pass with batched input**: The `forward_neuron` snippet computes `np.dot(w, x)`. For a single sample this works fine, but with a batch of inputs \\(X\\) of shape `(n_features, batch_size)`, the dot should be `np.dot(w, X)` not `np.dot(X, w)`. The transposition error silently produces a scalar instead of a `(batch_size,)` vector.
+- **Momentum's `1 - beta` factor changes gradient contribution**: The update rule here is \\(v_t = \beta v_{t-1} + (1 - \beta)\nabla J\\). Some implementations omit `(1 - beta)` and write \\(v_t = \beta v_{t-1} + \nabla J\\) instead. The two formulations have the same fixed point but different effective learning rates; mixing them when porting code between frameworks silently changes convergence speed.
 
 ## Next Steps
 
-Now that you understand the mathematics behind Neural Networks, let's move on to [Implementation](3-implementation.md) to see how to put these concepts into practice!
+Now that you understand the mathematics behind Neural Networks, move on to [Implementation](3-implementation.md) to see how to put these concepts into practice!

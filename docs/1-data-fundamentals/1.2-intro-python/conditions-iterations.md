@@ -1,6 +1,6 @@
 # Conditions and Iterations in Data Analysis
 
-**After this lesson:** you can explain the core ideas in “Conditions and Iterations in Data Analysis” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Conditions and Iterations in Data Analysis and try the examples in your own notebook.
 
 > **Best for Visualization:** Loops and conditions are AMAZING in Python Tutor - watch the flow!
 
@@ -14,7 +14,7 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/6iF8Xb7Z3wQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*Corey Schafer — Loops and iteration in Python*
+*Corey Schafer, Loops and iteration in Python*
 
 **How this fits together:** `if` / `elif` / `else` choose what runs once; `for` and `while` repeat work. Data pipelines use both: **validate** a row with branches, **scan** a table with loops, or prefer vectorized NumPy/pandas later. Master the ideas here so you can read any script that filters, iterates, or retries.
 
@@ -28,7 +28,7 @@
 
 ### Understanding If Statements in Data Analysis
 
-Conditions are crucial for data filtering and validation:
+Conditions are important for data filtering and validation:
 
 ```python
 import pandas as pd
@@ -59,7 +59,7 @@ def process_value(value):
 > Paste this into Python Tutor - watch which branch executes!
 > ```python
 > age = 25
-> 
+>
 > if age < 18:
 >   category = "Minor"
 >   discount = 0.1
@@ -69,7 +69,7 @@ def process_value(value):
 > else:
 >   category = "Senior"
 >   discount = 0.2
-> 
+>
 > print(f"{category}: {discount * 100}% discount")
 > ```
 
@@ -242,7 +242,7 @@ def create_age_features(df):
       <span class="code-callout__title">Nested Age Classifier</span>
     </div>
     <div class="code-callout__body">
-      <p>The inner function handles a null guard first, then branches on gender, then on age brackets—three levels of nesting for six distinct labels.</p>
+      <p>The inner function handles a null guard first, then branches on gender, then on age brackets, three levels of nesting for six distinct labels.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="23-27" data-tint="2">
@@ -280,7 +280,7 @@ high_values = df[df['value'] > 30]
 
 # Multiple conditions
 filtered_data = df[
-   (df['value'] > 20) & 
+   (df['value'] > 20) &
    (df['category'] == 'A')
 ]
 
@@ -305,10 +305,10 @@ def filter_outliers(df, columns, n_std=3):
 > import pandas as pd
 > import numpy as np
 > import time
-> 
+>
 > # Create large dataset
 > df = pd.DataFrame({'value': np.random.randint(0, 100, 1000000)})
-> 
+>
 > # Slow: Loop approach
 > start = time.time()
 > result = []
@@ -316,12 +316,12 @@ def filter_outliers(df, columns, n_std=3):
 >   if val > 50:
 >     result.append(val)
 > loop_time = time.time() - start
-> 
+>
 > # Fast: Vectorized approach
 > start = time.time()
 > result = df[df['value'] > 50]
 > vector_time = time.time() - start
-> 
+>
 > print(f"Loop: {loop_time:.4f}s")
 > print(f"Vectorized: {vector_time:.4f}s")
 > print(f"Speedup: {loop_time/vector_time:.1f}x faster!")
@@ -399,7 +399,7 @@ def detect_outliers(df, threshold=3):
       <span class="code-callout__title">Validity Check</span>
     </div>
     <div class="code-callout__body">
-      <p>Evaluates four quality conditions into a dict, then loops over any that are True to print a labelled report—returns False if any issue is found.</p>
+      <p>Evaluates four quality conditions into a dict, then loops over any that are True to print a labelled report, returns False if any issue is found.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="24-35" data-tint="3">
@@ -473,7 +473,7 @@ def process_data(df):
       <span class="code-callout__title">Loop Approach</span>
     </div>
     <div class="code-callout__body">
-      <p>Iterates row-by-row with <code>iterrows()</code>, branching on sign to compute <code>log</code> or append NaN—correct but slow for large DataFrames.</p>
+      <p>Iterates row-by-row with <code>iterrows()</code>, branching on sign to compute <code>log</code> or append NaN, correct but slow for large DataFrames.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="15-21" data-tint="2">
@@ -482,7 +482,7 @@ def process_data(df):
       <span class="code-callout__title">Vectorized Equivalent</span>
     </div>
     <div class="code-callout__body">
-      <p><code>np.where</code> applies the same condition across the entire column at once—no Python loop, so typically 10–100x faster.</p>
+      <p><code>np.where</code> applies the same condition across the entire column at once, no Python loop, so typically 10-100x faster.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="23-37" data-tint="3">
@@ -644,7 +644,7 @@ def process_by_group(df, group_col, value_col):
       <span class="code-callout__title">Group Statistics</span>
     </div>
     <div class="code-callout__body">
-      <p>Applies an inner function to each group that returns a Series of summary stats—mean, std, count, and an outlier flag—via <code>groupby.apply</code>.</p>
+      <p>Applies an inner function to each group that returns a Series of summary stats, mean, std, count, and an outlier flag, via <code>groupby.apply</code>.</p>
     </div>
   </div>
 </aside>
@@ -859,9 +859,9 @@ def validate_dataset(data):
        'negative': 0,
        'too_high': 0
    }
-   
+
    # Your code here...
-   
+
    return report
 
 # Test it:
@@ -875,7 +875,7 @@ print(result)
 ```
 
 > **Watch Counters:** Python Tutor shows how report values update in the loop!
-> **Improve:** "Suggest ways to make this validation function more robust"
+> **Improve:** "Suggest ways to make this validation function more reliable"
 
 ### Exercise 3: Nested Loops for Matrix Operations
 ```python
@@ -890,7 +890,7 @@ def process_matrix(matrix):
    # [[1, 2, 3],
    #  [4, 5, 6],
    #  [7, 8, 9]]
-   
+
    # Your code here...
    pass
 
@@ -1003,7 +1003,7 @@ numbers = [num for num in numbers if num % 2 != 0]
 Remember:
 
 - Use vectorized operations when possible
-- Consider memory efficiency 
+- Consider memory efficiency
 - Handle edge cases
 - Validate results
 - **Visualize loops in Python Tutor to understand flow**
@@ -1012,9 +1012,9 @@ Remember:
 
 ## Common pitfalls
 
-- **Off-by-one errors** — Check whether your range includes the last index; **range(len(x))** vs **range(len(x)-1)** trips people up.
-- **Modifying a list while iterating** — Prefer building a new list or iterate over a copy.
-- **Infinite loops** — Ensure the condition can become false (especially with **while**).
+- **Off-by-one errors**: Check whether your range includes the last index; **range(len(x))** vs **range(len(x)-1)** trips people up.
+- **Modifying a list while iterating**: Prefer building a new list or iterate over a copy.
+- **Infinite loops**: Ensure the condition can become false (especially with **while**).
 
 ## Next steps
 

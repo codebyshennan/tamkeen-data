@@ -26,7 +26,7 @@ Short install walkthrough (download, run the installer, open Jupyter from Anacon
 
 ## What is uv?
 
-**uv** is a modern, super-fast Python package manager. It's like a turbocharged version of **pip** — it installs packages 10–100 times faster!
+**uv** is a modern, super-fast Python package manager. It's like a turbocharged version of **pip**, it installs packages 10-100 times faster!
 
 **When to use uv:**
 
@@ -96,7 +96,7 @@ Short install walkthrough (download, run the installer, open Jupyter from Anacon
 5. Click **"Install"** and wait (this takes 5-10 minutes)
 6. Click **"Next"** and then **"Finish"** when done
 
-> **On screen:** Windows installer — **Just Me**, PATH, and finish screens.
+> **On screen:** Windows installer, **Just Me**, PATH, and finish screens.
 
 > **Note:** If you see a warning about PATH, that's okay - you checked the box to add it automatically.
 
@@ -108,7 +108,7 @@ Short install walkthrough (download, run the installer, open Jupyter from Anacon
 
 If you see a version number, Anaconda is installed correctly.
 
-> **Troubleshooting:** If `conda` is not recognized, restart your computer and open Anaconda Prompt (not PowerShell or cmd) — it sets PATH automatically.
+> **Troubleshooting:** If `conda` is not recognized, restart your computer and open Anaconda Prompt (not PowerShell or cmd), it sets PATH automatically.
 
 </details>
 
@@ -125,7 +125,7 @@ If you see a version number, Anaconda is installed correctly.
 4. Wait for installation to complete (5-10 minutes)
 5. Click **"Close"** when finished
 
-> **On screen:** macOS installer — license, destination, password prompt.
+> **On screen:** macOS installer, license, destination, password prompt.
 
 **Verify Installation:**
 
@@ -134,7 +134,7 @@ If you see a version number, Anaconda is installed correctly.
 3. Press Enter
 4. You should see something like **conda 24.x** or **25.x** (version numbers vary by installer date)
 
-If you see a version number, congratulations — Anaconda is installed.
+If you see a version number, congratulations, Anaconda is installed.
 
 > **Troubleshooting:** If you see "command not found", try restarting Terminal or your computer.
 
@@ -152,7 +152,7 @@ If you see a version number, congratulations — Anaconda is installed.
 **Step 2: Create Your First Environment**
 
 ```bash
-# Create a new environment named "dsai" with Python 3.12 (widely supported by scientific packages in 2025–2026)
+# Create a new environment named "dsai" with Python 3.12 (widely supported by scientific packages in 2025-2026)
 # Use 3.11 or 3.13 if your instructor or workplace standardizes on them
 conda create -n dsai python=3.12
 ```
@@ -166,7 +166,7 @@ When prompted, type `y` and press Enter to proceed.
 conda activate dsai
 ```
 
-> **What just happened?** You created a fresh workspace and activated it. Notice your prompt now shows **(dsai)** — that means you're working in that environment!
+> **What just happened?** You created a fresh workspace and activated it. Notice your prompt now shows **(dsai)**, that means you're working in that environment!
 
 **Step 4: Install Essential Packages**
 
@@ -237,7 +237,7 @@ Anaconda Navigator is a visual tool that lets you launch applications and manage
 3. Type: **jupyter notebook** and press Enter
 4. Your default browser will open with Jupyter Notebook
 
-> **Tip:** If you see a URL like **<http://localhost:8888>**, that's normal — Jupyter is running on your computer!
+> **Tip:** If you see a URL like **<http://localhost:8888>**, that's normal, Jupyter is running on your computer!
 
 ### VS Code
 
@@ -254,17 +254,17 @@ Anaconda Navigator is a visual tool that lets you launch applications and manage
 
 ### Anaconda
 
-- **"Add to PATH" is no longer recommended** — recent Anaconda installers default to *not* adding conda to PATH. Instead, use **Anaconda Prompt** on Windows or run `conda init zsh` / `conda init bash` once after install so your terminal shell can find `conda`. Restart the terminal afterwards.
-- **`conda activate` says "no such command"** — this means `conda init` was never run for your shell. Fix: `conda init <shell>` (e.g. `conda init zsh`), then restart the terminal.
-- **Solving environment takes forever** — the classic conda solver is slow on large environments. Enable the faster libmamba solver: `conda config --set solver libmamba` (requires `conda-libmamba-solver`, included in Anaconda 23.x+).
-- **Anaconda Navigator launches base, not your course env** — Navigator apps launch in the `base` env by default. Use the **Environment** dropdown in Navigator to switch to `dsai` before launching Jupyter.
-- **Don't install course packages into `base`** — conflicts in `base` are hard to untangle. Keep `base` minimal; do all course work in a named env (`dsai`).
+- **"Add to PATH" is no longer recommended**: recent Anaconda installers default to *not* adding conda to PATH. Instead, use **Anaconda Prompt** on Windows or run `conda init zsh` / `conda init bash` once after install so your terminal shell can find `conda`. Restart the terminal afterwards.
+- **`conda activate` says "no such command"**: this means `conda init` was never run for your shell. Fix: `conda init <shell>` (e.g. `conda init zsh`), then restart the terminal.
+- **Solving environment takes forever**: the classic conda solver is slow on large environments. Enable the faster libmamba solver: `conda config --set solver libmamba` (requires `conda-libmamba-solver`, included in Anaconda 23.x+).
+- **Anaconda Navigator launches base, not your course env**: Navigator apps launch in the `base` env by default. Use the **Environment** dropdown in Navigator to switch to `dsai` before launching Jupyter.
+- **Don't install course packages into `base`**: conflicts in `base` are hard to untangle. Keep `base` minimal; do all course work in a named env (`dsai`).
 
 ### uv
 
-- **"uv: command not found" after install** — the install script adds uv to `~/.local/bin` (Linux/macOS) or `%USERPROFILE%\.local\bin` (Windows) and updates your shell config, but the current terminal session doesn't see it yet. Close and reopen the terminal, or run `source ~/.zshrc` / `source ~/.bashrc`.
-- **`uv venv` creates `.venv` in the current folder** — if you run it in the wrong directory, a stray `.venv` appears there. Always `cd` into your project folder first.
-- **Forgetting to activate before installing** — `uv pip install` without activating `.venv` installs into the global Python. Check that `(.venv)` appears in your prompt before running any install commands.
+- **"uv: command not found" after install**: the install script adds uv to `~/.local/bin` (Linux/macOS) or `%USERPROFILE%\.local\bin` (Windows) and updates your shell config, but the current terminal session doesn't see it yet. Close and reopen the terminal, or run `source ~/.zshrc` / `source ~/.bashrc`.
+- **`uv venv` creates `.venv` in the current folder**: if you run it in the wrong directory, a stray `.venv` appears there. Always `cd` into your project folder first.
+- **Forgetting to activate before installing**: `uv pip install` without activating `.venv` installs into the global Python. Check that `(.venv)` appears in your prompt before running any install commands.
 
 
 
@@ -294,15 +294,15 @@ Anaconda Navigator is a visual tool that lets you launch applications and manage
 
 ### Why uv?
 
-[**uv**](https://github.com/astral-sh/uv) is a modern Python package manager created by Astral (the team behind Ruff). It's designed to be **10–100 times faster** than traditional **pip**.
+[**uv**](https://github.com/astral-sh/uv) is a modern Python package manager created by Astral (the team behind Ruff). It's designed to be **10-100 times faster** than traditional **pip**.
 
 **Key Benefits:**
 
-- **Super fast** — Installs packages much faster than pip
-- **Better dependency resolution** — Handles package conflicts automatically
-- **Lightweight** — Smaller footprint than Anaconda
-- **All-in-one tool** — Replaces multiple tools (pip, venv, pip-tools, etc.)
-- **Compatible** — Works with **requirements.txt** and **pyproject.toml**
+- **Super fast**: Installs packages much faster than pip
+- **Better dependency resolution**: Handles package conflicts automatically
+- **Lightweight**: Smaller footprint than Anaconda
+- **All-in-one tool**: Replaces multiple tools (pip, venv, pip-tools, etc.)
+- **Compatible**: Works with **requirements.txt** and **pyproject.toml**
 
 **Who should use uv?**
 
@@ -311,7 +311,7 @@ Anaconda Navigator is a visual tool that lets you launch applications and manage
 - Those who prefer lightweight tools
 - Experienced Python developers
 
-> **On screen:** Optional — timing **uv** vs **pip** for the same installs (for slides or motivation).
+> **On screen:** Optional, timing **uv** vs **pip** for the same installs (for slides or motivation).
 
 ### Installation
 
@@ -341,7 +341,7 @@ Close and reopen your terminal, then type:
 uv --version
 ```
 
-You should see a version number (for example **uv 0.6.x** or newer—check [astral.sh/uv](https://docs.astral.sh/uv/getting-started/installation/) if you need the latest). If you do, you're all set.
+You should see a version number (for example **uv 0.6.x** or newer, check [astral.sh/uv](https://docs.astral.sh/uv/getting-started/installation/) if you need the latest). If you do, you're all set.
 
 > **Troubleshooting:** If the command isn't found, you may need to restart your terminal or add **uv** to your PATH. Check the [uv documentation](https://github.com/astral-sh/uv) for platform-specific instructions.
 
@@ -367,7 +367,7 @@ source .venv/bin/activate
 .venv\Scripts\activate
 ```
 
-You should see **(.venv)** in your terminal prompt — that means the environment is active!
+You should see **(.venv)** in your terminal prompt, that means the environment is active!
 
 **Step 3: Install Packages**
 
@@ -377,7 +377,7 @@ You should see **(.venv)** in your terminal prompt — that means the environmen
 uv pip install numpy pandas matplotlib seaborn scikit-learn statsmodels jupyter
 ```
 
-Install **Apache Airflow** in its own folder and virtual environment using the pinned, constraint-based steps in the [Airflow guide](./airflow.md)—do not add it to your main `dsai` environment unless your instructor asks you to.
+Install **Apache Airflow** in its own folder and virtual environment using the pinned, constraint-based steps in the [Airflow guide](./airflow.md), do not add it to your main `dsai` environment unless your instructor asks you to.
 
 > **Tip:** You can install packages one at a time, or all together like above. **uv** will handle many conflicts automatically.
 

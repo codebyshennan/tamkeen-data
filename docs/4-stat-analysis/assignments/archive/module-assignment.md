@@ -5,7 +5,7 @@ This comprehensive assignment covers key concepts from statistical analysis, inc
 
 ## Prerequisites
 
-- Course material through [Module 4](../README.md) (lessons 4.1–4.4) or equivalent.
+- Course material through [Module 4](../README.md) (lessons 4.1-4.4) or equivalent.
 
 ## Questions
 

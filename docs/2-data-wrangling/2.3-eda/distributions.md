@@ -1,10 +1,10 @@
-# Understanding Data Distributions: A Comprehensive Guide
+# Understanding Data Distributions: A guide
 
-**After this lesson:** You can summarize a numeric column with appropriate center and spread, recognize skew and heavy tails from plots, and connect distribution shape to next steps (transform, robust stats, or modeling).
+**After this lesson:** You can summarize a numeric column with appropriate center and spread, recognize skew and heavy tails from plots, and connect distribution shape to next steps (transform, reliable stats, or modeling).
 
 ## Helpful video
 
-Summarizing distributions with percentiles—common in exploratory analysis.
+Summarizing distributions with percentiles, common in exploratory analysis.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/IFKQLDmRK0Y" title="Quantiles and Percentiles, Clearly Explained" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -12,7 +12,7 @@ Summarizing distributions with percentiles—common in exploratory analysis.
 
 **Prerequisites:** [Module 2.3 README](README.md) and [Pandas](../../1-data-fundamentals/1.5-data-analysis-pandas/README.md). [Two-variable statistics](../../1-data-fundamentals/1.3-intro-statistics/two-variable-statistics.md) supports correlation context.
 
-> **Time needed:** About 60–90 minutes.
+> **Time needed:** About 60-90 minutes.
 
 ## Why this matters
 
@@ -48,12 +48,12 @@ Each measure tells a different story about your data's center:
   - Best for symmetric distributions
   - Sensitive to outliers
   - Used in many statistical procedures
-  
+
 - **Median**: Middle value when sorted
-  - Robust to outliers
+  - reliable to outliers
   - Better for skewed distributions
   - Splits data into equal halves
-  
+
 - **Mode**: Most frequent value
   - Important for categorical data
   - Can identify multiple peaks
@@ -67,14 +67,14 @@ Different spread measures capture different aspects of variability:
   - Fundamental measure of variability
   - Units are squared (harder to interpret)
   - Foundation for many statistical methods
-  
+
 - **Standard Deviation**: $\sigma = \sqrt{\frac{1}{n}\sum_{i=1}^n (x_i - \bar{x})^2}$
   - Same units as original data
   - Approximately 68-95-99.7 rule for normal distributions
   - Most commonly used spread measure
-  
+
 - **IQR**: $IQR = Q_3 - Q_1$
-  - Robust to outliers
+  - reliable to outliers
   - Used in box plots
   - Contains middle 50% of data
 
@@ -87,7 +87,7 @@ Shape measures help identify the need for transformations:
   - Positive: right tail longer
   - Negative: left tail longer
   - |γ₁| > 1 indicates significant skewness
-  
+
 - **Kurtosis**: $\gamma_2 = \frac{m_4}{m_2^2} - 3$
   - Measures tail heaviness
   - Higher values: heavier tails
@@ -112,7 +112,7 @@ import plotly.graph_objects as go
 
 class DistributionAnalyzer:
     """A comprehensive framework for analyzing data distributions.
-    
+
     This class provides methods to:
     - Calculate and interpret descriptive statistics
     - Test for normality and other distribution types
@@ -120,22 +120,22 @@ class DistributionAnalyzer:
     - Identify potential issues and anomalies
     - Guide decisions about data transformations
     """
-    
+
     def __init__(self, data, column):
         self.data = data[column]
         self.column = column
         self.stats = {}
         self.tests = {}
-        
+
     def analyze_basic_stats(self):
         """Calculate and interpret comprehensive distribution statistics.
-        
+
         This method provides:
         - Basic summary statistics
         - Shape characteristics
         - Outlier indicators
         - Distribution type hints
-        
+
         Returns:
             dict: A comprehensive set of distribution statistics
         """
@@ -153,16 +153,16 @@ class DistributionAnalyzer:
             'range': self.data.max() - self.data.min()
         }
         return self.stats
-    
+
     def analyze_distribution_type(self):
         """Determine likely distribution type"""
         # Continuous vs Discrete check
         unique_ratio = len(self.data.unique()) / len(self.data)
-        
+
         # Normality tests
         shapiro_test = stats.shapiro(self.data.dropna())
         anderson_test = stats.anderson(self.data.dropna(), 'norm')
-        
+
         self.tests = {
             'unique_ratio': unique_ratio,
             'likely_type': 'continuous' if unique_ratio > 0.05 else 'discrete',
@@ -178,36 +178,36 @@ class DistributionAnalyzer:
             }
         }
         return self.tests
-    
+
     def plot_distribution_suite(self):
         """Create comprehensive distribution visualization"""
         fig = plt.figure(figsize=(20, 10))
-        
+
         # Histogram with KDE
         plt.subplot(231)
         sns.histplot(self.data, kde=True)
         plt.title('Distribution with KDE')
-        
+
         # Box plot
         plt.subplot(232)
         sns.boxplot(y=self.data)
         plt.title('Box Plot')
-        
+
         # Violin plot
         plt.subplot(233)
         sns.violinplot(y=self.data)
         plt.title('Violin Plot')
-        
+
         # Q-Q plot
         plt.subplot(234)
         stats.probplot(self.data.dropna(), dist="norm", plot=plt)
         plt.title('Q-Q Plot')
-        
+
         # ECDF
         plt.subplot(235)
         sns.ecdfplot(self.data)
         plt.title('Empirical CDF')
-        
+
         # Scatter plot with jitter
         plt.subplot(236)
         plt.scatter(
@@ -216,10 +216,10 @@ class DistributionAnalyzer:
             alpha=0.5
         )
         plt.title('Scatter with Jitter')
-        
+
         plt.tight_layout()
         plt.show()
-    
+
     def create_interactive_plots(self):
         """Create interactive visualizations with Plotly"""
         # Distribution plot
@@ -236,7 +236,7 @@ class DistributionAnalyzer:
         ))
         fig1.update_layout(title='Interactive Distribution Plot')
         fig1.show()
-        
+
         # Box plot with points
         fig2 = px.box(
             y=self.data,
@@ -271,7 +271,7 @@ class DistributionAnalyzer:
       <span class="code-callout__title">analyze_basic_stats</span>
     </div>
     <div class="code-callout__body">
-      <p>Computes eleven summary statistics: count, missing count, mean, median, mode, std, variance, skewness, kurtosis, IQR, and range—returning them in a single dict.</p>
+      <p>Computes eleven summary statistics: count, missing count, mean, median, mode, std, variance, skewness, kurtosis, IQR, and range, returning them in a single dict.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="53-77" data-tint="4">
@@ -280,7 +280,7 @@ class DistributionAnalyzer:
       <span class="code-callout__title">analyze_distribution_type</span>
     </div>
     <div class="code-callout__body">
-      <p>Estimates continuous vs discrete via unique-value ratio, then runs Shapiro–Wilk and Anderson–Darling normality tests, storing results in <code>self.tests</code>.</p>
+      <p>Estimates continuous vs discrete via unique-value ratio, then runs Shapiro-Wilk and Anderson-Darling normality tests, storing results in <code>self.tests</code>.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="78-117" data-tint="1">
@@ -289,7 +289,7 @@ class DistributionAnalyzer:
       <span class="code-callout__title">plot_distribution_suite</span>
     </div>
     <div class="code-callout__body">
-      <p>Creates a 2×3 subplot grid: histogram+KDE, box plot, violin plot, Q-Q plot, empirical CDF, and jittered scatter—giving six complementary views of the same column.</p>
+      <p>Creates a 2×3 subplot grid: histogram+KDE, box plot, violin plot, Q-Q plot, empirical CDF, and jittered scatter, giving six complementary views of the same column.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="118-142" data-tint="2">
@@ -312,7 +312,7 @@ class DistributionAnalyzer:
 
 ## Real-World Case Study: Sales Data Analysis
 
-Let's analyze a real sales dataset to understand common distribution patterns and their business implications:
+Analyze a real sales dataset to understand common distribution patterns and their business implications:
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -419,14 +419,14 @@ def analyze_normality(data, alpha=0.05):
             'kurtosis': stats.kurtosis(data)
         }
     }
-    
+
     # Interpretation
     results['is_normal'] = all([
         abs(results['shape']['skewness']) < 0.5,
         abs(results['shape']['kurtosis']) < 0.5,
         results['tests']['shapiro'][1] > alpha
     ])
-    
+
     return results
 {% endhighlight %}
 </div>
@@ -437,7 +437,7 @@ def analyze_normality(data, alpha=0.05):
       <span class="code-callout__title">Collect test results and shape metrics</span>
     </div>
     <div class="code-callout__body">
-      <p>Runs three normality tests (Shapiro–Wilk, D'Agostino, Anderson–Darling) and records skewness and kurtosis in a single <code>results</code> dict.</p>
+      <p>Runs three normality tests (Shapiro-Wilk, D'Agostino, Anderson-Darling) and records skewness and kurtosis in a single <code>results</code> dict.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="14-22" data-tint="2">
@@ -462,7 +462,7 @@ def analyze_tail_behavior(data):
     """Analyze distribution tail behavior"""
     percentiles = np.percentile(data, [1, 5, 95, 99])
     iqr = np.percentile(data, 75) - np.percentile(data, 25)
-    
+
     return {
         'tail_ratios': {
             'left_tail': (percentiles[1] - percentiles[0]) / iqr,
@@ -482,7 +482,7 @@ def analyze_tail_behavior(data):
       <span class="code-callout__title">Compute key percentiles and IQR</span>
     </div>
     <div class="code-callout__body">
-      <p>Grabs the 1st, 5th, 95th, and 99th percentiles plus the IQR—these four extremes anchor the tail-ratio calculation.</p>
+      <p>Grabs the 1st, 5th, 95th, and 99th percentiles plus the IQR, these four extremes anchor the tail-ratio calculation.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="5-15" data-tint="2">
@@ -506,15 +506,15 @@ def analyze_tail_behavior(data):
 def detect_multimodality(data, bandwidth=None):
     """Detect multiple modes in distribution"""
     from scipy.signal import find_peaks
-    
+
     # KDE estimation
     kde = stats.gaussian_kde(data)
     x_range = np.linspace(min(data), max(data), 1000)
     y = kde(x_range)
-    
+
     # Find peaks
     peaks, _ = find_peaks(y)
-    
+
     return {
         'n_modes': len(peaks),
         'mode_locations': x_range[peaks],
@@ -556,7 +556,7 @@ def optimize_numeric_analysis(data):
     """Optimize numeric computations"""
     # Use numpy arrays for computations
     arr = np.array(data)
-    
+
     # Compute statistics in one pass
     n = len(arr)
     mean = np.mean(arr)
@@ -564,7 +564,7 @@ def optimize_numeric_analysis(data):
     var = np.sum(diff**2) / n
     skew = np.sum(diff**3) / (n * var**1.5)
     kurt = np.sum(diff**4) / (n * var**2) - 3
-    
+
     return {
         'mean': mean,
         'variance': var,
@@ -580,7 +580,7 @@ def optimize_numeric_analysis(data):
       <span class="code-callout__title">Single-pass setup</span>
     </div>
     <div class="code-callout__body">
-      <p>Converts to a NumPy array once, computes n and mean, then subtracts the mean once into <code>diff</code>—reusing this array for all higher moments avoids repeated passes.</p>
+      <p>Converts to a NumPy array once, computes n and mean, then subtracts the mean once into <code>diff</code>-reusing this array for all higher moments avoids repeated passes.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="10-19" data-tint="2">
@@ -609,18 +609,18 @@ def create_efficient_plots(data, max_points=10000):
         sample = data.iloc[idx]
     else:
         sample = data
-    
+
     # Create plots
     fig, axes = plt.subplots(1, 2, figsize=(12, 5))
-    
+
     # Histogram (using bins)
     axes[0].hist(sample, bins='auto')
     axes[0].set_title('Histogram')
-    
+
     # Box plot
     axes[1].boxplot(sample)
     axes[1].set_title('Box Plot')
-    
+
     plt.tight_layout()
     plt.show()
 {% endhighlight %}
@@ -632,7 +632,7 @@ def create_efficient_plots(data, max_points=10000):
       <span class="code-callout__title">Systematic sampling for large data</span>
     </div>
     <div class="code-callout__body">
-      <p>If the series exceeds <code>max_points</code>, evenly-spaced integer indices are computed with <code>np.linspace</code> to draw a representative systematic sample—preserving the shape without random variance.</p>
+      <p>If the series exceeds <code>max_points</code>, evenly-spaced integer indices are computed with <code>np.linspace</code> to draw a representative systematic sample, preserving the shape without random variance.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-22" data-tint="2">
@@ -655,12 +655,12 @@ Avoid these common mistakes in distribution analysis:
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight python %}
       # Bad: Always using mean and std
       summary = {'mean': data.mean(), 'std': data.std()}
-      
-      # Good: Use robust statistics when appropriate
+
+      # Good: Use reliable statistics when appropriate
       def robust_summary(data):
           return {
               'median': np.median(data),
@@ -676,16 +676,16 @@ Avoid these common mistakes in distribution analysis:
          <span class="code-callout__title">Fragile: mean and std</span>
        </div>
        <div class="code-callout__body">
-         <p>Always using mean and std assumes normality—they become misleading when data is skewed or has heavy tails.</p>
+         <p>Always using mean and std assumes normality, they become misleading when data is skewed or has heavy tails.</p>
        </div>
      </div>
      <div class="code-callout" data-lines="3-10" data-tint="2">
        <div class="code-callout__meta">
          <span class="code-callout__lines"></span>
-         <span class="code-callout__title">Robust summary statistics</span>
+         <span class="code-callout__title">reliable summary statistics</span>
        </div>
        <div class="code-callout__body">
-         <p><code>robust_summary</code> returns median, MAD, and IQR—all outlier-resistant and valid regardless of distribution shape.</p>
+         <p><code>robust_summary</code> returns median, MAD, and IQR, all outlier-resistant and valid regardless of distribution shape.</p>
        </div>
      </div>
    </aside>
@@ -695,7 +695,7 @@ Avoid these common mistakes in distribution analysis:
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight python %}
       def adjust_for_sample_size(data):
           """Adjust analysis based on sample size"""
@@ -723,7 +723,7 @@ Avoid these common mistakes in distribution analysis:
          <span class="code-callout__title">Small-sample branch (n &lt; 30)</span>
        </div>
        <div class="code-callout__body">
-         <p>For fewer than 30 observations, parametric assumptions are unreliable. The function falls back to non-parametric statistics: median, IQR, and Shapiro–Wilk.</p>
+         <p>For fewer than 30 observations, parametric assumptions are unreliable. The function falls back to non-parametric statistics: median, IQR, and Shapiro-Wilk.</p>
        </div>
      </div>
      <div class="code-callout" data-lines="7-17" data-tint="2">
@@ -742,14 +742,14 @@ Avoid these common mistakes in distribution analysis:
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight python %}
       def analyze_with_outliers(data):
           """Analyze distribution with and without outliers"""
           Q1, Q3 = np.percentile(data, [25, 75])
           IQR = Q3 - Q1
           outlier_mask = (data < Q1 - 1.5*IQR) | (data > Q3 + 1.5*IQR)
-          
+
           return {
               'with_outliers': data.describe(),
               'without_outliers': data[~outlier_mask].describe(),
@@ -773,7 +773,7 @@ Avoid these common mistakes in distribution analysis:
          <span class="code-callout__title">Compare distributions with and without outliers</span>
        </div>
        <div class="code-callout__body">
-         <p>Returns <code>describe()</code> for the full series and for the outlier-filtered series side by side, plus the count of outliers—making the impact visible before deciding how to handle them.</p>
+         <p>Returns <code>describe()</code> for the full series and for the outlier-filtered series side by side, plus the count of outliers, making the impact visible before deciding how to handle them.</p>
        </div>
      </div>
    </aside>
@@ -783,7 +783,7 @@ Remember: "The choice of distribution analysis method should be guided by your d
 
 ## Next steps
 
-- [Analyzing relationships](relationships.md) — correlations and group comparisons
-- [Time series analysis](time-series.md) — trends and seasonality
+- [Analyzing relationships](relationships.md), correlations and group comparisons
+- [Time series analysis](time-series.md), trends and seasonality
 - [EDA project](project.md)
 - [Module README](README.md)

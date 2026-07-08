@@ -9,11 +9,11 @@ objectives:
 
 # Multiple Linear Regression: Prediction with Multiple Factors
 
-**After this lesson:** you can explain the core ideas in “Multiple Linear Regression: Prediction with Multiple Factors” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Multiple Linear Regression: Prediction with Multiple Factors and try the examples in your own notebook.
 
 ## Overview
 
-Multiple linear regression extends the simple case to a **linear combination of several predictors**. Each coefficient answers a conditional question: “How does the outcome change with this predictor **holding the others fixed**?” That conditioning is powerful and easy to misread—especially when predictors are correlated—so this lesson pairs intuition with careful wording before [diagnostics](./model-diagnostics.md).
+Multiple linear regression extends the simple case to a **linear combination of several predictors**. Each coefficient answers a conditional question: "How does the outcome change with this predictor **holding the others fixed**?" That conditioning is powerful and easy to misread, especially when predictors are correlated, so this lesson pairs intuition with careful wording before [diagnostics](./model-diagnostics.md).
 
 ## Why this matters
 
@@ -46,7 +46,7 @@ In real life, outcomes are rarely influenced by just one factor. Think about it:
 
 ### The Family Recipe Analogy
 
-Think of simple linear regression like trying to bake cookies with just flour. You can make something, but it won't be great. 
+Think of simple linear regression like trying to bake cookies with just flour. You can make something, but it won't be great.
 
 Multiple linear regression is like using a complete recipe with flour, sugar, butter, eggs, and vanilla. Each ingredient contributes to the final product, and the recipe tells you exactly how much of each to use!
 
@@ -58,7 +58,7 @@ The formula looks like this:
 
 \\[ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_p x_p + \epsilon \\]
 
-This might look intimidating, but let's break it down:
+This might look intimidating, but break it down:
 
 - **y** is what we're trying to predict (like exam score)
 - **x₁, x₂, …** are our predictors (like hours studied, hours slept, previous knowledge)
@@ -85,7 +85,7 @@ This tells us:
 
 ## Before We Start: Important Assumptions
 
-Just like a recipe only works under certain conditions, multiple linear regression works best when certain assumptions are met. Let's understand these in simple terms:
+Just like a recipe only works under certain conditions, multiple linear regression works best when certain assumptions are met. Understand these in simple terms:
 
 ### 1. The Relationships Should Be Linear
 
@@ -119,7 +119,7 @@ The factors you use should be relatively independent of each other.
 
 ## Building Your First Multiple Regression Model
 
-Let's walk through a concrete example using Python. Don't worry if the code looks complex - focus on understanding the concepts!
+Walk through a concrete example using Python. Don't worry if the code looks complex - focus on understanding the concepts!
 
 **Multiple regression with coefficients, R², and VIF**
 
@@ -205,7 +205,7 @@ Multicollinearity Check (VIF values):
       <span class="code-callout__title">Imports and synthetic predictors</span>
     </div>
     <div class="code-callout__body">
-      <p>Import sklearn, statsmodels, and plotting libraries. <code>np.random.seed(42)</code> fixes reproducibility. Three independent predictors — study hours, GPA, sleep — are each drawn from a standard normal distribution so they don't correlate with each other (ideal for isolating individual effects).</p>
+      <p>Import sklearn, statsmodels, and plotting libraries. <code>np.random.seed(42)</code> fixes reproducibility. Three independent predictors, study hours, GPA, sleep, are each drawn from a standard normal distribution so they don't correlate with each other (ideal for isolating individual effects).</p>
     </div>
   </div>
   <div class="code-callout" data-lines="17-19" data-tint="2">
@@ -214,7 +214,7 @@ Multicollinearity Check (VIF values):
       <span class="code-callout__title">Known ground truth</span>
     </div>
     <div class="code-callout__body">
-      <p>Exam scores are built with <em>known</em> coefficients (2, 3, 1.5) — after fitting, the model should recover these. This "check your answer" trick is useful whenever you're learning a new model: generate data with known structure, then verify the model finds it.</p>
+      <p>Exam scores are built with <em>known</em> coefficients (2, 3, 1.5), after fitting, the model should recover these. This "check your answer" trick is useful whenever you're learning a new model: generate data with known structure, then verify the model finds it.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="29-34" data-tint="3">
@@ -223,7 +223,7 @@ Multicollinearity Check (VIF values):
       <span class="code-callout__title">Multi-column feature matrix</span>
     </div>
     <div class="code-callout__body">
-      <p>Unlike simple regression, <code>X</code> now has 3 columns (one per predictor). sklearn requires a 2D DataFrame or array — double brackets <code>[[ ]]</code> select multiple columns at once. No <code>.reshape</code> needed.</p>
+      <p>Unlike simple regression, <code>X</code> now has 3 columns (one per predictor). sklearn requires a 2D DataFrame or array, double brackets <code>[[ ]]</code> select multiple columns at once. No <code>.reshape</code> needed.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="36-41" data-tint="4">
@@ -241,7 +241,7 @@ Multicollinearity Check (VIF values):
       <span class="code-callout__title">Variance Inflation Factor (VIF)</span>
     </div>
     <div class="code-callout__body">
-      <p>VIF measures how much each predictor's variance inflates due to correlation with others. A VIF above 5–10 signals multicollinearity — the model can't reliably separate the overlapping effects. VIF ≈ 1 here because the three predictors were generated independently.</p>
+      <p>VIF measures how much each predictor's variance inflates due to correlation with others. A VIF above 5-10 signals multicollinearity, the model can't reliably separate the overlapping effects. VIF ≈ 1 here because the three predictors were generated independently.</p>
     </div>
   </div>
 </aside>
@@ -265,7 +265,7 @@ Multicollinearity Check (VIF values):
 
 ### Understanding the Results
 
-Let's interpret what our model is telling us:
+Interpret what our model is telling us:
 
 1. **Contribution of each factor**:
    - Each additional hour studied adds 1.82 points to the exam score
@@ -352,33 +352,33 @@ def check_model_validity(model, X, y):
     # Make predictions
     y_pred = model.predict(X)
     residuals = y - y_pred
-    
+
     # Create diagnostic plots
     fig, axes = plt.subplots(2, 2, figsize=(15, 10))
-    
+
     # 1. Residuals vs Fitted (checks linearity)
     axes[0,0].scatter(y_pred, residuals)
     axes[0,0].axhline(y=0, color='r', linestyle='--')
     axes[0,0].set_xlabel('Predicted values')
     axes[0,0].set_ylabel('Errors (residuals)')
     axes[0,0].set_title('Residuals vs Fitted (should be random scatter)')
-    
+
     # 2. Q-Q plot (checks normality)
     from scipy import stats
     stats.probplot(residuals, dist="norm", plot=axes[0,1])
     axes[0,1].set_title('Normal Q-Q (points should follow diagonal)')
-    
+
     # 3. Scale-Location (checks equal variance)
     axes[1,0].scatter(y_pred, np.abs(residuals))
     axes[1,0].set_xlabel('Predicted values')
     axes[1,0].set_ylabel('|Errors|')
     axes[1,0].set_title('Scale-Location (spread should be even)')
-    
+
     # 4. Correlation matrix (checks multicollinearity)
     corr = X.corr()
     sns.heatmap(corr, ax=axes[1,1], annot=True, cmap='coolwarm')
     axes[1,1].set_title('Correlation Matrix (should not have values near 1)')
-    
+
     plt.tight_layout()
     plt.show()
 
@@ -388,7 +388,7 @@ check_model_validity(model, X, y)
 
 <figure>
 <img src="assets/multiple-linear-regression_fig_4.png" alt="Residual diagnostic panels and predictor correlation heatmap" />
-<figcaption>Figure 4: Residual panels — residuals vs fitted, Q-Q, scale-location — plus the predictor correlation heatmap</figcaption>
+<figcaption>Figure 4: Residual panels, residuals vs fitted, Q-Q, scale-location, plus the predictor correlation heatmap</figcaption>
 </figure>
 
 ### What Good Diagnostic Plots Look Like:
@@ -396,15 +396,15 @@ check_model_validity(model, X, y)
 1. **Residuals vs Fitted (top left)**:
    - Should look like a random cloud of points around the zero line
    - No patterns or curves should be visible
-   
+
 2. **Q-Q Plot (top right)**:
    - Points should follow the diagonal line closely
    - Significant deviations suggest non-normal errors
-   
+
 3. **Scale-Location (bottom left)**:
    - Should show a relatively even spread across all predicted values
    - A funnel shape suggests the errors aren't consistent
-   
+
 4. **Correlation Matrix (bottom right)**:
    - Shows the relationships between predictors
    - Values close to 1 or -1 indicate potential multicollinearity
@@ -451,7 +451,7 @@ competition = np.random.uniform(1, 10, n)    # Number of competitors
 
 # Create sales (dependent variable)
 # Note: Advertising has positive effect, price and competition have negative effects
-sales = (3 * advertising - 2 * price - competition + 
+sales = (3 * advertising - 2 * price - competition +
         np.random.normal(0, 20, n))  # Sales in units
 
 # Create DataFrame
@@ -496,12 +496,12 @@ data = pd.DataFrame({
 
 ## Gotchas
 
-- **Misreading coefficients when predictors are correlated** — Each MLR coefficient answers "how much does y change with this predictor, *holding all others fixed*?" When predictors are correlated (e.g., square footage and number of rooms), the coefficient can flip sign or shrink dramatically compared to a simple regression, confusing learners who expect it to match a pairwise correlation.
-- **Adding more predictors always raises training R²** — sklearn's `model.score(X, y)` is in-sample R², which can only increase as you add columns. Use adjusted R² or cross-validated R² to check whether extra predictors actually improve generalization.
-- **VIF does not detect nonlinear multicollinearity** — VIF measures linear dependencies between predictors. Two predictors that are related by a square (e.g., age and age²) can produce near-zero pairwise correlation yet still cause coefficient instability; check condition numbers as well.
-- **`SelectKBest` selects features before splitting data, causing data leakage** — Running `SelectKBest.fit_transform(X, y)` on the full dataset and then splitting incorporates label information from the test set into feature selection. Always perform selection inside a pipeline or only on the training fold.
-- **Interpreting the intercept as a meaningful baseline** — When predictor ranges do not include zero (e.g., house age, square footage), the intercept is purely a mathematical anchor and has no physical interpretation. Contextualising it as a "starting price" misleads stakeholders.
-- **Forgetting to encode categorical predictors** — Including a raw categorical column (e.g., neighborhood as a string) will silently fail or coerce to meaningless integers. Use one-hot encoding and drop one dummy level to avoid the dummy variable trap.
+- **Misreading coefficients when predictors are correlated**: Each MLR coefficient answers "how much does y change with this predictor, *holding all others fixed*?" When predictors are correlated (e.g., square footage and number of rooms), the coefficient can flip sign or shrink dramatically compared to a simple regression, confusing learners who expect it to match a pairwise correlation.
+- **Adding more predictors always raises training R²**: sklearn's `model.score(X, y)` is in-sample R², which can only increase as you add columns. Use adjusted R² or cross-validated R² to check whether extra predictors actually improve generalization.
+- **VIF does not detect nonlinear multicollinearity**: VIF measures linear dependencies between predictors. Two predictors that are related by a square (e.g., age and age²) can produce near-zero pairwise correlation yet still cause coefficient instability; check condition numbers as well.
+- **`SelectKBest` selects features before splitting data, causing data leakage**: Running `SelectKBest.fit_transform(X, y)` on the full dataset and then splitting incorporates label information from the test set into feature selection. Always perform selection inside a pipeline or only on the training fold.
+- **Interpreting the intercept as a meaningful baseline**: When predictor ranges do not include zero (e.g., house age, square footage), the intercept is purely a mathematical anchor and has no physical interpretation. Contextualising it as a "starting price" misleads stakeholders.
+- **Forgetting to encode categorical predictors**: Including a raw categorical column (e.g., neighborhood as a string) will silently fail or coerce to meaningless integers. Use one-hot encoding and drop one dummy level to avoid the dummy variable trap.
 
 ## Helpful Resources for Learning More
 

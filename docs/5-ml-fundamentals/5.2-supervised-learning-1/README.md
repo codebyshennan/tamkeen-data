@@ -4,7 +4,7 @@
 
 ## Overview
 
-This submodule introduces four classical **supervised** algorithms—[Naive Bayes](naive-bayes/1-introduction.md), [k-nearest neighbors](knn/1-introduction.md), [support vector machines](svm/1-introduction.md), and [decision trees](decision-trees/1-introduction.md)—with enough intuition to choose a first model and know where to read next. **Prerequisites:** [5.1 Introduction to ML](../5.1-intro-to-ml/README.md) (workflow, features, bias–variance); comfort with pandas and train/test splits.
+This submodule introduces four classical **supervised** algorithms: [Naive Bayes](naive-bayes/1-introduction.md), [k-nearest neighbors](knn/1-introduction.md), [support vector machines](svm/1-introduction.md), and [decision trees](decision-trees/1-introduction.md). You will get enough intuition to choose a first model and know where to read next. **Prerequisites:** [5.1 Introduction to ML](../5.1-intro-to-ml/README.md) (workflow, features, bias-variance); comfort with pandas and train/test splits.
 
 ## Why this matters
 
@@ -110,7 +110,7 @@ def select_classifier(data_characteristics):
 | -------------- | -------------- | ---------------- | ---------------- | ------------ |
 | Naive Bayes    | Usually fast   | Fast             | Moderate (coefficients / log-probs) | Low |
 | kNN            | Very fast (often just store data) | Slower as $n$ grows | Low (black-box votes) | High (stores training set) |
-| SVM            | Can be costly on large $n$ | Moderate | Low–moderate | Moderate |
+| SVM            | Can be costly on large $n$ | Moderate | Low-moderate | Moderate |
 | Decision Trees | Fast           | Fast             | High (rules)     | Low          |
 
 Values are typical heuristics; always profile and validate on your dataset.
@@ -149,7 +149,7 @@ import matplotlib.pyplot as plt  # Visualization
 
 ### 1. Email Classification
 
-#### Text pipeline sketch: TF–IDF + multinomial Naive Bayes
+#### Text pipeline sketch: TF-IDF + multinomial Naive Bayes
 
 ```python
 from sklearn.naive_bayes import MultinomialNB
@@ -294,4 +294,4 @@ The companion notebook demonstrates all four algorithms, including SVM. The codi
 
 Start your journey with [Naive Bayes](naive-bayes/1-introduction.md) to build a strong foundation in probabilistic classification. Each algorithm builds upon previous concepts, so following the suggested order will maximize your learning experience.
 
-Remember: The best way to learn is by doing! Each section includes hands-on examples and exercises to reinforce your understanding. Let's dive in!
+The best way to learn this is by doing. Each section includes hands-on examples and exercises to reinforce your understanding.

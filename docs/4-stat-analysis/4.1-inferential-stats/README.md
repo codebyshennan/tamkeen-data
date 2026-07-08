@@ -8,7 +8,7 @@ Inferential statistics is how we justify statements about a **whole** population
 
 See the [Module 4 overview](../README.md) for how this unit fits with hypothesis testing, regression, and modelling.
 
-Welcome to the fascinating world of inferential statistics. Imagine you are trying to understand an entire city by studying a few neighborhoods: that is the core move—learn from limited data without pretending the sample is the full world.
+Welcome to the fascinating world of inferential statistics. Imagine you are trying to understand an entire city by studying a few neighborhoods: that is the core move, learn from limited data without pretending the sample is the full world.
 
 ## Helpful video
 
@@ -30,11 +30,11 @@ By the end of this module, you will:
 
 Follow this sequence (it matches the site lesson navigation):
 
-1. [Population vs sample](./population-sample.md) — Definitions and sampling methods  
-2. [Sampling distributions](./sampling-distributions.md) — Why statistics vary from sample to sample (CLT, standard error)  
-3. [Confidence intervals](./confidence-intervals.md) — Ranges that express uncertainty around an estimate  
-4. [Understanding p-values](./p-values.md) — What “surprising under the null” means in practice  
-5. [Parameters and statistics](./parameters-statistics.md) — Notation, estimators, and tying ideas together  
+1. [Population vs sample](./population-sample.md), Definitions and sampling methods
+2. [Sampling distributions](./sampling-distributions.md), Why statistics vary from sample to sample (CLT, standard error)
+3. [Confidence intervals](./confidence-intervals.md), Ranges that express uncertainty around an estimate
+4. [Understanding p-values](./p-values.md), What "surprising under the null" means in practice
+5. [Parameters and statistics](./parameters-statistics.md), Notation, estimators, and tying ideas together
 
 ## Prerequisites
 
@@ -47,7 +47,7 @@ Before diving in, you should be comfortable with:
 
 ## Why this matters
 
-Almost every data role eventually asks: “Given this sample, what can we say about everyone or everything we did not measure?” Inferential tools are how you answer without hand-waving. The lists below are not exhaustive; they show where the same ideas show up repeatedly.
+Almost every data role eventually asks: "Given this sample, what can we say about everyone or everything we did not measure?" Inferential tools are how you answer without hand-waving. The lists below are not exhaustive; they show where the same ideas show up repeatedly.
 
 ### Business decision making
 
@@ -93,4 +93,4 @@ Begin with [Population vs sample](./population-sample.md). Each lesson assumes f
 
 Remember: Inferential statistics is like learning a new language - it takes practice and patience, but the ability to make data-driven decisions with confidence is an invaluable skill in today's data-rich world.
 
-Let's begin our journey into the world of statistical inference!
+Start here.

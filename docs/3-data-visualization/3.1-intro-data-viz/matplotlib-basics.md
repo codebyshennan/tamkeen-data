@@ -1,14 +1,14 @@
 # Getting Started with Matplotlib
 
-**After this lesson:** you can explain the core ideas in “Getting Started with Matplotlib” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Getting Started with Matplotlib and try the examples in your own notebook.
 
 > **Note:** This lesson is **code-first**. You will type Python to control figures, axes, and styles. Skim [Visualization principles](visualization-principles.md) first if you are unsure *why* certain choices make charts easier to read.
 
 ## Helpful video
 
-Creating and customizing your first matplotlib plots — figures, labels, titles, legends, and styling.
+Creating and customizing your first matplotlib plots, figures, labels, titles, legends, and styling.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/UO98lJQ3QGI" title="Matplotlib Tutorial Part 1 — Corey Schafer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/UO98lJQ3QGI" title="Matplotlib Tutorial Part 1, Corey Schafer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## What is Matplotlib?
 
@@ -43,7 +43,7 @@ plt.style.use('seaborn-v0_8-whitegrid')
 
 {% include mermaid-diagram.html src="3-data-visualization/3.1-intro-data-viz/diagrams/matplotlib-basics-1.mmd" %}
 
-*Key rule: `plt.subplots()` returns a Figure and one or more Axes objects. Do all your drawing on the Axes — the Figure just holds them.*
+*Key rule: `plt.subplots()` returns a Figure and one or more Axes objects. Do all your drawing on the Axes, the Figure just holds them.*
 
 ### Understanding the Basics
 
@@ -71,20 +71,20 @@ def create_simple_plot():
     # Create sample data - like preparing your paint
     x = np.linspace(0, 10, 100)  # 100 points from 0 to 10
     y = np.sin(x)                # Sine wave
-    
+
     # Create figure and axes - set up your canvas
     fig, ax = plt.subplots(figsize=(10, 6))
-    
+
     # Plot data - start painting
-    ax.plot(x, y, 
+    ax.plot(x, y,
            color='#2ecc71',    # Emerald green
            linewidth=2,        # Thicker line
            linestyle='-',      # Solid line
            label='sin(x)')     # Legend label
-    
+
     # Add finishing touches
-    ax.set_title('My First Plot', 
-                fontsize=14, 
+    ax.set_title('My First Plot',
+                fontsize=14,
                 pad=15)
     ax.set_xlabel('X Axis')
     ax.set_ylabel('Y Axis')
@@ -102,7 +102,7 @@ def create_simple_plot():
       <span class="code-callout__title">Figure and axes</span>
     </div>
     <div class="code-callout__body">
-      <p><code>plt.subplots()</code> returns two objects: the <strong>figure</strong> (the whole window) and the <strong>axes</strong> (the drawing area). Always keep a reference to <code>ax</code> — the object-oriented API lets you control multiple subplots precisely.</p>
+      <p><code>plt.subplots()</code> returns two objects: the <strong>figure</strong> (the whole window) and the <strong>axes</strong> (the drawing area). Always keep a reference to <code>ax</code>, the object-oriented API lets you control multiple subplots precisely.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-14" data-tint="2">
@@ -128,7 +128,7 @@ def create_simple_plot():
 
 ### Understanding the Code
 
-Let's break down what each part does:
+Break down what each part does:
 
 1. **Data Creation**: `np.linspace(0, 10, 100)` creates 100 evenly spaced points
 2. **Figure Setup**: `plt.subplots()` creates a new figure and axes
@@ -163,7 +163,7 @@ def pyplot_example():
 
 Think of this as detailed painting:
 
-**Purpose:** Same geometry as the pyplot example but all drawing goes through an `Axes` object—preferred for multi-panel figures.
+**Purpose:** Same geometry as the pyplot example but all drawing goes through an `Axes` object, preferred for multi-panel figures.
 
 **Walkthrough:** `subplots` creates `ax`; methods are `set_title`/`set_xlabel` instead of `plt.title`.
 
@@ -229,21 +229,21 @@ Great for showing relationships between variables:
 def create_scatter_plot(x, y, colors, sizes):
     """Create an informative scatter plot"""
     fig, ax = plt.subplots(figsize=(10, 6))
-    
+
     scatter = ax.scatter(x, y,
                         c=colors,           # Color mapping
                         s=sizes,            # Size mapping
                         alpha=0.6,          # Transparency
                         cmap='viridis')     # Color scheme
-    
+
     # Add colorbar
     plt.colorbar(scatter, label='Value')
-    
+
     # Customize
     ax.set_title('Scatter Plot with Color and Size Encoding')
     ax.set_xlabel('X Variable')
     ax.set_ylabel('Y Variable')
-    
+
     return fig, ax
 ```
 
@@ -261,15 +261,15 @@ Ideal for comparing categories:
 def create_bar_chart(categories, values, errors=None):
     """Create a professional bar chart"""
     fig, ax = plt.subplots(figsize=(10, 6))
-    
+
     # Create bars
-    bars = ax.bar(categories, 
+    bars = ax.bar(categories,
                   values,
                   yerr=errors,          # Error bars
                   capsize=5,            # Error bar caps
                   color='#2ecc71',      # Bar color
                   alpha=0.8)            # Transparency
-    
+
     # Add value labels on top of bars
     for bar in bars:
         height = bar.get_height()
@@ -277,7 +277,7 @@ def create_bar_chart(categories, values, errors=None):
                 height,
                 f'{height:,.0f}',
                 ha='center', va='bottom')
-    
+
     # Customize
     ax.set_title('Bar Chart with Error Bars')
     ax.set_xlabel('Categories')
@@ -296,7 +296,7 @@ Think of colors as your paint palette:
 
 **Purpose:** Keep named hex lists ready for categorical series, pastels, or grayscale layouts.
 
-**Walkthrough:** This dict is data only—index into it when assigning `color=` to plots.
+**Walkthrough:** This dict is data only, index into it when assigning `color=` to plots.
 
 ```python
 # Professional color schemes
@@ -318,19 +318,19 @@ Make your text clear and readable:
 ```python
 def style_text(ax, title_size=14, label_size=12):
     """Apply professional text styling"""
-    ax.set_title(ax.get_title(), 
+    ax.set_title(ax.get_title(),
                 fontsize=title_size,
                 pad=15,
                 fontweight='bold')
-    
+
     ax.set_xlabel(ax.get_xlabel(),
                  fontsize=label_size,
                  labelpad=10)
-    
+
     ax.set_ylabel(ax.get_ylabel(),
                  fontsize=label_size,
                  labelpad=10)
-    
+
     ax.tick_params(labelsize=10)
 ```
 
@@ -350,17 +350,17 @@ def create_dashboard():
     # Create figure with grid
     fig = plt.figure(figsize=(15, 10))
     gs = fig.add_gridspec(2, 2, hspace=0.3, wspace=0.3)
-    
+
     # Add subplots
     ax1 = fig.add_subplot(gs[0, 0])  # Line plot
     ax2 = fig.add_subplot(gs[0, 1])  # Scatter plot
     ax3 = fig.add_subplot(gs[1, :])  # Bar plot spanning bottom
-    
+
     # Style each subplot
     for ax in [ax1, ax2, ax3]:
         ax.grid(True, linestyle=':', alpha=0.7)
         style_text(ax)
-    
+
     return fig, (ax1, ax2, ax3)
 ```
 
@@ -382,7 +382,7 @@ def save_plot(fig, filename, dpi=300):
                 dpi=dpi,
                 bbox_inches='tight',
                 transparent=True)
-    
+
     # Save as PDF for publications
     fig.savefig(f'{filename}.pdf',
                 bbox_inches='tight',
@@ -414,12 +414,12 @@ def save_plot(fig, filename, dpi=300):
 
 ## Gotchas
 
-- **Mixing the pyplot (`plt.`) and object-oriented (`ax.`) APIs on the same figure causes subtle bugs** — calling `plt.title("...")` after `fig, ax = plt.subplots(...)` sets the title on the current active axes, which is usually `ax`, but if you have created multiple subplots, `plt.title` may target the last-created axes rather than the one you intended; stick to `ax.set_title(...)` once you have an explicit `ax` reference.
-- **`plt.subplots(figsize=(10, 6))` creates the figure at import time, not at display time** — if you define the figure in one cell and populate it across multiple cells, resizing the window or re-running only some cells will produce an inconsistent figure; build and display the entire figure in a single cell.
-- **`ax.legend()` only shows series that were plotted with a `label=` argument** — if you call `ax.plot(x, y)` without `label='...'`, the legend will be empty or show only a blank entry; the legend call does not automatically name unlabeled series.
-- **`ax.scatter` with `c=colors` and `cmap=` requires `colors` to be numeric, not a list of strings** — passing `c=['red', 'blue', 'green']` to set per-point colors works, but passing `c=values` alongside `cmap=` requires `values` to be a numeric array; mixing the two conventions causes a `ValueError` or incorrect color mapping.
-- **`fig.add_gridspec(2, 2)` and `gs[1, :]` will raise an `IndexError` if you pass `ncols=1` elsewhere in the same figure** — the gridspec is created at figure level; if you later add a subplot that exceeds the grid dimensions, the error appears at subplot creation time, not at gridspec creation time, making it harder to trace.
-- **`save_plot` with `transparent=True` exports a transparent background PNG, which displays as white in most browsers but as no background in presentation tools** — if you then place the chart on a dark slide, text labels set in black become invisible; check saved exports on the actual target background before distributing.
+- **Mixing the pyplot (`plt.`) and object-oriented (`ax.`) APIs on the same figure causes subtle bugs**: calling `plt.title("...")` after `fig, ax = plt.subplots(...)` sets the title on the current active axes, which is usually `ax`, but if you have created multiple subplots, `plt.title` may target the last-created axes rather than the one you intended; stick to `ax.set_title(...)` once you have an explicit `ax` reference.
+- **`plt.subplots(figsize=(10, 6))` creates the figure at import time, not at display time**: if you define the figure in one cell and populate it across multiple cells, resizing the window or re-running only some cells will produce an inconsistent figure; build and display the entire figure in a single cell.
+- **`ax.legend()` only shows series that were plotted with a `label=` argument**: if you call `ax.plot(x, y)` without `label='...'`, the legend will be empty or show only a blank entry; the legend call does not automatically name unlabeled series.
+- **`ax.scatter` with `c=colors` and `cmap=` requires `colors` to be numeric, not a list of strings**: passing `c=['red', 'blue', 'green']` to set per-point colors works, but passing `c=values` alongside `cmap=` requires `values` to be a numeric array; mixing the two conventions causes a `ValueError` or incorrect color mapping.
+- **`fig.add_gridspec(2, 2)` and `gs[1, :]` will raise an `IndexError` if you pass `ncols=1` elsewhere in the same figure**: the gridspec is created at figure level; if you later add a subplot that exceeds the grid dimensions, the error appears at subplot creation time, not at gridspec creation time, making it harder to trace.
+- **`save_plot` with `transparent=True` exports a transparent background PNG, which displays as white in most browsers but as no background in presentation tools**: if you then place the chart on a dark slide, text labels set in black become invisible; check saved exports on the actual target background before distributing.
 
 ## Next steps
 

@@ -9,11 +9,11 @@ objectives:
 
 # Learning Curves
 
-**After this lesson:** you can explain the core ideas in “Learning Curves” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Learning Curves and try the examples in your own notebook.
 
 ## Overview
 
-**Learning curves**: training vs validation error vs sample size—diagnosing bias, variance, and data needs.
+**Learning curves**: training vs validation error vs sample size, diagnosing bias, variance, and data needs.
 
 
 ## Introduction
@@ -213,7 +213,7 @@ plt.show()
       <span class="code-callout__title">Compute Mean and Std</span>
     </div>
     <div class="code-callout__body">
-      <p>Same aggregation as the ideal-fit example — collapse CV fold scores into per-size mean and standard deviation for plotting.</p>
+      <p>Same aggregation as the ideal-fit example, collapse CV fold scores into per-size mean and standard deviation for plotting.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="18-28" data-tint="3">
@@ -222,7 +222,7 @@ plt.show()
       <span class="code-callout__title">Overfitting Diagnostic</span>
     </div>
     <div class="code-callout__body">
-      <p>A large visible gap between the training and validation bands is the visual signature of overfitting — the model memorizes training patterns rather than generalizing.</p>
+      <p>A large visible gap between the training and validation bands is the visual signature of overfitting, the model memorizes training patterns rather than generalizing.</p>
     </div>
   </div>
 </aside>
@@ -290,7 +290,7 @@ plt.show()
       <span class="code-callout__title">Dummy Baseline</span>
     </div>
     <div class="code-callout__body">
-      <p><code>DummyClassifier</code> predicts the majority class regardless of input — a worst-case underfitter whose plateau score equals the class frequency.</p>
+      <p><code>DummyClassifier</code> predicts the majority class regardless of input, a worst-case underfitter whose plateau score equals the class frequency.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="13-16" data-tint="2">
@@ -308,7 +308,7 @@ plt.show()
       <span class="code-callout__title">Underfitting Diagnostic</span>
     </div>
     <div class="code-callout__body">
-      <p>Both curves plateau at a low, flat score with a small gap — the characteristic shape of underfitting where more data provides no improvement.</p>
+      <p>Both curves plateau at a low, flat score with a small gap, the characteristic shape of underfitting where more data provides no improvement.</p>
     </div>
   </div>
 </aside>
@@ -378,12 +378,12 @@ plt.show()
 
 ## Gotchas
 
-- **Confusing learning curves with validation curves** — Learning curves vary *training set size* on the x-axis; validation curves vary a *hyperparameter* on the x-axis; mixing them up leads to wrong diagnoses (e.g., concluding "more data won't help" when you're actually looking at a validation curve showing overfitting onset).
-- **Interpreting a converging gap as always meaning "good fit"** — Train and validation curves that converge at a *low* value both indicate underfitting, not a good model; a converging gap only confirms a good fit when the convergence point is also *high* (close to your target performance).
-- **Using too few or too many training size points** — With `train_sizes=np.linspace(0.1, 1.0, 5)` you get only 5 data points and miss the curve's shape; with 50 points the computation time multiplies; 8–15 points (the default 5 in sklearn is often too few) balances resolution and cost.
-- **Not shuffling before calling `learning_curve`** — If data is sorted by class or time, small training subsets may contain only one class, causing artificially low scores at the left end of the curve; pass `shuffle=True` (or use a pre-shuffled dataset) to get representative subsamples at each size.
-- **Assuming more data always closes an overfitting gap** — For a high-capacity model like an unregularised deep tree, adding data eventually helps, but the convergence may require far more samples than you have; if the gap is still wide at 100% of your data, regularisation or a simpler model is the right lever, not more data collection.
-- **Drawing the curve with training set size in samples vs fractions** — `learning_curve` returns raw sample counts in `train_sizes`; plotting fractions (0 to 1) without dividing by `n_samples` compresses the x-axis and makes it hard to know whether you need 500 or 5000 additional examples to close the gap.
+- **Confusing learning curves with validation curves**: Learning curves vary *training set size* on the x-axis; validation curves vary a *hyperparameter* on the x-axis; mixing them up leads to wrong diagnoses (e.g., concluding "more data won't help" when you're actually looking at a validation curve showing overfitting onset).
+- **Interpreting a converging gap as always meaning "good fit"**: Train and validation curves that converge at a *low* value both indicate underfitting, not a good model; a converging gap only confirms a good fit when the convergence point is also *high* (close to your target performance).
+- **Using too few or too many training size points**: With `train_sizes=np.linspace(0.1, 1.0, 5)` you get only 5 data points and miss the curve's shape; with 50 points the computation time multiplies; 8-15 points (the default 5 in sklearn is often too few) balances resolution and cost.
+- **Not shuffling before calling `learning_curve`**: If data is sorted by class or time, small training subsets may contain only one class, causing artificially low scores at the left end of the curve; pass `shuffle=True` (or use a pre-shuffled dataset) to get representative subsamples at each size.
+- **Assuming more data always closes an overfitting gap**: For a high-capacity model like an unregularised deep tree, adding data eventually helps, but the convergence may require far more samples than you have; if the gap is still wide at 100% of your data, regularisation or a simpler model is the right lever, not more data collection.
+- **Drawing the curve with training set size in samples vs fractions**: `learning_curve` returns raw sample counts in `train_sizes`; plotting fractions (0 to 1) without dividing by `n_samples` compresses the x-axis and makes it hard to know whether you need 500 or 5000 additional examples to close the gap.
 
 ## Additional Resources
 

@@ -3,17 +3,17 @@ reading_minutes: 22
 objectives:
   - "Define principal components as orthogonal directions of maximum variance and connect them to eigenvectors of the covariance matrix."
   - "Standardise before fitting `PCA`, then read `explained_variance_ratio_` and its cumulative sum to choose `n_components`."
-  - "Use `fit_transform` and `inverse_transform` for projection, reconstruction, and image-style compression — and treat reconstruction MSE as the lossiness measure."
+  - "Use `fit_transform` and `inverse_transform` for projection, reconstruction, and image-style compression, and treat reconstruction MSE as the lossiness measure."
   - "Avoid leakage and over-interpretation: fit PCA on training data only, never name a PC after a single feature, and switch to non-linear methods (kernel PCA, t-SNE, UMAP) when the manifold is curved."
 ---
 
 # Principal Component Analysis (PCA): Simplifying Complex Data
 
-**After this lesson:** you can explain the core ideas in “Principal Component Analysis (PCA): Simplifying Complex Data” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Principal Component Analysis (PCA): Simplifying Complex Data and try the examples in your own notebook.
 
 ## Overview
 
-**PCA** finds orthogonal **principal components**—directions of maximum variance—and lets you project data onto the top few for visualization, denoising, or as inputs to other models. **Prerequisites:** vectors and eigenvalue intuition from Module 1 linear algebra; [unsupervised learning hub](README.md).
+**PCA** finds orthogonal **principal components**-directions of maximum variance, and lets you project data onto the top few for visualization, denoising, or as inputs to other models. **Prerequisites:** vectors and eigenvalue intuition from Module 1 linear algebra; [unsupervised learning hub](README.md).
 
 Imagine you're trying to describe a person to someone who's never met them. Instead of listing every single detail (height, weight, hair color, eye color, clothing, etc.), you might focus on the most distinctive features that make them recognizable. That's exactly what PCA does with data - it helps us focus on the most important aspects while simplifying the rest!
 
@@ -37,7 +37,7 @@ PCA is like creating a simplified map of a complex city. Just as a map helps you
 
 ## How Does PCA Work?
 
-Let's break it down into simple steps:
+break it down into simple steps:
 
 1. **Standardize the Data**: First, we make sure all features are on the same scale (like converting different currencies to dollars).
 
@@ -47,9 +47,9 @@ Let's break it down into simple steps:
 
 {% include mermaid-diagram.html src="5-ml-fundamentals/5.4-unsupervised-learning/diagrams/pca-1.mmd" %}
 
-*The output components are **uncorrelated** — PC1 captures the most variance, PC2 the next most, and so on. The scree plot shows where adding more components stops being useful.*
+*The output components are **uncorrelated**, PC1 captures the most variance, PC2 the next most, and so on. The scree plot shows where adding more components stops being useful.*
 
-Let's see this in action with a simple example:
+Look at this in action with a simple example:
 
 #### 2D toy cloud: scale, fit PCA, three subplots
 
@@ -92,7 +92,7 @@ plt.ylabel('Feature 2')
 plt.subplot(132)
 plt.scatter(data_scaled[:, 0], data_scaled[:, 1], alpha=0.5)
 for i, (comp1, comp2) in enumerate(zip(pca.components_[0], pca.components_[1])):
-    plt.arrow(0, 0, comp1, comp2, color='r', alpha=0.8, 
+    plt.arrow(0, 0, comp1, comp2, color='r', alpha=0.8,
               head_width=0.05, head_length=0.1)
 plt.title('Data with Principal Components')
 plt.xlabel('Feature 1')
@@ -130,7 +130,7 @@ print("Explained variance ratio:", pca.explained_variance_ratio_)
       <span class="code-callout__title">Fit and transform</span>
     </div>
     <div class="code-callout__body">
-      <p><code>PCA()</code> with no argument keeps all components. <code>fit_transform</code> finds the principal directions <em>and</em> projects the data onto them in one step — equivalent to calling <code>fit</code> then <code>transform</code>.</p>
+      <p><code>PCA()</code> with no argument keeps all components. <code>fit_transform</code> finds the principal directions <em>and</em> projects the data onto them in one step, equivalent to calling <code>fit</code> then <code>transform</code>.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="33-40" data-tint="3">
@@ -139,7 +139,7 @@ print("Explained variance ratio:", pca.explained_variance_ratio_)
       <span class="code-callout__title">Principal component arrows</span>
     </div>
     <div class="code-callout__body">
-      <p><code>pca.components_</code> holds the principal directions as unit vectors. Drawing them as arrows on the original data shows <em>which way the data varies most</em> — the longer the effective spread, the more variance that component captures.</p>
+      <p><code>pca.components_</code> holds the principal directions as unit vectors. Drawing them as arrows on the original data shows <em>which way the data varies most</em>, the longer the effective spread, the more variance that component captures.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="42-54" data-tint="4">
@@ -148,7 +148,7 @@ print("Explained variance ratio:", pca.explained_variance_ratio_)
       <span class="code-callout__title">PC space + explained variance</span>
     </div>
     <div class="code-callout__body">
-      <p>The third subplot shows data in <strong>PC coordinates</strong>: axes are now orthogonal directions of maximum variance. <code>explained_variance_ratio_</code> says what fraction of total variance each PC accounts for — two roughly-equal values here confirm neither direction dominates.</p>
+      <p>The third subplot shows data in <strong>PC coordinates</strong>: axes are now orthogonal directions of maximum variance. <code>explained_variance_ratio_</code> says what fraction of total variance each PC accounts for, two roughly-equal values here confirm neither direction dominates.</p>
     </div>
   </div>
 </aside>
@@ -160,7 +160,7 @@ Explained variance ratio: [0.50565666 0.49434334]
 
 ## Real-World Example: Image Compression
 
-Let's see how PCA can help compress images while maintaining quality:
+Look at how PCA can help compress images while maintaining quality:
 
 #### Digits reconstruction vs number of components
 
@@ -333,7 +333,7 @@ plot_scree(X)
       <span class="code-callout__title">PCA and Per-component Variance</span>
     </div>
     <div class="code-callout__body">
-      <p>Fit full PCA and read <code>explained_variance_ratio_</code> — each entry is the fraction of total variance captured by that one PC, unlike the cumulative curve which sums progressively.</p>
+      <p>Fit full PCA and read <code>explained_variance_ratio_</code>, each entry is the fraction of total variance captured by that one PC, unlike the cumulative curve which sums progressively.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="10-18" data-tint="2">
@@ -367,11 +367,11 @@ from sklearn.preprocessing import StandardScaler
 def preprocess_for_pca(X):
     # Remove missing values
     X = np.nan_to_num(X)
-    
+
     # Scale data
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
-    
+
     return X_scaled
 ```
 
@@ -415,7 +415,7 @@ def validate_pca_results(X, n_components):
       <span class="code-callout__title">Fit on Train Only</span>
     </div>
     <div class="code-callout__body">
-      <p>Fit PCA on the training split only; apply <code>transform</code> (not <code>fit_transform</code>) to the test set so PCA learns the principal directions from training data alone — preventing data leakage.</p>
+      <p>Fit PCA on the training split only; apply <code>transform</code> (not <code>fit_transform</code>) to the test set so PCA learns the principal directions from training data alone, preventing data leakage.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="14-22" data-tint="2">
@@ -439,12 +439,12 @@ def validate_pca_results(X, n_components):
 
 ## Gotchas
 
-- **PCA on unscaled data is dominated by high-variance features** — a feature measured in thousands will produce a principal component that is almost entirely that feature. Always apply `StandardScaler` before `PCA`, unless the features are already in the same units and you deliberately want to weight by raw variance.
-- **`fit_transform` on the full dataset leaks test information** — calling `pca.fit_transform(X_all)` before splitting means the PCA directions are computed using test data. Fit PCA on training data only and use `pca.transform(X_test)` to avoid data leakage.
-- **Explained variance ratio does not equal model performance** — keeping 95% of variance sounds safe, but the discarded 5% may contain exactly the signal a downstream classifier needs. Treat the variance threshold as a starting point and validate by measuring downstream task performance at several k values.
-- **PC axes have no interpretable unit after projection** — the numbers in `X_pca` are coordinates in an abstract rotated space, not original feature values. Avoid statements like "PC1 is income" — instead, inspect `pca.components_` loadings to understand which original features contribute most.
-- **`inverse_transform` does not recover the original data exactly** — unless you keep all components, the reconstruction is lossy. The pixels look similar but are not identical; reconstruction error (MSE) quantifies how much information was dropped.
-- **PCA is linear — it cannot capture non-linear structure** — if your data lies on a curved manifold (e.g., a Swiss roll), PCA will produce a poor low-dimensional embedding; use kernel PCA, t-SNE, or UMAP instead.
+- **PCA on unscaled data is dominated by high-variance features**: a feature measured in thousands will produce a principal component that is almost entirely that feature. Always apply `StandardScaler` before `PCA`, unless the features are already in the same units and you deliberately want to weight by raw variance.
+- **`fit_transform` on the full dataset leaks test information**: calling `pca.fit_transform(X_all)` before splitting means the PCA directions are computed using test data. Fit PCA on training data only and use `pca.transform(X_test)` to avoid data leakage.
+- **Explained variance ratio does not equal model performance**: keeping 95% of variance sounds safe, but the discarded 5% may contain exactly the signal a downstream classifier needs. Treat the variance threshold as a starting point and validate by measuring downstream task performance at several k values.
+- **PC axes have no interpretable unit after projection**: the numbers in `X_pca` are coordinates in an abstract rotated space, not original feature values. Avoid statements like "PC1 is income", instead, inspect `pca.components_` loadings to understand which original features contribute most.
+- **`inverse_transform` does not recover the original data exactly**: unless you keep all components, the reconstruction is lossy. The pixels look similar but are not identical; reconstruction error (MSE) quantifies how much information was dropped.
+- **PCA is linear, it cannot capture non-linear structure**: if your data lies on a curved manifold (e.g., a Swiss roll), PCA will produce a poor low-dimensional embedding; use kernel PCA, t-SNE, or UMAP instead.
 
 ## Further Reading
 

@@ -4,12 +4,12 @@ objectives:
   - "Run controlled comparisons across linear, tree, ensemble, and neural baselines on the **same** train/validation split with the **same** scoring metric."
   - "Pair each candidate with sensible defaults and a small `Pipeline` so the comparison is preprocessing-fair, not just model-fair."
   - "Use cross-validated mean ± std (not a single split) to avoid picking a winner that just got lucky on one fold."
-  - "Pick the simplest model within ~1 std of the best — and balance accuracy against latency, interpretability, and operational cost."
+  - "Pick the simplest model within ~1 std of the best, and balance accuracy against latency, interpretability, and operational cost."
 ---
 
 # Model Selection
 
-**After this lesson:** you can explain the core ideas in “Model Selection” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Model Selection and try the examples in your own notebook.
 
 ## Overview
 
@@ -348,7 +348,7 @@ The learning curve shows how the model's performance improves with more training
 
 ## Model Comparison
 
-Let's compare different models:
+Compare different models:
 
 #### Bar chart of validation accuracies
 
@@ -456,7 +456,7 @@ The comparison shows that the Neural Network performs best on the validation spl
 
 ## Practical Example: Credit Risk Prediction
 
-Let's see how different models perform on a credit risk prediction task:
+Look at how different models perform on a credit risk prediction task:
 
 #### Pipelines on synthetic credit features
 
@@ -634,18 +634,18 @@ pprint(model_selection_process(X, y), sort_dicts=False)
 
 ![Comprehensive Learning Curves](assets/comprehensive_learning_curves.png)
 
-On this credit-risk data the function selects `Linear` from validation scores, then reports one final test score after refitting on all non-test data. The unscaled MLP underperforms here because raw feature magnitudes make optimisation hard for a neural network — a reminder that the "best" model depends on preprocessing, not just model family.
+On this credit-risk data the function selects `Linear` from validation scores, then reports one final test score after refitting on all non-test data. The unscaled MLP underperforms here because raw feature magnitudes make optimisation hard for a neural network, a reminder that the "best" model depends on preprocessing, not just model family.
 
 > **Read the final curve:** this chart is a sanity check after picking the apparent winner. If the chosen model's validation curve has already plateaued near the training curve, additional data is unlikely to change the ranking much. If it is still rising, collect more data or repeat model selection after expanding the dataset.
 
 ## Gotchas
 
-- **Selecting the best model based on the same test set you report** — If you try 10 models and pick the one with the highest test accuracy, your reported test accuracy is optimistically biased; reserve the test set for a single final evaluation and use cross-validation or a validation split for model selection decisions.
-- **Choosing model family before exploring the data** — Jumping straight to a neural network because it achieves state-of-the-art on benchmarks often leads to an over-engineered solution; always establish a simple baseline (e.g., logistic regression or linear regression) first to understand the baseline difficulty and whether complexity is warranted.
-- **Comparing models with different preprocessing pipelines** — Evaluating Model A on raw features and Model B on scaled features is not a fair comparison; wrap each model in an identical pipeline so preprocessing differences do not confound the comparison.
-- **Picking the highest single-split accuracy** — One train/test split can favour a model due to sampling luck; a model that beats a competitor by 0.3% on one split may lose by 0.5% on a different random seed; use cross-validation mean ± std across multiple splits to make robust comparisons.
-- **Ignoring inference time and model size in selection** — A model with 0.2% higher accuracy but 100× slower inference may be undeployable in production; always include latency, memory footprint, and interpretability requirements alongside accuracy metrics when making a final selection.
-- **Reusing `X_train`/`y_train` across sequential model fits in the same session** — In the comparison loop above, each model is fit on the same `X_train`; if any earlier step modified `X_train` in-place (e.g., imputation without copying), later models see corrupted data; always verify that transformations produce new arrays rather than mutating the input.
+- **Selecting the best model based on the same test set you report**: If you try 10 models and pick the one with the highest test accuracy, your reported test accuracy is optimistically biased; reserve the test set for a single final evaluation and use cross-validation or a validation split for model selection decisions.
+- **Choosing model family before exploring the data**: Jumping straight to a neural network because it achieves state-of-the-art on benchmarks often leads to an over-engineered solution; always establish a simple baseline (e.g., logistic regression or linear regression) first to understand the baseline difficulty and whether complexity is warranted.
+- **Comparing models with different preprocessing pipelines**: Evaluating Model A on raw features and Model B on scaled features is not a fair comparison; wrap each model in an identical pipeline so preprocessing differences do not confound the comparison.
+- **Picking the highest single-split accuracy**: One train/test split can favour a model due to sampling luck; a model that beats a competitor by 0.3% on one split may lose by 0.5% on a different random seed; use cross-validation mean ± std across multiple splits to make reliable comparisons.
+- **Ignoring inference time and model size in selection**: A model with 0.2% higher accuracy but 100× slower inference may be undeployable in production; always include latency, memory footprint, and interpretability requirements alongside accuracy metrics when making a final selection.
+- **Reusing `X_train`/`y_train` across sequential model fits in the same session**: In the comparison loop above, each model is fit on the same `X_train`; if any earlier step modified `X_train` in-place (e.g., imputation without copying), later models see corrupted data; always verify that transformations produce new arrays rather than mutating the input.
 
 ## Additional Resources
 

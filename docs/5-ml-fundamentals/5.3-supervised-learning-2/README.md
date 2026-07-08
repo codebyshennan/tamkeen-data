@@ -10,7 +10,7 @@ Part 2 moves from single learners to **ensembles** ([random forest](random-fores
 
 Tree ensembles and boosted models still dominate many tabular leaderboards; neural networks power vision and language. Regularization and honest validation are what keep these flexible models from overfitting noise.
 
-Welcome to the second part of supervised learning! In this section, we'll explore powerful ensemble methods and neural networks that have revolutionized machine learning. These advanced algorithms build upon the fundamentals you learned in Part 1 to solve even more complex problems.
+Welcome to the second part of supervised learning! This section covers powerful ensemble methods and neural networks that have revolutionized machine learning. These advanced algorithms build upon the fundamentals you learned in Part 1 to solve even more complex problems.
 
 ## Helpful video
 
@@ -45,7 +45,7 @@ Perfect for:
 - High-dimensional data
 - Complex non-linear relationships
 - Feature importance analysis
-- When stability is crucial
+- When stability is important
 
 ### 2. [Gradient Boosting](gradient-boosting/1-introduction.md)
 
@@ -60,7 +60,7 @@ Ideal for:
 
 - Structured/tabular data
 - Competition-winning performance
-- When accuracy is crucial
+- When accuracy is important
 - Handling imbalanced data
 
 ### 3. [Neural Networks](neural-networks/1-introduction.md)
@@ -190,4 +190,4 @@ import lightgbm
 
 Start with [Random Forest](random-forest/1-introduction.md) for bagging and feature-importance intuition, then follow the numbered lessons in each subfolder (introduction → math → implementation → advanced → applications). Add the [backpropagation](backpropagation/1-introduction.md) sequence when you want the training-time story spelled out step by step. Each algorithm builds upon previous concepts, so following the suggested order will maximize your learning experience.
 
-Remember: The best way to learn is by doing! Each section includes hands-on examples and exercises to reinforce your understanding. Let's dive in!
+The best way to learn this is by doing. Each section includes hands-on examples and exercises to reinforce your understanding.

@@ -20,7 +20,7 @@ Pandas is your best friend when it comes to working with data in Python! Think o
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ZyhVh-qRZPA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*Corey Schafer — Python pandas tutorial (part 1): getting started with data analysis*
+*Corey Schafer, Python pandas tutorial (part 1): getting started with data analysis*
 
 > **Note:** The name "Pandas" comes from "Panel Data", but don't worry about that - just think of it as your go-to tool for working with tables of data in Python!
 
@@ -46,7 +46,7 @@ The name "Pandas" comes from "Panel Data", referring to datasets that contain ob
 
 ### Key Features Explained
 
-Let's break down what Pandas can do for you:
+Break down what Pandas can do for you:
 
 - **DataFrames**: Like Excel spreadsheets in Python
 - **Data Exploration**: Easily peek into your data

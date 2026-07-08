@@ -101,7 +101,7 @@ Your notebook should be well-organized with markdown cells or comments in code e
 <summary>Show hints</summary>
 
 ## 1. Basic data exploration
-- **Where:** [DataFrame](../dataframe.md) — inspection methods.
+- **Where:** [DataFrame](../dataframe.md), inspection methods.
 - **Think:** `dtypes` (attribute, no parens), per-column stats with `df['quantity'].describe()` if you want them all at once, and `df.isnull().sum()` for a column-by-column missing count.
 - **Starter:**
   ```python
@@ -136,8 +136,8 @@ dtype: int64
 - **Think:**
   - **New column:** assign with bracket notation: `df['total_amount'] = df['quantity'] * df['price']`.
   - **Daily revenue:** group by `order_date` and sum `total_amount`. Each order has its own date in this dataset, so the group ≈ one row each.
-  - **+5% tax:** scalar broadcast — `df['price'] * 1.05`.
-  - **Above mean quantity:** boolean indexing — `df[df['quantity'] > df['quantity'].mean()]`.
+  - **+5% tax:** scalar broadcast, `df['price'] * 1.05`.
+  - **Above mean quantity:** boolean indexing, `df[df['quantity'] > df['quantity'].mean()]`.
 
 ## 3. Sorting & ranking
 - **Where:** [Sorting & ranking](../sorting-ranking.md).
@@ -150,7 +150,7 @@ dtype: int64
 ## 4. Function application
 - **Where:** [Function mapping](../function-mapping.md).
 - **Think:**
-  - Write `categorize_amount(amount)` returning 'High' / 'Medium' / 'Low' — mind the **boundaries** (>200 high, 100–200 medium, <100 low; equal to 100 should be Medium under the spec).
+  - Write `categorize_amount(amount)` returning 'High' / 'Medium' / 'Low', mind the **boundaries** (>200 high, 100-200 medium, <100 low; equal to 100 should be Medium under the spec).
   - Apply with `df['order_category'] = df['total_amount'].apply(categorize_amount)`.
   - Currency formatting via `df['price'].map('${:,.2f}'.format)`.
   - Cumulative sum: sort by date first, then `.cumsum()`.
@@ -166,14 +166,14 @@ dtype: int64
 ## 5. Index operations
 - **Where:** [Data types & index](../data-types-index.md), [Reindexing & dropping](../reindexing-dropping.md).
 - **Think:**
-  - `set_index('order_date')` — does not reorder rows by itself.
+  - `set_index('order_date')`, does not reorder rows by itself.
   - First 5 days: positional slice `dated.iloc[:5]`, or date slice with `.loc[:'2021-01-05']` once date-indexed.
   - `reset_index()` undoes it.
   - `set_index('order_id')` for the order-id-indexed copy (assign to a new variable to keep the original).
 
 ## Common pitfalls
-- Forgetting `inplace=False` — `df.sort_values(...)` returns a new frame; assign back if you want to keep the change.
-- Mutating the source `df` between tasks — copy first if a task expects the original shape.
-- Mismatched dtypes after `read_csv` (`order_date` may come back as string) — use `pd.to_datetime` if needed.
+- Forgetting `inplace=False`, `df.sort_values(...)` returns a new frame; assign back if you want to keep the change.
+- Mutating the source `df` between tasks, copy first if a task expects the original shape.
+- Mismatched dtypes after `read_csv` (`order_date` may come back as string), use `pd.to_datetime` if needed.
 
 </details>

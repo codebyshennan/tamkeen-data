@@ -9,7 +9,7 @@ objectives:
 
 # Scikit-learn Pipelines
 
-**After this lesson:** you can explain the core ideas in “Scikit-learn Pipelines” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Scikit-learn Pipelines and try the examples in your own notebook.
 
 ## Overview
 
@@ -173,7 +173,7 @@ print(f"Feature union score: {union_pipeline.score(X_test, y_test):.3f}")
       <span class="code-callout__title">Build and Score</span>
     </div>
     <div class="code-callout__body">
-      <p>Instantiate, fit on training data, and evaluate on the held-out test set in three lines — same API as a simple pipeline.</p>
+      <p>Instantiate, fit on training data, and evaluate on the held-out test set in three lines, same API as a simple pipeline.</p>
     </div>
   </div>
 </aside>
@@ -267,7 +267,7 @@ Custom pipeline score: 0.970
 
 ## Real-World Example: Text Classification
 
-#### Text preprocessing + TF–IDF + logistic regression in one `Pipeline`
+#### Text preprocessing + TF-IDF + logistic regression in one `Pipeline`
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -336,7 +336,7 @@ print(f"Test labels: {y_test}")
       <span class="code-callout__title">Text Preprocessor</span>
     </div>
     <div class="code-callout__body">
-      <p>Lowercase and strip non-alpha characters before vectorization — wrapped in a lambda so it processes the full list at once inside the pipeline step.</p>
+      <p>Lowercase and strip non-alpha characters before vectorization, wrapped in a lambda so it processes the full list at once inside the pipeline step.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="22-27" data-tint="3">
@@ -354,7 +354,7 @@ print(f"Test labels: {y_test}")
       <span class="code-callout__title">Split and Predict</span>
     </div>
     <div class="code-callout__body">
-      <p>Split raw string lists directly — sklearn handles list inputs — then fit and predict exactly as with numeric arrays.</p>
+      <p>Split raw string lists directly, sklearn handles list inputs, then fit and predict exactly as with numeric arrays.</p>
     </div>
   </div>
 </aside>
@@ -515,7 +515,7 @@ print(f"Test score: {grid_search.score(grid_X_test, grid_y_test):.3f}")
       <span class="code-callout__title">Pipeline Definition</span>
     </div>
     <div class="code-callout__body">
-      <p>A three-step pipeline — scaler, PCA, and logistic regression — where step names will be used as keys in the parameter grid using the <code>step__param</code> convention.</p>
+      <p>A three-step pipeline, scaler, PCA, and logistic regression, where step names will be used as keys in the parameter grid using the <code>step__param</code> convention.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="13-18" data-tint="2">
@@ -600,7 +600,7 @@ print(f"Training accuracy: {column_pipeline.score(X, y):.3f}")
       <span class="code-callout__title">Column-specific Transforms</span>
     </div>
     <div class="code-callout__body">
-      <p>Columns <code>[0, 1]</code> get standard-scaled; column <code>[2]</code> gets one-hot encoded — both in parallel, then stacked as the output feature matrix.</p>
+      <p>Columns <code>[0, 1]</code> get standard-scaled; column <code>[2]</code> gets one-hot encoded, both in parallel, then stacked as the output feature matrix.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="14-17" data-tint="3">
@@ -696,7 +696,7 @@ from sklearn.model_selection import cross_val_score
 def validate_pipeline(pipeline, X, y, cv=5):
     # Perform cross-validation
     scores = cross_val_score(pipeline, X, y, cv=cv)
-    
+
     # Print results
     print(f"Cross-validation scores: {scores}")
     print(f"Mean CV score: {scores.mean():.3f} (+/- {scores.std() * 2:.3f})")
@@ -721,12 +721,12 @@ def validate_pipeline(pipeline, X, y, cv=5):
 
 ## Gotchas
 
-- **Calling `fit_transform` on the full dataset before the pipeline** — If you run `scaler.fit_transform(X)` on all data and then pass it into a `Pipeline` for cross-validation, the scaler has already seen test folds and leaked their statistics; the pipeline only prevents leakage if it receives raw, untransformed data.
-- **Accessing step attributes before fitting** — Calling `pipeline.named_steps['scaler'].mean_` before `pipeline.fit(X_train, y_train)` raises `NotFittedError`; the pipeline steps are cloned and fitted lazily, so attributes like `mean_`, `coef_`, or `feature_importances_` are only available after fitting.
-- **Forgetting the double-underscore syntax for nested parameters** — In a grid search over a pipeline, hyperparameter names must be `stepname__param` (e.g., `classifier__max_depth`); a single underscore or a misspelled step name causes a silent `KeyError` or `ValueError` that can look like a data problem.
-- **`FeatureUnion` and `ColumnTransformer` do not preserve column names by default** — After transformation, the output is a plain numpy array; any subsequent step that expects a DataFrame with column names (e.g., a custom transformer checking `X.columns`) will break unless you explicitly handle name reconstruction or use `set_output(transform='pandas')` (sklearn ≥ 1.2).
-- **Pickling a pipeline that uses a lambda function** — `FunctionTransformer(lambda x: ...)` cannot be pickled with the default Python `pickle` or `joblib`; when deploying or saving the pipeline, replace inline lambdas with named module-level functions to avoid `AttributeError: Can't pickle local object`.
-- **Memory caching invalidates when estimator parameters change** — `Pipeline(memory=memory)` caches transformer outputs keyed by the step's parameters; if you change `PCA(n_components=2)` to `PCA(n_components=3)`, the cache is invalidated and all folds recompute; the cache only accelerates runs where parameters are truly unchanged across calls.
+- **Calling `fit_transform` on the full dataset before the pipeline**: If you run `scaler.fit_transform(X)` on all data and then pass it into a `Pipeline` for cross-validation, the scaler has already seen test folds and leaked their statistics; the pipeline only prevents leakage if it receives raw, untransformed data.
+- **Accessing step attributes before fitting**: Calling `pipeline.named_steps['scaler'].mean_` before `pipeline.fit(X_train, y_train)` raises `NotFittedError`; the pipeline steps are cloned and fitted lazily, so attributes like `mean_`, `coef_`, or `feature_importances_` are only available after fitting.
+- **Forgetting the double-underscore syntax for nested parameters**: In a grid search over a pipeline, hyperparameter names must be `stepname__param` (e.g., `classifier__max_depth`); a single underscore or a misspelled step name causes a silent `KeyError` or `ValueError` that can look like a data problem.
+- **`FeatureUnion` and `ColumnTransformer` do not preserve column names by default**: After transformation, the output is a plain numpy array; any subsequent step that expects a DataFrame with column names (e.g., a custom transformer checking `X.columns`) will break unless you explicitly handle name reconstruction or use `set_output(transform='pandas')` (sklearn ≥ 1.2).
+- **Pickling a pipeline that uses a lambda function**: `FunctionTransformer(lambda x: ...)` cannot be pickled with the default Python `pickle` or `joblib`; when deploying or saving the pipeline, replace inline lambdas with named module-level functions to avoid `AttributeError: Can't pickle local object`.
+- **Memory caching invalidates when estimator parameters change**: `Pipeline(memory=memory)` caches transformer outputs keyed by the step's parameters; if you change `PCA(n_components=2)` to `PCA(n_components=3)`, the cache is invalidated and all folds recompute; the cache only accelerates runs where parameters are truly unchanged across calls.
 
 ## Additional Resources
 

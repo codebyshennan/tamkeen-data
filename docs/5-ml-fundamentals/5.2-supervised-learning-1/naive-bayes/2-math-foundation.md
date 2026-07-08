@@ -8,7 +8,7 @@ objectives:
 ---
 # Mathematical Foundation of Naive Bayes
 
-**After this lesson:** you can explain the core ideas in “Mathematical Foundation of Naive Bayes” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Mathematical Foundation of Naive Bayes and try the examples in your own notebook.
 
 ## Overview
 
@@ -38,7 +38,7 @@ Imagine you're a detective trying to solve a case. You have some initial hunches
 
 #### The Basic Formula
 
-Let's break down the formula step by step:
+Break down the formula step by step:
 
 \\[P(y|X) = \frac{P(X|y)P(y)}{P(X)}\\]
 
@@ -53,12 +53,12 @@ Think of it like this:
 
 ### Real-World Example: Email Spam Detection
 
-Let's make this concrete with an email example:
+Make this concrete with an email example:
 
 #### Spam posterior from counts
 
 ```python
-# Let's say we have 1000 emails in our training data
+# Suppose we have 1000 emails in our training data
 total_emails = 1000
 spam_emails = 300        # 300 are spam
 emails_with_word_free = 400  # 400 contain "free"
@@ -83,7 +83,7 @@ This means:
 
 ### Understanding Feature Independence
 
-The "naive" part comes from assuming that features don't affect each other. Let's use a cooking analogy:
+The "naive" part comes from assuming that features do not affect each other. Use a cooking analogy:
 
 Imagine you're making a cake. The recipe says you need:
 
@@ -120,7 +120,7 @@ It's like a voting system where each feature gets a say, and the class with the 
 
 ### Example: Document Classification
 
-Let's classify a document as either tech or sports:
+Classify a document as either tech or sports:
 
 #### Tech vs sports score (naive product)
 
@@ -169,7 +169,7 @@ sports_score = P_sports * P_computer_sports * P_program_sports * P_code_sports
       <span class="code-callout__title">Likelihoods</span>
     </div>
     <div class="code-callout__body">
-      <p>Per-word conditional probabilities are set manually to illustrate that tech-domain words appear far less often in sports documents — the core assumption the Naive Bayes classifier exploits.</p>
+      <p>Per-word conditional probabilities are set manually to illustrate that tech-domain words appear far less often in sports documents, the core assumption the Naive Bayes classifier exploits.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="18-22" data-tint="3">
@@ -240,7 +240,7 @@ prediction = "male" if male_prob > female_prob else "female"
       <span class="code-callout__title">Gaussian PDF and Classify</span>
     </div>
     <div class="code-callout__body">
-      <p>The function implements the Gaussian PDF formula; calling it at height=168 for both classes gives two density values — the class with the higher value is predicted, demonstrating the Gaussian Naive Bayes decision rule.</p>
+      <p>The function implements the Gaussian PDF formula; calling it at height=168 for both classes gives two density values, the class with the higher value is predicted, demonstrating the Gaussian Naive Bayes decision rule.</p>
     </div>
   </div>
 </aside>
@@ -272,14 +272,14 @@ The best way to understand these concepts is to practice:
 
 ## Gotchas
 
-- **Numeric underflow from multiplying raw probabilities** — The `tech_score` and `sports_score` example multiplies three small probabilities together. With real documents containing dozens of words, the product quickly underflows to `0.0` in floating-point, making it impossible to compare classes. Always work in log-space (`log(P(y)) + Σ log(P(xi|y))`) in production code; scikit-learn does this internally via `predict_log_proba`.
-- **Ignoring the zero-probability problem before seeing smoothing** — If a word in the test document never appeared in training data for a class, the entire product for that class becomes zero, regardless of all other evidence. The `alpha=1.0` (Laplace smoothing) parameter in scikit-learn handles this, but the manual calculation in the lesson does not, so learners reproducing it on real data will get zero scores for unseen vocabulary.
-- **Confusing likelihood and posterior** — `P(X|y)` (likelihood) and `P(y|X)` (posterior) are different quantities. A common mistake is to compare raw likelihoods across classes without multiplying by the prior, which gives wrong answers whenever class frequencies are not equal. The Bayes formula is required to get the correct posterior.
-- **Misreading the `evidence` term as needing per-class computation** — `P(X)` (the evidence denominator) is the same for all classes, so for classification purposes it is a constant that cancels out when comparing `P(y|X)` across classes. Students sometimes compute a different evidence for each class, leading to probabilities that don't sum to 1.
-- **Treating the Gaussian PDF value as a probability** — The `gaussian_probability` function returns a probability density, not a probability. Densities can exceed 1 for narrow distributions. The decision rule (comparing densities) is correct, but quoting the raw density value as "a 0.08 probability" in an explanation is technically wrong.
+- **Numeric underflow from multiplying raw probabilities**: The `tech_score` and `sports_score` example multiplies three small probabilities together. With real documents containing dozens of words, the product quickly underflows to `0.0` in floating-point, making it impossible to compare classes. Always work in log-space (`log(P(y)) + Σ log(P(xi|y))`) in production code; scikit-learn does this internally via `predict_log_proba`.
+- **Ignoring the zero-probability problem before seeing smoothing**: If a word in the test document never appeared in training data for a class, the entire product for that class becomes zero, regardless of all other evidence. The `alpha=1.0` (Laplace smoothing) parameter in scikit-learn handles this, but the manual calculation in the lesson does not, so learners reproducing it on real data will get zero scores for unseen vocabulary.
+- **Confusing likelihood and posterior**: `P(X|y)` (likelihood) and `P(y|X)` (posterior) are different quantities. A common mistake is to compare raw likelihoods across classes without multiplying by the prior, which gives wrong answers whenever class frequencies are not equal. The Bayes formula is required to get the correct posterior.
+- **Misreading the `evidence` term as needing per-class computation**: `P(X)` (the evidence denominator) is the same for all classes, so for classification purposes it is a constant that cancels out when comparing `P(y|X)` across classes. Students sometimes compute a different evidence for each class, leading to probabilities that don't sum to 1.
+- **Treating the Gaussian PDF value as a probability**: The `gaussian_probability` function returns a probability density, not a probability. Densities can exceed 1 for narrow distributions. The decision rule (comparing densities) is correct, but quoting the raw density value as "a 0.08 probability" in an explanation is technically wrong.
 
 ## Next Steps
 
-Ready to see these concepts in action? Let's move on to [Types of Naive Bayes](3-types.md) to learn about the different versions of the algorithm and when to use each one.
+Ready to see these concepts in action? Move on to [Types of Naive Bayes](3-types.md) to learn about the different versions of the algorithm and when to use each one.
 
 Remember: Math is just a tool to help us make better predictions. Focus on understanding the concepts, and the formulas will make more sense!

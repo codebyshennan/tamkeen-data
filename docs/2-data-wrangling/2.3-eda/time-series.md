@@ -4,7 +4,7 @@
 
 ## Helpful video
 
-Summarizing distributions with percentiles—common in exploratory analysis.
+Summarizing distributions with percentiles, common in exploratory analysis.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/IFKQLDmRK0Y" title="Quantiles and Percentiles, Clearly Explained" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -12,13 +12,13 @@ Summarizing distributions with percentiles—common in exploratory analysis.
 
 **Prerequisites:** [Distributions](distributions.md) and [Pandas datetime](../../1-data-fundamentals/1.5-data-analysis-pandas/README.md) basics.
 
-> **Time needed:** About 60–90 minutes.
+> **Time needed:** About 60-90 minutes.
 
 ## Why this matters
 
-Ignoring order—trends, seasonality, gaps, and irregular sampling—makes standard assumptions fail quietly. A short structured pass (visualize, check frequency, decompose or diff) saves you from treating sequential data as independent points.
+Ignoring order, trends, seasonality, gaps, and irregular sampling, makes standard assumptions fail quietly. A short structured pass (visualize, check frequency, decompose or diff) saves you from treating sequential data as independent points.
 
-Time series analysis is crucial for:
+Time series analysis is important for:
 
 - Forecasting future trends
 - Understanding seasonal patterns
@@ -54,12 +54,12 @@ Each component tells a different part of the story:
   - Overall movement direction
   - Growth or decline patterns
   - Long-term cycles
-  
+
 - **Seasonality** ($S_t$): Regular patterns
   - Repeating cycles
   - Calendar effects
   - Periodic fluctuations
-  
+
 - **Residuals** ($R_t$): Random variations
   - Unexplained fluctuations
   - Noise in the data
@@ -73,7 +73,7 @@ Choose the right model based on your data characteristics:
   - For constant amplitude variations
   - When seasonality doesn't depend on trend
   - Most common for stable series
-  
+
 - **Multiplicative Model**: $Y_t = T_t \times S_t \times R_t$
   - For varying amplitude over time
   - When seasonality scales with trend
@@ -88,7 +88,7 @@ Different smoothing techniques serve different purposes:
   - Good for basic trend detection
   - Window size affects smoothing
   - Lags behind actual changes
-  
+
 - **Exponential Moving Average**: $EMA_t = \alpha Y_t + (1-\alpha)EMA_{t-1}$
   - More weight to recent points
   - Faster response to changes
@@ -114,7 +114,7 @@ import plotly.graph_objects as go
 
 class TimeSeriesAnalyzer:
     """A comprehensive framework for analyzing time series data.
-    
+
     This class provides methods to:
     - Decompose time series components
     - Analyze temporal patterns
@@ -123,13 +123,13 @@ class TimeSeriesAnalyzer:
     - Generate forecasts
     - Validate assumptions
     """
-    
+
     def __init__(self, data, date_column, value_column):
         self.data = data.copy()
         self.data[date_column] = pd.to_datetime(self.data[date_column])
         self.data.set_index(date_column, inplace=True)
         self.value_column = value_column
-        
+
     def analyze_components(self, period=None):
         """Analyze time series components"""
         # Determine period if not provided
@@ -141,38 +141,38 @@ class TimeSeriesAnalyzer:
                 period = 12  # Monthly
             else:
                 period = 30  # Default
-        
+
         # Perform decomposition
         decomposition = seasonal_decompose(
             self.data[self.value_column],
             period=period,
             extrapolate_trend='freq'
         )
-        
+
         # Plot components
         fig = plt.figure(figsize=(15, 12))
-        
+
         plt.subplot(411)
         plt.plot(self.data[self.value_column])
         plt.title('Original Time Series')
-        
+
         plt.subplot(412)
         plt.plot(decomposition.trend)
         plt.title('Trend')
-        
+
         plt.subplot(413)
         plt.plot(decomposition.seasonal)
         plt.title('Seasonal')
-        
+
         plt.subplot(414)
         plt.plot(decomposition.resid)
         plt.title('Residual')
-        
+
         plt.tight_layout()
         plt.show()
-        
+
         return decomposition
-    
+
     def analyze_patterns(self):
         """Analyze temporal patterns"""
         # Create multiple temporal views
@@ -182,37 +182,37 @@ class TimeSeriesAnalyzer:
             'monthly': self.data[self.value_column].groupby(self.data.index.month).mean(),
             'yearly': self.data[self.value_column].groupby(self.data.index.year).mean()
         }
-        
+
         # Plot patterns
         fig = plt.figure(figsize=(15, 10))
-        
+
         plt.subplot(221)
         patterns['hourly'].plot(kind='line')
         plt.title('Hourly Pattern')
-        
+
         plt.subplot(222)
         patterns['daily'].plot(kind='bar')
         plt.title('Daily Pattern')
-        
+
         plt.subplot(223)
         patterns['monthly'].plot(kind='bar')
         plt.title('Monthly Pattern')
-        
+
         plt.subplot(224)
         patterns['yearly'].plot(kind='bar')
         plt.title('Yearly Pattern')
-        
+
         plt.tight_layout()
         plt.show()
-        
+
         return patterns
-    
+
     def analyze_stationarity(self):
         """Analyze stationarity"""
         # Rolling statistics
         rolling_mean = self.data[self.value_column].rolling(window=7).mean()
         rolling_std = self.data[self.value_column].rolling(window=7).std()
-        
+
         # Plot rolling statistics
         plt.figure(figsize=(15, 5))
         plt.plot(self.data[self.value_column], label='Original')
@@ -221,31 +221,31 @@ class TimeSeriesAnalyzer:
         plt.legend()
         plt.title('Rolling Statistics')
         plt.show()
-        
+
         # Perform ADF test
         adf_result = adfuller(self.data[self.value_column].dropna())
-        
+
         return {
             'adf_statistic': adf_result[0],
             'p_value': adf_result[1],
             'critical_values': adf_result[4],
             'is_stationary': adf_result[1] < 0.05
         }
-    
+
     def detect_anomalies(self, window=30, threshold=3):
         """Detect anomalies using statistical methods"""
         # Calculate rolling statistics
         rolling_mean = self.data[self.value_column].rolling(window=window).mean()
         rolling_std = self.data[self.value_column].rolling(window=window).std()
-        
+
         # Define bounds
         upper_bound = rolling_mean + (threshold * rolling_std)
         lower_bound = rolling_mean - (threshold * rolling_std)
-        
+
         # Detect anomalies
         anomalies = self.data[self.value_column].copy()
         anomalies[anomalies.between(lower_bound, upper_bound)] = np.nan
-        
+
         # Plot
         plt.figure(figsize=(15, 5))
         plt.plot(self.data[self.value_column], label='Original')
@@ -255,7 +255,7 @@ class TimeSeriesAnalyzer:
         plt.legend()
         plt.title('Anomaly Detection')
         plt.show()
-        
+
         return anomalies.dropna()
 {% endhighlight %}
 </div>
@@ -272,7 +272,7 @@ class TimeSeriesAnalyzer:
   <div class="code-callout" data-lines="28-46" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
-      <span class="code-callout__title">analyze_components — period detection and decomposition</span>
+      <span class="code-callout__title">analyze_components, period detection and decomposition</span>
     </div>
     <div class="code-callout__body">
       <p>Auto-detects periodicity (7 for daily data, 12 for monthly), then calls <code>seasonal_decompose</code> with <code>extrapolate_trend='freq'</code> to handle edge points.</p>
@@ -284,13 +284,13 @@ class TimeSeriesAnalyzer:
       <span class="code-callout__title">Decomposition plot</span>
     </div>
     <div class="code-callout__body">
-      <p>Creates a 4-row subplot stack: original series, trend, seasonal component, and residuals—each with a descriptive title to identify patterns visually.</p>
+      <p>Creates a 4-row subplot stack: original series, trend, seasonal component, and residuals, each with a descriptive title to identify patterns visually.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="71-103" data-tint="4">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
-      <span class="code-callout__title">analyze_patterns — temporal groupings and plots</span>
+      <span class="code-callout__title">analyze_patterns, temporal groupings and plots</span>
     </div>
     <div class="code-callout__body">
       <p>Groups the value column by hour-of-day, day-of-week, month, and year to build four average-pattern series, then displays them in a 2×2 subplot grid.</p>
@@ -299,7 +299,7 @@ class TimeSeriesAnalyzer:
   <div class="code-callout" data-lines="105-128" data-tint="1">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
-      <span class="code-callout__title">analyze_stationarity — rolling stats and ADF test</span>
+      <span class="code-callout__title">analyze_stationarity, rolling stats and ADF test</span>
     </div>
     <div class="code-callout__body">
       <p>Plots the original series with a 7-day rolling mean and std to visually check stationarity, then runs the Augmented Dickey-Fuller test and flags the result with a p &lt; 0.05 threshold.</p>
@@ -308,7 +308,7 @@ class TimeSeriesAnalyzer:
   <div class="code-callout" data-lines="130-154" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
-      <span class="code-callout__title">detect_anomalies — rolling z-score bounds</span>
+      <span class="code-callout__title">detect_anomalies, rolling z-score bounds</span>
     </div>
     <div class="code-callout__body">
       <p>Computes rolling mean ± threshold×std over <code>window</code> days. Values outside those bounds are kept; in-range values are set to NaN, so <code>dropna()</code> returns only the anomaly timestamps.</p>
@@ -325,7 +325,7 @@ class TimeSeriesAnalyzer:
 
 ## Real-World Case Study: Sales Forecasting
 
-Let's analyze sales data to understand temporal patterns:
+Analyze sales data to understand temporal patterns:
 
 1. **Sales Trends**
    - Long-term growth patterns
@@ -382,7 +382,7 @@ def create_sales_dashboard(data, decomposition):
     ))
     fig1.update_layout(title='Sales Trend Analysis')
     fig1.show()
-    
+
     # Seasonal patterns
     fig2 = px.box(
         data,
@@ -391,7 +391,7 @@ def create_sales_dashboard(data, decomposition):
         title='Monthly Sales Distribution'
     )
     fig2.show()
-    
+
     # Anomaly visualization
     fig3 = go.Figure()
     fig3.add_trace(go.Scatter(
@@ -493,15 +493,15 @@ def optimize_time_series(df):
     """Optimize time series data storage"""
     # Convert to efficient dtypes
     df.index = pd.to_datetime(df.index)
-    
+
     # Downsample if needed
     if len(df) > 10000:
         df = df.resample('D').mean()
-    
+
     # Use float32 for numeric columns
     numeric_cols = df.select_dtypes(include=[np.number]).columns
     df[numeric_cols] = df[numeric_cols].astype(np.float32)
-    
+
     return df
 {% endhighlight %}
 
@@ -517,7 +517,7 @@ def optimize_time_series(df):
       <span class="code-callout__title">Datetime index and downsampling</span>
     </div>
     <div class="code-callout__body">
-      <p>Ensures the index is a proper DatetimeIndex, then resamples to daily means if the series has more than 10 000 rows—reducing memory without losing shape.</p>
+      <p>Ensures the index is a proper DatetimeIndex, then resamples to daily means if the series has more than 10 000 rows, reducing memory without losing shape.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-14" data-tint="2">
@@ -541,12 +541,12 @@ def optimize_time_series(df):
 def process_large_timeseries(file_path, chunksize=10000):
     """Process large time series in chunks"""
     chunks = []
-    
+
     for chunk in pd.read_csv(file_path, chunksize=chunksize):
         # Process each chunk
         processed_chunk = process_chunk(chunk)
         chunks.append(processed_chunk)
-    
+
     return pd.concat(chunks)
 {% endhighlight %}
 
@@ -603,19 +603,19 @@ Avoid these common mistakes in time series analysis:
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight python %}
       def handle_irregular_intervals(df):
           """Handle irregular time intervals"""
           # Resample to regular intervals
           df = df.resample('D').mean()
-          
+
           # Forward fill small gaps
           df = df.fillna(method='ffill', limit=3)
-          
+
           # Interpolate remaining gaps
           df = df.interpolate(method='time')
-          
+
           return df
    {% endhighlight %}
    </div>
@@ -645,17 +645,17 @@ Avoid these common mistakes in time series analysis:
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight python %}
       def detect_seasonality(data, max_lag=365):
           """Detect seasonality period"""
           # Calculate ACF
           acf_values = acf(data, nlags=max_lag)
-          
+
           # Find peaks
           from scipy.signal import find_peaks
           peaks, _ = find_peaks(acf_values)
-          
+
           # Get strongest peak
           if len(peaks) > 0:
               return peaks[np.argmax(acf_values[peaks])]
@@ -669,7 +669,7 @@ Avoid these common mistakes in time series analysis:
          <span class="code-callout__title">Compute ACF and find peaks</span>
        </div>
        <div class="code-callout__body">
-         <p>Computes the autocorrelation function up to <code>max_lag</code> lags, then uses <code>find_peaks</code> to locate local maxima in the ACF curve—each peak is a candidate seasonal period.</p>
+         <p>Computes the autocorrelation function up to <code>max_lag</code> lags, then uses <code>find_peaks</code> to locate local maxima in the ACF curve, each peak is a candidate seasonal period.</p>
        </div>
      </div>
      <div class="code-callout" data-lines="7-13" data-tint="2">
@@ -688,19 +688,19 @@ Avoid these common mistakes in time series analysis:
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight python %}
       def analyze_trend_seasonality(data):
           """Separate trend from seasonality"""
           # Smooth for trend
           trend = data.rolling(window=30).mean()
-          
+
           # Remove trend for seasonality
           detrended = data - trend
-          
+
           # Analyze seasonal pattern
           seasonal = detrended.groupby(detrended.index.month).mean()
-          
+
           return trend, seasonal
    {% endhighlight %}
    </div>
@@ -730,7 +730,7 @@ Remember: "Time series analysis requires careful consideration of temporal depen
 
 ## Next steps
 
-- [Statistical analysis (Module 4)](../../4-stat-analysis/README.md) — formal forecasting and inference (when added to your path)
+- [Statistical analysis (Module 4)](../../4-stat-analysis/README.md), formal forecasting and inference (when added to your path)
 - [EDA project](project.md)
-- [Data engineering (Module 2.4)](../2.4-data-engineering/README.md) — scheduling pipelines for time-based data
+- [Data engineering (Module 2.4)](../2.4-data-engineering/README.md), scheduling pipelines for time-based data
 - [Module README](README.md)

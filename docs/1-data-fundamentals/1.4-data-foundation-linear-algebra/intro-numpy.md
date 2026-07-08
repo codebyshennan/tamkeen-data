@@ -4,7 +4,7 @@
 
 ## Overview
 
-**Prerequisites:** Basic Python (lists, loops, functions) from this module’s Python unit.
+**Prerequisites:** Basic Python (lists, loops, functions) from this module's Python unit.
 
 ### Video
 
@@ -12,7 +12,7 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/QUT1VHiLmmI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*freeCodeCamp — Python NumPy tutorial for beginners*
+*freeCodeCamp, Python NumPy tutorial for beginners*
 
 **Why start here:** Almost every numeric library in Python **builds on NumPy arrays** (pandas columns are backed by NumPy; many sklearn inputs are `ndarray`). Investing an hour in dtypes, shapes, and vectorization pays off in every later module.
 
@@ -31,10 +31,10 @@ NumPy (Numerical Python) is like a supercharged calculator for Python! Imagine y
 
 ### The Problem NumPy Solves
 
-Let's see why regular Python lists aren't ideal for numerical computations:
+Look at why regular Python lists aren't ideal for numerical computations:
 
 ```python
-# Without NumPy (slow!) - Let's time it
+# Without NumPy (slow!) - time it
 import time
 
 # Create a big list
@@ -42,7 +42,7 @@ numbers = list(range(1000000))
 start_time = time.time()
 
 # Double each number (need explicit loop)
-doubled = [x * 2 for x in numbers]  # Need a loop 
+doubled = [x * 2 for x in numbers]  # Need a loop
 python_time = time.time() - start_time
 
 # With NumPy (fast! )
@@ -51,7 +51,7 @@ numbers_np = np.array(range(1000000))
 start_time = time.time()
 
 # Double each number (vectorized operation)
-doubled_np = numbers_np * 2  # No loop needed! 
+doubled_np = numbers_np * 2  # No loop needed!
 numpy_time = time.time() - start_time
 
 print(f"Python time: {python_time:.4f} seconds")
@@ -107,7 +107,7 @@ NumPy arrays can have any number of dimensions. Here is how 1D, 2D, and 3D array
 
 {% include mermaid-diagram.html src="1-data-fundamentals/1.4-data-foundation-linear-algebra/diagrams/intro-numpy-1.mmd" %}
 
-*`array.shape` is the first thing to check when something goes wrong — most dimension errors come from passing a 1D array where a 2D one is expected (or vice versa).*
+*`array.shape` is the first thing to check when something goes wrong, most dimension errors come from passing a 1D array where a 2D one is expected (or vice versa).*
 
 ---
 
@@ -125,7 +125,7 @@ NumPy way:
 
 ```python
 # Fast way (vectorized)
-result = numbers * 2  # All at once! 
+result = numbers * 2  # All at once!
 ```
 
 ![numpy_vs_list](./assets/numpy_vs_python_list.png)
@@ -157,14 +157,14 @@ import numpy as np
 # Create an array
 numbers = np.array([1, 2, 3, 4, 5])
 
-# Do magic! 
+# Do magic!
 doubled = numbers * 2
 squared = numbers ** 2
 ```
 
 ## Speed Comparison
 
-Let's race Python lists against NumPy arrays!
+Race Python lists against NumPy arrays!
 
 ---
 
@@ -200,9 +200,9 @@ That's 100 times faster!
 
 ## Common pitfalls
 
-- **Python lists vs arrays** — Mixing them loses vectorized speed; convert with **np.array** when you need numeric ops on the whole structure.
-- **Unexpected dtype** — Integer division and string inputs can surprise you; set **dtype=** explicitly when it matters.
-- **Copy vs view** — Some slices share memory; if you mutate, you may change the original unless you **.copy()**.
+- **Python lists vs arrays**: Mixing them loses vectorized speed; convert with **np.array** when you need numeric ops on the whole structure.
+- **Unexpected dtype**: Integer division and string inputs can surprise you; set **dtype=** explicitly when it matters.
+- **Copy vs view**: Some slices share memory; if you mutate, you may change the original unless you **.copy()**.
 
 ## Next steps
 

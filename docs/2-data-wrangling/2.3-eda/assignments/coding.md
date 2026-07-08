@@ -99,7 +99,7 @@ Submit your solution as a Python script with:
 - **Think:**
   - **Ensure datetime:** `flights['date'] = pd.to_datetime(flights['date'])`.
   - **Monthly delays:** `flights.groupby(flights['date'].dt.month)[['departure_delay', 'arrival_delay']].mean()`.
-  - **7-day rolling passengers:** sort by date, then `flights['passengers'].rolling('7D').mean()` (needs date index) — or `.rolling(7).mean()` for a row-count window.
+  - **7-day rolling passengers:** sort by date, then `flights['passengers'].rolling('7D').mean()` (needs date index), or `.rolling(7).mean()` for a row-count window.
   - **Busiest day per airline:** group by airline + day-of-week, sum or count, then `idxmax`.
 
 ## 2. Correlation analysis
@@ -109,20 +109,20 @@ Submit your solution as a Python script with:
   - For per-airline correlation, group then call `.corr()` on each subgroup, or use `groupby(...).apply(lambda g: g['x'].corr(g['y']))`.
 
 ## 3. Data reshaping
-- **Where:** [Time series](../time-series.md), [Relationships](../relationships.md) — pivot vs melt.
+- **Where:** [Time series](../time-series.md), [Relationships](../relationships.md), pivot vs melt.
 - **Think:**
   - **Pivot of avg ticket price:** `pivot_table(values='ticket_price', index='airline', columns='destination', aggfunc='mean')`.
   - **Wide format daily passengers:** pivot on `index='date'`, `columns='airline'`, sum passengers.
   - **Wide → long:** `melt(id_vars='date', var_name='airline', value_name='passengers')`.
 
 ## 4. Hierarchical indexing
-- **Where:** [Relationships](../relationships.md) — MultiIndex.
+- **Where:** [Relationships](../relationships.md), MultiIndex.
 - **Think:**
   - Build via `groupby(['airline', 'destination']).agg({'departure_delay': 'mean', 'ticket_price': 'mean'})`.
   - Two access patterns: `.loc[('SIA', 'Tokyo')]` for a single row, `xs('Tokyo', level='destination')` to slice the inner level.
 
 ## 5. Data combination
-- **Where:** [Relationships](../relationships.md) — concat / merge.
+- **Where:** [Relationships](../relationships.md), concat / merge.
 - **Think:**
   - Split with a date boundary: `first_half = flights[flights['date'].dt.month <= 6]`.
   - Merge them back: try `concat([h1, h2])` (stack), then `merge(h1, h2, how='outer'/'inner')` for comparison.
@@ -137,8 +137,8 @@ Submit your solution as a Python script with:
 
 ## Common pitfalls
 - Forgetting to **sort by date** before time-series operations (rolling, cumulative).
-- Using `mean()` on a boolean column to get a proportion is fine — but multiply by 100 if you want a percentage.
+- Using `mean()` on a boolean column to get a proportion is fine, but multiply by 100 if you want a percentage.
 - Pivoting with duplicate index/column pairs requires an `aggfunc`; otherwise pandas raises.
-- `corr()` ignores non-numeric columns silently — narrow to numeric first if you want to know what's included.
+- `corr()` ignores non-numeric columns silently, narrow to numeric first if you want to know what's included.
 
 </details>

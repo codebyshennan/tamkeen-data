@@ -1,6 +1,6 @@
 # Data Storytelling
 
-Every analyst has had this experience: you spend days running the perfect analysis, your numbers are correct, your logic is airtight — and then you present it, and nobody acts on it. The problem is almost never the data. It's the story around it. This submodule teaches you how to close that gap: how to turn analysis into narrative, numbers into decisions, and charts into change.
+Every analyst has had this experience: you spend days running the perfect analysis, your numbers are correct, your logic is airtight, and then you present it, and nobody acts on it. The problem is almost never the data. It's the story around it. This submodule teaches you how to close that gap: how to turn analysis into narrative, numbers into decisions, and charts into change.
 
 **After this submodule:** you can use the lessons linked below and complete the exercises that match **Mastering Data Storytelling: A Beginner's Guide** in your course schedule.
 
@@ -12,15 +12,15 @@ Before diving in, here are the core concepts this submodule builds on:
 
 | Term | Plain-English Definition |
 |------|--------------------------|
-| **Data Story** | A structured presentation that uses data as evidence for a human narrative — with a beginning, middle, and end |
+| **Data Story** | A structured presentation that uses data as evidence for a human narrative, with a beginning, middle, and end |
 | **Narrative Arc** | The shape of a story: Setup → Conflict → Resolution |
 | **Visual Hierarchy** | Deliberately sizing, coloring, and positioning elements so the audience's eye lands on the most important thing first |
 | **Call to Action** | The specific decision or behavior you want the audience to take after seeing your story |
-| **Context** | The comparison or benchmark that gives a number meaning — "Sales are $1M" means nothing; "Sales are $1M, up 40% from last year" tells a story |
+| **Context** | The comparison or benchmark that gives a number meaning, "Sales are $1M" means nothing; "Sales are $1M, up 40% from last year" tells a story |
 
 ## Helpful video
 
-Ben Wellington shows how finding the story inside a dataset — and telling it clearly — can change real-world policy.
+Ben Wellington shows how finding the story inside a dataset, and telling it clearly, can change real-world policy.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/6xsvGYIxJok" title="Ben Wellington: Making data mean more through storytelling | TEDxBroadway" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -43,7 +43,7 @@ Think of data storytelling like being a tour guide for your data. Just as a good
 | Data Visualization | ~65% |
 | **Data Storytelling** | **~85%** |
 
-> **Note:** These numbers are pedagogical illustrations, not cited research — but the direction is real and widely observed by practitioners.
+> **Note:** These numbers are pedagogical illustrations, not cited research, but the direction is real and widely observed by practitioners.
 
 ## The Building Blocks of Data Storytelling
 
@@ -78,7 +78,7 @@ Think of this like a traffic light system:
 
 ![Visual hierarchy principles in data storytelling](assets/visual_hierarchy.png)
 
-Visual hierarchy is what makes an audience's eye go to the right place first. The image above shows how size, color, and position signal importance — without it, every element competes equally for attention and nothing stands out.
+Visual hierarchy is what makes an audience's eye go to the right place first. The image above shows how size, color, and position signal importance, without it, every element competes equally for attention and nothing stands out.
 
 #### Why This Matters
 
@@ -91,8 +91,8 @@ Good visual grammar helps you:
 
 ---
 
-> **Try it yourself — Story Architecture:**
-> Pick any piece of work you've done (a homework assignment, a work report, a project). Write three sentences for it — one for Setup ("Here's the situation…"), one for Conflict ("Here's the problem/insight…"), and one for Resolution ("Here's what I recommend…"). If you can't write all three, your story is incomplete.
+> **Try it yourself, Story Architecture:**
+> Pick any piece of work you've done (a homework assignment, a work report, a project). Write three sentences for it, one for Setup ("Here's the situation…"), one for Conflict ("Here's the problem/insight…"), and one for Resolution ("Here's what I recommend…"). If you can't write all three, your story is incomplete.
 
 ---
 
@@ -114,15 +114,15 @@ Two frameworks cover most data presentations. The companion lesson on [Narrative
 |------|-------------|---------|
 | **Problem** | Name the issue | "We're losing 20% of customers monthly" |
 | **Analysis** | Explain the cause | "Survey data shows poor support experience" |
-| **Solution** | Propose a fix | "Implement 24/7 chat support — projected to reduce churn by 15%" |
+| **Solution** | Propose a fix | "Implement 24/7 chat support, projected to reduce churn by 15%" |
 
 ![Story structure frameworks: Hero's Journey vs Problem-Solution](assets/story_structure.png)
 
-Both frameworks share the same underlying logic — context, tension, resolution — just expressed differently. The Hero's Journey works well for longer narratives; the Problem-Solution framework is faster and better suited to executive briefings.
+Both frameworks share the same underlying logic, context, tension, resolution, just expressed differently. The Hero's Journey works well for longer narratives; the Problem-Solution framework is faster and better suited to executive briefings.
 
 ---
 
-> **Try it yourself — Frameworks:**
+> **Try it yourself, Frameworks:**
 > Take the same three-sentence story you wrote above. Now rewrite it using the Problem-Solution format: one sentence for Problem, one for Analysis, one for Solution. Which version feels more urgent? Which is clearer? The answer tells you something about your audience.
 
 ---
@@ -153,8 +153,8 @@ Choosing the right chart and color scheme is half the battle. The companion less
 
 ---
 
-> **Try it yourself — Chart and Color:**
-> Open a chart you've made recently. Ask yourself: (1) Does every color on this chart mean something, or are some colors random? (2) If I removed the color, would the chart still be readable? If color is doing real work, you're using it well. If removing it doesn't change anything, the color is decoration — not communication.
+> **Try it yourself, Chart and Color:**
+> Open a chart you've made recently. Ask yourself: (1) Does every color on this chart mean something, or are some colors random? (2) If I removed the color, would the chart still be readable? If color is doing real work, you're using it well. If removing it doesn't change anything, the color is decoration, not communication.
 
 ---
 
@@ -164,15 +164,15 @@ Choosing the right chart and color scheme is half the battle. The companion less
 
 | Mistake | Instead |
 |---------|---------|
-| **Data overload** — showing every data point | Focus on the 3-5 most important insights |
-| **Missing context** — jumping straight to conclusions | Build understanding gradually with benchmarks and comparisons |
-| **Weak structure** — rambling through data | Follow a clear narrative arc (Setup → Conflict → Resolution) |
-| **Leading with method** — "I ran a regression and found a coefficient of 0.73…" | Lead with insight: "Every extra hour of response time costs us 8% conversion" |
-| **No call to action** — ending with "the data shows…" | End with "We recommend [specific action] by [specific date]" |
+| **Data overload**, showing every data point | Focus on the 3-5 most important insights |
+| **Missing context**, jumping straight to conclusions | Build understanding gradually with benchmarks and comparisons |
+| **Weak structure**, rambling through data | Follow a clear narrative arc (Setup → Conflict → Resolution) |
+| **Leading with method**, "I ran a regression and found a coefficient of 0.73…" | Lead with insight: "Every extra hour of response time costs us 8% conversion" |
+| **No call to action**, ending with "the data shows…" | End with "We recommend [specific action] by [specific date]" |
 
 ---
 
-> **Try it yourself — Spot the Mistakes:**
+> **Try it yourself, Spot the Mistakes:**
 > Find a data report (could be news, a company press release, or one of your own). Using the five mistake categories above, identify at least two problems and write one sentence each explaining how you would fix them.
 
 ---
@@ -183,7 +183,7 @@ Choosing the right chart and color scheme is half the battle. The companion less
 
 ### Step 1: Gather Your Elements
 
-**Purpose:** Checklist of ingredients—data facts, narrative arc, and visuals—before drafting slides or a dashboard story.
+**Purpose:** Checklist of ingredients, data facts, narrative arc, and visuals, before drafting slides or a dashboard story.
 
 **Walkthrough:** Not executable; use as a worksheet outline.
 
@@ -193,12 +193,12 @@ Story Elements:
     - Key metrics
     - Supporting facts
     - Relevant context
-  
+
   Narrative:
     - Main message
     - Key points
     - Flow structure
-  
+
   Visuals:
     - Core charts
     - Supporting graphics

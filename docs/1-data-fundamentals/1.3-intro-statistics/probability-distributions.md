@@ -1,6 +1,6 @@
 # Probability Distributions with Python
 
-**After this lesson:** you can explain the core ideas in “Probability Distributions with Python” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Probability Distributions with Python and try the examples in your own notebook.
 
 ### Video
 
@@ -8,7 +8,7 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/iYiOVISeS84" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*StatQuest with Josh Starmer — The normal distribution, clearly explained*
+*StatQuest with Josh Starmer, The normal distribution, clearly explained*
 
 ## Understanding random variables through code
 
@@ -16,7 +16,7 @@ A **random variable** is a quantity whose value is uncertain until you observe i
 
 ### Implementing random variables
 
-Let's explore random variables using Python:
+we will look at random variables using Python:
 
 **`RandomVariableExplorer`: discrete vs continuous draws**
 
@@ -168,7 +168,7 @@ Name: Value, dtype: float64
       <span class="code-callout__title">Imports</span>
     </div>
     <div class="code-callout__body">
-      <p>Imports NumPy, pandas, Matplotlib, Seaborn, SciPy stats, and typing—the full stack needed for simulation, analysis, and plotting.</p>
+      <p>Imports NumPy, pandas, Matplotlib, Seaborn, SciPy stats, and typing, the full stack needed for simulation, analysis, and plotting.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-28" data-tint="2">
@@ -186,7 +186,7 @@ Name: Value, dtype: float64
       <span class="code-callout__title">Continuous Simulation</span>
     </div>
     <div class="code-callout__body">
-      <p>Branches on the distribution name to call the matching NumPy generator—normal or uniform—and raises if the name is unknown.</p>
+      <p>Branches on the distribution name to call the matching NumPy generator, normal or uniform, and raises if the name is unknown.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="55-88" data-tint="4">
@@ -236,7 +236,7 @@ Name: Value, dtype: float64
 
 ### Expected Value and Variance
 
-Let's implement tools for calculating distribution properties:
+Implement tools for calculating distribution properties:
 
 **Moments and skew/kurtosis on samples**
 
@@ -407,7 +407,7 @@ Kurtosis: -1.214
       <span class="code-callout__title">Demo Usage</span>
     </div>
     <div class="code-callout__body">
-      <p>Runs the analyzer on three distribution shapes—symmetric normal, right-skewed lognormal, and uniform—so you can compare their outputs side by side.</p>
+      <p>Runs the analyzer on three distribution shapes, symmetric normal, right-skewed lognormal, and uniform, so you can compare their outputs side by side.</p>
     </div>
   </div>
 </aside>
@@ -455,11 +455,11 @@ Kurtosis: -1.214
 
 ### Implementing Distribution Functions
 
-Let's create tools for working with common distributions:
+Create tools for working with common distributions:
 
 **Sampling binomial, Poisson, normal, exponential**
 
-- **Purpose:** See how NumPy’s `np.random.*` generators map to common families; compare shapes side-by-side with histograms and normal Q-Q panels.
+- **Purpose:** See how NumPy's `np.random.*` generators map to common families; compare shapes side-by-side with histograms and normal Q-Q panels.
 - **Walkthrough:** Each method wraps one generator (`binomial`, `poisson`, `normal`, `exponential`); `plot_distributions` lays out two columns per distribution.
 
 <div class="code-explainer" data-code-explainer>
@@ -582,7 +582,7 @@ Name: Exponential, dtype: float64
       <span class="code-callout__title">Four Generators</span>
     </div>
     <div class="code-callout__body">
-      <p>Each method wraps one NumPy generator—binomial, Poisson, normal, exponential—and returns a named pandas Series for easy labelling in plots.</p>
+      <p>Each method wraps one NumPy generator, binomial, Poisson, normal, exponential, and returns a named pandas Series for easy labelling in plots.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="23-40" data-tint="2">
@@ -660,7 +660,7 @@ Name: Exponential, dtype: float64
 
 ### Distribution Shape Analysis
 
-Let's create tools for analyzing distribution shapes:
+Create tools for analyzing distribution shapes:
 
 **Classify skew/tails and compare plot types**
 
@@ -788,7 +788,7 @@ Kurtosis: -1.763
       <span class="code-callout__title">Shape Classifier</span>
     </div>
     <div class="code-callout__body">
-      <p>Uses SciPy's skew and kurtosis to classify the distribution—left/right/symmetric for skewness, and heavy/light-tailed for kurtosis—and appends both labels.</p>
+      <p>Uses SciPy's skew and kurtosis to classify the distribution, left/right/symmetric for skewness, and heavy/light-tailed for kurtosis, and appends both labels.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="23-49" data-tint="2">
@@ -842,7 +842,7 @@ Try these distribution analysis exercises:
 
 1. **Stock Returns Analysis**
 
-   - **Purpose:** Stub for **Practice Exercise 1**—implement the four comment bullets (load prices, returns, fit, tails) using your own data source.
+   - **Purpose:** Stub for **Practice Exercise 1**-implement the four comment bullets (load prices, returns, fit, tails) using your own data source.
 
    ```python
    # Create functions to:
@@ -854,7 +854,7 @@ Try these distribution analysis exercises:
 
 2. **Customer Behavior Model**
 
-   - **Purpose:** Stub for **Practice Exercise 2**—model frequency and order value distributions and lifetime-style summaries from transactional data.
+   - **Purpose:** Stub for **Practice Exercise 2**-model frequency and order value distributions and lifetime-style summaries from transactional data.
 
    ```python
    # Build analysis tools for:
@@ -865,7 +865,7 @@ Try these distribution analysis exercises:
 
 3. **Quality Control System**
 
-   - **Purpose:** Stub for **Practice Exercise 3**—monitor measurements, compare to baseline distributions, and set control limits.
+   - **Purpose:** Stub for **Practice Exercise 3**-monitor measurements, compare to baseline distributions, and set control limits.
 
    ```python
    # Implement system to:
@@ -885,9 +885,9 @@ Remember:
 
 ## Common pitfalls
 
-- **Wrong support** — Binomial counts cannot be negative; Normal models are continuous—check that your data fits the story.
-- **Confusing PDF and probability** — For continuous variables, probability comes from areas under the curve, not the height at a point.
-- **Small-sample behavior** — Histograms and fitted curves look smoother as **n** grows; don’t overfit a distribution from a tiny sample.
+- **Wrong support**: Binomial counts cannot be negative; Normal models are continuous, check that your data fits the story.
+- **Confusing PDF and probability**: For continuous variables, probability comes from areas under the curve, not the height at a point.
+- **Small-sample behavior**: Histograms and fitted curves look smoother as **n** grows; don't overfit a distribution from a tiny sample.
 
 ## Next steps
 

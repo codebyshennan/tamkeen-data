@@ -1,6 +1,6 @@
 # E-commerce Data Analysis Project: GlobalMart Analytics Platform
 
-**After this lesson:** You produce a small set of documented SQL answers (segments, product performance, trends) that mirror real analyst work—using **JOIN**s, **CTEs**, and aggregates.
+**After this lesson:** You produce a small set of documented SQL answers (segments, product performance, trends) that mirror real analyst work, using **JOIN**s, **CTEs**, and aggregates.
 
 ## Helpful video
 
@@ -12,17 +12,17 @@ High-level introduction to SQL and relational databases.
 
 **Prerequisites:** Work through [Joins](joins.md) and [Aggregations](aggregations.md) first. Use the same database tooling as in the [module README](README.md).
 
-> **Time needed:** Often 4–8 hours including exploration and write-up.
+> **Time needed:** Often 4-8 hours including exploration and write-up.
 
 ## Why this matters
 
-This project is a capstone for Module 2.1: you combine **joins**, **aggregates**, **CTEs**, and conditional logic the way analysts do in practice—then document assumptions and results so someone else could reproduce your queries.
+This project is a capstone for Module 2.1: you combine **joins**, **aggregates**, **CTEs**, and conditional logic the way analysts do in practice, then document assumptions and results so someone else could reproduce your queries.
 
 ## Project Overview
 
 This project implements a comprehensive analytics platform for GlobalMart, an e-commerce business. The platform provides insights into customer behavior, product performance, and business operations through SQL-based analysis.
 
-The numbered sections below mirror a typical assignment brief: work through them in order, and treat the SQL as **reference patterns**—adapt table and column names to your own database.
+The numbered sections below mirror a typical assignment brief: work through them in order, and treat the SQL as **reference patterns**-adapt table and column names to your own database.
 
 ## Analysis Components
 
@@ -35,7 +35,7 @@ The numbered sections below mirror a typical assignment brief: work through them
 
 {% highlight sql %}
 WITH customer_metrics AS (
-    SELECT 
+    SELECT
         c.customer_id,
         c.join_date,
         COUNT(DISTINCT o.order_id) as total_orders,
@@ -50,7 +50,7 @@ WITH customer_metrics AS (
     GROUP BY c.customer_id, c.join_date
 ),
 customer_segments AS (
-    SELECT 
+    SELECT
         *,
         NTILE(4) OVER (ORDER BY total_spent DESC) as spending_quartile,
         NTILE(4) OVER (ORDER BY total_orders DESC) as frequency_quartile,
@@ -58,7 +58,7 @@ customer_segments AS (
         total_spent / NULLIF(active_months, 0) as monthly_avg_spend
     FROM customer_metrics
 )
-SELECT 
+SELECT
     customer_id,
     ROUND(total_spent::numeric, 2) as total_spent,
     total_orders,
@@ -67,14 +67,14 @@ SELECT
     ROUND(monthly_avg_spend::numeric, 2) as monthly_avg_spend,
     ROUND(discount_rate::numeric, 2) as discount_rate,
     days_since_last_order,
-    CASE 
+    CASE
         WHEN spending_quartile = 1 AND frequency_quartile = 1 THEN ' VIP'
         WHEN spending_quartile <= 2 AND frequency_quartile <= 2 THEN ' High Value'
         WHEN days_since_last_order <= 30 THEN ' Active'
         WHEN days_since_last_order <= 90 THEN ' At Risk'
         ELSE ' Churned'
     END as customer_segment,
-    CASE 
+    CASE
         WHEN discount_rate > 20 THEN ' Discount Sensitive'
         WHEN avg_order_value > 500 THEN ' Premium Buyer'
         WHEN total_orders > 12 THEN ' Regular Buyer'
@@ -91,7 +91,7 @@ ORDER BY total_spent DESC;
       <span class="code-callout__title">CTE 1: aggregate 12-month order history per customer</span>
     </div>
     <div class="code-callout__body">
-      <p>LEFT JOIN keeps customers who placed no orders in the period. The filter on <code>order_date &gt;= CURRENT_DATE - INTERVAL '12 months'</code> restricts to recent activity. <code>discount_rate</code> is the ratio of total discount to total spend—a proxy for price sensitivity.</p>
+      <p>LEFT JOIN keeps customers who placed no orders in the period. The filter on <code>order_date &gt;= CURRENT_DATE - INTERVAL '12 months'</code> restricts to recent activity. <code>discount_rate</code> is the ratio of total discount to total spend, a proxy for price sensitivity.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="16-23" data-tint="2">
@@ -118,7 +118,7 @@ ORDER BY total_spent DESC;
       <span class="code-callout__title">Second CASE: assign buying behaviour pattern</span>
     </div>
     <div class="code-callout__body">
-      <p>A separate CASE independently labels each customer's buying pattern based on discount sensitivity, average order size, and purchase frequency. This allows a customer to be both "VIP" (segment) and "Discount Sensitive" (pattern)—two orthogonal dimensions.</p>
+      <p>A separate CASE independently labels each customer's buying pattern based on discount sensitivity, average order size, and purchase frequency. This allows a customer to be both "VIP" (segment) and "Discount Sensitive" (pattern), two orthogonal dimensions.</p>
     </div>
   </div>
 </aside>
@@ -131,7 +131,7 @@ ORDER BY total_spent DESC;
 
 {% highlight sql %}
 WITH cohort_dates AS (
-    SELECT 
+    SELECT
         customer_id,
         DATE_TRUNC('month', join_date) as cohort_month,
         DATE_TRUNC('month', order_date) as order_month
@@ -139,14 +139,14 @@ WITH cohort_dates AS (
     JOIN orders o ON c.customer_id = o.customer_id
 ),
 cohort_size AS (
-    SELECT 
+    SELECT
         cohort_month,
         COUNT(DISTINCT customer_id) as num_customers
     FROM cohort_dates
     GROUP BY cohort_month
 ),
 retention_analysis AS (
-    SELECT 
+    SELECT
         c.cohort_month,
         o.order_month,
         COUNT(DISTINCT c.customer_id) as active_customers,
@@ -157,7 +157,7 @@ retention_analysis AS (
     JOIN cohort_size cs ON cs.cohort_month = c.cohort_month
     GROUP BY c.cohort_month, o.order_month, cs.num_customers
 )
-SELECT 
+SELECT
     cohort_month,
     cohort_size,
     months_since_join,
@@ -166,7 +166,7 @@ SELECT
         (active_customers::float / cohort_size * 100)::numeric,
         2
     ) as retention_rate,
-    CASE 
+    CASE
         WHEN months_since_join = 0 THEN ' New'
         WHEN months_since_join <= 3 THEN ' Early'
         WHEN months_since_join <= 6 THEN ' Established'
@@ -184,7 +184,7 @@ ORDER BY cohort_month DESC, months_since_join;
       <span class="code-callout__title">CTE 1: pair each customer's cohort month with each order month</span>
     </div>
     <div class="code-callout__body">
-      <p><code>DATE_TRUNC('month', join_date)</code> groups customers by the month they first joined—their cohort. The JOIN with <code>orders</code> produces one row per (customer, order), giving both the cohort month and the order month for cross-referencing.</p>
+      <p><code>DATE_TRUNC('month', join_date)</code> groups customers by the month they first joined, their cohort. The JOIN with <code>orders</code> produces one row per (customer, order), giving both the cohort month and the order month for cross-referencing.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="11-16" data-tint="2">
@@ -193,7 +193,7 @@ ORDER BY cohort_month DESC, months_since_join;
       <span class="code-callout__title">CTE 2: count original cohort size per month</span>
     </div>
     <div class="code-callout__body">
-      <p>Groups cohort_dates by cohort month and counts distinct customers—this is the denominator for retention rate calculations. Every subsequent month's active customers are divided by this number.</p>
+      <p>Groups cohort_dates by cohort month and counts distinct customers, this is the denominator for retention rate calculations. Every subsequent month's active customers are divided by this number.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="18-28" data-tint="3">
@@ -211,7 +211,7 @@ ORDER BY cohort_month DESC, months_since_join;
       <span class="code-callout__title">Outer query: retention rate and cohort stage label</span>
     </div>
     <div class="code-callout__body">
-      <p>Divides active customers by cohort size to get retention percentage. The CASE labels each cohort-month combination as New (month 0), Early (1–3), Established (4–6), or Loyal (7+). <code>WHERE months_since_join &lt;= 12</code> limits to the first year.</p>
+      <p>Divides active customers by cohort size to get retention percentage. The CASE labels each cohort-month combination as New (month 0), Early (1-3), Established (4-6), or Loyal (7+). <code>WHERE months_since_join &lt;= 12</code> limits to the first year.</p>
     </div>
   </div>
 </aside>
@@ -226,7 +226,7 @@ ORDER BY cohort_month DESC, months_since_join;
 
 {% highlight sql %}
 WITH product_metrics AS (
-    SELECT 
+    SELECT
         p.product_id,
         p.name as product_name,
         p.category,
@@ -246,7 +246,7 @@ WITH product_metrics AS (
     GROUP BY p.product_id, p.name, p.category, p.price, p.cost_price
 ),
 product_rankings AS (
-    SELECT 
+    SELECT
         *,
         ROUND((gross_revenue / NULLIF(units_sold, 0))::numeric, 2) as avg_selling_price,
         ROUND((gross_profit / NULLIF(gross_revenue, 0) * 100)::numeric, 2) as profit_margin,
@@ -254,7 +254,7 @@ product_rankings AS (
         PERCENT_RANK() OVER (ORDER BY gross_revenue) as revenue_percentile
     FROM product_metrics
 )
-SELECT 
+SELECT
     product_name,
     category,
     ROUND(price::numeric, 2) as list_price,
@@ -265,19 +265,19 @@ SELECT
     ROUND(avg_rating::numeric, 2) as avg_rating,
     review_count,
     category_rank,
-    CASE 
+    CASE
         WHEN revenue_percentile >= 0.9 THEN ' Top Performer'
         WHEN revenue_percentile >= 0.7 THEN ' High Performer'
         WHEN revenue_percentile >= 0.4 THEN ' Mid Performer'
         ELSE ' Under Performer'
     END as performance_tier,
-    CASE 
+    CASE
         WHEN profit_margin >= 50 THEN ' High Margin'
         WHEN profit_margin >= 25 THEN ' Good Margin'
         WHEN profit_margin >= 10 THEN ' Fair Margin'
         ELSE ' Low Margin'
     END as margin_category,
-    CASE 
+    CASE
         WHEN avg_rating >= 4.5 THEN ''
         WHEN avg_rating >= 4.0 THEN ''
         WHEN avg_rating >= 3.0 THEN ''
@@ -335,7 +335,7 @@ ORDER BY gross_revenue DESC;
 
 {% highlight sql %}
 WITH inventory_metrics AS (
-    SELECT 
+    SELECT
         p.product_id,
         p.name as product_name,
         p.category,
@@ -349,21 +349,21 @@ WITH inventory_metrics AS (
     LEFT JOIN order_items oi ON p.product_id = oi.product_id
     LEFT JOIN orders o ON oi.order_id = o.order_id
     WHERE o.order_date >= CURRENT_DATE - INTERVAL '30 days'
-    GROUP BY p.product_id, p.name, p.category, p.stock_quantity, 
+    GROUP BY p.product_id, p.name, p.category, p.stock_quantity,
              p.reorder_level, p.cost_price
 ),
 inventory_analysis AS (
-    SELECT 
+    SELECT
         *,
         ROUND(stock_quantity / NULLIF(daily_demand, 0)) as days_of_inventory,
         stock_quantity * cost_price as inventory_value,
-        CASE 
+        CASE
             WHEN stock_quantity = 0 THEN 0
             ELSE ROUND(units_sold_30d::float / stock_quantity * 100, 2)
         END as inventory_turnover
     FROM inventory_metrics
 )
-SELECT 
+SELECT
     product_name,
     category,
     stock_quantity,
@@ -372,20 +372,20 @@ SELECT
     days_of_inventory,
     ROUND(inventory_value::numeric, 2) as inventory_value,
     inventory_turnover,
-    CASE 
+    CASE
         WHEN stock_quantity = 0 THEN ' Out of Stock'
         WHEN stock_quantity <= reorder_level THEN ' Reorder Needed'
         WHEN days_of_inventory >= 90 THEN ' Overstocked'
         WHEN days_of_inventory >= 30 THEN ' Healthy Stock'
         ELSE ' Low Stock'
     END as stock_status,
-    CASE 
+    CASE
         WHEN inventory_turnover >= 50 THEN ' High Turnover'
         WHEN inventory_turnover >= 25 THEN ' Good Turnover'
         WHEN inventory_turnover >= 10 THEN ' Moderate Turnover'
         ELSE ' Slow Turnover'
     END as turnover_rate,
-    CASE 
+    CASE
         WHEN stock_quantity = 0 THEN 'Urgent Reorder'
         WHEN stock_quantity <= reorder_level THEN 'Place Order'
         WHEN days_of_inventory >= 90 THEN 'Consider Promotion'
@@ -411,7 +411,7 @@ ORDER BY inventory_value DESC;
       <span class="code-callout__title">CTE 2: derive days-of-inventory, value, and turnover rate</span>
     </div>
     <div class="code-callout__body">
-      <p><code>stock_quantity / NULLIF(daily_demand, 0)</code> estimates how many days of stock remain. <code>inventory_value = stock_quantity × cost_price</code> is the cash tied up in stock. <code>inventory_turnover</code> is units sold as a percentage of current stock—high values signal fast-moving items.</p>
+      <p><code>stock_quantity / NULLIF(daily_demand, 0)</code> estimates how many days of stock remain. <code>inventory_value = stock_quantity × cost_price</code> is the cash tied up in stock. <code>inventory_turnover</code> is units sold as a percentage of current stock, high values signal fast-moving items.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="29-43" data-tint="3">
@@ -444,16 +444,16 @@ ORDER BY inventory_value DESC;
 
 {% highlight sql %}
 WITH daily_sales AS (
-    SELECT 
+    SELECT
         DATE_TRUNC('day', o.order_date) as sale_date,
         COUNT(DISTINCT o.order_id) as num_orders,
         COUNT(DISTINCT o.customer_id) as num_customers,
         SUM(o.total_amount) as revenue,
         SUM(o.shipping_cost) as shipping_cost,
         SUM(o.discount_amount) as discounts,
-        COUNT(DISTINCT CASE 
+        COUNT(DISTINCT CASE
             WHEN c.join_date = DATE_TRUNC('day', o.order_date)
-            THEN c.customer_id 
+            THEN c.customer_id
         END) as new_customers
     FROM orders o
     JOIN customers c ON o.customer_id = c.customer_id
@@ -461,7 +461,7 @@ WITH daily_sales AS (
     GROUP BY DATE_TRUNC('day', o.order_date)
 ),
 sales_metrics AS (
-    SELECT 
+    SELECT
         *,
         revenue - shipping_cost - discounts as net_revenue,
         revenue / NULLIF(num_orders, 0) as avg_order_value,
@@ -473,20 +473,20 @@ sales_metrics AS (
     FROM daily_sales
 ),
 sales_analysis AS (
-    SELECT 
+    SELECT
         *,
         ROUND(
-            ((revenue - prev_day_revenue) / 
+            ((revenue - prev_day_revenue) /
              NULLIF(prev_day_revenue, 0) * 100)::numeric,
             2
         ) as revenue_growth,
         ROUND(
-            ((num_orders - prev_day_orders)::float / 
+            ((num_orders - prev_day_orders)::float /
              NULLIF(prev_day_orders, 0) * 100)::numeric,
             2
         ) as order_growth,
         ROUND(
-            ((num_customers - prev_day_customers)::float / 
+            ((num_customers - prev_day_customers)::float /
              NULLIF(prev_day_customers, 0) * 100)::numeric,
             2
         ) as customer_growth,
@@ -500,7 +500,7 @@ sales_analysis AS (
         ) as orders_7day_avg
     FROM sales_metrics
 )
-SELECT 
+SELECT
     sale_date,
     num_orders,
     num_customers,
@@ -515,13 +515,13 @@ SELECT
     revenue_growth,
     order_growth,
     customer_growth,
-    CASE 
+    CASE
         WHEN revenue_growth >= 20 THEN ' High Growth'
         WHEN revenue_growth > 0 THEN ' Growing'
         WHEN revenue_growth > -20 THEN ' Declining'
         ELSE ' Sharp Decline'
     END as revenue_trend,
-    CASE 
+    CASE
         WHEN customer_growth >= 20 THEN ' Strong Acquisition'
         WHEN customer_growth > 0 THEN ' Growing Base'
         WHEN customer_growth > -20 THEN ' Customer Loss'
@@ -538,7 +538,7 @@ ORDER BY sale_date DESC;
       <span class="code-callout__title">CTE 1: aggregate daily order, revenue, and new-customer metrics</span>
     </div>
     <div class="code-callout__body">
-      <p>Groups orders by day. <code>COUNT(DISTINCT CASE WHEN c.join_date = DATE_TRUNC('day', o.order_date) THEN c.customer_id END)</code> counts customers whose join date matches today's date—a proxy for new customers placing their first order on each day.</p>
+      <p>Groups orders by day. <code>COUNT(DISTINCT CASE WHEN c.join_date = DATE_TRUNC('day', o.order_date) THEN c.customer_id END)</code> counts customers whose join date matches today's date, a proxy for new customers placing their first order on each day.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="19-30" data-tint="2">
@@ -547,7 +547,7 @@ ORDER BY sale_date DESC;
       <span class="code-callout__title">CTE 2: derive per-day KPIs and prior-day values with LAG</span>
     </div>
     <div class="code-callout__body">
-      <p>Computes net revenue (revenue minus shipping and discounts), AOV, and new-customer percentage. Three <code>LAG(…) OVER (ORDER BY sale_date)</code> calls capture the previous day's values for revenue, orders, and customers—used to calculate day-over-day growth in the next CTE.</p>
+      <p>Computes net revenue (revenue minus shipping and discounts), AOV, and new-customer percentage. Three <code>LAG(…) OVER (ORDER BY sale_date)</code> calls capture the previous day's values for revenue, orders, and customers, used to calculate day-over-day growth in the next CTE.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="32-57" data-tint="3">
@@ -587,7 +587,7 @@ ORDER BY sale_date DESC;
 
 {% highlight sql %}
 WITH campaign_metrics AS (
-    SELECT 
+    SELECT
         mc.campaign_id,
         mc.name as campaign_name,
         mc.start_date,
@@ -603,44 +603,44 @@ WITH campaign_metrics AS (
         COUNT(DISTINCT DATE_TRUNC('day', cp.date)) as campaign_days
     FROM marketing_campaigns mc
     LEFT JOIN campaign_performance cp ON mc.campaign_id = cp.campaign_id
-    GROUP BY 
+    GROUP BY
         mc.campaign_id, mc.name, mc.start_date, mc.end_date,
         mc.budget, mc.target_segment, mc.channel
 ),
 campaign_kpis AS (
-    SELECT 
+    SELECT
         *,
-        CASE 
-            WHEN total_impressions > 0 
+        CASE
+            WHEN total_impressions > 0
             THEN ROUND((total_clicks::float / total_impressions * 100)::numeric, 2)
-            ELSE 0 
+            ELSE 0
         END as ctr,
-        CASE 
-            WHEN total_clicks > 0 
+        CASE
+            WHEN total_clicks > 0
             THEN ROUND((total_conversions::float / total_clicks * 100)::numeric, 2)
-            ELSE 0 
+            ELSE 0
         END as conversion_rate,
-        CASE 
-            WHEN total_conversions > 0 
+        CASE
+            WHEN total_conversions > 0
             THEN ROUND((total_revenue / total_conversions)::numeric, 2)
-            ELSE 0 
+            ELSE 0
         END as revenue_per_conversion,
-        CASE 
-            WHEN total_spend > 0 
+        CASE
+            WHEN total_spend > 0
             THEN ROUND((total_revenue / total_spend)::numeric, 2)
-            ELSE 0 
+            ELSE 0
         END as roas,
         ROUND((total_spend / NULLIF(total_clicks, 0))::numeric, 2) as cpc,
         ROUND((total_spend / NULLIF(total_conversions, 0))::numeric, 2) as cpa,
         total_revenue - total_spend as profit,
-        CASE 
-            WHEN total_spend > 0 
+        CASE
+            WHEN total_spend > 0
             THEN ROUND(((total_revenue - total_spend) / total_spend * 100)::numeric, 2)
-            ELSE 0 
+            ELSE 0
         END as roi
     FROM campaign_metrics
 )
-SELECT 
+SELECT
     campaign_name,
     channel,
     target_segment,
@@ -661,13 +661,13 @@ SELECT
     roi as return_on_investment,
     cpc as cost_per_click,
     cpa as cost_per_acquisition,
-    CASE 
+    CASE
         WHEN roi >= 100 THEN 'Exceptional'
         WHEN roi >= 50 THEN 'Strong'
         WHEN roi >= 0 THEN 'Acceptable'
         ELSE 'Poor'
     END as performance_category,
-    CASE 
+    CASE
         WHEN roi < 0 THEN 'Pause Campaign'
         WHEN cpa > revenue_per_conversion THEN 'Optimize Targeting'
         WHEN budget_utilization < 80 THEN 'Increase Budget'
@@ -726,7 +726,7 @@ ORDER BY roi DESC;
 
 {% highlight sql %}
 WITH supplier_metrics AS (
-    SELECT 
+    SELECT
         s.supplier_id,
         s.company_name,
         s.country,
@@ -736,9 +736,9 @@ WITH supplier_metrics AS (
         SUM(p.stock_quantity * p.cost_price) as inventory_value,
         COUNT(DISTINCT o.order_id) as fulfilled_orders,
         AVG(EXTRACT(EPOCH FROM (sh.actual_delivery - sh.ship_date)) / 86400) as avg_delivery_days,
-        COUNT(DISTINCT CASE 
-            WHEN sh.actual_delivery > sh.estimated_delivery 
-            THEN sh.shipment_id 
+        COUNT(DISTINCT CASE
+            WHEN sh.actual_delivery > sh.estimated_delivery
+            THEN sh.shipment_id
         END)::float / NULLIF(COUNT(DISTINCT sh.shipment_id), 0) * 100 as late_delivery_rate
     FROM suppliers s
     LEFT JOIN products p ON s.supplier_id = p.supplier_id
@@ -748,14 +748,14 @@ WITH supplier_metrics AS (
     GROUP BY s.supplier_id, s.company_name, s.country, s.lead_time_days
 ),
 supplier_performance AS (
-    SELECT 
+    SELECT
         *,
         NTILE(4) OVER (ORDER BY late_delivery_rate DESC) as reliability_quartile,
         NTILE(4) OVER (ORDER BY avg_delivery_days DESC) as speed_quartile,
         NTILE(4) OVER (ORDER BY inventory_value DESC) as value_quartile
     FROM supplier_metrics
 )
-SELECT 
+SELECT
     company_name,
     country,
     lead_time_days,
@@ -765,26 +765,26 @@ SELECT
     fulfilled_orders,
     ROUND(avg_delivery_days::numeric, 1) as avg_delivery_days,
     ROUND(late_delivery_rate::numeric, 2) as late_delivery_rate,
-    CASE 
+    CASE
         WHEN reliability_quartile = 1 THEN 'High Risk'
         WHEN reliability_quartile = 2 THEN 'Medium Risk'
         WHEN reliability_quartile = 3 THEN 'Low Risk'
         ELSE 'Very Reliable'
     END as reliability_rating,
-    CASE 
+    CASE
         WHEN speed_quartile = 1 THEN 'Slow'
         WHEN speed_quartile = 2 THEN 'Moderate'
         WHEN speed_quartile = 3 THEN 'Fast'
         ELSE 'Very Fast'
     END as speed_rating,
-    CASE 
+    CASE
         WHEN value_quartile = 1 THEN 'Strategic'
         WHEN value_quartile = 2 THEN 'Major'
         WHEN value_quartile = 3 THEN 'Medium'
         ELSE 'Minor'
     END as value_rating,
-    CASE 
-        WHEN late_delivery_rate > 20 OR avg_delivery_days > lead_time_days * 1.5 
+    CASE
+        WHEN late_delivery_rate > 20 OR avg_delivery_days > lead_time_days * 1.5
         THEN 'Review Partnership'
         WHEN late_delivery_rate > 10 OR avg_delivery_days > lead_time_days * 1.2
         THEN 'Needs Improvement'
@@ -803,7 +803,7 @@ ORDER BY inventory_value DESC;
       <span class="code-callout__title">CTE 1: join suppliers → products → orders → shipments and aggregate</span>
     </div>
     <div class="code-callout__body">
-      <p>Four LEFT JOINs chain from supplier through products, order items, orders, and shipments. <code>AVG(EXTRACT(EPOCH FROM …)/86400)</code> gives mean actual delivery time in days. The late-delivery rate uses <code>COUNT(DISTINCT CASE WHEN actual &gt; estimated THEN shipment_id END) / NULLIF(total, 0)</code>—a null-safe percentage.</p>
+      <p>Four LEFT JOINs chain from supplier through products, order items, orders, and shipments. <code>AVG(EXTRACT(EPOCH FROM …)/86400)</code> gives mean actual delivery time in days. The late-delivery rate uses <code>COUNT(DISTINCT CASE WHEN actual &gt; estimated THEN shipment_id END) / NULLIF(total, 0)</code>-a null-safe percentage.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="24-30" data-tint="2">
@@ -858,18 +858,18 @@ ORDER BY inventory_value DESC;
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight sql %}
       -- Indexes for frequent joins
       CREATE INDEX idx_orders_customer ON orders(customer_id);
       CREATE INDEX idx_orders_date ON orders(order_date);
-      
+
       -- Indexes for range queries
       CREATE INDEX idx_products_price ON products(price);
       CREATE INDEX idx_inventory_stock ON products(stock_quantity);
-      
+
       -- Composite indexes for common query patterns
-      CREATE INDEX idx_orders_customer_date 
+      CREATE INDEX idx_orders_customer_date
       ON orders(customer_id, order_date DESC);
    {% endhighlight %}
    </div>
@@ -889,7 +889,7 @@ ORDER BY inventory_value DESC;
          <span class="code-callout__title">Composite index for per-customer date-ordered queries</span>
        </div>
        <div class="code-callout__body">
-         <p>The composite <code>(customer_id, order_date DESC)</code> index satisfies queries that filter by customer and sort by date in one index scan—no separate sort step needed. The leading equality column prunes by customer first, then the date sort is already in order.</p>
+         <p>The composite <code>(customer_id, order_date DESC)</code> index satisfies queries that filter by customer and sort by date in one index scan, no separate sort step needed. The leading equality column prunes by customer first, then the date sort is already in order.</p>
        </div>
      </div>
    </aside>
@@ -905,16 +905,16 @@ ORDER BY inventory_value DESC;
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight sql %}
       -- Regular statistics update
       ANALYZE customers;
       ANALYZE orders;
       ANALYZE products;
-      
+
       -- Monitor query performance
-      SELECT * FROM pg_stat_statements 
-      ORDER BY total_time DESC 
+      SELECT * FROM pg_stat_statements
+      ORDER BY total_time DESC
       LIMIT 10;
    {% endhighlight %}
    </div>
@@ -934,7 +934,7 @@ ORDER BY inventory_value DESC;
          <span class="code-callout__title">pg_stat_statements: find the slowest queries</span>
        </div>
        <div class="code-callout__body">
-         <p><code>pg_stat_statements</code> tracks execution statistics for every query the server runs. Ordering by <code>total_time DESC</code> and limiting to 10 surfaces the queries consuming the most cumulative time—the prime candidates for indexing or rewriting.</p>
+         <p><code>pg_stat_statements</code> tracks execution statistics for every query the server runs. Ordering by <code>total_time DESC</code> and limiting to 10 surfaces the queries consuming the most cumulative time, the prime candidates for indexing or rewriting.</p>
        </div>
      </div>
    </aside>
@@ -980,11 +980,11 @@ ORDER BY inventory_value DESC;
 
 ## Gotchas
 
-- **The LEFT JOIN in `customer_metrics` still drops customers who ordered outside the 12-month window** — The CTE uses `LEFT JOIN orders o ON … WHERE o.order_date >= CURRENT_DATE - INTERVAL '12 months'`. Because the date filter is in WHERE (not in the ON clause), customers whose only orders are older than 12 months are excluded entirely rather than showing zero activity. Move the date condition into the ON clause to preserve all customers.
-- **NTILE assigns quartile 1 to the top spenders, not the bottom** — Because `NTILE(4) OVER (ORDER BY total_spent DESC)` sorts descending, quartile 1 is the highest-spending group. When labelling segments, "quartile 1 = VIP" is correct here, but reversing the ORDER BY direction in other uses would flip the meaning silently.
-- **`EXTRACT(MONTH FROM age)` in the retention CTE only returns the month component, not total months elapsed** — If a customer joins in January 2023 and places an order in January 2024, `EXTRACT(MONTH FROM order_month - cohort_month)` returns 0 (same month number), not 12. Use `EXTRACT(YEAR FROM age) * 12 + EXTRACT(MONTH FROM age)` or `DATE_PART('month', AGE(order_month, cohort_month))` to get total months since join.
-- **LEFT JOIN + WHERE on order date silently removes zero-sales products from the 90-day product analysis** — The `product_metrics` CTE LEFT JOINs to orders but then filters `WHERE o.order_date >= CURRENT_DATE - INTERVAL '90 days'`. Products with no recent orders have NULL for `o.order_date`, which fails the filter and is excluded. To keep unsold products, move the date filter into the ON clause or add `OR o.order_date IS NULL`.
-- **NULLIF in discount-rate and profit-margin calculations silently returns NULL instead of zero** — `NULLIF(SUM(o.total_amount), 0)` prevents division by zero but returns NULL for customers with no spend, which then propagates through the ratio. Wrap the whole expression in `COALESCE(… , 0)` if a zero rate is more meaningful to downstream logic than NULL.
-- **Hardcoded CASE thresholds become stale as the dataset grows** — Segment boundaries like `avg_order_value > 500` for "Premium Buyer" or `discount_rate > 20` for "Discount Sensitive" are calibrated to the current data distribution. After ingesting new data, re-examine these cutoffs with percentile queries rather than assuming the original numbers still separate segments meaningfully.
+- **The LEFT JOIN in `customer_metrics` still drops customers who ordered outside the 12-month window**: The CTE uses `LEFT JOIN orders o ON … WHERE o.order_date >= CURRENT_DATE - INTERVAL '12 months'`. Because the date filter is in WHERE (not in the ON clause), customers whose only orders are older than 12 months are excluded entirely rather than showing zero activity. Move the date condition into the ON clause to preserve all customers.
+- **NTILE assigns quartile 1 to the top spenders, not the bottom**: Because `NTILE(4) OVER (ORDER BY total_spent DESC)` sorts descending, quartile 1 is the highest-spending group. When labelling segments, "quartile 1 = VIP" is correct here, but reversing the ORDER BY direction in other uses would flip the meaning silently.
+- **`EXTRACT(MONTH FROM age)` in the retention CTE only returns the month component, not total months elapsed**: If a customer joins in January 2023 and places an order in January 2024, `EXTRACT(MONTH FROM order_month - cohort_month)` returns 0 (same month number), not 12. Use `EXTRACT(YEAR FROM age) * 12 + EXTRACT(MONTH FROM age)` or `DATE_PART('month', AGE(order_month, cohort_month))` to get total months since join.
+- **LEFT JOIN + WHERE on order date silently removes zero-sales products from the 90-day product analysis**: The `product_metrics` CTE LEFT JOINs to orders but then filters `WHERE o.order_date >= CURRENT_DATE - INTERVAL '90 days'`. Products with no recent orders have NULL for `o.order_date`, which fails the filter and is excluded. To keep unsold products, move the date filter into the ON clause or add `OR o.order_date IS NULL`.
+- **NULLIF in discount-rate and profit-margin calculations silently returns NULL instead of zero**: `NULLIF(SUM(o.total_amount), 0)` prevents division by zero but returns NULL for customers with no spend, which then propagates through the ratio. Wrap the whole expression in `COALESCE(… , 0)` if a zero rate is more meaningful to downstream logic than NULL.
+- **Hardcoded CASE thresholds become stale as the dataset grows**: Segment boundaries like `avg_order_value > 500` for "Premium Buyer" or `discount_rate > 20` for "Discount Sensitive" are calibrated to the current data distribution. After ingesting new data, re-examine these cutoffs with percentile queries rather than assuming the original numbers still separate segments meaningfully.
 
 Remember: "Data-driven decisions lead to better business outcomes!"

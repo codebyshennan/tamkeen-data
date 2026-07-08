@@ -1,8 +1,8 @@
 # Data Structures for Data Analysis
 
-**After this lesson:** you can explain the core ideas in “Data Structures for Data Analysis” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Data Structures for Data Analysis and try the examples in your own notebook.
 
-Lists, tuples, dicts, and sets are the **containers** you use before (and alongside) NumPy and pandas. Choosing the right one keeps code readable and fast enough for small and medium tasks; this page is long because it includes **patterns** you will see in data pipelines—skim the TOC mentally, then read the sections that match what you are building.
+Lists, tuples, dicts, and sets are the **containers** you use before (and alongside) NumPy and pandas. Choosing the right one keeps code readable and fast enough for small and medium tasks; this page is long because it includes **patterns** you will see in data pipelines, skim the TOC mentally, then read the sections that match what you are building.
 
 > **Essential Tool:** Open [Python Tutor](https://pythontutor.com) to visualize how data structures work in memory!
 
@@ -16,7 +16,7 @@ Lists, tuples, dicts, and sets are the **containers** you use before (and alongs
 <iframe width="560" height="315" src="https://www.youtube.com/embed/W8KRzm-HUcc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*Corey Schafer — Lists, tuples, and sets*
+*Corey Schafer, Lists, tuples, and sets*
 
 ## Introduction to Data Structures
 
@@ -48,7 +48,7 @@ In Python, we use different "containers" (data structures) to store and organize
 
 ### The Four Main Data Structures You'll Use
 
-Let's start with a simple overview before we dive deep into each one:
+Start with a simple overview before we dive deep into each one:
 
 {% include mermaid-diagram.html src="1-data-fundamentals/1.2-intro-python/diagrams/data-structures-1.mmd" %}
 
@@ -88,19 +88,19 @@ unique_visitors = {"Alice", "Bob", "Charlie"}
 # Order doesn't matter: {1, 2, 3} is the same as {3, 1, 2}
 ```
 
-> **Remember:** 
+> **Remember:**
 > - **Lists** `[]` = Ordered, can change, allows duplicates
 > - **Dictionaries** `{}` = Key-value pairs, fast lookup
 > - **Tuples** `()` = Ordered, CANNOT change (immutable)
 > - **Sets** `{}` = Unordered, unique values only
 
-Now let's explore each one in detail!
+Now we will look at each one in detail!
 
 ---
 
 ### Real-World Data Science Example
 
-Before we dive into details, let's see how these structures work together in a real scenario:
+Before details, look at how these structures work together in a real scenario:
 
 **Scenario: You're analyzing customer data for an online store**
 
@@ -136,7 +136,7 @@ browsed_categories = {"Electronics", "Books", "Clothing", "Electronics"}
 - **Tuple**for record: Historical data should never be modified
 - **Set**for categories: We only care about unique values visited
 
-This is how data scientists organize real data! Now let's learn each structure in depth.
+This is how data scientists organize real data! Now learn each structure in depth.
 
 ---
 
@@ -168,7 +168,7 @@ feature_info = {
 prices_array = np.array(stock_prices)
 
 # Pandas Series: Labeled data
-prices_series = pd.Series(stock_prices, 
+prices_series = pd.Series(stock_prices,
                         index=pd.date_range('2023-01-01', periods=4))
 ```
 
@@ -189,7 +189,7 @@ Each structure optimized for different operations:
 > my_tuple = (1, 2, 3)
 > my_set = {1, 2, 3}
 > my_dict = {'a': 1, 'b': 2, 'c': 3}
-> 
+>
 > # See what happens with operations
 > my_list.append(4)
 > # my_tuple.append(4) # Uncomment to see error!
@@ -425,7 +425,7 @@ shopping.extend(more_items) # Add all items from more_items
 > ```python
 > list1 = [1, 2, 3]
 > list1.append([4, 5])  # Result: [1, 2, 3, [4, 5]] ← list inside list!
-> 
+>
 > list2 = [1, 2, 3]
 > list2.extend([4, 5])  # Result: [1, 2, 3, 4, 5] ← items added individually
 > ```
@@ -489,7 +489,7 @@ data.clear() # Now data = []
 
 ### Advanced List Operations for Data Analysis
 
-Now that you understand the basics, let's see how data scientists use lists:
+Now that you understand the basics, look at how data scientists use lists:
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -562,12 +562,12 @@ def clean_data(data):
 > ```python
 > import numpy as np
 > import time
-> 
+>
 > # List approach
 > start = time.time()
 > result_list = [x * 2 for x in range(1000000)]
 > print(f"List time: {time.time() - start:.4f}s")
-> 
+>
 > # NumPy approach
 > start = time.time()
 > result_array = np.arange(1000000) * 2
@@ -597,7 +597,7 @@ It's a **shortcut way to create new lists**based on existing lists. Think of it 
 
 ### From Loop to Comprehension - Step by Step
 
-Let's see how to transform a regular loop into a list comprehension:
+Look at how to transform a regular loop into a list comprehension:
 
 **Example 1: Squaring Numbers**
 
@@ -840,7 +840,7 @@ odd_squares = [num ** 2 for num in numbers if num % 2 == 1]
 
 ### List Comprehensions in Data Science
 
-Now let's see advanced data science applications:
+Now look at advanced data science applications:
 
 ```python
 import pandas as pd
@@ -896,7 +896,7 @@ for date, symbol, price, volume in records:
 # Named tuples for better readability
 from collections import namedtuple
 
-StockRecord = namedtuple('StockRecord', 
+StockRecord = namedtuple('StockRecord',
                        ['date', 'symbol', 'price', 'volume'])
 
 records = [
@@ -936,21 +936,21 @@ def compare_access():
    tuple_data = tuple(range(1000))
    list_data = list(range(1000))
    """
-   
+
    # Test tuple access
    tuple_time = timeit(
        'x = tuple_data[500]',
        setup=setup,
        number=1000000
    )
-   
+
    # Test list access
    list_time = timeit(
        'x = list_data[500]',
        setup=setup,
        number=1000000
    )
-   
+
    print(f"Tuple access time: {tuple_time:.6f} seconds")
    print(f"List access time: {list_time:.6f} seconds")
 ```
@@ -993,12 +993,12 @@ def find_duplicates(data):
    """Find duplicate values in a sequence"""
    seen = set()
    duplicates = set()
-   
+
    for item in data:
        if item in seen:
            duplicates.add(item)
        seen.add(item)
-   
+
    return duplicates
 ```
 
@@ -1015,7 +1015,7 @@ class DataCleaner:
        self.categorical_cols = set()
        self.numeric_cols = set()
        self._identify_column_types()
-   
+
    def _identify_column_types(self):
        """Identify column types"""
        for col in self.df.columns:
@@ -1023,22 +1023,22 @@ class DataCleaner:
                self.numeric_cols.add(col)
            else:
                self.categorical_cols.add(col)
-   
+
    def standardize_categories(self, columns=None):
        """Standardize categorical values"""
        columns = columns or self.categorical_cols
-       
+
        for col in columns:
            # Get unique values
            unique_values = set(self.df[col].dropna())
-           
+
            # Create mapping for similar values
            mapping = {}
            for value in unique_values:
                key = str(value).lower().strip()
                if key not in mapping:
                    mapping[key] = value
-           
+
            # Apply standardization
            self.df[col] = self.df[col].apply(
                lambda x: mapping.get(
@@ -1102,7 +1102,7 @@ student_age = 20
 student_grade = "A"
 student_is_active = True
 
-# If you have 100 students, you'd need 400 variables! 
+# If you have 100 students, you'd need 400 variables!
 
 # Using a dictionary (organized!)
 student = {
@@ -1192,10 +1192,10 @@ last_item = person.popitem() # Returns tuple: (key, value)
 ```python
 # ALLOWED: Immutable types (strings, numbers, tuples)
 valid_dict = {
-   "name": "Alice",          # String key 
-   42: "The Answer",          # Number key 
-   (10, 20): "Coordinates",   # Tuple key 
-   True: "Yes"                # Boolean key 
+   "name": "Alice",          # String key
+   42: "The Answer",          # Number key
+   (10, 20): "Coordinates",   # Tuple key
+   True: "Yes"                # Boolean key
 }
 
 # NOT ALLOWED: Mutable types (lists, dictionaries, sets)
@@ -1482,18 +1482,18 @@ prices_with_tax = {fruit: price * 1.08 for fruit, price in prices.items()}
 
 ### Advanced Dictionary Patterns for Data Science
 
-Now let's see professional data science applications:
+Now look at professional data science applications:
 
 ```python
 class DatasetMetadata:
    def __init__(self, df):
        self.df = df
        self.metadata = self._generate_metadata()
-   
+
    def _generate_metadata(self):
        """Generate comprehensive dataset metadata"""
        metadata = {}
-       
+
        for column in self.df.columns:
            metadata[column] = {
                'dtype': str(self.df[column].dtype),
@@ -1504,7 +1504,7 @@ class DatasetMetadata:
                'unique_count': self.df[column].nunique(),
                'memory_usage': self.df[column].memory_usage(deep=True)
            }
-           
+
            # Add type-specific metadata
            if np.issubdtype(self.df[column].dtype, np.number):
                metadata[column].update({
@@ -1522,7 +1522,7 @@ class DatasetMetadata:
                        .to_dict()
                    )
                })
-       
+
        return metadata
 ```
 
@@ -1537,7 +1537,7 @@ Efficient data transformations:
 def calculate_feature_stats(df):
    """Calculate statistics for each numeric feature"""
    numeric_cols = df.select_dtypes(include=[np.number]).columns
-   
+
    return {
        col: {
            'mean': df[col].mean(),
@@ -1553,7 +1553,7 @@ def calculate_feature_stats(df):
 def analyze_correlations(df, threshold=0.7):
    """Find highly correlated feature pairs"""
    corr_matrix = df.corr()
-   
+
    return {
        (col1, col2): corr_matrix.loc[col1, col2]
        for col1 in corr_matrix.columns
@@ -1677,9 +1677,9 @@ Remember:
 
 ## Common pitfalls
 
-- **Mutating shared references** — Two variables can point at the same list; appending in one place changes what the other sees.
-- **Using lists as dict keys** — Lists are mutable and not hashable; use tuples or strings as keys instead.
-- **Shallow vs deep copies** — Nested structures may need **copy.deepcopy** when you want a fully independent copy.
+- **Mutating shared references**: Two variables can point at the same list; appending in one place changes what the other sees.
+- **Using lists as dict keys**: Lists are mutable and not hashable; use tuples or strings as keys instead.
+- **Shallow vs deep copies**: Nested structures may need **copy.deepcopy** when you want a fully independent copy.
 
 ## Next steps
 

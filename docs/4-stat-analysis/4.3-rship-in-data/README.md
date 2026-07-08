@@ -4,11 +4,11 @@
 
 ## Overview
 
-Most interesting questions are not about one variable in isolation—they are about **how variables move together** and whether we can **summarize** or **predict** one from others. This unit moves from plots and correlations to linear models with one or many predictors, then to **diagnostics** so you know when a line (or plane) is a fair summary. It bridges [hypothesis testing (4.2)](../4.2-hypotheses-testing/README.md) and the broader modelling topics in [module 4.4](../4.4-stat-modelling/README.md).
+Most interesting questions are not about one variable in isolation, they are about **how variables move together** and whether we can **summarize** or **predict** one from others. This unit moves from plots and correlations to linear models with one or many predictors, then to **diagnostics** so you know when a line (or plane) is a fair summary. It bridges [hypothesis testing (4.2)](../4.2-hypotheses-testing/README.md) and the broader modelling topics in [module 4.4](../4.4-stat-modelling/README.md).
 
 See the [Module 4 overview](../README.md) for prerequisites and how this unit connects to inference and modelling.
 
-Welcome to this guide on understanding relationships in data. The path is: visualize and name relationships, quantify association, fit simple then multiple regression, then check whether the model’s assumptions match the story in the residuals.
+Welcome to this guide on understanding relationships in data. The path is: visualize and name relationships, quantify association, fit simple then multiple regression, then check whether the model's assumptions match the story in the residuals.
 
 ## Helpful video
 

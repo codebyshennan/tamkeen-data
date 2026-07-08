@@ -2,7 +2,7 @@
 
 > **Submit your work on Skills Union →** <https://skillsu.com/member/assessment>
 
-Try each question closed-book first. Click **Show hint** if you get stuck — hints point you at the relevant lesson section and how to think about the question, without naming the answer.
+Try each question closed-book first. Click **Show hint** if you get stuck, hints point you at the relevant lesson section and how to think about the question, without naming the answer.
 
 ## Questions
 
@@ -16,8 +16,8 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Population vs Sample](../population-sample.md) — "What is a Population?"
-- **Think:** Ask which group the researcher wants to draw conclusions about — the people she measured, or the much larger group she cannot fully measure?
+- **Where:** [Population vs Sample](../population-sample.md), "What is a Population?"
+- **Think:** Ask which group the researcher wants to draw conclusions about, the people she measured, or the much larger group she cannot fully measure?
 
 </details>
 
@@ -31,7 +31,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Population vs Sample](../population-sample.md) — "Key terms".
+- **Where:** [Population vs Sample](../population-sample.md), "Key terms".
 - **Think:** A parameter describes the whole population (you usually cannot measure it directly); a statistic is computed from the data you actually collected. Which option comes from a subset?
 
 </details>
@@ -46,12 +46,12 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Population vs Sample](../population-sample.md) — "Sampling Methods: Choosing Your Strategy".
+- **Where:** [Population vs Sample](../population-sample.md), "Sampling Methods: Choosing Your Strategy".
 - **Think:** The key feature here is a fixed interval or skip pattern applied to a list. Which method is defined by that regular spacing?
 
 </details>
 
-4. A hospital researcher divides patients into age groups (under 40, 40–60, over 60) and randomly selects patients from each group. This is an example of:
+4. A hospital researcher divides patients into age groups (under 40, 40-60, over 60) and randomly selects patients from each group. This is an example of:
 
 - [ ] Cluster sampling
 - [ ] Systematic sampling
@@ -61,7 +61,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Population vs Sample](../population-sample.md) — "Stratified Sampling".
+- **Where:** [Population vs Sample](../population-sample.md), "Stratified Sampling".
 - **Think:** This method guarantees representation from each defined sub-group. The population is divided into groups first, then a random draw happens within each group.
 
 </details>
@@ -76,7 +76,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Sampling Distributions](../sampling-distributions.md) — "Standard Error: Measuring the Spread".
+- **Where:** [Sampling Distributions](../sampling-distributions.md), "Standard Error: Measuring the Spread".
 - **Think:** The formula for SE of the mean has n in the denominator, inside a square root. What happens to 1/√n as n grows large?
 
 </details>
@@ -91,7 +91,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Sampling Distributions](../sampling-distributions.md) — "The Central Limit Theorem (CLT): Statistical Magic".
+- **Where:** [Sampling Distributions](../sampling-distributions.md), "The Central Limit Theorem (CLT): Statistical Magic".
 - **Think:** The power of the CLT is that it makes no requirement about the shape of the original data. What does it say about the distribution of sample means as n grows?
 
 </details>
@@ -106,7 +106,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Confidence Intervals](../confidence-intervals.md) — "Common Misconceptions: What CIs Are NOT".
+- **Where:** [Confidence Intervals](../confidence-intervals.md), "Common Misconceptions: What CIs Are NOT".
 - **Think:** A frequentist confidence interval is a statement about the procedure, not about any single interval. The interval either contains the truth or it doesn't; the 95% is a long-run property of the method.
 
 </details>
@@ -121,7 +121,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Confidence Intervals](../confidence-intervals.md) — "Confidence Level Effect".
+- **Where:** [Confidence Intervals](../confidence-intervals.md), "Confidence Level Effect".
 - **Think:** A higher confidence level requires a larger critical value (the t or z multiplier). Larger multiplier × the same standard error = what kind of margin of error?
 
 </details>
@@ -136,7 +136,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Confidence Intervals](../confidence-intervals.md) — "Sample Size Effect" and [Sampling Distributions](../sampling-distributions.md) — "Standard Error: Measuring the Spread".
+- **Where:** [Confidence Intervals](../confidence-intervals.md), "Sample Size Effect" and [Sampling Distributions](../sampling-distributions.md), "Standard Error: Measuring the Spread".
 - **Think:** CI width is proportional to SE = σ/√n. To halve the width, you need to halve the SE. If SE halves, what must happen to n? Apply the square-root relationship.
 
 </details>
@@ -151,7 +151,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [P-values](../p-values.md) — "What is a P-value?" and "What p-values do NOT tell you".
+- **Where:** [P-values](../p-values.md), "What is a P-value?" and "What p-values do NOT tell you".
 - **Think:** The p-value is computed assuming H₀ is true, so it cannot tell you the probability that H₀ is true. It answers: given H₀ is true, how surprising is our result?
 
 </details>
@@ -166,7 +166,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [P-values](../p-values.md) — "Use Multiple Testing Corrections".
+- **Where:** [P-values](../p-values.md), "Use Multiple Testing Corrections".
 - **Think:** Each test has a false positive rate of α = 0.05 when the null is true. Multiply the number of tests by that rate.
 
 </details>
@@ -181,7 +181,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [P-values](../p-values.md) — "Type I error, Type II error, and statistical power".
-- **Think:** The 2×2 decision table has four cells. Type I and Type II label two of the "wrong" cells. Type I is a false alarm; Type II is the other kind of mistake — missing something that is actually there.
+- **Where:** [P-values](../p-values.md), "Type I error, Type II error, and statistical power".
+- **Think:** The 2×2 decision table has four cells. Type I and Type II label two of the "wrong" cells. Type I is a false alarm; Type II is the other kind of mistake, missing something that is actually there.
 
 </details>

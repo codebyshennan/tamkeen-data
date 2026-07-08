@@ -8,7 +8,7 @@ objectives:
 
 # Implementing Random Forest
 
-**After this lesson:** you can explain the core ideas in “Implementing Random Forest” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Implementing Random Forest and try the examples in your own notebook.
 
 ## Overview
 
@@ -19,7 +19,7 @@ objectives:
 
 ### Simple Classification Example
 
-Let's start with a basic example that shows how to create and train a Random Forest classifier:
+Start with a basic example that shows how to create and train a Random Forest classifier:
 
 #### `RandomForestClassifier` on synthetic data
 
@@ -87,7 +87,7 @@ print(classification_report(y_test, y_pred))
 
 ## Real-World Example: Credit Risk Prediction
 
-Let's create a more realistic example that shows how Random Forest can be used in a real-world scenario:
+Create a more realistic example that shows how Random Forest can be used in a real-world scenario:
 
 #### Credit risk: OOB score, probabilities, risk tiers
 
@@ -111,7 +111,7 @@ data = pd.DataFrame({
 
 # Create target variable (high risk = 1, low risk = 0)
 data['risk'] = (
-    (data['debt_ratio'] > 0.4) & 
+    (data['debt_ratio'] > 0.4) &
     (data['credit_score'] < 650)
 ).astype(int)
 
@@ -121,8 +121,8 @@ y = data['risk']
 
 # Split the data
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, 
-    test_size=0.2, 
+    X, y,
+    test_size=0.2,
     random_state=42
 )
 
@@ -178,7 +178,7 @@ print(risk_categories.value_counts())
       <span class="code-callout__title">Key hyperparameters</span>
     </div>
     <div class="code-callout__body">
-      <p><code>max_features='sqrt'</code> means each tree sees only √(n_features) columns per split — the randomness that makes trees diverse. <code>oob_score=True</code> uses samples not in each bootstrap bag as a free validation set. <code>n_jobs=-1</code> uses all CPU cores.</p>
+      <p><code>max_features='sqrt'</code> means each tree sees only √(n_features) columns per split, the randomness that makes trees diverse. <code>oob_score=True</code> uses samples not in each bootstrap bag as a free validation set. <code>n_jobs=-1</code> uses all CPU cores.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="45-49" data-tint="3">
@@ -187,7 +187,7 @@ print(risk_categories.value_counts())
       <span class="code-callout__title">Out-of-bag score</span>
     </div>
     <div class="code-callout__body">
-      <p>Because each tree is trained on a bootstrap sample (~63% of data), the remaining ~37% acts as a held-out test set for that tree. <code>oob_score_</code> aggregates these per-tree estimates — a free generalization measure without a separate validation split.</p>
+      <p>Because each tree is trained on a bootstrap sample (~63% of data), the remaining ~37% acts as a held-out test set for that tree. <code>oob_score_</code> aggregates these per-tree estimates, a free generalization measure without a separate validation split.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="51-64" data-tint="4">
@@ -196,7 +196,7 @@ print(risk_categories.value_counts())
       <span class="code-callout__title">Predict probabilities + risk tiers</span>
     </div>
     <div class="code-callout__body">
-      <p><code>predict_proba</code> returns probabilities for each class; <code>[:, 1]</code> takes the "high risk" column. <code>pd.cut</code> bins the continuous risk score into business-friendly categories — more actionable than raw predictions.</p>
+      <p><code>predict_proba</code> returns probabilities for each class; <code>[:, 1]</code> takes the "high risk" column. <code>pd.cut</code> bins the continuous risk score into business-friendly categories, more actionable than raw predictions.</p>
     </div>
   </div>
 </aside>
@@ -263,7 +263,7 @@ plot_feature_importance(rf, X.columns)
       <span class="code-callout__title">Importance and Variance</span>
     </div>
     <div class="code-callout__body">
-      <p><code>feature_importances_</code> is the mean impurity decrease over all trees; the standard deviation across individual tree importances quantifies how consistently each feature matters — high std means the importance is unstable.</p>
+      <p><code>feature_importances_</code> is the mean impurity decrease over all trees; the standard deviation across individual tree importances quantifies how consistently each feature matters, high std means the importance is unstable.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="16-30" data-tint="2">
@@ -328,7 +328,7 @@ print("Best score:", random_search.best_score_)
       <span class="code-callout__title">Parameter Space</span>
     </div>
     <div class="code-callout__body">
-      <p>Six hyperparameters are searched: tree count (100–500 from uniform integer distribution), depth, split thresholds, leaf size, feature subset method, and bootstrap flag — mixing continuous distributions with discrete lists.</p>
+      <p>Six hyperparameters are searched: tree count (100-500 from uniform integer distribution), depth, split thresholds, leaf size, feature subset method, and bootstrap flag, mixing continuous distributions with discrete lists.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="14-26" data-tint="2">
@@ -381,7 +381,7 @@ print(f"F-{beta} scores:", scores)
       <span class="code-callout__title">Custom Scorer</span>
     </div>
     <div class="code-callout__body">
-      <p><code>make_scorer</code> wraps <code>fbeta_score</code> so it works inside CV functions; beta=0.5 means precision counts twice as much as recall — useful when false positives are costlier than false negatives.</p>
+      <p><code>make_scorer</code> wraps <code>fbeta_score</code> so it works inside CV functions; beta=0.5 means precision counts twice as much as recall, useful when false positives are costlier than false negatives.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="8-13" data-tint="2">
@@ -433,7 +433,7 @@ print("Selected features:", selected_features)
       <span class="code-callout__title">Threshold Selection</span>
     </div>
     <div class="code-callout__body">
-      <p><code>prefit=True</code> skips refitting the forest; <code>threshold='median'</code> retains only the top half of features by importance — a quick way to halve feature dimensionality.</p>
+      <p><code>prefit=True</code> skips refitting the forest; <code>threshold='median'</code> retains only the top half of features by importance, a quick way to halve feature dimensionality.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-13" data-tint="2">
@@ -487,7 +487,7 @@ print(classification_report(y_test, y_pred_balanced))
       <span class="code-callout__title">Balanced Bootstrapping</span>
     </div>
     <div class="code-callout__body">
-      <p><code>BalancedRandomForestClassifier</code> from imbalanced-learn undersamples the majority class in each bootstrap so every tree trains on a balanced subset — reducing the bias toward predicting the majority class.</p>
+      <p><code>BalancedRandomForestClassifier</code> from imbalanced-learn undersamples the majority class in each bootstrap so every tree trains on a balanced subset, reducing the bias toward predicting the majority class.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="10-15" data-tint="2">
@@ -496,7 +496,7 @@ print(classification_report(y_test, y_pred_balanced))
       <span class="code-callout__title">Fit and Compare</span>
     </div>
     <div class="code-callout__body">
-      <p>The same train/test split is reused so the classification report can be compared directly with the standard random forest report — typically showing improved minority-class recall at the cost of some precision.</p>
+      <p>The same train/test split is reused so the classification report can be compared directly with the standard random forest report, typically showing improved minority-class recall at the cost of some precision.</p>
     </div>
   </div>
 </aside>
@@ -608,7 +608,7 @@ pipeline = Pipeline([
       <span class="code-callout__title">Pipeline Integration</span>
     </div>
     <div class="code-callout__body">
-      <p><code>FunctionTransformer</code> wraps the custom function so it participates in sklearn pipelines — the same transformation is automatically applied during both <code>fit</code> and <code>predict</code>.</p>
+      <p><code>FunctionTransformer</code> wraps the custom function so it participates in sklearn pipelines, the same transformation is automatically applied during both <code>fit</code> and <code>predict</code>.</p>
     </div>
   </div>
 </aside>
@@ -676,7 +676,7 @@ loaded_rf = joblib.load('random_forest_model.joblib')
 3. **Overfitting**
 
    - **Purpose:** Constrain **leaf purity** and **depth** so trees do not memorize noise.
-   - **Walkthrough:** Larger **`min_samples_leaf`** and lower **`max_depth`** smooth decision boundaries—pair with CV to choose values.
+   - **Walkthrough:** Larger **`min_samples_leaf`** and lower **`max_depth`** smooth decision boundaries, pair with CV to choose values.
 
    ```python
    from sklearn.ensemble import RandomForestClassifier
@@ -691,12 +691,12 @@ loaded_rf = joblib.load('random_forest_model.joblib')
 
 ## Gotchas
 
-- **`oob_score=True` requires `bootstrap=True`** — setting `bootstrap=False` and `oob_score=True` together raises a `ValueError`; OOB scoring is only meaningful when bootstrap sampling is active because the out-of-bag samples are the ones not selected by bootstrap.
-- **`SelectFromModel` with `prefit=True` freezes the importance threshold at fit time** — if you retrain the forest on new data and call `transform` again without recreating the selector, it still uses the old importance threshold and selected columns, silently producing wrong results.
-- **`predict_proba` columns are ordered by `classes_`, not by label value** — on an imbalanced dataset where class 0 happens to be the minority, `predict_proba[:, 1]` is still the probability of class 1 (the one with higher index in `classes_`); always check `rf.classes_` before indexing into the probability matrix.
-- **`RandomizedSearchCV` does not set `random_state` on the estimator** — the `random_state=42` in `RandomizedSearchCV` controls which parameter combinations are drawn, not the forest's internal randomness; the `RandomForestClassifier` inside also needs its own `random_state` for reproducible trees.
-- **`BalancedRandomForestClassifier` from imbalanced-learn may not be installed** — unlike sklearn estimators, `imblearn` is a separate package; calling it without `pip install imbalanced-learn` raises an `ImportError` with no clear hint about the fix.
-- **`joblib.load` on a model saved with a different sklearn version may silently give wrong predictions** — sklearn pickles embed the version; loading across minor versions (e.g., 1.2 → 1.4) usually works but can break if internal estimator structure changed; always record the sklearn version alongside saved models.
+- **`oob_score=True` requires `bootstrap=True`**: setting `bootstrap=False` and `oob_score=True` together raises a `ValueError`; OOB scoring is only meaningful when bootstrap sampling is active because the out-of-bag samples are the ones not selected by bootstrap.
+- **`SelectFromModel` with `prefit=True` freezes the importance threshold at fit time**: if you retrain the forest on new data and call `transform` again without recreating the selector, it still uses the old importance threshold and selected columns, silently producing wrong results.
+- **`predict_proba` columns are ordered by `classes_`, not by label value**: on an imbalanced dataset where class 0 happens to be the minority, `predict_proba[:, 1]` is still the probability of class 1 (the one with higher index in `classes_`); always check `rf.classes_` before indexing into the probability matrix.
+- **`RandomizedSearchCV` does not set `random_state` on the estimator**: the `random_state=42` in `RandomizedSearchCV` controls which parameter combinations are drawn, not the forest's internal randomness; the `RandomForestClassifier` inside also needs its own `random_state` for reproducible trees.
+- **`BalancedRandomForestClassifier` from imbalanced-learn may not be installed**: unlike sklearn estimators, `imblearn` is a separate package; calling it without `pip install imbalanced-learn` raises an `ImportError` with no clear hint about the fix.
+- **`joblib.load` on a model saved with a different sklearn version may silently give wrong predictions**: sklearn pickles embed the version; loading across minor versions (e.g., 1.2 → 1.4) usually works but can break if internal estimator structure changed; always record the sklearn version alongside saved models.
 
 ## Next Steps
 

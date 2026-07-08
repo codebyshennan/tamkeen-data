@@ -1,6 +1,6 @@
 # Functions in Data Analysis
 
-**After this lesson:** you can explain the core ideas in “Functions in Data Analysis” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Functions in Data Analysis and try the examples in your own notebook.
 
 > **Must Watch:** Functions are WHERE Python Tutor shines! Visualize every function call!
 
@@ -14,13 +14,13 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/9Os0o3wzS_I" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*Corey Schafer — Python functions*
+*Corey Schafer, Python functions*
 
 ## Understanding Functions in Data Science
 
 ### Functions in Data Analysis
 
-A **function** is a named block of code with parameters and (optional) return values. In data work you wrap anything repeated—cleaning a column, computing a metric, plotting a standard figure—so notebooks stay short and tests can target one piece of logic.
+A **function** is a named block of code with parameters and (optional) return values. In data work you wrap anything repeated, cleaning a column, computing a metric, plotting a standard figure, so notebooks stay short and tests can target one piece of logic.
 
 Think of each function as a reusable **input → process → output** pipeline:
 
@@ -30,7 +30,7 @@ Think of each function as a reusable **input → process → output** pipeline:
 
 {% include mermaid-diagram.html src="1-data-fundamentals/1.2-intro-python/diagrams/functions-1.mmd" %}
 
-*Once defined, the same function can be called on any column — that's the reusability win.*
+*Once defined, the same function can be called on any column, that's the reusability win.*
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -42,10 +42,10 @@ import numpy as np
 def analyze_numeric_column(data: pd.Series) -> dict:
    """
    Analyze a numeric column and return basic statistics.
-   
+
    Args:
        data: Pandas Series containing numeric data
-       
+
    Returns:
        Dictionary of statistics
    """
@@ -120,7 +120,7 @@ print(stats)
 >   count = len(numbers)
 >   average = total / count
 >   return average
-> 
+>
 > data = [10, 20, 30, 40, 50]
 > result = calculate_average(data)
 > print(f"Average: {result}")
@@ -129,7 +129,7 @@ print(stats)
 ```
 Average: 30.0
 ```
-> 
+>
 > **Watch carefully:**
 > - Function definition vs function call
 > - How parameters receive values
@@ -186,7 +186,7 @@ df2_scaled = (df2_cleaned - df2_cleaned.mean()) / df2_cleaned.std()
       <span class="code-callout__title">Dataset 2</span>
     </div>
     <div class="code-callout__body">
-      <p>Identical logic repeated—motivation for a function.</p>
+      <p>Identical logic repeated, motivation for a function.</p>
     </div>
   </div>
 </aside>
@@ -203,11 +203,11 @@ def preprocess_dataset(df: pd.DataFrame) -> pd.DataFrame:
    # Check missing values
    nulls = df.isnull().sum()
    print(f"Missing values:\n{nulls}")
-   
+
    # Clean and scale
    df_cleaned = df.dropna()
    df_scaled = (df_cleaned - df_cleaned.mean()) / df_cleaned.std()
-   
+
    return df_scaled
 
 # Now we can process any dataset consistently
@@ -243,7 +243,7 @@ df2_processed = preprocess_dataset(df2)
 > ```python
 > def add_ten(number):
 >   return number + 10
-> 
+>
 > x = 5
 > y = add_ten(x)
 > print(f"Original: {x}, Result: {y}")
@@ -280,32 +280,32 @@ def process_timeseries(
 ) -> Dict[str, Union[pd.Series, float]]:
    """
    Process time series data with rolling statistics.
-   
+
    Args:
        data: Time series data
        window: Rolling window size
        method: Aggregation method ('mean' or 'median')
-   
+
    Returns:
        Dictionary containing processed data and statistics
-   
+
    Raises:
        ValueError: If method is not supported
    """
    # Convert to pandas Series if numpy array
    if isinstance(data, np.ndarray):
        data = pd.Series(data)
-   
+
    # Validate method
    if method not in ['mean', 'median']:
        raise ValueError(f"Method {method} not supported")
-   
+
    # Calculate rolling statistics
    if method == 'mean':
        rolling = data.rolling(window).mean()
    else:
        rolling = data.rolling(window).median()
-   
+
    return {
        'original': data,
        'rolling': rolling,
@@ -389,38 +389,38 @@ def process_dataset(
 ) -> pd.DataFrame:
    """
    Process dataset with configurable options.
-   
+
    Args:
        df: Input DataFrame
        numeric_columns: Columns to process
        config: Processing configuration
-   
+
    Returns:
        Processed DataFrame
    """
    # Use default config if none provided
    if config is None:
        config = ProcessingConfig()
-   
+
    # Work on copy
    df = df.copy()
-   
+
    for col in numeric_columns:
        # Remove outliers
        if config.remove_outliers:
            z_scores = np.abs((df[col] - df[col].mean()) / df[col].std())
            df.loc[z_scores > config.outlier_threshold, col] = np.nan
-       
+
        # Fill missing values
        if config.fill_method == 'mean':
            df[col] = df[col].fillna(df[col].mean())
        elif config.fill_method == 'median':
            df[col] = df[col].fillna(df[col].median())
-       
+
        # Scale data
        if config.scaling:
            df[col] = (df[col] - df[col].mean()) / df[col].std()
-   
+
    return df
 
 # Using the function
@@ -439,7 +439,7 @@ custom_config = ProcessingConfig(
    scaling=False
 )
 result_custom = process_dataset(
-   df, 
+   df,
    numeric_columns=['A', 'B'],
    config=custom_config
 )
@@ -515,10 +515,10 @@ def analyze_distribution(
 ) -> Dict[str, Any]:
    """
    Analyze distribution of data.
-   
+
    Args:
        data: Numeric data to analyze
-       
+
    Returns:
        Dictionary containing:
        - Basic statistics
@@ -528,7 +528,7 @@ def analyze_distribution(
    # Convert to numpy array
    if isinstance(data, pd.Series):
        data = data.dropna().values
-   
+
    # Basic statistics
    basic_stats = {
        'mean': np.mean(data),
@@ -537,7 +537,7 @@ def analyze_distribution(
        'skew': stats.skew(data),
        'kurtosis': stats.kurtosis(data)
    }
-   
+
    # Normality test
    shapiro_stat, shapiro_p = stats.shapiro(data)
    normality_test = {
@@ -545,7 +545,7 @@ def analyze_distribution(
        'p_value': shapiro_p,
        'is_normal': shapiro_p > 0.05
    }
-   
+
    # Fit distribution
    dist_params = stats.norm.fit(data)
    distribution = {
@@ -555,7 +555,7 @@ def analyze_distribution(
            'scale': dist_params[1]
        }
    }
-   
+
    return {
        'statistics': basic_stats,
        'normality_test': normality_test,
@@ -673,7 +673,7 @@ import numpy as np
 def validate_dataframe(required_columns=None, numeric_only=False):
    """
    Decorator to validate DataFrame inputs.
-   
+
    Args:
        required_columns: List of required column names
        numeric_only: Whether to check for numeric columns
@@ -684,7 +684,7 @@ def validate_dataframe(required_columns=None, numeric_only=False):
            # Check DataFrame type
            if not isinstance(df, pd.DataFrame):
                raise TypeError("Input must be a pandas DataFrame")
-           
+
            # Check required columns
            if required_columns:
                missing_cols = set(required_columns) - set(df.columns)
@@ -692,7 +692,7 @@ def validate_dataframe(required_columns=None, numeric_only=False):
                    raise ValueError(
                        f"Missing required columns: {missing_cols}"
                    )
-           
+
            # Check numeric columns
            if numeric_only:
                non_numeric = df[required_columns].select_dtypes(
@@ -702,7 +702,7 @@ def validate_dataframe(required_columns=None, numeric_only=False):
                    raise ValueError(
                        f"Non-numeric columns found: {non_numeric}"
                    )
-           
+
            return func(df, *args, **kwargs)
        return wrapper
    return decorator
@@ -803,15 +803,15 @@ from functools import lru_cache
 class DataProcessor:
    def __init__(self, chunk_size: int = 10000):
        self.chunk_size = chunk_size
-   
+
    @lru_cache(maxsize=128)
    def calculate_statistics(self, values: tuple) -> Dict:
        """
        Calculate statistics with caching for repeated calculations.
-       
+
        Args:
            values: Tuple of values (must be tuple for caching)
-           
+
        Returns:
            Dictionary of statistics
        """
@@ -820,7 +820,7 @@ class DataProcessor:
            'std': np.std(values),
            'median': np.median(values)
        }
-   
+
    def process_large_dataset(
        self,
        df: pd.DataFrame,
@@ -828,21 +828,21 @@ class DataProcessor:
    ) -> Dict[str, Dict]:
        """
        Process large dataset in chunks.
-       
+
        Args:
            df: Input DataFrame
            columns: Columns to process
-           
+
        Returns:
            Dictionary of results per column
        """
        results = {col: [] for col in columns}
-       
+
        # Process in chunks
        for start in range(0, len(df), self.chunk_size):
            end = start + self.chunk_size
            chunk = df.iloc[start:end]
-           
+
            # Process each column
            for col in columns:
                # Convert to tuple for caching
@@ -850,7 +850,7 @@ class DataProcessor:
                if values:
                    stats = self.calculate_statistics(values)
                    results[col].append(stats)
-       
+
        # Combine chunk results
        final_results = {}
        for col in columns:
@@ -860,7 +860,7 @@ class DataProcessor:
                    'std': np.mean([r['std'] for r in results[col]]),
                    'median': np.median([r['median'] for r in results[col]])
                }
-       
+
        return final_results
 
 # Using the optimized processor
@@ -979,18 +979,18 @@ def preprocess_features(
 ) -> Tuple[pd.DataFrame, Dict[str, Any]]:
    """
    Preprocess features for machine learning.
-   
+
    Args:
        df: Input DataFrame
        numeric_features: List of numeric feature names
        categorical_features: List of categorical feature names
        scaling: Whether to apply standard scaling
-   
+
    Returns:
        Tuple containing:
        - Processed DataFrame
        - Dictionary of transformation parameters
-   
+
    Example:
        >>> df = pd.DataFrame({
        ...     'age': [25, 30, 35],
@@ -1061,16 +1061,16 @@ def analyze_timeseries(
    # Input validation
    if not isinstance(data, pd.Series):
        raise TypeError("Input must be pandas Series")
-   
+
    if not pd.api.types.is_numeric_dtype(data):
        raise ValueError("Series must contain numeric data")
-   
+
    if window_size < 1:
        raise ValueError("Window size must be positive")
-   
+
    if window_size >= len(data):
        raise ValueError("Window size too large for data")
-   
+
    try:
        # Calculate statistics
        results = {
@@ -1123,16 +1123,16 @@ def analyze_timeseries(
 {% highlight python %}
 class DataAnalyzer:
    """Modular data analysis pipeline"""
-   
+
    def __init__(self, df: pd.DataFrame):
        self.df = df.copy()
        self.results = {}
-   
+
    def clean_data(self) -> 'DataAnalyzer':
        """Clean the dataset"""
        self.df = self.df.dropna()
        return self
-   
+
    def calculate_statistics(self) -> 'DataAnalyzer':
        """Calculate basic statistics"""
        self.results['statistics'] = {
@@ -1143,13 +1143,13 @@ class DataAnalyzer:
            for col in self.df.select_dtypes(include=[np.number])
        }
        return self
-   
+
    def analyze_correlations(self) -> 'DataAnalyzer':
        """Analyze feature correlations"""
        numeric_cols = self.df.select_dtypes(include=[np.number])
        self.results['correlations'] = numeric_cols.corr()
        return self
-   
+
    def get_results(self) -> Dict[str, Any]:
        """Get analysis results"""
        return self.results
@@ -1171,7 +1171,7 @@ results = (analyzer
       <span class="code-callout__title">Class header and constructor</span>
     </div>
     <div class="code-callout__body">
-      <p><code>df.copy()</code> prevents accidental mutation of the caller's DataFrame. <code>self.results</code> is a shared dict that each method populates — returned at the end of the chain.</p>
+      <p><code>df.copy()</code> prevents accidental mutation of the caller's DataFrame. <code>self.results</code> is a shared dict that each method populates, returned at the end of the chain.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="8-11" data-tint="2">
@@ -1180,7 +1180,7 @@ results = (analyzer
       <span class="code-callout__title">clean_data</span>
     </div>
     <div class="code-callout__body">
-      <p>Drops rows with any missing value. Returning <code>self</code> is what makes method chaining possible — the next method call goes on the same object.</p>
+      <p>Drops rows with any missing value. Returning <code>self</code> is what makes method chaining possible, the next method call goes on the same object.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="13-22" data-tint="3">
@@ -1189,7 +1189,7 @@ results = (analyzer
       <span class="code-callout__title">calculate_statistics</span>
     </div>
     <div class="code-callout__body">
-      <p>A dict comprehension builds one <code>{mean, std}</code> entry per numeric column. <code>select_dtypes(include=[np.number])</code> automatically skips text columns — the result is stored in <code>self.results['statistics']</code>.</p>
+      <p>A dict comprehension builds one <code>{mean, std}</code> entry per numeric column. <code>select_dtypes(include=[np.number])</code> automatically skips text columns, the result is stored in <code>self.results['statistics']</code>.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="24-32" data-tint="4">
@@ -1248,7 +1248,7 @@ def calculate_zscore_fast(df: pd.DataFrame) -> pd.DataFrame:
       <span class="code-callout__title">Loop version</span>
     </div>
     <div class="code-callout__body">
-      <p>Nested loops and per-cell loc—slow on big frames.</p>
+      <p>Nested loops and per-cell loc, slow on big frames.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="13-15" data-tint="2">
@@ -1275,13 +1275,13 @@ def process_large_file(
 ) -> pd.DataFrame:
    """Process large CSV file in chunks"""
    results = []
-   
+
    # Process file in chunks
    for chunk in pd.read_csv(filepath, chunksize=chunksize):
        # Process chunk
        processed = chunk.groupby('category')['value'].mean()
        results.append(processed)
-   
+
    # Combine results
    return pd.concat(results).groupby(level=0).mean()
 {% endhighlight %}
@@ -1323,7 +1323,7 @@ class FeatureEngine:
        """Calculate expensive feature with caching"""
        # Expensive computation here
        return some_expensive_calculation(values)
-   
+
    def process_dataset(self, df: pd.DataFrame) -> pd.DataFrame:
        results = []
        for group in df.groupby('category'):
@@ -1369,7 +1369,7 @@ class FeatureEngine:
 def calculate_statistics(numbers):
    """
    Calculate basic statistics for a list of numbers.
-   
+
    Your function should return a dictionary with:
    - mean
    - median
@@ -1533,25 +1533,25 @@ print(f"Total: ${total}, Average: ${avg:.2f}")
 def process_dataset(data):
    """
    Main function that uses helper functions.
-   
+
    Create helper functions inside:
    - validate_data(data)
    - remove_outliers(data)
    - normalize_data(data)
    """
-   
+
    def validate_data(d):
        # Your code...
        pass
-   
+
    def remove_outliers(d):
        # Your code...
        pass
-   
+
    def normalize_data(d):
        # Your code...
        pass
-   
+
    # Use helper functions
    # Your code here...
    pass
@@ -1617,7 +1617,7 @@ def convert_temperature(value, from_unit, to_unit):
       <span class="code-callout__title">Signature</span>
     </div>
     <div class="code-callout__body">
-      <p>Units in/out—implementation left to learner.</p>
+      <p>Units in/out, implementation left to learner.</p>
     </div>
   </div>
 </aside>
@@ -1749,9 +1749,9 @@ Remember:
 
 ## Common pitfalls
 
-- **Forgetting return** — If you omit **return**, the function returns **None**; Python Tutor shows this clearly.
-- **Mutable default arguments** — Do not use **def f(items=[])**; use **None** and assign **items = items or []** inside.
-- **Shadowing names** — Reusing a name for a parameter and an outer variable makes bugs hard to spot.
+- **Forgetting return**: If you omit **return**, the function returns **None**; Python Tutor shows this clearly.
+- **Mutable default arguments**: Do not use **def f(items=[])**; use **None** and assign **items = items or []** inside.
+- **Shadowing names**: Reusing a name for a parameter and an outer variable makes bugs hard to spot.
 
 ## Next steps
 

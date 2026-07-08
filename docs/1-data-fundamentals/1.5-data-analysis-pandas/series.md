@@ -1,6 +1,6 @@
 # Understanding Pandas Series
 
-**After this lesson:** You can create a **Series**, interpret its index and **dtype**, and perform basic math and summary stats—thinking of it as one labeled column.
+**After this lesson:** You can create a **Series**, interpret its index and **dtype**, and perform basic math and summary stats, thinking of it as one labeled column.
 
 ## Overview
 
@@ -14,7 +14,7 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/zmdjNSmRXF4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*Corey Schafer — Python pandas tutorial (part 2): DataFrame and Series basics*
+*Corey Schafer, Python pandas tutorial (part 2): DataFrame and Series basics*
 
 ## What is a Series?
 
@@ -22,7 +22,7 @@ A Pandas Series is like a column in a spreadsheet or a single list of data with 
 
 {% include mermaid-diagram.html src="1-data-fundamentals/1.5-data-analysis-pandas/diagrams/series-1.mmd" %}
 
-*An index label sits next to each value — this is what makes a Series smarter than a plain Python list.*
+*An index label sits next to each value, this is what makes a Series smarter than a plain Python list.*
 
 - Time series data (stock prices over time)
 - Storing categorical data (product categories)
@@ -40,7 +40,7 @@ Real-world applications:
 
 ### Creating Your First Series
 
-Let's explore different ways to create a Series:
+we will look at different ways to create a Series:
 
 **Construct Series from list, array, scalar, and custom index**
 
@@ -131,7 +131,7 @@ You can create your own labels (called an index) for each value:
 
 ```python
 # Create a Series with custom labels
-grades = pd.Series([90, 85, 95, 78], 
+grades = pd.Series([90, 85, 95, 78],
                   index=['Alice', 'Bob', 'Charlie', 'David'])
 print(grades)
 ```
@@ -205,7 +205,7 @@ A Series can be created from a dictionary, where:
 
 **Series from mapping**
 
-- **Purpose:** See how dict **keys → index** and **values → data**—common when you already have a lookup table in Python.
+- **Purpose:** See how dict **keys → index** and **values → data**-common when you already have a lookup table in Python.
 - **Walkthrough:** Order of rows follows insertion order (Python 3.7+ dicts).
 
 ```python
@@ -314,7 +314,7 @@ Pandas provides tools to work with missing data:
 **Detect, drop, or fill NaNs**
 
 - **Purpose:** Use `isna`, `dropna`, and `fillna` as the minimal toolkit before aggregating.
-- **Walkthrough:** `scores.fillna(0)` is illustrative—choose a fill rule that matches your domain.
+- **Walkthrough:** `scores.fillna(0)` is illustrative, choose a fill rule that matches your domain.
 
 ```python
 # Check for missing values
@@ -362,7 +362,7 @@ Series support mathematical operations, just like regular numbers:
 
 **Broadcast scalar addition**
 
-- **Purpose:** See element-wise `grades + 5` with **index preserved**—the same rule as NumPy broadcasting, but with labels.
+- **Purpose:** See element-wise `grades + 5` with **index preserved**-the same rule as NumPy broadcasting, but with labels.
 - **Walkthrough:** `Alice`/`Bob`/`Charlie` keys stay aligned.
 
 ```python
@@ -432,9 +432,9 @@ Remember: A Series is just the beginning. Once you're comfortable with Series, y
 
 ## Common pitfalls
 
-- Forgetting that **Series** alignment is by **index** — operations pair labels, not just positions.
+- Forgetting that **Series** alignment is by **index**, operations pair labels, not just positions.
 - Mixing up **loc** (label-based) and **iloc** (position-based) when you slice (covered in more detail in later lessons).
-- Ignoring **NaN** values before calling **.mean()** or similar — check **.isna()** first when data is messy.
+- Ignoring **NaN** values before calling **.mean()** or similar, check **.isna()** first when data is messy.
 
 ## Next steps
 

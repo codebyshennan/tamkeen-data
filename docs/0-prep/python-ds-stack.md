@@ -23,7 +23,7 @@ The "Python Data Science Stack" refers to a collection of essential libraries (p
 
 ## Helpful video
 
-Ultra-quick **pandas** warm-up (under 7 minutes): DataFrames, a few operations, and a tiny exercise—enough to see why the stack matters after you install it.
+Ultra-quick **pandas** warm-up (under 7 minutes): DataFrames, a few operations, and a tiny exercise, enough to see why the stack matters after you install it.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/m1_33jhhiLE" title="Learn PANDAS in 5 minutes | Pandas Ultraquick Tutorial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -32,7 +32,7 @@ Ultra-quick **pandas** warm-up (under 7 minutes): DataFrames, a few operations, 
 Before you begin, make sure you have:
 
 * **Python 3.10 or newer** installed (for new environments, **3.12** is a practical default; **3.11** and **3.13** are fine if your team or instructor standardizes on them)
-* **A package manager** — Either Anaconda or **uv** (see the Anaconda setup guide)
+* **A package manager**: Either Anaconda or **uv** (see the Anaconda setup guide)
 
 > **Don't have Python yet?** If you install Anaconda, Python comes with it! If you're using **uv**, you'll need Python installed separately.
 
@@ -183,12 +183,12 @@ uv pip install numpy pandas matplotlib seaborn scikit-learn statsmodels jupyter 
 
 ## Gotchas
 
-- **Install into the wrong environment** — if `(dsai)` (or `.venv`) is not visible in your prompt, you are installing into the wrong Python. Activate your environment first, then install.
-- **`ModuleNotFoundError` even after installing** — the package went into a different env than your running Python. Check `which python` (macOS/Linux) or `where python` (Windows) and confirm it points to your course env before retrying.
-- **Mixing conda and pip** — in a conda env, `conda install` sets up compiled wheels and their system dependencies correctly; random `pip install` can overwrite them with incompatible builds. Use `conda-forge` first; fall back to `pip` only when a package is not on conda-forge.
-- **`great_expectations` conflicts** — it pulls in a large dependency tree. If it blocks other installs, install it last, or omit it until the data engineering module explicitly requires it.
-- **NumPy 2.x deprecation warnings** — libraries like statsmodels may emit warnings against NumPy 2. They still work; treat warnings as informational unless you see an actual error.
-- **Matplotlib shows no plot window in a script** — outside a notebook, add `plt.show()` at the end of your script, or use `%matplotlib inline` at the top of a Jupyter notebook.
+- **Install into the wrong environment**: if `(dsai)` (or `.venv`) is not visible in your prompt, you are installing into the wrong Python. Activate your environment first, then install.
+- **`ModuleNotFoundError` even after installing**: the package went into a different env than your running Python. Check `which python` (macOS/Linux) or `where python` (Windows) and confirm it points to your course env before retrying.
+- **Mixing conda and pip**: in a conda env, `conda install` sets up compiled wheels and their system dependencies correctly; random `pip install` can overwrite them with incompatible builds. Use `conda-forge` first; fall back to `pip` only when a package is not on conda-forge.
+- **`great_expectations` conflicts**: it pulls in a large dependency tree. If it blocks other installs, install it last, or omit it until the data engineering module explicitly requires it.
+- **NumPy 2.x deprecation warnings**: libraries like statsmodels may emit warnings against NumPy 2. They still work; treat warnings as informational unless you see an actual error.
+- **Matplotlib shows no plot window in a script**: outside a notebook, add `plt.show()` at the end of your script, or use `%matplotlib inline` at the top of a Jupyter notebook.
 
 
 

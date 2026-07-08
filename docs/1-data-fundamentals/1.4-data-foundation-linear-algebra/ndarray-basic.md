@@ -1,6 +1,6 @@
 # NumPy Array Basics: Math Magic
 
-**After this lesson:** you can explain the core ideas in “NumPy Array Basics: Math Magic” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain NumPy Array Basics: Math Magic and try the examples in your own notebook.
 
 ### Video
 
@@ -8,7 +8,7 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/XkY2DOUCWMU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*3Blue1Brown — Matrix multiplication as composition (Essence of linear algebra)*
+*3Blue1Brown, Matrix multiplication as composition (Essence of linear algebra)*
 
 ## Overview
 
@@ -357,9 +357,9 @@ Rows  ┌───────────┐
 
 ## Common pitfalls
 
-- **View side effects** — Assigning through a slice can change the parent array; use **.copy()** when you want an independent array.
-- **Axis mix-ups** — **axis=0** aggregates down rows in many functions; say the shape out loud before you pick an axis.
-- **Reshape without matching size** — Total elements must match; use **-1** in one dimension only when NumPy can infer it.
+- **View side effects**: Assigning through a slice can change the parent array; use **.copy()** when you want an independent array.
+- **Axis mix-ups**: **axis=0** aggregates down rows in many functions; say the shape out loud before you pick an axis.
+- **Reshape without matching size**: Total elements must match; use **-1** in one dimension only when NumPy can infer it.
 
 ## Next steps
 

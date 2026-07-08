@@ -1,6 +1,6 @@
 # Exploratory Data Analysis: From Data to Insights
 
-**After this submodule:** Profile a dataset, plot distributions and relationships, and document findings before modeling—using a repeatable **EDA workflow** (see the mermaid diagram below).
+**After this submodule:** Profile a dataset, plot distributions and relationships, and document findings before modeling, using a repeatable **EDA workflow** (see the mermaid diagram below).
 
 ## Overview
 
@@ -12,16 +12,16 @@
 
 ## Lesson path (site order)
 
-1. [Distributions](distributions.md)  
-2. [Relationships](relationships.md)  
-3. [Time series](time-series.md)  
-4. [EDA project](project.md)  
+1. [Distributions](distributions.md)
+2. [Relationships](relationships.md)
+3. [Time series](time-series.md)
+4. [EDA project](project.md)
 
 ## Why this matters
 
 EDA is where you catch **skewed distributions**, **leaky features**, **wrong units**, and **silent missingness** before they become a pretty chart or a bad model. A short, repeatable EDA pass saves hours of debugging later and gives stakeholders confidence in your numbers.
 
-Exploratory Data Analysis (EDA) is the crucial first step in any data analysis project. It is like being a detective: you investigate your data to uncover patterns, spot anomalies, test hypotheses, and check assumptions. Through EDA, you turn raw tables into questions you can answer with statistics or visualization.
+Exploratory Data Analysis (EDA) is the important first step in any data analysis project. It is like being a detective: you investigate your data to uncover patterns, spot anomalies, test hypotheses, and check assumptions. Through EDA, you turn raw tables into questions you can answer with statistics or visualization.
 
 ### Video Tutorial: Exploratory Data Analysis
 
@@ -59,10 +59,10 @@ from scipy import stats
 
 class DataExplorer:
     """A comprehensive framework for exploratory data analysis.
-    
+
     This class provides methods to systematically explore and understand your dataset
     through summary statistics, visualizations, and pattern detection.
-    
+
     Key Features:
     - Automated data type detection
     - Comprehensive summary statistics
@@ -71,22 +71,22 @@ class DataExplorer:
     - Distribution visualization
     - Relationship exploration
     """
-    
+
     def __init__(self, df):
         self.df = df
         self.numeric_cols = df.select_dtypes(include=[np.number]).columns
         self.categorical_cols = df.select_dtypes(include=['object']).columns
-        
+
     def generate_summary(self):
         """Generate a comprehensive data summary including statistics and data quality metrics.
-        
+
         This method provides a complete overview of your dataset by analyzing:
         - Basic information (shape, data types, memory usage)
         - Numeric column statistics (mean, std, quartiles, etc.)
         - Categorical column summaries (unique values, frequencies)
         - Missing data patterns
         - Correlation structure
-        
+
         Returns:
             dict: A dictionary containing various summary metrics and analyses
         """
@@ -102,7 +102,7 @@ class DataExplorer:
             'correlations': self.analyze_correlations()
         }
         return summary
-    
+
     def analyze_missing_data(self):
         """Analyze missing values"""
         missing = pd.DataFrame({
@@ -110,28 +110,28 @@ class DataExplorer:
             'percentage': (self.df.isnull().sum() / len(self.df)) * 100
         })
         return missing[missing['count'] > 0]
-    
+
     def analyze_correlations(self):
         """Analyze correlations between numeric variables"""
         return self.df[self.numeric_cols].corr()
-    
+
     def plot_distributions(self):
         """Plot distributions for all numeric variables"""
         n_cols = len(self.numeric_cols)
         fig, axes = plt.subplots(n_cols, 2, figsize=(15, 5*n_cols))
-        
+
         for i, col in enumerate(self.numeric_cols):
             # Histogram
             sns.histplot(self.df[col], kde=True, ax=axes[i,0])
             axes[i,0].set_title(f'{col} Distribution')
-            
+
             # Box plot
             sns.boxplot(y=self.df[col], ax=axes[i,1])
             axes[i,1].set_title(f'{col} Box Plot')
-        
+
         plt.tight_layout()
         plt.show()
-    
+
     def plot_relationships(self):
         """Plot relationships between variables"""
         # Correlation heatmap
@@ -139,7 +139,7 @@ class DataExplorer:
         sns.heatmap(self.analyze_correlations(), annot=True, cmap='coolwarm')
         plt.title('Correlation Matrix')
         plt.show()
-        
+
         # Scatter matrix
         if len(self.numeric_cols) > 1:
             pd.plotting.scatter_matrix(
@@ -148,19 +148,19 @@ class DataExplorer:
                 diagonal='kde'
             )
             plt.show()
-    
+
     def analyze_categorical(self):
         """Analyze categorical variables"""
         for col in self.categorical_cols:
             plt.figure(figsize=(10, 5))
-            
+
             # Value counts
             counts = self.df[col].value_counts()
             sns.barplot(x=counts.index, y=counts.values)
             plt.title(f'{col} Value Counts')
             plt.xticks(rotation=45)
             plt.show()
-            
+
             # Cross-tabulations with numeric variables
             for num_col in self.numeric_cols:
                 plt.figure(figsize=(10, 5))
@@ -195,7 +195,7 @@ class DataExplorer:
       <span class="code-callout__title">generate_summary</span>
     </div>
     <div class="code-callout__body">
-      <p>Builds a dict with <code>basic_info</code> (shape, dtypes, memory), numeric and categorical <code>describe()</code> outputs, missing-data counts, and the correlation matrix—all in one call.</p>
+      <p>Builds a dict with <code>basic_info</code> (shape, dtypes, memory), numeric and categorical <code>describe()</code> outputs, missing-data counts, and the correlation matrix, all in one call.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="54-65" data-tint="4">
@@ -236,20 +236,20 @@ class DataExplorer:
 {% highlight python %}
 class AdvancedAnalyzer:
     """Advanced techniques for in-depth exploratory data analysis.
-    
+
     This class implements sophisticated methods for:
     - Outlier detection using multiple methods
     - Distribution analysis with statistical tests
     - Time pattern analysis with decomposition
     - Advanced visualization techniques
-    
+
     Perfect for when you need to dig deeper into your data's characteristics
     and uncover subtle patterns or anomalies.
     """
-    
+
     def __init__(self, df):
         self.df = df
-        
+
     def detect_outliers(self, column, method='zscore'):
         """Detect outliers using multiple methods"""
         if method == 'zscore':
@@ -260,7 +260,7 @@ class AdvancedAnalyzer:
             Q3 = self.df[column].quantile(0.75)
             IQR = Q3 - Q1
             return (self.df[column] < (Q1 - 1.5 * IQR)) | (self.df[column] > (Q3 + 1.5 * IQR))
-    
+
     def analyze_distributions(self, column):
         """Analyze distribution characteristics"""
         dist_stats = {
@@ -276,18 +276,18 @@ class AdvancedAnalyzer:
             }
         }
         return dist_stats
-    
+
     def analyze_time_patterns(self, date_column, value_column):
         """Analyze time-based patterns"""
         self.df[date_column] = pd.to_datetime(self.df[date_column])
-        
+
         # Resample to different frequencies
         patterns = {
             'daily': self.df.resample('D', on=date_column)[value_column].mean(),
             'weekly': self.df.resample('W', on=date_column)[value_column].mean(),
             'monthly': self.df.resample('ME', on=date_column)[value_column].mean()
         }
-        
+
         # Decompose time series
         from statsmodels.tsa.seasonal import seasonal_decompose
         decomposition = seasonal_decompose(
@@ -295,7 +295,7 @@ class AdvancedAnalyzer:
             period=7,
             extrapolate_trend='freq'
         )
-        
+
         return patterns, decomposition
 {% endhighlight %}
 </div>
@@ -324,7 +324,7 @@ class AdvancedAnalyzer:
       <span class="code-callout__title">analyze_distributions</span>
     </div>
     <div class="code-callout__body">
-      <p>Runs Shapiro–Wilk and D'Agostino normality tests, then computes the four distribution moments: mean, std, skewness, and excess kurtosis.</p>
+      <p>Runs Shapiro-Wilk and D'Agostino normality tests, then computes the four distribution moments: mean, std, skewness, and excess kurtosis.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="44-63" data-tint="4">
@@ -427,7 +427,7 @@ dtype: object, 'memory_usage': np.float64(0.003177642822265625)}
       <span class="code-callout__title">Setup</span>
     </div>
     <div class="code-callout__body">
-      <p>Loads the CSV and initialises both explorer objects—<code>DataExplorer</code> for summaries and plots, <code>AdvancedAnalyzer</code> for outlier and time-pattern work.</p>
+      <p>Loads the CSV and initialises both explorer objects-<code>DataExplorer</code> for summaries and plots, <code>AdvancedAnalyzer</code> for outlier and time-pattern work.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="8-15" data-tint="2">
@@ -487,7 +487,7 @@ dtype: object, 'memory_usage': np.float64(0.003177642822265625)}
 
 ## Performance Optimization Tips
 
-When working with large datasets, performance optimization becomes crucial. Here are some battle-tested strategies to make your EDA more efficient:
+When working with large datasets, performance optimization becomes important. Here are some battle-tested strategies to make your EDA more efficient:
 
 ### 1. Memory Management: Working Smart with Big Data
 
@@ -497,13 +497,13 @@ When working with large datasets, performance optimization becomes crucial. Here
 {% highlight python %}
 def optimize_dataframe(df):
     """Optimize DataFrame memory usage"""
-    
+
     # Numeric optimization
     numerics = ['int16', 'int32', 'int64', 'float64']
     for col in df.select_dtypes(include=numerics).columns:
         col_min = df[col].min()
         col_max = df[col].max()
-        
+
         # Integer optimization
         if str(df[col].dtype).startswith('int'):
             if col_min > np.iinfo(np.int8).min and col_max < np.iinfo(np.int8).max:
@@ -512,16 +512,16 @@ def optimize_dataframe(df):
                 df[col] = df[col].astype(np.int16)
             elif col_min > np.iinfo(np.int32).min and col_max < np.iinfo(np.int32).max:
                 df[col] = df[col].astype(np.int32)
-        
+
         # Float optimization
         else:
             df[col] = pd.to_numeric(df[col], downcast='float')
-    
+
     # Categorical optimization
     for col in df.select_dtypes(include=['object']).columns:
         if df[col].nunique() / len(df) < 0.5:  # If less than 50% unique values
             df[col] = df[col].astype('category')
-    
+
     return df
 {% endhighlight %}
 
@@ -557,16 +557,16 @@ def optimize_dataframe(df):
 def analyze_large_dataset(file_path, chunk_size=10000):
     """Process large datasets in chunks"""
     chunks = []
-    
+
     # Process file in chunks
     for chunk in pd.read_csv(file_path, chunksize=chunk_size):
         # Optimize memory usage
         chunk = optimize_dataframe(chunk)
-        
+
         # Process chunk
         chunk_stats = process_chunk(chunk)
         chunks.append(chunk_stats)
-    
+
     # Combine results
     return pd.concat(chunks)
 {% endhighlight %}
@@ -601,7 +601,7 @@ Even experienced data scientists can fall into these common traps. Here's how to
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight python %}
 # no-output
 import pandas as pd
@@ -612,7 +612,7 @@ df = pd.read_csv('../_data/ecommerce_data.csv')
 mean = df['amount'].mean()
 std = df['amount'].std()
 
-# Good: Use robust statistics
+# Good: Use reliable statistics
 median = df['amount'].median()
 mad = stats.median_abs_deviation(df['amount'])
    {% endhighlight %}
@@ -630,10 +630,10 @@ mad = stats.median_abs_deviation(df['amount'])
      <div class="code-callout" data-lines="9-12" data-tint="2">
        <div class="code-callout__meta">
          <span class="code-callout__lines"></span>
-         <span class="code-callout__title">Robust approach: median and MAD</span>
+         <span class="code-callout__title">reliable approach: median and MAD</span>
        </div>
        <div class="code-callout__body">
-         <p>Median and median absolute deviation (MAD) are resistant to outliers and make no normality assumption—prefer them for skewed distributions.</p>
+         <p>Median and median absolute deviation (MAD) are resistant to outliers and make no normality assumption, prefer them for skewed distributions.</p>
        </div>
      </div>
    </aside>
@@ -643,11 +643,11 @@ mad = stats.median_abs_deviation(df['amount'])
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight python %}
       # Correlation analysis
       correlation = df['price'].corr(df['sales'])
-      
+
       # Additional analysis needed
       # - Time series analysis
       # - A/B testing
@@ -661,7 +661,7 @@ mad = stats.median_abs_deviation(df['amount'])
          <span class="code-callout__title">Pearson correlation</span>
        </div>
        <div class="code-callout__body">
-         <p>A single correlation number tells you direction and strength, but not causation—confounding variables or reversed causality can produce the same value.</p>
+         <p>A single correlation number tells you direction and strength, but not causation, confounding variables or reversed causality can produce the same value.</p>
        </div>
      </div>
      <div class="code-callout" data-lines="3-7" data-tint="2">
@@ -670,7 +670,7 @@ mad = stats.median_abs_deviation(df['amount'])
          <span class="code-callout__title">Follow-up analyses needed</span>
        </div>
        <div class="code-callout__body">
-         <p>The comment block lists three next steps—time-series analysis, A/B testing, and controlling for confounders—that must follow before any causal claim.</p>
+         <p>The comment block lists three next steps, time-series analysis, A/B testing, and controlling for confounders, that must follow before any causal claim.</p>
        </div>
      </div>
    </aside>
@@ -680,11 +680,11 @@ mad = stats.median_abs_deviation(df['amount'])
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight python %}
       # Bad: Drop all missing values
       df_clean = df.dropna()
-      
+
       # Good: Analyze missing patterns
       missing_patterns = pd.DataFrame({
           'missing_count': df.isnull().sum(),
@@ -725,13 +725,13 @@ Static visualizations are good, but interactive ones can tell a more compelling 
 {% highlight python %}
 def create_interactive_dashboard(df):
     """Create interactive visualizations with Plotly"""
-    
+
     # Sales trends
     fig1 = px.line(
         df.resample('D', on='date')['amount'].sum(),
         title='Daily Sales Trend'
     )
-    
+
     # Customer segments
     fig2 = px.scatter(
         df,
@@ -741,7 +741,7 @@ def create_interactive_dashboard(df):
         color='segment',
         title='RFM Analysis'
     )
-    
+
     # Product analysis
     fig3 = px.treemap(
         df.groupby('category')['amount'].sum().reset_index(),
@@ -749,7 +749,7 @@ def create_interactive_dashboard(df):
         values='amount',
         title='Sales by Category'
     )
-    
+
     return [fig1, fig2, fig3]
 {% endhighlight %}
 </div>
@@ -769,7 +769,7 @@ def create_interactive_dashboard(df):
       <span class="code-callout__title">Category treemap and return</span>
     </div>
     <div class="code-callout__body">
-      <p><code>fig3</code> uses a treemap to show revenue share by product category—each tile area is proportional to total sales amount. The function returns all three figures for embedding in a notebook or app.</p>
+      <p><code>fig3</code> uses a treemap to show revenue share by product category, each tile area is proportional to total sales amount. The function returns all three figures for embedding in a notebook or app.</p>
     </div>
   </div>
 </aside>
@@ -783,7 +783,7 @@ def create_interactive_dashboard(df):
 
 Ready to practice your EDA skills? Head over to the [Module 2 assignment (student version)](../assignments/module-assignment-student.md) to apply what you have learned.
 
-Remember: "EDA is not just about looking at data, it's about understanding the story it tells!"
+Remember: "EDA is about more than looking at data, it's about understanding the story it tells!"
 
 Pro Tips:
 

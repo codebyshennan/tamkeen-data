@@ -1,8 +1,8 @@
 # Learning Tableau Through a Real Example: SuperStore Analysis
 
-**After this lesson:** you can explain the core ideas in "Learning Tableau Through a Real Example: SuperStore Analysis" and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Learning Tableau Through a Real Example: SuperStore Analysis and try the examples in your own notebook.
 
-You're a retail analyst. Sales are growing but profit is flat — why? In this case study, you'll build a Tableau dashboard that reveals exactly which products and regions are dragging down margins. The same techniques work on any business dataset.
+You're a retail analyst. Sales are growing but profit is flat, why? In this case study, you'll build a Tableau dashboard that reveals exactly which products and regions are dragging down margins. The same techniques work on any business dataset.
 
 > **Note:** This tutorial is **UI-first** (Tableau Desktop). Install Tableau or use your course lab; paths to sample data may differ slightly by version and OS.
 
@@ -23,7 +23,7 @@ Short Tableau Public install; pair with the written guides in this folder.
      - **Windows:** `Documents\My Tableau Repository\Datasources\en_US-US\`
 3. Click **Connect** to load the dataset
 
-![Tableau Desktop start page — Connect panel](assets/tableau_start_page.png)
+![Tableau Desktop start page, Connect panel](assets/tableau_start_page.png)
 
 
 ### 2. Understanding the Tableau Workspace
@@ -46,11 +46,11 @@ The Tableau interface consists of several key areas:
    - **Canvas**: Main area where charts appear
    - **Show Me**: Panel for chart suggestions
 
-<!-- TODO: screenshot — Tableau worksheet interface with annotated areas -->
+<!-- TODO: screenshot, Tableau worksheet interface with annotated areas -->
 
 > **Ask AI (Claude or ChatGPT)**
 >
-> "In Tableau, I have a field called [field name] that shows up as a Measure (green) but I want to use it as a Dimension (blue) — for example, a numeric order ID I want to group by. How do I change it, and when should I do this?"
+> "In Tableau, I have a field called [field name] that shows up as a Measure (green) but I want to use it as a Dimension (blue), for example, a numeric order ID I want to group by. How do I change it, and when should I do this?"
 
 
 ## Project Overview
@@ -62,7 +62,7 @@ In this comprehensive case study, we'll analyze retail data to drive business de
 - A product profitability analysis
 - Interactive filters and drill-downs
 
-<!-- TODO: screenshot — Completed SuperStore analysis dashboard -->
+<!-- TODO: screenshot, Completed SuperStore analysis dashboard -->
 
 
 ## Dataset Introduction
@@ -74,7 +74,7 @@ We'll utilize the "Sample - Superstore" dataset included with Tableau. This data
 - It's readily available in Tableau
 - It covers multiple analysis dimensions
 
-<!-- TODO: screenshot — Tableau Data Source tab with table join preview -->
+<!-- TODO: screenshot, Tableau Data Source tab with table join preview -->
 
 
 ### Data Structure Overview
@@ -149,9 +149,9 @@ Statistics:
    - Edit the sheet title (double-click the title above the chart)
    - Add labels by dragging "Sales" to the Label mark
 
-<!-- TODO: screenshot — Tableau first chart — Sales by Category bar chart -->
+<!-- TODO: screenshot, Tableau first chart, Sales by Category bar chart -->
 
-Now we know WHICH categories perform best. Let's look at WHEN — do we see seasonal patterns?
+Now we know WHICH categories perform best. look at WHEN, do we see seasonal patterns?
 
 ### 2. Time Series Analysis
 
@@ -169,7 +169,7 @@ Now we know WHICH categories perform best. Let's look at WHEN — do we see seas
    - Configure dual axis synchronization
    - Add reference lines for averages
 
-<!-- TODO: screenshot — Tableau dual-axis line chart with Sales and Profit -->
+<!-- TODO: screenshot, Tableau dual-axis line chart with Sales and Profit -->
 
 > **Ask AI (Claude or ChatGPT)**
 >
@@ -191,7 +191,7 @@ Now we know WHICH categories perform best. Let's look at WHEN — do we see seas
    - Configure tooltips
    - Add reference lines
 
-<!-- TODO: screenshot — Tableau filled map of US states colored by Sales -->
+<!-- TODO: screenshot, Tableau filled map of US states colored by Sales -->
 
 
 ### 4. Building a Dashboard
@@ -211,14 +211,14 @@ Now we know WHICH categories perform best. Let's look at WHEN — do we see seas
    - Configure actions
    - Set up parameters
 
-<!-- TODO: screenshot — Tableau dashboard canvas in edit mode -->
+<!-- TODO: screenshot, Tableau dashboard canvas in edit mode -->
 
 
 ## Advanced Features
 
 ### 1. Calculated Fields
 
-Use calculated fields when you need a metric that doesn't exist in the raw data — for example, profit margin as a percentage, or a flag for orders with unusually high discounts.
+Use calculated fields when you need a metric that doesn't exist in the raw data, for example, profit margin as a percentage, or a flag for orders with unusually high discounts.
 
 1. Creating a Basic Calculation:
    - Right-click in the Data pane
@@ -227,7 +227,7 @@ Use calculated fields when you need a metric that doesn't exist in the raw data 
    - Enter formula: `SUM([Profit])/SUM([Sales])`
    - Click OK
 
-<!-- TODO: screenshot — Tableau Create Calculated Field dialog for Profit Ratio -->
+<!-- TODO: screenshot, Tableau Create Calculated Field dialog for Profit Ratio -->
 
 > **Ask AI (Claude or ChatGPT)**
 >
@@ -245,7 +245,7 @@ Use calculated fields when you need a metric that doesn't exist in the raw data 
    - Add parameter control to dashboard
    - Use in calculations or filters
 
-<!-- TODO: screenshot — Tableau Create Parameter dialog -->
+<!-- TODO: screenshot, Tableau Create Parameter dialog -->
 
 
 ## Tips and Best Practices
@@ -286,7 +286,7 @@ Use calculated fields when you need a metric that doesn't exist in the raw data 
    - Export as PDF/image
    - Share on Tableau Server
 
-<!-- TODO: screenshot — Tableau Save As and Publish to Tableau Public dialogs -->
+<!-- TODO: screenshot, Tableau Save As and Publish to Tableau Public dialogs -->
 
 
 ## Tableau Prep Builder
@@ -306,7 +306,7 @@ Use calculated fields when you need a metric that doesn't exist in the raw data 
    - Handle null values
    - Pivot/unpivot data
 
-<!-- TODO: screenshot — Tableau Prep Builder Flow canvas with input, clean, and output steps -->
+<!-- TODO: screenshot, Tableau Prep Builder Flow canvas with input, clean, and output steps -->
 
 
 ### 2. Flow Management
@@ -323,7 +323,7 @@ Use calculated fields when you need a metric that doesn't exist in the raw data 
    - Handle errors
    - Create reusable flows
 
-<!-- TODO: screenshot — Tableau Prep Builder scheduled flow configuration -->
+<!-- TODO: screenshot, Tableau Prep Builder scheduled flow configuration -->
 
 
 ## Advanced Calculations
@@ -332,7 +332,7 @@ Use calculated fields when you need a metric that doesn't exist in the raw data 
 
 ### 1. Table Calculations
 
-Use table calculations when you need values that depend on what's already in the view — for example, a running total of sales over time, or each category's share of the overall total.
+Use table calculations when you need values that depend on what's already in the view, for example, a running total of sales over time, or each category's share of the overall total.
 
 ```sql
 // Running Total
@@ -350,7 +350,7 @@ RANK(SUM([Sales]), 'desc')
 
 ### 2. Level of Detail (LOD) Expressions
 
-Use LOD expressions when a filter or aggregation is collapsing detail you need to keep — for example, computing each customer's first order date regardless of how the view is filtered by region or product.
+Use LOD expressions when a filter or aggregation is collapsing detail you need to keep, for example, computing each customer's first order date regardless of how the view is filtered by region or product.
 
 ```sql
 // Fixed LOD
@@ -380,7 +380,7 @@ Use LOD expressions when a filter or aggregation is collapsing detail you need t
    - Bullet graphs
    - Radar charts
 
-<!-- TODO: screenshot — Tableau advanced chart gallery — waterfall, bullet, box plot, Gantt -->
+<!-- TODO: screenshot, Tableau advanced chart gallery, waterfall, bullet, box plot, Gantt -->
 
 
 ### 2. Advanced Mapping
@@ -397,7 +397,7 @@ Use LOD expressions when a filter or aggregation is collapsing detail you need t
    - Perform spatial joins
    - Create density maps
 
-<!-- TODO: screenshot — Tableau map with density overlay and custom territory polygon -->
+<!-- TODO: screenshot, Tableau map with density overlay and custom territory polygon -->
 
 
 ## Performance Optimization
@@ -416,7 +416,7 @@ Use LOD expressions when a filter or aggregation is collapsing detail you need t
    - Use appropriate data types
    - Monitor performance
 
-<!-- TODO: screenshot — Tableau Extract refresh configuration dialog -->
+<!-- TODO: screenshot, Tableau Extract refresh configuration dialog -->
 
 
 ### 2. Dashboard Optimization
@@ -433,7 +433,7 @@ Use LOD expressions when a filter or aggregation is collapsing detail you need t
    - Monitor resource usage
    - Analyze bottlenecks
 
-<!-- TODO: screenshot — Tableau Performance Recorder results with flame chart -->
+<!-- TODO: screenshot, Tableau Performance Recorder results with flame chart -->
 
 > **Ask AI (Claude or ChatGPT)**
 >
@@ -444,16 +444,16 @@ Use LOD expressions when a filter or aggregation is collapsing detail you need t
 
 1. Explore [Tableau Public](https://public.tableau.com) and study dashboards others have built
 2. Join the [Tableau Community](https://community.tableau.com) forums
-3. Practice with your own dataset — connect it to Tableau and replicate the charts from this guide
+3. Practice with your own dataset, connect it to Tableau and replicate the charts from this guide
 4. Explore Tableau extensions for additional chart types
 5. Work toward the [Tableau Desktop Specialist](https://www.tableau.com/learn/certification/desktop-specialist) certification
 
 ## Gotchas
 
-- **"Use as Filter" on a dashboard sheet filters all other sheets by default, including ones you didn't intend** — when you enable a chart as a filter, it acts on every compatible sheet on the dashboard unless you configure a targeted filter action. Go to Dashboard → Actions to restrict the source and target sheets explicitly.
-- **Dual-axis charts require synchronised axes or the chart visually lies** — if Sales is in the thousands and Profit is in the hundreds, an unsynchronised dual axis makes the two lines appear to track each other closely when they may not. Right-click the secondary axis and choose "Synchronize Axis" or use separate panels to avoid misleading comparisons.
-- **Table calculations like `RUNNING_SUM` depend on the sort order of the view, not the data** — if a viewer reorders the table by clicking a column header, the running total recomputes along the new sort order, producing a completely different result. Always label running total charts with the sort assumption or lock the view.
-- **Tableau Prep flows do not automatically re-run when source data changes** — a Prep flow is a manual or scheduled operation, not a live query. If you clean your data in Prep and then update the source file, the downstream Tableau workbook still shows the old cleaned data until you re-run the flow and refresh the extract.
-- **Saving as `.twb` (not `.twbx`) leaves data behind** — a `.twb` file is just XML; it references the data source path but does not embed the data. When you share a `.twb` with a colleague who doesn't have access to the same data path, the workbook opens empty. Use `.twbx` to bundle the extract for portability.
+- **"Use as Filter" on a dashboard sheet filters all other sheets by default, including ones you didn't intend**: when you enable a chart as a filter, it acts on every compatible sheet on the dashboard unless you configure a targeted filter action. Go to Dashboard → Actions to restrict the source and target sheets explicitly.
+- **Dual-axis charts require synchronised axes or the chart visually lies**: if Sales is in the thousands and Profit is in the hundreds, an unsynchronised dual axis makes the two lines appear to track each other closely when they may not. Right-click the secondary axis and choose "Synchronize Axis" or use separate panels to avoid misleading comparisons.
+- **Table calculations like `RUNNING_SUM` depend on the sort order of the view, not the data**: if a viewer reorders the table by clicking a column header, the running total recomputes along the new sort order, producing a completely different result. Always label running total charts with the sort assumption or lock the view.
+- **Tableau Prep flows do not automatically re-run when source data changes**: a Prep flow is a manual or scheduled operation, not a live query. If you clean your data in Prep and then update the source file, the downstream Tableau workbook still shows the old cleaned data until you re-run the flow and refresh the extract.
+- **Saving as `.twb` (not `.twbx`) leaves data behind**: a `.twb` file is just XML; it references the data source path but does not embed the data. When you share a `.twb` with a colleague who doesn't have access to the same data path, the workbook opens empty. Use `.twbx` to bundle the extract for portability.
 
 Remember: Practice makes perfect! Try recreating these visualizations and experiment with different options to build your Tableau skills.

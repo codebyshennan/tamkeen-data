@@ -7,7 +7,7 @@ objectives:
 ---
 # Types of Naive Bayes Classifiers
 
-**After this lesson:** you can explain the core ideas in “Types of Naive Bayes Classifiers” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Types of Naive Bayes Classifiers and try the examples in your own notebook.
 
 
 ## Overview
@@ -183,7 +183,7 @@ prediction = model.predict(X_new)  # Should predict 'tech'
       <span class="code-callout__title">Train and Classify</span>
     </div>
     <div class="code-callout__body">
-      <p>MultinomialNB models word counts as multinomial distributions per class; the new article is transformed with the same vocabulary before predict — words like "smartphone" and "technology" should push it toward "tech".</p>
+      <p>MultinomialNB models word counts as multinomial distributions per class; the new article is transformed with the same vocabulary before predict, words like "smartphone" and "technology" should push it toward "tech".</p>
     </div>
   </div>
 </aside>
@@ -318,14 +318,14 @@ Try these exercises:
 
 ## Gotchas
 
-- **Passing negative values to `MultinomialNB`** — `MultinomialNB` assumes features are non-negative counts. If you pass TF-IDF scores (which are floats, not integers) or any negative values, scikit-learn will raise a `ValueError`. Use `BernoulliNB` for binary features, `GaussianNB` for real-valued features, and `MultinomialNB` only when your features are genuine non-negative integers or TF-IDF with `min_df` safely applied.
-- **Using `GaussianNB` without scaling and then wondering why accuracy is low** — Unlike many parametric models, `GaussianNB` estimates per-class Gaussian distributions. Unscaled features (e.g., blood pressure in the 100s vs age in the 30s) don't cause the model to fail outright, but the variance estimates become dominated by the high-magnitude feature, skewing the decision boundary. Always scale continuous inputs.
-- **Applying `BernoulliNB` to word-count features instead of binary presence** — `BernoulliNB` models each feature as present-or-absent (0 or 1). If you feed raw word counts (e.g., "free" appears 3 times), it treats anything non-zero as 1, silently discarding frequency information. Use `MultinomialNB` when word frequency matters, and `BernoulliNB` only when you want pure presence/absence.
-- **Calling `scaler.fit_transform` on the new patient at prediction time** — The `GaussianNB` example calls `scaler.transform(new_patient)` (correct). A common mistake is to call `scaler.fit_transform(new_patient)`, which fits a new scaler on a single row of data, producing useless z-scores and a silently wrong prediction.
-- **Expecting `MultinomialNB` to handle out-of-vocabulary words gracefully without smoothing** — The `CountVectorizer` ignores words in test documents that didn't appear in training. This is handled automatically by sklearn's pipeline, but if you build your own vocabulary manually and forget to handle OOV tokens, the model will either error or produce zero-probability predictions for those documents.
+- **Passing negative values to `MultinomialNB`**: `MultinomialNB` assumes features are non-negative counts. If you pass TF-IDF scores (which are floats, not integers) or any negative values, scikit-learn will raise a `ValueError`. Use `BernoulliNB` for binary features, `GaussianNB` for real-valued features, and `MultinomialNB` only when your features are genuine non-negative integers or TF-IDF with `min_df` safely applied.
+- **Using `GaussianNB` without scaling and then wondering why accuracy is low**: Unlike many parametric models, `GaussianNB` estimates per-class Gaussian distributions. Unscaled features (e.g., blood pressure in the 100s vs age in the 30s) don't cause the model to fail outright, but the variance estimates become dominated by the high-magnitude feature, skewing the decision boundary. Always scale continuous inputs.
+- **Applying `BernoulliNB` to word-count features instead of binary presence**: `BernoulliNB` models each feature as present-or-absent (0 or 1). If you feed raw word counts (e.g., "free" appears 3 times), it treats anything non-zero as 1, silently discarding frequency information. Use `MultinomialNB` when word frequency matters, and `BernoulliNB` only when you want pure presence/absence.
+- **Calling `scaler.fit_transform` on the new patient at prediction time**: The `GaussianNB` example calls `scaler.transform(new_patient)` (correct). A common mistake is to call `scaler.fit_transform(new_patient)`, which fits a new scaler on a single row of data, producing useless z-scores and a silently wrong prediction.
+- **Expecting `MultinomialNB` to handle out-of-vocabulary words gracefully without smoothing**: The `CountVectorizer` ignores words in test documents that didn't appear in training. This is handled automatically by sklearn's pipeline, but if you build your own vocabulary manually and forget to handle OOV tokens, the model will either error or produce zero-probability predictions for those documents.
 
 ## Next Steps
 
-Ready to put these types into action? Let's move on to [Implementation](4-implementation.md) to see how to use these different types in real projects.
+Ready to put these types into action? Move on to [Implementation](4-implementation.md) to see how to use these different types in real projects.
 
 Remember: The right tool for the right job! Choose your Naive Bayes type wisely based on your data.

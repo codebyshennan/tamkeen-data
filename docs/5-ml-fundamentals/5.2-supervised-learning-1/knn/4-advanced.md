@@ -8,7 +8,7 @@ objectives:
 ---
 # Advanced KNN Techniques: Taking Your Skills to the Next Level
 
-**After this lesson:** you can explain the core ideas in “Advanced KNN Techniques: Taking Your Skills to the Next Level” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Advanced KNN Techniques: Taking Your Skills to the Next Level and try the examples in your own notebook.
 
 ## Overview
 
@@ -77,7 +77,7 @@ print(f"Predicted genre: {prediction[0]}")
       <span class="code-callout__title">Weighted KNN Setup</span>
     </div>
     <div class="code-callout__body">
-      <p>Six movies labeled by genre with three score features; <code>weights='distance'</code> makes nearer neighbors cast stronger votes than distant ones — helpful when one cluster is much closer to the query.</p>
+      <p>Six movies labeled by genre with three score features; <code>weights='distance'</code> makes nearer neighbors cast stronger votes than distant ones, helpful when one cluster is much closer to the query.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="24-29" data-tint="2">
@@ -145,7 +145,7 @@ visualize_data(X, y)
       <span class="code-callout__title">PCA Reduction</span>
     </div>
     <div class="code-callout__body">
-      <p><code>PCA(n_components=2).fit_transform</code> compresses all four Iris features into two principal components that capture the most variance — enabling a 2D scatter plot of a 4D dataset.</p>
+      <p><code>PCA(n_components=2).fit_transform</code> compresses all four Iris features into two principal components that capture the most variance, enabling a 2D scatter plot of a 4D dataset.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="19-23" data-tint="2">
@@ -154,7 +154,7 @@ visualize_data(X, y)
       <span class="code-callout__title">Scatter with Colorbar</span>
     </div>
     <div class="code-callout__body">
-      <p>Load Iris and call the helper; <code>c=y</code> colors each point by class, and the colorbar maps numeric label to color — clear cluster separation indicates the first two PCs are informative.</p>
+      <p>Load Iris and call the helper; <code>c=y</code> colors each point by class, and the colorbar maps numeric label to color, clear cluster separation indicates the first two PCs are informative.</p>
     </div>
   </div>
 </aside>
@@ -169,7 +169,7 @@ visualize_data(X, y)
 
 ## 3. Finding the Best k Value
 
-Choosing the right number of neighbors (k) is crucial. Too few can lead to noise, too many can blur boundaries.
+Choosing the right number of neighbors (k) is important. Too few can lead to noise, too many can blur boundaries.
 
 ### Cross-Validation for k Selection
 
@@ -305,7 +305,7 @@ model = handle_imbalanced_data(X_imbalanced, y_imbalanced)
       <span class="code-callout__title">Evaluate and Return</span>
     </div>
     <div class="code-callout__body">
-      <p><code>cross_val_score</code> evaluates the full pipeline on held-out folds; the placeholder arrays illustrate the expected shape — swap with your real imbalanced dataset.</p>
+      <p><code>cross_val_score</code> evaluates the full pipeline on held-out folds; the placeholder arrays illustrate the expected shape, swap with your real imbalanced dataset.</p>
     </div>
   </div>
 </aside>
@@ -395,7 +395,7 @@ predictions = fast_knn.predict(X_test)
    #  Wrong way
    knn = KNeighborsClassifier(weights='distance')
    knn.fit(X_unscaled, y)
-   
+
    #  Right way
    from sklearn.preprocessing import StandardScaler
    scaler = StandardScaler()
@@ -410,7 +410,7 @@ predictions = fast_knn.predict(X_test)
    ```python
    #  Wrong way
    pca = PCA(n_components=1)  # Too few components
-   
+
    #  Right way
    pca = PCA(n_components=0.95)  # Keep 95% of variance
    ```
@@ -423,7 +423,7 @@ predictions = fast_knn.predict(X_test)
    #  Wrong way
    knn = KNeighborsClassifier()
    knn.fit(X_imbalanced, y_imbalanced)
-   
+
    #  Right way
    from imblearn.over_sampling import SMOTE
    smote = SMOTE()
@@ -467,12 +467,12 @@ predictions = fast_knn.predict(X_test)
 
 ## Gotchas
 
-- **Using `weights='distance'` without scaling first** — Distance-based weighting amplifies the dominance of unscaled features: if one feature has values in the thousands, it will virtually eliminate the contribution of all other features to the weight calculation. Always scale before enabling distance weighting.
-- **Applying SMOTE outside the cross-validation loop** — The `imblearn.pipeline.Pipeline` example is deliberately correct, but a common mistake is to `SMOTE.fit_resample(X, y)` on the entire dataset before splitting into folds. This leaks synthetic minority-class information into validation folds, inflating reported CV accuracy on imbalanced problems.
-- **Reducing dimensions before splitting train and test** — Fitting PCA on `X` (combined train+test) before splitting leaks test distribution information into the PCA components. Always `pca.fit_transform(X_train)` and `pca.transform(X_test)` using the same fitted object.
-- **Selecting the best k from a CV curve then re-evaluating on the same test set** — The `find_best_k` function uses CV (correct), but if you then also report accuracy on a held-out `X_test` that was used to verify the chosen k, the test estimate is optimistically biased. Reserve the test set strictly for final reporting.
-- **Using `np.bincount` in `FastKNN` when labels are not consecutive integers** — `np.bincount` requires non-negative integer labels starting from 0. If your class labels are arbitrary integers (e.g., `[-1, 1]` or `[2, 5, 10]`), `bincount` either errors or produces wrong argmax results. Use `Counter` or remap labels to 0-based indices first.
-- **Ignoring that BallTree fails on high-dimensional data** — `BallTree` and `KDTree` lose their speed advantage over brute force once dimensionality exceeds roughly 20. In high dimensions, the tree degenerates and query time approaches O(n), so the `FastKNN` class provides no benefit without prior dimensionality reduction.
+- **Using `weights='distance'` without scaling first**: Distance-based weighting amplifies the dominance of unscaled features: if one feature has values in the thousands, it will virtually eliminate the contribution of all other features to the weight calculation. Always scale before enabling distance weighting.
+- **Applying SMOTE outside the cross-validation loop**: The `imblearn.pipeline.Pipeline` example is deliberately correct, but a common mistake is to `SMOTE.fit_resample(X, y)` on the entire dataset before splitting into folds. This leaks synthetic minority-class information into validation folds, inflating reported CV accuracy on imbalanced problems.
+- **Reducing dimensions before splitting train and test**: Fitting PCA on `X` (combined train+test) before splitting leaks test distribution information into the PCA components. Always `pca.fit_transform(X_train)` and `pca.transform(X_test)` using the same fitted object.
+- **Selecting the best k from a CV curve then re-evaluating on the same test set**: The `find_best_k` function uses CV (correct), but if you then also report accuracy on a held-out `X_test` that was used to verify the chosen k, the test estimate is optimistically biased. Reserve the test set strictly for final reporting.
+- **Using `np.bincount` in `FastKNN` when labels are not consecutive integers**: `np.bincount` requires non-negative integer labels starting from 0. If your class labels are arbitrary integers (e.g., `[-1, 1]` or `[2, 5, 10]`), `bincount` either errors or produces wrong argmax results. Use `Counter` or remap labels to 0-based indices first.
+- **Ignoring that BallTree fails on high-dimensional data**: `BallTree` and `KDTree` lose their speed advantage over brute force once dimensionality exceeds roughly 20. In high dimensions, the tree degenerates and query time approaches O(n), so the `FastKNN` class provides no benefit without prior dimensionality reduction.
 
 ## Additional Resources
 

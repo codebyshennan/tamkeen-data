@@ -79,17 +79,17 @@ Submit your solution as a Python script with:
   ```
 
 ## 2. String manipulation
-- **Where:** [Transformations](../transformations.md) — string operations.
+- **Where:** [Transformations](../transformations.md), string operations.
 - **Think:** Vectorized string methods live on `.str`.
   - **Title case:** `data['name'].str.title()`.
   - **Email domain:** `data['email'].str.split('@').str[-1]`.
-  - **`is_gmail`:** compare the extracted domain to `'gmail.com'`, **or** use `.str.endswith('@gmail.com')` directly. Watch for `NaN` emails — the result will also be NaN unless you handle it.
+  - **`is_gmail`:** compare the extracted domain to `'gmail.com'`, **or** use `.str.endswith('@gmail.com')` directly. Watch for `NaN` emails, the result will also be NaN unless you handle it.
 
 ## 3. Categorical data
-- **Where:** [Transformations](../transformations.md) — categorical encoding.
+- **Where:** [Transformations](../transformations.md), categorical encoding.
 - **Think:**
   - Convert with `astype('category')`.
-  - Dummies with `pd.get_dummies(data['category'])` — returns a new DataFrame of 0/1 columns.
+  - Dummies with `pd.get_dummies(data['category'])`, returns a new DataFrame of 0/1 columns.
   - Frequency: `data['category'].value_counts()`.
 
 ## 4. Handling outliers
@@ -100,7 +100,7 @@ Submit your solution as a Python script with:
   - Watch for chicken-and-egg: if you replace **then** describe, do the calculation on the cleaned column.
 
 ## 5. Data transformation
-- **Where:** [Transformations](../transformations.md) — mapping.
+- **Where:** [Transformations](../transformations.md), mapping.
 - **Think:**
   - Build the dict `{'A': 1, 'B': 2, 'C': 3}` and call `.map(...)` on the category column.
   - Sort: `sort_values(['category_num', 'score'])`.
@@ -113,7 +113,7 @@ Submit your solution as a Python script with:
 
 ## Common pitfalls
 - Forgetting to **reassign** the DataFrame after a non-in-place method (`drop_duplicates`, `dropna`, `sort_values`).
-- Computing the mean/std **before** removing sentinels — they pollute the statistic.
+- Computing the mean/std **before** removing sentinels, they pollute the statistic.
 - `get_dummies` returns a new frame; you usually want to `concat` it back to the original or assign it to a new variable rather than overwriting `data`.
 - `.str` methods return NaN for NaN inputs unless you `.fillna('')` first.
 

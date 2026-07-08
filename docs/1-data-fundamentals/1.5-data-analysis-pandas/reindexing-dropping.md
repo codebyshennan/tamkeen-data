@@ -1,6 +1,6 @@
 # Reindexing and Dropping Data in Pandas
 
-**After this lesson:** you can explain the core ideas in “Reindexing and Dropping Data in Pandas” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Reindexing and Dropping Data in Pandas and try the examples in your own notebook.
 
 ### Video
 
@@ -8,13 +8,13 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/W9XjRYFkkyw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*Corey Schafer — Python pandas tutorial (part 3): indexes (set, reset, reindex)*
+*Corey Schafer, Python pandas tutorial (part 3): indexes (set, reset, reindex)*
 
 ## Overview
 
 **Prerequisites:** [DataFrame](./dataframe.md) creation; basic understanding of **row labels** vs positions.
 
-**Why this lesson:** You will often **change** the index (dates, IDs), **drop** bad rows or columns, or **reindex** to match another table’s labels. Doing this deliberately—without scrambling rows—is core data prep.
+**Why this lesson:** You will often **change** the index (dates, IDs), **drop** bad rows or columns, or **reindex** to match another table's labels. Doing this deliberately, without scrambling rows, is core data prep.
 
 ## Understanding Reindexing
 
@@ -41,25 +41,25 @@ Real-world applications:
 - Standardizing country codes/names
 - Matching customer records across systems
 
-Let's explore with examples:
+we will look at with examples:
 
 ---
 
 ### Basic Reindexing
 
-Let's start with practical examples:
+Start with practical examples:
 
 **Expand Series index and calendar rows**
 
-- **Purpose:** Use `reindex` to introduce new labels (David) or a full month list—missing slots become `NaN` until you fill them.
-- **Walkthrough:** `grades.reindex(new_index)` aligns to the new label order; `sales.reindex(all_months)` pads Feb–May.
+- **Purpose:** Use `reindex` to introduce new labels (David) or a full month list, missing slots become `NaN` until you fill them.
+- **Walkthrough:** `grades.reindex(new_index)` aligns to the new label order; `sales.reindex(all_months)` pads Feb-May.
 
 ```python
 import pandas as pd
 import numpy as np
 
 # Example 1: Student Grades
-grades = pd.Series([85, 92, 78], 
+grades = pd.Series([85, 92, 78],
                   index=['Alice', 'Bob', 'Charlie'])
 print("Original grades:")
 print(grades)
@@ -125,12 +125,12 @@ When reindexing, you can specify how to handle missing values:
 
 **`ffill` / `bfill` after reindex**
 
-- **Purpose:** Carry last known value forward or backward across newly inserted index labels—common for sparse time series.
+- **Purpose:** Carry last known value forward or backward across newly inserted index labels, common for sparse time series.
 - **Walkthrough:** `method='ffill'` / `method='bfill'` (older API style in `reindex`; modern code may use `.ffill()` after reindex).
 
 ```python
 # Create a Series with missing days
-temps = pd.Series([20, 22, 25], 
+temps = pd.Series([20, 22, 25],
                  index=['Mon', 'Wed', 'Fri'])
 print("Original temperatures:")
 print(temps)
@@ -159,7 +159,7 @@ You can reindex both rows and columns in a DataFrame:
 
 **Pad sparse weekday rows**
 
-- **Purpose:** Same as Series—extend a DataFrame’s row index to every weekday; new rows are all-NaN until filled.
+- **Purpose:** Same as Series, extend a DataFrame's row index to every weekday; new rows are all-NaN until filled.
 - **Walkthrough:** Uses `df` with Mon/Wed/Fri then `reindex(all_days)`.
 
 ```python
@@ -308,8 +308,8 @@ You can also drop columns you don't need:
 
 **`axis=1` and column lists**
 
-- **Purpose:** Project down to fewer columns—one or many—without touching rows.
-- **Walkthrough:** `axis=1` means “columns”; pass a list to drop several at once.
+- **Purpose:** Project down to fewer columns, one or many, without touching rows.
+- **Walkthrough:** `axis=1` means "columns"; pass a list to drop several at once.
 
 ```python
 # Drop a single column
@@ -354,9 +354,9 @@ Use reindex when you want to:
 
 Example of aligning two DataFrames:
 
-**Match another frame’s index**
+**Match another frame's index**
 
-- **Purpose:** Before element-wise ops, force `df2` onto `df1`’s row labels so shared keys line up.
+- **Purpose:** Before element-wise ops, force `df2` onto `df1`'s row labels so shared keys line up.
 - **Walkthrough:** `df2.reindex(df1.index)` introduces row `a` as NaN.
 
 ```python
@@ -393,8 +393,8 @@ Example of smart dropping:
 
 **Thresholds, duplicates, conditional row drop**
 
-- **Purpose:** Illustrate `thresh` for partial missing rows, `drop_duplicates`, and dropping by a boolean condition’s index.
-- **Walkthrough:** `df` here is the student DataFrame from above—`thresh` keeps rows with at least half the columns non-null.
+- **Purpose:** Illustrate `thresh` for partial missing rows, `drop_duplicates`, and dropping by a boolean condition's index.
+- **Walkthrough:** `df` here is the student DataFrame from above-`thresh` keeps rows with at least half the columns non-null.
 
 ```python
 # Drop rows where more than 50% of values are missing
@@ -414,7 +414,7 @@ df_filtered = df.drop(df[df['grade'] < 60].index)
    ```python
    # Wrong: original df unchanged
    df.drop('column_name', axis=1)
-   
+
    # Right: save result or use inplace=True
    df = df.drop('column_name', axis=1)
    # or
@@ -427,10 +427,10 @@ df_filtered = df.drop(df[df['grade'] < 60].index)
    # Remember:
    # axis=0 or 'index' for rows
    # axis=1 or 'columns' for columns
-   
+
    # Drop a column
    df.drop('column_name', axis=1)  # or axis='columns'
-   
+
    # Drop a row
    df.drop(0, axis=0)  # or axis='index'
    ```

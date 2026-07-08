@@ -8,7 +8,7 @@ Here you work **without labels**: [PCA](pca.md) and [t-SNE / UMAP](tsne-umap.md)
 
 ## Why this matters
 
-Exploratory grouping and dimensionality reduction show up in segmentation, anomaly screening, and preprocessing for supervised models—often before you ever pick a classifier.
+Exploratory grouping and dimensionality reduction show up in segmentation, anomaly screening, and preprocessing for supervised models, often before you ever pick a classifier.
 
 Welcome to the fascinating world of unsupervised learning! Think of it as being a detective who can find patterns and relationships in data without being told what to look for. Just like how you might naturally group similar items in your room without being instructed, unsupervised learning algorithms can find natural groupings and patterns in data all on their own.
 
@@ -109,4 +109,4 @@ Remember:
 - Learning takes time and practice
 - We're here to help you succeed
 
-Let's begin our journey into the fascinating world of unsupervised learning!
+Start here.

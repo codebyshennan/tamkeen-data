@@ -8,7 +8,7 @@ This submodule answers: what counts as machine learning, how a typical project f
 
 Welcome to the exciting world of Machine Learning! This section will introduce you to the fundamental concepts, workflows, and practices that form the foundation of machine learning.
 
-**How this fits the course:** You should already be comfortable with **pandas**, basic **plots**, and **summary statistics** from Modules 1–3. Module 4 deepened how we reason about uncertainty; here we use that same care when we **fit models** and **measure generalization**. Read the topics in order—later files assume vocabulary from [What is Machine Learning?](what-is-ml.md) and the [workflow](ml-workflow.md).
+**How this fits the course:** You should already be comfortable with **pandas**, basic **plots**, and **summary statistics** from Modules 1-3. Module 4 deepened how we reason about uncertainty; here we use that same care when we **fit models** and **measure generalization**. Read the topics in order, later files assume vocabulary from [What is Machine Learning?](what-is-ml.md) and the [workflow](ml-workflow.md).
 
 ## Helpful video
 
@@ -86,4 +86,4 @@ Ready to apply your knowledge? The module assignment (concepts plus implementati
 
 Begin with [What is Machine Learning?](./what-is-ml.md) to build a strong foundation in ML concepts. Each subsequent topic builds upon previous ones, so it's recommended to follow the order presented, ending with [Machine Learning in Production](./ml-in-production.md) to see where a model goes after it is trained.
 
-Let's embark on your machine learning journey!
+Start here.

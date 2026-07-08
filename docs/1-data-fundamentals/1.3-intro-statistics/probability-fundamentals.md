@@ -6,7 +6,7 @@
 
 **Prerequisites:** Basic Python and comfort reading imports; statistics module [Introduction to Statistics](./README.md) context helps.
 
-**Why this lesson:** Probability is the language of **uncertainty**. Simulation in code turns abstract rules (coins, dice, draws) into histograms you can **see**—the bridge to distributions and inference later.
+**Why this lesson:** Probability is the language of **uncertainty**. Simulation in code turns abstract rules (coins, dice, draws) into histograms you can **see**-the bridge to distributions and inference later.
 
 ### Video
 
@@ -14,14 +14,14 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/uzkc-qNVoOk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*Khan Academy — Introduction to probability*
+*Khan Academy, Introduction to probability*
 
 ## Understanding probability through code
 
 ---
 
 ### Implementing Basic Probability
-Let's explore probability concepts using Python:
+we will look at probability concepts using Python:
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -124,7 +124,7 @@ Name: count, dtype: float64
       <span class="code-callout__title">Coin and Dice</span>
     </div>
     <div class="code-callout__body">
-      <p>Seeds the RNG on init; <code>flip_coin</code> uses <code>random.choice</code> with equal weights, <code>roll_dice</code> uses <code>randint</code>—both return empirical probabilities as fractions.</p>
+      <p>Seeds the RNG on init; <code>flip_coin</code> uses <code>random.choice</code> with equal weights, <code>roll_dice</code> uses <code>randint</code>-both return empirical probabilities as fractions.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="26-51" data-tint="3">
@@ -160,7 +160,7 @@ Name: count, dtype: float64
 ---
 
 ### Monte Carlo Simulation
-Let's use simulation to understand probability:
+Use simulation to understand probability:
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -247,7 +247,7 @@ Probability when staying:   0.334
       <span class="code-callout__title">Birthday Problem</span>
     </div>
     <div class="code-callout__body">
-      <p>Generates <code>n_people</code> random birthdays across 365 days and counts runs where any two match—repeating this 10,000 times gives a stable probability estimate.</p>
+      <p>Generates <code>n_people</code> random birthdays across 365 days and counts runs where any two match, repeating this 10,000 times gives a stable probability estimate.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="16-31" data-tint="2">
@@ -256,7 +256,7 @@ Probability when staying:   0.334
       <span class="code-callout__title">Monty Hall</span>
     </div>
     <div class="code-callout__body">
-      <p>Simulates the three-door game: the host eliminates a non-prize door, then the contestant either switches or stays—switching wins ~2/3 of the time.</p>
+      <p>Simulates the three-door game: the host eliminates a non-prize door, then the contestant either switches or stays, switching wins ~2/3 of the time.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="33-52" data-tint="3">
@@ -286,7 +286,7 @@ Probability when staying: 0.334
 ---
 
 ### Implementing Probability Rules
-Let's create tools for probability calculations:
+Create tools for probability calculations:
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -346,7 +346,7 @@ Probability of disease given positive test: 0.088
       <span class="code-callout__title">Set Operations</span>
     </div>
     <div class="code-callout__body">
-      <p>Implements complement, union, intersection, and conditional probability as one-liners—clean translations of the formulas from the text above.</p>
+      <p>Implements complement, union, intersection, and conditional probability as one-liners, clean translations of the formulas from the text above.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="22-27" data-tint="2">
@@ -364,7 +364,7 @@ Probability of disease given positive test: 0.088
       <span class="code-callout__title">Medical Demo</span>
     </div>
     <div class="code-callout__body">
-      <p>Shows that a 95%-accurate test on a 1%-prevalence disease still yields only ~8.8% chance of disease given a positive result—a classic base-rate demonstration.</p>
+      <p>Shows that a 95%-accurate test on a 1%-prevalence disease still yields only ~8.8% chance of disease given a positive result, a classic base-rate demonstration.</p>
     </div>
   </div>
 </aside>
@@ -480,7 +480,7 @@ viz.plot_probability_tree(weather_probs, weather_outcomes)
 ---
 
 ### Implementing Advanced Probability
-Let's create tools for advanced probability analysis:
+Create tools for advanced probability analysis:
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -547,7 +547,7 @@ Probability of hitting ±10: 0.631
       <span class="code-callout__title">Random Walk Simulation</span>
     </div>
     <div class="code-callout__body">
-      <p>Generates a matrix of ±1 steps then uses <code>cumsum</code> along the step axis—one row per simulation path, fully vectorised.</p>
+      <p>Generates a matrix of ±1 steps then uses <code>cumsum</code> along the step axis, one row per simulation path, fully vectorised.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="13-15" data-tint="2">
@@ -647,7 +647,7 @@ pc.plot_results(results)
       <span class="code-callout__title">Probabilistic Labels</span>
     </div>
     <div class="code-callout__body">
-      <p>Generates labels using a sigmoid of the feature sum so each sample has a genuine probability of being class 1—not a hard boundary, making the task realistically noisy.</p>
+      <p>Generates labels using a sigmoid of the feature sum so each sample has a genuine probability of being class 1, not a hard boundary, making the task realistically noisy.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="18-29" data-tint="2">
@@ -665,7 +665,7 @@ pc.plot_results(results)
       <span class="code-callout__title">Results Plot</span>
     </div>
     <div class="code-callout__body">
-      <p>Shows a heatmap confusion matrix on the left and a histogram of predicted class-1 probabilities on the right—illustrating calibration as well as accuracy.</p>
+      <p>Shows a heatmap confusion matrix on the left and a histogram of predicted class-1 probabilities on the right, illustrating calibration as well as accuracy.</p>
     </div>
   </div>
 </aside>
@@ -715,9 +715,9 @@ Remember:
 
 ## Common pitfalls
 
-- **Confusing P(A|B) and P(B|A)** — Write down which event is “given” before you plug into formulas.
-- **Assuming independence** — Multiplication rules for probabilities only apply when events are independent (or you use the correct conditional form).
-- **Law of large numbers vs one trial** — A fair coin can show many heads in a row; probability describes long-run frequency, not a guarantee on the next flip.
+- **Confusing P(A|B) and P(B|A)**: Write down which event is "given" before you plug into formulas.
+- **Assuming independence**: Multiplication rules for probabilities only apply when events are independent (or you use the correct conditional form).
+- **Law of large numbers vs one trial**: A fair coin can show many heads in a row; probability describes long-run frequency, not a guarantee on the next flip.
 
 ## Next steps
 

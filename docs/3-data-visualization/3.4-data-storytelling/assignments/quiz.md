@@ -2,7 +2,7 @@
 
 > **Submit your work on Skills Union →** <https://skillsu.com/member/assessment>
 
-Try each question closed-book first. Click **Show hint** if you get stuck — hints point you at the relevant lesson section and how to think about the question, without naming the answer.
+Try each question closed-book first. Click **Show hint** if you get stuck, hints point you at the relevant lesson section and how to think about the question, without naming the answer.
 
 ## Questions
 
@@ -16,7 +16,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Narrative techniques](../narrative-techniques.md) — "SCR Framework".
+- **Where:** [Narrative techniques](../narrative-techniques.md), "SCR Framework".
 - **Think:** Each letter in SCR stands for one word. The lesson gives a worked example with each sentence labelled. Reconstruct the three labels from the example, not from memory.
 
 </details>
@@ -31,7 +31,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Narrative techniques](../narrative-techniques.md) — "Core Narrative Elements — The Hook: Grabbing Attention".
+- **Where:** [Narrative techniques](../narrative-techniques.md), "Core Narrative Elements, The Hook: Grabbing Attention".
 - **Think:** The lesson describes the hook's job in one sentence. Consider what "hook" means in everyday language and find the option that matches.
 
 </details>
@@ -46,7 +46,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Visual storytelling](../visual-storytelling.md) — "Common Mistakes — The Missing Title Problem".
+- **Where:** [Visual storytelling](../visual-storytelling.md), "Common Mistakes, The Missing Title Problem".
 - **Think:** The lesson contrasts a "data description" title with an "insight" title. Which of the options captures that distinction?
 
 </details>
@@ -61,7 +61,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Visual storytelling](../visual-storytelling.md) — "Color and Design — Modern Color Schemes", and [Narrative techniques](../narrative-techniques.md) — "Data Visualization Best Practices — Color Usage Guidelines".
+- **Where:** [Visual storytelling](../visual-storytelling.md), "Color and Design, Modern Color Schemes", and [Narrative techniques](../narrative-techniques.md), "Data Visualization Best Practices, Color Usage Guidelines".
 - **Think:** The lesson maps each color scheme type to a data characteristic. The key phrase is "positive and negative relative to a meaningful midpoint."
 
 </details>
@@ -76,7 +76,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Narrative techniques](../narrative-techniques.md) — "SCR Framework" closing paragraph.
+- **Where:** [Narrative techniques](../narrative-techniques.md), "SCR Framework" closing paragraph.
 - **Think:** The lesson explicitly tells you when to use each framework based on the time available. Match "5-minute briefing" to the framework the lesson recommends for that context.
 
 </details>
@@ -91,7 +91,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Visual storytelling](../visual-storytelling.md) — Key Terms, "Annotation" definition, and [Narrative techniques](../narrative-techniques.md) — "Tips for Success — Use Visual Aids Purposefully".
+- **Where:** [Visual storytelling](../visual-storytelling.md), Key Terms, "Annotation" definition, and [Narrative techniques](../narrative-techniques.md), "Tips for Success, Use Visual Aids Purposefully".
 - **Think:** The lesson's definition of annotation emphasizes what it adds to a chart that the data line alone cannot show. Which option captures that?
 
 </details>
@@ -106,7 +106,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Visual storytelling](../visual-storytelling.md) — "Common Mistakes — The Scale Problem" and "Common Gotchas — Truncating the y-axis…".
+- **Where:** [Visual storytelling](../visual-storytelling.md), "Common Mistakes, The Scale Problem" and "Common Gotchas, Truncating the y-axis…".
 - **Think:** The Gotcha section describes the perceptual effect of a non-zero baseline on a bar chart. Which option matches that described effect?
 
 </details>
@@ -114,29 +114,29 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 8. You are creating a scatter plot to show whether advertising spend correlates with revenue. According to the narrative techniques lesson, at what step in the story creation process should you decide which chart type to use?
 
 - [ ] Before collecting any data, as chart choice drives data collection
-- [ ] After generating insights from your analysis — charts illustrate points, not replace them
+- [ ] After generating insights from your analysis, charts illustrate points, not replace them
 - [ ] At the same time as writing the hook, so the visual matches the opening
 - [ ] Only after getting stakeholder approval on the dataset
 
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Narrative techniques](../narrative-techniques.md) — "Story Creation Process".
+- **Where:** [Narrative techniques](../narrative-techniques.md), "Story Creation Process".
 - **Think:** The lesson lists ten steps with a specific warning about the order of insight generation vs. story structure vs. visualization. Identify which step "Visualization" occupies relative to "Insight Generation."
 
 </details>
 
 9. Which type of hook works best when presenting to a CFO who is primarily concerned with budget risk, according to the narrative techniques lesson?
 
-- [ ] The Question Hook — creates curiosity with an open-ended question
-- [ ] The Surprise Hook — challenges a common assumption
-- [ ] The Stakes Hook — creates urgency by naming a cost, risk, or deadline
-- [ ] The Data Dump Hook — leads with all the raw numbers immediately
+- [ ] The Question Hook, creates curiosity with an open-ended question
+- [ ] The Surprise Hook, challenges a common assumption
+- [ ] The Stakes Hook, creates urgency by naming a cost, risk, or deadline
+- [ ] The Data Dump Hook, leads with all the raw numbers immediately
 
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Narrative techniques](../narrative-techniques.md) — "Core Narrative Elements — The Hook" — "Three Types of Hooks".
+- **Where:** [Narrative techniques](../narrative-techniques.md), "Core Narrative Elements, The Hook", "Three Types of Hooks".
 - **Think:** The lesson maps each hook type to a specific audience characteristic. Which type is explicitly matched to executives and concerns about money, time, and risk?
 
 </details>
@@ -151,7 +151,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Visual storytelling](../visual-storytelling.md) — "Common Gotchas — Pie charts with more than 5–7 slices…".
+- **Where:** [Visual storytelling](../visual-storytelling.md), "Common Gotchas, Pie charts with more than 5-7 slices…".
 - **Think:** The Gotcha section explicitly states the recommended replacement and explains why it solves the root problem better than collapsing into "Other." Match that recommendation to the options.
 
 </details>

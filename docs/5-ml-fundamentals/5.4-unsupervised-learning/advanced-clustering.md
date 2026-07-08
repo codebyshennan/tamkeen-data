@@ -1,7 +1,7 @@
 ---
 reading_minutes: 25
 objectives:
-  - "Pick the right tool when k-means / DBSCAN fall short — HDBSCAN for varying density, GMM for soft / overlapping clusters, spectral for non-convex shapes."
+  - "Pick the right tool when k-means / DBSCAN fall short, HDBSCAN for varying density, GMM for soft / overlapping clusters, spectral for non-convex shapes."
   - "Read GMM outputs as soft membership: use `predict_proba` for cluster confidence and remember `n_components` is a Gaussian count, not a true cluster count."
   - "Tune HDBSCAN's `min_cluster_size` and `min_samples` with silhouette score, excluding `-1` noise points before scoring."
   - "Recognise the practical edges: spectral clustering's O(n²) memory wall, GMM convergence collapse without `reg_covar`, and why naive label-vote ensembles fail."
@@ -9,7 +9,7 @@ objectives:
 
 # Advanced Clustering Techniques
 
-**After this lesson:** you can explain the core ideas in “Advanced Clustering Techniques” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Advanced Clustering Techniques and try the examples in your own notebook.
 
 ## Overview
 
@@ -80,7 +80,7 @@ plt.close()
       <span class="code-callout__title">Labels and Probabilities</span>
     </div>
     <div class="code-callout__body">
-      <p>First plot shows hard cluster labels; second uses <code>clusterer.probabilities_</code> — HDBSCAN's unique membership confidence score that shows how "core" each point is to its cluster.</p>
+      <p>First plot shows hard cluster labels; second uses <code>clusterer.probabilities_</code>, HDBSCAN's unique membership confidence score that shows how "core" each point is to its cluster.</p>
     </div>
   </div>
 </aside>
@@ -149,7 +149,7 @@ plt.show()
       <span class="code-callout__title">Hard Labels vs Soft Membership</span>
     </div>
     <div class="code-callout__body">
-      <p>Left subplot shows argmax cluster assignments; right uses <code>probs[:, 0]</code> to color by probability of belonging to cluster 0 — gradient color reveals the boundary uncertainty that hard labels hide.</p>
+      <p>Left subplot shows argmax cluster assignments; right uses <code>probs[:, 0]</code> to color by probability of belonging to cluster 0, gradient color reveals the boundary uncertainty that hard labels hide.</p>
     </div>
   </div>
 </aside>
@@ -268,7 +268,7 @@ for doc, label, probs in zip(documents, doc_labels, doc_probs):
       <span class="code-callout__title">TF-IDF Vectorization</span>
     </div>
     <div class="code-callout__body">
-      <p>Convert five short documents to TF-IDF feature vectors; <code>.toarray()</code> converts the sparse matrix to dense — required for GMM which expects a dense input array.</p>
+      <p>Convert five short documents to TF-IDF feature vectors; <code>.toarray()</code> converts the sparse matrix to dense, required for GMM which expects a dense input array.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="16-24" data-tint="2">
@@ -277,7 +277,7 @@ for doc, label, probs in zip(documents, doc_labels, doc_probs):
       <span class="code-callout__title">GMM Topic Assignments</span>
     </div>
     <div class="code-callout__body">
-      <p>Fit GMM with 2 components to discover two topic groups; <code>predict_proba</code> shows the soft topic membership — documents about "deep learning" and "clustering" should land in different components.</p>
+      <p>Fit GMM with 2 components to discover two topic groups; <code>predict_proba</code> shows the soft topic membership, documents about "deep learning" and "clustering" should land in different components.</p>
     </div>
   </div>
 </aside>
@@ -392,7 +392,7 @@ def ensemble_clustering(X):
       <span class="code-callout__title">Three Diverse Clusterers</span>
     </div>
     <div class="code-callout__body">
-      <p>Combine HDBSCAN, GMM, and SpectralClustering — each with different inductive biases; diversity across methods reduces the chance that all three make the same mistakes.</p>
+      <p>Combine HDBSCAN, GMM, and SpectralClustering, each with different inductive biases; diversity across methods reduces the chance that all three make the same mistakes.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="10-18" data-tint="2">
@@ -401,7 +401,7 @@ def ensemble_clustering(X):
       <span class="code-callout__title">Majority Vote Ensemble</span>
     </div>
     <div class="code-callout__body">
-      <p>Collect per-clusterer predictions in a matrix, then <code>mode(axis=1)</code> picks the most common label per point — note that cluster label alignment across methods is a known challenge for real ensemble implementations.</p>
+      <p>Collect per-clusterer predictions in a matrix, then <code>mode(axis=1)</code> picks the most common label per point, note that cluster label alignment across methods is a known challenge for real ensemble implementations.</p>
     </div>
   </div>
 </aside>
@@ -411,7 +411,7 @@ def ensemble_clustering(X):
 
 ```python
 def semi_supervised_gmm(X, labeled_indices, true_labels):
-    # NOTE: GaussianMixture.fit(X, y) ignores y — it is unsupervised.
+    # NOTE: GaussianMixture.fit(X, y) ignores y: it is unsupervised.
     # To actually use the labels, seed each Gaussian with the mean of a
     # labeled class via means_init (this is what makes it semi-supervised).
     y_known = true_labels[labeled_indices]
@@ -434,11 +434,11 @@ from sklearn.cluster import MiniBatchKMeans
 def online_clustering(data_generator, n_clusters=3):
     # Initialize online clusterer
     clusterer = MiniBatchKMeans(n_clusters=n_clusters)
-    
+
     # Process data in batches
     for batch in data_generator:
         clusterer.partial_fit(batch)
-    
+
     return clusterer
 ```
 
@@ -450,12 +450,12 @@ def online_clustering(data_generator, n_clusters=3):
 def select_best_model(X, models, n_splits=5):
     from sklearn.metrics import silhouette_score
     scores = {}
-    
+
     for name, model in models.items():
         labels = model.fit_predict(X)
         score = silhouette_score(X, labels)
         scores[name] = score
-    
+
     return scores
 ```
 
@@ -531,12 +531,12 @@ def optimize_hdbscan(X):
 
 ## Gotchas
 
-- **Ensemble clustering with naive majority voting is broken by label misalignment** — different clustering algorithms assign arbitrary integers to clusters, so cluster "0" in HDBSCAN and cluster "0" in GMM may refer to completely different groups. A majority vote on raw labels is meaningless; use a proper consensus method like co-association matrices.
-- **GMM's `n_components` is not the same as the true number of clusters** — GMM fits a mixture of Gaussians regardless of whether your data is actually Gaussian. Setting `n_components` too high causes it to split one real cluster into multiple Gaussian blobs, inflating the apparent cluster count.
-- **HDBSCAN's `min_cluster_size` has a large impact on results** — setting it too small produces many tiny clusters and noise, too large merges distinct groups. Unlike DBSCAN's `eps`, there is no k-distance plot guide; validate with silhouette scores while excluding noise points (`labels != -1`).
-- **Spectral clustering is not scalable** — it builds an n×n affinity matrix, making it O(n²) in memory and up to O(n³) in the eigendecomposition. On more than a few thousand points it becomes impractical; cluster a representative subsample, or switch to a scalable method (HDBSCAN, MiniBatchKMeans). The faster `eigen_solver='amg'` path exists but requires the optional `pyamg` package.
-- **`GaussianMixture.fit` can fail to converge** — EM for GMM can collapse when a Gaussian component shrinks to fit a single point (covariance → 0). Add `reg_covar=1e-6` to regularize covariance matrices and prevent `ConvergenceWarning` or `NaN` outputs.
-- **`MiniBatchKMeans` for online clustering produces slightly different centroids each run** — mini-batch updates introduce randomness beyond the initial seed; results will vary across runs even with `random_state` set, which is expected behavior, not a bug.
+- **Ensemble clustering with naive majority voting is broken by label misalignment**: different clustering algorithms assign arbitrary integers to clusters, so cluster "0" in HDBSCAN and cluster "0" in GMM may refer to completely different groups. A majority vote on raw labels is meaningless; use a proper consensus method like co-association matrices.
+- **GMM's `n_components` is not the same as the true number of clusters**: GMM fits a mixture of Gaussians regardless of whether your data is actually Gaussian. Setting `n_components` too high causes it to split one real cluster into multiple Gaussian blobs, inflating the apparent cluster count.
+- **HDBSCAN's `min_cluster_size` has a large impact on results**: setting it too small produces many tiny clusters and noise, too large merges distinct groups. Unlike DBSCAN's `eps`, there is no k-distance plot guide; validate with silhouette scores while excluding noise points (`labels != -1`).
+- **Spectral clustering is not scalable**: it builds an n×n affinity matrix, making it O(n²) in memory and up to O(n³) in the eigendecomposition. On more than a few thousand points it becomes impractical; cluster a representative subsample, or switch to a scalable method (HDBSCAN, MiniBatchKMeans). The faster `eigen_solver='amg'` path exists but requires the optional `pyamg` package.
+- **`GaussianMixture.fit` can fail to converge**: EM for GMM can collapse when a Gaussian component shrinks to fit a single point (covariance → 0). Add `reg_covar=1e-6` to regularize covariance matrices and prevent `ConvergenceWarning` or `NaN` outputs.
+- **`MiniBatchKMeans` for online clustering produces slightly different centroids each run**: mini-batch updates introduce randomness beyond the initial seed; results will vary across runs even with `random_state` set, which is expected behavior, not a bug.
 
 ## Next Steps
 

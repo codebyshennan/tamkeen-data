@@ -9,11 +9,11 @@ objectives:
 
 # Sampling Distributions: The Heart of Statistical Inference
 
-**After this lesson:** you can explain the core ideas in “Sampling Distributions: The Heart of Statistical Inference” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Sampling Distributions: The Heart of Statistical Inference and try the examples in your own notebook.
 
 ## Overview
 
-If you drew another sample tomorrow, your mean would change slightly. A **sampling distribution** describes how a statistic (like \\(\bar x\\)) would vary under repeated sampling. That distribution is what makes [confidence intervals](./confidence-intervals.md), p-values, and tests behave the way they do—including the famous **Central Limit Theorem** for means. Read this lesson before confidence intervals so the margin-of-error formula has a foundation.
+If you drew another sample tomorrow, your mean would change slightly. A **sampling distribution** describes how a statistic (like \\(\bar x\\)) would vary under repeated sampling. That distribution is what makes [confidence intervals](./confidence-intervals.md), p-values, and tests behave the way they do, including the famous **Central Limit Theorem** for means. Read this lesson before confidence intervals so the margin-of-error formula has a foundation.
 
 ## Why this matters
 
@@ -66,15 +66,15 @@ The folklore answer is "n ≥ 30," which is fine as a default but hides importan
 
 | Shape | Population shape | Approximate \\(n\\) needed |
 |---|---|---|
-| ![Normal](assets/shape_normal.png) | Already normal (bell curve) | any \\(n\\) — the sampling distribution of \\(\bar x\\) is exactly normal |
-| ![Uniform](assets/shape_uniform.png) | Roughly symmetric with light tails (e.g., uniform / "flat top") | \\(n \approx 15\text{–}20\\) |
-| ![Mild skew](assets/shape_mild_skew.png) | Mild skew or moderate outliers (gentle lean to one side) | \\(n \approx 30\text{–}40\\) — the textbook rule |
-| ![Strong skew](assets/shape_strong_skew.png) | Strong skew (long tail — e.g., exponential, income, waiting times) | \\(n \approx 50\text{–}100\\) or more |
+| ![Normal](assets/shape_normal.png) | Already normal (bell curve) | any \\(n\\), the sampling distribution of \\(\bar x\\) is exactly normal |
+| ![Uniform](assets/shape_uniform.png) | Roughly symmetric with light tails (e.g., uniform / "flat top") | \\(n \approx 15\text{-}20\\) |
+| ![Mild skew](assets/shape_mild_skew.png) | Mild skew or moderate outliers (gentle lean to one side) | \\(n \approx 30\text{-}40\\), the textbook rule |
+| ![Strong skew](assets/shape_strong_skew.png) | Strong skew (long tail, e.g., exponential, income, waiting times) | \\(n \approx 50\text{-}100\\) or more |
 | ![Binomial extreme](assets/shape_binomial_extreme.png) | Binomial with \\(p\\) near 0 or 1 (most weight on one side) | check \\(np \geq 10\\) **and** \\(n(1-p) \geq 10\\) |
 
 **How to read this:** the bumpier or more lop-sided the population, the more data you need before the *average* of a sample starts to look like a clean bell. So when you read "n = 30 is enough," ask: *enough for what kind of population?* If your data have a long tail or many extreme values (think incomes, waiting times, customer spend), aim for the higher end of the table.
 
-Let's see it in action!
+Look at it in action!
 
 **CLT simulation: population → one sample → distribution of \\(\bar x\\)**
 
@@ -171,7 +171,7 @@ for dist in distributions:
       <span class="code-callout__title">Overlay the normal curve</span>
     </div>
     <div class="code-callout__body">
-      <p>Fit a normal curve to the simulated means and overlay it on the histogram — the visual signature of CLT.</p>
+      <p>Fit a normal curve to the simulated means and overlay it on the histogram, the visual signature of CLT.</p>
     </div>
   </div>
 </aside>
@@ -181,19 +181,19 @@ for dist in distributions:
 
 Three side-by-side panels per population type:
 
-1. **Population** — the raw shape we sampled from (could be very non-normal).
-2. **One sample** — what 30 randomly drawn values look like (still messy).
-3. **Sampling distribution** — histogram of *means* from 1,000 such samples, with a normal curve overlaid.
+1. **Population**: the raw shape we sampled from (could be very non-normal).
+2. **One sample**: what 30 randomly drawn values look like (still messy).
+3. **Sampling distribution**: histogram of *means* from 1,000 such samples, with a normal curve overlaid.
 
 Look at panel 3 in each image: even for the lopsided exponential and bimodal "skewed" populations, the histogram of means is a clean bell.
 
-![CLT — exponential population](assets/clt_exponential.png)
+![CLT, exponential population](assets/clt_exponential.png)
 *Figure 2a: An exponential (long-tail) population. Individual draws are skewed, but the sampling distribution of the mean (right) is approximately normal.*
 
-![CLT — uniform population](assets/clt_uniform.png)
-*Figure 2b: A uniform (flat) population. Same story — the mean's distribution looks like a bell even though the population doesn't.*
+![CLT, uniform population](assets/clt_uniform.png)
+*Figure 2b: A uniform (flat) population. Same story, the mean's distribution looks like a bell even though the population doesn't.*
 
-![CLT — bimodal/skewed population](assets/clt_skewed.png)
+![CLT, bimodal/skewed population](assets/clt_skewed.png)
 *Figure 2c: A bumpy, two-bump population. CLT still kicks in for the mean.*
 
 **Big idea:** CLT is a statement about *averages*, not about individual data points. The raw data can stay weird; the mean smooths out.
@@ -226,11 +226,11 @@ The standard error (SE) tells us how much sample statistics typically deviate fr
 |---|---|---|
 | \\(SE\\) | "standard error" | How much the statistic typically wobbles from sample to sample |
 | \\(\bar x\\) | "x-bar" | The **sample mean** (one number computed from your data) |
-| \\(\sigma\\) | "sigma" | The **population standard deviation** — the spread of individual values across the whole population |
+| \\(\sigma\\) | "sigma" | The **population standard deviation**, the spread of individual values across the whole population |
 | \\(\sigma^2\\) | "sigma squared" | The **population variance** (just \\(\sigma\\) squared) |
-| \\(n\\) | "n" | The **sample size** — how many observations you collected |
+| \\(n\\) | "n" | The **sample size**, how many observations you collected |
 | \\(\sqrt{n}\\) | "square root of n" | Why bigger samples shrink the SE more slowly than you'd hope (you need 4× more data to halve the SE) |
-| \\(\hat p\\) | "p-hat" | The **sample proportion** — the fraction of "yes" outcomes in your sample (e.g., 184 / 200 = 0.92) |
+| \\(\hat p\\) | "p-hat" | The **sample proportion**, the fraction of "yes" outcomes in your sample (e.g., 184 / 200 = 0.92) |
 | \\(p\\) | "p" | The **true population proportion** that \\(\hat p\\) is estimating |
 | \\(p(1-p)\\) | "p times one minus p" | A measure of how "spread out" a yes/no variable is; biggest at \\(p = 0.5\\), smallest near 0 or 1 |
 | \\(\bar x_1 - \bar x_2\\) | "x-bar one minus x-bar two" | The **difference between two group means** (e.g., treatment minus control) |
@@ -239,7 +239,7 @@ The standard error (SE) tells us how much sample statistics typically deviate fr
 
 In plain words, all three formulas have the same shape: **noise in the data ÷ a function of how many points you have**. More data → smaller SE → tighter estimates.
 
-Let's see how sample size affects SE:
+Look at how sample size affects SE:
 
 **Empirical vs theoretical standard error across n**
 
@@ -358,11 +358,11 @@ for r in se_results:
 </div>
 
 ![Standard error effect](assets/standard_error_effect.png)
-*Figure 3: As sample size grows from 10 to 1,000, the sampling distribution of the mean (each panel) gets narrower — the standard error shrinks roughly by 1/√n.*
+*Figure 3: As sample size grows from 10 to 1,000, the sampling distribution of the mean (each panel) gets narrower, the standard error shrinks roughly by 1/√n.*
 
 #### Interactive: SE vs sample size
 
-Slide \\(n\\) from 5 to 500. Left: the sampling distribution of \\(\bar x\\) gets narrower. Right: the empirical SE (orange dot) lands close to the theoretical \\(\sigma/\sqrt{n}\\) curve (blue line) — and the gap shows the cost of being too aggressive with small samples.
+Slide \\(n\\) from 5 to 500. Left: the sampling distribution of \\(\bar x\\) gets narrower. Right: the empirical SE (orange dot) lands close to the theoretical \\(\sigma/\sqrt{n}\\) curve (blue line), and the gap shows the cost of being too aggressive with small samples.
 
 <iframe src="assets/interactive/se_vs_n_simulation.html" width="100%" height="480" frameborder="0" loading="lazy" title="Interactive SE vs n simulation"></iframe>
 
@@ -372,7 +372,7 @@ Slide \\(n\\) from 5 to 500. Left: the sampling distribution of \\(\bar x\\) get
 
 ### 1. Quality Control in Manufacturing
 
-**Single hour’s sample vs spec band**
+**Single hour's sample vs spec band**
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -464,7 +464,7 @@ quality_control_demo()
 
 ### 2. Political Polling
 
-**Monte Carlo distribution of \\(\hat p\\) and one poll’s MOE**
+**Monte Carlo distribution of \\(\hat p\\) and one poll's MOE**
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -553,11 +553,11 @@ def polling_demo():
 
 
 ![Polling results](assets/polling_results.png)
-*Figure 5: Histogram of 100 simulated polls of 1,000 voters each. The true support is 52% (red dashed). Most polls land within a couple of percentage points — that wobble is the sampling distribution of \\(\hat p\\).*
+*Figure 5: Histogram of 100 simulated polls of 1,000 voters each. The true support is 52% (red dashed). Most polls land within a couple of percentage points, that wobble is the sampling distribution of \\(\hat p\\).*
 
 *Note: The visualization shows the distribution of poll results from multiple samples. This helps us understand the variability in polling estimates and the role of sampling error.*
 
-## Common Misconceptions: Let's Clear Them Up
+## Common misconceptions to clear up
 
 ### 1. Sampling Distribution vs. Sample Distribution
 
@@ -572,7 +572,7 @@ def polling_demo():
 ### 3. Sample Size Effects
 
 - **Misconception:** "Larger samples always give the right answer." Larger samples reduce *random* error but cannot fix a biased design.
-- **Reality:** Larger samples give more *precise* estimates of whatever the design measures—accurate or not.
+- **Reality:** Larger samples give more *precise* estimates of whatever the design measures, accurate or not.
 
 ## Interactive Learning: Try It Yourself
 
@@ -643,22 +643,22 @@ sampling_game()
       <span class="code-callout__title">Coverage check</span>
     </div>
     <div class="code-callout__body">
-      <p>Print the CI and check whether the true mean falls inside it—a simple illustration of what "95% confidence" means in one run.</p>
+      <p>Print the CI and check whether the true mean falls inside it, a simple illustration of what "95% confidence" means in one run.</p>
     </div>
   </div>
 </aside>
 </div>
 
 ![Sampling game](assets/sampling_game.png)
-*Figure 6: One run of the sampling game. Grey histogram = population, blue histogram = the single sample, red dashed = the true mean, blue dotted = our sample mean, blue band = the approximate 95% CI for the mean. Run the code repeatedly and count how often the band covers the red line — it should be close to 95 out of 100 times.*
+*Figure 6: One run of the sampling game. Grey histogram = population, blue histogram = the single sample, red dashed = the true mean, blue dotted = our sample mean, blue band = the approximate 95% CI for the mean. Run the code repeatedly and count how often the band covers the red line, it should be close to 95 out of 100 times.*
 
 #### Interactive: 30 samples, 30 intervals
 
-The widget below shows 30 independent samples drawn from the same population, each with its 95% CI. Blue intervals **cover** the true mean (red dashed line); red intervals **miss**. The header reports the coverage rate — across many runs it converges to 95%.
+The widget below shows 30 independent samples drawn from the same population, each with its 95% CI. Blue intervals **cover** the true mean (red dashed line); red intervals **miss**. The header reports the coverage rate, across many runs it converges to 95%.
 
 <iframe src="assets/interactive/sampling_game_simulation.html" width="100%" height="540" frameborder="0" loading="lazy" title="Interactive sampling game"></iframe>
 
-This is the *operational* meaning of "95% confidence" — not "this specific interval has a 95% probability of being right," but "this *procedure* gets it right 95% of the time."
+This is the *operational* meaning of "95% confidence", not "this specific interval has a 95% probability of being right," but "this *procedure* gets it right 95% of the time."
 
 *Note: The visualization shows how a single sample relates to the population distribution. The confidence interval helps us understand the uncertainty in our sample mean estimate.*
 
@@ -677,7 +677,7 @@ For \\(n = 100\\) the t critical value is essentially 1.98, close enough to the 
 \text{95\% CI} \approx \bar x \pm 1.96 \cdot SE = 85 \pm 1.96 \times 5 = 85 \pm 9.8
 \\]
 
-That gives **roughly $75.20 to $94.80**. Plain reading: based on this sample, the procedure used produces an interval that captures the true average customer spend about 95% of the time, and this particular interval is $75.20–$94.80.
+That gives **roughly $75.20 to $94.80**. Plain reading: based on this sample, the procedure used produces an interval that captures the true average customer spend about 95% of the time, and this particular interval is $75.20-$94.80.
 
 </details>
 
@@ -692,7 +692,7 @@ That gives **roughly $75.20 to $94.80**. Plain reading: based on this sample, th
 SE_{\text{new}} = \dfrac{\sigma}{\sqrt{2n}} = \dfrac{1}{\sqrt{2}} \cdot \dfrac{\sigma}{\sqrt{n}} \approx 0.707 \cdot SE_{\text{old}}
 \\]
 
-So doubling \\(n\\) shrinks the SE by a factor of \\(1/\sqrt{2} \approx 0.71\\) — a **~29% reduction**, *not* 50%. To halve the SE you need to **quadruple** the sample size.
+So doubling \\(n\\) shrinks the SE by a factor of \\(1/\sqrt{2} \approx 0.71\\), a **~29% reduction**, *not* 50%. To halve the SE you need to **quadruple** the sample size.
 
 </details>
 
@@ -705,9 +705,9 @@ The CLT promises that the sampling distribution of the mean is approximately nor
 
 - A handful of extreme values can dominate the average, so individual sample means swing wildly.
 - If the population is heavily skewed (income, waiting times) or has long tails, \\(n = 5\\) or \\(n = 10\\) is far too small for the bell-curve approximation to hold.
-- Inferences (CIs, p-values) that rely on the normal approximation will be off — typically too narrow / too confident.
+- Inferences (CIs, p-values) that rely on the normal approximation will be off, typically too narrow / too confident.
 
-Rule of thumb: aim for \\(n \geq 30\\) for mildly skewed populations, \\(n \geq 50\text{–}100\\) for strongly skewed ones (see the table earlier in the lesson).
+Rule of thumb: aim for \\(n \geq 30\\) for mildly skewed populations, \\(n \geq 50\text{-}100\\) for strongly skewed ones (see the table earlier in the lesson).
 
 </details>
 
@@ -718,14 +718,14 @@ Rule of thumb: aim for \\(n \geq 30\\) for mildly skewed populations, \\(n \geq 
 
 A reasonable plan:
 
-1. **Define the population clearly** — e.g., "daily unique visitors to the site for a calendar year." Decide whether bots are included.
-2. **Pick the sampling unit** — usually the *day*, not individual visits, so each draw is one day's traffic count.
-3. **Use stratified sampling by day-of-week** — traffic on Mondays and weekends behaves very differently. Strata: Mon, Tue, Wed, Thu, Fri, Sat, Sun. Sample several days from each.
-4. **Cover seasonality** — sample across the whole year (or at least several months) to avoid period-specific bias (e.g., holiday spikes).
-5. **Set sample size from desired precision** — choose how tight you want the CI for the average and back-solve via \\(n = (z\sigma/\text{MOE})^2\\) using a pilot estimate of the day-to-day standard deviation.
+1. **Define the population clearly**: e.g., "daily unique visitors to the site for a calendar year." Decide whether bots are included.
+2. **Pick the sampling unit**: usually the *day*, not individual visits, so each draw is one day's traffic count.
+3. **Use stratified sampling by day-of-week**: traffic on Mondays and weekends behaves very differently. Strata: Mon, Tue, Wed, Thu, Fri, Sat, Sun. Sample several days from each.
+4. **Cover seasonality**: sample across the whole year (or at least several months) to avoid period-specific bias (e.g., holiday spikes).
+5. **Set sample size from desired precision**: choose how tight you want the CI for the average and back-solve via \\(n = (z\sigma/\text{MOE})^2\\) using a pilot estimate of the day-to-day standard deviation.
 6. **Report \\(\bar x\\) with a confidence interval**, not just a point estimate, so consumers see the uncertainty.
 
-If you have analytics for *every* day, you don't need to sample at all — just compute the mean directly. Sampling matters when measurement is costly (e.g., manual log review, paid tools with quotas).
+If you have analytics for *every* day, you don't need to sample at all, just compute the mean directly. Sampling matters when measurement is costly (e.g., manual log review, paid tools with quotas).
 
 </details>
 
@@ -734,12 +734,12 @@ If you have analytics for *every* day, you don't need to sample at all — just 
 <details>
 <summary>Show answer</summary>
 
-> "Imagine we ran our survey 100 different times, each with a fresh group of customers. We'd get 100 slightly different averages — that's not a mistake, that's just life. The *sampling distribution* is the picture of those 100 averages.
+> "Imagine we ran our survey 100 different times, each with a fresh group of customers. We'd get 100 slightly different averages, that's not a mistake, that's just life. The *sampling distribution* is the picture of those 100 averages.
 >
 > Two things to know:
 >
 > 1. The averages cluster around the true value, not on top of it. So our single survey number is *near* the truth, not exactly the truth.
-> 2. The bigger our survey, the tighter that cluster — meaning our number is closer to the truth.
+> 2. The bigger our survey, the tighter that cluster, meaning our number is closer to the truth.
 >
 > That's why we report a *range* (a confidence interval) instead of a single number: it's an honest way of saying 'here's our best guess, and here's how much that guess could move if we redid the survey'."
 
@@ -757,12 +757,12 @@ If you have analytics for *every* day, you don't need to sample at all — just 
 
 ## Gotchas
 
-- **Confusing the sampling distribution with the sample distribution** — the *sample distribution* is the histogram of values in one dataset; the *sampling distribution* is the distribution of a statistic (e.g., x̄) across hypothetical repeated samples. The CLT applies to the second, not the first.
-- **Believing the CLT means "your data become normal with more observations"** — the CLT says the *sampling distribution of the mean* becomes approximately normal; the raw data can stay skewed or bimodal regardless of n. Using CLT to justify normality of individual values leads to wrong model choices downstream.
-- **Using `np.random.choice(population, size=n)` to build a sampling distribution when n is small** — for a population of size 10,000 and n=5, each resample is highly sensitive to outliers and the normal approximation is poor. The lesson's threshold of n=30 is a common rule of thumb; skewed populations may need n>50 before the CLT kicks in.
-- **Equating standard deviation with standard error** — `np.std(data)` gives the spread of individual observations; `scipy.stats.sem(data)` gives how much the *mean* varies across samples. Using the wrong one in a CI formula inflates or deflates the interval by a factor of √n.
-- **Overlaying a normal curve on a sampling distribution and concluding CLT "proved"** — the lesson's `stats.norm.pdf` overlay is fitted to the simulated means, so it will always look like a decent fit. A formal normality check (Shapiro-Wilk or Q-Q plot) is needed to verify CLT has kicked in adequately for a given n and population shape.
-- **Running the demonstration code without a fixed seed and expecting stable output** — the lesson's CLT simulation uses `np.random.choice` inside a loop without a per-run seed; re-running will produce slightly different empirical SEs. Always seed before benchmarking or sharing, and report that values are approximate.
+- **Confusing the sampling distribution with the sample distribution**: the *sample distribution* is the histogram of values in one dataset; the *sampling distribution* is the distribution of a statistic (e.g., x̄) across hypothetical repeated samples. The CLT applies to the second, not the first.
+- **Believing the CLT means "your data become normal with more observations"**: the CLT says the *sampling distribution of the mean* becomes approximately normal; the raw data can stay skewed or bimodal regardless of n. Using CLT to justify normality of individual values leads to wrong model choices downstream.
+- **Using `np.random.choice(population, size=n)` to build a sampling distribution when n is small**: for a population of size 10,000 and n=5, each resample is highly sensitive to outliers and the normal approximation is poor. The lesson's threshold of n=30 is a common rule of thumb; skewed populations may need n>50 before the CLT kicks in.
+- **Equating standard deviation with standard error**: `np.std(data)` gives the spread of individual observations; `scipy.stats.sem(data)` gives how much the *mean* varies across samples. Using the wrong one in a CI formula inflates or deflates the interval by a factor of √n.
+- **Overlaying a normal curve on a sampling distribution and concluding CLT "proved"**: the lesson's `stats.norm.pdf` overlay is fitted to the simulated means, so it will always look like a decent fit. A formal normality check (Shapiro-Wilk or Q-Q plot) is needed to verify CLT has kicked in adequately for a given n and population shape.
+- **Running the demonstration code without a fixed seed and expecting stable output**: the lesson's CLT simulation uses `np.random.choice` inside a loop without a per-run seed; re-running will produce slightly different empirical SEs. Always seed before benchmarking or sharing, and report that values are approximate.
 
 ## Next steps
 

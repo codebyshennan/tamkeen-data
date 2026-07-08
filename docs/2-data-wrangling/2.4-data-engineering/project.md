@@ -4,7 +4,7 @@
 
 ## Helpful video
 
-DAGs, tasks, and scheduling—conceptual background for ETL-style pipelines.
+DAGs, tasks, and scheduling, conceptual background for ETL-style pipelines.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eeSLDdz-aLg" title="Apache Airflow Tutorial for Beginners" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -12,13 +12,13 @@ DAGs, tasks, and scheduling—conceptual background for ETL-style pipelines.
 
 **Prerequisites:** [ETL fundamentals](etl-fundamentals.md), [data storage](data-storage.md), and [data integration](data-integration.md). Comfortable Python; optional [Airflow](../../0-prep/airflow.md) if you orchestrate with it.
 
-> **Time needed:** Often 8–15 hours for a solid submission.
+> **Time needed:** Often 8-15 hours for a solid submission.
 
 ## Why this matters
 
 This project checks whether you can narrate a pipeline end to end: **sources**, **transformations**, **load targets**, **quality checks**, and **what happens when a step fails**. Polished code is optional; coherent stages and failure thinking are not.
 
-In this assignment, you design or prototype an ETL-style pipeline that could plausibly serve analysts—emphasizing structure, data-quality gates, and recovery—not only a single successful run.
+In this assignment, you design or prototype an ETL-style pipeline that could plausibly serve analysts, emphasizing structure, data-quality gates, and recovery, not only a single successful run.
 
 ### Learning Objectives
 
@@ -132,12 +132,12 @@ class SalesAPIClient:
     def __init__(self, base_url: str, api_key: str):
         # Your code here
         pass
-    
+
     def fetch_sales(self, start_date: str, end_date: str) -> pd.DataFrame:
         """Fetch sales data for date range"""
         # Your code here
         pass
-    
+
     def handle_rate_limit(self):
         """Implement rate limiting"""
         # Your code here
@@ -160,7 +160,7 @@ class SalesAPIClient:
       <span class="code-callout__title">fetch_sales stub</span>
     </div>
     <div class="code-callout__body">
-      <p>Accepts a date range and should return a DataFrame of sales records. Implement pagination, error handling, and retry logic here—this is the main data extraction entry point.</p>
+      <p>Accepts a date range and should return a DataFrame of sales records. Implement pagination, error handling, and retry logic here, this is the main data extraction entry point.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="14-17" data-tint="3">
@@ -211,7 +211,7 @@ class DataCleaner:
         """
         # Your code here
         pass
-    
+
     def validate_data(self, df: pd.DataFrame) -> bool:
         """
         Implement data validation rules
@@ -284,7 +284,7 @@ class WarehouseSchema:
             FOREIGN KEY (customer_id) REFERENCES dim_customer(customer_id)
         )
         """
-        
+
         # Define dimension tables
         dim_date = """
         CREATE TABLE IF NOT EXISTS dim_date (
@@ -297,7 +297,7 @@ class WarehouseSchema:
             is_weekend BOOLEAN
         )
         """
-        
+
         # Execute schema creation
         with engine.connect() as conn:
             conn.execute(dim_date)
@@ -329,7 +329,7 @@ class WarehouseSchema:
       <span class="code-callout__title">dim_date DDL and schema execution</span>
     </div>
     <div class="code-callout__body">
-      <p>Defines the date dimension with time attributes (year, month, day, quarter, is_weekend) needed for time-based slicing in reports. The final block opens a connection and executes both DDL statements—dimension first, then fact.</p>
+      <p>Defines the date dimension with time attributes (year, month, day, quarter, is_weekend) needed for time-based slicing in reports. The final block opens a connection and executes both DDL statements, dimension first, then fact.</p>
     </div>
   </div>
 </aside>
@@ -365,7 +365,7 @@ class DataPipeline:
         self.api_client = SalesAPIClient(base_url, api_key)
         self.cleaner = DataCleaner()
         self.warehouse = WarehouseSchema()
-    
+
     def run_pipeline(self, start_date: str, end_date: str):
         """
         Run complete pipeline
@@ -378,13 +378,13 @@ class DataPipeline:
         try:
             # Extract
             raw_data = self.api_client.fetch_sales(start_date, end_date)
-            
+
             # Transform
             clean_data = self.cleaner.clean_sales_data(raw_data)
-            
+
             # Load
             self.load_to_warehouse(clean_data)
-            
+
         except Exception as e:
             logger.error(f"Pipeline failed: {str(e)}")
             raise
@@ -397,7 +397,7 @@ class DataPipeline:
       <span class="code-callout__title">Class definition and constructor</span>
     </div>
     <div class="code-callout__body">
-      <p>Defines <code>DataPipeline</code> and wires up the three main components in the constructor: the API client, the data cleaner, and the warehouse schema object—ready for use by <code>run_pipeline</code>.</p>
+      <p>Defines <code>DataPipeline</code> and wires up the three main components in the constructor: the API client, the data cleaner, and the warehouse schema object, ready for use by <code>run_pipeline</code>.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="10-31" data-tint="2">
@@ -494,7 +494,7 @@ class SalesDataPipeline:
     def __init__(self, config: Dict[str, Any]):
         self.config = config
         self.setup_components()
-    
+
     def setup_components(self):
         """Initialize pipeline components"""
         # Setup API client
@@ -502,38 +502,38 @@ class SalesDataPipeline:
             self.config['api']['base_url'],
             self.config['api']['api_key']
         )
-        
+
         # Setup database connections
         self.warehouse = sqlalchemy.create_engine(
             self.config['database']['warehouse']
         )
-        
+
         # Setup data cleaner
         self.cleaner = DataCleaner()
-    
+
     def run_daily_load(self):
         """Run daily data load"""
         try:
             # Extract data
             sales_data = self.extract_daily_data()
-            
+
             # Clean and transform
             clean_data = self.cleaner.clean_sales_data(sales_data)
-            
+
             # Load to warehouse
             self.load_to_warehouse(clean_data)
-            
+
             logger.info("Daily load completed successfully")
-            
+
         except Exception as e:
             logger.error(f"Daily load failed: {str(e)}")
             raise
-    
+
     def extract_daily_data(self) -> pd.DataFrame:
         """Extract daily data from all sources"""
         # Your code here
         pass
-    
+
     def load_to_warehouse(self, df: pd.DataFrame):
         """Load data to warehouse"""
         # Your code here
@@ -543,11 +543,11 @@ class SalesDataPipeline:
 if __name__ == "__main__":
     # Initialize pipeline
     pipeline = SalesDataPipeline(config)
-    
+
     try:
         # Run daily load
         pipeline.run_daily_load()
-        
+
     except Exception as e:
         logger.error(f"Pipeline failed: {str(e)}")
 {% endhighlight %}
@@ -568,7 +568,7 @@ if __name__ == "__main__":
       <span class="code-callout__title">SalesDataPipeline: class, constructor, and setup_components</span>
     </div>
     <div class="code-callout__body">
-      <p>Defines the main pipeline class. The constructor calls <code>setup_components</code>, which initialises the API client, creates the warehouse engine from config, and instantiates the data cleaner—wiring everything together before any pipeline run.</p>
+      <p>Defines the main pipeline class. The constructor calls <code>setup_components</code>, which initialises the API client, creates the warehouse engine from config, and instantiates the data cleaner, wiring everything together before any pipeline run.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="43-59" data-tint="3">
@@ -594,12 +594,12 @@ if __name__ == "__main__":
 
 ## Gotchas
 
-- **`SalesAPIClient` constructor stores credentials as plain instance attributes** — hardcoding `api_key` as `self.api_key` means it appears in `repr()`, log output, and tracebacks; use environment variables or a secrets manager and never log the key directly.
-- **`run_pipeline` re-raises exceptions but leaves no checkpoint** — if the load step fails partway through, re-running the pipeline from `start_date` will re-extract and re-transform data that was already partially loaded; add a staging table or idempotency key so reruns are safe.
-- **`conn.execute(dim_date)` then `conn.execute(fact_sales)` without `conn.commit()`** — in SQLAlchemy 2.x, DDL within a connection context is not auto-committed; omitting `conn.commit()` (or using `engine.begin()`) means tables are created inside a rolled-back transaction and the schema silently disappears.
-- **Incremental loads without a watermark column will re-insert all historical rows** — the `DataLoading` task in the assignment requires handling incremental loads, but the `load_to_warehouse` stub has no logic for filtering already-loaded records; without a `last_updated_at` or batch ID check, every daily run duplicates the full dataset.
-- **`logger.error(f"Daily load failed: {str(e)}")` then `raise` logs the message but loses the stack trace context** — wrapping exceptions with `str(e)` discards the original traceback; use `logger.exception("Daily load failed")` inside the `except` block to log the full stack automatically.
-- **File integration with no deduplication on reprocessing** — the assignment requires tracking processed files, but without a persistent manifest (e.g., a database table or a `.done` marker file), restarting after a crash will reprocess already-loaded files and silently double-count records.
+- **`SalesAPIClient` constructor stores credentials as plain instance attributes**: hardcoding `api_key` as `self.api_key` means it appears in `repr()`, log output, and tracebacks; use environment variables or a secrets manager and never log the key directly.
+- **`run_pipeline` re-raises exceptions but leaves no checkpoint**: if the load step fails partway through, re-running the pipeline from `start_date` will re-extract and re-transform data that was already partially loaded; add a staging table or idempotency key so reruns are safe.
+- **`conn.execute(dim_date)` then `conn.execute(fact_sales)` without `conn.commit()`**: in SQLAlchemy 2.x, DDL within a connection context is not auto-committed; omitting `conn.commit()` (or using `engine.begin()`) means tables are created inside a rolled-back transaction and the schema silently disappears.
+- **Incremental loads without a watermark column will re-insert all historical rows**: the `DataLoading` task in the assignment requires handling incremental loads, but the `load_to_warehouse` stub has no logic for filtering already-loaded records; without a `last_updated_at` or batch ID check, every daily run duplicates the full dataset.
+- **`logger.error(f"Daily load failed: {str(e)}")` then `raise` logs the message but loses the stack trace context**: wrapping exceptions with `str(e)` discards the original traceback; use `logger.exception("Daily load failed")` inside the `except` block to log the full stack automatically.
+- **File integration with no deduplication on reprocessing**: the assignment requires tracking processed files, but without a persistent manifest (e.g., a database table or a `.done` marker file), restarting after a crash will reprocess already-loaded files and silently double-count records.
 
 ## Bonus Challenges
 
@@ -621,4 +621,4 @@ if __name__ == "__main__":
    - Add caching layer
    - Implement query optimization
 
-Good luck! Remember to focus on building a robust and maintainable solution!
+Good luck! Remember to focus on building a reliable and maintainable solution!

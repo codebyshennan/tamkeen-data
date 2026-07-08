@@ -3,17 +3,17 @@ reading_minutes: 15
 objectives:
   - Distinguish supervised, unsupervised, and reinforcement learning by example.
   - Outline the seven-step machine-learning lifecycle from problem definition to deployment.
-  - Recognise the bias–variance tradeoff and read learning curves to diagnose under- and overfitting at a glance.
+  - Recognise the bias-variance tradeoff and read learning curves to diagnose under- and overfitting at a glance.
   - Run a four-line sklearn `fit`/`predict` loop on toy data to anchor the supervised-learning idea in code.
 ---
 
 # Introduction to Machine Learning
 
-**After this lesson:** you can explain the core ideas in “Introduction to Machine Learning” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Introduction to Machine Learning and try the examples in your own notebook.
 
 ## Overview
 
-This lesson sets vocabulary you will reuse everywhere in Module 5: **supervised**, **unsupervised**, and **reinforcement** learning, the high-level **workflow** from problem to deployment, and the intuition behind **bias–variance** and **learning curves**. **Prerequisites:** comfortable Python, basic plots, and descriptive stats from [Module 1](../../1-data-fundamentals/README.md) and [Module 2](../../2-data-wrangling/README.md); probability thinking from [Module 4](../../4-stat-analysis/README.md) helps when we talk about generalization.
+This lesson sets vocabulary you will reuse everywhere in Module 5: **supervised**, **unsupervised**, and **reinforcement** learning, the high-level **workflow** from problem to deployment, and the intuition behind **bias-variance** and **learning curves**. **Prerequisites:** comfortable Python, basic plots, and descriptive stats from [Module 1](../../1-data-fundamentals/README.md) and [Module 2](../../2-data-wrangling/README.md); probability thinking from [Module 4](../../4-stat-analysis/README.md) helps when we talk about generalization.
 
 ## Why this matters
 
@@ -171,7 +171,7 @@ plt.show()
       <span class="code-callout__title">Fit and Predict</span>
     </div>
     <div class="code-callout__body">
-      <p><code>model.fit</code> learns the slope and intercept; <code>predict</code> extrapolates to 1750 sq ft — this is the complete supervised learning loop in four lines.</p>
+      <p><code>model.fit</code> learns the slope and intercept; <code>predict</code> extrapolates to 1750 sq ft, this is the complete supervised learning loop in four lines.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="17-27" data-tint="3">
@@ -180,7 +180,7 @@ plt.show()
       <span class="code-callout__title">Visualize the Fit</span>
     </div>
     <div class="code-callout__body">
-      <p>Plotting the data, the fitted line, and the prediction makes the linear relationship concrete — the star lands on the line at 1750 sq ft, exactly where the model interpolates.</p>
+      <p>Plotting the data, the fitted line, and the prediction makes the linear relationship concrete, the star lands on the line at 1750 sq ft, exactly where the model interpolates.</p>
     </div>
   </div>
 </aside>
@@ -198,11 +198,11 @@ Predicted price for 1750 sq ft: $350,000.00
 
 ## Gotchas
 
-- **Passing a 1D array to sklearn estimators** — `model.fit(sizes, prices)` requires `sizes` to be 2D (shape `(n, 1)`), which is why the example uses `[[1000], [1500], …]`; passing a plain list like `[1000, 1500, …]` raises a `ValueError` about a 1D feature array that confuses many beginners.
-- **Treating "more data always helps" as universal** — collecting more data is the right fix for high-variance (overfitting) models, but it does not help a high-bias (underfitting) model; adding data to a linear model on non-linear data just confirms the same bad fit at larger scale.
-- **Assuming supervised learning requires a "correct" answer for every case** — the labels in supervised learning represent a ground truth decided at the time of data collection; if those labels are noisy, biased, or stale, the model will learn those biases faithfully, and high accuracy on training data will not save you.
-- **Conflating unsupervised clustering output with ground truth classes** — cluster labels from k-means or similar algorithms are arbitrary integers (cluster 0 and cluster 1 have no inherent meaning) and should not be compared to class labels without an explicit alignment step.
-- **Skipping problem definition before writing code** — jumping straight to model selection without deciding what metric to optimise (and why) routinely leads to models that score well on a proxy metric but fail the actual business goal; the problem spec is not optional overhead.
+- **Passing a 1D array to sklearn estimators**: `model.fit(sizes, prices)` requires `sizes` to be 2D (shape `(n, 1)`), which is why the example uses `[[1000], [1500], …]`; passing a plain list like `[1000, 1500, …]` raises a `ValueError` about a 1D feature array that confuses many beginners.
+- **Treating "more data always helps" as universal**: collecting more data is the right fix for high-variance (overfitting) models, but it does not help a high-bias (underfitting) model; adding data to a linear model on non-linear data just confirms the same bad fit at larger scale.
+- **Assuming supervised learning requires a "correct" answer for every case**: the labels in supervised learning represent a ground truth decided at the time of data collection; if those labels are noisy, biased, or stale, the model will learn those biases faithfully, and high accuracy on training data will not save you.
+- **Conflating unsupervised clustering output with ground truth classes**: cluster labels from k-means or similar algorithms are arbitrary integers (cluster 0 and cluster 1 have no inherent meaning) and should not be compared to class labels without an explicit alignment step.
+- **Skipping problem definition before writing code**: jumping straight to model selection without deciding what metric to optimise (and why) routinely leads to models that score well on a proxy metric but fail the actual business goal; the problem spec is not optional overhead.
 
 ## Next Steps
 

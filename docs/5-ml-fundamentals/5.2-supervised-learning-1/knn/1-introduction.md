@@ -7,7 +7,7 @@ objectives:
 ---
 # Introduction to k-Nearest Neighbors (KNN)
 
-**After this lesson:** you can explain the core ideas in “Introduction to k-Nearest Neighbors (KNN)” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Introduction to k-Nearest Neighbors (KNN) and try the examples in your own notebook.
 
 ## Overview
 
@@ -54,7 +54,7 @@ KNN is important because:
 
 ## How Does KNN Work?
 
-Let's break it down into simple steps:
+break it down into simple steps:
 
 1. **Find Neighbors**
    - When you have a new data point
@@ -67,7 +67,7 @@ Let's break it down into simple steps:
 
 {% include mermaid-diagram.html src="5-ml-fundamentals/5.2-supervised-learning-1/knn/diagrams/1-introduction-1.mmd" %}
 
-*At prediction time KNN does all the work — it never builds an explicit model. That's why it's called a **lazy** learner.*
+*At prediction time KNN does all the work, it never builds an explicit model. That's why it's called a **lazy** learner.*
 
 #### Minimal `KNeighborsClassifier` usage
 
@@ -143,12 +143,12 @@ In the following sections, we'll explore:
 
 ## Gotchas
 
-- **Assuming KNN "trains" like other models** — KNN stores the entire training set and does all computation at prediction time. This means `fit` is instantaneous but `predict` is slow, and memory usage scales linearly with training data size. With 1 million rows, every prediction scans all 1 million points.
-- **Skipping feature scaling** — If one feature spans 0–100,000 (e.g., salary) and another spans 0–5 (e.g., rating), distance is almost entirely determined by salary. KNN will silently ignore the rating feature, producing misleading results without any error.
-- **Using an even k with binary classification** — An even k can produce exact ties (e.g., 2 neighbors in each class), and scikit-learn breaks ties by choosing the lower class index rather than raising an error. Use odd k values for binary problems to avoid non-deterministic-looking results.
-- **Testing KNN on the same data used to find k** — If you loop over k values and pick the best on the test set, you've leaked the test set into model selection. Use cross-validation on the training set to choose k, then evaluate on the held-out test set once.
-- **Ignoring the curse of dimensionality** — With many features, all pairwise distances tend toward the same value, making "nearest" neighbors meaningless. KNN typically degrades above ~20 relevant features unless you apply dimensionality reduction first.
-- **Treating KNN as memory-free after training** — Unlike tree or linear models, the entire `X_train` array lives in memory for the lifetime of the fitted object. Storing a KNN model does not discard training data, so deployment memory costs are much higher than for parametric models.
+- **Assuming KNN "trains" like other models**: KNN stores the entire training set and does all computation at prediction time. This means `fit` is instantaneous but `predict` is slow, and memory usage scales linearly with training data size. With 1 million rows, every prediction scans all 1 million points.
+- **Skipping feature scaling**: If one feature spans 0-100,000 (e.g., salary) and another spans 0-5 (e.g., rating), distance is almost entirely determined by salary. KNN will silently ignore the rating feature, producing misleading results without any error.
+- **Using an even k with binary classification**: An even k can produce exact ties (e.g., 2 neighbors in each class), and scikit-learn breaks ties by choosing the lower class index rather than raising an error. Use odd k values for binary problems to avoid non-deterministic-looking results.
+- **Testing KNN on the same data used to find k**: If you loop over k values and pick the best on the test set, you've leaked the test set into model selection. Use cross-validation on the training set to choose k, then evaluate on the held-out test set once.
+- **Ignoring the curse of dimensionality**: With many features, all pairwise distances tend toward the same value, making "nearest" neighbors meaningless. KNN typically degrades above ~20 relevant features unless you apply dimensionality reduction first.
+- **Treating KNN as memory-free after training**: Unlike tree or linear models, the entire `X_train` array lives in memory for the lifetime of the fitted object. Storing a KNN model does not discard training data, so deployment memory costs are much higher than for parametric models.
 
 ## Additional Resources
 

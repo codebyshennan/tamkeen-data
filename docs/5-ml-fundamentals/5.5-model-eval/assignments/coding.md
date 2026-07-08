@@ -30,7 +30,7 @@ scaler = StandardScaler()
 X_train_s = scaler.fit_transform(X_train)
 X_test_s  = scaler.transform(X_test)
 
-# Baseline model — used in Tasks 1, 3, and 4
+# Baseline model: used in Tasks 1, 3, and 4
 clf = RandomForestClassifier(n_estimators=100, random_state=42)
 clf.fit(X_train_s, y_train)
 y_pred = clf.predict(X_test_s)
@@ -104,7 +104,7 @@ Test set size: 114 samples, 72 benign, 42 malignant
 
 Submit a single Python script that:
 
-1. Runs all four tasks in order — no external files needed.
+1. Runs all four tasks in order, no external files needed.
 2. Produces the three required plots (confusion matrix display, ROC curve; the CV bar chart is optional).
 3. Prints clearly labelled numeric results for each task.
 4. Includes comments comparing manual metric calculations to `classification_report` outputs and explaining the GridSearchCV workflow.
@@ -117,25 +117,25 @@ Submit a single Python script that:
 <summary>Show hints</summary>
 
 ### 1. Confusion Matrix
-- **Where:** [Confusion Matrix](../confusion-matrix.md) — "What is a Confusion Matrix? → TP/TN/FP/FN"; [Metrics](../metrics.md) — "Classification Metrics Comparison Table".
+- **Where:** [Confusion Matrix](../confusion-matrix.md), "What is a Confusion Matrix? → TP/TN/FP/FN"; [Metrics](../metrics.md), "Classification Metrics Comparison Table".
 - **Think:** `confusion_matrix` returns a 2×2 array for binary classification. Unpack it as `TN, FP, FN, TP = cm.ravel()` if you want named variables. Then plug into the formulas exactly as written in the lesson's table. The `classification_report` output should match your manual values (small floating-point differences are expected).
 
 ### 2. k-Fold Cross-Validation
-- **Where:** [Cross-Validation](../cross-validation.md) — "Why Cross-Validation Matters"; "k-fold" variants.
+- **Where:** [Cross-Validation](../cross-validation.md), "Why Cross-Validation Matters"; "k-fold" variants.
 - **Think:** `cross_validate` (not `cross_val_score`) returns a dict with keys like `'test_accuracy'` and `'test_f1'`. Use `np.mean(...)` and `np.std(...)` to summarise each array. Fitting on all of `X` and `y` (not the train split) gives the most stable CV estimate over the full dataset.
 
 ### 3. ROC Curve and AUC
-- **Where:** [Metrics](../metrics.md) — "ROC-AUC" row in the comparison table.
-- **Think:** `roc_curve` needs the **probability** scores for the positive class (`y_prob`), not the binary predictions. Plot `fpr` on the x-axis and `tpr` on the y-axis. The diagonal from (0,0) to (1,1) represents random guessing (AUC = 0.5) — add it with `plt.plot([0,1],[0,1],'--')`.
+- **Where:** [Metrics](../metrics.md), "ROC-AUC" row in the comparison table.
+- **Think:** `roc_curve` needs the **probability** scores for the positive class (`y_prob`), not the binary predictions. Plot `fpr` on the x-axis and `tpr` on the y-axis. The diagonal from (0,0) to (1,1) represents random guessing (AUC = 0.5), add it with `plt.plot([0,1],[0,1],'--')`.
 
 ### 4. GridSearchCV
-- **Where:** [Hyperparameter Tuning](../hyperparameter-tuning.md) — "GridSearchCV"; "Always wrap preprocessing + model in a Pipeline".
-- **Think:** `grid_search.best_score_` is the mean CV F1 on the training folds — it is slightly optimistic because the grid was tuned to maximise it. The test F1 (`f1_score(y_test, best_clf.predict(X_test_s))`) is the unbiased estimate. In this task the preprocessing is done outside the search, but in production you would wrap `(scaler, clf)` in a `Pipeline` so the scaler is refitted per fold.
+- **Where:** [Hyperparameter Tuning](../hyperparameter-tuning.md), "GridSearchCV"; "Always wrap preprocessing + model in a Pipeline".
+- **Think:** `grid_search.best_score_` is the mean CV F1 on the training folds, it is slightly optimistic because the grid was tuned to maximise it. The test F1 (`f1_score(y_test, best_clf.predict(X_test_s))`) is the unbiased estimate. In this task the preprocessing is done outside the search, but in production you would wrap `(scaler, clf)` in a `Pipeline` so the scaler is refitted per fold.
 
 ### Common pitfalls
-- Passing `y_pred` (binary labels) instead of `y_prob` (probabilities) to `roc_curve` or `roc_auc_score` — you will get a degenerate two-point curve. Always use `predict_proba(...)[: , 1]`.
-- Forgetting `stratify=y` in `train_test_split` on imbalanced data — without it, a random split can put most of one class in training and very few in test, making recall and F1 meaningless.
-- Reporting `grid_search.best_score_` as the "final test score" — the lesson explicitly warns against this; always evaluate `best_estimator_` on the held-out `X_test_s`.
+- Passing `y_pred` (binary labels) instead of `y_prob` (probabilities) to `roc_curve` or `roc_auc_score`, you will get a degenerate two-point curve. Always use `predict_proba(...)[: , 1]`.
+- Forgetting `stratify=y` in `train_test_split` on imbalanced data, without it, a random split can put most of one class in training and very few in test, making recall and F1 meaningless.
+- Reporting `grid_search.best_score_` as the "final test score", the lesson explicitly warns against this; always evaluate `best_estimator_` on the held-out `X_test_s`.
 - Unravelling the confusion matrix in the wrong order: `sklearn` uses the convention `cm[true_class, predicted_class]`, so for binary labels `cm[0,0]=TN, cm[0,1]=FP, cm[1,0]=FN, cm[1,1]=TP`.
 
 </details>

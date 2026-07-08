@@ -2,7 +2,7 @@
 
 > **Submit your work on Skills Union →** <https://skillsu.com/member/assessment>
 
-Try each question closed-book first. Click **Show hint** if you get stuck — hints point you at the relevant lesson section and how to think about the question, without naming the answer.
+Try each question closed-book first. Click **Show hint** if you get stuck, hints point you at the relevant lesson section and how to think about the question, without naming the answer.
 
 ## Questions
 
@@ -16,7 +16,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Tableau basics](../tableau-basics.md) — "Beginner's Mental Model" table.
+- **Where:** [Tableau basics](../tableau-basics.md), "Beginner's Mental Model" table.
 - **Think:** The lesson maps each core concept to a color. Recall the two pill colors Tableau uses and which type each represents.
 
 </details>
@@ -31,7 +31,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Tableau basics](../tableau-basics.md) — "Common Mistakes — Date fields collapse to year only."
+- **Where:** [Tableau basics](../tableau-basics.md), "Common Mistakes, Date fields collapse to year only."
 - **Think:** Tableau makes a default choice when a date field is dropped onto a shelf. The lesson's Common Mistakes section names exactly this behavior and the fix.
 
 </details>
@@ -46,7 +46,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Tableau basics](../tableau-basics.md) — "Common Mistakes — Postal Code and Order ID end up as green Measures."
+- **Where:** [Tableau basics](../tableau-basics.md), "Common Mistakes, Postal Code and Order ID end up as green Measures."
 - **Think:** The issue is classification, not aggregation. Which panel does the field need to live in, and how do you move it there?
 
 </details>
@@ -61,7 +61,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [README](../README.md) — "Core Concepts — Connection Types" table.
+- **Where:** [README](../README.md), "Core Concepts, Connection Types" table.
 - **Think:** The table contrasts two main types. One queries the source on every interaction; the other stores a local file. Which one is the snapshot?
 
 </details>
@@ -76,7 +76,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Tableau basics](../tableau-basics.md) — "Common Mistakes — Calculated field gives wrong profit margin."
+- **Where:** [Tableau basics](../tableau-basics.md), "Common Mistakes, Calculated field gives wrong profit margin."
 - **Think:** The lesson explicitly contrasts this formula with the correct version. Focus on when aggregation happens relative to when the division happens.
 
 </details>
@@ -91,7 +91,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Tableau basics](../tableau-basics.md) — "Common Mistakes — Filters on a dashboard don't apply to all sheets."
+- **Where:** [Tableau basics](../tableau-basics.md), "Common Mistakes, Filters on a dashboard don't apply to all sheets."
 - **Think:** The lesson describes the exact right-click menu path that fixes this. Recall the two-step action the lesson recommends.
 
 </details>
@@ -106,7 +106,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Tableau basics](../tableau-basics.md) — "Beginner's Mental Model" table, "Shelf" row.
+- **Where:** [Tableau basics](../tableau-basics.md), "Beginner's Mental Model" table, "Shelf" row.
 - **Think:** The lesson defines Rows and Columns as axis mappings. Which axis is vertical?
 
 </details>
@@ -121,7 +121,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Tableau basics](../tableau-basics.md) — "Gotchas — LOD expressions are filtered by context filters, not regular filters."
+- **Where:** [Tableau basics](../tableau-basics.md), "Gotchas, LOD expressions are filtered by context filters, not regular filters."
 - **Think:** The Gotchas section names the specific filter level that overrides a `FIXED` LOD. There is only one correct term.
 
 </details>
@@ -136,7 +136,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [README](../README.md) — "Core Concepts — Basic Charts — Chart Selection" table, Comparison row.
+- **Where:** [README](../README.md), "Core Concepts, Basic Charts, Chart Selection" table, Comparison row.
 - **Think:** The table maps each visualization goal to chart types. "Trends over time" maps directly to one type.
 
 </details>
@@ -151,7 +151,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Tableau basics](../tableau-basics.md) — "Gotchas — Published workbooks to Tableau Public expose all data in the extract."
+- **Where:** [Tableau basics](../tableau-basics.md), "Gotchas, Published workbooks to Tableau Public expose all data in the extract."
 - **Think:** The Gotcha specifically addresses what is downloadable by anyone, not just the author. Think about data confidentiality.
 
 </details>
@@ -166,7 +166,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Tableau basics](../tableau-basics.md) — "Beginner's Mental Model" table, "Marks Card" row.
+- **Where:** [Tableau basics](../tableau-basics.md), "Beginner's Mental Model" table, "Marks Card" row.
 - **Think:** The table gives a plain-English "What it is" for each concept. Find the Marks Card entry and match it to the options above.
 
 </details>
@@ -181,7 +181,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [README](../README.md) — "Core Concepts — Basic Charts — Chart Selection" table, Comparison row.
+- **Where:** [README](../README.md), "Core Concepts, Basic Charts, Chart Selection" table, Comparison row.
 - **Think:** The table lists three chart types for the Comparison goal. One is specifically described as being for "targets." Match the goal to the chart type.
 
 </details>

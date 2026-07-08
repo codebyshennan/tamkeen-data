@@ -8,7 +8,7 @@ objectives:
 
 # Mathematical Foundation of Gradient Boosting
 
-**After this lesson:** you can explain the core ideas in “Mathematical Foundation of Gradient Boosting” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Mathematical Foundation of Gradient Boosting and try the examples in your own notebook.
 
 ## Overview
 
@@ -27,7 +27,7 @@ Imagine you're trying to predict house prices. Instead of using one complex mode
 
 $$F_M(x) = \sum_{m=1}^M \gamma_m h_m(x)$$
 
-Let's break this down:
+Break this down:
 
 - \\(F_M(x)\\) is your final prediction (like the total price)
 - \\(h_m(x)\\) are simple models (like individual features: location, size, etc.)
@@ -52,7 +52,7 @@ def mse_loss(y_true, y_pred):
 def log_loss(y_true, y_pred):
     """Binary Cross Entropy loss - measures probability errors"""
     return -np.mean(
-        y_true * np.log(y_pred) + 
+        y_true * np.log(y_pred) +
         (1 - y_true) * np.log(1 - y_pred)
     )
 ```
@@ -237,7 +237,7 @@ class EarlyStopping:
       <span class="code-callout__title">Call Logic</span>
     </div>
     <div class="code-callout__body">
-      <p>Each call checks if validation loss improved by at least <code>min_delta</code>; if not, the patience counter increments and <code>early_stop</code> is set to <code>True</code> once the limit is reached — the training loop checks this flag.</p>
+      <p>Each call checks if validation loss improved by at least <code>min_delta</code>; if not, the patience counter increments and <code>early_stop</code> is set to <code>True</code> once the limit is reached, the training loop checks this flag.</p>
     </div>
   </div>
 </aside>
@@ -259,11 +259,11 @@ $$\text{Importance}(f) = \sum_{t=1}^T \sum_{j \in \{splits on f\}} \text{Gain}(j
 def calculate_feature_importance(trees, feature_names):
     """Calculate how important each feature is"""
     importance = defaultdict(float)
-    
+
     for tree in trees:
         for feature, gain in tree.feature_gains.items():
             importance[feature_names[feature]] += gain
-    
+
     # Normalize to get percentages
     total = sum(importance.values())
     return {f: v/total for f, v in importance.items()}
@@ -280,16 +280,16 @@ def calculate_feature_importance(trees, feature_names):
 
 ## Next Steps
 
-Now that you understand the mathematics behind Gradient Boosting, let's move on to [Implementation](3-implementation.md) to see how to put these concepts into practice!
+Now that you understand the mathematics behind Gradient Boosting, move on to [Implementation](3-implementation.md) to see how to put these concepts into practice!
 
 ## Gotchas
 
-- **The residual formula uses negative gradients, not raw errors** — The residual \\(r_{im} = -\partial L / \partial F(x_i)\\) is the *negative gradient* of the loss, not simply \\(y - \hat{y}\\). For MSE these are equal, but for other losses (e.g., MAE, log-loss) they differ. Using raw errors with a non-MSE loss function is a frequent implementation mistake.
-- **Learning rate and number of trees must be tuned jointly** — A small \\(\nu\\) (learning rate) requires a large \\(M\\) (number of trees) to reach the same loss; a large \\(\nu\\) converges faster but overshoots. Setting learning rate without adjusting tree count produces a misleadingly poor model, not a true assessment of the method's capability.
-- **The \\(\lambda\\) regularization term in the split gain formula is easy to overlook** — The gain formula has \\(\lambda\\) in the denominator. Setting \\(\lambda = 0\\) makes all splits look maximally beneficial and leads to extremely deep, overfit trees. Most practitioners leave it at the library default (1 in XGBoost) but should understand it controls leaf weight shrinkage.
-- **`EarlyStopping` tracks validation loss, not training loss** — The `EarlyStopping` class monitors `val_loss`. If you accidentally pass training loss, the counter never increments (training loss almost always improves), so early stopping effectively never fires and you train the full number of rounds.
-- **Feature importance summed over trees doesn't account for split frequency vs. split quality** — The gain-based importance formula sums *gain*, not the number of times a feature is used. A feature that appears in every tree with tiny gain can score lower than a rarely-used feature with one large gain split. This is expected behavior, but learners often assume high-gain = high-frequency.
-- **Subsampling reduces variance but introduces non-determinism** — `feature_fraction` (column subsampling) and `subsample` (row subsampling) in LightGBM/XGBoost make results non-reproducible unless you set a `seed`/`random_state`. Always fix the seed when comparing runs.
+- **The residual formula uses negative gradients, not raw errors**: The residual \\(r_{im} = -\partial L / \partial F(x_i)\\) is the *negative gradient* of the loss, not simply \\(y - \hat{y}\\). For MSE these are equal, but for other losses (e.g., MAE, log-loss) they differ. Using raw errors with a non-MSE loss function is a frequent implementation mistake.
+- **Learning rate and number of trees must be tuned jointly**: A small \\(\nu\\) (learning rate) requires a large \\(M\\) (number of trees) to reach the same loss; a large \\(\nu\\) converges faster but overshoots. Setting learning rate without adjusting tree count produces a misleadingly poor model, not a true assessment of the method's capability.
+- **The \\(\lambda\\) regularization term in the split gain formula is easy to overlook**: The gain formula has \\(\lambda\\) in the denominator. Setting \\(\lambda = 0\\) makes all splits look maximally beneficial and leads to extremely deep, overfit trees. Most practitioners leave it at the library default (1 in XGBoost) but should understand it controls leaf weight shrinkage.
+- **`EarlyStopping` tracks validation loss, not training loss**: The `EarlyStopping` class monitors `val_loss`. If you accidentally pass training loss, the counter never increments (training loss almost always improves), so early stopping effectively never fires and you train the full number of rounds.
+- **Feature importance summed over trees doesn't account for split frequency vs. split quality**: The gain-based importance formula sums *gain*, not the number of times a feature is used. A feature that appears in every tree with tiny gain can score lower than a rarely-used feature with one large gain split. This is expected behavior, but learners often assume high-gain = high-frequency.
+- **Subsampling reduces variance but introduces non-determinism**: `feature_fraction` (column subsampling) and `subsample` (row subsampling) in LightGBM/XGBoost make results non-reproducible unless you set a `seed`/`random_state`. Always fix the seed when comparing runs.
 
 ## Additional Resources
 

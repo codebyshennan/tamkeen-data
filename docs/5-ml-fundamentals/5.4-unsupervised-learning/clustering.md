@@ -1,7 +1,7 @@
 ---
 reading_minutes: 20
 objectives:
-  - "Distinguish K-means, hierarchical, and DBSCAN by the kinds of data and questions each suits — known k vs unknown, spherical vs arbitrary shape, with vs without noise."
+  - "Distinguish K-means, hierarchical, and DBSCAN by the kinds of data and questions each suits, known k vs unknown, spherical vs arbitrary shape, with vs without noise."
   - "Preprocess for distance-based clustering: handle NaNs and standardise so no single feature dominates Euclidean distance."
   - "Pick a sensible number of clusters using the elbow method on inertia, then sanity-check with silhouette score or domain knowledge."
   - "Avoid the everyday traps: comparing raw cluster-label values across runs, forgetting to scale, and treating clusters as ground-truth classes."
@@ -9,7 +9,7 @@ objectives:
 
 # Clustering: Finding Natural Groups in Data
 
-**After this lesson:** you can explain the core ideas in “Clustering: Finding Natural Groups in Data” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Clustering: Finding Natural Groups in Data and try the examples in your own notebook.
 
 ## Overview
 
@@ -101,7 +101,7 @@ plt.close()
       <span class="code-callout__title">Side-by-side Comparison</span>
     </div>
     <div class="code-callout__body">
-      <p>Left subplot shows true labels from <code>make_blobs</code>; right shows K-Means assignments with red X markers at <code>cluster_centers_</code> — comparing the two reveals how well the algorithm recovered the true groups.</p>
+      <p>Left subplot shows true labels from <code>make_blobs</code>; right shows K-Means assignments with red X markers at <code>cluster_centers_</code>, comparing the two reveals how well the algorithm recovered the true groups.</p>
     </div>
   </div>
 </aside>
@@ -190,7 +190,7 @@ plt.close()
       <span class="code-callout__title">Three-panel Figure</span>
     </div>
     <div class="code-callout__body">
-      <p>Left: original labels; middle: hierarchical assignments; right: <code>dendrogram</code> from scipy's <code>linkage</code> (Ward method) — the dendrogram's branch heights show at what distances clusters merged.</p>
+      <p>Left: original labels; middle: hierarchical assignments; right: <code>dendrogram</code> from scipy's <code>linkage</code> (Ward method), the dendrogram's branch heights show at what distances clusters merged.</p>
     </div>
   </div>
 </aside>
@@ -228,7 +228,7 @@ from sklearn.preprocessing import StandardScaler
 # Create curved clusters that are difficult for centroid-based methods
 X_moons, y_moons = make_moons(n_samples=300, noise=0.06, random_state=42)
 
-# DBSCAN uses Euclidean distance — scale first (see Gotchas)
+# DBSCAN uses Euclidean distance: scale first (see Gotchas)
 X_scaled = StandardScaler().fit_transform(X_moons)
 
 # Apply DBSCAN (eps is in scaled units)
@@ -321,11 +321,11 @@ Noise fraction: 0.0
 def preprocess_for_clustering(X):
     # Remove missing values
     X = np.nan_to_num(X)
-    
+
     # Scale data
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
-    
+
     return X_scaled
 ```
 
@@ -371,7 +371,7 @@ def find_optimal_clusters(X, max_clusters=10):
       <span class="code-callout__title">Elbow Plot</span>
     </div>
     <div class="code-callout__body">
-      <p>Plot inertia vs k; the "elbow" — where the curve bends sharply — is the heuristic choice for the optimal number of clusters.</p>
+      <p>Plot inertia vs k; the "elbow", where the curve bends sharply, is the heuristic choice for the optimal number of clusters.</p>
     </div>
   </div>
 </aside>
@@ -397,12 +397,12 @@ Expected numeric output for `k=1..10`:
 
 ## Gotchas
 
-- **Cluster labels are arbitrary integers** — running K-Means twice with different random seeds can produce the same clusters but with swapped label numbers (e.g., cluster 0 and cluster 2 swap). Never compare raw label values across runs; use metrics like silhouette score instead.
-- **The elbow method is subjective and sometimes has no clear elbow** — on real-world data the inertia curve often decreases smoothly without a visible kink. Pair it with silhouette scores or domain knowledge rather than relying on it alone.
-- **Forgetting to scale before clustering** — Euclidean distance is scale-sensitive; a feature in thousands will dominate a feature measured in units, and K-Means/DBSCAN will cluster on that dominant feature almost exclusively.
-- **DBSCAN's `eps` is not unitless** — its meaning depends entirely on the scale of your features, so after standardization the same `eps=0.5` behaves very differently than on raw data. Always tune `eps` on scaled data, not the raw values.
-- **AgglomerativeClustering can't predict new points** — unlike K-Means, `AgglomerativeClustering` has no `predict` method; you must refit on the combined old + new data to assign labels to unseen points.
-- **Assuming clusters found equal ground-truth classes** — clustering is unsupervised, so a "4-cluster" result on the Iris dataset doesn't map cleanly to 3 true species. Validate with adjusted rand index if labels are available, or with domain expertise if they're not.
+- **Cluster labels are arbitrary integers**: running K-Means twice with different random seeds can produce the same clusters but with swapped label numbers (e.g., cluster 0 and cluster 2 swap). Never compare raw label values across runs; use metrics like silhouette score instead.
+- **The elbow method is subjective and sometimes has no clear elbow**: on real-world data the inertia curve often decreases smoothly without a visible kink. Pair it with silhouette scores or domain knowledge rather than relying on it alone.
+- **Forgetting to scale before clustering**: Euclidean distance is scale-sensitive; a feature in thousands will dominate a feature measured in units, and K-Means/DBSCAN will cluster on that dominant feature almost exclusively.
+- **DBSCAN's `eps` is not unitless**: its meaning depends entirely on the scale of your features, so after standardization the same `eps=0.5` behaves very differently than on raw data. Always tune `eps` on scaled data, not the raw values.
+- **AgglomerativeClustering can't predict new points**: unlike K-Means, `AgglomerativeClustering` has no `predict` method; you must refit on the combined old + new data to assign labels to unseen points.
+- **Assuming clusters found equal ground-truth classes**: clustering is unsupervised, so a "4-cluster" result on the Iris dataset doesn't map cleanly to 3 true species. Validate with adjusted rand index if labels are available, or with domain expertise if they're not.
 
 ## Further Reading
 

@@ -8,7 +8,7 @@ objectives:
 
 # Implementing Neural Networks
 
-**After this lesson:** you can explain the core ideas in “Implementing Neural Networks” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Implementing Neural Networks and try the examples in your own notebook.
 
 ## Overview
 
@@ -34,7 +34,7 @@ TensorFlow is like a toolbox for building neural networks. It provides all the t
 
 ### Setting Up Your Environment
 
-First, let's make sure you have everything you need:
+First, make sure you have everything you need:
 
 #### Environment: TensorFlow + sklearn utilities
 
@@ -52,7 +52,7 @@ from sklearn.preprocessing import StandardScaler
 
 ### Your First Neural Network: Predicting House Prices
 
-Let's build a simple network to predict house prices based on features like size, number of bedrooms, and location.
+Build a simple network to predict house prices based on features like size, number of bedrooms, and location.
 
 #### Keras `Sequential`: regression with early stopping
 
@@ -70,7 +70,7 @@ def create_house_data(n_samples=1000):
     X[:, 1] = np.round(X[:, 1] * 4 + 1)  # Bedrooms: 1-5
     X[:, 2] = np.round(X[:, 2] * 3 + 1)  # Bathrooms: 1-4
     X[:, 3] = np.round(X[:, 3] * 50)  # Age: 0-50 years
-    
+
     # Generate prices based on features
     prices = (
         100 * X[:, 0] +  # Base price per sq ft
@@ -79,7 +79,7 @@ def create_house_data(n_samples=1000):
         -1000 * X[:, 3]  # Price reduction per year of age
     )
     prices += np.random.normal(0, 50000, n_samples)  # Add some noise
-    
+
     return X, prices
 
 # Create and prepare data
@@ -152,7 +152,7 @@ print(f"Predicted price: ${predicted_price:,.2f}")
       <span class="code-callout__title">Network architecture</span>
     </div>
     <div class="code-callout__body">
-      <p><code>Sequential</code> stacks layers left-to-right. Two hidden <code>Dense</code> layers with <code>relu</code> add non-linearity. The final layer has 1 unit with no activation — regression predicts an unbounded number, not a probability.</p>
+      <p><code>Sequential</code> stacks layers left-to-right. Two hidden <code>Dense</code> layers with <code>relu</code> add non-linearity. The final layer has 1 unit with no activation, regression predicts an unbounded number, not a probability.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="44-49" data-tint="3">
@@ -161,7 +161,7 @@ print(f"Predicted price: ${predicted_price:,.2f}")
       <span class="code-callout__title">Compile: optimizer &amp; loss</span>
     </div>
     <div class="code-callout__body">
-      <p><code>adam</code> adapts the learning rate per parameter — a safe default for most tasks. <code>mean_squared_error</code> is the regression loss; <code>mae</code> as a metric gives error in the original price units, which is easier to interpret.</p>
+      <p><code>adam</code> adapts the learning rate per parameter, a safe default for most tasks. <code>mean_squared_error</code> is the regression loss; <code>mae</code> as a metric gives error in the original price units, which is easier to interpret.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="51-63" data-tint="4">
@@ -170,7 +170,7 @@ print(f"Predicted price: ${predicted_price:,.2f}")
       <span class="code-callout__title">Fit with early stopping</span>
     </div>
     <div class="code-callout__body">
-      <p>Training runs up to 50 epochs in mini-batches of 32. <code>EarlyStopping(patience=5)</code> halts if validation loss doesn't improve for 5 epochs, then restores the best weights — prevents overfitting without manually tuning the epoch count.</p>
+      <p>Training runs up to 50 epochs in mini-batches of 32. <code>EarlyStopping(patience=5)</code> halts if validation loss doesn't improve for 5 epochs, then restores the best weights, prevents overfitting without manually tuning the epoch count.</p>
     </div>
   </div>
 </aside>
@@ -178,7 +178,7 @@ print(f"Predicted price: ${predicted_price:,.2f}")
 
 ## Understanding the Code
 
-Let's break down what each part does:
+Break down what each part does:
 
 1. **Data Preparation**
    - We create synthetic house data with realistic features
@@ -197,7 +197,7 @@ Let's break down what each part does:
 
 ## Visualizing the Results
 
-Let's create some plots to understand how our model is performing:
+Create some plots to understand how our model is performing:
 
 #### Loss curves + predicted vs actual scatter
 
@@ -577,7 +577,7 @@ history = model.fit(
       <span class="code-callout__title">Data Augmentation</span>
     </div>
     <div class="code-callout__body">
-      <p>Training images are randomly rotated, shifted, and flipped on the fly; the test generator only rescales to [0,1] — augmentation is applied only to training data to avoid contaminating evaluation.</p>
+      <p>Training images are randomly rotated, shifted, and flipped on the fly; the test generator only rescales to [0,1], augmentation is applied only to training data to avoid contaminating evaluation.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="45-59" data-tint="3">
@@ -739,7 +739,7 @@ def create_model(input_shape, num_classes):
       <span class="code-callout__title">BN+Dropout Blocks</span>
     </div>
     <div class="code-callout__body">
-      <p>An initial BatchNorm normalises raw inputs; each Dense block follows the pattern Dense→BatchNorm→ReLU→Dropout — BatchNorm stabilises training, ReLU introduces non-linearity, and Dropout regularises; the final softmax produces class probabilities.</p>
+      <p>An initial BatchNorm normalises raw inputs; each Dense block follows the pattern Dense→BatchNorm→ReLU→Dropout, BatchNorm stabilises training, ReLU introduces non-linearity, and Dropout regularises; the final softmax produces class probabilities.</p>
     </div>
   </div>
 </aside>
@@ -796,7 +796,7 @@ def get_training_config():
       <span class="code-callout__title">Optimizer</span>
     </div>
     <div class="code-callout__body">
-      <p>Adam with <code>clipnorm=1.0</code> clips the global gradient norm to prevent exploding gradients — a common issue with deep networks or recurrent architectures.</p>
+      <p>Adam with <code>clipnorm=1.0</code> clips the global gradient norm to prevent exploding gradients, a common issue with deep networks or recurrent architectures.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="12-32" data-tint="2">
@@ -836,8 +836,8 @@ def create_data_pipeline(data_dir, batch_size=32):
 
 1. **Vanishing/Exploding Gradients**
 
-   - **Purpose:** Cap update steps when gradients spike (**exploding**) or shrink unstable updates (**vanishing** mitigation is partial—also check activations, init, and normalization).
-   - **Walkthrough:** **`clipnorm`** scales the whole gradient; **`clipvalue`** caps each component—usually pick one strategy, not both at strong values.
+   - **Purpose:** Cap update steps when gradients spike (**exploding**) or shrink unstable updates (**vanishing** mitigation is partial, also check activations, init, and normalization).
+   - **Walkthrough:** **`clipnorm`** scales the whole gradient; **`clipvalue`** caps each component, usually pick one strategy, not both at strong values.
 
    ```python
    import tensorflow as tf
@@ -852,7 +852,7 @@ def create_data_pipeline(data_dir, batch_size=32):
 2. **Overfitting**
 
    - **Purpose:** Add **L1/L2** penalties on weights or activations so large weights cost more in the loss.
-   - **Walkthrough:** **`kernel_regularizer`** acts on `W`; **`activity_regularizer`** on layer outputs—often combine with **dropout** and early stopping.
+   - **Walkthrough:** **`kernel_regularizer`** acts on `W`; **`activity_regularizer`** on layer outputs, often combine with **dropout** and early stopping.
 
    ```python
    import tensorflow as tf
@@ -887,12 +887,12 @@ def create_data_pipeline(data_dir, batch_size=32):
 
 ## Gotchas
 
-- **Fitting `StandardScaler` on both train and test** — The implementation correctly calls `scaler.fit_transform(X_train)` then `scaler.transform(X_test)`. A very common mistake is calling `fit_transform` on the test set too, which leaks test-set statistics into scaling and inflates reported accuracy with no runtime error.
-- **`validation_split` in `model.fit` uses the *last* fraction of the data** — Keras takes the final 20% of rows as validation data without shuffling. If your data is ordered (e.g., by class or time), the validation set will be unrepresentative. Pass a manually shuffled dataset or use `validation_data=(X_val, y_val)` with a pre-shuffled split.
-- **Using both `clipnorm` and `clipvalue` simultaneously at strong values** — Setting both `clipnorm=1.0` and `clipvalue=0.5` applies two independent clipping operations. In most cases, using one is sufficient; using both aggressively can over-constrain gradients and significantly slow convergence.
-- **`base_model.trainable = False` must be set *before* `model.compile`** — Setting a layer's `trainable` attribute after compiling has no effect on the current training run. If you freeze the ResNet base after compiling, all ResNet weights will still be updated. Always set `trainable` flags, then compile.
-- **`ImageDataGenerator` augmentation is applied to validation data if not careful** — The `test_datagen` only rescales, which is correct. But if you accidentally pass `train_datagen` to `flow_from_directory('validation_dir', ...)`, random augmentations will be applied to validation images, making the validation metric noisy and misleadingly optimistic.
-- **`EarlyStopping` without `restore_best_weights=True` returns the *last* model, not the best** — By default, `EarlyStopping` stops training but does not roll back to the checkpoint with the lowest validation loss. The `restore_best_weights=True` flag shown in the classification example is essential; omitting it often means the returned model has slightly degraded validation performance.
+- **Fitting `StandardScaler` on both train and test**: The implementation correctly calls `scaler.fit_transform(X_train)` then `scaler.transform(X_test)`. A very common mistake is calling `fit_transform` on the test set too, which leaks test-set statistics into scaling and inflates reported accuracy with no runtime error.
+- **`validation_split` in `model.fit` uses the *last* fraction of the data**, Keras takes the final 20% of rows as validation data without shuffling. If your data is ordered (e.g., by class or time), the validation set will be unrepresentative. Pass a manually shuffled dataset or use `validation_data=(X_val, y_val)` with a pre-shuffled split.
+- **Using both `clipnorm` and `clipvalue` simultaneously at strong values**: Setting both `clipnorm=1.0` and `clipvalue=0.5` applies two independent clipping operations. In most cases, using one is sufficient; using both aggressively can over-constrain gradients and significantly slow convergence.
+- **`base_model.trainable = False` must be set *before* `model.compile`**, Setting a layer's `trainable` attribute after compiling has no effect on the current training run. If you freeze the ResNet base after compiling, all ResNet weights will still be updated. Always set `trainable` flags, then compile.
+- **`ImageDataGenerator` augmentation is applied to validation data if not careful**: The `test_datagen` only rescales, which is correct. But if you accidentally pass `train_datagen` to `flow_from_directory('validation_dir', ...)`, random augmentations will be applied to validation images, making the validation metric noisy and misleadingly optimistic.
+- **`EarlyStopping` without `restore_best_weights=True` returns the *last* model, not the best**, By default, `EarlyStopping` stops training but does not roll back to the checkpoint with the lowest validation loss. The `restore_best_weights=True` flag shown in the classification example is essential; omitting it often means the returned model has slightly degraded validation performance.
 
 ## Next Steps
 

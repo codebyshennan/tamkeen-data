@@ -4,7 +4,7 @@
 
 ## Overview
 
-Data collection is how you obtain the raw material for any analysis. The way you collect—who is included, how often you sample, what you ask, and how you record consent—shows up later as **bias**, **gaps**, or **compliance risk**. This page introduces vocabulary and trade-offs; it does not try to teach every tool in depth.
+Data collection is how you obtain the raw material for any analysis. The way you collect, who is included, how often you sample, what you ask, and how you record consent, shows up later as **bias**, **gaps**, or **compliance risk**. This page introduces vocabulary and trade-offs; it does not try to teach every tool in depth.
 
 ### Video
 
@@ -12,7 +12,7 @@ Data collection is how you obtain the raw material for any analysis. The way you
 <iframe width="560" height="315" src="https://www.youtube.com/embed/sxzD_kC4McQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*CrashCourse Statistics — Mathematical thinking (sampling and study design)*
+*CrashCourse Statistics, Mathematical thinking (sampling and study design)*
 
 ## Why this matters
 
@@ -29,19 +29,19 @@ Organizations rarely use a single source. You should know **who generated the da
 
 {% include mermaid-diagram.html src="1-data-fundamentals/1.1-intro-data-analytics/diagrams/data-collection-1.mmd" %}
 
-*The closer to the source, the more you know about how data was gathered — and the fewer compliance surprises downstream.*
+*The closer to the source, the more you know about how data was gathered, and the fewer compliance surprises downstream.*
 
 ### First-party data
 
 **What it is:** Data your organization collects directly from customers, systems, or employees.
 
-**Why it matters:** You usually know how it was captured (e.g. checkout logs, CRM fields). You still need clear definitions and timestamps, but you are not guessing a stranger’s pipeline.
+**Why it matters:** You usually know how it was captured (e.g. checkout logs, CRM fields). You still need clear definitions and timestamps, but you are not guessing a stranger's pipeline.
 
 **Examples:** Website or app events, purchases, support tickets, in-house surveys, operational logs.
 
 ### Second-party data
 
-**What it is:** Another organization’s first-party data, shared with you under an agreement (often a partner or advertiser).
+**What it is:** Another organization's first-party data, shared with you under an agreement (often a partner or advertiser).
 
 **Why it matters:** You inherit their definitions and collection rules. Contracts spell out **purpose**, **retention**, and **whether** the data can be combined with yours.
 
@@ -69,11 +69,11 @@ Below are common **methods**, not a checklist for every project. Real work combi
 
 {% include mermaid-diagram.html src="1-data-fundamentals/1.1-intro-data-analytics/diagrams/data-collection-2.mmd" %}
 
-*Start with the question you need to answer — that determines the method, not the other way around.*
+*Start with the question you need to answer, that determines the method, not the other way around.*
 
 ### 1. Data logging
 
-**In plain terms:** Systems record events as they happen—clicks, errors, API calls, sensor readings.
+**In plain terms:** Systems record events as they happen, clicks, errors, API calls, sensor readings.
 
 **Good for:** High-volume, timestamped behavior; A/B tests; reliability monitoring.
 
@@ -83,7 +83,7 @@ Below are common **methods**, not a checklist for every project. Real work combi
 
 **In plain terms:** You ask people the same questions in a structured way (online or on paper).
 
-**Good for:** Opinions, demographics, satisfaction—things you cannot infer from clicks alone.
+**Good for:** Opinions, demographics, satisfaction, things you cannot infer from clicks alone.
 
 **Watch out for:** Non-response bias, leading questions, and scale mismatch (e.g. comparing two surveys with different wording).
 
@@ -107,13 +107,13 @@ Below are common **methods**, not a checklist for every project. Real work combi
 
 **In plain terms:** You change one thing at a time (where possible) and compare outcomes to a **control**.
 
-**Good for:** Causal claims (“this change *caused* that effect”) when randomized and well designed.
+**Good for:** Causal claims ("this change *caused* that effect") when randomized and well designed.
 
 **Watch out for:** Selection into treatment, spillover between groups, and short windows that miss long-term effects.
 
 ### 6. Focus groups
 
-**In plain terms:** A facilitator leads a small group discussion (often 6–10 people).
+**In plain terms:** A facilitator leads a small group discussion (often 6-10 people).
 
 **Good for:** Exploring reactions to concepts, messaging, or prototypes.
 
@@ -155,7 +155,7 @@ Below are common **methods**, not a checklist for every project. Real work combi
 
 ## Observational studies in retail and product (examples)
 
-These are **special cases** of observation and logging, shown so you see how “methods” become concrete metrics.
+These are **special cases** of observation and logging, shown so you see how "methods" become concrete metrics.
 
 ### In-store observation
 
@@ -171,8 +171,8 @@ Teams often want to know where people walk, how long they linger, and where they
 
 #### Retail heatmap sketch (illustrative)
 
-- **Purpose:** Show how in-store analytics code might hold a **2D accumulator** (`heatmap`) and expose **summary hooks** (`generate_insights`)—not a real tracker, but the shape of the program.
-- **Walkthrough:** `StoreAnalytics` stubs `process_frame` (where CV would update the heatmap) and returns dict-shaped “insights” for dashboards.
+- **Purpose:** Show how in-store analytics code might hold a **2D accumulator** (`heatmap`) and expose **summary hooks** (`generate_insights`), not a real tracker, but the shape of the program.
+- **Walkthrough:** `StoreAnalytics` stubs `process_frame` (where CV would update the heatmap) and returns dict-shaped "insights" for dashboards.
 
 **Note:** `store_height` / `store_width` would match your camera frame.
 
@@ -205,7 +205,7 @@ class StoreAnalytics:
         }
 ```
 
-**Typical tooling:** Computer vision, IoT beacons, RFID, WiFi positioning—each with different cost and privacy implications.
+**Typical tooling:** Computer vision, IoT beacons, RFID, WiFi positioning, each with different cost and privacy implications.
 
 ### User experience testing
 
@@ -220,7 +220,7 @@ You might combine session replay, tasks, and optional moderated sessions. Signal
 
 #### Session event buffer (conceptual JavaScript)
 
-- **Purpose:** Show how UX tooling often **buffers typed events** (move, click, error) with **relative timestamps** for replay or analytics—privacy and consent still apply before shipping anything like this.
+- **Purpose:** Show how UX tooling often **buffers typed events** (move, click, error) with **relative timestamps** for replay or analytics, privacy and consent still apply before shipping anything like this.
 - **Walkthrough:** `UserSession` appends small objects to `events`; production code would batch, compress, and redact PII.
 
 **Illustrative pattern** (browser-side event capture):
@@ -262,7 +262,7 @@ class UserSession {
 }
 ```
 
-**Tools:** Screen recording, eye tracking, session replay products—always governed by privacy notices and retention limits.
+**Tools:** Screen recording, eye tracking, session replay products, always governed by privacy notices and retention limits.
 
 ## Common challenges and how teams address them
 
@@ -270,14 +270,14 @@ class UserSession {
 
 **What goes wrong:** Wrong types, duplicates, impossible values, or silent missingness.
 
-**What teams do:** Define validation rules up front, require critical fields, audit samples regularly, and automate checks in pipelines—not only manual eyeballing.
+**What teams do:** Define validation rules up front, require critical fields, audit samples regularly, and automate checks in pipelines, not only manual eyeballing.
 
 #### Field-level validation rules
 
-- **Purpose:** Centralize **per-column checks** (regex, bounds) in one `rules` map so pipelines can reject or quarantine bad rows consistently—instead of scattering one-off `if` statements.
+- **Purpose:** Centralize **per-column checks** (regex, bounds) in one `rules` map so pipelines can reject or quarantine bad rows consistently, instead of scattering one-off `if` statements.
 - **Walkthrough:** Each lambda is one predicate; `validate_record` walks fields and collects error strings; `clean_data` keeps rows that pass every rule present in `rules`.
 
-**Example — validation rules in code:**
+**Example, validation rules in code:**
 
 ```python
 import re
@@ -315,7 +315,7 @@ class DataValidator:
 - **Purpose:** Replace direct identifiers with a **keyed digest**, **bucket** ages, and **generalize** location so downstream tables keep utility with lower re-identification risk.
 - **Walkthrough:** `os.urandom` seeds `hash_key` (protect like any secret); `hash_value` concatenates value and key before SHA-256; `bucket_age` and `generalize_location` are placeholders for policy-defined coarsening.
 
-**Example — pseudonymization sketch:**
+**Example, pseudonymization sketch:**
 
 ```python
 import hashlib
@@ -353,16 +353,16 @@ class DataAnonymizer:
 
 ### 3. Sample size and representation
 
-**What goes wrong:** Too few responses, or a sample that looks like “who answered the survey” instead of “who we care about.”
+**What goes wrong:** Too few responses, or a sample that looks like "who answered the survey" instead of "who we care about."
 
 **What teams do:** Use multiple channels, sensible incentives, reminders, longer field periods, and **stratified** sampling when you need representation across known groups.
 
 #### Finite-population sample size (illustrative)
 
-- **Purpose:** Turn **confidence level**, **margin of error**, and **population size** into one planned $n$ using a normal approximation and \\(p(1-p)\approx 0.25\\) as a conservative proportion—useful for survey planning before fieldwork.
+- **Purpose:** Turn **confidence level**, **margin of error**, and **population size** into one planned $n$ using a normal approximation and \\(p(1-p)\approx 0.25\\) as a conservative proportion, useful for survey planning before fieldwork.
 - **Walkthrough:** `z_scores` maps common \\(\alpha\\) to critical $z$; the fraction is a standard finite-population form; `math.ceil` rounds up. Confirm design and assumptions with a statistician for important decisions.
 
-**Example — sample size helper** (classic formula sketch; confirm assumptions with a statistician for important decisions):
+**Example, sample size helper** (classic formula sketch; confirm assumptions with a statistician for important decisions):
 
 ```python
 import math
@@ -401,9 +401,9 @@ def calculate_sample_size(population_size, confidence_level, margin_error):
 #### Sample vs reference mix (illustrative stub)
 
 - **Purpose:** Sketch how teams compare **observed** category shares in a sample to a **reference** distribution (e.g. census) before trusting a survey or model training split.
-- **Walkthrough:** For each `protected_attribute`, align `sample_dist` with `population_dist`, then store ratios and a test statistic. Implement `get_population_distribution` and `chi_square_test` with real baselines and `scipy`/domain packages—stubs here are not runnable end-to-end.
+- **Walkthrough:** For each `protected_attribute`, align `sample_dist` with `population_dist`, then store ratios and a test statistic. Implement `get_population_distribution` and `chi_square_test` with real baselines and `scipy`/domain packages, stubs here are not runnable end-to-end.
 
-**Example — comparing sample mix to an expected distribution** (illustrative; needs domain-specific population baselines):
+**Example, comparing sample mix to an expected distribution** (illustrative; needs domain-specific population baselines):
 
 ```python
 class BiasDetector:
@@ -431,7 +431,7 @@ class BiasDetector:
         return bias_metrics
 ```
 
-## Best practices (what “good” looks like)
+## Best practices (what "good" looks like)
 
 These are habits that separate fragile projects from auditable ones. You do not need every item on day one; you **do** need the mindset: **plan, document, validate, and govern.**
 
@@ -439,16 +439,16 @@ These are habits that separate fragile projects from auditable ones. You do not 
 
 Before you pull data, write down **why** you need it and **what decision** it will support. That drives method choice (survey vs log), timeline, and who must sign off.
 
-- **Objectives** — Tie metrics to decisions, not to “more data.”
-- **Methods** — Match method to question (causal vs descriptive).
-- **Tools** — Note systems of record, APIs, and access requests early.
-- **Timelines** — Include pilot, validation, and buffer for rework.
-- **Governance** — Who owns the data, retention rules, and approval for sensitive fields.
+- **Objectives**: Tie metrics to decisions, not to "more data."
+- **Methods**: Match method to question (causal vs descriptive).
+- **Tools**: Note systems of record, APIs, and access requests early.
+- **Timelines**: Include pilot, validation, and buffer for rework.
+- **Governance**: Who owns the data, retention rules, and approval for sensitive fields.
 
 #### Project planning scaffold (code-shaped charter)
 
 - **Purpose:** Keep **objectives, phases, timeline, and roles** in one structure so collection work stays traceable for engineering, compliance, or handoff.
-- **Walkthrough:** `add_phase` records duration, deliverables, and status; `assign_team` pairs people to roles via `get_role_responsibilities` (define that method for your org—omitted here as a stub).
+- **Walkthrough:** `add_phase` records duration, deliverables, and status; `assign_team` pairs people to roles via `get_role_responsibilities` (define that method for your org, omitted here as a stub).
 
 **Illustrative project scaffold:**
 
@@ -481,31 +481,31 @@ class DataCollectionProject:
 
 Treat quality as **continuous**, not a one-time scrub.
 
-- **Validation** — Rules at ingest; quarantine bad rows instead of silently dropping without logs.
-- **Audits** — Periodic manual review of samples and edge cases.
-- **Error logging** — Know when pipelines fail or fields spike.
-- **Metrics** — Completeness, timeliness, duplicate rate—whatever matches your risk.
-- **Automated testing** — Especially for recurring extracts and transforms.
+- **Validation**: Rules at ingest; quarantine bad rows instead of silently dropping without logs.
+- **Audits**: Periodic manual review of samples and edge cases.
+- **Error logging**: Know when pipelines fail or fields spike.
+- **Metrics**: Completeness, timeliness, duplicate rate, whatever matches your risk.
+- **Automated testing**: Especially for recurring extracts and transforms.
 
 ### Documentation
 
 Future you is a stakeholder. Write for them.
 
-- **Methodology** — How and when data was collected.
-- **Data dictionary** — Field names, units, allowed values, and known issues.
-- **Procedures** — Steps to reproduce a pull or survey wave.
-- **Quality notes** — What you fixed, what you did not, and why.
-- **Ethics** — Consent scope and sensitive fields.
+- **Methodology**: How and when data was collected.
+- **Data dictionary**: Field names, units, allowed values, and known issues.
+- **Procedures**: Steps to reproduce a pull or survey wave.
+- **Quality notes**: What you fixed, what you did not, and why.
+- **Ethics**: Consent scope and sensitive fields.
 
 ### Technical infrastructure
 
 Match investment to sensitivity and scale.
 
-- **Storage** — Durable, permissioned, and cost-aware.
-- **Backups** — Test restores, not only backups on paper.
-- **Security** — Encryption, access control, secrets hygiene (see [Data security](./data-security.md)).
-- **Pipelines** — Repeatable jobs with monitoring.
-- **Monitoring** — Volume, latency, and anomaly alerts for feeds you depend on.
+- **Storage**: Durable, permissioned, and cost-aware.
+- **Backups**: Test restores, not only backups on paper.
+- **Security**: Encryption, access control, secrets hygiene (see [Data security](./data-security.md)).
+- **Pipelines**: Repeatable jobs with monitoring.
+- **Monitoring**: Volume, latency, and anomaly alerts for feeds you depend on.
 
 ## Advanced collection patterns (sketches)
 
@@ -515,7 +515,7 @@ The blocks below are **patterns** you may see in larger systems: sensors, APIs, 
 
 #### IoT buffer pattern
 
-- **Purpose:** **Register** sensors with metadata, then **append** timestamped readings to an in-memory buffer—typical first step before batching to a warehouse or stream.
+- **Purpose:** **Register** sensors with metadata, then **append** timestamped readings to an in-memory buffer, typical first step before batching to a warehouse or stream.
 - **Walkthrough:** `register_sensor` stores type/location; `collect_sensor_data` timestamps each row with `datetime.now()`.
 
 ```python
@@ -547,8 +547,8 @@ class IoTDataCollector:
 
 #### Async API pull with rate limiting
 
-- **Purpose:** Show how **async** `GET` requests, **Authorization** headers, and a **rate limiter** fit together in a responsible API client—avoid hammering third-party endpoints.
-- **Walkthrough:** `aiohttp` session context managers; `try`/`finally` releases the limiter—`RateLimiter` would be your shared implementation (queue, token bucket, etc.).
+- **Purpose:** Show how **async** `GET` requests, **Authorization** headers, and a **rate limiter** fit together in a responsible API client, avoid hammering third-party endpoints.
+- **Walkthrough:** `aiohttp` session context managers; `try`/`finally` releases the limiter-`RateLimiter` would be your shared implementation (queue, token bucket, etc.).
 
 ```python
 # Illustrative: pip install aiohttp; implement RateLimiter for your policy
@@ -578,7 +578,7 @@ class APIDataCollector:
 
 #### CSS selector extraction
 
-- **Purpose:** Minimal **requests + BeautifulSoup** scrape: fetch HTML, parse, and pull text for each **CSS selector**—respect `robots.txt`, terms of service, and rate limits in real use.
+- **Purpose:** Minimal **requests + BeautifulSoup** scrape: fetch HTML, parse, and pull text for each **CSS selector**-respect `robots.txt`, terms of service, and rate limits in real use.
 - **Walkthrough:** `Session()` reuses connections; `soup.select(selector)` returns lists matching each named field in `selectors`.
 
 ```python
@@ -604,18 +604,18 @@ class WebScraper:
 
 ## Common pitfalls
 
-- **Convenience sampling** — Data that is easy to reach (only active users, only one region) rarely represents the whole population. Ask who is missing.
+- **Convenience sampling**: Data that is easy to reach (only active users, only one region) rarely represents the whole population. Ask who is missing.
 
-- **Ignoring time and seasonality** — A snapshot taken in a holiday week or during an outage can mislead trends. Align windows and note anomalies.
+- **Ignoring time and seasonality**: A snapshot taken in a holiday week or during an outage can mislead trends. Align windows and note anomalies.
 
-- **Unclear consent or purpose** — Collecting fields “for later” without a use case increases privacy risk and rework. Collect what you need for known purposes.
+- **Unclear consent or purpose**: Collecting fields "for later" without a use case increases privacy risk and rework. Collect what you need for known purposes.
 
 ## Next steps
 
 In this submodule, continue with:
 
-1. [Data privacy](./data-privacy.md) — legal and ethical constraints on what you collect
-2. [Data security](./data-security.md) — protecting data after collection
-3. [Workflow concepts](./workflow-concepts.md) — how collection fits into broader pipelines
+1. [Data privacy](./data-privacy.md), legal and ethical constraints on what you collect
+2. [Data security](./data-security.md), protecting data after collection
+3. [Workflow concepts](./workflow-concepts.md), how collection fits into broader pipelines
 
 Later in the course you will apply collection ideas in SQL, APIs, and engineering modules.

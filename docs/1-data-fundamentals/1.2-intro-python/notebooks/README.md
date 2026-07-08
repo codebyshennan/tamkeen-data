@@ -10,7 +10,7 @@ Welcome to your interactive Python learning journey! These Jupyter notebooks are
 <iframe width="560" height="315" src="https://www.youtube.com/embed/YYXdXT2l-Gg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*Corey Schafer — Python environment setup (before running notebooks locally)*
+*Corey Schafer, Python environment setup (before running notebooks locally)*
 
 ## Quick Start
 
@@ -98,15 +98,15 @@ Week 1: Complete 01-basic-syntax.ipynb
        - Spend time on every example
        - Complete all challenges
        - Use AI to ask questions
-       
+
 Week 2: Complete 02-data-structures.ipynb
        - Focus on understanding differences
        - Build the mini-projects
        - Visualize in Python Tutor
-       
+
 Week 3: Complete 03-functions.ipynb
        - Take your time with this one
-       - Functions are crucial!
+       - Functions are important!
        - Build the final project
 ```
 
@@ -114,10 +114,10 @@ Week 3: Complete 03-functions.ipynb
 ```
 Day 1: Speed through 01-basic-syntax.ipynb
       Focus on Python-specific features
-      
+
 Day 2: Deep dive into 02-data-structures.ipynb
       Python's data structures are powerful!
-      
+
 Day 3-4: Master 03-functions.ipynb
         Try the challenges without solutions
         Build the final project
@@ -335,7 +335,7 @@ These notebooks align with [Basic syntax](../basic-syntax-data-types.md), [Data 
 
 ## Success Tips
 
-### Do's 
+### Do's
 - Run every code cell
 - Modify examples to experiment
 - Take breaks (Pomodoro technique!)
@@ -343,7 +343,7 @@ These notebooks align with [Basic syntax](../basic-syntax-data-types.md), [Data 
 - Ask questions early
 - Practice daily (consistency > quantity)
 
-### Don'ts 
+### Don'ts
 - Don't just read - CODE!
 - Don't skip ahead too fast
 - Don't memorize - understand
@@ -388,4 +388,4 @@ Remember:
 
 **Questions?**Check the main course materials or ask your instructor!
 
-**Ready to start?**Click a notebook above and let's code! 
+**Ready to start?** Pick a notebook above and start coding.

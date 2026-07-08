@@ -99,7 +99,7 @@ Submit your code in a Python script (`.py` file). You can submit as a single fil
 <details>
 <summary>Show hints</summary>
 
-## Task 1 — data types and variables
+## Task 1: data types and variables
 - **Where:** [Basic syntax & data types](../basic-syntax-data-types.md), [Data structures](../data-structures.md).
 - **Think:** One assignment per type, one `print` to verify. Mix in a `print(type(x))` to confirm Python inferred the type you expected.
 - **Starter:**
@@ -110,9 +110,9 @@ Submit your code in a Python script (`.py` file). You can submit as a single fil
   # ...continue for each type, then print()
   ```
 
-## Task 2 — `count_and_return_vowels(text)`
-- **Where:** [Conditions & iterations](../conditions-iterations.md), [Basic syntax & data types](../basic-syntax-data-types.md) — string methods.
-- **Think:** You need two things — a **count** and a **list** of the matched characters. Iterate the text once. Compare each char against a vowels set (lowercase the char first if you want case-insensitive matching but still want to preserve the **original** case in the output list — read the expected output carefully).
+## Task 2: `count_and_return_vowels(text)`
+- **Where:** [Conditions & iterations](../conditions-iterations.md), [Basic syntax & data types](../basic-syntax-data-types.md), string methods.
+- **Think:** You need two things, a **count** and a **list** of the matched characters. Iterate the text once. Compare each char against a vowels set (lowercase the char first if you want case-insensitive matching but still want to preserve the **original** case in the output list, read the expected output carefully).
 - **Starter:**
   ```python
   vowels = set('aeiou')
@@ -120,9 +120,9 @@ Submit your code in a Python script (`.py` file). You can submit as a single fil
   return len(found), found
   ```
 
-## Task 2 — `sum_of_even_numbers(limit)`
-- **Where:** [Conditions & iterations](../conditions-iterations.md) — `while` loops.
-- **Think:** The spec says **use a `while` loop** (not a comprehension). Decide whether `limit` is inclusive — the example `sum_of_even_numbers(10) == 30` (i.e. 2+4+6+8+10) tells you it is.
+## Task 2: `sum_of_even_numbers(limit)`
+- **Where:** [Conditions & iterations](../conditions-iterations.md), `while` loops.
+- **Think:** The spec says **use a `while` loop** (not a comprehension). Decide whether `limit` is inclusive, the example `sum_of_even_numbers(10) == 30` (i.e. 2+4+6+8+10) tells you it is.
 - **Starter:**
   ```python
   total, n = 0, 0
@@ -133,9 +133,9 @@ Submit your code in a Python script (`.py` file). You can submit as a single fil
   return total
   ```
 
-## Task 2 — `BankAccount` class
+## Task 2: `BankAccount` class
 - **Where:** [Classes & objects](../classes-objects.md).
-- **Think:** Four methods: `__init__`, `deposit`, `withdraw`, `get_balance`. State lives on `self.balance`. `withdraw` needs a guard — and the spec says to **print** "Insufficient funds" when the balance would go negative, not raise.
+- **Think:** Four methods: `__init__`, `deposit`, `withdraw`, `get_balance`. State lives on `self.balance`. `withdraw` needs a guard, and the spec says to **print** "Insufficient funds" when the balance would go negative, not raise.
 - **Starter:**
   ```python
   class BankAccount:
@@ -143,7 +143,7 @@ Submit your code in a Python script (`.py` file). You can submit as a single fil
           self.balance = initial_balance
       def deposit(self, amount):
           self.balance += amount
-      # withdraw, get_balance — your turn
+      # withdraw, get_balance: your turn
   ```
 
 ## Common pitfalls

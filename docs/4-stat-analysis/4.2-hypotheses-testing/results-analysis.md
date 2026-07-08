@@ -9,11 +9,11 @@ objectives:
 
 # Results Analysis: From Numbers to Insights
 
-**After this lesson:** you can explain the core ideas in “Results Analysis: From Numbers to Insights” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Results Analysis: From Numbers to Insights and try the examples in your own notebook.
 
 ## Overview
 
-This is the “so what?” lesson. Significance is not a business case: you combine **effect size**, **intervals**, **design limits**, and **costs** into a recommendation someone can defend. It closes the 4.2 sequence after [A/B testing](./ab-testing.md); use it before presenting to non-specialists.
+This is the "so what?" lesson. Significance is not a business case: you combine **effect size**, **intervals**, **design limits**, and **costs** into a recommendation someone can defend. It closes the 4.2 sequence after [A/B testing](./ab-testing.md); use it before presenting to non-specialists.
 
 ## Why this matters
 
@@ -29,7 +29,7 @@ This is the “so what?” lesson. Significance is not a business case: you comb
 
 ## Introduction: Why Results Analysis Matters
 
-Think of results analysis as being a detective with data - it's not just about finding clues (statistical significance) but understanding what they mean for the case (practical significance). Whether you're analyzing A/B tests, research studies, or business experiments, proper results analysis helps you turn raw numbers into actionable insights!
+Think of results analysis as being a detective with data - it's about more than finding clues (statistical significance) but understanding what they mean for the case (practical significance). Whether you're analyzing A/B tests, research studies, or business experiments, proper results analysis helps you turn raw numbers into actionable insights!
 
 ### Video Tutorial: Results Analysis and Statistical Significance
 
@@ -333,7 +333,7 @@ class EffectSizeAnalyzer:
 
 ## From Results to Decisions
 
-Results don't make decisions — people do. The job of results analysis is to give the decision-maker the right framing.
+Results don't make decisions, people do. The job of results analysis is to give the decision-maker the right framing.
 
 ### The Four-Quadrant Decision Framework
 
@@ -354,7 +354,7 @@ Map every result onto two axes: statistical significance and practical significa
                  └─────────────────────────────────┘
 ```
 
-The dangerous quadrant is **bottom-right**: statistically significant but practically trivial. With enough data, a 0.001% conversion lift will have p < 0.05 — that doesn't mean you should spend engineering resources shipping it.
+The dangerous quadrant is **bottom-right**: statistically significant but practically trivial. With enough data, a 0.001% conversion lift will have p < 0.05, that doesn't mean you should spend engineering resources shipping it.
 
 ### Building a Results Summary
 
@@ -400,13 +400,13 @@ def summarize_results(control_data, treatment_data, mde, alpha=0.05):
 
     # Decision
     if stat_sig and prac_sig:
-        decision = "SHIP — statistically and practically significant"
+        decision = "SHIP - statistically and practically significant"
     elif stat_sig and not prac_sig:
-        decision = "HOLD — significant but effect may be below practical threshold"
+        decision = "HOLD - significant but effect may be below practical threshold"
     elif not stat_sig and prac_sig:
-        decision = "RERUN — effect looks meaningful but underpowered"
+        decision = "RERUN - effect looks meaningful but underpowered"
     else:
-        decision = "NO GO — no evidence of a meaningful effect"
+        decision = "NO GO - no evidence of a meaningful effect"
 
     return {
         'n_control': n_c, 'n_treatment': n_t,
@@ -444,7 +444,7 @@ p_value                       : 0.0031
 ci_95                         : (0.005, 0.0238)
 statistically_significant     : True
 practically_significant       : True
-decision                      : SHIP — statistically and practically significant
+decision                      : SHIP - statistically and practically significant
 ```
 
 ### Communicating Results to Non-Specialists
@@ -453,21 +453,21 @@ Translate statistics into stakes. Different audiences need different framings:
 
 | Audience | What they care about | How to frame it |
 |---|---|---|
-| **Engineers** | Is the result robust? Will it hold at scale? | CI width, sample size, assumptions met |
+| **Engineers** | Is the result reliable? Will it hold at scale? | CI width, sample size, assumptions met |
 | **Product managers** | Should we ship? What's the business impact? | Relative lift %, CI, decision recommendation |
 | **Executives** | What's the revenue/cost impact? | Expected value calculation, risk if we're wrong |
 | **Analysts** | Can we trust the methodology? | Test selection rationale, assumption checks |
 
-A good one-paragraph summary covers: what changed, how much (with interval), confidence level, and the recommended action. Avoid raw p-values in executive summaries — "we're 95% confident the new checkout reduces cart abandonment by 1.4–2.4 percentage points" is more useful than "p = 0.003".
+A good one-paragraph summary covers: what changed, how much (with interval), confidence level, and the recommended action. Avoid raw p-values in executive summaries, "we're 95% confident the new checkout reduces cart abandonment by 1.4-2.4 percentage points" is more useful than "p = 0.003".
 
 ## Gotchas
 
-- **Conflating statistical significance with business importance** — the `SignificanceAnalyzer` buckets evidence as "Very Strong / Strong / Moderate" based solely on the p-value; a "Very Strong" result with a Cohen's d of 0.01 may be economically worthless. Always pair the significance label with an effect-size interpretation before making a recommendation.
-- **Applying Cohen's d thresholds (0.2 / 0.5 / 0.8) across all domains** — the `EffectSizeAnalyzer._get_magnitude` thresholds are conventions from psychology; in medicine a d of 0.2 may be clinically irrelevant, while in education research even a d of 0.1 is sometimes considered meaningful. Match the threshold to your domain's accepted standards.
-- **Reporting p-values without confidence intervals** — a p-value tells you direction and rough rarity; an interval tells you the *plausible range* of the true effect. The lesson builds a `SignificanceAnalyzer` that visualizes the null distribution but does not automatically produce a CI; add one before presenting to stakeholders.
-- **Stopping at "fail to reject H₀" without a power check** — a non-significant result in a small study may simply mean the test lacked power to detect the effect. Before concluding "no difference," compute post-hoc power or report the minimum detectable effect at your observed n; otherwise "no evidence of effect" is easily misread as "evidence of no effect."
-- **Using `_get_evidence_strength` thresholds as hard rules for action** — the p < 0.001 "Very Strong" band is a presentation aid; it does not override business context, cost-benefit analysis, or the number of other tests run in the same analysis. Always describe how many comparisons were made when reporting strength.
-- **Not checking assumptions before interpreting results** — the `SignificanceAnalyzer` accepts any p-value and t-statistic without verifying that the underlying test's assumptions (normality, equal variances, independence) were met. A visually clean significance plot built on a violated assumption is still a misleading output.
+- **Conflating statistical significance with business importance**: the `SignificanceAnalyzer` buckets evidence as "Very Strong / Strong / Moderate" based solely on the p-value; a "Very Strong" result with a Cohen's d of 0.01 may be economically worthless. Always pair the significance label with an effect-size interpretation before making a recommendation.
+- **Applying Cohen's d thresholds (0.2 / 0.5 / 0.8) across all domains**: the `EffectSizeAnalyzer._get_magnitude` thresholds are conventions from psychology; in medicine a d of 0.2 may be clinically irrelevant, while in education research even a d of 0.1 is sometimes considered meaningful. Match the threshold to your domain's accepted standards.
+- **Reporting p-values without confidence intervals**: a p-value tells you direction and rough rarity; an interval tells you the *plausible range* of the true effect. The lesson builds a `SignificanceAnalyzer` that visualizes the null distribution but does not automatically produce a CI; add one before presenting to stakeholders.
+- **Stopping at "fail to reject H₀" without a power check**: a non-significant result in a small study may simply mean the test lacked power to detect the effect. Before concluding "no difference," compute post-hoc power or report the minimum detectable effect at your observed n; otherwise "no evidence of effect" is easily misread as "evidence of no effect."
+- **Using `_get_evidence_strength` thresholds as hard rules for action**: the p < 0.001 "Very Strong" band is a presentation aid; it does not override business context, cost-benefit analysis, or the number of other tests run in the same analysis. Always describe how many comparisons were made when reporting strength.
+- **Not checking assumptions before interpreting results**: the `SignificanceAnalyzer` accepts any p-value and t-statistic without verifying that the underlying test's assumptions (normality, equal variances, independence) were met. A visually clean significance plot built on a violated assumption is still a misleading output.
 
 ## Next steps
 

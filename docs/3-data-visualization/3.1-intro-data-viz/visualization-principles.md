@@ -1,14 +1,14 @@
 # Data Visualization Principles
 
-**After this lesson:** you can explain the core ideas in “Data Visualization Principles” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Data Visualization Principles and try the examples in your own notebook.
 
 > **Note:** This lesson is **concept-first**: it explains *how people see* charts (pre-attentive vs attentive processing, Gestalt cues) before you lean on tool syntax. Use it with [Matplotlib basics](matplotlib-basics.md) when you implement ideas in code.
 
 ## Helpful video
 
-Why bar charts beat pie charts — and the perceptual science behind choosing the right chart type.
+Why bar charts beat pie charts, and the perceptual science behind choosing the right chart type.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/RiEZ_hEf96A" title="Bar Charts Are Better than Pie Charts — StatQuest" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/RiEZ_hEf96A" title="Bar Charts Are Better than Pie Charts, StatQuest" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Understanding Visual Perception
 
@@ -316,12 +316,12 @@ Think of this as organizing your layout:
 
 ## Gotchas
 
-- **Pre-attentive attributes lose their power when overused** — color pops out because everything else is grey; if you highlight five different categories in five bright colors, none of them are pre-attentive anymore and the viewer must read every element carefully, defeating the purpose.
-- **Gestalt proximity can work against you in subplot grids** — when axes are spaced too tightly, viewers perceive the top and bottom panels as one chart rather than two separate ones; increase `hspace` in `plt.subplots` or add a visible divider so the grouping matches your intent.
-- **Sequential color schemes are the wrong choice for categorical data** — using a blue gradient (light to dark) for unordered categories such as "Fruits", "Vegetables", "Grains" implies that darker means more or higher, misleading viewers; use a qualitative palette (equal brightness, distinct hues) for categories with no inherent order.
-- **Chart junk and data-ink are separate problems** — removing a decorative 3D shadow reduces chart junk; adding a second grid line reduces data-ink ratio; conflating them causes people to remove useful elements (like reference lines) when they should only remove decorative ones.
-- **The Figure/Ground principle means your background color becomes part of the message** — a dark background pushes bright data marks forward visually, which can increase perceived contrast but also makes small differences in similar colors harder to distinguish; test your chart on the actual background it will be displayed against.
-- **Visual hierarchy is undone by uniform font sizes** — setting every text element (title, axis labels, tick labels, annotations) to the same `fontsize=12` removes the hierarchy that guides the viewer's eye; the title should be noticeably larger than axis labels, which should be noticeably larger than tick labels.
+- **Pre-attentive attributes lose their power when overused**: color pops out because everything else is grey; if you highlight five different categories in five bright colors, none of them are pre-attentive anymore and the viewer must read every element carefully, defeating the purpose.
+- **Gestalt proximity can work against you in subplot grids**: when axes are spaced too tightly, viewers perceive the top and bottom panels as one chart rather than two separate ones; increase `hspace` in `plt.subplots` or add a visible divider so the grouping matches your intent.
+- **Sequential color schemes are the wrong choice for categorical data**: using a blue gradient (light to dark) for unordered categories such as "Fruits", "Vegetables", "Grains" implies that darker means more or higher, misleading viewers; use a qualitative palette (equal brightness, distinct hues) for categories with no inherent order.
+- **Chart junk and data-ink are separate problems**: removing a decorative 3D shadow reduces chart junk; adding a second grid line reduces data-ink ratio; conflating them causes people to remove useful elements (like reference lines) when they should only remove decorative ones.
+- **The Figure/Ground principle means your background color becomes part of the message**: a dark background pushes bright data marks forward visually, which can increase perceived contrast but also makes small differences in similar colors harder to distinguish; test your chart on the actual background it will be displayed against.
+- **Visual hierarchy is undone by uniform font sizes**: setting every text element (title, axis labels, tick labels, annotations) to the same `fontsize=12` removes the hierarchy that guides the viewer's eye; the title should be noticeably larger than axis labels, which should be noticeably larger than tick labels.
 
 ## Next steps
 

@@ -4,7 +4,7 @@
 
 ## Overview
 
-Gradient boosting builds an ensemble of weak learners sequentially, each correcting the residual errors of the previous — powerful for tabular data competitions and production models. Prerequisites: [5.1 Intro to ML](../../5.1-intro-to-ml/README.md), [Random Forest](../random-forest/README.md) recommended.
+Gradient boosting builds an ensemble of weak learners sequentially, each correcting the residual errors of the previous, powerful for tabular data competitions and production models. Prerequisites: [5.1 Intro to ML](../../5.1-intro-to-ml/README.md), [Random Forest](../random-forest/README.md) recommended.
 
 ## Lesson Path
 

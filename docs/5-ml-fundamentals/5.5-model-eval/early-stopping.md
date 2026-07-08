@@ -9,7 +9,7 @@ objectives:
 
 # Early Stopping
 
-**After this lesson:** you can explain the core ideas in “Early Stopping” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Early Stopping and try the examples in your own notebook.
 
 ## Overview
 
@@ -28,7 +28,7 @@ Early stopping works by monitoring the model's performance on a validation set d
 
 {% include model-eval-html-diagram.html diagram="early-stopping" title="Early stopping loop diagram" %}
 
-> **Highlight:** `patience` controls how many epochs of no-improvement you tolerate before stopping. Typical values: **5–20** for neural networks, **10–50** for gradient boosting.
+> **Highlight:** `patience` controls how many epochs of no-improvement you tolerate before stopping. Typical values: **5-20** for neural networks, **10-50** for gradient boosting.
 
 > **Read the diagram:** each loop represents one more epoch or boosting iteration. Training continues only while validation performance is improving often enough. The saved checkpoint is the best validation checkpoint, not necessarily the final epoch before stopping.
 
@@ -120,7 +120,7 @@ for epoch in range(1000):
       <span class="code-callout__title">Patience Loop</span>
     </div>
     <div class="code-callout__body">
-      <p>Each iteration calls <code>partial_fit</code> then scores the validation set; the counter resets on any improvement and triggers a break when it reaches the <code>patience</code> limit — the core early-stopping mechanic.</p>
+      <p>Each iteration calls <code>partial_fit</code> then scores the validation set; the counter resets on any improvement and triggers a break when it reaches the <code>patience</code> limit, the core early-stopping mechanic.</p>
     </div>
   </div>
 </aside>
@@ -180,7 +180,7 @@ print(f"Early Stopping Score: {pipeline.score(X_test, y_test):.3f}")
       <span class="code-callout__title">Built-in Early Stopping</span>
     </div>
     <div class="code-callout__body">
-      <p><code>SGDClassifier(early_stopping=True, validation_fraction=0.2)</code> automatically reserves 20% of train data for validation and halts when score stops improving — no manual loop needed.</p>
+      <p><code>SGDClassifier(early_stopping=True, validation_fraction=0.2)</code> automatically reserves 20% of train data for validation and halts when score stops improving, no manual loop needed.</p>
     </div>
   </div>
 </aside>
@@ -273,7 +273,7 @@ for epoch in range(1000):
       <span class="code-callout__title">Training Loop</span>
     </div>
     <div class="code-callout__body">
-      <p>Call the instance like a function each epoch; when it returns <code>True</code> the loop breaks — the class can be reused across different models and frameworks with no changes.</p>
+      <p>Call the instance like a function each epoch; when it returns <code>True</code> the loop breaks, the class can be reused across different models and frameworks with no changes.</p>
     </div>
   </div>
 </aside>
@@ -326,7 +326,7 @@ Early stopping at epoch 28
 
 ## Practical Example: Credit Risk Prediction
 
-Let's see how early stopping helps in a credit risk prediction task:
+Look at how early stopping helps in a credit risk prediction task:
 
 #### Growing `n_estimators` with patience
 
@@ -437,12 +437,12 @@ Final test score: 0.985
 
 ## Gotchas
 
-- **Monitoring training loss instead of validation loss** — Early stopping only prevents overfitting when triggered by *validation* performance; stopping on training loss can halt before the model has converged because training loss can plateau due to learning rate schedules, not because generalisation has peaked.
-- **Setting patience too low and stopping in a temporary dip** — Validation loss often fluctuates between epochs; a patience of 1 or 2 will stop training prematurely during a normal valley that would have recovered; set patience to at least 5–10 epochs and restore the best model weights at the end.
-- **Forgetting to restore best weights after stopping** — The model's weights at the stopping epoch are not the best weights — they are the weights from `patience` epochs *after* the best; always save the best checkpoint (e.g., `best_model = pipeline`) and use that for inference, not the final state.
-- **Using `SGDClassifier(early_stopping=True)` without understanding `validation_fraction`** — This flag causes sklearn to carve out `validation_fraction` (default 0.1) from the training set internally; if your dataset is small, this hidden split can meaningfully reduce effective training size without any warning.
-- **Treating early stopping epoch count as a stable hyperparameter** — The number of epochs at which stopping triggers depends on the train/validation split, random seed, and data order; reporting "we stopped at epoch 47" across different splits is not reproducible; the stopping point will differ on every run unless you also fix all random seeds.
-- **Applying early stopping to random forests** — Random forests do not train iteratively in the same sense as gradient-based models; "stopping early" by limiting `n_estimators` is valid but is better handled via OOB error or a held-out validation set with a standard grid search, not a patience-based loop that evaluates the test set each iteration.
+- **Monitoring training loss instead of validation loss**: Early stopping only prevents overfitting when triggered by *validation* performance; stopping on training loss can halt before the model has converged because training loss can plateau due to learning rate schedules, not because generalisation has peaked.
+- **Setting patience too low and stopping in a temporary dip**: Validation loss often fluctuates between epochs; a patience of 1 or 2 will stop training prematurely during a normal valley that would have recovered; set patience to at least 5-10 epochs and restore the best model weights at the end.
+- **Forgetting to restore best weights after stopping**: The model's weights at the stopping epoch are not the best weights, they are the weights from `patience` epochs *after* the best; always save the best checkpoint (e.g., `best_model = pipeline`) and use that for inference, not the final state.
+- **Using `SGDClassifier(early_stopping=True)` without understanding `validation_fraction`**: This flag causes sklearn to carve out `validation_fraction` (default 0.1) from the training set internally; if your dataset is small, this hidden split can meaningfully reduce effective training size without any warning.
+- **Treating early stopping epoch count as a stable hyperparameter**: The number of epochs at which stopping triggers depends on the train/validation split, random seed, and data order; reporting "we stopped at epoch 47" across different splits is not reproducible; the stopping point will differ on every run unless you also fix all random seeds.
+- **Applying early stopping to random forests**: Random forests do not train iteratively in the same sense as gradient-based models; "stopping early" by limiting `n_estimators` is valid but is better handled via OOB error or a held-out validation set with a standard grid search, not a patience-based loop that evaluates the test set each iteration.
 
 ## Additional Resources
 

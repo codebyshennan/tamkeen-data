@@ -1,6 +1,6 @@
 # NumPy Arrays: Your Data Superhero
 
-**After this lesson:** you can explain the core ideas in “NumPy Arrays: Your Data Superhero” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain NumPy Arrays: Your Data Superhero and try the examples in your own notebook.
 
 ### Video
 
@@ -8,13 +8,13 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/QUT1VHiLmmI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*freeCodeCamp — Python NumPy tutorial for beginners*
+*freeCodeCamp, Python NumPy tutorial for beginners*
 
 ## Overview
 
 **Prerequisites:** [Introduction to NumPy](./intro-numpy.md) (why arrays exist) and comfort with Python lists.
 
-**Why this lesson:** The **`ndarray`** is the concrete type behind “NumPy array.” Shape, dtype, and vectorized ops are the vocabulary for every numeric cell in this submodule.
+**Why this lesson:** The **`ndarray`** is the concrete type behind "NumPy array." Shape, dtype, and vectorized ops are the vocabulary for every numeric cell in this submodule.
 
 ## What is an ndarray?
 
@@ -42,7 +42,7 @@ import numpy as np
 # Create your first array
 data = np.array([1.5, -0.1, 3])
 
-# Watch the magic! 
+# Watch the magic!
 print("Original data:", data)
 print("Multiplied by 10:", data * 10)     # [15.0, -1.0, 30.0]
 print("Added to itself:", data + data)     # [3.0, -0.2, 6.0]
@@ -291,9 +291,9 @@ If you write `float` instead of `np.float64`, Numpy will guess the data type for
 
 ## Common pitfalls
 
-- **Silent overflow** — Integer dtypes wrap instead of raising errors; use **float64** or check ranges for big numbers.
-- **astype truncates** — Casting floats to integers drops the fractional part; it does not round unless you do so explicitly.
-- **Object dtype** — Arrays of Python objects lose NumPy speed; only use when you truly need heterogeneous data.
+- **Silent overflow**: Integer dtypes wrap instead of raising errors; use **float64** or check ranges for big numbers.
+- **astype truncates**: Casting floats to integers drops the fractional part; it does not round unless you do so explicitly.
+- **Object dtype**: Arrays of Python objects lose NumPy speed; only use when you truly need heterogeneous data.
 
 ## Next steps
 

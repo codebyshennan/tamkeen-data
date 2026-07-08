@@ -4,7 +4,7 @@
 
 **Mandatory** • 10 questions • Covers SQL, Data Wrangling, EDA, and Data Engineering.
 
-Try each question closed-book first. Click **Show hint** if you get stuck — hints point you at the relevant lesson section and how to think about it, without naming the answer.
+Try each question closed-book first. Click **Show hint** if you get stuck, hints point you at the relevant lesson section and how to think about it, without naming the answer.
 
 ---
 
@@ -18,7 +18,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [SQL basics](../2.1-sql/README.md) — anatomy of a `SELECT` statement.
+- **Where:** [SQL basics](../2.1-sql/README.md), anatomy of a `SELECT` statement.
 - **Think:** Walk through what each clause does. One picks columns, one filters rows, one sorts. The remaining clause names the **source** the query reads from.
 
 </details>
@@ -33,7 +33,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [SQL basics](../2.1-sql/README.md) — aliases and joins.
+- **Where:** [SQL basics](../2.1-sql/README.md), aliases and joins.
 - **Think:** Aliases rename something for the rest of the query (e.g. `customers c`). Which keyword reads naturally as "this table, **named as** something shorter"?
 
 </details>
@@ -48,7 +48,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Data wrangling with pandas](../2.2-data-wrangling/README.md) — reductions.
+- **Where:** [Data wrangling with pandas](../2.2-data-wrangling/README.md), reductions.
 - **Think:** Each option does what its name says. Pick the one whose name literally describes "adding values together".
 
 </details>
@@ -63,8 +63,8 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Data wrangling with pandas](../2.2-data-wrangling/README.md) — element-wise transforms.
-- **Think:** `groupby` and `filter` don't take a dict. Of the two remaining, one is specifically the **Series**-level transform that accepts either a function **or** a dict — the other lives on DataFrames and on Series but is more general.
+- **Where:** [Data wrangling with pandas](../2.2-data-wrangling/README.md), element-wise transforms.
+- **Think:** `groupby` and `filter` don't take a dict. Of the two remaining, one is specifically the **Series**-level transform that accepts either a function **or** a dict, the other lives on DataFrames and on Series but is more general.
 
 </details>
 
@@ -78,8 +78,8 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Data wrangling with pandas](../2.2-data-wrangling/README.md) — sampling and shuffling.
-- **Think:** `transpose` swaps axes (not a shuffle). One option doesn't exist in NumPy. Of the two real shuffles, one mutates **in place** and returns nothing — the other **returns** a new permuted array, which is what you want for indexing rows.
+- **Where:** [Data wrangling with pandas](../2.2-data-wrangling/README.md), sampling and shuffling.
+- **Think:** `transpose` swaps axes (not a shuffle). One option doesn't exist in NumPy. Of the two real shuffles, one mutates **in place** and returns nothing, the other **returns** a new permuted array, which is what you want for indexing rows.
 
 </details>
 
@@ -93,8 +93,8 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [EDA](../2.3-eda/README.md) — relationships between variables.
-- **Think:** Three options describe a **single** variable's centre or spread. Only one captures the **joint** behaviour of two variables — and its name starts with the prefix meaning "together".
+- **Where:** [EDA](../2.3-eda/README.md), relationships between variables.
+- **Think:** Three options describe a **single** variable's centre or spread. Only one captures the **joint** behaviour of two variables, and its name starts with the prefix meaning "together".
 
 </details>
 
@@ -108,7 +108,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [EDA](../2.3-eda/README.md) — Pearson correlation.
+- **Where:** [EDA](../2.3-eda/README.md), Pearson correlation.
 - **Think:** Correlation captures **direction** (positive or negative) and **strength** (how close to perfect). So the range must be **symmetric around zero** and **bounded on both sides**.
 
 </details>
@@ -123,8 +123,8 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Data wrangling with pandas](../2.2-data-wrangling/README.md) — combining DataFrames.
-- **Think:** Three options reshape or aggregate a **single** DataFrame. Only one joins **two** DataFrames together on key columns — its name mirrors the SQL operation that does the same thing.
+- **Where:** [Data wrangling with pandas](../2.2-data-wrangling/README.md), combining DataFrames.
+- **Think:** Three options reshape or aggregate a **single** DataFrame. Only one joins **two** DataFrames together on key columns, its name mirrors the SQL operation that does the same thing.
 
 </details>
 
@@ -138,8 +138,8 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Data engineering overview](../2.2-data-wrangling/README.md) — pipeline stages.
-- **Think:** A pipeline takes data **in**, does something **to** it, and puts it **somewhere**. One of these options uses a verb that isn't part of that standard vocabulary — pipelines don't "release" data, they store / serve / publish it.
+- **Where:** [Data engineering overview](../2.2-data-wrangling/README.md), pipeline stages.
+- **Think:** A pipeline takes data **in**, does something **to** it, and puts it **somewhere**. One of these options uses a verb that isn't part of that standard vocabulary, pipelines don't "release" data, they store / serve / publish it.
 
 </details>
 
@@ -153,7 +153,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Data engineering](../2.2-data-wrangling/README.md) — ETL.
-- **Think:** Read each option's letters. The middle word is the same in two options — that's a strong clue it's correct. Between those two, which **first** word matches "pull data out of a source"?
+- **Where:** [Data engineering](../2.2-data-wrangling/README.md), ETL.
+- **Think:** Read each option's letters. The middle word is the same in two options, that's a strong clue it's correct. Between those two, which **first** word matches "pull data out of a source"?
 
 </details>

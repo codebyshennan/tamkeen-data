@@ -1,18 +1,18 @@
 # Learning Power BI Through a Real Example: SuperStore Analysis
 
-You have a spreadsheet of retail sales. Your manager wants to know which regions are underperforming and why — by tomorrow. Power BI can turn that spreadsheet into an interactive, automatically-updating dashboard in under an hour. That's what you'll build here.
+You have a spreadsheet of retail sales. Your manager wants to know which regions are underperforming and why, by tomorrow. Power BI can turn that spreadsheet into an interactive, automatically-updating dashboard in under an hour. That's what you'll build here.
 
-**After this lesson:** you can explain the core ideas in "Learning Power BI Through a Real Example: SuperStore Analysis" and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Learning Power BI Through a Real Example: SuperStore Analysis and try the examples in your own notebook.
 
 > **Note:** This tutorial is **UI-first**.
 > - **Windows:** Use Power BI Desktop (free download from the Microsoft Store or powerbi.microsoft.com).
 > - **macOS:** Power BI Desktop is not available natively. Use [Power BI Service](https://app.powerbi.com) in your browser, or run Power BI Desktop in a Windows VM. Most steps in this guide translate directly to the Service; note differences where they appear.
 
-> **Desktop vs Service:** Power BI Desktop (Windows only) is the full tool. Power BI Service (web, any browser) is 90% the same but with limited Power Query editing. This guide works in both — build in Desktop if you have it, use Service on Mac.
+> **Desktop vs Service:** Power BI Desktop (Windows only) is the full tool. Power BI Service (web, any browser) is 90% the same but with limited Power Query editing. This guide works in both, build in Desktop if you have it, use Service on Mac.
 
-> **No work or school email?** Power BI Service requires a Microsoft work or school account — personal Gmail or Hotmail accounts won't work. Your realistic options:
+> **No work or school email?** Power BI Service requires a Microsoft work or school account, personal Gmail or Hotmail accounts won't work. Your realistic options:
 > - **Windows users:** Power BI Desktop works fully offline with no sign-in required for building and exploring reports. Sign in only when you want to publish to the Service.
-> - **Microsoft 365 Developer Program:** You can join at [developer.microsoft.com/microsoft-365/dev-program](https://developer.microsoft.com/en-us/microsoft-365/dev-program), but the E5 subscription (which includes Power BI Pro) is only granted to **qualified members** — Visual Studio Professional/Enterprise subscribers, Microsoft Partner Program members, or Premier Support customers. Joining with a personal Microsoft account does not automatically grant the subscription.
+> - **Microsoft 365 Developer Program:** You can join at [developer.microsoft.com/microsoft-365/dev-program](https://developer.microsoft.com/en-us/microsoft-365/dev-program), but the E5 subscription (which includes Power BI Pro) is only granted to **qualified members**, Visual Studio Professional/Enterprise subscribers, Microsoft Partner Program members, or Premier Support customers. Joining with a personal Microsoft account does not automatically grant the subscription.
 > - **30-day trial:** Microsoft offers a [Power BI Pro trial](https://app.powerbi.com) for new sign-ups if you have an eligible work/school email.
 
 ## Helpful video
@@ -178,7 +178,7 @@ The dataset consists of four primary tables:
    - Add data labels from the Format pane
    - Customize colors and title
 
-![Power BI first chart — Sales by Category](assets/powerbi_first_chart.png)
+![Power BI first chart, Sales by Category](assets/powerbi_first_chart.png)
 
 
 ### 2. Time Series Analysis
@@ -240,7 +240,7 @@ Before writing complex DAX, start with the simplest possible measure to see how 
 
 1. In the Fields pane, right-click the `Orders` table and select **New Measure**
 2. In the formula bar, type: `Total Sales = SUM(Orders[Sales])`
-3. Press Enter or click the checkmark — the measure appears in the Orders table with a calculator icon
+3. Press Enter or click the checkmark, the measure appears in the Orders table with a calculator icon
 
 **Step 2: Display it as a Card**
 
@@ -254,10 +254,10 @@ Before writing complex DAX, start with the simplest possible measure to see how 
 1. Click a blank area on the canvas (away from the Card)
 2. In the Visualizations pane, click the **Slicer** visual
 3. Drag `Region` from the Fields pane into the slicer
-4. Click **"West"** in the slicer — watch the Card number change to show only West sales
-5. Click **"East"** — the number updates again instantly
+4. Click **"West"** in the slicer, watch the Card number change to show only West sales
+5. Click **"East"**, the number updates again instantly
 
-You just saw filter context in action — the measure recalculates based on what's selected. This is the core idea behind all DAX: every measure is always evaluated within the current filter context.
+You just saw filter context in action, the measure recalculates based on what's selected. This is the core idea behind all DAX: every measure is always evaluated within the current filter context.
 
 > **Checkpoint:** Before moving to DAX, make sure you can: (1) create a bar chart of Sales by Category, (2) add a slicer for Region, (3) click the slicer and see the chart update. If you can do these three things, you're ready for DAX.
 
@@ -392,7 +392,7 @@ You just saw filter context in action — the measure recalculates based on what
 ![Power BI Decomposition Tree and Key Influencers](assets/powerbi_advanced_charts.png)
 
 
-> **Advanced (skip on first read):** The DAX patterns below — time intelligence, YTD, prior-year comparisons, and moving averages — require a proper Date table and a solid grasp of filter context. Come back here after you've built your first complete dashboard.
+> **Advanced (skip on first read):** The DAX patterns below, time intelligence, YTD, prior-year comparisons, and moving averages, require a proper Date table and a solid grasp of filter context. Come back here after you've built your first complete dashboard.
 
 ## Advanced DAX Patterns
 
@@ -508,7 +508,7 @@ SWITCH(
       <span class="code-callout__title">Dynamic Segmentation</span>
     </div>
     <div class="code-callout__body">
-      <p><code>SWITCH(TRUE(), ...)</code> evaluates conditions in order—the first matching expression wins, replacing a chain of nested IFs.</p>
+      <p><code>SWITCH(TRUE(), ...)</code> evaluates conditions in order, the first matching expression wins, replacing a chain of nested IFs.</p>
     </div>
   </div>
 </aside>
@@ -550,7 +550,7 @@ SWITCH(
 ![Power BI Service sharing and collaboration dialog](assets/powerbi_collaboration.png)
 
 
-> **Advanced (skip on first read):** Performance optimization — DirectQuery, incremental refresh, query folding — matters when your dataset grows large. For the Superstore sample, you won't need any of this. Return here when reports start feeling slow or you're working with millions of rows.
+> **Advanced (skip on first read):** Performance optimization, DirectQuery, incremental refresh, query folding, matters when your dataset grows large. For the Superstore sample, you won't need any of this. Return here when reports start feeling slow or you're working with millions of rows.
 
 ## Performance Optimization
 
@@ -590,12 +590,12 @@ SWITCH(
 
 ## Gotchas
 
-- **DAX measures are evaluated in filter context, not row context** — `DIVIDE(SUM([Profit]), SUM([Sales]))` gives the correct profit margin for the current slicer selection, but writing `[Profit] / [Sales]` without aggregation evaluates at row level and then averages the ratios, producing a different and usually wrong number. Always aggregate explicitly in measures.
-- **Relationships in the Model view default to bidirectional filtering, which can cause double-counting** — when you set cross-filter direction to "Both" between two tables, filters propagate in both directions and can inflate totals unexpectedly. Use single-direction filtering unless you have a specific reason for bidirectional, and test totals against known values.
-- **`DATESYTD` requires a Date table with contiguous dates** — if your Date table has gaps (e.g., weekends missing for a business-day-only table), `DATESYTD` and other time intelligence functions will produce incorrect results. Power BI's time intelligence functions assume a complete, unbroken date sequence.
-- **DirectQuery mode disables most DAX time intelligence functions** — `SAMEPERIODLASTYEAR`, `DATESYTD`, and `DATESINPERIOD` are not supported in DirectQuery against most sources. If you need time intelligence, you must import the data or use a calculated table. This limitation is not surfaced as an error at design time in all versions.
-- **Publishing to Power BI Service requires a gateway for on-premise data sources** — workbooks that connect to local files or on-premise databases will show stale data in the Service after publishing unless an on-premise data gateway is configured and running. Reports connected only to cloud sources (SharePoint, Azure, etc.) do not need a gateway.
-- **Incremental refresh policy requires `RangeStart` and `RangeEnd` parameters spelled exactly** — the parameter names are case-sensitive and must match `RangeStart` and `RangeEnd` precisely. Any variation (e.g., `range_start`, `Start`) causes the incremental refresh to silently fall back to a full refresh on every scheduled run.
+- **DAX measures are evaluated in filter context, not row context**: `DIVIDE(SUM([Profit]), SUM([Sales]))` gives the correct profit margin for the current slicer selection, but writing `[Profit] / [Sales]` without aggregation evaluates at row level and then averages the ratios, producing a different and usually wrong number. Always aggregate explicitly in measures.
+- **Relationships in the Model view default to bidirectional filtering, which can cause double-counting**: when you set cross-filter direction to "Both" between two tables, filters propagate in both directions and can inflate totals unexpectedly. Use single-direction filtering unless you have a specific reason for bidirectional, and test totals against known values.
+- **`DATESYTD` requires a Date table with contiguous dates**: if your Date table has gaps (e.g., weekends missing for a business-day-only table), `DATESYTD` and other time intelligence functions will produce incorrect results. Power BI's time intelligence functions assume a complete, unbroken date sequence.
+- **DirectQuery mode disables most DAX time intelligence functions**: `SAMEPERIODLASTYEAR`, `DATESYTD`, and `DATESINPERIOD` are not supported in DirectQuery against most sources. If you need time intelligence, you must import the data or use a calculated table. This limitation is not surfaced as an error at design time in all versions.
+- **Publishing to Power BI Service requires a gateway for on-premise data sources**: workbooks that connect to local files or on-premise databases will show stale data in the Service after publishing unless an on-premise data gateway is configured and running. Reports connected only to cloud sources (SharePoint, Azure, etc.) do not need a gateway.
+- **Incremental refresh policy requires `RangeStart` and `RangeEnd` parameters spelled exactly**: the parameter names are case-sensitive and must match `RangeStart` and `RangeEnd` precisely. Any variation (e.g., `range_start`, `Start`) causes the incremental refresh to silently fall back to a full refresh on every scheduled run.
 
 ## Troubleshooting
 
@@ -604,7 +604,7 @@ SWITCH(
 - **Chart is blank** → check that the Values field well has a measure or numeric column dragged into it. An empty Values well produces an empty visual even if Axis is populated.
 - **Slicer not filtering other charts** → both the slicer and the chart must draw from the same table (or tables connected by a relationship). If they use separate, unrelated tables, filters will not propagate. Check the Model view to confirm a relationship exists.
 - **DAX formula error** → check for missing parentheses and make sure column references use the `TableName[ColumnName]` format. A common mistake: writing `[Sales]` when the correct reference is `Orders[Sales]`. Power BI will highlight the error in red in the formula bar.
-- **Mac users: Power BI Desktop won't install** → Power BI Desktop is Windows only. Use Power BI Service at [app.powerbi.com](https://app.powerbi.com) instead — it supports the same visuals, slicers, and basic DAX measures used throughout this guide.
+- **Mac users: Power BI Desktop won't install** → Power BI Desktop is Windows only. Use Power BI Service at [app.powerbi.com](https://app.powerbi.com) instead, it supports the same visuals, slicers, and basic DAX measures used throughout this guide.
 
 ## Next Steps
 

@@ -6,9 +6,9 @@
 
 **Who this is for:** Learners who have completed [Module 0: Prep](../0-prep/README.md) (or equivalent: editor, notebooks, and a working Python environment). No prior data science career experience is assumed.
 
-This module moves from concepts (analytics, ethics, collection) into Python, then statistics, then NumPy and pandas—the stack you will use in later modules for wrangling, visualization, and modeling.
+This module moves from concepts (analytics, ethics, collection) into Python, then statistics, then NumPy and pandas, the stack you will use in later modules for wrangling, visualization, and modeling.
 
-**How to study it:** Work submodule order **1.1 → 1.5**. Read the narrative first, then run code in order; skip ahead only when you are reviewing. If a page feels like a list of facts, slow down and run one example end-to-end—understanding beats coverage.
+**How to study it:** Work submodule order **1.1 → 1.5**. Read the narrative first, then run code in order; skip ahead only when you are reviewing. If a page feels like a list of facts, slow down and run one example end-to-end, understanding beats coverage.
 
 ### Video
 
@@ -16,7 +16,7 @@ This module moves from concepts (analytics, ethics, collection) into Python, the
 <iframe width="560" height="315" src="https://www.youtube.com/embed/RBSUwFGaqsY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*IBM Technology — What is data science?*
+*IBM Technology, What is data science?*
 
 ## Prerequisites
 

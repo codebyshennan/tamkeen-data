@@ -86,10 +86,10 @@ Submit your solution as a Python script with:
 <summary>Show hints</summary>
 
 ### Task 1: Correlation analysis
-- **Where:** [Correlation Analysis](../correlation-analysis.md) — "What is Correlation Analysis?" and Pearson coefficient section.
+- **Where:** [Correlation Analysis](../correlation-analysis.md), "What is Correlation Analysis?" and Pearson coefficient section.
 - **Think:**
   - `stats.pearsonr(x, y)` returns `(r, p_value)`. Print both; a large |r| with small p confirms a real linear relationship.
-  - `df.corr()` uses Pearson by default. Check whether any predictor pair has high correlation — that foreshadows multicollinearity in Task 3.
+  - `df.corr()` uses Pearson by default. Check whether any predictor pair has high correlation, that foreshadows multicollinearity in Task 3.
 - **Starter:**
   ```python
   for col in ['study_hours', 'sleep_hours', 'prior_score']:
@@ -104,7 +104,7 @@ prior_score: r = 0.212, p = 0.0590
 ```
 
 ### Task 2: Simple linear regression
-- **Where:** [Simple Linear Regression](../simple-linear-regression.md) — "Fitting the model" and "Interpreting coefficients".
+- **Where:** [Simple Linear Regression](../simple-linear-regression.md), "Fitting the model" and "Interpreting coefficients".
 - **Think:**
   - sklearn expects a 2-D feature matrix: `X = df[['study_hours']]` (double brackets).
   - `model.coef_[0]` is the slope; `model.intercept_` is the intercept.
@@ -125,14 +125,14 @@ R² = 0.717
 ```
 
 ### Task 3: Multiple linear regression
-- **Where:** [Multiple Linear Regression](../multiple-linear-regression.md) — "Interpreting Coefficients" and "Model Evaluation".
+- **Where:** [Multiple Linear Regression](../multiple-linear-regression.md), "Interpreting Coefficients" and "Model Evaluation".
 - **Think:**
   - The conditional interpretation matters: each coefficient describes the effect of one predictor *holding the other predictors constant*.
   - RMSE = `np.sqrt(mean_squared_error(y, y_pred))`.
   - If R² jumps significantly from simple to multiple regression, the additional predictors are contributing real explanatory power.
 
 ### Task 4: Residual diagnostics
-- **Where:** [Simple Linear Regression](../simple-linear-regression.md) — "Residual Diagnostics" section.
+- **Where:** [Simple Linear Regression](../simple-linear-regression.md), "Residual Diagnostics" section.
 - **Think:**
   - A random scatter of residuals around zero supports the linearity and homoscedasticity assumptions.
   - A funnel shape (variance growing with fitted values) indicates heteroscedasticity.

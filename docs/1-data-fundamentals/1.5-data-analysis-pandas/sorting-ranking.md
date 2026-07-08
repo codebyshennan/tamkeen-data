@@ -1,6 +1,6 @@
 # Sorting and Ranking in Pandas
 
-**After this lesson:** you can explain the core ideas in “Sorting and Ranking in Pandas” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Sorting and Ranking in Pandas and try the examples in your own notebook.
 
 ### Video
 
@@ -8,7 +8,7 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/T11QYVfZoD0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*Corey Schafer — Python pandas tutorial (part 7): sorting data*
+*Corey Schafer, Python pandas tutorial (part 7): sorting data*
 
 ## Overview
 
@@ -54,7 +54,7 @@ Real-world applications:
 
 ### Basic Sorting Example
 
-Let's explore sorting with practical examples:
+we will look at sorting with practical examples:
 
 **Sort Series by value or index; sort DataFrame by column**
 
@@ -146,7 +146,7 @@ Sales Data (sorted by total sales):
       <span class="code-callout__title">DataFrame Sort</span>
     </div>
     <div class="code-callout__body">
-      <p>Builds a sales DataFrame, computes a Total column, then sorts descending by Total—showing how row order changes while all columns travel together.</p>
+      <p>Builds a sales DataFrame, computes a Total column, then sorts descending by Total, showing how row order changes while all columns travel together.</p>
     </div>
   </div>
 </aside>
@@ -192,11 +192,11 @@ Sales Data (sorted by total sales):
 
 ### Sorting by a Single Column
 
-Let's work with a student grades DataFrame:
+Work with a student grades DataFrame:
 
 **`sort_values` on one column**
 
-- **Purpose:** Order rows by `Math` ascending or descending while keeping each student’s row intact.
+- **Purpose:** Order rows by `Math` ascending or descending while keeping each student's row intact.
 - **Walkthrough:** Default `ascending=True` gives low-to-high scores.
 
 ```python
@@ -264,7 +264,7 @@ print(grades.sort_values(['Science', 'Math']))
 
 # Sort Science descending and Math ascending
 print("\nScience descending, Math ascending:")
-print(grades.sort_values(['Science', 'Math'], 
+print(grades.sort_values(['Science', 'Math'],
                         ascending=[False, True]))
 ```
 
@@ -304,11 +304,11 @@ The difference from sorting is that ranking keeps your data in its original orde
 
 ### Basic Ranking Example
 
-Let's see different ways to rank data:
+Look at different ways to rank data:
 
 **Tie-breaking: average, first, min, max**
 
-- **Purpose:** See how the same scores get different rank numbers depending on `method`—important for leaderboards and percentiles.
+- **Purpose:** See how the same scores get different rank numbers depending on `method`-important for leaderboards and percentiles.
 - **Walkthrough:** Tied `85` values get ranks 1.5 (average), 1 vs 2 (first), 1 (min), 2 (max).
 
 ```python
@@ -382,7 +382,7 @@ Notice how different methods handle the tied scores (85 appears twice).
 
 ### Sales Performance Analysis
 
-Let's analyze sales data:
+Analyze sales data:
 
 **Global sort + `groupby` rank**
 
@@ -481,7 +481,7 @@ Student rankings:
       <span class="code-callout__title">Student DataFrame</span>
     </div>
     <div class="code-callout__body">
-      <p>Creates a five-student table with three subject scores—enough to show ties and rank differences across subjects.</p>
+      <p>Creates a five-student table with three subject scores, enough to show ties and rank differences across subjects.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-11" data-tint="2">
@@ -490,7 +490,7 @@ Student rankings:
       <span class="code-callout__title">Overall Rank</span>
     </div>
     <div class="code-callout__body">
-      <p>Computes a row-wise mean across the three subjects then ranks descending—highest average gets rank 1.</p>
+      <p>Computes a row-wise mean across the three subjects then ranks descending, highest average gets rank 1.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="13-18" data-tint="3">
@@ -532,7 +532,7 @@ Student rankings:
    ```python
    # Create sorted view without modifying original
    sorted_df = df.sort_values('column')
-   
+
    # Or sort in-place if needed
    df.sort_values('column', inplace=True)
    ```
@@ -552,7 +552,7 @@ Student rankings:
 
    **Stable sort for tied keys**
 
-   - **Purpose:** When primary/secondary keys repeat, preserve original row order among ties—helps reproducible exports.
+   - **Purpose:** When primary/secondary keys repeat, preserve original row order among ties, helps reproducible exports.
 
    ```python
    # Maintain relative order of equal values
@@ -568,10 +568,10 @@ Student rankings:
    ```python
    # For competition rankings (1224 ranking)
    df['Rank'] = df['Score'].rank(method='min')
-   
+
    # For dense rankings (1223 ranking)
    df['Rank'] = df['Score'].rank(method='dense')
-   
+
    # For unique rankings
    df['Rank'] = df['Score'].rank(method='first')
    ```

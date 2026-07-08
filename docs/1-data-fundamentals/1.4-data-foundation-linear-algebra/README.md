@@ -30,7 +30,7 @@ Before starting this module, you should have:
 <iframe width="560" height="315" src="https://www.youtube.com/embed/QUT1VHiLmmI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*freeCodeCamp — Python NumPy tutorial for beginners*
+*freeCodeCamp, Python NumPy tutorial for beginners*
 
 ---
 
@@ -60,16 +60,16 @@ Before you average or model, ask what **kind of measurement** you have. The four
 
 | Level | Order? | Equal steps? | True zero? | Examples | Sensible summaries |
 | ----- | ------ | -------------- | ---------- | -------- | ------------------- |
-| **Nominal** | No | — | No | Country codes, blood type | Counts, proportions, mode |
+| **Nominal** | No |, | No | Country codes, blood type | Counts, proportions, mode |
 | **Ordinal** | Yes | Not guaranteed equal | No | Likert scales, education band | Median, ranks; means need care |
 | **Interval** | Yes | Yes | No | Celsius, calendar years | Means, differences; ratios often misleading |
-| **Ratio** | Yes | Yes | Yes | Height, weight, revenue | Full arithmetic, ratios (“twice as much”) |
+| **Ratio** | Yes | Yes | Yes | Height, weight, revenue | Full arithmetic, ratios ("twice as much") |
 
-**Nominal** values are labels: blue is not “greater than” red. You can count categories and find the mode, but an “average color” is nonsense.
+**Nominal** values are labels: blue is not "greater than" red. You can count categories and find the mode, but an "average color" is nonsense.
 
-**Ordinal** values can be sorted (mild, medium, hot), but the **distance** between ranks may be uneven—five stars are not necessarily “equal steps” in satisfaction. Medians and percentiles are often safer than means.
+**Ordinal** values can be sorted (mild, medium, hot), but the **distance** between ranks may be uneven, five stars are not necessarily "equal steps" in satisfaction. Medians and percentiles are often safer than means.
 
-**Interval** scales have equal-sized steps, but **zero is arbitrary** (0°C is not “no heat”). Differences matter; ratios like “twice as hot” usually do not.
+**Interval** scales have equal-sized steps, but **zero is arbitrary** (0°C is not "no heat"). Differences matter; ratios like "twice as hot" usually do not.
 
 **Ratio** scales have a **true zero** (no money, no height). All arithmetic operations are on the table, including ratios.
 
@@ -81,7 +81,7 @@ Before you average or model, ask what **kind of measurement** you have. The four
 
 ```
 Level      Order   Steps    Zero    Example
-Nominal    no      —        no      Colors
+Nominal    no - no      Colors
 Ordinal    yes     uneven   no      Star ratings
 Interval   yes     equal    no      °C
 Ratio      yes     equal    yes     Height (cm)
@@ -115,7 +115,7 @@ Get ready to master NumPy through these exciting topics:
    - Matrix operations
    - Mathematical tools
 
-> **Pro Tip:** Understanding data types is crucial because it determines what operations you can perform on your data!
+> **Pro Tip:** Understanding data types is important because it determines what operations you can perform on your data!
 
 ## What You'll Be Able to Do After This Module
 

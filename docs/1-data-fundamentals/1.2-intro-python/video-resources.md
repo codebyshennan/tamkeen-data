@@ -10,7 +10,7 @@ This page is a **curriculum map**, not a substitute for the written lessons. Use
 <iframe width="560" height="315" src="https://www.youtube.com/embed/YYXdXT2l-Gg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*Corey Schafer — Python tutorial for beginners: install and setup*
+*Corey Schafer, Python tutorial for beginners: install and setup*
 
 > **How to Use This Guide:** Each section includes curated videos with specific timestamps. Watch at 1.25x-1.5x speed for efficiency!
 
@@ -253,7 +253,7 @@ This page is a **curriculum map**, not a substitute for the written lessons. Use
 
 **Best Video:** Python for Beginners - Learn Python in 1 Hour
 - Duration: 1:00:00
-- Perfect for: Quick comprehensive overview
+- Perfect for: Quick overview
 - Watch: [Python in 1 Hour](https://www.youtube.com/watch?v=kqtD5dpn9C8)
 
 ---

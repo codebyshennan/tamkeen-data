@@ -1,14 +1,14 @@
 ---
 reading_minutes: 25
 objectives:
-  - "Apply regularized linear models in high-dimensional, noisy settings — credit risk, gene expression, marketing-mix modelling — where plain OLS over-fits."
+  - "Apply regularized linear models in high-dimensional, noisy settings, credit risk, gene expression, marketing-mix modelling, where plain OLS over-fits."
   - "Use Lasso to do feature selection in a real workflow, then retrain a denser model on the kept features."
   - "Calibrate regularization strength against business cost: too much regularization underfits real signal; too little chases noise."
 ---
 
 # Real-World Applications of Regularization
 
-**After this lesson:** you can explain the core ideas in “Real-World Applications of Regularization” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Real-World Applications of Regularization and try the examples in your own notebook.
 
 ## Overview
 
@@ -451,7 +451,7 @@ def engineer_features(data):
       <span class="code-callout__title">Polynomial and Flag</span>
     </div>
     <div class="code-callout__body">
-      <p>Age-squared lets a linear model capture the non-linear age–risk relationship; the binary <code>high_risk</code> flag encodes a conjunction rule (high debt AND low score) as a single interpretable feature.</p>
+      <p>Age-squared lets a linear model capture the non-linear age-risk relationship; the binary <code>high_risk</code> flag encodes a conjunction rule (high debt AND low score) as a single interpretable feature.</p>
     </div>
   </div>
 </aside>
@@ -526,12 +526,12 @@ Now that you understand how regularization is applied in real-world scenarios, y
 
 ## Gotchas
 
-- **`LogisticRegression(penalty='elasticnet')` requires `solver='saga'`** — sklearn raises a `ValueError` if you use the default `lbfgs` solver with `elasticnet` penalty; this is documented but easy to miss, and the error message is not always obvious about the solver constraint.
-- **`C=0.1` in `LogisticRegression` is not the same as `alpha=0.1` in `Ridge`** — logistic regression uses `C = 1/λ`, so `C=0.1` applies strong regularisation (λ=10), while `alpha=0.1` in Ridge/Lasso applies weak regularisation; mixing mental models across these APIs is a common source of accidental under- or over-regularisation.
-- **`predict_disease_risk` calls `scaler.transform` on a fresh patient record using a scaler fitted on training data that is not defined in scope** — the function relies on `scaler` and `model` from an outer scope, which makes it fragile; in practice, bundle the scaler and model in a pipeline or a class to avoid silent scope errors at prediction time.
-- **`analyze_churn_factors` returns signed coefficients, not absolute importances** — features with large negative coefficients (e.g., `contract_length` reducing churn) are equally important as those with large positive ones; sorting by raw coefficient value buries the most protective factors at the bottom of the list unless you sort by `abs(coefficient)`.
-- **`LassoCV` with a fixed feature list will silently break if the feature matrix has different columns at inference time** — the `analyze_climate_factors` function builds a feature list manually but does not enforce column order at prediction time; if a caller passes columns in a different order, predictions will be wrong with no error raised.
-- **`select_best_regularization` compares Ridge, Lasso, and ElasticNet at their default `alpha=1.0` without tuning** — the model selected as "best" in this loop depends entirely on whether the default alpha happens to be near-optimal for each method; a fair comparison requires running `RidgeCV`, `LassoCV`, and `ElasticNetCV` to let each method select its own best alpha.
+- **`LogisticRegression(penalty='elasticnet')` requires `solver='saga'`**: sklearn raises a `ValueError` if you use the default `lbfgs` solver with `elasticnet` penalty; this is documented but easy to miss, and the error message is not always obvious about the solver constraint.
+- **`C=0.1` in `LogisticRegression` is not the same as `alpha=0.1` in `Ridge`**: logistic regression uses `C = 1/λ`, so `C=0.1` applies strong regularisation (λ=10), while `alpha=0.1` in Ridge/Lasso applies weak regularisation; mixing mental models across these APIs is a common source of accidental under- or over-regularisation.
+- **`predict_disease_risk` calls `scaler.transform` on a fresh patient record using a scaler fitted on training data that is not defined in scope**: the function relies on `scaler` and `model` from an outer scope, which makes it fragile; in practice, bundle the scaler and model in a pipeline or a class to avoid silent scope errors at prediction time.
+- **`analyze_churn_factors` returns signed coefficients, not absolute importances**: features with large negative coefficients (e.g., `contract_length` reducing churn) are equally important as those with large positive ones; sorting by raw coefficient value buries the most protective factors at the bottom of the list unless you sort by `abs(coefficient)`.
+- **`LassoCV` with a fixed feature list will silently break if the feature matrix has different columns at inference time**: the `analyze_climate_factors` function builds a feature list manually but does not enforce column order at prediction time; if a caller passes columns in a different order, predictions will be wrong with no error raised.
+- **`select_best_regularization` compares Ridge, Lasso, and ElasticNet at their default `alpha=1.0` without tuning**: the model selected as "best" in this loop depends entirely on whether the default alpha happens to be near-optimal for each method; a fair comparison requires running `RidgeCV`, `LassoCV`, and `ElasticNetCV` to let each method select its own best alpha.
 
 ## Additional Resources
 

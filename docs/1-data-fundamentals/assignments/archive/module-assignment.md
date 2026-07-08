@@ -2,7 +2,7 @@
 
 ## Overview
 
-**Primary outcome:** You check that you can recall core ideas from Module 1—analytics, Python, statistics, NumPy, and pandas—before you move on to data wrangling.
+**Primary outcome:** You check that you can recall core ideas from Module 1 - analytics, Python, statistics, NumPy, and pandas - before you move on to data wrangling.
 
 This assignment is multiple choice (100 points total). Use your notes and the module lessons; it is normal to look up syntax you do not memorize yet.
 
@@ -11,9 +11,9 @@ This assignment is multiple choice (100 points total). Use your notes and the mo
 - You have worked through (or are finishing) the lessons in [Module 1: Data fundamentals](../README.md).
 - You can read Python and pandas snippets at a basic level.
 
-> **Time needed:** About 60–90 minutes for a careful first pass; less if you are reviewing.
+> **Time needed:** About 60-90 minutes for a careful first pass; less if you are reviewing.
 
-> **Stuck on a question?** See the [hints page](./module-assignment-hints.md) — it points you at the relevant lesson section and a way to think about each question, without giving the answer away.
+> **Stuck on a question?** See the [hints page](./module-assignment-hints.md) - it points you at the relevant lesson section and a way to think about each question, without giving the answer away.
 
 ## Part 1: Introduction to Data Analytics (20 points)
 
@@ -639,9 +639,9 @@ Each part is worth 20 points:
 
 ## Common pitfalls
 
-- **Rushing on wording** — Read each stem carefully; two options often sound similar.
-- **Partial study** — Questions span all five areas; skim every submodule once before the quiz.
-- **Leaving blanks** — There is no penalty for guessing on most setups; mark something if unsure.
+- **Rushing on wording**: Read each stem carefully; two options often sound similar.
+- **Partial study**: Questions span all five areas; skim every submodule once before the quiz.
+- **Leaving blanks**: There is no penalty for guessing on most setups; mark something if unsure.
 
 ## Next steps
 

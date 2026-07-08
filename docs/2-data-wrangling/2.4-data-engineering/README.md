@@ -4,7 +4,7 @@
 
 ## Helpful video
 
-DAGs, tasks, and scheduling—conceptual background for ETL-style pipelines.
+DAGs, tasks, and scheduling, conceptual background for ETL-style pipelines.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eeSLDdz-aLg" title="Apache Airflow Tutorial for Beginners" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -16,14 +16,14 @@ DAGs, tasks, and scheduling—conceptual background for ETL-style pipelines.
 
 ## Lesson path (site order)
 
-1. [Data storage](data-storage.md)  
-2. [Data integration](data-integration.md)  
-3. [ETL fundamentals](etl-fundamentals.md)  
-4. [Data engineering project](project.md)  
+1. [Data storage](data-storage.md)
+2. [Data integration](data-integration.md)
+3. [ETL fundamentals](etl-fundamentals.md)
+4. [Data engineering project](project.md)
 
 ## Why this matters
 
-Analysts and scientists depend on **reliable pipelines**: data that arrives on schedule, matches an agreed schema, and can be traced back to a source. Data engineering is the discipline that makes that happen—**extract**, **transform**, **load**, orchestration, and storage choices—so downstream work is reproducible, not heroic.
+Analysts and scientists depend on **reliable pipelines**: data that arrives on schedule, matches an agreed schema, and can be traced back to a source. Data engineering is the discipline that makes that happen-**extract**, **transform**, **load**, orchestration, and storage choices, so downstream work is reproducible, not heroic.
 
 Data engineering is the backbone of modern data-driven organizations: designing, building, and maintaining the systems that collect, store, and serve data at scale. This submodule introduces vocabulary and patterns you will recognize in any modern stack.
 
@@ -34,7 +34,7 @@ By the end of this module, you will be able to:
 1. **Understand Data Engineering and ETL Fundamentals**
    - Master the Extract, Transform, Load (ETL) paradigm
    - Design efficient data workflows
-   - Implement robust error handling
+   - Implement reliable error handling
    - Ensure data quality throughout the pipeline
 
 2. **Design and Implement Data Pipelines**
@@ -265,12 +265,12 @@ Before starting this module, ensure you have:
 
 ## Why Data Engineering?
 
-Data engineering is a critical foundation for modern data-driven organizations. Here's why it's crucial:
+Data engineering is a critical foundation for modern data-driven organizations. Here's why it's important:
 
 1. **Enables Advanced Analytics**
    - **Data Preparation**:
      - Cleanses and standardizes raw data
-     - Implements robust quality frameworks
+     - Implements reliable quality frameworks
      - Creates analysis-ready datasets
      - Maintains data lineage
 
@@ -771,4 +771,4 @@ Airflow is the industry-standard workflow orchestration platform covered in this
 
 Ready to practice your data engineering skills? Head over to the [Module 2 assignment (student version)](../assignments/module-assignment-student.md) to apply what you have learned.
 
-Let's dive into the world of data engineering and learn how to build robust, scalable data pipelines!
+Start with the first exercise.

@@ -17,11 +17,11 @@ Jupyter Notebook is a **free** web-based tool that lets you create documents tha
 
 > **On screen:** Jupyter notebook with a code cell, output, and markdown.
 
-> **Note:** This guide assumes you have Anaconda or **uv** installed. If not, start with the [Anaconda guide](./anaconda.md) or your course’s Python setup materials.
+> **Note:** This guide assumes you have Anaconda or **uv** installed. If not, start with the [Anaconda guide](./anaconda.md) or your course's Python setup materials.
 
 ## Helpful video
 
-Quick start: **Jupyter notebooks in VS Code** (under 4 minutes)—cells, running code, and saving `.ipynb` files. The same notebook ideas apply if you use Jupyter in the browser via Anaconda instead.
+Quick start: **Jupyter notebooks in VS Code** (under 4 minutes), cells, running code, and saving `.ipynb` files. The same notebook ideas apply if you use Jupyter in the browser via Anaconda instead.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/h1sAzPojKMg" title="Get started with Jupyter Notebooks in less than 4 minutes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -58,7 +58,7 @@ A notebook is made up of **cells** - think of them as building blocks. Each cell
 3. **Press Ctrl + Enter** (runs the cell but stays on the same cell)
 4. **Press Alt + Enter** (runs the cell and creates a new cell below)
 
-> **Tip:** The most common way is **Shift + Enter** — it runs your code and automatically moves to the next cell!
+> **Tip:** The most common way is **Shift + Enter**, it runs your code and automatically moves to the next cell!
 
 > **On screen:** Toolbar with the Run control highlighted.
 
@@ -70,20 +70,20 @@ Jupyter has two modes, and different shortcuts work in each:
 Press **Esc** to enter command mode. The cell border turns blue.
 
 **Most Useful Shortcuts:**
-- **a** — Insert a new cell **above** the current one
-- **b** — Insert a new cell **below** the current one
-- **d** twice — **Delete** the current cell (press **d** two times)
-- **z** — **Undo** cell deletion
-- **m** — Change cell to **Markdown** (for text/explanations)
-- **y** — Change cell to **Code** (for Python code)
+- **a**: Insert a new cell **above** the current one
+- **b**: Insert a new cell **below** the current one
+- **d** twice, **Delete** the current cell (press **d** two times)
+- **z**: **Undo** cell deletion
+- **m**: Change cell to **Markdown** (for text/explanations)
+- **y**: Change cell to **Code** (for Python code)
 
 ### Edit Mode (Green Border)
 Press **Enter** to enter edit mode. The cell border turns green.
 
 **Most Useful Shortcuts:**
-- **Shift + Enter** — Run cell and move to next
-- **Ctrl + Enter** — Run cell (stay on same cell)
-- **Alt + Enter** — Run cell and create new cell below
+- **Shift + Enter**: Run cell and move to next
+- **Ctrl + Enter**: Run cell (stay on same cell)
+- **Alt + Enter**: Run cell and create new cell below
 
 > **Tip:** Don't try to memorize all shortcuts at once! Start with **Shift + Enter** to run cells, and **a** / **b** to add cells. You'll learn the rest as you go.
 
@@ -138,13 +138,13 @@ jupyter notebook
 
 ## Gotchas
 
-- **Kernel ≠ terminal Python** — if `import pandas` fails inside a notebook but works in your terminal, the notebook kernel is bound to a different environment. Fix: in the browser, go to **Kernel → Change kernel** and select the env where pandas is installed. In VS Code, use the kernel picker (top-right of the notebook).
-- **Cells run out of order produce wrong results** — Jupyter keeps state; if you run cell 10 before cell 2, variables from earlier cells may be missing or stale. Use **Kernel → Restart & Run All** after any significant reordering.
-- **`%matplotlib inline` must be run before plotting** — place the magic command in a cell you run early in the session. Defining it in a cell that hasn't been run yet won't have any effect.
-- **uv + Jupyter: kernel not found** — Jupyter must be installed *inside* the `.venv` you activated (`uv pip install jupyter`), and you may also need `uv pip install ipykernel`. Otherwise the browser shows "No kernel" or uses system Python.
-- **Anaconda: Jupyter not in your course env** — if you installed Jupyter into `base` but run code in `dsai`, packages installed in `dsai` won't be importable. Fix: `conda activate dsai && conda install jupyter`, or register the env as a kernel: `python -m ipykernel install --user --name=dsai`.
-- **Notebooks auto-save checkpoints, not the file** — `.ipynb_checkpoints/` contains auto-saves, but the main file is only updated on explicit save (Ctrl+S / Cmd+S). Save before closing the browser tab.
-- **Browser tab vs VS Code** — opening the same `.ipynb` in both simultaneously can cause conflicting saves or two different kernels. Stick to one interface per file.
+- **Kernel ≠ terminal Python**: if `import pandas` fails inside a notebook but works in your terminal, the notebook kernel is bound to a different environment. Fix: in the browser, go to **Kernel → Change kernel** and select the env where pandas is installed. In VS Code, use the kernel picker (top-right of the notebook).
+- **Cells run out of order produce wrong results**: Jupyter keeps state; if you run cell 10 before cell 2, variables from earlier cells may be missing or stale. Use **Kernel → Restart & Run All** after any significant reordering.
+- **`%matplotlib inline` must be run before plotting**: place the magic command in a cell you run early in the session. Defining it in a cell that hasn't been run yet won't have any effect.
+- **uv + Jupyter: kernel not found**: Jupyter must be installed *inside* the `.venv` you activated (`uv pip install jupyter`), and you may also need `uv pip install ipykernel`. Otherwise the browser shows "No kernel" or uses system Python.
+- **Anaconda: Jupyter not in your course env**: if you installed Jupyter into `base` but run code in `dsai`, packages installed in `dsai` won't be importable. Fix: `conda activate dsai && conda install jupyter`, or register the env as a kernel: `python -m ipykernel install --user --name=dsai`.
+- **Notebooks auto-save checkpoints, not the file**: `.ipynb_checkpoints/` contains auto-saves, but the main file is only updated on explicit save (Ctrl+S / Cmd+S). Save before closing the browser tab.
+- **Browser tab vs VS Code**: opening the same `.ipynb` in both simultaneously can cause conflicting saves or two different kernels. Stick to one interface per file.
 
 
 

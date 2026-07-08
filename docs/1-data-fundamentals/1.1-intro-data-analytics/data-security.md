@@ -1,6 +1,6 @@
 # Data Security: Protecting Data Assets
 
-**After this lesson:** You can describe the core goals of data security (confidentiality, integrity, availability), explain defense in depth at a high level, and read the code sketches as common patterns—not as copy-paste production systems.
+**After this lesson:** You can describe the core goals of data security (confidentiality, integrity, availability), explain defense in depth at a high level, and read the code sketches as common patterns, not as copy-paste production systems.
 
 ## Introduction
 
@@ -12,16 +12,16 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/inWWhTJ_0Zs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*IBM Technology — Cybersecurity basics*
+*IBM Technology, Cybersecurity basics*
 
 ## Goals and layers
 
 ### Protection goals (CIA + N)
 
-- **Confidentiality** — Only **authorized** people and systems can read the data. Leaks and oversharing break confidentiality.
-- **Integrity** — Data is **accurate and complete**; changes are intentional and detectable.
-- **Availability** — Authorized users can use systems and data when needed. Attacks and outages can target availability.
-- **Non-repudiation** — Actors cannot plausibly deny sending or receiving data; important for audits and contracts.
+- **Confidentiality**: Only **authorized** people and systems can read the data. Leaks and oversharing break confidentiality.
+- **Integrity**: Data is **accurate and complete**; changes are intentional and detectable.
+- **Availability**: Authorized users can use systems and data when needed. Attacks and outages can target availability.
+- **Non-repudiation**: Actors cannot plausibly deny sending or receiving data; important for audits and contracts.
 
 {% include mermaid-diagram.html src="1-data-fundamentals/1.1-intro-data-analytics/diagrams/data-security-1.mmd" %}
 
@@ -31,10 +31,10 @@
 
 Teams stack controls so one failure does not mean total failure:
 
-1. **Physical** — Facilities, badges, environmental controls. Still relevant in the cloud: providers run the buildings.
-2. **Network** — Firewalls, segmentation, VPNs, intrusion detection—so one compromised laptop does not mean the whole network.
-3. **Application** — **Authentication** (identity), **authorization** (permissions), **input validation** (block malicious input), **session management** (tokens, expiry).
-4. **Data** — **Encryption**, **access controls**, **masking** in lower environments, **secure deletion** when data must go away.
+1. **Physical**: Facilities, badges, environmental controls. Still relevant in the cloud: providers run the buildings.
+2. **Network**: Firewalls, segmentation, VPNs, intrusion detection, so one compromised laptop does not mean the whole network.
+3. **Application**: **Authentication** (identity), **authorization** (permissions), **input validation** (block malicious input), **session management** (tokens, expiry).
+4. **Data**: **Encryption**, **access controls**, **masking** in lower environments, **secure deletion** when data must go away.
 
 ## Implementation guide (illustrative)
 
@@ -120,7 +120,7 @@ class EncryptionService:
       <span class="code-callout__title">Hybrid Encryption</span>
     </div>
     <div class="code-callout__body">
-      <p>Combines both: generates a random session key, encrypts the data symmetrically, then encrypts the session key asymmetrically—the pattern used in TLS.</p>
+      <p>Combines both: generates a random session key, encrypts the data symmetrically, then encrypts the session key asymmetrically, the pattern used in TLS.</p>
     </div>
   </div>
 </aside>
@@ -130,7 +130,7 @@ class EncryptionService:
 
 ### Access control
 
-**RBAC** assigns permissions to **roles** (analyst, admin), then assigns users to roles. **ABAC** (below) can depend on attributes (department, clearance, resource sensitivity) and context (time, location)—more flexible, more complex to configure.
+**RBAC** assigns permissions to **roles** (analyst, admin), then assigns users to roles. **ABAC** (below) can depend on attributes (department, clearance, resource sensitivity) and context (time, location), more flexible, more complex to configure.
 
 #### Role-based access control (RBAC)
 
@@ -188,7 +188,7 @@ class RBACSystem:
       <span class="code-callout__title">State Stores</span>
     </div>
     <div class="code-callout__body">
-      <p>Three dicts hold roles, user-to-role assignments, and permissions—the minimal state for an RBAC system.</p>
+      <p>Three dicts hold roles, user-to-role assignments, and permissions, the minimal state for an RBAC system.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="8-14" data-tint="2">
@@ -384,7 +384,7 @@ class SecurityMonitor:
       <span class="code-callout__title">Monitoring Loop</span>
     </div>
     <div class="code-callout__body">
-      <p>Continuously collects metrics, analyses for threats, and dispatches handlers—sleeping between cycles to avoid CPU saturation.</p>
+      <p>Continuously collects metrics, analyses for threats, and dispatches handlers, sleeping between cycles to avoid CPU saturation.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="21-31" data-tint="3">
@@ -530,7 +530,7 @@ class SecurityBaseline:
       <span class="code-callout__title">Hardening Steps</span>
     </div>
     <div class="code-callout__body">
-      <p>Applies secure configuration, installs updates, and sets access controls—the three pillars of a security baseline—in a defined order.</p>
+      <p>Applies secure configuration, installs updates, and sets access controls, the three pillars of a security baseline, in a defined order.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="18-21" data-tint="3">
@@ -602,9 +602,9 @@ class SecurityAssessment:
 
 ## Common pitfalls
 
-- **Shared passwords or API keys in notebooks** — Treat secrets like production; use environment variables and rotation.
-- **Over-relying on perimeter security** — Insider risk and misconfigured buckets matter; layer controls and audit access.
-- **Ignoring updates** — Unpatched dependencies are a common breach path.
+- **Shared passwords or API keys in notebooks**: Treat secrets like production; use environment variables and rotation.
+- **Over-relying on perimeter security**: Insider risk and misconfigured buckets matter; layer controls and audit access.
+- **Ignoring updates**: Unpatched dependencies are a common breach path.
 
 ## Next Steps
 
@@ -614,7 +614,7 @@ Continue to [Workflow concepts](./workflow-concepts.md). Then start [Introductio
 
 ### Going deeper on your own
 
-Specialists go further with **SIEM** tooling, **zero trust** architectures, **threat hunting**, and formal programs (ISO 27001, SOC 2, NIST CSF). For this course, focus on **hygiene**: least privilege, patching, secrets management, and logging—most incidents still exploit basics.
+Specialists go further with **SIEM** tooling, **zero trust** architectures, **threat hunting**, and formal programs (ISO 27001, SOC 2, NIST CSF). For this course, focus on **hygiene**: least privilege, patching, secrets management, and logging, most incidents still exploit basics.
 
 ## Additional resources
 

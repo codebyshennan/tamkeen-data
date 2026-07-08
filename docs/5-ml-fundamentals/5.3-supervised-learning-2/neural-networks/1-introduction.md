@@ -8,11 +8,11 @@ objectives:
 
 # Introduction to Neural Networks
 
-**After this lesson:** you can explain the core ideas in “Introduction to Neural Networks” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Introduction to Neural Networks and try the examples in your own notebook.
 
 ## Overview
 
-**Neural networks** stack differentiable layers of units; training adjusts **weights** to reduce a **loss** (usually via gradient-based optimization—see [backpropagation](../backpropagation/1-introduction.md)). **Prerequisites:** vectors and matrices from Module 1; [5.3 README](../README.md).
+**Neural networks** stack differentiable layers of units; training adjusts **weights** to reduce a **loss** (usually via gradient-based optimization, see [backpropagation](../backpropagation/1-introduction.md)). **Prerequisites:** vectors and matrices from Module 1; [5.3 README](../README.md).
 
 
 ## Welcome to Neural Networks
@@ -101,7 +101,7 @@ Neural networks power many of the technologies we use daily:
 
 {% include mermaid-diagram.html src="5-ml-fundamentals/5.3-supervised-learning-2/neural-networks/diagrams/1-introduction-2.mmd" %}
 
-*Use this as a starting heuristic—real projects often combine types (e.g. CNN + LSTM for video captioning).*
+*Use this as a starting heuristic, real projects often combine types (e.g. CNN + LSTM for video captioning).*
 
 ## Common Mistakes to Avoid
 
@@ -123,7 +123,7 @@ Neural networks power many of the technologies we use daily:
 
 ## Getting Started with Code
 
-Let's build a simple neural network to recognize handwritten digits. This is like teaching a computer to read numbers!
+Build a simple neural network to recognize handwritten digits. This is like teaching a computer to read numbers!
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -173,7 +173,7 @@ print(f"Test accuracy: {test_acc:.3f}")
       <span class="code-callout__title">Load and Normalize MNIST</span>
     </div>
     <div class="code-callout__body">
-      <p>Load the 70,000 handwritten digit images from Keras; divide by 255 to scale pixel values from [0, 255] to [0, 1] — neural networks train faster and more stably on normalized inputs.</p>
+      <p>Load the 70,000 handwritten digit images from Keras; divide by 255 to scale pixel values from [0, 255] to [0, 1], neural networks train faster and more stably on normalized inputs.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="12-26" data-tint="2">
@@ -199,11 +199,11 @@ print(f"Test accuracy: {test_acc:.3f}")
 
 ## Gotchas
 
-- **Using `sparse_categorical_crossentropy` when labels are already one-hot encoded** — The MNIST example uses integer labels (0–9) with `sparse_categorical_crossentropy`, which is correct. If you one-hot encode the labels first and then use this loss, Keras interprets each label as a class index into a 10-class one-hot vector — producing wrong shapes or silent misclassification.
-- **Normalizing test data with statistics from the test set** — The example divides by 255 (a known constant), which is safe. For other datasets, always compute mean and std from the training split only and apply those same values to test data. Fitting normalization on test data leaks information and inflates reported accuracy.
-- **Choosing network type based on familiarity, not problem type** — The type selector diagram is a starting heuristic. A common mistake is defaulting to a feedforward network for all tasks: CNNs are necessary for spatial data (images), and LSTMs/Transformers are necessary for sequences. Using a dense-only network on images treats each pixel as independent and loses spatial structure.
-- **Epoch count of 5 is rarely enough for production** — The introductory MNIST example trains for 5 epochs and achieves decent accuracy on a well-conditioned dataset. For harder datasets or transfer-learning fine-tuning, 5 epochs will underfit. Always monitor validation loss and let early stopping determine the right epoch count.
-- **Assuming more hidden neurons always helps** — Adding neurons increases capacity but also training time, memory, and overfitting risk. Neural networks for small datasets (< 1000 examples per class) need regularization (dropout, L2) far more than they need wider layers.
+- **Using `sparse_categorical_crossentropy` when labels are already one-hot encoded**: The MNIST example uses integer labels (0-9) with `sparse_categorical_crossentropy`, which is correct. If you one-hot encode the labels first and then use this loss, Keras interprets each label as a class index into a 10-class one-hot vector, producing wrong shapes or silent misclassification.
+- **Normalizing test data with statistics from the test set**: The example divides by 255 (a known constant), which is safe. For other datasets, always compute mean and std from the training split only and apply those same values to test data. Fitting normalization on test data leaks information and inflates reported accuracy.
+- **Choosing network type based on familiarity, not problem type**: The type selector diagram is a starting heuristic. A common mistake is defaulting to a feedforward network for all tasks: CNNs are necessary for spatial data (images), and LSTMs/Transformers are necessary for sequences. Using a dense-only network on images treats each pixel as independent and loses spatial structure.
+- **Epoch count of 5 is rarely enough for production**: The introductory MNIST example trains for 5 epochs and achieves decent accuracy on a well-conditioned dataset. For harder datasets or transfer-learning fine-tuning, 5 epochs will underfit. Always monitor validation loss and let early stopping determine the right epoch count.
+- **Assuming more hidden neurons always helps**: Adding neurons increases capacity but also training time, memory, and overfitting risk. Neural networks for small datasets (< 1000 examples per class) need regularization (dropout, L2) far more than they need wider layers.
 
 ## Additional Resources
 

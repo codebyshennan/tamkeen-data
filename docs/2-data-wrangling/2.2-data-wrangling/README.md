@@ -4,7 +4,7 @@
 
 ## Helpful video
 
-Pandas DataFrames in a quick walkthrough—useful for cleaning and wrangling.
+Pandas DataFrames in a quick walkthrough, useful for cleaning and wrangling.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/m1_33jhhiLE" title="Learn PANDAS in 5 minutes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -16,11 +16,11 @@ Pandas DataFrames in a quick walkthrough—useful for cleaning and wrangling.
 
 ## Lesson path (site order)
 
-1. [Data quality](data-quality.md)  
-2. [Missing values](missing-values.md)  
-3. [Outliers](outliers.md)  
-4. [Transformations](transformations.md)  
-5. [Wrangling project](project.md)  
+1. [Data quality](data-quality.md)
+2. [Missing values](missing-values.md)
+3. [Outliers](outliers.md)
+4. [Transformations](transformations.md)
+5. [Wrangling project](project.md)
 
 ## Why this matters
 
@@ -30,7 +30,7 @@ Data wrangling, also known as data munging or data preprocessing, is the art and
 
 ## The Data Wrangling Journey
 
-Let's explore the essential steps in transforming messy data into analysis-ready datasets:
+we will look at the essential steps in transforming messy data into analysis-ready datasets:
 
 {% include mermaid-diagram.html src="2-data-wrangling/2.2-data-wrangling/diagrams/README-1.mmd" %}
 
@@ -68,7 +68,7 @@ After completing this module, you will be able to:
 
 ## Real-World Example: E-commerce Data Analysis
 
-Let's walk through a comprehensive example of wrangling e-commerce data. This example demonstrates common challenges and solutions you'll encounter in real-world data science projects:
+Walk through a comprehensive example of wrangling e-commerce data. This example demonstrates common challenges and solutions you'll encounter in real-world data science projects:
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -166,7 +166,7 @@ Data validation passed!
       <span class="code-callout__title">Handle Missing Values</span>
     </div>
     <div class="code-callout__body">
-      <p>Fill numeric columns with their median and categorical columns with their mode—two safe default strategies.</p>
+      <p>Fill numeric columns with their median and categorical columns with their mode, two safe default strategies.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="24-32" data-tint="4">
@@ -220,7 +220,7 @@ Data validation passed!
 
 ## Common Data Quality Issues and Solutions
 
-Here's a comprehensive guide to handling common data quality challenges:
+Here's a guide to handling common data quality challenges:
 
 | Issue | Detection Method | Solution Strategy | Real-World Example |
 |-------|-----------------|-------------------|-------------------|
@@ -335,7 +335,7 @@ encoded shape: (120, 10)
       <span class="code-callout__title">One-Hot Encoding</span>
     </div>
     <div class="code-callout__body">
-      <p>Use <code>pd.get_dummies</code> to expand the <code>category</code> column into binary indicator columns—one new column per unique category value.</p>
+      <p>Use <code>pd.get_dummies</code> to expand the <code>category</code> column into binary indicator columns, one new column per unique category value.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="7-13" data-tint="2">
@@ -366,7 +366,7 @@ encoded shape: (120, 10)
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight python %}
       # Data cleaning log
       cleaning_log = {
@@ -394,15 +394,15 @@ encoded shape: (120, 10)
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight python %}
       def clean_dataset(df):
           """
           Clean dataset using standard procedures
-          
+
           Parameters:
           df (pandas.DataFrame): Input dataframe
-          
+
           Returns:
           pandas.DataFrame: Cleaned dataframe
           """
@@ -439,7 +439,7 @@ encoded shape: (120, 10)
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight python %}
       def validate_transformation(original_df, transformed_df):
           """Validate data transformation results"""
@@ -467,7 +467,7 @@ encoded shape: (120, 10)
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight python %}
       # Optimize datatypes
       def optimize_dtypes(df):
@@ -496,12 +496,12 @@ encoded shape: (120, 10)
 
    <div class="code-explainer" data-code-explainer>
    <div class="code-explainer__code">
-   
+
    {% highlight python %}
       # Use vectorized operations
       # Good:
       df['total'] = df['price'] * df['quantity']
-      
+
       # Avoid:
       # for i in range(len(df)):
       #     df.loc[i, 'total'] = df.loc[i, 'price'] * df.loc[i, 'quantity']
@@ -527,7 +527,7 @@ encoded shape: (120, 10)
 
   <div class="code-explainer" data-code-explainer>
   <div class="code-explainer__code">
-  
+
   {% highlight bash %}
     pip install pandas numpy scikit-learn matplotlib seaborn
   {% endhighlight %}
@@ -570,4 +570,4 @@ encoded shape: (120, 10)
 
 Ready to practice your data wrangling skills? Head over to the [Module 2 assignment (student version)](../assignments/module-assignment-student.md) to apply what you have learned.
 
-Let's transform messy data into analysis-ready datasets!
+Transform messy data into analysis-ready datasets!

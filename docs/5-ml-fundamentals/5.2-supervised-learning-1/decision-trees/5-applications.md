@@ -7,11 +7,11 @@ objectives:
 ---
 # Real-World Applications of Decision Trees
 
-**After this lesson:** you can explain the core ideas in “Real-World Applications of Decision Trees” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Real-World Applications of Decision Trees and try the examples in your own notebook.
 
 ## Overview
 
-Applies decision trees to **explainable** domains—rules stakeholders can audit—plus pointers on metrics and validation.
+Applies decision trees to **explainable** domains, rules stakeholders can audit, plus pointers on metrics and validation.
 
 
 ## 1. Medical Diagnosis System
@@ -71,7 +71,7 @@ plot_tree(
 plt.title('Medical Diagnosis Decision Tree')
 plt.show()
 
-# Let's diagnose a new patient
+# Diagnose a new patient
 new_patient = np.array([[2, 2, 2, 1, 1]])  # Moderate symptoms across the board, normal BP
 prediction = diagnosis_model.predict(new_patient)
 probabilities = diagnosis_model.predict_proba(new_patient)
@@ -182,7 +182,7 @@ In this example, we:
 4. Diagnose a new patient and show the confidence in each possible disease
 5. Explain the reasoning behind the diagnosis by tracing the decision path
 
-The decision tree makes medical diagnosis transparent, which is crucial for healthcare applications where doctors need to understand the reasoning behind AI recommendations.
+The decision tree makes medical diagnosis transparent, which is important for healthcare applications where doctors need to understand the reasoning behind AI recommendations.
 
 ## 2. Credit Risk Assessment
 
@@ -270,7 +270,7 @@ plt.title('Feature Importance for Credit Risk Assessment')
 plt.tight_layout()
 plt.show()
 
-# Let's assess a new applicant
+# Assess a new applicant
 new_applicant = np.array([[55, 705, 6, 0.25, 0]])  # New loan applicant
 approval_prob = credit_model.predict_proba(new_applicant)[0, 1]  # Probability of approval
 print(f"\nNew applicant approval probability: {approval_prob:.2f}")
@@ -321,7 +321,7 @@ print(f"Risk assessment: {risk}")
       <span class="code-callout__title">Risk-Band Scoring</span>
     </div>
     <div class="code-callout__body">
-      <p>Approval probability from <code>predict_proba</code> is mapped to Low/Medium/High risk tiers—a simple but auditable business rule.</p>
+      <p>Approval probability from <code>predict_proba</code> is mapped to Low/Medium/High risk tiers, a simple but auditable business rule.</p>
     </div>
   </div>
 </aside>
@@ -377,7 +377,7 @@ This approach provides transparency in lending decisions, which is important for
 
 ## 3. Customer Churn Prediction
 
-Businesses use decision trees to predict which customers might leave. Let's build a simple churn prediction system:
+Businesses use decision trees to predict which customers might leave. Build a simple churn prediction system:
 
 #### Churn model with retention rules from churn probability
 
@@ -568,9 +568,9 @@ By predicting which customers are at risk of leaving, businesses can take proact
 
 ## 4. Fraud Detection
 
-Let's create a simple fraud-detection pattern using decision trees. The data is synthetic, and the thresholds are for teaching precision/recall tradeoffs rather than production fraud operations:
+Create a simple fraud-detection pattern using decision trees. The data is synthetic, and the thresholds are for teaching precision/recall tradeoffs rather than production fraud operations:
 
-#### Fraud: `class_weight`, precision–recall curve, and threshold tuning
+#### Fraud: `class_weight`, precision-recall curve, and threshold tuning
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -946,18 +946,18 @@ Predictive maintenance helps companies avoid costly downtime while also preventi
 
 ## Gotchas
 
-- **Interpreting 100% classification report scores on 5-row test sets** — the churn, credit, and fraud examples all show perfect metrics on 5-sample test sets; these numbers are statistically meaningless and purely a consequence of the tiny toy datasets; never cite them as evidence of real-world performance.
-- **Using accuracy as the primary metric for fraud detection** — the fraud model achieves a good accuracy score even before `class_weight` tuning, because predicting "legitimate" for every transaction gives high accuracy on imbalanced data; always use precision, recall, and the precision-recall curve for fraud and other rare-event problems.
-- **Applying `decision_path` reasoning verbatim to stakeholders as if it were a rule system** — the diagnosis example maps ordinal integers back to text labels (`"none"`, `"mild"`) to produce human-readable reasoning, but the underlying splits are learned from only 8 patients; the narrative looks authoritative but is not clinically validated.
-- **Setting `class_weight={0: 1, 1: 5}` without business justification** — the 5x fraud weight is illustrative; the correct multiplier depends on the relative cost of a false negative (missed fraud) vs a false positive (blocked legitimate transaction), which is a business decision, not a modelling default.
-- **Choosing the optimal threshold from `precision_recall_curve` on the same test set you evaluate on** — the fraud example computes `best_threshold` by maximising F1 on `y_probs` from the test set; this is threshold-shopping on the test set and produces optimistic F1 estimates; use a separate validation set or cross-validated threshold selection.
-- **Treating feature importance from a single churn tree as a stable business insight** — the churn example shows `Contract Length: 1.0` and all other features at `0.0`; on a 15-row dataset, this is almost certainly a data artefact from the toy data rather than a genuine signal, and presenting it to business stakeholders as "only contract length matters" would be misleading.
+- **Interpreting 100% classification report scores on 5-row test sets**: the churn, credit, and fraud examples all show perfect metrics on 5-sample test sets; these numbers are statistically meaningless and purely a consequence of the tiny toy datasets; never cite them as evidence of real-world performance.
+- **Using accuracy as the primary metric for fraud detection**: the fraud model achieves a good accuracy score even before `class_weight` tuning, because predicting "legitimate" for every transaction gives high accuracy on imbalanced data; always use precision, recall, and the precision-recall curve for fraud and other rare-event problems.
+- **Applying `decision_path` reasoning verbatim to stakeholders as if it were a rule system**: the diagnosis example maps ordinal integers back to text labels (`"none"`, `"mild"`) to produce human-readable reasoning, but the underlying splits are learned from only 8 patients; the narrative looks authoritative but is not clinically validated.
+- **Setting `class_weight={0: 1, 1: 5}` without business justification**: the 5x fraud weight is illustrative; the correct multiplier depends on the relative cost of a false negative (missed fraud) vs a false positive (blocked legitimate transaction), which is a business decision, not a modelling default.
+- **Choosing the optimal threshold from `precision_recall_curve` on the same test set you evaluate on**: the fraud example computes `best_threshold` by maximising F1 on `y_probs` from the test set; this is threshold-shopping on the test set and produces optimistic F1 estimates; use a separate validation set or cross-validated threshold selection.
+- **Treating feature importance from a single churn tree as a stable business insight**: the churn example shows `Contract Length: 1.0` and all other features at `0.0`; on a 15-row dataset, this is almost certainly a data artefact from the toy data rather than a genuine signal, and presenting it to business stakeholders as "only contract length matters" would be misleading.
 
 ## Best Practices for Real-World Applications
 
 1. **Data Quality**
    - Clean and preprocess data carefully
-   - Handle missing values appropriately 
+   - Handle missing values appropriately
    - Deal with outliers
 
 2. **Model Validation**

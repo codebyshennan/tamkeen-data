@@ -3,16 +3,16 @@ reading_minutes: 15
 objectives:
   - "Define regularization as a penalty on model complexity that trades a little bias for less variance, tying back to the bias-variance picture from 5.1."
   - "Distinguish L1 (Lasso, sparsity), L2 (Ridge, shrinkage), and Elastic Net (a mix), and pick which to use for a given problem."
-  - "Recognise other regularizers in everyday use — tree depth limits, early stopping, dropout — as the same idea applied to different model families."
+  - "Recognise other regularizers in everyday use, tree depth limits, early stopping, dropout, as the same idea applied to different model families."
 ---
 
 # Introduction to Regularization
 
-**After this lesson:** you can explain the core ideas in “Introduction to Regularization” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Introduction to Regularization and try the examples in your own notebook.
 
 ## Overview
 
-**Regularization** adds a penalty on model complexity (L1/L2 on weights, tree depth limits, dropout, etc.) so the fit does not chase noise. **Prerequisites:** [bias–variance](../../5.1-intro-to-ml/bias-variance.md); linear models from earlier modules help when reading Ridge/Lasso forms in [2-math-foundation.md](2-math-foundation.md).
+**Regularization** adds a penalty on model complexity (L1/L2 on weights, tree depth limits, dropout, etc.) so the fit does not chase noise. **Prerequisites:** [bias-variance](../../5.1-intro-to-ml/bias-variance.md); linear models from earlier modules help when reading Ridge/Lasso forms in [2-math-foundation.md](2-math-foundation.md).
 
 Imagine you're learning to ride a bicycle. At first, you might use training wheels to prevent falling over. Regularization in machine learning works similarly - it's like adding training wheels to your model to prevent it from "falling over" (overfitting) when making predictions.
 
@@ -95,7 +95,7 @@ Elastic Net is like having both a strict teacher and a gentle coach - it combine
 Features:
 
 - Combines benefits of L1 and L2 (like having both structure and flexibility)
-- More robust than pure L1 or L2 (like having multiple safety nets)
+- More reliable than pure L1 or L2 (like having multiple safety nets)
 - Good for highly correlated features (like managing a team with overlapping skills)
 
 ## When to Use Regularization?
@@ -112,7 +112,7 @@ Features:
 
 - Very small datasets (like trying to learn from just a few examples)
 - Already simple models (like using training wheels on a tricycle)
-- When interpretability is crucial (like needing to explain decisions to stakeholders)
+- When interpretability is important (like needing to explain decisions to stakeholders)
 - When you need exact zero coefficients (L2) (like needing to completely eliminate certain factors)
 
 ## Advantages and Limitations
@@ -157,11 +157,11 @@ Ready to dive deeper? Continue to [Mathematical Foundation](2-math-foundation.md
 
 ## Gotchas
 
-- **L1 and L2 behave very differently when features are correlated** — Lasso tends to arbitrarily pick one of a correlated pair and zero out the rest, which can make results unstable across datasets; Ridge distributes the penalty evenly across correlated features, so if correlated predictors are all meaningful, Ridge is the safer default.
-- **λ in sklearn is inverted: larger `alpha` means stronger regularization** — this matches the math in this lesson; but in sklearn's `LogisticRegression`, the parameter is `C = 1/λ`, so a *larger* `C` means *less* regularization — the opposite direction from `Ridge`, `Lasso`, and `ElasticNet`.
-- **Regularization without feature scaling penalizes unfairly** — the penalty is applied to raw coefficient magnitudes; a feature measured in thousands (e.g., income) will have a naturally smaller coefficient than one measured in single digits (e.g., number of bedrooms), receiving a smaller penalty and effectively being regularized less.
-- **"L1 performs feature selection" is only true at the right λ** — at very small λ, Lasso barely shrinks any coefficient; at very large λ, it zeros out everything; feature selection only happens in the middle range, which requires careful tuning rather than using an arbitrary default.
-- **Elastic Net has two hyperparameters to tune, not one** — both `alpha` (overall penalty strength) and `l1_ratio` (L1/L2 mix) need to be optimised together, making the search space 2D; a grid over only `alpha` while fixing `l1_ratio` may miss the best combination entirely.
+- **L1 and L2 behave very differently when features are correlated**: Lasso tends to arbitrarily pick one of a correlated pair and zero out the rest, which can make results unstable across datasets; Ridge distributes the penalty evenly across correlated features, so if correlated predictors are all meaningful, Ridge is the safer default.
+- **λ in sklearn is inverted: larger `alpha` means stronger regularization**: this matches the math in this lesson; but in sklearn's `LogisticRegression`, the parameter is `C = 1/λ`, so a *larger* `C` means *less* regularization, the opposite direction from `Ridge`, `Lasso`, and `ElasticNet`.
+- **Regularization without feature scaling penalizes unfairly**: the penalty is applied to raw coefficient magnitudes; a feature measured in thousands (e.g., income) will have a naturally smaller coefficient than one measured in single digits (e.g., number of bedrooms), receiving a smaller penalty and effectively being regularized less.
+- **"L1 performs feature selection" is only true at the right λ**: at very small λ, Lasso barely shrinks any coefficient; at very large λ, it zeros out everything; feature selection only happens in the middle range, which requires careful tuning rather than using an arbitrary default.
+- **Elastic Net has two hyperparameters to tune, not one**: both `alpha` (overall penalty strength) and `l1_ratio` (L1/L2 mix) need to be optimised together, making the search space 2D; a grid over only `alpha` while fixing `l1_ratio` may miss the best combination entirely.
 
 ## Additional Resources
 

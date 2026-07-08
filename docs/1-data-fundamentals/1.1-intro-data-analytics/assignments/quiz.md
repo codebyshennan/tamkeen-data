@@ -2,7 +2,7 @@
 
 > **Submit your work on Skills Union →** <https://skillsu.com/member/assessment>
 
-Try each question closed-book first. Click **Show hint** if you get stuck — hints point you at the relevant lesson section and how to think about the question, without naming the answer.
+Try each question closed-book first. Click **Show hint** if you get stuck, hints point you at the relevant lesson section and how to think about the question, without naming the answer.
 
 ## Questions
 
@@ -16,7 +16,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Data Collection](../data-collection.md) — opening section.
+- **Where:** [Data Collection](../data-collection.md), opening section.
 - **Think:** Three options describe what you do **after** data exists; one describes the step that **produces** data.
 
 </details>
@@ -31,7 +31,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Data Collection](../data-collection.md) — "First/second/third-party data".
+- **Where:** [Data Collection](../data-collection.md), "First/second/third-party data".
 - **Think:** Ask "who collected it, and from whom?". First-party = data you collected yourself from people interacting with you. Reports bought from elsewhere are someone else's collection.
 
 </details>
@@ -47,7 +47,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <summary>Show hint</summary>
 
 - **Where:** [Data Privacy](../data-privacy.md).
-- **Think:** Two options look almost identical. Read carefully — "Privacy" vs "Protection" and "General" vs "Global" both matter. (Heads-up: this question has a known typo in the source; two options may be identical word-for-word.)
+- **Think:** Two options look almost identical. Read carefully, "Privacy" vs "Protection" and "General" vs "Global" both matter. (Heads-up: this question has a known typo in the source; two options may be identical word-for-word.)
 
 </details>
 
@@ -61,8 +61,8 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Data Collection](../data-collection.md) — "Quantitative vs qualitative methods".
-- **Think:** Qualitative = words, meaning, context — not numbers. Which option produces a transcript, not a table?
+- **Where:** [Data Collection](../data-collection.md), "Quantitative vs qualitative methods".
+- **Think:** Qualitative = words, meaning, context, not numbers. Which option produces a transcript, not a table?
 
 </details>
 
@@ -76,7 +76,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Workflow Concepts](../workflow-concepts.md) — analytics ladder.
+- **Where:** [Workflow Concepts](../workflow-concepts.md), analytics ladder.
 - **Think:** The four analytics types map to **tenses**: past (descriptive), why-past (diagnostic), **future** (predictive), what-to-do (prescriptive). Pick the future-tense verb.
 
 </details>
@@ -106,7 +106,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Data Security](../data-security.md) — CIA triad.
+- **Where:** [Data Security](../data-security.md), CIA triad.
 - **Think:** Three options (minimization, purpose limitation, portability) are **privacy** principles from data-protection laws. One is straight from the classic security triad (Confidentiality / Integrity / Availability).
 
 </details>
@@ -136,7 +136,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Workflow Concepts](../workflow-concepts.md) — process stages.
+- **Where:** [Workflow Concepts](../workflow-concepts.md), process stages.
 - **Think:** Each stage has a job. Removing missing-value rows is housekeeping on the data itself, before exploration or analysis. The verb you want is in the stage name.
 
 </details>
@@ -151,7 +151,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Workflow Concepts](../workflow-concepts.md) — cleaning step.
+- **Where:** [Workflow Concepts](../workflow-concepts.md), cleaning step.
 - **Think:** "Cleaning" implies fixing what's broken or wrong. Three options describe other workflow steps; one matches the literal meaning of the word.
 
 </details>
@@ -166,8 +166,8 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Workflow Concepts](../workflow-concepts.md) — feature engineering.
-- **Think:** "Feature engineering" literally means **constructing** features from existing data — derived columns, ratios, encodings. Not collection or cleaning.
+- **Where:** [Workflow Concepts](../workflow-concepts.md), feature engineering.
+- **Think:** "Feature engineering" literally means **constructing** features from existing data, derived columns, ratios, encodings. Not collection or cleaning.
 
 </details>
 
@@ -181,8 +181,8 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Data Collection](../data-collection.md) — primary vs secondary.
-- **Think:** Secondary = data **someone else** collected and shared. Three options (surveys, interviews, observations) are all primary — you'd be collecting fresh data yourself.
+- **Where:** [Data Collection](../data-collection.md), primary vs secondary.
+- **Think:** Secondary = data **someone else** collected and shared. Three options (surveys, interviews, observations) are all primary, you'd be collecting fresh data yourself.
 
 </details>
 
@@ -196,7 +196,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [README](../README.md) — DSLC overview.
+- **Where:** [README](../README.md), DSLC overview.
 - **Think:** The lifecycle isn't *one* step (collection, cleaning, viz). It's the whole arc of **building and delivering** a data product end-to-end.
 
 </details>
@@ -211,7 +211,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Data Privacy](../data-privacy.md) — GDPR principles.
+- **Where:** [Data Privacy](../data-privacy.md), GDPR principles.
 - **Think:** "Minimize" = collect the **least** you need. The opposite-meaning options (collect as much as possible, store indefinitely) are distractors.
 
 </details>
@@ -226,7 +226,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Data Security](../data-security.md) — threats.
+- **Where:** [Data Security](../data-security.md), threats.
 - **Think:** Three options (encryption, backup, access control) are **defenses**. One is an attacker tool.
 
 </details>
@@ -241,7 +241,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Workflow Concepts](../workflow-concepts.md) — iterative process.
+- **Where:** [Workflow Concepts](../workflow-concepts.md), iterative process.
 - **Think:** Feedback in any process means using outcomes to **improve next time**. It's not a raw step like collecting or cleaning.
 
 </details>
@@ -256,7 +256,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Data Collection](../data-collection.md) — party taxonomy.
+- **Where:** [Data Collection](../data-collection.md), party taxonomy.
 - **Think:** Third-party = bought or licensed from an external **broker** who collected from many sources. CRM and surveys are first-party; "data from aggregators" maps right to the definition.
 
 </details>
@@ -271,7 +271,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Data Collection](../data-collection.md) — automated collection.
+- **Where:** [Data Collection](../data-collection.md), automated collection.
 - **Think:** Why would you scrape rather than survey? Because scrapers can run programmatically and pull **lots of data fast** without human effort.
 
 </details>
@@ -286,7 +286,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Data Privacy](../data-privacy.md) — data subject rights.
+- **Where:** [Data Privacy](../data-privacy.md), data subject rights.
 - **Think:** "Erasure" = deletion. The other options describe other GDPR rights (access, rectification, portability). Match the verb.
 
 </details>
@@ -301,7 +301,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Workflow Concepts](../workflow-concepts.md) — communication step.
-- **Think:** Viz is the **output** step — turning analysis into something a human reader can absorb. Not collection, not cleaning, not analysis itself.
+- **Where:** [Workflow Concepts](../workflow-concepts.md), communication step.
+- **Think:** Viz is the **output** step, turning analysis into something a human reader can absorb. Not collection, not cleaning, not analysis itself.
 
 </details>

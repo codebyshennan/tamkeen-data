@@ -9,15 +9,15 @@ objectives:
 
 # Population vs Sample: The Foundation of Statistical Inference
 
-**After this lesson:** you can explain the core ideas in “Population vs Sample: The Foundation of Statistical Inference” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Population vs Sample: The Foundation of Statistical Inference and try the examples in your own notebook.
 
 ## Overview
 
-This lesson fixes vocabulary: **population** (what you want to learn about), **sample** (what you actually measure), and **how you pick** the sample. Every later idea—intervals, tests, models—assumes you can say clearly what was and was not included in the data.
+This lesson fixes vocabulary: **population** (what you want to learn about), **sample** (what you actually measure), and **how you pick** the sample. Every later idea, intervals, tests, models, assumes you can say clearly what was and was not included in the data.
 
 ## Why this matters
 
-If “population” and “sample” are vague, every number you compute is easy to misread. This lesson matters because:
+If "population" and "sample" are vague, every number you compute is easy to misread. This lesson matters because:
 
 - You need precise **population** and **sample** language before confidence intervals, tests, or models.
 - Sampling choices affect whether conclusions generalize beyond the rows in your spreadsheet.
@@ -158,7 +158,7 @@ Difference: 0.51
       <span class="code-callout__title">The population</span>
     </div>
     <div class="code-callout__body">
-      <p>10,000 production items with target mean 100 — stand-in for "everything we made this batch."</p>
+      <p>10,000 production items with target mean 100, stand-in for "everything we made this batch."</p>
     </div>
   </div>
   <div class="code-callout" data-lines="8" data-tint="2">
@@ -167,7 +167,7 @@ Difference: 0.51
       <span class="code-callout__title">The sample</span>
     </div>
     <div class="code-callout__body">
-      <p>Draw 100 items without replacement — what we'd actually inspect on the line.</p>
+      <p>Draw 100 items without replacement, what we'd actually inspect on the line.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="34-36" data-tint="3">
@@ -191,7 +191,7 @@ Difference: 0.51
 
 The statistical equivalent of drawing names from a hat - every member has an equal chance.
 
-**SRS on IDs with scatter “strip” plot**
+**SRS on IDs with scatter "strip" plot**
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -231,7 +231,7 @@ Random sample IDs: [664 919 241 476 610]...
       <span class="code-callout__title">The draw</span>
     </div>
     <div class="code-callout__body">
-      <p><code>replace=False</code> means each ID can appear at most once in the sample — the defining feature of SRS without replacement.</p>
+      <p><code>replace=False</code> means each ID can appear at most once in the sample, the defining feature of SRS without replacement.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="7-8" data-tint="2">
@@ -478,7 +478,7 @@ sample = cluster_sample(population, 5, 20)
 
 ### 1. Selection bias
 
-Selection bias means the people or units in your data **do not represent** the population you claim to study. The sample is often easy to reach, willing to respond, or already filtered by another process—none of which guarantees a fair picture of everyone.
+Selection bias means the people or units in your data **do not represent** the population you claim to study. The sample is often easy to reach, willing to respond, or already filtered by another process, none of which guarantees a fair picture of everyone.
 
 #### Example
 
@@ -487,7 +487,7 @@ Selection bias means the people or units in your data **do not represent** the p
 
 ### 2. Sampling error
 
-Even with a perfect design, **random samples differ** from each other and from the population. That unavoidable wiggle is sampling error—not a mistake, but variation you account for with intervals, standard errors, and larger *n* when feasible.
+Even with a perfect design, **random samples differ** from each other and from the population. That unavoidable wiggle is sampling error, not a mistake, but variation you account for with intervals, standard errors, and larger *n* when feasible.
 
 **SE curve vs sample size**
 
@@ -553,12 +553,12 @@ Sample size 1000: Standard Error = 0.47
 
 ### 3. Coverage error
 
-Coverage error happens when your **sampling frame**—the list or mechanism you draw from—does not cover the full population. You might still run a clean random draw *within* the frame and still miss entire groups.
+Coverage error happens when your **sampling frame**-the list or mechanism you draw from, does not cover the full population. You might still run a clean random draw *within* the frame and still miss entire groups.
 
 #### Example
 
-- **Risky:** Email-only survey for “all customers” when many never gave an email.
-- **Better:** Combine contact modes where appropriate, document who is excluded, or narrow the claim to “customers with email on file.”
+- **Risky:** Email-only survey for "all customers" when many never gave an email.
+- **Better:** Combine contact modes where appropriate, document who is excluded, or narrow the claim to "customers with email on file."
 
 ## Sample Size Determination
 
@@ -584,7 +584,7 @@ n = \dfrac{z^2 \cdot p(1-p)}{\text{MOE}^2}
 |---|---|---|
 | \\(n\\) | The sample size you want to find | "How many people do I need to survey?" |
 | \\(z\\) | A confidence-level multiplier | 1.96 for 95% confidence; 2.58 for 99% |
-| \\(p\\) | A guess of the true proportion | If unsure, use 0.5 — it's the worst case (largest \\(n\\)), so it's the safe default |
+| \\(p\\) | A guess of the true proportion | If unsure, use 0.5, it's the worst case (largest \\(n\\)), so it's the safe default |
 | \\(p(1-p)\\) | How spread out a yes/no answer is | Biggest at \\(p = 0.5\\) (= 0.25); smallest near 0 or 1 |
 | MOE | Margin of error you can live with | 0.05 means "answer within ±5 percentage points" |
 
@@ -598,7 +598,7 @@ Plug in \\(z = 1.96\\), \\(p = 0.5\\) (no prior info, use the safe default), MOE
 n = \dfrac{1.96^2 \times 0.5 \times 0.5}{0.05^2} = \dfrac{0.9604}{0.0025} \approx 384
 \\]
 
-So **about 384 users** is the answer. That's why so many polls and A/B tests target around 400 respondents — it's the magic number for "±5% at 95% confidence."
+So **about 384 users** is the answer. That's why so many polls and A/B tests target around 400 respondents, it's the magic number for "±5% at 95% confidence."
 
 ### What happens if you tighten the requirements?
 
@@ -611,7 +611,7 @@ Each tightening multiplies the cost:
 | MOE = 1% | 9,604 | **25× more data** for fivefold tighter precision |
 | Confidence 99% (z = 2.58), MOE = 5% | 666 | Higher confidence → more data |
 
-**The key insight:** because the formula has MOE *squared* in the denominator, halving the MOE quadruples the cost. This is the same square-root rule we keep meeting — it's expensive to be very precise.
+**The key insight:** because the formula has MOE *squared* in the denominator, halving the MOE quadruples the cost. This is the same square-root rule we keep meeting, it's expensive to be very precise.
 
 ### When can you use a smaller sample?
 
@@ -703,7 +703,7 @@ Try each question on your own first, then expand the answer to check.
 <details>
 <summary>Show answer</summary>
 
-Crime patterns are very uneven across a city — some neighborhoods have 50× the crime rate of others. A simple random sample of, say, 1,000 incidents could easily miss low-frequency but important categories (e.g., a few high-impact violent crimes scattered across boroughs).
+Crime patterns are very uneven across a city, some neighborhoods have 50× the crime rate of others. A simple random sample of, say, 1,000 incidents could easily miss low-frequency but important categories (e.g., a few high-impact violent crimes scattered across boroughs).
 
 A better strategy is **stratified sampling** by neighborhood and crime type so that every stratum is represented even when its rate is low. This keeps the sample size manageable while making sure the picture is complete.
 
@@ -720,9 +720,9 @@ Income is highly variable and very right-skewed (a few people earn enormous amou
 
 1. **Stratify by region** (urban / rural / specific provinces). Income varies sharply by location, so stratifying makes the overall estimate much more precise.
 2. **Stratify by employment status / income bracket** if you have rough prior data. Sampling proportionally to the variance in each stratum (Neyman allocation) further reduces the SE.
-3. **Choose \\(n\\) per stratum** large enough that the CLT applies inside each stratum — for highly skewed income data this means \\(n \geq 50\text{–}100\\) per stratum.
+3. **Choose \\(n\\) per stratum** large enough that the CLT applies inside each stratum, for highly skewed income data this means \\(n \geq 50\text{-}100\\) per stratum.
 4. **Use cluster sampling within strata** if you must visit households in person (cost matters). Pick random villages/blocks, then survey every household in the chosen cluster.
-5. **Report the median** alongside the mean — for skewed distributions like income, the median is often more informative.
+5. **Report the median** alongside the mean, for skewed distributions like income, the median is often more informative.
 
 </details>
 
@@ -733,12 +733,12 @@ Income is highly variable and very right-skewed (a few people earn enormous amou
 
 **Cluster sampling**, with the school (or classroom) as the cluster.
 
-- It's usually impractical to randomly assign individual *students* to teaching methods across many schools — schools and classrooms have to coordinate. So you assign *whole classrooms or schools* to control vs. treatment.
+- It's usually impractical to randomly assign individual *students* to teaching methods across many schools, schools and classrooms have to coordinate. So you assign *whole classrooms or schools* to control vs. treatment.
 - Then sample a random subset of schools to study, and inside each chosen school survey every student.
 
 If you want to *guarantee* representation across school types (urban / rural / public / private / size), combine cluster with **stratified sampling**: stratify by school type, then cluster-sample within each stratum.
 
-Note that cluster sampling reduces cost but *increases* the standard error compared to SRS of the same size — students in the same school are more alike than two random students, so each cluster contributes less independent information.
+Note that cluster sampling reduces cost but *increases* the standard error compared to SRS of the same size, students in the same school are more alike than two random students, so each cluster contributes less independent information.
 
 </details>
 
@@ -765,9 +765,9 @@ Larger samples → smaller **standard error** → narrower **confidence interval
 |---|---|---|---|
 | **Simple random sampling (SRS)** | Easy to understand; unbiased if frame is good | Can miss small subgroups; needs full frame list | Population is small/medium and you have a clean list |
 | **Stratified sampling** | Guarantees representation per group; smaller SE for the overall estimate | Need clear strata definitions; need to know strata sizes | Subgroups differ a lot (region, age, income brackets) |
-| **Systematic sampling** | Easy to do in person (e.g., "every 10th customer"); no need for random number generator | Vulnerable to *periodicity bias* — if the list has a hidden cycle, you'll lock onto one phase | List has no obvious order related to the outcome |
+| **Systematic sampling** | Easy to do in person (e.g., "every 10th customer"); no need for random number generator | Vulnerable to *periodicity bias*, if the list has a hidden cycle, you'll lock onto one phase | List has no obvious order related to the outcome |
 | **Cluster sampling** | Much cheaper when units are far apart geographically | Higher SE per unit (cluster members are similar) | Travel/cost is a major constraint (door-to-door surveys, school studies) |
-| **Convenience sampling** *(non-probability — included for contrast)* | Cheap and fast | Strong selection bias; not generalizable | Pilot tests, scoping work — not for production estimates |
+| **Convenience sampling** *(non-probability, included for contrast)* | Cheap and fast | Strong selection bias; not generalizable | Pilot tests, scoping work, not for production estimates |
 
 </details>
 
@@ -783,12 +783,12 @@ Larger samples → smaller **standard error** → narrower **confidence interval
 
 ## Gotchas
 
-- **Confusing the sampling frame with the population** — the sampling frame is the *list or mechanism you actually draw from* (e.g., email addresses on file), which often covers only a subset of the true population (e.g., all customers). Conclusions drawn from the sample technically apply only to the frame, not the full population.
-- **`systematic_sample` can lock onto periodic patterns** — `population[start::interval]` is convenient, but if the frame's order is correlated with the outcome (e.g., every 12th row is December data), the stride will silently sample only one phase of that cycle. Shuffle the frame or switch to SRS when periodicity is plausible.
-- **Equating stratified sampling with representative sampling** — stratified sampling guarantees minimum representation per stratum, but if the strata themselves are defined incorrectly or key segments are omitted entirely, the combined sample can still be badly biased.
-- **Assuming a larger sample fixes a biased design** — collecting 100,000 responses from a convenience sample does not reduce selection bias; it only reduces sampling error. A small, well-drawn probability sample is more valuable than a massive but non-representative one.
-- **Using the Wald sample-size formula (`n = z²·p(1-p)/MOE²`) when p is near 0 or 1** — the normal approximation behind this formula breaks down for extreme proportions. For rare events (p < 0.1 or p > 0.9) the formula tends to underestimate the required n; use exact or Wilson-based planning equations instead.
-- **Forgetting to set a random seed before sharing code** — sampling code without a fixed seed produces different splits every run, making results unreproducible. Always set `np.random.seed` (or pass `rng=np.random.default_rng(seed)`) in any sampling demo you share or submit.
+- **Confusing the sampling frame with the population**: the sampling frame is the *list or mechanism you actually draw from* (e.g., email addresses on file), which often covers only a subset of the true population (e.g., all customers). Conclusions drawn from the sample technically apply only to the frame, not the full population.
+- **`systematic_sample` can lock onto periodic patterns**: `population[start::interval]` is convenient, but if the frame's order is correlated with the outcome (e.g., every 12th row is December data), the stride will silently sample only one phase of that cycle. Shuffle the frame or switch to SRS when periodicity is plausible.
+- **Equating stratified sampling with representative sampling**: stratified sampling guarantees minimum representation per stratum, but if the strata themselves are defined incorrectly or key segments are omitted entirely, the combined sample can still be badly biased.
+- **Assuming a larger sample fixes a biased design**: collecting 100,000 responses from a convenience sample does not reduce selection bias; it only reduces sampling error. A small, well-drawn probability sample is more valuable than a massive but non-representative one.
+- **Using the Wald sample-size formula (`n = z²·p(1-p)/MOE²`) when p is near 0 or 1**: the normal approximation behind this formula breaks down for extreme proportions. For rare events (p < 0.1 or p > 0.9) the formula tends to underestimate the required n; use exact or Wilson-based planning equations instead.
+- **Forgetting to set a random seed before sharing code**: sampling code without a fixed seed produces different splits every run, making results unreproducible. Always set `np.random.seed` (or pass `rng=np.random.default_rng(seed)`) in any sampling demo you share or submit.
 
 ## Next steps
 

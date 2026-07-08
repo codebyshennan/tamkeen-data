@@ -26,11 +26,11 @@ By the end of this module, you will be able to:
 
 ## Topics Covered
 
-1. [Logistic Regression](./logistic-regression.md) — binary classification, the sigmoid link, odds ratios, ROC.
-2. [Polynomial Regression](./polynomial-regression.md) — non-linear relationships via feature transformation.
-3. [Model Selection](./model-selection.md) — cross-validation, feature selection, AIC/BIC-style thinking.
-4. [Regularization](./regularization.md) — Ridge, Lasso, Elastic Net, and hyperparameter tuning.
-5. [Model Interpretation](./model-interpretation.md) — coefficients, partial dependence, SHAP-style explanations.
+1. [Logistic Regression](./logistic-regression.md), binary classification, the sigmoid link, odds ratios, ROC.
+2. [Polynomial Regression](./polynomial-regression.md), non-linear relationships via feature transformation.
+3. [Model Selection](./model-selection.md), cross-validation, feature selection, AIC/BIC-style thinking.
+4. [Regularization](./regularization.md), Ridge, Lasso, Elastic Net, and hyperparameter tuning.
+5. [Model Interpretation](./model-interpretation.md), coefficients, partial dependence, SHAP-style explanations.
 
 ## Prerequisites
 

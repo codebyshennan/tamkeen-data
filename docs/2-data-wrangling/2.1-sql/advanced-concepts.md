@@ -10,15 +10,15 @@ High-level introduction to SQL and relational databases.
 
 ## Overview
 
-**Prerequisites:** Solid comfort with [Joins](joins.md) and [Aggregations](aggregations.md). This lesson goes deeper than day-one analyst SQL—take breaks and run examples in your own database.
+**Prerequisites:** Solid comfort with [Joins](joins.md) and [Aggregations](aggregations.md). This lesson goes deeper than day-one analyst SQL, take breaks and run examples in your own database.
 
 > **Time needed:** 90+ minutes; split across sessions if needed.
 
-> **Warning:** Dialects differ (PostgreSQL vs SQL Server vs BigQuery). Treat advanced snippets as patterns and check your engine’s docs for exact syntax.
+> **Warning:** Dialects differ (PostgreSQL vs SQL Server vs BigQuery). Treat advanced snippets as patterns and check your engine's docs for exact syntax.
 
 ## Why this matters
 
-Readable SQL survives code review and production debugging. **CTEs** break big questions into named steps; **window functions** answer “rank within group” without self-joins; **EXPLAIN** shows whether the database is scanning whole tables or using indexes. Together, these are the bridge from “it runs” to “it runs efficiently.”
+Readable SQL survives code review and production debugging. **CTEs** break big questions into named steps; **window functions** answer "rank within group" without self-joins; **EXPLAIN** shows whether the database is scanning whole tables or using indexes. Together, these are the bridge from "it runs" to "it runs efficiently."
 
 ## Introduction to Advanced SQL
 
@@ -40,7 +40,7 @@ Applications often store nested payloads (orders with line items, flexible attri
 
 {% highlight sql %}
 -- JSON creation and manipulation
-SELECT 
+SELECT
     order_id,
     jsonb_build_object(
         'customer', customer_name,
@@ -61,7 +61,7 @@ FROM orders o
 JOIN customers c ON o.customer_id = c.customer_id;
 
 -- JSON querying
-SELECT 
+SELECT
     order_id,
     order_details -> 'customer' as customer,
     jsonb_array_length(order_details -> 'items') as item_count,
@@ -79,7 +79,7 @@ FROM order_details_json;
       <span class="code-callout__title">Build a nested JSON object from relational data</span>
     </div>
     <div class="code-callout__body">
-      <p><code>jsonb_build_object</code> assembles key-value pairs into a JSONB object. The nested <code>jsonb_agg(jsonb_build_object(…))</code> correlated subquery aggregates all line items for each order into a JSON array under the <code>'items'</code> key—turning a 1:many relationship into a single document per order.</p>
+      <p><code>jsonb_build_object</code> assembles key-value pairs into a JSONB object. The nested <code>jsonb_agg(jsonb_build_object(…))</code> correlated subquery aggregates all line items for each order into a JSON array under the <code>'items'</code> key, turning a 1:many relationship into a single document per order.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="23-32" data-tint="2">
@@ -102,29 +102,29 @@ FROM order_details_json;
 {% highlight sql %}
 -- Create search vectors
 CREATE INDEX idx_products_search ON products USING gin(
-    to_tsvector('english', 
-        coalesce(name,'') || ' ' || 
-        coalesce(description,'') || ' ' || 
+    to_tsvector('english',
+        coalesce(name,'') || ' ' ||
+        coalesce(description,'') || ' ' ||
         coalesce(category,'')
     )
 );
 
 -- Perform search with ranking
-SELECT 
+SELECT
     name,
     description,
     ts_rank(
-        to_tsvector('english', 
-            coalesce(name,'') || ' ' || 
-            coalesce(description,'') || ' ' || 
+        to_tsvector('english',
+            coalesce(name,'') || ' ' ||
+            coalesce(description,'') || ' ' ||
             coalesce(category,'')
         ),
         plainto_tsquery('english', 'search term')
     ) as relevance
 FROM products
-WHERE to_tsvector('english', 
-    coalesce(name,'') || ' ' || 
-    coalesce(description,'') || ' ' || 
+WHERE to_tsvector('english',
+    coalesce(name,'') || ' ' ||
+    coalesce(description,'') || ' ' ||
     coalesce(category,'')
 ) @@ plainto_tsquery('english', 'search term')
 ORDER BY relevance DESC;
@@ -146,7 +146,7 @@ ORDER BY relevance DESC;
       <span class="code-callout__title">Search with relevance ranking using ts_rank</span>
     </div>
     <div class="code-callout__body">
-      <p><code>plainto_tsquery</code> turns a plain search string into a tsquery. The <code>@@</code> operator filters rows whose tsvector matches the query. <code>ts_rank</code> scores each match by how many times terms appear and how prominently—results are ordered by relevance descending.</p>
+      <p><code>plainto_tsquery</code> turns a plain search string into a tsquery. The <code>@@</code> operator filters rows whose tsvector matches the query. <code>ts_rank</code> scores each match by how many times terms appear and how prominently, results are ordered by relevance descending.</p>
     </div>
   </div>
 </aside>
@@ -161,7 +161,7 @@ ORDER BY relevance DESC;
 -- Employee hierarchy
 WITH RECURSIVE employee_hierarchy AS (
     -- Base case: top-level employees
-    SELECT 
+    SELECT
         employee_id,
         name,
         manager_id,
@@ -169,11 +169,11 @@ WITH RECURSIVE employee_hierarchy AS (
         ARRAY[name] as path
     FROM employees
     WHERE manager_id IS NULL
-    
+
     UNION ALL
-    
+
     -- Recursive case: employees with managers
-    SELECT 
+    SELECT
         e.employee_id,
         e.name,
         e.manager_id,
@@ -182,7 +182,7 @@ WITH RECURSIVE employee_hierarchy AS (
     FROM employees e
     JOIN employee_hierarchy eh ON e.manager_id = eh.employee_id
 )
-SELECT 
+SELECT
     level,
     lpad(' ', (level-1)*2) || name as employee,
     array_to_string(path, ' -> ') as hierarchy_path
@@ -220,28 +220,28 @@ ORDER BY path;
 <div class="code-explainer__code">
 
 {% highlight sql %}
-SELECT 
+SELECT
     date,
     amount,
     -- Different frame specifications
     SUM(amount) OVER (
         ORDER BY date
-        ROWS BETWEEN 
-            UNBOUNDED PRECEDING 
+        ROWS BETWEEN
+            UNBOUNDED PRECEDING
             AND CURRENT ROW
     ) as cumulative_sum,
-    
+
     AVG(amount) OVER (
         ORDER BY date
-        ROWS BETWEEN 
-            3 PRECEDING 
+        ROWS BETWEEN
+            3 PRECEDING
             AND 1 FOLLOWING
     ) as centered_average,
-    
+
     SUM(amount) OVER (
         ORDER BY date
-        RANGE BETWEEN 
-            INTERVAL '1 month' PRECEDING 
+        RANGE BETWEEN
+            INTERVAL '1 month' PRECEDING
             AND CURRENT ROW
     ) as rolling_monthly_sum
 FROM transactions;
@@ -254,7 +254,7 @@ FROM transactions;
       <span class="code-callout__title">ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW: cumulative sum</span>
     </div>
     <div class="code-callout__body">
-      <p><code>ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW</code> expands the frame from the first row up to and including the current row—a standard running total. Every new row adds to the previous cumulative sum.</p>
+      <p><code>ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW</code> expands the frame from the first row up to and including the current row, a standard running total. Every new row adds to the previous cumulative sum.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="14-25" data-tint="2">
@@ -263,7 +263,7 @@ FROM transactions;
       <span class="code-callout__title">Centered average and rolling monthly sum with different frame modes</span>
     </div>
     <div class="code-callout__body">
-      <p><code>ROWS BETWEEN 3 PRECEDING AND 1 FOLLOWING</code> averages the 3 rows before and 1 row after the current row—a centered moving average. <code>RANGE BETWEEN INTERVAL '1 month' PRECEDING</code> uses value-based framing on date rather than row counts, summing all transactions within the past calendar month.</p>
+      <p><code>ROWS BETWEEN 3 PRECEDING AND 1 FOLLOWING</code> averages the 3 rows before and 1 row after the current row, a centered moving average. <code>RANGE BETWEEN INTERVAL '1 month' PRECEDING</code> uses value-based framing on date rather than row counts, summing all transactions within the past calendar month.</p>
     </div>
   </div>
 </aside>
@@ -275,7 +275,7 @@ FROM transactions;
 <div class="code-explainer__code">
 
 {% highlight sql %}
-SELECT 
+SELECT
     category,
     product_name,
     price,
@@ -283,16 +283,16 @@ SELECT
     RANK() OVER w1 as price_rank,
     DENSE_RANK() OVER w1 as dense_rank,
     ROW_NUMBER() OVER w1 as row_num,
-    
+
     -- Statistics within category
     AVG(price) OVER w2 as avg_price,
     price - AVG(price) OVER w2 as price_diff,
-    
+
     -- Percentiles within category
     NTILE(4) OVER w1 as price_quartile,
     PERCENT_RANK() OVER w1 as price_percentile
 FROM products
-WINDOW 
+WINDOW
     w1 as (PARTITION BY category ORDER BY price DESC),
     w2 as (PARTITION BY category);
 {% endhighlight %}
@@ -313,7 +313,7 @@ WINDOW
       <span class="code-callout__title">Statistics and percentile functions use a second window w2</span>
     </div>
     <div class="code-callout__body">
-      <p><code>w2</code> partitions by category without an ORDER BY—it aggregates over the entire category group rather than a cumulative frame. <code>price - AVG(price) OVER w2</code> shows each product's deviation from its category average. <code>NTILE(4)</code> and <code>PERCENT_RANK()</code> use <code>w1</code> to assign price quartiles and percentile positions within category.</p>
+      <p><code>w2</code> partitions by category without an ORDER BY, it aggregates over the entire category group rather than a cumulative frame. <code>price - AVG(price) OVER w2</code> shows each product's deviation from its category average. <code>NTILE(4)</code> and <code>PERCENT_RANK()</code> use <code>w1</code> to assign price quartiles and percentile positions within category.</p>
     </div>
   </div>
 </aside>
@@ -327,14 +327,14 @@ WINDOW
 <div class="code-explainer__code">
 
 {% highlight sql %}
-SELECT 
+SELECT
     c.customer_name,
     recent_orders.order_id,
     recent_orders.order_date,
     recent_orders.amount
 FROM customers c
 CROSS JOIN LATERAL (
-    SELECT 
+    SELECT
         order_id,
         order_date,
         total_amount as amount
@@ -361,7 +361,7 @@ CROSS JOIN LATERAL (
       <span class="code-callout__title">LATERAL subquery: top-3 orders per customer</span>
     </div>
     <div class="code-callout__body">
-      <p>The subquery references <code>c.customer_id</code> from the outer <code>FROM customers c</code>—that's what makes it a lateral join. It runs once per customer row, returning that customer's 3 most recent orders. This is cleaner and often faster than a window-function approach when a hard per-group row limit is needed.</p>
+      <p>The subquery references <code>c.customer_id</code> from the outer <code>FROM customers c</code>-that's what makes it a lateral join. It runs once per customer row, returning that customer's 3 most recent orders. This is cleaner and often faster than a window-function approach when a hard per-group row limit is needed.</p>
     </div>
   </div>
 </aside>
@@ -375,7 +375,7 @@ CROSS JOIN LATERAL (
 {% highlight sql %}
 -- Complex set operations
 (
-    SELECT 
+    SELECT
         'Current' as period,
         category,
         SUM(amount) as total_sales
@@ -385,17 +385,17 @@ CROSS JOIN LATERAL (
 )
 UNION ALL
 (
-    SELECT 
+    SELECT
         'Previous' as period,
         category,
         SUM(amount) as total_sales
     FROM sales
-    WHERE 
+    WHERE
         date >= CURRENT_DATE - INTERVAL '2 months' AND
         date < CURRENT_DATE - INTERVAL '1 month'
     GROUP BY category
 )
-ORDER BY 
+ORDER BY
     category,
     period DESC;
 {% endhighlight %}
@@ -485,7 +485,7 @@ COMMIT;
       <span class="code-callout__title">Deduct stock and roll back to savepoint on failure</span>
     </div>
     <div class="code-callout__body">
-      <p>The UPDATE deducts quantity but only if stock is sufficient (<code>stock_quantity &gt;= order_quantity</code> in the WHERE). <code>IF NOT FOUND</code> detects that no row was updated—meaning insufficient stock—and rolls back to <code>order_start</code> before raising an exception.</p>
+      <p>The UPDATE deducts quantity but only if stock is sufficient (<code>stock_quantity &gt;= order_quantity</code> in the WHERE). <code>IF NOT FOUND</code> detects that no row was updated, meaning insufficient stock, and rolls back to <code>order_start</code> before raising an exception.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="23-37" data-tint="3">
@@ -519,21 +519,21 @@ BEGIN
     IF p_items IS NULL OR jsonb_array_length(p_items) = 0 THEN
         RAISE EXCEPTION 'Order must contain at least one item';
     END IF;
-    
+
     -- Start transaction
     BEGIN
         -- Create order
         INSERT INTO orders (customer_id, order_date, status)
         VALUES (p_customer_id, CURRENT_TIMESTAMP, 'pending')
         RETURNING order_id INTO v_order_id;
-        
+
         -- Process items
         FOR v_item IN SELECT * FROM jsonb_array_elements(p_items)
         LOOP
             -- Add order item
             BEGIN
                 INSERT INTO order_items (
-                    order_id, 
+                    order_id,
                     product_id,
                     quantity,
                     price
@@ -552,18 +552,18 @@ BEGIN
                     RAISE EXCEPTION 'Invalid quantity or price for product %',
                         (v_item->>'product_id');
             END;
-            
+
             -- Update total
-            v_total := v_total + 
+            v_total := v_total +
                 ((v_item->>'quantity')::INT * (v_item->>'price')::DECIMAL);
         END LOOP;
-        
+
         -- Update order total
-        UPDATE orders 
+        UPDATE orders
         SET total_amount = v_total,
             status = 'confirmed'
         WHERE order_id = v_order_id;
-        
+
         RETURN v_order_id;
     EXCEPTION
         WHEN OTHERS THEN
@@ -580,7 +580,7 @@ $$ LANGUAGE plpgsql;
       <span class="code-callout__title">Function signature, variables, and input validation</span>
     </div>
     <div class="code-callout__body">
-      <p>The function accepts a customer ID and a JSONB array of items and returns the new order ID. The DECLARE block initializes loop and total variables. An early guard raises an exception immediately if the items array is NULL or empty—fail fast before any writes.</p>
+      <p>The function accepts a customer ID and a JSONB array of items and returns the new order ID. The DECLARE block initializes loop and total variables. An early guard raises an exception immediately if the items array is NULL or empty, fail fast before any writes.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="14-26" data-tint="2">
@@ -607,7 +607,7 @@ $$ LANGUAGE plpgsql;
       <span class="code-callout__title">Accumulate total, update order, and handle outer exceptions</span>
     </div>
     <div class="code-callout__body">
-      <p>After each item is inserted the running total is accumulated. After the loop, the order is updated with the final total and status <code>'confirmed'</code>. The outer <code>WHEN OTHERS</code> handler wraps all remaining errors—converting any unexpected exception into a clear <code>'Order processing failed: …'</code> message.</p>
+      <p>After each item is inserted the running total is accumulated. After the loop, the order is updated with the final total and status <code>'confirmed'</code>. The outer <code>WHEN OTHERS</code> handler wraps all remaining errors, converting any unexpected exception into a clear <code>'Order processing failed: …'</code> message.</p>
     </div>
   </div>
 </aside>
@@ -622,7 +622,7 @@ $$ LANGUAGE plpgsql;
 
 {% highlight sql %}
 WITH user_journey AS (
-    SELECT 
+    SELECT
         u.user_id,
         u.email,
         COUNT(DISTINCT CASE WHEN e.event_type = 'view' THEN e.product_id END) as products_viewed,
@@ -634,17 +634,17 @@ WITH user_journey AS (
     LEFT JOIN events e ON u.user_id = e.user_id
     GROUP BY u.user_id, u.email
 )
-SELECT 
+SELECT
     ROUND(AVG(products_viewed)::numeric, 2) as avg_products_viewed,
     ROUND(AVG(products_carted)::numeric, 2) as avg_products_carted,
     ROUND(AVG(products_purchased)::numeric, 2) as avg_products_purchased,
     ROUND(
-        100.0 * SUM(CASE WHEN products_carted > 0 THEN 1 END) / 
+        100.0 * SUM(CASE WHEN products_carted > 0 THEN 1 END) /
         NULLIF(SUM(CASE WHEN products_viewed > 0 THEN 1 END), 0),
         2
     ) as view_to_cart_rate,
     ROUND(
-        100.0 * SUM(CASE WHEN products_purchased > 0 THEN 1 END) / 
+        100.0 * SUM(CASE WHEN products_purchased > 0 THEN 1 END) /
         NULLIF(SUM(CASE WHEN products_carted > 0 THEN 1 END), 0),
         2
     ) as cart_to_purchase_rate
@@ -658,7 +658,7 @@ FROM user_journey;
       <span class="code-callout__title">CTE: per-user funnel event counts</span>
     </div>
     <div class="code-callout__body">
-      <p>LEFT JOIN keeps all users, including those with no events. <code>COUNT(DISTINCT CASE WHEN event_type = '…' THEN product_id END)</code> counts unique products at each funnel stage (view → cart → purchase) per user in a single pass—no self-joins needed.</p>
+      <p>LEFT JOIN keeps all users, including those with no events. <code>COUNT(DISTINCT CASE WHEN event_type = '…' THEN product_id END)</code> counts unique products at each funnel stage (view → cart → purchase) per user in a single pass, no self-joins needed.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="15-28" data-tint="2">
@@ -680,7 +680,7 @@ FROM user_journey;
 
 {% highlight sql %}
 WITH transaction_metrics AS (
-    SELECT 
+    SELECT
         t.transaction_id,
         t.user_id,
         t.amount,
@@ -689,7 +689,7 @@ WITH transaction_metrics AS (
         -- Time since last transaction
         EXTRACT(EPOCH FROM (
             t.created_at - LAG(t.created_at) OVER (
-                PARTITION BY t.user_id 
+                PARTITION BY t.user_id
                 ORDER BY t.created_at
             )
         ))/60 as minutes_since_last_txn,
@@ -699,27 +699,27 @@ WITH transaction_metrics AS (
         ), 0) as amount_vs_avg,
         -- Number of transactions in last hour
         COUNT(*) OVER (
-            PARTITION BY t.user_id 
-            ORDER BY t.created_at 
-            RANGE BETWEEN INTERVAL '1 hour' PRECEDING 
+            PARTITION BY t.user_id
+            ORDER BY t.created_at
+            RANGE BETWEEN INTERVAL '1 hour' PRECEDING
             AND CURRENT ROW
         ) as txns_last_hour,
         -- Different locations in last 24 hours
         COUNT(DISTINCT location_id) OVER (
-            PARTITION BY t.user_id 
-            ORDER BY t.created_at 
-            RANGE BETWEEN INTERVAL '24 hours' PRECEDING 
+            PARTITION BY t.user_id
+            ORDER BY t.created_at
+            RANGE BETWEEN INTERVAL '24 hours' PRECEDING
             AND CURRENT ROW
         ) as locations_24h
     FROM transactions t
 )
-SELECT 
+SELECT
     transaction_id,
     user_id,
     amount,
     created_at,
-    CASE 
-        WHEN minutes_since_last_txn < 1 
+    CASE
+        WHEN minutes_since_last_txn < 1
         AND amount_vs_avg > 3 THEN 'High Risk: Rapid Large Transaction'
         WHEN txns_last_hour > 10 THEN 'High Risk: High Frequency'
         WHEN locations_24h > 3 THEN 'High Risk: Multiple Locations'
@@ -728,10 +728,10 @@ SELECT
         ELSE 'Low Risk'
     END as risk_assessment
 FROM transaction_metrics
-WHERE 
-    minutes_since_last_txn < 5 
-    OR amount_vs_avg > 3 
-    OR txns_last_hour > 10 
+WHERE
+    minutes_since_last_txn < 5
+    OR amount_vs_avg > 3
+    OR txns_last_hour > 10
     OR locations_24h > 3;
 {% endhighlight %}
 </div>
@@ -742,7 +742,7 @@ WHERE
       <span class="code-callout__title">CTE: compute time-since-last and amount-vs-average per transaction</span>
     </div>
     <div class="code-callout__body">
-      <p><code>LAG(created_at) OVER (PARTITION BY user_id ORDER BY created_at)</code> gets the previous transaction time for the same user. Dividing the epoch difference by 60 converts seconds to minutes. <code>amount / AVG(amount) OVER (PARTITION BY user_id)</code> normalizes each transaction against the user's own historical average—values well above 1 flag unusually large amounts.</p>
+      <p><code>LAG(created_at) OVER (PARTITION BY user_id ORDER BY created_at)</code> gets the previous transaction time for the same user. Dividing the epoch difference by 60 converts seconds to minutes. <code>amount / AVG(amount) OVER (PARTITION BY user_id)</code> normalizes each transaction against the user's own historical average, values well above 1 flag unusually large amounts.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="14-33" data-tint="2">
@@ -751,7 +751,7 @@ WHERE
       <span class="code-callout__title">CTE: transaction frequency and location diversity window functions</span>
     </div>
     <div class="code-callout__body">
-      <p><code>COUNT(*) OVER (… RANGE BETWEEN INTERVAL '1 hour' PRECEDING …)</code> counts all of the user's transactions in the last hour using value-based framing on the timestamp. Similarly, <code>COUNT(DISTINCT location_id)</code> counts unique locations in 24 hours—sudden multi-location activity is a classic fraud signal.</p>
+      <p><code>COUNT(*) OVER (… RANGE BETWEEN INTERVAL '1 hour' PRECEDING …)</code> counts all of the user's transactions in the last hour using value-based framing on the timestamp. Similarly, <code>COUNT(DISTINCT location_id)</code> counts unique locations in 24 hours, sudden multi-location activity is a classic fraud signal.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="35-54" data-tint="3">
@@ -760,7 +760,7 @@ WHERE
       <span class="code-callout__title">Outer query: classify each suspicious transaction by risk tier</span>
     </div>
     <div class="code-callout__body">
-      <p>The CASE expression maps combinations of computed signals to risk labels. The WHERE clause filters to only transactions that triggered at least one signal threshold—excluding low-risk transactions from the result set keeps the output focused on actionable alerts.</p>
+      <p>The CASE expression maps combinations of computed signals to risk labels. The WHERE clause filters to only transactions that triggered at least one signal threshold, excluding low-risk transactions from the result set keeps the output focused on actionable alerts.</p>
     </div>
   </div>
 </aside>
@@ -773,7 +773,7 @@ WHERE
 
 {% highlight sql %}
 WITH inventory_metrics AS (
-    SELECT 
+    SELECT
         p.product_id,
         p.name,
         p.category,
@@ -803,26 +803,26 @@ WITH inventory_metrics AS (
     FROM products p
     LEFT JOIN order_items oi ON p.product_id = oi.product_id
     LEFT JOIN orders o ON oi.order_id = o.order_id
-    GROUP BY 
-        p.product_id, p.name, p.category, 
+    GROUP BY
+        p.product_id, p.name, p.category,
         p.stock_quantity, p.reorder_point, p.lead_time_days
 )
-SELECT 
+SELECT
     name,
     category,
     stock_quantity,
     units_sold_30d,
     ROUND(avg_daily_sales::numeric, 2) as avg_daily_sales,
     ROUND(safety_stock::numeric, 2) as recommended_safety_stock,
-    CASE 
+    CASE
         WHEN stock_quantity = 0 THEN 'Out of Stock'
         WHEN stock_quantity < safety_stock THEN 'Below Safety Stock'
         WHEN stock_quantity < reorder_point THEN 'Reorder Needed'
         ELSE 'Adequate Stock'
     END as stock_status,
     CEIL(
-        CASE 
-            WHEN avg_daily_sales > 0 
+        CASE
+            WHEN avg_daily_sales > 0
             THEN stock_quantity / avg_daily_sales
             ELSE NULL
         END
@@ -836,8 +836,8 @@ SELECT
         0
     ) as suggested_order_quantity
 FROM inventory_metrics
-ORDER BY 
-    CASE 
+ORDER BY
+    CASE
         WHEN stock_quantity = 0 THEN 1
         WHEN stock_quantity < safety_stock THEN 2
         WHEN stock_quantity < reorder_point THEN 3
@@ -889,13 +889,13 @@ ORDER BY
 {% highlight sql %}
 -- Analyze and explain complex queries
 EXPLAIN (ANALYZE, BUFFERS, FORMAT JSON)
-SELECT 
+SELECT
     c.customer_name,
     COUNT(*) as order_count,
     SUM(o.total_amount) as total_spent
 FROM customers c
 JOIN orders o ON c.customer_id = o.customer_id
-WHERE 
+WHERE
     o.order_date >= CURRENT_DATE - INTERVAL '1 year'
     AND o.total_amount > 100
 GROUP BY c.customer_id, c.customer_name
@@ -925,7 +925,7 @@ ORDER BY total_spent DESC;
       <span class="code-callout__title">Key metrics to look for in the output</span>
     </div>
     <div class="code-callout__body">
-      <p>Focus on planning time vs. execution time (high planning time suggests many possible plans), actual vs. planned row counts (large discrepancies indicate stale statistics), and buffer usage (<code>shared_blks_hit</code> vs. <code>shared_blks_read</code>—cache misses drive I/O).</p>
+      <p>Focus on planning time vs. execution time (high planning time suggests many possible plans), actual vs. planned row counts (large discrepancies indicate stale statistics), and buffer usage (<code>shared_blks_hit</code> vs. <code>shared_blks_read</code>-cache misses drive I/O).</p>
     </div>
   </div>
 </aside>
@@ -938,20 +938,20 @@ ORDER BY total_spent DESC;
 
 {% highlight sql %}
 -- Composite indexes for range + equality
-CREATE INDEX idx_orders_customer_date 
+CREATE INDEX idx_orders_customer_date
 ON orders(customer_id, order_date DESC);
 
 -- Partial indexes for specific queries
-CREATE INDEX idx_high_value_orders 
+CREATE INDEX idx_high_value_orders
 ON orders(order_date)
 WHERE total_amount > 1000;
 
 -- Expression indexes for function calls
-CREATE INDEX idx_order_date_truncated 
+CREATE INDEX idx_order_date_truncated
 ON orders(DATE_TRUNC('month', order_date));
 
 -- Include columns to avoid table lookups
-CREATE INDEX idx_orders_customer_details 
+CREATE INDEX idx_orders_customer_details
 ON orders(customer_id)
 INCLUDE (order_date, total_amount, status);
 {% endhighlight %}
@@ -963,7 +963,7 @@ INCLUDE (order_date, total_amount, status);
       <span class="code-callout__title">Composite and partial indexes for common query patterns</span>
     </div>
     <div class="code-callout__body">
-      <p>The composite index <code>(customer_id, order_date DESC)</code> supports queries that filter on customer and sort by date—the leading equality column is most selective. The partial index on <code>total_amount &gt; 1000</code> covers a common high-value-order filter with a much smaller index than a full-table index.</p>
+      <p>The composite index <code>(customer_id, order_date DESC)</code> supports queries that filter on customer and sort by date, the leading equality column is most selective. The partial index on <code>total_amount &gt; 1000</code> covers a common high-value-order filter with a much smaller index than a full-table index.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-17" data-tint="2">
@@ -986,7 +986,7 @@ INCLUDE (order_date, total_amount, status);
 {% highlight sql %}
 -- Create materialized view
 CREATE MATERIALIZED VIEW sales_summary AS
-SELECT 
+SELECT
     DATE_TRUNC('day', order_date) as sale_date,
     category,
     SUM(total_amount) as revenue,
@@ -994,15 +994,15 @@ SELECT
 FROM orders o
 JOIN order_items oi ON o.order_id = oi.order_id
 JOIN products p ON oi.product_id = p.product_id
-GROUP BY 
+GROUP BY
     DATE_TRUNC('day', order_date),
     category;
 
 -- Create indexes on materialized view
-CREATE INDEX idx_sales_summary_date 
+CREATE INDEX idx_sales_summary_date
 ON sales_summary(sale_date DESC);
 
-CREATE INDEX idx_sales_summary_category 
+CREATE INDEX idx_sales_summary_category
 ON sales_summary(category, sale_date DESC);
 
 -- Refresh strategy
@@ -1046,7 +1046,7 @@ EXECUTE FUNCTION refresh_sales_summary();
       <span class="code-callout__title">Trigger-based auto-refresh on order changes</span>
     </div>
     <div class="code-callout__body">
-      <p>A statement-level trigger fires after any INSERT, UPDATE, or DELETE on <code>orders</code> and calls <code>REFRESH MATERIALIZED VIEW CONCURRENTLY</code>—which updates the view without locking readers. This keeps the summary current automatically after every order write.</p>
+      <p>A statement-level trigger fires after any INSERT, UPDATE, or DELETE on <code>orders</code> and calls <code>REFRESH MATERIALIZED VIEW CONCURRENTLY</code>-which updates the view without locking readers. This keeps the summary current automatically after every order write.</p>
     </div>
   </div>
 </aside>
@@ -1061,22 +1061,22 @@ EXECUTE FUNCTION refresh_sales_summary();
 
 {% highlight sql %}
 -- Bad: Separate query for each order
-SELECT 
+SELECT
     o.order_id,
     (
-        SELECT c.name 
-        FROM customers c 
+        SELECT c.name
+        FROM customers c
         WHERE c.id = o.customer_id
     ) as customer_name,
     (
-        SELECT COUNT(*) 
-        FROM order_items oi 
+        SELECT COUNT(*)
+        FROM order_items oi
         WHERE oi.order_id = o.order_id
     ) as item_count
 FROM orders o;
 
 -- Good: Use JOINs and window functions
-SELECT 
+SELECT
     o.order_id,
     c.name as customer_name,
     COUNT(*) OVER (PARTITION BY o.order_id) as item_count
@@ -1092,7 +1092,7 @@ JOIN order_items oi ON o.order_id = oi.order_id;
       <span class="code-callout__title">Bad: two correlated subqueries run once per order row</span>
     </div>
     <div class="code-callout__body">
-      <p>One scalar subquery fetches the customer name and another counts order items—both are correlated, meaning they re-execute for every row in <code>orders</code>. With 10,000 orders that's 20,001 queries total instead of one.</p>
+      <p>One scalar subquery fetches the customer name and another counts order items, both are correlated, meaning they re-execute for every row in <code>orders</code>. With 10,000 orders that's 20,001 queries total instead of one.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="13-23" data-tint="2">
@@ -1114,14 +1114,14 @@ JOIN order_items oi ON o.order_id = oi.order_id;
 
 {% highlight sql %}
 -- Bad: Function on column prevents index use
-SELECT * 
-FROM orders 
+SELECT *
+FROM orders
 WHERE EXTRACT(YEAR FROM order_date) = 2023;
 
 -- Good: Range condition uses index
-SELECT * 
-FROM orders 
-WHERE order_date >= '2023-01-01' 
+SELECT *
+FROM orders
+WHERE order_date >= '2023-01-01'
 AND order_date < '2024-01-01';
 {% endhighlight %}
 </div>
@@ -1132,7 +1132,7 @@ AND order_date < '2024-01-01';
       <span class="code-callout__title">Bad: wrapping a column in a function forces a full table scan</span>
     </div>
     <div class="code-callout__body">
-      <p><code>EXTRACT(YEAR FROM order_date) = 2023</code> applies a function to every row before comparing—no index on <code>order_date</code> can be used. This is called a non-sargable predicate.</p>
+      <p><code>EXTRACT(YEAR FROM order_date) = 2023</code> applies a function to every row before comparing, no index on <code>order_date</code> can be used. This is called a non-sargable predicate.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="6-10" data-tint="2">
@@ -1141,7 +1141,7 @@ AND order_date < '2024-01-01';
       <span class="code-callout__title">Good: range predicate on the raw column uses the index</span>
     </div>
     <div class="code-callout__body">
-      <p>Rewriting as <code>order_date &gt;= '2023-01-01' AND order_date &lt; '2024-01-01'</code> keeps the column unmodified—the planner can use an index range scan instead of reading every row.</p>
+      <p>Rewriting as <code>order_date &gt;= '2023-01-01' AND order_date &lt; '2024-01-01'</code> keeps the column unmodified, the planner can use an index range scan instead of reading every row.</p>
     </div>
   </div>
 </aside>
@@ -1154,7 +1154,7 @@ AND order_date < '2024-01-01';
 
 {% highlight sql %}
 -- Bad: Correlated subquery runs for each row
-SELECT 
+SELECT
     product_name,
     (
         SELECT AVG(quantity)
@@ -1164,7 +1164,7 @@ SELECT
 FROM products p;
 
 -- Good: Use window functions or JOIN
-SELECT 
+SELECT
     p.product_name,
     AVG(oi.quantity) OVER (
         PARTITION BY p.product_id
@@ -1180,7 +1180,7 @@ LEFT JOIN order_items oi ON p.product_id = oi.product_id;
       <span class="code-callout__title">Bad: correlated subquery re-aggregates for every product row</span>
     </div>
     <div class="code-callout__body">
-      <p>The scalar subquery inside SELECT references <code>p.product_id</code> from the outer query—it's correlated. The planner must run a separate aggregation over <code>order_items</code> for each product row, which doesn't scale with large catalogs.</p>
+      <p>The scalar subquery inside SELECT references <code>p.product_id</code> from the outer query, it's correlated. The planner must run a separate aggregation over <code>order_items</code> for each product row, which doesn't scale with large catalogs.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="11-18" data-tint="2">
@@ -1222,12 +1222,12 @@ Remember: "Performance optimization is an iterative process - measure, analyze, 
 
 ## Gotchas
 
-- **Recursive CTEs without a termination condition can loop forever** — If the recursive step never produces an empty result set (e.g., a cycle in a hierarchy table), the query will run until it hits `max_recursion_depth` or exhausts memory. Always include a depth counter or path-cycle guard (like the `ARRAY[name]` path in the employee hierarchy example) so the recursion terminates cleanly.
-- **RANK() vs DENSE_RANK() vs ROW_NUMBER() give different results for ties** — `RANK()` leaves gaps (1, 2, 2, 4); `DENSE_RANK()` does not (1, 2, 2, 3); `ROW_NUMBER()` assigns a unique number regardless of ties. Picking the wrong one produces incorrect rankings that are hard to spot because they look plausible.
-- **Window functions are evaluated after WHERE and GROUP BY, not before** — You cannot filter rows by the result of a window function in the same query's WHERE clause. Wrap the query in a CTE or subquery, then filter on the window column in the outer query.
-- **The `->` and `->>` operators for JSON return different types** — In PostgreSQL, `->` returns a JSONB value and `->>` returns text. Using `->` where you need a text comparison (e.g., `WHERE data -> 'status' = 'active'`) will fail or behave unexpectedly; use `->>` to extract as text before comparing.
-- **EXPLAIN shows estimated costs; EXPLAIN ANALYZE shows actual runtime** — A query can look cheap in EXPLAIN (based on planner statistics) but run slowly because statistics are stale. Run `ANALYZE <table>` to refresh statistics, then use `EXPLAIN (ANALYZE, BUFFERS)` to see real row counts and buffer hits vs misses.
-- **Using ROWS BETWEEN instead of RANGE for date-based rolling windows** — `ROWS BETWEEN 6 PRECEDING AND CURRENT ROW` counts the 6 physical rows before the current one, which is wrong when there are gaps in the date series (e.g., no data on weekends). Use `RANGE BETWEEN INTERVAL '6 days' PRECEDING AND CURRENT ROW` to define the window by value rather than row position when the column is a date or timestamp.
+- **Recursive CTEs without a termination condition can loop forever**: If the recursive step never produces an empty result set (e.g., a cycle in a hierarchy table), the query will run until it hits `max_recursion_depth` or exhausts memory. Always include a depth counter or path-cycle guard (like the `ARRAY[name]` path in the employee hierarchy example) so the recursion terminates cleanly.
+- **RANK() vs DENSE_RANK() vs ROW_NUMBER() give different results for ties**: `RANK()` leaves gaps (1, 2, 2, 4); `DENSE_RANK()` does not (1, 2, 2, 3); `ROW_NUMBER()` assigns a unique number regardless of ties. Picking the wrong one produces incorrect rankings that are hard to spot because they look plausible.
+- **Window functions are evaluated after WHERE and GROUP BY, not before**: You cannot filter rows by the result of a window function in the same query's WHERE clause. Wrap the query in a CTE or subquery, then filter on the window column in the outer query.
+- **The `->` and `->>` operators for JSON return different types**: In PostgreSQL, `->` returns a JSONB value and `->>` returns text. Using `->` where you need a text comparison (e.g., `WHERE data -> 'status' = 'active'`) will fail or behave unexpectedly; use `->>` to extract as text before comparing.
+- **EXPLAIN shows estimated costs; EXPLAIN ANALYZE shows actual runtime**: A query can look cheap in EXPLAIN (based on planner statistics) but run slowly because statistics are stale. Run `ANALYZE <table>` to refresh statistics, then use `EXPLAIN (ANALYZE, BUFFERS)` to see real row counts and buffer hits vs misses.
+- **Using ROWS BETWEEN instead of RANGE for date-based rolling windows**: `ROWS BETWEEN 6 PRECEDING AND CURRENT ROW` counts the 6 physical rows before the current one, which is wrong when there are gaps in the date series (e.g., no data on weekends). Use `RANGE BETWEEN INTERVAL '6 days' PRECEDING AND CURRENT ROW` to define the window by value rather than row position when the column is a date or timestamp.
 
 ## Additional Resources
 
@@ -1245,6 +1245,6 @@ Remember: "Complex queries should be like well-written essays - clear, structure
 
 ## Next steps
 
-- [SQL project](project.md) — consolidate skills in one scenario
-- [Exploratory Data Analysis (Module 2.3)](../2.3-eda/README.md) — after you extract data, explore it in Python
-- [Module README](README.md) — resources and assignment
+- [SQL project](project.md), consolidate skills in one scenario
+- [Exploratory Data Analysis (Module 2.3)](../2.3-eda/README.md), after you extract data, explore it in Python
+- [Module README](README.md), resources and assignment

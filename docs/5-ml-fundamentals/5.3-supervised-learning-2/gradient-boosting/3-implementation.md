@@ -8,7 +8,7 @@ objectives:
 
 # Implementing Gradient Boosting
 
-**After this lesson:** you can explain the core ideas in “Implementing Gradient Boosting” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Implementing Gradient Boosting and try the examples in your own notebook.
 
 ## Overview
 
@@ -19,9 +19,9 @@ Libraries and APIs (e.g. **hist** gradient boosting in sklearn, XGBoost/LightGBM
 
 ### Classification Example: Spam Detection
 
-Let's build a spam detector as our first project. This is like creating a filter that can tell if an email is spam or not.
+Build a spam detector as our first project. This is like creating a filter that can tell if an email is spam or not.
 
-Before we dive into the code, let's understand what we're trying to achieve:
+Before we dive into the code, get clear on what we're trying to achieve:
 
 1. We want to classify emails as spam or not spam
 2. We'll use features like word counts and sender information
@@ -37,7 +37,7 @@ Here's how we'll do it step by step:
 <div class="code-explainer__code">
 
 {% highlight python %}
-# First, let's import the tools we need
+# First, import the tools we need
 # Think of these as our kitchen utensils
 import numpy as np
 import pandas as pd
@@ -45,7 +45,7 @@ import xgboost as xgb
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 
-# Now, let's create some sample email data
+# Now, create some sample email data
 # This is like preparing our ingredients
 from sklearn.datasets import make_classification
 X, y = make_classification(
@@ -56,20 +56,20 @@ X, y = make_classification(
     random_state=42        # For reproducibility
 )
 
-# Let's split our data into training and testing sets
+# Split the data into training and testing sets
 # This is like dividing our ingredients for practice and final cooking
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, 
+    X, y,
     test_size=0.2,         # 20% for testing
     random_state=42
 )
 
-# Now, let's prepare our data for XGBoost
+# Prepare the data for XGBoost
 # This is like organizing our ingredients before cooking
 dtrain = xgb.DMatrix(X_train, label=y_train)
 dtest = xgb.DMatrix(X_test, label=y_test)
 
-# Let's set our model's parameters
+# Set the model parameters
 # These are like the settings on our cooking equipment
 params = {
     'max_depth': 3,        # How deep each tree can grow
@@ -90,12 +90,12 @@ model = xgb.train(
     verbose_eval=False
 )
 
-# Let's test our model on new emails
+# Test the model on new emails
 # This is like tasting our dish
 y_pred = model.predict(dtest)
 y_pred_binary = (y_pred > 0.5).astype(int)  # Convert probabilities to 0/1
 
-# Finally, let's see how well we did
+# Finally, look at how well we did
 # This is like getting feedback on our cooking
 print("Classification Report:")
 print(classification_report(y_test, y_pred_binary))
@@ -109,7 +109,7 @@ print(classification_report(y_test, y_pred_binary))
       <span class="code-callout__title">Informative vs redundant features</span>
     </div>
     <div class="code-callout__body">
-      <p><code>make_classification</code> creates 15 features that genuinely predict the label and 5 redundant noise features — mimics real data where not all columns are useful. Gradient boosting handles this well via feature selection inside each tree.</p>
+      <p><code>make_classification</code> creates 15 features that genuinely predict the label and 5 redundant noise features, mimics real data where not all columns are useful. Gradient boosting handles this well via feature selection inside each tree.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="28-31" data-tint="2">
@@ -118,7 +118,7 @@ print(classification_report(y_test, y_pred_binary))
       <span class="code-callout__title">DMatrix: XGBoost's data format</span>
     </div>
     <div class="code-callout__body">
-      <p><code>xgb.DMatrix</code> wraps numpy arrays in XGBoost's optimized internal format, attaching labels alongside features. Required before calling <code>xgb.train</code> — unlike sklearn's <code>.fit(X, y)</code>, XGBoost separates data preparation from training.</p>
+      <p><code>xgb.DMatrix</code> wraps numpy arrays in XGBoost's optimized internal format, attaching labels alongside features. Required before calling <code>xgb.train</code>, unlike sklearn's <code>.fit(X, y)</code>, XGBoost separates data preparation from training.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="33-41" data-tint="3">
@@ -127,7 +127,7 @@ print(classification_report(y_test, y_pred_binary))
       <span class="code-callout__title">Boosting parameters</span>
     </div>
     <div class="code-callout__body">
-      <p><code>eta</code> (learning rate) shrinks each new tree's contribution — lower values need more rounds but generalize better. <code>objective: binary:logistic</code> produces probabilities for a two-class problem. <code>eval_metric: logloss</code> measures calibration of those probabilities.</p>
+      <p><code>eta</code> (learning rate) shrinks each new tree's contribution, lower values need more rounds but generalize better. <code>objective: binary:logistic</code> produces probabilities for a two-class problem. <code>eval_metric: logloss</code> measures calibration of those probabilities.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="43-52" data-tint="4">
@@ -136,7 +136,7 @@ print(classification_report(y_test, y_pred_binary))
       <span class="code-callout__title">Train with eval tracking</span>
     </div>
     <div class="code-callout__body">
-      <p><code>evals</code> logs loss on both train and test each round. <code>early_stopping_rounds=10</code> halts boosting when test loss stops improving for 10 rounds — XGBoost automatically uses the best round's weights, avoiding over-boosting.</p>
+      <p><code>evals</code> logs loss on both train and test each round. <code>early_stopping_rounds=10</code> halts boosting when test loss stops improving for 10 rounds, XGBoost automatically uses the best round's weights, avoiding over-boosting.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="54-57" data-tint="1">
@@ -145,32 +145,32 @@ print(classification_report(y_test, y_pred_binary))
       <span class="code-callout__title">Probability → class label</span>
     </div>
     <div class="code-callout__body">
-      <p><code>model.predict</code> returns a float probability per sample. <code>(y_pred > 0.5)</code> applies the default decision threshold — lower it (e.g. 0.3) to catch more positives at the cost of more false alarms.</p>
+      <p><code>model.predict</code> returns a float probability per sample. <code>(y_pred > 0.5)</code> applies the default decision threshold, lower it (e.g. 0.3) to catch more positives at the cost of more false alarms.</p>
     </div>
   </div>
 </aside>
 </div>
 
-Great job! You've just built your first spam detector. Let's break down what we did:
+Great job! You've just built your first spam detector. break down what we did:
 
 1. We prepared our data (emails and their features)
 2. We split the data for training and testing
 3. We set up our model with appropriate parameters
 4. We trained the model and evaluated its performance
 
-Now that you understand the basics, let's try something a bit more complex: predicting house prices!
+Now that you understand the basics, try something a bit more complex: predicting house prices!
 
 ## LightGBM Implementation: House Price Prediction
 
 Predicting house prices is like helping a real estate agent estimate property values. We'll use LightGBM, which is particularly good at handling large datasets efficiently.
 
-Before we start coding, let's think about what we need:
+Before coding, think through what you need:
 
 1. Features like square footage, number of bedrooms, location, etc.
 2. A way to measure how accurate our predictions are
 3. A model that can learn from these features
 
-Let's implement this step by step:
+Implement this step by step:
 
 ![Feature Importance](assets/feature_importance.png)
 
@@ -231,7 +231,7 @@ print(f"R²: {r2_score(y_test, y_pred):.4f}")
       <span class="code-callout__title">Data and LightGBM Datasets</span>
     </div>
     <div class="code-callout__body">
-      <p>1000 synthetic regression samples with 20 features are split 80/20; <code>lgb.Dataset</code> wraps the train and test arrays — the <code>reference=train_data</code> argument aligns the test set's feature histogram with the training set.</p>
+      <p>1000 synthetic regression samples with 20 features are split 80/20; <code>lgb.Dataset</code> wraps the train and test arrays, the <code>reference=train_data</code> argument aligns the test set's feature histogram with the training set.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="20-37" data-tint="2">
@@ -249,7 +249,7 @@ print(f"R²: {r2_score(y_test, y_pred):.4f}")
       <span class="code-callout__title">Evaluate</span>
     </div>
     <div class="code-callout__body">
-      <p>RMSE measures the average prediction error in the original units; R² shows the fraction of variance explained — together they give a balanced picture of regression performance.</p>
+      <p>RMSE measures the average prediction error in the original units; R² shows the fraction of variance explained, together they give a balanced picture of regression performance.</p>
     </div>
   </div>
 </aside>
@@ -261,19 +261,19 @@ Excellent! You've now built a house price predictor. Notice how this implementat
 2. We're using different evaluation metrics
 3. The data preparation is slightly different
 
-Now, let's try something even more interesting: customer segmentation with CatBoost!
+Now, try something even more interesting: customer segmentation with CatBoost!
 
 ## CatBoost Implementation: Customer Segmentation
 
 Customer segmentation is like grouping customers for targeted marketing. CatBoost is particularly good at handling categorical data, which is perfect for this task.
 
-Before we start coding, let's understand what we're working with:
+Before we start coding, get clear on what we're working with:
 
 1. Customer data like age, income, education, and occupation
 2. Categorical features that need special handling
 3. A way to identify high-value customers
 
-Let's implement this step by step:
+Implement this step by step:
 
 ![SHAP Values](assets/shap_values.png)
 
@@ -358,19 +358,19 @@ Great work! You've now built a customer segmentation model. Notice how CatBoost 
 2. CatBoost automatically handles the encoding
 3. The rest of the process is similar to our previous examples
 
-Now, let's put everything together in a real-world example: predicting customer churn!
+Now, put everything together in a real-world example: predicting customer churn!
 
 ## Real-World Example: Customer Churn Prediction
 
 Customer churn prediction is like having a crystal ball for customer retention. We'll use everything we've learned to build a practical system.
 
-Before we start coding, let's understand what we're building:
+Before we start coding, get clear on what we're building:
 
 1. A system that predicts which customers might leave
 2. Features that help identify at-risk customers
 3. A way to categorize customers by risk level
 
-Let's implement this step by step:
+Implement this step by step:
 
 ![Customer Tenure Distribution](assets/churn_prediction.png)
 
@@ -437,7 +437,7 @@ print(risk_categories.value_counts())
       <span class="code-callout__title">Data Generation</span>
     </div>
     <div class="code-callout__body">
-      <p>Three numeric and three categorical columns simulate a telecom dataset; the churn label combines short tenure, high charges, and month-to-month contract — a realistic proxy for real churn signals.</p>
+      <p>Three numeric and three categorical columns simulate a telecom dataset; the churn label combines short tenure, high charges, and month-to-month contract, a realistic proxy for real churn signals.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="25-33" data-tint="2">
@@ -461,7 +461,7 @@ print(risk_categories.value_counts())
 </aside>
 </div>
 
-Congratulations! You've now built a complete customer churn prediction system. Notice how we've combined everything we've learned:
+You've now built a complete customer churn prediction system. Notice how we've combined everything we've learned:
 
 1. We used CatBoost for handling categorical data
 2. We analyzed feature importance to understand what drives churn
@@ -469,7 +469,7 @@ Congratulations! You've now built a complete customer churn prediction system. N
 
 ## Best Practices and Common Mistakes
 
-Now that you've seen several implementations, let's review some best practices and common mistakes to avoid:
+Now that you've seen several implementations, review some best practices and common mistakes to avoid:
 
 ### 1. Data Preparation
 
@@ -515,12 +515,12 @@ Ready to try these implementations? Start with the spam detection example and gr
 
 ## Gotchas
 
-- **Using the sklearn API vs the native XGBoost API interchangeably** — `xgb.train` (native) takes a `DMatrix` and a params dict; `XGBClassifier` (sklearn API) takes numpy arrays and uses `fit`. Mixing them (e.g., passing a `DMatrix` to `XGBClassifier.fit`) raises confusing type errors. Pick one API per project and stick with it.
-- **`early_stopping_rounds` in the native XGBoost API uses the last entry in `evals`** — XGBoost monitors the *last* evaluation set passed to `evals` for early stopping. If you list `[(dtrain, 'train'), (dtest, 'test')]`, it correctly watches the test set. Reversing the order means early stopping fires on training loss and almost never stops.
-- **LightGBM's `reference=train_data` in `Dataset` is not optional** — Passing `reference=train_data` when building the test `Dataset` ensures the two datasets share the same feature binning histogram. Omitting it can cause silent prediction drift, especially on categorical features.
-- **CatBoost's `Pool` with `cat_features` expects column *names*, not integer indices, for DataFrames** — When your input is a pandas DataFrame, pass string column names to `cat_features`. Passing integer positions works for numpy arrays but silently misidentifies columns when a DataFrame has a non-default index.
-- **`predict_proba` column ordering differs between sklearn and CatBoost** — In sklearn, `predict_proba(X)[:, 1]` gives P(positive class). In CatBoost, the column order depends on class ordering in the training labels. Always check `model.classes_` before slicing a specific column to avoid swapping the positive and negative class probabilities.
-- **`scale_pos_weight` in XGBClassifier is not the same as SMOTE or resampling** — `scale_pos_weight` adjusts the gradient contribution of minority-class samples; it does not create new samples. For severe imbalance (>100:1), it helps but may still underperform proper resampling or threshold tuning on `predict_proba` output.
+- **Using the sklearn API vs the native XGBoost API interchangeably**: `xgb.train` (native) takes a `DMatrix` and a params dict; `XGBClassifier` (sklearn API) takes numpy arrays and uses `fit`. Mixing them (e.g., passing a `DMatrix` to `XGBClassifier.fit`) raises confusing type errors. Pick one API per project and stick with it.
+- **`early_stopping_rounds` in the native XGBoost API uses the last entry in `evals`**: XGBoost monitors the *last* evaluation set passed to `evals` for early stopping. If you list `[(dtrain, 'train'), (dtest, 'test')]`, it correctly watches the test set. Reversing the order means early stopping fires on training loss and almost never stops.
+- **LightGBM's `reference=train_data` in `Dataset` is not optional**: Passing `reference=train_data` when building the test `Dataset` ensures the two datasets share the same feature binning histogram. Omitting it can cause silent prediction drift, especially on categorical features.
+- **CatBoost's `Pool` with `cat_features` expects column *names*, not integer indices, for DataFrames**, When your input is a pandas DataFrame, pass string column names to `cat_features`. Passing integer positions works for numpy arrays but silently misidentifies columns when a DataFrame has a non-default index.
+- **`predict_proba` column ordering differs between sklearn and CatBoost**: In sklearn, `predict_proba(X)[:, 1]` gives P(positive class). In CatBoost, the column order depends on class ordering in the training labels. Always check `model.classes_` before slicing a specific column to avoid swapping the positive and negative class probabilities.
+- **`scale_pos_weight` in XGBClassifier is not the same as SMOTE or resampling**: `scale_pos_weight` adjusts the gradient contribution of minority-class samples; it does not create new samples. For severe imbalance (>100:1), it helps but may still underperform proper resampling or threshold tuning on `predict_proba` output.
 
 ## Additional Resources
 

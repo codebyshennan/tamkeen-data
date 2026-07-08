@@ -4,21 +4,21 @@
 
 ## Helpful video
 
-Pandas DataFrames in a quick walkthrough—useful for cleaning and wrangling.
+Pandas DataFrames in a quick walkthrough, useful for cleaning and wrangling.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/m1_33jhhiLE" title="Learn PANDAS in 5 minutes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Overview
 
-**Prerequisites:** [Missing values](missing-values.md) and [Outliers](outliers.md) (or equivalent cleaning). Familiarity with **scikit-learn**’s preprocessing module is useful; we cite it in examples.
+**Prerequisites:** [Missing values](missing-values.md) and [Outliers](outliers.md) (or equivalent cleaning). Familiarity with **scikit-learn**'s preprocessing module is useful; we cite it in examples.
 
 > **Time needed:** About 60 minutes.
 
 ## Why this matters
 
-Models and charts respond to **scale** and **representation**: distance-based algorithms care about units; trees often care less; linear models care about approximate linearity. Transformations align your features with those expectations—on purpose, not by habit.
+Models and charts respond to **scale** and **representation**: distance-based algorithms care about units; trees often care less; linear models care about approximate linearity. Transformations align your features with those expectations, on purpose, not by habit.
 
-Data transformation is a crucial step in the data preparation process: converting data from one format or structure into another. The sections below map common transforms to those goals.
+Data transformation is a important step in the data preparation process: converting data from one format or structure into another. The sections below map common transforms to those goals.
 
 ## Understanding Data Transformations: A Strategic Framework
 
@@ -54,7 +54,7 @@ Data transformations serve multiple purposes:
 
   <div class="code-explainer" data-code-explainer>
   <div class="code-explainer__code">
-  
+
   {% highlight text %}
     z = (x - μ) / σ
     # Where:
@@ -80,7 +80,7 @@ Data transformations serve multiple purposes:
 
   <div class="code-explainer" data-code-explainer>
   <div class="code-explainer__code">
-  
+
   {% highlight text %}
     x_scaled = (x - x_min) / (x_max - x_min)
     # Scales data to [0, 1] range
@@ -99,11 +99,11 @@ Data transformations serve multiple purposes:
   </aside>
   </div>
 
-- **Robust Scaling**
+- **reliable Scaling**
 
   <div class="code-explainer" data-code-explainer>
   <div class="code-explainer__code">
-  
+
   {% highlight text %}
     x_robust = (x - Q2) / (Q3 - Q1)
     # Where:
@@ -116,7 +116,7 @@ Data transformations serve multiple purposes:
     <div class="code-callout" data-lines="1-5" data-tint="1">
       <div class="code-callout__meta">
         <span class="code-callout__lines"></span>
-        <span class="code-callout__title">Robust scaling formula</span>
+        <span class="code-callout__title">reliable scaling formula</span>
       </div>
       <div class="code-callout__body">
         <p>Centers on the median (Q2) and scales by the interquartile range (Q3 − Q1), making it insensitive to extreme outliers unlike standard or min-max scaling.</p>
@@ -131,7 +131,7 @@ Data transformations serve multiple purposes:
 
   <div class="code-explainer" data-code-explainer>
   <div class="code-explainer__code">
-  
+
   {% highlight text %}
     x_log = log(x + c)  # c is a constant to handle zeros
   {% endhighlight %}
@@ -153,7 +153,7 @@ Data transformations serve multiple purposes:
 
   <div class="code-explainer" data-code-explainer>
   <div class="code-explainer__code">
-  
+
   {% highlight text %}
     x_boxcox = {
         (x^λ - 1) / λ  if λ ≠ 0
@@ -178,7 +178,7 @@ Data transformations serve multiple purposes:
 
   <div class="code-explainer" data-code-explainer>
   <div class="code-explainer__code">
-  
+
   {% highlight text %}
     # Handles negative values unlike Box-Cox
     x_yeojohnson = {
@@ -217,28 +217,28 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 def create_transformation_pipeline(numeric_features, categorical_features):
     """
     Create a comprehensive transformation pipeline
-    
+
     Parameters:
     numeric_features (list): List of numeric column names
     categorical_features (list): List of categorical column names
-    
+
     Returns:
     sklearn.Pipeline: Transformation pipeline
     """
     numeric_transformer = Pipeline(steps=[
         ('scaler', StandardScaler())
     ])
-    
+
     categorical_transformer = Pipeline(steps=[
         ('onehot', OneHotEncoder(drop='first', sparse_output=False))
     ])
-    
+
     preprocessor = ColumnTransformer(
         transformers=[
             ('num', numeric_transformer, numeric_features),
             ('cat', categorical_transformer, categorical_features)
         ])
-    
+
     return Pipeline(steps=[('preprocessor', preprocessor)])
 {% endhighlight %}
 
@@ -275,20 +275,20 @@ def create_transformation_pipeline(numeric_features, categorical_features):
 {% highlight python %}
 class DistributionTransformer:
     """Transform data to follow specific distributions"""
-    
+
     def __init__(self, method='box-cox', target_distribution='normal'):
         self.method = method
         self.target_distribution = target_distribution
         self.transformer = None
         self.lambda_ = None
-    
+
     def fit_transform(self, data):
         """
         Fit and transform the data
-        
+
         Parameters:
         data (array-like): Input data
-        
+
         Returns:
         array: Transformed data
         """
@@ -305,16 +305,16 @@ class DistributionTransformer:
             )
             transformed_data = qt.fit_transform(data.reshape(-1, 1))
             self.transformer = qt
-        
+
         return transformed_data
-    
+
     def inverse_transform(self, transformed_data):
         """
         Inverse transform the data back to original scale
-        
+
         Parameters:
         transformed_data (array-like): Transformed data
-        
+
         Returns:
         array: Original scale data
         """
@@ -349,7 +349,7 @@ class DistributionTransformer:
       <span class="code-callout__title">Three transform branches</span>
     </div>
     <div class="code-callout__body">
-      <p>Dispatches to Box-Cox (stores λ), Yeo-Johnson via <code>PowerTransformer</code>, or quantile normalisation via <code>QuantileTransformer</code>—storing the fitted object for later inverse-transform.</p>
+      <p>Dispatches to Box-Cox (stores λ), Yeo-Johnson via <code>PowerTransformer</code>, or quantile normalisation via <code>QuantileTransformer</code>-storing the fitted object for later inverse-transform.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="36-49" data-tint="4">
@@ -373,16 +373,16 @@ class DistributionTransformer:
 def engineer_time_features(df, datetime_column):
     """
     Create comprehensive time-based features
-    
+
     Parameters:
     df (pandas.DataFrame): Input dataframe
     datetime_column (str): Name of datetime column
-    
+
     Returns:
     pandas.DataFrame: DataFrame with engineered features
     """
     dt = pd.to_datetime(df[datetime_column])
-    
+
     # Basic components
     time_features = pd.DataFrame({
         'year': dt.dt.year,
@@ -392,18 +392,18 @@ def engineer_time_features(df, datetime_column):
         'dayofweek': dt.dt.dayofweek,
         'quarter': dt.dt.quarter
     })
-    
+
     # Cyclical features
     time_features['month_sin'] = np.sin(2 * np.pi * dt.dt.month / 12)
     time_features['month_cos'] = np.cos(2 * np.pi * dt.dt.month / 12)
     time_features['hour_sin'] = np.sin(2 * np.pi * dt.dt.hour / 24)
     time_features['hour_cos'] = np.cos(2 * np.pi * dt.dt.hour / 24)
-    
+
     # Business logic features
     time_features['is_weekend'] = dt.dt.dayofweek >= 5
     time_features['is_business_hour'] = (dt.dt.hour >= 9) & (dt.dt.hour < 17)
     time_features['is_morning'] = dt.dt.hour < 12
-    
+
     return time_features
 {% endhighlight %}
 </div>
@@ -448,24 +448,24 @@ def engineer_time_features(df, datetime_column):
 {% highlight python %}
 def transform_ecommerce_data(df):
     """Transform e-commerce dataset for analysis"""
-    
+
     # 1. Handle monetary values
     price_transformer = DistributionTransformer(method='box-cox')
     df['price_transformed'] = price_transformer.fit_transform(df['price'])
-    
+
     # 2. Create time features
     time_features = engineer_time_features(df, 'order_date')
-    
+
     # 3. Encode categories
     cat_encoder = OneHotEncoder(drop='first', sparse_output=False)
     encoded_categories = cat_encoder.fit_transform(
         df[['category', 'payment_method']]
     )
-    
+
     # 4. Create interaction features
     df['price_per_unit'] = df['total_amount'] / df['quantity']
     df['items_per_order'] = df.groupby('order_id')['quantity'].transform('sum')
-    
+
     return pd.concat([
         df,
         pd.DataFrame(encoded_categories, columns=cat_encoder.get_feature_names_out()),
@@ -503,27 +503,27 @@ def transform_ecommerce_data(df):
 {% highlight python %}
 def transform_financial_data(df):
     """Transform financial time series data"""
-    
+
     # 1. Calculate returns
     df['returns'] = df['price'].pct_change()
-    
+
     # 2. Log transform for volatility
     df['log_returns'] = np.log1p(df['returns'])
-    
+
     # 3. Rolling statistics
     windows = [5, 21, 63]  # 1 week, 1 month, 3 months
     for window in windows:
         df[f'rolling_mean_{window}'] = df['price'].rolling(window).mean()
         df[f'rolling_std_{window}'] = df['price'].rolling(window).std()
         df[f'rolling_zscore_{window}'] = (
-            (df['price'] - df[f'rolling_mean_{window}']) / 
+            (df['price'] - df[f'rolling_mean_{window}']) /
             df[f'rolling_std_{window}']
         )
-    
+
     # 4. Technical indicators
     df['RSI'] = calculate_rsi(df['price'])
     df['MACD'] = calculate_macd(df['price'])
-    
+
     return df
 {% endhighlight %}
 </div>
@@ -567,11 +567,11 @@ def transform_financial_data(df):
 def validate_transformation(original, transformed):
     """
     Validate transformation results
-    
+
     Parameters:
     original (array-like): Original data
     transformed (array-like): Transformed data
-    
+
     Returns:
     dict: Validation metrics
     """
@@ -591,19 +591,19 @@ def validate_transformation(original, transformed):
             'transformed_range': (np.min(transformed), np.max(transformed))
         }
     }
-    
+
     # Visualize comparison
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))
-    
+
     sns.histplot(original, ax=ax1)
     ax1.set_title('Original Distribution')
-    
+
     sns.histplot(transformed, ax=ax2)
     ax2.set_title('Transformed Distribution')
-    
+
     plt.tight_layout()
     plt.show()
-    
+
     return validation
 {% endhighlight %}
 </div>
@@ -647,11 +647,11 @@ def validate_transformation(original, transformed):
 def optimize_transformation_pipeline(df, pipeline):
     """
     Optimize transformation pipeline performance
-    
+
     Parameters:
     df (pandas.DataFrame): Input dataframe
     pipeline (sklearn.Pipeline): Transformation pipeline
-    
+
     Returns:
     sklearn.Pipeline: Optimized pipeline
     """
@@ -662,10 +662,10 @@ def optimize_transformation_pipeline(df, pipeline):
             df_optimized[col] = pd.to_numeric(df_optimized[col], downcast='float')
         elif df_optimized[col].dtype == 'int64':
             df_optimized[col] = pd.to_numeric(df_optimized[col], downcast='integer')
-    
+
     # Pipeline optimization
     pipeline.set_params(memory='cachedir')
-    
+
     return pipeline.fit(df_optimized)
 {% endhighlight %}
 </div>
@@ -830,7 +830,7 @@ Remember: "Choose transformations that enhance the signal in your data while pre
 
 ## Next steps
 
-- [Wrangling project](project.md) — consolidate cleaning and transforms in one brief
-- [Exploratory Data Analysis (Module 2.3)](../2.3-eda/README.md) — explore distributions after transforming
-- [Data engineering (Module 2.4)](../2.4-data-engineering/README.md) — where transforms often run in pipelines
+- [Wrangling project](project.md), consolidate cleaning and transforms in one brief
+- [Exploratory Data Analysis (Module 2.3)](../2.3-eda/README.md), explore distributions after transforming
+- [Data engineering (Module 2.4)](../2.4-data-engineering/README.md), where transforms often run in pipelines
 - [Module README](README.md)

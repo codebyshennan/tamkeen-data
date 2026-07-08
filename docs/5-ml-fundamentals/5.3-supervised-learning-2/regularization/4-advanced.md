@@ -8,7 +8,7 @@ objectives:
 
 # Advanced Regularization Techniques
 
-**After this lesson:** you can explain the core ideas in “Advanced Regularization Techniques” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Advanced Regularization Techniques and try the examples in your own notebook.
 
 ## Overview
 
@@ -82,7 +82,7 @@ class AdaptiveLasso:
       <span class="code-callout__title">Predict</span>
     </div>
     <div class="code-callout__body">
-      <p>Re-applies the same feature scaling learned during <code>fit</code> before passing new data to the inner Lasso — ensuring training and inference use identical transformations.</p>
+      <p>Re-applies the same feature scaling learned during <code>fit</code> before passing new data to the inner Lasso, ensuring training and inference use identical transformations.</p>
     </div>
   </div>
 </aside>
@@ -136,7 +136,7 @@ class GroupLasso:
       <span class="code-callout__title">Penalty Function</span>
     </div>
     <div class="code-callout__body">
-      <p>Computes the Group Lasso penalty as the sum over groups of √(group size) × L2 norm — larger groups are penalised more heavily in proportion to their size.</p>
+      <p>Computes the Group Lasso penalty as the sum over groups of √(group size) × L2 norm, larger groups are penalised more heavily in proportion to their size.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="8-29" data-tint="2">
@@ -270,7 +270,7 @@ def admm_lasso(X, y, alpha, rho=1.0, max_iter=1000):
       <span class="code-callout__title">ADMM Update Steps</span>
     </div>
     <div class="code-callout__body">
-      <p>Each iteration alternates: (1) update beta via a ridge solve, (2) update z with the Lasso soft-threshold proximal operator, (3) accumulate the dual residual u — convergence is declared when z stops changing.</p>
+      <p>Each iteration alternates: (1) update beta via a ridge solve, (2) update z with the Lasso soft-threshold proximal operator, (3) accumulate the dual residual u, convergence is declared when z stops changing.</p>
     </div>
   </div>
 </aside>
@@ -385,7 +385,7 @@ class RandomizedLasso:
       <span class="code-callout__title">Init Parameters</span>
     </div>
     <div class="code-callout__body">
-      <p>Stores the Lasso <code>alpha</code>, a <code>scaling</code> lower bound for random feature attenuation (e.g. 0.5 means each feature may be weakened to 50–100% of its original magnitude), and the number of repetitions.</p>
+      <p>Stores the Lasso <code>alpha</code>, a <code>scaling</code> lower bound for random feature attenuation (e.g. 0.5 means each feature may be weakened to 50-100% of its original magnitude), and the number of repetitions.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-23" data-tint="2">
@@ -394,7 +394,7 @@ class RandomizedLasso:
       <span class="code-callout__title">Randomised Resampling</span>
     </div>
     <div class="code-callout__body">
-      <p>Each run draws a random per-feature scaling factor, trains Lasso on the perturbed features, and counts which coefficients survive; dividing by <code>n_resampling</code> gives robustness scores — features that survive across many random perturbations are genuinely informative.</p>
+      <p>Each run draws a random per-feature scaling factor, trains Lasso on the perturbed features, and counts which coefficients survive; dividing by <code>n_resampling</code> gives robustness scores, features that survive across many random perturbations are genuinely informative.</p>
     </div>
   </div>
 </aside>
@@ -448,7 +448,7 @@ def create_regularized_model(input_shape, l2_lambda=0.01):
       <span class="code-callout__title">Regularised Architecture</span>
     </div>
     <div class="code-callout__body">
-      <p>Both hidden Dense layers carry an L2 weight penalty (<code>kernel_regularizer</code>) that adds squared weight magnitudes to the loss, while Dropout layers (30% and 20%) independently drop neurons during training — combining two complementary regularisation strategies.</p>
+      <p>Both hidden Dense layers carry an L2 weight penalty (<code>kernel_regularizer</code>) that adds squared weight magnitudes to the loss, while Dropout layers (30% and 20%) independently drop neurons during training, combining two complementary regularisation strategies.</p>
     </div>
   </div>
 </aside>
@@ -464,16 +464,16 @@ def create_regularized_model(input_shape, l2_lambda=0.01):
 
 ## Next Steps
 
-Now that you understand advanced regularization techniques, let's move on to [Applications](5-applications.md) to see how these methods are used in real-world scenarios!
+Now that you understand advanced regularization techniques, move on to [Applications](5-applications.md) to see how these methods are used in real-world scenarios!
 
 ## Gotchas
 
-- **`AdaptiveLasso` divides by `ols.coef_`, which will crash if any OLS coefficient is exactly zero** — `1 / (np.abs(ols.coef_) ** gamma)` produces `inf` or `NaN` for zero coefficients; in practice, add a small epsilon (`1e-8`) to the denominator before computing adaptive weights to avoid numerical failures.
-- **`GroupLasso.fit` uses a fixed step size of `0.01` with no line search** — gradient descent with a hard-coded step can diverge or converge very slowly depending on the scale of `X`; for data with large-magnitude features, normalise columns first or the 1 000-iteration limit will terminate before convergence.
-- **`StabilitySelection` refits the estimator in place on each bootstrap, destroying its previous state** — Lasso stores `coef_` after each fit, so checking `coef_ != 0` after `estimator.fit(X_boot, y_boot)` gives the current bootstrap's result, not a cumulative one; the implementation is correct, but learners who pass a stateful custom estimator may see unexpected behaviour.
-- **Combining L2 weight decay and Dropout in the neural network creates redundant regularisation at low noise** — both mechanisms reduce effective capacity; with clean, low-dimensional data they can interact to under-fit; start with one regulariser and add the second only if validation loss is still high.
-- **`np.linalg.cholesky` in `admm_lasso` will raise `LinAlgError` if `X'X + ρI` is not positive definite** — this should not happen mathematically (ρI guarantees positive definiteness), but floating-point rounding on poorly conditioned X can cause it; scaling features and increasing ρ resolves the issue.
-- **`RandomizedLasso` is deprecated and removed from scikit-learn** — the class was removed in sklearn 0.25; the custom implementation here recreates the concept manually, but learners who search for it in the sklearn docs will find it missing; use `StabilitySelection` with a Lasso estimator as the modern equivalent.
+- **`AdaptiveLasso` divides by `ols.coef_`, which will crash if any OLS coefficient is exactly zero**: `1 / (np.abs(ols.coef_) ** gamma)` produces `inf` or `NaN` for zero coefficients; in practice, add a small epsilon (`1e-8`) to the denominator before computing adaptive weights to avoid numerical failures.
+- **`GroupLasso.fit` uses a fixed step size of `0.01` with no line search**: gradient descent with a hard-coded step can diverge or converge very slowly depending on the scale of `X`; for data with large-magnitude features, normalise columns first or the 1 000-iteration limit will terminate before convergence.
+- **`StabilitySelection` refits the estimator in place on each bootstrap, destroying its previous state**: Lasso stores `coef_` after each fit, so checking `coef_ != 0` after `estimator.fit(X_boot, y_boot)` gives the current bootstrap's result, not a cumulative one; the implementation is correct, but learners who pass a stateful custom estimator may see unexpected behaviour.
+- **Combining L2 weight decay and Dropout in the neural network creates redundant regularisation at low noise**: both mechanisms reduce effective capacity; with clean, low-dimensional data they can interact to under-fit; start with one regulariser and add the second only if validation loss is still high.
+- **`np.linalg.cholesky` in `admm_lasso` will raise `LinAlgError` if `X'X + ρI` is not positive definite**: this should not happen mathematically (ρI guarantees positive definiteness), but floating-point rounding on poorly conditioned X can cause it; scaling features and increasing ρ resolves the issue.
+- **`RandomizedLasso` is deprecated and removed from scikit-learn**: the class was removed in sklearn 0.25; the custom implementation here recreates the concept manually, but learners who search for it in the sklearn docs will find it missing; use `StabilitySelection` with a Lasso estimator as the modern equivalent.
 
 ## Additional Resources
 

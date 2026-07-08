@@ -1,6 +1,6 @@
 # Getting Started with Apache Airflow
 
-**After this guide:** Airflow runs on your machine (or via Docker as described below), you can open the **web UI** (for example `http://localhost:8080`), sign in, and see DAGs—enough to follow orchestration labs.
+**After this guide:** Airflow runs on your machine (or via Docker as described below), you can open the **web UI** (for example `http://localhost:8080`), sign in, and see DAGs, enough to follow orchestration labs.
 
 ## What is Apache Airflow?
 
@@ -10,24 +10,24 @@ Apache Airflow is a tool that helps you automate and schedule data tasks. Think 
 
 > **Note for beginners:** You don't need to master Airflow right away. Start with the basics and learn as you go. This guide will walk you through everything step by step.
 
-> **On screen:** Airflow web UI — DAG list / home dashboard.
+> **On screen:** Airflow web UI, DAG list / home dashboard.
 
 ## Helpful video
 
-High-level introduction to **DAGs**, tasks, operators, scheduling, and the web UI—pairs well with the install steps below.
+High-level introduction to **DAGs**, tasks, operators, scheduling, and the web UI, pairs well with the install steps below.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eeSLDdz-aLg" title="Apache Airflow Tutorial for Beginners: Workflow Orchestration Explained" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## System Requirements
 
-- **Python 3.10, 3.11, 3.12, or 3.13** (Airflow 3.1.x does not support Python 3.9 or earlier, and 3.14+ is not supported yet—see the [supported versions](https://airflow.apache.org/docs/apache-airflow/stable/installation/supported-versions.html) page for your install date)
+- **Python 3.10, 3.11, 3.12, or 3.13** (Airflow 3.1.x does not support Python 3.9 or earlier, and 3.14+ is not supported yet, see the [supported versions](https://airflow.apache.org/docs/apache-airflow/stable/installation/supported-versions.html) page for your install date)
 - 4GB RAM minimum (8GB+ recommended)
 - 10GB free disk space
 - POSIX-compliant operating system (Linux/macOS preferred, Windows via WSL2)
 
 > **Windows users:** Airflow's install scripts use bash syntax that doesn't work in PowerShell or cmd. The easiest path is **WSL2** (Windows Subsystem for Linux), which gives you a real Linux environment. See the [Windows setup guide](./windows.md) for WSL2 install steps, then follow Option 1 below inside your WSL2 terminal. A native PowerShell option is also documented below if you cannot use WSL2.
 
-Airflow is pinned to **tested dependency sets** via official **constraints** files. A plain `pip install apache-airflow` or `uv pip install apache-airflow` without constraints often fails or yields a broken install—use the commands below.
+Airflow is pinned to **tested dependency sets** via official **constraints** files. A plain `pip install apache-airflow` or `uv pip install apache-airflow` without constraints often fails or yields a broken install, use the commands below.
 
 ## Installation Options
 
@@ -94,9 +94,9 @@ airflow dag-processor
 airflow triggerer
 ```
 
-The `users create` flow requires the [FAB auth manager](https://airflow.apache.org/docs/apache-airflow-providers-fab/stable/auth-manager/index.html) as in a default install; if your org uses a different auth setup, follow your administrator’s docs.
+The `users create` flow requires the [FAB auth manager](https://airflow.apache.org/docs/apache-airflow-providers-fab/stable/auth-manager/index.html) as in a default install; if your org uses a different auth setup, follow your administrator's docs.
 
-### Option 1b: Windows — PowerShell (if you cannot use WSL2)
+### Option 1b: Windows: PowerShell (if you cannot use WSL2)
 
 The bash multi-line variable expansion in Option 1 doesn't work in PowerShell. Use the equivalent PowerShell commands instead:
 
@@ -172,7 +172,7 @@ If your machine still has the old `docker-compose` binary, that works too; new D
 
 ## Initial Configuration
 
-Settings below are typical for **local learning** installs. **Airflow 3.x** uses an **API server** for the web UI and may rename or relocate some options—confirm names in [Configuration reference](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html) for your exact version.
+Settings below are typical for **local learning** installs. **Airflow 3.x** uses an **API server** for the web UI and may rename or relocate some options, confirm names in [Configuration reference](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html) for your exact version.
 
 ### Core Settings
 
@@ -199,7 +199,7 @@ sql_alchemy_conn = sqlite:///airflow.db
 
 ### Security Settings
 
-For production or shared networks, follow [Production deployment](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/production-deployment.html) and TLS guidance for the **API server / web UI** in your Airflow version’s docs. Local `standalone` installs use defaults suitable for **localhost only**.
+For production or shared networks, follow [Production deployment](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/production-deployment.html) and TLS guidance for the **API server / web UI** in your Airflow version's docs. Local `standalone` installs use defaults suitable for **localhost only**.
 
 ## Starting Airflow Services
 
@@ -207,7 +207,7 @@ For production or shared networks, follow [Production deployment](https://airflo
 
 ### Local Development
 
-**Option A — one command (simplest):**
+**Option A, one command (simplest):**
 
 <details>
 <summary><b>macOS / Linux / WSL2</b></summary>
@@ -233,9 +233,9 @@ airflow standalone
 
 </details>
 
-**Option B — separate processes** (typical when you have already run `airflow db migrate` and created a user):
+**Option B, separate processes** (typical when you have already run `airflow db migrate` and created a user):
 
-**Terminal 1 — API server (web UI):**
+**Terminal 1, API server (web UI):**
 
 <details>
 <summary><b>macOS / Linux / WSL2</b></summary>
@@ -260,7 +260,7 @@ airflow api-server --port 8080
 
 </details>
 
-**Terminal 2 — scheduler:**
+**Terminal 2, scheduler:**
 
 <details>
 <summary><b>macOS / Linux / WSL2</b></summary>
@@ -285,7 +285,7 @@ airflow scheduler
 
 </details>
 
-**Terminal 3 — DAG processor and triggerer** (required in multi-process setups; often started for you by `standalone`):
+**Terminal 3, DAG processor and triggerer** (required in multi-process setups; often started for you by `standalone`):
 
 ```bash
 airflow dag-processor
@@ -316,15 +316,15 @@ docker compose ps
 
 ## Gotchas
 
-- **Windows: `AIRFLOW_HOME` resets every terminal** — PowerShell `$env:AIRFLOW_HOME` only lasts for the current session. If you open a new terminal and forget to set it, Airflow initializes a fresh instance in `~/airflow`. Fix: add `$env:AIRFLOW_HOME = "C:\...\airflow_home"` to your PowerShell profile (`$PROFILE`), or use WSL2 where `export` in `.bashrc` persists.
-- **Windows: bash install script won't run in PowerShell or cmd** — the multi-line variable expansion in Option 1 uses bash syntax. Use Option 1b (PowerShell) or WSL2.
-- **Never install without constraint files** — plain `pip install apache-airflow` or `uv pip install apache-airflow` almost always produces a broken install due to conflicting transitive dependencies. Always use the official `--constraint` URL for your Airflow version and Python version.
-- **`AIRFLOW_HOME` must be consistent** — Airflow stores its database, config, and DAGs relative to `AIRFLOW_HOME`. If you open a new terminal and forget to set it, `airflow standalone` initializes a *fresh* second Airflow instance in `~/airflow`, and your DAGs won't appear. Set `AIRFLOW_HOME` in your shell profile or always `cd` to the project folder and export before running Airflow.
-- **Airflow 3.x uses `airflow api-server`, not `airflow webserver`** — guides written for Airflow 2.x say `airflow webserver`. In Airflow 3.x, the web UI is served by `airflow api-server --port 8080`. Using the old command will fail or start nothing.
-- **DAGs don't appear immediately** — the scheduler picks up new DAG files every 30–60 seconds (configurable). If your DAG is missing, wait a minute, then check `airflow dags list` for import errors (a syntax error in the Python file will silently prevent loading).
-- **`load_examples = True` by default** — Airflow ships with ~20 example DAGs. They clutter the UI when learning. Set `load_examples = False` in `airflow.cfg` and run `airflow db migrate` to remove them.
-- **SQLite only supports one active process** — with `LocalExecutor` or `CeleryExecutor`, multiple workers try to write the SQLite database concurrently and will fail. SQLite is only suitable for `SequentialExecutor` (one task at a time), which is the default for learning. Upgrade to PostgreSQL when you need parallelism.
-- **Port 8080 already in use** — if something else is on port 8080 (another Airflow, Jupyter, a local server), the API server won't start. Change the port with `airflow api-server --port 8090` or stop the conflicting process first.
+- **Windows: `AIRFLOW_HOME` resets every terminal**: PowerShell `$env:AIRFLOW_HOME` only lasts for the current session. If you open a new terminal and forget to set it, Airflow initializes a fresh instance in `~/airflow`. Fix: add `$env:AIRFLOW_HOME = "C:\...\airflow_home"` to your PowerShell profile (`$PROFILE`), or use WSL2 where `export` in `.bashrc` persists.
+- **Windows: bash install script won't run in PowerShell or cmd**: the multi-line variable expansion in Option 1 uses bash syntax. Use Option 1b (PowerShell) or WSL2.
+- **Never install without constraint files**: plain `pip install apache-airflow` or `uv pip install apache-airflow` almost always produces a broken install due to conflicting transitive dependencies. Always use the official `--constraint` URL for your Airflow version and Python version.
+- **`AIRFLOW_HOME` must be consistent**: Airflow stores its database, config, and DAGs relative to `AIRFLOW_HOME`. If you open a new terminal and forget to set it, `airflow standalone` initializes a *fresh* second Airflow instance in `~/airflow`, and your DAGs won't appear. Set `AIRFLOW_HOME` in your shell profile or always `cd` to the project folder and export before running Airflow.
+- **Airflow 3.x uses `airflow api-server`, not `airflow webserver`**: guides written for Airflow 2.x say `airflow webserver`. In Airflow 3.x, the web UI is served by `airflow api-server --port 8080`. Using the old command will fail or start nothing.
+- **DAGs don't appear immediately**: the scheduler picks up new DAG files every 30-60 seconds (configurable). If your DAG is missing, wait a minute, then check `airflow dags list` for import errors (a syntax error in the Python file will silently prevent loading).
+- **`load_examples = True` by default**: Airflow ships with ~20 example DAGs. They clutter the UI when learning. Set `load_examples = False` in `airflow.cfg` and run `airflow db migrate` to remove them.
+- **SQLite only supports one active process**: with `LocalExecutor` or `CeleryExecutor`, multiple workers try to write the SQLite database concurrently and will fail. SQLite is only suitable for `SequentialExecutor` (one task at a time), which is the default for learning. Upgrade to PostgreSQL when you need parallelism.
+- **Port 8080 already in use**: if something else is on port 8080 (another Airflow, Jupyter, a local server), the API server won't start. Change the port with `airflow api-server --port 8090` or stop the conflicting process first.
 
 
 
@@ -410,7 +410,7 @@ with DAG(
     pass  # add tasks here
 ```
 
-> **On screen:** Graph view of a simple DAG (2–3 tasks) in the UI.
+> **On screen:** Graph view of a simple DAG (2-3 tasks) in the UI.
 
 1. **Testing**:
 

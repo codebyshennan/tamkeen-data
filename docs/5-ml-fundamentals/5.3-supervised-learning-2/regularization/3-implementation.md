@@ -8,7 +8,7 @@ objectives:
 
 # Implementing Regularization
 
-**After this lesson:** you can explain the core ideas in “Implementing Regularization” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Implementing Regularization and try the examples in your own notebook.
 
 ## Overview
 
@@ -19,7 +19,7 @@ Using **`Ridge`**, **`Lasso`**, **`ElasticNet`** (and related) in sklearn: pipel
 
 ### Simple Example with Ridge Regression
 
-Let's start with a basic example that shows how to implement Ridge Regression, one of the most common regularization techniques.
+Start with a basic example that shows how to implement Ridge Regression, one of the most common regularization techniques.
 
 #### Ridge on scaled features (regression)
 
@@ -75,7 +75,7 @@ y_pred = ridge.predict(X_test_scaled)
 
 ## Real-World Example: House Price Prediction
 
-Let's look at a more practical example that you might encounter in the real world - predicting house prices.
+look at a more practical example that you might encounter in the real world - predicting house prices.
 
 #### Compare Lasso, Ridge, ElasticNet coefficients
 
@@ -109,7 +109,7 @@ data = pd.DataFrame({
 # Create target with noise
 # This simulates how house prices are determined
 data['price'] = (
-    200 * data['size'] 
+    200 * data['size']
     + 50000 * data['bedrooms']
     - 1000 * data['age']
     + 20000 * data['location_score']
@@ -121,7 +121,7 @@ X = data.drop('price', axis=1)  # Features
 y = data['price']               # Target
 
 # Scale features
-# This is crucial for regularization to work properly
+# This is important for regularization to work properly
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
@@ -132,7 +132,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # Compare different regularization methods
-# Let's see how different types of regularization perform
+# Look at how different types of regularization perform
 models = {
     'Lasso': Lasso(alpha=0.1),           # L1 regularization
     'Ridge': Ridge(alpha=0.1),           # L2 regularization
@@ -143,10 +143,10 @@ results = {}
 for name, model in models.items():
     # Train model
     model.fit(X_train, y_train)
-    
+
     # Make predictions
     y_pred = model.predict(X_test)
-    
+
     # Store results
     results[name] = {
         'R2': r2_score(y_test, y_pred),  # How well the model fits
@@ -161,7 +161,7 @@ x = np.arange(len(X.columns))
 width = 0.25
 
 for i, (name, result) in enumerate(results.items()):
-    plt.bar(x + i*width, result['Coefficients'], 
+    plt.bar(x + i*width, result['Coefficients'],
             width, label=name)
 
 plt.xlabel('Features')
@@ -188,7 +188,7 @@ for name, result in results.items():
       <span class="code-callout__title">Noise features in the dataset</span>
     </div>
     <div class="code-callout__body">
-      <p>4 meaningful features (size, bedrooms, age, location) plus 2 random noise columns. Regularization should shrink or zero the noise coefficients — this makes the comparison between methods observable in the coefficient chart.</p>
+      <p>4 meaningful features (size, bedrooms, age, location) plus 2 random noise columns. Regularization should shrink or zero the noise coefficients, this makes the comparison between methods observable in the coefficient chart.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="38-47" data-tint="2">
@@ -197,7 +197,7 @@ for name, result in results.items():
       <span class="code-callout__title">Scale before regularizing</span>
     </div>
     <div class="code-callout__body">
-      <p>Regularization penalizes coefficient magnitude — without scaling, features with large units (e.g. house size in sq ft) receive a lower penalty than small-unit features, distorting results. Always scale before applying L1 or L2 penalties.</p>
+      <p>Regularization penalizes coefficient magnitude, without scaling, features with large units (e.g. house size in sq ft) receive a lower penalty than small-unit features, distorting results. Always scale before applying L1 or L2 penalties.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="49-55" data-tint="3">
@@ -206,7 +206,7 @@ for name, result in results.items():
       <span class="code-callout__title">Three regularization methods</span>
     </div>
     <div class="code-callout__body">
-      <p><strong>Lasso</strong> (L1) drives noisy coefficients to exactly zero — acts as feature selection. <strong>Ridge</strong> (L2) shrinks all coefficients but rarely zeros them. <strong>ElasticNet</strong> blends both via <code>l1_ratio</code>. Same <code>alpha=0.1</code> lets you compare them fairly.</p>
+      <p><strong>Lasso</strong> (L1) drives noisy coefficients to exactly zero, acts as feature selection. <strong>Ridge</strong> (L2) shrinks all coefficients but rarely zeros them. <strong>ElasticNet</strong> blends both via <code>l1_ratio</code>. Same <code>alpha=0.1</code> lets you compare them fairly.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="57-70" data-tint="4">
@@ -215,7 +215,7 @@ for name, result in results.items():
       <span class="code-callout__title">Train and collect metrics</span>
     </div>
     <div class="code-callout__body">
-      <p>The loop trains each model and stores R², RMSE, and <code>coef_</code> vectors in one dict — a reusable pattern for comparing multiple estimators on the same split without repeating code.</p>
+      <p>The loop trains each model and stores R², RMSE, and <code>coef_</code> vectors in one dict, a reusable pattern for comparing multiple estimators on the same split without repeating code.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="72-88" data-tint="1">
@@ -224,7 +224,7 @@ for name, result in results.items():
       <span class="code-callout__title">Coefficient comparison chart</span>
     </div>
     <div class="code-callout__body">
-      <p>Grouped bar chart shows each method's coefficient per feature side-by-side. Lasso bars for noise features should be near zero; Ridge bars will be small but nonzero — the visual makes the L1 vs L2 difference concrete.</p>
+      <p>Grouped bar chart shows each method's coefficient per feature side-by-side. Lasso bars for noise features should be near zero; Ridge bars will be small but nonzero, the visual makes the L1 vs L2 difference concrete.</p>
     </div>
   </div>
 </aside>
@@ -567,16 +567,16 @@ Plot the regularization path to understand how different features are affected b
 
 ## Next Steps
 
-Now that you understand how to implement regularization, let's move on to [Advanced Topics](4-advanced.md) to explore more sophisticated techniques!
+Now that you understand how to implement regularization, move on to [Advanced Topics](4-advanced.md) to explore more sophisticated techniques!
 
 ## Gotchas
 
-- **`scaler.fit_transform(X)` on the whole dataset before splitting leaks test statistics** — the house pricing example calls `scaler.fit_transform(X)` then splits, so test-set mean and variance are baked into the scaler; always fit the scaler on `X_train` only and apply `transform` to `X_test`.
-- **`Lasso` with very small `alpha` can fail to converge within the default `max_iter=1000`** — sklearn prints a `ConvergenceWarning` silently in some environments; if coefficients look unexpectedly large, increase `max_iter` or scale features more aggressively before fitting.
-- **`GridSearchCV` with `scoring='neg_mean_squared_error'` returns negative scores** — `best_score_` will be a negative number (e.g., `-2.7e9`); learners who check this directly may think the model is broken when it is working correctly; take `abs()` or negate to get the actual MSE.
-- **`select_features_lasso` comparing `lasso.coef_ != 0` is sensitive to floating-point noise** — at some alpha values, Lasso leaves near-zero coefficients like `1e-15` that are not exactly zero; use a small threshold (`abs(coef) > 1e-6`) rather than strict `!= 0` to avoid retaining numerically negligible features.
-- **`compare_alphas` applies the same `alpha` to Ridge, Lasso, and ElasticNet, but the scales are not equivalent** — `alpha=10` on Lasso is far more aggressive than `alpha=10` on Ridge because L1 and L2 penalties have different magnitudes; a fair comparison requires tuning each method's alpha range independently.
-- **`n_nonzero_coef` counting on Ridge will always equal the number of features** — Ridge never produces exact zero coefficients; reporting sparsity for a Ridge model as a meaningful metric misleads learners into thinking Ridge performs feature selection.
+- **`scaler.fit_transform(X)` on the whole dataset before splitting leaks test statistics**: the house pricing example calls `scaler.fit_transform(X)` then splits, so test-set mean and variance are baked into the scaler; always fit the scaler on `X_train` only and apply `transform` to `X_test`.
+- **`Lasso` with very small `alpha` can fail to converge within the default `max_iter=1000`**: sklearn prints a `ConvergenceWarning` silently in some environments; if coefficients look unexpectedly large, increase `max_iter` or scale features more aggressively before fitting.
+- **`GridSearchCV` with `scoring='neg_mean_squared_error'` returns negative scores**: `best_score_` will be a negative number (e.g., `-2.7e9`); learners who check this directly may think the model is broken when it is working correctly; take `abs()` or negate to get the actual MSE.
+- **`select_features_lasso` comparing `lasso.coef_ != 0` is sensitive to floating-point noise**: at some alpha values, Lasso leaves near-zero coefficients like `1e-15` that are not exactly zero; use a small threshold (`abs(coef) > 1e-6`) rather than strict `!= 0` to avoid retaining numerically negligible features.
+- **`compare_alphas` applies the same `alpha` to Ridge, Lasso, and ElasticNet, but the scales are not equivalent**: `alpha=10` on Lasso is far more aggressive than `alpha=10` on Ridge because L1 and L2 penalties have different magnitudes; a fair comparison requires tuning each method's alpha range independently.
+- **`n_nonzero_coef` counting on Ridge will always equal the number of features**: Ridge never produces exact zero coefficients; reporting sparsity for a Ridge model as a meaningful metric misleads learners into thinking Ridge performs feature selection.
 
 ## Additional Resources
 

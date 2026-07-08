@@ -8,7 +8,7 @@ objectives:
 ---
 # Implementing SVM with Scikit-learn
 
-**After this lesson:** you can explain the core ideas in “Implementing SVM with Scikit-learn” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Implementing SVM with Scikit-learn and try the examples in your own notebook.
 
 ## Overview
 
@@ -19,7 +19,7 @@ objectives:
 
 ### Basic Setup
 
-First, let's import the necessary libraries:
+First, import the necessary libraries:
 
 #### Core imports for SVM in scikit-learn
 
@@ -42,7 +42,7 @@ import matplotlib.pyplot as plt
 
 ## Basic Classification Example
 
-Let's implement a complete binary classification example:
+Implement a complete binary classification example:
 
 #### Binary classification with scaling and RBF SVC
 
@@ -67,7 +67,7 @@ y = np.array([0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1])
 
 # Split data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, 
+    X, y,
     test_size=0.25,  # 25% for testing
     random_state=42  # For reproducibility
 )
@@ -96,15 +96,15 @@ def plot_decision_boundary(X, y, model, scaler):
     x_min, x_max = X[:, 0].min() - 1, X[:, 0].max() + 1
     y_min, y_max = X[:, 1].min() - 1, X[:, 1].max() + 1
     xx, yy = np.meshgrid(np.arange(x_min, x_max, h), np.arange(y_min, y_max, h))
-    
+
     # Scale mesh grid points
     mesh_points = np.c_[xx.ravel(), yy.ravel()]
     mesh_points_scaled = scaler.transform(mesh_points)
-    
+
     # Get predictions
     Z = model.predict(mesh_points_scaled)
     Z = Z.reshape(xx.shape)
-    
+
     # Plot decision boundary
     plt.figure(figsize=(10, 6))
     plt.contourf(xx, yy, Z, alpha=0.4)
@@ -126,7 +126,7 @@ def plot_decision_boundary(X, y, model, scaler):
       <span class="code-callout__title">2D labeled dataset</span>
     </div>
     <div class="code-callout__body">
-      <p><code>make_classification</code> generates two clearly separated 2D clusters — a toy problem where SVM should achieve near-perfect accuracy. <code>n_features=2</code> keeps it visualizable.</p>
+      <p><code>make_classification</code> generates two clearly separated 2D clusters, a toy problem where SVM should achieve near-perfect accuracy. <code>n_features=2</code> keeps it visualizable.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="21-25" data-tint="2">
@@ -135,7 +135,7 @@ def plot_decision_boundary(X, y, model, scaler):
       <span class="code-callout__title">Scale before SVM</span>
     </div>
     <div class="code-callout__body">
-      <p>SVM finds the maximum-margin hyperplane — a geometry problem. If one feature spans 0–1000 and another 0–1, the large-scale feature dominates the margin calculation. Always <code>StandardScaler</code> before fitting.</p>
+      <p>SVM finds the maximum-margin hyperplane, a geometry problem. If one feature spans 0-1000 and another 0-1, the large-scale feature dominates the margin calculation. Always <code>StandardScaler</code> before fitting.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="27-29" data-tint="3">
@@ -153,7 +153,7 @@ def plot_decision_boundary(X, y, model, scaler):
       <span class="code-callout__title">Decision boundary meshgrid</span>
     </div>
     <div class="code-callout__body">
-      <p><code>np.meshgrid</code> creates a dense grid of (x, y) points covering the feature space. Predicting every point and reshaping back reveals which region belongs to which class — <code>contourf</code> fills these regions with color.</p>
+      <p><code>np.meshgrid</code> creates a dense grid of (x, y) points covering the feature space. Predicting every point and reshaping back reveals which region belongs to which class, <code>contourf</code> fills these regions with color.</p>
     </div>
   </div>
 </aside>
@@ -166,7 +166,7 @@ Model accuracy: 1.00
 **Explanation:**
 1. **Data Creation**: We create a simple 2D dataset with two clearly separated classes
 2. **Data Splitting**: We divide the data into training (75%) and testing (25%) sets
-3. **Feature Scaling**: This is crucial for SVM as it's sensitive to the scale of input features
+3. **Feature Scaling**: This is important for SVM as it's sensitive to the scale of input features
 4. **Model Training**: We use the SVC classifier with an RBF kernel, which works well for many problems
 5. **Evaluation**: We check model accuracy on the test set
 6. **Visualization**: The included function can visualize the decision boundary to help understand how SVM separates the classes
@@ -175,7 +175,7 @@ Note that scaling is performed separately on the training and testing data to pr
 
 ## Multiclass Classification
 
-SVM naturally extends to multiple classes. Let's implement a complete example using the Iris dataset:
+SVM naturally extends to multiple classes. Implement a complete example using the Iris dataset:
 
 #### Multiclass Iris classification
 
@@ -283,7 +283,7 @@ def plot_iris_decision_boundary(X, y, model, scaler, feature_idx=(0, 1)):
       <span class="code-callout__title">Imports</span>
     </div>
     <div class="code-callout__body">
-      <p>Brings in the Iris loader, <code>SVC</code>, scaling, splitting, and the classification report — everything needed for a multiclass pipeline.</p>
+      <p>Brings in the Iris loader, <code>SVC</code>, scaling, splitting, and the classification report, everything needed for a multiclass pipeline.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="10-15" data-tint="2">
@@ -301,7 +301,7 @@ def plot_iris_decision_boundary(X, y, model, scaler, feature_idx=(0, 1)):
       <span class="code-callout__title">Split and scale</span>
     </div>
     <div class="code-callout__body">
-      <p>A 75/25 split followed by <code>StandardScaler</code> fit on training data only — the test set is transformed using training statistics to prevent leakage.</p>
+      <p>A 75/25 split followed by <code>StandardScaler</code> fit on training data only, the test set is transformed using training statistics to prevent leakage.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="29-36" data-tint="4">
@@ -319,7 +319,7 @@ def plot_iris_decision_boundary(X, y, model, scaler, feature_idx=(0, 1)):
       <span class="code-callout__title">Predict and report</span>
     </div>
     <div class="code-callout__body">
-      <p><code>classification_report</code> prints per-class precision, recall, and F1 — far more informative than a single accuracy number for multiclass problems.</p>
+      <p><code>classification_report</code> prints per-class precision, recall, and F1, far more informative than a single accuracy number for multiclass problems.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="49-88" data-tint="2">
@@ -473,7 +473,7 @@ def plot_svr_results():
       <span class="code-callout__title">Imports</span>
     </div>
     <div class="code-callout__body">
-      <p>Imports <code>SVR</code> instead of <code>SVC</code> — the regression variant of the SVM family.</p>
+      <p>Imports <code>SVR</code> instead of <code>SVC</code>, the regression variant of the SVM family.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="7-25" data-tint="2">
@@ -509,7 +509,7 @@ def plot_svr_results():
       <span class="code-callout__title">Evaluate and predict</span>
     </div>
     <div class="code-callout__body">
-      <p>MSE and R² measure regression quality. A new house is then scaled with the same fitted scaler before prediction — never refit on the test point.</p>
+      <p>MSE and R² measure regression quality. A new house is then scaled with the same fitted scaler before prediction, never refit on the test point.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="68-91" data-tint="2">
@@ -518,7 +518,7 @@ def plot_svr_results():
       <span class="code-callout__title">1D plot helper</span>
     </div>
     <div class="code-callout__body">
-      <p>Reduces to a single feature (square footage) and refits SVR to produce a smooth curve that can be plotted — a common trick for visualizing high-dimensional regressors.</p>
+      <p>Reduces to a single feature (square footage) and refits SVR to produce a smooth curve that can be plotted, a common trick for visualizing high-dimensional regressors.</p>
     </div>
   </div>
 </aside>
@@ -533,7 +533,7 @@ Predicted price for new house: $261.62k
 
 **Explanation:**
 1. **Data**: We create a dataset of house features (square footage, bedrooms, age) and their prices
-2. **Scaling**: As with classification, feature scaling is crucial for SVR
+2. **Scaling**: As with classification, feature scaling is important for SVR
 3. **SVR Parameters**:
    - **C**: Controls the trade-off between model complexity and allowing errors
    - **epsilon**: Defines the width of the tube where errors are ignored
@@ -546,7 +546,7 @@ SVR works by finding a function that deviates from the observed targets by at mo
 
 ## Parameter Tuning
 
-Finding the optimal parameters is crucial for SVM performance. Here's how to use Grid Search:
+Finding the optimal parameters is important for SVM performance. Here's how to use Grid Search:
 
 #### GridSearchCV for SVC hyperparameters
 
@@ -696,7 +696,7 @@ def plot_param_performance():
       <span class="code-callout__title">GridSearchCV setup</span>
     </div>
     <div class="code-callout__body">
-      <p>5-fold CV with <code>n_jobs=-1</code> runs folds in parallel. Each of the 32 combinations is evaluated 5 times — 160 fits total — so this uses all CPU cores.</p>
+      <p>5-fold CV with <code>n_jobs=-1</code> runs folds in parallel. Each of the 32 combinations is evaluated 5 times, 160 fits total, so this uses all CPU cores.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="50-65" data-tint="1">
@@ -810,7 +810,7 @@ def compare_c_values():
       <span class="code-callout__title">Imports</span>
     </div>
     <div class="code-callout__body">
-      <p>Swaps <code>train_test_split</code> for <code>cross_val_score</code> and <code>KFold</code> — the tools needed for proper k-fold evaluation.</p>
+      <p>Swaps <code>train_test_split</code> for <code>cross_val_score</code> and <code>KFold</code>, the tools needed for proper k-fold evaluation.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="8-15" data-tint="2">
@@ -819,7 +819,7 @@ def compare_c_values():
       <span class="code-callout__title">Load and scale</span>
     </div>
     <div class="code-callout__body">
-      <p>Breast cancer dataset (569 samples, 30 features). <code>fit_transform</code> is used here because no held-out test set exists — scaling and CV are the entire evaluation.</p>
+      <p>Breast cancer dataset (569 samples, 30 features). <code>fit_transform</code> is used here because no held-out test set exists, scaling and CV are the entire evaluation.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="17-29" data-tint="3">
@@ -851,7 +851,7 @@ Mean CV score: 0.979 (+/- 0.014)
 **Explanation:**
 1. **Cross-Validation**:
    - Instead of a single train-test split, we use multiple splits (folds)
-   - This gives a more robust estimate of model performance
+   - This gives a more reliable estimate of model performance
    - We can see the variation in performance across different data subsets
    - The visualization shows how the C parameter affects model performance
 
@@ -951,7 +951,7 @@ print(classification_report(y_test, model_smote.predict(X_test_scaled)))
       <span class="code-callout__title">Imbalanced dataset</span>
     </div>
     <div class="code-callout__body">
-      <p>100 majority-class points vs 20 minority-class points — a 5:1 ratio that would cause a naive model to mostly predict the majority class.</p>
+      <p>100 majority-class points vs 20 minority-class points, a 5:1 ratio that would cause a naive model to mostly predict the majority class.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="15-23" data-tint="3">
@@ -969,7 +969,7 @@ print(classification_report(y_test, model_smote.predict(X_test_scaled)))
       <span class="code-callout__title">Method 1: class weights</span>
     </div>
     <div class="code-callout__body">
-      <p><code>class_weight='balanced'</code> tells SVC to upweight the minority class inversely proportional to its frequency — no resampling required.</p>
+      <p><code>class_weight='balanced'</code> tells SVC to upweight the minority class inversely proportional to its frequency, no resampling required.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="29-34" data-tint="1">
@@ -1080,7 +1080,7 @@ def show_important_features(model, vectorizer, n=10):
       <span class="code-callout__title">Imports</span>
     </div>
     <div class="code-callout__body">
-      <p>Adds <code>TfidfVectorizer</code> — the bridge between raw text and the numeric feature space SVM requires.</p>
+      <p>Adds <code>TfidfVectorizer</code>, the bridge between raw text and the numeric feature space SVM requires.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-22" data-tint="2">
@@ -1089,7 +1089,7 @@ def show_important_features(model, vectorizer, n=10):
       <span class="code-callout__title">Text dataset</span>
     </div>
     <div class="code-callout__body">
-      <p>Six short reviews labeled positive (1) or negative (0). The 50/50 split is intentionally aggressive given the tiny dataset — in practice use at least 80/20.</p>
+      <p>Six short reviews labeled positive (1) or negative (0). The 50/50 split is intentionally aggressive given the tiny dataset, in practice use at least 80/20.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="24-31" data-tint="3">
@@ -1098,7 +1098,7 @@ def show_important_features(model, vectorizer, n=10):
       <span class="code-callout__title">TF-IDF vectorization</span>
     </div>
     <div class="code-callout__body">
-      <p>Fit the vectorizer on training documents only, then <code>transform</code> test documents — the same train-only-fit principle as <code>StandardScaler</code>. <code>stop_words='english'</code> drops common words like "the".</p>
+      <p>Fit the vectorizer on training documents only, then <code>transform</code> test documents, the same train-only-fit principle as <code>StandardScaler</code>. <code>stop_words='english'</code> drops common words like "the".</p>
     </div>
   </div>
   <div class="code-callout" data-lines="33-39" data-tint="4">
@@ -1129,12 +1129,12 @@ def show_important_features(model, vectorizer, n=10):
 
 ## Gotchas
 
-- **Calling `scaler.transform` on unscaled test data after fitting on already-scaled train data** — If you accidentally call `scaler.fit_transform(X_train_scaled)` a second time (i.e., the input is already scaled), the scaler fits to a near-zero-mean near-unit-variance distribution and rescales it again, producing subtly wrong features without raising any error.
-- **Using `SVC` without `probability=True` then calling `predict_proba`** — `SVC` raises `AttributeError: predict_proba is not available when probability=False` if you call `predict_proba` on a default `SVC`. You must set `probability=True` at construction, which triggers Platt scaling via cross-validation — noticeably slowing training.
-- **Setting `max_iter` too low and getting a `ConvergenceWarning`** — The default `max_iter=-1` (no limit) is correct for most cases, but tutorials sometimes set `max_iter=100` to speed up demos. If the solver hasn't converged, scikit-learn raises a `ConvergenceWarning` and returns a partially fitted model that may have poor accuracy. Never ignore this warning.
-- **Using `SVC` for multiclass without knowing its default strategy** — `SVC` uses one-vs-one (OVO) by default for multiclass problems. With k classes this creates k(k-1)/2 binary classifiers, which scales quadratically. For many classes, `LinearSVC` with one-vs-rest or `decision_function_shape='ovr'` is faster and often equally accurate.
-- **Applying SVR with the default `epsilon=0.1` for data on very different scales** — `SVR`'s epsilon-insensitive tube is in the same units as the target variable. If your target is in the thousands (e.g., house prices), `epsilon=0.1` means the tube is essentially zero-width and the model will overfit. Scale both features and the target before using `SVR`.
-- **Plotting decision boundaries on unscaled coordinates when the model was trained on scaled data** — The mesh grid in visualization examples must be built in the original feature space and then transformed with `scaler.transform` before prediction. Building the mesh on scaled coordinates and plotting on raw axes shifts the boundary visually, making it look like the model drew a wrong boundary.
+- **Calling `scaler.transform` on unscaled test data after fitting on already-scaled train data**: If you accidentally call `scaler.fit_transform(X_train_scaled)` a second time (i.e., the input is already scaled), the scaler fits to a near-zero-mean near-unit-variance distribution and rescales it again, producing subtly wrong features without raising any error.
+- **Using `SVC` without `probability=True` then calling `predict_proba`**: `SVC` raises `AttributeError: predict_proba is not available when probability=False` if you call `predict_proba` on a default `SVC`. You must set `probability=True` at construction, which triggers Platt scaling via cross-validation, noticeably slowing training.
+- **Setting `max_iter` too low and getting a `ConvergenceWarning`**: The default `max_iter=-1` (no limit) is correct for most cases, but tutorials sometimes set `max_iter=100` to speed up demos. If the solver hasn't converged, scikit-learn raises a `ConvergenceWarning` and returns a partially fitted model that may have poor accuracy. Never ignore this warning.
+- **Using `SVC` for multiclass without knowing its default strategy**: `SVC` uses one-vs-one (OVO) by default for multiclass problems. With k classes this creates k(k-1)/2 binary classifiers, which scales quadratically. For many classes, `LinearSVC` with one-vs-rest or `decision_function_shape='ovr'` is faster and often equally accurate.
+- **Applying SVR with the default `epsilon=0.1` for data on very different scales**: `SVR`'s epsilon-insensitive tube is in the same units as the target variable. If your target is in the thousands (e.g., house prices), `epsilon=0.1` means the tube is essentially zero-width and the model will overfit. Scale both features and the target before using `SVR`.
+- **Plotting decision boundaries on unscaled coordinates when the model was trained on scaled data**: The mesh grid in visualization examples must be built in the original feature space and then transformed with `scaler.transform` before prediction. Building the mesh on scaled coordinates and plotting on raw axes shifts the boundary visually, making it look like the model drew a wrong boundary.
 
 ## Common Mistakes to Avoid
 
@@ -1146,7 +1146,7 @@ def show_important_features(model, vectorizer, n=10):
    # Wrong
    model = SVC()
    model.fit(X_train, y_train)
-   
+
    # Right
    scaler = StandardScaler()
    X_train_scaled = scaler.fit_transform(X_train)
@@ -1162,7 +1162,7 @@ def show_important_features(model, vectorizer, n=10):
    ```python
    # Wrong
    model = SVC()
-   
+
    # Right
    model = SVC(class_weight='balanced')
    ```
@@ -1174,7 +1174,7 @@ def show_important_features(model, vectorizer, n=10):
    ```python
    # Wrong for text data
    model = SVC(kernel='rbf')
-   
+
    # Right for text data
    model = SVC(kernel='linear')
    ```

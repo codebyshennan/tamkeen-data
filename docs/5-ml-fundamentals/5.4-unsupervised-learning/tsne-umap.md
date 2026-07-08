@@ -3,13 +3,13 @@ reading_minutes: 18
 objectives:
   - "Compare t-SNE and UMAP on what they preserve (local neighbourhoods) and how they differ on speed, global structure, and `transform` support for new points."
   - "Preprocess high-dimensional data before either method: scale, then optionally PCA down to ~50 dimensions to cut runtime and noise."
-  - "Run both on the same data and tune key parameters — `perplexity` for t-SNE, `n_neighbors` / `min_dist` for UMAP — by checking visual stability across seeds."
+  - "Run both on the same data and tune key parameters, `perplexity` for t-SNE, `n_neighbors` / `min_dist` for UMAP, by checking visual stability across seeds."
   - "Avoid over-interpreting embeddings: cluster sizes and inter-cluster distances are not meaningful, and UMAP can find structure even in pure noise."
 ---
 
 # t-SNE and UMAP: Visualizing Complex Data in 2D
 
-**After this lesson:** you can explain the core ideas in “t-SNE and UMAP: Visualizing Complex Data in 2D” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain t-SNE and UMAP: Visualizing Complex Data in 2D and try the examples in your own notebook.
 
 ## Overview
 
@@ -40,9 +40,9 @@ UMAP is like a more efficient version of t-SNE - it's like having a GPS that can
 
 {% include mermaid-diagram.html src="5-ml-fundamentals/5.4-unsupervised-learning/diagrams/tsne-umap-1.mmd" %}
 
-*Always run PCA first to reduce to ~50 dimensions before feeding into t-SNE — it speeds up computation significantly and removes noise.*
+*Always run PCA first to reduce to ~50 dimensions before feeding into t-SNE, it speeds up computation significantly and removes noise.*
 
-Let's break it down with a simple example:
+break it down with a simple example:
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -102,7 +102,7 @@ plt.close()
       <span class="code-callout__title">Data, t-SNE, and UMAP Fits</span>
     </div>
     <div class="code-callout__body">
-      <p>Generate four well-separated blobs then project with both t-SNE and UMAP; <code>random_state=42</code> makes results reproducible — t-SNE especially varies across runs without fixing the seed.</p>
+      <p>Generate four well-separated blobs then project with both t-SNE and UMAP; <code>random_state=42</code> makes results reproducible, t-SNE especially varies across runs without fixing the seed.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="18-44" data-tint="2">
@@ -111,7 +111,7 @@ plt.close()
       <span class="code-callout__title">Three-panel Comparison</span>
     </div>
     <div class="code-callout__body">
-      <p>Left shows original 2D space; middle is t-SNE; right is UMAP — comparing all three side by side lets you see how each method transforms the cluster structure.</p>
+      <p>Left shows original 2D space; middle is t-SNE; right is UMAP, comparing all three side by side lets you see how each method transforms the cluster structure.</p>
     </div>
   </div>
 </aside>
@@ -119,7 +119,7 @@ plt.close()
 
 ## Real-World Example: Visualizing Handwritten Digits
 
-Let's see how these tools can help us visualize complex data:
+Look at how these tools can help us visualize complex data:
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -183,7 +183,7 @@ plt.close()
       <span class="code-callout__title">Side-by-side Digit Maps</span>
     </div>
     <div class="code-callout__body">
-      <p>Use <code>tab10</code> colormap for 10 distinct digit classes; the colorbar maps colors to digit values — clean separation of color clusters indicates the embedding preserved class structure.</p>
+      <p>Use <code>tab10</code> colormap for 10 distinct digit classes; the colorbar maps colors to digit values, clean separation of color clusters indicates the embedding preserved class structure.</p>
     </div>
   </div>
 </aside>
@@ -219,11 +219,11 @@ plt.close()
 def preprocess_for_visualization(X):
     # Remove missing values
     X = np.nan_to_num(X)
-    
+
     # Scale data
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
-    
+
     return X_scaled
 ```
 
@@ -283,12 +283,12 @@ def find_best_parameters(X, y):
 
 ## Gotchas
 
-- **Cluster sizes and inter-cluster distances in t-SNE plots are not meaningful** — t-SNE distorts global structure to preserve local neighborhoods; two clusters appearing close together or one cluster appearing larger than another does not mean they are more similar or more spread out in the original space.
-- **Different runs of t-SNE produce different layouts** — even with `random_state` set, changing `perplexity` or the number of iterations yields a completely different-looking plot. Always fix the seed and treat the layout as one possible visualization, not a unique ground truth.
-- **t-SNE does not support `transform` on new data** — unlike PCA or UMAP, sklearn's `TSNE` has no `transform` method; you must refit the entire embedding if a new point arrives, making it unsuitable for production pipelines.
-- **Running t-SNE on raw high-dimensional data is slow and noisy** — the recommendation (noted in the lesson) to run PCA first down to ~50 dimensions is critical: skipping it on data with hundreds of features multiplies runtime significantly and can degrade embedding quality.
-- **UMAP embeddings can look deceptively clean with random data** — UMAP is prone to finding structure even in pure noise; always verify that clusters visible in a UMAP plot correspond to real structure by checking cluster quality in the original feature space.
-- **Perplexity must be smaller than the number of samples** — setting `perplexity` larger than `n_samples - 1` raises a `ValueError`; a rule of thumb is perplexity between 5 and 50 for most datasets.
+- **Cluster sizes and inter-cluster distances in t-SNE plots are not meaningful**: t-SNE distorts global structure to preserve local neighborhoods; two clusters appearing close together or one cluster appearing larger than another does not mean they are more similar or more spread out in the original space.
+- **Different runs of t-SNE produce different layouts**: even with `random_state` set, changing `perplexity` or the number of iterations yields a completely different-looking plot. Always fix the seed and treat the layout as one possible visualization, not a unique ground truth.
+- **t-SNE does not support `transform` on new data**: unlike PCA or UMAP, sklearn's `TSNE` has no `transform` method; you must refit the entire embedding if a new point arrives, making it unsuitable for production pipelines.
+- **Running t-SNE on raw high-dimensional data is slow and noisy**: the recommendation (noted in the lesson) to run PCA first down to ~50 dimensions is critical: skipping it on data with hundreds of features multiplies runtime significantly and can degrade embedding quality.
+- **UMAP embeddings can look deceptively clean with random data**: UMAP is prone to finding structure even in pure noise; always verify that clusters visible in a UMAP plot correspond to real structure by checking cluster quality in the original feature space.
+- **Perplexity must be smaller than the number of samples**: setting `perplexity` larger than `n_samples - 1` raises a `ValueError`; a rule of thumb is perplexity between 5 and 50 for most datasets.
 
 ## Further Reading
 

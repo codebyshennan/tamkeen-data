@@ -22,8 +22,8 @@ By the end of this module, you should be able to choose chart types for a goal, 
 
 ## Module-wide resources
 
-- [Quick start](quick-start.md) — short Matplotlib warm-up
-- [Beginner's guide](beginners-guide.md) — concepts in plain language
+- [Quick start](quick-start.md), short Matplotlib warm-up
+- [Beginner's guide](beginners-guide.md), concepts in plain language
 - [Choosing the right visualization](choosing-the-right-visualization.md)
 - [Common mistakes](common-mistakes.md)
 - [Best practices](best-practices-guide.md)

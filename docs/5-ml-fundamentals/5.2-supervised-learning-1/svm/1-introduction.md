@@ -7,7 +7,7 @@ objectives:
 ---
 # Introduction to Support Vector Machines (SVM)
 
-**After this lesson:** you can explain the core ideas in “Introduction to Support Vector Machines (SVM)” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Introduction to Support Vector Machines (SVM) and try the examples in your own notebook.
 
 ## Overview
 
@@ -99,7 +99,7 @@ Imagine you're building a fence to separate two types of plants in your garden:
 
 3. **Probabilistic Predictions**
    - When you need probability scores
-   - When uncertainty estimates are crucial
+   - When uncertainty estimates are important
 
 ## Advantages and Limitations
 
@@ -148,11 +148,11 @@ Imagine you're building a fence to separate two types of plants in your garden:
 
 ## Gotchas
 
-- **Expecting SVM to output probabilities by default** — Unlike logistic regression, `SVC` does not output calibrated probabilities unless you pass `probability=True` at construction time. Even then, the probabilities are estimated via Platt scaling (an internal cross-validation) which significantly increases training time and can still be poorly calibrated for small datasets.
-- **Forgetting to scale features before training** — SVM is one of the most scaling-sensitive algorithms. A single feature with values in the thousands will dominate the margin calculation, causing the hyperplane to nearly ignore all other features. Always apply `StandardScaler` (or `MinMaxScaler`) before fitting any SVM model.
-- **Assuming SVM handles class imbalance automatically** — By default, `SVC` gives equal weight to all training samples. With imbalanced classes (e.g., 95% negative, 5% positive), the model may learn to always predict the majority class and still achieve high accuracy. Use `class_weight='balanced'` to account for imbalance.
-- **Treating the number of support vectors as fixed** — The number of support vectors increases with a higher `C` (more points near or inside the margin are included) and decreases with lower `C`. A model with very many support vectors relative to training size is likely overfitting, even though the training accuracy looks high.
-- **Interpreting the SVM boundary as a global rule** — The SVM boundary is defined entirely by the support vectors. Adding or removing a non-support-vector training point has no effect on the decision boundary, but adding a single point near the boundary can shift it dramatically. This is a feature (memory efficiency) but also a fragility in adversarial or noisy settings.
+- **Expecting SVM to output probabilities by default**: Unlike logistic regression, `SVC` does not output calibrated probabilities unless you pass `probability=True` at construction time. Even then, the probabilities are estimated via Platt scaling (an internal cross-validation) which significantly increases training time and can still be poorly calibrated for small datasets.
+- **Forgetting to scale features before training**: SVM is one of the most scaling-sensitive algorithms. A single feature with values in the thousands will dominate the margin calculation, causing the hyperplane to nearly ignore all other features. Always apply `StandardScaler` (or `MinMaxScaler`) before fitting any SVM model.
+- **Assuming SVM handles class imbalance automatically**: By default, `SVC` gives equal weight to all training samples. With imbalanced classes (e.g., 95% negative, 5% positive), the model may learn to always predict the majority class and still achieve high accuracy. Use `class_weight='balanced'` to account for imbalance.
+- **Treating the number of support vectors as fixed**: The number of support vectors increases with a higher `C` (more points near or inside the margin are included) and decreases with lower `C`. A model with very many support vectors relative to training size is likely overfitting, even though the training accuracy looks high.
+- **Interpreting the SVM boundary as a global rule**: The SVM boundary is defined entirely by the support vectors. Adding or removing a non-support-vector training point has no effect on the decision boundary, but adding a single point near the boundary can shift it dramatically. This is a feature (memory efficiency) but also a fragility in adversarial or noisy settings.
 
 ## Next Steps
 

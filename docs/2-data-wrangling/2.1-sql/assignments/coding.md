@@ -47,15 +47,15 @@ Submit your solution as a SQL script (`.sql`) with:
 - **Where:** [Basic operations](../basic-operations.md).
 - **Think:**
   - **Tracks > $0.99:** `SELECT … WHERE UnitPrice > 0.99`. Find which table holds prices first (browse the schema in DBeaver).
-  - **"Love" in name:** `LIKE '%Love%'`. Case sensitivity depends on the DB collation — SQLite is case-insensitive for ASCII `LIKE` by default.
-  - **Sales Agents:** filter on the title column in `employees`. Look up exact wording — it may be "Sales Support Agent" rather than the prompt's "Sales Agent".
+  - **"Love" in name:** `LIKE '%Love%'`. Case sensitivity depends on the DB collation, SQLite is case-insensitive for ASCII `LIKE` by default.
+  - **Sales Agents:** filter on the title column in `employees`. Look up exact wording, it may be "Sales Support Agent" rather than the prompt's "Sales Agent".
 
 ## 2. Advanced filtering and sorting
-- **Where:** [Basic operations](../basic-operations.md) — `WHERE`, `BETWEEN`, `ORDER BY`.
+- **Where:** [Basic operations](../basic-operations.md), `WHERE`, `BETWEEN`, `ORDER BY`.
 - **Think:**
-  - **5–10 min tracks:** the column is `Milliseconds`. 5 min = 300,000 ms, 10 min = 600,000 ms. `BETWEEN 300000 AND 600000`.
+  - **5-10 min tracks:** the column is `Milliseconds`. 5 min = 300,000 ms, 10 min = 600,000 ms. `BETWEEN 300000 AND 600000`.
   - **First-name starts with 'A', sorted by country:** `WHERE FirstName LIKE 'A%' ORDER BY Country`.
-  - **Invoices from 2009:** date column on `invoices` — filter with `strftime('%Y', InvoiceDate) = '2009'` (SQLite) or `EXTRACT(YEAR FROM …)` (Postgres). Sort by `Total DESC`.
+  - **Invoices from 2009:** date column on `invoices`, filter with `strftime('%Y', InvoiceDate) = '2009'` (SQLite) or `EXTRACT(YEAR FROM …)` (Postgres). Sort by `Total DESC`.
 
 ## 3. Aggregation and grouping
 - **Where:** [Aggregations](../aggregations.md).
@@ -74,7 +74,7 @@ Submit your solution as a SQL script (`.sql`) with:
 - **Where:** [Joins](../joins.md).
 - **Think:**
   - **Albums with artist names:** classic two-table join on `ArtistId`.
-  - **Tracks with album / genre / media type:** four-way join — start from `tracks` and join out to each lookup table.
+  - **Tracks with album / genre / media type:** four-way join, start from `tracks` and join out to each lookup table.
   - **Tracks purchased per customer:** chain `customers → invoices → invoice_items`, then `SUM(Quantity)` grouped by customer.
 - **Starter:**
   ```sql
@@ -86,7 +86,7 @@ Submit your solution as a SQL script (`.sql`) with:
 ## Common pitfalls
 - Confusing `WHERE` (per row) with `HAVING` (per group).
 - Forgetting `GROUP BY` for every non-aggregated select column.
-- Joining on the wrong foreign key — read the schema diagram first.
+- Joining on the wrong foreign key, read the schema diagram first.
 - SQLite stores dates as text; comparisons need `strftime` or string-prefix tricks.
 
 </details>

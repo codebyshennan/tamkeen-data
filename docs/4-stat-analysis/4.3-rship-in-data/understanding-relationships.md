@@ -9,7 +9,7 @@ objectives:
 
 # Understanding Relationships in Data: Connecting the Dots
 
-**After this lesson:** you can explain the core ideas in “Understanding Relationships in Data: Connecting the Dots” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Understanding Relationships in Data: Connecting the Dots and try the examples in your own notebook.
 
 ## Overview
 
@@ -55,7 +55,7 @@ Think about rain and umbrellas. When it rains, you probably see more umbrellas o
 
 ## Taking Our First Steps: Basic Concepts You Need to Know
 
-Before we dive into the exciting world of finding relationships, let's get comfortable with a few simple ideas.
+Before looking for relationships, get comfortable with a few simple ideas.
 
 ### What Are We Actually Looking At?
 
@@ -99,7 +99,7 @@ Understanding these helps us know what kind of relationships we can look for!
 
 ## The Different Ways Things Can Be Connected
 
-Let's explore the main ways two pieces of information can be related to each other.
+we will look at the main ways two pieces of information can be related to each other.
 
 ### 1. Straight-Line Connections (Linear Relationships)
 
@@ -137,7 +137,7 @@ Sometimes, two things have no meaningful connection whatsoever.
 
 ## How Information Can Be Connected
 
-Let's explore some ways data points can be linked to each other:
+we will look at some ways data points can be linked to each other:
 
 ### One-to-One Connections
 
@@ -202,7 +202,7 @@ Relationships can move in different directions:
 
 ### When One Goes Up and One Goes Down (Negative Relationship)
 
-**Think of it like:** A seesaw on the playground – when one side goes up, the other side goes down.
+**Think of it like:** A seesaw on the playground, when one side goes up, the other side goes down.
 
 **Real-Life Examples:**
 - Higher prices → Lower demand for products
@@ -213,9 +213,9 @@ Relationships can move in different directions:
 
 Some relationships follow more complicated patterns that aren't simply positive or negative.
 
-**Think of it like:** The temperature throughout the year – it goes up and down in a cyclical pattern.
+**Think of it like:** The temperature throughout the year, it goes up and down in a cyclical pattern.
 
-**Real-Life Example:** The relationship between age and height from birth to adulthood – we grow quickly as children, then slower as teenagers, then stop growing, and eventually might even shrink slightly in old age.
+**Real-Life Example:** The relationship between age and height from birth to adulthood, we grow quickly as children, then slower as teenagers, then stop growing, and eventually might even shrink slightly in old age.
 
 ## Common Mistakes People Make When Looking at Relationships
 
@@ -241,7 +241,7 @@ Not all relationships follow neat, straight lines. Some curve or follow other pa
 
 **Think of it like:** Expecting a puppy to grow at the same rate throughout its life. In reality, puppies grow quickly at first, then their growth slows down dramatically.
 
-**Real-Life Example:** The relationship between practice time and skill improvement often shows diminishing returns – beginners improve quickly with practice, but experts gain smaller improvements from the same amount of practice.
+**Real-Life Example:** The relationship between practice time and skill improvement often shows diminishing returns, beginners improve quickly with practice, but experts gain smaller improvements from the same amount of practice.
 
 ### Forgetting That Relationships Can Change
 
@@ -251,7 +251,7 @@ Relationships between things aren't always fixed forever.
 
 **Real-Life Example:** The relationship between technology skills and employability changes as technology evolves. Skills that were highly valuable 20 years ago (like programming in certain outdated languages) may be less valuable today.
 
-## Let's Try It Yourself!
+## Try it yourself
 
 Ready to put your new knowledge into action? Here's a simple activity:
 
@@ -290,11 +290,11 @@ Ready to put your new knowledge into action? Here's a simple activity:
 
 ## Gotchas
 
-- **Confusing association with causation from a scatter plot alone** — A scatter plot showing two variables moving together does not mean one drives the other; a third confounding variable (like season, income, or geography) may be causing both. Always ask "what else could explain this pattern?" before drawing conclusions.
-- **Missing non-linear relationships by looking only at correlation numbers** — A strong U-shaped or cyclical relationship between two variables can produce a Pearson r near zero, making you conclude there is no relationship. Plot the data first; a single number never replaces a visualisation.
-- **Interpreting ordinal data as ratio-scale** — Customer satisfaction on a 1–5 scale is ordinal: the gap between 1 and 2 is not necessarily the same as between 4 and 5. Treating it as ratio data and computing arithmetic means or Pearson correlations can produce meaningless results.
-- **Ignoring outliers in scatter plots** — One extreme data point can dominate the visual impression of a relationship (or lack of one). Always check whether a perceived pattern survives after investigating unusual points; a single billionaire in a neighborhood income dataset can make a flat relationship look steeply positive.
-- **Assuming a relationship is stable across all subgroups (Simpson's Paradox)** — An overall positive relationship can reverse or disappear within subgroups of the data. For example, a drug might appear effective overall while being ineffective (or harmful) in every individual age group. Always stratify by key variables before accepting an aggregate finding.
+- **Confusing association with causation from a scatter plot alone**: A scatter plot showing two variables moving together does not mean one drives the other; a third confounding variable (like season, income, or geography) may be causing both. Always ask "what else could explain this pattern?" before drawing conclusions.
+- **Missing non-linear relationships by looking only at correlation numbers**: A strong U-shaped or cyclical relationship between two variables can produce a Pearson r near zero, making you conclude there is no relationship. Plot the data first; a single number never replaces a visualisation.
+- **Interpreting ordinal data as ratio-scale**: Customer satisfaction on a 1-5 scale is ordinal: the gap between 1 and 2 is not necessarily the same as between 4 and 5. Treating it as ratio data and computing arithmetic means or Pearson correlations can produce meaningless results.
+- **Ignoring outliers in scatter plots**: One extreme data point can dominate the visual impression of a relationship (or lack of one). Always check whether a perceived pattern survives after investigating unusual points; a single billionaire in a neighborhood income dataset can make a flat relationship look steeply positive.
+- **Assuming a relationship is stable across all subgroups (Simpson's Paradox)**: An overall positive relationship can reverse or disappear within subgroups of the data. For example, a drug might appear effective overall while being ineffective (or harmful) in every individual age group. Always stratify by key variables before accepting an aggregate finding.
 
 ## Additional Resources for Curious Minds
 

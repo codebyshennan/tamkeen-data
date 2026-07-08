@@ -2,14 +2,14 @@
 reading_minutes: 30
 objectives:
   - Identify a feature as numerical (continuous/discrete), categorical (nominal/ordinal), temporal, or text and pick the right preprocessing.
-  - Apply `StandardScaler` and `MinMaxScaler` correctly — fit on training data only, transform both train and test.
+  - Apply `StandardScaler` and `MinMaxScaler` correctly, fit on training data only, transform both train and test.
   - One-hot encode nominal categories with `pd.get_dummies` and reserve label encoding for ordinals with a real order.
   - Avoid the common pitfalls (fitting before splitting, false ordering on nominals, high-cardinality blow-up).
 ---
 
 # Feature Engineering in Machine Learning: A Beginner's Guide
 
-**After this lesson:** you can explain the core ideas in “Feature Engineering in Machine Learning: A Beginner's Guide” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Feature Engineering in Machine Learning: A Beginner's Guide and try the examples in your own notebook.
 
 ## Overview
 
@@ -28,7 +28,7 @@ Feature engineering is the process of creating new features or transforming exis
 
 ### Why Should You Care About Feature Engineering?
 
-Think of feature engineering as the secret sauce that can make or break your machine learning project. Here's why it's crucial:
+Think of feature engineering as the secret sauce that can make or break your machine learning project. Here's why it's important:
 
 1. **Better Model Performance**: Just like a well-prepared dish tastes better, well-engineered features help your model make better predictions
 2. **Domain Knowledge**: It lets you incorporate your understanding of the problem into the model
@@ -39,7 +39,7 @@ Think of feature engineering as the secret sauce that can make or break your mac
 
 ## Types of Features: Understanding Your Ingredients
 
-Before we start cooking (engineering features), let's understand the different types of ingredients (features) we might work with:
+Before we start cooking (engineering features), get clear on the different types of ingredients (features) we might work with:
 
 ### 1. Numerical Features: The Measurable Ingredients
 
@@ -91,7 +91,7 @@ These features contain written information. Think of them like recipe instructio
 
 ## Why This Matters
 
-Understanding these different types of features is crucial because:
+Understanding these different types of features is important because:
 
 1. Each type requires different preparation techniques
 2. The way you handle features affects your model's performance
@@ -140,7 +140,7 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
 
-# Let's create some example data
+# Create some example data
 data = {
     'height_cm': [150, 160, 170, 180, 190],
     'weight_kg': [45, 55, 65, 75, 85]
@@ -218,7 +218,7 @@ plt.show()
       <span class="code-callout__title">Side-by-side Plot</span>
     </div>
     <div class="code-callout__body">
-      <p>Scatter plots before and after scaling show the relationship shape is unchanged—only the axis units shift to standardized values.</p>
+      <p>Scatter plots before and after scaling show the relationship shape is unchanged, only the axis units shift to standardized values.</p>
     </div>
   </div>
 </aside>
@@ -329,7 +329,7 @@ plt.show()
       <span class="code-callout__title">Comparison Plot</span>
     </div>
     <div class="code-callout__body">
-      <p>Side-by-side scatter plots show the original scale vs the [0, 1] range—the relationship shape is preserved while units change.</p>
+      <p>Side-by-side scatter plots show the original scale vs the [0, 1] range, the relationship shape is preserved while units change.</p>
     </div>
   </div>
 </aside>
@@ -447,7 +447,7 @@ plt.show()
       <span class="code-callout__title">One-Hot Encoding</span>
     </div>
     <div class="code-callout__body">
-      <p><code>pd.get_dummies</code> expands each categorical column into binary indicator columns—one per unique value.</p>
+      <p><code>pd.get_dummies</code> expands each categorical column into binary indicator columns, one per unique value.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="23-39" data-tint="3">
@@ -555,7 +555,7 @@ plt.show()
       <span class="code-callout__title">Visual Comparison</span>
     </div>
     <div class="code-callout__body">
-      <p>Count plots before and after encoding show that frequency distributions are preserved—only the axis labels change from strings to integers.</p>
+      <p>Count plots before and after encoding show that frequency distributions are preserved, only the axis labels change from strings to integers.</p>
     </div>
   </div>
 </aside>
@@ -601,9 +601,9 @@ Label Encoded Data:
 
 ## Gotchas
 
-- **Fitting the scaler on the full dataset before splitting** — `StandardScaler` and `MinMaxScaler` must be `fit` on training data only, then `transform` applied to both train and test; fitting on all data leaks test statistics into the model and produces optimistic evaluation scores.
-- **Using label encoding for nominal (unordered) categories** — assigning integers 0, 1, 2 to `red`, `blue`, `green` implies an ordering (`green > blue > red`) that doesn't exist; most linear and distance-based models will treat the numbers as meaningful, introducing false relationships.
-- **One-hot encoding high-cardinality columns without capping** — a column with 500 unique city names expands to 500 binary columns, increasing memory use and giving tree-based models many near-zero-importance splits to waste time on; consider target encoding, frequency encoding, or grouping rare values into an "other" bucket.
-- **Forgetting to apply the same transformations to new data at inference time** — the scaler fitted during training must be saved (e.g., with `joblib`) and reused on every new batch; re-fitting on new data changes the reference statistics and breaks calibration.
-- **Creating interaction features that include the target column** — dividing price by square footage is fine when both are features, but deriving a feature that is mathematically dependent on your target variable (`y`) introduces data leakage and produces inflated training scores.
-- **Deriving time-based features without respecting temporal order** — if you compute `day_of_week` or `hour_of_day` without first sorting and splitting on time, future information can appear in training folds and the model will not generalise to truly unseen future dates.
+- **Fitting the scaler on the full dataset before splitting**: `StandardScaler` and `MinMaxScaler` must be `fit` on training data only, then `transform` applied to both train and test; fitting on all data leaks test statistics into the model and produces optimistic evaluation scores.
+- **Using label encoding for nominal (unordered) categories**: assigning integers 0, 1, 2 to `red`, `blue`, `green` implies an ordering (`green > blue > red`) that doesn't exist; most linear and distance-based models will treat the numbers as meaningful, introducing false relationships.
+- **One-hot encoding high-cardinality columns without capping**: a column with 500 unique city names expands to 500 binary columns, increasing memory use and giving tree-based models many near-zero-importance splits to waste time on; consider target encoding, frequency encoding, or grouping rare values into an "other" bucket.
+- **Forgetting to apply the same transformations to new data at inference time**: the scaler fitted during training must be saved (e.g., with `joblib`) and reused on every new batch; re-fitting on new data changes the reference statistics and breaks calibration.
+- **Creating interaction features that include the target column**: dividing price by square footage is fine when both are features, but deriving a feature that is mathematically dependent on your target variable (`y`) introduces data leakage and produces inflated training scores.
+- **Deriving time-based features without respecting temporal order**: if you compute `day_of_week` or `hour_of_day` without first sorting and splitting on time, future information can appear in training folds and the model will not generalise to truly unseen future dates.

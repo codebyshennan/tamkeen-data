@@ -1,6 +1,6 @@
 # Data Visualization Glossary
 
-**After this lesson:** you can explain the core ideas in “Data Visualization Glossary” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Data Visualization Glossary and try the examples in your own notebook.
 
 A simple guide to common terms you'll encounter in data visualization. Use it when a lesson uses a word you have not seen yet; definitions stay short on purpose.
 
@@ -155,8 +155,8 @@ Using the same style throughout:
 
 ## Gotchas
 
-- **"Scale" does not always mean "axis range"** — in data visualization, scale can refer to the axis range (how many units fit on the axis), the measurement level of your data (nominal, ordinal, interval, ratio), or the size at which a chart is displayed; these are different concepts and the word is often used loosely in tutorials.
-- **"Trend" implies a direction, not just a pattern** — calling any repeating shape in a time series a "trend" is imprecise; a seasonal spike that recurs every summer is a seasonal pattern, not a trend; a trend is a long-run directional change (upward or downward) that persists across seasons.
-- **A "baseline" of zero is not always correct** — for charts encoding length (bar charts), starting at zero is required to keep bar heights proportional; for charts encoding position (line charts, scatter plots), the baseline should match the meaningful lower bound of the data, which may not be zero.
-- **"Categorical" and "discrete" are not synonyms** — categorical data groups observations into named classes (e.g. fruit types) with no numeric meaning; discrete data is numeric but takes only specific values (e.g. number of orders); a bar chart suits both, but the interpretation differs.
-- **Tooltips in a glossary context means hover-over labels, but the term is overloaded** — in some tools "tooltip" also refers to the entire pop-up panel that appears on hover, including formatted numbers and metadata; when reading documentation, check whether the tool distinguishes between a "label" (static) and a "tooltip" (interactive).
+- **"Scale" does not always mean "axis range"**: in data visualization, scale can refer to the axis range (how many units fit on the axis), the measurement level of your data (nominal, ordinal, interval, ratio), or the size at which a chart is displayed; these are different concepts and the word is often used loosely in tutorials.
+- **"Trend" implies a direction, not just a pattern**: calling any repeating shape in a time series a "trend" is imprecise; a seasonal spike that recurs every summer is a seasonal pattern, not a trend; a trend is a long-run directional change (upward or downward) that persists across seasons.
+- **A "baseline" of zero is not always correct**: for charts encoding length (bar charts), starting at zero is required to keep bar heights proportional; for charts encoding position (line charts, scatter plots), the baseline should match the meaningful lower bound of the data, which may not be zero.
+- **"Categorical" and "discrete" are not synonyms**: categorical data groups observations into named classes (e.g. fruit types) with no numeric meaning; discrete data is numeric but takes only specific values (e.g. number of orders); a bar chart suits both, but the interpretation differs.
+- **Tooltips in a glossary context means hover-over labels, but the term is overloaded**: in some tools "tooltip" also refers to the entire pop-up panel that appears on hover, including formatted numbers and metadata; when reading documentation, check whether the tool distinguishes between a "label" (static) and a "tooltip" (interactive).

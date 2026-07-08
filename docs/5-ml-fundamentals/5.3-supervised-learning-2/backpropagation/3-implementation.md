@@ -8,7 +8,7 @@ objectives:
 
 # Implementing Backpropagation
 
-**After this lesson:** you can explain the core ideas in “Implementing Backpropagation” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Implementing Backpropagation and try the examples in your own notebook.
 
 ## Overview
 
@@ -17,11 +17,11 @@ Numerical vs symbolic gradients, modular layers, and debugging shape mistakes wh
 
 ## Getting Started
 
-Before we dive into the code, let's understand what we're building. We'll create a simple neural network that can learn from data. Think of it like teaching a computer to recognize patterns, similar to how you might teach a child to recognize different animals.
+Before we dive into the code, get clear on what we're building. We'll create a simple neural network that can learn from data. Think of it like teaching a computer to recognize patterns, similar to how you might teach a child to recognize different animals.
 
 ## Basic Implementation
 
-Let's start with a basic implementation of backpropagation. This is like the core recipe for our neural network:
+Start with a basic implementation of backpropagation. This is like the core recipe for our neural network:
 
 #### `backward_pass` skeleton
 
@@ -32,28 +32,28 @@ Let's start with a basic implementation of backpropagation. This is like the cor
 def backward_pass(network, x, y, cache):
     """
     Compute gradients using backpropagation
-    
+
     This function is like a teacher correcting a student's work:
     1. It looks at the final answer (output)
     2. Compares it with the correct answer (target)
     3. Figures out how to adjust the student's thinking (weights)
-    
+
     Parameters:
     - network: List of layer parameters (like the student's knowledge)
     - x: Input data (like the questions)
     - y: True labels (like the correct answers)
     - cache: Dictionary containing intermediate values (like the student's work)
-    
+
     Returns:
     - gradients: Dictionary of gradients for each parameter (like correction notes)
     """
     gradients = {}
     L = len(network)  # Number of layers
-    
+
     # Output layer error
     # This is like checking how far off the final answer is
     dz = cache['a' + str(L)] - y
-    
+
     # Backpropagate through layers
     # This is like going back through the student's work to find where they went wrong
     for l in reversed(range(L)):
@@ -65,7 +65,7 @@ def backward_pass(network, x, y, cache):
         gradients['db' + str(l)] = np.sum(
             dz, axis=1, keepdims=True
         )
-        
+
         if l > 0:
             # Error for previous layer
             # This is like tracing back to earlier mistakes
@@ -74,7 +74,7 @@ def backward_pass(network, x, y, cache):
             ) * activation_derivative(
                 cache['z' + str(l-1)]
             )
-    
+
     return gradients
 {% endhighlight %}
 
@@ -86,7 +86,7 @@ def backward_pass(network, x, y, cache):
       <span class="code-callout__title">Output layer error (δ)</span>
     </div>
     <div class="code-callout__body">
-      <p><code>dz = prediction - y</code> is the gradient of MSE loss w.r.t. the output pre-activation — the "how wrong were we" signal that flows backward through every layer.</p>
+      <p><code>dz = prediction - y</code> is the gradient of MSE loss w.r.t. the output pre-activation, the "how wrong were we" signal that flows backward through every layer.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="28-36" data-tint="2">
@@ -95,7 +95,7 @@ def backward_pass(network, x, y, cache):
       <span class="code-callout__title">Weight &amp; bias gradients</span>
     </div>
     <div class="code-callout__body">
-      <p><code>dW = dz · aᵀ</code> — outer product of upstream error and previous activations. <code>db = Σ dz</code> sums across the batch dimension. These gradients are what the optimizer uses to update each layer's parameters.</p>
+      <p><code>dW = dz · aᵀ</code>, outer product of upstream error and previous activations. <code>db = Σ dz</code> sums across the batch dimension. These gradients are what the optimizer uses to update each layer's parameters.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="38-45" data-tint="3">
@@ -104,7 +104,7 @@ def backward_pass(network, x, y, cache):
       <span class="code-callout__title">Propagate error backward</span>
     </div>
     <div class="code-callout__body">
-      <p><code>dz = Wᵀ · dz × σ′(z)</code> — the chain rule in action. Transposing W "routes" the error back through the same weights that carried it forward. Multiplying by the activation derivative applies the local gradient at that layer.</p>
+      <p><code>dz = Wᵀ · dz × σ′(z)</code>, the chain rule in action. Transposing W "routes" the error back through the same weights that carried it forward. Multiplying by the activation derivative applies the local gradient at that layer.</p>
     </div>
   </div>
 </aside>
@@ -166,7 +166,7 @@ def tanh_derivative(x):
       <span class="code-callout__title">ReLU derivative</span>
     </div>
     <div class="code-callout__body">
-      <p><code>np.where</code> returns 1 where the pre-activation was positive and 0 elsewhere — the "dead neuron" property: no gradient flows for negative inputs.</p>
+      <p><code>np.where</code> returns 1 where the pre-activation was positive and 0 elsewhere, the "dead neuron" property: no gradient flows for negative inputs.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="21-28" data-tint="3">
@@ -183,7 +183,7 @@ def tanh_derivative(x):
 
 ## Complete Implementation
 
-Now, let's put it all together in a complete neural network class:
+Now, put it all together in a complete neural network class:
 
 #### `NeuralNetwork` class (educational)
 
@@ -380,7 +380,7 @@ class NeuralNetwork:
       <span class="code-callout__title">Weight initialisation</span>
     </div>
     <div class="code-callout__body">
-      <p>Weights are drawn from a zero-mean Gaussian scaled by 0.01 to keep activations in a well-behaved range at the start of training. Biases are initialised to zero — a safe default for fully-connected layers.</p>
+      <p>Weights are drawn from a zero-mean Gaussian scaled by 0.01 to keep activations in a well-behaved range at the start of training. Biases are initialised to zero, a safe default for fully-connected layers.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="27-54" data-tint="2">
@@ -425,7 +425,7 @@ class NeuralNetwork:
       <span class="code-callout__title">Activation &amp; loss helpers</span>
     </div>
     <div class="code-callout__body">
-      <p>Sigmoid activation and its derivative are defined here for self-containment. <code>compute_loss</code> uses MSE — switch to binary cross-entropy for classification tasks.</p>
+      <p>Sigmoid activation and its derivative are defined here for self-containment. <code>compute_loss</code> uses MSE, switch to binary cross-entropy for classification tasks.</p>
     </div>
   </div>
 </aside>
@@ -433,7 +433,7 @@ class NeuralNetwork:
 
 ## Usage Example
 
-Let's see how to use our neural network:
+Look at how to use our neural network:
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -477,7 +477,7 @@ predictions = network.forward(X)['a' + str(len(network.weights))]
       <span class="code-callout__title">Synthetic data</span>
     </div>
     <div class="code-callout__body">
-      <p>Random data is used here for illustration. Note the shape convention: <code>(features, samples)</code> — columns are samples, rows are features — the opposite of the pandas/sklearn convention.</p>
+      <p>Random data is used here for illustration. Note the shape convention: <code>(features, samples)</code>, columns are samples, rows are features, the opposite of the pandas/sklearn convention.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="13-15" data-tint="3">
@@ -516,7 +516,7 @@ Epoch 900, Loss: 0.9784079813400143
 
 ## Visualizing the Training Process
 
-Let's add some visualization to help understand what's happening:
+Add some visualization to help understand what's happening:
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -595,7 +595,7 @@ plot_training_process(network, X, y)
       <span class="code-callout__title">Driver code</span>
     </div>
     <div class="code-callout__body">
-      <p>Creates a fresh <code>[2, 3, 1]</code> network and random data, then calls the function — a minimal end-to-end demo you can run directly in a notebook cell.</p>
+      <p>Creates a fresh <code>[2, 3, 1]</code> network and random data, then calls the function, a minimal end-to-end demo you can run directly in a notebook cell.</p>
     </div>
   </div>
 </aside>
@@ -659,12 +659,12 @@ plot_training_process(network, X, y)
 
 ## Gotchas
 
-- **Shape convention mismatch between examples** — The `NeuralNetwork` class uses the `(features, samples)` convention (columns are samples), which is the *opposite* of the pandas/sklearn convention. Passing an `(n_samples, n_features)` array directly into `network.train` silently transposes the learning problem and produces garbage gradients.
-- **Recomputing loss from the forward pass cache instead of re-running forward** — In the `train` method, `compute_loss` reads `cache['a…']` from the *same* forward pass that generated the current gradients. Calling `forward` again would be wasteful but also consistent; mixing cache reads with extra forward calls is a common source of subtle training-loop bugs.
-- **Initializing weights with `randn * 0.01` for every architecture** — Scaling by 0.01 keeps initial activations small for shallow nets but starves gradients in deep nets. Use Xavier init for tanh/sigmoid layers and He init for ReLU; the scaffolding here always uses `* 0.01`, which will fail silently on deeper architectures.
-- **The training loop doesn't shuffle data between epochs** — The `train` method runs gradient descent on the full dataset in a single step each epoch. Without mini-batching or shuffling, the gradient estimate is just full-batch GD; on real data this means the model sees the same ordering every time, which can introduce bias.
-- **`activation_derivative` is hard-coded to sigmoid throughout** — The `NeuralNetwork` class uses sigmoid both as the activation and for its derivative. Swapping `activation` to ReLU without also updating `activation_derivative` produces incorrect gradients with no error — the network trains silently with the wrong math.
-- **Gradient checking is described but not wired up** — The "Best Practices" section recommends gradient checking, but there is no utility function for it in this file. Without a numerical gradient check, a subtle sign error or index-off-by-one in the backward pass can go undetected for many training runs.
+- **Shape convention mismatch between examples**: The `NeuralNetwork` class uses the `(features, samples)` convention (columns are samples), which is the *opposite* of the pandas/sklearn convention. Passing an `(n_samples, n_features)` array directly into `network.train` silently transposes the learning problem and produces garbage gradients.
+- **Recomputing loss from the forward pass cache instead of re-running forward**: In the `train` method, `compute_loss` reads `cache['a…']` from the *same* forward pass that generated the current gradients. Calling `forward` again would be wasteful but also consistent; mixing cache reads with extra forward calls is a common source of subtle training-loop bugs.
+- **Initializing weights with `randn * 0.01` for every architecture**, Scaling by 0.01 keeps initial activations small for shallow nets but starves gradients in deep nets. Use Xavier init for tanh/sigmoid layers and He init for ReLU; the scaffolding here always uses `* 0.01`, which will fail silently on deeper architectures.
+- **The training loop doesn't shuffle data between epochs**: The `train` method runs gradient descent on the full dataset in a single step each epoch. Without mini-batching or shuffling, the gradient estimate is just full-batch GD; on real data this means the model sees the same ordering every time, which can introduce bias.
+- **`activation_derivative` is hard-coded to sigmoid throughout**: The `NeuralNetwork` class uses sigmoid both as the activation and for its derivative. Swapping `activation` to ReLU without also updating `activation_derivative` produces incorrect gradients with no error, the network trains silently with the wrong math.
+- **Gradient checking is described but not wired up**: The "Best Practices" section recommends gradient checking, but there is no utility function for it in this file. Without a numerical gradient check, a subtle sign error or index-off-by-one in the backward pass can go undetected for many training runs.
 
 ## Additional Resources
 

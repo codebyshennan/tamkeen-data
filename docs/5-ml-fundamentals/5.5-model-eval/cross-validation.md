@@ -3,13 +3,13 @@ reading_minutes: 22
 objectives:
   - "Replace a single train/test split with **k-fold cross-validation** to get a lower-variance estimate of out-of-sample performance."
   - "Pick the right CV variant: `KFold` for iid data, `StratifiedKFold` for class imbalance, `GroupKFold` for grouped samples, `TimeSeriesSplit` for temporal data."
-  - "Use `cross_val_score` / `cross_validate` with a `Pipeline` so preprocessing is fit on each train fold only — never on the validation fold."
+  - "Use `cross_val_score` / `cross_validate` with a `Pipeline` so preprocessing is fit on each train fold only, never on the validation fold."
   - "Avoid the everyday traps: leakage from pre-split scaling, the wrong CV strategy for time series, and reading a single fold's score as the model's true performance."
 ---
 
 # Cross-Validation
 
-**After this lesson:** you can explain the core ideas in “Cross-Validation” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Cross-Validation and try the examples in your own notebook.
 
 ## Overview
 
@@ -66,7 +66,7 @@ Think of cross validation like a sports team's practice games:
 
 ### K-Fold Cross-Validation
 
-The data is divided into k subsets (called "folds"), and the holdout method is repeated k times. Each time, one fold serves as the validation set while the remaining k-1 folds form the training set.
+The data is divided into k subsets (called "folds"), and the holdout method is repeated k times. Each time, one fold is the validation set while the remaining k-1 folds form the training set.
 
 ![K-Fold Visualization](assets/kfold_visualization.png)
 
@@ -173,7 +173,7 @@ LOOCV mean score: 0.490
 
 ### Stratified K-Fold Cross-Validation
 
-Similar to K-Fold but ensures that the proportions of samples for each class are the same in each fold. This is crucial for imbalanced datasets.
+Similar to K-Fold but ensures that the proportions of samples for each class are the same in each fold. This is important for imbalanced datasets.
 
 ![Stratified vs Regular K-Fold](assets/stratified_vs_regular_kfold.png)
 
@@ -227,7 +227,7 @@ print(f"Regular CV: {regular_scores.mean():.3f} (+/- {regular_scores.std() * 2:.
       <span class="code-callout__title">Imbalanced Dataset</span>
     </div>
     <div class="code-callout__body">
-      <p>Use <code>make_classification</code> with <code>weights=[0.8, 0.2]</code> to build an 80/20 split with real signal, then sort by label so the classes are grouped — this is where regular k-fold goes wrong and the minority class is easily lost.</p>
+      <p>Use <code>make_classification</code> with <code>weights=[0.8, 0.2]</code> to build an 80/20 split with real signal, then sort by label so the classes are grouped, this is where regular k-fold goes wrong and the minority class is easily lost.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="17-24" data-tint="2">
@@ -245,7 +245,7 @@ print(f"Regular CV: {regular_scores.mean():.3f} (+/- {regular_scores.std() * 2:.
       <span class="code-callout__title">Compare Results</span>
     </div>
     <div class="code-callout__body">
-      <p>Printing mean ± 2 std for both strategies shows that stratified scoring is more stable — smaller standard deviation — on imbalanced data.</p>
+      <p>Printing mean ± 2 std for both strategies shows that stratified scoring is more stable, smaller standard deviation, on imbalanced data.</p>
     </div>
   </div>
 </aside>
@@ -309,7 +309,7 @@ for fold, (train_idx, val_idx) in enumerate(tscv.split(X)):
       <span class="code-callout__title">Print Fold Ranges</span>
     </div>
     <div class="code-callout__body">
-      <p>Each fold's train block grows while validation always starts immediately after the last training point — confirming no temporal leakage across folds.</p>
+      <p>Each fold's train block grows while validation always starts immediately after the last training point, confirming no temporal leakage across folds.</p>
     </div>
   </div>
 </aside>
@@ -353,7 +353,7 @@ Fold 5:
 
 ## Practical Example: Credit Risk Prediction
 
-Let's see how cross validation helps in a real-world scenario:
+Look at how cross validation helps in a real-world scenario:
 
 #### Manual fold loop with a pipeline (credit risk sketch)
 
@@ -526,12 +526,12 @@ choose_optimal_k(X, y)
 
 ## Gotchas
 
-- **Fitting preprocessing on the full dataset before CV** — Calling `scaler.fit_transform(X)` before passing `X` to `cross_val_score` leaks test-fold statistics into the training folds; the scaler has "seen" the test samples during fitting, inflating CV scores; always wrap preprocessing inside a `Pipeline` so each fold's scaler fits only on that fold's training data.
-- **Using plain `KFold` on imbalanced classification data** — Random splits can create folds where a minority class appears in only one or two folds, causing wildly variable CV scores; use `StratifiedKFold` for classification tasks so each fold preserves the original class distribution.
-- **Shuffling time-series data before CV** — For temporal data, randomly shuffling rows before `KFold` creates future-leakage: the model trains on data from next week and validates on data from last week; use `TimeSeriesSplit` to ensure validation always comes after the training window.
-- **Treating cross-validation score as an unbiased test set estimate** — CV score is an unbiased estimate of *model-selection* performance, but if you use it to also pick hyperparameters, the score is optimistic; use nested CV or a held-out test set that is never touched during model selection.
-- **Choosing `k=2` or `k=3` to save time** — Very small `k` means each fold trains on only 50–67% of the data (k=2 trains on 50%, k=3 on 67%) and validates on the remaining 33–50%, producing high-variance score estimates with wide confidence intervals; `k=5` or `k=10` is standard and typically adds little extra computation for tabular data.
-- **Ignoring the standard deviation across folds** — Reporting only mean CV accuracy hides instability; a mean of 0.85 with std of 0.12 is far less trustworthy than a mean of 0.83 with std of 0.02; always report `mean ± 2*std` to convey the reliability of the estimate.
+- **Fitting preprocessing on the full dataset before CV**: Calling `scaler.fit_transform(X)` before passing `X` to `cross_val_score` leaks test-fold statistics into the training folds; the scaler has "seen" the test samples during fitting, inflating CV scores; always wrap preprocessing inside a `Pipeline` so each fold's scaler fits only on that fold's training data.
+- **Using plain `KFold` on imbalanced classification data**: Random splits can create folds where a minority class appears in only one or two folds, causing wildly variable CV scores; use `StratifiedKFold` for classification tasks so each fold preserves the original class distribution.
+- **Shuffling time-series data before CV**: For temporal data, randomly shuffling rows before `KFold` creates future-leakage: the model trains on data from next week and validates on data from last week; use `TimeSeriesSplit` to ensure validation always comes after the training window.
+- **Treating cross-validation score as an unbiased test set estimate**: CV score is an unbiased estimate of *model-selection* performance, but if you use it to also pick hyperparameters, the score is optimistic; use nested CV or a held-out test set that is never touched during model selection.
+- **Choosing `k=2` or `k=3` to save time**: Very small `k` means each fold trains on only 50-67% of the data (k=2 trains on 50%, k=3 on 67%) and validates on the remaining 33-50%, producing high-variance score estimates with wide confidence intervals; `k=5` or `k=10` is standard and typically adds little extra computation for tabular data.
+- **Ignoring the standard deviation across folds**: Reporting only mean CV accuracy hides instability; a mean of 0.85 with std of 0.12 is far less trustworthy than a mean of 0.83 with std of 0.02; always report `mean ± 2*std` to convey the reliability of the estimate.
 
 ## Additional Resources
 

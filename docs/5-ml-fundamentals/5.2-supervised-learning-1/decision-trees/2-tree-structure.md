@@ -8,7 +8,7 @@ objectives:
 ---
 # Understanding How Decision Trees Work
 
-**After this lesson:** you can explain the core ideas in “Understanding How Decision Trees Work” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Understanding How Decision Trees Work and try the examples in your own notebook.
 
 ## Overview
 
@@ -23,7 +23,7 @@ Think of building a decision tree like organizing a messy room. You want to crea
 
 ### Step-by-Step Example: Organizing Your Clothes
 
-Let's say you want to organize your clothes. You might ask:
+Suppose you want to organize your clothes. You might ask:
 
 1. "Is it a shirt or pants?" (First split)
 2. If shirt: "Is it casual or formal?" (Second split)
@@ -80,7 +80,7 @@ def calculate_gini(y):
 
     return gini
 
-# Let's try some examples
+# Try some examples
 perfect_group = np.array(['A', 'A', 'A', 'A', 'A'])  # All one class
 mixed_group = np.array(['A', 'A', 'B', 'B', 'C'])    # Mixed classes
 balanced_group = np.array(['A', 'A', 'B', 'B'])      # Perfectly balanced
@@ -152,7 +152,7 @@ def calculate_entropy(y):
 
     return entropy
 
-# Let's try the same examples
+# Try the same examples
 print(f"Perfect group entropy: {calculate_entropy(perfect_group):.4f}")
 print(f"Mixed group entropy: {calculate_entropy(mixed_group):.4f}")
 print(f"Balanced group entropy: {calculate_entropy(balanced_group):.4f}")
@@ -194,7 +194,7 @@ When we run this code, we'll see:
 
 ### Visual Comparison of Impurity Measures
 
-Let's visualize how these measures behave for different class distributions:
+Visualize how these measures behave for different class distributions:
 
 ##### Plot Gini vs entropy for binary class probability $p$
 
@@ -234,7 +234,7 @@ print("Entropy penalizes highly imbalanced splits slightly more than Gini.")
       <span class="code-callout__title">Closed-Form Values</span>
     </div>
     <div class="code-callout__body">
-      <p>Both curves are computed analytically over 100 probability values using the two-class formulas—no training required.</p>
+      <p>Both curves are computed analytically over 100 probability values using the two-class formulas, no training required.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="8-17" data-tint="2">
@@ -281,7 +281,7 @@ This visualization helps us understand that both measures:
 
 How does a decision tree find the best question to ask? It tries all possible features and all possible values for each feature.
 
-Let's implement a simple version of this search:
+Implement a simple version of this search:
 
 ##### Greedy search for one split (maximize information gain)
 
@@ -339,7 +339,7 @@ def find_best_split(X, y, feature_names):
     else:
         return None, None, 0.0
 
-# Let's create a simple dataset
+# Create a simple dataset
 X = np.array([
     [3, 1],  # Sample 1: temp=3, humidity=1
     [2, 3],  # Sample 2: temp=2, humidity=3
@@ -425,7 +425,7 @@ This example shows:
 
 ### Visualizing the Split Process
 
-Let's visualize the splitting process on a 2D dataset:
+Visualize the splitting process on a 2D dataset:
 
 ##### First split of a tree (`max_depth=1` stump)
 
@@ -669,7 +669,7 @@ print(f"Number of leaves at best depth: {leaf_counts[best_depth-1]}")
       <span class="code-callout__title">Run Sweep</span>
     </div>
     <div class="code-callout__body">
-      <p>Depths 1–10 are evaluated in a single call, returning four parallel lists aligned by depth index.</p>
+      <p>Depths 1-10 are evaluated in a single call, returning four parallel lists aligned by depth index.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="51-73" data-tint="3">
@@ -718,7 +718,7 @@ This example demonstrates:
    - But test accuracy usually peaks and then declines
    - This happens because the tree starts memorizing noise in the training data
 
-Let's also explore other stopping criteria:
+Explore other stopping criteria:
 
 ##### `min_samples_split` and `min_samples_leaf` vs unrestricted tree
 
@@ -811,7 +811,7 @@ for name, stats in stopping_results.items():
       <span class="code-callout__title">Tabular Summary</span>
     </div>
     <div class="code-callout__body">
-      <p>A formatted table prints all configurations side by side so you can see the accuracy–complexity trade-off at a glance.</p>
+      <p>A formatted table prints all configurations side by side so you can see the accuracy-complexity trade-off at a glance.</p>
     </div>
   </div>
 </aside>
@@ -841,7 +841,7 @@ This demonstrates two additional stopping criteria:
 
 2. **Minimum Samples Leaf**: The minimum number of samples required in a leaf node
    - Higher values ensure that leaf nodes aren't too small
-   - This makes predictions more robust and less sensitive to noise
+   - This makes predictions more reliable and less sensitive to noise
 
 ## Common Mistakes and How to Avoid Them
 
@@ -918,7 +918,7 @@ plt.show()
       <span class="code-callout__title">Noisy Moons Data</span>
     </div>
     <div class="code-callout__body">
-      <p><code>make_moons</code> with <code>noise=0.2</code> creates a two-class dataset with non-linear boundaries and overlapping points — ideal for showing overfitting.</p>
+      <p><code>make_moons</code> with <code>noise=0.2</code> creates a two-class dataset with non-linear boundaries and overlapping points, ideal for showing overfitting.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="11-33" data-tint="2">
@@ -1063,7 +1063,7 @@ Try building a simple decision tree by hand:
 
 {% highlight python %}
 # Example dataset: Iris flower features
-# Let's simplify to just two features for easy visualization
+# Simplify to two features for easy visualization
 from sklearn.datasets import load_iris
 import numpy as np
 import matplotlib.pyplot as plt
@@ -1196,13 +1196,13 @@ This exercise lets you:
 
 ## Gotchas
 
-- **Selecting `max_depth` based on the training accuracy curve alone** — the depth sweep shows training accuracy monotonically increasing with depth; you must look at the *test* accuracy curve (which peaks then drops) and use that peak as your depth guide, not the training curve.
-- **Confusing information gain of zero with a useless feature** — `find_best_split` will return zero gain if no feature can improve purity at all (e.g., the node is already pure); this is a valid stopping condition, not a bug in the implementation.
-- **Assuming Gini and entropy always produce the same tree structure** — the custom-impurity comparison shows Gini produces 127 nodes and entropy produces 117 on the same dataset; the split chosen at each node can differ, leading to structurally different trees even when final accuracy is similar.
-- **Picking `best_depth` via `np.argmax(test_scores)` on a single held-out split** — this optimises for one random 70/30 split and will overfit to that particular test partition; use cross-validation to select depth in practice rather than picking the single best score from one split.
-- **Misinterpreting impurity-based feature importance for correlated features** — if `proline` and `alcohol` are correlated in the Wine dataset, the tree may assign all importance to one and zero to the other depending on which it splits on first; this is a known limitation of single-tree importance (random forests with permutation importance are more reliable).
-- **Treating the threshold printed in `find_best_split` as a universal threshold** — the greedy algorithm finds the best split threshold for the *current node's subset* of data; a threshold of `temperature <= 3` at the root does not mean that threshold is meaningful deeper in the tree where the data distribution has already changed.
+- **Selecting `max_depth` based on the training accuracy curve alone**: the depth sweep shows training accuracy monotonically increasing with depth; you must look at the *test* accuracy curve (which peaks then drops) and use that peak as your depth guide, not the training curve.
+- **Confusing information gain of zero with a useless feature**: `find_best_split` will return zero gain if no feature can improve purity at all (e.g., the node is already pure); this is a valid stopping condition, not a bug in the implementation.
+- **Assuming Gini and entropy always produce the same tree structure**: the custom-impurity comparison shows Gini produces 127 nodes and entropy produces 117 on the same dataset; the split chosen at each node can differ, leading to structurally different trees even when final accuracy is similar.
+- **Picking `best_depth` via `np.argmax(test_scores)` on a single held-out split**: this optimises for one random 70/30 split and will overfit to that particular test partition; use cross-validation to select depth in practice rather than picking the single best score from one split.
+- **Misinterpreting impurity-based feature importance for correlated features**: if `proline` and `alcohol` are correlated in the Wine dataset, the tree may assign all importance to one and zero to the other depending on which it splits on first; this is a known limitation of single-tree importance (random forests with permutation importance are more reliable).
+- **Treating the threshold printed in `find_best_split` as a universal threshold**: the greedy algorithm finds the best split threshold for the *current node's subset* of data; a threshold of `temperature <= 3` at the root does not mean that threshold is meaningful deeper in the tree where the data distribution has already changed.
 
 ## Next Steps
 
-Now that you understand how trees are built, let's learn how to [implement them in Python](3-implementation.md)!
+Now that you understand how trees are built, learn how to [implement them in Python](3-implementation.md)!

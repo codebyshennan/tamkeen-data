@@ -1,6 +1,6 @@
 # NumPy Array Methods: Shape-Shifting Magic
 
-**After this lesson:** you can explain the core ideas in “NumPy Array Methods: Shape-Shifting Magic” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain NumPy Array Methods: Shape-Shifting Magic and try the examples in your own notebook.
 
 ### Video
 
@@ -8,7 +8,7 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/kYB8IZa5AuE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*3Blue1Brown — Linear transformations and matrices (Essence of linear algebra)*
+*3Blue1Brown, Linear transformations and matrices (Essence of linear algebra)*
 
 ## Overview
 
@@ -360,15 +360,15 @@ After: [1 1 2 3 4 5 6 9]
 
 - Use **reshape** when you need to change array dimensions
 - Remember: rows → columns with **transpose** or **.T**
-- Universal functions are super fast — use them
+- Universal functions are super fast, use them
 - **where** is great for conditional operations
 - Think about which axis you want when using statistics
 
 ## Common pitfalls
 
-- **NaN propagation** — Many reductions return **nan** if any element is **nan**; use **nanmean** and friends when appropriate.
-- **keepdims** — Forgetting **keepdims=True** can break broadcasting in the next step.
-- **In-place vs return** — Some methods modify the array; others return a new one—check the docs for the function you use.
+- **NaN propagation**: Many reductions return **nan** if any element is **nan**; use **nanmean** and friends when appropriate.
+- **keepdims**: Forgetting **keepdims=True** can break broadcasting in the next step.
+- **In-place vs return**: Some methods modify the array; others return a new one, check the docs for the function you use.
 
 ## Next steps
 

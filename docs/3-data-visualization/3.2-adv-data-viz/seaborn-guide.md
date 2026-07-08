@@ -1,12 +1,12 @@
 # Mastering Statistical Visualization with Seaborn
 
-**After this lesson:** you can explain the core ideas in "Mastering Statistical Visualization with Seaborn" and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Mastering Statistical Visualization with Seaborn and try the examples in your own notebook.
 
 > **Note:** This lesson is **code-first**. You should understand [Matplotlib basics](../3.1-intro-data-viz/matplotlib-basics.md) and [visualization principles](../3.1-intro-data-viz/visualization-principles.md) first so you can interpret what Seaborn is doing.
 
 ## Introduction
 
-Seaborn is your statistical visualization powerhouse — think of it as Matplotlib with a PhD in Statistics. It makes complex statistical visualizations both beautiful and informative with minimal code.
+Seaborn is your statistical visualization powerhouse, think of it as Matplotlib with a PhD in Statistics. It makes complex statistical visualizations both beautiful and informative with minimal code.
 
 ### Video Tutorial: Seaborn Data Visualization
 
@@ -35,21 +35,21 @@ Pick the right chart before writing any code. The wrong chart can hide the very 
 
 | Chart type | Use it when… | Skip it when… |
 |---|---|---|
-| **histplot + KDE** | Showing the shape of one numeric variable | Comparing > 3 groups — bars overlap badly |
-| **boxplot** | Comparing median and spread across 2–10 groups | You need to see the distribution shape (use violin) |
-| **violinplot** | You want full distribution shape per group | Sample size < 30 per group — KDE becomes unreliable |
+| **histplot + KDE** | Showing the shape of one numeric variable | Comparing > 3 groups, bars overlap badly |
+| **boxplot** | Comparing median and spread across 2-10 groups | You need to see the distribution shape (use violin) |
+| **violinplot** | You want full distribution shape per group | Sample size < 30 per group, KDE becomes unreliable |
 | **ecdfplot** | Reading off exact percentiles directly | Presenting to audiences unfamiliar with cumulative charts |
-| **scatterplot / regplot** | Exploring a linear relationship between two variables | > 5,000 points — use hexbin or sample down first |
-| **heatmap** | Correlation matrix or a pivot of two categoricals | More than ~15 variables — cells become unreadable |
+| **scatterplot / regplot** | Exploring a linear relationship between two variables | > 5,000 points, use hexbin or sample down first |
+| **heatmap** | Correlation matrix or a pivot of two categoricals | More than ~15 variables, cells become unreadable |
 | **clustermap** | Heatmap + revealing which variables cluster together | You need a fixed variable order (clustering reorders rows) |
-| **pairplot** | Quick multivariate overview of ≤ 6 variables | More than 8 variables — too slow and unreadable |
-| **FacetGrid / relplot col=** | Same chart repeated per category | More than ~8 panels — scrolling becomes the story |
+| **pairplot** | Quick multivariate overview of ≤ 6 variables | More than 8 variables, too slow and unreadable |
+| **FacetGrid / relplot col=** | Same chart repeated per category | More than ~8 panels, scrolling becomes the story |
 
 ## Getting Started
 
 ### Professional Setup
 
-> **Level:** Beginner — run this cell before any Seaborn code.
+> **Level:** Beginner, run this cell before any Seaborn code.
 
 Import Seaborn and Matplotlib and set global theme, palette, font scale, and `rcParams` for figure size and label sizes.
 
@@ -68,7 +68,7 @@ def setup_plotting_defaults():
         font="sans-serif",          # Modern font
         font_scale=1.1             # Slightly larger text
     )
-    
+
     # Figure aesthetics
     plt.rcParams.update({
         'figure.figsize': (10, 6),
@@ -84,14 +84,14 @@ setup_plotting_defaults()
 
 ### Data Loading & Inspection
 
-Load a built-in Seaborn dataset and return both the frame and a small dict of diagnostics. `sns.load_dataset` ships sample CSVs — no download needed.
+Load a built-in Seaborn dataset and return both the frame and a small dict of diagnostics. `sns.load_dataset` ships sample CSVs, no download needed.
 
 ```python
 def load_and_inspect_data(dataset_name="tips"):
     """Load and provide quick data overview"""
     # Load dataset
     data = sns.load_dataset(dataset_name)
-    
+
     # Quick inspection
     summary = {
         "Shape": data.shape,
@@ -100,7 +100,7 @@ def load_and_inspect_data(dataset_name="tips"):
         "Missing Values": data.isnull().sum(),
         "Numeric Summary": data.describe()
     }
-    
+
     return data, summary
 
 # Example usage
@@ -109,11 +109,11 @@ tips, tips_summary = load_and_inspect_data("tips")
 
 ## Distribution Analysis
 
-> **Level:** Beginner — start here. Understanding your variable's distribution is the first step in any analysis.
+> **Level:** Beginner, start here. Understanding your variable's distribution is the first step in any analysis.
 
 ### 1. Single Variable Distributions
 
-Four views of one numeric column — histogram+KDE, box, violin, and ECDF — on one canvas. Each view reveals different things.
+Four views of one numeric column, histogram+KDE, box, violin, and ECDF, on one canvas. Each view reveals different things.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -124,7 +124,7 @@ def plot_distribution_suite(data, variable):
     # Create figure
     fig = plt.figure(figsize=(15, 10))
     gs = fig.add_gridspec(2, 2, hspace=0.3, wspace=0.3)
-    
+
     # Histogram with KDE
     ax1 = fig.add_subplot(gs[0, 0])
     sns.histplot(
@@ -135,7 +135,7 @@ def plot_distribution_suite(data, variable):
         palette="deep"
     )
     ax1.set_title(f'Distribution of {variable}')
-    
+
     # Box plot
     ax2 = fig.add_subplot(gs[0, 1])
     sns.boxplot(
@@ -145,7 +145,7 @@ def plot_distribution_suite(data, variable):
         color='skyblue'
     )
     ax2.set_title(f'Box Plot of {variable}')
-    
+
     # Violin plot
     ax3 = fig.add_subplot(gs[1, 0])
     sns.violinplot(
@@ -155,7 +155,7 @@ def plot_distribution_suite(data, variable):
         color='lightgreen'
     )
     ax3.set_title(f'Violin Plot of {variable}')
-    
+
     # ECDF
     ax4 = fig.add_subplot(gs[1, 1])
     sns.ecdfplot(
@@ -165,7 +165,7 @@ def plot_distribution_suite(data, variable):
         color='coral'
     )
     ax4.set_title(f'Empirical CDF of {variable}')
-    
+
     plt.tight_layout()
     return fig
 
@@ -187,7 +187,7 @@ dist_fig = plot_distribution_suite(tips, "total_bill")
       <span class="code-callout__title">Figure setup with GridSpec</span>
     </div>
     <div class="code-callout__body">
-      <p><code>plt.figure</code> creates the canvas; <code>add_gridspec(2, 2)</code> reserves a 2×2 grid of axes. <code>hspace</code>/<code>wspace</code> control the gaps between panels — a cleaner approach than <code>plt.subplot</code> for multi-panel dashboards. <code>add_subplot(gs[0, 0])</code> places the first axes in the top-left cell.</p>
+      <p><code>plt.figure</code> creates the canvas; <code>add_gridspec(2, 2)</code> reserves a 2×2 grid of axes. <code>hspace</code>/<code>wspace</code> control the gaps between panels, a cleaner approach than <code>plt.subplot</code> for multi-panel dashboards. <code>add_subplot(gs[0, 0])</code> places the first axes in the top-left cell.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-16" data-tint="2">
@@ -214,7 +214,7 @@ dist_fig = plot_distribution_suite(tips, "total_bill")
       <span class="code-callout__title">violinplot + ecdfplot</span>
     </div>
     <div class="code-callout__body">
-      <p>A <strong>violin</strong> mirrors the KDE shape on both sides — you see the full distribution density, not just quartiles. <strong>ECDF</strong> (empirical CDF) shows what fraction of values fall below each x — great for reading off percentiles directly.</p>
+      <p>A <strong>violin</strong> mirrors the KDE shape on both sides, you see the full distribution density, not just quartiles. <strong>ECDF</strong> (empirical CDF) shows what fraction of values fall below each x, great for reading off percentiles directly.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="47-52" data-tint="1">
@@ -248,7 +248,7 @@ def plot_categorical_analysis(data, cat_var, num_var):
     # Create figure
     fig = plt.figure(figsize=(15, 10))
     gs = fig.add_gridspec(2, 2, hspace=0.3, wspace=0.3)
-    
+
     # Box plot
     ax1 = fig.add_subplot(gs[0, 0])
     sns.boxplot(
@@ -258,7 +258,7 @@ def plot_categorical_analysis(data, cat_var, num_var):
         ax=ax1
     )
     ax1.set_title(f'{num_var} by {cat_var} (Box Plot)')
-    
+
     # Violin plot
     ax2 = fig.add_subplot(gs[0, 1])
     sns.violinplot(
@@ -268,7 +268,7 @@ def plot_categorical_analysis(data, cat_var, num_var):
         ax=ax2
     )
     ax2.set_title(f'{num_var} by {cat_var} (Violin Plot)')
-    
+
     # Strip plot
     ax3 = fig.add_subplot(gs[1, 0])
     sns.stripplot(
@@ -280,7 +280,7 @@ def plot_categorical_analysis(data, cat_var, num_var):
         jitter=0.2
     )
     ax3.set_title(f'{num_var} by {cat_var} (Strip Plot)')
-    
+
     # Swarm plot
     ax4 = fig.add_subplot(gs[1, 1])
     sns.swarmplot(
@@ -290,7 +290,7 @@ def plot_categorical_analysis(data, cat_var, num_var):
         ax=ax4
     )
     ax4.set_title(f'{num_var} by {cat_var} (Swarm Plot)')
-    
+
     plt.tight_layout()
     return fig
 
@@ -315,13 +315,13 @@ cat_fig = plot_categorical_analysis(tips, "day", "total_bill")
 
 ## Relationship Analysis
 
-> **Level:** Intermediate — adds regression and multivariate views. Useful once you know the basic distribution of each variable.
+> **Level:** Intermediate, adds regression and multivariate views. Useful once you know the basic distribution of each variable.
 
 ### 1. Scatter Plot Suite
 
 Explore a bivariate relationship with scatter, regression line, residuals, and hexbin density.
 
-`regplot` fits OLS. `residplot` shows errors around the line — if residuals fan out, OLS assumptions are violated. `hexbin` handles overplotting for large datasets.
+`regplot` fits OLS. `residplot` shows errors around the line, if residuals fan out, OLS assumptions are violated. `hexbin` handles overplotting for large datasets.
 
 ```python
 def create_scatter_analysis(data, x_var, y_var, hue_var=None):
@@ -329,7 +329,7 @@ def create_scatter_analysis(data, x_var, y_var, hue_var=None):
     # Create figure
     fig = plt.figure(figsize=(15, 10))
     gs = fig.add_gridspec(2, 2, hspace=0.3, wspace=0.3)
-    
+
     # Basic scatter
     ax1 = fig.add_subplot(gs[0, 0])
     sns.scatterplot(
@@ -340,7 +340,7 @@ def create_scatter_analysis(data, x_var, y_var, hue_var=None):
         ax=ax1
     )
     ax1.set_title('Basic Scatter Plot')
-    
+
     # With regression line
     ax2 = fig.add_subplot(gs[0, 1])
     sns.regplot(
@@ -352,7 +352,7 @@ def create_scatter_analysis(data, x_var, y_var, hue_var=None):
         line_kws={'color': 'red'}
     )
     ax2.set_title('Scatter with Regression')
-    
+
     # Residual plot
     ax3 = fig.add_subplot(gs[1, 0])
     sns.residplot(
@@ -363,7 +363,7 @@ def create_scatter_analysis(data, x_var, y_var, hue_var=None):
         scatter_kws={'alpha':0.5}
     )
     ax3.set_title('Residual Plot')
-    
+
     # 2D KDE density plot
     ax4 = fig.add_subplot(gs[1, 1])
     sns.kdeplot(
@@ -376,7 +376,7 @@ def create_scatter_analysis(data, x_var, y_var, hue_var=None):
         levels=10
     )
     ax4.set_title('2D KDE Density Plot')
-    
+
     plt.tight_layout()
     return fig
 
@@ -403,11 +403,11 @@ def analyze_complex_relationships(data, x_var, y_var, cat_vars):
         hue=cat_vars[0],
         height=8
     )
-    
+
     # Add different plots
     g.map(sns.scatterplot, alpha=0.7)
     g.add_legend()
-    
+
     # Create facet grid
     g2 = sns.FacetGrid(
         data,
@@ -416,11 +416,11 @@ def analyze_complex_relationships(data, x_var, y_var, cat_vars):
         height=4,
         aspect=1.5
     )
-    
+
     # Add plot layers
     g2.map_dataframe(sns.scatterplot, x_var, y_var)
     g2.add_legend()
-    
+
     return g, g2
 
 # Example usage
@@ -454,23 +454,23 @@ pair_g, facet_g = analyze_complex_relationships(
 
 ## Matrix Visualizations
 
-> **Level:** Intermediate — heatmaps and clustermaps for correlation analysis. Most useful after you have a well-structured numeric dataset.
+> **Level:** Intermediate, heatmaps and clustermaps for correlation analysis. Most useful after you have a well-structured numeric dataset.
 
 ### 1. Correlation Analysis
 
 Numeric correlation matrix as a labeled heatmap, and as a clustered heatmap to reveal variable groups.
 
-`select_dtypes` keeps only numeric columns. `heatmap` preserves your column order. `clustermap` reorders rows and columns by similarity — useful for spotting groups of related variables.
+`select_dtypes` keeps only numeric columns. `heatmap` preserves your column order. `clustermap` reorders rows and columns by similarity, useful for spotting groups of related variables.
 
 ```python
 def create_correlation_analysis(data, method='pearson'):
     """Create comprehensive correlation analysis"""
     # Compute correlations
     corr = data.select_dtypes(include=[np.number]).corr(method=method)
-    
+
     # Create figure
     fig, ax1 = plt.subplots(1, 1, figsize=(8, 7))
-    
+
     # Heatmap
     sns.heatmap(
         corr,
@@ -481,7 +481,7 @@ def create_correlation_analysis(data, method='pearson'):
         fmt='.2f'
     )
     ax1.set_title('Correlation Heatmap')
-    
+
     # Clustermap (creates its own figure)
     sns.clustermap(
         corr,
@@ -491,7 +491,7 @@ def create_correlation_analysis(data, method='pearson'):
         fmt='.2f',
         figsize=(10, 10)
     )
-    
+
     return fig
 
 # Example usage
@@ -572,7 +572,7 @@ def set_plot_style(style_type='presentation'):
             'figure.figsize': (10, 6)
         }
     }
-    
+
     style = styles.get(style_type, styles['notebook'])
     sns.set_theme(**style)
     return style
@@ -594,7 +594,7 @@ def save_publication_quality(fig, filename, dpi=300):
         'png': {'dpi': dpi, 'bbox_inches': 'tight'},
         'svg': {'bbox_inches': 'tight'}
     }
-    
+
     for fmt, settings in formats.items():
         fig.savefig(f'{filename}.{fmt}', **settings)
 
@@ -613,12 +613,12 @@ Remember:
 
 ## Gotchas
 
-- **`sns.set_theme()` applies globally and permanently for the session** — calling it once at the top changes every subsequent Matplotlib figure too, not just Seaborn charts. If a later cell uses plain `plt.subplots`, it will still inherit the Seaborn theme, which can surprise you when mixing libraries.
-- **`clustermap` creates its own figure and ignores the `ax` parameter** — unlike `heatmap`, you cannot embed a `clustermap` into a subplot grid using `ax=`. Trying to do so silently produces a separate floating figure rather than an error.
-- **`violinplot` with very small groups gives misleading KDE shapes** — the kernel density estimator will still produce a smooth, wide violin even with 3–5 data points, implying a distribution that isn't there. The chart header in this lesson warns about groups under 30, but the visual looks confident regardless.
-- **`heatmap(annot=True)` on a DataFrame with object columns throws a formatting error** — `fmt='.2f'` requires all annotated values to be numeric. If your pivot table has NaN cells or mixed types, the call crashes. Pass `annot=True` without `fmt` first, or fill NaNs before calling `heatmap`.
-- **`pairplot` with `hue` drops rows that have NaN in the hue column silently** — you may think your full dataset is plotted when actually a subset is. Always check `.value_counts(dropna=False)` on your hue column before relying on a pairplot for counts.
-- **Saving with `fig.savefig` after a `clustermap` saves the wrong figure** — `sns.clustermap` returns a `ClusterGrid` object, not a `Figure`. Use `g.savefig(...)` on the returned object rather than `plt.savefig` or `fig.savefig` to avoid saving a blank canvas.
+- **`sns.set_theme()` applies globally and permanently for the session**: calling it once at the top changes every subsequent Matplotlib figure too, not just Seaborn charts. If a later cell uses plain `plt.subplots`, it will still inherit the Seaborn theme, which can surprise you when mixing libraries.
+- **`clustermap` creates its own figure and ignores the `ax` parameter**: unlike `heatmap`, you cannot embed a `clustermap` into a subplot grid using `ax=`. Trying to do so silently produces a separate floating figure rather than an error.
+- **`violinplot` with very small groups gives misleading KDE shapes**: the kernel density estimator will still produce a smooth, wide violin even with 3-5 data points, implying a distribution that isn't there. The chart header in this lesson warns about groups under 30, but the visual looks confident regardless.
+- **`heatmap(annot=True)` on a DataFrame with object columns throws a formatting error**: `fmt='.2f'` requires all annotated values to be numeric. If your pivot table has NaN cells or mixed types, the call crashes. Pass `annot=True` without `fmt` first, or fill NaNs before calling `heatmap`.
+- **`pairplot` with `hue` drops rows that have NaN in the hue column silently**: you may think your full dataset is plotted when actually a subset is. Always check `.value_counts(dropna=False)` on your hue column before relying on a pairplot for counts.
+- **Saving with `fig.savefig` after a `clustermap` saves the wrong figure**: `sns.clustermap` returns a `ClusterGrid` object, not a `Figure`. Use `g.savefig(...)` on the returned object rather than `plt.savefig` or `fig.savefig` to avoid saving a blank canvas.
 
 ## Next steps
 

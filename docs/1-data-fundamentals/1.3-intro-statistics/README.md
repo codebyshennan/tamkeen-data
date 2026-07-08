@@ -6,7 +6,7 @@
 
 ## Overview
 
-Have you ever wondered how Netflix predicts what shows you might like? Or how weather forecasts are made? Welcome to the world of statistics — your key to understanding data and making informed decisions.
+Have you ever wondered how Netflix predicts what shows you might like? Or how weather forecasts are made? Welcome to the world of statistics, your key to understanding data and making informed decisions.
 
 > **Note:** Statistics might sound intimidating, but it's really just about making sense of numbers. We'll start with simple concepts and build up gradually. You don't need to be a math whiz to succeed here!
 
@@ -16,7 +16,7 @@ Have you ever wondered how Netflix predicts what shows you might like? Or how we
 <iframe width="560" height="315" src="https://www.youtube.com/embed/zPs3aVB9VzQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*CrashCourse Statistics — What is statistics?*
+*CrashCourse Statistics, What is statistics?*
 
 > **Contributors:** Authoring standards: `docs/meta/DOCUMENTATION_GUIDELINES.md` (`meta/` is excluded from the Jekyll build).
 
@@ -63,7 +63,7 @@ Statistics is the foundation of data science, machine learning, and AI. It's lik
 
 ## Real-World Applications
 
-Let's look at some exciting ways statistics is used:
+look at some exciting ways statistics is used:
 
 1. **Netflix Recommendations**
    - Uses statistics to analyze viewing patterns
@@ -132,9 +132,9 @@ Statistics isn't just about numbers - it's about telling stories with data. As y
 
 ### Key Topic Links
 
-- **Basic Probability** — Interactive guide with examples: [BBC Bitesize: Probability](https://www.bbc.co.uk/bitesize/articles/zpmmp9q#zvvvcxs)
-- **Bayesian Probability** — Clear explanation of Bayes' Theorem: [GeeksForGeeks: Bayes' Theorem](https://www.geeksforgeeks.org/maths/bayes-theorem/)
-- **Probability Distributions in Real-Life** — Applications in ML: [Data Science Dojo: Statistical Distributions](https://datasciencedojo.com/blog/types-of-statistical-distributions-in-ml/)
+- **Basic Probability**: Interactive guide with examples: [BBC Bitesize: Probability](https://www.bbc.co.uk/bitesize/articles/zpmmp9q#zvvvcxs)
+- **Bayesian Probability**: Clear explanation of Bayes' Theorem: [GeeksForGeeks: Bayes' Theorem](https://www.geeksforgeeks.org/maths/bayes-theorem/)
+- **Probability Distributions in Real-Life**: Applications in ML: [Data Science Dojo: Statistical Distributions](https://datasciencedojo.com/blog/types-of-statistical-distributions-in-ml/)
 
 ### Additional Resources
 
@@ -148,4 +148,4 @@ After completing this module, you'll move on to:
 2. **Data Analysis with Pandas** - Use statistics to analyze real datasets
 3. **Data Wrangling** - Clean and prepare data for statistical analysis
 
-Let's begin this exciting journey together!
+Start here.

@@ -1,6 +1,6 @@
 # Understanding Data Types and Index in Pandas
 
-**After this lesson:** you can explain the core ideas in “Understanding Data Types and Index in Pandas” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Understanding Data Types and Index in Pandas and try the examples in your own notebook.
 
 ### Video
 
@@ -8,13 +8,13 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/zmdjNSmRXF4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*Corey Schafer — Python pandas tutorial (part 2): DataFrame and Series basics*
+*Corey Schafer, Python pandas tutorial (part 2): DataFrame and Series basics*
 
 ## Overview
 
 **Prerequisites:** [Series](./series.md) and [DataFrame](./dataframe.md) basics.
 
-**Why this lesson:** Every column has a **dtype**; wrong dtypes break math (strings that look like numbers), waste memory (`int64` where `int8` would do), or hide bugs (`object` columns that should be categorical). The **index** labels rows—misunderstanding it breaks joins and alignment. This page connects dtypes and index to everyday fixes.
+**Why this lesson:** Every column has a **dtype**; wrong dtypes break math (strings that look like numbers), waste memory (`int64` where `int8` would do), or hide bugs (`object` columns that should be categorical). The **index** labels rows, misunderstanding it breaks joins and alignment. This page connects dtypes and index to everyday fixes.
 
 ## Data types (dtypes)
 
@@ -22,7 +22,7 @@
 
 ### What are Data Types?
 
-In Pandas, each column in a DataFrame (or each value in a Series) has a specific data type (dtype). Understanding data types is crucial for:
+In Pandas, each column in a DataFrame (or each value in a Series) has a specific data type (dtype). Understanding data types is important for:
 
 - Memory efficiency
 - Better performance
@@ -50,7 +50,7 @@ Common data types include:
   - For limited unique values (status, grade)
   - More memory efficient than strings
 
-Let's explore them in action:
+we will look at them in action:
 
 **Mixed dtypes in one DataFrame**
 
@@ -121,14 +121,14 @@ DataFrame Info:
 <class 'pandas.DataFrame'>
 RangeIndex: 3 entries, 0 to 2
 Data columns (total 6 columns):
- #   Column     Non-Null Count  Dtype         
----  ------     --------------  -----         
- 0   ID         3 non-null      int64         
- 1   Name       3 non-null      str           
- 2   Height     3 non-null      float64       
- 3   IsStudent  3 non-null      bool          
+ #   Column     Non-Null Count  Dtype
+---  ------     --------------  -----
+ 0   ID         3 non-null      int64
+ 1   Name       3 non-null      str
+ 2   Height     3 non-null      float64
+ 3   IsStudent  3 non-null      bool
  4   BirthDate  3 non-null      datetime64[us]
- 5   Grade      3 non-null      category      
+ 5   Grade      3 non-null      category
 dtypes: bool(1), category(1), datetime64[us](1), float64(1), int64(1), str(1)
 memory usage: 250.0 bytes
 ```
@@ -179,7 +179,7 @@ You can check and change data types easily:
 **`astype` for numeric Series**
 
 - **Purpose:** Convert string digits to `int64` so you can do math without Python loops.
-- **Walkthrough:** `numbers.astype('int64')` returns a new Series—assign back to replace.
+- **Walkthrough:** `numbers.astype('int64')` returns a new Series, assign back to replace.
 
 ```python
 # Create a Series with numbers as strings
@@ -230,8 +230,8 @@ You can select columns based on their data type:
 
 **`select_dtypes` for numeric vs text**
 
-- **Purpose:** Pull only **number** columns for modeling or only **object** columns for cleaning—avoids manual column lists.
-- **Walkthrough:** `include=['number']` picks both int and float; `include=['object']` matches this frame’s strings.
+- **Purpose:** Pull only **number** columns for modeling or only **object** columns for cleaning, avoids manual column lists.
+- **Walkthrough:** `include=['number']` picks both int and float; `include=['object']` matches this frame's strings.
 
 ```python
 # Create a sample DataFrame
@@ -408,7 +408,7 @@ print(df_reset)
 
 **DateRange index for time series**
 
-- **Purpose:** Use a **DatetimeIndex** when rows are ordered in time—helps resampling and joins later.
+- **Purpose:** Use a **DatetimeIndex** when rows are ordered in time, helps resampling and joins later.
 - **Walkthrough:** `pd.date_range('2023-01-01', periods=3)` as `index=` sets daily timestamps.
 
 ```python
@@ -466,7 +466,7 @@ Well-structured DataFrame with date index:
 Duplicate index values: False
 ```
 
-Remember: Understanding data types and index is crucial for efficient data analysis. Take time to set up your data structure correctly at the beginning of your analysis!
+Remember: Understanding data types and index is important for efficient data analysis. Take time to set up your data structure correctly at the beginning of your analysis!
 
 ## Next steps
 

@@ -7,11 +7,11 @@ objectives:
 ---
 # Introduction to Decision Trees
 
-**After this lesson:** you can explain the core ideas in “Introduction to Decision Trees” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Introduction to Decision Trees and try the examples in your own notebook.
 
 ## Overview
 
-A **decision tree** splits the data with nested if/else rules on features until it reaches a prediction—easy to visualize and explain. This page uses a tiny “go for a walk” example; follow with [tree structure](2-tree-structure.md) and [implementation](3-implementation.md). **Prerequisites:** [Supervised learning 5.2](../README.md); sklearn `fit` / `predict` from [5.1 workflow](../../5.1-intro-to-ml/ml-workflow.md).
+A **decision tree** splits the data with nested if/else rules on features until it reaches a prediction, easy to visualize and explain. This page uses a tiny "go for a walk" example; follow with [tree structure](2-tree-structure.md) and [implementation](3-implementation.md). **Prerequisites:** [Supervised learning 5.2](../README.md); sklearn `fit` / `predict` from [5.1 workflow](../../5.1-intro-to-ml/ml-workflow.md).
 
 
 ## Why Learn Decision Trees?
@@ -52,7 +52,7 @@ This is exactly how a decision tree works! It's a series of yes/no questions tha
 
 ## Key Components of a Decision Tree
 
-Let's break down the parts of a decision tree using a simple example:
+Break down the parts of a decision tree using a simple example:
 
 #### Train a toy tree and inspect structure
 
@@ -137,7 +137,7 @@ for i, importance in enumerate(feature_importance):
       <span class="code-callout__title">Predict and Explain</span>
     </div>
     <div class="code-callout__body">
-      <p>Predict for a new scenario, then print <code>feature_importances_</code> — each value is the fraction of total impurity reduction attributed to that feature across all splits.</p>
+      <p>Predict for a new scenario, then print <code>feature_importances_</code>, each value is the fraction of total impurity reduction attributed to that feature across all splits.</p>
     </div>
   </div>
 </aside>
@@ -188,7 +188,7 @@ Decision trees learn by finding the best questions to ask that separate the data
 <div class="code-explainer__code">
 
 {% highlight python %}
-# Let's see the splitting process visually
+# Look at the splitting process visually
 from sklearn.datasets import make_classification
 import numpy as np
 import matplotlib.pyplot as plt
@@ -263,7 +263,7 @@ plt.show()
       <span class="code-callout__title">Decision Boundary Helper</span>
     </div>
     <div class="code-callout__body">
-      <p>The helper builds a fine meshgrid, predicts class labels at each point, and fills contour regions — this reveals the axis-aligned rectangular regions that decision trees always produce.</p>
+      <p>The helper builds a fine meshgrid, predicts class labels at each point, and fills contour regions, this reveals the axis-aligned rectangular regions that decision trees always produce.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="45-57" data-tint="3">
@@ -401,15 +401,15 @@ Most important factor: Previous Score
 
 ## Gotchas
 
-- **Fitting a `DecisionTreeClassifier` without `max_depth` on tiny toy data** — the unrestrained tree in the student exercise will memorise the 8 training rows perfectly (training accuracy 1.0) but will often fail on any new student; always set a depth limit or use cross-validation to see through the perfect training score.
-- **Misreading `feature_importances_` as a global ranking** — importance values are specific to this fitted tree on this training set; a feature with zero importance was not useful given the *other* features present, not necessarily unimportant in general; run the same data with a different split and the ranking can change.
-- **Assuming the "Go for a Walk" labels are deterministic** — the training data has only 8 rows with mixed outcomes for similar conditions; the learned tree may predict confidently for a new scenario simply because it memorised an adjacent training row, not because it found a true pattern.
-- **Calling `plot_tree` without naming features and classes** — the default output shows numeric feature indices and class integers, which are nearly unreadable; always pass `feature_names` and `class_names` before sharing or debugging a tree.
-- **Treating `feature_importances_` totalling 1.0 as a percentage of predictive power** — importance measures impurity reduction, not correlation with the target; a single dominant feature (e.g., "Temperature: 0.51") does not mean the other features are useless, only that they contributed less to this tree's splits.
+- **Fitting a `DecisionTreeClassifier` without `max_depth` on tiny toy data**: the unrestrained tree in the student exercise will memorise the 8 training rows perfectly (training accuracy 1.0) but will often fail on any new student; always set a depth limit or use cross-validation to see through the perfect training score.
+- **Misreading `feature_importances_` as a global ranking**: importance values are specific to this fitted tree on this training set; a feature with zero importance was not useful given the *other* features present, not necessarily unimportant in general; run the same data with a different split and the ranking can change.
+- **Assuming the "Go for a Walk" labels are deterministic**: the training data has only 8 rows with mixed outcomes for similar conditions; the learned tree may predict confidently for a new scenario simply because it memorised an adjacent training row, not because it found a true pattern.
+- **Calling `plot_tree` without naming features and classes**: the default output shows numeric feature indices and class integers, which are nearly unreadable; always pass `feature_names` and `class_names` before sharing or debugging a tree.
+- **Treating `feature_importances_` totalling 1.0 as a percentage of predictive power**: importance measures impurity reduction, not correlation with the target; a single dominant feature (e.g., "Temperature: 0.51") does not mean the other features are useless, only that they contributed less to this tree's splits.
 
 ## Next Steps
 
-Now that you understand the basics of decision trees, let's explore:
+Now that you understand the basics of decision trees, we will look at:
 
 1. [How decision trees are structured](2-tree-structure.md)
 2. [How to implement them in Python](3-implementation.md)

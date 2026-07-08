@@ -10,15 +10,15 @@ High-level introduction to SQL and relational databases.
 
 ## Overview
 
-**Prerequisites:** [Data Querying with SQL (module README)](README.md) lists tools and sample data. Thinking in rows and columns—like a spreadsheet—matches what you practiced in [Pandas Series and DataFrame](../../1-data-fundamentals/1.5-data-analysis-pandas/dataframe.md).
+**Prerequisites:** [Data Querying with SQL (module README)](README.md) lists tools and sample data. Thinking in rows and columns, like a spreadsheet, matches what you practiced in [Pandas Series and DataFrame](../../1-data-fundamentals/1.5-data-analysis-pandas/dataframe.md).
 
-> **Time needed:** About 45–60 minutes for a first read; longer if you run every SQL snippet.
+> **Time needed:** About 45-60 minutes for a first read; longer if you run every SQL snippet.
 
 > **Note:** **SQL** (Structured Query Language) is the standard language for querying relational databases; you will use it starting in [Basic SQL Operations](basic-operations.md).
 
 ## Why this matters
 
-Tables and keys are not academic details—they are how organizations keep orders, customers, and inventory consistent at scale. When you later write `JOIN` and `WHERE` clauses, you are relying on this structure. A clear mental model of rows, relationships, and normalization makes the rest of the SQL submodule easier to read and debug.
+Tables and keys are not academic details, they are how organizations keep orders, customers, and inventory consistent at scale. When you later write `JOIN` and `WHERE` clauses, you are relying on this structure. A clear mental model of rows, relationships, and normalization makes the rest of the SQL submodule easier to read and debug.
 
 ## Understanding Databases
 
@@ -26,7 +26,7 @@ Tables and keys are not academic details—they are how organizations keep order
 
 A **database** is software that stores and retrieves structured data reliably: many users, controlled updates, and rules that keep records consistent. You already think in **tables** if you have used spreadsheets or pandas; relational databases make relationships between those tables explicit with **keys** and **constraints**.
 
-The bullets below are not separate topics to memorize in isolation—they describe what “good” database design tries to protect: organized storage, trustworthy values, and safe access at scale.
+The bullets below are not separate topics to memorize in isolation, they describe what "good" database design tries to protect: organized storage, trustworthy values, and safe access at scale.
 
 1. **Data Organization**
    - Structured vs Unstructured Data
@@ -47,7 +47,7 @@ The bullets below are not separate topics to memorize in isolation—they descri
 
 ## Types of Databases
 
-Not every system stores data like a spreadsheet with explicit foreign keys. This course focuses on **relational** databases, but you will hear the other families in architecture discussions—so a short map is useful.
+Not every system stores data like a spreadsheet with explicit foreign keys. This course focuses on **relational** databases, but you will hear the other families in architecture discussions, so a short map is useful.
 
 ### 1. Relational Databases (RDBMS)
 
@@ -80,13 +80,13 @@ CREATE TABLE orders (
       <span class="code-callout__title">Example of relational structure</span>
     </div>
     <div class="code-callout__body">
-      <p>Two tables: <code>customers</code> owns identities; <code>orders</code> references <code>customer_id</code> so each order belongs to one customer—classic parent/child FK pattern.</p>
+      <p>Two tables: <code>customers</code> owns identities; <code>orders</code> references <code>customer_id</code> so each order belongs to one customer, classic parent/child FK pattern.</p>
     </div>
   </div>
 </aside>
 </div>
 
-The two `CREATE TABLE` statements illustrate the usual pattern: `customers` holds stable identity, and `orders` points to it with `REFERENCES customers(customer_id)`—that is a **foreign key** in practice.
+The two `CREATE TABLE` statements illustrate the usual pattern: `customers` holds stable identity, and `orders` points to it with `REFERENCES customers(customer_id)`-that is a **foreign key** in practice.
 
 ### 2. NoSQL Databases
 
@@ -99,7 +99,7 @@ NoSQL systems often relax strict table-and-key rules to gain flexibility, scale,
 
 ### 3. Specialized Databases
 
-These engines optimize for one workload—time-ordered metrics, full-text search, embeddings, or geography. Teams often combine them with a relational database: PostgreSQL for core transactions, plus Elasticsearch or a time-series DB for specialized queries.
+These engines optimize for one workload, time-ordered metrics, full-text search, embeddings, or geography. Teams often combine them with a relational database: PostgreSQL for core transactions, plus Elasticsearch or a time-series DB for specialized queries.
 
 - Time-Series Databases (InfluxDB)
 - Search Engines (Elasticsearch)
@@ -146,7 +146,7 @@ CREATE TABLE product_categories (
       <span class="code-callout__title">Example of implementing entities and relation…</span>
     </div>
     <div class="code-callout__body">
-      <p><code>products</code> and <code>categories</code> are linked by a junction table <code>product_categories</code> with a composite primary key—standard many-to-many modeling.</p>
+      <p><code>products</code> and <code>categories</code> are linked by a junction table <code>product_categories</code> with a composite primary key, standard many-to-many modeling.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-17" data-tint="2">
@@ -161,7 +161,7 @@ CREATE TABLE product_categories (
 </aside>
 </div>
 
-Here the composite primary key on the junction table enforces “each product–category pair appears at most once,” which is exactly what you want for a many-to-many link.
+Here the composite primary key on the junction table enforces "each product-category pair appears at most once," which is exactly what you want for a many-to-many link.
 
 ### 2. Data Modeling
 
@@ -175,7 +175,7 @@ In practice: **conceptual** is business nouns and verbs on a whiteboard; **logic
 
 ### 3. Normalization Forms
 
-**Normalization** reduces redundant storage and update anomalies by splitting tables until each fact lives in one logical place. The examples below are minimal illustrations—real schemas add history, soft deletes, and performance trade-offs.
+**Normalization** reduces redundant storage and update anomalies by splitting tables until each fact lives in one logical place. The examples below are minimal illustrations, real schemas add history, soft deletes, and performance trade-offs.
 
 1. **First Normal Form (1NF)**
    - Atomic values
@@ -205,7 +205,7 @@ CREATE TABLE orders_good (
       <span class="code-callout__title">Bad: Non-1NF</span>
     </div>
     <div class="code-callout__body">
-      <p>Contrasts a packed text list of products with one row per product line—atomic values enable joins and counts.</p>
+      <p>Contrasts a packed text list of products with one row per product line, atomic values enable joins and counts.</p>
     </div>
   </div>
 </aside>
@@ -266,7 +266,7 @@ CREATE TABLE order_items (
 </aside>
 </div>
 
-> **Takeaway:** Here `product_name` depends only on `product_id`, not on the full `(order_id, product_id)` key—so it belongs in a `products` table. That split is the usual 2NF fix for line-item tables.
+> **Takeaway:** Here `product_name` depends only on `product_id`, not on the full `(order_id, product_id)` key, so it belongs in a `products` table. That split is the usual 2NF fix for line-item tables.
 
 3. **Third Normal Form (3NF)**
    - Must be in 2NF
@@ -313,13 +313,13 @@ CREATE TABLE employees (
       <span class="code-callout__title">CREATE TABLE departments (</span>
     </div>
     <div class="code-callout__body">
-      <p>Department attributes live in one place; employees reference <code>department_id</code> only—removes transitive dependency.</p>
+      <p>Department attributes live in one place; employees reference <code>department_id</code> only, removes transitive dependency.</p>
     </div>
   </div>
 </aside>
 </div>
 
-> **Takeaway:** `department_name` is determined by `department_id`, not by `employee_id` directly—so repeating it on every employee row risks inconsistency when a department renames. Moving department attributes to `departments` restores 3NF.
+> **Takeaway:** `department_name` is determined by `department_id`, not by `employee_id` directly, so repeating it on every employee row risks inconsistency when a department renames. Moving department attributes to `departments` restores 3NF.
 
 ## Database Management Systems (DBMS)
 
@@ -337,7 +337,7 @@ At minimum you should expect: durable **storage**, query **retrieval**, controll
 
 ### 2. Important Features
 
-The snippets below are **illustrative**—exact privilege syntax and backup commands depend on your engine (PostgreSQL, SQL Server, etc.). The point is to see what a DBMS provides beyond raw `SELECT`/`INSERT`.
+The snippets below are **illustrative**-exact privilege syntax and backup commands depend on your engine (PostgreSQL, SQL Server, etc.). The point is to see what a DBMS provides beyond raw `SELECT`/`INSERT`.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -362,7 +362,7 @@ CREATE EXTENSION pg_dump;
       <span class="code-callout__title">Transaction Management</span>
     </div>
     <div class="code-callout__body">
-      <p>Sketch of ACID-related features: explicit <code>BEGIN</code>/<code>COMMIT</code>, <code>GRANT</code> for privileges—syntax varies by engine; backup lines are illustrative.</p>
+      <p>Sketch of ACID-related features: explicit <code>BEGIN</code>/<code>COMMIT</code>, <code>GRANT</code> for privileges, syntax varies by engine; backup lines are illustrative.</p>
     </div>
   </div>
 </aside>
@@ -391,7 +391,7 @@ SET work_mem = '64MB';
       <span class="code-callout__title">Indexing</span>
     </div>
     <div class="code-callout__body">
-      <p>Creates a btree index for lookups, mentions <code>EXPLAIN ANALYZE</code> for plans, and <code>work_mem</code> for sort/hash workspace—tune per workload.</p>
+      <p>Creates a btree index for lookups, mentions <code>EXPLAIN ANALYZE</code> for plans, and <code>work_mem</code> for sort/hash workspace, tune per workload.</p>
     </div>
   </div>
 </aside>
@@ -446,7 +446,7 @@ CREATE TABLE users (
 );
 
 -- Alter table
-ALTER TABLE users 
+ALTER TABLE users
 ADD COLUMN last_login TIMESTAMP,
 ADD CONSTRAINT user_status CHECK (last_login IS NULL OR last_login <= CURRENT_TIMESTAMP);
 
@@ -463,7 +463,7 @@ WHERE last_login >= CURRENT_TIMESTAMP - INTERVAL '30 days';
       <span class="code-callout__title">Create table with constraints</span>
     </div>
     <div class="code-callout__body">
-      <p><code>UNIQUE</code>, <code>NOT NULL</code>, regex <code>CHECK</code> on email, and defaults—constraints enforce rules at insert time.</p>
+      <p><code>UNIQUE</code>, <code>NOT NULL</code>, regex <code>CHECK</code> on email, and defaults, constraints enforce rules at insert time.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="10-18" data-tint="2">
@@ -472,7 +472,7 @@ WHERE last_login >= CURRENT_TIMESTAMP - INTERVAL '30 days';
       <span class="code-callout__title">Alter table</span>
     </div>
     <div class="code-callout__body">
-      <p><code>ALTER TABLE</code> adds columns and constraints; <code>CREATE VIEW</code> exposes a filtered “active users” subset.</p>
+      <p><code>ALTER TABLE</code> adds columns and constraints; <code>CREATE VIEW</code> exposes a filtered "active users" subset.</p>
     </div>
   </div>
 </aside>
@@ -489,7 +489,7 @@ INSERT INTO users (username, email)
 VALUES ('john_doe', 'john@example.com');
 
 -- Update data
-UPDATE users 
+UPDATE users
 SET last_login = CURRENT_TIMESTAMP
 WHERE username = 'john_doe';
 
@@ -505,7 +505,7 @@ WHERE last_login < CURRENT_TIMESTAMP - INTERVAL '1 year';
       <span class="code-callout__title">Insert data</span>
     </div>
     <div class="code-callout__body">
-      <p>Standard <code>INSERT</code>—specify the target columns, then provide matching values. Omitting the column list inserts into every column in declaration order.</p>
+      <p>Standard <code>INSERT</code>-specify the target columns, then provide matching values. Omitting the column list inserts into every column in declaration order.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="5-8" data-tint="2">
@@ -514,7 +514,7 @@ WHERE last_login < CURRENT_TIMESTAMP - INTERVAL '1 year';
       <span class="code-callout__title">Update data</span>
     </div>
     <div class="code-callout__body">
-      <p>Conditional <code>UPDATE</code>—<code>SET</code> assigns the new value; always pair with a <code>WHERE</code> clause to avoid updating every row in the table.</p>
+      <p>Conditional <code>UPDATE</code>-<code>SET</code> assigns the new value; always pair with a <code>WHERE</code> clause to avoid updating every row in the table.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="10-12" data-tint="3">
@@ -523,7 +523,7 @@ WHERE last_login < CURRENT_TIMESTAMP - INTERVAL '1 year';
       <span class="code-callout__title">Delete data</span>
     </div>
     <div class="code-callout__body">
-      <p>Scoped <code>DELETE</code>—the <code>WHERE</code> clause limits deletion to inactive users only. Without it the entire table is wiped.</p>
+      <p>Scoped <code>DELETE</code>-the <code>WHERE</code> clause limits deletion to inactive users only. Without it the entire table is wiped.</p>
     </div>
   </div>
 </aside>
@@ -551,7 +551,7 @@ CREATE TABLE user_events (
 
 -- Create materialized view for real-time analytics
 CREATE MATERIALIZED VIEW product_engagement AS
-SELECT 
+SELECT
     p.product_id,
     p.name,
     COUNT(DISTINCT CASE WHEN ue.event_type = 'view' THEN ue.user_id END) as unique_views,
@@ -583,7 +583,7 @@ GROUP BY p.product_id, p.name;
       <span class="code-callout__title">SELECT</span>
     </div>
     <div class="code-callout__body">
-      <p>Outer query joins events to products and computes conversion-style rates—typical engagement dashboard SQL.</p>
+      <p>Outer query joins events to products and computes conversion-style rates, typical engagement dashboard SQL.</p>
     </div>
   </div>
 </aside>
@@ -623,7 +623,7 @@ CREATE TABLE medical_records (
 -- Implement row-level security
 ALTER TABLE patients ENABLE ROW LEVEL SECURITY;
 CREATE POLICY patient_access_policy ON patients
-    USING (created_by = CURRENT_USER OR 
+    USING (created_by = CURRENT_USER OR
            CURRENT_USER IN (SELECT user_id FROM staff WHERE role = 'doctor'));
 {% endhighlight %}
 </div>
@@ -634,7 +634,7 @@ CREATE POLICY patient_access_policy ON patients
       <span class="code-callout__title">Patient records with privacy considerations</span>
     </div>
     <div class="code-callout__body">
-      <p>Illustrative DDL with <code>ENCRYPTED</code> markers—real systems use column encryption or vaults; shows versioning fields on medical records.</p>
+      <p>Illustrative DDL with <code>ENCRYPTED</code> markers, real systems use column encryption or vaults; shows versioning fields on medical records.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="16-30" data-tint="2">
@@ -643,7 +643,7 @@ CREATE POLICY patient_access_policy ON patients
       <span class="code-callout__title">Patient_id INT REFERENCES patients(patient_id),</span>
     </div>
     <div class="code-callout__body">
-      <p>Row-level security policy example: only certain roles see rows—Postgres-style; wire-up depends on your auth model.</p>
+      <p>Row-level security policy example: only certain roles see rows, Postgres-style; wire-up depends on your auth model.</p>
     </div>
   </div>
 </aside>
@@ -677,7 +677,7 @@ CREATE INDEX idx_products_search ON products USING GIN (to_tsvector('english', d
       <span class="code-callout__title">B-tree index for exact matches and ranges</span>
     </div>
     <div class="code-callout__body">
-      <p>Contrasts btree, hash, GiST, and GIN—pick the access pattern (equality vs text search vs geometry).</p>
+      <p>Contrasts btree, hash, GiST, and GIN, pick the access pattern (equality vs text search vs geometry).</p>
     </div>
   </div>
 </aside>
@@ -724,7 +724,7 @@ CREATE TABLE sales_south PARTITION OF sales
       <span class="code-callout__title">Range partitioning for time-series data</span>
     </div>
     <div class="code-callout__body">
-      <p>Parent <code>metrics</code> table partitioned by timestamp; child tables hold monthly ranges—prune partitions when dropping old data.</p>
+      <p>Parent <code>metrics</code> table partitioned by timestamp; child tables hold monthly ranges, prune partitions when dropping old data.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="14-26" data-tint="2">
@@ -747,7 +747,7 @@ CREATE TABLE sales_south PARTITION OF sales
 {% highlight sql %}
 -- Use CTEs for better readability and performance
 WITH monthly_sales AS (
-    SELECT 
+    SELECT
         DATE_TRUNC('month', sale_date) as month,
         SUM(amount) as revenue
     FROM sales
@@ -755,13 +755,13 @@ WITH monthly_sales AS (
     GROUP BY DATE_TRUNC('month', sale_date)
 ),
 sales_growth AS (
-    SELECT 
+    SELECT
         month,
         revenue,
         LAG(revenue) OVER (ORDER BY month) as prev_month_revenue
     FROM monthly_sales
 )
-SELECT 
+SELECT
     month,
     revenue,
     ROUND(
@@ -778,7 +778,7 @@ FROM sales_growth;
       <span class="code-callout__title">Use CTEs for better readability and performance</span>
     </div>
     <div class="code-callout__body">
-      <p>Monthly revenue CTE, then <code>LAG</code> for prior month—month-over-month growth pattern.</p>
+      <p>Monthly revenue CTE, then <code>LAG</code> for prior month, month-over-month growth pattern.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="13-24" data-tint="2">
@@ -821,7 +821,7 @@ SELECT * FROM connection_pool;
       <span class="code-callout__title">Bad: Not closing connections</span>
     </div>
     <div class="code-callout__body">
-      <p>Contrasts leaking connections with pooling—pseudo-SQL; real clients use poolers or context managers in app code.</p>
+      <p>Contrasts leaking connections with pooling, pseudo-SQL; real clients use poolers or context managers in app code.</p>
     </div>
   </div>
 </aside>
@@ -840,25 +840,25 @@ UPDATE accounts SET balance = balance + 100 WHERE id = 2;
 -- Good: Proper transaction handling
 BEGIN;
     SAVEPOINT my_savepoint;
-    
-    UPDATE accounts 
-    SET balance = balance - 100 
+
+    UPDATE accounts
+    SET balance = balance - 100
     WHERE id = 1;
-    
+
     IF NOT FOUND THEN
         ROLLBACK TO my_savepoint;
         RAISE EXCEPTION 'Account not found';
     END IF;
-    
-    UPDATE accounts 
-    SET balance = balance + 100 
+
+    UPDATE accounts
+    SET balance = balance + 100
     WHERE id = 2;
-    
+
     IF NOT FOUND THEN
         ROLLBACK TO my_savepoint;
         RAISE EXCEPTION 'Account not found';
     END IF;
-    
+
     COMMIT;
 EXCEPTION WHEN OTHERS THEN
     ROLLBACK;
@@ -872,7 +872,7 @@ EXCEPTION WHEN OTHERS THEN
       <span class="code-callout__title">Bad: No error handling</span>
     </div>
     <div class="code-callout__body">
-      <p>Two bare <code>UPDATE</code>s vs a transactional block with savepoints—illustrates atomic transfers and rollback on failure.</p>
+      <p>Two bare <code>UPDATE</code>s vs a transactional block with savepoints, illustrates atomic transfers and rollback on failure.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="16-30" data-tint="2">
@@ -897,7 +897,7 @@ EXCEPTION WHEN OTHERS THEN
 {% highlight sql %}
 -- Create sample customer data
 INSERT INTO customers (first_name, last_name, email, join_date)
-SELECT 
+SELECT
     'Customer' || i as first_name,
     'Last' || i as last_name,
     'customer' || i || '@example.com' as email,
@@ -906,13 +906,13 @@ FROM generate_series(1, 1000) i;
 
 -- Analyze customer cohorts
 WITH cohorts AS (
-    SELECT 
+    SELECT
         DATE_TRUNC('month', join_date) as cohort_month,
         COUNT(*) as cohort_size
     FROM customers
     GROUP BY DATE_TRUNC('month', join_date)
 )
-SELECT 
+SELECT
     cohort_month,
     cohort_size,
     SUM(cohort_size) OVER (ORDER BY cohort_month) as cumulative_customers
@@ -950,7 +950,7 @@ ORDER BY cohort_month;
 {% highlight sql %}
 -- Generate sample sales data
 INSERT INTO sales (product_id, sale_date, quantity, amount)
-SELECT 
+SELECT
     (random() * 100)::integer as product_id,
     CURRENT_DATE - (random() * 90)::integer as sale_date,
     (random() * 10 + 1)::integer as quantity,
@@ -959,7 +959,7 @@ FROM generate_series(1, 10000);
 
 -- Analyze product performance
 WITH product_metrics AS (
-    SELECT 
+    SELECT
         product_id,
         COUNT(*) as sale_count,
         SUM(quantity) as units_sold,
@@ -968,7 +968,7 @@ WITH product_metrics AS (
     FROM sales
     GROUP BY product_id
 )
-SELECT 
+SELECT
     product_id,
     sale_count,
     units_sold,
@@ -995,7 +995,7 @@ ORDER BY revenue DESC;
       <span class="code-callout__title">SUM(quantity) as units_sold,</span>
     </div>
     <div class="code-callout__body">
-      <p>Aggregates random sales per product: counts, units, revenue, average ticket, and quartile rank—typical product leaderboard query.</p>
+      <p>Aggregates random sales per product: counts, units, revenue, average ticket, and quartile rank, typical product leaderboard query.</p>
     </div>
   </div>
 </aside>
@@ -1005,16 +1005,16 @@ Remember: "A well-designed database is the foundation of any successful applicat
 
 ## Gotchas
 
-- **Confusing NULL with an empty string or zero** — NULL means "value unknown"; it is not `''` or `0`. Comparing with `= NULL` always returns NULL (not true), so rows with missing values silently disappear from results. Always use `IS NULL` or `IS NOT NULL` to test for absence of a value.
-- **Forgetting that a foreign key only prevents orphaned child rows, not NULL** — A column declared `REFERENCES customers(customer_id)` will accept NULL unless you also add `NOT NULL`. Without that extra constraint, a child row can exist with no parent reference at all and the database will not complain.
-- **Treating normalization as always-good** — 3NF eliminates redundancy but every extra table requires a JOIN at query time. On read-heavy analytics tables it is common to intentionally denormalize (store `product_name` on the order line) to avoid expensive joins; the "right" form depends on your read/write ratio.
-- **Assuming `SERIAL` / `AUTO_INCREMENT` IDs are gap-free** — When an INSERT fails or a transaction is rolled back, the sequence counter still advances. Real tables have gaps in their primary keys; code that depends on IDs being contiguous (e.g., `WHERE id BETWEEN 1 AND 100`) will miss rows.
-- **Conflating the physical, logical, and conceptual models** — An ER diagram is a design sketch; the actual PostgreSQL schema may differ due to performance trade-offs (e.g., denormalized columns, materialized views). Always verify constraints in the DDL rather than trusting the diagram alone.
-- **Creating indexes on every column "just in case"** — Indexes speed up reads but slow down every INSERT/UPDATE/DELETE because each index must be maintained. Add indexes only on columns that appear in frequent WHERE, JOIN ON, or ORDER BY clauses, and measure the impact with EXPLAIN ANALYZE before and after.
+- **Confusing NULL with an empty string or zero**: NULL means "value unknown"; it is not `''` or `0`. Comparing with `= NULL` always returns NULL (not true), so rows with missing values silently disappear from results. Always use `IS NULL` or `IS NOT NULL` to test for absence of a value.
+- **Forgetting that a foreign key only prevents orphaned child rows, not NULL**: A column declared `REFERENCES customers(customer_id)` will accept NULL unless you also add `NOT NULL`. Without that extra constraint, a child row can exist with no parent reference at all and the database will not complain.
+- **Treating normalization as always-good**: 3NF eliminates redundancy but every extra table requires a JOIN at query time. On read-heavy analytics tables it is common to intentionally denormalize (store `product_name` on the order line) to avoid expensive joins; the "right" form depends on your read/write ratio.
+- **Assuming `SERIAL` / `AUTO_INCREMENT` IDs are gap-free**: When an INSERT fails or a transaction is rolled back, the sequence counter still advances. Real tables have gaps in their primary keys; code that depends on IDs being contiguous (e.g., `WHERE id BETWEEN 1 AND 100`) will miss rows.
+- **Conflating the physical, logical, and conceptual models**: An ER diagram is a design sketch; the actual PostgreSQL schema may differ due to performance trade-offs (e.g., denormalized columns, materialized views). Always verify constraints in the DDL rather than trusting the diagram alone.
+- **Creating indexes on every column "just in case"**: Indexes speed up reads but slow down every INSERT/UPDATE/DELETE because each index must be maintained. Add indexes only on columns that appear in frequent WHERE, JOIN ON, or ORDER BY clauses, and measure the impact with EXPLAIN ANALYZE before and after.
 
 ## Next steps
 
-- [Basic SQL Operations](basic-operations.md) — **SELECT**, filters, and sorting
-- [Aggregations](aggregations.md) — **GROUP BY** and summary statistics
-- [Joins](joins.md) — combine tables with **JOIN**
-- [Module 2.1 README](README.md) — full path and assignment
+- [Basic SQL Operations](basic-operations.md), **SELECT**, filters, and sorting
+- [Aggregations](aggregations.md), **GROUP BY** and summary statistics
+- [Joins](joins.md), combine tables with **JOIN**
+- [Module 2.1 README](README.md), full path and assignment

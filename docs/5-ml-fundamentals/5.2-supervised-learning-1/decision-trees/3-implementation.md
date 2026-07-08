@@ -7,7 +7,7 @@ objectives:
 ---
 # Building Your First Decision Tree
 
-**After this lesson:** you can explain the core ideas in “Building Your First Decision Tree” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Building Your First Decision Tree and try the examples in your own notebook.
 
 ## Overview
 
@@ -18,7 +18,7 @@ Pairs with [tree structure](2-tree-structure.md); context in [5.2 README](../REA
 
 ## Getting Started with Scikit-learn
 
-Scikit-learn is like a toolbox for machine learning. It provides ready-to-use implementations of many algorithms, including decision trees. Let's learn how to use it!
+Scikit-learn is like a toolbox for machine learning. It provides ready-to-use implementations of many algorithms, including decision trees. Learn how to use it!
 
 ### Installation
 
@@ -32,7 +32,7 @@ pip install scikit-learn
 
 ## Your First Decision Tree: Disease Diagnosis
 
-Let's build a simple system that helps diagnose whether someone might be sick based on their symptoms.
+Build a simple system that helps diagnose whether someone might be sick based on their symptoms.
 
 ### Step 1: Prepare the Data
 
@@ -79,7 +79,7 @@ y = ['sick', 'healthy', 'sick', 'healthy', 'healthy']
       <span class="code-callout__title">Patient Feature Matrix</span>
     </div>
     <div class="code-callout__body">
-      <p>Each row is a patient; columns are temperature (numeric), cough (0/1), and fatigue (0/1)—a small supervised dataset with five examples.</p>
+      <p>Each row is a patient; columns are temperature (numeric), cough (0/1), and fatigue (0/1), a small supervised dataset with five examples.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="18-19" data-tint="3">
@@ -200,7 +200,7 @@ This visual representation helps us understand exactly how the model makes decis
 
 ## Iris Flower Classification Example
 
-Let's try another example with the famous Iris dataset, which is built into scikit-learn:
+Try another example with the famous Iris dataset, which is built into scikit-learn:
 
 #### Iris: train/test split, accuracy, and tree plot
 
@@ -270,7 +270,7 @@ plt.show()
       <span class="code-callout__title">Evaluate Accuracy</span>
     </div>
     <div class="code-callout__body">
-      <p><code>score</code> returns mean accuracy on the held-out test set—a quick sanity check before deeper evaluation.</p>
+      <p><code>score</code> returns mean accuracy on the held-out test set, a quick sanity check before deeper evaluation.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="25-34" data-tint="4">
@@ -304,7 +304,7 @@ This example demonstrates how to work with a real dataset. We:
 
 ## House Price Prediction Example
 
-Now let's try a regression problem - predicting house prices:
+Now try a regression problem - predicting house prices:
 
 #### `DecisionTreeRegressor` with R² and feature importances
 
@@ -374,7 +374,7 @@ plt.show()
       <span class="code-callout__title">House Data Setup</span>
     </div>
     <div class="code-callout__body">
-      <p>Ten houses described by three numeric features (size, bedrooms, age) with prices in thousands — a minimal regression dataset.</p>
+      <p>Ten houses described by three numeric features (size, bedrooms, age) with prices in thousands, a minimal regression dataset.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="23-31" data-tint="2">
@@ -427,7 +427,7 @@ This example shows:
 
 ## Visualizing Decision Boundaries
 
-For a better understanding, let's create a simple 2D visualization of how decision trees create boundaries:
+For a better understanding, create a simple 2D visualization of how decision trees create boundaries:
 
 ##### Noisy 2D rule + axis-aligned decision regions
 
@@ -587,7 +587,7 @@ print(f"With scaling: {tree_with_scaling.score(X_test_scaled, y_test):.3f}")
       <span class="code-callout__title">Tree Without Scaling</span>
     </div>
     <div class="code-callout__body">
-      <p>A depth-3 tree is fit directly on unscaled features and scored on the test set — decision trees use threshold comparisons, so feature magnitude doesn't change the splits.</p>
+      <p>A depth-3 tree is fit directly on unscaled features and scored on the test set, decision trees use threshold comparisons, so feature magnitude doesn't change the splits.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="8-15" data-tint="2">
@@ -621,12 +621,12 @@ Try building your own decision tree:
 
 ## Gotchas
 
-- **Trusting 100% training R² as a sign of a good model** — the house regression example prints `Training R² Score: 1.000` with only 7 training rows; a perfect in-sample fit on tiny data almost always means the tree memorised individual values rather than learning a general rule, which the lower `Testing R² Score: 0.782` confirms.
-- **Passing `class_names` in the wrong order to `plot_tree`** — `class_names` must match sklearn's internal label encoding order (alphabetical for string targets, sorted integers for numeric ones), not the order you listed them in the data; a mismatch silently swaps the leaf labels in the visualization without raising an error.
-- **Interpreting 100% test accuracy on the Iris example as realistic** — `iris_clf` achieves 100% on that particular 30% split due to a small test set and a clean separable dataset; re-run with a different `random_state` and you will see the score drop, a reminder that a single split is not a reliable estimate.
-- **Using `clf.score` as the only evaluation for classification** — `score` returns mean accuracy, which is misleading on imbalanced targets; even the small disease-diagnosis example has only 5 rows, making accuracy meaningless; `classification_report` or `predict_proba` give more actionable information.
-- **Forgetting that decision tree boundaries are always axis-aligned rectangles** — the meshgrid visualizations show step-like boundaries, not smooth curves; this means decision trees will need many splits (deep trees, more overfitting risk) to approximate a genuinely diagonal or circular decision boundary.
-- **Reusing `X_train`/`X_test` from a previous cell (Iris) in the regressor cell** — the house-price `DecisionTreeRegressor` example calls `train_test_split` referencing the same variable names; if you run cells out of order, the regressor silently trains on Iris data and produces nonsense predictions.
+- **Trusting 100% training R² as a sign of a good model**: the house regression example prints `Training R² Score: 1.000` with only 7 training rows; a perfect in-sample fit on tiny data almost always means the tree memorised individual values rather than learning a general rule, which the lower `Testing R² Score: 0.782` confirms.
+- **Passing `class_names` in the wrong order to `plot_tree`**: `class_names` must match sklearn's internal label encoding order (alphabetical for string targets, sorted integers for numeric ones), not the order you listed them in the data; a mismatch silently swaps the leaf labels in the visualization without raising an error.
+- **Interpreting 100% test accuracy on the Iris example as realistic**: `iris_clf` achieves 100% on that particular 30% split due to a small test set and a clean separable dataset; re-run with a different `random_state` and you will see the score drop, a reminder that a single split is not a reliable estimate.
+- **Using `clf.score` as the only evaluation for classification**: `score` returns mean accuracy, which is misleading on imbalanced targets; even the small disease-diagnosis example has only 5 rows, making accuracy meaningless; `classification_report` or `predict_proba` give more actionable information.
+- **Forgetting that decision tree boundaries are always axis-aligned rectangles**: the meshgrid visualizations show step-like boundaries, not smooth curves; this means decision trees will need many splits (deep trees, more overfitting risk) to approximate a genuinely diagonal or circular decision boundary.
+- **Reusing `X_train`/`X_test` from a previous cell (Iris) in the regressor cell**: the house-price `DecisionTreeRegressor` example calls `train_test_split` referencing the same variable names; if you run cells out of order, the regressor silently trains on Iris data and produces nonsense predictions.
 
 ## Next Steps
 

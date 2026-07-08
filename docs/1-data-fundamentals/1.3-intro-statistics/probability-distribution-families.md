@@ -1,6 +1,6 @@
 # Probability Distribution Families with Python
 
-**After this lesson:** you can explain the core ideas in “Probability Distribution Families with Python” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Probability Distribution Families with Python and try the examples in your own notebook.
 
 ### Video
 
@@ -8,17 +8,17 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/qBigTk9VwNU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*StatQuest with Josh Starmer — The binomial distribution*
+*StatQuest with Josh Starmer, The binomial distribution*
 
 ## Understanding distribution families
 
 A **family** is a shape of randomness described by a formula and **parameters** (for example Normal: mean and standard deviation; Binomial: number of trials and success probability). Changing parameters changes the curve or the histogram, but the **same family** still answers the same kind of real-world question.
 
-**Discrete** families (Binomial, Poisson) describe counts and frequencies. **Continuous** families (Normal, Exponential) describe measurements and waiting times. The code below lets you **sample** and **plot** several parameter settings side by side so you build intuition for “what happens when we change *n*, *p*, *lambda*, *sigma*?”
+**Discrete** families (Binomial, Poisson) describe counts and frequencies. **Continuous** families (Normal, Exponential) describe measurements and waiting times. The code below lets you **sample** and **plot** several parameter settings side by side so you build intuition for "what happens when we change *n*, *p*, *lambda*, *sigma*?"
 
 ### Exploring families in Python
 
-Let's explore different distribution families using Python:
+we will look at different distribution families using Python:
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -187,7 +187,7 @@ explorer.plot_distribution_family('poisson', poisson_params)
 
 ### Distribution Fitting and Testing
 
-Let's create tools for fitting distributions to data:
+Create tools for fitting distributions to data:
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -352,7 +352,7 @@ Parameter 3: 0.9478
       <span class="code-callout__title">Single Fit + KS Test</span>
     </div>
     <div class="code-callout__body">
-      <p><code>fit_distribution</code> uses MLE to estimate parameters, then runs a Kolmogorov-Smirnov test — the p-value measures how well the data matches the fitted distribution.</p>
+      <p><code>fit_distribution</code> uses MLE to estimate parameters, then runs a Kolmogorov-Smirnov test, the p-value measures how well the data matches the fitted distribution.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="42-68" data-tint="3">
@@ -361,7 +361,7 @@ Parameter 3: 0.9478
       <span class="code-callout__title">Best Fit Selection</span>
     </div>
     <div class="code-callout__body">
-      <p>Tries every candidate distribution, collects p-values, sorts them descending, and returns the best-fitting one — failures for a specific family are silently skipped.</p>
+      <p>Tries every candidate distribution, collects p-values, sorts them descending, and returns the best-fitting one, failures for a specific family are silently skipped.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="70-110" data-tint="4">
@@ -379,7 +379,7 @@ Parameter 3: 0.9478
       <span class="code-callout__title">Usage Example</span>
     </div>
     <div class="code-callout__body">
-      <p>Generates 1,000 log-normal samples and runs the full fit pipeline — the fitter should correctly identify <code>lognorm</code> as the best fit.</p>
+      <p>Generates 1,000 log-normal samples and runs the full fit pipeline, the fitter should correctly identify <code>lognorm</code> as the best fit.</p>
     </div>
   </div>
 </aside>
@@ -404,7 +404,7 @@ Parameter 3: 0.9478
 
 ### Binomial Distribution
 
-Let's implement tools for working with binomial distributions:
+Implement tools for working with binomial distributions:
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -548,7 +548,7 @@ Probability of exactly 5 successes: 0.1029
       <span class="code-callout__title">Exact Probability</span>
     </div>
     <div class="code-callout__body">
-      <p>Uses the closed-form PMF to compute P(X = k) exactly — faster and more precise than counting from simulations.</p>
+      <p>Uses the closed-form PMF to compute P(X = k) exactly, faster and more precise than counting from simulations.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="40-68" data-tint="4">
@@ -724,7 +724,7 @@ Probability of exactly 5 events: 0.1008
       <span class="code-callout__title">Analyzer Init</span>
     </div>
     <div class="code-callout__body">
-      <p>Stores <code>lambda_</code> (the average event rate). For a Poisson distribution, mean and variance are both equal to λ — a key property highlighted in the print output.</p>
+      <p>Stores <code>lambda_</code> (the average event rate). For a Poisson distribution, mean and variance are both equal to λ, a key property highlighted in the print output.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="21-29" data-tint="2">
@@ -742,7 +742,7 @@ Probability of exactly 5 events: 0.1008
       <span class="code-callout__title">Exact PMF</span>
     </div>
     <div class="code-callout__body">
-      <p>Computes P(X = k) from the closed-form Poisson PMF — use this when you need a precise probability, not a simulation estimate.</p>
+      <p>Computes P(X = k) from the closed-form Poisson PMF, use this when you need a precise probability, not a simulation estimate.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="38-70" data-tint="4">
@@ -791,7 +791,7 @@ Probability of exactly 5 events: 0.1008
 
 ### Normal Distribution and Central Limit Theorem
 
-Let's demonstrate the Central Limit Theorem:
+Demonstrate the Central Limit Theorem:
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -996,7 +996,7 @@ Normality Test p-value: 0.0019
       <span class="code-callout__title">Init</span>
     </div>
     <div class="code-callout__body">
-      <p>Seeds the random state so the CLT demonstration produces the same plots each run — important for reproducible teaching examples.</p>
+      <p>Seeds the random state so the CLT demonstration produces the same plots each run, important for reproducible teaching examples.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="8-42" data-tint="2">
@@ -1005,7 +1005,7 @@ Normality Test p-value: 0.0019
       <span class="code-callout__title">Sample Mean Generation</span>
     </div>
     <div class="code-callout__body">
-      <p>Draws an <code>(n_samples × sample_size)</code> matrix from the chosen distribution, then collapses each row to its mean — each row is one simulated sample of size <code>sample_size</code>.</p>
+      <p>Draws an <code>(n_samples × sample_size)</code> matrix from the chosen distribution, then collapses each row to its mean, each row is one simulated sample of size <code>sample_size</code>.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="44-87" data-tint="3">
@@ -1023,7 +1023,7 @@ Normality Test p-value: 0.0019
       <span class="code-callout__title">Normality Tests</span>
     </div>
     <div class="code-callout__body">
-      <p>Prints mean, std dev, and D'Agostino-Pearson normality test p-value for each sample size — as <em>n</em> grows the p-value should rise, confirming the CLT.</p>
+      <p>Prints mean, std dev, and D'Agostino-Pearson normality test p-value for each sample size, as <em>n</em> grows the p-value should rise, confirming the CLT.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="104-122" data-tint="1">
@@ -1132,9 +1132,9 @@ Remember:
 
 ## Common pitfalls
 
-- **Using a famous name without checking fit** — “It’s Normal because we always use Normal” is wrong; use plots and domain knowledge.
-- **Ignoring parameter constraints** — Rate parameters must be positive; probabilities must stay in **[0, 1]**.
-- **Mixing discrete and continuous** — PMF vs PDF: different rules for summing vs integrating.
+- **Using a famous name without checking fit**: "It's Normal because we always use Normal" is wrong; use plots and domain knowledge.
+- **Ignoring parameter constraints**: Rate parameters must be positive; probabilities must stay in **[0, 1]**.
+- **Mixing discrete and continuous**: PMF vs PDF: different rules for summing vs integrating.
 
 ## Next steps
 

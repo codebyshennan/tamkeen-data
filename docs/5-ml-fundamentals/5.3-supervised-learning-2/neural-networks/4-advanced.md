@@ -2,13 +2,13 @@
 reading_minutes: 20
 objectives:
   - "Identify the right architecture for a task: CNN for image data, RNN/LSTM/GRU for sequences, Transformer for long-range dependencies."
-  - "Apply training refinements — Adam, learning-rate scheduling, batch normalization, dropout — and explain when each helps."
+  - "Apply training refinements, Adam, learning-rate scheduling, batch normalization, dropout, and explain when each helps."
   - "Use transfer learning by fine-tuning a pretrained backbone instead of training from scratch."
 ---
 
 # Advanced Neural Network Techniques
 
-**After this lesson:** you can explain the core ideas in “Advanced Neural Network Techniques” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Advanced Neural Network Techniques and try the examples in your own notebook.
 
 ## Overview
 
@@ -229,7 +229,7 @@ def scaled_dot_product_attention(q, k, v, mask=None):
       <span class="code-callout__title">Similarity and Scaling</span>
     </div>
     <div class="code-callout__body">
-      <p>Query–key dot products measure similarity; dividing by √d_k prevents dot products from growing too large in high dimensions, which would saturate the softmax and kill gradients.</p>
+      <p>Query-key dot products measure similarity; dividing by √d_k prevents dot products from growing too large in high dimensions, which would saturate the softmax and kill gradients.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="11-21" data-tint="2">
@@ -309,7 +309,7 @@ class CurriculumDataGenerator:
       <span class="code-callout__title">Curriculum Batch</span>
     </div>
     <div class="code-callout__body">
-      <p>Each call computes a threshold that rises by 0.1 per epoch (capped at 1.0), filters to only samples below that difficulty, then randomly draws a batch—gradually exposing harder examples as training progresses.</p>
+      <p>Each call computes a threshold that rises by 0.1 per epoch (capped at 1.0), filters to only samples below that difficulty, then randomly draws a batch, gradually exposing harder examples as training progresses.</p>
     </div>
   </div>
 </aside>
@@ -406,12 +406,12 @@ def create_mixed_precision_model():
 
 ## Gotchas
 
-- **Residual block dimension mismatch crashes silently on some TF versions** — The `residual_block` function adjusts the shortcut with a 1×1 convolution when `shortcut.shape[-1] != filters`. This check only covers channel dimension mismatches. If you add `strides=2` to the main-path convolutions (for downsampling), the spatial size also mismatches, and the `Add` layer will fail at runtime with a cryptic shape error.
-- **Setting `base_model.trainable = True` unfreezes all layers, not just the last few** — The fine-tuning pattern requires unfreezing only the tail of ResNet (e.g., `base_model.layers[-4:]`). Writing `base_model.trainable = True` unfreezes all 175+ ResNet layers, causing a dramatically larger parameter space that overfits quickly on small datasets.
-- **`mixed_float16` silently keeps BatchNorm in float32** — Keras automatically keeps normalization layers in float32 even under `mixed_float16` policy, which is correct. But learners often check layer dtypes and assume the policy isn't working because they see float32 layers. This is intentional; the compute-intensive Dense and Conv layers run in float16.
-- **`CurriculumDataGenerator` can produce empty batches** — If `threshold` is low (early training) and the `difficulty_fn` scores most samples above that threshold, `eligible_data` can be empty. `np.random.choice(0, size=batch_size)` will raise a `ValueError`. Always add a fallback (e.g., `if len(eligible_data) < batch_size: ...`) before production use.
-- **Attention weights are summed, not concatenated** — In the `AttentionLayer`, the context vector is computed as `tf.reduce_sum(attention_weights * values, axis=1)`. Replacing `reduce_sum` with concatenation produces a tensor with the wrong shape for downstream layers and typically a large performance drop, since positional information is lost.
-- **`scaled_dot_product_attention` mask convention uses large negative values, not zeros** — The mask adds `-1e9` to masked positions so softmax assigns near-zero weight to them. Adding 0 to masked positions (a common mistake) means those positions contribute equally to the output, breaking causal attention in decoder models.
+- **Residual block dimension mismatch crashes silently on some TF versions**: The `residual_block` function adjusts the shortcut with a 1×1 convolution when `shortcut.shape[-1] != filters`. This check only covers channel dimension mismatches. If you add `strides=2` to the main-path convolutions (for downsampling), the spatial size also mismatches, and the `Add` layer will fail at runtime with a cryptic shape error.
+- **Setting `base_model.trainable = True` unfreezes all layers, not just the last few**: The fine-tuning pattern requires unfreezing only the tail of ResNet (e.g., `base_model.layers[-4:]`). Writing `base_model.trainable = True` unfreezes all 175+ ResNet layers, causing a dramatically larger parameter space that overfits quickly on small datasets.
+- **`mixed_float16` silently keeps BatchNorm in float32**: Keras automatically keeps normalization layers in float32 even under `mixed_float16` policy, which is correct. But learners often check layer dtypes and assume the policy isn't working because they see float32 layers. This is intentional; the compute-intensive Dense and Conv layers run in float16.
+- **`CurriculumDataGenerator` can produce empty batches**: If `threshold` is low (early training) and the `difficulty_fn` scores most samples above that threshold, `eligible_data` can be empty. `np.random.choice(0, size=batch_size)` will raise a `ValueError`. Always add a fallback (e.g., `if len(eligible_data) < batch_size: ...`) before production use.
+- **Attention weights are summed, not concatenated**: In the `AttentionLayer`, the context vector is computed as `tf.reduce_sum(attention_weights * values, axis=1)`. Replacing `reduce_sum` with concatenation produces a tensor with the wrong shape for downstream layers and typically a large performance drop, since positional information is lost.
+- **`scaled_dot_product_attention` mask convention uses large negative values, not zeros**: The mask adds `-1e9` to masked positions so softmax assigns near-zero weight to them. Adding 0 to masked positions (a common mistake) means those positions contribute equally to the output, breaking causal attention in decoder models.
 
 ## Next Steps
 

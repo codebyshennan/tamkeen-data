@@ -9,7 +9,7 @@ objectives:
 
 # Simple Linear Regression: Your First Step into Prediction
 
-**After this lesson:** you can explain the core ideas in “Simple Linear Regression: Your First Step into Prediction” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Simple Linear Regression: Your First Step into Prediction and try the examples in your own notebook.
 
 ## Overview
 
@@ -106,7 +106,7 @@ The mistakes in our predictions should follow a normal distribution (bell curve)
 
 ## Building Your First Regression Model: A Step-by-Step Example
 
-Let's walk through a concrete example using Python. Don't worry if you're not familiar with the code - focus on the concepts!
+Walk through a concrete example using Python. Don't worry if you're not familiar with the code - focus on the concepts!
 
 **Fit `LinearRegression`, print intercept, slope, and R², and plot the line**
 
@@ -170,7 +170,7 @@ plt.show()
       <span class="code-callout__title">2D feature matrix</span>
     </div>
     <div class="code-callout__body">
-      <p><code>.reshape(-1, 1)</code> converts the 1D array to a column vector — sklearn requires <code>X</code> to be 2D (samples × features). <code>-1</code> tells NumPy to infer the row count automatically.</p>
+      <p><code>.reshape(-1, 1)</code> converts the 1D array to a column vector, sklearn requires <code>X</code> to be 2D (samples × features). <code>-1</code> tells NumPy to infer the row count automatically.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="12-17" data-tint="3">
@@ -179,7 +179,7 @@ plt.show()
       <span class="code-callout__title">Fit and predict</span>
     </div>
     <div class="code-callout__body">
-      <p><code>LinearRegression().fit</code> runs OLS — computes the intercept and slope that minimize the sum of squared residuals (vertical distances from points to the line). No hyperparameters needed. <code>model.predict(X)</code> applies the fitted line to produce <code>y_pred</code>.</p>
+      <p><code>LinearRegression().fit</code> runs OLS, computes the intercept and slope that minimize the sum of squared residuals (vertical distances from points to the line). No hyperparameters needed. <code>model.predict(X)</code> applies the fitted line to produce <code>y_pred</code>.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="19-22" data-tint="4">
@@ -218,7 +218,7 @@ In our example about study hours and test scores:
 
 ## Understanding Your Results: What Do These Numbers Mean?
 
-Let's break down the key components of your regression results:
+Break down the key components of your regression results:
 
 ### 1. The Starting Point (Intercept)
 
@@ -269,28 +269,28 @@ Before trusting your model, you should always check if it's valid. One way to do
 def plot_diagnostics(X, y, y_pred):
     # Calculate residuals (the differences between actual and predicted values)
     residuals = y - y_pred
-    
+
     # Create four diagnostic plots
     fig, axes = plt.subplots(2, 2, figsize=(15, 10))
-    
+
     # 1. Residuals vs Fitted values - checks linearity
     axes[0,0].scatter(y_pred, residuals)
     axes[0,0].axhline(y=0, color='r', linestyle='--')
     axes[0,0].set_xlabel('Predicted values')
     axes[0,0].set_ylabel('Residuals')
     axes[0,0].set_title('Residuals vs Predicted (check for linearity)')
-    
+
     # 2. Q-Q plot - checks normality of residuals
     from scipy import stats
     stats.probplot(residuals, dist="norm", plot=axes[0,1])
     axes[0,1].set_title('Q-Q Plot (check for normality)')
-    
+
     # 3. Scale-Location - checks homoscedasticity
     axes[1,0].scatter(y_pred, np.abs(residuals))
     axes[1,0].set_xlabel('Predicted values')
     axes[1,0].set_ylabel('|Residuals|')
     axes[1,0].set_title('Scale-Location (check for constant spread)')
-    
+
     # 4. Residuals vs Leverage - checks for influential points
     X_design = np.column_stack([np.ones(len(X)), X])  # add intercept column
     leverage = np.diagonal(X_design @ np.linalg.inv(X_design.T @ X_design) @ X_design.T)
@@ -298,7 +298,7 @@ def plot_diagnostics(X, y, y_pred):
     axes[1,1].set_xlabel('Leverage')
     axes[1,1].set_ylabel('Residuals')
     axes[1,1].set_title('Residuals vs Leverage (check for influential points)')
-    
+
     plt.tight_layout()
     plt.show()
 
@@ -308,66 +308,66 @@ plot_diagnostics(X, y, y_pred)
 
 <figure>
 <img src="assets/simple-linear-regression_fig_2.png" alt="Four-panel regression diagnostic plots" />
-<figcaption>Figure 2: Diagnostic plots — residuals vs predicted, Q-Q, scale-location, residuals vs leverage</figcaption>
+<figcaption>Figure 2: Diagnostic plots, residuals vs predicted, Q-Q, scale-location, residuals vs leverage</figcaption>
 </figure>
 
 ### What to Look for in Diagnostic Plots:
 ### 1. Residuals vs Predicted/Fitted (Top Left)
-- **What it shows:**  
+- **What it shows:**
    The difference between what your model predicted and what actually happened.
-- **Good looks like:**  
+- **Good looks like:**
    Points randomly scattered around the horizontal zero line, like confetti thrown evenly on the ground.
-- **Bad looks like:**  
+- **Bad looks like:**
    Any pattern, curve, or trend in the dots.
-- **Real-world analogy:**  
-   Checking if your bathroom scale is accurate across different weights – it should be equally reliable whether weighing a feather or a bowling ball.
-- **In this example:**  
+- **Real-world analogy:**
+   Checking if your bathroom scale is accurate across different weights, it should be equally reliable whether weighing a feather or a bowling ball.
+- **In this example:**
    The points appear randomly scattered around the zero line without any clear pattern. This is a good sign! Your model seems to be capturing the relationship in your data well without missing any non-linear patterns. Your "scale" is equally accurate for light and heavy objects.
 
 ### 2. Q-Q Plot (Top Right)
-- **What it shows:**  
+- **What it shows:**
    Whether your prediction errors follow a normal distribution (bell curve).
-- **Good looks like:**  
+- **Good looks like:**
    Points that follow the diagonal line closely, like cars staying in their lane.
-- **Bad looks like:**  
+- **Bad looks like:**
    Points that curve away from the line, especially at the ends.
-- **Real-world analogy:**  
+- **Real-world analogy:**
    Checking if the mistakes your model makes follow a predictable pattern that statisticians can work with.
-- **In this example:**  
-   The points follow the diagonal reference line quite closely with only minor deviations at the extreme ends. This indicates that your model’s errors follow a normal distribution very well, satisfying a key assumption of linear regression. The mistakes your model makes are symmetrically distributed around zero – exactly what we want.
+- **In this example:**
+   The points follow the diagonal reference line quite closely with only minor deviations at the extreme ends. This indicates that your model's errors follow a normal distribution very well, satisfying a key assumption of linear regression. The mistakes your model makes are symmetrically distributed around zero, exactly what we want.
 
 ### 3. Scale-Location (Bottom Left)
-- **What it shows:**  
-   Whether your model’s accuracy is consistent across all predictions.
-- **Good looks like:**  
+- **What it shows:**
+   Whether your model's accuracy is consistent across all predictions.
+- **Good looks like:**
    An even spread of points with no clear pattern, like evenly distributed stars.
-- **Bad looks like:**  
+- **Bad looks like:**
    A funnel shape (wider on one side), which means your model is more accurate for some values than others.
-- **Real-world analogy:**  
+- **Real-world analogy:**
    Checking if your weather forecast is equally reliable for sunny days and rainy days.
-- **In this example:**  
-   There might be a slight upward trend in the spread as the fitted values increase, but it’s not dramatically pronounced. This suggests minor heteroscedasticity – your model’s predictions might be slightly less reliable for higher values, like a weather forecast that’s a bit more accurate for moderate temperatures than for extreme ones.
+- **In this example:**
+   There might be a slight upward trend in the spread as the fitted values increase, but it's not dramatically pronounced. This suggests minor heteroscedasticity, your model's predictions might be slightly less reliable for higher values, like a weather forecast that's a bit more accurate for moderate temperatures than for extreme ones.
 
 ### 4. Residuals vs Leverage (Bottom Right)
-- **What it shows:**  
+- **What it shows:**
    Whether any single data point is having too much influence on your entire model.
-- **Good looks like:**  
+- **Good looks like:**
    No points far from others, especially in the top or bottom right corners.
-- **Bad looks like:**  
+- **Bad looks like:**
    Points in the top or bottom right (influential outliers).
-- **Real-world analogy:**  
-   Checking if one extremely vocal person is swaying an entire group’s decision, rather than everyone having equal input.
-- **In this example:**  
-   The points are well-spread without any particularly influential points in concerning regions. No points appear outside Cook’s distance contours (which would indicate high influence). This suggests your model is robust and not being skewed by outliers – no single data point is dominating how your model behaves.
+- **Real-world analogy:**
+   Checking if one extremely vocal person is swaying an entire group's decision, rather than everyone having equal input.
+- **In this example:**
+   The points are well-spread without any particularly influential points in concerning regions. No points appear outside Cook's distance contours (which would indicate high influence). This suggests your model is reliable and not being skewed by outliers, no single data point is dominating how your model behaves.
 
 ### Overall Assessment
-- **Linearity ✓:**  
+- **Linearity ✓:**
    The random scatter in the Residuals vs Fitted plot indicates your model captures the relationships appropriately.
-- **Normality of residuals ✓:**  
+- **Normality of residuals ✓:**
    The good alignment in the Q-Q plot shows errors follow a normal distribution.
-- **Homoscedasticity ⚠️:**  
-   There’s a slight concern in the Scale-Location plot, but it’s not severe.
-- **No influential outliers ✓:**  
+- **Homoscedasticity ⚠️:**
+   There's a slight concern in the Scale-Location plot, but it's not severe.
+- **No influential outliers ✓:**
    The Residuals vs Leverage plot shows no problematic points driving your results.
 
 ## Real-Life Applications: Where Is Simple Linear Regression Used?
@@ -399,7 +399,7 @@ Simple linear regression is used in countless real-world scenarios:
 - **Resource Allocation**: Understanding how class size affects student performance
 - **Career Planning**: Analyzing how education level affects income
 
-## Let's Practice Together: Predicting Exam Scores
+## Practice together: Predicting Exam Scores
 
 Try working through this simple example:
 
@@ -459,12 +459,12 @@ The model would likely show:
 
 ## Gotchas
 
-- **Forgetting `.reshape(-1, 1)` for a 1D predictor** — sklearn's `LinearRegression.fit` requires a 2D feature matrix. Passing a plain 1D NumPy array raises a `ValueError`; use `X.reshape(-1, 1)` or `X[:, np.newaxis]` before calling `.fit`.
-- **Trusting R² without checking residual plots** — A high R² (e.g., 0.98) can appear even when the true relationship is curved, because OLS minimises squared error regardless of shape. The residuals-vs-fitted plot will reveal systematic curvature that R² hides.
-- **Confusing training R² with generalization quality** — `r2_score(y, y_pred)` computed on the same data used to fit the model always paints an optimistic picture. Evaluate on a held-out test set or use cross-validation to get an honest estimate.
-- **Over-interpreting the intercept** — The intercept is the predicted y when x = 0. When x = 0 is outside the observed data range (e.g., predicting exam score for 0 study hours from a dataset where everyone studied at least 2 hours), the intercept is a mathematical extrapolation, not a meaningful baseline.
-- **Predicting outside the training range (extrapolation)** — The least-squares line is valid within the range of x values seen during training. Using it to predict far beyond that range assumes the linear relationship continues indefinitely, which is rarely true in practice.
-- **Ignoring the equal-variance assumption before comparing groups** — When residuals fan out (heteroscedasticity), standard errors and p-values for the slope are wrong even if the line looks like a reasonable fit. Always check the scale-location plot before reporting inference results.
+- **Forgetting `.reshape(-1, 1)` for a 1D predictor**: sklearn's `LinearRegression.fit` requires a 2D feature matrix. Passing a plain 1D NumPy array raises a `ValueError`; use `X.reshape(-1, 1)` or `X[:, np.newaxis]` before calling `.fit`.
+- **Trusting R² without checking residual plots**: A high R² (e.g., 0.98) can appear even when the true relationship is curved, because OLS minimises squared error regardless of shape. The residuals-vs-fitted plot will reveal systematic curvature that R² hides.
+- **Confusing training R² with generalization quality**: `r2_score(y, y_pred)` computed on the same data used to fit the model always paints an optimistic picture. Evaluate on a held-out test set or use cross-validation to get an honest estimate.
+- **Over-interpreting the intercept**: The intercept is the predicted y when x = 0. When x = 0 is outside the observed data range (e.g., predicting exam score for 0 study hours from a dataset where everyone studied at least 2 hours), the intercept is a mathematical extrapolation, not a meaningful baseline.
+- **Predicting outside the training range (extrapolation)**: The least-squares line is valid within the range of x values seen during training. Using it to predict far beyond that range assumes the linear relationship continues indefinitely, which is rarely true in practice.
+- **Ignoring the equal-variance assumption before comparing groups**: When residuals fan out (heteroscedasticity), standard errors and p-values for the slope are wrong even if the line looks like a reasonable fit. Always check the scale-location plot before reporting inference results.
 
 ## Additional Resources for the Curious Mind
 

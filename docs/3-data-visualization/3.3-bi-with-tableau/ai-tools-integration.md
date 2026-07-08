@@ -1,6 +1,6 @@
 # Using AI Tools with Tableau
 
-**After this lesson:** you can use Claude or ChatGPT as an AI pair partner while building Tableau dashboards — getting concepts explained, writing calculated fields faster, debugging LOD expressions, and getting chart recommendations without leaving your workflow.
+**After this lesson:** you can use Claude or ChatGPT as an AI pair partner while building Tableau dashboards, getting concepts explained, writing calculated fields faster, debugging LOD expressions, and getting chart recommendations without leaving your workflow.
 
 This course uses **Tableau Public**, which is free and requires no login. The setup for AI assistance is equally simple: open a chat tab next to Tableau and start asking questions.
 
@@ -16,7 +16,7 @@ Open [claude.ai](https://claude.ai) or [chatgpt.com](https://chatgpt.com) in a b
 
 ## Key concepts to ask AI about
 
-If you're new to Tableau, these are the five concepts that trip people up most. Ask Claude or ChatGPT to explain any of them in plain language — or use the ready-made prompts below each one.
+If you're new to Tableau, these are the five concepts that trip people up most. Ask Claude or ChatGPT to explain any of them in plain language, or use the ready-made prompts below each one.
 
 ### Dimensions vs. Measures
 
@@ -32,7 +32,7 @@ The **Marks card** controls everything visual about your chart that isn't the X/
 
 ### Calculated fields
 
-A **calculated field** is a new column you create inside Tableau using a formula — like a spreadsheet formula, but it works across aggregated data. You create one via **Analysis → Create Calculated Field**.
+A **calculated field** is a new column you create inside Tableau using a formula, like a spreadsheet formula, but it works across aggregated data. You create one via **Analysis → Create Calculated Field**.
 
 > **Ask AI:** "I want to create a Tableau calculated field that divides Profit by Sales to get a margin percentage. My fields are called [Profit] and [Sales]. Write the formula and explain what each part does."
 
@@ -44,7 +44,7 @@ Tableau applies filters in a specific order: **Extract filters → Data source f
 
 ### Aggregation (SUM vs AVG vs COUNT)
 
-When you drag a measure to a shelf, Tableau automatically aggregates it — usually as SUM. Right-click the pill to change it to AVG, COUNT, MIN, MAX, etc. Forgetting to check this is why totals often look far too large.
+When you drag a measure to a shelf, Tableau automatically aggregates it, usually as SUM. Right-click the pill to change it to AVG, COUNT, MIN, MAX, etc. Forgetting to check this is why totals often look far too large.
 
 > **Ask AI:** "In Tableau, my Sales total looks 100× too large. Could aggregation be the reason? How do I check and fix it?"
 
@@ -90,7 +90,7 @@ STR(ROUND(SUM([Profit]) / SUM([Sales]) * 100, 1)) + "%"
 
 ### Workflow 2: Debug an LOD expression
 
-LOD (Level of Detail) expressions compute values at a different granularity than the current view — useful but error-prone. Paste the broken expression and describe what it should do.
+LOD (Level of Detail) expressions compute values at a different granularity than the current view, useful but error-prone. Paste the broken expression and describe what it should do.
 
 **Prompt template:**
 
@@ -109,7 +109,7 @@ This Tableau LOD expression returns wrong numbers when I add a Region filter:
 I want it to show each customer's first order date, filtered by the current Region selection.
 ```
 
-Claude will explain why `FIXED` ignores dimension filters and show you the fix — either adding a context filter or switching to `INCLUDE`:
+Claude will explain why `FIXED` ignores dimension filters and show you the fix, either adding a context filter or switching to `INCLUDE`:
 
 ```
 {INCLUDE [Region] : MIN([Order Date])}
@@ -125,7 +125,7 @@ Use Claude to create practice data when you don't have a real dataset yet.
 
 ```
 Generate a CSV with 50 rows of fictional retail sales data suitable for Tableau practice.
-Include: Order ID, Order Date (2023–2024), Region (East/West/North/South),
+Include: Order ID, Order Date (2023-2024), Region (East/West/North/South),
 Category (Furniture/Technology/Office Supplies), Sales (numeric), Profit (numeric).
 ```
 
@@ -167,7 +167,7 @@ What chart type should I use in Tableau, and which fields go on Rows, Columns, a
 >
 > **Shelf configuration:**
 > - **Columns:** `Order Date` (set to continuous Month/Year)
-> - **Rows:** Profit margin calculated field — `SUM([Profit]) / SUM([Sales])`
+> - **Rows:** Profit margin calculated field, `SUM([Profit]) / SUM([Sales])`
 > - **Color:** `Category` (one line per category)
 > - **Marks:** Line
 >
@@ -198,7 +198,7 @@ Before assuming AI gave you a bad formula, run through these:
 
 > **This does not apply to Tableau Public.** Tableau Public does not expose the REST API required for MCP. If you're using Tableau Public in this course, use the copy-paste workflow above.
 
-The [Model Context Protocol (MCP)](https://modelcontextprotocol.io) lets Claude Desktop connect directly to Tableau Server or Tableau Cloud workbooks and data sources — no copy-pasting field lists required. This is useful when you're working iteratively on a large workbook with many fields.
+The [Model Context Protocol (MCP)](https://modelcontextprotocol.io) lets Claude Desktop connect directly to Tableau Server or Tableau Cloud workbooks and data sources, no copy-pasting field lists required. This is useful when you're working iteratively on a large workbook with many fields.
 
 ### Prerequisites
 
@@ -206,14 +206,14 @@ The [Model Context Protocol (MCP)](https://modelcontextprotocol.io) lets Claude 
 - Access to **Tableau Server** or **Tableau Cloud** (not Tableau Public)
 - Node.js v18+ installed ([nodejs.org](https://nodejs.org))
 
-### Step 1 — Create a Personal Access Token in Tableau
+### Step 1: Create a Personal Access Token in Tableau
 
 1. Sign in to Tableau Server or Tableau Cloud.
 2. Click your profile icon → **My Account Settings**.
 3. Scroll to **Personal Access Tokens** → **Create new token**.
-4. Name it `claude-mcp` and copy the token secret immediately — you won't see it again.
+4. Name it `claude-mcp` and copy the token secret immediately, you won't see it again.
 
-### Step 2 — Configure Claude Desktop
+### Step 2: Configure Claude Desktop
 
 Open the Claude Desktop config file on macOS:
 
@@ -240,9 +240,9 @@ Add the Tableau block, replacing the placeholder values:
 }
 ```
 
-`TABLEAU_SITE_ID` is the value after `/site/` in your Tableau URL — leave blank for the default site.
+`TABLEAU_SITE_ID` is the value after `/site/` in your Tableau URL, leave blank for the default site.
 
-### Step 3 — Verify
+### Step 3: Verify
 
 Restart Claude Desktop. You should see a hammer icon (🔨) in the chat bar. Test with:
 

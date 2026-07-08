@@ -2,7 +2,7 @@
 
 > **Submit your work on Skills Union →** <https://skillsu.com/member/assessment>
 
-Try each question closed-book first. Click **Show hint** if you get stuck — hints point you at the relevant lesson section and how to think about the question, without naming the answer.
+Try each question closed-book first. Click **Show hint** if you get stuck, hints point you at the relevant lesson section and how to think about the question, without naming the answer.
 
 ## Questions
 
@@ -16,8 +16,8 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [What is ML?](../what-is-ml.md) — "Types of Machine Learning → Supervised Learning".
-- **Think:** The word "supervised" implies guidance — something tells the algorithm what the right answer is for each training example. Which option captures that idea?
+- **Where:** [What is ML?](../what-is-ml.md), "Types of Machine Learning → Supervised Learning".
+- **Think:** The word "supervised" implies guidance, something tells the algorithm what the right answer is for each training example. Which option captures that idea?
 
 </details>
 
@@ -31,7 +31,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [What is ML?](../what-is-ml.md) — "Types of Machine Learning → Unsupervised Learning".
+- **Where:** [What is ML?](../what-is-ml.md), "Types of Machine Learning → Unsupervised Learning".
 - **Think:** Unsupervised learning finds patterns without any labels. Which option describes discovery rather than prediction from known examples?
 
 </details>
@@ -46,7 +46,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [What is ML?](../what-is-ml.md) — "Types of Machine Learning → Reinforcement Learning".
+- **Where:** [What is ML?](../what-is-ml.md), "Types of Machine Learning → Reinforcement Learning".
 - **Think:** This paradigm involves an agent, an environment, and a feedback signal that is not a pre-labeled dataset. Which term names that feedback loop?
 
 </details>
@@ -61,7 +61,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [ML Workflow](../ml-workflow.md) — "The Machine Learning Workflow Steps".
+- **Where:** [ML Workflow](../ml-workflow.md), "The Machine Learning Workflow Steps".
 - **Think:** The workflow is linear: you must understand the problem before you collect, clean before you model, and evaluate before you deploy. Which sequence preserves that logical order?
 
 </details>
@@ -76,23 +76,23 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [ML Workflow](../ml-workflow.md) — "2. Data Collection and Exploration → Exploratory Data Analysis".
+- **Where:** [ML Workflow](../ml-workflow.md), "2. Data Collection and Exploration → Exploratory Data Analysis".
 - **Think:** Correlation heatmaps and target distributions are EDA activities. They happen after you have data but before you touch any model.
 
 </details>
 
 6. You train a model and observe that training accuracy is 98% but validation accuracy is 62%. What does this gap most likely indicate?
 
-- [ ] Underfitting — the model is too simple
+- [ ] Underfitting, the model is too simple
 - [ ] A data collection error
-- [ ] Overfitting — the model has memorized the training data
+- [ ] Overfitting, the model has memorized the training data
 - [ ] A correct and expected outcome
 
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Bias and Variance](../bias-variance.md) — "High Variance (Overfitting)".
-- **Think:** High training score and low validation score means the model performs very differently on seen vs unseen data. Which failure mode is characterised by a large training–validation gap?
+- **Where:** [Bias and Variance](../bias-variance.md), "High Variance (Overfitting)".
+- **Think:** High training score and low validation score means the model performs very differently on seen vs unseen data. Which failure mode is characterised by a large training-validation gap?
 
 </details>
 
@@ -106,8 +106,8 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Bias and Variance](../bias-variance.md) — "Interpreting Learning Curves → High Bias (Underfitting)".
-- **Think:** High bias means the model is too simple and misses patterns consistently — even on its own training data. Which description matches that outcome?
+- **Where:** [Bias and Variance](../bias-variance.md), "Interpreting Learning Curves → High Bias (Underfitting)".
+- **Think:** High bias means the model is too simple and misses patterns consistently, even on its own training data. Which description matches that outcome?
 
 </details>
 
@@ -121,8 +121,8 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Bias and Variance](../bias-variance.md) — "Dealing with High Bias → Increase Model Complexity".
-- **Think:** Polynomial features let a model follow curved patterns it couldn't before — they make the hypothesis space richer. What failure mode does a richer hypothesis space fix?
+- **Where:** [Bias and Variance](../bias-variance.md), "Dealing with High Bias → Increase Model Complexity".
+- **Think:** Polynomial features let a model follow curved patterns it couldn't before, they make the hypothesis space richer. What failure mode does a richer hypothesis space fix?
 
 </details>
 
@@ -136,7 +136,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Bias and Variance](../bias-variance.md) — "Interpreting Learning Curves → Good Fit".
+- **Where:** [Bias and Variance](../bias-variance.md), "Interpreting Learning Curves → Good Fit".
 - **Think:** Convergence of both curves at a high score is the signature of a well-calibrated model. None of the other options apply when both scores are high and close together.
 
 </details>
@@ -151,7 +151,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Feature Engineering](../feature-engineering.md) — "Scaling and Normalization → Why Scaling Matters".
+- **Where:** [Feature Engineering](../feature-engineering.md), "Scaling and Normalization → Why Scaling Matters".
 - **Think:** Algorithms that rely on distances or gradient magnitudes behave poorly when one feature is measured in thousands and another in fractions. What does scaling fix?
 
 </details>
@@ -166,7 +166,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Feature Engineering](../feature-engineering.md) — "Handling Categorical Variables → When to Use Which Encoding Method".
+- **Where:** [Feature Engineering](../feature-engineering.md), "Handling Categorical Variables → When to Use Which Encoding Method".
 - **Think:** City names have no inherent numeric order. Which encoding avoids implying a false ordering between categories?
 
 </details>
@@ -181,7 +181,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Feature Engineering](../feature-engineering.md) — "Gotchas: Fitting the scaler on the full dataset before splitting".
+- **Where:** [Feature Engineering](../feature-engineering.md), "Gotchas: Fitting the scaler on the full dataset before splitting".
 - **Think:** The scaler computes statistics (mean, std) during `fit`. If you fit on all data, those statistics encode information from test rows. What does that do to your evaluation?
 
 </details>

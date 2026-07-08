@@ -10,7 +10,7 @@ objectives:
 
 # Machine Learning Workflow: A Step-by-Step Guide
 
-**After this lesson:** you can explain the core ideas in “Machine Learning Workflow: A Step-by-Step Guide” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Machine Learning Workflow: A Step-by-Step Guide and try the examples in your own notebook.
 
 ## Overview
 
@@ -18,9 +18,9 @@ A **workflow** is the repeatable path from a business or research question throu
 
 ## Why this matters
 
-Skipping steps—especially clear problem definition, honest splits, and evaluation—produces models that look good in a notebook and fail in production. A shared workflow also keeps teams aligned on what “done” means and what to document.
+Skipping steps, especially clear problem definition, honest splits, and evaluation, produces models that look good in a notebook and fail in production. A shared workflow also keeps teams aligned on what "done" means and what to document.
 
-Welcome to our comprehensive guide on the machine learning workflow! This guide will walk you through each step of building a machine learning solution, with practical examples and clear explanations.
+Welcome to our guide on the machine learning workflow! This guide will walk you through each step of building a machine learning solution, with practical examples and clear explanations.
 
 
 ## What is a Machine Learning Workflow?
@@ -52,7 +52,7 @@ The workflow consists of six main steps:
 5. Model Evaluation
 6. Model Deployment
 
-Let's explore each step in detail.
+we will look at each step in detail.
 
 ## 1. Problem Definition
 
@@ -88,7 +88,7 @@ There are three main types of ML problems:
 
 ### Example Problem Statement
 
-Let's look at a concrete example:
+look at a concrete example:
 
 #### Document the problem before writing modeling code
 
@@ -121,7 +121,7 @@ Before we can build a model, we need to understand our data. This is like gettin
 
 ### Initial Data Assessment
 
-Let's start by loading and examining our data:
+Start by loading and examining our data:
 
 #### Load CSV and inspect shape, dtypes, and missing values
 
@@ -155,7 +155,7 @@ print(df.describe())
       <span class="code-callout__title">Imports and Load</span>
     </div>
     <div class="code-callout__body">
-      <p>Standard ML imports — pandas for the dataframe, numpy for numerics, matplotlib and seaborn for plots; <code>read_csv</code> loads the raw house dataset.</p>
+      <p>Standard ML imports, pandas for the dataframe, numpy for numerics, matplotlib and seaborn for plots; <code>read_csv</code> loads the raw house dataset.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-16" data-tint="2">
@@ -203,7 +203,7 @@ plt.show()
       <span class="code-callout__title">Price Distribution</span>
     </div>
     <div class="code-callout__body">
-      <p><code>histplot</code> shows whether house prices are skewed or multimodal — skew suggests a log transform may help the model; multimodal peaks can indicate distinct market segments.</p>
+      <p><code>histplot</code> shows whether house prices are skewed or multimodal, skew suggests a log transform may help the model; multimodal peaks can indicate distinct market segments.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-13" data-tint="2">
@@ -212,7 +212,7 @@ plt.show()
       <span class="code-callout__title">Correlation Heatmap</span>
     </div>
     <div class="code-callout__body">
-      <p><code>df.corr()</code> computes pairwise Pearson correlations; the heatmap with annotations reveals which features move together — high inter-feature correlation flags potential multicollinearity.</p>
+      <p><code>df.corr()</code> computes pairwise Pearson correlations; the heatmap with annotations reveals which features move together, high inter-feature correlation flags potential multicollinearity.</p>
     </div>
   </div>
 </aside>
@@ -228,7 +228,7 @@ Data preparation is like preparing ingredients for cooking. We need to clean and
 
 ### Data Cleaning
 
-Let's create a helper class to clean our data:
+Create a helper class to clean our data:
 
 #### Encapsulate imputation and outlier clipping
 
@@ -290,7 +290,7 @@ cleaner.remove_outliers('price')
       <span class="code-callout__title">Fill Missing Values</span>
     </div>
     <div class="code-callout__body">
-      <p>Numeric columns get median imputation (robust to skew); categorical columns use the most frequent value (mode).</p>
+      <p>Numeric columns get median imputation (reliable to skew); categorical columns use the most frequent value (mode).</p>
     </div>
   </div>
   <div class="code-callout" data-lines="23-31" data-tint="3">
@@ -348,7 +348,7 @@ df = create_features(df)
       <span class="code-callout__title">Numeric Features</span>
     </div>
     <div class="code-callout__body">
-      <p>Three derived numeric columns — price per sqft, total rooms, and a renovation flag — encode domain knowledge that raw columns alone cannot express for a linear model.</p>
+      <p>Three derived numeric columns, price per sqft, total rooms, and a renovation flag, encode domain knowledge that raw columns alone cannot express for a linear model.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="11-14" data-tint="2">
@@ -387,7 +387,7 @@ X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.5, r
 
 ### Training Multiple Models
 
-Let's try different models to find the best one:
+Try different models to find the best one:
 
 #### Compare baselines with the same MAE / R² reporting
 
@@ -522,7 +522,7 @@ evaluate_model(best_model, X_test, y_test)
       <span class="code-callout__title">Actual vs Predicted Plot</span>
     </div>
     <div class="code-callout__body">
-      <p>The scatter plot shows each test sample; the red dashed diagonal is perfect calibration—points above or below reveal systematic over- or under-prediction.</p>
+      <p>The scatter plot shows each test sample; the red dashed diagonal is perfect calibration, points above or below reveal systematic over- or under-prediction.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="26-27" data-tint="3">
@@ -639,7 +639,7 @@ save_model(best_model, scaler, X.columns)
       <span class="code-callout__title">Serialize All Artifacts</span>
     </div>
     <div class="code-callout__body">
-      <p>Model, scaler, and feature names are saved as separate <code>.joblib</code> files — storing all three together ensures inference code can reconstruct the exact preprocessing + scoring pipeline.</p>
+      <p>Model, scaler, and feature names are saved as separate <code>.joblib</code> files, storing all three together ensures inference code can reconstruct the exact preprocessing + scoring pipeline.</p>
     </div>
   </div>
 </aside>
@@ -691,7 +691,7 @@ print(f"\nPredicted House Price: ${predicted_price:,.2f}")
       <span class="code-callout__title">Load Artifacts</span>
     </div>
     <div class="code-callout__body">
-      <p>All three saved objects—model, scaler, and feature list—are loaded from disk so inference is fully self-contained.</p>
+      <p>All three saved objects, model, scaler, and feature list, are loaded from disk so inference is fully self-contained.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="8-16" data-tint="2">
@@ -709,7 +709,7 @@ print(f"\nPredicted House Price: ${predicted_price:,.2f}")
       <span class="code-callout__title">Predict New House</span>
     </div>
     <div class="code-callout__body">
-      <p>A single-row DataFrame with four features is passed to the function and the formatted price is printed—this is the minimal inference path.</p>
+      <p>A single-row DataFrame with four features is passed to the function and the formatted price is printed, this is the minimal inference path.</p>
     </div>
   </div>
 </aside>
@@ -717,12 +717,12 @@ print(f"\nPredicted House Price: ${predicted_price:,.2f}")
 
 ## Gotchas
 
-- **Calling `fit_transform` on test data instead of `transform`** — `DataCleaner` and scalers compute statistics (mean, std, min, max) during `fit`; applying `fit_transform` to `X_test` re-computes those statistics from the test set, leaking test distribution information into preprocessing and invalidating the evaluation.
-- **Cleaning data before the train/test split** — imputing missing values or removing outliers across the full dataset uses information from test rows to influence training-set statistics; always split first, then fit your cleaning pipeline on `X_train` only.
-- **Accepting a high validation R² or MAE without examining the actual-vs-predicted scatter** — a good scalar metric can hide systematic over-prediction at high values or heteroscedastic errors that matter in production; the scatter plot against the diagonal is a mandatory sanity check.
-- **Selecting the best model by comparing only training scores** — `results[name]['train_mae']` says how well the model memorised the training data, not how well it generalises; always rank models by their `val_mae` or cross-validation score and treat `train_mae` only as a diagnostic for overfitting.
-- **Saving only the model file and not the scaler or feature list** — `predict_house_price` reloads all three artifacts; deploying just `model.joblib` means the scoring function cannot apply the same column order and scaling the training pipeline used, silently producing wrong predictions.
-- **Using `df.corr()` as the only feature-selection signal** — the correlation heatmap detects *linear* relationships; features with near-zero Pearson correlation can still carry strong non-linear predictive signal that a tree-based model or polynomial feature would capture.
+- **Calling `fit_transform` on test data instead of `transform`**: `DataCleaner` and scalers compute statistics (mean, std, min, max) during `fit`; applying `fit_transform` to `X_test` re-computes those statistics from the test set, leaking test distribution information into preprocessing and invalidating the evaluation.
+- **Cleaning data before the train/test split**: imputing missing values or removing outliers across the full dataset uses information from test rows to influence training-set statistics; always split first, then fit your cleaning pipeline on `X_train` only.
+- **Accepting a high validation R² or MAE without examining the actual-vs-predicted scatter**: a good scalar metric can hide systematic over-prediction at high values or heteroscedastic errors that matter in production; the scatter plot against the diagonal is a mandatory sanity check.
+- **Selecting the best model by comparing only training scores**: `results[name]['train_mae']` says how well the model memorised the training data, not how well it generalises; always rank models by their `val_mae` or cross-validation score and treat `train_mae` only as a diagnostic for overfitting.
+- **Saving only the model file and not the scaler or feature list**: `predict_house_price` reloads all three artifacts; deploying just `model.joblib` means the scoring function cannot apply the same column order and scaling the training pipeline used, silently producing wrong predictions.
+- **Using `df.corr()` as the only feature-selection signal**: the correlation heatmap detects *linear* relationships; features with near-zero Pearson correlation can still carry strong non-linear predictive signal that a tree-based model or polynomial feature would capture.
 
 ## Best Practices and Tips
 

@@ -1,8 +1,8 @@
 # Visual Storytelling: A Beginner's Guide to Data Visualization
 
-You've probably seen it before: two people present the same data — same numbers, same findings — and one presentation gets questions and action while the other gets polite nods and nothing changes. The difference is almost always visual. How you show data changes what people understand, what they remember, and what they do. This lesson teaches you the grammar of visual communication so your charts work as hard as your analysis.
+You've probably seen it before: two people present the same data, same numbers, same findings, and one presentation gets questions and action while the other gets polite nods and nothing changes. The difference is almost always visual. How you show data changes what people understand, what they remember, and what they do. This lesson teaches you the grammar of visual communication so your charts work as hard as your analysis.
 
-**After this lesson:** you can explain the core ideas in "Visual Storytelling: A Beginner's Guide to Data Visualization" and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Visual Storytelling: A Beginner's Guide to Data Visualization and try the examples in your own notebook.
 
 > **Note:** This lesson focuses on **structure and communication** (titles, flow, emphasis). You can practice with any charting tool you already use from earlier in Module 3.
 
@@ -11,15 +11,15 @@ You've probably seen it before: two people present the same data — same number
 | Term | Plain-English Definition |
 |------|--------------------------|
 | **Visual hierarchy** | The deliberate arrangement of elements so important things look important and secondary things recede |
-| **Chart type** | The shape of a visualization — bar, line, scatter, etc. — chosen based on what comparison or pattern you want to show |
+| **Chart type** | The shape of a visualization, bar, line, scatter, etc., chosen based on what comparison or pattern you want to show |
 | **Color encoding** | Using color to carry meaning (e.g., red = bad, green = good, or blue = one category, orange = another) |
-| **Axis** | The scale on a chart's edge — x-axis is horizontal, y-axis is vertical; both must be labelled and honestly scaled |
+| **Axis** | The scale on a chart's edge, x-axis is horizontal, y-axis is vertical; both must be labelled and honestly scaled |
 | **Annotation** | Text added directly to a chart to explain a specific point, spike, or pattern |
-| **Whitespace** | Intentional empty space around elements — it reduces clutter and makes the important elements stand out |
+| **Whitespace** | Intentional empty space around elements, it reduces clutter and makes the important elements stand out |
 
 ## Helpful video
 
-David McCandless shows how visual design transforms raw data into insights — with real examples of charts that changed the conversation.
+David McCandless shows how visual design transforms raw data into insights, with real examples of charts that changed the conversation.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/5Zg-C8AAIGg" title="David McCandless: The beauty of data visualization" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -35,11 +35,11 @@ Think of data visualization like a universal language:
 - **Numbers** = Mathematical language (precise but abstract)
 - **Visuals** = Universal language (instant understanding)
 
-The human brain processes visual patterns dramatically faster than text — we recognize shapes and colors almost instantly, while reading requires sequential decoding. A well-designed chart can communicate in seconds what a paragraph of prose communicates in a minute — but only if the chart is designed intentionally.
+The human brain processes visual patterns dramatically faster than text, we recognize shapes and colors almost instantly, while reading requires sequential decoding. A well-designed chart can communicate in seconds what a paragraph of prose communicates in a minute, but only if the chart is designed intentionally.
 
 ---
 
-> **Try it yourself — The Words vs Visuals Test:**
+> **Try it yourself, The Words vs Visuals Test:**
 > Write a paragraph describing this data: "Monday: 120, Tuesday: 145, Wednesday: 112, Thursday: 188, Friday: 205." Now sketch a simple bar chart of the same data. Show both to a friend and ask: "Which day had the highest value?" Time how long it takes them to answer from each format. The difference is your argument for visual communication.
 
 ---
@@ -107,7 +107,7 @@ The chart selection guide above helps you choose the right visualization based o
      - Example: Test scores by class
      - Tip: Include outliers for complete picture
 
-   > **Advanced (skip on first read):** Violin Plots show probability density on both sides of a center axis — they're box plots that also show the shape of the distribution. Useful for comparing distributions across groups, but require statistical literacy from your audience.
+   > **Advanced (skip on first read):** Violin Plots show probability density on both sides of a center axis, they're box plots that also show the shape of the distribution. Useful for comparing distributions across groups, but require statistical literacy from your audience.
 
 4. **Relationship Charts**
    - **Scatter Plots**: Like stars in a constellation
@@ -129,7 +129,7 @@ The chart selection guide above helps you choose the right visualization based o
    - **Pie Charts**: Like slicing a pizza
      - Best for: Showing parts of a whole when there are 5 or fewer slices
      - Example: Market share by top 4 companies
-     - Tip: If you have more than 5-6 slices, use a bar chart instead — pie charts with many slices are unreadable
+     - Tip: If you have more than 5-6 slices, use a bar chart instead, pie charts with many slices are unreadable
 
    - **Donut Charts**: Like a pie chart with a hole
      - Best for: Showing parts with a center metric
@@ -143,18 +143,18 @@ The chart selection guide above helps you choose the right visualization based o
 
 6. **Hierarchical Charts**
 
-   > **Advanced (skip on first read):** Treemaps, Sunburst charts, and Tree Diagrams all show hierarchical data — how a whole is made up of parts, which are made up of sub-parts. These are powerful but need careful labelling. Use a sorted bar chart for your first version, then upgrade to a treemap only if the hierarchy itself is the story.
+   > **Advanced (skip on first read):** Treemaps, Sunburst charts, and Tree Diagrams all show hierarchical data, how a whole is made up of parts, which are made up of sub-parts. These are powerful but need careful labelling. Use a sorted bar chart for your first version, then upgrade to a treemap only if the hierarchy itself is the story.
 
 ---
 
-> **Try it yourself — Chart Matching:**
+> **Try it yourself, Chart Matching:**
 > For each scenario below, choose the chart type that fits best and write one sentence explaining why:
 > 1. You want to show how monthly website visits changed over the past year
 > 2. You want to compare the number of support tickets by department
 > 3. You want to show what percentage of revenue comes from each product category (4 categories)
 > 4. You want to understand whether taller people tend to weigh more
 >
-> Answers: (1) Line chart — time series. (2) Bar chart — categorical comparison. (3) Pie or bar chart — composition with few categories. (4) Scatter plot — relationship between two continuous variables.
+> Answers: (1) Line chart, time series. (2) Bar chart, categorical comparison. (3) Pie or bar chart, composition with few categories. (4) Scatter plot, relationship between two continuous variables.
 
 ---
 
@@ -186,7 +186,7 @@ The color schemes above demonstrate three key approaches:
 2. **Consider Color Blindness**
    - About 8% of men and 0.5% of women have some form of color vision deficiency
    - Use colorblind-friendly palettes (e.g., Okabe-Ito, ColorBrewer)
-   - Add patterns or shapes as backup — don't rely on color alone to encode data
+   - Add patterns or shapes as backup, don't rely on color alone to encode data
 
 3. **Create Visual Hierarchy**
    - Primary information: Bold, bright colors
@@ -223,7 +223,7 @@ The color schemes above demonstrate three key approaches:
 
 ---
 
-> **Try it yourself — Color Audit:**
+> **Try it yourself, Color Audit:**
 > Open any chart you've made. Ask yourself three questions:
 > 1. Does every color carry a specific meaning, or are some colors just "default"?
 > 2. Would a colorblind person be able to read this chart?
@@ -245,9 +245,9 @@ Think of layout like arranging furniture in a room:
 
 The layout examples above show three common structures:
 
-1. **Dashboard Layout**: For interactive data exploration — key metrics at top, details below
-2. **Report Layout**: For formal documentation — header, body, footer with sources
-3. **Presentation Layout**: For storytelling flow — hook, evidence, conclusion
+1. **Dashboard Layout**: For interactive data exploration, key metrics at top, details below
+2. **Report Layout**: For formal documentation, header, body, footer with sources
+3. **Presentation Layout**: For storytelling flow, hook, evidence, conclusion
 
 #### Layout Principles
 
@@ -267,7 +267,7 @@ The layout examples above show three common structures:
 
 ---
 
-> **Try it yourself — Layout Analysis:**
+> **Try it yourself, Layout Analysis:**
 > Find a dashboard or report (could be a news infographic, a Tableau Public example, or your own work). Without reading the content, trace where your eye goes first, second, and third. Does that order match what's actually most important? If not, describe one change that would fix the visual hierarchy.
 
 ---
@@ -279,8 +279,8 @@ The layout examples above show three common structures:
 #### Bad Version
 
 - Cluttered with too many charts
-- Inconsistent colors — each chart uses a different palette
-- No clear hierarchy — every element is the same visual weight
+- Inconsistent colors, each chart uses a different palette
+- No clear hierarchy, every element is the same visual weight
 - No titles that state the insight (just "Sales by Region")
 
 #### Good Version
@@ -288,15 +288,15 @@ The layout examples above show three common structures:
 - Focused on 5-7 key metrics at top
 - Consistent color scheme (green = above target, red = below)
 - Clear visual hierarchy: KPIs large at top, supporting detail below
-- Insight titles: "Southeast underperforming by 23% — needs attention"
+- Insight titles: "Southeast underperforming by 23%, needs attention"
 
 ### Example 2: Customer Journey Map
 
 #### Bad Version
 
-- Linear, text-heavy — bullet points describing each step
+- Linear, text-heavy, bullet points describing each step
 - No visual cues for drop-off or problem stages
-- Hard to follow — no flow, no connectors, no progression
+- Hard to follow, no flow, no connectors, no progression
 
 #### Good Version
 
@@ -308,9 +308,9 @@ The layout examples above show three common structures:
 
 #### Bad Version
 
-- Raw numbers only — a table of 50+ rows and columns
-- No visual elements — no charts, no highlighting
-- Hard to understand — what's the trend? What's changed?
+- Raw numbers only, a table of 50+ rows and columns
+- No visual elements, no charts, no highlighting
+- Hard to understand, what's the trend? What's changed?
 
 #### Good Version
 
@@ -324,7 +324,7 @@ The layout examples above show three common structures:
 
 ### 1. The Clutter Trap
 
-**Don't**: Put everything on one screen — show every metric, every filter, every annotation.
+**Don't**: Put everything on one screen, show every metric, every filter, every annotation.
 **Do**: Focus on key insights. If something doesn't support the main message, remove it or move it to an appendix.
 
 ### 2. The Color Chaos
@@ -334,8 +334,8 @@ The layout examples above show three common structures:
 
 ### 3. The Scale Problem
 
-**Don't**: Let your chart tool auto-scale the y-axis to start near the data minimum — this visually exaggerates small differences.
-**Do**: Start axes at zero for bar charts. For line charts showing small changes over time, truncating is acceptable — but label it clearly.
+**Don't**: Let your chart tool auto-scale the y-axis to start near the data minimum, this visually exaggerates small differences.
+**Do**: Start axes at zero for bar charts. For line charts showing small changes over time, truncating is acceptable, but label it clearly.
 
 ### 4. The Font Fiasco
 
@@ -344,17 +344,17 @@ The layout examples above show three common structures:
 
 ### 5. The Alignment Issue
 
-**Don't**: Randomly place elements — let the tool position everything by default.
+**Don't**: Randomly place elements, let the tool position everything by default.
 **Do**: Use consistent alignment. Left-align text. Align chart edges. Use a grid.
 
 ### 6. The Missing Title Problem
 
-**Don't**: Title a chart "Sales by Month" — that describes the data, not the insight.
-**Do**: Title it "Sales fell 18% in Q3 before recovering in October" — that tells the story.
+**Don't**: Title a chart "Sales by Month", that describes the data, not the insight.
+**Do**: Title it "Sales fell 18% in Q3 before recovering in October", that tells the story.
 
 ---
 
-> **Try it yourself — Mistake Hunt:**
+> **Try it yourself, Mistake Hunt:**
 > Apply all six mistake checks to a chart you've built or found online. Score it: how many does it pass? How many does it fail? Write one concrete fix for each failure. This is the habit professional data analysts use before every chart goes into a presentation.
 
 ---
@@ -389,15 +389,15 @@ Sketch a simple layout (boxes on paper or ASCII art) for:
 
 ### 1. Start Simple
 
-- One message per visualization — if a chart needs two messages, make two charts
-- Clear, readable fonts — 12pt minimum for labels, 18pt+ for titles
-- Adequate white space — if it feels cramped, it is
+- One message per visualization, if a chart needs two messages, make two charts
+- Clear, readable fonts, 12pt minimum for labels, 18pt+ for titles
+- Adequate white space, if it feels cramped, it is
 
 ### 2. Test Your Visuals
 
-- Show to a colleague and ask: "What's the main message of this chart?" — if they can't say it in 10 seconds, redesign
-- Ask: "What would you do differently based on this?" — their answer shows whether the call to action is clear
-- Iterate and improve — first drafts are almost never final
+- Show to a colleague and ask: "What's the main message of this chart?", if they can't say it in 10 seconds, redesign
+- Ask: "What would you do differently based on this?", their answer shows whether the call to action is clear
+- Iterate and improve, first drafts are almost never final
 
 ### 3. Consider Your Audience
 
@@ -407,28 +407,28 @@ Sketch a simple layout (boxes on paper or ASCII art) for:
 
 ### 4. Use Interactive Elements Carefully
 
-> **Advanced (skip on first read):** Interactive dashboards (Tableau, Power BI) let users filter and drill down. This is powerful but dangerous — it can make "the story" disappear because every user builds their own story. For executive presentations, use static views with the key insight pre-selected. Save interactive exploration for analysts.
+> **Advanced (skip on first read):** Interactive dashboards (Tableau, Power BI) let users filter and drill down. This is powerful but dangerous, it can make "the story" disappear because every user builds their own story. For executive presentations, use static views with the key insight pre-selected. Save interactive exploration for analysts.
 
 ### 5. Maintain Consistency
 
-- Use templates — save your color palette and font choices as a reusable style
+- Use templates, save your color palette and font choices as a reusable style
 - Follow style guides if your organization has them
 - Keep chart types consistent across related dashboards (don't use bar charts for the same data sometimes and line charts other times)
 
 ## Common Gotchas
 
-- **Truncating the y-axis at a non-zero baseline exaggerates differences visually** — a bar chart where the y-axis starts at 90 makes a difference from 92 to 95 look massive compared to one starting at 0. Matplotlib and Tableau sometimes auto-scale axes near the data minimum. Always check axis origin before publishing.
-- **Pie charts with more than 5–7 slices are unreadable, and "limit to 5-7 segments" doesn't solve the root problem** — if you have 12 product categories, the right solution is not a pie with "Other" collapsed; it's a sorted bar chart. Pie charts are only appropriate when proportions are the story and parts sum to a meaningful whole.
-- **The Z-pattern and F-pattern describe how people scan, not how you should fill the canvas** — placing the most important chart top-left assumes a Western left-to-right audience and a non-interactive display. Dashboard tools let users click and filter, which breaks linear scan paths. Design for the decision, not the reading pattern.
-- **Consistent color "across charts" breaks down when two charts encode different variables in the same color** — if blue means "Desktop" in a device chart and blue also means "Q1" in a quarterly chart on the same dashboard, color loses its meaning entirely. Map colors to semantic meaning (device type, region, status) not to chart position or order.
-- **"Test with colleagues" only helps if you ask specific questions** — asking "does this look okay?" produces no useful signal. Ask instead: "What is the main message?" and "What would you do differently based on this?" Their answers reveal whether the story is landing.
+- **Truncating the y-axis at a non-zero baseline exaggerates differences visually**: a bar chart where the y-axis starts at 90 makes a difference from 92 to 95 look massive compared to one starting at 0. Matplotlib and Tableau sometimes auto-scale axes near the data minimum. Always check axis origin before publishing.
+- **Pie charts with more than 5-7 slices are unreadable, and "limit to 5-7 segments" doesn't solve the root problem**: if you have 12 product categories, the right solution is not a pie with "Other" collapsed; it's a sorted bar chart. Pie charts are only appropriate when proportions are the story and parts sum to a meaningful whole.
+- **The Z-pattern and F-pattern describe how people scan, not how you should fill the canvas**: placing the most important chart top-left assumes a Western left-to-right audience and a non-interactive display. Dashboard tools let users click and filter, which breaks linear scan paths. Design for the decision, not the reading pattern.
+- **Consistent color "across charts" breaks down when two charts encode different variables in the same color**: if blue means "Desktop" in a device chart and blue also means "Q1" in a quarterly chart on the same dashboard, color loses its meaning entirely. Map colors to semantic meaning (device type, region, status) not to chart position or order.
+- **"Test with colleagues" only helps if you ask specific questions**: asking "does this look okay?" produces no useful signal. Ask instead: "What is the main message?" and "What would you do differently based on this?" Their answers reveal whether the story is landing.
 
 ## Next Steps
 
-1. **Master chart selection** — practice choosing chart types without looking up a guide. The goal is intuition.
-2. **Build your color toolkit** — save 2-3 color palettes you trust (one sequential, one categorical, one diverging) and use them consistently.
-3. **Move to narrative** — once your individual charts are solid, read [Narrative Techniques](narrative-techniques.md) to learn how to connect charts into a story.
-4. **Study real examples** — the [Case Studies](case-studies.md) file shows before/after transformations for real-world scenarios.
+1. **Master chart selection**: practice choosing chart types without looking up a guide. The goal is intuition.
+2. **Build your color toolkit**: save 2-3 color palettes you trust (one sequential, one categorical, one diverging) and use them consistently.
+3. **Move to narrative**: once your individual charts are solid, read [Narrative Techniques](narrative-techniques.md) to learn how to connect charts into a story.
+4. **Study real examples**: the [Case Studies](case-studies.md) file shows before/after transformations for real-world scenarios.
 
 ## Additional Resources
 
@@ -451,4 +451,4 @@ Sketch a simple layout (boxes on paper or ASCII art) for:
 - Python (matplotlib, seaborn)
 - R (ggplot2)
 
-Remember: The best visualizations are like good maps — they guide your audience to understanding without getting them lost in the details.
+Remember: The best visualizations are like good maps, they guide your audience to understanding without getting them lost in the details.

@@ -1,10 +1,10 @@
 # Random Forest
 
-**After these lessons, you can train random forests, interpret feature importances, tune n_estimators and max_features, and explain the bias–variance trade-off in ensembles.**
+**After these lessons, you can train random forests, interpret feature importances, tune n_estimators and max_features, and explain the bias-variance trade-off in ensembles.**
 
 ## Overview
 
-Random forests average many decorrelated decision trees — each tree trained on a bootstrap sample with a random feature subset — to reduce variance without increasing bias. Prerequisites: [Decision Trees](../../5.2-supervised-learning-1/decision-trees/README.md).
+Random forests average many decorrelated decision trees, each tree trained on a bootstrap sample with a random feature subset, to reduce variance without increasing bias. Prerequisites: [Decision Trees](../../5.2-supervised-learning-1/decision-trees/README.md).
 
 ## Lesson Path
 

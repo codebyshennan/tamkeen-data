@@ -18,7 +18,7 @@ Tableau is a powerful tool for creating beautiful, interactive data visualizatio
 
 **Important Note:** Tableau Public workbooks are saved to the cloud and are **publicly visible**. Don't use sensitive or private data!
 
-> **On screen:** Tableau workspace — shelves, marks, data pane.
+> **On screen:** Tableau workspace, shelves, marks, data pane.
 
 ## Helpful video
 
@@ -83,8 +83,8 @@ Short **Tableau Public** setup: sign up, download, and install (under one minute
 1. Find the downloaded **.exe** file (usually in your Downloads folder)
 2. Double-click to run the installer
 3. If Windows asks for permission (UAC prompt), click **"Yes"**
-4. Follow the installation wizard — click **"Next"** through the steps
-5. Click **"Install"** and wait 2–5 minutes
+4. Follow the installation wizard, click **"Next"** through the steps
+5. Click **"Install"** and wait 2-5 minutes
 6. Click **"Finish"**
 
 **Verify:**
@@ -147,11 +147,11 @@ Open **Tableau Public** from the Start menu. The splash screen should appear and
 **Step 1: Start a New Connection**
 1. When you open Tableau, you'll see a "Connect" panel on the left
 2. Under "To a File," you'll see options like:
-   - **Microsoft Excel** — For **.xlsx** or **.xls** files
-   - **Text File** — For **.csv** or **.txt** files
+   - **Microsoft Excel**: For **.xlsx** or **.xls** files
+   - **Text File**: For **.csv** or **.txt** files
    - **More...** - For other file types
 
-> **On screen:** Connect to data — file / server options.
+> **On screen:** Connect to data, file / server options.
 
 **Step 2: Choose Your Data File**
 1. Click on the file type you want (e.g., "Microsoft Excel" or "Text File")
@@ -167,7 +167,7 @@ Open **Tableau Public** from the Start menu. The splash screen should appear and
    - **Split columns** - Right-click a column for options
    - **Remove columns** - Uncheck columns you don't need
 
-> **On screen:** Data source preview — fields and types.
+> **On screen:** Data source preview, fields and types.
 
 **Step 4: Load Your Data**
 1. Once you're happy with your data, click **"Sheet 1"** at the bottom
@@ -188,13 +188,13 @@ Open **Tableau Public** from the Start menu. The splash screen should appear and
 
 ## Gotchas
 
-- **Tableau Public = public** — every workbook you save is visible to anyone on the internet. Never upload data that includes personal information, confidential figures, or anything your employer considers sensitive.
-- **No live database connections** — Tableau Public can only connect to files (Excel, CSV, Google Sheets, spatial files). It cannot connect directly to PostgreSQL, Snowflake, or other live databases. For live-database exercises, use Tableau Desktop (14-day trial) or export a query result to CSV first.
-- **Saving requires an internet connection and login** — Tableau Public saves to the cloud, not to a local file. If your internet drops mid-save, the workbook is not saved. Use **File → Export Packaged Workbook (.twbx)** to keep a local backup.
-- **`.twb` vs `.twbx`** — a `.twb` file references an external data source but does not embed the data. A `.twbx` (packaged workbook) embeds the data. For sharing or reopening on another machine, always use `.twbx` or Tableau Public.
-- **macOS security warning on first launch** — if macOS says Tableau Public can't be opened, go to **System Settings → Privacy & Security → Open Anyway**. This is standard for apps distributed outside the App Store.
-- **Large files are slow** — Tableau Public works best with files under ~1 million rows. If your CSV is large, pre-aggregate it in pandas or SQL before connecting.
-- **Field type detection errors** — Tableau auto-detects data types, but it sometimes reads numeric IDs as numbers and tries to SUM them. Right-click the field in the Data pane and change the role to **Dimension** (or type to **String**) when this happens.
+- **Tableau Public = public**: every workbook you save is visible to anyone on the internet. Never upload data that includes personal information, confidential figures, or anything your employer considers sensitive.
+- **No live database connections**: Tableau Public can only connect to files (Excel, CSV, Google Sheets, spatial files). It cannot connect directly to PostgreSQL, Snowflake, or other live databases. For live-database exercises, use Tableau Desktop (14-day trial) or export a query result to CSV first.
+- **Saving requires an internet connection and login**: Tableau Public saves to the cloud, not to a local file. If your internet drops mid-save, the workbook is not saved. Use **File → Export Packaged Workbook (.twbx)** to keep a local backup.
+- **`.twb` vs `.twbx`**: a `.twb` file references an external data source but does not embed the data. A `.twbx` (packaged workbook) embeds the data. For sharing or reopening on another machine, always use `.twbx` or Tableau Public.
+- **macOS security warning on first launch**: if macOS says Tableau Public can't be opened, go to **System Settings → Privacy & Security → Open Anyway**. This is standard for apps distributed outside the App Store.
+- **Large files are slow**: Tableau Public works best with files under ~1 million rows. If your CSV is large, pre-aggregate it in pandas or SQL before connecting.
+- **Field type detection errors**: Tableau auto-detects data types, but it sometimes reads numeric IDs as numbers and tries to SUM them. Right-click the field in the Data pane and change the role to **Dimension** (or type to **String**) when this happens.
 
 
 

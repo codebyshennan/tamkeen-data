@@ -1,13 +1,13 @@
 ---
-title: "4.4 Statistical Modelling — Practice Quiz"
+title: "4.4 Statistical Modelling - Practice Quiz"
 nav_order: 99
 ---
 
-# 4.4 Statistical Modelling — Practice Quiz
+# 4.4 Statistical Modelling: Practice Quiz
 
 Test your understanding of logistic regression, polynomial regression, model selection, regularization, and model interpretation.
 
-## Part A: Logistic Regression (Questions 1–3)
+## Part A: Logistic Regression (Questions 1-3)
 
 **1.** A logistic regression model predicts whether a customer churns (1) or stays (0). The model produces:
 
@@ -53,7 +53,7 @@ premium_member: OR = 0.30 (70% decrease in odds)
 <details>
 <summary>Answer</summary>
 
-**No** — a model that always predicts "no churn" would also achieve 95% accuracy without learning anything. This is the **class imbalance problem**.
+**No** - a model that always predicts "no churn" would also achieve 95% accuracy without learning anything. This is the **class imbalance problem**.
 
 **Better metrics:**
 
@@ -174,9 +174,9 @@ weighted avg       0.78      0.70      0.70       400
 
 ---
 
-## Part B: Overfitting and Model Selection (Questions 4–6)
+## Part B: Overfitting and Model Selection (Questions 4-6)
 
-**4.** You fit polynomial regression models of degrees 1–10 to a dataset and get these results:
+**4.** You fit polynomial regression models of degrees 1-10 to a dataset and get these results:
 
 | Degree | Train RMSE | Test RMSE |
 |---|---|---|
@@ -194,10 +194,10 @@ Which degree should you choose and why? What is happening at degree 10?
 
 **Choose degree 2 or 3.** They have nearly identical test RMSE (2.2 and 2.1), and degree 2 is simpler.
 
-**At degree 10:** Classic **overfitting**. Training RMSE is excellent (0.9) but test RMSE (6.8) is 3× worse than degree 2. The model has memorised the training data — it fits the noise, not the signal.
+**At degree 10:** Classic **overfitting**. Training RMSE is excellent (0.9) but test RMSE (6.8) is 3× worse than degree 2. The model has memorised the training data - it fits the noise, not the signal.
 
 Key indicators:
-- Train–test gap widens dramatically after degree 3
+- Train-test gap widens dramatically after degree 3
 - Test RMSE is *increasing* despite training RMSE decreasing
 - "More complex" ≠ "better" once the gap opens
 
@@ -216,7 +216,7 @@ Key indicators:
 **How it happens with preprocessing:**
 
 ```python
-# WRONG — leaks test data into preprocessing
+# WRONG: leaks test data into preprocessing
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import Ridge
 import numpy as np
@@ -238,7 +238,7 @@ Leaked scores: -0.770032365713268
 ```
 
 ```python
-# CORRECT — pipeline ensures preprocessing is re-fit per fold only on training data
+# CORRECT: pipeline ensures preprocessing is re-fit per fold only on training data
 from sklearn.pipeline import make_pipeline
 
 pipeline = make_pipeline(StandardScaler(), Ridge())
@@ -262,7 +262,7 @@ The same applies to: `SelectKBest`, `PCA`, imputation, encoding. **Whenever a tr
 
 This is **model selection bias** (also called "the winner's curse"). By choosing the model with the best CV score out of 10 candidates, you are implicitly optimising over the CV scores themselves. The best CV score is likely an overestimate of true performance because:
 
-1. Each CV score has random variance — the "best" model may have won partly due to luck on the particular folds
+1. Each CV score has random variance - the "best" model may have won partly due to luck on the particular folds
 2. You've effectively used the CV data to make a selection decision, spending some of your "budget" for unbiased estimation
 
 **The fix:** Use a proper **nested cross-validation** structure:
@@ -284,20 +284,20 @@ Each outer fold's score is an unbiased estimate of the model selection procedure
 
 ---
 
-## Part C: Regularization (Questions 7–8)
+## Part C: Regularization (Questions 7-8)
 
 **7.** A Ridge regression model (L2) and a Lasso model (L1) are fit with the same data and same λ. The Ridge model retains all 20 features; the Lasso model uses 8. Explain why, and when you would choose each.
 
 <details>
 <summary>Answer</summary>
 
-**L1 (Lasso) shrinks some coefficients exactly to zero**, producing sparse models with built-in feature selection. This happens because the L1 penalty creates a diamond-shaped constraint region with corners on the axes — the optimum often lands on a corner, where some coefficients are exactly zero.
+**L1 (Lasso) shrinks some coefficients exactly to zero**, producing sparse models with built-in feature selection. This happens because the L1 penalty creates a diamond-shaped constraint region with corners on the axes - the optimum often lands on a corner, where some coefficients are exactly zero.
 
 **L2 (Ridge) shrinks all coefficients toward zero but rarely to exactly zero**, because the circular L2 constraint rarely intersects an axis. It distributes the shrinkage evenly across correlated features.
 
 | | Lasso (L1) | Ridge (L2) |
 |---|---|---|
-| Coefficient sparsity | Yes — some → exactly 0 | No — all shrunk but non-zero |
+| Coefficient sparsity | Yes - some → exactly 0 | No - all shrunk but non-zero |
 | Feature selection | Built-in | Not built-in |
 | With correlated features | Picks one, discards others | Averages them |
 | Best when | Many irrelevant features | All features informative, multicollinearity present |
@@ -366,19 +366,19 @@ for alpha in [0.001, 1, 100, 1000]:
 λ=1000.000  |coef| = 0.260  coef[0] = 0.240
 ```
 
-The coefficient norm shrinks monotonically with λ. **Always standardise features before regularization** — otherwise, features with different scales receive different amounts of shrinkage.
+The coefficient norm shrinks monotonically with λ. **Always standardise features before regularization** - otherwise, features with different scales receive different amounts of shrinkage.
 </details>
 
 ---
 
-## Part D: Model Interpretation (Questions 9–10)
+## Part D: Model Interpretation (Questions 9-10)
 
 **9.** A model predicts loan default. Feature importances from a tree-based model show "age" as the top predictor. A colleague says: "The model has learned that older people default more." What questions should you ask before accepting this interpretation?
 
 <details>
 <summary>Answer</summary>
 
-Feature importance tells you the feature is *used heavily by the model* — not that the relationship is causal, linear, or even in the direction implied.
+Feature importance tells you the feature is *used heavily by the model* - not that the relationship is causal, linear, or even in the direction implied.
 
 **Questions to ask:**
 
@@ -416,15 +416,15 @@ import shap
 
 **Depends on the use case:**
 
-**For prediction accuracy:** Random Forest (CV RMSE 24,100) — but notice the large train–test gap (12,300 vs 24,100), suggesting it may overfit. Worth running a nested CV to confirm.
+**For prediction accuracy:** Random Forest (CV RMSE 24,100) - but notice the large train-test gap (12,300 vs 24,100), suggesting it may overfit. Worth running a nested CV to confirm.
 
-**For interpretability + accuracy balance:** Ridge Regression (CV RMSE 26,200) — only 8% worse than Random Forest on CV, but fully interpretable. If stakeholders need to understand *why* a price was predicted, or if model decisions need to be explained (e.g., for appraisal disputes), Ridge is defensible.
+**For interpretability + accuracy balance:** Ridge Regression (CV RMSE 26,200) - only 8% worse than Random Forest on CV, but fully interpretable. If stakeholders need to understand *why* a price was predicted, or if model decisions need to be explained (e.g., for appraisal disputes), Ridge is defensible.
 
 **When NOT to choose:**
 - Linear Regression (CV RMSE 28,500) underperforms Ridge without offering meaningful benefits in this case
-- Random Forest if the CV score is unreliable due to the train/test gap — need to investigate
+- Random Forest if the CV score is unreliable due to the train/test gap - need to investigate
 
-**The key signal:** Random Forest's train RMSE (12,300) vs CV RMSE (24,100) is a 2× gap — classic overfitting, even with 5 features. Consider max_depth, min_samples_leaf tuning before committing to it.
+**The key signal:** Random Forest's train RMSE (12,300) vs CV RMSE (24,100) is a 2× gap - classic overfitting, even with 5 features. Consider max_depth, min_samples_leaf tuning before committing to it.
 
 **General rule:** When two models are within ~10% on CV performance, prefer the simpler/more interpretable one.
 </details>
@@ -435,10 +435,10 @@ import shap
 
 | Part | Questions | Points each | Total |
 |---|---|---|---|
-| A: Logistic Regression | 1–3 | 12 | 36 |
-| B: Overfitting & Model Selection | 4–6 | 10 | 30 |
-| C: Regularization | 7–8 | 10 | 20 |
-| D: Model Interpretation | 9–10 | 7 | 14 |
+| A: Logistic Regression | 1-3 | 12 | 36 |
+| B: Overfitting & Model Selection | 4-6 | 10 | 30 |
+| C: Regularization | 7-8 | 10 | 20 |
+| D: Model Interpretation | 9-10 | 7 | 14 |
 | **Total** | | | **100** |
 
 ## Back to module

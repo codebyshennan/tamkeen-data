@@ -13,17 +13,17 @@ objectives:
 
 ## TLDR
 
-- **Goal:** pick the model that *generalises* to new data — not the one with the lowest training error.
-- **Golden rule:** fit on training data, evaluate on test data — never use the same data for both.
+- **Goal:** pick the model that *generalises* to new data, not the one with the lowest training error.
+- **Golden rule:** fit on training data, evaluate on test data, never use the same data for both.
 - **Bias-variance tradeoff:** simple models underfit (high bias); complex models overfit (high variance). The sweet spot minimises total error on unseen data.
-- **Cross-validation (k-fold):** rotates which fold acts as the test set across k rounds — far more reliable than a single split, especially on small datasets.
-- **Information criteria (AIC/BIC):** reward fit while penalising the number of parameters. BIC penalises complexity more heavily — prefer it when you want the "true" model, not just the best predictor.
+- **Cross-validation (k-fold):** rotates which fold acts as the test set across k rounds, far more reliable than a single split, especially on small datasets.
+- **Information criteria (AIC/BIC):** reward fit while penalising the number of parameters. BIC penalises complexity more heavily, prefer it when you want the "true" model, not just the best predictor.
 - **Feature selection (forward/backward):** greedy search that adds/removes one feature at a time; stop where test error is lowest.
 - **Gotcha:** every time you adjust your model based on test performance, you're effectively training on the test set. Use CV for all tuning decisions.
 
 ## Overview
 
-Training error almost always rewards **more** complexity; generalization asks which model predicts well on **new** data. This lesson covers cross-validation, holdout discipline, and criteria like AIC/BIC-style thinking—so you pick structure (polynomial degree, feature subsets) without fooling yourself. It pairs naturally with [regularization](./regularization.md), which penalizes complexity inside a single optimization instead of comparing many separate fits.
+Training error almost always rewards **more** complexity; generalization asks which model predicts well on **new** data. This lesson covers cross-validation, holdout discipline, and criteria like AIC/BIC-style thinking, so you pick structure (polynomial degree, feature subsets) without fooling yourself. It pairs naturally with [regularization](./regularization.md), which penalizes complexity inside a single optimization instead of comparing many separate fits.
 
 ## Why this matters
 
@@ -39,7 +39,7 @@ Training error almost always rewards **more** complexity; generalization asks wh
 
 ## Introduction
 
-Model selection is the process of choosing the best statistical model from a set of candidate models. It's a crucial step in the data analysis pipeline that helps us find the right balance between model complexity and predictive performance. In other words, model selection helps us answer the question: "Which model will give us the most accurate predictions without being unnecessarily complex?"
+Model selection is the process of choosing the best statistical model from a set of candidate models. It's a important step in the data analysis pipeline that helps us find the right balance between model complexity and predictive performance. In other words, model selection helps us answer the question: "Which model will give us the most accurate predictions without being unnecessarily complex?"
 
 ### Video Tutorial: Introduction to Model Selection
 
@@ -59,7 +59,7 @@ Every time we build a model, we face an important trade-off between:
 - **Flexibility**: Complex models can capture more intricate patterns in the data
 - **Generalization**: Our ultimate goal is to make good predictions on new, unseen data
 
-Let's consider a concrete example. Imagine you're trying to predict house prices and have the following options:
+Consider a concrete example. Imagine you're trying to predict house prices and have the following options:
 
 1. **Simple linear model** using only house size (one feature)
 2. **Multiple regression model** using size, location, age, and number of rooms (several features)
@@ -69,13 +69,13 @@ The question is: which one should you choose? That's where model selection comes
 
 ### Real-world Examples
 
-Let's explore some scenarios where model selection is crucial:
+we will look at some scenarios where model selection is important:
 
-1. **Medical Diagnosis** — A simple age-only model is easy to communicate but misses risk factors; a complex model (weight, blood pressure, family history, genetic markers) is potentially more accurate but needs more data and risks overfitting. The right choice depends on available data, interpretability needs, and the cost of missing rare conditions.
+1. **Medical Diagnosis**: A simple age-only model is easy to communicate but misses risk factors; a complex model (weight, blood pressure, family history, genetic markers) is potentially more accurate but needs more data and risks overfitting. The right choice depends on available data, interpretability needs, and the cost of missing rare conditions.
 
-2. **Marketing Campaigns** — A demographics-only model is simple with clear segments but misses behavioral patterns; adding purchase history, browsing, and social activity enables personalized targeting at higher data and processing cost. The right choice depends on budget, expected ROI, and privacy constraints.
+2. **Marketing Campaigns**: A demographics-only model is simple with clear segments but misses behavioral patterns; adding purchase history, browsing, and social activity enables personalized targeting at higher data and processing cost. The right choice depends on budget, expected ROI, and privacy constraints.
 
-3. **Financial Forecasting** — Historical averages are robust to noise and easy to implement but miss complex market dynamics; multiple economic indicators with non-linear interactions can capture subtleties but risk fitting random fluctuations. The right choice depends on forecasting horizon, volatility, and risk tolerance.
+3. **Financial Forecasting**: Historical averages are reliable to noise and easy to implement but miss complex market dynamics; multiple economic indicators with non-linear interactions can capture subtleties but risk fitting random fluctuations. The right choice depends on forecasting horizon, volatility, and risk tolerance.
 
 ### The Key Questions in Model Selection
 
@@ -125,11 +125,11 @@ At the heart of model selection is the bias-variance tradeoff. This is a fundame
 - **Bias**: The error from incorrect assumptions in the model. High bias means the model is too simple to capture the underlying pattern (underfitting).
 - **Variance**: The error from sensitivity to small fluctuations in the training data. High variance means the model is too complex and captures noise (overfitting).
 
-Let's visualize this tradeoff:
+Visualize this tradeoff:
 
 **Schematic bias, variance, and total error vs complexity**
 
-**Purpose:** Plot stylized decreasing bias, increasing variance, and their sum to mark an “optimal complexity” vertical line for teaching.
+**Purpose:** Plot stylized decreasing bias, increasing variance, and their sum to mark an "optimal complexity" vertical line for teaching.
 
 **Walkthrough:** Pure NumPy curves; `np.argmin` on total error; `plt.annotate` for under/overfitting regions.
 
@@ -266,7 +266,7 @@ This plot illustrates:
 
 *Machine Learning Fundamentals: Bias and Variance by StatQuest with Josh Starmer*
 
-Let's explore these concepts further with a concrete example of different models applied to the same dataset:
+we will look at these concepts further with a concrete example of different models applied to the same dataset:
 
 **Polynomial degree 1 vs 3 vs 15 on noisy sinusoidal data**
 
@@ -420,7 +420,7 @@ This visualization shows three key scenarios:
 
 ## Model Selection Techniques
 
-Now that we understand the conceptual background, let's examine specific techniques for model selection.
+Now that we understand the conceptual background, look at specific techniques for model selection.
 
 ### 1. Train-Test Split
 
@@ -578,7 +578,7 @@ This approach:
 
 ### 2. Cross-Validation
 
-A more robust approach is k-fold cross-validation, which uses all of your data for both training and validation:
+A more reliable approach is k-fold cross-validation, which uses all of your data for both training and validation:
 
 ### Video Tutorial: Cross-Validation
 
@@ -680,11 +680,11 @@ print(f"CV MSE: {cv_mean:.4f} ± {cv_std:.4f}")
 CV MSE: 1.0184 ± 0.1262
 ```
 
-The `±` gives the standard deviation *across* folds — a model with CV MSE 1.02 ± 0.13 is meaningfully different from one with 1.02 ± 0.90. High fold-to-fold variance signals that the model's performance is sensitive to which data it trains on, which itself is a warning sign.
+The `±` gives the standard deviation *across* folds, a model with CV MSE 1.02 ± 0.13 is meaningfully different from one with 1.02 ± 0.90. High fold-to-fold variance signals that the model's performance is sensitive to which data it trains on, which itself is a warning sign.
 
 **Comparing multiple models with `cross_val_score`**
 
-The simpler sklearn path for model comparison — no manual fold loop required:
+The simpler sklearn path for model comparison, no manual fold loop required:
 
 {% highlight python %}
 from sklearn.model_selection import cross_val_score
@@ -721,7 +721,7 @@ degree= 5  CV MSE=1.068 ± 0.148
 degree=10  CV MSE=1.193 ± 0.271
 ```
 
-Degree 2 wins — it matches the true data-generating process (which is quadratic). Degree 10 has both higher error *and* higher variance across folds, the signature of overfitting.
+Degree 2 wins, it matches the true data-generating process (which is quadratic). Degree 10 has both higher error *and* higher variance across folds, the signature of overfitting.
 
 **Key rule:** when two models have similar CV MSE, prefer the simpler one. If degree 2 (CV MSE 1.018 ± 0.102) and degree 3 (CV MSE 1.025 ± 0.114) are within one standard error, degree 2 wins on parsimony.
 
@@ -818,7 +818,7 @@ For more formal model comparison, especially in statistical modeling, we can use
 
 *Time Series Model Selection (AIC & BIC) : Time Series Talk*
 
-**Polynomial degrees 1–5: MSE-based AIC/BIC and plots**
+**Polynomial degrees 1-5: MSE-based AIC/BIC and plots**
 
 **Purpose:** Fit OLS on polynomial expansions of `X`, compute MSE and common AIC/BIC surrogates, plot criteria vs degree, and print best degree by each.
 
@@ -1701,7 +1701,7 @@ plt.show()
       <span class="code-callout__title">Synthetic Dataset</span>
     </div>
     <div class="code-callout__body">
-      <p>Generate 200 student records with non-linear score relationships (quadratic for previous score and sleep hours) and clip scores to 0–100.</p>
+      <p>Generate 200 student records with non-linear score relationships (quadratic for previous score and sleep hours) and clip scores to 0-100.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="47-55" data-tint="2">
@@ -1740,12 +1740,12 @@ plt.show()
 
 ## Gotchas
 
-- **Choosing the best degree or feature set by looking at the test set repeatedly** — Every time you adjust the model based on test-set performance, you are effectively training on that test set. Reserve it for a single final evaluation; use a validation set or cross-validation for all intermediate comparisons.
-- **Comparing models with training MSE instead of cross-validated MSE** — Training error always decreases as you add polynomial terms or features. A degree-15 polynomial will have lower training MSE than a degree-2 polynomial while generalising far worse; always compare out-of-sample error.
-- **Treating k-fold cross-validation score as a single "true" estimate** — CV scores have variance; a model with CV MSE of 10.2 vs. 10.4 is not meaningfully better unless the difference exceeds one standard error of the fold scores. Use `cross_val_score` and inspect the standard deviation, not just the mean.
-- **Data leakage through preprocessing before splitting** — Fitting a `StandardScaler` or `SelectKBest` on the full dataset before cross-validation leaks test information into training folds, making scores overly optimistic. Always wrap preprocessing in a `Pipeline` so it is re-fit on each training fold independently.
-- **Selecting the model with the highest AIC/BIC without understanding the scale** — AIC and BIC differences below ~2 are not meaningful; only differences greater than 10 constitute strong evidence. Picking between two models where ΔAIC = 1.3 based on AIC alone is not statistically justified.
-- **Ignoring the bias-variance tradeoff in very small datasets** — With few observations, k-fold cross-validation itself becomes unreliable because each fold is tiny. Use leave-one-out CV (LOOCV) or bootstrap resampling instead, and be conservative about model complexity.
+- **Choosing the best degree or feature set by looking at the test set repeatedly**: Every time you adjust the model based on test-set performance, you are effectively training on that test set. Reserve it for a single final evaluation; use a validation set or cross-validation for all intermediate comparisons.
+- **Comparing models with training MSE instead of cross-validated MSE**: Training error always decreases as you add polynomial terms or features. A degree-15 polynomial will have lower training MSE than a degree-2 polynomial while generalising far worse; always compare out-of-sample error.
+- **Treating k-fold cross-validation score as a single "true" estimate**: CV scores have variance; a model with CV MSE of 10.2 vs. 10.4 is not meaningfully better unless the difference exceeds one standard error of the fold scores. Use `cross_val_score` and inspect the standard deviation, not just the mean.
+- **Data leakage through preprocessing before splitting**: Fitting a `StandardScaler` or `SelectKBest` on the full dataset before cross-validation leaks test information into training folds, making scores overly optimistic. Always wrap preprocessing in a `Pipeline` so it is re-fit on each training fold independently.
+- **Selecting the model with the highest AIC/BIC without understanding the scale**: AIC and BIC differences below ~2 are not meaningful; only differences greater than 10 constitute strong evidence. Picking between two models where ΔAIC = 1.3 based on AIC alone is not statistically justified.
+- **Ignoring the bias-variance tradeoff in very small datasets**: With few observations, k-fold cross-validation itself becomes unreliable because each fold is tiny. Use leave-one-out CV (LOOCV) or bootstrap resampling instead, and be conservative about model complexity.
 
 ## Additional Resources
 

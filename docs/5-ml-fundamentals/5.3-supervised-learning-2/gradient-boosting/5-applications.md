@@ -8,7 +8,7 @@ objectives:
 
 # Real-World Applications of Gradient Boosting
 
-**After this lesson:** you can explain the core ideas in “Real-World Applications of Gradient Boosting” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Real-World Applications of Gradient Boosting and try the examples in your own notebook.
 
 ## Overview
 
@@ -135,7 +135,7 @@ def calculate_credit_risk(model, scaler, applicant_data):
       <span class="code-callout__title">Risk Scoring Function</span>
     </div>
     <div class="code-callout__body">
-      <p>Scores a new applicant by transforming their features, extracting the default probability, inverting it to a 0–100 credit score, ranking feature importances, and appending targeted recommendations when risk exceeds 0.3.</p>
+      <p>Scores a new applicant by transforming their features, extracting the default probability, inverting it to a 0-100 credit score, ranking feature importances, and appending targeted recommendations when risk exceeds 0.3.</p>
     </div>
   </div>
 </aside>
@@ -143,7 +143,7 @@ def calculate_credit_risk(model, scaler, applicant_data):
 
 ### Stock Market Prediction: Finding Patterns in Market Data
 
-Let's build a system that can help predict stock movements. Think of this as having a smart assistant for stock trading.
+Build a system that can help predict stock movements. Think of this as having a smart assistant for stock trading.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -322,7 +322,7 @@ def assess_patient_risk(model, patient_data):
 
 ### Customer Churn Prediction: Keeping Customers Happy
 
-Let's build a system that can predict which customers might leave a service. This is like having a crystal ball for customer retention.
+Build a system that can predict which customers might leave a service. This is like having a crystal ball for customer retention.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -406,12 +406,12 @@ Ready to try these applications? Start with the credit risk example and graduall
 
 ## Gotchas
 
-- **`StandardScaler` is fit on the full dataset, then applied to test data** — In `train_credit_model`, `scaler.fit_transform(X_train)` is correct but easy to accidentally replace with `scaler.fit_transform(X_test)` during debugging. Fitting the scaler on test data leaks test-set statistics into preprocessing and inflates reported performance.
-- **The walk-forward stock predictor retrains a fresh model each step** — `model.fit(X_train, y_train)` inside the loop discards the previous model entirely and trains from scratch on each sliding window. This is correct for a strict walk-forward evaluation, but the loop is very slow on large datasets; warm-starting or caching model state would speed it up.
-- **`cross_val_score` with a final `model.fit(X, y)` trains on the full data after cross-validation** — In `train_disease_predictor`, the CV scores evaluate generalization, but the returned model is re-fitted on all labels, including the test fold it was evaluated against. This is standard practice, but reporting the CV score *and* the final model's training accuracy side by side will show inflated in-sample performance.
-- **Operator precedence in the churn label rule produces surprising results** — `(data['tenure'] < 12) & (data['monthly_charges'] > 80) | (data['contract_type'] == 'Month-to-month')` is evaluated as `((A & B) | C)` due to Python's operator precedence. The intended logic may be `A & (B | C)`. Always add explicit parentheses when mixing `&` and `|` in pandas boolean conditions.
-- **`yfinance` data may have NaNs from rolling windows** — `create_stock_features` calls `.dropna()` after computing rolling indicators like SMA-50. If the downloaded history is shorter than 50 days (e.g., newly listed stocks), `dropna` removes most of the data silently. Always check `len(df)` after the drop.
-- **`pd.cut` risk buckets are sensitive to the chosen thresholds** — The `[0, 0.3, 0.6, 1]` bins in the churn prediction example are arbitrary. Changing the threshold from 0.3 to 0.4 can flip a large segment of customers between "Low" and "Medium" risk. Thresholds should be calibrated on actual business outcomes, not chosen by convention.
+- **`StandardScaler` is fit on the full dataset, then applied to test data**: In `train_credit_model`, `scaler.fit_transform(X_train)` is correct but easy to accidentally replace with `scaler.fit_transform(X_test)` during debugging. Fitting the scaler on test data leaks test-set statistics into preprocessing and inflates reported performance.
+- **The walk-forward stock predictor retrains a fresh model each step**: `model.fit(X_train, y_train)` inside the loop discards the previous model entirely and trains from scratch on each sliding window. This is correct for a strict walk-forward evaluation, but the loop is very slow on large datasets; warm-starting or caching model state would speed it up.
+- **`cross_val_score` with a final `model.fit(X, y)` trains on the full data after cross-validation**: In `train_disease_predictor`, the CV scores evaluate generalization, but the returned model is re-fitted on all labels, including the test fold it was evaluated against. This is standard practice, but reporting the CV score *and* the final model's training accuracy side by side will show inflated in-sample performance.
+- **Operator precedence in the churn label rule produces surprising results**: `(data['tenure'] < 12) & (data['monthly_charges'] > 80) | (data['contract_type'] == 'Month-to-month')` is evaluated as `((A & B) | C)` due to Python's operator precedence. The intended logic may be `A & (B | C)`. Always add explicit parentheses when mixing `&` and `|` in pandas boolean conditions.
+- **`yfinance` data may have NaNs from rolling windows**: `create_stock_features` calls `.dropna()` after computing rolling indicators like SMA-50. If the downloaded history is shorter than 50 days (e.g., newly listed stocks), `dropna` removes most of the data silently. Always check `len(df)` after the drop.
+- **`pd.cut` risk buckets are sensitive to the chosen thresholds**: The `[0, 0.3, 0.6, 1]` bins in the churn prediction example are arbitrary. Changing the threshold from 0.3 to 0.4 can flip a large segment of customers between "Low" and "Medium" risk. Thresholds should be calibrated on actual business outcomes, not chosen by convention.
 
 ## Additional Resources
 

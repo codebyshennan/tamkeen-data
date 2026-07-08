@@ -1,6 +1,6 @@
 # Frequently Asked Questions (FAQ)
 
-**After this lesson:** you can explain the core ideas in “Frequently Asked Questions (FAQ)” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Frequently Asked Questions (FAQ) and try the examples in your own notebook.
 
 Quick answers about libraries, chart choice, Jupyter quirks, and performance. For structured lessons, start with the [module README](README.md) and [3.1 Intro to data visualization](3.1-intro-data-viz/README.md).
 
@@ -62,7 +62,7 @@ Example:
 
 **Purpose:** Minimal notebook cell that proves the inline backend and `show()` display a line plot.
 
-**Walkthrough:** Magic first, then imports; `plot` then `show()`—order matches execution.
+**Walkthrough:** Magic first, then imports; `plot` then `show()`-order matches execution.
 
 ```python
 %matplotlib inline
@@ -177,7 +177,7 @@ plt.scatter(x, y, alpha=0.1)
 
 2. **Jittering**:
 
-**Purpose:** Break ties on discrete axes (e.g. Likert scales) so individual points don’t sit on one pixel.
+**Purpose:** Break ties on discrete axes (e.g. Likert scales) so individual points don't sit on one pixel.
 
 **Walkthrough:** Small Gaussian noise on x only (or y); keep sigma small relative to spacing.
 
@@ -303,9 +303,9 @@ plt.hist2d(x, y, bins=50)
 
 ## Gotchas
 
-- **`%matplotlib inline` must appear before `import matplotlib.pyplot as plt`** — if the magic runs after the import, it does not switch the already-loaded backend; restart the kernel and put `%matplotlib inline` in the first cell to guarantee inline rendering.
-- **`plt.savefig('plot.pdf', dpi=300)` — `dpi` is ignored for PDF exports** — PDFs are vector formats and have no native DPI; the `dpi` argument only affects raster elements (e.g. images embedded inside the figure); use `bbox_inches='tight'` to control margins, not DPI.
-- **`np.random.choice(len(data), sample_size)` samples indices, not values** — the call returns integer positions that you must then use to index `data`; passing the returned array directly into a plot function will plot the index numbers, not your original data values.
-- **`plt.hist2d(x, y, bins=50)` returns a tuple, not a figure** — the function plots the heatmap and also returns `(counts, xedges, yedges, image)`; if you store the return value expecting a figure object and then call `.savefig()` on it, you will get an `AttributeError`.
-- **Seaborn palettes used as `cmap=` expect a Colormap object, not a list** — `sns.color_palette("Blues", n_colors=5)` returns a list of RGB tuples; passing it to `cmap=` in `scatter` or `imshow` will raise a `TypeError`; use `sns.color_palette("Blues", as_cmap=True)` or `matplotlib.colors.ListedColormap(...)` to wrap the list.
-- **The `"Clipping input data to the valid range"` warning from `imshow` is silent data loss** — it means values outside `[0, 1]` (float) or `[0, 255]` (int) are being clamped before display; normalize your array first with `(arr - arr.min()) / (arr.max() - arr.min())` rather than letting the clip happen invisibly.
+- **`%matplotlib inline` must appear before `import matplotlib.pyplot as plt`**: if the magic runs after the import, it does not switch the already-loaded backend; restart the kernel and put `%matplotlib inline` in the first cell to guarantee inline rendering.
+- **`plt.savefig('plot.pdf', dpi=300)`, `dpi` is ignored for PDF exports**: PDFs are vector formats and have no native DPI; the `dpi` argument only affects raster elements (e.g. images embedded inside the figure); use `bbox_inches='tight'` to control margins, not DPI.
+- **`np.random.choice(len(data), sample_size)` samples indices, not values**: the call returns integer positions that you must then use to index `data`; passing the returned array directly into a plot function will plot the index numbers, not your original data values.
+- **`plt.hist2d(x, y, bins=50)` returns a tuple, not a figure**: the function plots the heatmap and also returns `(counts, xedges, yedges, image)`; if you store the return value expecting a figure object and then call `.savefig()` on it, you will get an `AttributeError`.
+- **Seaborn palettes used as `cmap=` expect a Colormap object, not a list**: `sns.color_palette("Blues", n_colors=5)` returns a list of RGB tuples; passing it to `cmap=` in `scatter` or `imshow` will raise a `TypeError`; use `sns.color_palette("Blues", as_cmap=True)` or `matplotlib.colors.ListedColormap(...)` to wrap the list.
+- **The `"Clipping input data to the valid range"` warning from `imshow` is silent data loss**: it means values outside `[0, 1]` (float) or `[0, 255]` (int) are being clamped before display; normalize your array first with `(arr - arr.min()) / (arr.max() - arr.min())` rather than letting the clip happen invisibly.

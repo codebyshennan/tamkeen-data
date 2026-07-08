@@ -2,7 +2,7 @@
 
 > **Submit your work on Skills Union →** <https://skillsu.com/member/assessment>
 
-Try each question closed-book first. Click **Show hint** if you get stuck — hints point you at the relevant lesson section and how to think about the question, without naming the answer.
+Try each question closed-book first. Click **Show hint** if you get stuck, hints point you at the relevant lesson section and how to think about the question, without naming the answer.
 
 ## Questions
 
@@ -15,7 +15,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [One-variable statistics](../one-variable-statistics.md) — mode.
+- **Where:** [One-variable statistics](../one-variable-statistics.md), mode.
 - **Think:** Mode = most frequent value. Tally each number.
 
 </details>
@@ -29,7 +29,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [One-variable statistics](../one-variable-statistics.md) — skewness.
+- **Where:** [One-variable statistics](../one-variable-statistics.md), skewness.
 - **Think:** The mean gets dragged in the direction of the long tail. If the mean sits **above** the median, the tail must stretch toward the high end.
 
 </details>
@@ -43,7 +43,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Two-variable statistics](../two-variable-statistics.md) — Pearson r.
+- **Where:** [Two-variable statistics](../two-variable-statistics.md), Pearson r.
 - **Think:** Pearson's *r* is symmetric: perfect negative is at one end, perfect positive at the other, zero in the middle. Bounded on both sides.
 
 </details>
@@ -57,7 +57,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [One-variable statistics](../one-variable-statistics.md) — centre vs spread.
+- **Where:** [One-variable statistics](../one-variable-statistics.md), centre vs spread.
 - **Think:** Mean / median / mode all summarise the **centre**. The remaining option summarises **spread** instead.
 
 </details>
@@ -71,7 +71,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Probability distribution families](../probability-distribution-families.md) — empirical (68–95–99.7) rule.
+- **Where:** [Probability distribution families](../probability-distribution-families.md), empirical (68-95-99.7) rule.
 - **Think:** The empirical rule has three famous numbers. The smallest of the three corresponds to ±1 SD.
 
 </details>
@@ -85,7 +85,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [One-variable statistics](../one-variable-statistics.md) — quartiles.
+- **Where:** [One-variable statistics](../one-variable-statistics.md), quartiles.
 - **Think:** IQR is the **spread** between the upper and lower quartiles. Spread is always Q-bigger minus Q-smaller, never the other way.
 
 </details>
@@ -113,8 +113,8 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Probability fundamentals](../probability-fundamentals.md) — CLT.
-- **Think:** CLT is not "sample means are always normal". It's a **convergence** result — the distribution of the sample mean **approaches** normality as **n** grows.
+- **Where:** [Probability fundamentals](../probability-fundamentals.md), CLT.
+- **Think:** CLT is not "sample means are always normal". It's a **convergence** result, the distribution of the sample mean **approaches** normality as **n** grows.
 
 </details>
 
@@ -127,7 +127,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Probability distribution families](../probability-distribution-families.md) — Poisson.
+- **Where:** [Probability distribution families](../probability-distribution-families.md), Poisson.
 - **Think:** Poisson has a famous identity between its first two moments. If you forget it, recall that the Poisson is described by a single parameter λ, and both mean and variance equal that same λ.
 
 </details>
@@ -141,8 +141,8 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Probability distributions](../probability-distributions.md) — PMF vs PDF.
-- **Think:** Note the word **density** — for discrete data we use a probability **mass** function instead. Density is for the continuum.
+- **Where:** [Probability distributions](../probability-distributions.md), PMF vs PDF.
+- **Think:** Note the word **density**, for discrete data we use a probability **mass** function instead. Density is for the continuum.
 
 </details>
 
@@ -155,8 +155,8 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Probability distribution families](../probability-distribution-families.md) — normal.
-- **Think:** Normal is symmetric and unimodal — peak in the middle, mirror-image tails. With perfect symmetry, the three measures of centre coincide.
+- **Where:** [Probability distribution families](../probability-distribution-families.md), normal.
+- **Think:** Normal is symmetric and unimodal, peak in the middle, mirror-image tails. With perfect symmetry, the three measures of centre coincide.
 
 </details>
 
@@ -169,7 +169,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Probability distribution families](../probability-distribution-families.md) — standardization.
+- **Where:** [Probability distribution families](../probability-distribution-families.md), standardization.
 - **Think:** A Z-score answers "how far from the mean, in units of SD?". It's a **standardized distance**, not a probability.
 
 </details>
@@ -183,7 +183,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Two-variable statistics](../two-variable-statistics.md) — correlation.
+- **Where:** [Two-variable statistics](../two-variable-statistics.md), correlation.
 - **Think:** Correlation captures **both** how strong the relationship is **and** which way it goes. It is **not** causation.
 
 </details>
@@ -197,7 +197,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Two-variable statistics](../two-variable-statistics.md) — covariance.
+- **Where:** [Two-variable statistics](../two-variable-statistics.md), covariance.
 - **Think:** Covariance zero = no linear co-movement. It doesn't say "perfect" anything; it just says the linear trend is absent.
 
 </details>
@@ -211,7 +211,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Two-variable statistics](../two-variable-statistics.md) — visualising correlation.
+- **Where:** [Two-variable statistics](../two-variable-statistics.md), visualising correlation.
 - **Think:** Positive = both variables move **together**. As you read left-to-right (x increasing), y should also be increasing.
 
 </details>
@@ -225,8 +225,8 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [One-variable statistics](../one-variable-statistics.md) — robustness.
-- **Think:** Range is a spread measure, eliminate it. Of the remaining three, only one is computed by **summing every value** — that's the one a single huge number distorts.
+- **Where:** [One-variable statistics](../one-variable-statistics.md), robustness.
+- **Think:** Range is a spread measure, eliminate it. Of the remaining three, only one is computed by **summing every value**, that's the one a single huge number distorts.
 
 </details>
 
@@ -253,7 +253,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [One-variable statistics](../one-variable-statistics.md) — skewness.
+- **Where:** [One-variable statistics](../one-variable-statistics.md), skewness.
 - **Think:** Mirror of Q2. Negative skew = long tail on the **left**, which pulls the mean **down** below the median.
 
 </details>
@@ -267,7 +267,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [Probability distribution families](../probability-distribution-families.md) — binomial.
+- **Where:** [Probability distribution families](../probability-distribution-families.md), binomial.
 - **Think:** Expected count of successes over **n** trials when each succeeds with probability **p** = the obvious multiplication.
 
 </details>
@@ -281,7 +281,7 @@ Try each question closed-book first. Click **Show hint** if you get stuck — hi
 <details>
 <summary>Show hint</summary>
 
-- **Where:** [One-variable statistics](../one-variable-statistics.md) — variance and SD.
+- **Where:** [One-variable statistics](../one-variable-statistics.md), variance and SD.
 - **Think:** SD and variance are joined by a single operation: one is the **square root** of the other. Variance is the "raw" sum-of-squared-deviations measure.
 
 </details>

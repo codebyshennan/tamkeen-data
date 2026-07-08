@@ -9,15 +9,15 @@ objectives:
 
 # Model Check-Ups: Making Sure Your Predictions Are Trustworthy
 
-**After this lesson:** you can explain the core ideas in “Model Check-Ups: Making Sure Your Predictions Are Trustworthy” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Model Check-Ups: Making Sure Your Predictions Are Trustworthy and try the examples in your own notebook.
 
 ## Overview
 
-Fitting a model is cheap; **trusting** it requires checking whether the errors look like the theory assumes (linearity, independence, constant variance, approximate normality of residuals for inference). Residual plots, influence measures, and simple fixes are how you defend a line or plane—or decide to switch to a richer model in [module 4.4](../4.4-stat-modelling/README.md).
+Fitting a model is cheap; **trusting** it requires checking whether the errors look like the theory assumes (linearity, independence, constant variance, approximate normality of residuals for inference). Residual plots, influence measures, and simple fixes are how you defend a line or plane, or decide to switch to a richer model in [module 4.4](../4.4-stat-modelling/README.md).
 
 ## Why this matters
 
-- **Residuals** and diagnostic plots turn “the model ran” into “the model fits the problem.”
+- **Residuals** and diagnostic plots turn "the model ran" into "the model fits the problem."
 - You will fix violations (transformations, robust methods, or different models) before forecasting.
 
 ## Prerequisites
@@ -104,7 +104,7 @@ def check_if_relationship_is_straight(model, X, y):
       <span class="code-callout__title">Imports</span>
     </div>
     <div class="code-callout__body">
-      <p>Import NumPy, pandas, Matplotlib, seaborn, and SciPy — the standard diagnostic toolkit used across all helper functions in this lesson.</p>
+      <p>Import NumPy, pandas, Matplotlib, seaborn, and SciPy, the standard diagnostic toolkit used across all helper functions in this lesson.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="8-21" data-tint="2">
@@ -136,7 +136,7 @@ def check_if_relationship_is_straight(model, X, y):
 <figcaption>Independence check: healthy residuals show no run pattern in observation order, giving a Durbin-Watson statistic near 2 (left); residuals that drift in runs signal autocorrelation and a statistic well below 1 (right).</figcaption>
 </figure>
 
-**Durbin–Watson statistic on a residual series**
+**Durbin-Watson statistic on a residual series**
 
 ```python
 from statsmodels.stats.stattools import durbin_watson
@@ -202,7 +202,7 @@ def check_if_error_spread_is_even(model, X, y):
       <span class="code-callout__title">Absolute residuals</span>
     </div>
     <div class="code-callout__body">
-      <p>Take the absolute value of residuals to focus on error magnitude and plot it against fitted values—a scale-location style diagnostic.</p>
+      <p>Take the absolute value of residuals to focus on error magnitude and plot it against fitted values, a scale-location style diagnostic.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="7-17" data-tint="2">
@@ -229,7 +229,7 @@ def check_if_error_spread_is_even(model, X, y):
 
 **How to check it**: We look at the distribution of errors with histograms and what's called a "Q-Q plot."
 
-**What's a Q-Q plot?** "Q-Q" is short for **quantile–quantile**. It compares two distributions by plotting their quantiles (think percentiles) against each other. For a normality check, we plot the quantiles of our residuals against the quantiles of a theoretical normal distribution. If the two distributions have the same shape, the points fall along a straight diagonal line — so reading a Q-Q plot is just asking "how far do the points stray from that line?"
+**What's a Q-Q plot?** "Q-Q" is short for **quantile-quantile**. It compares two distributions by plotting their quantiles (think percentiles) against each other. For a normality check, we plot the quantiles of our residuals against the quantiles of a theoretical normal distribution. If the two distributions have the same shape, the points fall along a straight diagonal line, so reading a Q-Q plot is just asking "how far do the points stray from that line?"
 
 - **Points hug the line** → residuals are approximately normal.
 - **Points curve away, especially at the ends** → skewness, heavy tails, or outliers.
@@ -241,7 +241,7 @@ The same idea works beyond residuals: you can put one dataset's quantiles on eac
 <figcaption>Normality check: healthy residuals hug the diagonal line (left); points curving away at the ends indicate skew or heavy tails (right).</figcaption>
 </figure>
 
-**Histogram, Q-Q plot, and Shapiro–Wilk on residuals**
+**Histogram, Q-Q plot, and Shapiro-Wilk on residuals**
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -283,10 +283,10 @@ def check_if_errors_follow_bell_curve(errors):
   <div class="code-callout" data-lines="17-19" data-tint="2">
     <div class="code-callout__meta">
       <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Shapiro–Wilk test</span>
+      <span class="code-callout__title">Shapiro-Wilk test</span>
     </div>
     <div class="code-callout__body">
-      <p>Run the Shapiro–Wilk normality test and print the p-value; a p-value below 0.05 suggests the residuals depart from normality.</p>
+      <p>Run the Shapiro-Wilk normality test and print the p-value; a p-value below 0.05 suggests the residuals depart from normality.</p>
     </div>
   </div>
 </aside>
@@ -306,7 +306,7 @@ Sometimes, just a few unusual data points can have an outsized impact on your mo
 
 **Everyday analogy**: In a classroom discussion, some students might significantly change the direction of the conversation if they were absent. Cook's Distance helps us identify those influential "conversation changers."
 
-**Cook’s distance from residuals, leverage, and MSE**
+**Cook's distance from residuals, leverage, and MSE**
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -434,7 +434,7 @@ def find_unusual_x_values(X):
 
 **What to look for**: Points with leverage values above the threshold line.
 
-## Let's Put It All Together: A Complete Check-Up
+## Put it all together: a complete check-up
 
 Here's a function that performs all these checks at once:
 
@@ -509,7 +509,7 @@ def give_model_complete_checkup(model, X, y):
       <span class="code-callout__title">Four assumption checks</span>
     </div>
     <div class="code-callout__body">
-      <p>Call helper functions in sequence for linearity, independence (Durbin–Watson), homoscedasticity, and normality of residuals.</p>
+      <p>Call helper functions in sequence for linearity, independence (Durbin-Watson), homoscedasticity, and normality of residuals.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="34-44" data-tint="3">
@@ -524,9 +524,9 @@ def give_model_complete_checkup(model, X, y):
 </aside>
 </div>
 
-## Let's Try It: A Hands-On Example
+## Try it: A Hands-On Example
 
-Let's see how this works with some example data:
+Look at how this works with some example data:
 
 **Synthetic data with an outlier and heteroscedastic noise, then full check-up**
 
@@ -645,7 +645,7 @@ Points with too much overall influence: 8
 
 ## Common Problems and How to Fix Them
 
-Let's look at common problems you might discover and what to do about them:
+look at common problems you might discover and what to do about them:
 
 ### Problem 1: The Relationship Isn't Actually Straight
 
@@ -744,12 +744,12 @@ Try running a model check-up on a dataset you're working with. Here are the step
 
 ## Gotchas
 
-- **Running diagnostics on training-set residuals only** — Diagnostic plots computed on the same data used to fit the model can look acceptable even when the model generalises poorly. Always check residual patterns on a held-out validation set if generalisation is your goal.
-- **Shapiro–Wilk rejects normality for large samples trivially** — With n > 5,000 the test flags tiny, irrelevant departures from normality as significant. At that scale, inspect the Q-Q plot visually instead of relying on the p-value alone.
-- **The Durbin–Watson test only catches lag-1 autocorrelation** — A DW value near 2 does not guarantee independence; it only checks whether adjacent residuals are correlated. Seasonal patterns (lag 12, lag 52) will pass Durbin–Watson while still violating independence.
-- **High leverage is not the same as high influence** — A point can sit far out in predictor space (high leverage) but still fall exactly on the regression surface, giving it near-zero Cook's distance. Only combine leverage with large residuals makes a point truly influential.
-- **Deleting influential points without investigating them** — Automatically removing observations above the 4/n Cook's threshold destroys valid data. First check whether the point is a data-entry error, an out-of-scope observation, or a real signal the model is failing to capture.
-- **Ignoring heteroscedasticity and still reporting standard errors** — OLS standard errors assume constant variance; heteroscedastic residuals make those errors (and therefore p-values and confidence intervals) wrong. Use heteroscedasticity-robust standard errors (`HC3` in statsmodels) or transform the response before trusting inference.
+- **Running diagnostics on training-set residuals only**: Diagnostic plots computed on the same data used to fit the model can look acceptable even when the model generalises poorly. Always check residual patterns on a held-out validation set if generalisation is your goal.
+- **Shapiro-Wilk rejects normality for large samples trivially**: With n > 5,000 the test flags tiny, irrelevant departures from normality as significant. At that scale, inspect the Q-Q plot visually instead of relying on the p-value alone.
+- **The Durbin-Watson test only catches lag-1 autocorrelation**: A DW value near 2 does not guarantee independence; it only checks whether adjacent residuals are correlated. Seasonal patterns (lag 12, lag 52) will pass Durbin-Watson while still violating independence.
+- **High leverage is not the same as high influence**: A point can sit far out in predictor space (high leverage) but still fall exactly on the regression surface, giving it near-zero Cook's distance. Only combine leverage with large residuals makes a point truly influential.
+- **Deleting influential points without investigating them**: Automatically removing observations above the 4/n Cook's threshold destroys valid data. First check whether the point is a data-entry error, an out-of-scope observation, or a real signal the model is failing to capture.
+- **Ignoring heteroscedasticity and still reporting standard errors**: OLS standard errors assume constant variance; heteroscedastic residuals make those errors (and therefore p-values and confidence intervals) wrong. Use heteroscedasticity-robust standard errors (`HC3` in statsmodels) or transform the response before trusting inference.
 
 ## Helpful Resources for Going Deeper
 

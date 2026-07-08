@@ -1,6 +1,6 @@
 # One-Variable Statistics with Python
 
-**After this lesson:** you can explain the core ideas in “One-Variable Statistics with Python” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain One-Variable Statistics with Python and try the examples in your own notebook.
 
 ### Video
 
@@ -8,7 +8,7 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/IFKQLDmRK0Y" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*StatQuest with Josh Starmer — Quantiles and percentiles, clearly explained*
+*StatQuest with Josh Starmer, Quantiles and percentiles, clearly explained*
 
 ## Overview
 
@@ -20,7 +20,7 @@
 
 ### What is One-Variable Statistics?
 
-**Univariate** (one-variable) statistics describes a **single** column or measurement: where it sits, how wide it is, and whether it is skewed. Let's explore with Python:
+**Univariate** (one-variable) statistics describes a **single** column or measurement: where it sits, how wide it is, and whether it is skewed. we will look at with Python:
 
 ```python
 import numpy as np
@@ -69,7 +69,7 @@ This gives us a quick overview of:
 
 ### Real-World Applications
 
-Let's analyze real estate data:
+Analyze real estate data:
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -139,7 +139,7 @@ Kurtosis: -0.35
       <span class="code-callout__title">Sample Data</span>
     </div>
     <div class="code-callout__body">
-      <p>Creates a pandas Series of house prices in thousands—small enough to inspect but realistic enough to show skew.</p>
+      <p>Creates a pandas Series of house prices in thousands, small enough to inspect but realistic enough to show skew.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="7-21" data-tint="2">
@@ -148,7 +148,7 @@ Kurtosis: -0.35
       <span class="code-callout__title">Five-Number Summary</span>
     </div>
     <div class="code-callout__body">
-      <p>Computes mean, median, std, skewness, and kurtosis into a dict then prints each—covering center, spread, and shape in one pass.</p>
+      <p>Computes mean, median, std, skewness, and kurtosis into a dict then prints each, covering center, spread, and shape in one pass.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="23-37" data-tint="3">
@@ -180,7 +180,7 @@ Kurtosis: -0.35
 
 ### Mean, Median, and Mode in Python
 
-Let's implement all three measures:
+Implement all three measures:
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -302,7 +302,7 @@ Trimmed_Mean: 54375.00
 
 ### When to Use Each Measure
 
-Let's create a function to help choose the appropriate measure:
+Create a function to help choose the appropriate measure:
 
 ```python
 def recommend_central_measure(data: pd.Series) -> str:
@@ -313,7 +313,7 @@ def recommend_central_measure(data: pd.Series) -> str:
         np.abs(stats.zscore(data)) > 3
     ).any()
     is_symmetric = abs(skewness) < 0.5
-    
+
     # Create recommendation
     if is_symmetric and not has_outliers:
         return (
@@ -364,7 +364,7 @@ Reason: Data contains outliers
 
 ### Calculating Spread Measures
 
-Let's create a comprehensive spread analyzer:
+Create a comprehensive spread analyzer:
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -449,7 +449,7 @@ spread.plot_spread()
       <span class="code-callout__title">Spread Statistics</span>
     </div>
     <div class="code-callout__body">
-      <p>Computes range, std, variance, MAD, IQR, and Q1/Q3 at init—five spread measures for comprehensive spread characterisation.</p>
+      <p>Computes range, std, variance, MAD, IQR, and Q1/Q3 at init, five spread measures for comprehensive spread characterisation.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="21-27" data-tint="2">
@@ -458,7 +458,7 @@ spread.plot_spread()
       <span class="code-callout__title">IQR Outlier Detection</span>
     </div>
     <div class="code-callout__body">
-      <p>Uses the 1.5×IQR fence rule—the same logic behind boxplot whiskers—to return a filtered Series of extreme values.</p>
+      <p>Uses the 1.5×IQR fence rule, the same logic behind boxplot whiskers, to return a filtered Series of extreme values.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="29-62" data-tint="3">
@@ -477,7 +477,7 @@ spread.plot_spread()
 
 ### Understanding Variability in Context
 
-Let's analyze variability in different scenarios:
+Analyze variability in different scenarios:
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -561,7 +561,7 @@ Website Traffic: 0.385
       <span class="code-callout__title">Per-Dataset Stats</span>
     </div>
     <div class="code-callout__body">
-      <p>For each dataset computes std, IQR, and coefficient of variation (CV)—CV normalises spread by the mean so datasets on different scales can be compared.</p>
+      <p>For each dataset computes std, IQR, and coefficient of variation (CV), CV normalises spread by the mean so datasets on different scales can be compared.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="16-26" data-tint="2">
@@ -612,7 +612,7 @@ Website Traffic: 0.385
 
 ### Creating Frequency Distributions
 
-Let's create a comprehensive frequency analyzer:
+Create a comprehensive frequency analyzer:
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -722,7 +722,7 @@ Median frequency: 21.0
       <span class="code-callout__title">Frequency Table</span>
     </div>
     <div class="code-callout__body">
-      <p>Builds a DataFrame with bin edges, counts, relative frequencies, and cumulative frequencies—the four columns needed for standard frequency distribution tables.</p>
+      <p>Builds a DataFrame with bin edges, counts, relative frequencies, and cumulative frequencies, the four columns needed for standard frequency distribution tables.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="25-55" data-tint="3">
@@ -731,7 +731,7 @@ Median frequency: 21.0
       <span class="code-callout__title">Four-Panel View</span>
     </div>
     <div class="code-callout__body">
-      <p>Creates a 2×2 grid: histogram, relative frequency bar chart, cumulative frequency line, and KDE—covering every standard distribution visualisation in one call.</p>
+      <p>Creates a 2×2 grid: histogram, relative frequency bar chart, cumulative frequency line, and KDE, covering every standard distribution visualisation in one call.</p>
     </div>
   </div>
 </aside>
@@ -763,7 +763,7 @@ Median frequency: 24.5
 
 ### Advanced Visualization Techniques
 
-Let's create publication-quality visualizations:
+Create publication-quality visualizations:
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -937,9 +937,9 @@ Remember:
 
 ## Common pitfalls
 
-- **Mean with outliers** — A few extreme values can pull the mean; pair it with the median or a plot.
-- **Mixing population and sample notation** — Be clear whether you report a population parameter or a sample statistic.
-- **Reporting spread without scale** — A standard deviation is easier to interpret next to the mean and **n**.
+- **Mean with outliers**: A few extreme values can pull the mean; pair it with the median or a plot.
+- **Mixing population and sample notation**: Be clear whether you report a population parameter or a sample statistic.
+- **Reporting spread without scale**: A standard deviation is easier to interpret next to the mean and **n**.
 
 ## Next steps
 

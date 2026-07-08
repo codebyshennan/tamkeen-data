@@ -8,7 +8,7 @@ objectives:
 
 # Mathematical Foundations of Backpropagation
 
-**After this lesson:** you can explain the core ideas in “Mathematical Foundations of Backpropagation” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Mathematical Foundations of Backpropagation and try the examples in your own notebook.
 
 ## Overview
 
@@ -29,7 +29,7 @@ $$\frac{df}{dx} = \frac{df}{dg} \cdot \frac{dg}{dx}$$
 
 ### Why Does it Matter?
 
-The chain rule is crucial because:
+The chain rule is important because:
 
 - It helps us understand how small changes in the weights affect the final output
 - It allows us to calculate gradients efficiently
@@ -86,7 +86,7 @@ plot_chain_rule_example()
       <span class="code-callout__title">Plot and Call</span>
     </div>
     <div class="code-callout__body">
-      <p>Overlay both curves so you can see how applying <code>sin</code> to the parabola output changes the shape — the chain rule governs how these slopes relate.</p>
+      <p>Overlay both curves so you can see how applying <code>sin</code> to the parabola output changes the shape, the chain rule governs how these slopes relate.</p>
     </div>
   </div>
 </aside>
@@ -171,7 +171,7 @@ plot_forward_pass()
       <span class="code-callout__title">Draw Connections</span>
     </div>
     <div class="code-callout__body">
-      <p>Nested loops draw semi-transparent gray lines between every input–hidden pair and every hidden–output pair, mimicking a fully-connected forward pass.</p>
+      <p>Nested loops draw semi-transparent gray lines between every input-hidden pair and every hidden-output pair, mimicking a fully-connected forward pass.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="23-27" data-tint="3">
@@ -309,7 +309,7 @@ plot_activation_functions()
       <span class="code-callout__title">Compute Functions and Derivatives</span>
     </div>
     <div class="code-callout__body">
-      <p>Calculate Sigmoid, ReLU, and Tanh — and their analytical derivatives — for 100 points between −5 and 5.</p>
+      <p>Calculate Sigmoid, ReLU, and Tanh, and their analytical derivatives, for 100 points between −5 and 5.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="15-25" data-tint="2">
@@ -327,7 +327,7 @@ plot_activation_functions()
       <span class="code-callout__title">Bottom Panel: Derivatives</span>
     </div>
     <div class="code-callout__body">
-      <p>Plot the matching derivative curves below — showing where each function saturates (near-zero gradients) and where backprop signals vanish.</p>
+      <p>Plot the matching derivative curves below, showing where each function saturates (near-zero gradients) and where backprop signals vanish.</p>
     </div>
   </div>
 </aside>
@@ -413,7 +413,7 @@ plot_loss_functions()
       <span class="code-callout__title">Compute MSE and BCE</span>
     </div>
     <div class="code-callout__body">
-      <p>MSE averages squared differences; Binary Cross-Entropy penalizes confident wrong predictions logarithmically — both computed over the prediction sweep.</p>
+      <p>MSE averages squared differences; Binary Cross-Entropy penalizes confident wrong predictions logarithmically, both computed over the prediction sweep.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="14-23" data-tint="3">
@@ -481,12 +481,12 @@ Matrix formulation is important because:
 
 ## Gotchas
 
-- **Applying the chain rule in the wrong order** — The chain rule requires multiplying \\(\partial f/\partial g\\) by \\(\partial g/\partial x\\), not the reverse. Swapping the order produces incorrect gradients that still have plausible-looking magnitudes, making this mistake hard to spot without gradient checking.
-- **Using the pre-activation \\(z\\) where the activation \\(a\\) is expected (or vice versa)** — The weight gradient is \\(\delta^{(l)} (a^{(l-1)})^T\\), using the previous layer's *activation*. Accidentally substituting \\(z\\) produces subtly wrong gradients that converge more slowly or not at all.
-- **Overlooking the element-wise vs. matrix multiplication distinction** — The \\(\odot\\) (Hadamard) product in \\(\Delta^{(l)} = (W^{(l+1)})^T\Delta^{(l+1)} \odot f'(Z^{(l)})\\) is element-wise, not a dot product. Using `np.dot` here silently produces wrong shapes or values.
-- **Sigmoid's vanishing gradient in deep networks** — The sigmoid derivative peaks at 0.25, so multiplying it through many layers shrinks gradients exponentially. The math in this file shows this clearly in the activation derivative plots; in practice, switching to ReLU for hidden layers is the standard fix.
-- **Forgetting to sum bias gradients across the batch** — The bias gradient is \\(\sum_i \Delta^{(l)}_i\\), a sum over the batch dimension. Missing the sum gives a gradient shaped (batch, neurons) instead of (neurons,), causing a shape error or (worse) silent broadcasting.
-- **Using MSE loss with a sigmoid output for classification** — MSE paired with sigmoid produces a non-convex loss surface with slow-moving gradients near 0 and 1. Use binary cross-entropy instead, whose derivative cancels the sigmoid's saturation and gives a cleaner gradient signal.
+- **Applying the chain rule in the wrong order**: The chain rule requires multiplying \\(\partial f/\partial g\\) by \\(\partial g/\partial x\\), not the reverse. Swapping the order produces incorrect gradients that still have plausible-looking magnitudes, making this mistake hard to spot without gradient checking.
+- **Using the pre-activation \\(z\\) where the activation \\(a\\) is expected (or vice versa)**: The weight gradient is \\(\delta^{(l)} (a^{(l-1)})^T\\), using the previous layer's *activation*. Accidentally substituting \\(z\\) produces subtly wrong gradients that converge more slowly or not at all.
+- **Overlooking the element-wise vs. matrix multiplication distinction**: The \\(\odot\\) (Hadamard) product in \\(\Delta^{(l)} = (W^{(l+1)})^T\Delta^{(l+1)} \odot f'(Z^{(l)})\\) is element-wise, not a dot product. Using `np.dot` here silently produces wrong shapes or values.
+- **Sigmoid's vanishing gradient in deep networks**: The sigmoid derivative peaks at 0.25, so multiplying it through many layers shrinks gradients exponentially. The math in this file shows this clearly in the activation derivative plots; in practice, switching to ReLU for hidden layers is the standard fix.
+- **Forgetting to sum bias gradients across the batch**: The bias gradient is \\(\sum_i \Delta^{(l)}_i\\), a sum over the batch dimension. Missing the sum gives a gradient shaped (batch, neurons) instead of (neurons,), causing a shape error or (worse) silent broadcasting.
+- **Using MSE loss with a sigmoid output for classification**: MSE paired with sigmoid produces a non-convex loss surface with slow-moving gradients near 0 and 1. Use binary cross-entropy instead, whose derivative cancels the sigmoid's saturation and gives a cleaner gradient signal.
 
 ## Additional Resources
 

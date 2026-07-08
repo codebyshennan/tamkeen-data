@@ -4,7 +4,7 @@
 
 ## Overview
 
-This unit turns a vague question into a **designed comparison**, a **null and alternative**, a **chosen test**, and a **report** that separates statistical noise from practical importance. Submodule 4.1 gave you uncertainty and p-values; here you use them inside disciplined experiments—especially A/B-style work—before you move on to modelling relationships in [module 4.3](../4.3-rship-in-data/README.md).
+This unit turns a vague question into a **designed comparison**, a **null and alternative**, a **chosen test**, and a **report** that separates statistical noise from practical importance. Submodule 4.1 gave you uncertainty and p-values; here you use them inside disciplined experiments, especially A/B-style work, before you move on to modelling relationships in [module 4.3](../4.3-rship-in-data/README.md).
 
 See the [Module 4 overview](../README.md) for prerequisites and how this unit connects to inference and regression.
 
@@ -29,11 +29,11 @@ By the end of this module, you will be able to:
 
 Follow this sequence (it matches the site lesson navigation):
 
-1. [Experimental design](./experimental-design.md) — Control, randomization, replication, blocking basics  
-2. [Hypothesis formulation](./hypothesis-formulation.md) — Null vs alternative, one- vs two-sided tests, clarity  
-3. [Statistical tests](./statistical-tests.md) — Matching tests to data types and assumptions  
-4. [A/B testing](./ab-testing.md) — Metrics, execution, and product-style workflows  
-5. [Results analysis](./results-analysis.md) — Effect sizes, intervals, and communication  
+1. [Experimental design](./experimental-design.md), Control, randomization, replication, blocking basics
+2. [Hypothesis formulation](./hypothesis-formulation.md), Null vs alternative, one- vs two-sided tests, clarity
+3. [Statistical tests](./statistical-tests.md), Matching tests to data types and assumptions
+4. [A/B testing](./ab-testing.md), Metrics, execution, and product-style workflows
+5. [Results analysis](./results-analysis.md), Effect sizes, intervals, and communication
 
 ## Prerequisites
 
@@ -46,7 +46,7 @@ Before diving in, you should be comfortable with:
 
 ## Why this matters
 
-Hypothesis testing is not only for academic papers. The same structure applies whenever you must justify a change with data. The following lists show typical arenas—each still needs clean design and honest reporting.
+Hypothesis testing is not only for academic papers. The same structure applies whenever you must justify a change with data. The following lists show typical arenas, each still needs clean design and honest reporting.
 
 ### In business
 

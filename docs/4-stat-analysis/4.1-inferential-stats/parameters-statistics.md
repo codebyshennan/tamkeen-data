@@ -3,17 +3,17 @@ reading_minutes: 25
 objectives:
   - Distinguish a population parameter (Greek) from a sample statistic (Latin) in any reported result.
   - Tell the difference between an estimator (a rule), an estimate (a number), and a statistic (an umbrella).
-  - Judge an estimator by unbiasedness, efficiency, and consistency — and explain when bias is acceptable.
+  - Judge an estimator by unbiasedness, efficiency, and consistency, and explain when bias is acceptable.
   - Use bootstrap resampling to attach a standard error and CI to any sample statistic.
 ---
 
 # Parameters and Statistics: The Bridge to Understanding Populations
 
-**After this lesson:** you can explain the core ideas in “Parameters and Statistics: The Bridge to Understanding Populations” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Parameters and Statistics: The Bridge to Understanding Populations and try the examples in your own notebook.
 
 ## Overview
 
-**Parameters** describe populations (usually unknown); **statistics** are computed from samples and estimate those parameters. This lesson pulls together notation, point and interval estimates, and properties of estimators—after you have already seen intervals, sampling behavior, and p-values in context.
+**Parameters** describe populations (usually unknown); **statistics** are computed from samples and estimate those parameters. This lesson pulls together notation, point and interval estimates, and properties of estimators, after you have already seen intervals, sampling behavior, and p-values in context.
 
 ## Why this matters
 
@@ -31,7 +31,7 @@ objectives:
 
 Imagine you're a detective trying to understand the average height of all trees in the Amazon rainforest. It's impossible to measure every tree, but you can measure some trees and use that information to make educated guesses about all trees. This is where parameters and statistics come into play!
 
-In statistical inference, we distinguish between parameters and statistics. Parameters are numerical characteristics of a population, while statistics are numerical characteristics of a sample. Understanding this distinction is crucial for making valid inferences about populations based on sample data.
+In statistical inference, we distinguish between parameters and statistics. Parameters are numerical characteristics of a population, while statistics are numerical characteristics of a sample. Understanding this distinction is important for making valid inferences about populations based on sample data.
 
 {% include mermaid-diagram.html src="4-stat-analysis/4.1-inferential-stats/diagrams/parameters-statistics-1.mmd" %}
 
@@ -40,7 +40,7 @@ In statistical inference, we distinguish between parameters and statistics. Para
 ### Parameters
 
 - Fixed, unknown values that describe a population
-- Typically denoted by Greek letters (e.g., \\(\mu\\), \\(\sigma\\), \\(\sigma^2\\), \\(\rho\\)) — and by \\(p\\) for the population proportion (most modern texts use Latin \\(p\\) for the population proportion and \\(\hat p\\) for the sample proportion)
+- Typically denoted by Greek letters (e.g., \\(\mu\\), \\(\sigma\\), \\(\sigma^2\\), \\(\rho\\)), and by \\(p\\) for the population proportion (most modern texts use Latin \\(p\\) for the population proportion and \\(\hat p\\) for the sample proportion)
 - Examples: population mean, population standard deviation, population proportion
 
 ### Statistics
@@ -54,11 +54,11 @@ In statistical inference, we distinguish between parameters and statistics. Para
 
 These three words sound interchangeable but mean different things, and the distinction matters once you start reasoning about hypothesis tests and regression:
 
-- **Estimator** — the *rule or formula* you apply to data. Example: "take the arithmetic mean of the sample." An estimator is a function; it has properties like bias and variance regardless of which dataset you feed it.
-- **Estimate** — the *single number* the estimator produces on one specific dataset. Example: \\(\bar x = 99.86\\) feet for the sample of 100 trees below. Run the estimator on a different sample and you get a different estimate.
-- **Statistic** — any quantity computed from sample data. Every estimate is a statistic, but "statistic" is also the broader umbrella that covers things you would never use as estimators (e.g., the sample minimum, or a test statistic like \\(t\\)).
+- **Estimator**: the *rule or formula* you apply to data. Example: "take the arithmetic mean of the sample." An estimator is a function; it has properties like bias and variance regardless of which dataset you feed it.
+- **Estimate**: the *single number* the estimator produces on one specific dataset. Example: \\(\bar x = 99.86\\) feet for the sample of 100 trees below. Run the estimator on a different sample and you get a different estimate.
+- **Statistic**: any quantity computed from sample data. Every estimate is a statistic, but "statistic" is also the broader umbrella that covers things you would never use as estimators (e.g., the sample minimum, or a test statistic like \\(t\\)).
 
-When the lesson says "the sample mean is unbiased," the subject is the estimator (the rule), not any one estimate. A specific value like \\(\bar x = 99.86\\) is neither biased nor unbiased—it's just a number.
+When the lesson says "the sample mean is unbiased," the subject is the estimator (the rule), not any one estimate. A specific value like \\(\bar x = 99.86\\) is neither biased nor unbiased, it's just a number.
 
 ![Parameter-Statistic Relationship](assets/parameter_statistic_diagram.png)
 *Figure 1: Visual representation of the relationship between population parameters and sample statistics. Parameters (Greek letters) describe the entire population, while statistics (Latin letters) are calculated from samples to estimate these parameters.*
@@ -144,7 +144,7 @@ Difference: 0.11 feet
       <span class="code-callout__title">Population (μ)</span>
     </div>
     <div class="code-callout__body">
-      <p>Simulate 10,000 tree heights — in real research μ would be unknown; here we know it so we can grade the estimator below.</p>
+      <p>Simulate 10,000 tree heights, in real research μ would be unknown; here we know it so we can grade the estimator below.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-10" data-tint="2">
@@ -153,7 +153,7 @@ Difference: 0.11 feet
       <span class="code-callout__title">Sample statistic (x̄)</span>
     </div>
     <div class="code-callout__body">
-      <p>Draw 100 heights and compute the sample mean x̄ — our point estimate of μ.</p>
+      <p>Draw 100 heights and compute the sample mean x̄, our point estimate of μ.</p>
     </div>
   </div>
 </aside>
@@ -288,7 +288,7 @@ Difference: 0.03
       <span class="code-callout__title">Verify unbiasedness</span>
     </div>
     <div class="code-callout__body">
-      <p>Compute the mean of 1,000 sample means and compare to μ—the tiny difference confirms the sample mean is an unbiased estimator.</p>
+      <p>Compute the mean of 1,000 sample means and compare to μ-the tiny difference confirms the sample mean is an unbiased estimator.</p>
     </div>
   </div>
 </aside>
@@ -338,7 +338,7 @@ Trimmed mean: 99.71
       <span class="code-callout__title">Two estimators</span>
     </div>
     <div class="code-callout__body">
-      <p>Compute the plain mean and a 10%-trimmed mean on the same data—the trimmed version drops the extreme 10% from each tail before averaging.</p>
+      <p>Compute the plain mean and a 10%-trimmed mean on the same data, the trimmed version drops the extreme 10% from each tail before averaging.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="10-14" data-tint="2">
@@ -408,7 +408,7 @@ Sample size 5000: 99.81 (Diff: 0.16)
       <span class="code-callout__title">Convergence printout</span>
     </div>
     <div class="code-callout__body">
-      <p>Print the absolute difference between each sample mean and μ—it should generally shrink as n grows, illustrating consistency numerically.</p>
+      <p>Print the absolute difference between each sample mean and μ-it should generally shrink as n grows, illustrating consistency numerically.</p>
     </div>
   </div>
 </aside>
@@ -473,7 +473,7 @@ def quality_control_example():
       <span class="code-callout__title">t-interval</span>
     </div>
     <div class="code-callout__body">
-      <p>Use <code>stats.t.interval</code> with <code>stats.sem</code> as the scale parameter to produce a 95% CI—a one-line alternative to the manual ppf × SE formula.</p>
+      <p>Use <code>stats.t.interval</code> with <code>stats.sem</code> as the scale parameter to produce a 95% CI, a one-line alternative to the manual ppf × SE formula.</p>
     </div>
   </div>
 </aside>
@@ -556,8 +556,8 @@ Try each question on your own first, then expand the answer to check.
 
 It's a **statistic** (\\(\bar x = 12\\) hours).
 
-- A **parameter** would be the *true* mean battery life of *all* phones the company has produced (or will produce) — call it \\(\mu\\). That's a single fixed number, almost always unknown, because they don't measure every phone.
-- A **statistic** is computed from the sample — here, the average of those 100 phones. It's our best guess of \\(\mu\\), but it will be slightly different if a different 100 phones are tested.
+- A **parameter** would be the *true* mean battery life of *all* phones the company has produced (or will produce), call it \\(\mu\\). That's a single fixed number, almost always unknown, because they don't measure every phone.
+- A **statistic** is computed from the sample, here, the average of those 100 phones. It's our best guess of \\(\mu\\), but it will be slightly different if a different 100 phones are tested.
 
 Notation cue: Greek letter (\\(\mu\\)) → parameter. Latin letter (\\(\bar x\\)) → statistic.
 
@@ -597,21 +597,21 @@ This square-root relationship is why "just collect more data" hits diminishing r
 **Strategy:**
 
 1. **Define the population.** All active users in the past 30 days (or whatever the product team cares about). Decide whether to include test accounts, internal users, and bots.
-2. **Pick the unit of analysis.** Per-user *daily session minutes*, averaged over a window — much more stable than a single day per user.
+2. **Pick the unit of analysis.** Per-user *daily session minutes*, averaged over a window, much more stable than a single day per user.
 3. **Stratify** by user segment (free vs. paid, region, device type, tenure). Time-on-app varies heavily by segment, so stratifying gives a tighter overall estimate.
-4. **Use sufficient \\(n\\) per stratum.** Time-on-app is right-skewed (most use it briefly; a few use it for hours), so aim for \\(n \geq 50\text{–}100\\) per stratum so the CLT works.
+4. **Use sufficient \\(n\\) per stratum.** Time-on-app is right-skewed (most use it briefly; a few use it for hours), so aim for \\(n \geq 50\text{-}100\\) per stratum so the CLT works.
 
 **Statistics to report:**
 
 | Statistic | Why |
 |---|---|
 | Sample mean \\(\bar x\\) | Standard estimate of average time |
-| **Median** | Skewed data — the median is a better "typical user" summary |
+| **Median** | Skewed data, the median is a better "typical user" summary |
 | Standard error of the mean | For confidence intervals |
 | 95% CI for the mean | So stakeholders see uncertainty |
 | Quantiles (e.g., p50, p90, p95) | Show the spread, not just the average |
 
-Always report **both** the mean and the median for skewed data — the gap between them tells you about heavy tails.
+Always report **both** the mean and the median for skewed data, the gap between them tells you about heavy tails.
 
 </details>
 
@@ -631,7 +631,7 @@ Suppose:
 - **Unbiased estimator A:** Bias = 0, Variance = 100 → MSE = 100
 - **Biased estimator B:** Bias = 1, Variance = 4 → MSE = 1 + 4 = 5
 
-Estimator B's typical estimate lands much closer to the true value, even though it's slightly off-target on average. This is the **bias–variance trade-off** that comes up everywhere — regression regularization (ridge, lasso), shrinkage estimators, and smoothing all *intentionally* add bias to reduce variance.
+Estimator B's typical estimate lands much closer to the true value, even though it's slightly off-target on average. This is the **bias-variance trade-off** that comes up everywhere, regression regularization (ridge, lasso), shrinkage estimators, and smoothing all *intentionally* add bias to reduce variance.
 
 **When unbiasedness wins instead:**
 
@@ -653,7 +653,7 @@ Recipe:
 
 1. Have a sample of size \\(n\\). Compute your statistic of interest (mean, median, ratio, whatever).
 2. Draw a **bootstrap sample** of size \\(n\\) from your data, **with replacement**. Compute the statistic on this resample.
-3. Repeat step 2 about 1,000–10,000 times. You now have a distribution of bootstrap statistics.
+3. Repeat step 2 about 1,000-10,000 times. You now have a distribution of bootstrap statistics.
 4. Use the distribution to:
    - **Estimate standard error** = standard deviation of the bootstrap statistics.
    - **Build a 95% CI** = the 2.5th and 97.5th percentiles of the bootstrap statistics (the "percentile" method).
@@ -681,11 +681,11 @@ Bootstrap SE:    0.62
 
 **Why it's powerful:**
 
-- Works for *any* statistic — medians, ratios, regression coefficients, model AUC. Not just means.
+- Works for *any* statistic, medians, ratios, regression coefficients, model AUC. Not just means.
 - Doesn't require the data to be normal, doesn't require a closed-form SE formula.
 - Makes the abstract concept of "if I redid the study" concrete and visualizable.
 
-**Limits:** assumes your sample is representative; doesn't fix bias. Works best with \\(n \geq 50\text{–}100\\).
+**Limits:** assumes your sample is representative; doesn't fix bias. Works best with \\(n \geq 50\text{-}100\\).
 
 </details>
 
@@ -700,12 +700,12 @@ Bootstrap SE:    0.62
 
 ## Gotchas
 
-- **Swapping Greek and Latin notation in code comments** — writing `mu` when you mean `x_bar` (or vice versa) is not just cosmetic; it signals a conceptual confusion between the unknown population parameter and the computed sample statistic. Parameters are fixed but unknown; statistics are noisy estimates that change with every new sample.
-- **Using `np.std(data)` to compute the sample SD for a confidence interval** — NumPy's default is `ddof=0` (population formula), which underestimates the variance for samples. Use `np.std(data, ddof=1)` or `scipy.stats.sem(data)` wherever you need the sample standard deviation.
-- **Believing a biased estimator is always worse** — a biased estimator with lower variance can produce estimates closer to the truth (lower MSE) than an unbiased one with high variance. The lesson's trimmed mean example illustrates this: trimming biases the mean slightly but reduces variance when outliers are present.
-- **Forgetting that consistency is a large-sample property** — a consistent estimator is not guaranteed to be close to the parameter for small n; it only converges as n → ∞. Drawing a single sample of size 10 and observing that x̄ ≈ μ does not demonstrate consistency.
-- **Ignoring the finite population correction factor** — when you sample more than about 5–10% of a finite population *without* replacement, the standard error formula `σ/√n` overstates variability. Apply the FPC multiplier `√((N−n)/(N−1))` to get an accurate SE.
-- **Treating x̄ as the population mean** — software often prints the sample mean prominently; it is easy to start writing "the average is 12.3" when the correct statement is "the sample estimate of the average is 12.3, with uncertainty." This distinction matters every time you communicate results.
+- **Swapping Greek and Latin notation in code comments**: writing `mu` when you mean `x_bar` (or vice versa) is not just cosmetic; it signals a conceptual confusion between the unknown population parameter and the computed sample statistic. Parameters are fixed but unknown; statistics are noisy estimates that change with every new sample.
+- **Using `np.std(data)` to compute the sample SD for a confidence interval**: NumPy's default is `ddof=0` (population formula), which underestimates the variance for samples. Use `np.std(data, ddof=1)` or `scipy.stats.sem(data)` wherever you need the sample standard deviation.
+- **Believing a biased estimator is always worse**: a biased estimator with lower variance can produce estimates closer to the truth (lower MSE) than an unbiased one with high variance. The lesson's trimmed mean example illustrates this: trimming biases the mean slightly but reduces variance when outliers are present.
+- **Forgetting that consistency is a large-sample property**: a consistent estimator is not guaranteed to be close to the parameter for small n; it only converges as n → ∞. Drawing a single sample of size 10 and observing that x̄ ≈ μ does not demonstrate consistency.
+- **Ignoring the finite population correction factor**: when you sample more than about 5-10% of a finite population *without* replacement, the standard error formula `σ/√n` overstates variability. Apply the FPC multiplier `√((N−n)/(N−1))` to get an accurate SE.
+- **Treating x̄ as the population mean**: software often prints the sample mean prominently; it is easy to start writing "the average is 12.3" when the correct statement is "the sample estimate of the average is 12.3, with uncertainty." This distinction matters every time you communicate results.
 
 ## Additional Resources
 

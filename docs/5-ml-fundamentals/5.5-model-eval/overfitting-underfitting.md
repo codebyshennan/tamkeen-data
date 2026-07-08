@@ -9,16 +9,16 @@ objectives:
 
 # Overfitting and Underfitting
 
-**After this lesson:** you can explain the core ideas in “Overfitting and Underfitting” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Overfitting and Underfitting and try the examples in your own notebook.
 
 ## Overview
 
-Recognizing **over** vs **under**fitting from learning curves and error gaps—not only training loss.
+Recognizing **over** vs **under**fitting from learning curves and error gaps, not only training loss.
 
 
 ## Introduction
 
-Understanding overfitting and underfitting is crucial for building effective machine learning models. These concepts help us diagnose model performance and make better decisions about model complexity.
+Understanding overfitting and underfitting is important for building effective machine learning models. These concepts help us diagnose model performance and make better decisions about model complexity.
 
 > **Key idea:** diagnose from **train vs validation** behaviour, not from training score alone.
 
@@ -224,12 +224,12 @@ plt.show()
 
 ## Gotchas
 
-- **Diagnosing overfitting from training accuracy alone** — A training accuracy of 99% is only concerning if validation accuracy is significantly lower; high training accuracy combined with high, similar validation accuracy is a sign of a good model, not overfitting; always compare both curves before drawing conclusions.
-- **Treating small training sets as underfitting** — If you have 50 samples and a complex model memorises them perfectly (training accuracy 100%), that is overfitting, not good generalisation; the symptom is a large train-validation gap, not low training accuracy; diagnose from the gap, not the absolute training score.
-- **Fixing underfitting by adding training epochs alone** — For gradient-based models, training longer can improve a truly underfit model, but continuing past convergence causes overfitting; monitor validation loss and stop when it stops improving rather than training for a fixed epoch budget.
-- **Polynomial degree overfitting is subtler with real data** — The degree-15 polynomial example clearly overfits because the ground truth is linear; in real datasets the "true" function is unknown and a degree-3 or degree-5 polynomial might already overfit; use cross-validation to pick degree rather than relying on visual inspection of a single train/test plot.
-- **Assuming regularisation always fixes overfitting** — Regularisation shrinks coefficients and can reduce overfitting, but if the model is structurally wrong for the problem (e.g., linear model on highly non-linear data), regularisation only reduces variance without improving bias; you also need to consider the model family.
-- **Ignoring data leakage as a source of apparent overfitting** — A large gap between train and test performance is not always caused by model complexity; if preprocessing was fit on the full dataset or test labels accidentally influenced training, the gap may reflect leakage rather than overfitting, and increasing regularisation will not help.
+- **Diagnosing overfitting from training accuracy alone**: A training accuracy of 99% is only concerning if validation accuracy is significantly lower; high training accuracy combined with high, similar validation accuracy is a sign of a good model, not overfitting; always compare both curves before drawing conclusions.
+- **Treating small training sets as underfitting**: If you have 50 samples and a complex model memorises them perfectly (training accuracy 100%), that is overfitting, not good generalisation; the symptom is a large train-validation gap, not low training accuracy; diagnose from the gap, not the absolute training score.
+- **Fixing underfitting by adding training epochs alone**: For gradient-based models, training longer can improve a truly underfit model, but continuing past convergence causes overfitting; monitor validation loss and stop when it stops improving rather than training for a fixed epoch budget.
+- **Polynomial degree overfitting is subtler with real data**: The degree-15 polynomial example clearly overfits because the ground truth is linear; in real datasets the "true" function is unknown and a degree-3 or degree-5 polynomial might already overfit; use cross-validation to pick degree rather than relying on visual inspection of a single train/test plot.
+- **Assuming regularisation always fixes overfitting**: Regularisation shrinks coefficients and can reduce overfitting, but if the model is structurally wrong for the problem (e.g., linear model on highly non-linear data), regularisation only reduces variance without improving bias; you also need to consider the model family.
+- **Ignoring data leakage as a source of apparent overfitting**: A large gap between train and test performance is not always caused by model complexity; if preprocessing was fit on the full dataset or test labels accidentally influenced training, the gap may reflect leakage rather than overfitting, and increasing regularisation will not help.
 
 ## Additional Resources
 

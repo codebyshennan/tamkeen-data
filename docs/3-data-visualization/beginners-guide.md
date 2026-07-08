@@ -1,6 +1,6 @@
 # Data Visualization: A Beginner's Guide
 
-**After this lesson:** you can explain the core ideas in “Data Visualization: A Beginner's Guide” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Data Visualization: A Beginner's Guide and try the examples in your own notebook.
 
 ## Helpful video
 
@@ -90,7 +90,7 @@ plt.show()
       <span class="code-callout__title">Import</span>
     </div>
     <div class="code-callout__body">
-      <p><code>matplotlib.pyplot</code> is the only dependency for this basic chart—no additional libraries needed.</p>
+      <p><code>matplotlib.pyplot</code> is the only dependency for this basic chart, no additional libraries needed.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="4-7" data-tint="2">
@@ -99,7 +99,7 @@ plt.show()
       <span class="code-callout__title">Data Setup</span>
     </div>
     <div class="code-callout__body">
-      <p>Parallel lists for weekday labels and step counts—the simplest way to define x/y data for Matplotlib.</p>
+      <p>Parallel lists for weekday labels and step counts, the simplest way to define x/y data for Matplotlib.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-15" data-tint="3">
@@ -177,7 +177,7 @@ plt.show()
       <span class="code-callout__title">Category Data</span>
     </div>
     <div class="code-callout__body">
-      <p>Parallel lists of flavor names and preference counts—<code>plt.bar</code> maps each name to a bar height.</p>
+      <p>Parallel lists of flavor names and preference counts-<code>plt.bar</code> maps each name to a bar height.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-15" data-tint="3">
@@ -207,7 +207,7 @@ plt.show()
 
 ### 3. Pie Chart
 
-**Purpose:** Show how a day divides into parts that sum to 100%—appropriate when “share of total” is the question.
+**Purpose:** Show how a day divides into parts that sum to 100%-appropriate when "share of total" is the question.
 
 **Walkthrough:** `pie` takes magnitudes (hours); `autopct` prints percentages; `colors` overrides default palette.
 
@@ -221,7 +221,7 @@ hours = [8, 8, 5, 3]
 
 # Create the chart
 plt.figure(figsize=(10, 6))
-plt.pie(hours, labels=activities, autopct='%1.1f%%', 
+plt.pie(hours, labels=activities, autopct='%1.1f%%',
         colors=['#3498db', '#e74c3c', '#2ecc71', '#f1c40f'])
 plt.title('How I Spend My Day', fontsize=14, pad=20)
 plt.show()
@@ -290,9 +290,9 @@ plt.style.use('seaborn-v0_8-whitegrid')  # Uses a pre-made style
 
 ### 3. Add Explanations
 
-**Purpose:** Anchor the chart with a small data-source note in figure coordinates—common in reports.
+**Purpose:** Anchor the chart with a small data-source note in figure coordinates, common in reports.
 
-**Walkthrough:** `figtext` uses 0–1 figure coordinates; `ha='right'` aligns the caption to the bottom-right margin.
+**Walkthrough:** `figtext` uses 0-1 figure coordinates; `ha='right'` aligns the caption to the bottom-right margin.
 
 ```python
 # Add a note about the data
@@ -311,7 +311,7 @@ Text(0.99, 0.01, 'Data source: My Budget App')
 ```
 
 
-**Captured output (notebook):** The last line may print the `Text` artist returned by `figtext`—that is normal; the annotation still appears on the figure.
+**Captured output (notebook):** The last line may print the `Text` artist returned by `figtext`-that is normal; the annotation still appears on the figure.
 
 ## Tips for Beginners
 
@@ -400,11 +400,11 @@ Remember: The best visualization is one that helps your audience understand the 
 
 ## Gotchas
 
-- **`plt.style.use('seaborn-v0_8-whitegrid')` must be called before any plotting** — if you call it after `plt.figure()` or `plt.plot()`, the style applies to the next figure, not the one already open; move style calls to the top of your setup cell.
-- **Pie charts with `hours = [8, 8, 5, 3]` hide that slices are unequal even when they look similar** — 8 hours of "Sleep" and 8 hours of "Work" produce identical wedges, making it hard to spot difference; when two categories are close in value, a bar chart communicates the gap far more clearly.
-- **Color lists must match the number of bars exactly** — passing `color=['#e74c3c', '#3498db', '#2ecc71', '#9b59b6']` to `plt.bar` works only when there are exactly 4 bars; adding or removing a category without updating the color list raises a silent mismatch or a `ValueError`.
-- **`plt.figtext` coordinates are figure-relative (0–1), not data or axes coordinates** — a note placed at `(0.99, 0.01)` sits at the bottom-right of the whole figure canvas, not the chart area; if your figure has a large bottom margin, the note may appear far below the chart.
-- **No x-axis label on bar charts creates ambiguity** — the bar chart examples here label only the y-axis (`'Number of People'`) but omit an x-axis label; viewers who see the chart without the title cannot tell what the categories represent.
-- **`marker='o'` on line charts works for small datasets but clutters dense time series** — once you have more than ~20 points on a line, markers overlap and obscure the trend; omit the marker or reduce its size with `markersize=3` for denser data.
+- **`plt.style.use('seaborn-v0_8-whitegrid')` must be called before any plotting**: if you call it after `plt.figure()` or `plt.plot()`, the style applies to the next figure, not the one already open; move style calls to the top of your setup cell.
+- **Pie charts with `hours = [8, 8, 5, 3]` hide that slices are unequal even when they look similar**: 8 hours of "Sleep" and 8 hours of "Work" produce identical wedges, making it hard to spot difference; when two categories are close in value, a bar chart communicates the gap far more clearly.
+- **Color lists must match the number of bars exactly**: passing `color=['#e74c3c', '#3498db', '#2ecc71', '#9b59b6']` to `plt.bar` works only when there are exactly 4 bars; adding or removing a category without updating the color list raises a silent mismatch or a `ValueError`.
+- **`plt.figtext` coordinates are figure-relative (0-1), not data or axes coordinates**: a note placed at `(0.99, 0.01)` sits at the bottom-right of the whole figure canvas, not the chart area; if your figure has a large bottom margin, the note may appear far below the chart.
+- **No x-axis label on bar charts creates ambiguity**: the bar chart examples here label only the y-axis (`'Number of People'`) but omit an x-axis label; viewers who see the chart without the title cannot tell what the categories represent.
+- **`marker='o'` on line charts works for small datasets but clutters dense time series**: once you have more than ~20 points on a line, markers overlap and obscure the trend; omit the marker or reduce its size with `markersize=3` for denser data.
 
 - Structured follow-on: [3.1 Intro to data visualization](3.1-intro-data-viz/README.md) and [Choosing the right visualization](choosing-the-right-visualization.md).

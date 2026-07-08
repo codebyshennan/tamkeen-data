@@ -1,6 +1,6 @@
 # Linear Algebra: Matrix Magic
 
-**After this lesson:** you can explain the core ideas in “Linear Algebra: Matrix Magic” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Linear Algebra: Matrix Magic and try the examples in your own notebook.
 
 ### Video
 
@@ -8,11 +8,11 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/fNk_zzaMoSs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*3Blue1Brown — Essence of linear algebra: vectors*
+*3Blue1Brown, Essence of linear algebra: vectors*
 
 ## How this lesson is organized
 
-This page mixes **set-like** ideas (unique values, membership) with **matrix multiplication** and other **linear algebra** tools. That mirrors real workflows: you often **deduplicate** or **filter** arrays before you **combine** or **transform** them with matrices. Read top to bottom; each section’s code is short enough to run in a notebook as you go.
+This page mixes **set-like** ideas (unique values, membership) with **matrix multiplication** and other **linear algebra** tools. That mirrors real workflows: you often **deduplicate** or **filter** arrays before you **combine** or **transform** them with matrices. Read top to bottom; each section's code is short enough to run in a notebook as you go.
 
 {% include mermaid-diagram.html src="1-data-fundamentals/1.4-data-foundation-linear-algebra/diagrams/linear-algebra-1.mmd" %}
 
@@ -24,7 +24,7 @@ This page mixes **set-like** ideas (unique values, membership) with **matrix mul
 
 ### Finding Unique Values
 
-Like finding unique cards in a deck! Set operations are crucial for:
+Like finding unique cards in a deck! Set operations are important for:
 
 - Data cleaning (removing duplicates)
 - Feature engineering (unique categories)
@@ -272,7 +272,7 @@ Eigenvectors:
 
 **Pro Tips**:
 
-- Use **@** for matrix multiplication — it is cleaner
+- Use **@** for matrix multiplication, it is cleaner
 - Check matrix shapes before multiplying
 - Remember: not all matrices have inverses
 - Use **np.linalg** for advanced operations
@@ -280,9 +280,9 @@ Eigenvectors:
 
 ## Common pitfalls
 
-- **Shape mismatch** — Inner dimensions must align for matrix multiply; use **.shape** when an error mentions **(m,k)** vs **(k,n)**.
-- **Singular matrix** — **inv** fails when the matrix is singular; prefer **lstsq** or **pinv** when appropriate.
-- **Confusing elementwise * and @** — **\*** multiplies element by element; **@** is matrix multiplication.
+- **Shape mismatch**: Inner dimensions must align for matrix multiply; use **.shape** when an error mentions **(m,k)** vs **(k,n)**.
+- **Singular matrix**: **inv** fails when the matrix is singular; prefer **lstsq** or **pinv** when appropriate.
+- **Confusing elementwise * and @**, **\*** multiplies element by element; **@** is matrix multiplication.
 
 ## Next steps
 

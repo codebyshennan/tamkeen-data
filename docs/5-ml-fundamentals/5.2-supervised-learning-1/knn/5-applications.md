@@ -7,7 +7,7 @@ objectives:
 ---
 # Real-World Applications of KNN: From Theory to Practice
 
-**After this lesson:** you can explain the core ideas in “Real-World Applications of KNN: From Theory to Practice” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Real-World Applications of KNN: From Theory to Practice and try the examples in your own notebook.
 
 ## Overview
 
@@ -29,7 +29,7 @@ Imagine you're building a movie streaming service. You want to recommend movies 
 
 ### How It Works
 
-#### Item–item `NearestNeighbors` on a ratings matrix
+#### Item-item `NearestNeighbors` on a ratings matrix
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -213,7 +213,7 @@ print(f"Diagnosis: {diagnosis[0]} (confidence: {confidence[0]:.2f})")
       <span class="code-callout__title">Train on History</span>
     </div>
     <div class="code-callout__body">
-      <p>A single <code>fit</code> call processes all historical patient records through the pipeline—scaling is fit on training vitals only.</p>
+      <p>A single <code>fit</code> call processes all historical patient records through the pipeline, scaling is fit on training vitals only.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="21-30" data-tint="3">
@@ -450,7 +450,7 @@ for case in fraud_cases:
       <span class="code-callout__title">Usage Demo</span>
     </div>
     <div class="code-callout__body">
-      <p>Three transactions—two normal and one outlier—demonstrate the pipeline; the high-amount late-night transaction is flagged with a high fraud score.</p>
+      <p>Three transactions, two normal and one outlier, demonstrate the pipeline; the high-amount late-night transaction is flagged with a high fraud score.</p>
     </div>
   </div>
 </aside>
@@ -482,7 +482,7 @@ Transaction 1: Score 1.01
 
    ```python
    from imblearn.over_sampling import SMOTE
-   
+
    # Balance the classes
    smote = SMOTE()
    X_balanced, y_balanced = smote.fit_resample(X, y)
@@ -495,7 +495,7 @@ Transaction 1: Score 1.01
    ```python
    # For text data
    knn = KNeighborsClassifier(metric='cosine')
-   
+
    # For numerical data
    knn = KNeighborsClassifier(metric='euclidean')
    ```
@@ -534,12 +534,12 @@ Transaction 1: Score 1.01
 
 ## Gotchas
 
-- **Using `1 - distance` as a similarity score without normalizing distances** — The `MovieRecommender` and `ImageSimilarityFinder` examples compute similarity as `1 - distance`. This only makes intuitive sense if distances are bounded in [0, 1]. With Euclidean distance on unscaled features, `1 - distance` can be negative or exceed 1, producing scores with no meaningful interpretation.
-- **Assuming LOF's `contamination` parameter has no effect on scores** — `LocalOutlierFactor(contamination=0.1)` sets the decision threshold for `fit_predict` labels, but `negative_outlier_factor_` scores are computed independently. Changing `contamination` changes which points are labelled `-1` without changing the underlying scores — learners often expect scores to shift, leading to confusion when re-fitting with different contamination values.
-- **Scaling inside `fit` but forgetting to scale inference inputs the same way** — The `MedicalDiagnosisSystem` correctly puts `StandardScaler` inside a `Pipeline`. If instead the scaler is applied manually outside the class, it is easy to forget `scaler.transform(new_patient)` at prediction time, causing silently wrong diagnoses with no error raised.
-- **Building the pixel-vector index on color images without fixing the channel count** — The `ImageSimilarityFinder` converts images to grayscale (single channel). If a query image has a different number of channels than the index images, `kneighbors` will raise a shape mismatch or silently compare wrong dimensions. Enforce consistent preprocessing for both indexed and query images.
-- **Using `NearestNeighbors` with `n_neighbors=k+1` then forgetting to strip self** — The recommender sets `n_neighbors=k+1` to account for the fact that querying a movie against the index returns itself as the nearest neighbor. If you later increase `n_recommendations` without adjusting `n_neighbors`, you lose the self-exclusion buffer and get back one fewer real recommendation than expected.
-- **Evaluating real-world KNN models with accuracy alone on imbalanced data** — Fraud datasets (like the LOF example) are highly skewed. A model that labels every transaction as normal can score 99% accuracy on a 1% fraud rate. Always pair accuracy with precision, recall, and AUC-ROC for anomaly and fraud detection tasks.
+- **Using `1 - distance` as a similarity score without normalizing distances**: The `MovieRecommender` and `ImageSimilarityFinder` examples compute similarity as `1 - distance`. This only makes intuitive sense if distances are bounded in [0, 1]. With Euclidean distance on unscaled features, `1 - distance` can be negative or exceed 1, producing scores with no meaningful interpretation.
+- **Assuming LOF's `contamination` parameter has no effect on scores**: `LocalOutlierFactor(contamination=0.1)` sets the decision threshold for `fit_predict` labels, but `negative_outlier_factor_` scores are computed independently. Changing `contamination` changes which points are labelled `-1` without changing the underlying scores, learners often expect scores to shift, leading to confusion when re-fitting with different contamination values.
+- **Scaling inside `fit` but forgetting to scale inference inputs the same way**: The `MedicalDiagnosisSystem` correctly puts `StandardScaler` inside a `Pipeline`. If instead the scaler is applied manually outside the class, it is easy to forget `scaler.transform(new_patient)` at prediction time, causing silently wrong diagnoses with no error raised.
+- **Building the pixel-vector index on color images without fixing the channel count**: The `ImageSimilarityFinder` converts images to grayscale (single channel). If a query image has a different number of channels than the index images, `kneighbors` will raise a shape mismatch or silently compare wrong dimensions. Enforce consistent preprocessing for both indexed and query images.
+- **Using `NearestNeighbors` with `n_neighbors=k+1` then forgetting to strip self**: The recommender sets `n_neighbors=k+1` to account for the fact that querying a movie against the index returns itself as the nearest neighbor. If you later increase `n_recommendations` without adjusting `n_neighbors`, you lose the self-exclusion buffer and get back one fewer real recommendation than expected.
+- **Evaluating real-world KNN models with accuracy alone on imbalanced data**: Fraud datasets (like the LOF example) are highly skewed. A model that labels every transaction as normal can score 99% accuracy on a 1% fraud rate. Always pair accuracy with precision, recall, and AUC-ROC for anomaly and fraud detection tasks.
 
 ## Additional Resources
 

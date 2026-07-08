@@ -3,17 +3,17 @@ reading_minutes: 32
 objectives:
   - "Define the **ROC curve** as TPR vs FPR over all thresholds, and **AUC** as the probability the model ranks a random positive above a random negative."
   - "Plot ROC and compute AUC with `roc_curve` / `roc_auc_score`; read curve shapes (diagonal = random, top-left elbow = good ranker)."
-  - "Pick an operating threshold from the curve using cost-weighted criteria (Youden's J, F1 max, business cost matrix) — not the default 0.5."
-  - "Know when ROC misleads: with severe class imbalance, AUC can stay high while precision is awful — switch to **PR-AUC** (or report both)."
+  - "Pick an operating threshold from the curve using cost-weighted criteria (Youden's J, F1 max, business cost matrix), not the default 0.5."
+  - "Know when ROC misleads: with severe class imbalance, AUC can stay high while precision is awful, switch to **PR-AUC** (or report both)."
 ---
 
 # ROC Curves and AUC: Complete Guide
 
-**After this lesson:** you can explain the core ideas in “ROC Curves and AUC: Complete Guide” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain ROC Curves and AUC: Complete Guide and try the examples in your own notebook.
 
 ## Overview
 
-**ROC curves** and **AUC**: ranking quality across thresholds; complements precision–recall for skewed classes.
+**ROC curves** and **AUC**: ranking quality across thresholds; complements precision-recall for skewed classes.
 
 ## Introduction
 
@@ -170,7 +170,7 @@ plot_roc_curve(fpr, tpr, roc_auc)
       <span class="code-callout__title">Data, Model, and Probabilities</span>
     </div>
     <div class="code-callout__body">
-      <p>Fit logistic regression and extract <code>predict_proba[:, 1]</code> — the positive-class scores used to sweep the decision threshold across the ROC curve.</p>
+      <p>Fit logistic regression and extract <code>predict_proba[:, 1]</code>, the positive-class scores used to sweep the decision threshold across the ROC curve.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="24-31" data-tint="2">
@@ -179,7 +179,7 @@ plot_roc_curve(fpr, tpr, roc_auc)
       <span class="code-callout__title">Compute ROC and AUC</span>
     </div>
     <div class="code-callout__body">
-      <p><code>roc_curve</code> returns aligned FPR, TPR, and threshold arrays; <code>auc(fpr, tpr)</code> integrates the curve — the same value as <code>roc_auc_score</code>.</p>
+      <p><code>roc_curve</code> returns aligned FPR, TPR, and threshold arrays; <code>auc(fpr, tpr)</code> integrates the curve, the same value as <code>roc_auc_score</code>.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="33-49" data-tint="3">
@@ -417,7 +417,7 @@ Model Accuracy: 100.0%
 
 ## Threshold Analysis and Selection
 
-Understanding how different thresholds affect model performance is crucial for practical applications.
+Understanding how different thresholds affect model performance is important for practical applications.
 
 #### Sweep thresholds and plot precision/recall vs TPR/FPR
 
@@ -541,7 +541,7 @@ plt.show()
       <span class="code-callout__title">Two-panel Visualization</span>
     </div>
     <div class="code-callout__body">
-      <p>Left panel plots precision, recall, and F1 vs threshold; right panel plots TPR and FPR — together they reveal the operating point trade-off space beyond a single AUC number.</p>
+      <p>Left panel plots precision, recall, and F1 vs threshold; right panel plots TPR and FPR, together they reveal the operating point trade-off space beyond a single AUC number.</p>
     </div>
   </div>
 </aside>
@@ -555,7 +555,7 @@ plt.show()
 
 ## Practical Example: Credit Risk Assessment
 
-Let's apply ROC and AUC analysis to a realistic credit risk prediction scenario:
+Apply ROC and AUC analysis to a realistic credit risk prediction scenario:
 
 #### Synthetic credit data, pipeline, and four-panel analysis
 
@@ -708,7 +708,7 @@ print(f"Predicted default rate (threshold=0.5): {(y_pred_proba >= 0.5).mean():.2
       <span class="code-callout__title">Stratified Split and Pipeline</span>
     </div>
     <div class="code-callout__body">
-      <p><code>stratify=y</code> preserves the default rate in both splits; the scaler+forest pipeline prevents leakage and produces ranking scores (not necessarily calibrated) via <code>predict_proba[:, 1]</code> — ROC/AUC only needs the scores to rank positives above negatives correctly.</p>
+      <p><code>stratify=y</code> preserves the default rate in both splits; the scaler+forest pipeline prevents leakage and produces ranking scores (not necessarily calibrated) via <code>predict_proba[:, 1]</code>, ROC/AUC only needs the scores to rank positives above negatives correctly.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="66-118" data-tint="3">
@@ -717,7 +717,7 @@ print(f"Predicted default rate (threshold=0.5): {(y_pred_proba >= 0.5).mean():.2
       <span class="code-callout__title">Four-panel Analysis</span>
     </div>
     <div class="code-callout__body">
-      <p>The 2×2 figure covers ROC curve, threshold trade-offs, predicted probability distributions separated by true label, and feature importance — giving a full diagnostic view of the credit scoring model.</p>
+      <p>The 2×2 figure covers ROC curve, threshold trade-offs, predicted probability distributions separated by true label, and feature importance, giving a full diagnostic view of the credit scoring model.</p>
     </div>
   </div>
 </aside>
@@ -742,7 +742,7 @@ Predicted default rate (threshold=0.5): 13.00%
 - **Validate data quality** before modelling because leakage, duplicate rows, and temporal ordering can all inflate AUC.
 
 ### 2. Model Development
-- **Use cross-validation** for robust evaluation so the ROC curve is not driven by one lucky split.
+- **Use cross-validation** for reliable evaluation so the ROC curve is not driven by one lucky split.
 - **Compare multiple models** systematically with the same preprocessing and folds; otherwise AUC differences may come from the evaluation setup.
 - **Consider model complexity** versus performance trade-offs because a tiny AUC gain may not justify slower inference or lower interpretability.
 - **Validate on holdout data** once at the end so the reported AUC is not biased by repeated tuning.
@@ -926,18 +926,18 @@ ROC curves and AUC provide powerful tools for evaluating and comparing classific
 2. **AUC** provides a single metric for model comparison
 3. **Threshold selection** should consider business costs and requirements
 4. **Multiple metrics** should be used for comprehensive evaluation
-5. **Domain knowledge** is crucial for practical implementation
+5. **Domain knowledge** is important for practical implementation
 
 Remember that while ROC/AUC are valuable metrics, they should be used in conjunction with other evaluation methods and always in the context of your specific problem domain and business requirements.
 
 ## Gotchas
 
-- **Passing hard labels instead of probability scores to `roc_curve`** — `roc_curve` needs continuous probability scores (from `predict_proba[:, 1]`) to sweep thresholds; passing binary `predict` output collapses the curve to just two points and gives a meaningless flat line rather than the full ROC shape.
-- **AUC of 0.5 does not always mean a random model** — A model that perfectly separates classes but has its probabilities inverted (predicts 1.0 for negatives and 0.0 for positives) also scores 0.5; check whether AUC is near 0.5 because the model is uninformative or because its scores are calibrated backwards.
-- **ROC-AUC is optimistic on highly imbalanced datasets** — A model that predicts "not fraud" for every transaction achieves high AUC on a 1% fraud dataset because the many true negatives dominate the FPR denominator; use the Precision-Recall curve or PR-AUC when the positive class is rare.
-- **Using AUC alone to select thresholds in production** — AUC measures ranking quality across all thresholds, but deployment requires a single threshold; two models with identical AUC can have very different precision/recall at the business-relevant operating point, so always plot the full ROC curve and examine the curve shape near your cost-optimal threshold.
-- **Not stratifying splits before computing ROC** — A random test split on a 5% positive-class dataset might leave zero positives in a fold, causing `roc_auc_score` to raise a `ValueError` or return `NaN`; use `StratifiedKFold` or `train_test_split(..., stratify=y)` to guarantee both classes appear.
-- **Comparing AUC across datasets with different class ratios** — AUC is not directly comparable between a balanced dataset and a 10:1 imbalanced one, because the FPR denominator differs in size; models that look similar in AUC may behave very differently in practice when deployed on data with real-world class frequencies.
+- **Passing hard labels instead of probability scores to `roc_curve`**: `roc_curve` needs continuous probability scores (from `predict_proba[:, 1]`) to sweep thresholds; passing binary `predict` output collapses the curve to just two points and gives a meaningless flat line rather than the full ROC shape.
+- **AUC of 0.5 does not always mean a random model**: A model that perfectly separates classes but has its probabilities inverted (predicts 1.0 for negatives and 0.0 for positives) also scores 0.5; check whether AUC is near 0.5 because the model is uninformative or because its scores are calibrated backwards.
+- **ROC-AUC is optimistic on highly imbalanced datasets**: A model that predicts "not fraud" for every transaction achieves high AUC on a 1% fraud dataset because the many true negatives dominate the FPR denominator; use the Precision-Recall curve or PR-AUC when the positive class is rare.
+- **Using AUC alone to select thresholds in production**: AUC measures ranking quality across all thresholds, but deployment requires a single threshold; two models with identical AUC can have very different precision/recall at the business-relevant operating point, so always plot the full ROC curve and examine the curve shape near your cost-optimal threshold.
+- **Not stratifying splits before computing ROC**: A random test split on a 5% positive-class dataset might leave zero positives in a fold, causing `roc_auc_score` to raise a `ValueError` or return `NaN`; use `StratifiedKFold` or `train_test_split(..., stratify=y)` to guarantee both classes appear.
+- **Comparing AUC across datasets with different class ratios**: AUC is not directly comparable between a balanced dataset and a 10:1 imbalanced one, because the FPR denominator differs in size; models that look similar in AUC may behave very differently in practice when deployed on data with real-world class frequencies.
 
 ## Additional Resources
 

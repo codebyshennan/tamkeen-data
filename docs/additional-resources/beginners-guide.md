@@ -1,6 +1,6 @@
 # Beginner's guide to this course site
 
-If you are new to data work or to this site, use this page as a **compass**. The lessons assume you can open a browser, install software, and run small code examples—nothing more.
+If you are new to data work or to this site, use this page as a **compass**. The lessons assume you can open a browser, install software, and run small code examples, nothing more.
 
 ## Helpful video
 
@@ -10,20 +10,20 @@ Short orientation to the data science ecosystem.
 
 ## Start here (order matters)
 
-1. **[Module 0: Prep](../0-prep/README.md)** — Get Python, libraries, and Jupyter (or VS Code) working. Do not skip environment setup; almost every later error traces back to “wrong interpreter” or missing packages.
-2. **[Course overview](../README.md)** — See how modules fit together and what “success” looks like at a high level.
-3. **[Module 1: Data fundamentals](../1-data-fundamentals/README.md)** — Concepts, Python, stats, NumPy, pandas: the base for everything else.
+1. **[Module 0: Prep](../0-prep/README.md)**: Get Python, libraries, and Jupyter (or VS Code) working. Do not skip environment setup; almost every later error traces back to "wrong interpreter" or missing packages.
+2. **[Course overview](../README.md)**: See how modules fit together and what "success" looks like at a high level.
+3. **[Module 1: Data fundamentals](../1-data-fundamentals/README.md)**: Concepts, Python, stats, NumPy, pandas: the base for everything else.
 
 ## How lesson pages are written
 
 Most lesson pages include:
 
-- **Overview** or **Why this lesson** — What you are building toward.
-- **Prerequisites** — What you should know already (with links).
-- **Worked examples** — Code or SQL with short explanations; run them when you can.
-- **Common pitfalls** or **Next steps** — Where learners usually get stuck and where to go after.
+- **Overview** or **Why this lesson**, What you are building toward.
+- **Prerequisites**: What you should know already (with links).
+- **Worked examples**: Code or SQL with short explanations; run them when you can.
+- **Common pitfalls** or **Next steps**, Where learners usually get stuck and where to go after.
 
-If a section looks like a dense list, read the **introductory paragraphs** first—they usually explain *why* the list exists.
+If a section looks like a dense list, read the **introductory paragraphs** first, they usually explain *why* the list exists.
 
 ## Where to get unstuck
 

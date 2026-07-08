@@ -9,16 +9,16 @@ objectives:
 
 # Feature Importance
 
-**After this lesson:** you can explain the core ideas in “Feature Importance” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Feature Importance and try the examples in your own notebook.
 
 ## Overview
 
-Tree importances, permutation importance, and caveats—correlation and baseline comparisons matter.
+Tree importances, permutation importance, and caveats, correlation and baseline comparisons matter.
 
 
 ## Introduction
 
-Feature importance is a crucial concept in machine learning that helps us understand which features contribute most to our model's predictions. This understanding is essential for model interpretability, feature selection, and domain knowledge validation.
+Feature importance is a important concept in machine learning that helps us understand which features contribute most to our model's predictions. This understanding is essential for model interpretability, feature selection, and domain knowledge validation.
 
 > **Key idea:** feature importance explains **model behaviour**, not truth about the world. Treat it as evidence to investigate, not proof of causality.
 
@@ -233,7 +233,7 @@ plt.show()
 
 ## Practical Example: Credit Risk Prediction
 
-Let's analyze feature importance in a credit risk prediction task:
+Analyze feature importance in a credit risk prediction task:
 
 #### Pipeline importances + SHAP on the forest
 
@@ -289,7 +289,7 @@ plt.show()
 
 # Calculate and plot SHAP values.
 # Note: StandardScaler is a no-op for tree ensembles (splits are scale-invariant),
-# so it adds nothing here. It also creates a subtle mismatch — the forest was
+# so it adds nothing here. It also creates a subtle mismatch: the forest was
 # trained on *scaled* features, so feeding raw `X` to TreeExplainer explains the
 # model in a different space than it sees. SHAP should receive data in the same
 # space the model was fit on (e.g. pipeline[:-1].transform(X)). For a pure tree
@@ -311,7 +311,7 @@ plt.show()
       <span class="code-callout__title">Synthetic Credit Data</span>
     </div>
     <div class="code-callout__body">
-      <p>Five financial features with realistic distributions; the binary label is a threshold on credit score, income, and age — meaning those three should dominate importance.</p>
+      <p>Five financial features with realistic distributions; the binary label is a threshold on credit score, income, and age, meaning those three should dominate importance.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="24-32" data-tint="2">
@@ -346,12 +346,12 @@ plt.show()
 
 ## Gotchas
 
-- **Tree-based impurity importance is biased toward high-cardinality features** — `feature_importances_` from Random Forest sums mean impurity decrease over splits; features with many unique values (e.g., a continuous numeric column) get more split opportunities and can appear more important than they truly are; use permutation importance or SHAP for a less biased view.
-- **Permutation importance computed on training data is misleading** — Shuffling a feature on the training set measures how much the model *relied* on it during training, not how useful it is for new data; always compute permutation importance on a held-out validation or test set to measure true generalisation contribution.
-- **Correlated features split importance between them** — If `income` and `wealth_score` are strongly correlated, the model may use one or the other interchangeably; both features will show lower individual importances than either deserves alone, and removing one may not hurt performance; cluster correlated features before interpreting rankings.
-- **SHAP values require the model, not just predictions** — `shap.TreeExplainer` needs the fitted estimator object; if you only serialised `predict` output without saving the model, you cannot compute SHAP values retrospectively; always save the full fitted model, not just predictions.
-- **Treating feature importance as a ranking for causal inference** — A high-importance feature in a predictive model tells you the model uses that feature, not that it causally drives the outcome; recommending business actions based on feature importances alone (e.g., "increase credit score to get approved") conflates correlation with causation.
-- **Negative permutation importance does not mean the feature hurts** — A small negative value (near zero) for permutation importance usually means the feature adds negligible predictive value and the drop in score is within random noise, not that the feature actively harms the model; check confidence intervals before removing features with slightly negative scores.
+- **Tree-based impurity importance is biased toward high-cardinality features**: `feature_importances_` from Random Forest sums mean impurity decrease over splits; features with many unique values (e.g., a continuous numeric column) get more split opportunities and can appear more important than they truly are; use permutation importance or SHAP for a less biased view.
+- **Permutation importance computed on training data is misleading**: Shuffling a feature on the training set measures how much the model *relied* on it during training, not how useful it is for new data; always compute permutation importance on a held-out validation or test set to measure true generalisation contribution.
+- **Correlated features split importance between them**: If `income` and `wealth_score` are strongly correlated, the model may use one or the other interchangeably; both features will show lower individual importances than either deserves alone, and removing one may not hurt performance; cluster correlated features before interpreting rankings.
+- **SHAP values require the model, not just predictions**: `shap.TreeExplainer` needs the fitted estimator object; if you only serialised `predict` output without saving the model, you cannot compute SHAP values retrospectively; always save the full fitted model, not just predictions.
+- **Treating feature importance as a ranking for causal inference**: A high-importance feature in a predictive model tells you the model uses that feature, not that it causally drives the outcome; recommending business actions based on feature importances alone (e.g., "increase credit score to get approved") conflates correlation with causation.
+- **Negative permutation importance does not mean the feature hurts**: A small negative value (near zero) for permutation importance usually means the feature adds negligible predictive value and the drop in score is within random noise, not that the feature actively harms the model; check confidence intervals before removing features with slightly negative scores.
 
 ## Additional Resources
 

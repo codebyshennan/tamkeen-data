@@ -27,7 +27,7 @@ This prevents random chart production and keeps you focused on the answer rather
 
 ## Step 2: Prepare the data
 
-Aggregate to the right level — week and channel — then compute derived metrics.
+Aggregate to the right level, week and channel, then compute derived metrics.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -134,7 +134,7 @@ weekly_channel["revenue_per_session"] = (
 
 ## Step 3: Exploratory charts
 
-Use a small set of charts with distinct purposes — one per question from Step 1.
+Use a small set of charts with distinct purposes, one per question from Step 1.
 
 ### Chart 1: Overall conversion trend
 
@@ -171,7 +171,7 @@ ax.annotate(
     bbox=dict(boxstyle="round,pad=0.3", facecolor="#fff3cd", alpha=0.9)
 )
 
-ax.set_title("Weekly Conversion Rate — Q2 Improvement Visible After Redesign")
+ax.set_title("Weekly Conversion Rate - Q2 Improvement Visible After Redesign")
 ax.set_xlabel("Week")
 ax.set_ylabel("Conversion Rate (%)")
 ax.yaxis.set_major_formatter(
@@ -198,7 +198,7 @@ ax.grid(True, alpha=0.3)
       <span class="code-callout__title">Line chart</span>
     </div>
     <div class="code-callout__body">
-      <p>Multiply by 100 to show percentages. <code>marker="o"</code> makes individual weeks visible — useful when there are only 20–30 data points.</p>
+      <p>Multiply by 100 to show percentages. <code>marker="o"</code> makes individual weeks visible, useful when there are only 20-30 data points.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="16-27" data-tint="3">
@@ -224,7 +224,7 @@ ax.grid(True, alpha=0.3)
 
 ![Overall conversion trend](assets/cs_overall_trend.png)
 
-The dashed line shows when the mobile checkout redesign shipped. Conversion climbed noticeably in the weeks that followed — that is the signal the growth team was asking about.
+The dashed line shows when the mobile checkout redesign shipped. Conversion climbed noticeably in the weeks that followed, that is the signal the growth team was asking about.
 
 ### Chart 2: Channel comparison
 
@@ -249,7 +249,7 @@ channel_summary["revenue_per_session"] = (
     channel_summary["revenue"] / channel_summary["sessions"]
 )
 
-# Sorted horizontal bar — easier to read channel names
+# Sorted horizontal bar: easier to read channel names
 channel_sorted = channel_summary.sort_values(
     "conversion_rate", ascending=True
 )
@@ -280,7 +280,7 @@ ax.grid(True, alpha=0.3, axis="x")
       <span class="code-callout__title">Aggregate across all weeks</span>
     </div>
     <div class="code-callout__body">
-      <p>Collapse the full period into one row per channel. This gives a stable summary rate — weekly variance would make the comparison hard to read.</p>
+      <p>Collapse the full period into one row per channel. This gives a stable summary rate, weekly variance would make the comparison hard to read.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="16-18" data-tint="2">
@@ -310,7 +310,7 @@ Email converts at the highest rate despite lower session volume. Paid Search bri
 
 ### Chart 3: Volume vs efficiency
 
-A bar chart can only show one metric at a time. A scatter plot shows both — volume on one axis, efficiency on the other.
+A bar chart can only show one metric at a time. A scatter plot shows both, volume on one axis, efficiency on the other.
 
 <div class="code-explainer" data-code-explainer>
 <div class="code-explainer__code">
@@ -443,7 +443,7 @@ ax.set_title("Conversion Rate by Channel and Device (%)")
       <span class="code-callout__title">Heatmap options</span>
     </div>
     <div class="code-callout__body">
-      <p><code>annot=True</code> prints the value inside each cell. <code>fmt=".1f"</code> limits decimals. <code>cmap="Blues"</code> makes darker cells mean higher conversion — intuitive without a legend explanation.</p>
+      <p><code>annot=True</code> prints the value inside each cell. <code>fmt=".1f"</code> limits decimals. <code>cmap="Blues"</code> makes darker cells mean higher conversion, intuitive without a legend explanation.</p>
     </div>
   </div>
 </aside>
@@ -520,7 +520,7 @@ ax.grid(True, alpha=0.3)
       <span class="code-callout__title">Device-level weekly rollup</span>
     </div>
     <div class="code-callout__body">
-      <p>Same pattern as the overall trend — but grouped by device instead of dropping that dimension. This isolates whether the improvement was device-specific.</p>
+      <p>Same pattern as the overall trend, but grouped by device instead of dropping that dimension. This isolates whether the improvement was device-specific.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="12-20" data-tint="2">
@@ -546,7 +546,7 @@ ax.grid(True, alpha=0.3)
 
 ![Mobile vs desktop comparison](assets/cs_device_comparison.png)
 
-Mobile conversion rose sharply after the redesign. Desktop improved only slightly. This is the strongest piece of evidence that the redesign — not external factors — drove the Q2 lift.
+Mobile conversion rose sharply after the redesign. Desktop improved only slightly. This is the strongest piece of evidence that the redesign, not external factors, drove the Q2 lift.
 
 ### Final chart 2: Interactive Plotly view for stakeholders
 
@@ -597,7 +597,7 @@ fig.show()
       <span class="code-callout__title">Unified hover</span>
     </div>
     <div class="code-callout__body">
-      <p><code>hovermode="x unified"</code> shows all channel values in one tooltip when the cursor is at a given week — much easier to compare than hovering each line individually.</p>
+      <p><code>hovermode="x unified"</code> shows all channel values in one tooltip when the cursor is at a given week, much easier to compare than hovering each line individually.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="18-20" data-tint="3">
@@ -620,9 +620,9 @@ fig.show()
 
 Connect each chart to a specific action:
 
-- **"Increase Paid Search budget carefully"** — it drives the most volume, but monitor efficiency (Chart 3 shows it sits below Email on revenue per session).
-- **"Protect Email"** — it remains the highest-converting channel even at lower volume (Chart 2).
-- **"Continue mobile optimisation"** — the conversion gap between Mobile and Desktop narrowed sharply after the redesign (Chart 5). There is still room to close it further.
+- **"Increase Paid Search budget carefully"**: it drives the most volume, but monitor efficiency (Chart 3 shows it sits below Email on revenue per session).
+- **"Protect Email"**: it remains the highest-converting channel even at lower volume (Chart 2).
+- **"Continue mobile optimisation"**: the conversion gap between Mobile and Desktop narrowed sharply after the redesign (Chart 5). There is still room to close it further.
 
 That is more useful than "conversion went up."
 
@@ -641,28 +641,28 @@ For any real visualization task:
 1. Define the decision.
 2. Prepare the data at the right level.
 3. Explore with several chart types.
-4. Choose the 2–3 charts that best support the conclusion.
+4. Choose the 2-3 charts that best support the conclusion.
 5. Annotate the final charts.
 6. Write the recommendation in plain language.
 
 ## Practice prompts
 
-1. Rework this case study with a different dataset — customer support tickets by team and category.
+1. Rework this case study with a different dataset, customer support tickets by team and category.
 2. Create a final chart set for sales performance by region using the same five-step workflow.
 3. Replace the static device comparison with an interactive Plotly version and explain when each format is better.
 4. Write a one-paragraph recommendation based on three charts only.
 
 ## Gotchas
 
-- **Computing conversion rate before aggregation gives the wrong answer** — if you average per-row rates instead of dividing total orders by total sessions after grouping, high-volume rows get the same weight as low-volume ones. The lesson demonstrates this correctly with derived metrics calculated after `groupby`, but skipping that step is the most common bug in marketing analytics.
-- **`dt.to_period("W").dt.start_time` snaps dates to Monday regardless of your actual week definition** — if your business defines weeks starting Sunday or Saturday, the weekly grouping will straddle boundaries and mix data from two calendar weeks. Verify the snap day matches your business calendar before publishing weekly charts.
-- **Using the same `redesign_date` variable across multiple code cells requires running them in order** — if a learner runs Step 5's chart cells before Step 2, `redesign_date` is undefined and the annotation call raises a `NameError`. Notebooks don't enforce execution order; always re-run from top when sharing.
-- **Bubble size encoded with `s=value / constant` encodes area proportional to orders, but audiences perceive radius** — humans underestimate differences in area and overestimate differences in radius. If the business needs precise comparisons from the bubble chart, add direct labels; don't rely on bubble size alone to convey magnitude.
-- **`hovermode="x unified"` in the Plotly channel view flattens all channels to the same tooltip even when they have different values on the same week** — for channels with very similar rates, the unified tooltip shows them stacked in the order traces were added, which may not match the legend order. Confirm the tooltip order matches what you describe in the recommendation.
-- **Annotating an event with `axvline` does not prove causation** — the chart visually implies the redesign caused the Q2 lift, but external factors (seasonality, a concurrent campaign) could also explain it. Always note the limitation in the recommendation text, as the "Common failure modes" section of this lesson already flags.
+- **Computing conversion rate before aggregation gives the wrong answer**: if you average per-row rates instead of dividing total orders by total sessions after grouping, high-volume rows get the same weight as low-volume ones. The lesson demonstrates this correctly with derived metrics calculated after `groupby`, but skipping that step is the most common bug in marketing analytics.
+- **`dt.to_period("W").dt.start_time` snaps dates to Monday regardless of your actual week definition**: if your business defines weeks starting Sunday or Saturday, the weekly grouping will straddle boundaries and mix data from two calendar weeks. Verify the snap day matches your business calendar before publishing weekly charts.
+- **Using the same `redesign_date` variable across multiple code cells requires running them in order**: if a learner runs Step 5's chart cells before Step 2, `redesign_date` is undefined and the annotation call raises a `NameError`. Notebooks don't enforce execution order; always re-run from top when sharing.
+- **Bubble size encoded with `s=value / constant` encodes area proportional to orders, but audiences perceive radius**: humans underestimate differences in area and overestimate differences in radius. If the business needs precise comparisons from the bubble chart, add direct labels; don't rely on bubble size alone to convey magnitude.
+- **`hovermode="x unified"` in the Plotly channel view flattens all channels to the same tooltip even when they have different values on the same week**: for channels with very similar rates, the unified tooltip shows them stacked in the order traces were added, which may not match the legend order. Confirm the tooltip order matches what you describe in the recommendation.
+- **Annotating an event with `axvline` does not prove causation**: the chart visually implies the redesign caused the Q2 lift, but external factors (seasonality, a concurrent campaign) could also explain it. Always note the limitation in the recommendation text, as the "Common failure modes" section of this lesson already flags.
 
 ## Next steps
 
-1. [3.4 Data storytelling](../3.4-data-storytelling/README.md) — turn case-study evidence into a polished narrative.
-2. [Module assignment](../assignments/module-assignment.md) — a fuller end-to-end practice task.
-3. [Annotations and highlighting](../3.1-intro-data-viz/annotations-and-highlighting.md) — if your final charts still need too much verbal explanation.
+1. [3.4 Data storytelling](../3.4-data-storytelling/README.md), turn case-study evidence into a polished narrative.
+2. [Module assignment](../assignments/module-assignment.md), a fuller end-to-end practice task.
+3. [Annotations and highlighting](../3.1-intro-data-viz/annotations-and-highlighting.md), if your final charts still need too much verbal explanation.

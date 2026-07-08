@@ -12,7 +12,7 @@ High-level introduction to SQL and relational databases.
 
 **Prerequisites:** [Introduction to Databases](intro-databases.md) (tables, keys, types). Have a SQL client and a practice database as described in the [module README](README.md).
 
-> **Time needed:** About 60–90 minutes with hands-on practice.
+> **Time needed:** About 60-90 minutes with hands-on practice.
 
 ## Why this matters
 
@@ -20,7 +20,7 @@ High-level introduction to SQL and relational databases.
 
 ## Introduction to SQL Basics
 
-SQL (Structured Query Language) is the standard language for managing and manipulating relational databases. Understanding basic SQL operations is crucial for:
+SQL (Structured Query Language) is the standard language for managing and manipulating relational databases. Understanding basic SQL operations is important for:
 
 - Data retrieval and analysis
 - Database management
@@ -56,7 +56,7 @@ VALUES ('John', 'Doe', 'john.doe@email.com');
 
 -- Insert multiple rows
 INSERT INTO customers (first_name, last_name, email)
-VALUES 
+VALUES
     ('Jane', 'Smith', 'jane.smith@email.com'),
     ('Bob', 'Johnson', 'bob.johnson@email.com');
 {% endhighlight %}
@@ -77,7 +77,7 @@ VALUES
       <span class="code-callout__title">INSERT: single and multi-row</span>
     </div>
     <div class="code-callout__body">
-      <p>The first <code>INSERT</code> adds one row by listing column names then values. The second uses a single statement with multiple value tuples—more efficient than separate inserts because it sends one round-trip to the database.</p>
+      <p>The first <code>INSERT</code> adds one row by listing column names then values. The second uses a single statement with multiple value tuples, more efficient than separate inserts because it sends one round-trip to the database.</p>
     </div>
   </div>
 </aside>
@@ -93,7 +93,7 @@ VALUES
 SELECT * FROM customers;
 
 -- Select specific columns
-SELECT first_name, last_name, email 
+SELECT first_name, last_name, email
 FROM customers;
 
 -- Basic filtering
@@ -112,7 +112,7 @@ WHERE email LIKE '%@email.com';
       <span class="code-callout__title">SELECT * and specific columns</span>
     </div>
     <div class="code-callout__body">
-      <p><code>SELECT *</code> returns every column—convenient for exploration but avoid in production as schema changes can break downstream code. Listing columns explicitly (<code>first_name, last_name, email</code>) makes the contract clear.</p>
+      <p><code>SELECT *</code> returns every column, convenient for exploration but avoid in production as schema changes can break downstream code. Listing columns explicitly (<code>first_name, last_name, email</code>) makes the contract clear.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="7-14" data-tint="2">
@@ -121,7 +121,7 @@ WHERE email LIKE '%@email.com';
       <span class="code-callout__title">WHERE filtering and LIKE pattern</span>
     </div>
     <div class="code-callout__body">
-      <p><strong>WHERE last_name = 'Smith'</strong> does an exact match. <code>LIKE '%@email.com'</code> uses a wildcard to match any email ending with that domain—useful for finding customers from a specific provider.</p>
+      <p><strong>WHERE last_name = 'Smith'</strong> does an exact match. <code>LIKE '%@email.com'</code> uses a wildcard to match any email ending with that domain, useful for finding customers from a specific provider.</p>
     </div>
   </div>
 </aside>
@@ -145,10 +145,10 @@ WHERE created_at IS NULL;
 
 -- Update with conditions
 UPDATE customers
-SET 
+SET
     first_name = INITCAP(first_name),
     last_name = INITCAP(last_name)
-WHERE 
+WHERE
     first_name != INITCAP(first_name) OR
     last_name != INITCAP(last_name);
 {% endhighlight %}
@@ -169,7 +169,7 @@ WHERE
       <span class="code-callout__title">Conditional UPDATE with INITCAP</span>
     </div>
     <div class="code-callout__body">
-      <p><code>INITCAP</code> title-cases a string. The <code>WHERE</code> clause only touches rows where at least one name is already in the wrong case—avoiding unnecessary writes on rows that are already correct.</p>
+      <p><code>INITCAP</code> title-cases a string. The <code>WHERE</code> clause only touches rows where at least one name is already in the wrong case, avoiding unnecessary writes on rows that are already correct.</p>
     </div>
   </div>
 </aside>
@@ -200,7 +200,7 @@ TRUNCATE TABLE customers;
       <span class="code-callout__title">DELETE a specific row by primary key</span>
     </div>
     <div class="code-callout__body">
-      <p>Scoping <code>DELETE</code> by primary key is the safest approach—exactly one row is removed. Without <code>WHERE</code> the entire table would be cleared.</p>
+      <p>Scoping <code>DELETE</code> by primary key is the safest approach, exactly one row is removed. Without <code>WHERE</code> the entire table would be cleared.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="5-7" data-tint="2">
@@ -209,7 +209,7 @@ TRUNCATE TABLE customers;
       <span class="code-callout__title">Delete rows matching a condition</span>
     </div>
     <div class="code-callout__body">
-      <p>Deletes all customers whose account was created more than a year ago—a typical data-retention policy. The interval comparison is evaluated at runtime so the cutoff shifts with calendar time.</p>
+      <p>Deletes all customers whose account was created more than a year ago, a typical data-retention policy. The interval comparison is evaluated at runtime so the cutoff shifts with calendar time.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-10" data-tint="3">
@@ -232,7 +232,7 @@ TRUNCATE TABLE customers;
 <div class="code-explainer__code">
 
 {% highlight sql %}
-SELECT 
+SELECT
     column1,
     column2,
     column3 AS alias,
@@ -252,7 +252,7 @@ LIMIT 10;
       <span class="code-callout__title">Columns: aliases and derived values</span>
     </div>
     <div class="code-callout__body">
-      <p>The <code>SELECT</code> list defines output columns. <code>AS alias</code> renames a column in results. <code>CONCAT(...)</code> creates a derived column combining two source columns—no schema change needed.</p>
+      <p>The <code>SELECT</code> list defines output columns. <code>AS alias</code> renames a column in results. <code>CONCAT(...)</code> creates a derived column combining two source columns, no schema change needed.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="7-11" data-tint="2">
@@ -261,7 +261,7 @@ LIMIT 10;
       <span class="code-callout__title">Clauses in execution order</span>
     </div>
     <div class="code-callout__body">
-      <p>SQL processes clauses in this order: <strong>FROM</strong> → <strong>WHERE</strong> → <strong>GROUP BY</strong> → <strong>HAVING</strong> → <strong>SELECT</strong> → <strong>ORDER BY</strong> → <strong>LIMIT</strong>. The written order differs from the execution order—that matters when diagnosing unexpected results.</p>
+      <p>SQL processes clauses in this order: <strong>FROM</strong> → <strong>WHERE</strong> → <strong>GROUP BY</strong> → <strong>HAVING</strong> → <strong>SELECT</strong> → <strong>ORDER BY</strong> → <strong>LIMIT</strong>. The written order differs from the execution order, that matters when diagnosing unexpected results.</p>
     </div>
   </div>
 </aside>
@@ -275,32 +275,32 @@ LIMIT 10;
 {% highlight sql %}
 -- Basic WHERE clauses
 SELECT * FROM products
-WHERE 
+WHERE
     category = 'Electronics' AND
     price >= 100 AND
     stock_quantity > 0;
 
 -- Multiple conditions
 SELECT * FROM orders
-WHERE 
+WHERE
     status IN ('pending', 'processing') AND
-    order_date BETWEEN 
-        CURRENT_DATE - INTERVAL '30 days' 
+    order_date BETWEEN
+        CURRENT_DATE - INTERVAL '30 days'
         AND CURRENT_DATE;
 
 -- Pattern matching
 SELECT * FROM customers
-WHERE 
+WHERE
     email LIKE '%.com' AND
     first_name ILIKE 'j%';  -- Case-insensitive
 
 -- Sorting results
-SELECT 
+SELECT
     product_name,
     price,
     stock_quantity
 FROM products
-ORDER BY 
+ORDER BY
     price DESC,
     product_name ASC;
 {% endhighlight %}
@@ -312,7 +312,7 @@ ORDER BY
       <span class="code-callout__title">WHERE with AND, IN, and BETWEEN</span>
     </div>
     <div class="code-callout__body">
-      <p>Multiple <code>AND</code> conditions narrow results to rows meeting all criteria. <code>IN ('pending', 'processing')</code> is cleaner than chained <code>OR</code>. <code>BETWEEN … AND …</code> is inclusive on both ends—combine it with <code>CURRENT_DATE</code> for rolling windows.</p>
+      <p>Multiple <code>AND</code> conditions narrow results to rows meeting all criteria. <code>IN ('pending', 'processing')</code> is cleaner than chained <code>OR</code>. <code>BETWEEN … AND …</code> is inclusive on both ends, combine it with <code>CURRENT_DATE</code> for rolling windows.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="16-30" data-tint="2">
@@ -321,7 +321,7 @@ ORDER BY
       <span class="code-callout__title">LIKE, ILIKE, and ORDER BY</span>
     </div>
     <div class="code-callout__body">
-      <p><code>LIKE '%.com'</code> matches case-sensitively; <code>ILIKE 'j%'</code> is case-insensitive (PostgreSQL extension). The final <code>ORDER BY price DESC, product_name ASC</code> sorts by two columns—price descending, then alphabetically within the same price.</p>
+      <p><code>LIKE '%.com'</code> matches case-sensitively; <code>ILIKE 'j%'</code> is case-insensitive (PostgreSQL extension). The final <code>ORDER BY price DESC, product_name ASC</code> sorts by two columns, price descending, then alphabetically within the same price.</p>
     </div>
   </div>
 </aside>
@@ -340,18 +340,18 @@ CREATE TABLE products (
     product_id SERIAL PRIMARY KEY,
     price DECIMAL(10,2),
     weight INTEGER,
-    
+
     -- String types
     name VARCHAR(100),
     description TEXT,
-    
+
     -- Date/Time types
     created_at TIMESTAMP,
     sale_date DATE,
-    
+
     -- Boolean type
     is_active BOOLEAN,
-    
+
     -- Enumerated type
     status product_status
 );
@@ -364,7 +364,7 @@ CREATE TABLE products (
       <span class="code-callout__title">Numeric and text columns</span>
     </div>
     <div class="code-callout__body">
-      <p><code>SERIAL</code> auto-increments integers for surrogate keys. <code>DECIMAL(10,2)</code> stores exact money values. <code>VARCHAR(n)</code> caps string length; <code>TEXT</code> is unlimited—use it for user-written content.</p>
+      <p><code>SERIAL</code> auto-increments integers for surrogate keys. <code>DECIMAL(10,2)</code> stores exact money values. <code>VARCHAR(n)</code> caps string length; <code>TEXT</code> is unlimited, use it for user-written content.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-20" data-tint="2">
@@ -373,7 +373,7 @@ CREATE TABLE products (
       <span class="code-callout__title">Date/time, boolean, and enum columns</span>
     </div>
     <div class="code-callout__body">
-      <p><code>TIMESTAMP</code> stores full date+time; <code>DATE</code> stores date only. <code>BOOLEAN</code> holds true/false flags. Custom enum types like <code>product_status</code> constrain a column to a known set of string values—better than free-text strings for state columns.</p>
+      <p><code>TIMESTAMP</code> stores full date+time; <code>DATE</code> stores date only. <code>BOOLEAN</code> holds true/false flags. Custom enum types like <code>product_status</code> constrain a column to a known set of string values, better than free-text strings for state columns.</p>
     </div>
   </div>
 </aside>
@@ -388,19 +388,19 @@ CREATE TABLE products (
 CREATE TABLE orders (
     -- Primary Key
     order_id SERIAL PRIMARY KEY,
-    
+
     -- Foreign Key
     customer_id INTEGER REFERENCES customers(customer_id),
-    
+
     -- Not Null
     order_date TIMESTAMP NOT NULL,
-    
+
     -- Unique
     tracking_number VARCHAR(50) UNIQUE,
-    
+
     -- Check constraint
     total_amount DECIMAL(10,2) CHECK (total_amount >= 0),
-    
+
     -- Default value
     status VARCHAR(20) DEFAULT 'pending'
 );
@@ -413,7 +413,7 @@ CREATE TABLE orders (
       <span class="code-callout__title">Primary key and foreign key constraints</span>
     </div>
     <div class="code-callout__body">
-      <p><code>PRIMARY KEY</code> uniquely identifies each order. <code>REFERENCES customers(customer_id)</code> is a foreign key—the database rejects inserts where the customer_id doesn't exist in the customers table, keeping referential integrity.</p>
+      <p><code>PRIMARY KEY</code> uniquely identifies each order. <code>REFERENCES customers(customer_id)</code> is a foreign key, the database rejects inserts where the customer_id doesn't exist in the customers table, keeping referential integrity.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="10-19" data-tint="2">
@@ -464,7 +464,7 @@ CREATE TABLE products (
       <span class="code-callout__title">Child table: products with foreign key</span>
     </div>
     <div class="code-callout__body">
-      <p><code>REFERENCES categories(category_id)</code> creates a one-to-many link: one category can have many products, but each product belongs to at most one category. The database enforces this—inserting a product with an unknown category_id fails.</p>
+      <p><code>REFERENCES categories(category_id)</code> creates a one-to-many link: one category can have many products, but each product belongs to at most one category. The database enforces this, inserting a product with an unknown category_id fails.</p>
     </div>
   </div>
 </aside>
@@ -502,7 +502,7 @@ CREATE TABLE order_items (
       <span class="code-callout__title">Independent parent tables</span>
     </div>
     <div class="code-callout__body">
-      <p><code>products</code> and <code>orders</code> each have their own primary keys. Neither references the other directly—the relationship is expressed through the junction table below.</p>
+      <p><code>products</code> and <code>orders</code> each have their own primary keys. Neither references the other directly, the relationship is expressed through the junction table below.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="10-18" data-tint="2">
@@ -526,7 +526,7 @@ CREATE TABLE order_items (
 
 {% highlight sql %}
 -- Get all orders with customer information
-SELECT 
+SELECT
     o.order_id,
     o.order_date,
     c.first_name,
@@ -543,7 +543,7 @@ INNER JOIN customers c ON o.customer_id = c.customer_id;
       <span class="code-callout__title">INNER JOIN: only matched rows</span>
     </div>
     <div class="code-callout__body">
-      <p><code>INNER JOIN customers c ON o.customer_id = c.customer_id</code> returns only orders that have a matching customer—orders with a missing or invalid customer_id are dropped. Use an alias (<code>o</code>, <code>c</code>) to keep column references short and unambiguous.</p>
+      <p><code>INNER JOIN customers c ON o.customer_id = c.customer_id</code> returns only orders that have a matching customer, orders with a missing or invalid customer_id are dropped. Use an alias (<code>o</code>, <code>c</code>) to keep column references short and unambiguous.</p>
     </div>
   </div>
 </aside>
@@ -556,7 +556,7 @@ INNER JOIN customers c ON o.customer_id = c.customer_id;
 
 {% highlight sql %}
 -- Get all customers and their orders (if any)
-SELECT 
+SELECT
     c.customer_id,
     c.first_name,
     c.last_name,
@@ -574,7 +574,7 @@ GROUP BY c.customer_id, c.first_name, c.last_name;
       <span class="code-callout__title">LEFT JOIN: all customers including those with no orders</span>
     </div>
     <div class="code-callout__body">
-      <p><code>LEFT JOIN orders</code> keeps every customer row even if there are no matching orders. <code>COALESCE(SUM(...), 0)</code> replaces the NULL total that results from a non-matching left-join row with zero—so customers who never ordered show <code>0</code> rather than <code>NULL</code>.</p>
+      <p><code>LEFT JOIN orders</code> keeps every customer row even if there are no matching orders. <code>COALESCE(SUM(...), 0)</code> replaces the NULL total that results from a non-matching left-join row with zero, so customers who never ordered show <code>0</code> rather than <code>NULL</code>.</p>
     </div>
   </div>
 </aside>
@@ -587,7 +587,7 @@ GROUP BY c.customer_id, c.first_name, c.last_name;
 
 {% highlight sql %}
 -- Get order details with product and customer information
-SELECT 
+SELECT
     o.order_id,
     c.first_name || ' ' || c.last_name as customer_name,
     p.name as product_name,
@@ -624,24 +624,24 @@ ORDER BY o.order_id, p.name;
 {% highlight sql %}
 -- Comprehensive order analysis with multiple metrics
 WITH order_metrics AS (
-    SELECT 
+    SELECT
         DATE_TRUNC('day', order_date) as order_day,
         COUNT(*) as total_orders,
         COUNT(DISTINCT customer_id) as unique_customers,
         SUM(total_amount) as revenue,
         AVG(total_amount) as avg_order_value,
-        COUNT(DISTINCT CASE 
+        COUNT(DISTINCT CASE
             WHEN customer_id NOT IN (
-                SELECT customer_id 
-                FROM orders o2 
+                SELECT customer_id
+                FROM orders o2
                 WHERE o2.order_date < o.order_date
-            ) THEN customer_id 
+            ) THEN customer_id
         END) as new_customers
     FROM orders o
     WHERE order_date >= CURRENT_DATE - INTERVAL '30 days'
     GROUP BY DATE_TRUNC('day', order_date)
 )
-SELECT 
+SELECT
     order_day,
     total_orders,
     unique_customers,
@@ -667,7 +667,7 @@ ORDER BY order_day DESC;
       <span class="code-callout__title">CTE: daily order metrics with new-customer detection</span>
     </div>
     <div class="code-callout__body">
-      <p><code>order_metrics</code> groups by day over the last 30 days. The <code>COUNT(DISTINCT CASE WHEN customer_id NOT IN (...))</code> subquery identifies first-time buyers by checking whether a customer placed any order before today—an anti-join pattern inline.</p>
+      <p><code>order_metrics</code> groups by day over the last 30 days. The <code>COUNT(DISTINCT CASE WHEN customer_id NOT IN (...))</code> subquery identifies first-time buyers by checking whether a customer placed any order before today, an anti-join pattern inline.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="22-36" data-tint="2">
@@ -689,7 +689,7 @@ ORDER BY order_day DESC;
 
 {% highlight sql %}
 WITH customer_metrics AS (
-    SELECT 
+    SELECT
         c.customer_id,
         c.email,
         COUNT(o.order_id) as order_count,
@@ -702,7 +702,7 @@ WITH customer_metrics AS (
     LEFT JOIN orders o ON c.customer_id = o.customer_id
     GROUP BY c.customer_id, c.email
 )
-SELECT 
+SELECT
     email,
     order_count,
     ROUND(total_spent::numeric, 2) as total_spent,
@@ -710,13 +710,13 @@ SELECT
     first_order_date,
     active_months,
     ROUND(avg_order_value::numeric, 2) as avg_order_value,
-    CASE 
+    CASE
         WHEN order_count = 0 THEN 'Never Ordered'
         WHEN last_order_date >= CURRENT_DATE - INTERVAL '30 days' THEN 'Active'
         WHEN last_order_date >= CURRENT_DATE - INTERVAL '90 days' THEN 'At Risk'
         ELSE 'Churned'
     END as customer_status,
-    CASE 
+    CASE
         WHEN total_spent >= 1000 AND order_count >= 10 THEN 'VIP'
         WHEN total_spent >= 500 OR order_count >= 5 THEN 'Regular'
         WHEN order_count > 0 THEN 'New'
@@ -755,7 +755,7 @@ ORDER BY total_spent DESC NULLS LAST;
 
 {% highlight sql %}
 WITH product_metrics AS (
-    SELECT 
+    SELECT
         p.product_id,
         p.name,
         p.category,
@@ -772,7 +772,7 @@ WITH product_metrics AS (
     LEFT JOIN reviews r ON p.product_id = r.product_id
     GROUP BY p.product_id, p.name, p.category, p.price
 )
-SELECT 
+SELECT
     name,
     category,
     price,
@@ -825,22 +825,22 @@ ORDER BY revenue DESC NULLS LAST;
 
 {% highlight sql %}
 -- Create strategic indexes
-CREATE INDEX idx_orders_customer_date 
+CREATE INDEX idx_orders_customer_date
 ON orders(customer_id, order_date DESC);
 
-CREATE INDEX idx_products_category_price 
+CREATE INDEX idx_products_category_price
 ON products(category_id, price)
 INCLUDE (name, stock_quantity);
 
 -- Use indexes effectively
 EXPLAIN ANALYZE
-SELECT 
+SELECT
     c.name,
     COUNT(*) as order_count,
     SUM(o.total_amount) as total_spent
 FROM customers c
 JOIN orders o ON c.customer_id = o.customer_id
-WHERE 
+WHERE
     o.order_date >= CURRENT_DATE - INTERVAL '30 days'
     AND o.total_amount > 100
 GROUP BY c.customer_id, c.name;
@@ -907,7 +907,7 @@ WHERE EXISTS (
       <span class="code-callout__title">Slow: IN with a subquery</span>
     </div>
     <div class="code-callout__body">
-      <p><code>WHERE customer_id IN (SELECT ...)</code> can force the engine to materialise the subquery and then probe it for each order row—inefficient on large tables without an index on the subquery column.</p>
+      <p><code>WHERE customer_id IN (SELECT ...)</code> can force the engine to materialise the subquery and then probe it for each order row, inefficient on large tables without an index on the subquery column.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="10-16" data-tint="2">
@@ -916,7 +916,7 @@ WHERE EXISTS (
       <span class="code-callout__title">Better: JOIN replaces the subquery</span>
     </div>
     <div class="code-callout__body">
-      <p>A <code>JOIN</code> lets the planner choose an optimal hash or merge join, often far faster than the <code>IN</code> subquery. <code>EXISTS</code> (shown last) is a further alternative—it short-circuits as soon as one matching row is found.</p>
+      <p>A <code>JOIN</code> lets the planner choose an optimal hash or merge join, often far faster than the <code>IN</code> subquery. <code>EXISTS</code> (shown last) is a further alternative, it short-circuits as soon as one matching row is found.</p>
     </div>
   </div>
 </aside>
@@ -948,14 +948,14 @@ BEGIN
         SET processed = true
         FROM batch b
         WHERE o.order_id = b.order_id;
-        
+
         GET DIAGNOSTICS batch_count = ROW_COUNT;
-        
+
         EXIT WHEN batch_count = 0;
-        
+
         total_processed := total_processed + batch_count;
         RAISE NOTICE 'Processed % orders', total_processed;
-        
+
         COMMIT;
     END LOOP;
 END $$;
@@ -977,7 +977,7 @@ END $$;
       <span class="code-callout__title">CTE + UPDATE with FOR UPDATE SKIP LOCKED</span>
     </div>
     <div class="code-callout__body">
-      <p>The CTE selects the next batch of unprocessed rows. <code>FOR UPDATE SKIP LOCKED</code> locks only the selected rows and skips any already locked by another session—safe for concurrent workers. The <code>UPDATE</code> marks the batch as processed.</p>
+      <p>The CTE selects the next batch of unprocessed rows. <code>FOR UPDATE SKIP LOCKED</code> locks only the selected rows and skips any already locked by another session, safe for concurrent workers. The <code>UPDATE</code> marks the batch as processed.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="21-31" data-tint="3">
@@ -1001,7 +1001,7 @@ END $$;
 
 {% highlight sql %}
 -- Bad: Separate query for each order
-SELECT o.order_id, 
+SELECT o.order_id,
        (SELECT c.name FROM customers c WHERE c.id = o.customer_id) as customer_name
 FROM orders o;
 
@@ -1018,7 +1018,7 @@ JOIN customers c ON o.customer_id = c.customer_id;
       <span class="code-callout__title">N+1 problem: correlated subquery per row</span>
     </div>
     <div class="code-callout__body">
-      <p>The scalar subquery inside <code>SELECT</code> runs once for every row in <code>orders</code>. With 10,000 orders that's 10,001 round-trips to the database—slow and unscalable.</p>
+      <p>The scalar subquery inside <code>SELECT</code> runs once for every row in <code>orders</code>. With 10,000 orders that's 10,001 round-trips to the database, slow and unscalable.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="5-8" data-tint="2">
@@ -1040,7 +1040,7 @@ JOIN customers c ON o.customer_id = c.customer_id;
 
 {% highlight sql %}
 -- Bad: Implicit cross join
-SELECT * FROM orders, customers 
+SELECT * FROM orders, customers
 WHERE orders.customer_id = customers.customer_id;
 
 -- Good: Explicit JOIN syntax
@@ -1064,7 +1064,7 @@ JOIN customers c ON o.customer_id = c.customer_id;
       <span class="code-callout__title">Good: explicit JOIN keeps intent visible</span>
     </div>
     <div class="code-callout__body">
-      <p>The explicit <code>JOIN … ON</code> syntax makes the join condition part of the join itself—not a filter afterthought. Missing or wrong <code>ON</code> clauses are a syntax or logical error, not a silent blowup.</p>
+      <p>The explicit <code>JOIN … ON</code> syntax makes the join condition part of the join itself, not a filter afterthought. Missing or wrong <code>ON</code> clauses are a syntax or logical error, not a silent blowup.</p>
     </div>
   </div>
 </aside>
@@ -1083,7 +1083,7 @@ SELECT * FROM products WHERE price = NULL;
 SELECT * FROM products WHERE price IS NULL;
 
 -- Better: COALESCE for default values
-SELECT 
+SELECT
     product_id,
     name,
     COALESCE(price, 0) as price,
@@ -1098,7 +1098,7 @@ FROM products;
       <span class="code-callout__title">Bad: = NULL always returns NULL (no rows)</span>
     </div>
     <div class="code-callout__body">
-      <p>In SQL, <code>NULL = NULL</code> evaluates to <code>NULL</code>, not <code>TRUE</code>. A <code>WHERE price = NULL</code> predicate silently returns zero rows—no error, no warning.</p>
+      <p>In SQL, <code>NULL = NULL</code> evaluates to <code>NULL</code>, not <code>TRUE</code>. A <code>WHERE price = NULL</code> predicate silently returns zero rows, no error, no warning.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="4-5" data-tint="2">
@@ -1152,15 +1152,15 @@ Remember: "Clean, efficient queries lead to better performance and maintainabili
 
 ## Gotchas
 
-- **Running UPDATE or DELETE without a WHERE clause** — Without a filter, every row in the table is modified or removed. Before writing a destructive statement, run the equivalent SELECT with the same WHERE to confirm the affected rows, then substitute UPDATE/DELETE.
-- **TRUNCATE is not the same as DELETE with no WHERE** — `TRUNCATE TABLE` is much faster but cannot be rolled back in some databases (and in PostgreSQL it can be, but it bypasses row-level triggers and resets sequences). Use `DELETE` when you need triggers to fire or when a partial rollback is possible.
-- **Relying on the written order of SQL clauses as the execution order** — SQL is processed as FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT. That means a column alias defined in SELECT is not yet available in WHERE or HAVING; reference the original expression instead.
-- **Using LIKE with a leading wildcard and expecting fast queries** — `LIKE '%@email.com'` cannot use a standard B-tree index because the pattern starts with a wildcard; the database must scan every row. Anchor patterns to the left (`LIKE 'john%'`) or add a full-text or trigram index for suffix searches.
-- **Assuming COUNT(*) and COUNT(column) are interchangeable** — `COUNT(*)` counts all rows including those with NULLs; `COUNT(column)` skips rows where that column is NULL. Using the wrong form in an aggregation gives a silently incorrect count.
-- **Inserting rows without listing the column names** — `INSERT INTO t VALUES (1, 'foo')` breaks silently or inserts wrong data the moment a column is added, reordered, or has a different default. Always list column names explicitly in every INSERT statement.
+- **Running UPDATE or DELETE without a WHERE clause**: Without a filter, every row in the table is modified or removed. Before writing a destructive statement, run the equivalent SELECT with the same WHERE to confirm the affected rows, then substitute UPDATE/DELETE.
+- **TRUNCATE is not the same as DELETE with no WHERE**: `TRUNCATE TABLE` is much faster but cannot be rolled back in some databases (and in PostgreSQL it can be, but it bypasses row-level triggers and resets sequences). Use `DELETE` when you need triggers to fire or when a partial rollback is possible.
+- **Relying on the written order of SQL clauses as the execution order**: SQL is processed as FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT. That means a column alias defined in SELECT is not yet available in WHERE or HAVING; reference the original expression instead.
+- **Using LIKE with a leading wildcard and expecting fast queries**: `LIKE '%@email.com'` cannot use a standard B-tree index because the pattern starts with a wildcard; the database must scan every row. Anchor patterns to the left (`LIKE 'john%'`) or add a full-text or trigram index for suffix searches.
+- **Assuming COUNT(*) and COUNT(column) are interchangeable**, `COUNT(*)` counts all rows including those with NULLs; `COUNT(column)` skips rows where that column is NULL. Using the wrong form in an aggregation gives a silently incorrect count.
+- **Inserting rows without listing the column names**: `INSERT INTO t VALUES (1, 'foo')` breaks silently or inserts wrong data the moment a column is added, reordered, or has a different default. Always list column names explicitly in every INSERT statement.
 
 ## Next steps
 
-- [Joins](joins.md) — combine rows from multiple tables (next in the lesson sequence)
-- [Aggregations](aggregations.md) — **GROUP BY**, aggregate functions, **HAVING**
-- [Advanced SQL concepts](advanced-concepts.md) — window functions, CTEs, and optimization
+- [Joins](joins.md), combine rows from multiple tables (next in the lesson sequence)
+- [Aggregations](aggregations.md), **GROUP BY**, aggregate functions, **HAVING**
+- [Advanced SQL concepts](advanced-concepts.md), window functions, CTEs, and optimization

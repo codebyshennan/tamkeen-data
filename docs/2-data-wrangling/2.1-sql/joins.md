@@ -12,17 +12,17 @@ Quick tour of join types in SQL (inner, left, right, full).
 
 **Prerequisites:** [Basic SQL Operations](basic-operations.md) and [Aggregations](aggregations.md). You should recognize foreign keys from [Introduction to Databases](intro-databases.md).
 
-> **Time needed:** About 60–90 minutes with practice queries.
+> **Time needed:** About 60-90 minutes with practice queries.
 
 ## Why this matters
 
-Almost every real question spans more than one table—customers and orders, students and enrollments, parts and suppliers. Choosing **INNER** vs **LEFT** join is choosing *which rows you are willing to drop* from the result; getting that wrong silently loses data or duplicates it.
+Almost every real question spans more than one table, customers and orders, students and enrollments, parts and suppliers. Choosing **INNER** vs **LEFT** join is choosing *which rows you are willing to drop* from the result; getting that wrong silently loses data or duplicates it.
 
 ## Introduction to SQL Joins
 
 {% include mermaid-diagram.html src="2-data-wrangling/2.1-sql/diagrams/joins-1.mmd" %}
 
-> **Figure (add screenshot or diagram):** Four Venn diagrams side by side — INNER (centre only), LEFT (left circle + centre), RIGHT (right circle + centre), FULL OUTER (both circles). Shade the returned region for each.
+> **Figure (add screenshot or diagram):** Four Venn diagrams side by side, INNER (centre only), LEFT (left circle + centre), RIGHT (right circle + centre), FULL OUTER (both circles). Shade the returned region for each.
 
 SQL joins combine rows from two or more tables based on related columns. They are essential for:
 
@@ -42,7 +42,7 @@ Returns only matching rows from both tables.
 
 {% highlight sql %}
 -- Basic INNER JOIN
-SELECT 
+SELECT
     o.order_id,
     c.customer_name,
     o.order_date,
@@ -51,11 +51,11 @@ FROM orders o
 INNER JOIN customers c ON o.customer_id = c.customer_id;
 
 -- Multiple conditions
-SELECT 
+SELECT
     o.order_id,
     c.customer_name
 FROM orders o
-INNER JOIN customers c 
+INNER JOIN customers c
     ON o.customer_id = c.customer_id
     AND o.store_id = c.preferred_store_id;
 {% endhighlight %}
@@ -67,7 +67,7 @@ INNER JOIN customers c
       <span class="code-callout__title">Basic INNER JOIN</span>
     </div>
     <div class="code-callout__body">
-      <p>Joins <code>orders</code> to <code>customers</code> on <code>customer_id</code>. Only rows with a matching customer in both tables appear—orders with no customer record and customers with no orders are both excluded.</p>
+      <p>Joins <code>orders</code> to <code>customers</code> on <code>customer_id</code>. Only rows with a matching customer in both tables appear, orders with no customer record and customers with no orders are both excluded.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="10-17" data-tint="2">
@@ -76,7 +76,7 @@ INNER JOIN customers c
       <span class="code-callout__title">Multiple ON conditions</span>
     </div>
     <div class="code-callout__body">
-      <p>Two predicates in the <code>ON</code> clause mean both must match: the order's customer and the store must be the customer's preferred store. This further restricts the result—only orders placed at the customer's preferred location are returned.</p>
+      <p>Two predicates in the <code>ON</code> clause mean both must match: the order's customer and the store must be the customer's preferred store. This further restricts the result, only orders placed at the customer's preferred location are returned.</p>
     </div>
   </div>
 </aside>
@@ -91,7 +91,7 @@ Returns all rows from the left table and matching rows from the right table.
 
 {% highlight sql %}
 -- Basic LEFT JOIN
-SELECT 
+SELECT
     c.customer_name,
     COUNT(o.order_id) as order_count,
     COALESCE(SUM(o.total_amount), 0) as total_spent
@@ -100,7 +100,7 @@ LEFT JOIN orders o ON c.customer_id = o.customer_id
 GROUP BY c.customer_name;
 
 -- Finding missing relationships
-SELECT 
+SELECT
     c.customer_name,
     'No orders' as status
 FROM customers c
@@ -115,7 +115,7 @@ WHERE o.order_id IS NULL;
       <span class="code-callout__title">LEFT JOIN: all customers, even those with no orders</span>
     </div>
     <div class="code-callout__body">
-      <p>Every customer from the left table appears in the result. Where there are no matching orders, <code>COUNT(o.order_id)</code> returns 0 and <code>COALESCE(SUM(…), 0)</code> substitutes 0 for the NULL total—customers who never ordered still appear with zeroes.</p>
+      <p>Every customer from the left table appears in the result. Where there are no matching orders, <code>COUNT(o.order_id)</code> returns 0 and <code>COALESCE(SUM(…), 0)</code> substitutes 0 for the NULL total, customers who never ordered still appear with zeroes.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="10-16" data-tint="2">
@@ -139,7 +139,7 @@ Returns all rows from the right table and matching rows from the left table.
 
 {% highlight sql %}
 -- Basic RIGHT JOIN
-SELECT 
+SELECT
     p.product_name,
     COALESCE(SUM(oi.quantity), 0) as total_ordered
 FROM order_items oi
@@ -147,7 +147,7 @@ RIGHT JOIN products p ON oi.product_id = p.product_id
 GROUP BY p.product_name;
 
 -- Finding unused products
-SELECT 
+SELECT
     p.product_name,
     'Never ordered' as status
 FROM order_items oi
@@ -162,7 +162,7 @@ WHERE oi.order_id IS NULL;
       <span class="code-callout__title">RIGHT JOIN: all products, even those never ordered</span>
     </div>
     <div class="code-callout__body">
-      <p>The right table (<code>products</code>) drives the result—every product appears regardless of whether it has any matching <code>order_items</code> rows. <code>COALESCE(SUM(oi.quantity), 0)</code> returns 0 for products with no orders instead of NULL.</p>
+      <p>The right table (<code>products</code>) drives the result, every product appears regardless of whether it has any matching <code>order_items</code> rows. <code>COALESCE(SUM(oi.quantity), 0)</code> returns 0 for products with no orders instead of NULL.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-15" data-tint="2">
@@ -171,7 +171,7 @@ WHERE oi.order_id IS NULL;
       <span class="code-callout__title">Finding products that have never been ordered</span>
     </div>
     <div class="code-callout__body">
-      <p>After the RIGHT JOIN, <code>WHERE oi.order_id IS NULL</code> isolates products with no matching order item—another anti-join pattern, this time preserving the right table's unmatched rows.</p>
+      <p>After the RIGHT JOIN, <code>WHERE oi.order_id IS NULL</code> isolates products with no matching order item, another anti-join pattern, this time preserving the right table's unmatched rows.</p>
     </div>
   </div>
 </aside>
@@ -186,7 +186,7 @@ Returns all rows when there's a match in either left or right table.
 
 {% highlight sql %}
 -- Basic FULL JOIN
-SELECT 
+SELECT
     c.customer_name,
     p.product_name,
     COUNT(o.order_id) as times_ordered
@@ -197,7 +197,7 @@ FULL JOIN products p ON oi.product_id = p.product_id
 GROUP BY c.customer_name, p.product_name;
 
 -- Finding all missing relationships
-SELECT 
+SELECT
     COALESCE(c.customer_name, 'No Customer') as customer,
     COALESCE(p.product_name, 'No Product') as product,
     'Missing Relationship' as status
@@ -215,7 +215,7 @@ WHERE o.order_id IS NULL;
       <span class="code-callout__title">FULL JOIN: every row from every table</span>
     </div>
     <div class="code-callout__body">
-      <p>Three chained FULL JOINs mean unmatched rows from any table still appear—a customer with no orders, an order with no items, and a product with no order items all show up with NULLs for the unjoined columns.</p>
+      <p>Three chained FULL JOINs mean unmatched rows from any table still appear, a customer with no orders, an order with no items, and a product with no order items all show up with NULLs for the unjoined columns.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="12-21" data-tint="2">
@@ -224,7 +224,7 @@ WHERE o.order_id IS NULL;
       <span class="code-callout__title">Finding all missing relationships</span>
     </div>
     <div class="code-callout__body">
-      <p><code>COALESCE</code> substitutes readable labels for NULLs in the output. <code>WHERE o.order_id IS NULL</code> filters to only the orphaned rows—customers with no orders, or products never ordered—exposing data integrity gaps across the four tables.</p>
+      <p><code>COALESCE</code> substitutes readable labels for NULLs in the output. <code>WHERE o.order_id IS NULL</code> filters to only the orphaned rows, customers with no orders, or products never ordered, exposing data integrity gaps across the four tables.</p>
     </div>
   </div>
 </aside>
@@ -239,14 +239,14 @@ Returns Cartesian product of both tables.
 
 {% highlight sql %}
 -- Basic CROSS JOIN
-SELECT 
+SELECT
     p.product_name,
     c.category_name
 FROM products p
 CROSS JOIN categories c;
 
 -- Generate date-product combinations
-SELECT 
+SELECT
     d.date,
     p.product_name
 FROM generate_series(
@@ -264,7 +264,7 @@ CROSS JOIN products p;
       <span class="code-callout__title">Basic CROSS JOIN: every product × category combination</span>
     </div>
     <div class="code-callout__body">
-      <p>A CROSS JOIN has no <code>ON</code> condition—it produces every combination of rows from both tables. With 100 products and 10 categories this gives 1,000 rows. Useful for generating all possibilities (e.g., a pricing matrix), dangerous when accidental.</p>
+      <p>A CROSS JOIN has no <code>ON</code> condition, it produces every combination of rows from both tables. With 100 products and 10 categories this gives 1,000 rows. Useful for generating all possibilities (e.g., a pricing matrix), dangerous when accidental.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="8-17" data-tint="2">
@@ -288,7 +288,7 @@ CROSS JOIN products p;
 
 {% highlight sql %}
 -- Order details with customer and product info
-SELECT 
+SELECT
     o.order_id,
     c.customer_name,
     p.product_name,
@@ -320,19 +320,19 @@ JOIN products p ON oi.product_id = p.product_id;
 
 {% highlight sql %}
 -- Employee hierarchy
-SELECT 
+SELECT
     e.employee_name as employee,
     m.employee_name as manager
 FROM employees e
 LEFT JOIN employees m ON e.manager_id = m.employee_id;
 
 -- Product recommendations
-SELECT 
+SELECT
     p1.product_name,
     p2.product_name as recommended_product,
     COUNT(*) as times_bought_together
 FROM order_items oi1
-JOIN order_items oi2 
+JOIN order_items oi2
     ON oi1.order_id = oi2.order_id
     AND oi1.product_id < oi2.product_id
 JOIN products p1 ON oi1.product_id = p1.product_id
@@ -371,19 +371,19 @@ ORDER BY times_bought_together DESC;
 
 {% highlight sql %}
 -- Join based on date ranges
-SELECT 
+SELECT
     e.event_name,
     p.promotion_name
 FROM events e
-LEFT JOIN promotions p 
+LEFT JOIN promotions p
     ON e.event_date BETWEEN p.start_date AND p.end_date;
 
 -- Join with multiple conditions
-SELECT 
+SELECT
     o.order_id,
     d.driver_name
 FROM orders o
-LEFT JOIN drivers d 
+LEFT JOIN drivers d
     ON d.zone_id = o.delivery_zone_id
     AND d.is_active = true
     AND d.current_orders < d.max_orders;
@@ -396,7 +396,7 @@ LEFT JOIN drivers d
       <span class="code-callout__title">Range join: match events to overlapping promotions</span>
     </div>
     <div class="code-callout__body">
-      <p>The <code>ON</code> clause uses <code>BETWEEN</code> instead of equality—an event matches a promotion if its date falls within the promotion's active window. LEFT JOIN keeps events even when no promotion was running.</p>
+      <p>The <code>ON</code> clause uses <code>BETWEEN</code> instead of equality, an event matches a promotion if its date falls within the promotion's active window. LEFT JOIN keeps events even when no promotion was running.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="9-17" data-tint="2">
@@ -420,10 +420,10 @@ LEFT JOIN drivers d
 
 {% highlight sql %}
 -- Use proper indexes
-CREATE INDEX idx_orders_customer 
+CREATE INDEX idx_orders_customer
 ON orders(customer_id);
 
-CREATE INDEX idx_order_items_composite 
+CREATE INDEX idx_order_items_composite
 ON order_items(order_id, product_id);
 
 -- Join order matters
@@ -471,7 +471,7 @@ SELECT * FROM orders
 JOIN customers ON orders.customer_id = customers.customer_id;
 
 -- Handle NULL values
-SELECT 
+SELECT
     c.customer_name,
     COALESCE(SUM(o.total_amount), 0) as total_spent
 FROM customers c
@@ -486,7 +486,7 @@ GROUP BY c.customer_name;
       <span class="code-callout__title">Avoid implicit Cartesian products</span>
     </div>
     <div class="code-callout__body">
-      <p>The comma-separated <code>FROM orders, customers</code> syntax produces a full Cartesian product—every order row paired with every customer row. Without a filter this is almost always a mistake. The explicit <code>JOIN … ON</code> form makes the intent clear and is harder to accidentally omit.</p>
+      <p>The comma-separated <code>FROM orders, customers</code> syntax produces a full Cartesian product, every order row paired with every customer row. Without a filter this is almost always a mistake. The explicit <code>JOIN … ON</code> form makes the intent clear and is harder to accidentally omit.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="8-15" data-tint="2">
@@ -508,7 +508,7 @@ GROUP BY c.customer_name;
 
 {% highlight sql %}
 -- Use meaningful aliases
-SELECT 
+SELECT
     cust.name,
     ord.order_date,
     prod.name as product_name
@@ -518,20 +518,20 @@ JOIN products prod ON ord.product_id = prod.product_id;
 
 -- Break down complex joins
 WITH customer_orders AS (
-    SELECT 
+    SELECT
         customer_id,
         COUNT(*) as order_count
     FROM orders
     GROUP BY customer_id
 ),
 customer_spending AS (
-    SELECT 
+    SELECT
         customer_id,
         SUM(total_amount) as total_spent
     FROM orders
     GROUP BY customer_id
 )
-SELECT 
+SELECT
     c.customer_name,
     co.order_count,
     cs.total_spent
@@ -547,7 +547,7 @@ LEFT JOIN customer_spending cs ON c.customer_id = cs.customer_id;
       <span class="code-callout__title">Readable aliases: full words instead of single letters</span>
     </div>
     <div class="code-callout__body">
-      <p>Using <code>cust</code>, <code>ord</code>, and <code>prod</code> instead of <code>c</code>, <code>o</code>, <code>p</code> makes queries self-documenting—readers can tell which table each column comes from without cross-referencing the FROM clause.</p>
+      <p>Using <code>cust</code>, <code>ord</code>, and <code>prod</code> instead of <code>c</code>, <code>o</code>, <code>p</code> makes queries self-documenting, readers can tell which table each column comes from without cross-referencing the FROM clause.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="10-22" data-tint="2">
@@ -565,7 +565,7 @@ LEFT JOIN customer_spending cs ON c.customer_id = cs.customer_id;
       <span class="code-callout__title">CTE 2 + outer join: combine aggregates per customer</span>
     </div>
     <div class="code-callout__body">
-      <p>The second CTE sums total spend per customer. The final SELECT LEFT JOINs both CTEs onto <code>customers</code> so that customers with no orders still appear—with NULLs for count and total rather than being silently dropped.</p>
+      <p>The second CTE sums total spend per customer. The final SELECT LEFT JOINs both CTEs onto <code>customers</code> so that customers with no orders still appear, with NULLs for count and total rather than being silently dropped.</p>
     </div>
   </div>
 </aside>
@@ -580,7 +580,7 @@ LEFT JOIN customer_spending cs ON c.customer_id = cs.customer_id;
 
 {% highlight sql %}
 WITH user_journey AS (
-    SELECT 
+    SELECT
         u.user_id,
         u.email,
         COUNT(DISTINCT CASE WHEN e.event_type = 'view' THEN e.product_id END) as products_viewed,
@@ -592,17 +592,17 @@ WITH user_journey AS (
     LEFT JOIN events e ON u.user_id = e.user_id
     GROUP BY u.user_id, u.email
 )
-SELECT 
+SELECT
     ROUND(AVG(products_viewed)::numeric, 2) as avg_products_viewed,
     ROUND(AVG(products_carted)::numeric, 2) as avg_products_carted,
     ROUND(AVG(products_purchased)::numeric, 2) as avg_products_purchased,
     ROUND(
-        100.0 * SUM(CASE WHEN products_carted > 0 THEN 1 END) / 
+        100.0 * SUM(CASE WHEN products_carted > 0 THEN 1 END) /
         NULLIF(SUM(CASE WHEN products_viewed > 0 THEN 1 END), 0),
         2
     ) as view_to_cart_rate,
     ROUND(
-        100.0 * SUM(CASE WHEN products_purchased > 0 THEN 1 END) / 
+        100.0 * SUM(CASE WHEN products_purchased > 0 THEN 1 END) /
         NULLIF(SUM(CASE WHEN products_carted > 0 THEN 1 END), 0),
         2
     ) as cart_to_purchase_rate
@@ -616,7 +616,7 @@ FROM user_journey;
       <span class="code-callout__title">CTE: per-user event counts across the funnel</span>
     </div>
     <div class="code-callout__body">
-      <p>LEFT JOIN <code>events</code> keeps users who never triggered any event. <code>COUNT(DISTINCT CASE WHEN event_type = 'view' THEN product_id END)</code> counts unique products at each funnel stage—view, cart, purchase—per user without multiple self-joins.</p>
+      <p>LEFT JOIN <code>events</code> keeps users who never triggered any event. <code>COUNT(DISTINCT CASE WHEN event_type = 'view' THEN product_id END)</code> counts unique products at each funnel stage, view, cart, purchase, per user without multiple self-joins.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="15-28" data-tint="2">
@@ -638,14 +638,14 @@ FROM user_journey;
 
 {% highlight sql %}
 WITH supplier_performance AS (
-    SELECT 
+    SELECT
         s.supplier_id,
         s.supplier_name,
         COUNT(DISTINCT o.order_id) as orders_fulfilled,
         AVG(EXTRACT(EPOCH FROM (d.delivery_date - o.order_date))/86400) as avg_delivery_days,
-        COUNT(DISTINCT CASE 
-            WHEN d.delivery_date > o.expected_delivery 
-            THEN o.order_id 
+        COUNT(DISTINCT CASE
+            WHEN d.delivery_date > o.expected_delivery
+            THEN o.order_id
         END) as late_deliveries,
         SUM(o.total_amount) as total_purchase_value
     FROM suppliers s
@@ -653,7 +653,7 @@ WITH supplier_performance AS (
     LEFT JOIN deliveries d ON o.order_id = d.order_id
     GROUP BY s.supplier_id, s.supplier_name
 )
-SELECT 
+SELECT
     supplier_name,
     orders_fulfilled,
     ROUND(avg_delivery_days::numeric, 1) as avg_delivery_days,
@@ -662,7 +662,7 @@ SELECT
         2
     ) as late_delivery_rate,
     ROUND(total_purchase_value::numeric, 2) as total_purchase_value,
-    CASE 
+    CASE
         WHEN late_deliveries = 0 THEN 'Excellent'
         WHEN late_deliveries::float / orders_fulfilled <= 0.05 THEN 'Good'
         WHEN late_deliveries::float / orders_fulfilled <= 0.10 THEN 'Fair'
@@ -688,7 +688,7 @@ ORDER BY orders_fulfilled DESC;
       <span class="code-callout__title">Outer query: compute late-delivery rate and rating</span>
     </div>
     <div class="code-callout__body">
-      <p>Divides late deliveries by total orders—<code>NULLIF(orders_fulfilled, 0)</code> prevents division-by-zero for new suppliers. The <code>CASE</code> expression buckets each supplier into a performance tier (Excellent / Good / Fair / Poor) for easy reporting.</p>
+      <p>Divides late deliveries by total orders-<code>NULLIF(orders_fulfilled, 0)</code> prevents division-by-zero for new suppliers. The <code>CASE</code> expression buckets each supplier into a performance tier (Excellent / Good / Fair / Poor) for easy reporting.</p>
     </div>
   </div>
 </aside>
@@ -701,7 +701,7 @@ ORDER BY orders_fulfilled DESC;
 
 {% highlight sql %}
 WITH ticket_metrics AS (
-    SELECT 
+    SELECT
         t.ticket_id,
         t.customer_id,
         t.created_at,
@@ -718,7 +718,7 @@ WITH ticket_metrics AS (
     LEFT JOIN order_items oi ON o.order_id = oi.order_id
     LEFT JOIN products p ON oi.product_id = p.product_id
 )
-SELECT 
+SELECT
     priority,
     COUNT(*) as ticket_count,
     ROUND(AVG(resolution_time_hours)::numeric, 2) as avg_resolution_hours,
@@ -726,11 +726,11 @@ SELECT
         100.0 * COUNT(CASE WHEN status = 'resolved' THEN 1 END) / COUNT(*),
         2
     ) as resolution_rate,
-    STRING_AGG(DISTINCT product_name, ', ' ORDER BY product_name) 
+    STRING_AGG(DISTINCT product_name, ', ' ORDER BY product_name)
         FILTER (WHERE product_name IS NOT NULL) as affected_products
 FROM ticket_metrics
 GROUP BY priority
-ORDER BY 
+ORDER BY
     CASE priority
         WHEN 'high' THEN 1
         WHEN 'medium' THEN 2
@@ -801,7 +801,7 @@ GROUP BY c.customer_name;
       <span class="code-callout__title">Merge join: best for pre-sorted or indexed columns</span>
     </div>
     <div class="code-callout__body">
-      <p>Merge joins require both sides sorted on the join key. When an index already provides that order the planner can avoid a sort step and stream through both sides in a single pass—very efficient for equality joins on indexed columns.</p>
+      <p>Merge joins require both sides sorted on the join key. When an index already provides that order the planner can avoid a sort step and stream through both sides in a single pass, very efficient for equality joins on indexed columns.</p>
     </div>
   </div>
 </aside>
@@ -835,7 +835,7 @@ CREATE TABLE order_items_2023_q1 PARTITION OF order_items
     FOR VALUES FROM (1000) TO (2000);
 
 -- Query specific partitions
-SELECT 
+SELECT
     o.order_id,
     SUM(oi.quantity * oi.price) as total_value
 FROM orders_2023_q1 o
@@ -850,7 +850,7 @@ GROUP BY o.order_id;
       <span class="code-callout__title">Declare partitioned parent tables</span>
     </div>
     <div class="code-callout__body">
-      <p><code>PARTITION BY RANGE (order_date)</code> and <code>PARTITION BY RANGE (order_id)</code> create parent tables with no data of their own—they delegate rows to child partitions. Queries against the parent automatically target only the relevant partition(s).</p>
+      <p><code>PARTITION BY RANGE (order_date)</code> and <code>PARTITION BY RANGE (order_id)</code> create parent tables with no data of their own, they delegate rows to child partitions. Queries against the parent automatically target only the relevant partition(s).</p>
     </div>
   </div>
   <div class="code-callout" data-lines="16-28" data-tint="2">
@@ -859,7 +859,7 @@ GROUP BY o.order_id;
       <span class="code-callout__title">Create child partitions and join them directly</span>
     </div>
     <div class="code-callout__body">
-      <p>Each <code>PARTITION OF … FOR VALUES FROM … TO …</code> creates a child table holding rows in that range. Joining the Q1 child partitions directly instead of the parent tables lets the planner skip all other partitions entirely—partition pruning.</p>
+      <p>Each <code>PARTITION OF … FOR VALUES FROM … TO …</code> creates a child table holding rows in that range. Joining the Q1 child partitions directly instead of the parent tables lets the planner skip all other partitions entirely, partition pruning.</p>
     </div>
   </div>
 </aside>
@@ -873,7 +873,7 @@ GROUP BY o.order_id;
 {% highlight sql %}
 -- Create materialized view for frequently joined data
 CREATE MATERIALIZED VIEW order_summary AS
-SELECT 
+SELECT
     o.order_id,
     c.customer_name,
     o.order_date,
@@ -912,7 +912,7 @@ EXECUTE FUNCTION refresh_order_summary();
       <span class="code-callout__title">Materialize a complex multi-join query as a stored result</span>
     </div>
     <div class="code-callout__body">
-      <p><code>CREATE MATERIALIZED VIEW</code> executes the four-table JOIN once and stores the rows on disk. Subsequent reads hit the stored result instead of re-running the join—trading up-to-date data for dramatically faster reads.</p>
+      <p><code>CREATE MATERIALIZED VIEW</code> executes the four-table JOIN once and stores the rows on disk. Subsequent reads hit the stored result instead of re-running the join, trading up-to-date data for dramatically faster reads.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="17-19" data-tint="2">
@@ -930,7 +930,7 @@ EXECUTE FUNCTION refresh_order_summary();
       <span class="code-callout__title">Trigger-based refresh: keep the view current on writes</span>
     </div>
     <div class="code-callout__body">
-      <p>A statement-level trigger fires after any INSERT, UPDATE, or DELETE on <code>orders</code> and calls <code>REFRESH MATERIALIZED VIEW CONCURRENTLY</code>—which rebuilds without locking out readers. This keeps the view fresh without a manual cron job.</p>
+      <p>A statement-level trigger fires after any INSERT, UPDATE, or DELETE on <code>orders</code> and calls <code>REFRESH MATERIALIZED VIEW CONCURRENTLY</code>-which rebuilds without locking out readers. This keeps the view fresh without a manual cron job.</p>
     </div>
   </div>
 </aside>
@@ -946,7 +946,7 @@ EXECUTE FUNCTION refresh_order_summary();
 {% highlight sql %}
 -- Create sample customers
 INSERT INTO customers (customer_name, email, join_date)
-SELECT 
+SELECT
     'Customer ' || i,
     'customer' || i || '@example.com',
     CURRENT_DATE - (random() * 365)::integer
@@ -954,7 +954,7 @@ FROM generate_series(1, 1000) i;
 
 -- Create sample orders
 INSERT INTO orders (customer_id, order_date, total_amount)
-SELECT 
+SELECT
     (random() * 1000)::integer,
     CURRENT_DATE - (random() * 90)::integer,
     (random() * 1000)::numeric(10,2)
@@ -962,7 +962,7 @@ FROM generate_series(1, 5000);
 
 -- Create sample products
 INSERT INTO products (product_name, category_id, price)
-SELECT 
+SELECT
     'Product ' || i,
     (random() * 10 + 1)::integer,
     (random() * 100 + 10)::numeric(10,2)
@@ -985,7 +985,7 @@ FROM generate_series(1, 100);
       <span class="code-callout__title">Bulk-insert orders and products with random values</span>
     </div>
     <div class="code-callout__body">
-      <p>5,000 orders are inserted with random customer IDs (1–1,000), random dates in the past 90 days, and random amounts. Then 100 products are inserted with random category IDs and prices. Together these three blocks seed a realistic dataset for join practice.</p>
+      <p>5,000 orders are inserted with random customer IDs (1-1,000), random dates in the past 90 days, and random amounts. Then 100 products are inserted with random category IDs and prices. Together these three blocks seed a realistic dataset for join practice.</p>
     </div>
   </div>
 </aside>
@@ -999,7 +999,7 @@ FROM generate_series(1, 100);
 {% highlight sql %}
 -- Customer purchase patterns
 WITH customer_patterns AS (
-    SELECT 
+    SELECT
         c.customer_id,
         c.customer_name,
         COUNT(DISTINCT o.order_id) as order_count,
@@ -1010,8 +1010,8 @@ WITH customer_patterns AS (
     LEFT JOIN orders o ON c.customer_id = o.customer_id
     GROUP BY c.customer_id, c.customer_name
 )
-SELECT 
-    CASE 
+SELECT
+    CASE
         WHEN order_count = 0 THEN 'Never Ordered'
         WHEN order_count = 1 THEN 'One-Time'
         WHEN order_count > 1 AND active_months = 1 THEN 'Same Month Multiple'
@@ -1022,8 +1022,8 @@ SELECT
     ROUND(AVG(total_spent)::numeric, 2) as avg_total_spent,
     ROUND(AVG(avg_order_value)::numeric, 2) as avg_order_value
 FROM customer_patterns
-GROUP BY 
-    CASE 
+GROUP BY
+    CASE
         WHEN order_count = 0 THEN 'Never Ordered'
         WHEN order_count = 1 THEN 'One-Time'
         WHEN order_count > 1 AND active_months = 1 THEN 'Same Month Multiple'
@@ -1039,7 +1039,7 @@ ORDER BY avg_total_spent DESC;
       <span class="code-callout__title">CTE: per-customer order and spending summary</span>
     </div>
     <div class="code-callout__body">
-      <p>LEFT JOIN keeps customers who have never ordered. <code>COUNT(DISTINCT DATE_TRUNC('month', …))</code> counts how many different calendar months the customer placed at least one order—a proxy for purchase consistency over time.</p>
+      <p>LEFT JOIN keeps customers who have never ordered. <code>COUNT(DISTINCT DATE_TRUNC('month', …))</code> counts how many different calendar months the customer placed at least one order, a proxy for purchase consistency over time.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="13-27" data-tint="2">
@@ -1058,16 +1058,16 @@ Remember: "Efficient joins are the key to unlocking insights from your data!"
 
 ## Gotchas
 
-- **Using INNER JOIN when you need LEFT JOIN silently drops rows** — If any customer has no orders, an INNER JOIN will exclude them from the result without an error. Decide which table is the "source of truth" first; if you want all rows from it, you need a LEFT JOIN, not the default INNER JOIN.
-- **Adding a WHERE filter on the right-side table converts a LEFT JOIN into an INNER JOIN** — `LEFT JOIN orders o ON … WHERE o.status = 'shipped'` eliminates unmatched left rows because NULL does not equal `'shipped'`. Move the condition into the ON clause (`ON c.customer_id = o.customer_id AND o.status = 'shipped'`) to preserve left-side rows with no shipped orders.
-- **Joining on a non-unique column causes row multiplication** — If `orders.customer_id` has duplicates (multiple orders per customer) and you join to another table that also has duplicates on the same key, each pair matches, producing more output rows than either source table. Always check cardinality with COUNT before joining on a column you haven't verified is unique on one side.
-- **Forgetting to handle NULL after an outer join when aggregating** — After a LEFT JOIN, unmatched right-side columns are NULL. `SUM(o.total_amount)` returns NULL (not 0) for customers with no orders. Wrap aggregates with `COALESCE(SUM(…), 0)` to get meaningful values.
-- **Using a comma in FROM instead of JOIN accidentally creates a Cartesian product** — `FROM orders, customers` (old-style) returns every order paired with every customer — M × N rows. The query runs without error and can silently produce billions of rows. Always use explicit `JOIN … ON` syntax.
-- **Aliasing ambiguity when two joined tables have a column with the same name** — If both `orders` and `customers` have a `created_at` column, writing `SELECT created_at` raises an error or returns the wrong table's value depending on the database. Prefix every column reference with its table alias to avoid this.
+- **Using INNER JOIN when you need LEFT JOIN silently drops rows**: If any customer has no orders, an INNER JOIN will exclude them from the result without an error. Decide which table is the "source of truth" first; if you want all rows from it, you need a LEFT JOIN, not the default INNER JOIN.
+- **Adding a WHERE filter on the right-side table converts a LEFT JOIN into an INNER JOIN**: `LEFT JOIN orders o ON … WHERE o.status = 'shipped'` eliminates unmatched left rows because NULL does not equal `'shipped'`. Move the condition into the ON clause (`ON c.customer_id = o.customer_id AND o.status = 'shipped'`) to preserve left-side rows with no shipped orders.
+- **Joining on a non-unique column causes row multiplication**: If `orders.customer_id` has duplicates (multiple orders per customer) and you join to another table that also has duplicates on the same key, each pair matches, producing more output rows than either source table. Always check cardinality with COUNT before joining on a column you haven't verified is unique on one side.
+- **Forgetting to handle NULL after an outer join when aggregating**: After a LEFT JOIN, unmatched right-side columns are NULL. `SUM(o.total_amount)` returns NULL (not 0) for customers with no orders. Wrap aggregates with `COALESCE(SUM(…), 0)` to get meaningful values.
+- **Using a comma in FROM instead of JOIN accidentally creates a Cartesian product**: `FROM orders, customers` (old-style) returns every order paired with every customer, M × N rows. The query runs without error and can silently produce billions of rows. Always use explicit `JOIN … ON` syntax.
+- **Aliasing ambiguity when two joined tables have a column with the same name**: If both `orders` and `customers` have a `created_at` column, writing `SELECT created_at` raises an error or returns the wrong table's value depending on the database. Prefix every column reference with its table alias to avoid this.
 
 ## Next steps
 
-- [Aggregations](aggregations.md) — **GROUP BY** and summaries on joined result sets
-- [Advanced SQL concepts](advanced-concepts.md) — subqueries, CTEs, and window functions
-- [SQL project](project.md) — apply joins in a structured brief
-- [Data wrangling (Module 2.2)](../2.2-data-wrangling/README.md) — cleaning and shaping extracts
+- [Aggregations](aggregations.md), **GROUP BY** and summaries on joined result sets
+- [Advanced SQL concepts](advanced-concepts.md), subqueries, CTEs, and window functions
+- [SQL project](project.md), apply joins in a structured brief
+- [Data wrangling (Module 2.2)](../2.2-data-wrangling/README.md), cleaning and shaping extracts

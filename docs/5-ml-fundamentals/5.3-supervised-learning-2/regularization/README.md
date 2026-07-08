@@ -4,7 +4,7 @@
 
 ## Overview
 
-Regularization adds a penalty to the loss function to shrink model weights and prevent overfitting — essential when features outnumber samples or multicollinearity is present. Prerequisites: [5.1 Intro to ML](../../5.1-intro-to-ml/README.md), [5.5 Model Evaluation](../../5.5-model-eval/README.md) recommended.
+Regularization adds a penalty to the loss function to shrink model weights and prevent overfitting, essential when features outnumber samples or multicollinearity is present. Prerequisites: [5.1 Intro to ML](../../5.1-intro-to-ml/README.md), [5.5 Model Evaluation](../../5.5-model-eval/README.md) recommended.
 
 ## Lesson Path
 

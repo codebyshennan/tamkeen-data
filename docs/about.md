@@ -122,7 +122,7 @@ This course is taught by two practitioners who bring both industry depth and tea
     </div>
   </div>
   <p class="instructor-card__bio">
-    Shennan is a software engineer and technical educator currently based in Ho Chi Minh City. He works as the sole engineer at <strong>Iterative</strong>, an early-stage VC fund across Southeast and South Asia, where he builds data infrastructure, internal tooling, and AI systems for investment operations — including an AI-powered deal-screening pipeline and a Voice AI system for founder outreach.
+    Shennan is a software engineer and technical educator currently based in Ho Chi Minh City. He works as the sole engineer at <strong>Iterative</strong>, an early-stage VC fund across Southeast and South Asia, where he builds data infrastructure, internal tooling, and AI systems for investment operations - including an AI-powered deal-screening pipeline and a Voice AI system for founder outreach.
   </p>
   <p class="instructor-card__bio">
     He is also Founder and Technical Consultant at <strong>Fracxional</strong>, where he teaches AI and data engineering across Asian universities and corporate programs. Previous roles include Co-founder &amp; CTO of ZOLO (AI food supply chain, ~$350K pre-seed), Senior Software Engineer at Circles.Life, Senior DevSecOps Engineer at Partior, and Software Engineering Instructor at Rocket Academy.

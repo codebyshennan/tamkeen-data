@@ -4,7 +4,7 @@
 
 ## Helpful video
 
-DAGs, tasks, and scheduling—conceptual background for ETL-style pipelines.
+DAGs, tasks, and scheduling, conceptual background for ETL-style pipelines.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eeSLDdz-aLg" title="Apache Airflow Tutorial for Beginners" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
@@ -12,13 +12,13 @@ DAGs, tasks, and scheduling—conceptual background for ETL-style pipelines.
 
 **Prerequisites:** [ETL fundamentals](etl-fundamentals.md) and [Intro to databases](../2.1-sql/intro-databases.md). Optional: skim [Snowflake](../../0-prep/snowflake.md) if your org uses it.
 
-> **Time needed:** About 45–60 minutes.
+> **Time needed:** About 45-60 minutes.
 
 > **Note:** **OLTP** (online transaction processing) systems optimize row-level transactions; warehouses optimize analytical queries across large history.
 
 ## Why this matters
 
-Choosing where data lives—operational database, warehouse, lake, or a mix—shapes **cost**, **latency**, **schema strictness**, and **who** can query comfortably (applications vs analysts vs scientists). You do not need to pick vendors here; you need clear vocabulary for architecture discussions.
+Choosing where data lives, operational database, warehouse, lake, or a mix, shapes **cost**, **latency**, **schema strictness**, and **who** can query comfortably (applications vs analysts vs scientists). You do not need to pick vendors here; you need clear vocabulary for architecture discussions.
 
 ## Introduction to Data Storage
 
@@ -193,13 +193,13 @@ class SalesRecord(Base):
     Example of a SQLAlchemy model for sales data
     """
     __tablename__ = 'sales'
-    
+
     id = Column(Integer, primary_key=True)
     product_id = Column(Integer)
     customer_id = Column(Integer)
     sale_date = Column(DateTime)
     amount = Column(Float)
-    
+
     def __repr__(self):
         return f"<Sale(id={self.id}, amount={self.amount})>"
 
@@ -210,13 +210,13 @@ def setup_database(connection_string):
     """
     # Create engine
     engine = create_engine(connection_string)
-    
+
     # Create tables
     Base.metadata.create_all(engine)
-    
+
     # Create session factory
     Session = sessionmaker(bind=engine)
-    
+
     return Session()
 {% endhighlight %}
 </div>
@@ -236,7 +236,7 @@ def setup_database(connection_string):
       <span class="code-callout__title">SalesRecord ORM model</span>
     </div>
     <div class="code-callout__body">
-      <p>Defines the <code>sales</code> table as a Python class. Each <code>Column(...)` call maps a class attribute to a typed database column—SQLAlchemy infers the DDL from these declarations when <code>create_all</code> runs.</p>
+      <p>Defines the <code>sales</code> table as a Python class. Each <code>Column(...)` call maps a class attribute to a typed database column, SQLAlchemy infers the DDL from these declarations when <code>create_all</code> runs.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="24-38" data-tint="3">
@@ -326,19 +326,19 @@ class MongoDBHandler:
     """
     def __init__(self, connection_string):
         self.client = MongoClient(connection_string)
-    
+
     def insert_document(self, database, collection, document):
         """Insert a single document"""
         db = self.client[database]
         coll = db[collection]
         return coll.insert_one(document)
-    
+
     def find_documents(self, database, collection, query):
         """Find documents matching query"""
         db = self.client[database]
         coll = db[collection]
         return list(coll.find(query))
-    
+
     def update_document(self, database, collection, query, update):
         """Update documents matching query"""
         db = self.client[database]
@@ -372,7 +372,7 @@ mongo.insert_document('sales_db', 'transactions', document)
       <span class="code-callout__title">insert_document, find_documents, update_document</span>
     </div>
     <div class="code-callout__body">
-      <p>Three CRUD methods following the same pattern: resolve <code>db</code> and <code>coll</code> from the client, then call the pymongo method—<code>insert_one</code>, <code>find</code>, or <code>update_many</code> with a <code>$set</code> operator.</p>
+      <p>Three CRUD methods following the same pattern: resolve <code>db</code> and <code>coll</code> from the client, then call the pymongo method-<code>insert_one</code>, <code>find</code>, or <code>update_many</code> with a <code>$set</code> operator.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="29-37" data-tint="3">
@@ -404,7 +404,7 @@ class DataLakeHandler:
     def __init__(self, bucket_name):
         self.s3 = boto3.client('s3')
         self.bucket = bucket_name
-    
+
     def upload_dataframe(self, df, key, partition=None):
         """
         Upload DataFrame to data lake with optional partitioning
@@ -412,28 +412,28 @@ class DataLakeHandler:
         # Add partition information to key if provided
         if partition:
             key = f"{partition['name']}={partition['value']}/{key}"
-        
+
         # Convert DataFrame to CSV
         csv_buffer = StringIO()
         df.to_csv(csv_buffer, index=False)
-        
+
         # Upload to S3
         self.s3.put_object(
             Bucket=self.bucket,
             Key=key,
             Body=csv_buffer.getvalue()
         )
-    
+
     def read_dataframe(self, key):
         """
         Read DataFrame from data lake
         """
         # Get object from S3
         obj = self.s3.get_object(Bucket=self.bucket, Key=key)
-        
+
         # Read CSV data
         return pd.read_csv(obj['Body'])
-    
+
     def list_files(self, prefix=''):
         """
         List files in data lake
@@ -452,7 +452,7 @@ class DataLakeHandler:
       <span class="code-callout__title">Imports, class definition, and constructor</span>
     </div>
     <div class="code-callout__body">
-      <p>Imports <code>boto3</code>, <code>pandas</code>, and <code>StringIO</code>. The constructor creates an S3 client and stores the bucket name—the single point of configuration for all subsequent operations.</p>
+      <p>Imports <code>boto3</code>, <code>pandas</code>, and <code>StringIO</code>. The constructor creates an S3 client and stores the bucket name, the single point of configuration for all subsequent operations.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="13-30" data-tint="2">
@@ -543,23 +543,23 @@ class DataWarehouseHandler:
     """
     def __init__(self, connection_params):
         self.conn = connect(**connection_params)
-    
+
     def execute_query(self, query):
         """Execute SQL query"""
         cursor = self.conn.cursor()
         cursor.execute(query)
         return cursor.fetchall()
-    
+
     def load_data(self, df, table_name, schema='public'):
         """Load DataFrame to warehouse table"""
         # Create temporary stage
         stage_name = f"temp_stage_{table_name}"
         self.execute_query(f"CREATE TEMPORARY STAGE {stage_name}")
-        
+
         # Write data to stage
         cursor = self.conn.cursor()
         cursor.write_pandas(df, table_name, schema=schema)
-        
+
         # Copy from stage to table
         self.execute_query(f"""
             COPY INTO {schema}.{table_name}
@@ -612,10 +612,10 @@ def partition_data(df, partition_columns):
     Partition DataFrame by specified columns
     """
     partitions = []
-    
+
     # Group data by partition columns
     grouped = df.groupby(partition_columns)
-    
+
     # Create partitions
     for name, group in grouped:
         if isinstance(name, tuple):
@@ -625,12 +625,12 @@ def partition_data(df, partition_columns):
             ])
         else:
             partition_path = f"{partition_columns[0]}={name}"
-        
+
         partitions.append({
             'path': partition_path,
             'data': group
         })
-    
+
     return partitions
 {% endhighlight %}
 </div>
@@ -641,7 +641,7 @@ def partition_data(df, partition_columns):
       <span class="code-callout__title">Signature, init list, and groupby</span>
     </div>
     <div class="code-callout__body">
-      <p>Takes a DataFrame and a list of partition column names. Initialises an empty <code>partitions</code> list, then groups the data by those columns—each group becomes one partition file.</p>
+      <p>Takes a DataFrame and a list of partition column names. Initialises an empty <code>partitions</code> list, then groups the data by those columns, each group becomes one partition file.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="10-25" data-tint="2">
@@ -672,10 +672,10 @@ def compress_data(data, compression='gzip'):
     if compression == 'gzip':
         # Convert data to JSON string
         json_str = json.dumps(data)
-        
+
         # Compress using gzip
         return gzip.compress(json_str.encode('utf-8'))
-    
+
     raise ValueError(f"Unsupported compression: {compression}")
 
 def decompress_data(compressed_data, compression='gzip'):
@@ -685,10 +685,10 @@ def decompress_data(compressed_data, compression='gzip'):
     if compression == 'gzip':
         # Decompress gzip data
         json_str = gzip.decompress(compressed_data).decode('utf-8')
-        
+
         # Parse JSON
         return json.loads(json_str)
-    
+
     raise ValueError(f"Unsupported compression: {compression}")
 {% endhighlight %}
 </div>
@@ -729,12 +729,12 @@ class DataVersioning:
     """
     def __init__(self, storage_path):
         self.storage_path = storage_path
-    
+
     def save_version(self, data, metadata=None):
         """Save new version of data"""
         # Generate version ID
         version_id = self._generate_version_id(data)
-        
+
         # Create version metadata
         version_info = {
             'version_id': version_id,
@@ -742,19 +742,19 @@ class DataVersioning:
             'metadata': metadata or {},
             'checksum': self._calculate_checksum(data)
         }
-        
+
         # Save data and metadata
         self._save_data(version_id, data)
         self._save_metadata(version_id, version_info)
-        
+
         return version_info
-    
+
     def _generate_version_id(self, data):
         """Generate unique version ID"""
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
         checksum = self._calculate_checksum(data)[:8]
         return f"v_{timestamp}_{checksum}"
-    
+
     def _calculate_checksum(self, data):
         """Calculate data checksum"""
         if isinstance(data, pd.DataFrame):
@@ -771,7 +771,7 @@ class DataVersioning:
       <span class="code-callout__title">Imports, class definition, and constructor</span>
     </div>
     <div class="code-callout__body">
-      <p>Imports <code>datetime</code> and <code>hashlib</code>. The constructor only stores the storage path—all version data is computed on demand in <code>save_version</code>.</p>
+      <p>Imports <code>datetime</code> and <code>hashlib</code>. The constructor only stores the storage path, all version data is computed on demand in <code>save_version</code>.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="11-28" data-tint="2">
@@ -845,42 +845,42 @@ class DataStorage:
         self.config = config
         self.backends = self._initialize_backends()
         self.versioning = DataVersioning(config['version_path'])
-    
+
     def _initialize_backends(self):
         """Initialize storage backends"""
         backends = {}
-        
+
         # Setup relational database
         if 'rdbms' in self.config:
             backends['rdbms'] = setup_database(
                 self.config['rdbms']['connection_string']
             )
-        
+
         # Setup MongoDB
         if 'mongodb' in self.config:
             backends['mongodb'] = MongoDBHandler(
                 self.config['mongodb']['connection_string']
             )
-        
+
         # Setup data lake
         if 'data_lake' in self.config:
             backends['data_lake'] = DataLakeHandler(
                 self.config['data_lake']['bucket']
             )
-        
+
         return backends
-    
+
     def store_data(self, data, backend, **kwargs):
         """Store data in specified backend"""
         if backend not in self.backends:
             raise ValueError(f"Unknown backend: {backend}")
-        
+
         # Version the data
         version_info = self.versioning.save_version(
             data,
             metadata={'backend': backend, **kwargs}
         )
-        
+
         # Store in backend
         if backend == 'rdbms':
             self._store_in_rdbms(data, **kwargs)
@@ -888,9 +888,9 @@ class DataStorage:
             self._store_in_mongodb(data, **kwargs)
         elif backend == 'data_lake':
             self._store_in_data_lake(data, **kwargs)
-        
+
         return version_info
-    
+
     def _store_in_rdbms(self, data, **kwargs):
         """Store data in RDBMS"""
         session = self.backends['rdbms']
@@ -902,7 +902,7 @@ class DataStorage:
             ]
             session.add_all(records)
             session.commit()
-    
+
     def _store_in_mongodb(self, data, **kwargs):
         """Store data in MongoDB"""
         mongo = self.backends['mongodb']
@@ -913,7 +913,7 @@ class DataStorage:
                 kwargs['collection'],
                 documents
             )
-    
+
     def _store_in_data_lake(self, data, **kwargs):
         """Store data in data lake"""
         lake = self.backends['data_lake']
@@ -973,7 +973,7 @@ storage.store_data(
       <span class="code-callout__title">Class definition, constructor, and _initialize_backends</span>
     </div>
     <div class="code-callout__body">
-      <p>Defines <code>DataStorage</code>, stores config and a versioning instance, then conditionally initialises each backend (RDBMS, MongoDB, data lake) based on which keys are present in <code>config</code>—making all three optional.</p>
+      <p>Defines <code>DataStorage</code>, stores config and a versioning instance, then conditionally initialises each backend (RDBMS, MongoDB, data lake) based on which keys are present in <code>config</code>-making all three optional.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="34-53" data-tint="2">
@@ -1018,7 +1018,7 @@ storage.store_data(
       <span class="code-callout__title">Write to all three backends</span>
     </div>
     <div class="code-callout__body">
-      <p>Demonstrates storing the same DataFrame in RDBMS, MongoDB (with database and collection kwargs), and the data lake (with a key path and date partition)—showing how the same <code>store_data</code> interface works across all backends.</p>
+      <p>Demonstrates storing the same DataFrame in RDBMS, MongoDB (with database and collection kwargs), and the data lake (with a key path and date partition), showing how the same <code>store_data</code> interface works across all backends.</p>
     </div>
   </div>
 </aside>
@@ -1026,17 +1026,17 @@ storage.store_data(
 
 ## Gotchas
 
-- **Schema-on-read in a data lake does not mean schema-free** — dropping raw files into S3 without documenting the schema defers the pain, not eliminates it; analysts querying the lake later will infer conflicting schemas from different file vintages, producing silent join errors.
-- **`session.add_all` followed by `session.commit` is not atomic across multiple batches** — if your RDBMS load iterates over chunks and the second chunk fails, the first chunk is already committed; wrap the entire load in a single transaction or use a staging table with a final swap.
-- **Storing DataFrames as CSV in a data lake loses dtype information** — column types (especially dates and nullable integers) revert to object/string on every read; use Parquet (`.to_parquet`) to preserve schema and compress storage significantly.
-- **Vertical scaling of a data warehouse hits a ceiling faster than expected** — the comparison chart lists warehouses as "vertical" scalable; most modern warehouse products (Snowflake, Redshift) do scale horizontally, but if you design for single-node vertical growth you may hit cost and size limits before switching architectures is easy.
-- **MongoDB `insert_many` with `to_dict('records')` includes the pandas index as a field** — if the DataFrame has a non-default index (e.g., `customer_id`), the index column appears in each document; call `reset_index()` first or explicitly exclude the index with `df.to_dict('records')` after resetting.
-- **Data versioning writes a new copy per `store_data` call** — if the `DataStorage` class versions every write unconditionally, frequent small loads will multiply storage consumption and version metadata rapidly; version at logical checkpoints (e.g., end-of-day load), not on every append.
+- **Schema-on-read in a data lake does not mean schema-free**: dropping raw files into S3 without documenting the schema defers the pain, not eliminates it; analysts querying the lake later will infer conflicting schemas from different file vintages, producing silent join errors.
+- **`session.add_all` followed by `session.commit` is not atomic across multiple batches**: if your RDBMS load iterates over chunks and the second chunk fails, the first chunk is already committed; wrap the entire load in a single transaction or use a staging table with a final swap.
+- **Storing DataFrames as CSV in a data lake loses dtype information**: column types (especially dates and nullable integers) revert to object/string on every read; use Parquet (`.to_parquet`) to preserve schema and compress storage significantly.
+- **Vertical scaling of a data warehouse hits a ceiling faster than expected**: the comparison chart lists warehouses as "vertical" scalable; most modern warehouse products (Snowflake, Redshift) do scale horizontally, but if you design for single-node vertical growth you may hit cost and size limits before switching architectures is easy.
+- **MongoDB `insert_many` with `to_dict('records')` includes the pandas index as a field**: if the DataFrame has a non-default index (e.g., `customer_id`), the index column appears in each document; call `reset_index()` first or explicitly exclude the index with `df.to_dict('records')` after resetting.
+- **Data versioning writes a new copy per `store_data` call**: if the `DataStorage` class versions every write unconditionally, frequent small loads will multiply storage consumption and version metadata rapidly; version at logical checkpoints (e.g., end-of-day load), not on every append.
 
 Remember: Choose your data storage solution based on your specific requirements and use cases!
 
 ## Next steps
 
-- [Data integration](data-integration.md) — moving data between systems
-- [ETL fundamentals](etl-fundamentals.md) — revisit load patterns
+- [Data integration](data-integration.md), moving data between systems
+- [ETL fundamentals](etl-fundamentals.md), revisit load patterns
 - [Module README](README.md)

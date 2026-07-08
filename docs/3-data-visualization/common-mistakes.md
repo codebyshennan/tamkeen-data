@@ -1,6 +1,6 @@
 # Common Data Visualization Mistakes and How to Fix Them
 
-**After this lesson:** you can explain the core ideas in “Common Data Visualization Mistakes and How to Fix Them” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Common Data Visualization Mistakes and How to Fix Them and try the examples in your own notebook.
 
 ## Helpful video
 
@@ -54,7 +54,7 @@ Match your chart type to your data and goal:
 
 ### Example
 
-> **Figure (add screenshot or diagram):** A clean line chart of daily step counts over 30 days — one trend line, no gridlines, a single clear title "Daily Steps (March)", and a minimalist y-axis with rounded tick labels; illustrating the "less is more" principle.
+> **Figure (add screenshot or diagram):** A clean line chart of daily step counts over 30 days, one trend line, no gridlines, a single clear title "Daily Steps (March)", and a minimalist y-axis with rounded tick labels; illustrating the "less is more" principle.
 
 ## 3. Poor Color Choices
 
@@ -74,7 +74,7 @@ Match your chart type to your data and goal:
 
 ### Example
 
-> **Figure (add screenshot or diagram):** A pie chart of ice cream flavor preferences using a colorblind-friendly palette (5 distinct colors from the Okabe-Ito or ColorBrewer set) — each slice clearly differentiated with no jarring clashes, demonstrating purposeful color use.
+> **Figure (add screenshot or diagram):** A pie chart of ice cream flavor preferences using a colorblind-friendly palette (5 distinct colors from the Okabe-Ito or ColorBrewer set), each slice clearly differentiated with no jarring clashes, demonstrating purposeful color use.
 
 ## 4. Missing Context
 
@@ -94,7 +94,7 @@ Match your chart type to your data and goal:
 
 ### Example
 
-> **Figure (add screenshot or diagram):** A donut chart of daily activities (Sleep, Work, Exercise, Leisure) with a descriptive title "How I Spend My Day", each segment labeled with activity name and percentage, and a subtitle citing the data source — demonstrating proper chart context.
+> **Figure (add screenshot or diagram):** A donut chart of daily activities (Sleep, Work, Exercise, Leisure) with a descriptive title "How I Spend My Day", each segment labeled with activity name and percentage, and a subtitle citing the data source, demonstrating proper chart context.
 
 ## 5. Misleading Scales
 
@@ -114,7 +114,7 @@ Match your chart type to your data and goal:
 
 ### Example
 
-> **Figure (add screenshot or diagram):** Side-by-side bar charts of "Study Hours vs Grade" — left chart with y-axis starting at 60 (misleading, exaggerating differences) and right chart with y-axis starting at 0 (honest scale); illustrating how axis manipulation distorts perception.
+> **Figure (add screenshot or diagram):** Side-by-side bar charts of "Study Hours vs Grade", left chart with y-axis starting at 60 (misleading, exaggerating differences) and right chart with y-axis starting at 0 (honest scale); illustrating how axis manipulation distorts perception.
 
 ## 6. Poor Data-to-Ink Ratio
 
@@ -192,12 +192,12 @@ Match your chart type to your data and goal:
 
 ## Gotchas
 
-- **A truncated y-axis is not always dishonest, but omitting a note about it is** — starting a bar chart y-axis at a non-zero value exaggerates differences, but starting a line chart y-axis at a non-zero value is often the right call for time series with small variance; the mistake is not the scale itself but failing to label or note it so viewers do not assume the axis starts at zero.
-- **Removing gridlines entirely can make value estimation harder, not easier** — this guide correctly calls out excessive gridlines as clutter, but removing all reference lines forces viewers to guess values; keep one set of faint horizontal gridlines to support reading bar or line heights.
-- **"One main message per chart" does not mean one data series** — a scatter plot comparing two variables still has one message (their relationship); the mistake is plotting unrelated questions on the same axes, not plotting multiple related series.
-- **Inconsistent formatting across a multi-panel figure is harder to spot than inconsistency across separate charts** — when four subplots share a `fig.suptitle`, it is easy to overlook that one axis uses a different font size or that one bar chart has a grid while others do not; check all panels in the final figure together, not panel by panel.
-- **Color meanings that feel "obvious" (red = bad, green = good) create confusion in contexts where both are neutral** — a chart showing revenue growth in green and cost reduction in red reads correctly in English-speaking business contexts but inverts in other settings; always add a label or legend note rather than relying on color convention alone.
-- **3D effects on pie or bar charts do not just "look bad" — they actively distort values** — a 3D pie chart makes the front slices look larger than rear slices of equal value due to perspective foreshortening; this is not a style preference, it is a perceptual error that misleads viewers.
+- **A truncated y-axis is not always dishonest, but omitting a note about it is**: starting a bar chart y-axis at a non-zero value exaggerates differences, but starting a line chart y-axis at a non-zero value is often the right call for time series with small variance; the mistake is not the scale itself but failing to label or note it so viewers do not assume the axis starts at zero.
+- **Removing gridlines entirely can make value estimation harder, not easier**: this guide correctly calls out excessive gridlines as clutter, but removing all reference lines forces viewers to guess values; keep one set of faint horizontal gridlines to support reading bar or line heights.
+- **"One main message per chart" does not mean one data series**: a scatter plot comparing two variables still has one message (their relationship); the mistake is plotting unrelated questions on the same axes, not plotting multiple related series.
+- **Inconsistent formatting across a multi-panel figure is harder to spot than inconsistency across separate charts**: when four subplots share a `fig.suptitle`, it is easy to overlook that one axis uses a different font size or that one bar chart has a grid while others do not; check all panels in the final figure together, not panel by panel.
+- **Color meanings that feel "obvious" (red = bad, green = good) create confusion in contexts where both are neutral**: a chart showing revenue growth in green and cost reduction in red reads correctly in English-speaking business contexts but inverts in other settings; always add a label or legend note rather than relying on color convention alone.
+- **3D effects on pie or bar charts do not just "look bad", they actively distort values**: a 3D pie chart makes the front slices look larger than rear slices of equal value due to perspective foreshortening; this is not a style preference, it is a perceptual error that misleads viewers.
 
 ## Next steps
 

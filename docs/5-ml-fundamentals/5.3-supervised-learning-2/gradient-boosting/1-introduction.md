@@ -3,16 +3,16 @@ reading_minutes: 15
 objectives:
   - "Explain how gradient boosting trains weak learners *sequentially* on residuals, in contrast with random forest's parallel bagging."
   - "Identify problems where gradient boosting shines (tabular data, mixed feature types, ranking) and where it doesn't (real-time low-latency inference, hard interpretability constraints)."
-  - "Compare XGBoost, LightGBM, and CatBoost at a high level — which to reach for given dataset shape and categorical-handling needs."
+  - "Compare XGBoost, LightGBM, and CatBoost at a high level, which to reach for given dataset shape and categorical-handling needs."
 ---
 
 # Introduction to Gradient Boosting
 
-**After this lesson:** you can explain the core ideas in “Introduction to Gradient Boosting” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Introduction to Gradient Boosting and try the examples in your own notebook.
 
 ## Overview
 
-**Gradient boosting** fits **weak learners** (often shallow trees) **sequentially**, each one targeting the residual errors of the ensemble so far—different from random forest’s parallel bagging. **Prerequisites:** decision trees; [5.3 README](../README.md).
+**Gradient boosting** fits **weak learners** (often shallow trees) **sequentially**, each one targeting the residual errors of the ensemble so far, different from random forest's parallel bagging. **Prerequisites:** decision trees; [5.3 README](../README.md).
 
 Imagine you're learning to play a musical instrument. At first, you make many mistakes, but with each practice session, you focus on correcting your previous errors. Gradient Boosting works similarly - it's a smart way of learning from mistakes to create a powerful prediction model.
 
@@ -128,11 +128,11 @@ Ready to learn more? Continue to [Mathematical Foundation](2-math-foundation.md)
 
 ## Gotchas
 
-- **Treating gradient boosting like a black box that needs no tuning** — The default parameters (e.g., `n_estimators=100`, `learning_rate=0.1`) work for demos but rarely for real problems. At minimum, you should tune `n_estimators` with early stopping and adjust `max_depth` and `learning_rate` together — lower `learning_rate` almost always requires more trees.
-- **Conflating random forests and gradient boosting** — Both use ensembles of trees, but random forests train trees *independently in parallel*, while gradient boosting trains them *sequentially on residuals*. This distinction matters for debugging: a gradient boosting model that diverges in later rounds is overfitting the residuals, not the raw labels.
-- **Over-trusting feature importance scores** — The built-in "gain" importance scores reflect how much each feature improved splits in the training trees. Correlated features split the importance between them, so a feature can appear unimportant even if it's highly predictive. Use SHAP values for more reliable attribution.
-- **Using too many trees without early stopping** — Adding more trees always reduces training loss, so the training curve looks great. Without a validation set and `early_stopping_rounds`, you'll routinely overfit. The "overfitting risk" listed as a limitation is almost entirely mitigated by early stopping on a held-out set.
-- **Assuming gradient boosting handles missing values automatically everywhere** — XGBoost learns a default direction for missing values; LightGBM does the same. But scikit-learn's `GradientBoostingClassifier` does *not* — it requires imputation beforehand. Which library you're using determines whether you need to handle NaNs manually.
+- **Treating gradient boosting like a black box that needs no tuning**: The default parameters (e.g., `n_estimators=100`, `learning_rate=0.1`) work for demos but rarely for real problems. At minimum, you should tune `n_estimators` with early stopping and adjust `max_depth` and `learning_rate` together, lower `learning_rate` almost always requires more trees.
+- **Conflating random forests and gradient boosting**: Both use ensembles of trees, but random forests train trees *independently in parallel*, while gradient boosting trains them *sequentially on residuals*. This distinction matters for debugging: a gradient boosting model that diverges in later rounds is overfitting the residuals, not the raw labels.
+- **Over-trusting feature importance scores**: The built-in "gain" importance scores reflect how much each feature improved splits in the training trees. Correlated features split the importance between them, so a feature can appear unimportant even if it's highly predictive. Use SHAP values for more reliable attribution.
+- **Using too many trees without early stopping**: Adding more trees always reduces training loss, so the training curve looks great. Without a validation set and `early_stopping_rounds`, you'll routinely overfit. The "overfitting risk" listed as a limitation is almost entirely mitigated by early stopping on a held-out set.
+- **Assuming gradient boosting handles missing values automatically everywhere**: XGBoost learns a default direction for missing values; LightGBM does the same. But scikit-learn's `GradientBoostingClassifier` does *not*, it requires imputation beforehand. Which library you're using determines whether you need to handle NaNs manually.
 
 ## Additional Resources
 

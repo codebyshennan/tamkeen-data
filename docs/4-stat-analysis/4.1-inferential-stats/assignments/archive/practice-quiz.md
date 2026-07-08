@@ -1,27 +1,27 @@
 ---
-title: "4.1 Inferential Statistics — Practice Quiz"
+title: "4.1 Inferential Statistics - Practice Quiz"
 nav_order: 99
 ---
 
-# 4.1 Inferential Statistics — Practice Quiz
+# 4.1 Inferential Statistics: Practice Quiz
 
 Test your understanding before moving to module 4.2. Questions progress from concept checks to applied problems.
 
-## Part A: Populations, Samples, and Parameters (Questions 1–4)
+## Part A: Populations, Samples, and Parameters (Questions 1-4)
 
 **1.** A researcher wants to know the average sleep duration of all adults in Singapore. She surveys 500 randomly selected adults and finds a mean of 6.8 hours with a standard deviation of 1.2 hours. Identify:
 
-a) The population  
-b) The sample  
-c) The parameter of interest  
-d) The sample statistic  
+a) The population
+b) The sample
+c) The parameter of interest
+d) The sample statistic
 
 <details>
 <summary>Answer</summary>
 
-a) **Population:** All adults in Singapore  
-b) **Sample:** The 500 randomly selected adults  
-c) **Parameter:** The true mean sleep duration of all Singaporean adults (μ — unknown)  
+a) **Population:** All adults in Singapore
+b) **Sample:** The 500 randomly selected adults
+c) **Parameter:** The true mean sleep duration of all Singaporean adults (μ - unknown)
 d) **Sample statistic:** The observed mean x̄ = 6.8 hours (s = 1.2 hours)
 
 Note: The sample standard deviation (s = 1.2) is a statistic used to *estimate* the population standard deviation (σ).
@@ -34,7 +34,7 @@ Note: The sample standard deviation (s = 1.2) is a statistic used to *estimate* 
 <details>
 <summary>Answer</summary>
 
-**Systematic sampling** — selecting every kth element from an ordered list.
+**Systematic sampling** - selecting every kth element from an ordered list.
 
 **Potential bias:** If the assembly line has a periodic pattern (e.g., a machine fault that occurs every 10 cycles), systematic sampling might consistently select either defective or non-defective items, misrepresenting the true defect rate. This is called *periodicity bias*.
 </details>
@@ -46,9 +46,9 @@ Note: The sample standard deviation (s = 1.2) is a statistic used to *estimate* 
 <details>
 <summary>Answer</summary>
 
-**False** — a larger sample reduces sampling error (the estimate is more precise) but does *not* fix systematic bias. A biased sampling method with 10,000 respondents produces a more precise but still wrong estimate.
+**False** - a larger sample reduces sampling error (the estimate is more precise) but does *not* fix systematic bias. A biased sampling method with 10,000 respondents produces a more precise but still wrong estimate.
 
-The famous example: the 1936 *Literary Digest* poll predicted a landslide win for Alf Landon over FDR using 2.4 million responses — one of the largest polls ever — but got the result badly wrong because the sample was biased (respondents were wealthier and more Republican than the electorate).
+The famous example: the 1936 *Literary Digest* poll predicted a landslide win for Alf Landon over FDR using 2.4 million responses - one of the largest polls ever - but got the result badly wrong because the sample was biased (respondents were wealthier and more Republican than the electorate).
 
 **What matters:** Both *representativeness* (unbiased method) and *size* (precision).
 </details>
@@ -72,7 +72,7 @@ The famous example: the 1936 *Literary Digest* poll predicted a landslide win fo
 
 ---
 
-## Part B: The Central Limit Theorem (Questions 5–6)
+## Part B: The Central Limit Theorem (Questions 5-6)
 
 **5.** A factory produces bolts with a mean diameter of 10mm and standard deviation of 0.5mm. The distribution is right-skewed. If you take samples of n=50 bolts, what does the sampling distribution of the sample mean look like?
 
@@ -81,7 +81,7 @@ The famous example: the 1936 *Literary Digest* poll predicted a landslide win fo
 
 By the **Central Limit Theorem**, even though the population is right-skewed, the sampling distribution of x̄ for n=50 will be approximately **normal** with:
 
-- Mean: μ_x̄ = 10mm (same as population mean)  
+- Mean: μ_x̄ = 10mm (same as population mean)
 - Standard error: SE = σ/√n = 0.5/√50 ≈ 0.071mm
 
 ```python
@@ -128,27 +128,27 @@ This is why there are diminishing returns to collecting more data. Going from n=
 
 ---
 
-## Part C: Confidence Intervals (Questions 7–9)
+## Part C: Confidence Intervals (Questions 7-9)
 
 **7.** A 95% confidence interval for mean commute time is [28.4, 33.6] minutes. Which of the following interpretations is correct?
 
-a) There is a 95% chance the true mean commute time is between 28.4 and 33.6 minutes.  
-b) 95% of commuters have a commute time between 28.4 and 33.6 minutes.  
-c) If we repeated this sampling process many times, 95% of the resulting CIs would contain the true mean.  
-d) The sample mean is 31 minutes with 95% certainty.  
+a) There is a 95% chance the true mean commute time is between 28.4 and 33.6 minutes.
+b) 95% of commuters have a commute time between 28.4 and 33.6 minutes.
+c) If we repeated this sampling process many times, 95% of the resulting CIs would contain the true mean.
+d) The sample mean is 31 minutes with 95% certainty.
 
 <details>
 <summary>Answer</summary>
 
 **c) is correct.**
 
-A CI is a procedure, not a probability statement about a fixed parameter. The true mean either is or isn't in [28.4, 33.6] — there's no probability involved once the interval is computed.
+A CI is a procedure, not a probability statement about a fixed parameter. The true mean either is or isn't in [28.4, 33.6] - there's no probability involved once the interval is computed.
 
 The correct interpretation: the *method* of constructing 95% CIs produces intervals that capture the true parameter 95% of the time in repeated samples.
 
-**a)** is wrong — the parameter is fixed; it's not random.  
-**b)** is wrong — this would be a prediction interval, not a CI for the mean.  
-**d)** is wrong — the sample mean is known exactly; the CI is about the *population* mean.
+**a)** is wrong - the parameter is fixed; it's not random.
+**b)** is wrong - this would be a prediction interval, not a CI for the mean.
+**d)** is wrong - the sample mean is known exactly; the CI is about the *population* mean.
 </details>
 
 ---
@@ -159,9 +159,9 @@ The correct interpretation: the *method* of constructing 95% CIs produces interv
 \bar{x} \pm t^* \cdot \frac{s}{\sqrt{n}}
 \\]
 
-You have x̄ = 50, s = 12, n = 36. Calculate the 95% CI and explain how it would change if:  
-a) n increased to 144  
-b) Confidence level increased to 99%  
+You have x̄ = 50, s = 12, n = 36. Calculate the 95% CI and explain how it would change if:
+a) n increased to 144
+b) Confidence level increased to 99%
 
 <details>
 <summary>Answer</summary>
@@ -176,16 +176,16 @@ t_star = stats.t.ppf(0.975, df=n-1)  # ≈ 2.03
 
 ci = (x_bar - t_star * se, x_bar + t_star * se)
 print(f"95% CI: ({ci[0]:.2f}, {ci[1]:.2f})")
-# 95% CI: (45.94, 54.06)  — width ≈ 8.1 minutes
+# 95% CI: (45.94, 54.06): width ≈ 8.1 minutes
 ```
 
 ```
 95% CI: (45.94, 54.06)
 ```
 
-**a) n = 144:** SE = 12/√144 = 1.0 (halved). CI becomes approximately (47.97, 52.03) — half the width.
+**a) n = 144:** SE = 12/√144 = 1.0 (halved). CI becomes approximately (47.97, 52.03) - half the width.
 
-**b) 99% CI:** t* increases from ≈2.03 to ≈2.72. CI becomes approximately (44.56, 55.44) — wider by ~33%.
+**b) 99% CI:** t* increases from ≈2.03 to ≈2.72. CI becomes approximately (44.56, 55.44) - wider by ~33%.
 
 **The tradeoff:** Higher confidence → wider interval. More data → narrower interval. You can't have high confidence and high precision without sufficient data.
 </details>
@@ -199,7 +199,7 @@ print(f"95% CI: ({ci[0]:.2f}, {ci[1]:.2f})")
 
 Several things are wrong:
 
-1. **Absence of evidence ≠ evidence of absence.** p = 0.12 means the data are not inconsistent with H₀ at α = 0.05 — it does *not* prove H₀ is true.
+1. **Absence of evidence ≠ evidence of absence.** p = 0.12 means the data are not inconsistent with H₀ at α = 0.05 - it does *not* prove H₀ is true.
 
 2. **The CI spans a wide range.** [−0.3, 2.8] includes zero (hence not significant) but also includes effects as large as 2.8, which could be clinically meaningful. The study is *underpowered* to rule out a meaningful effect.
 
@@ -210,7 +210,7 @@ The researcher could legitimately say: *"We found no statistically significant e
 
 ---
 
-## Part D: P-Values (Questions 10–12)
+## Part D: P-Values (Questions 10-12)
 
 **10.** Match each statement to "True" or "False":
 
@@ -226,10 +226,10 @@ The researcher could legitimately say: *"We found no statistically significant e
 
 | Statement | Answer | Explanation |
 |---|---|---|
-| p-value = P(H₀ is true) | **False** | p = P(data this extreme | H₀ is true) — a conditional probability, not about H₀'s truth |
+| p-value = P(H₀ is true) | **False** | p = P(data this extreme | H₀ is true) - a conditional probability, not about H₀'s truth |
 | Smaller p → larger effect | **False** | p shrinks with larger n even for tiny effects; effect size and p are separate |
 | p > 0.05 → H₀ is true | **False** | Fail to reject ≠ accept; the test may just be underpowered |
-| p depends on both effect size and n | **True** | p = f(effect size, n, variability) — with enough n even δ=0.001 yields p<0.05 |
+| p depends on both effect size and n | **True** | p = f(effect size, n, variability) - with enough n even δ=0.001 yields p<0.05 |
 </details>
 
 ---
@@ -244,7 +244,7 @@ Which result is more clinically important? Which is more statistically significa
 <summary>Answer</summary>
 
 - **More statistically significant:** Study B (p = 0.001 < p = 0.03)
-- **More clinically important:** Study A — a 5-point reduction is 5× larger than a 1-point reduction
+- **More clinically important:** Study A - a 5-point reduction is 5× larger than a 1-point reduction
 
 Study B's tiny p-value is a consequence of its large sample size (n = 2000), not a large effect. With 2000 patients, almost any difference will be statistically detectable.
 
@@ -269,7 +269,7 @@ Study B Cohen's d ≈ 0.14
 
 ---
 
-**12.** Write code to compute and interpret a one-sample t-test. A nutrition company claims their supplement increases average daily energy levels from a baseline of 5.0 (on a 1–10 scale). You sample 40 users and observe a mean of 5.8 with SD = 1.5.
+**12.** Write code to compute and interpret a one-sample t-test. A nutrition company claims their supplement increases average daily energy levels from a baseline of 5.0 (on a 1-10 scale). You sample 40 users and observe a mean of 5.8 with SD = 1.5.
 
 <details>
 <summary>Reference Solution</summary>
@@ -331,10 +331,10 @@ The observed mean (5.8) is significantly above baseline (5.0).
 
 | Part | Questions | Points each | Total |
 |---|---|---|---|
-| A: Populations & Sampling | 1–4 | 8 | 32 |
-| B: Central Limit Theorem | 5–6 | 8 | 16 |
-| C: Confidence Intervals | 7–9 | 10 | 30 |
-| D: P-Values | 10–12 | variable | 22 |
+| A: Populations & Sampling | 1-4 | 8 | 32 |
+| B: Central Limit Theorem | 5-6 | 8 | 16 |
+| C: Confidence Intervals | 7-9 | 10 | 30 |
+| D: P-Values | 10-12 | variable | 22 |
 | **Total** | | | **100** |
 
 ## Back to module

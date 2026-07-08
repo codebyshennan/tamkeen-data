@@ -2,13 +2,13 @@
 
 ## Overview
 
-**Primary outcome:** You check your recall of core ideas across **SQL**, **wrangling**, **EDA**, and **data engineering**—each block maps to one submodule in Module 2.
+**Primary outcome:** You check your recall of core ideas across **SQL**, **wrangling**, **EDA**, and **data engineering**-each block maps to one submodule in Module 2.
 
 **Prerequisites:** Work through (or skim) [SQL](../2.1-sql/README.md), [Data wrangling](../2.2-data-wrangling/README.md), [EDA](../2.3-eda/README.md), and [Data engineering](../2.4-data-engineering/README.md). This quiz assumes that exposure, not perfection.
 
-> **Time needed:** About 30–45 minutes for all 20 items.
+> **Time needed:** About 30-45 minutes for all 20 items.
 
-> **Note:** Each section is worth **25 points** (100 total). Choose the best single answer (a–d) per question.
+> **Note:** Each section is worth **25 points** (100 total). Choose the best single answer (a-d) per question.
 
 This comprehensive assessment covers key concepts from SQL, Data Wrangling, Exploratory Data Analysis (EDA), and Data Engineering.
 
@@ -70,9 +70,9 @@ This comprehensive assessment covers key concepts from SQL, Data Wrangling, Expl
    c. Collecting new data samples
    d. Analyzing data patterns
 
-10. Which scaling method is most robust to outliers?
+10. Which scaling method is most reliable to outliers?
     a. Standard scaling (z-score)
-    b. Robust scaling (using quartiles)
+    b. reliable scaling (using quartiles)
     c. Min-max scaling
     d. Log transformation
 

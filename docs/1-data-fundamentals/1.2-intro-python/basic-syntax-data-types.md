@@ -1,18 +1,18 @@
 # Basic Syntax and Data Types for Data Science
 
-**After this lesson:** You can write small Python programs using variables, core types, operators, and formatted output—enough to read and tweak data-science examples.
+**After this lesson:** You can write small Python programs using variables, core types, operators, and formatted output, enough to read and tweak data-science examples.
 
 ## Overview
 
 **Prerequisites:** [Introduction to Python](./README.md) module context; no other programming background required.
 
-**Why this lesson:** Variables, operators, types, and f-strings are the **grammar** of every script you will read. Nothing here is “data science–only,” but skipping it makes later pandas errors impossible to debug.
+**Why this lesson:** Variables, operators, types, and f-strings are the **grammar** of every script you will read. Nothing here is "data science-only," but skipping it makes later pandas errors impossible to debug.
 
 > **AI learning tip:** As you go through this section, try asking ChatGPT or Claude: "Explain Python variables using everyday objects as examples"
 
 > **Visualize execution:** Open [Python Tutor](https://pythontutor.com) in another tab. Paste every code example to see exactly how Python executes it.
 
-> **Interactive notebook:** [Open in Google Colab](./notebooks/01-basic-syntax.ipynb) — run and modify examples interactively.
+> **Interactive notebook:** [Open in Google Colab](./notebooks/01-basic-syntax.ipynb), run and modify examples interactively.
 
 ### Video
 
@@ -20,7 +20,7 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/khKv-8q7YmY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
-*Corey Schafer — Integers, floats, and numeric types in Python*
+*Corey Schafer, Integers, floats, and numeric types in Python*
 
 ## Getting Started with Python
 
@@ -28,7 +28,7 @@
 
 ### Your First Data Analysis Program
 
-Let's start with a simple data analysis example:
+Start with a simple data analysis example:
 
 **Mean and standard deviation of a small list**
 
@@ -116,7 +116,7 @@ Two main approaches for data analysis:
    **Reusable function + `if __name__`-style flow**
 
    - **Purpose:** Encapsulate loading and aggregation in `analyze_sales` so the same logic can target a file path or a `StringIO` buffer.
-   - **Walkthrough:** The dict returned uses column sums/means from pandas—`StringIO` again stands in for a real path.
+   - **Walkthrough:** The dict returned uses column sums/means from pandas-`StringIO` again stands in for a real path.
 
    ```python
   # analysis.py
@@ -149,11 +149,11 @@ Two main approaches for data analysis:
 
 ### Indentation in Data Processing
 
-Python's indentation is crucial in data processing flows:
+Python's indentation is important in data processing flows:
 
 **Nested blocks: function → if → for**
 
-- **Purpose:** See how indentation defines scope—`cleaned_data` is built only when `len(data) > 0` and each value passes `pd.notna`.
+- **Purpose:** See how indentation defines scope-`cleaned_data` is built only when `len(data) > 0` and each value passes `pd.notna`.
 - **Walkthrough:** `pd.notna(value)` filters out `None` and NumPy NaN in a list context.
 
 ```python
@@ -166,7 +166,7 @@ def process_data(data):
            # Third level: Inside loop
            if pd.notna(value):  # Check for non-NA values
                cleaned_data.append(value)
-   
+
    return cleaned_data
 
 # Example usage
@@ -174,7 +174,7 @@ raw_data = [10, None, 20, np.nan, 30]
 clean_data = process_data(raw_data)
 ```
 
- **Pro Tip**: Consistent indentation is crucial for maintaining complex data processing pipelines.
+ **Pro Tip**: Consistent indentation is important for maintaining complex data processing pipelines.
 
 > **See Indentation in Action:**
 > Paste this code into Python Tutor to see how indentation creates code blocks:
@@ -245,7 +245,7 @@ def preprocess_data(df):
       <span class="code-callout__title">Imports</span>
     </div>
     <div class="code-callout__body">
-      <p>Imports pandas, NumPy, and sklearn's <code>StandardScaler</code>—the three tools needed for this preprocessing pipeline.</p>
+      <p>Imports pandas, NumPy, and sklearn's <code>StandardScaler</code>-the three tools needed for this preprocessing pipeline.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="7-16" data-tint="2">
@@ -254,7 +254,7 @@ def preprocess_data(df):
       <span class="code-callout__title">Docstring</span>
     </div>
     <div class="code-callout__body">
-      <p>A full docstring documents the parameter type and return type—good practice so callers know what to pass and what comes back.</p>
+      <p>A full docstring documents the parameter type and return type, good practice so callers know what to pass and what comes back.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="17-24" data-tint="3">
@@ -263,7 +263,7 @@ def preprocess_data(df):
       <span class="code-callout__title">Clean and Scale</span>
     </div>
     <div class="code-callout__body">
-      <p>Drops NaN rows first, then uses <code>select_dtypes</code> to find numeric columns and scales them with <code>StandardScaler</code>—a common two-step before model training.</p>
+      <p>Drops NaN rows first, then uses <code>select_dtypes</code> to find numeric columns and scales them with <code>StandardScaler</code>-a common two-step before model training.</p>
     </div>
   </div>
 </aside>
@@ -282,7 +282,7 @@ Variables in data science often represent different types of data:
 **Representing common data-science dtypes**
 
 - **Purpose:** Tie variable names to roles: continuous vs discrete numbers, nominal vs ordinal categories, datetimes, and small `DataFrame` tables.
-- **Walkthrough:** `np.array` vs `pd.DataFrame` previews Module 1.4–1.5 content.
+- **Walkthrough:** `np.array` vs `pd.DataFrame` previews Module 1.4-1.5 content.
 
 ```python
 # Numerical data
@@ -335,7 +335,7 @@ Follow these conventions for clear data analysis code:
 
 **Clear names for analysis variables**
 
-- **Purpose:** Contrast readable names with vague ones—same values, better scan-ability in notebooks and reviews.
+- **Purpose:** Contrast readable names with vague ones, same values, better scan-ability in notebooks and reviews.
 
 ```python
 mean_temperature = 23.5   # Clear statistical measure
@@ -349,7 +349,7 @@ MAX_ITERATIONS = 1000   # Constant value
 
 **Avoid vague identifiers**
 
-- **Purpose:** See how `temp`, `data1`, `x` obscure intent compared to the “Do This” block above—no behavior change, only naming.
+- **Purpose:** See how `temp`, `data1`, `x` obscure intent compared to the "Do This" block above, no behavior change, only naming.
 
 ```python
 temp = 23.5        # Too vague
@@ -373,15 +373,15 @@ Python data types commonly used in data science:
 
    ```python
   import numpy as np
-  
+
   # Integer types
   sample_size = 1000                  # int
   array_int = np.int32([1, 2, 3])    # numpy int32
-  
+
   # Float types
   mean_value = 75.5                   # float
   array_float = np.float64([1.1, 1.2])  # numpy float64
-  
+
   # Complex numbers (e.g., for signal processing)
   signal = 3 + 4j
    ```
@@ -392,7 +392,7 @@ Python data types commonly used in data science:
   # String operations for text analysis
   text = "Data Science is fascinating"
   tokens = text.lower().split()
-  
+
   # Regular expressions for pattern matching
   import re
   emails = re.findall(r'\S+@\S+', text)
@@ -402,11 +402,11 @@ Python data types commonly used in data science:
 
    ```python
   import pandas as pd
-  
+
   df = pd.DataFrame({
       'value': [10, 20, 30, 40, 50]
   })
-  
+
   # Boolean indexing
   mask = df['value'] > 30
   high_values = df[mask]
@@ -417,10 +417,10 @@ Python data types commonly used in data science:
    ```python
   # None for missing values
   optional_value = None
-  
+
   # NaN for numerical missing data
   missing_numeric = np.nan
-  
+
   # Handling missing data in pandas
   df = pd.DataFrame({
       'value': [10, np.nan, 30]
@@ -582,7 +582,7 @@ Common type conversions in data analysis:
 
 {% include mermaid-diagram.html src="1-data-fundamentals/1.2-intro-python/diagrams/basic-syntax-data-types-2.mmd" %}
 
-*Always validate before converting — a stray `"N/A"` string will raise a `ValueError` if you call `int()` directly. Use `pd.to_numeric(errors='coerce')` to convert safely and let pandas turn failures into `NaN`.*
+*Always validate before converting, a stray `"N/A"` string will raise a `ValueError` if you call `int()` directly. Use `pd.to_numeric(errors='coerce')` to convert safely and let pandas turn failures into `NaN`.*
 
 ```python
 import pandas as pd
@@ -658,7 +658,7 @@ def validate_dataset(df):
       <span class="code-callout__title">Imports</span>
     </div>
     <div class="code-callout__body">
-      <p>Only pandas and NumPy are needed—pandas for type selection, NumPy for the <code>isinf</code> check.</p>
+      <p>Only pandas and NumPy are needed, pandas for type selection, NumPy for the <code>isinf</code> check.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="5-13" data-tint="2">
@@ -667,7 +667,7 @@ def validate_dataset(df):
       <span class="code-callout__title">Numeric Checks</span>
     </div>
     <div class="code-callout__body">
-      <p>Loops over numeric columns to flag infinite values and negative numbers in columns whose names suggest they should be positive—two common data quality traps.</p>
+      <p>Loops over numeric columns to flag infinite values and negative numbers in columns whose names suggest they should be positive, two common data quality traps.</p>
     </div>
   </div>
   <div class="code-callout" data-lines="15-22" data-tint="3">
@@ -676,7 +676,7 @@ def validate_dataset(df):
       <span class="code-callout__title">Categorical Checks</span>
     </div>
     <div class="code-callout__body">
-      <p>Counts unique values per object column and warns if cardinality exceeds 100—high-cardinality categoricals often indicate data entry errors or IDs mistaken for categories.</p>
+      <p>Counts unique values per object column and warns if cardinality exceeds 100, high-cardinality categoricals often indicate data entry errors or IDs mistaken for categories.</p>
     </div>
   </div>
 </aside>
@@ -689,7 +689,7 @@ Try these data analysis exercises:
 
 ### Exercise 1: Temperature Analysis
 
-- **Purpose:** Stub for **Exercise 1**—complete the bullets in the heading (stats + °F + outliers).
+- **Purpose:** Stub for **Exercise 1**-complete the bullets in the heading (stats + °F + outliers).
 
 ```python
 # Create a numpy array of temperatures and calculate:
@@ -707,7 +707,7 @@ temperatures_celsius = np.array([22, 25, 19, 100, 23, 21, 24])
 
 ### Exercise 2: String Processing
 
-- **Purpose:** Stub for **Exercise 2**—split, parse floats, summarize.
+- **Purpose:** Stub for **Exercise 2**-split, parse floats, summarize.
 
 ```python
 # Process a string of comma-separated values:
@@ -723,7 +723,7 @@ data_string = "10.5, 20.3, 15.7, 18.9, 22.1"
 
 ### Exercise 3: Date Manipulation
 
-- **Purpose:** Stub for **Exercise 3**—parse strings, differences, components.
+- **Purpose:** Stub for **Exercise 3**-parse strings, differences, components.
 
 ```python
 # Work with dates and times:
@@ -738,7 +738,7 @@ date_strings = ["2024-01-15", "2024-02-20", "2024-03-10"]
 
 ### Exercise 4: Data Cleaning Function
 
-- **Purpose:** Stub for **Exercise 4**—implement `clean_data` per comments and test with `messy_data`.
+- **Purpose:** Stub for **Exercise 4**-implement `clean_data` per comments and test with `messy_data`.
 
 ```python
 # Create a simple data cleaning function:
@@ -782,9 +782,9 @@ Remember:
 
 ## Common pitfalls
 
-- **Indentation errors** — Python uses indentation for blocks; mixing spaces and tabs breaks code. Use one style (usually four spaces) in your editor.
-- **Name errors before assignment** — You must assign a variable before you use it; trace the order of lines when debugging.
-- **Float comparison** — Avoid checking **==** between floats; use **math.isclose** or compare rounded values.
+- **Indentation errors**: Python uses indentation for blocks; mixing spaces and tabs breaks code. Use one style (usually four spaces) in your editor.
+- **Name errors before assignment**: You must assign a variable before you use it; trace the order of lines when debugging.
+- **Float comparison**: Avoid checking **==** between floats; use **math.isclose** or compare rounded values.
 
 ## Next steps
 

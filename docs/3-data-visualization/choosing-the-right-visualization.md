@@ -15,7 +15,7 @@ Orientation for the course visualization materials.
 ## Prerequisites
 
 - Basic idea of **numeric** vs **categorical** data and, when relevant, **time series** (from EDA or statistics modules).
-- Optional: skim [Common mistakes](common-mistakes.md) for paired “do/don’t” examples.
+- Optional: skim [Common mistakes](common-mistakes.md) for paired "do/don't" examples.
 
 ## Understanding Your Data Type
 
@@ -37,7 +37,7 @@ Before choosing a visualization, identify what type of data you're working with:
 
 {% include mermaid-diagram.html src="3-data-visualization/diagrams/choosing-the-right-visualization-1.mmd" %}
 
-*When in doubt, start with a bar chart or scatter plot — they work for most business questions and are the easiest to read correctly.*
+*When in doubt, start with a bar chart or scatter plot, they work for most business questions and are the easiest to read correctly.*
 
 ## Matching Data Types to Visualizations
 
@@ -61,7 +61,7 @@ Before choosing a visualization, identify what type of data you're working with:
 
 **Purpose:** Sketch a one-variable distribution with frequency on the y-axis and binned values on the x-axis.
 
-**Walkthrough:** `hist` chooses bin counts via `bins=`; add title and axis labels so “what is counted” is explicit. Assumes `plt` and `data` exist.
+**Walkthrough:** `hist` chooses bin counts via `bins=`; add title and axis labels so "what is counted" is explicit. Assumes `plt` and `data` exist.
 
 ```python
 # Histogram for showing distribution
@@ -278,12 +278,12 @@ plt.ylabel('Frequency')
 
 ## Gotchas
 
-- **Pie charts with more than 6 slices become unreadable even when the rule is nominally followed** — six segments is a ceiling, not a target; if any slice is under ~5% of the total it will be impossible to label clearly and should be folded into an "Other" category or replaced with a sorted bar chart.
-- **Bar charts and column charts are not interchangeable** — vertical bars (column charts) are conventional for time-ordered data; horizontal bar charts read better when category labels are long or when there are more than ~8 categories; mixing orientations on the same dashboard creates visual inconsistency.
-- **Histograms are not bar charts** — a histogram shows the distribution of one continuous variable by binning it; using `plt.bar` with pre-counted data looks similar but requires you to already know the bin edges and counts, while `plt.hist` computes them automatically.
-- **Scatter plots require both variables to be on a ratio or interval scale** — plotting an ordinal variable (e.g. satisfaction: low/medium/high) on a scatter plot axis implies equal spacing between categories, which is often false; use a strip plot or box plot instead.
-- **Heat maps hide the shape of distributions** — showing a correlation matrix as a heat map tells you the strength of relationships but not whether the underlying relationship is linear, curved, or driven by outliers; always back up a heat map with individual scatter plots for strong correlations.
-- **Line charts with a non-zero y-axis exaggerate trends** — starting the y-axis well above zero makes small changes appear dramatic; this is appropriate for some financial contexts but should always be explicitly noted in the axis label or title.
+- **Pie charts with more than 6 slices become unreadable even when the rule is nominally followed**: six segments is a ceiling, not a target; if any slice is under ~5% of the total it will be impossible to label clearly and should be folded into an "Other" category or replaced with a sorted bar chart.
+- **Bar charts and column charts are not interchangeable**: vertical bars (column charts) are conventional for time-ordered data; horizontal bar charts read better when category labels are long or when there are more than ~8 categories; mixing orientations on the same dashboard creates visual inconsistency.
+- **Histograms are not bar charts**: a histogram shows the distribution of one continuous variable by binning it; using `plt.bar` with pre-counted data looks similar but requires you to already know the bin edges and counts, while `plt.hist` computes them automatically.
+- **Scatter plots require both variables to be on a ratio or interval scale**: plotting an ordinal variable (e.g. satisfaction: low/medium/high) on a scatter plot axis implies equal spacing between categories, which is often false; use a strip plot or box plot instead.
+- **Heat maps hide the shape of distributions**: showing a correlation matrix as a heat map tells you the strength of relationships but not whether the underlying relationship is linear, curved, or driven by outliers; always back up a heat map with individual scatter plots for strong correlations.
+- **Line charts with a non-zero y-axis exaggerate trends**: starting the y-axis well above zero makes small changes appear dramatic; this is appropriate for some financial contexts but should always be explicitly noted in the axis label or title.
 
 ## Next steps
 

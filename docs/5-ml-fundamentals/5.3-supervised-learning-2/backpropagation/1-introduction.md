@@ -8,7 +8,7 @@ objectives:
 
 # Introduction to Backpropagation
 
-**After this lesson:** you can explain the core ideas in “Introduction to Backpropagation” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Introduction to Backpropagation and try the examples in your own notebook.
 
 ## Overview
 
@@ -23,7 +23,7 @@ In technical terms, backpropagation is the algorithm that enables neural network
 
 ## Why is it Important?
 
-Backpropagation is crucial because:
+Backpropagation is important because:
 
 - It's the key algorithm that makes deep learning possible
 - It allows networks to learn from their mistakes, just like humans do
@@ -32,7 +32,7 @@ Backpropagation is crucial because:
 
 ## The Big Picture: How Backpropagation Works
 
-Let's break down the process using a simple analogy:
+Break down the process using a simple analogy:
 
 Imagine you're teaching a friend to play darts. The process involves:
 
@@ -53,7 +53,7 @@ Imagine you're teaching a friend to play darts. The process involves:
 
 {% include mermaid-diagram.html src="5-ml-fundamentals/5.3-supervised-learning-2/backpropagation/diagrams/1-introduction-1.mmd" %}
 
-*The **chain rule** is why gradients can flow backward: each layer's gradient is the product of all downstream gradients. `α` is the learning rate — how big a step to take each update.*
+*The **chain rule** is why gradients can flow backward: each layer's gradient is the product of all downstream gradients. `α` is the learning rate, how big a step to take each update.*
 
 ## Real-World Applications
 
@@ -146,12 +146,12 @@ To get the most out of this module:
 
 ## Gotchas
 
-- **Confusing backpropagation with gradient descent** — Backpropagation is the algorithm that computes gradients; gradient descent is the optimizer that uses those gradients to update weights. Mixing up the two leads to misdiagnosed bugs (e.g., blaming the wrong step when loss doesn't decrease).
-- **Assuming the forward pass stores nothing** — The backward pass needs activations and pre-activations from the forward pass. If you don't cache them during the forward pass, you'll either recompute them (expensive) or get incorrect gradients.
-- **Forgetting that the chain rule multiplies** — Each additional layer multiplies another local gradient into the chain. For deep networks this multiplication can drive gradients toward zero (vanishing) or infinity (exploding) before you notice, especially with sigmoid activations.
-- **Treating backpropagation as equivalent to training** — Running one forward + backward pass computes gradients for a single batch; you still need an optimizer step, and many such iterations, for the network to actually learn. A single call to `backward()` changes nothing until you call `update_parameters`.
-- **Using the same learning rate for every problem** — The introduction mentions starting small, but learners often pick 0.01 and never revisit it. Too large a rate causes loss to oscillate or diverge; too small means thousands of unnecessary epochs.
-- **Skipping data normalization before any training** — Unnormalized inputs (e.g., pixel values in [0, 255]) cause the first-layer gradients to be scaled wildly differently from those of later layers, slowing convergence or causing instability even before vanishing/exploding gradient problems appear.
+- **Confusing backpropagation with gradient descent**: Backpropagation is the algorithm that computes gradients; gradient descent is the optimizer that uses those gradients to update weights. Mixing up the two leads to misdiagnosed bugs (e.g., blaming the wrong step when loss doesn't decrease).
+- **Assuming the forward pass stores nothing**: The backward pass needs activations and pre-activations from the forward pass. If you don't cache them during the forward pass, you'll either recompute them (expensive) or get incorrect gradients.
+- **Forgetting that the chain rule multiplies**: Each additional layer multiplies another local gradient into the chain. For deep networks this multiplication can drive gradients toward zero (vanishing) or infinity (exploding) before you notice, especially with sigmoid activations.
+- **Treating backpropagation as equivalent to training**: Running one forward + backward pass computes gradients for a single batch; you still need an optimizer step, and many such iterations, for the network to actually learn. A single call to `backward()` changes nothing until you call `update_parameters`.
+- **Using the same learning rate for every problem**: The introduction mentions starting small, but learners often pick 0.01 and never revisit it. Too large a rate causes loss to oscillate or diverge; too small means thousands of unnecessary epochs.
+- **Skipping data normalization before any training**: Unnormalized inputs (e.g., pixel values in [0, 255]) cause the first-layer gradients to be scaled wildly differently from those of later layers, slowing convergence or causing instability even before vanishing/exploding gradient problems appear.
 
 ## Additional Resources
 

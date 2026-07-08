@@ -1,18 +1,18 @@
 ---
 reading_minutes: 25
 objectives:
-  - "Build random-forest baselines for tabular problems in finance, healthcare, and marketing — and use feature importance to explain predictions to stakeholders."
+  - "Build random-forest baselines for tabular problems in finance, healthcare, and marketing, and use feature importance to explain predictions to stakeholders."
   - "Use a forest as a *feature screen* before training a more expensive model (e.g., gradient boosting or neural network)."
   - "Recognise when a boosted ensemble would beat a forest on the same data, and when it wouldn't."
 ---
 
 # Real-World Applications of Random Forest
 
-**After this lesson:** you can explain the core ideas in “Real-World Applications of Random Forest” and reproduce the examples here in your own notebook or environment.
+**After this lesson:** you can explain Real-World Applications of Random Forest and try the examples in your own notebook.
 
 ## Overview
 
-Tabular benchmarks, feature screening, and when a forest beats boosting—or does not.
+Tabular benchmarks, feature screening, and when a forest beats boosting, or does not.
 
 
 ## 1. Financial Applications
@@ -119,7 +119,7 @@ print(pd.qcut(risk_scores, q=5).value_counts())
       <span class="code-callout__title">Risk Score</span>
     </div>
     <div class="code-callout__body">
-      <p><code>calculate_risk_score</code> converts the default probability to a 0–100 creditworthiness score (higher = safer); <code>pd.qcut</code> then bins the test-set scores into five equal-size quantiles for reporting.</p>
+      <p><code>calculate_risk_score</code> converts the default probability to a 0-100 creditworthiness score (higher = safer); <code>pd.qcut</code> then bins the test-set scores into five equal-size quantiles for reporting.</p>
     </div>
   </div>
 </aside>
@@ -386,7 +386,7 @@ print(importance)
       <span class="code-callout__title">Synthetic Dataset</span>
     </div>
     <div class="code-callout__body">
-      <p>71 years (1950–2020) of synthetic CO2, methane, deforestation, and emissions data are created for demonstration; the function is called and the ranked importance table is printed.</p>
+      <p>71 years (1950-2020) of synthetic CO2, methane, deforestation, and emissions data are created for demonstration; the function is called and the ranked importance table is printed.</p>
     </div>
   </div>
 </aside>
@@ -558,12 +558,12 @@ def predict_product_quality(manufacturing_data):
 
 ## Gotchas
 
-- **Scaling features before Random Forest is unnecessary but harmless** — the credit risk example applies `StandardScaler` before fitting, which does not affect tree splits (trees use rank order, not magnitude); scaling is needed for the downstream `predict_proba` risk score consistency but adds no predictive benefit to the forest itself.
-- **Chronological splitting is mandatory for time-series data, not random splitting** — the stock predictor uses an 80/20 index-based split, which preserves time order correctly; using `train_test_split` with `shuffle=True` would leak future prices into training and give artificially high R² scores.
-- **`yfinance` data includes dividends and splits that distort raw price features** — using `Close` directly without adjusting for corporate actions inflates apparent returns on ex-dividend days; always use the `Auto Adjust=True` option or the `Adj Close` column for financial feature engineering.
-- **`rf_medical.fit(X_train, y_train)` uses a different split than the medical feature matrix** — the healthcare example creates `medical_data` but then fits on `X_train`/`y_train` from the earlier credit risk split, silently training on the wrong data; always verify that feature matrix and labels originate from the same dataset.
-- **`get_recommendations(sensor_data)` in the manufacturing monitor is undefined** — the `monitor_production_line` function calls `get_recommendations` which is never declared in this file; running it raises a `NameError` and would need a separate implementation before use in production.
-- **Feature importance from a Random Forest trained on scaled data reflects scaled units** — the `calculate_risk_score` function scales inputs, so feature importances (if inspected) reflect the scaled representation; do not interpret raw importance values as importance in the original dollar or score units.
+- **Scaling features before Random Forest is unnecessary but harmless**: the credit risk example applies `StandardScaler` before fitting, which does not affect tree splits (trees use rank order, not magnitude); scaling is needed for the downstream `predict_proba` risk score consistency but adds no predictive benefit to the forest itself.
+- **Chronological splitting is mandatory for time-series data, not random splitting**: the stock predictor uses an 80/20 index-based split, which preserves time order correctly; using `train_test_split` with `shuffle=True` would leak future prices into training and give artificially high R² scores.
+- **`yfinance` data includes dividends and splits that distort raw price features**: using `Close` directly without adjusting for corporate actions inflates apparent returns on ex-dividend days; always use the `Auto Adjust=True` option or the `Adj Close` column for financial feature engineering.
+- **`rf_medical.fit(X_train, y_train)` uses a different split than the medical feature matrix**: the healthcare example creates `medical_data` but then fits on `X_train`/`y_train` from the earlier credit risk split, silently training on the wrong data; always verify that feature matrix and labels originate from the same dataset.
+- **`get_recommendations(sensor_data)` in the manufacturing monitor is undefined**: the `monitor_production_line` function calls `get_recommendations` which is never declared in this file; running it raises a `NameError` and would need a separate implementation before use in production.
+- **Feature importance from a Random Forest trained on scaled data reflects scaled units**: the `calculate_risk_score` function scales inputs, so feature importances (if inspected) reflect the scaled representation; do not interpret raw importance values as importance in the original dollar or score units.
 
 ## Next Steps
 
