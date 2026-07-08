@@ -3,8 +3,12 @@ reading_minutes: 25
 objectives:
   - Read a scatterplot before relying on a single summary statistic.
   - Distinguish linear, non-linear, and no-relationship patterns by eye.
-  - Tell association from causation by naming a plausible confounder before claiming a link.
-  - Spot common misreadings (outliers, ordinal-as-ratio, Simpson's paradox) in a relationship plot.
+  - >-
+    Tell association from causation by naming a plausible confounder before
+    claiming a link.
+  - >-
+    Spot common misreadings (outliers, ordinal-as-ratio, Simpson's paradox) in a
+    relationship plot.
 ---
 
 # Understanding Relationships in Data: Connecting the Dots
@@ -17,37 +21,31 @@ Before you compute a correlation or fit a line, you need a **picture of the join
 
 ## Why this matters
 
-- You will tell **association** from **causation** and choose the right follow-up tool (correlation, regression, or tests).
-- You will read plots before trusting a single summary number.
+* You will tell **association** from **causation** and choose the right follow-up tool (correlation, regression, or tests).
+* You will read plots before trusting a single summary number.
 
 ## Prerequisites
 
-- [Hypothesis testing and results (module 4.2)](../4.2-hypotheses-testing/README.md), especially [results analysis](../4.2-hypotheses-testing/results-analysis.md), for significance vs importance.
-- NumPy or pandas comfort for examples in later files.
+* [Hypothesis testing and results (module 4.2)](../4.2-hypotheses-testing/), especially [results analysis](../4.2-hypotheses-testing/results-analysis.md), for significance vs importance.
+* NumPy or pandas comfort for examples in later files.
 
-> **Note:** This is the first lesson in [Relationships in data (4.3)](./README.md).
+> **Note:** This is the first lesson in [Relationships in data (4.3)](./).
 
 ### Video Tutorial: Understanding Relationships in Data
 
-<div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/xZ_z8KWkhXE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-*StatQuest: Correlation by Josh Starmer*
+_StatQuest: Correlation by Josh Starmer_
 
 ## What is a Relationship in Data?
 
 Imagine you're wondering if there's a connection between two things in your life. For example:
 
-- Does eating more vegetables make you feel more energetic?
-- When the temperature drops, does your heating bill go up?
-- Do students who attend more classes get better grades?
+* Does eating more vegetables make you feel more energetic?
+* When the temperature drops, does your heating bill go up?
+* Do students who attend more classes get better grades?
 
 When we talk about "relationships in data," we're simply asking: "When one thing changes, does another thing tend to change too?" It's like being a detective looking for patterns in everyday life!
 
-{% include mermaid-diagram.html src="4-stat-analysis/4.3-rship-in-data/diagrams/understanding-relationships-1.mmd" %}
-
-*Always ask: could a third variable explain this pattern? That question separates useful insight from misleading coincidence.*
+_Always ask: could a third variable explain this pattern? That question separates useful insight from misleading coincidence._
 
 ### An Everyday Example: Rain and Umbrellas
 
@@ -61,8 +59,8 @@ Before looking for relationships, get comfortable with a few simple ideas.
 
 In data, we typically talk about:
 
-- **Things we're observing**: Like people, products, or weather (data scientists call these "entities")
-- **Details about those things**: Like a person's age, a product's price, or today's temperature (these are called "attributes" or "variables")
+* **Things we're observing**: Like people, products, or weather (data scientists call these "entities")
+* **Details about those things**: Like a person's age, a product's price, or today's temperature (these are called "attributes" or "variables")
 
 Think of it like a table in a spreadsheet. Each row might be a different student (the things we're observing), while columns show their age, exam scores, and hours spent studying (the details about them).
 
@@ -70,9 +68,9 @@ Think of it like a table in a spreadsheet. Each row might be a different student
 
 Imagine baking cookies with incorrect measurements - they won't turn out right! Similarly, before looking for relationships, we need to make sure our data is:
 
-- **Accurate**: The information correctly represents reality
-- **Complete**: We're not missing important pieces
-- **Consistent**: The way we collected data makes sense
+* **Accurate**: The information correctly represents reality
+* **Complete**: We're not missing important pieces
+* **Consistent**: The way we collected data makes sense
 
 This is like making sure your ingredients are fresh and your measuring cups are accurate before baking.
 
@@ -81,19 +79,16 @@ This is like making sure your ingredients are fresh and your measuring cups are 
 Information comes in different types, kind of like how we categorize objects in our home:
 
 1. **Categories with no order** (Nominal): Like favorite colors or types of pets
-   - Example: Dog, Cat, Fish, Bird
-
+   * Example: Dog, Cat, Fish, Bird
 2. **Categories with an order** (Ordinal): Like T-shirt sizes or customer satisfaction ratings
-   - Example: Small, Medium, Large, X-Large
-   - Example: Very Unsatisfied, Unsatisfied, Neutral, Satisfied, Very Satisfied
-
+   * Example: Small, Medium, Large, X-Large
+   * Example: Very Unsatisfied, Unsatisfied, Neutral, Satisfied, Very Satisfied
 3. **Numbers with meaningful intervals** (Interval): Like temperature in Celsius
-   - The difference between 10°C and 20°C is the same as between 20°C and 30°C
-   - But 0°C doesn't mean "no temperature"
-
+   * The difference between 10°C and 20°C is the same as between 20°C and 30°C
+   * But 0°C doesn't mean "no temperature"
 4. **Numbers with a true zero point** (Ratio): Like height, weight, or count of something
-   - Example: Someone who is 180cm is twice as tall as someone who is 90cm
-   - 0cm truly means "no height"
+   * Example: Someone who is 180cm is twice as tall as someone who is 90cm
+   * 0cm truly means "no height"
 
 Understanding these helps us know what kind of relationships we can look for!
 
@@ -108,32 +103,36 @@ Imagine you're filling a bathtub with water. As time passes, the water level ris
 In a linear relationship, when one thing changes, the other thing changes at a steady, consistent rate.
 
 **Real-Life Examples:**
-- The longer you drive at a constant speed, the further you travel
-- The more hours you work at a fixed hourly rate, the more money you earn
-- The more slices of pizza you eat, the more calories you consume
+
+* The longer you drive at a constant speed, the further you travel
+* The more hours you work at a fixed hourly rate, the more money you earn
+* The more slices of pizza you eat, the more calories you consume
 
 ### 2. Curved Connections (Non-linear Relationships)
 
 Not all relationships follow a straight line. Sometimes they curve or bend.
 
 Think about learning a new skill like playing the piano:
-- At first, you improve quickly (steep curve)
-- Then, as you get better, it takes more practice to see small improvements (flattened curve)
-- Eventually, even professional pianists only make tiny improvements despite hours of practice (nearly flat)
+
+* At first, you improve quickly (steep curve)
+* Then, as you get better, it takes more practice to see small improvements (flattened curve)
+* Eventually, even professional pianists only make tiny improvements despite hours of practice (nearly flat)
 
 **Real-Life Examples:**
-- Plant growth over time (fast at first, then slowing down)
-- The relationship between speed and fuel efficiency in cars (efficiency improves until an optimal speed, then gets worse)
-- Learning returns on study time (diminishing returns after a certain point)
+
+* Plant growth over time (fast at first, then slowing down)
+* The relationship between speed and fuel efficiency in cars (efficiency improves until an optimal speed, then gets worse)
+* Learning returns on study time (diminishing returns after a certain point)
 
 ### 3. No Connection At All (No Relationship)
 
 Sometimes, two things have no meaningful connection whatsoever.
 
 **Real-Life Examples:**
-- Your shoe size and your favorite color
-- The number of birds in your yard today and tomorrow's stock prices
-- The first letter of your name and your mathematics ability
+
+* Your shoe size and your favorite color
+* The number of birds in your yard today and tomorrow's stock prices
+* The first letter of your name and your mathematics ability
 
 ## How Information Can Be Connected
 
@@ -173,13 +172,11 @@ Imagine you're measuring the heights and weights of adults. These tend to be str
 
 **Think of it like:** How tightly a rubber band connects two objects. A strong relationship has a tight connection with little wiggle room.
 
-
 ### Weak Relationships
 
 Now imagine looking at hours of sleep and test performance. While there might be some connection (well-rested students might do better), the relationship isn't very strong. Many other factors affect test performance too.
 
 **Think of it like:** A stretched-out rubber band that allows a lot of movement between objects.
-
 
 ### Perfect Relationships
 
@@ -196,18 +193,20 @@ Relationships can move in different directions:
 **Think of it like:** Two friends on escalators moving upward together.
 
 **Real-Life Examples:**
-- More hours of practice → Better performance
-- Higher education level → Higher average income
-- More soil nutrients → Taller plants
+
+* More hours of practice → Better performance
+* Higher education level → Higher average income
+* More soil nutrients → Taller plants
 
 ### When One Goes Up and One Goes Down (Negative Relationship)
 
 **Think of it like:** A seesaw on the playground, when one side goes up, the other side goes down.
 
 **Real-Life Examples:**
-- Higher prices → Lower demand for products
-- More exercise → Lower resting heart rate
-- More efficient appliances → Lower electricity bills
+
+* Higher prices → Lower demand for products
+* More exercise → Lower resting heart rate
+* More efficient appliances → Lower electricity bills
 
 ### When the Pattern is More Complex
 
@@ -256,24 +255,21 @@ Relationships between things aren't always fixed forever.
 Ready to put your new knowledge into action? Here's a simple activity:
 
 1. Think about two things from your daily life that might be related:
-   - Hours of sleep and your energy level
-   - Time spent on social media and productivity
-   - Weather temperature and your water consumption
-
+   * Hours of sleep and your energy level
+   * Time spent on social media and productivity
+   * Weather temperature and your water consumption
 2. For a few days, keep track of both things:
-   - Make a simple table with one column for each thing
-   - Each row can represent one day
-   - Write down the values for both things each day
-
+   * Make a simple table with one column for each thing
+   * Each row can represent one day
+   * Write down the values for both things each day
 3. Look for patterns:
-   - Do they seem to move together?
-   - Does one go up when the other goes down?
-   - Is there no clear pattern?
-
+   * Do they seem to move together?
+   * Does one go up when the other goes down?
+   * Is there no clear pattern?
 4. Try to describe the relationship you see:
-   - Is it a straight-line connection or a curved one?
-   - Is it a strong or weak relationship?
-   - Do they move in the same direction or opposite directions?
+   * Is it a straight-line connection or a curved one?
+   * Is it a strong or weak relationship?
+   * Do they move in the same direction or opposite directions?
 
 ## Key Things to Remember
 
@@ -286,18 +282,18 @@ Ready to put your new knowledge into action? Here's a simple activity:
 
 ## Next steps
 
-- Continue to [Correlation analysis](./correlation-analysis.md).
+* Continue to [Correlation analysis](correlation-analysis.md).
 
 ## Gotchas
 
-- **Confusing association with causation from a scatter plot alone**: A scatter plot showing two variables moving together does not mean one drives the other; a third confounding variable (like season, income, or geography) may be causing both. Always ask "what else could explain this pattern?" before drawing conclusions.
-- **Missing non-linear relationships by looking only at correlation numbers**: A strong U-shaped or cyclical relationship between two variables can produce a Pearson r near zero, making you conclude there is no relationship. Plot the data first; a single number never replaces a visualisation.
-- **Interpreting ordinal data as ratio-scale**: Customer satisfaction on a 1-5 scale is ordinal: the gap between 1 and 2 is not necessarily the same as between 4 and 5. Treating it as ratio data and computing arithmetic means or Pearson correlations can produce meaningless results.
-- **Ignoring outliers in scatter plots**: One extreme data point can dominate the visual impression of a relationship (or lack of one). Always check whether a perceived pattern survives after investigating unusual points; a single billionaire in a neighborhood income dataset can make a flat relationship look steeply positive.
-- **Assuming a relationship is stable across all subgroups (Simpson's Paradox)**: An overall positive relationship can reverse or disappear within subgroups of the data. For example, a drug might appear effective overall while being ineffective (or harmful) in every individual age group. Always stratify by key variables before accepting an aggregate finding.
+* **Confusing association with causation from a scatter plot alone**: A scatter plot showing two variables moving together does not mean one drives the other; a third confounding variable (like season, income, or geography) may be causing both. Always ask "what else could explain this pattern?" before drawing conclusions.
+* **Missing non-linear relationships by looking only at correlation numbers**: A strong U-shaped or cyclical relationship between two variables can produce a Pearson r near zero, making you conclude there is no relationship. Plot the data first; a single number never replaces a visualisation.
+* **Interpreting ordinal data as ratio-scale**: Customer satisfaction on a 1-5 scale is ordinal: the gap between 1 and 2 is not necessarily the same as between 4 and 5. Treating it as ratio data and computing arithmetic means or Pearson correlations can produce meaningless results.
+* **Ignoring outliers in scatter plots**: One extreme data point can dominate the visual impression of a relationship (or lack of one). Always check whether a perceived pattern survives after investigating unusual points; a single billionaire in a neighborhood income dataset can make a flat relationship look steeply positive.
+* **Assuming a relationship is stable across all subgroups (Simpson's Paradox)**: An overall positive relationship can reverse or disappear within subgroups of the data. For example, a drug might appear effective overall while being ineffective (or harmful) in every individual age group. Always stratify by key variables before accepting an aggregate finding.
 
 ## Additional Resources for Curious Minds
 
-- [Python Data Science Handbook - Visualization](https://jakevdp.github.io/PythonDataScienceHandbook/04.00-introduction-to-matplotlib.html) - For when you're ready to create visualizations
-- [Seaborn Gallery](https://seaborn.pydata.org/examples/index.html) - For beautiful examples of data visualization
-- [Perplexity AI](https://www.perplexity.ai/) - A helpful tool for getting quick answers to your statistics questions
+* [Python Data Science Handbook - Visualization](https://jakevdp.github.io/PythonDataScienceHandbook/04.00-introduction-to-matplotlib.html) - For when you're ready to create visualizations
+* [Seaborn Gallery](https://seaborn.pydata.org/examples/index.html) - For beautiful examples of data visualization
+* [Perplexity AI](https://www.perplexity.ai/) - A helpful tool for getting quick answers to your statistics questions

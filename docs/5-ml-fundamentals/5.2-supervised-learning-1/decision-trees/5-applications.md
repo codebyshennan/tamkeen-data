@@ -1,10 +1,17 @@
 ---
 reading_minutes: 35
 objectives:
-  - "Frame a real-world classification task (medical diagnosis, churn, credit scoring) as a tabular tree problem."
-  - "Choose evaluation metrics (precision, recall, ROC-AUC) appropriate to each application's cost asymmetry."
-  - "Communicate a tree's decision path to stakeholders who need to audit individual predictions."
+  - >-
+    Frame a real-world classification task (medical diagnosis, churn, credit
+    scoring) as a tabular tree problem.
+  - >-
+    Choose evaluation metrics (precision, recall, ROC-AUC) appropriate to each
+    application's cost asymmetry.
+  - >-
+    Communicate a tree's decision path to stakeholders who need to audit
+    individual predictions.
 ---
+
 # Real-World Applications of Decision Trees
 
 **After this lesson:** you can explain Real-World Applications of Decision Trees and try the examples in your own notebook.
@@ -12,7 +19,6 @@ objectives:
 ## Overview
 
 Applies decision trees to **explainable** domains, rules stakeholders can audit, plus pointers on metrics and validation.
-
 
 ## 1. Medical Diagnosis System
 
@@ -22,140 +28,23 @@ Imagine a toy clinical screening dataset where each row has simple symptom-like 
 
 #### Toy multi-class diagnosis with `class_weight` and path trace
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Data and Model
 
-{% highlight python %}
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.tree import DecisionTreeClassifier, plot_tree
+Eight patients with five ordinal symptom columns; `class_weight='balanced'` equalizes learning across six diagnoses so rare conditions aren't ignored.
 
-# Create a dataset of patient symptoms
-# Each row is a patient with symptoms: [fever, cough, fatigue, breathing_difficulty, blood_pressure]
-# Values: 0=none, 1=mild, 2=moderate, 3=severe, blood pressure: 0=low, 1=normal, 2=high
-patients = np.array([
-    [3, 2, 1, 0, 1],  # Patient 1
-    [0, 0, 0, 0, 1],  # Patient 2
-    [3, 2, 3, 2, 0],  # Patient 3
-    [1, 1, 2, 0, 1],  # Patient 4
-    [2, 3, 2, 1, 2],  # Patient 5
-    [0, 1, 0, 0, 1],  # Patient 6
-    [3, 3, 3, 3, 0],  # Patient 7
-    [1, 0, 1, 0, 1]   # Patient 8
-])
+Visualize Tree
 
-# Diagnoses: flu, healthy, pneumonia, cold, covid, allergies
-diagnoses = ['flu', 'healthy', 'pneumonia', 'cold', 'covid', 'allergies', 'pneumonia', 'cold']
+The wide figure displays the full multi-class tree with real feature and class names so every split rule is readable by a non-programmer.
 
-# Create and train the diagnosis model
-diagnosis_model = DecisionTreeClassifier(
-    max_depth=4,
-    min_samples_leaf=1,
-    class_weight='balanced'  # Handle rare diseases appropriately
-)
-diagnosis_model.fit(patients, diagnoses)
+Predict with Confidence
 
-# Visualize the diagnosis tree
-plt.figure(figsize=(20, 12))
-feature_names = ['Fever', 'Cough', 'Fatigue', 'Breathing Difficulty', 'Blood Pressure']
-class_names = sorted(list(set(diagnoses)))  # Get unique diagnoses
+`predict_proba` returns the probability for each of the six diagnoses; printing all scores reveals the tree's certainty and any runner-up conditions.
 
-plot_tree(
-    diagnosis_model,
-    feature_names=feature_names,
-    class_names=class_names,
-    filled=True,
-    rounded=True,
-    fontsize=10
-)
-plt.title('Medical Diagnosis Decision Tree')
-plt.show()
+Explain Reasoning
 
-# Diagnose a new patient
-new_patient = np.array([[2, 2, 2, 1, 1]])  # Moderate symptoms across the board, normal BP
-prediction = diagnosis_model.predict(new_patient)
-probabilities = diagnosis_model.predict_proba(new_patient)
+The decision path is walked node by node; severity values are mapped back to English labels so the printed output reads as natural-language reasoning steps.
 
-print(f"Diagnosis: {prediction[0]}")
-print("Confidence levels:")
-for i, disease in enumerate(class_names):
-    print(f"  {disease}: {probabilities[0][i]:.2f}")
-
-# Explain how the diagnosis was made by following the decision path
-path = diagnosis_model.decision_path(new_patient)
-node_indices = path.indices
-
-print("\nDiagnosis reasoning:")
-for node_idx in node_indices:
-    if node_idx != diagnosis_model.tree_.node_count - 1:  # Not a leaf node
-        feature = diagnosis_model.tree_.feature[node_idx]
-        threshold = diagnosis_model.tree_.threshold[node_idx]
-
-        # Format the explanation in a readable way
-        symptom = feature_names[feature]
-        severity = new_patient[0, feature]
-
-        if severity <= threshold:
-            comparison = "<="
-        else:
-            comparison = ">"
-
-        # Convert numeric severity to text
-        severity_text = ["none", "mild", "moderate", "severe"][int(severity)] if feature < 4 else \
-                         ["low", "normal", "high"][int(severity)]
-
-        threshold_text = ["none", "mild", "moderate", "severe"][int(threshold)] if feature < 4 else \
-                         ["low", "normal", "high"][int(threshold)]
-
-        print(f"- Patient has {severity_text} {symptom.lower()}, which is {comparison} {threshold_text}")
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-28" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Data and Model</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Eight patients with five ordinal symptom columns; <code>class_weight='balanced'</code> equalizes learning across six diagnoses so rare conditions aren't ignored.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="30-44" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Visualize Tree</span>
-    </div>
-    <div class="code-callout__body">
-      <p>The wide figure displays the full multi-class tree with real feature and class names so every split rule is readable by a non-programmer.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="46-55" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Predict with Confidence</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>predict_proba</code> returns the probability for each of the six diagnoses; printing all scores reveals the tree's certainty and any runner-up conditions.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="57-78" data-tint="4">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Explain Reasoning</span>
-    </div>
-    <div class="code-callout__body">
-      <p>The decision path is walked node by node; severity values are mapped back to English labels so the printed output reads as natural-language reasoning steps.</p>
-    </div>
-  </div>
-</aside>
-</div>
-
-
-<figure>
-<img src="assets/5-applications_fig_1.png" alt="5-applications" />
-<figcaption>Figure 1: Medical Diagnosis Decision Tree</figcaption>
-</figure>
+<figure><img src="../../../../.gitbook/assets/5-applications_fig_1.png" alt="5-applications"><figcaption><p>Figure 1: Medical Diagnosis Decision Tree</p></figcaption></figure>
 
 ```
 Diagnosis: flu
@@ -190,154 +79,25 @@ Decision trees can illustrate how credit-risk rules are learned from tabular fea
 
 #### Credit approval: train/test report + importances + new applicant risk band
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Data, Split, and Fit
 
-{% highlight python %}
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.tree import DecisionTreeClassifier, plot_tree
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report, confusion_matrix
+Fifteen applicants with five financial features; a 70/30 split trains and tests the depth-3 credit classifier.
 
-# Create a dataset of loan applicants
-# Columns: [income (k$), credit_score, employment_years, debt_to_income_ratio, previous_defaults]
-X = np.array([
-    [45, 680, 3, 0.35, 0],  # Applicant 1
-    [82, 720, 5, 0.20, 0],  # Applicant 2
-    [32, 650, 1, 0.45, 1],  # Applicant 3
-    [60, 710, 8, 0.28, 0],  # Applicant 4
-    [75, 750, 10, 0.15, 0],  # Applicant 5
-    [28, 630, 2, 0.55, 2],  # Applicant 6
-    [90, 760, 15, 0.10, 0],  # Applicant 7
-    [40, 700, 4, 0.33, 0],  # Applicant 8
-    [65, 730, 7, 0.22, 0],  # Applicant 9
-    [35, 640, 2, 0.42, 1],  # Applicant 10
-    [50, 690, 6, 0.30, 0],  # Applicant 11
-    [25, 620, 1, 0.52, 2],  # Applicant 12
-    [70, 740, 9, 0.18, 0],  # Applicant 13
-    [38, 670, 3, 0.38, 1],  # Applicant 14
-    [85, 755, 12, 0.12, 0]   # Applicant 15
-])
+Visualize Tree
 
-# Loan approval status: 1 = approved, 0 = denied
-y = np.array([1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1])
+The tree renders with business-friendly feature and class names; each node shows the financial threshold that drives the split.
 
-# Split into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.3, random_state=42
-)
+Evaluate and Rank Features
 
-# Create and train the credit scoring model
-credit_model = DecisionTreeClassifier(max_depth=3, min_samples_leaf=2)
-credit_model.fit(X_train, y_train)
+The confusion matrix and classification report show per-class performance; feature ranking reveals which factor (income, score, etc.) the tree relied on most.
 
-# Visualize the credit decision tree
-plt.figure(figsize=(15, 10))
-feature_names = ['Income (k$)', 'Credit Score', 'Employment Years',
-                 'Debt to Income Ratio', 'Previous Defaults']
-plot_tree(
-    credit_model,
-    feature_names=feature_names,
-    class_names=['Denied', 'Approved'],
-    filled=True,
-    rounded=True
-)
-plt.title('Credit Risk Decision Tree')
-plt.show()
+Risk-Band Scoring
 
-# Evaluate the model
-y_pred = credit_model.predict(X_test)
-print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred))
-print("\nClassification Report:")
-print(classification_report(y_test, y_pred))
+Approval probability from `predict_proba` is mapped to Low/Medium/High risk tiers, a simple but auditable business rule.
 
-# Calculate feature importance
-importances = credit_model.feature_importances_
-indices = np.argsort(importances)[::-1]
+<figure><img src="../../../../.gitbook/assets/5-applications_fig_2.png" alt="5-applications"><figcaption><p>Figure 2: Credit Risk Decision Tree</p></figcaption></figure>
 
-# Print feature ranking
-print("\nFeature ranking:")
-for i in range(X.shape[1]):
-    print(f"{i+1}. {feature_names[indices[i]]}: {importances[indices[i]]:.4f}")
-
-# Visualize feature importance
-plt.figure(figsize=(10, 6))
-plt.bar(range(X.shape[1]), importances[indices], align='center')
-plt.xticks(range(X.shape[1]), [feature_names[i] for i in indices], rotation=90)
-plt.title('Feature Importance for Credit Risk Assessment')
-plt.tight_layout()
-plt.show()
-
-# Assess a new applicant
-new_applicant = np.array([[55, 705, 6, 0.25, 0]])  # New loan applicant
-approval_prob = credit_model.predict_proba(new_applicant)[0, 1]  # Probability of approval
-print(f"\nNew applicant approval probability: {approval_prob:.2f}")
-
-# Determine risk category based on probability
-if approval_prob >= 0.8:
-    risk = "Low Risk"
-elif approval_prob >= 0.5:
-    risk = "Medium Risk"
-else:
-    risk = "High Risk"
-
-print(f"Risk assessment: {risk}")
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-37" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Data, Split, and Fit</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Fifteen applicants with five financial features; a 70/30 split trains and tests the depth-3 credit classifier.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="39-53" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Visualize Tree</span>
-    </div>
-    <div class="code-callout__body">
-      <p>The tree renders with business-friendly feature and class names; each node shows the financial threshold that drives the split.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="55-72" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Evaluate and Rank Features</span>
-    </div>
-    <div class="code-callout__body">
-      <p>The confusion matrix and classification report show per-class performance; feature ranking reveals which factor (income, score, etc.) the tree relied on most.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="74-91" data-tint="4">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Risk-Band Scoring</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Approval probability from <code>predict_proba</code> is mapped to Low/Medium/High risk tiers, a simple but auditable business rule.</p>
-    </div>
-  </div>
-</aside>
-</div>
-
-
-<figure>
-<img src="assets/5-applications_fig_2.png" alt="5-applications" />
-<figcaption>Figure 2: Credit Risk Decision Tree</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/5-applications_fig_3.png" alt="5-applications" />
-<figcaption>Figure 3: Feature Importance for Credit Risk Assessment</figcaption>
-</figure>
+<figure><img src="../../../../.gitbook/assets/5-applications_fig_3.png" alt="5-applications"><figcaption><p>Figure 3: Feature Importance for Credit Risk Assessment</p></figcaption></figure>
 
 ```
 Confusion Matrix:
@@ -381,152 +141,21 @@ Businesses use decision trees to predict which customers might leave. Build a si
 
 #### Churn model with retention rules from churn probability
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Data and Training
 
-{% highlight python %}
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.tree import DecisionTreeClassifier, plot_tree
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report, confusion_matrix, roc_curve, auc
+Fifteen customers with tenure, charges, contract type, and support signals; the tree learns which combination most strongly predicts cancellation.
 
-# Create a dataset of customer information
-# Columns: [tenure_months, monthly_charges, total_charges, contract_length, support_calls, service_issues]
-# contract_length: 0=month-to-month, 1=one year, 2=two year
-X = np.array([
-    [1, 80, 80, 0, 3, 2],      # Customer 1
-    [35, 65, 2275, 2, 0, 0],   # Customer 2
-    [6, 90, 540, 0, 5, 3],     # Customer 3
-    [24, 75, 1800, 1, 1, 0],   # Customer 4
-    [12, 85, 1020, 0, 2, 1],   # Customer 5
-    [48, 60, 2880, 2, 0, 0],   # Customer 6
-    [3, 95, 285, 0, 4, 2],     # Customer 7
-    [18, 70, 1260, 1, 1, 1],   # Customer 8
-    [36, 55, 1980, 2, 0, 0],   # Customer 9
-    [2, 100, 200, 0, 6, 4],    # Customer 10
-    [30, 65, 1950, 1, 0, 0],   # Customer 11
-    [8, 85, 680, 0, 3, 2],     # Customer 12
-    [42, 60, 2520, 2, 0, 0],   # Customer 13
-    [4, 90, 360, 0, 5, 3],     # Customer 14
-    [24, 70, 1680, 1, 1, 1]    # Customer 15
-])
+Evaluate and Rank
 
-# Churn status: 1 = churned, 0 = stayed
-y = np.array([1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0])
+Confusion matrix and report show precision/recall per class; feature ranking reveals whether contract length or support call volume dominates churn risk.
 
-# Split into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.3, random_state=42
-)
+Retention Actions
 
-# Create and train the churn prediction model
-churn_model = DecisionTreeClassifier(max_depth=3, min_samples_leaf=2)
-churn_model.fit(X_train, y_train)
+Churn probability for two new customers is thresholded into three retention tiers (high/medium/low) with specific recommended actions per tier.
 
-# Visualize the churn decision tree
-plt.figure(figsize=(15, 10))
-feature_names = ['Tenure (months)', 'Monthly Charges', 'Total Charges',
-                 'Contract Length', 'Support Calls', 'Service Issues']
-plot_tree(
-    churn_model,
-    feature_names=feature_names,
-    class_names=['Stayed', 'Churned'],
-    filled=True,
-    rounded=True
-)
-plt.title('Customer Churn Decision Tree')
-plt.show()
+<figure><img src="../../../../.gitbook/assets/5-applications_fig_4.png" alt="5-applications"><figcaption><p>Figure 4: Customer Churn Decision Tree</p></figcaption></figure>
 
-# Evaluate the model
-y_pred = churn_model.predict(X_test)
-print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred))
-print("\nClassification Report:")
-print(classification_report(y_test, y_pred))
-
-# Calculate feature importance
-importances = churn_model.feature_importances_
-indices = np.argsort(importances)[::-1]
-
-# Print feature ranking
-print("\nFeature ranking for churn prediction:")
-for i in range(X.shape[1]):
-    print(f"{i+1}. {feature_names[indices[i]]}: {importances[indices[i]]:.4f}")
-
-# Visualize feature importance
-plt.figure(figsize=(10, 6))
-plt.bar(range(X.shape[1]), importances[indices], align='center')
-plt.xticks(range(X.shape[1]), [feature_names[i] for i in indices], rotation=90)
-plt.title('Feature Importance for Churn Prediction')
-plt.tight_layout()
-plt.show()
-
-# Predict churn probability for new customers
-new_customers = np.array([
-    [2, 95, 190, 0, 4, 3],    # High-risk customer
-    [40, 60, 2400, 2, 0, 0]    # Low-risk customer
-])
-
-# Get churn probabilities
-churn_probs = churn_model.predict_proba(new_customers)[:, 1]
-
-# Display results
-for i, prob in enumerate(churn_probs):
-    print(f"Customer {i+1} churn probability: {prob:.2f}")
-
-    # Recommend retention actions based on risk
-    if prob > 0.7:
-        print("  High risk - Immediate contact needed, offer special retention package")
-    elif prob > 0.3:
-        print("  Medium risk - Proactive outreach, offer loyalty benefits")
-    else:
-        print("  Low risk - Maintain regular engagement")
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-40" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Data and Training</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Fifteen customers with tenure, charges, contract type, and support signals; the tree learns which combination most strongly predicts cancellation.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="42-68" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Evaluate and Rank</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Confusion matrix and report show precision/recall per class; feature ranking reveals whether contract length or support call volume dominates churn risk.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="70-99" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Retention Actions</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Churn probability for two new customers is thresholded into three retention tiers (high/medium/low) with specific recommended actions per tier.</p>
-    </div>
-  </div>
-</aside>
-</div>
-
-
-<figure>
-<img src="assets/5-applications_fig_4.png" alt="5-applications" />
-<figcaption>Figure 4: Customer Churn Decision Tree</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/5-applications_fig_5.png" alt="5-applications" />
-<figcaption>Figure 5: Feature Importance for Churn Prediction</figcaption>
-</figure>
+<figure><img src="../../../../.gitbook/assets/5-applications_fig_5.png" alt="5-applications"><figcaption><p>Figure 5: Feature Importance for Churn Prediction</p></figcaption></figure>
 
 ```
 Confusion Matrix:
@@ -572,164 +201,25 @@ Create a simple fraud-detection pattern using decision trees. The data is synthe
 
 #### Fraud: `class_weight`, precision-recall curve, and threshold tuning
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Fraud Data and Model
 
-{% highlight python %}
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.tree import DecisionTreeClassifier, plot_tree
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report, confusion_matrix, precision_recall_curve
+`stratify=y` keeps the fraud rate equal in train/test; `class_weight={0:1,1:5}` penalizes missed fraud five times more than false alarms.
 
-# Create a dataset of transactions
-# Columns: [amount, time_of_day, day_of_week, distance_from_home, frequency_last_24h]
-X = np.array([
-    [25.50, 14, 2, 0.5, 3],    # Transaction 1
-    [1500, 2, 6, 300, 0],      # Transaction 2
-    [80, 12, 3, 2.1, 2],       # Transaction 3
-    [65.40, 18, 1, 1.2, 1],    # Transaction 4
-    [2000, 3, 5, 500, 0],      # Transaction 5
-    [34.25, 10, 4, 0.8, 4],    # Transaction 6
-    [750, 22, 6, 150, 0],      # Transaction 7
-    [125, 15, 0, 5, 1],        # Transaction 8
-    [45.80, 9, 2, 1.0, 2],     # Transaction 9
-    [1800, 1, 6, 450, 0],      # Transaction 10
-    [55.30, 17, 3, 1.5, 3],    # Transaction 11
-    [95.75, 20, 5, 3.2, 1],    # Transaction 12
-    [1200, 23, 6, 200, 0],     # Transaction 13
-    [30.45, 11, 1, 0.7, 5],    # Transaction 14
-    [1600, 2, 0, 350, 0]       # Transaction 15
-])
+Visualize and Evaluate
 
-# Fraud status: 1 = fraud, 0 = legitimate
-y = np.array([0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1])
+The tree shows which transaction features (amount, time, distance) drive the fraud split; the classification report exposes precision and recall for the minority fraud class.
 
-# Split into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.3, random_state=42, stratify=y  # Keep same fraud ratio in train/test
-)
+Precision-Recall Curve
 
-# Create and train the fraud detection model
-fraud_model = DecisionTreeClassifier(
-    max_depth=3,
-    min_samples_leaf=2,
-    class_weight={0: 1, 1: 5}  # Give fraud class 5x more weight
-)
-fraud_model.fit(X_train, y_train)
+The P-R curve is more informative than ROC for imbalanced data; maximizing F1 across thresholds picks the operating point that balances catching fraud vs raising false alarms.
 
-# Visualize the fraud detection tree
-plt.figure(figsize=(15, 10))
-feature_names = ['Amount', 'Time of Day', 'Day of Week',
-                 'Distance from Home (miles)', 'Frequency Last 24h']
-plot_tree(
-    fraud_model,
-    feature_names=feature_names,
-    class_names=['Legitimate', 'Fraud'],
-    filled=True,
-    rounded=True
-)
-plt.title('Fraud Detection Decision Tree')
-plt.show()
+Alert Logic
 
-# Evaluate the model
-y_pred = fraud_model.predict(X_test)
-print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred))
-print("\nClassification Report:")
-print(classification_report(y_test, y_pred))
+Two new transactions are scored; the optimal threshold determines whether to block immediately, flag for review, or pass as legitimate.
 
-# Get fraud probabilities for all test transactions
-y_probs = fraud_model.predict_proba(X_test)[:, 1]
+<figure><img src="../../../../.gitbook/assets/5-applications_fig_6.png" alt="5-applications"><figcaption><p>Figure 6: Fraud Detection Decision Tree</p></figcaption></figure>
 
-# Plot precision-recall curve (better than ROC for imbalanced classes)
-precision, recall, thresholds = precision_recall_curve(y_test, y_probs)
-plt.figure(figsize=(10, 6))
-plt.plot(recall, precision, marker='.')
-plt.xlabel('Recall')
-plt.ylabel('Precision')
-plt.title('Precision-Recall Curve for Fraud Detection')
-plt.grid(True)
-plt.show()
-
-# Find optimal threshold via max F1
-f1_scores = 2 * precision * recall / (precision + recall + 1e-10)
-best_idx = np.argmax(f1_scores)
-best_threshold = thresholds[best_idx]
-print(f"Optimal threshold: {best_threshold:.3f}")
-print(f"At this threshold - Precision: {precision[best_idx]:.3f}, Recall: {recall[best_idx]:.3f}")
-
-# Check some new transactions
-new_transactions = np.array([
-    [1200, 3, 6, 250, 0],       # Suspicious transaction
-    [45.75, 15, 2, 1.2, 3]       # Normal transaction
-])
-
-fraud_probs = fraud_model.predict_proba(new_transactions)[:, 1]
-
-for i, prob in enumerate(fraud_probs):
-    print(f"Transaction {i+1} fraud probability: {prob:.3f}")
-    if prob >= best_threshold:
-        print("  ALERT: Likely fraudulent transaction")
-        print("  Action: Block transaction and contact customer")
-    else:
-        print("  Status: Transaction appears legitimate")
-        if prob > 0.3:
-            print("  Note: Some unusual characteristics - flag for review")
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-40" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Fraud Data and Model</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>stratify=y</code> keeps the fraud rate equal in train/test; <code>class_weight={0:1,1:5}</code> penalizes missed fraud five times more than false alarms.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="42-62" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Visualize and Evaluate</span>
-    </div>
-    <div class="code-callout__body">
-      <p>The tree shows which transaction features (amount, time, distance) drive the fraud split; the classification report exposes precision and recall for the minority fraud class.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="64-80" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Precision-Recall Curve</span>
-    </div>
-    <div class="code-callout__body">
-      <p>The P-R curve is more informative than ROC for imbalanced data; maximizing F1 across thresholds picks the operating point that balances catching fraud vs raising false alarms.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="82-97" data-tint="4">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Alert Logic</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Two new transactions are scored; the optimal threshold determines whether to block immediately, flag for review, or pass as legitimate.</p>
-    </div>
-  </div>
-</aside>
-</div>
-
-
-<figure>
-<img src="assets/5-applications_fig_6.png" alt="5-applications" />
-<figcaption>Figure 6: Fraud Detection Decision Tree</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/5-applications_fig_7.png" alt="5-applications" />
-<figcaption>Figure 7: Precision-Recall Curve for Fraud Detection</figcaption>
-</figure>
+<figure><img src="../../../../.gitbook/assets/5-applications_fig_7.png" alt="5-applications"><figcaption><p>Figure 7: Precision-Recall Curve for Fraud Detection</p></figcaption></figure>
 
 ```
 Confusion Matrix:
@@ -770,150 +260,21 @@ Manufacturing companies use decision trees to predict when machines need mainten
 
 #### Multiclass maintenance states from sensor vectors
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Sensor Data and Fit
 
-{% highlight python %}
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.tree import DecisionTreeClassifier, plot_tree
+Fifteen machines described by six sensor readings; three target classes (ok/soon/urgent) make this a multiclass classification problem fit on the full table.
 
-# Create a dataset of equipment readings
-# Columns: [temp, vibration, pressure, runtime_hours, sound_level, power_consumption]
-X = np.array([
-    [45, 0.2, 95, 2000, 65, 5.5],   # Machine 1
-    [78, 0.8, 87, 5000, 85, 7.2],   # Machine 2
-    [50, 0.3, 92, 3000, 68, 5.8],   # Machine 3
-    [82, 1.2, 84, 4800, 88, 7.5],   # Machine 4
-    [48, 0.4, 93, 2500, 67, 5.6],   # Machine 5
-    [55, 0.5, 90, 3200, 70, 6.0],   # Machine 6
-    [85, 1.5, 82, 5100, 90, 7.8],   # Machine 7
-    [52, 0.3, 91, 2800, 69, 5.7],   # Machine 8
-    [75, 0.7, 88, 4500, 82, 7.0],   # Machine 9
-    [88, 1.8, 80, 5300, 92, 8.0],   # Machine 10
-    [46, 0.2, 94, 2200, 66, 5.5],   # Machine 11
-    [80, 1.0, 85, 4700, 86, 7.3],   # Machine 12
-    [53, 0.4, 90, 3100, 71, 5.9],   # Machine 13
-    [83, 1.4, 83, 4900, 89, 7.6],   # Machine 14
-    [49, 0.3, 92, 2600, 68, 5.7]    # Machine 15
-])
+Visualize and Rank
 
-# Maintenance status: 0 = no maintenance needed, 1 = maintenance soon, 2 = urgent maintenance
-y = np.array([0, 2, 0, 2, 0, 1, 2, 0, 1, 2, 0, 2, 0, 2, 0])
+The tree shows which sensor thresholds (temperature or power consumption) drive the three-way classification; feature importance ranks them by total impurity reduction.
 
-# Create and train the maintenance prediction model
-maintenance_model = DecisionTreeClassifier(max_depth=3)
-maintenance_model.fit(X, y)
+Predict and Act
 
-# Visualize the maintenance decision tree
-plt.figure(figsize=(15, 10))
-feature_names = ['Temperature (°C)', 'Vibration (mm/s)', 'Pressure (psi)',
-                 'Runtime Hours', 'Sound Level (dB)', 'Power Consumption (kW)']
-class_names = ['No Maintenance', 'Maintenance Soon', 'Urgent Maintenance']
-plot_tree(
-    maintenance_model,
-    feature_names=feature_names,
-    class_names=class_names,
-    filled=True,
-    rounded=True
-)
-plt.title('Equipment Maintenance Decision Tree')
-plt.show()
+Three new machines get predictions plus probability breakdowns; the action logic maps each predicted state to a specific maintenance timeline or alert level.
 
-# Calculate feature importance
-importances = maintenance_model.feature_importances_
-indices = np.argsort(importances)[::-1]
+<figure><img src="../../../../.gitbook/assets/5-applications_fig_8.png" alt="5-applications"><figcaption><p>Figure 8: Equipment Maintenance Decision Tree</p></figcaption></figure>
 
-# Print feature ranking
-print("Feature ranking for maintenance prediction:")
-for i in range(X.shape[1]):
-    print(f"{i+1}. {feature_names[indices[i]]}: {importances[indices[i]]:.4f}")
-
-# Visualize feature importance
-plt.figure(figsize=(10, 6))
-plt.bar(range(X.shape[1]), importances[indices], align='center')
-plt.xticks(range(X.shape[1]), [feature_names[i] for i in indices], rotation=90)
-plt.title('Feature Importance for Maintenance Prediction')
-plt.tight_layout()
-plt.show()
-
-# Predict maintenance needs for new equipment readings
-new_readings = np.array([
-    [47, 0.3, 93, 2400, 67, 5.6],   # Machine A
-    [65, 0.6, 88, 4000, 75, 6.5],   # Machine B
-    [84, 1.3, 83, 4950, 87, 7.5]    # Machine C
-])
-
-# Get maintenance predictions and probabilities
-maintenance_preds = maintenance_model.predict(new_readings)
-maintenance_probs = maintenance_model.predict_proba(new_readings)
-
-# Display results with recommended actions
-for i, (pred, probs) in enumerate(zip(maintenance_preds, maintenance_probs)):
-    machine_label = chr(65 + i)  # A, B, C, etc.
-    print(f"Machine {machine_label} status: {class_names[pred]}")
-    print(f"  Probability breakdown: No Maintenance: {probs[0]:.2f}, Soon: {probs[1]:.2f}, Urgent: {probs[2]:.2f}")
-
-    # Recommend specific actions based on prediction
-    if pred == 0:
-        print("  Recommendation: Continue normal operation, next check in 30 days")
-    elif pred == 1:
-        print("  Recommendation: Schedule maintenance within 2 weeks, order parts now")
-        # Identify which readings contributed most to this prediction
-        threshold_exceeded = []
-        for j, name in enumerate(feature_names):
-            if new_readings[i, j] > np.percentile(X[:, j], 75):
-                threshold_exceeded.append(name)
-        if threshold_exceeded:
-            print(f"  Focus areas: {', '.join(threshold_exceeded)}")
-    else:  # pred == 2
-        print("  Recommendation: URGENT - Schedule maintenance immediately!")
-        print("  Alert: Potential failure imminent if operation continues")
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-31" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Sensor Data and Fit</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Fifteen machines described by six sensor readings; three target classes (ok/soon/urgent) make this a multiclass classification problem fit on the full table.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="33-57" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Visualize and Rank</span>
-    </div>
-    <div class="code-callout__body">
-      <p>The tree shows which sensor thresholds (temperature or power consumption) drive the three-way classification; feature importance ranks them by total impurity reduction.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="59-96" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Predict and Act</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Three new machines get predictions plus probability breakdowns; the action logic maps each predicted state to a specific maintenance timeline or alert level.</p>
-    </div>
-  </div>
-</aside>
-</div>
-
-
-<figure>
-<img src="assets/5-applications_fig_8.png" alt="5-applications" />
-<figcaption>Figure 8: Equipment Maintenance Decision Tree</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/5-applications_fig_9.png" alt="5-applications" />
-<figcaption>Figure 9: Feature Importance for Maintenance Prediction</figcaption>
-</figure>
+<figure><img src="../../../../.gitbook/assets/5-applications_fig_9.png" alt="5-applications"><figcaption><p>Figure 9: Feature Importance for Maintenance Prediction</p></figcaption></figure>
 
 ```
 Feature ranking for maintenance prediction:
@@ -946,51 +307,46 @@ Predictive maintenance helps companies avoid costly downtime while also preventi
 
 ## Gotchas
 
-- **Interpreting 100% classification report scores on 5-row test sets**: the churn, credit, and fraud examples all show perfect metrics on 5-sample test sets; these numbers are statistically meaningless and purely a consequence of the tiny toy datasets; never cite them as evidence of real-world performance.
-- **Using accuracy as the primary metric for fraud detection**: the fraud model achieves a good accuracy score even before `class_weight` tuning, because predicting "legitimate" for every transaction gives high accuracy on imbalanced data; always use precision, recall, and the precision-recall curve for fraud and other rare-event problems.
-- **Applying `decision_path` reasoning verbatim to stakeholders as if it were a rule system**: the diagnosis example maps ordinal integers back to text labels (`"none"`, `"mild"`) to produce human-readable reasoning, but the underlying splits are learned from only 8 patients; the narrative looks authoritative but is not clinically validated.
-- **Setting `class_weight={0: 1, 1: 5}` without business justification**: the 5x fraud weight is illustrative; the correct multiplier depends on the relative cost of a false negative (missed fraud) vs a false positive (blocked legitimate transaction), which is a business decision, not a modelling default.
-- **Choosing the optimal threshold from `precision_recall_curve` on the same test set you evaluate on**: the fraud example computes `best_threshold` by maximising F1 on `y_probs` from the test set; this is threshold-shopping on the test set and produces optimistic F1 estimates; use a separate validation set or cross-validated threshold selection.
-- **Treating feature importance from a single churn tree as a stable business insight**: the churn example shows `Contract Length: 1.0` and all other features at `0.0`; on a 15-row dataset, this is almost certainly a data artefact from the toy data rather than a genuine signal, and presenting it to business stakeholders as "only contract length matters" would be misleading.
+* **Interpreting 100% classification report scores on 5-row test sets**: the churn, credit, and fraud examples all show perfect metrics on 5-sample test sets; these numbers are statistically meaningless and purely a consequence of the tiny toy datasets; never cite them as evidence of real-world performance.
+* **Using accuracy as the primary metric for fraud detection**: the fraud model achieves a good accuracy score even before `class_weight` tuning, because predicting "legitimate" for every transaction gives high accuracy on imbalanced data; always use precision, recall, and the precision-recall curve for fraud and other rare-event problems.
+* **Applying `decision_path` reasoning verbatim to stakeholders as if it were a rule system**: the diagnosis example maps ordinal integers back to text labels (`"none"`, `"mild"`) to produce human-readable reasoning, but the underlying splits are learned from only 8 patients; the narrative looks authoritative but is not clinically validated.
+* **Setting `class_weight={0: 1, 1: 5}` without business justification**: the 5x fraud weight is illustrative; the correct multiplier depends on the relative cost of a false negative (missed fraud) vs a false positive (blocked legitimate transaction), which is a business decision, not a modelling default.
+* **Choosing the optimal threshold from `precision_recall_curve` on the same test set you evaluate on**: the fraud example computes `best_threshold` by maximising F1 on `y_probs` from the test set; this is threshold-shopping on the test set and produces optimistic F1 estimates; use a separate validation set or cross-validated threshold selection.
+* **Treating feature importance from a single churn tree as a stable business insight**: the churn example shows `Contract Length: 1.0` and all other features at `0.0`; on a 15-row dataset, this is almost certainly a data artefact from the toy data rather than a genuine signal, and presenting it to business stakeholders as "only contract length matters" would be misleading.
 
 ## Best Practices for Real-World Applications
 
 1. **Data Quality**
-   - Clean and preprocess data carefully
-   - Handle missing values appropriately
-   - Deal with outliers
-
+   * Clean and preprocess data carefully
+   * Handle missing values appropriately
+   * Deal with outliers
 2. **Model Validation**
-   - Use cross-validation
-   - Monitor performance metrics specific to your application
-   - Test with real-world data before deployment
-
+   * Use cross-validation
+   * Monitor performance metrics specific to your application
+   * Test with real-world data before deployment
 3. **Interpretability**
-   - Keep trees simple (limit depth)
-   - Document decision rules
-   - Provide explanations for important predictions
-
+   * Keep trees simple (limit depth)
+   * Document decision rules
+   * Provide explanations for important predictions
 4. **Maintenance**
-   - Regular model updates as new data arrives
-   - Monitor performance drift
-   - Re-train periodically with fresh data
+   * Regular model updates as new data arrives
+   * Monitor performance drift
+   * Re-train periodically with fresh data
 
 ## Common Challenges and Solutions
 
 1. **Imbalanced Data**
-   - Use class weights (as shown in the fraud detection example)
-   - Try different sampling techniques
-   - Adjust decision thresholds based on business needs
-
+   * Use class weights (as shown in the fraud detection example)
+   * Try different sampling techniques
+   * Adjust decision thresholds based on business needs
 2. **Overfitting**
-   - Limit tree depth
-   - Use pruning techniques
-   - Require minimum samples per leaf
-
+   * Limit tree depth
+   * Use pruning techniques
+   * Require minimum samples per leaf
 3. **Feature Selection**
-   - Start with domain knowledge to select relevant features
-   - Use feature importance to identify key predictors
-   - Remove redundant or irrelevant features
+   * Start with domain knowledge to select relevant features
+   * Use feature importance to identify key predictors
+   * Remove redundant or irrelevant features
 
 ## Next Steps
 
@@ -1002,7 +358,8 @@ Ready to build your own application? Try:
 4. Deploy and monitor it in a controlled environment before full rollout
 
 Remember:
-- Start simple and add complexity only as needed
-- Validate thoroughly with real-world data
-- Document everything about your model and data preprocessing
-- Monitor performance over time to ensure continued accuracy
+
+* Start simple and add complexity only as needed
+* Validate thoroughly with real-world data
+* Document everything about your model and data preprocessing
+* Monitor performance over time to ensure continued accuracy

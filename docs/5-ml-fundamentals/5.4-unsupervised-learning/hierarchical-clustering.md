@@ -1,10 +1,18 @@
 ---
 reading_minutes: 15
 objectives:
-  - "Explain bottom-up agglomerative clustering and how a dendrogram encodes the order in which clusters merge."
-  - "Compare ward / complete / average / single linkage and how each shapes the resulting cluster geometry."
-  - "Use `AgglomerativeClustering` and `scipy.cluster.hierarchy.linkage` + `dendrogram` to fit, plot, and pick a cut height."
-  - "Recognise practical limits: O(n²) memory, no `predict` for new points, and why ward linkage requires Euclidean distance."
+  - >-
+    Explain bottom-up agglomerative clustering and how a dendrogram encodes the
+    order in which clusters merge.
+  - >-
+    Compare ward / complete / average / single linkage and how each shapes the
+    resulting cluster geometry.
+  - >-
+    Use `AgglomerativeClustering` and `scipy.cluster.hierarchy.linkage` +
+    `dendrogram` to fit, plot, and pick a cut height.
+  - >-
+    Recognise practical limits: O(n²) memory, no `predict` for new points, and
+    why ward linkage requires Euclidean distance.
 ---
 
 # Hierarchical Clustering
@@ -26,20 +34,18 @@ Think of this as a clustering method that keeps a history. K-Means gives you one
 
 Use it when you want to ask questions like:
 
-- Which customers are similar at a broad level, and which are similar only within a narrow subgroup?
-- Are there two big groups that split naturally into smaller groups?
-- At what distance do separate groups start merging together?
+* Which customers are similar at a broad level, and which are similar only within a narrow subgroup?
+* Are there two big groups that split naturally into smaller groups?
+* At what distance do separate groups start merging together?
 
 ## Quick Reference
 
-{% include mermaid-diagram.html src="5-ml-fundamentals/5.4-unsupervised-learning/diagrams/hierarchical-clustering-1.mmd" %}
-
 Hierarchical clustering is ideal when:
 
-- You want to explore multiple cluster levels.
-- You do not know the number of clusters in advance.
-- You have a small to medium dataset.
-- You need a dendrogram to explain how groups relate.
+* You want to explore multiple cluster levels.
+* You do not know the number of clusters in advance.
+* You have a small to medium dataset.
+* You need a dendrogram to explain how groups relate.
 
 ## What the Dendrogram Adds
 
@@ -95,10 +101,7 @@ plt.savefig("assets/hierarchical_clustering.png")
 plt.close()
 ```
 
-<figure>
-<img src="assets/hierarchical_clustering.png" alt="Original data, agglomerative clustering result, and dendrogram for the same synthetic dataset" />
-<figcaption>Figure 1: The dendrogram shows the merge history. Large vertical gaps suggest natural cut heights.</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/hierarchical_clustering.png" alt="Original data, agglomerative clustering result, and dendrogram for the same synthetic dataset"><figcaption><p>Figure 1: The dendrogram shows the merge history. Large vertical gaps suggest natural cut heights.</p></figcaption></figure>
 
 ## How to Read the Chart
 
@@ -106,10 +109,10 @@ The first panel shows the synthetic groups used to create the example. The secon
 
 Read the dendrogram from bottom to top:
 
-- At the bottom, each point starts separate.
-- Short branches merge very similar points.
-- Taller branches merge larger groups.
-- A horizontal cut across the tree gives the final number of clusters.
+* At the bottom, each point starts separate.
+* Short branches merge very similar points.
+* Taller branches merge larger groups.
+* A horizontal cut across the tree gives the final number of clusters.
 
 If you cut the tree lower, you get more clusters. If you cut it higher, smaller groups merge into fewer broader clusters.
 
@@ -129,7 +132,7 @@ print("Cluster counts:", cluster_counts)
 
 Expected output:
 
-```text
+```
 Cluster labels: [2 0 1 0 2 2 3 1 0 0]
 Cluster ids: [0 1 2 3]
 Cluster counts: [75 75 75 75]
@@ -141,10 +144,10 @@ The label numbers are arbitrary, just like K-Means. The useful information is th
 
 In a dendrogram:
 
-- Each leaf starts as one point or one small merged group.
-- Each horizontal connection means two clusters were merged.
-- The y-axis height is the merge distance.
-- A horizontal cut through the tree produces the final cluster count.
+* Each leaf starts as one point or one small merged group.
+* Each horizontal connection means two clusters were merged.
+* The y-axis height is the merge distance.
+* A horizontal cut through the tree produces the final cluster count.
 
 Look for the largest vertical gap with no horizontal line crossing it. Cutting through that gap often gives a reasonable number of clusters.
 
@@ -152,12 +155,12 @@ Look for the largest vertical gap with no horizontal line crossing it. Cutting t
 
 The linkage method defines "distance between clusters":
 
-| Linkage | How it measures cluster distance | Typical behavior |
-| --- | --- | --- |
-| `ward` | Merge that increases within-cluster variance the least | Compact clusters; Euclidean only |
-| `complete` | Farthest pair of points across clusters | Compact, conservative clusters |
-| `average` | Average pairwise distance across clusters | Middle-ground behavior |
-| `single` | Closest pair of points across clusters | Can create long chained clusters |
+| Linkage    | How it measures cluster distance                       | Typical behavior                 |
+| ---------- | ------------------------------------------------------ | -------------------------------- |
+| `ward`     | Merge that increases within-cluster variance the least | Compact clusters; Euclidean only |
+| `complete` | Farthest pair of points across clusters                | Compact, conservative clusters   |
+| `average`  | Average pairwise distance across clusters              | Middle-ground behavior           |
+| `single`   | Closest pair of points across clusters                 | Can create long chained clusters |
 
 Use `ward` as a clean default for numeric, scaled Euclidean data. Try `complete` or `average` when the dendrogram looks too chained.
 
@@ -165,8 +168,8 @@ Use `ward` as a clean default for numeric, scaled Euclidean data. Try `complete`
 
 There are two common ways to choose the final grouping:
 
-- Set `n_clusters` directly in `AgglomerativeClustering`.
-- Choose a cut height from the dendrogram and use that as the cluster boundary.
+* Set `n_clusters` directly in `AgglomerativeClustering`.
+* Choose a cut height from the dendrogram and use that as the cluster boundary.
 
 For beginners, start with the dendrogram. Look for a large vertical gap where no horizontal branches cross. Cutting through that gap often separates groups before the algorithm starts merging dissimilar clusters.
 
@@ -193,7 +196,7 @@ for linkage_name in ["ward", "complete", "average"]:
 
 Expected output:
 
-```text
+```
 ward [2 0 1 0 2 2 3 1 0 0]
 complete [2 1 3 1 2 2 0 3 1 1]
 average [2 0 3 0 2 2 1 3 0 0]
@@ -208,10 +211,10 @@ Then answer:
 
 ## Gotchas
 
-- **Ward linkage requires Euclidean distance** - `method="ward"` in scipy only works with Euclidean geometry.
-- **Cutting at the wrong height** - do not pick a cut because it looks neat; look for a large vertical gap in merge distances.
-- **Scalability wall** - agglomerative clustering uses O(n²) memory, so large datasets become expensive quickly.
-- **No `predict` for new points** - unlike K-Means, `AgglomerativeClustering` has no `predict` method. To assign new rows, refit on the combined old and new data.
-- **Linkage choice changes cluster shapes** - `single`, `complete`, `average`, and `ward` can produce very different trees on the same data.
+* **Ward linkage requires Euclidean distance** - `method="ward"` in scipy only works with Euclidean geometry.
+* **Cutting at the wrong height** - do not pick a cut because it looks neat; look for a large vertical gap in merge distances.
+* **Scalability wall** - agglomerative clustering uses O(n²) memory, so large datasets become expensive quickly.
+* **No `predict` for new points** - unlike K-Means, `AgglomerativeClustering` has no `predict` method. To assign new rows, refit on the combined old and new data.
+* **Linkage choice changes cluster shapes** - `single`, `complete`, `average`, and `ward` can produce very different trees on the same data.
 
 For the broader algorithm comparison, see the [Clustering Guide](clustering.md).

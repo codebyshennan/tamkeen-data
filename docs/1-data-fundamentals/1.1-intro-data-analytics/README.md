@@ -8,11 +8,7 @@ In today's data-driven world, understanding data analytics and data science is i
 
 ### Video
 
-<div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/9VamqHc7dRo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-*Alex the Analyst, What does a data analyst do?*
+_Alex the Analyst, What does a data analyst do?_
 
 > **Contributors:** Authoring standards: `docs/meta/DOCUMENTATION_GUIDELINES.md` (`meta/` is excluded from the Jekyll build).
 
@@ -24,12 +20,12 @@ Data analytics is like being a detective with numbers. It's the process of exami
 
 Teams often talk about four levels. You do not need all four in every project; the point is to **match the question to the method** and avoid jumping to complex models when a simple summary would do.
 
-| Type | Question it answers | Plain-language idea |
-| ---- | ------------------- | --------------------- |
-| **Descriptive** | What happened? | Summaries and trends over **past** data (averages, counts, dashboards). |
-| **Diagnostic** | Why did it happen? | Comparisons and drill-downs that suggest **causes** (often correlation first; experiments when you need causation). |
-| **Predictive** | What might happen? | Models that **estimate the future** or fill in unknowns (forecasts, churn risk, demand). |
-| **Prescriptive** | What should we do? | Recommendations or optimizations that **turn insight into action** (pricing, inventory, routing). |
+| Type             | Question it answers | Plain-language idea                                                                                                 |
+| ---------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **Descriptive**  | What happened?      | Summaries and trends over **past** data (averages, counts, dashboards).                                             |
+| **Diagnostic**   | Why did it happen?  | Comparisons and drill-downs that suggest **causes** (often correlation first; experiments when you need causation). |
+| **Predictive**   | What might happen?  | Models that **estimate the future** or fill in unknowns (forecasts, churn risk, demand).                            |
+| **Prescriptive** | What should we do?  | Recommendations or optimizations that **turn insight into action** (pricing, inventory, routing).                   |
 
 As you learn more statistics and machine learning, you will recognize **predictive** and **prescriptive** work as the places models show up most often; **descriptive** and **diagnostic** work is where you build shared understanding and sanity-check the data.
 
@@ -47,20 +43,20 @@ Most analytics projects move through the same building blocks. Names differ by c
 
 > **Important:** Don't worry if you don't understand the code examples yet! These are meant to give you a preview of what to expect in the course and show you how things are done in the industry. We'll teach you everything step by step as we go.
 
----
+***
 
 ### 1. Business Understanding
 
 **Example**: Construct a very simple example. A retail store wants to:
 
-- Increase sales revenue
-- Reduce inventory costs
-- Improve customer satisfaction
-- Optimize store layouts
-- Enhance marketing ROI
-- Predict seasonal demands
-- Reduce checkout wait times
-- Track employee performance
+* Increase sales revenue
+* Reduce inventory costs
+* Improve customer satisfaction
+* Optimize store layouts
+* Enhance marketing ROI
+* Predict seasonal demands
+* Reduce checkout wait times
+* Track employee performance
 
 How can a store do all of that? Obviously, there needs to be a way to collect these data points, and more importantly, to parse, analyse and understand the data that is collected.
 
@@ -91,7 +87,7 @@ retail_kpis = {
 
 We can see a very structured method of organising information; firstly, the retail stores wants to track metrics across the `sales`, `inventory` and `customer` category, and we have simple attributes that we would like to configure in this setup.
 
----
+***
 
 ### 2. Data Collection & Preparation
 
@@ -99,14 +95,14 @@ We can see a very structured method of organising information; firstly, the reta
 
 Say we've decided on the data structure that we would want to work with. The next (often tedious part) is gathering (retail) data. This can be gleaned from:
 
-- Point of sale (POS) systems
-- Customer loyalty programs
-- Inventory management systems
-- Employee scheduling software
-- Security cameras (foot traffic)
-- Online reviews and feedback
-- Website analytics
-- Social media mentions etc.
+* Point of sale (POS) systems
+* Customer loyalty programs
+* Inventory management systems
+* Employee scheduling software
+* Security cameras (foot traffic)
+* Online reviews and feedback
+* Website analytics
+* Social media mentions etc.
 
 **Data Processing:**
 
@@ -137,20 +133,20 @@ def prepare_sales_data(df):
     return daily_sales
 ```
 
----
+***
 
 ### 3. Analysis
 
 Once we've cleaned and parsed the data, we then want to make sense of this information. We want to make intelligent choices on our business based on the information presented to us. We might consider analyzing retail performance through:
 
-- Sales trend analysis
-- Customer segmentation
-- Basket analysis
-- Inventory optimization
-- Staff productivity metrics
-- Peak hour identification
-- Promotion effectiveness
-- Customer lifetime value
+* Sales trend analysis
+* Customer segmentation
+* Basket analysis
+* Inventory optimization
+* Staff productivity metrics
+* Peak hour identification
+* Promotion effectiveness
+* Customer lifetime value
 
 We can visualize these information (y'know, who wants to look at just numbers) to see if we can identify any patterns or trends, and to make generalizations on the performance of the retail store. In Python, we do these visualizations by importing data handling libraries like `pandas` and plotting / visualization libraries like `matplotlib`.
 
@@ -177,20 +173,20 @@ def analyze_peak_hours(sales_data):
     return hourly_sales
 ```
 
----
+***
 
 ### 4. Insights Generation
 
 Visualizations are informative in elucidating trends and patterns in data. In scenarios where there's a need for deeper thinking and present the findings thereafter in a report, a good data analyst must be able to discover insights like:
 
-- "70% of sales occur between 4-7 PM"
-- "Customers who buy product A often buy product B"
-- "Store layout change increased sales by 15%"
-- "Employee scheduling gaps during peak hours"
-- "Inventory stockouts causing lost sales"
-- "Weather impacts on shopping patterns"
-- "Loyalty program members spend 3x more"
-- "Social media mentions predict sales spikes"
+* "70% of sales occur between 4-7 PM"
+* "Customers who buy product A often buy product B"
+* "Store layout change increased sales by 15%"
+* "Employee scheduling gaps during peak hours"
+* "Inventory stockouts causing lost sales"
+* "Weather impacts on shopping patterns"
+* "Loyalty program members spend 3x more"
+* "Social media mentions predict sales spikes"
 
 **Visualization**:
 
@@ -228,11 +224,11 @@ def plot_sales_drivers(df):
     return plt.gcf()
 ```
 
-![Sales Drivers](./assets/sales_drivers_correlation.png)
+![Sales Drivers](../../../.gitbook/assets/sales_drivers_correlation.png)
 
 From this, we can easily see that traffic and promotions affect sales more than the weather. We know this sounds very simplistic (purely for illustrative purposes), but if we have more than the current feature set, you can see how powerful this tool could be to plan out and inform a retail strategy.
 
----
+***
 
 ### 5. Communication
 
@@ -240,14 +236,14 @@ Of course, in a larger company with multiple retail stores, the volume of data w
 
 **Example**: Presenting findings through:
 
-- Interactive dashboards
-- Regular performance reports
-- Executive summaries
-- Team presentations
-- Email newsletters
-- Automated alerts
-- Strategy recommendations
-- Action item tracking
+* Interactive dashboards
+* Regular performance reports
+* Executive summaries
+* Team presentations
+* Email newsletters
+* Automated alerts
+* Strategy recommendations
+* Action item tracking
 
 **Dashboard Example**:
 
@@ -285,7 +281,7 @@ The retail walkthrough earlier in this page is mostly **descriptive** (what sale
 ### Data Analysis Tools
 
 | Tool   | Use Case                           | Skill Level  |
-| -------- | ------------------------------------ | -------------- |
+| ------ | ---------------------------------- | ------------ |
 | Excel  | Basic data analysis, pivot tables  | Beginner     |
 | SQL    | Database querying, data extraction | Intermediate |
 | Python | Advanced analysis, automation      | Intermediate |
@@ -294,7 +290,7 @@ The retail walkthrough earlier in this page is mostly **descriptive** (what sale
 ### Visualization Tools
 
 | Tool       | Best For               | Key Features            |
-| ------------ | ------------------------ | ------------------------- |
+| ---------- | ---------------------- | ----------------------- |
 | Tableau    | Interactive dashboards | Drag-and-drop interface |
 | Power BI   | Business reporting     | Microsoft integration   |
 | Matplotlib | Custom visualizations  | Python integration      |
@@ -303,7 +299,7 @@ The retail walkthrough earlier in this page is mostly **descriptive** (what sale
 ### Statistical Tools
 
 | Tool    | Application          | Common Uses            |
-| --------- | ---------------------- | ------------------------ |
+| ------- | -------------------- | ---------------------- |
 | SPSS    | Academic research    | Statistical testing    |
 | SAS     | Enterprise analytics | Large dataset analysis |
 | Stata   | Economic analysis    | Time series analysis   |
@@ -335,20 +331,20 @@ Data science is like being both a detective and an inventor. While data analytic
 
 ### The Data Science Process
 
----
+***
 
 ### 1. Data Collection
 
 **Example**: A streaming service like Netflix collecting:
 
-- User viewing history (watch time, completion rates)
-- Search queries and results clicked
-- Pause/rewind/fast-forward patterns
-- Device information and quality settings
-- Time spent browsing vs watching
-- Rating and review data
-- Account sharing patterns
-- Network performance metrics
+* User viewing history (watch time, completion rates)
+* Search queries and results clicked
+* Pause/rewind/fast-forward patterns
+* Device information and quality settings
+* Time spent browsing vs watching
+* Rating and review data
+* Account sharing patterns
+* Network performance metrics
 
 **Technical Implementation**:
 
@@ -365,20 +361,20 @@ viewing_data = {
 }
 ```
 
----
+***
 
 ### 2. Data Cleaning
 
 **Example**: Preparing streaming data by:
 
-- Removing incomplete viewing sessions (<10 seconds)
-- Fixing timestamp errors across time zones
-- Standardizing show categories and genres
-- Handling missing ratings and reviews
-- Normalizing device names and types
-- Filtering out bot/test accounts
-- Correcting metadata inconsistencies
-- Dealing with VPN-related location issues
+* Removing incomplete viewing sessions (<10 seconds)
+* Fixing timestamp errors across time zones
+* Standardizing show categories and genres
+* Handling missing ratings and reviews
+* Normalizing device names and types
+* Filtering out bot/test accounts
+* Correcting metadata inconsistencies
+* Dealing with VPN-related location issues
 
 **Code Example**:
 
@@ -401,20 +397,20 @@ def clean_viewing_data(df):
     return df
 ```
 
----
+***
 
 ### 3. Data Exploration
 
 **Example**: Discovering patterns like:
 
-- Popular genres by time of day and region
-- Viewing duration patterns by content type
-- Content that keeps viewers engaged longest
-- Seasonal viewing trends and preferences
-- Correlation between rating and completion
-- Impact of auto-play on session length
-- Device preferences by demographic
-- Binge-watching behavior analysis
+* Popular genres by time of day and region
+* Viewing duration patterns by content type
+* Content that keeps viewers engaged longest
+* Seasonal viewing trends and preferences
+* Correlation between rating and completion
+* Impact of auto-play on session length
+* Device preferences by demographic
+* Binge-watching behavior analysis
 
 **Analysis Example**:
 
@@ -433,20 +429,20 @@ completion_rate = watched_duration / content_duration
 engagement_score = completion_rate * rating
 ```
 
----
+***
 
 ### 4. Modeling
 
 **Example**: Creating algorithms to:
 
-- Predict what shows a user might like (recommendation system)
-- Determine optimal video quality settings based on network
-- Forecast server capacity needs by region
-- Identify potential churning customers
-- Optimize content delivery networks
-- Personalize thumbnail images
-- Predict show success probability
-- Optimize auto-play timing
+* Predict what shows a user might like (recommendation system)
+* Determine optimal video quality settings based on network
+* Forecast server capacity needs by region
+* Identify potential churning customers
+* Optimize content delivery networks
+* Personalize thumbnail images
+* Predict show success probability
+* Optimize auto-play timing
 
 **Model Example**:
 
@@ -463,20 +459,20 @@ def train_recommendation_model(user_data, content_data):
     return model
 ```
 
----
+***
 
 ### 5. Deployment
 
 **Example**: Implementing solutions like:
 
-- Personalized recommendation system
-- Automated content categorization
-- Dynamic quality adjustment
-- Proactive retention campaigns
-- A/B testing framework
-- Real-time analytics pipeline
-- Automated reporting system
-- Performance monitoring dashboard
+* Personalized recommendation system
+* Automated content categorization
+* Dynamic quality adjustment
+* Proactive retention campaigns
+* A/B testing framework
+* Real-time analytics pipeline
+* Automated reporting system
+* Performance monitoring dashboard
 
 **Deployment Example**:
 
@@ -496,7 +492,7 @@ Understand the differences through real-world examples from various industries:
 ### Streaming Service (Netflix)
 
 | Aspect     | Data Analytics                                         | Data Science                                                    |
-| ------------ | -------------------------------------------------------- | ----------------------------------------------------------------- |
+| ---------- | ------------------------------------------------------ | --------------------------------------------------------------- |
 | Focus      | "Our most-watched show last month was Stranger Things" | "Here's an algorithm to predict what each user will watch next" |
 | Techniques | Creating reports on viewing patterns and engagement    | Building a recommendation engine using collaborative filtering  |
 | Outcome    | "Weekend viewership is 50% higher than weekdays"       | "This model predicts viewing preferences with 85% accuracy"     |
@@ -505,7 +501,7 @@ Understand the differences through real-world examples from various industries:
 ### E-commerce (Amazon)
 
 | Aspect     | Data Analytics                           | Data Science                                |
-| ------------ | ------------------------------------------ | --------------------------------------------- |
+| ---------- | ---------------------------------------- | ------------------------------------------- |
 | Focus      | "Best-selling products in each category" | "Predictive model for inventory management" |
 | Techniques | Sales reporting and trend analysis       | Machine learning for demand forecasting     |
 | Outcome    | "Electronics sales peak during holidays" | "Automated inventory optimization system"   |
@@ -514,7 +510,7 @@ Understand the differences through real-world examples from various industries:
 ### Healthcare
 
 | Aspect     | Data Analytics                            | Data Science                                     |
-| ------------ | ------------------------------------------- | -------------------------------------------------- |
+| ---------- | ----------------------------------------- | ------------------------------------------------ |
 | Focus      | "Average patient wait time is 45 minutes" | "Algorithm to predict patient readmission risk"  |
 | Techniques | Statistical analysis of hospital metrics  | Machine learning on patient health records       |
 | Outcome    | "Peak admission times are 2-4 PM"         | "Early warning system for patient complications" |
@@ -524,125 +520,115 @@ Understand the differences through real-world examples from various industries:
 
 ### Healthcare
 
-- **Analytics**:
-  - Tracking patient wait times and doctor availability
-  - Analyzing treatment costs and insurance claims
-  - Monitoring hospital resource utilization
-  - Reporting on patient satisfaction scores
-- **Data Science**:
-  - Predicting patient readmission risks
-  - Analyzing medical images for diagnosis
-  - Optimizing emergency response systems
-  - Developing personalized treatment plans
+* **Analytics**:
+  * Tracking patient wait times and doctor availability
+  * Analyzing treatment costs and insurance claims
+  * Monitoring hospital resource utilization
+  * Reporting on patient satisfaction scores
+* **Data Science**:
+  * Predicting patient readmission risks
+  * Analyzing medical images for diagnosis
+  * Optimizing emergency response systems
+  * Developing personalized treatment plans
 
 ### Finance
 
-- **Analytics**:
-  - Monthly reports on credit card spending
-  - Analysis of transaction patterns
-  - Customer segment profitability
-  - Branch performance metrics
-- **Data Science**:
-  - AI-powered fraud detection
-  - Algorithmic trading systems
-  - Credit risk assessment models
-  - Customer churn prediction
+* **Analytics**:
+  * Monthly reports on credit card spending
+  * Analysis of transaction patterns
+  * Customer segment profitability
+  * Branch performance metrics
+* **Data Science**:
+  * AI-powered fraud detection
+  * Algorithmic trading systems
+  * Credit risk assessment models
+  * Customer churn prediction
 
 ### Marketing
 
-- **Analytics**:
-  - Campaign performance reports
-  - Customer segmentation analysis
-  - ROI calculations
-  - Website traffic analysis
-- **Data Science**:
-  - Predictive models for customer lifetime value
-  - Recommendation systems
-  - Natural language processing for social media
-  - Attribution modeling
+* **Analytics**:
+  * Campaign performance reports
+  * Customer segmentation analysis
+  * ROI calculations
+  * Website traffic analysis
+* **Data Science**:
+  * Predictive models for customer lifetime value
+  * Recommendation systems
+  * Natural language processing for social media
+  * Attribution modeling
 
 ### Education
 
-- **Analytics**:
-  - Student attendance tracking
-  - Grade distribution analysis
-  - Course popularity metrics
-  - Resource utilization reports
-- **Data Science**:
-  - Personalized learning path recommendations
-  - Early warning systems for at-risk students
-  - Automated grading systems
-  - Student success prediction models
+* **Analytics**:
+  * Student attendance tracking
+  * Grade distribution analysis
+  * Course popularity metrics
+  * Resource utilization reports
+* **Data Science**:
+  * Personalized learning path recommendations
+  * Early warning systems for at-risk students
+  * Automated grading systems
+  * Student success prediction models
 
 ## Learning Path Recommendation
 
 For beginners, we recommend this comprehensive learning sequence:
 
 1. **Foundation (1-2 months)**
-
-   - Basic data analytics concepts
-   - Introduction to statistics
-   - Excel/spreadsheet proficiency
-   - SQL fundamentals
+   * Basic data analytics concepts
+   * Introduction to statistics
+   * Excel/spreadsheet proficiency
+   * SQL fundamentals
 2. **Technical Skills (2-3 months)**
-
-   - Python programming basics
-   - Data manipulation with Pandas
-   - Data visualization with Matplotlib/Seaborn
-   - Database management
+   * Python programming basics
+   * Data manipulation with Pandas
+   * Data visualization with Matplotlib/Seaborn
+   * Database management
 3. **Advanced Analytics (2-3 months)**
-
-   - Statistical analysis techniques
-   - Hypothesis testing
-   - A/B testing methodology
-   - Time series analysis
+   * Statistical analysis techniques
+   * Hypothesis testing
+   * A/B testing methodology
+   * Time series analysis
 4. **Data Science Fundamentals (3-4 months)**
-
-   - Machine learning basics
-   - Supervised/unsupervised learning
-   - Model evaluation techniques
-   - Feature engineering
+   * Machine learning basics
+   * Supervised/unsupervised learning
+   * Model evaluation techniques
+   * Feature engineering
 5. **Specialization (2-3 months)**
-
-   - Deep learning
-   - Natural language processing
-   - Computer vision
-   - Big data technologies
+   * Deep learning
+   * Natural language processing
+   * Computer vision
+   * Big data technologies
 6. **Professional Skills**
-
-   - Business acumen
-   - Data storytelling
-   - Project management
-   - Ethics in data science
+   * Business acumen
+   * Data storytelling
+   * Project management
+   * Ethics in data science
 
 ## Chapter Outline
 
 This chapter will cover:
 
 1. **Lifecycle of Data Analytics and Data Science**
-
-   - Data collection methods
-   - Processing techniques
-   - Analysis approaches
-   - Implementation strategies
+   * Data collection methods
+   * Processing techniques
+   * Analysis approaches
+   * Implementation strategies
 2. **Data Collection**
-
-   - Primary vs secondary data
-   - Data quality assessment
-   - Collection methods
-   - Best practices
+   * Primary vs secondary data
+   * Data quality assessment
+   * Collection methods
+   * Best practices
 3. **Data Privacy**
-
-   - Legal requirements
-   - Privacy frameworks
-   - Data protection
-   - Ethical considerations
+   * Legal requirements
+   * Privacy frameworks
+   * Data protection
+   * Ethical considerations
 4. **Data Security**
-
-   - Security protocols
-   - Access control
-   - Data encryption
-   - Risk management
+   * Security protocols
+   * Access control
+   * Data encryption
+   * Risk management
 
 Each section includes practical examples, hands-on exercises, and real-world case studies to help you understand these concepts better. The focus is on building both theoretical knowledge and practical skills that are directly applicable in the industry.
 
@@ -650,12 +636,12 @@ Each section includes practical examples, hands-on exercises, and real-world cas
 
 By the end of this module, you'll be able to:
 
-- Explain the difference between data analytics and data science
-- Understand the data analytics lifecycle and its key stages
-- Identify different types of data analytics (descriptive, diagnostic, predictive, prescriptive)
-- Recognize common tools used in data analytics and data science
-- Understand the importance of data privacy and security
-- Explain how data is collected, processed, and analyzed in real-world scenarios
+* Explain the difference between data analytics and data science
+* Understand the data analytics lifecycle and its key stages
+* Identify different types of data analytics (descriptive, diagnostic, predictive, prescriptive)
+* Recognize common tools used in data analytics and data science
+* Understand the importance of data privacy and security
+* Explain how data is collected, processed, and analyzed in real-world scenarios
 
 > **Tip:** As you go through this module, try to think of examples from your own life or work where data analytics could be useful. This will help you understand the concepts better!
 

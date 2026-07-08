@@ -4,46 +4,40 @@
 
 ### Video
 
-<div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/W9XjRYFkkyw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-*Corey Schafer, Python pandas tutorial (part 3): indexes (set, reset, reindex)*
+_Corey Schafer, Python pandas tutorial (part 3): indexes (set, reset, reindex)_
 
 ## Overview
 
-**Prerequisites:** [DataFrame](./dataframe.md) creation; basic understanding of **row labels** vs positions.
+**Prerequisites:** [DataFrame](dataframe.md) creation; basic understanding of **row labels** vs positions.
 
 **Why this lesson:** You will often **change** the index (dates, IDs), **drop** bad rows or columns, or **reindex** to match another table's labels. Doing this deliberately, without scrambling rows, is core data prep.
 
 ## Understanding Reindexing
 
----
+***
 
 ### What is Reindexing?
 
 Think of reindexing like reorganizing your data to match a new set of labels. It's a powerful tool for:
 
-{% include mermaid-diagram.html src="1-data-fundamentals/1.5-data-analysis-pandas/diagrams/reindexing-dropping-1.mmd" %}
+_`reindex` is the low-level primitive; `reset_index` and `set_index` are the high-level shortcuts you'll use most often._
 
-*`reindex` is the low-level primitive; `reset_index` and `set_index` are the high-level shortcuts you'll use most often.*
-
-- Rearranging data in a specific order
-- Adding new index labels (with placeholder values)
-- Removing unwanted index labels
-- Aligning multiple datasets
-- Restructuring data hierarchies
+* Rearranging data in a specific order
+* Adding new index labels (with placeholder values)
+* Removing unwanted index labels
+* Aligning multiple datasets
+* Restructuring data hierarchies
 
 Real-world applications:
 
-- Aligning financial data from different sources
-- Filling in missing dates in time series
-- Standardizing country codes/names
-- Matching customer records across systems
+* Aligning financial data from different sources
+* Filling in missing dates in time series
+* Standardizing country codes/names
+* Matching customer records across systems
 
 we will look at with examples:
 
----
+***
 
 ### Basic Reindexing
 
@@ -51,8 +45,8 @@ Start with practical examples:
 
 **Expand Series index and calendar rows**
 
-- **Purpose:** Use `reindex` to introduce new labels (David) or a full month list, missing slots become `NaN` until you fill them.
-- **Walkthrough:** `grades.reindex(new_index)` aligns to the new label order; `sales.reindex(all_months)` pads Feb-May.
+* **Purpose:** Use `reindex` to introduce new labels (David) or a full month list, missing slots become `NaN` until you fill them.
+* **Walkthrough:** `grades.reindex(new_index)` aligns to the new label order; `sales.reindex(all_months)` pads Feb-May.
 
 ```python
 import pandas as pd
@@ -117,7 +111,7 @@ Jun   1200.0   60.0
 
 Notice how 'David' was added with a NaN (Not a Number) value since we didn't have data for them.
 
----
+***
 
 ### Filling Missing Values
 
@@ -125,8 +119,8 @@ When reindexing, you can specify how to handle missing values:
 
 **`ffill` / `bfill` after reindex**
 
-- **Purpose:** Carry last known value forward or backward across newly inserted index labels, common for sparse time series.
-- **Walkthrough:** `method='ffill'` / `method='bfill'` (older API style in `reindex`; modern code may use `.ffill()` after reindex).
+* **Purpose:** Carry last known value forward or backward across newly inserted index labels, common for sparse time series.
+* **Walkthrough:** `method='ffill'` / `method='bfill'` (older API style in `reindex`; modern code may use `.ffill()` after reindex).
 
 ```python
 # Create a Series with missing days
@@ -151,7 +145,7 @@ print(temps_bfill)
 
 ## Working with DataFrames
 
----
+***
 
 ### Reindexing DataFrame Rows
 
@@ -159,8 +153,8 @@ You can reindex both rows and columns in a DataFrame:
 
 **Pad sparse weekday rows**
 
-- **Purpose:** Same as Series, extend a DataFrame's row index to every weekday; new rows are all-NaN until filled.
-- **Walkthrough:** Uses `df` with Mon/Wed/Fri then `reindex(all_days)`.
+* **Purpose:** Same as Series, extend a DataFrame's row index to every weekday; new rows are all-NaN until filled.
+* **Walkthrough:** Uses `df` with Mon/Wed/Fri then `reindex(all_days)`.
 
 ```python
 # Create a sample DataFrame
@@ -195,7 +189,7 @@ Thu   NaN       NaN
 Fri  25.0      45.0
 ```
 
----
+***
 
 ### Reindexing DataFrame Columns
 
@@ -203,8 +197,8 @@ You can also reindex columns to add or rearrange them:
 
 **Add or reorder columns without manual assignment**
 
-- **Purpose:** Insert missing columns as `NaN` or permute column order using the same `reindex` machinery.
-- **Walkthrough:** `columns=new_columns` adds `precipitation`; second call swaps `humidity`/`temp`.
+* **Purpose:** Insert missing columns as `NaN` or permute column order using the same `reindex` machinery.
+* **Walkthrough:** `columns=new_columns` adds `precipitation`; second call swaps `humidity`/`temp`.
 
 ```python
 # Reindex columns to add 'precipitation'
@@ -235,19 +229,19 @@ Fri        45    25
 
 ## Dropping Data
 
----
+***
 
 ### Understanding Drop Operations
 
 Dropping is like removing items from your dataset. You can drop:
 
-- Specific rows or columns
-- Rows or columns that meet certain conditions
-- Missing values
+* Specific rows or columns
+* Rows or columns that meet certain conditions
+* Missing values
 
 The dropped data is removed from the result but your original data remains unchanged unless you use `inplace=True`.
 
----
+***
 
 ### Dropping Rows
 
@@ -255,8 +249,8 @@ Here's how to drop rows from your data:
 
 **Drop by label and by NaN**
 
-- **Purpose:** Remove a row by integer position label (`drop(1)`) or all rows with any missing value (`dropna()`).
-- **Walkthrough:** `drop(1)` uses the **default RangeIndex** positions from `pd.DataFrame(...)`.
+* **Purpose:** Remove a row by integer position label (`drop(1)`) or all rows with any missing value (`dropna()`).
+* **Walkthrough:** `drop(1)` uses the **default RangeIndex** positions from `pd.DataFrame(...)`.
 
 ```python
 # Create a sample DataFrame
@@ -300,7 +294,7 @@ After dropping rows with missing values:
 3  David     95        90.0
 ```
 
----
+***
 
 ### Dropping Columns
 
@@ -308,8 +302,8 @@ You can also drop columns you don't need:
 
 **`axis=1` and column lists**
 
-- **Purpose:** Project down to fewer columns, one or many, without touching rows.
-- **Walkthrough:** `axis=1` means "columns"; pass a list to drop several at once.
+* **Purpose:** Project down to fewer columns, one or many, without touching rows.
+* **Walkthrough:** `axis=1` means "columns"; pass a list to drop several at once.
 
 ```python
 # Drop a single column
@@ -341,7 +335,7 @@ After dropping multiple columns:
 
 ## Best Practices and Tips
 
----
+***
 
 ### When to Use Reindex
 
@@ -356,8 +350,8 @@ Example of aligning two DataFrames:
 
 **Match another frame's index**
 
-- **Purpose:** Before element-wise ops, force `df2` onto `df1`'s row labels so shared keys line up.
-- **Walkthrough:** `df2.reindex(df1.index)` introduces row `a` as NaN.
+* **Purpose:** Before element-wise ops, force `df2` onto `df1`'s row labels so shared keys line up.
+* **Walkthrough:** `df2.reindex(df1.index)` introduces row `a` as NaN.
 
 ```python
 # Two DataFrames with different indexes
@@ -378,7 +372,7 @@ b  4.0
 c  5.0
 ```
 
----
+***
 
 ### When to Use Drop
 
@@ -393,8 +387,8 @@ Example of smart dropping:
 
 **Thresholds, duplicates, conditional row drop**
 
-- **Purpose:** Illustrate `thresh` for partial missing rows, `drop_duplicates`, and dropping by a boolean condition's index.
-- **Walkthrough:** `df` here is the student DataFrame from above-`thresh` keeps rows with at least half the columns non-null.
+* **Purpose:** Illustrate `thresh` for partial missing rows, `drop_duplicates`, and dropping by a boolean condition's index.
+* **Walkthrough:** `df` here is the student DataFrame from above-`thresh` keeps rows with at least half the columns non-null.
 
 ```python
 # Drop rows where more than 50% of values are missing
@@ -409,44 +403,42 @@ df_filtered = df.drop(df[df['grade'] < 60].index)
 
 ## Common Pitfalls and Solutions
 
-1. **Forgetting to Assign Results**:
+1.  **Forgetting to Assign Results**:
 
-   ```python
-   # Wrong: original df unchanged
-   df.drop('column_name', axis=1)
+    ```python
+    # Wrong: original df unchanged
+    df.drop('column_name', axis=1)
 
-   # Right: save result or use inplace=True
-   df = df.drop('column_name', axis=1)
-   # or
-   df.drop('column_name', axis=1, inplace=True)
-   ```
+    # Right: save result or use inplace=True
+    df = df.drop('column_name', axis=1)
+    # or
+    df.drop('column_name', axis=1, inplace=True)
+    ```
+2.  **Wrong Axis**:
 
-2. **Wrong Axis**:
+    ```python
+    # Remember:
+    # axis=0 or 'index' for rows
+    # axis=1 or 'columns' for columns
 
-   ```python
-   # Remember:
-   # axis=0 or 'index' for rows
-   # axis=1 or 'columns' for columns
+    # Drop a column
+    df.drop('column_name', axis=1)  # or axis='columns'
 
-   # Drop a column
-   df.drop('column_name', axis=1)  # or axis='columns'
+    # Drop a row
+    df.drop(0, axis=0)  # or axis='index'
+    ```
+3.  **Chaining Operations**:
 
-   # Drop a row
-   df.drop(0, axis=0)  # or axis='index'
-   ```
-
-3. **Chaining Operations**:
-
-   ```python
-   # More efficient way to drop multiple items
-   df_clean = (df
-               .drop('unnecessary_col', axis=1)
-               .dropna()
-               .drop_duplicates())
-   ```
+    ```python
+    # More efficient way to drop multiple items
+    df_clean = (df
+                .drop('unnecessary_col', axis=1)
+                .dropna()
+                .drop_duplicates())
+    ```
 
 Remember: Always make a copy of your data before dropping or reindexing if you want to preserve the original data structure!
 
 ## Next steps
 
-Continue to [Function mapping](./function-mapping.md), then [Sorting and ranking](./sorting-ranking.md) and [Arithmetic and alignment](./arithmetic-alignment.md).
+Continue to [Function mapping](function-mapping.md), then [Sorting and ranking](sorting-ranking.md) and [Arithmetic and alignment](arithmetic-alignment.md).

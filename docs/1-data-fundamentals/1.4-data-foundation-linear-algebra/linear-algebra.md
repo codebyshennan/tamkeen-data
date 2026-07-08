@@ -4,39 +4,33 @@
 
 ### Video
 
-<div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/fNk_zzaMoSs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-*3Blue1Brown, Essence of linear algebra: vectors*
+_3Blue1Brown, Essence of linear algebra: vectors_
 
 ## How this lesson is organized
 
 This page mixes **set-like** ideas (unique values, membership) with **matrix multiplication** and other **linear algebra** tools. That mirrors real workflows: you often **deduplicate** or **filter** arrays before you **combine** or **transform** them with matrices. Read top to bottom; each section's code is short enough to run in a notebook as you go.
 
-{% include mermaid-diagram.html src="1-data-fundamentals/1.4-data-foundation-linear-algebra/diagrams/linear-algebra-1.mmd" %}
-
-*Most sklearn algorithms reduce to matrix multiplications under the hood. Understanding shapes prevents the most common errors: mismatched dimensions in `np.dot` or `@`.*
+_Most sklearn algorithms reduce to matrix multiplications under the hood. Understanding shapes prevents the most common errors: mismatched dimensions in `np.dot` or `@`._
 
 ## Set operations: finding unique values
 
----
+***
 
 ### Finding Unique Values
 
 Like finding unique cards in a deck! Set operations are important for:
 
-- Data cleaning (removing duplicates)
-- Feature engineering (unique categories)
-- Finding distinct values
-- Comparing datasets
+* Data cleaning (removing duplicates)
+* Feature engineering (unique categories)
+* Finding distinct values
+* Comparing datasets
 
 Real-world applications:
 
-- Finding unique customer IDs
-- Extracting unique product categories
-- Identifying unique transaction types
-- Finding unique locations in data
+* Finding unique customer IDs
+* Extracting unique product categories
+* Identifying unique transaction types
+* Finding unique locations in data
 
 ```python
 import numpy as np
@@ -78,7 +72,7 @@ Counts: [2 2 3 2]
 Unique product categories: ['Books' 'Clothing' 'Electronics']
 ```
 
----
+***
 
 ### Testing Membership
 
@@ -108,7 +102,7 @@ print("Out of stock:", orders[~can_fulfill])
 
 ## Matrix Multiplication: The Dance of Numbers
 
----
+***
 
 ### What is Matrix Multiplication?
 
@@ -138,7 +132,7 @@ print(result)
  [ 67 181]]
 ```
 
----
+***
 
 ### Visual Guide to Matrix Multiplication
 
@@ -153,7 +147,7 @@ Matrix 1:      Matrix 2:      Result:
 First element (28) = 1×6 + 2×(-1) + 3×8
 ```
 
----
+***
 
 ### Three Ways to Multiply
 
@@ -172,7 +166,7 @@ result3 = np.matmul(x, y)
 
 ## Linear Algebra Operations: The Toolbox
 
----
+***
 
 ### Common Operations
 
@@ -203,7 +197,7 @@ Inverse:
 Solution: [1. 2.]
 ```
 
----
+***
 
 ### Visual Guide to Operations
 
@@ -222,7 +216,7 @@ Solution: x = 1, y = 2
 
 ## Matrix Properties: Getting to Know Your Data
 
----
+***
 
 ### Finding Matrix Properties
 
@@ -248,7 +242,7 @@ Rank: 2
 Trace: 5
 ```
 
----
+***
 
 ### Eigenvalues and Eigenvectors
 
@@ -272,18 +266,18 @@ Eigenvectors:
 
 **Pro Tips**:
 
-- Use **@** for matrix multiplication, it is cleaner
-- Check matrix shapes before multiplying
-- Remember: not all matrices have inverses
-- Use **np.linalg** for advanced operations
-- Think about what operation makes sense for your data
+* Use **@** for matrix multiplication, it is cleaner
+* Check matrix shapes before multiplying
+* Remember: not all matrices have inverses
+* Use **np.linalg** for advanced operations
+* Think about what operation makes sense for your data
 
 ## Common pitfalls
 
-- **Shape mismatch**: Inner dimensions must align for matrix multiply; use **.shape** when an error mentions **(m,k)** vs **(k,n)**.
-- **Singular matrix**: **inv** fails when the matrix is singular; prefer **lstsq** or **pinv** when appropriate.
-- **Confusing elementwise * and @**, **\*** multiplies element by element; **@** is matrix multiplication.
+* **Shape mismatch**: Inner dimensions must align for matrix multiply; use **.shape** when an error mentions **(m,k)** vs **(k,n)**.
+* **Singular matrix**: **inv** fails when the matrix is singular; prefer **lstsq** or **pinv** when appropriate.
+* **Confusing elementwise \* and @**, **\*** multiplies element by element; **@** is matrix multiplication.
 
 ## Next steps
 
-Continue to [Data analysis with pandas](../1.5-data-analysis-pandas/README.md), starting with [Series](../1.5-data-analysis-pandas/series.md).
+Continue to [Data analysis with pandas](../1.5-data-analysis-pandas/), starting with [Series](../1.5-data-analysis-pandas/series.md).

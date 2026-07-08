@@ -4,53 +4,47 @@
 
 ### Video
 
-<div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/T11QYVfZoD0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-*Corey Schafer, Python pandas tutorial (part 7): sorting data*
+_Corey Schafer, Python pandas tutorial (part 7): sorting data_
 
 ## Overview
 
-**Prerequisites:** [DataFrame](./dataframe.md) indexing; basic notion of **rank** vs **sort**.
+**Prerequisites:** [DataFrame](dataframe.md) indexing; basic notion of **rank** vs **sort**.
 
 **Why this lesson:** Sorting puts rows in a readable order; **ranking** assigns positions for scoring and percentiles. You will use both for leaderboards, time-ordered panels, and preparing data for cumulative plots or window functions.
 
 ## Understanding Sorting
 
----
+***
 
 ### What is Sorting?
 
 Sorting in Pandas helps you organize your data in a specific order. Think of it like:
 
-{% include mermaid-diagram.html src="1-data-fundamentals/1.5-data-analysis-pandas/diagrams/sorting-ranking-1.mmd" %}
+_Use `sort_values` to reorder rows for display or iteration. Use `rank` when you need a numeric position (e.g. leaderboard position, percentile) as a new column alongside the original data._
 
-*Use `sort_values` to reorder rows for display or iteration. Use `rank` when you need a numeric position (e.g. leaderboard position, percentile) as a new column alongside the original data.*
-
-- Arranging books alphabetically on a shelf
-- Organizing test scores from highest to lowest
-- Arranging dates from oldest to newest
-- Sorting transactions by amount
-- Ranking players by score
+* Arranging books alphabetically on a shelf
+* Organizing test scores from highest to lowest
+* Arranging dates from oldest to newest
+* Sorting transactions by amount
+* Ranking players by score
 
 Key benefits:
 
-- Quick value lookup
-- Pattern identification
-- Data presentation
-- Priority identification
-- Trend analysis
+* Quick value lookup
+* Pattern identification
+* Data presentation
+* Priority identification
+* Trend analysis
 
 Real-world applications:
 
-- Financial portfolio analysis
-- Sports rankings and statistics
-- Sales performance reports
-- Event scheduling and planning
-- Customer segmentation
+* Financial portfolio analysis
+* Sports rankings and statistics
+* Sales performance reports
+* Event scheduling and planning
+* Customer segmentation
 
----
+***
 
 ### Basic Sorting Example
 
@@ -58,42 +52,9 @@ we will look at sorting with practical examples:
 
 **Sort Series by value or index; sort DataFrame by column**
 
-- **Purpose:** Use `sort_values` on a Series and on a derived `Total` column; use `sort_index` for alphabetical names.
-- **Walkthrough:** `ascending=False` puts largest totals first; `sort_index()` orders the **index** labels, not values.
+* **Purpose:** Use `sort_values` on a Series and on a derived `Total` column; use `sort_index` for alphabetical names.
+* **Walkthrough:** `ascending=False` puts largest totals first; `sort_index()` orders the **index** labels, not values.
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
-
-{% highlight python %}
-import pandas as pd
-import numpy as np
-
-# Example 1: Student Performance
-scores = pd.Series({
-    'Alice': 85, 'Bob': 92, 'Charlie': 78, 'David': 95, 'Eve': 88
-}, name='Test Scores')
-
-print("Original scores:")
-print(scores)
-
-print("\nTop performers:")
-print(scores.sort_values(ascending=False))
-
-print("\nAlphabetical order:")
-print(scores.sort_index())
-
-# Example 2: Sales Analysis
-sales_data = pd.DataFrame({
-    'Product': ['Laptop', 'Mouse', 'Keyboard', 'Monitor', 'Laptop'],
-    'Price': [1200, 25, 100, 300, 1100],
-    'Units': [5, 50, 30, 10, 8],
-    'Date': pd.date_range('2023-01-01', periods=5)
-})
-
-sales_data['Total'] = sales_data['Price'] * sales_data['Units']
-print("\nSales Data (sorted by total sales):")
-print(sales_data.sort_values('Total', ascending=False))
-{% endhighlight %}
 ```
 Original scores:
 Alice      85
@@ -128,29 +89,13 @@ Sales Data (sorted by total sales):
 1     Mouse     25     50 2023-01-02   1250
 ```
 
+Series Sorting
 
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-15" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Series Sorting</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Creates a named Series with student names as the index, then demonstrates <code>sort_values</code> for ranking by score and <code>sort_index</code> for alphabetical order.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="17-27" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">DataFrame Sort</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Builds a sales DataFrame, computes a Total column, then sorts descending by Total, showing how row order changes while all columns travel together.</p>
-    </div>
-  </div>
-</aside>
-</div>
+Creates a named Series with student names as the index, then demonstrates `sort_values` for ranking by score and `sort_index` for alphabetical order.
+
+DataFrame Sort
+
+Builds a sales DataFrame, computes a Total column, then sorts descending by Total, showing how row order changes while all columns travel together.
 
 ```
 Original scores:
@@ -188,7 +133,7 @@ Sales Data (sorted by total sales):
 
 ## Sorting DataFrames
 
----
+***
 
 ### Sorting by a Single Column
 
@@ -196,8 +141,8 @@ Work with a student grades DataFrame:
 
 **`sort_values` on one column**
 
-- **Purpose:** Order rows by `Math` ascending or descending while keeping each student's row intact.
-- **Walkthrough:** Default `ascending=True` gives low-to-high scores.
+* **Purpose:** Order rows by `Math` ascending or descending while keeping each student's row intact.
+* **Walkthrough:** Default `ascending=True` gives low-to-high scores.
 
 ```python
 # Create a DataFrame with student grades
@@ -246,7 +191,7 @@ Sorted by Math scores (highest to lowest):
 2  Charlie    78       96       92
 ```
 
----
+***
 
 ### Sorting by Multiple Columns
 
@@ -254,8 +199,8 @@ You can sort by multiple columns to break ties:
 
 **Lexicographic sort with `ascending` list**
 
-- **Purpose:** Break ties on `Science` using `Math` as secondary key; flip directions per column with `ascending=[False, True]`.
-- **Walkthrough:** Column order in the list is **primary → secondary** sort.
+* **Purpose:** Break ties on `Science` using `Math` as secondary key; flip directions per column with `ascending=[False, True]`.
+* **Walkthrough:** Column order in the list is **primary → secondary** sort.
 
 ```python
 # Sort by Science first, then by Math
@@ -288,19 +233,19 @@ Science descending, Math ascending:
 
 ## Understanding Ranking
 
----
+***
 
 ### What is Ranking?
 
 Ranking assigns positions to your data based on their values. Think of it like:
 
-- Ranking athletes in a competition
-- Assigning class rank to students
-- Determining the position of teams in a league
+* Ranking athletes in a competition
+* Assigning class rank to students
+* Determining the position of teams in a league
 
 The difference from sorting is that ranking keeps your data in its original order but adds rank numbers.
 
----
+***
 
 ### Basic Ranking Example
 
@@ -308,8 +253,8 @@ Look at different ways to rank data:
 
 **Tie-breaking: average, first, min, max**
 
-- **Purpose:** See how the same scores get different rank numbers depending on `method`-important for leaderboards and percentiles.
-- **Walkthrough:** Tied `85` values get ranks 1.5 (average), 1 vs 2 (first), 1 (min), 2 (max).
+* **Purpose:** See how the same scores get different rank numbers depending on `method`-important for leaderboards and percentiles.
+* **Walkthrough:** Tied `85` values get ranks 1.5 (average), 1 vs 2 (first), 1 (min), 2 (max).
 
 ```python
 # Create a Series with test scores
@@ -378,7 +323,7 @@ Notice how different methods handle the tied scores (85 appears twice).
 
 ## Real-World Examples
 
----
+***
 
 ### Sales Performance Analysis
 
@@ -386,8 +331,8 @@ Analyze sales data:
 
 **Global sort + `groupby` rank**
 
-- **Purpose:** Sort for reporting, then assign **within-group** ranks (here by `Region`) so North and South are ranked separately.
-- **Walkthrough:** `groupby('Region')['Sales'].rank(ascending=False)` broadcasts ranks back to original row order.
+* **Purpose:** Sort for reporting, then assign **within-group** ranks (here by `Region`) so North and South are ranked separately.
+* **Walkthrough:** `groupby('Region')['Sales'].rank(ascending=False)` broadcasts ranks back to original row order.
 
 ```python
 # Create sales data
@@ -426,7 +371,7 @@ Sales with regional rankings:
 4         Tom  North  250000       55           1.0
 ```
 
----
+***
 
 ### Student Performance Analysis
 
@@ -434,42 +379,13 @@ Analyze student rankings across different subjects:
 
 **Row-wise mean and per-subject ranks**
 
-- **Purpose:** Combine `mean(axis=1)` for an overall score with per-column `rank` to show strengths in each subject.
-- **Walkthrough:** `sort_values('OverallRank')` at the end orders by overall performance.
+* **Purpose:** Combine `mean(axis=1)` for an overall score with per-column `rank` to show strengths in each subject.
+* **Walkthrough:** `sort_values('OverallRank')` at the end orders by overall performance.
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+\`\`\` Student rankings: Name Math Science ... MathRank ScienceRank HistoryRank 4 Eve 88 90 ... 3.0 3.0 1.0 3 David 95 88 ... 1.0 4.0 4.5 2 Charlie 78 96 ... 5.0 1.0 2.0 0 Alice 85 92 ... 4.0 2.0 3.0 1 Bob 92 85 ... 2.0 5.0 4.5
 
-{% highlight python %}
-# Create student data
-students = pd.DataFrame({
-    'Name': ['Alice', 'Bob', 'Charlie', 'David', 'Eve'],
-    'Math': [85, 92, 78, 95, 88],
-    'Science': [92, 85, 96, 88, 90],
-    'History': [88, 85, 92, 85, 95]
-})
+\[5 rows x 9 columns]
 
-# Calculate overall ranking
-students['AverageScore'] = students[['Math', 'Science', 'History']].mean(axis=1)
-students['OverallRank'] = students['AverageScore'].rank(ascending=False)
-
-# Calculate subject-wise rankings
-for subject in ['Math', 'Science', 'History']:
-    students[f'{subject}Rank'] = students[subject].rank(ascending=False)
-
-print("Student rankings:")
-print(students.sort_values('OverallRank'))
-{% endhighlight %}
-```
-Student rankings:
-      Name  Math  Science  ...  MathRank  ScienceRank  HistoryRank
-4      Eve    88       90  ...       3.0          3.0          1.0
-3    David    95       88  ...       1.0          4.0          4.5
-2  Charlie    78       96  ...       5.0          1.0          2.0
-0    Alice    85       92  ...       4.0          2.0          3.0
-1      Bob    92       85  ...       2.0          5.0          4.5
-
-[5 rows x 9 columns]
 ```
 
 
@@ -506,16 +422,12 @@ Student rankings:
 </div>
 
 ```
-Student rankings:
-      Name  Math  Science  ...  MathRank  ScienceRank  HistoryRank
-4      Eve    88       90  ...       3.0          3.0          1.0
-3    David    95       88  ...       1.0          4.0          4.5
-2  Charlie    78       96  ...       5.0          1.0          2.0
-0    Alice    85       92  ...       4.0          2.0          3.0
-1      Bob    92       85  ...       2.0          5.0          4.5
 
-[5 rows x 9 columns]
-```
+Student rankings: Name Math Science ... MathRank ScienceRank HistoryRank 4 Eve 88 90 ... 3.0 3.0 1.0 3 David 95 88 ... 1.0 4.0 4.5 2 Charlie 78 96 ... 5.0 1.0 2.0 0 Alice 85 92 ... 4.0 2.0 3.0 1 Bob 92 85 ... 2.0 5.0 4.5
+
+\[5 rows x 9 columns]
+
+````
 
 ## Best Practices and Tips
 
@@ -535,84 +447,80 @@ Student rankings:
 
    # Or sort in-place if needed
    df.sort_values('column', inplace=True)
-   ```
+````
 
-2. **Handle Missing Values**:
+2.  **Handle Missing Values**:
 
-   **Placement of NaNs when sorting**
+    **Placement of NaNs when sorting**
 
-   - **Purpose:** Decide whether missing keys sort to the top or bottom for dashboards.
+    * **Purpose:** Decide whether missing keys sort to the top or bottom for dashboards.
 
-   ```python
-   # Control where NaN values appear
-   df.sort_values('column', na_position='first')  # or 'last'
-   ```
+    ```python
+    # Control where NaN values appear
+    df.sort_values('column', na_position='first')  # or 'last'
+    ```
+3.  **Stable Sorting**:
 
-3. **Stable Sorting**:
+    **Stable sort for tied keys**
 
-   **Stable sort for tied keys**
+    * **Purpose:** When primary/secondary keys repeat, preserve original row order among ties, helps reproducible exports.
 
-   - **Purpose:** When primary/secondary keys repeat, preserve original row order among ties, helps reproducible exports.
+    ```python
+    # Maintain relative order of equal values
+    df.sort_values(['A', 'B'], kind='stable')
+    ```
 
-   ```python
-   # Maintain relative order of equal values
-   df.sort_values(['A', 'B'], kind='stable')
-   ```
-
----
+***
 
 ### Ranking Best Practices
 
-1. **Choose Appropriate Method**:
+1.  **Choose Appropriate Method**:
 
-   ```python
-   # For competition rankings (1224 ranking)
-   df['Rank'] = df['Score'].rank(method='min')
+    ```python
+    # For competition rankings (1224 ranking)
+    df['Rank'] = df['Score'].rank(method='min')
 
-   # For dense rankings (1223 ranking)
-   df['Rank'] = df['Score'].rank(method='dense')
+    # For dense rankings (1223 ranking)
+    df['Rank'] = df['Score'].rank(method='dense')
 
-   # For unique rankings
-   df['Rank'] = df['Score'].rank(method='first')
-   ```
+    # For unique rankings
+    df['Rank'] = df['Score'].rank(method='first')
+    ```
+2.  **Handle Percentile Rankings**:
 
-2. **Handle Percentile Rankings**:
-
-   ```python
-   # Calculate percentile ranks
-   df['Percentile'] = df['Score'].rank(pct=True)
-   ```
+    ```python
+    # Calculate percentile ranks
+    df['Percentile'] = df['Score'].rank(pct=True)
+    ```
 
 ## Common Pitfalls and Solutions
 
-1. **Forgetting to Handle NaN Values**:
+1.  **Forgetting to Handle NaN Values**:
 
-   ```python
-   # Specify na_position explicitly
-   df.sort_values('column', na_position='last')
-   ```
+    ```python
+    # Specify na_position explicitly
+    df.sort_values('column', na_position='last')
+    ```
+2.  **Incorrect Rank Method**:
 
-2. **Incorrect Rank Method**:
+    ```python
+    # Different methods for different needs:
+    # 'average': Default, assigns average of ranks for ties
+    # 'min': Assigns minimum rank for ties
+    # 'max': Assigns maximum rank for ties
+    # 'first': Assigns ranks in order they appear
+    # 'dense': Leaves no gaps in ranking
+    ```
+3.  **Not Considering Performance**:
 
-   ```python
-   # Different methods for different needs:
-   # 'average': Default, assigns average of ranks for ties
-   # 'min': Assigns minimum rank for ties
-   # 'max': Assigns maximum rank for ties
-   # 'first': Assigns ranks in order they appear
-   # 'dense': Leaves no gaps in ranking
-   ```
-
-3. **Not Considering Performance**:
-
-   ```python
-   # More efficient for large datasets
-   df.nlargest(10, 'column')  # Instead of sort_values().head(10)
-   df.nsmallest(10, 'column')  # Instead of sort_values().tail(10)
-   ```
+    ```python
+    # More efficient for large datasets
+    df.nlargest(10, 'column')  # Instead of sort_values().head(10)
+    df.nsmallest(10, 'column')  # Instead of sort_values().tail(10)
+    ```
 
 Remember: Choose sorting and ranking methods based on your specific needs. Consider how you want to handle ties and missing values before applying these operations!
 
 ## Next steps
 
-Continue to [Arithmetic and alignment](./arithmetic-alignment.md) to finish core pandas patterns in this submodule.
+Continue to [Arithmetic and alignment](arithmetic-alignment.md) to finish core pandas patterns in this submodule.

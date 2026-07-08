@@ -4,39 +4,33 @@
 
 ## Overview
 
-**Prerequisites:** [Introduction to Python](../1.2-intro-python/README.md) and [Introduction to NumPy](../1.4-data-foundation-linear-algebra/intro-numpy.md) (arrays) at a basic level.
+**Prerequisites:** [Introduction to Python](../1.2-intro-python/) and [Introduction to NumPy](../1.4-data-foundation-linear-algebra/intro-numpy.md) (arrays) at a basic level.
 
 **Why this lesson:** A **Series** is a single column with an **index** and a **dtype**. Mastering it now makes **DataFrame** operations (selection, alignment, missing data) much easier later.
 
 ### Video
 
-<div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/zmdjNSmRXF4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-*Corey Schafer, Python pandas tutorial (part 2): DataFrame and Series basics*
+_Corey Schafer, Python pandas tutorial (part 2): DataFrame and Series basics_
 
 ## What is a Series?
 
 A Pandas Series is like a column in a spreadsheet or a single list of data with labels. Think of it as a smart, one-dimensional array that knows the name of each item! It's perfect for:
 
-{% include mermaid-diagram.html src="1-data-fundamentals/1.5-data-analysis-pandas/diagrams/series-1.mmd" %}
+_An index label sits next to each value, this is what makes a Series smarter than a plain Python list._
 
-*An index label sits next to each value, this is what makes a Series smarter than a plain Python list.*
-
-- Time series data (stock prices over time)
-- Storing categorical data (product categories)
-- Tracking measurements (temperatures, distances)
-- Working with labeled data (student grades)
+* Time series data (stock prices over time)
+* Storing categorical data (product categories)
+* Tracking measurements (temperatures, distances)
+* Working with labeled data (student grades)
 
 Real-world applications:
 
-- Financial data analysis
-- Daily temperature readings
-- Survey responses
-- Sales performance tracking
+* Financial data analysis
+* Daily temperature readings
+* Survey responses
+* Sales performance tracking
 
----
+***
 
 ### Creating Your First Series
 
@@ -44,8 +38,8 @@ we will look at different ways to create a Series:
 
 **Construct Series from list, array, scalar, and custom index**
 
-- **Purpose:** Recognize the three inputs pandas accepts for a 1-D Series and see default `RangeIndex` vs named day labels.
-- **Walkthrough:** `pd.Series(list)`, `pd.Series(ndarray)`, broadcast `pd.Series(5, index=[...])`, then `temperatures.mean()`/`max()`.
+* **Purpose:** Recognize the three inputs pandas accepts for a 1-D Series and see default `RangeIndex` vs named day labels.
+* **Walkthrough:** `pd.Series(list)`, `pd.Series(ndarray)`, broadcast `pd.Series(5, index=[...])`, then `temperatures.mean()`/`max()`.
 
 ```python
 import pandas as pd
@@ -118,7 +112,7 @@ Highest temperature: 23.4
 
 Notice how Pandas automatically creates numbered labels (0, 1, 2, 3) for each value!
 
----
+***
 
 ### Custom Labels
 
@@ -126,8 +120,8 @@ You can create your own labels (called an index) for each value:
 
 **String index for student grades**
 
-- **Purpose:** Use non-numeric index labels so you can refer to rows by name (`grades['Alice']` in the next section).
-- **Walkthrough:** `index=[...]` aligns 1:1 with the value list.
+* **Purpose:** Use non-numeric index labels so you can refer to rows by name (`grades['Alice']` in the next section).
+* **Walkthrough:** `index=[...]` aligns 1:1 with the value list.
 
 ```python
 # Create a Series with custom labels
@@ -156,7 +150,7 @@ dtype: int64
 
 Now you can access values using these friendly names!
 
----
+***
 
 ### Working with Series
 
@@ -164,8 +158,8 @@ Here are some common ways to work with your Series:
 
 **Label, fancy index, and boolean mask**
 
-- **Purpose:** Read one label, several labels, and filter by a condition on the Series values.
-- **Walkthrough:** `grades[['Alice', 'Bob']]` passes a list of labels; `grades >= 90` returns a boolean Series aligned to `grades`.
+* **Purpose:** Read one label, several labels, and filter by a condition on the Series values.
+* **Walkthrough:** `grades[['Alice', 'Bob']]` passes a list of labels; `grades >= 90` returns a boolean Series aligned to `grades`.
 
 ```python
 # Access a single value using its label
@@ -194,19 +188,19 @@ dtype: int64
 
 ## Series from Dictionary
 
----
+***
 
 ### Creating from Dictionary
 
 A Series can be created from a dictionary, where:
 
-- Dictionary keys become the index (labels)
-- Dictionary values become the Series values
+* Dictionary keys become the index (labels)
+* Dictionary values become the Series values
 
 **Series from mapping**
 
-- **Purpose:** See how dict **keys → index** and **values → data**-common when you already have a lookup table in Python.
-- **Walkthrough:** Order of rows follows insertion order (Python 3.7+ dicts).
+* **Purpose:** See how dict **keys → index** and **values → data**-common when you already have a lookup table in Python.
+* **Walkthrough:** Order of rows follows insertion order (Python 3.7+ dicts).
 
 ```python
 # Create a Series from a dictionary
@@ -237,7 +231,7 @@ Paris        2.2
 dtype: float64
 ```
 
----
+***
 
 ### Converting Back to Dictionary
 
@@ -245,8 +239,8 @@ You can convert your Series back to a dictionary:
 
 **Round-trip to plain Python dict**
 
-- **Purpose:** Export a Series to a built-in dict for APIs or serialization that expect `{}`.
-- **Walkthrough:** `population.to_dict()` maps index → value.
+* **Purpose:** Export a Series to a built-in dict for APIs or serialization that expect `{}`.
+* **Walkthrough:** `population.to_dict()` maps index → value.
 
 ```python
 # Convert Series to dictionary
@@ -270,7 +264,7 @@ Output:
 
 ## Working with Missing Data
 
----
+***
 
 ### Understanding Missing Data
 
@@ -278,8 +272,8 @@ In the real world, data is often incomplete. Pandas uses `NaN` (Not a Number) to
 
 **`None` becomes float NaN**
 
-- **Purpose:** Observe how pandas stores missing entries and promotes dtypes when needed (`None` → `NaN`, often float column).
-- **Walkthrough:** `Science: None` shows up as `NaN` in `print(scores)`.
+* **Purpose:** Observe how pandas stores missing entries and promotes dtypes when needed (`None` → `NaN`, often float column).
+* **Walkthrough:** `Science: None` shows up as `NaN` in `print(scores)`.
 
 ```python
 # Series with missing data
@@ -305,7 +299,7 @@ History    88.0
 dtype: float64
 ```
 
----
+***
 
 ### Handling Missing Data
 
@@ -313,8 +307,8 @@ Pandas provides tools to work with missing data:
 
 **Detect, drop, or fill NaNs**
 
-- **Purpose:** Use `isna`, `dropna`, and `fillna` as the minimal toolkit before aggregating.
-- **Walkthrough:** `scores.fillna(0)` is illustrative, choose a fill rule that matches your domain.
+* **Purpose:** Use `isna`, `dropna`, and `fillna` as the minimal toolkit before aggregating.
+* **Walkthrough:** `scores.fillna(0)` is illustrative, choose a fill rule that matches your domain.
 
 ```python
 # Check for missing values
@@ -354,7 +348,7 @@ dtype: float64
 
 ## Series Operations
 
----
+***
 
 ### Basic Math Operations
 
@@ -362,8 +356,8 @@ Series support mathematical operations, just like regular numbers:
 
 **Broadcast scalar addition**
 
-- **Purpose:** See element-wise `grades + 5` with **index preserved**-the same rule as NumPy broadcasting, but with labels.
-- **Walkthrough:** `Alice`/`Bob`/`Charlie` keys stay aligned.
+* **Purpose:** See element-wise `grades + 5` with **index preserved**-the same rule as NumPy broadcasting, but with labels.
+* **Walkthrough:** `Alice`/`Bob`/`Charlie` keys stay aligned.
 
 ```python
 # Original grades
@@ -387,7 +381,7 @@ Charlie    83
 dtype: int64
 ```
 
----
+***
 
 ### Statistical Operations
 
@@ -395,8 +389,8 @@ Pandas provides many built-in statistical methods:
 
 **Summary stats on labeled Series**
 
-- **Purpose:** Use `mean`, `max`, `min`, and `describe()` for a quick numeric profile of one column.
-- **Walkthrough:** `grades.describe()` returns count/mean/std/quartiles/min/max for numeric values.
+* **Purpose:** Use `mean`, `max`, `min`, and `describe()` for a quick numeric profile of one column.
+* **Walkthrough:** `grades.describe()` returns count/mean/std/quartiles/min/max for numeric values.
 
 ```python
 print(f"Average grade: {grades.mean()}")
@@ -432,10 +426,10 @@ Remember: A Series is just the beginning. Once you're comfortable with Series, y
 
 ## Common pitfalls
 
-- Forgetting that **Series** alignment is by **index**, operations pair labels, not just positions.
-- Mixing up **loc** (label-based) and **iloc** (position-based) when you slice (covered in more detail in later lessons).
-- Ignoring **NaN** values before calling **.mean()** or similar, check **.isna()** first when data is messy.
+* Forgetting that **Series** alignment is by **index**, operations pair labels, not just positions.
+* Mixing up **loc** (label-based) and **iloc** (position-based) when you slice (covered in more detail in later lessons).
+* Ignoring **NaN** values before calling **.mean()** or similar, check **.isna()** first when data is messy.
 
 ## Next steps
 
-Continue to [Understanding DataFrames](./dataframe.md) to combine multiple columns and work with full tables.
+Continue to [Understanding DataFrames](dataframe.md) to combine multiple columns and work with full tables.

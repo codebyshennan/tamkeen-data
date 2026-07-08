@@ -4,15 +4,11 @@
 
 ### Video
 
-<div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/XkY2DOUCWMU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-*3Blue1Brown, Matrix multiplication as composition (Essence of linear algebra)*
+_3Blue1Brown, Matrix multiplication as composition (Essence of linear algebra)_
 
 ## Overview
 
-**Prerequisites:** [Introduction to NumPy](./intro-numpy.md) and [What is an ndarray?](./ndarray.md).
+**Prerequisites:** [Introduction to NumPy](intro-numpy.md) and [What is an ndarray?](ndarray.md).
 
 **Why this lesson:** **Vectorized** arithmetic and **broadcasting** are what make NumPy fast and concise. This page builds muscle memory for element-wise ops and shape rules before you tackle indexing and linear algebra.
 
@@ -20,14 +16,14 @@
 
 Ever wished you could do math on entire lists at once? With NumPy arrays, you can! This is called _vectorization_ - it's like having a calculator that works on all numbers simultaneously. Imagine you're:
 
-- Calculating sales tax on thousands of prices
-- Converting temperatures from Celsius to Fahrenheit
-- Computing compound interest on multiple investments
-- Scaling measurements from inches to centimeters
+* Calculating sales tax on thousands of prices
+* Converting temperatures from Celsius to Fahrenheit
+* Computing compound interest on multiple investments
+* Scaling measurements from inches to centimeters
 
 Instead of writing loops, NumPy lets you perform these operations in one go!
 
----
+***
 
 ### Basic Math Operations
 
@@ -112,7 +108,7 @@ Celsius: [ 0 15 30 45]
 Fahrenheit: [ 32.  59.  86. 113.]
 ```
 
----
+***
 
 ### How It Works
 
@@ -124,11 +120,11 @@ Original Array:     Operation:      Result:
 └─────────────┘                   └─────────────┘
 ```
 
-![vectorization](./assets/vectorization.png)
+![vectorization](../../../.gitbook/assets/vectorization.png)
 
 ## Broadcasting: The Shape-Shifter
 
----
+***
 
 ### What is Broadcasting?
 
@@ -153,7 +149,7 @@ print(arr + np.array([1, 1, 1]))
  [5. 6. 7.]]
 ```
 
----
+***
 
 ### Magic with Numbers
 
@@ -176,7 +172,7 @@ print(1 / arr1)  # [1.0, 0.5, 0.33, 0.25]
 [1.         0.5        0.33333333 0.25      ]
 ```
 
----
+***
 
 ### How Broadcasting Works
 
@@ -190,7 +186,7 @@ NumPy automatically turns 4 into [4 4 4]!
 
 ## Comparing Arrays
 
----
+***
 
 ### Array Comparisons
 
@@ -210,7 +206,7 @@ print(arr2 > arr)
  [ True False  True]]
 ```
 
----
+***
 
 ### Understanding the Result
 
@@ -224,7 +220,7 @@ Array 1:     Compare:    Array 2:     Result:
 
 ## Indexing and Slicing: Array Surgery
 
----
+***
 
 ### Basic Indexing (1D Arrays)
 
@@ -244,7 +240,7 @@ print(arr[5:8])    # [5 6 7]
 [5 6 7]
 ```
 
----
+***
 
 ### Changing Values
 
@@ -264,7 +260,7 @@ print(arr)  # [0 1 2 3 4 12 10 12 8 9]
 [ 0  1  2  3  4 12 10 12  8  9]
 ```
 
----
+***
 
 ### Understanding Slices
 
@@ -278,7 +274,7 @@ Array: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 ## 2D array access (matrix indexing)
 
----
+***
 
 ### Creating a 2D Array
 
@@ -290,7 +286,7 @@ arr2d = np.array([
 ])
 ```
 
----
+***
 
 ### Getting Elements
 
@@ -309,7 +305,7 @@ print(arr2d[1][2])  # Same thing!
 6
 ```
 
----
+***
 
 ### Slicing 2D Arrays
 
@@ -332,7 +328,7 @@ print(arr2d[:2, 1:])
  [5 6]]
 ```
 
----
+***
 
 ### Visual Guide
 
@@ -346,21 +342,21 @@ Rows  ┌───────────┐
       └───────────┘
 ```
 
-![2d_array_indexing](./assets/ndarray_axis_index.png)
+![2d\_array\_indexing](../../../.gitbook/assets/ndarray_axis_index.png)
 
- **Pro Tips**:
+**Pro Tips**:
 
-- Use **:** to select everything in that dimension
-- Remember: **[row, column]** order
-- Slices create views (changes affect original)
-- Think of 2D arrays like spreadsheets!
+* Use **:** to select everything in that dimension
+* Remember: **\[row, column]** order
+* Slices create views (changes affect original)
+* Think of 2D arrays like spreadsheets!
 
 ## Common pitfalls
 
-- **View side effects**: Assigning through a slice can change the parent array; use **.copy()** when you want an independent array.
-- **Axis mix-ups**: **axis=0** aggregates down rows in many functions; say the shape out loud before you pick an axis.
-- **Reshape without matching size**: Total elements must match; use **-1** in one dimension only when NumPy can infer it.
+* **View side effects**: Assigning through a slice can change the parent array; use **.copy()** when you want an independent array.
+* **Axis mix-ups**: **axis=0** aggregates down rows in many functions; say the shape out loud before you pick an axis.
+* **Reshape without matching size**: Total elements must match; use **-1** in one dimension only when NumPy can infer it.
 
 ## Next steps
 
-Continue to [Boolean indexing](./boolean-indexing.md), then [ndarray methods](./ndarray-methods.md).
+Continue to [Boolean indexing](boolean-indexing.md), then [ndarray methods](ndarray-methods.md).

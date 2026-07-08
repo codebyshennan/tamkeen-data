@@ -2,13 +2,11 @@
 
 **After this lesson:** you can explain Getting Started with Matplotlib and try the examples in your own notebook.
 
-> **Note:** This lesson is **code-first**. You will type Python to control figures, axes, and styles. Skim [Visualization principles](visualization-principles.md) first if you are unsure *why* certain choices make charts easier to read.
+> **Note:** This lesson is **code-first**. You will type Python to control figures, axes, and styles. Skim [Visualization principles](visualization-principles.md) first if you are unsure _why_ certain choices make charts easier to read.
 
 ## Helpful video
 
 Creating and customizing your first matplotlib plots, figures, labels, titles, legends, and styling.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/UO98lJQ3QGI" title="Matplotlib Tutorial Part 1, Corey Schafer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## What is Matplotlib?
 
@@ -16,10 +14,10 @@ Matplotlib is like a digital artist's canvas for data. It's Python's most popula
 
 ### Why This Matters
 
-- **Industry Standard**: Most widely used Python plotting library
-- **Flexibility**: Can create almost any type of visualization
-- **Integration**: Works seamlessly with other data science libraries
-- **Customization**: Highly customizable for professional results
+* **Industry Standard**: Most widely used Python plotting library
+* **Flexibility**: Can create almost any type of visualization
+* **Integration**: Works seamlessly with other data science libraries
+* **Customization**: Highly customizable for professional results
 
 ## Your First Steps
 
@@ -41,19 +39,17 @@ import numpy as np
 plt.style.use('seaborn-v0_8-whitegrid')
 ```
 
-{% include mermaid-diagram.html src="3-data-visualization/3.1-intro-data-viz/diagrams/matplotlib-basics-1.mmd" %}
-
-*Key rule: `plt.subplots()` returns a Figure and one or more Axes objects. Do all your drawing on the Axes, the Figure just holds them.*
+_Key rule: `plt.subplots()` returns a Figure and one or more Axes objects. Do all your drawing on the Axes, the Figure just holds them._
 
 ### Understanding the Basics
 
 Think of a Matplotlib plot like a painting:
 
-- **Figure**: The entire canvas
-- **Axes**: The area where you draw
-- **Title**: The name of your artwork
-- **Labels**: Descriptions of what you're showing
-- **Legend**: A guide to your colors and symbols
+* **Figure**: The entire canvas
+* **Axes**: The area where you draw
+* **Title**: The name of your artwork
+* **Labels**: Descriptions of what you're showing
+* **Legend**: A guide to your colors and symbols
 
 ## Creating Your First Plot
 
@@ -63,68 +59,17 @@ Think of a Matplotlib plot like a painting:
 
 **Walkthrough:** `subplots` returns `(fig, ax)`; plotting goes on `ax`; `label` + `legend()` explains the curve.
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Figure and axes
 
-{% highlight python %}
-def create_simple_plot():
-    # Create sample data - like preparing your paint
-    x = np.linspace(0, 10, 100)  # 100 points from 0 to 10
-    y = np.sin(x)                # Sine wave
+`plt.subplots()` returns two objects: the **figure** (the whole window) and the **axes** (the drawing area). Always keep a reference to `ax`, the object-oriented API lets you control multiple subplots precisely.
 
-    # Create figure and axes - set up your canvas
-    fig, ax = plt.subplots(figsize=(10, 6))
+Plot with styling
 
-    # Plot data - start painting
-    ax.plot(x, y,
-           color='#2ecc71',    # Emerald green
-           linewidth=2,        # Thicker line
-           linestyle='-',      # Solid line
-           label='sin(x)')     # Legend label
+`ax.plot()` draws a line through the (x, y) pairs. Keyword arguments control appearance: `color` accepts hex or names, `linewidth` scales thickness, `label` is what appears in the legend.
 
-    # Add finishing touches
-    ax.set_title('My First Plot',
-                fontsize=14,
-                pad=15)
-    ax.set_xlabel('X Axis')
-    ax.set_ylabel('Y Axis')
-    ax.grid(True, linestyle='--', alpha=0.7)
-    ax.legend()
+Labels and grid
 
-    return fig, ax
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="6-7" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Figure and axes</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>plt.subplots()</code> returns two objects: the <strong>figure</strong> (the whole window) and the <strong>axes</strong> (the drawing area). Always keep a reference to <code>ax</code>, the object-oriented API lets you control multiple subplots precisely.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="9-14" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Plot with styling</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>ax.plot()</code> draws a line through the (x, y) pairs. Keyword arguments control appearance: <code>color</code> accepts hex or names, <code>linewidth</code> scales thickness, <code>label</code> is what appears in the legend.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="16-23" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Labels and grid</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>set_title</code>, <code>set_xlabel</code>, <code>set_ylabel</code> annotate the chart. <code>grid(alpha=0.7)</code> draws faint reference lines. <code>legend()</code> reads the <code>label</code> strings you set in each <code>plot()</code> call.</p>
-    </div>
-  </div>
-</aside>
-</div>
+`set_title`, `set_xlabel`, `set_ylabel` annotate the chart. `grid(alpha=0.7)` draws faint reference lines. `legend()` reads the `label` strings you set in each `plot()` call.
 
 ### Understanding the Code
 
@@ -157,7 +102,7 @@ def pyplot_example():
     plt.show()
 ```
 
-![Pyplot interface example](assets/matplotlib_basics_pyplot.png)
+![Pyplot interface example](../../../.gitbook/assets/matplotlib_basics_pyplot.png)
 
 ### 2. Object-Oriented
 
@@ -178,7 +123,7 @@ def object_oriented_example():
     return fig, ax
 ```
 
-![Object-oriented interface example](assets/matplotlib_basics_oo.png)
+![Object-oriented interface example](../../../.gitbook/assets/matplotlib_basics_oo.png)
 
 ## Essential Plot Types
 
@@ -215,7 +160,7 @@ def create_line_plot(x, y1, y2):
     return fig, ax
 ```
 
-![Multi-series line plot](assets/matplotlib_basics_line.png)
+![Multi-series line plot](../../../.gitbook/assets/matplotlib_basics_line.png)
 
 ### 2. Scatter Plots
 
@@ -247,7 +192,7 @@ def create_scatter_plot(x, y, colors, sizes):
     return fig, ax
 ```
 
-![Scatter plot with color and size encoding](assets/matplotlib_basics_scatter.png)
+![Scatter plot with color and size encoding](../../../.gitbook/assets/matplotlib_basics_scatter.png)
 
 ### 3. Bar Charts
 
@@ -286,7 +231,7 @@ def create_bar_chart(categories, values, errors=None):
     return fig, ax
 ```
 
-![Bar chart with error bars](assets/matplotlib_basics_bar.png)
+![Bar chart with error bars](../../../.gitbook/assets/matplotlib_basics_bar.png)
 
 ## Styling and Customization
 
@@ -393,37 +338,37 @@ def save_plot(fig, filename, dpi=300):
 
 ### 1. Planning Your Plot
 
-- Start with a clear purpose
-- Choose the right chart type
-- Plan your color scheme
-- Consider your audience
+* Start with a clear purpose
+* Choose the right chart type
+* Plan your color scheme
+* Consider your audience
 
 ### 2. Code Organization
 
-- Use functions for reusable plots
-- Keep your code clean and documented
-- Use consistent naming conventions
-- Comment complex operations
+* Use functions for reusable plots
+* Keep your code clean and documented
+* Use consistent naming conventions
+* Comment complex operations
 
 ### 3. Common Mistakes to Avoid
 
-- Overcrowding with too much data
-- Using inappropriate chart types
-- Poor color choices
-- Missing labels or context
+* Overcrowding with too much data
+* Using inappropriate chart types
+* Poor color choices
+* Missing labels or context
 
 ## Gotchas
 
-- **Mixing the pyplot (`plt.`) and object-oriented (`ax.`) APIs on the same figure causes subtle bugs**: calling `plt.title("...")` after `fig, ax = plt.subplots(...)` sets the title on the current active axes, which is usually `ax`, but if you have created multiple subplots, `plt.title` may target the last-created axes rather than the one you intended; stick to `ax.set_title(...)` once you have an explicit `ax` reference.
-- **`plt.subplots(figsize=(10, 6))` creates the figure at import time, not at display time**: if you define the figure in one cell and populate it across multiple cells, resizing the window or re-running only some cells will produce an inconsistent figure; build and display the entire figure in a single cell.
-- **`ax.legend()` only shows series that were plotted with a `label=` argument**: if you call `ax.plot(x, y)` without `label='...'`, the legend will be empty or show only a blank entry; the legend call does not automatically name unlabeled series.
-- **`ax.scatter` with `c=colors` and `cmap=` requires `colors` to be numeric, not a list of strings**: passing `c=['red', 'blue', 'green']` to set per-point colors works, but passing `c=values` alongside `cmap=` requires `values` to be a numeric array; mixing the two conventions causes a `ValueError` or incorrect color mapping.
-- **`fig.add_gridspec(2, 2)` and `gs[1, :]` will raise an `IndexError` if you pass `ncols=1` elsewhere in the same figure**: the gridspec is created at figure level; if you later add a subplot that exceeds the grid dimensions, the error appears at subplot creation time, not at gridspec creation time, making it harder to trace.
-- **`save_plot` with `transparent=True` exports a transparent background PNG, which displays as white in most browsers but as no background in presentation tools**: if you then place the chart on a dark slide, text labels set in black become invisible; check saved exports on the actual target background before distributing.
+* **Mixing the pyplot (`plt.`) and object-oriented (`ax.`) APIs on the same figure causes subtle bugs**: calling `plt.title("...")` after `fig, ax = plt.subplots(...)` sets the title on the current active axes, which is usually `ax`, but if you have created multiple subplots, `plt.title` may target the last-created axes rather than the one you intended; stick to `ax.set_title(...)` once you have an explicit `ax` reference.
+* **`plt.subplots(figsize=(10, 6))` creates the figure at import time, not at display time**: if you define the figure in one cell and populate it across multiple cells, resizing the window or re-running only some cells will produce an inconsistent figure; build and display the entire figure in a single cell.
+* **`ax.legend()` only shows series that were plotted with a `label=` argument**: if you call `ax.plot(x, y)` without `label='...'`, the legend will be empty or show only a blank entry; the legend call does not automatically name unlabeled series.
+* **`ax.scatter` with `c=colors` and `cmap=` requires `colors` to be numeric, not a list of strings**: passing `c=['red', 'blue', 'green']` to set per-point colors works, but passing `c=values` alongside `cmap=` requires `values` to be a numeric array; mixing the two conventions causes a `ValueError` or incorrect color mapping.
+* **`fig.add_gridspec(2, 2)` and `gs[1, :]` will raise an `IndexError` if you pass `ncols=1` elsewhere in the same figure**: the gridspec is created at figure level; if you later add a subplot that exceeds the grid dimensions, the error appears at subplot creation time, not at gridspec creation time, making it harder to trace.
+* **`save_plot` with `transparent=True` exports a transparent background PNG, which displays as white in most browsers but as no background in presentation tools**: if you then place the chart on a dark slide, text labels set in black become invisible; check saved exports on the actual target background before distributing.
 
 ## Next steps
 
-1. Continue to [3.2 Advanced data visualization](../3.2-adv-data-viz/README.md) (Seaborn and Plotly).
+1. Continue to [3.2 Advanced data visualization](../3.2-adv-data-viz/) (Seaborn and Plotly).
 2. Reinforce chart choice with [Choosing the right visualization](../choosing-the-right-visualization.md) and [Common mistakes](../common-mistakes.md).
 
 Remember: The best visualizations are clear, informative, and tell a story. Start simple, focus on your message, and let your data guide your design decisions.

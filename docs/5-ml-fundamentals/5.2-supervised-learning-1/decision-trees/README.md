@@ -4,7 +4,7 @@
 
 ## Overview
 
-Decision trees split data recursively on feature thresholds, producing an interpretable flowchart-like structure. Prerequisites: [5.1 Intro to ML](../../5.1-intro-to-ml/README.md).
+Decision trees split data recursively on feature thresholds, producing an interpretable flowchart-like structure. Prerequisites: [5.1 Intro to ML](../../5.1-intro-to-ml/).
 
 ## Lesson Path
 

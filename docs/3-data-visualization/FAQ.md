@@ -2,45 +2,44 @@
 
 **After this lesson:** you can explain Frequently Asked Questions (FAQ) and try the examples in your own notebook.
 
-Quick answers about libraries, chart choice, Jupyter quirks, and performance. For structured lessons, start with the [module README](README.md) and [3.1 Intro to data visualization](3.1-intro-data-viz/README.md).
+Quick answers about libraries, chart choice, Jupyter quirks, and performance. For structured lessons, start with the [module README](./) and [3.1 Intro to data visualization](3.1-intro-data-viz/).
 
 ## Helpful video
 
 Orientation for the course visualization materials.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/RBSUwFGa6Fk" title="What is Data Science?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## General Questions
 
 ### Q: Which visualization library should I use?
 
 **A:** Choose based on your needs:
-- **Matplotlib**: Basic plotting, complete control, static visualizations
-- **Seaborn**: Statistical visualizations, better defaults, built on Matplotlib
-- **Plotly**: Interactive visualizations, web integration, dashboards
-- **Tableau**: Business intelligence, drag-and-drop interface, enterprise features
+
+* **Matplotlib**: Basic plotting, complete control, static visualizations
+* **Seaborn**: Statistical visualizations, better defaults, built on Matplotlib
+* **Plotly**: Interactive visualizations, web integration, dashboards
+* **Tableau**: Business intelligence, drag-and-drop interface, enterprise features
 
 ### Q: How do I choose the right chart type?
 
 **A:** Consider your data and purpose:
+
 1. **Comparison**:
-   - Bar charts for categories
-   - Line charts for trends
-   - Scatter plots for relationships
-
+   * Bar charts for categories
+   * Line charts for trends
+   * Scatter plots for relationships
 2. **Distribution**:
-   - Histograms for single variables
-   - Box plots for multiple categories
-   - Violin plots for detailed distributions
-
+   * Histograms for single variables
+   * Box plots for multiple categories
+   * Violin plots for detailed distributions
 3. **Composition**:
-   - Pie charts for parts of a whole
-   - Stacked bars for changes over time
-   - Treemaps for hierarchical data
+   * Pie charts for parts of a whole
+   * Stacked bars for changes over time
+   * Treemaps for hierarchical data
 
 ### Q: How can I make my visualizations more accessible?
 
 **A:** Follow these guidelines:
+
 1. Use colorblind-friendly palettes
 2. Include alternative text descriptions
 3. Maintain sufficient contrast
@@ -53,6 +52,7 @@ Orientation for the course visualization materials.
 ### Q: Why is my plot not showing in Jupyter?
 
 **A:** Common solutions:
+
 1. Add `%matplotlib inline` at the start
 2. Call `plt.show()` after plotting
 3. Check if data is empty or invalid
@@ -94,6 +94,7 @@ plt.savefig('plot.svg', bbox_inches='tight')
 ### Q: How do I handle large datasets in visualizations?
 
 **A:** Several approaches:
+
 1. **Sampling**:
 
 **Purpose:** Plot a random subset of rows so the scatter stays readable and fast.
@@ -133,6 +134,7 @@ for chunk in pd.read_csv('large_file.csv', chunksize=1000):
 ### Q: How do I choose colors for my visualization?
 
 **A:** Follow these principles:
+
 1. **Sequential Data**: Use single color gradient
 2. **Categorical Data**: Use distinct colors
 3. **Diverging Data**: Use two contrasting colors
@@ -155,16 +157,12 @@ colors = sns.color_palette("Set2")
 colors = sns.color_palette("RdBu", n_colors=11)
 ```
 
-
-<figure>
-<img src="assets/FAQ_fig_1.png" alt="FAQ" />
-<figcaption>Figure 1: Generated visualization</figcaption>
-</figure>
-
+<figure><img src="../../.gitbook/assets/FAQ_fig_1.png" alt="FAQ"><figcaption><p>Figure 1: Generated visualization</p></figcaption></figure>
 
 ### Q: How do I handle overlapping data points?
 
 **A:** Several solutions:
+
 1. **Transparency**:
 
 **Purpose:** Reveal density where many points stack at the same coordinates.
@@ -199,6 +197,7 @@ plt.hist2d(x, y, bins=50)
 ### Q: How do I create effective dashboards?
 
 **A:** Key principles:
+
 1. Organize related information together
 2. Use consistent styling
 3. Provide clear navigation
@@ -211,24 +210,24 @@ plt.hist2d(x, y, bins=50)
 ### Q: Why is my visualization slow?
 
 **A:** Common issues and solutions:
+
 1. **Too much data**:
-   - Sample or aggregate data
-   - Use appropriate plot types
-   - Consider data streaming
-
+   * Sample or aggregate data
+   * Use appropriate plot types
+   * Consider data streaming
 2. **Inefficient code**:
-   - Use vectorized operations
-   - Minimize redundant calculations
-   - Cache intermediate results
-
+   * Use vectorized operations
+   * Minimize redundant calculations
+   * Cache intermediate results
 3. **Resource constraints**:
-   - Reduce plot complexity
-   - Optimize image resolution
-   - Use appropriate file formats
+   * Reduce plot complexity
+   * Optimize image resolution
+   * Use appropriate file formats
 
 ### Q: How do I optimize Tableau dashboards?
 
 **A:** Best practices:
+
 1. Use extracts instead of live connections
 2. Limit the number of filters
 3. Aggregate data appropriately
@@ -241,29 +240,28 @@ plt.hist2d(x, y, bins=50)
 ### Q: Where can I learn more?
 
 **A:** Recommended resources:
+
 1. **Documentation**:
-   - Matplotlib, Seaborn, Plotly docs
-   - Tableau help center
-   - Online tutorials
-
+   * Matplotlib, Seaborn, Plotly docs
+   * Tableau help center
+   * Online tutorials
 2. **Books**:
-   - "Fundamentals of Data Visualization"
-   - "Storytelling with Data"
-   - "Python for Data Analysis"
-
+   * "Fundamentals of Data Visualization"
+   * "Storytelling with Data"
+   * "Python for Data Analysis"
 3. **Online Courses**:
-   - Coursera Data Visualization
-   - DataCamp
-   - Tableau Training
-
+   * Coursera Data Visualization
+   * DataCamp
+   * Tableau Training
 4. **Communities**:
-   - Stack Overflow
-   - GitHub Discussions
-   - Tableau Community
+   * Stack Overflow
+   * GitHub Discussions
+   * Tableau Community
 
 ### Q: How do I practice visualization skills?
 
 **A:** Suggested approaches:
+
 1. Work with public datasets
 2. Participate in visualization challenges
 3. Recreate interesting visualizations
@@ -276,36 +274,33 @@ plt.hist2d(x, y, bins=50)
 ### Q: Common Error Messages
 
 1. **"No display name and no $DISPLAY environment variable"**:
-   - Use `plt.switch_backend('agg')`
-   - Configure appropriate backend
-
-2. **"Figure includes Axes that are not compatible with tight_layout"**:
-   - Adjust figure size
-   - Modify subplot parameters
-   - Use `constrained_layout`
-
+   * Use `plt.switch_backend('agg')`
+   * Configure appropriate backend
+2. **"Figure includes Axes that are not compatible with tight\_layout"**:
+   * Adjust figure size
+   * Modify subplot parameters
+   * Use `constrained_layout`
 3. **"Clipping input data to the valid range"**:
-   - Check data ranges
-   - Verify calculations
-   - Handle outliers appropriately
+   * Check data ranges
+   * Verify calculations
+   * Handle outliers appropriately
 
 ### Q: Version Compatibility
 
 1. **Library Versions**:
-   - Check compatibility matrix
-   - Use virtual environments
-   - Document dependencies
-
+   * Check compatibility matrix
+   * Use virtual environments
+   * Document dependencies
 2. **Operating Systems**:
-   - Test on target platforms
-   - Use appropriate backends
-   - Handle path differences
+   * Test on target platforms
+   * Use appropriate backends
+   * Handle path differences
 
 ## Gotchas
 
-- **`%matplotlib inline` must appear before `import matplotlib.pyplot as plt`**: if the magic runs after the import, it does not switch the already-loaded backend; restart the kernel and put `%matplotlib inline` in the first cell to guarantee inline rendering.
-- **`plt.savefig('plot.pdf', dpi=300)`, `dpi` is ignored for PDF exports**: PDFs are vector formats and have no native DPI; the `dpi` argument only affects raster elements (e.g. images embedded inside the figure); use `bbox_inches='tight'` to control margins, not DPI.
-- **`np.random.choice(len(data), sample_size)` samples indices, not values**: the call returns integer positions that you must then use to index `data`; passing the returned array directly into a plot function will plot the index numbers, not your original data values.
-- **`plt.hist2d(x, y, bins=50)` returns a tuple, not a figure**: the function plots the heatmap and also returns `(counts, xedges, yedges, image)`; if you store the return value expecting a figure object and then call `.savefig()` on it, you will get an `AttributeError`.
-- **Seaborn palettes used as `cmap=` expect a Colormap object, not a list**: `sns.color_palette("Blues", n_colors=5)` returns a list of RGB tuples; passing it to `cmap=` in `scatter` or `imshow` will raise a `TypeError`; use `sns.color_palette("Blues", as_cmap=True)` or `matplotlib.colors.ListedColormap(...)` to wrap the list.
-- **The `"Clipping input data to the valid range"` warning from `imshow` is silent data loss**: it means values outside `[0, 1]` (float) or `[0, 255]` (int) are being clamped before display; normalize your array first with `(arr - arr.min()) / (arr.max() - arr.min())` rather than letting the clip happen invisibly.
+* **`%matplotlib inline` must appear before `import matplotlib.pyplot as plt`**: if the magic runs after the import, it does not switch the already-loaded backend; restart the kernel and put `%matplotlib inline` in the first cell to guarantee inline rendering.
+* **`plt.savefig('plot.pdf', dpi=300)`, `dpi` is ignored for PDF exports**: PDFs are vector formats and have no native DPI; the `dpi` argument only affects raster elements (e.g. images embedded inside the figure); use `bbox_inches='tight'` to control margins, not DPI.
+* **`np.random.choice(len(data), sample_size)` samples indices, not values**: the call returns integer positions that you must then use to index `data`; passing the returned array directly into a plot function will plot the index numbers, not your original data values.
+* **`plt.hist2d(x, y, bins=50)` returns a tuple, not a figure**: the function plots the heatmap and also returns `(counts, xedges, yedges, image)`; if you store the return value expecting a figure object and then call `.savefig()` on it, you will get an `AttributeError`.
+* **Seaborn palettes used as `cmap=` expect a Colormap object, not a list**: `sns.color_palette("Blues", n_colors=5)` returns a list of RGB tuples; passing it to `cmap=` in `scatter` or `imshow` will raise a `TypeError`; use `sns.color_palette("Blues", as_cmap=True)` or `matplotlib.colors.ListedColormap(...)` to wrap the list.
+* **The `"Clipping input data to the valid range"` warning from `imshow` is silent data loss**: it means values outside `[0, 1]` (float) or `[0, 255]` (int) are being clamped before display; normalize your array first with `(arr - arr.min()) / (arr.max() - arr.min())` rather than letting the clip happen invisibly.

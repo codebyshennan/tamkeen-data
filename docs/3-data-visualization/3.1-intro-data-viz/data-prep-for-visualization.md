@@ -8,30 +8,26 @@
 
 A practical walkthrough of cleaning and reshaping a real dataset in pandas before visualization.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/bDhvCp3_lYw" title="Data Cleaning in Pandas, Alex the Analyst" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 ## Why data prep matters
 
 A chart can be technically correct and still be misleading. Many visualization problems come from plotting the wrong level of detail, leaving categories unsorted, mixing missing values into summaries, or skipping the aggregation step that matches the business question.
 
 Think of data prep as deciding what story the chart is allowed to tell:
 
-- **Granularity:** Are you plotting rows, daily totals, or monthly averages?
-- **Ordering:** Does the viewer see a meaningful sequence or a random one?
-- **Completeness:** Are missing values handled consistently?
-- **Comparability:** Are categories and units aligned before plotting?
+* **Granularity:** Are you plotting rows, daily totals, or monthly averages?
+* **Ordering:** Does the viewer see a meaningful sequence or a random one?
+* **Completeness:** Are missing values handled consistently?
+* **Comparability:** Are categories and units aligned before plotting?
 
 ## Start with the question
 
 Before writing plotting code, state the question in one sentence.
 
-- "Which product category generated the most revenue last quarter?"
-- "How does order value vary by payment method?"
-- "Did weekly traffic change after the campaign launch?"
+* "Which product category generated the most revenue last quarter?"
+* "How does order value vary by payment method?"
+* "Did weekly traffic change after the campaign launch?"
 
 That sentence determines the data shape you need.
-
-{% include mermaid-diagram.html src="3-data-visualization/3.1-intro-data-viz/diagrams/data-prep-for-visualization-1.mmd" %}
 
 ## Core preparation patterns
 
@@ -58,18 +54,18 @@ sales["order_date"] = pd.to_datetime(sales["order_date"])
 
 **Starting dataset, 10 rows, 6 columns:**
 
-| order_id | order_date | status | category | revenue | product_name |
-|---|---|---|---|---|---|
-| A1 | 2025-03-01 | completed | Electronics | 250.0 | Laptop |
-| A2 | 2025-06-15 | completed | Clothing | 45.0 | T-Shirt |
-| A3 | 2025-08-20 | completed | Electronics | 180.0 | Phone |
-| **A4** | **2024-11-05** | completed | Clothing | 60.0 | Jeans |
-| **A5** | 2025-11-12 | **cancelled** | Electronics | **NaN** | Headphones |
-| A6 | 2025-01-30 | completed | Food | 30.0 | Coffee |
-| A7 | 2025-06-15 | completed | Food | 25.0 | Tea |
-| A8 | 2025-09-01 | completed | Clothing | 90.0 | Jacket |
-| **A9** | **2024-12-20** | completed | Electronics | 200.0 | Tablet |
-| A10 | 2025-06-15 | completed | Clothing | 55.0 | Dress |
+| order\_id | order\_date    | status        | category    | revenue | product\_name |
+| --------- | -------------- | ------------- | ----------- | ------- | ------------- |
+| A1        | 2025-03-01     | completed     | Electronics | 250.0   | Laptop        |
+| A2        | 2025-06-15     | completed     | Clothing    | 45.0    | T-Shirt       |
+| A3        | 2025-08-20     | completed     | Electronics | 180.0   | Phone         |
+| **A4**    | **2024-11-05** | completed     | Clothing    | 60.0    | Jeans         |
+| **A5**    | 2025-11-12     | **cancelled** | Electronics | **NaN** | Headphones    |
+| A6        | 2025-01-30     | completed     | Food        | 30.0    | Coffee        |
+| A7        | 2025-06-15     | completed     | Food        | 25.0    | Tea           |
+| A8        | 2025-09-01     | completed     | Clothing    | 90.0    | Jacket        |
+| **A9**    | **2024-12-20** | completed     | Electronics | 200.0   | Tablet        |
+| A10       | 2025-06-15     | completed     | Clothing    | 55.0    | Dress         |
 
 Three rows need attention (highlighted): A4 and A9 are from 2024, and A5 is cancelled with missing revenue.
 
@@ -233,9 +229,9 @@ Wide form (3 rows × 3 columns) becomes long form (6 rows × 3 columns). Seaborn
 
 ### Missing values
 
-- Drop rows when missingness is rare and clearly accidental.
-- Impute only when the business meaning supports it.
-- Leave gaps in time series when showing missingness is informative.
+* Drop rows when missingness is rare and clearly accidental.
+* Impute only when the business meaning supports it.
+* Leave gaps in time series when showing missingness is informative.
 
 ```python
 plot_df = orders.dropna(subset=["order_value", "segment"]).copy()
@@ -324,11 +320,11 @@ Use this before every chart:
 
 ## Common mistakes
 
-- Plotting raw transactional rows when the question needs grouped totals.
-- Leaving categories unsorted so rankings are hard to scan.
-- Mixing incomplete and complete periods in the same time chart.
-- Using wide-form data with a library example that expects long-form data.
-- Treating missing values as zero without checking what they mean.
+* Plotting raw transactional rows when the question needs grouped totals.
+* Leaving categories unsorted so rankings are hard to scan.
+* Mixing incomplete and complete periods in the same time chart.
+* Using wide-form data with a library example that expects long-form data.
+* Treating missing values as zero without checking what they mean.
 
 ## Practice prompts
 
@@ -339,15 +335,15 @@ Use this before every chart:
 
 ## Gotchas
 
-- **`groupby(...).agg(revenue=("revenue", "sum"))` silently drops rows with `NaN` in the aggregated column**: pandas excludes NaN values from `sum` and `mean` by default, so if A5's missing revenue is in the filtered dataset it simply vanishes from the total without any warning; verify your sums add up to the expected grand total after aggregation.
-- **`pd.to_datetime(sales["order_date"])` raises a `ParserError` on inconsistent date formats**: if a column mixes `"2025-03-01"` and `"01/03/2025"`, the conversion will fail or silently coerce bad rows to `NaT`; pass `format=` explicitly or use `errors='coerce'` and then inspect the resulting `NaT` rows before plotting.
-- **`.copy()` after `.loc[]` is not optional**: assigning new columns to a slice without `.copy()` raises a `SettingWithCopyWarning` and may not persist the change; always chain `.copy()` when you intend to modify the filtered DataFrame in subsequent steps.
-- **`melt` changes the number of rows, which can surprise downstream `.groupby` logic**: after melting a wide table into long form, the same original row now appears multiple times (once per melted column); if you then `groupby` the melted result and count rows, you will overcount observations unless you group by the correct id variable.
-- **Sorting before plotting does not persist unless you reset the index**: `sort_values("revenue", ascending=False)` returns a sorted copy but preserves the original integer index; some plotting functions (especially those that accept a DataFrame column by name) may re-sort by index internally; call `.reset_index(drop=True)` after sorting to guarantee the order is preserved.
-- **Using `where(..., "Other")` to group a long tail works only if the column dtype is `object`**: if `product_name` is a `Categorical` dtype, the new value `"Other"` may not be in the existing categories and will be set to `NaN` instead; cast the column with `.astype(str)` before applying the `where` pattern.
+* **`groupby(...).agg(revenue=("revenue", "sum"))` silently drops rows with `NaN` in the aggregated column**: pandas excludes NaN values from `sum` and `mean` by default, so if A5's missing revenue is in the filtered dataset it simply vanishes from the total without any warning; verify your sums add up to the expected grand total after aggregation.
+* **`pd.to_datetime(sales["order_date"])` raises a `ParserError` on inconsistent date formats**: if a column mixes `"2025-03-01"` and `"01/03/2025"`, the conversion will fail or silently coerce bad rows to `NaT`; pass `format=` explicitly or use `errors='coerce'` and then inspect the resulting `NaT` rows before plotting.
+* **`.copy()` after `.loc[]` is not optional**: assigning new columns to a slice without `.copy()` raises a `SettingWithCopyWarning` and may not persist the change; always chain `.copy()` when you intend to modify the filtered DataFrame in subsequent steps.
+* **`melt` changes the number of rows, which can surprise downstream `.groupby` logic**: after melting a wide table into long form, the same original row now appears multiple times (once per melted column); if you then `groupby` the melted result and count rows, you will overcount observations unless you group by the correct id variable.
+* **Sorting before plotting does not persist unless you reset the index**: `sort_values("revenue", ascending=False)` returns a sorted copy but preserves the original integer index; some plotting functions (especially those that accept a DataFrame column by name) may re-sort by index internally; call `.reset_index(drop=True)` after sorting to guarantee the order is preserved.
+* **Using `where(..., "Other")` to group a long tail works only if the column dtype is `object`**: if `product_name` is a `Categorical` dtype, the new value `"Other"` may not be in the existing categories and will be set to `NaN` instead; cast the column with `.astype(str)` before applying the `where` pattern.
 
 ## Next steps
 
 1. Use [Matplotlib basics](matplotlib-basics.md) to turn prepared tables into clean static charts.
 2. Use [Annotations and highlighting](annotations-and-highlighting.md) to direct attention to the most important points in those charts.
-3. Use [3.2 Advanced data visualization](../3.2-adv-data-viz/README.md) once your data prep workflow feels natural.
+3. Use [3.2 Advanced data visualization](../3.2-adv-data-viz/) once your data prep workflow feels natural.

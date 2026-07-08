@@ -1,10 +1,20 @@
 ---
 reading_minutes: 12
 objectives:
-  - "Define accuracy as the fraction of correct predictions and compute it for binary and multi-class problems with `sklearn.metrics.accuracy_score`."
-  - "Recognise when accuracy is misleading: with class imbalance (>~80% majority), report at least one of precision/recall, F1, or a confusion matrix alongside it."
-  - "Compare your model's accuracy to the **majority-class baseline** before celebrating, beating \"always predict the most common label\" is the actual bar."
-  - "Validate with cross-validation and a held-out test set, not the training set, to avoid mistaking memorisation for skill."
+  - >-
+    Define accuracy as the fraction of correct predictions and compute it for
+    binary and multi-class problems with `sklearn.metrics.accuracy_score`.
+  - >-
+    Recognise when accuracy is misleading: with class imbalance (>~80%
+    majority), report at least one of precision/recall, F1, or a confusion
+    matrix alongside it.
+  - >-
+    Compare your model's accuracy to the **majority-class baseline** before
+    celebrating, beating "always predict the most common label" is the actual
+    bar.
+  - >-
+    Validate with cross-validation and a held-out test set, not the training
+    set, to avoid mistaking memorisation for skill.
 ---
 
 # Accuracy
@@ -17,7 +27,6 @@ objectives:
 
 Relates to [confusion matrix](confusion-matrix.md) and [metrics](metrics.md).
 
-
 ## Introduction
 
 Accuracy is one of the most fundamental metrics in machine learning, measuring the proportion of correct predictions made by a model. While simple to understand and calculate, it's important to use accuracy appropriately and understand its limitations.
@@ -26,11 +35,7 @@ Accuracy is one of the most fundamental metrics in machine learning, measuring t
 
 Accuracy is the ratio of correct predictions to total predictions:
 
-\\[
-\text{Accuracy} = \frac{\text{Number of Correct Predictions}}{\text{Total Number of Predictions}}
-\\]
-
-{% include model-eval-html-diagram.html diagram="accuracy" title="Accuracy decision diagram" %}
+\\\[ \text{Accuracy} = \frac{\text{Number of Correct Predictions\}}{\text{Total Number of Predictions\}} \\]
 
 > **Key idea:** accuracy answers **"how often was the model correct overall?"** It does not answer **which class was missed** or **which mistake is expensive**.
 
@@ -42,54 +47,13 @@ Accuracy is the ratio of correct predictions to total predictions:
 
 #### Compute accuracy on a held-out set (binary)
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Data and Split
 
-{% highlight python %}
-import numpy as np
-from sklearn.metrics import accuracy_score
-from sklearn.datasets import make_classification
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
+Generate a balanced binary classification dataset and split 80/20; the class balance here makes accuracy a meaningful baseline metric.
 
-# Generate sample data
-X, y = make_classification(n_samples=1000, n_features=20, n_informative=15, random_state=42)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+Train and Score
 
-# Train model
-model = LogisticRegression(random_state=42)
-model.fit(X_train, y_train)
-
-# Get predictions
-y_pred = model.predict(X_test)
-
-# Calculate accuracy
-accuracy = accuracy_score(y_test, y_pred)
-print(f"Accuracy: {accuracy:.3f}")
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-10" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Data and Split</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Generate a balanced binary classification dataset and split 80/20; the class balance here makes accuracy a meaningful baseline metric.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="12-20" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Train and Score</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Fit logistic regression, call <code>predict</code> for hard labels, then pass both to <code>accuracy_score</code>-the fraction of matching indices across all test samples.</p>
-    </div>
-  </div>
-</aside>
-</div>
+Fit logistic regression, call `predict` for hard labels, then pass both to `accuracy_score`-the fraction of matching indices across all test samples.
 
 ```
 Accuracy: 0.810
@@ -99,54 +63,13 @@ Accuracy: 0.810
 
 #### Accuracy with three classes (Iris)
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Iris Setup
 
-{% highlight python %}
-from sklearn.datasets import load_iris
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
+Load the three-class Iris dataset and split into train/test; with only 150 samples, `test_size=0.2` reserves 30 samples for evaluation.
 
-# Load iris dataset
-iris = load_iris()
-X, y = iris.data, iris.target
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+Random Forest Accuracy
 
-# Train model
-model = RandomForestClassifier(random_state=42)
-model.fit(X_train, y_train)
-
-# Get predictions
-y_pred = model.predict(X_test)
-
-# Calculate accuracy
-accuracy = accuracy_score(y_test, y_pred)
-print(f"Accuracy: {accuracy:.3f}")
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-10" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Iris Setup</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Load the three-class Iris dataset and split into train/test; with only 150 samples, <code>test_size=0.2</code> reserves 30 samples for evaluation.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="12-20" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Random Forest Accuracy</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Fit a Random Forest and measure accuracy; for well-separated Iris classes this typically reaches 1.0, illustrating that accuracy is reliable when classes are balanced and separable.</p>
-    </div>
-  </div>
-</aside>
-</div>
+Fit a Random Forest and measure accuracy; for well-separated Iris classes this typically reaches 1.0, illustrating that accuracy is reliable when classes are balanced and separable.
 
 ```
 Accuracy: 1.000
@@ -156,62 +79,57 @@ Accuracy: 1.000
 
 ### 1. Binary Classification
 
-- Perfect accuracy: 1.0
-- Random guessing: 0.5
-- Worst case: 0.0
+* Perfect accuracy: 1.0
+* Random guessing: 0.5
+* Worst case: 0.0
 
 ### 2. Multi-class Classification
 
-- Perfect accuracy: 1.0
-- Random guessing: 1/n_classes
-- Worst case: 0.0
+* Perfect accuracy: 1.0
+* Random guessing: 1/n\_classes
+* Worst case: 0.0
 
 ### 3. Balanced vs. Imbalanced Data
 
-- Balanced: Accuracy is meaningful
-- Imbalanced: May be misleading
-- Consider other metrics
+* Balanced: Accuracy is meaningful
+* Imbalanced: May be misleading
+* Consider other metrics
 
 > **Highlight:** compare accuracy to the **majority-class baseline** before celebrating. If 90% of cases are negative, a 90% accurate model may have learned nothing useful.
 
 ## Best Practices
 
 1. **Choose Appropriate Metrics**
-   - Check class distribution before trusting accuracy. If 95% of examples are negative, a model can score 95% by predicting negative every time.
-   - Pair accuracy with precision, recall, F1, or ROC/PR metrics when mistakes have asymmetric costs.
-   - Inspect the confusion matrix because it shows which classes are being confused; accuracy hides whether errors are concentrated in the most important class.
-
+   * Check class distribution before trusting accuracy. If 95% of examples are negative, a model can score 95% by predicting negative every time.
+   * Pair accuracy with precision, recall, F1, or ROC/PR metrics when mistakes have asymmetric costs.
+   * Inspect the confusion matrix because it shows which classes are being confused; accuracy hides whether errors are concentrated in the most important class.
 2. **Handle Class Imbalance**
-   - Use class weights or balanced accuracy when each class should contribute fairly to evaluation.
-   - Consider recall or precision for the minority class because that is often where the business risk sits.
-   - Apply resampling only inside the training fold of a pipeline; resampling before splitting leaks information and inflates performance.
-
+   * Use class weights or balanced accuracy when each class should contribute fairly to evaluation.
+   * Consider recall or precision for the minority class because that is often where the business risk sits.
+   * Apply resampling only inside the training fold of a pipeline; resampling before splitting leaks information and inflates performance.
 3. **Validate Results**
-   - Use cross-validation to see whether accuracy is stable across different train/test splits.
-   - Compare training and validation accuracy to detect overfitting; a large gap means the model is memorising training data.
-   - Compare with a simple baseline such as the majority-class classifier. A model that barely beats the baseline may not be useful.
-
+   * Use cross-validation to see whether accuracy is stable across different train/test splits.
+   * Compare training and validation accuracy to detect overfitting; a large gap means the model is memorising training data.
+   * Compare with a simple baseline such as the majority-class classifier. A model that barely beats the baseline may not be useful.
 4. **Consider Business Impact**
-   - Estimate the cost of false positives and false negatives before selecting a threshold.
-   - Align the metric with risk tolerance: a screening model may prefer high recall, while an automated action may require high precision.
-   - Tune the decision threshold on validation data rather than accepting the default 0.5 cutoff.
+   * Estimate the cost of false positives and false negatives before selecting a threshold.
+   * Align the metric with risk tolerance: a screening model may prefer high recall, while an automated action may require high precision.
+   * Tune the decision threshold on validation data rather than accepting the default 0.5 cutoff.
 
 ## Common Mistakes to Avoid
 
 1. **Relying Solely on Accuracy**
-   - Ignoring class imbalance
-   - Missing important patterns
-   - Overlooking costs
-
+   * Ignoring class imbalance
+   * Missing important patterns
+   * Overlooking costs
 2. **Poor Data Preparation**
-   - Not handling missing values
-   - Ignoring outliers
-   - Skipping preprocessing
-
+   * Not handling missing values
+   * Ignoring outliers
+   * Skipping preprocessing
 3. **Incorrect Interpretation**
-   - Not considering baseline
-   - Ignoring business context
-   - Overlooking costs
+   * Not considering baseline
+   * Ignoring business context
+   * Overlooking costs
 
 ## Practical Example: Credit Risk Prediction
 
@@ -219,89 +137,17 @@ Analyze accuracy for a credit risk prediction model:
 
 #### Pipeline accuracy vs majority baseline
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Credit Dataset
 
-{% highlight python %}
-import numpy as np
-import pandas as pd
-from sklearn.metrics import accuracy_score
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import Pipeline
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
+Generate five financial features and derive a binary approval label from a threshold on credit score, income, and age, the same synthetic credit setup reused across 5.5 examples.
 
-# Create credit risk dataset
-np.random.seed(42)
-n_samples = 1000
+Pipeline and Prediction
 
-# Generate features
-data = {
-    'age': np.random.normal(35, 10, n_samples),
-    'income': np.random.exponential(50000, n_samples),
-    'credit_score': np.random.normal(700, 100, n_samples),
-    'debt_ratio': np.random.beta(2, 5, n_samples),
-    'employment_length': np.random.exponential(5, n_samples)
-}
+A scaler+forest pipeline prevents data leakage; `predict` returns hard labels used to compute the test-set accuracy score.
 
-X = pd.DataFrame(data)
-y = (X['credit_score'] + X['income']/1000 + X['age'] > 800).astype(int)
+Accuracy vs Baseline
 
-# Split data
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-# Create pipeline
-pipeline = Pipeline([
-    ('scaler', StandardScaler()),
-    ('classifier', RandomForestClassifier(random_state=42))
-])
-
-# Train model
-pipeline.fit(X_train, y_train)
-
-# Get predictions
-y_pred = pipeline.predict(X_test)
-
-# Calculate accuracy
-accuracy = accuracy_score(y_test, y_pred)
-print(f"Accuracy: {accuracy:.3f}")
-
-# Calculate baseline accuracy
-baseline_accuracy = max(y_test.mean(), 1 - y_test.mean())
-print(f"Baseline Accuracy: {baseline_accuracy:.3f}")
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-24" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Credit Dataset</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Generate five financial features and derive a binary approval label from a threshold on credit score, income, and age, the same synthetic credit setup reused across 5.5 examples.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="26-40" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Pipeline and Prediction</span>
-    </div>
-    <div class="code-callout__body">
-      <p>A scaler+forest pipeline prevents data leakage; <code>predict</code> returns hard labels used to compute the test-set accuracy score.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="42-48" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Accuracy vs Baseline</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Report both model accuracy and the majority-class baseline (<code>max(P(y=1), P(y=0))</code>); the gap between the two shows how much the model actually learns beyond trivial prediction.</p>
-    </div>
-  </div>
-</aside>
-</div>
+Report both model accuracy and the majority-class baseline (`max(P(y=1), P(y=0))`); the gap between the two shows how much the model actually learns beyond trivial prediction.
 
 ```
 Accuracy: 0.970
@@ -310,11 +156,11 @@ Baseline Accuracy: 0.555
 
 ## Gotchas
 
-- **High accuracy on an imbalanced dataset feels like success**: A dataset with 95% negative samples lets a classifier that always predicts "negative" achieve 95% accuracy; this is the accuracy paradox, and the model has learned nothing; always compare model accuracy to the majority-class baseline before declaring success.
-- **`model.score(X_test, y_test)` returns accuracy by default for classifiers**: This is easy to overlook when you later switch to a regression problem where `.score` returns R², not MSE; explicitly call `accuracy_score` or the relevant metric function to make your intent clear and avoid silent metric changes.
-- **Balanced accuracy is not the same as accuracy on balanced data**: `sklearn.metrics.balanced_accuracy_score` averages recall per class and is appropriate for imbalanced data; it will differ from standard accuracy even on a balanced dataset if per-class recalls are unequal; choose the right function deliberately.
-- **Comparing accuracy across different test set sizes**: Accuracy from a 50-sample test is far noisier than accuracy from a 5000-sample test; a 2% gap between two models may be statistically insignificant on 50 samples; always report confidence intervals or use statistical tests when comparing models on small test sets.
-- **Using accuracy as the scoring metric inside `GridSearchCV` for imbalanced problems**: Setting `scoring='accuracy'` in `GridSearchCV` selects the model that maximises accuracy, which on imbalanced data rewards the model that best predicts the majority class; use `scoring='f1'`, `'roc_auc'`, or a custom scorer aligned with your actual objective.
+* **High accuracy on an imbalanced dataset feels like success**: A dataset with 95% negative samples lets a classifier that always predicts "negative" achieve 95% accuracy; this is the accuracy paradox, and the model has learned nothing; always compare model accuracy to the majority-class baseline before declaring success.
+* **`model.score(X_test, y_test)` returns accuracy by default for classifiers**: This is easy to overlook when you later switch to a regression problem where `.score` returns R², not MSE; explicitly call `accuracy_score` or the relevant metric function to make your intent clear and avoid silent metric changes.
+* **Balanced accuracy is not the same as accuracy on balanced data**: `sklearn.metrics.balanced_accuracy_score` averages recall per class and is appropriate for imbalanced data; it will differ from standard accuracy even on a balanced dataset if per-class recalls are unequal; choose the right function deliberately.
+* **Comparing accuracy across different test set sizes**: Accuracy from a 50-sample test is far noisier than accuracy from a 5000-sample test; a 2% gap between two models may be statistically insignificant on 50 samples; always report confidence intervals or use statistical tests when comparing models on small test sets.
+* **Using accuracy as the scoring metric inside `GridSearchCV` for imbalanced problems**: Setting `scoring='accuracy'` in `GridSearchCV` selects the model that maximises accuracy, which on imbalanced data rewards the model that best predicts the majority class; use `scoring='f1'`, `'roc_auc'`, or a custom scorer aligned with your actual objective.
 
 ## Additional Resources
 

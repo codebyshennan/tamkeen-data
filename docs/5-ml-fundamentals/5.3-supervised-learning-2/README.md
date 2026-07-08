@@ -4,7 +4,7 @@
 
 ## Overview
 
-Part 2 moves from single learners to **ensembles** ([random forest](random-forest/1-introduction.md), [gradient boosting](gradient-boosting/1-introduction.md)), **neural networks** ([introduction](neural-networks/1-introduction.md) plus optional [backpropagation](backpropagation/1-introduction.md) deep dive), and **regularization** ([overview](regularization/1-introduction.md)) to control complexity. **Prerequisites:** [5.2 Supervised learning 1](../5.2-supervised-learning-1/README.md); evaluation ideas from [5.5](../5.5-model-eval/README.md) are worth skimming early so you tune with the right metrics.
+Part 2 moves from single learners to **ensembles** ([random forest](random-forest/1-introduction.md), [gradient boosting](gradient-boosting/1-introduction.md)), **neural networks** ([introduction](neural-networks/1-introduction.md) plus optional [backpropagation](backpropagation/1-introduction.md) deep dive), and **regularization** ([overview](regularization/1-introduction.md)) to control complexity. **Prerequisites:** [5.2 Supervised learning 1](../5.2-supervised-learning-1/); evaluation ideas from [5.5](../5.5-model-eval/) are worth skimming early so you tune with the right metrics.
 
 ## Why this matters
 
@@ -14,9 +14,7 @@ Welcome to the second part of supervised learning! This section covers powerful 
 
 ## Helpful video
 
-Crash Course AI: supervised learning framing (~15 min).
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+Crash Course AI: supervised learning framing (\~15 min).
 
 ## Learning Objectives
 
@@ -35,59 +33,59 @@ By the end of this section, you will be able to:
 
 Ensemble method using multiple decision trees:
 
-- Bootstrap aggregating (bagging)
-- Random feature selection
-- Parallel training
-- Built-in feature importance
+* Bootstrap aggregating (bagging)
+* Random feature selection
+* Parallel training
+* Built-in feature importance
 
 Perfect for:
 
-- High-dimensional data
-- Complex non-linear relationships
-- Feature importance analysis
-- When stability is important
+* High-dimensional data
+* Complex non-linear relationships
+* Feature importance analysis
+* When stability is important
 
 ### 2. [Gradient Boosting](gradient-boosting/1-introduction.md)
 
 Sequential ensemble method:
 
-- Builds models iteratively
-- Each model corrects previous errors
-- Strong predictive power
-- Multiple implementations (XGBoost, LightGBM, CatBoost)
+* Builds models iteratively
+* Each model corrects previous errors
+* Strong predictive power
+* Multiple implementations (XGBoost, LightGBM, CatBoost)
 
 Ideal for:
 
-- Structured/tabular data
-- Competition-winning performance
-- When accuracy is important
-- Handling imbalanced data
+* Structured/tabular data
+* Competition-winning performance
+* When accuracy is important
+* Handling imbalanced data
 
 ### 3. [Neural Networks](neural-networks/1-introduction.md)
 
 Deep learning foundation:
 
-- Multiple layers of neurons
-- Automatic feature learning
-- Various architectures (CNN, RNN, Transformers)
-- Transfer learning capabilities
+* Multiple layers of neurons
+* Automatic feature learning
+* Various architectures (CNN, RNN, Transformers)
+* Transfer learning capabilities
 
 Best for:
 
-- Complex pattern recognition
-- Image and video processing
-- Natural language processing
-- When large data is available
+* Complex pattern recognition
+* Image and video processing
+* Natural language processing
+* When large data is available
 
 ### 4. [Regularization](regularization/1-introduction.md)
 
 Techniques to prevent overfitting:
 
-- L1 regularization (Lasso)
-- L2 regularization (Ridge)
-- Elastic Net
-- Dropout
-- Early stopping
+* L1 regularization (Lasso)
+* L2 regularization (Ridge)
+* Elastic Net
+* Dropout
+* Early stopping
 
 ## Algorithm Selection Guide
 
@@ -111,11 +109,11 @@ def select_classifier(data_characteristics):
 
 ### Performance Comparison
 
-| Algorithm | Training Speed | Prediction Speed | Interpretability | Memory Usage |
-|-----------|---------------|------------------|------------------|--------------|
-| Random Forest | Fast | Very Fast | High | Medium |
-| Gradient Boosting | Slow | Fast | Medium | Low |
-| Neural Networks | Slow | Very Fast | Low | High |
+| Algorithm         | Training Speed | Prediction Speed | Interpretability | Memory Usage |
+| ----------------- | -------------- | ---------------- | ---------------- | ------------ |
+| Random Forest     | Fast           | Very Fast        | High             | Medium       |
+| Gradient Boosting | Slow           | Fast             | Medium           | Low          |
+| Neural Networks   | Slow           | Very Fast        | Low              | High         |
 
 ## Prerequisites
 
@@ -143,48 +141,43 @@ import lightgbm
 ## Best Practices
 
 1. **Data Preparation**
-   - Handle missing values
-   - Scale features appropriately
-   - Split data properly
-   - Create validation set
-
+   * Handle missing values
+   * Scale features appropriately
+   * Split data properly
+   * Create validation set
 2. **Model Selection**
-   - Start simple, increase complexity
-   - Use cross-validation
-   - Consider computational resources
-   - Think about interpretability needs
-
+   * Start simple, increase complexity
+   * Use cross-validation
+   * Consider computational resources
+   * Think about interpretability needs
 3. **Training Process**
-   - Monitor training metrics
-   - Use early stopping
-   - Apply appropriate regularization
-   - Save model checkpoints
-
+   * Monitor training metrics
+   * Use early stopping
+   * Apply appropriate regularization
+   * Save model checkpoints
 4. **Evaluation**
-   - Use multiple metrics
-   - Check for overfitting
-   - Analyze feature importance
-   - Validate on holdout set
+   * Use multiple metrics
+   * Check for overfitting
+   * Analyze feature importance
+   * Validate on holdout set
 
 ## Common Pitfalls
 
 1. **Random Forest**
-   - Too many trees (diminishing returns)
-   - Correlated features
-   - Class imbalance
-   - Memory constraints
-
+   * Too many trees (diminishing returns)
+   * Correlated features
+   * Class imbalance
+   * Memory constraints
 2. **Gradient Boosting**
-   - Overfitting
-   - Too high learning rate
-   - Too deep trees
-   - Training time
-
+   * Overfitting
+   * Too high learning rate
+   * Too deep trees
+   * Training time
 3. **Neural Networks**
-   - Vanishing/exploding gradients
-   - Overfitting
-   - Architecture complexity
-   - Hardware requirements
+   * Vanishing/exploding gradients
+   * Overfitting
+   * Architecture complexity
+   * Hardware requirements
 
 ## Ready to Begin?
 

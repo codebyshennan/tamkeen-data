@@ -1,10 +1,18 @@
 ---
 reading_minutes: 15
 objectives:
-  - "Describe DBSCAN's core / border / noise classification and how `eps` and `min_samples` shape the result."
-  - "Identify when density clustering beats k-means: arbitrary cluster shapes, unknown cluster count, and explicit outlier handling."
-  - "Run `DBSCAN(eps=..., min_samples=...).fit_predict(X)` on scaled data and interpret the `-1` noise label."
-  - "Diagnose the two common failure modes: everything-noise and one-giant-cluster, using an `eps` sweep or k-distance plot."
+  - >-
+    Describe DBSCAN's core / border / noise classification and how `eps` and
+    `min_samples` shape the result.
+  - >-
+    Identify when density clustering beats k-means: arbitrary cluster shapes,
+    unknown cluster count, and explicit outlier handling.
+  - >-
+    Run `DBSCAN(eps=..., min_samples=...).fit_predict(X)` on scaled data and
+    interpret the `-1` noise label.
+  - >-
+    Diagnose the two common failure modes: everything-noise and
+    one-giant-cluster, using an `eps` sweep or k-distance plot.
 ---
 
 # DBSCAN (Density-Based Spatial Clustering)
@@ -15,8 +23,8 @@ objectives:
 
 DBSCAN finds dense neighborhoods in feature space. Unlike K-Means, it does not ask for the number of clusters in advance. Instead, it asks:
 
-- How close must points be to count as neighbors? (`eps`)
-- How many neighbors make an area dense enough? (`min_samples`)
+* How close must points be to count as neighbors? (`eps`)
+* How many neighbors make an area dense enough? (`min_samples`)
 
 Points in dense areas become clusters. Points that are too isolated are labeled `-1`, meaning noise or outlier.
 
@@ -26,24 +34,22 @@ The tradeoff is parameter sensitivity. DBSCAN does not need `k`, but it does nee
 
 ## Quick Reference
 
-{% include mermaid-diagram.html src="5-ml-fundamentals/5.4-unsupervised-learning/diagrams/dbscan-1.mmd" %}
-
 DBSCAN is ideal when:
 
-- Clusters have arbitrary shapes rather than round blobs.
-- You need to identify noise or outliers.
-- You do not know the number of clusters.
-- The dataset is scaled and distance is meaningful.
+* Clusters have arbitrary shapes rather than round blobs.
+* You need to identify noise or outliers.
+* You do not know the number of clusters.
+* The dataset is scaled and distance is meaningful.
 
 ## Core, Border, and Noise Points
 
 DBSCAN classifies points by density:
 
-| Point type | Meaning | What happens |
-| --- | --- | --- |
-| Core point | Has at least `min_samples` points within distance `eps` | Starts or expands a cluster |
-| Border point | Is close to a core point but does not have enough neighbors itself | Joins a nearby cluster |
-| Noise point | Is not close enough to any core point | Receives label `-1` |
+| Point type   | Meaning                                                            | What happens                |
+| ------------ | ------------------------------------------------------------------ | --------------------------- |
+| Core point   | Has at least `min_samples` points within distance `eps`            | Starts or expands a cluster |
+| Border point | Is close to a core point but does not have enough neighbors itself | Joins a nearby cluster      |
+| Noise point  | Is not close enough to any core point                              | Receives label `-1`         |
 
 Clusters form by connecting core points that can reach each other through dense neighborhoods. This is why DBSCAN can follow curved shapes without using centroids.
 
@@ -82,10 +88,7 @@ plt.savefig("assets/dbscan_example.png")
 plt.close()
 ```
 
-<figure>
-<img src="assets/dbscan_example.png" alt="Side-by-side scatter plots of moon-shaped data and DBSCAN cluster labels" />
-<figcaption>Figure 1: DBSCAN separates curved groups because it follows density instead of centroid distance.</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/dbscan_example.png" alt="Side-by-side scatter plots of moon-shaped data and DBSCAN cluster labels"><figcaption><p>Figure 1: DBSCAN separates curved groups because it follows density instead of centroid distance.</p></figcaption></figure>
 
 ## How to Read the Chart
 
@@ -93,11 +96,11 @@ The two moons are not round. A centroid method would tend to split the shape wit
 
 When reading a DBSCAN plot:
 
-- Same-colored points are connected by density.
-- A `-1` color means noise or outlier.
-- Curved clusters are acceptable; DBSCAN does not require spherical groups.
-- If one visible group is split into many fragments, `eps` is probably too small.
-- If several visible groups merge together, `eps` is probably too large.
+* Same-colored points are connected by density.
+* A `-1` color means noise or outlier.
+* Curved clusters are acceptable; DBSCAN does not require spherical groups.
+* If one visible group is split into many fragments, `eps` is probably too small.
+* If several visible groups merge together, `eps` is probably too large.
 
 ## Interpreting Labels
 
@@ -116,7 +119,7 @@ print("Noise fraction:", round(noise_fraction, 3))
 
 Expected output:
 
-```text
+```
 Cluster ids: [0 1]
 Cluster counts: [150 150]
 Noise fraction: 0.0
@@ -144,10 +147,7 @@ plt.savefig("assets/dbscan_eps_sweep.png")
 plt.close()
 ```
 
-<figure>
-<img src="assets/dbscan_eps_sweep.png" alt="Three DBSCAN plots showing too-small, reasonable, and too-large eps values" />
-<figcaption>Figure 2: Small `eps` creates too much noise; large `eps` merges groups. The middle setting preserves the two curved clusters.</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/dbscan_eps_sweep.png" alt="Three DBSCAN plots showing too-small, reasonable, and too-large eps values"><figcaption><p>Figure 2: Small `eps` creates too much noise; large `eps` merges groups. The middle setting preserves the two curved clusters.</p></figcaption></figure>
 
 For a more systematic choice, plot each point's distance to its `min_samples`-th nearest neighbor and look for the elbow. Use that distance as a starting point for `eps`, then inspect the clusters visually.
 
@@ -155,9 +155,9 @@ For a more systematic choice, plot each point's distance to its `min_samples`-th
 
 `min_samples` controls how dense a region must be before it can become a cluster.
 
-- Smaller values make DBSCAN more willing to form clusters.
-- Larger values make DBSCAN stricter and label more points as noise.
-- A common starting point is `min_samples = 2 * number_of_features`.
+* Smaller values make DBSCAN more willing to form clusters.
+* Larger values make DBSCAN stricter and label more points as noise.
+* A common starting point is `min_samples = 2 * number_of_features`.
 
 For a two-dimensional teaching dataset, `min_samples=5` is a reasonable default. For real data, tune it together with `eps` and always report the noise fraction.
 
@@ -176,9 +176,9 @@ Use this sequence when trying DBSCAN:
 
 Use the same `make_moons` dataset and try:
 
-- `eps=0.10`
-- `eps=0.25`
-- `eps=0.60`
+* `eps=0.10`
+* `eps=0.25`
+* `eps=0.60`
 
 For each setting, answer:
 
@@ -189,10 +189,10 @@ For each setting, answer:
 
 ## Gotchas
 
-- **Noise points labeled `-1` need special handling** - some metrics, including silhouette score, should be computed after filtering noise points (`labels != -1`) and reported alongside the noise fraction.
-- **`eps` in raw feature space is meaningless** - DBSCAN uses Euclidean distance, so an `eps` value that works on standardized data can be wildly wrong on unscaled data.
-- **All points classified as noise** - if `eps` is too small or `min_samples` is too large, DBSCAN assigns everything to noise. Increase `eps` or reduce `min_samples`.
-- **All points in one cluster** - if `eps` is too large, DBSCAN merges everything into one dense region. Decrease `eps`.
-- **Different densities are hard** - DBSCAN uses one global `eps`, so dense and sparse clusters can be hard to recover together. Consider HDBSCAN when density varies.
+* **Noise points labeled `-1` need special handling** - some metrics, including silhouette score, should be computed after filtering noise points (`labels != -1`) and reported alongside the noise fraction.
+* **`eps` in raw feature space is meaningless** - DBSCAN uses Euclidean distance, so an `eps` value that works on standardized data can be wildly wrong on unscaled data.
+* **All points classified as noise** - if `eps` is too small or `min_samples` is too large, DBSCAN assigns everything to noise. Increase `eps` or reduce `min_samples`.
+* **All points in one cluster** - if `eps` is too large, DBSCAN merges everything into one dense region. Decrease `eps`.
+* **Different densities are hard** - DBSCAN uses one global `eps`, so dense and sparse clusters can be hard to recover together. Consider HDBSCAN when density varies.
 
 For a longer comparison with K-Means and hierarchical clustering, see the [Clustering Guide](clustering.md).

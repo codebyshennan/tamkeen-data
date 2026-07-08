@@ -1,10 +1,19 @@
 ---
 reading_minutes: 6
 objectives:
-  - "Distinguish **bias** (error from over-simplifying assumptions) from **variance** (error from sensitivity to training data) and place a model on the underfit-overfit axis."
-  - "Recognise the tradeoff: low-bias models tend to be high-variance and vice versa, so total error has a U-shape in model complexity."
-  - "Diagnose which side of the tradeoff a model is on by comparing **train vs validation error**, close and high = bias; large gap = variance."
-  - "Counter high bias with more capacity / better features; counter high variance with regularisation, more data, or simpler models."
+  - >-
+    Distinguish **bias** (error from over-simplifying assumptions) from
+    **variance** (error from sensitivity to training data) and place a model on
+    the underfit-overfit axis.
+  - >-
+    Recognise the tradeoff: low-bias models tend to be high-variance and vice
+    versa, so total error has a U-shape in model complexity.
+  - >-
+    Diagnose which side of the tradeoff a model is on by comparing **train vs
+    validation error**, close and high = bias; large gap = variance.
+  - >-
+    Counter high bias with more capacity / better features; counter high
+    variance with regularisation, more data, or simpler models.
 ---
 
 # Bias-Variance Tradeoff
@@ -16,7 +25,6 @@ objectives:
 Evaluation-focused view of **bias-variance** and what different validation designs reveal.
 
 Connects to [5.1 bias-variance](../5.1-intro-to-ml/bias-variance.md) intuition.
-
 
 ## Introduction
 
@@ -34,8 +42,6 @@ Understanding the bias-variance tradeoff is important in machine learning. It he
 
 Finding the right balance between bias and variance is key to creating effective models. Too much bias leads to underfitting, while too much variance leads to overfitting.
 
-{% include model-eval-html-diagram.html diagram="bias-variance" title="Bias variance trade-off diagram" %}
-
 > **Diagnostic shortcut:** **high train error + high validation error = bias**. **low train error + high validation error = variance**.
 
 ## Practical Examples
@@ -43,19 +49,17 @@ Finding the right balance between bias and variance is key to creating effective
 look at some real-world examples:
 
 1. Linear Regression (High Bias, Low Variance)
-   - Simple model
-   - Consistent predictions
-   - May miss complex patterns
-
+   * Simple model
+   * Consistent predictions
+   * May miss complex patterns
 2. Deep Neural Networks (Low Bias, High Variance)
-   - Complex model
-   - Flexible predictions
-   - May overfit to noise
-
+   * Complex model
+   * Flexible predictions
+   * May overfit to noise
 3. Random Forests (Balanced)
-   - Ensemble method
-   - Combines multiple trees
-   - Often achieves good balance
+   * Ensemble method
+   * Combines multiple trees
+   * Often achieves good balance
 
 ## Best Practices
 
@@ -67,12 +71,12 @@ look at some real-world examples:
 
 ## Gotchas
 
-- **Conflating training error with bias**: A model can have near-zero training error and still have high bias if the training set is tiny; always check validation error, not just training error, to diagnose bias.
-- **Assuming more data always fixes variance**: Adding data reduces variance only when the model is actually overfitting; if both train and validation error are high (high bias), more data will not help and you need a more complex model.
-- **Treating regularization and bias as independent**: Adding L1/L2 regularization to reduce variance simultaneously increases bias; the tradeoff is intentional, but learners often add regularization expecting only gains without realising accuracy on the training set will drop.
-- **Ignoring variance in the error estimate itself**: A single train/test split gives one variance sample; use cross-validation to see whether the gap between train and validation scores is stable or fluctuates, which reveals variance in the *evaluation*, not just the model.
-- **Confusing irreducible error with high bias**: Even a perfect model cannot beat noise inherent in the data; diagnosing "high bias" incorrectly as irreducible error (or vice versa) leads to wasted complexity tuning.
-- **Using only model complexity as the bias-variance dial**: Dataset size, feature engineering quality, and regularization strength all shift the tradeoff; fixing overfitting by switching to a simpler model family often discards useful capacity that regularization could preserve.
+* **Conflating training error with bias**: A model can have near-zero training error and still have high bias if the training set is tiny; always check validation error, not just training error, to diagnose bias.
+* **Assuming more data always fixes variance**: Adding data reduces variance only when the model is actually overfitting; if both train and validation error are high (high bias), more data will not help and you need a more complex model.
+* **Treating regularization and bias as independent**: Adding L1/L2 regularization to reduce variance simultaneously increases bias; the tradeoff is intentional, but learners often add regularization expecting only gains without realising accuracy on the training set will drop.
+* **Ignoring variance in the error estimate itself**: A single train/test split gives one variance sample; use cross-validation to see whether the gap between train and validation scores is stable or fluctuates, which reveals variance in the _evaluation_, not just the model.
+* **Confusing irreducible error with high bias**: Even a perfect model cannot beat noise inherent in the data; diagnosing "high bias" incorrectly as irreducible error (or vice versa) leads to wasted complexity tuning.
+* **Using only model complexity as the bias-variance dial**: Dataset size, feature engineering quality, and regularization strength all shift the tradeoff; fixing overfitting by switching to a simpler model family often discards useful capacity that regularization could preserve.
 
 ## Additional Resources
 

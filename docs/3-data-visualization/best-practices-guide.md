@@ -6,8 +6,6 @@
 
 Orientation for the course visualization materials.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/RBSUwFGa6Fk" title="What is Data Science?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 ## Overview
 
 These practices apply whether you plot in Python or in a BI tool: one clear message per view, audience-appropriate complexity, honest scales, and accessible color and type.
@@ -19,10 +17,11 @@ These practices apply whether you plot in Python or in a BI tool: one clear mess
 ### 1. Clarity First
 
 #### Clear Purpose
-- Each visualization should answer a specific question
-- Focus on one main message
-- Remove unnecessary elements
-- Guide viewer's attention
+
+* Each visualization should answer a specific question
+* Focus on one main message
+* Remove unnecessary elements
+* Guide viewer's attention
 
 #### Example
 
@@ -45,10 +44,11 @@ plt.plot(data4, label='Profits', color='green')
 ### 2. Know Your Audience
 
 #### Audience Considerations
-- Technical expertise
-- Domain knowledge
-- Time constraints
-- Decision needs
+
+* Technical expertise
+* Domain knowledge
+* Time constraints
+* Decision needs
 
 #### Example Adaptations
 
@@ -72,10 +72,11 @@ plt.ylabel('Sales ($M)')
 ### 3. Choose the Right Chart
 
 #### Data Type Considerations
-- Temporal: Line charts, area charts
-- Categorical: Bar charts, pie charts
-- Numerical: Histograms, box plots
-- Relational: Scatter plots, bubble charts
+
+* Temporal: Line charts, area charts
+* Categorical: Bar charts, pie charts
+* Numerical: Histograms, box plots
+* Relational: Scatter plots, bubble charts
 
 #### Examples for Different Data Types
 
@@ -102,10 +103,11 @@ plt.scatter(x, y)
 ### 1. Color Usage
 
 #### Color Purpose
-- Highlight important data
-- Show categories
-- Represent values
-- Create hierarchy
+
+* Highlight important data
+* Show categories
+* Represent values
+* Create hierarchy
 
 #### Color Best Practices
 
@@ -126,10 +128,11 @@ plt.scatter(x, y, c=values, cmap=sns.color_palette("Blues", as_cmap=True))
 ### 2. Typography
 
 #### Text Hierarchy
-- Clear titles
-- Readable labels
-- Appropriate font sizes
-- Consistent styling
+
+* Clear titles
+* Readable labels
+* Appropriate font sizes
+* Consistent styling
 
 #### Example
 
@@ -149,10 +152,11 @@ plt.tick_params(labelsize=10)
 ### 3. Layout
 
 #### Space Usage
-- Maintain white space
-- Align elements
-- Group related items
-- Use consistent spacing
+
+* Maintain white space
+* Align elements
+* Group related items
+* Use consistent spacing
 
 #### Example
 
@@ -167,29 +171,20 @@ fig.suptitle('Sales Analysis Dashboard', fontsize=16)
 plt.tight_layout(rect=[0, 0.03, 1, 0.95])
 ```
 
+<figure><img src="../../.gitbook/assets/best-practices-guide_fig_1.png" alt="best-practices-guide"><figcaption><p>Figure 1: Generated visualization</p></figcaption></figure>
 
-<figure>
-<img src="assets/best-practices-guide_fig_1.png" alt="best-practices-guide" />
-<figcaption>Figure 1: Generated visualization</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/best-practices-guide_fig_2.png" alt="best-practices-guide" />
-<figcaption>Figure 2: Sales Analysis Dashboard</figcaption>
-</figure>
-
-
+<figure><img src="../../.gitbook/assets/best-practices-guide_fig_2.png" alt="best-practices-guide"><figcaption><p>Figure 2: Sales Analysis Dashboard</p></figcaption></figure>
 
 ## Interactive Features
 
 ### 1. Tooltips
 
 #### Content Guidelines
-- Show relevant details
-- Use clear formatting
-- Maintain consistency
-- Avoid clutter
+
+* Show relevant details
+* Use clear formatting
+* Maintain consistency
+* Avoid clutter
 
 #### Example (Plotly)
 
@@ -209,10 +204,11 @@ fig = px.scatter(data, x='x', y='y',
 ### 2. Filters
 
 #### Implementation
-- Clear controls
-- Instant feedback
-- Multiple options
-- Reset capability
+
+* Clear controls
+* Instant feedback
+* Multiple options
+* Reset capability
 
 #### Example (Plotly)
 
@@ -233,10 +229,11 @@ fig = px.scatter(data, x='x', y='y',
 ### 1. Data Preparation
 
 #### Best Practices
-- Aggregate when possible
-- Remove unnecessary data
-- Use appropriate data types
-- Cache results
+
+* Aggregate when possible
+* Remove unnecessary data
+* Use appropriate data types
+* Cache results
 
 #### Example
 
@@ -256,10 +253,11 @@ plt.pcolormesh(bins[1], bins[2], bins[0].T)
 ### 2. Rendering Optimization
 
 #### Techniques
-- Use appropriate formats
-- Optimize resolution
-- Minimize elements
-- Consider file size
+
+* Use appropriate formats
+* Optimize resolution
+* Minimize elements
+* Consider file size
 
 #### Example
 
@@ -280,10 +278,11 @@ plt.savefig('plot.pdf', dpi=300)
 ### 1. Color Blindness
 
 #### Considerations
-- Use colorblind-friendly palettes
-- Include patterns/shapes
-- Maintain contrast
-- Test with simulators
+
+* Use colorblind-friendly palettes
+* Include patterns/shapes
+* Maintain contrast
+* Test with simulators
 
 #### Example
 
@@ -302,10 +301,11 @@ plt.plot(data2, color=colors[1], linestyle='--', marker='s')
 ### 2. Text Readability
 
 #### Guidelines
-- Sufficient font size
-- High contrast
-- Clear hierarchy
-- Alternative text
+
+* Sufficient font size
+* High contrast
+* Clear hierarchy
+* Alternative text
 
 #### Example
 
@@ -326,10 +326,11 @@ plt.ylabel('Sales ($)', fontsize=12)
 ### 1. Code Comments
 
 #### Best Practices
-- Explain complex logic
-- Document assumptions
-- Note data sources
-- Include references
+
+* Explain complex logic
+* Document assumptions
+* Note data sources
+* Include references
 
 #### Example
 
@@ -350,10 +351,11 @@ plt.plot(smoothed_data, label='7-day Average')
 ### 2. Visualization Documentation
 
 #### Elements to Include
-- Data sources
-- Processing steps
-- Calculation methods
-- Update frequency
+
+* Data sources
+* Processing steps
+* Calculation methods
+* Update frequency
 
 #### Example
 
@@ -367,23 +369,13 @@ plt.figtext(0.99, 0.01, 'Source: Sales Database (Updated Daily)',
             ha='right', va='bottom', fontsize=8, style='italic')
 ```
 
+<figure><img src="../../.gitbook/assets/best-practices-guide_fig_3.png" alt="best-practices-guide"><figcaption><p>Figure 3: Generated visualization</p></figcaption></figure>
 
-<figure>
-<img src="assets/best-practices-guide_fig_3.png" alt="best-practices-guide" />
-<figcaption>Figure 3: Generated visualization</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/best-practices-guide_fig_4.png" alt="best-practices-guide" />
-<figcaption>Figure 4: Generated visualization</figcaption>
-</figure>
+<figure><img src="../../.gitbook/assets/best-practices-guide_fig_4.png" alt="best-practices-guide"><figcaption><p>Figure 4: Generated visualization</p></figcaption></figure>
 
 ```
 Text(0.99, 0.01, 'Source: Sales Database (Updated Daily)')
 ```
-
-
 
 **Captured output (notebook):** Jupyter may display the `Text` object returned by `figtext`; the caption still renders on the figure.
 
@@ -392,10 +384,11 @@ Text(0.99, 0.01, 'Source: Sales Database (Updated Daily)')
 ### 1. Testing
 
 #### Check Points
-- Data accuracy
-- Visual accuracy
-- Performance
-- Accessibility
+
+* Data accuracy
+* Visual accuracy
+* Performance
+* Accessibility
 
 #### Example
 
@@ -419,12 +412,14 @@ except Exception as e:
 ### 2. Review Process
 
 #### Steps
-- Peer review
-- User testing
-- Performance testing
-- Documentation review
+
+* Peer review
+* User testing
+* Performance testing
+* Documentation review
 
 #### Checklist
+
 1. Data accuracy verified
 2. Visualization clarity checked
 3. Performance tested
@@ -433,14 +428,14 @@ except Exception as e:
 
 ## Gotchas
 
-- **`plt.tight_layout(rect=[0, 0.03, 1, 0.95])` must be called after all subplot content is added**: calling it before `plt.plot` or `ax.set_title` means the layout engine does not know about those elements yet and cannot account for their size; always call it last, after all drawing and labeling is complete.
-- **`sns.color_palette("Blues", as_cmap=True)` and `sns.color_palette("Blues", n_colors=5)` return different objects**: the first returns a `LinearSegmentedColormap` for continuous data (use as `cmap=`); the second returns a list of RGB tuples for discrete categories; confusing them causes either a `TypeError` or a flat single-color plot.
-- **`data.rolling(window=7).mean()` produces NaN for the first 6 rows**: the rolling average only has enough data starting at position 7; plotting both the raw and smoothed series will show a gap at the beginning of the smoothed line unless you set `min_periods=1` or trim the raw data to the same range.
-- **`assert data.min() >= 0` raises an `AssertionError` but does not tell you which rows are invalid**: in a production chart pipeline, a failing assertion will abort the notebook without printing the offending values; use `data[data < 0]` to inspect violations before asserting, or replace the assertion with a logged warning.
-- **`plt.savefig('plot.png', dpi=72, optimize=True)`, the `optimize` parameter is silently ignored by most Matplotlib backends**: it is a hint for image compression libraries; DPI is the reliable lever for file size on raster exports.
-- **Dual y-axes created with `twinx()` share the x-axis tick positions but draw two independent y-scales**: the visual alignment of the two lines will depend entirely on your axis limits, making it easy to imply a correlation or ratio that is purely an artifact of scaling; always label both y-axes clearly and consider whether two separate charts would be less misleading.
+* **`plt.tight_layout(rect=[0, 0.03, 1, 0.95])` must be called after all subplot content is added**: calling it before `plt.plot` or `ax.set_title` means the layout engine does not know about those elements yet and cannot account for their size; always call it last, after all drawing and labeling is complete.
+* **`sns.color_palette("Blues", as_cmap=True)` and `sns.color_palette("Blues", n_colors=5)` return different objects**: the first returns a `LinearSegmentedColormap` for continuous data (use as `cmap=`); the second returns a list of RGB tuples for discrete categories; confusing them causes either a `TypeError` or a flat single-color plot.
+* **`data.rolling(window=7).mean()` produces NaN for the first 6 rows**: the rolling average only has enough data starting at position 7; plotting both the raw and smoothed series will show a gap at the beginning of the smoothed line unless you set `min_periods=1` or trim the raw data to the same range.
+* **`assert data.min() >= 0` raises an `AssertionError` but does not tell you which rows are invalid**: in a production chart pipeline, a failing assertion will abort the notebook without printing the offending values; use `data[data < 0]` to inspect violations before asserting, or replace the assertion with a logged warning.
+* **`plt.savefig('plot.png', dpi=72, optimize=True)`, the `optimize` parameter is silently ignored by most Matplotlib backends**: it is a hint for image compression libraries; DPI is the reliable lever for file size on raster exports.
+* **Dual y-axes created with `twinx()` share the x-axis tick positions but draw two independent y-scales**: the visual alignment of the two lines will depend entirely on your axis limits, making it easy to imply a correlation or ratio that is purely an artifact of scaling; always label both y-axes clearly and consider whether two separate charts would be less misleading.
 
 ## Next steps
 
-- Deepen design intuition in [Visualization principles](3.1-intro-data-viz/visualization-principles.md).
-- Compare your habits against [Common mistakes](common-mistakes.md) before publishing or presenting.
+* Deepen design intuition in [Visualization principles](3.1-intro-data-viz/visualization-principles.md).
+* Compare your habits against [Common mistakes](common-mistakes.md) before publishing or presenting.

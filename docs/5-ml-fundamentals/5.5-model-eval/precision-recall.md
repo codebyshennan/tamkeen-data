@@ -1,10 +1,20 @@
 ---
 reading_minutes: 16
 objectives:
-  - "Define **precision** (of predicted positives, how many are real) and **recall** (of real positives, how many we caught), and tie both back to confusion-matrix cells."
-  - "Move along the **precision-recall curve** by changing the decision threshold, there is no free lunch."
-  - "Compute and read PR curves with `precision_recall_curve` and `average_precision_score`; prefer PR over ROC when the positive class is rare."
-  - "Pick a threshold that matches the cost asymmetry of your problem (false positives vs false negatives), defaulting to 0.5 is rarely right."
+  - >-
+    Define **precision** (of predicted positives, how many are real) and
+    **recall** (of real positives, how many we caught), and tie both back to
+    confusion-matrix cells.
+  - >-
+    Move along the **precision-recall curve** by changing the decision
+    threshold, there is no free lunch.
+  - >-
+    Compute and read PR curves with `precision_recall_curve` and
+    `average_precision_score`; prefer PR over ROC when the positive class is
+    rare.
+  - >-
+    Pick a threshold that matches the cost asymmetry of your problem (false
+    positives vs false negatives), defaulting to 0.5 is rarely right.
 ---
 
 # Precision and Recall
@@ -21,61 +31,58 @@ Precision and Recall are fundamental metrics in machine learning for evaluating 
 
 ### Video Tutorial: Sensitivity and Specificity Explained
 
-<div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/vP06aMoz4v8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-*StatQuest: Machine Learning Fundamentals: Sensitivity and Specificity by Josh Starmer*
+_StatQuest: Machine Learning Fundamentals: Sensitivity and Specificity by Josh Starmer_
 
 Note: **sensitivity** is exactly the same metric as **recall** (TP / (TP + FN)), so this video builds the intuition you need before we layer precision on top.
 
 ## What are Precision and Recall?
 
-{% include model-eval-html-diagram.html diagram="precision-recall" title="Precision recall formula diagram" %}
-
-![Precision-Recall Curve](assets/precision_recall_curve.png)
+![Precision-Recall Curve](../../../.gitbook/assets/precision_recall_curve.png)
 
 > **Key idea:** **precision** asks whether positive predictions are trustworthy; **recall** asks whether real positives are being found.
 
 ### Precision
 
-- **Definition**: Ratio of true positives to all predicted positives
-- **Formula**: TP / (TP + FP)
-- **Interpretation**: "Of all the cases I predicted as positive, how many were actually positive?"
-- **Range**: 0 to 1 (higher is better)
-- **Focus**: Quality of positive predictions
+* **Definition**: Ratio of true positives to all predicted positives
+* **Formula**: TP / (TP + FP)
+* **Interpretation**: "Of all the cases I predicted as positive, how many were actually positive?"
+* **Range**: 0 to 1 (higher is better)
+* **Focus**: Quality of positive predictions
 
 ### Recall (Sensitivity)
 
-- **Definition**: Ratio of true positives to all actual positives
-- **Formula**: TP / (TP + FN)
-- **Interpretation**: "Of all the actual positive cases, how many did I correctly identify?"
-- **Range**: 0 to 1 (higher is better)
-- **Focus**: Completeness of positive detection
+* **Definition**: Ratio of true positives to all actual positives
+* **Formula**: TP / (TP + FN)
+* **Interpretation**: "Of all the actual positive cases, how many did I correctly identify?"
+* **Range**: 0 to 1 (higher is better)
+* **Focus**: Completeness of positive detection
 
 ### The Precision-Recall Trade-off
 
 There's typically a trade-off between precision and recall:
 
-- **High Precision, Low Recall**: Very conservative model - when it says "positive," it's usually right, but it misses many positive cases
-- **Low Precision, High Recall**: Very liberal model - catches most positive cases but also flags many false positives
-- **Balanced**: Moderate precision and recall - good overall performance
+* **High Precision, Low Recall**: Very conservative model - when it says "positive," it's usually right, but it misses many positive cases
+* **Low Precision, High Recall**: Very liberal model - catches most positive cases but also flags many false positives
+* **Balanced**: Moderate precision and recall - good overall performance
 
 > **Threshold rule:** raising the threshold usually increases **precision** and lowers **recall**; lowering the threshold usually increases **recall** and lowers **precision**.
 
 ### Real-World Examples
 
 **Medical Diagnosis (Cancer Screening):**
-- **High Recall Priority**: Don't miss any cancer cases (even if some false alarms)
-- **High Precision Priority**: Avoid unnecessary anxiety and procedures
+
+* **High Recall Priority**: Don't miss any cancer cases (even if some false alarms)
+* **High Precision Priority**: Avoid unnecessary anxiety and procedures
 
 **Email Spam Detection:**
-- **High Precision Priority**: Don't block important emails
-- **High Recall Priority**: Catch all spam emails
+
+* **High Precision Priority**: Don't block important emails
+* **High Recall Priority**: Catch all spam emails
 
 **Fraud Detection:**
-- **High Recall Priority**: Catch all fraudulent transactions
-- **High Precision Priority**: Don't block legitimate transactions
+
+* **High Recall Priority**: Catch all fraudulent transactions
+* **High Precision Priority**: Don't block legitimate transactions
 
 ## Types of Precision-Recall Curves
 
@@ -83,241 +90,101 @@ There's typically a trade-off between precision and recall:
 
 #### PR curve and average precision
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Data, Model, and Probabilities
 
-{% highlight python %}
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.metrics import precision_recall_curve, average_precision_score
-from sklearn.datasets import make_classification
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
+Fit logistic regression and extract `predict_proba[:, 1]`, the positive-class probabilities needed to sweep the threshold for the PR curve.
 
-# Generate sample data
-X, y = make_classification(n_samples=1000, n_features=20, n_informative=15, random_state=42)
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+Compute PR Curve
 
-# Train model
-model = LogisticRegression(random_state=42)
-model.fit(X_train, y_train)
+`precision_recall_curve` returns aligned precision/recall arrays at every unique probability threshold; `average_precision_score` summarizes the area in one number.
 
-# Get prediction probabilities
-y_pred_proba = model.predict_proba(X_test)[:, 1]
+Plot Curve
 
-# Calculate precision-recall curve
-precision, recall, thresholds = precision_recall_curve(y_test, y_pred_proba)
-average_precision = average_precision_score(y_test, y_pred_proba)
+Plot recall on x and precision on y; the AP score in the legend gives a quick summary of the curve's area without reading the shape manually.
 
-# Plot precision-recall curve
-plt.figure(figsize=(8, 6))
-plt.plot(recall, precision, color='darkorange', lw=2, label=f'Precision-Recall curve (AP = {average_precision:.2f})')
-plt.xlabel('Recall')
-plt.ylabel('Precision')
-plt.title('Precision-Recall Curve')
-plt.legend(loc="lower left")
-plt.grid(True)
-plt.show()
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-14" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Data, Model, and Probabilities</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Fit logistic regression and extract <code>predict_proba[:, 1]</code>, the positive-class probabilities needed to sweep the threshold for the PR curve.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="16-21" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Compute PR Curve</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>precision_recall_curve</code> returns aligned precision/recall arrays at every unique probability threshold; <code>average_precision_score</code> summarizes the area in one number.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="23-31" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Plot Curve</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Plot recall on x and precision on y; the AP score in the legend gives a quick summary of the curve's area without reading the shape manually.</p>
-    </div>
-  </div>
-</aside>
-</div>
-
-
-<figure>
-<img src="assets/precision-recall_fig_1.png" alt="precision-recall" />
-<figcaption>Figure 1: Precision-Recall Curve</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/precision-recall_fig_1.png" alt="precision-recall"><figcaption><p>Figure 1: Precision-Recall Curve</p></figcaption></figure>
 
 ### 2. Multi-class Classification
 
 #### One-vs-rest PR curves (Iris)
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Binarize Labels
 
-{% highlight python %}
-import matplotlib.pyplot as plt
-from itertools import cycle
-from sklearn.datasets import load_iris
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import label_binarize
-from sklearn.metrics import precision_recall_curve, average_precision_score
+`label_binarize` converts the three-class integer labels to a 3-column binary matrix; each column is the one-vs-rest indicator for that class.
 
-# Load iris dataset
-iris = load_iris()
-X, y = iris.data, iris.target
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+Per-class PR Curves
 
-# Binarize the output
-y_test_bin = label_binarize(y_test, classes=[0, 1, 2])
-n_classes = y_test_bin.shape[1]
+Loop over each class, pairing the binarized true labels with the model's predicted probability for that column; store precision, recall, and AP per class in dicts.
 
-# Train model
-model = RandomForestClassifier(random_state=42)
-model.fit(X_train, y_train)
+Overlay Three Curves
 
-# Get prediction probabilities
-y_pred_proba = model.predict_proba(X_test)
+Cycle through three colors to draw each class's PR curve on the same axes; the AP in the legend lets you compare performance per class at a glance.
 
-# Calculate precision-recall curve for each class
-precision = dict()
-recall = dict()
-average_precision = dict()
-for i in range(n_classes):
-    precision[i], recall[i], _ = precision_recall_curve(y_test_bin[:, i], y_pred_proba[:, i])
-    average_precision[i] = average_precision_score(y_test_bin[:, i], y_pred_proba[:, i])
-
-# Plot precision-recall curves
-plt.figure(figsize=(8, 6))
-colors = cycle(['blue', 'red', 'green'])
-for i, color in zip(range(n_classes), colors):
-    plt.plot(recall[i], precision[i], color=color, lw=2,
-             label=f'Precision-Recall curve of class {i} (AP = {average_precision[i]:.2f})')
-plt.xlabel('Recall')
-plt.ylabel('Precision')
-plt.title('Multi-class Precision-Recall Curves')
-plt.legend(loc="lower left")
-plt.grid(True)
-plt.show()
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-16" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Binarize Labels</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>label_binarize</code> converts the three-class integer labels to a 3-column binary matrix; each column is the one-vs-rest indicator for that class.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="18-31" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Per-class PR Curves</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Loop over each class, pairing the binarized true labels with the model's predicted probability for that column; store precision, recall, and AP per class in dicts.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="33-43" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Overlay Three Curves</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Cycle through three colors to draw each class's PR curve on the same axes; the AP in the legend lets you compare performance per class at a glance.</p>
-    </div>
-  </div>
-</aside>
-</div>
-
-
-<figure>
-<img src="assets/precision-recall_fig_2.png" alt="precision-recall" />
-<figcaption>Figure 2: Multi-class Precision-Recall Curves</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/precision-recall_fig_2.png" alt="precision-recall"><figcaption><p>Figure 2: Multi-class Precision-Recall Curves</p></figcaption></figure>
 
 ## Interpreting Precision-Recall Curves
 
 ### 1. Binary Classification
 
-- Area Under Curve (AUC / Average Precision): Overall model performance
-- Perfect classifier: AUC = 1.0
-- Random classifier: Average Precision ≈ the positive-class prevalence (the fraction of positives), **not** 0.5, that 0.5 baseline belongs to the ROC curve, not the PR curve
-- Quality is judged **relative to the prevalence baseline**: a "good" model sits well above prevalence, a "poor" model sits near or below it. Fixed 0.6/0.8 cutoffs are misleading because, on a rare positive class, even a strong model may have a modest absolute AP.
+* Area Under Curve (AUC / Average Precision): Overall model performance
+* Perfect classifier: AUC = 1.0
+* Random classifier: Average Precision ≈ the positive-class prevalence (the fraction of positives), **not** 0.5, that 0.5 baseline belongs to the ROC curve, not the PR curve
+* Quality is judged **relative to the prevalence baseline**: a "good" model sits well above prevalence, a "poor" model sits near or below it. Fixed 0.6/0.8 cutoffs are misleading because, on a rare positive class, even a strong model may have a modest absolute AP.
 
 ### 2. Multi-class Classification
 
-- One curve per class
-- Micro-average: Overall performance
-- Macro-average: Class-wise average
-- Weighted average: Class-weighted performance
+* One curve per class
+* Micro-average: Overall performance
+* Macro-average: Class-wise average
+* Weighted average: Class-weighted performance
 
 ### 3. Average Precision
 
-- Range: 0 to 1
-- ≈ positive-class prevalence: random classifier
-- 1.0: Perfect classifier
-- The 0.7-0.8 (good), 0.8-0.9 (very good), and 0.9+ (excellent) bands are only meaningful **relative to that prevalence baseline**, an AP of 0.7 is excellent when positives are 5% of the data but unremarkable when they are 60%.
+* Range: 0 to 1
+* ≈ positive-class prevalence: random classifier
+* 1.0: Perfect classifier
+* The 0.7-0.8 (good), 0.8-0.9 (very good), and 0.9+ (excellent) bands are only meaningful **relative to that prevalence baseline**, an AP of 0.7 is excellent when positives are 5% of the data but unremarkable when they are 60%.
 
 ## Best Practices
 
 1. **Choose Appropriate Threshold**
-   - Choose the threshold from business costs, not from the default 0.5 probability cutoff.
-   - Move the threshold up when false positives are expensive and down when false negatives are expensive.
-   - Use domain knowledge to identify realistic operating points; a medical screening tool and a marketing lead scorer should not use the same trade-off.
-   - Validate the selected threshold with stakeholders because they own the practical consequences of the errors.
-
+   * Choose the threshold from business costs, not from the default 0.5 probability cutoff.
+   * Move the threshold up when false positives are expensive and down when false negatives are expensive.
+   * Use domain knowledge to identify realistic operating points; a medical screening tool and a marketing lead scorer should not use the same trade-off.
+   * Validate the selected threshold with stakeholders because they own the practical consequences of the errors.
 2. **Handle Class Imbalance**
-   - Use precision-recall curves for imbalanced problems because they focus on positive-class retrieval instead of true negatives.
-   - Apply sampling or class weights inside the training process only; changing the validation distribution can make precision look better than it will be in production.
-   - Use cost-sensitive learning when one class is rare but operationally important.
-   - Compare against the positive-class prevalence baseline, since average precision is meaningful only relative to that baseline.
-
+   * Use precision-recall curves for imbalanced problems because they focus on positive-class retrieval instead of true negatives.
+   * Apply sampling or class weights inside the training process only; changing the validation distribution can make precision look better than it will be in production.
+   * Use cost-sensitive learning when one class is rare but operationally important.
+   * Compare against the positive-class prevalence baseline, since average precision is meaningful only relative to that baseline.
 3. **Validate Results**
-   - Use cross-validation to check whether the curve shape is stable across folds.
-   - Check for overfitting by comparing train and validation curves; a large separation means the threshold analysis is optimistic.
-   - Compare with a baseline classifier so the PR curve improvement has context.
-   - Consider multiple metrics because the best threshold for F1 may not be the best threshold for cost or recall.
-
+   * Use cross-validation to check whether the curve shape is stable across folds.
+   * Check for overfitting by comparing train and validation curves; a large separation means the threshold analysis is optimistic.
+   * Compare with a baseline classifier so the PR curve improvement has context.
+   * Consider multiple metrics because the best threshold for F1 may not be the best threshold for cost or recall.
 4. **Visualize Effectively**
-   - Label the baseline prevalence line so viewers know what a random or trivial classifier would achieve.
-   - Mark candidate operating thresholds directly on the curve; otherwise readers see the trade-off but not the decision point.
-   - Include a legend when comparing models so the winning curve is identifiable without colour memory.
-   - Use grid lines or threshold labels sparingly to make recall/precision trade-offs readable.
+   * Label the baseline prevalence line so viewers know what a random or trivial classifier would achieve.
+   * Mark candidate operating thresholds directly on the curve; otherwise readers see the trade-off but not the decision point.
+   * Include a legend when comparing models so the winning curve is identifiable without colour memory.
+   * Use grid lines or threshold labels sparingly to make recall/precision trade-offs readable.
 
 ## Common Mistakes to Avoid
 
 1. **Ignoring Threshold Selection**
-   - Using default threshold
-   - Not considering costs
-   - Missing business context
-   - Overlooking trade-offs
-
+   * Using default threshold
+   * Not considering costs
+   * Missing business context
+   * Overlooking trade-offs
 2. **Poor Visualization**
-   - Unclear labels
-   - Wrong color scheme
-   - Missing context
-   - Incomplete information
-
+   * Unclear labels
+   * Wrong color scheme
+   * Missing context
+   * Incomplete information
 3. **Misinterpretation**
-   - Focusing on AUC alone
-   - Ignoring class imbalance
-   - Overlooking costs
-   - Missing patterns
+   * Focusing on AUC alone
+   * Ignoring class imbalance
+   * Overlooking costs
+   * Missing patterns
 
 ## Practical Example: Credit Risk Prediction
 
@@ -325,111 +192,28 @@ Analyze precision-recall curves for a credit risk prediction model:
 
 #### Credit pipeline + PR plot
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Credit Dataset
 
-{% highlight python %}
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import Pipeline
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import precision_recall_curve, average_precision_score
+Generate five financial features with realistic distributions and derive a binary approval label from a linear threshold, reusing the same synthetic credit setup as other 5.5 examples.
 
-# Create credit risk dataset
-np.random.seed(42)
-n_samples = 1000
+Pipeline and Probabilities
 
-# Generate features
-data = {
-    'age': np.random.normal(35, 10, n_samples),
-    'income': np.random.exponential(50000, n_samples),
-    'credit_score': np.random.normal(700, 100, n_samples),
-    'debt_ratio': np.random.beta(2, 5, n_samples),
-    'employment_length': np.random.exponential(5, n_samples)
-}
+A scaler+forest pipeline avoids leakage; `predict_proba[:, 1]` gives the positive-class score needed to sweep the PR threshold.
 
-X = pd.DataFrame(data)
-y = (X['credit_score'] + X['income']/1000 + X['age'] > 800).astype(int)
+PR Curve and Plot
 
-# Split data
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+Compute and plot the precision-recall curve; the AP score tells lenders whether the model reliably ranks high-risk applicants above low-risk ones.
 
-# Create pipeline
-pipeline = Pipeline([
-    ('scaler', StandardScaler()),
-    ('classifier', RandomForestClassifier(random_state=42))
-])
-
-# Train model
-pipeline.fit(X_train, y_train)
-
-# Get prediction probabilities
-y_pred_proba = pipeline.predict_proba(X_test)[:, 1]
-
-# Calculate precision-recall curve
-precision, recall, thresholds = precision_recall_curve(y_test, y_pred_proba)
-average_precision = average_precision_score(y_test, y_pred_proba)
-
-# Plot precision-recall curve
-plt.figure(figsize=(8, 6))
-plt.plot(recall, precision, color='darkorange', lw=2, label=f'Precision-Recall curve (AP = {average_precision:.2f})')
-plt.xlabel('Recall')
-plt.ylabel('Precision')
-plt.title('Precision-Recall Curve for Credit Risk Prediction')
-plt.legend(loc="lower left")
-plt.grid(True)
-plt.show()
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-22" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Credit Dataset</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Generate five financial features with realistic distributions and derive a binary approval label from a linear threshold, reusing the same synthetic credit setup as other 5.5 examples.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="24-36" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Pipeline and Probabilities</span>
-    </div>
-    <div class="code-callout__body">
-      <p>A scaler+forest pipeline avoids leakage; <code>predict_proba[:, 1]</code> gives the positive-class score needed to sweep the PR threshold.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="38-50" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">PR Curve and Plot</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Compute and plot the precision-recall curve; the AP score tells lenders whether the model reliably ranks high-risk applicants above low-risk ones.</p>
-    </div>
-  </div>
-</aside>
-</div>
-
-
-<figure>
-<img src="assets/precision-recall_fig_3.png" alt="precision-recall" />
-<figcaption>Figure 3: Precision-Recall Curve for Credit Risk Prediction</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/precision-recall_fig_3.png" alt="precision-recall"><figcaption><p>Figure 3: Precision-Recall Curve for Credit Risk Prediction</p></figcaption></figure>
 
 ## Gotchas
 
-- **Calling `precision_recall_curve` with hard predictions instead of probabilities**: `precision_recall_curve` requires continuous probability scores from `predict_proba[:, 1]`, not binary `predict` output; with hard labels the function returns only two operating points and the resulting "curve" cannot guide threshold selection.
-- **Average Precision is not the same as area under a smoothed PR curve**: AP is a weighted step sum of precision at each recall increment (Σ (Rₙ − Rₙ₋₁)·Pₙ), deliberately *not* the trapezoidal interpolation used by `auc(recall, precision)`, which can be over-optimistic; do not mix the two, and do not compare AP scores computed by different libraries that may interpolate differently.
-- **Precision is undefined when the model predicts zero positives**: If your threshold is so high that the model never predicts the positive class, `TP + FP = 0` and precision is undefined (sklearn returns 0 with a warning); this silent 0 can mislead if you scan thresholds programmatically without checking prediction counts.
-- **F1 score hides severe imbalance in precision and recall**: An F1 of 0.67 could represent precision=1.0, recall=0.5 (never wrong but misses half) or precision=0.5, recall=1.0 (catches everything but half are false alarms); always report precision and recall separately in addition to F1 so the direction of the tradeoff is visible.
-- **Interpreting a high-recall model as "safe" for all use cases**: A spam filter with recall=0.99 for spam sounds great, but if precision=0.30 then 70% of flagged emails are legitimate; high recall at low precision is only acceptable when the cost of false negatives vastly outweighs false positives.
-- **Using the default 0.5 threshold without justification**: sklearn's `predict` uses 0.5 as the decision boundary, which is optimal only for balanced classes with equal misclassification costs; for fraud detection, medical screening, or any asymmetric-cost problem, plot the full PR curve and choose the threshold that minimises your actual cost function.
+* **Calling `precision_recall_curve` with hard predictions instead of probabilities**: `precision_recall_curve` requires continuous probability scores from `predict_proba[:, 1]`, not binary `predict` output; with hard labels the function returns only two operating points and the resulting "curve" cannot guide threshold selection.
+* **Average Precision is not the same as area under a smoothed PR curve**: AP is a weighted step sum of precision at each recall increment (Σ (Rₙ − Rₙ₋₁)·Pₙ), deliberately _not_ the trapezoidal interpolation used by `auc(recall, precision)`, which can be over-optimistic; do not mix the two, and do not compare AP scores computed by different libraries that may interpolate differently.
+* **Precision is undefined when the model predicts zero positives**: If your threshold is so high that the model never predicts the positive class, `TP + FP = 0` and precision is undefined (sklearn returns 0 with a warning); this silent 0 can mislead if you scan thresholds programmatically without checking prediction counts.
+* **F1 score hides severe imbalance in precision and recall**: An F1 of 0.67 could represent precision=1.0, recall=0.5 (never wrong but misses half) or precision=0.5, recall=1.0 (catches everything but half are false alarms); always report precision and recall separately in addition to F1 so the direction of the tradeoff is visible.
+* **Interpreting a high-recall model as "safe" for all use cases**: A spam filter with recall=0.99 for spam sounds great, but if precision=0.30 then 70% of flagged emails are legitimate; high recall at low precision is only acceptable when the cost of false negatives vastly outweighs false positives.
+* **Using the default 0.5 threshold without justification**: sklearn's `predict` uses 0.5 as the decision boundary, which is optimal only for balanced classes with equal misclassification costs; for fraud detection, medical screening, or any asymmetric-cost problem, plot the full PR curve and choose the threshold that minimises your actual cost function.
 
 ## Additional Resources
 

@@ -1,5 +1,4 @@
 ---
-layout: default
 title: Course overview
 permalink: /README.html
 ---
@@ -12,7 +11,7 @@ This site is a **self-contained curriculum** from first steps in Python and anal
 
 **How to use the material:** Follow modules in order (**0 → 1 → … → 6**) unless an instructor assigns a different path. Within each module, open the **submodule README** first—it lists prerequisites, time hints, and the intended lesson order. Read the **Overview** or **Why this matters** sections on each lesson page before diving into long code blocks; run examples in your own environment when you can.
 
-**If you are new to the stack:** Start with [Module 0: Prep](0-prep/README.md) (environment, Jupyter, optional tools), then [Module 1: Data fundamentals](1-data-fundamentals/README.md). Maintainer-facing authoring notes live in `meta/` in the repository and are **not** part of the public site build.
+**If you are new to the stack:** Start with [Module 0: Prep](0-prep/) (environment, Jupyter, optional tools), then [Module 1: Data fundamentals](1-data-fundamentals/). Maintainer-facing authoring notes live in `meta/` in the repository and are **not** part of the public site build.
 
 The [full curriculum](curriculum.md) lists every lesson page in one place for bookmarking and search. The [home page](index.md) links to each module.
 
@@ -37,15 +36,15 @@ What makes a strong data practitioner is a mix of **technical foundations**, **p
 
 The course is organized into **six modules** plus preparation:
 
-1. **Data fundamentals** — Analytics vs data science, Python, statistics, NumPy, pandas ([start here after setup](1-data-fundamentals/README.md)).
-2. **Data wrangling** — SQL, quality and missing data, EDA, engineering concepts ([2-data-wrangling](2-data-wrangling/2.1-sql/README.md) entry).
-3. **Data visualization** — Principles, Matplotlib/Seaborn/Plotly, BI tools, storytelling ([module hub](3-data-visualization/README.md)).
-4. **Statistical analysis** — Inference, testing, regression-style relationships, modelling ([module hub](4-stat-analysis/README.md)).
-5. **Machine learning fundamentals** — ML workflow, supervised and unsupervised methods, evaluation ([start with 5.1](5-ml-fundamentals/5.1-intro-to-ml/README.md)).
-6. **Capstone project** — End-to-end project and presentation ([6-capstone](6-capstone/README.md)).
+1. **Data fundamentals** — Analytics vs data science, Python, statistics, NumPy, pandas ([start here after setup](1-data-fundamentals/)).
+2. **Data wrangling** — SQL, quality and missing data, EDA, engineering concepts ([2-data-wrangling](2-data-wrangling/2.1-sql/) entry).
+3. **Data visualization** — Principles, Matplotlib/Seaborn/Plotly, BI tools, storytelling ([module hub](3-data-visualization/)).
+4. **Statistical analysis** — Inference, testing, regression-style relationships, modelling ([module hub](4-stat-analysis/)).
+5. **Machine learning fundamentals** — ML workflow, supervised and unsupervised methods, evaluation ([start with 5.1](5-ml-fundamentals/5.1-intro-to-ml/)).
+6. **Capstone project** — End-to-end project and presentation ([6-capstone](6-capstone/)).
 
-Each module combines readings, runnable examples, and assignments where listed. **Additional resources** (glossary, FAQ, visualization guides) are linked from [module 3](3-data-visualization/README.md) and the [additional-resources](additional-resources/beginners-guide.md) folder.
+Each module combines readings, runnable examples, and assignments where listed. **Additional resources** (glossary, FAQ, visualization guides) are linked from [module 3](3-data-visualization/) and the [additional-resources](additional-resources/beginners-guide.md) folder.
 
 ## Next step
 
-Open [Module 0: Prep](0-prep/README.md) if you have not finished setup, or [Module 1](1-data-fundamentals/README.md) if your environment is ready.
+Open [Module 0: Prep](0-prep/) if you have not finished setup, or [Module 1](1-data-fundamentals/) if your environment is ready.

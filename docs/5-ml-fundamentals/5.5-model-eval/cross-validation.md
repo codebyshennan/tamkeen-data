@@ -1,10 +1,20 @@
 ---
 reading_minutes: 22
 objectives:
-  - "Replace a single train/test split with **k-fold cross-validation** to get a lower-variance estimate of out-of-sample performance."
-  - "Pick the right CV variant: `KFold` for iid data, `StratifiedKFold` for class imbalance, `GroupKFold` for grouped samples, `TimeSeriesSplit` for temporal data."
-  - "Use `cross_val_score` / `cross_validate` with a `Pipeline` so preprocessing is fit on each train fold only, never on the validation fold."
-  - "Avoid the everyday traps: leakage from pre-split scaling, the wrong CV strategy for time series, and reading a single fold's score as the model's true performance."
+  - >-
+    Replace a single train/test split with **k-fold cross-validation** to get a
+    lower-variance estimate of out-of-sample performance.
+  - >-
+    Pick the right CV variant: `KFold` for iid data, `StratifiedKFold` for class
+    imbalance, `GroupKFold` for grouped samples, `TimeSeriesSplit` for temporal
+    data.
+  - >-
+    Use `cross_val_score` / `cross_validate` with a `Pipeline` so preprocessing
+    is fit on each train fold only, never on the validation fold.
+  - >-
+    Avoid the everyday traps: leakage from pre-split scaling, the wrong CV
+    strategy for time series, and reading a single fold's score as the model's
+    true performance.
 ---
 
 # Cross-Validation
@@ -21,11 +31,7 @@ Cross-validation is a resampling method that uses different portions of the data
 
 ### Video Tutorial: Cross-Validation Explained
 
-<div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/fSytzGwwBVw" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-*StatQuest: Cross Validation by Josh Starmer*
+_StatQuest: Cross Validation by Josh Starmer_
 
 ### Why Cross-Validation Matters
 
@@ -44,10 +50,10 @@ Think of cross validation like a student taking multiple practice tests before t
 
 Imagine you're opening a new restaurant. You wouldn't just serve your menu to one group of customers and call it a success. Instead, you'd:
 
-- Test different dishes with various groups of customers
-- Get feedback from different demographics
-- Try different times of day
-- Consider different seasons
+* Test different dishes with various groups of customers
+* Get feedback from different demographics
+* Try different times of day
+* Consider different seasons
 
 This is exactly what cross validation does for machine learning models!
 
@@ -55,12 +61,10 @@ This is exactly what cross validation does for machine learning models!
 
 Think of cross validation like a sports team's practice games:
 
-- Each fold is like a practice game
-- The training data is like your team's practice
-- The validation data is like the practice game
-- The final model is like your team going into the real season
-
-{% include model-eval-html-diagram.html diagram="cross-validation" title="Cross-validation fold diagram" %}
+* Each fold is like a practice game
+* The training data is like your team's practice
+* The validation data is like the practice game
+* The final model is like your team going into the real season
 
 ## Types of Cross-Validation
 
@@ -68,13 +72,14 @@ Think of cross validation like a sports team's practice games:
 
 The data is divided into k subsets (called "folds"), and the holdout method is repeated k times. Each time, one fold is the validation set while the remaining k-1 folds form the training set.
 
-![K-Fold Visualization](assets/kfold_visualization.png)
+![K-Fold Visualization](../../../.gitbook/assets/kfold_visualization.png)
 
 **How it works:**
+
 1. Split data into k equal-sized folds
 2. For each fold:
-   - Train model on k-1 folds
-   - Validate on the remaining fold
+   * Train model on k-1 folds
+   * Validate on the remaining fold
 3. Average the k validation scores
 
 > **Read the mean and spread together:** the mean estimates performance; the spread tells you whether that estimate is stable enough to trust.
@@ -83,53 +88,13 @@ The data is divided into k subsets (called "folds"), and the holdout method is r
 
 #### K-fold CV with `cross_val_score`
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Data and Imports
 
-{% highlight python %}
-from sklearn.model_selection import KFold, cross_val_score
-from sklearn.ensemble import RandomForestClassifier
-import numpy as np
+Import KFold and cross\_val\_score, then create a small random dataset to demonstrate k-fold splitting.
 
-# Create sample data
-np.random.seed(42)
-X = np.random.randn(100, 4)
-y = np.random.randint(0, 2, 100)
+Five-fold CV
 
-# 5-fold cross-validation
-kf = KFold(n_splits=5, shuffle=True, random_state=42)
-model = RandomForestClassifier(random_state=42)
-
-# What this does: Trains and evaluates the model 5 times,
-# each time using a different fold as validation set
-scores = cross_val_score(model, X, y, cv=kf)
-
-print(f"Cross-validation scores: {scores}")
-print(f"Mean CV score: {scores.mean():.3f} (+/- {scores.std() * 2:.3f})")
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-7" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Data and Imports</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Import KFold and cross_val_score, then create a small random dataset to demonstrate k-fold splitting.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="9-18" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Five-fold CV</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Run 5-fold cross-validation, training the RandomForest on each fold in turn and printing mean accuracy with ±2σ spread.</p>
-    </div>
-  </div>
-</aside>
-</div>
+Run 5-fold cross-validation, training the RandomForest on each fold in turn and printing mean accuracy with ±2σ spread.
 
 ```
 Cross-validation scores: [0.5  0.45 0.6  0.55 0.5 ]
@@ -141,9 +106,10 @@ Mean CV score: 0.520 (+/- 0.102)
 Each observation is used once as a validation set while the remaining observations form the training set. This is equivalent to k-fold where k equals the number of samples.
 
 **When to use:**
-- Small datasets (< 100 samples)
-- When you need maximum use of training data
-- Computationally expensive for large datasets
+
+* Small datasets (< 100 samples)
+* When you need maximum use of training data
+* Computationally expensive for large datasets
 
 **Example:**
 
@@ -175,81 +141,29 @@ LOOCV mean score: 0.490
 
 Similar to K-Fold but ensures that the proportions of samples for each class are the same in each fold. This is important for imbalanced datasets.
 
-![Stratified vs Regular K-Fold](assets/stratified_vs_regular_kfold.png)
+![Stratified vs Regular K-Fold](../../../.gitbook/assets/stratified_vs_regular_kfold.png)
 
 **Why stratification matters:**
-- Prevents folds with very few or no samples from minority classes
-- Ensures each fold is representative of the overall dataset
-- Provides more reliable performance estimates for imbalanced data
+
+* Prevents folds with very few or no samples from minority classes
+* Ensures each fold is representative of the overall dataset
+* Provides more reliable performance estimates for imbalanced data
 
 **Example:**
 
 #### Stratified vs ordinary K-fold on imbalanced labels
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Imbalanced Dataset
 
-{% highlight python %}
-import numpy as np
-from sklearn.datasets import make_classification
-from sklearn.model_selection import StratifiedKFold, KFold, cross_val_score
-from sklearn.ensemble import RandomForestClassifier
+Use `make_classification` with `weights=[0.8, 0.2]` to build an 80/20 split with real signal, then sort by label so the classes are grouped, this is where regular k-fold goes wrong and the minority class is easily lost.
 
-np.random.seed(42)
-model = RandomForestClassifier(random_state=42)
+Two Splitter Strategies
 
-# Imbalanced dataset (80/20) with real signal, then sort so classes are grouped
-X_imbalanced, y_imbalanced = make_classification(
-    n_samples=200, n_features=6, n_informative=4,
-    weights=[0.8, 0.2], random_state=0
-)
-order = np.argsort(y_imbalanced)
-X_imbalanced, y_imbalanced = X_imbalanced[order], y_imbalanced[order]
+`StratifiedKFold` keeps \~20% minority class in each fold; plain `KFold(shuffle=False)` on label-sorted data concentrates each class into separate folds, producing wildly variable scores.
 
-# Compare regular vs stratified k-fold (no shuffle, so order matters)
-skf = StratifiedKFold(n_splits=5)
-kf = KFold(n_splits=5, shuffle=False)
+Compare Results
 
-# Stratified scores
-stratified_scores = cross_val_score(model, X_imbalanced, y_imbalanced, cv=skf)
-# Regular scores
-regular_scores = cross_val_score(model, X_imbalanced, y_imbalanced, cv=kf)
-
-print(f"Stratified CV: {stratified_scores.mean():.3f} (+/- {stratified_scores.std() * 2:.3f})")
-print(f"Regular CV: {regular_scores.mean():.3f} (+/- {regular_scores.std() * 2:.3f})")
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-15" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Imbalanced Dataset</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Use <code>make_classification</code> with <code>weights=[0.8, 0.2]</code> to build an 80/20 split with real signal, then sort by label so the classes are grouped, this is where regular k-fold goes wrong and the minority class is easily lost.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="17-24" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Two Splitter Strategies</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>StratifiedKFold</code> keeps ~20% minority class in each fold; plain <code>KFold(shuffle=False)</code> on label-sorted data concentrates each class into separate folds, producing wildly variable scores.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="26-27" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Compare Results</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Printing mean ± 2 std for both strategies shows that stratified scoring is more stable, smaller standard deviation, on imbalanced data.</p>
-    </div>
-  </div>
-</aside>
-</div>
+Printing mean ± 2 std for both strategies shows that stratified scoring is more stable, smaller standard deviation, on imbalanced data.
 
 ```
 Stratified CV: 0.885 (+/- 0.081)
@@ -260,60 +174,25 @@ Regular CV: 0.760 (+/- 0.761)
 
 For time series data, we need to respect the temporal order and avoid using future data to predict the past.
 
-![Time Series Cross-Validation](assets/timeseries_cv.png)
+![Time Series Cross-Validation](../../../.gitbook/assets/timeseries_cv.png)
 
 **Key principles:**
-- Training data always comes before validation data
-- No shuffling of data
-- Expanding or sliding window approaches
+
+* Training data always comes before validation data
+* No shuffling of data
+* Expanding or sliding window approaches
 
 **Example:**
 
 #### Time-ordered splits with `TimeSeriesSplit`
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Setup
 
-{% highlight python %}
-import numpy as np
-from sklearn.model_selection import TimeSeriesSplit
+Create an ordered index array simulating 100 timesteps; `TimeSeriesSplit(n_splits=5)` will produce expanding train windows that never see future validation data.
 
-# Ordered data (e.g. time index 0..n-1)
-X = np.arange(100).reshape(-1, 1)
+Print Fold Ranges
 
-# Time series split
-tscv = TimeSeriesSplit(n_splits=5)
-
-# What this does: Creates 5 splits where each validation set
-# comes after its corresponding training set in time
-for fold, (train_idx, val_idx) in enumerate(tscv.split(X)):
-    print(f"Fold {fold+1}:")
-    print(f"  Train indices: {train_idx[:5]}...{train_idx[-5:]}")
-    print(f"  Val indices: {val_idx[:5]}...{val_idx[-5:]}")
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-8" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Setup</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Create an ordered index array simulating 100 timesteps; <code>TimeSeriesSplit(n_splits=5)</code> will produce expanding train windows that never see future validation data.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="10-16" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Print Fold Ranges</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Each fold's train block grows while validation always starts immediately after the last training point, confirming no temporal leakage across folds.</p>
-    </div>
-  </div>
-</aside>
-</div>
+Each fold's train block grows while validation always starts immediately after the last training point, confirming no temporal leakage across folds.
 
 ```
 Fold 1:
@@ -357,81 +236,17 @@ Look at how cross validation helps in a real-world scenario:
 
 #### Manual fold loop with a pipeline (credit risk sketch)
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Synthetic Credit Data
 
-{% highlight python %}
-import numpy as np
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import Pipeline
-from sklearn.model_selection import StratifiedKFold
+Generate age, income, and credit score features, then create a binary target based on a threshold combination of those features.
 
-# Create credit risk dataset
-np.random.seed(42)
-n_samples = 1000
+Pipeline and Splitter
 
-# Generate features
-age = np.random.normal(35, 10, n_samples)
-income = np.random.exponential(50000, n_samples)
-credit_score = np.random.normal(700, 100, n_samples)
+Wrap scaler and classifier in a pipeline to prevent data leakage, then set up stratified 5-fold splitting.
 
-X = np.column_stack([age, income, credit_score])
-y = (credit_score + income/1000 + age > 800).astype(int)  # Binary target
+Fold Loop
 
-# Create pipeline
-pipeline = Pipeline([
-    ('scaler', StandardScaler()),
-    ('classifier', RandomForestClassifier())
-])
-
-# Perform stratified cross-validation
-skf = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
-
-scores = []
-for fold, (train_idx, val_idx) in enumerate(skf.split(X, y)):
-    X_train, X_val = X[train_idx], X[val_idx]
-    y_train, y_val = y[train_idx], y[val_idx]
-
-    pipeline.fit(X_train, y_train)
-    score = pipeline.score(X_val, y_val)
-    scores.append(score)
-    print(f"Fold {fold+1}: {score:.3f}")
-
-print(f"\nMean CV score: {np.mean(scores):.3f} (+/- {np.std(scores) * 2:.3f})")
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-18" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Synthetic Credit Data</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Generate age, income, and credit score features, then create a binary target based on a threshold combination of those features.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="20-26" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Pipeline and Splitter</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Wrap scaler and classifier in a pipeline to prevent data leakage, then set up stratified 5-fold splitting.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="28-38" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Fold Loop</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Iterate through each fold, fit the pipeline on train indices, score on validation indices, and print each fold accuracy plus the overall mean.</p>
-    </div>
-  </div>
-</aside>
-</div>
+Iterate through each fold, fit the pipeline on train indices, score on validation indices, and print each fold accuracy plus the overall mean.
 
 ```
 Fold 1: 0.980
@@ -449,97 +264,36 @@ Mean CV score: 0.981 (+/- 0.007)
 
 #### Sweep k and plot mean score with error bars
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Data Setup
 
-{% highlight python %}
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.model_selection import cross_val_score
-from sklearn.linear_model import LogisticRegression
-from sklearn.datasets import make_classification
+Generate a classification dataset with 800 samples and 20 features to analyse how fold count affects CV stability.
 
-X, y = make_classification(n_samples=800, n_features=20, random_state=42)
+Sweep k Values
 
-def choose_optimal_k(X, y, k_range=range(2, 11)):
-    scores = []
-    stds = []
+Loop k from 2 to 10, compute cross-validated mean accuracy and standard deviation for each fold count.
 
-    for k in k_range:
-        cv_scores = cross_val_score(
-            LogisticRegression(),
-            X, y,
-            cv=k
-        )
-        scores.append(cv_scores.mean())
-        stds.append(cv_scores.std())
+Error-bar Plot
 
-    plt.figure(figsize=(10, 5))
-    plt.errorbar(k_range, scores, yerr=stds, fmt='o-')
-    plt.xlabel('Number of Folds')
-    plt.ylabel('Cross-validation Score')
-    plt.title('Impact of K on Cross-validation')
-    plt.grid(True)
-    plt.savefig('assets/optimal_k_selection.png')
-    plt.show()
+Plot mean score ± std for each k to visually identify the fold count with the best bias-variance trade-off.
 
-choose_optimal_k(X, y)
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-7" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Data Setup</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Generate a classification dataset with 800 samples and 20 features to analyse how fold count affects CV stability.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="10-21" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Sweep k Values</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Loop k from 2 to 10, compute cross-validated mean accuracy and standard deviation for each fold count.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="23-32" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Error-bar Plot</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Plot mean score ± std for each k to visually identify the fold count with the best bias-variance trade-off.</p>
-    </div>
-  </div>
-</aside>
-</div>
-
-
-<figure>
-<img src="assets/cross-validation_fig_1.png" alt="cross-validation" />
-<figcaption>Figure 1: Impact of K on Cross-validation</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/cross-validation_fig_1.png" alt="cross-validation"><figcaption><p>Figure 1: Impact of K on Cross-validation</p></figcaption></figure>
 
 ## Gotchas
 
-- **Fitting preprocessing on the full dataset before CV**: Calling `scaler.fit_transform(X)` before passing `X` to `cross_val_score` leaks test-fold statistics into the training folds; the scaler has "seen" the test samples during fitting, inflating CV scores; always wrap preprocessing inside a `Pipeline` so each fold's scaler fits only on that fold's training data.
-- **Using plain `KFold` on imbalanced classification data**: Random splits can create folds where a minority class appears in only one or two folds, causing wildly variable CV scores; use `StratifiedKFold` for classification tasks so each fold preserves the original class distribution.
-- **Shuffling time-series data before CV**: For temporal data, randomly shuffling rows before `KFold` creates future-leakage: the model trains on data from next week and validates on data from last week; use `TimeSeriesSplit` to ensure validation always comes after the training window.
-- **Treating cross-validation score as an unbiased test set estimate**: CV score is an unbiased estimate of *model-selection* performance, but if you use it to also pick hyperparameters, the score is optimistic; use nested CV or a held-out test set that is never touched during model selection.
-- **Choosing `k=2` or `k=3` to save time**: Very small `k` means each fold trains on only 50-67% of the data (k=2 trains on 50%, k=3 on 67%) and validates on the remaining 33-50%, producing high-variance score estimates with wide confidence intervals; `k=5` or `k=10` is standard and typically adds little extra computation for tabular data.
-- **Ignoring the standard deviation across folds**: Reporting only mean CV accuracy hides instability; a mean of 0.85 with std of 0.12 is far less trustworthy than a mean of 0.83 with std of 0.02; always report `mean ± 2*std` to convey the reliability of the estimate.
+* **Fitting preprocessing on the full dataset before CV**: Calling `scaler.fit_transform(X)` before passing `X` to `cross_val_score` leaks test-fold statistics into the training folds; the scaler has "seen" the test samples during fitting, inflating CV scores; always wrap preprocessing inside a `Pipeline` so each fold's scaler fits only on that fold's training data.
+* **Using plain `KFold` on imbalanced classification data**: Random splits can create folds where a minority class appears in only one or two folds, causing wildly variable CV scores; use `StratifiedKFold` for classification tasks so each fold preserves the original class distribution.
+* **Shuffling time-series data before CV**: For temporal data, randomly shuffling rows before `KFold` creates future-leakage: the model trains on data from next week and validates on data from last week; use `TimeSeriesSplit` to ensure validation always comes after the training window.
+* **Treating cross-validation score as an unbiased test set estimate**: CV score is an unbiased estimate of _model-selection_ performance, but if you use it to also pick hyperparameters, the score is optimistic; use nested CV or a held-out test set that is never touched during model selection.
+* **Choosing `k=2` or `k=3` to save time**: Very small `k` means each fold trains on only 50-67% of the data (k=2 trains on 50%, k=3 on 67%) and validates on the remaining 33-50%, producing high-variance score estimates with wide confidence intervals; `k=5` or `k=10` is standard and typically adds little extra computation for tabular data.
+* **Ignoring the standard deviation across folds**: Reporting only mean CV accuracy hides instability; a mean of 0.85 with std of 0.12 is far less trustworthy than a mean of 0.83 with std of 0.02; always report `mean ± 2*std` to convey the reliability of the estimate.
 
 ## Additional Resources
 
 For more information on cross-validation techniques and best practices, check out:
 
-- [Cross Validation Guide](https://scikit-learn.org/stable/modules/cross_validation.html)
-- [Time Series Cross Validation](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html)
-- [Model Evaluation Best Practices](https://scikit-learn.org/stable/modules/model_evaluation.html)
+* [Cross Validation Guide](https://scikit-learn.org/stable/modules/cross_validation.html)
+* [Time Series Cross Validation](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html)
+* [Model Evaluation Best Practices](https://scikit-learn.org/stable/modules/model_evaluation.html)
 
 Remember: Cross validation is essential for reliable model evaluation!
 
@@ -547,6 +301,6 @@ Remember: Cross validation is essential for reliable model evaluation!
 
 Ready to learn more? Check out:
 
-1. [Hyperparameter Tuning](./hyperparameter-tuning.md) to optimize your model's performance
-2. [Model Metrics](./metrics.md) to understand different ways to evaluate your model
-3. [Model Selection](./model-selection.md) to choose the best model for your problem
+1. [Hyperparameter Tuning](hyperparameter-tuning.md) to optimize your model's performance
+2. [Model Metrics](metrics.md) to understand different ways to evaluate your model
+3. [Model Selection](model-selection.md) to choose the best model for your problem

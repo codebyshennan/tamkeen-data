@@ -1,10 +1,18 @@
 ---
 reading_minutes: 40
 objectives:
-  - Check the four OLS assumptions (linearity, independence, homoscedasticity, normal errors) using residual plots and tests.
-  - Identify high-leverage and high-influence points with hat values and Cook's distance.
-  - Choose a fix (transformation, robust method, richer model) based on the violation pattern.
-  - Avoid common diagnostic mistakes (lag-1 only, large-n Shapiro, deleting influence without investigation).
+  - >-
+    Check the four OLS assumptions (linearity, independence, homoscedasticity,
+    normal errors) using residual plots and tests.
+  - >-
+    Identify high-leverage and high-influence points with hat values and Cook's
+    distance.
+  - >-
+    Choose a fix (transformation, robust method, richer model) based on the
+    violation pattern.
+  - >-
+    Avoid common diagnostic mistakes (lag-1 only, large-n Shapiro, deleting
+    influence without investigation).
 ---
 
 # Model Check-Ups: Making Sure Your Predictions Are Trustworthy
@@ -13,26 +21,22 @@ objectives:
 
 ## Overview
 
-Fitting a model is cheap; **trusting** it requires checking whether the errors look like the theory assumes (linearity, independence, constant variance, approximate normality of residuals for inference). Residual plots, influence measures, and simple fixes are how you defend a line or plane, or decide to switch to a richer model in [module 4.4](../4.4-stat-modelling/README.md).
+Fitting a model is cheap; **trusting** it requires checking whether the errors look like the theory assumes (linearity, independence, constant variance, approximate normality of residuals for inference). Residual plots, influence measures, and simple fixes are how you defend a line or plane, or decide to switch to a richer model in [module 4.4](../4.4-stat-modelling/).
 
 ## Why this matters
 
-- **Residuals** and diagnostic plots turn "the model ran" into "the model fits the problem."
-- You will fix violations (transformations, robust methods, or different models) before forecasting.
+* **Residuals** and diagnostic plots turn "the model ran" into "the model fits the problem."
+* You will fix violations (transformations, robust methods, or different models) before forecasting.
 
 ## Prerequisites
 
-- [Multiple linear regression](./multiple-linear-regression.md).
+* [Multiple linear regression](multiple-linear-regression.md).
 
 > **Important:** Diagnostics apply to many models beyond ordinary least squares.
 
 ### Video Tutorial: Model Diagnostics and Residual Analysis
 
-<div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/U1sISt-vsTA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-*Model Adequacy Checking - Regression Assumptions and Residuals*
+_Model Adequacy Checking - Regression Assumptions and Residuals_
 
 ## Why Do We Need Model Check-Ups?
 
@@ -44,8 +48,6 @@ Model check-ups help us:
 2. Find and fix any problems early
 3. Ensure our predictions will be reliable
 4. Gain confidence in our results
-
-{% include mermaid-diagram.html src="4-stat-analysis/4.3-rship-in-data/diagrams/model-diagnostics-1.mmd" %}
 
 ## Four Key Questions to Ask About Your Model
 
@@ -59,65 +61,17 @@ To make sure your model is healthy, we need to check four main assumptions. Thin
 
 **How to check it**: Look at a "residual plot" - a graph showing the difference between our predictions and the actual values.
 
-<figure>
-<img src="assets/model-diagnostics_question1.png" alt="Healthy residuals-vs-fitted scatter beside a problematic curved one" />
-<figcaption>Linearity check: a healthy residual plot scatters randomly around zero (left); a clear curve means the relationship isn't straight (right).</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/model-diagnostics_question1.png" alt="Healthy residuals-vs-fitted scatter beside a problematic curved one"><figcaption><p>Linearity check: a healthy residual plot scatters randomly around zero (left); a clear curve means the relationship isn't straight (right).</p></figcaption></figure>
 
 **Residuals vs fitted for the linear mean structure**
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Imports
 
-{% highlight python %}
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-from scipy import stats
+Import NumPy, pandas, Matplotlib, seaborn, and SciPy, the standard diagnostic toolkit used across all helper functions in this lesson.
 
-def check_if_relationship_is_straight(model, X, y):
-    """Check if our model's relationship is actually linear."""
-    # Get predictions
-    y_pred = model.predict(X)
-    errors = y - y_pred  # These are called "residuals"
+Residuals vs fitted
 
-    # Create plot
-    plt.figure(figsize=(10, 6))
-    plt.scatter(y_pred, errors, alpha=0.7)
-    plt.axhline(y=0, color='r', linestyle='--')
-    plt.xlabel('What our model predicted')
-    plt.ylabel('How wrong we were (errors)')
-    plt.title('Are Our Errors Random? (They Should Be!)')
-    plt.show()
-
-    print("What to look for:")
-    print("✓ GOOD: Random scatter around the zero line with no pattern")
-    print("✗ BAD: Any curves, funnels, or patterns in the dots")
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-6" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Imports</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Import NumPy, pandas, Matplotlib, seaborn, and SciPy, the standard diagnostic toolkit used across all helper functions in this lesson.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="8-21" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Residuals vs fitted</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Compute residuals as y − ŷ, scatter them against fitted values, and draw a zero reference line; a random scatter around zero indicates no systematic pattern (good linearity).</p>
-    </div>
-  </div>
-</aside>
-</div>
+Compute residuals as y − ŷ, scatter them against fitted values, and draw a zero reference line; a random scatter around zero indicates no systematic pattern (good linearity).
 
 **What good looks like**: Dots randomly scattered around the horizontal line with no clear pattern.
 
@@ -131,10 +85,7 @@ def check_if_relationship_is_straight(model, X, y):
 
 **How to check it**: For time-based data, we can use a test called the Durbin-Watson test to check for patterns over time.
 
-<figure>
-<img src="assets/model-diagnostics_question2.png" alt="Independent residuals in order beside autocorrelated ones that drift in runs" />
-<figcaption>Independence check: healthy residuals show no run pattern in observation order, giving a Durbin-Watson statistic near 2 (left); residuals that drift in runs signal autocorrelation and a statistic well below 1 (right).</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/model-diagnostics_question2.png" alt="Independent residuals in order beside autocorrelated ones that drift in runs"><figcaption><p>Independence check: healthy residuals show no run pattern in observation order, giving a Durbin-Watson statistic near 2 (left); residuals that drift in runs signal autocorrelation and a statistic well below 1 (right).</p></figcaption></figure>
 
 **Durbin-Watson statistic on a residual series**
 
@@ -164,58 +115,17 @@ def check_if_points_are_independent(errors):
 
 **How to check it**: We look at how the size of errors changes across different predicted values.
 
-<figure>
-<img src="assets/model-diagnostics_question3.png" alt="Even error spread beside a funnel-shaped spread that grows with fitted values" />
-<figcaption>Homoscedasticity check: a healthy plot keeps the error size roughly constant across fitted values (left); a funnel shape means the spread grows with the prediction (right).</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/model-diagnostics_question3.png" alt="Even error spread beside a funnel-shaped spread that grows with fitted values"><figcaption><p>Homoscedasticity check: a healthy plot keeps the error size roughly constant across fitted values (left); a funnel shape means the spread grows with the prediction (right).</p></figcaption></figure>
 
 **Absolute residuals vs fitted (scale-location style)**
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Absolute residuals
 
-{% highlight python %}
-def check_if_error_spread_is_even(model, X, y):
-    """Check if the errors have consistent spread."""
-    # Get predictions and errors
-    y_pred = model.predict(X)
-    errors = y - y_pred
+Take the absolute value of residuals to focus on error magnitude and plot it against fitted values, a scale-location style diagnostic.
 
-    # Create plot to look at absolute error values
-    plt.figure(figsize=(10, 6))
-    plt.scatter(y_pred, np.abs(errors), alpha=0.7)
-    plt.xlabel('What our model predicted')
-    plt.ylabel('How big our errors were (absolute value)')
-    plt.title('Is Our Error Spread Consistent?')
-    plt.show()
+Homoscedasticity check
 
-    print("What to look for:")
-    print("✓ GOOD: Random scatter with consistent spread throughout")
-    print("✗ BAD: Fan or funnel shapes that get wider or narrower")
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-5" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Absolute residuals</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Take the absolute value of residuals to focus on error magnitude and plot it against fitted values, a scale-location style diagnostic.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="7-17" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Homoscedasticity check</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Plot and describe what consistent (homoscedastic) versus fanning (heteroscedastic) spread looks like so the learner knows what to look for.</p>
-    </div>
-  </div>
-</aside>
-</div>
+Plot and describe what consistent (homoscedastic) versus fanning (heteroscedastic) spread looks like so the learner knows what to look for.
 
 **What good looks like**: Errors with similar spread across all predictions.
 
@@ -231,66 +141,22 @@ def check_if_error_spread_is_even(model, X, y):
 
 **What's a Q-Q plot?** "Q-Q" is short for **quantile-quantile**. It compares two distributions by plotting their quantiles (think percentiles) against each other. For a normality check, we plot the quantiles of our residuals against the quantiles of a theoretical normal distribution. If the two distributions have the same shape, the points fall along a straight diagonal line, so reading a Q-Q plot is just asking "how far do the points stray from that line?"
 
-- **Points hug the line** → residuals are approximately normal.
-- **Points curve away, especially at the ends** → skewness, heavy tails, or outliers.
+* **Points hug the line** → residuals are approximately normal.
+* **Points curve away, especially at the ends** → skewness, heavy tails, or outliers.
 
 The same idea works beyond residuals: you can put one dataset's quantiles on each axis to check whether two samples come from the same underlying distribution.
 
-<figure>
-<img src="assets/model-diagnostics_question4.png" alt="Q-Q plot with points on the diagonal beside one where points curve away at the ends" />
-<figcaption>Normality check: healthy residuals hug the diagonal line (left); points curving away at the ends indicate skew or heavy tails (right).</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/model-diagnostics_question4.png" alt="Q-Q plot with points on the diagonal beside one where points curve away at the ends"><figcaption><p>Normality check: healthy residuals hug the diagonal line (left); points curving away at the ends indicate skew or heavy tails (right).</p></figcaption></figure>
 
 **Histogram, Q-Q plot, and Shapiro-Wilk on residuals**
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Histogram and Q-Q plot
 
-{% highlight python %}
-def check_if_errors_follow_bell_curve(errors):
-    """Check if our errors follow a normal distribution (bell curve)."""
-    # Create plots
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
+Plot a density histogram alongside a Q-Q plot from `stats.probplot`; points following the diagonal line indicate normally distributed residuals.
 
-    # Histogram to see the distribution shape
-    ax1.hist(errors, bins=30, density=True, alpha=0.7)
-    ax1.set_title('Distribution of Errors (Should Look Like a Bell Curve)')
+Shapiro-Wilk test
 
-    # Q-Q plot compares our errors to a perfect bell curve
-    stats.probplot(errors, dist="norm", plot=ax2)
-    ax2.set_title('Q-Q Plot (Points Should Follow the Line)')
-
-    plt.tight_layout()
-    plt.show()
-
-    # Statistical test
-    stat, p_value = stats.shapiro(errors)
-    print(f"Bell curve test p-value: {p_value:.4f}")
-    print("If p-value < 0.05, errors likely don't follow a bell curve")
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="3-14" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Histogram and Q-Q plot</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Plot a density histogram alongside a Q-Q plot from <code>stats.probplot</code>; points following the diagonal line indicate normally distributed residuals.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="17-19" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Shapiro-Wilk test</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Run the Shapiro-Wilk normality test and print the p-value; a p-value below 0.05 suggests the residuals depart from normality.</p>
-    </div>
-  </div>
-</aside>
-</div>
+Run the Shapiro-Wilk normality test and print the p-value; a p-value below 0.05 suggests the residuals depart from normality.
 
 **What good looks like**: A histogram that looks like a bell curve and points following the diagonal line in the Q-Q plot.
 
@@ -308,71 +174,17 @@ Sometimes, just a few unusual data points can have an outsized impact on your mo
 
 **Cook's distance from residuals, leverage, and MSE**
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Hat matrix and leverage
 
-{% highlight python %}
-def find_all_around_troublemakers(model, X, y):
-    """Find data points with high overall influence on the model."""
-    # Get predictions and errors
-    y_pred = model.predict(X)
-    errors = y - y_pred
+Build the hat matrix H = X(XᵀX)⁻¹Xᵀ and extract its diagonal to obtain per-observation leverage values.
 
-    # Calculate leverage (how extreme each point's x-values are)
-    X_design = np.column_stack([np.ones(len(X)), X])  # add intercept column
-    hat_matrix = X_design @ np.linalg.inv(X_design.T @ X_design) @ X_design.T
-    leverage = np.diagonal(hat_matrix)
+Cook's distance formula
 
-    # Calculate Cook's distance
-    n = len(y)
-    p = X_design.shape[1]  # number of parameters including intercept
-    mse = np.sum(errors**2) / (n - p)
-    cooks_d = (errors**2 * leverage) / (p * mse * (1 - leverage)**2)
+Compute Cook's D using residuals, leverage, and MSE; each value measures how much all fitted values would shift if this observation were deleted.
 
-    # Plot
-    plt.figure(figsize=(10, 6))
-    plt.stem(range(len(cooks_d)), cooks_d, markerfmt='ro')
-    plt.axhline(y=4/n, color='r', linestyle='--', label='Threshold for concern')
-    plt.xlabel('Data Point Number')
-    plt.ylabel("Cook's Distance (Influence)")
-    plt.title("Which Points Have Too Much Influence?")
-    plt.legend()
-    plt.show()
+Stem plot with threshold
 
-    return cooks_d
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="3-10" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Hat matrix and leverage</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Build the hat matrix H = X(XᵀX)⁻¹Xᵀ and extract its diagonal to obtain per-observation leverage values.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="12-15" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Cook's distance formula</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Compute Cook's D using residuals, leverage, and MSE; each value measures how much all fitted values would shift if this observation were deleted.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="17-26" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Stem plot with threshold</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Stem-plot each Cook's D value and overlay a 4/n reference line; points above it are worth investigating as high-influence observations.</p>
-    </div>
-  </div>
-</aside>
-</div>
+Stem-plot each Cook's D value and overlay a 4/n reference line; points above it are worth investigating as high-influence observations.
 
 **What to look for**: Points with Cook's Distance values that stand out above the threshold line.
 
@@ -384,53 +196,13 @@ def find_all_around_troublemakers(model, X, y):
 
 **Leverage (hat values) for each row of X**
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Leverage via hat matrix
 
-{% highlight python %}
-def find_unusual_x_values(X):
-    """Find data points with unusual X values."""
-    # Calculate hat values (another name for leverage)
-    X_design = np.column_stack([np.ones(len(X)), X])  # add intercept column
-    hat_matrix = X_design @ np.linalg.inv(X_design.T @ X_design) @ X_design.T
-    leverage = np.diagonal(hat_matrix)
-    p = X_design.shape[1]
+Extract diagonal elements of the hat matrix H = X(XᵀX)⁻¹Xᵀ; high values indicate observations with extreme predictor values that can pull the fitted line.
 
-    # Plot
-    plt.figure(figsize=(10, 6))
-    plt.stem(range(len(leverage)), leverage, markerfmt='bo')
-    plt.axhline(y=2*p/len(X), color='r', linestyle='--', label='Threshold for concern')
-    plt.xlabel('Data Point Number')
-    plt.ylabel('Leverage (Unusual X Values)')
-    plt.title('Which Points Have Unusual X Values?')
-    plt.legend()
-    plt.show()
+Stem plot with 2p/n threshold
 
-    return leverage
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-5" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Leverage via hat matrix</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Extract diagonal elements of the hat matrix H = X(XᵀX)⁻¹Xᵀ; high values indicate observations with extreme predictor values that can pull the fitted line.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="7-16" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Stem plot with 2p/n threshold</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Plot leverage per observation and add a 2p/n reference line; points above it have unusually extreme predictor values and deserve closer inspection.</p>
-    </div>
-  </div>
-</aside>
-</div>
+Plot leverage per observation and add a 2p/n reference line; points above it have unusually extreme predictor values and deserve closer inspection.
 
 **What to look for**: Points with leverage values above the threshold line.
 
@@ -440,89 +212,17 @@ Here's a function that performs all these checks at once:
 
 **End-to-end diagnostic runner**
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Function setup
 
-{% highlight python %}
-def give_model_complete_checkup(model, X, y):
-    """
-    Run a complete diagnostic check-up on our regression model.
+Accept a fitted model, predictor matrix, and target vector; compute predictions and residuals for all downstream checks.
 
-    Parameters:
-    model: our fitted regression model
-    X: our predictor variables
-    y: what we're trying to predict
-    """
-    # Get predictions and errors
-    y_pred = model.predict(X)
-    errors = y - y_pred
+Four assumption checks
 
-    print("=== MODEL CHECK-UP RESULTS ===\n")
+Call helper functions in sequence for linearity, independence (Durbin-Watson), homoscedasticity, and normality of residuals.
 
-    # 1. Linearity check
-    print("✅ CHECKING IF RELATIONSHIP IS STRAIGHT...")
-    check_if_relationship_is_straight(model, X, y)
+Influence summary
 
-    # 2. Independence check
-    print("\n✅ CHECKING IF POINTS ARE INDEPENDENT...")
-    check_if_points_are_independent(errors)
-
-    # 3. Consistent error spread check
-    print("\n✅ CHECKING IF ERROR SPREAD IS CONSISTENT...")
-    check_if_error_spread_is_even(model, X, y)
-
-    # 4. Bell curve check
-    print("\n✅ CHECKING IF ERRORS FOLLOW A BELL CURVE...")
-    check_if_errors_follow_bell_curve(errors)
-
-    # 5. Troublemaker identification
-    print("\n✅ FINDING TROUBLEMAKER POINTS...")
-    cooks_d = find_all_around_troublemakers(model, X, y)
-    leverage = find_unusual_x_values(X)
-
-    # Summary of issues found
-    print("\n=== SUMMARY OF POTENTIAL ISSUES ===")
-    print(f"Points with unusual X values: {sum(leverage > 2*(X.shape[1]+1)/len(X))}")
-    print(f"Points with too much overall influence: {sum(cooks_d > 4/len(y))}")
-
-    return {
-        'errors': errors,
-        'cooks_distance': cooks_d,
-        'leverage': leverage
-    }
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-12" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Function setup</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Accept a fitted model, predictor matrix, and target vector; compute predictions and residuals for all downstream checks.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="14-32" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Four assumption checks</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Call helper functions in sequence for linearity, independence (Durbin-Watson), homoscedasticity, and normality of residuals.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="34-44" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Influence summary</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Compute Cook's distance and leverage, print counts of flagged observations using common rule-of-thumb thresholds, and return all diagnostics.</p>
-    </div>
-  </div>
-</aside>
-</div>
+Compute Cook's distance and leverage, print counts of flagged observations using common rule-of-thumb thresholds, and return all diagnostics.
 
 ## Try it: A Hands-On Example
 
@@ -530,86 +230,27 @@ Look at how this works with some example data:
 
 **Synthetic data with an outlier and heteroscedastic noise, then full check-up**
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Synthetic data with outlier
 
-{% highlight python %}
-# Create some example data
-np.random.seed(42)  # This makes the "random" numbers the same each time
-n_samples = 100
+Generate a 100×2 predictor matrix and manually set the first row to \[5, 5] to create a high-leverage outlier point.
 
-# Create predictors with an unusual outlier point
-X = np.random.normal(0, 1, (n_samples, 2))  # 100 data points with 2 predictors
-X[0] = [5, 5]  # Make the first point an extreme outlier
+Heteroscedastic response
 
-# Create a response variable with errors that get bigger as X gets bigger
-y = 2 * X[:, 0] + 3 * X[:, 1] + np.random.normal(0, np.abs(X[:, 0]), n_samples)
+Scale the noise by `|X[:,0]|` so error variance grows with the predictor, deliberately violating homoscedasticity.
 
-# Fit a regression model
-from sklearn.linear_model import LinearRegression
-model = LinearRegression()
-model.fit(X, y)
+Fit and check
 
-# Run our complete check-up
-results = give_model_complete_checkup(model, X, y)
-{% endhighlight %}
+Fit `LinearRegression` and pass the model to `give_model_complete_checkup` to run all four diagnostic plots and the influence summary.
 
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-7" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Synthetic data with outlier</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Generate a 100×2 predictor matrix and manually set the first row to [5, 5] to create a high-leverage outlier point.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="9-10" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Heteroscedastic response</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Scale the noise by <code>|X[:,0]|</code> so error variance grows with the predictor, deliberately violating homoscedasticity.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="12-18" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Fit and check</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Fit <code>LinearRegression</code> and pass the model to <code>give_model_complete_checkup</code> to run all four diagnostic plots and the influence summary.</p>
-    </div>
-  </div>
-</aside>
-</div>
+<figure><img src="../../../.gitbook/assets/model-diagnostics_fig_1.png" alt="Residuals vs predicted values scatter plot"><figcaption><p>Figure 1: Are Our Errors Random? (They Should Be!)</p></figcaption></figure>
 
-<figure>
-<img src="assets/model-diagnostics_fig_1.png" alt="Residuals vs predicted values scatter plot" />
-<figcaption>Figure 1: Are Our Errors Random? (They Should Be!)</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/model-diagnostics_fig_2.png" alt="Absolute residuals vs predicted values scatter plot"><figcaption><p>Figure 2: Is Our Error Spread Consistent?</p></figcaption></figure>
 
-<figure>
-<img src="assets/model-diagnostics_fig_2.png" alt="Absolute residuals vs predicted values scatter plot" />
-<figcaption>Figure 2: Is Our Error Spread Consistent?</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/model-diagnostics_fig_3.png" alt="Histogram of residuals and Q-Q plot"><figcaption><p>Figure 3: Distribution of Errors (Should Look Like a Bell Curve)</p></figcaption></figure>
 
-<figure>
-<img src="assets/model-diagnostics_fig_3.png" alt="Histogram of residuals and Q-Q plot" />
-<figcaption>Figure 3: Distribution of Errors (Should Look Like a Bell Curve)</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/model-diagnostics_fig_4.png" alt="Cook&#x27;s distance stem plot with threshold line"><figcaption><p>Figure 4: Which Points Have Too Much Influence?</p></figcaption></figure>
 
-<figure>
-<img src="assets/model-diagnostics_fig_4.png" alt="Cook's distance stem plot with threshold line" />
-<figcaption>Figure 4: Which Points Have Too Much Influence?</figcaption>
-</figure>
-
-<figure>
-<img src="assets/model-diagnostics_fig_5.png" alt="Leverage stem plot with threshold line" />
-<figcaption>Figure 5: Which Points Have Unusual X Values?</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/model-diagnostics_fig_5.png" alt="Leverage stem plot with threshold line"><figcaption><p>Figure 5: Which Points Have Unusual X Values?</p></figcaption></figure>
 
 ```
 === MODEL CHECK-UP RESULTS ===
@@ -650,75 +291,71 @@ look at common problems you might discover and what to do about them:
 ### Problem 1: The Relationship Isn't Actually Straight
 
 **Signs of this problem**:
-- Curved pattern in the residual plot
-- Poor predictions
+
+* Curved pattern in the residual plot
+* Poor predictions
 
 **Solutions**:
-- **Transform your variables**: Try using log(x), square root(x), or x² instead of just x
-- **Try polynomial regression**: Add squared or cubed terms (x²)
-- **Use a non-linear model**: Consider a different type of model altogether
+
+* **Transform your variables**: Try using log(x), square root(x), or x² instead of just x
+* **Try polynomial regression**: Add squared or cubed terms (x²)
+* **Use a non-linear model**: Consider a different type of model altogether
 
 **Real-world example**: When predicting house prices, the relationship between size and price might not be straight - each additional square foot might add less value as houses get very large.
 
-<figure>
-<img src="assets/model-diagnostics_problem1.png" alt="Residual plot with a curved pattern, then a random scatter after adding a quadratic term" />
-<figcaption>Left: a straight-line model leaves a clear curve in the residuals. Right: adding a quadratic term removes the pattern.</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/model-diagnostics_problem1.png" alt="Residual plot with a curved pattern, then a random scatter after adding a quadratic term"><figcaption><p>Left: a straight-line model leaves a clear curve in the residuals. Right: adding a quadratic term removes the pattern.</p></figcaption></figure>
 
 ### Problem 2: Inconsistent Error Spread
 
 **Signs of this problem**:
-- Funnel shape in the scale-location plot
-- Errors get bigger or smaller as predicted values change
+
+* Funnel shape in the scale-location plot
+* Errors get bigger or smaller as predicted values change
 
 **Solutions**:
-- **Transform your y variable**: Try log(y) or square root(y)
-- **Use weighted regression**: Give less weight to observations with potentially larger errors
-- **Try robust regression methods**: These are less affected by uneven error spreads
+
+* **Transform your y variable**: Try log(y) or square root(y)
+* **Use weighted regression**: Give less weight to observations with potentially larger errors
+* **Try robust regression methods**: These are less affected by uneven error spreads
 
 **Real-world example**: When predicting company revenue, errors might be bigger for large companies than for small ones.
 
-<figure>
-<img src="assets/model-diagnostics_problem2.png" alt="Scale-location plot with a funnel shape, then an even band after a log transform" />
-<figcaption>Left: residual spread fans out as fitted values grow. Right: modelling log(y) makes the spread roughly even.</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/model-diagnostics_problem2.png" alt="Scale-location plot with a funnel shape, then an even band after a log transform"><figcaption><p>Left: residual spread fans out as fitted values grow. Right: modelling log(y) makes the spread roughly even.</p></figcaption></figure>
 
 ### Problem 3: Errors Don't Follow a Bell Curve
 
 **Signs of this problem**:
-- Skewed histogram of residuals
-- Points deviating from the line in the Q-Q plot
+
+* Skewed histogram of residuals
+* Points deviating from the line in the Q-Q plot
 
 **Solutions**:
-- **Transform your y variable**: Try log(y) or another transformation
-- **Consider if you're missing important predictors**: Add more relevant variables
-- **Look for natural limits in your data**: Is there a floor or ceiling effect?
+
+* **Transform your y variable**: Try log(y) or another transformation
+* **Consider if you're missing important predictors**: Add more relevant variables
+* **Look for natural limits in your data**: Is there a floor or ceiling effect?
 
 **Real-world example**: When predicting salaries, errors might not follow a bell curve because salaries have a lower bound (they can't be negative) but no upper bound.
 
-<figure>
-<img src="assets/model-diagnostics_problem3.png" alt="Q-Q plot with points curving away from the line, then points hugging the line after a log transform" />
-<figcaption>Left: right-skewed residuals pull the Q-Q points away from the line. Right: modelling log(y) brings them back onto it.</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/model-diagnostics_problem3.png" alt="Q-Q plot with points curving away from the line, then points hugging the line after a log transform"><figcaption><p>Left: right-skewed residuals pull the Q-Q points away from the line. Right: modelling log(y) brings them back onto it.</p></figcaption></figure>
 
 ### Problem 4: Troublemaker Points with Too Much Influence
 
 **Signs of this problem**:
-- High Cook's distance values
-- High leverage points
+
+* High Cook's distance values
+* High leverage points
 
 **Solutions**:
-- **Investigate these points carefully**: Are they errors, or just unusual but valid data?
-- **Try robust regression methods**: These are less affected by outliers
-- **Run the analysis with and without these points**: Compare the results to see how much they matter
-- **Transform your predictors**: This can sometimes reduce the impact of extreme values
+
+* **Investigate these points carefully**: Are they errors, or just unusual but valid data?
+* **Try robust regression methods**: These are less affected by outliers
+* **Run the analysis with and without these points**: Compare the results to see how much they matter
+* **Transform your predictors**: This can sometimes reduce the impact of extreme values
 
 **Real-world example**: In a customer spending analysis, a few ultra-high-net-worth individuals might have too much influence on your model if not handled properly.
 
-<figure>
-<img src="assets/model-diagnostics_problem4.png" alt="Regression line dragged by one influential point, then a corrected fit after removing it" />
-<figcaption>Left: a single high-leverage point pulls the fitted line away from the data. Right: after confirming it was a data-entry error, the refit follows the real pattern.</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/model-diagnostics_problem4.png" alt="Regression line dragged by one influential point, then a corrected fit after removing it"><figcaption><p>Left: a single high-leverage point pulls the fitted line away from the data. Right: after confirming it was a data-entry error, the refit follows the real pattern.</p></figcaption></figure>
 
 ## Your Turn: Practice Exercise
 
@@ -740,20 +377,20 @@ Try running a model check-up on a dataset you're working with. Here are the step
 
 ## Next steps
 
-- Start [Statistical modelling (module 4.4)](../4.4-stat-modelling/README.md) with [Logistic regression](../4.4-stat-modelling/logistic-regression.md).
+* Start [Statistical modelling (module 4.4)](../4.4-stat-modelling/) with [Logistic regression](../4.4-stat-modelling/logistic-regression.md).
 
 ## Gotchas
 
-- **Running diagnostics on training-set residuals only**: Diagnostic plots computed on the same data used to fit the model can look acceptable even when the model generalises poorly. Always check residual patterns on a held-out validation set if generalisation is your goal.
-- **Shapiro-Wilk rejects normality for large samples trivially**: With n > 5,000 the test flags tiny, irrelevant departures from normality as significant. At that scale, inspect the Q-Q plot visually instead of relying on the p-value alone.
-- **The Durbin-Watson test only catches lag-1 autocorrelation**: A DW value near 2 does not guarantee independence; it only checks whether adjacent residuals are correlated. Seasonal patterns (lag 12, lag 52) will pass Durbin-Watson while still violating independence.
-- **High leverage is not the same as high influence**: A point can sit far out in predictor space (high leverage) but still fall exactly on the regression surface, giving it near-zero Cook's distance. Only combine leverage with large residuals makes a point truly influential.
-- **Deleting influential points without investigating them**: Automatically removing observations above the 4/n Cook's threshold destroys valid data. First check whether the point is a data-entry error, an out-of-scope observation, or a real signal the model is failing to capture.
-- **Ignoring heteroscedasticity and still reporting standard errors**: OLS standard errors assume constant variance; heteroscedastic residuals make those errors (and therefore p-values and confidence intervals) wrong. Use heteroscedasticity-robust standard errors (`HC3` in statsmodels) or transform the response before trusting inference.
+* **Running diagnostics on training-set residuals only**: Diagnostic plots computed on the same data used to fit the model can look acceptable even when the model generalises poorly. Always check residual patterns on a held-out validation set if generalisation is your goal.
+* **Shapiro-Wilk rejects normality for large samples trivially**: With n > 5,000 the test flags tiny, irrelevant departures from normality as significant. At that scale, inspect the Q-Q plot visually instead of relying on the p-value alone.
+* **The Durbin-Watson test only catches lag-1 autocorrelation**: A DW value near 2 does not guarantee independence; it only checks whether adjacent residuals are correlated. Seasonal patterns (lag 12, lag 52) will pass Durbin-Watson while still violating independence.
+* **High leverage is not the same as high influence**: A point can sit far out in predictor space (high leverage) but still fall exactly on the regression surface, giving it near-zero Cook's distance. Only combine leverage with large residuals makes a point truly influential.
+* **Deleting influential points without investigating them**: Automatically removing observations above the 4/n Cook's threshold destroys valid data. First check whether the point is a data-entry error, an out-of-scope observation, or a real signal the model is failing to capture.
+* **Ignoring heteroscedasticity and still reporting standard errors**: OLS standard errors assume constant variance; heteroscedastic residuals make those errors (and therefore p-values and confidence intervals) wrong. Use heteroscedasticity-robust standard errors (`HC3` in statsmodels) or transform the response before trusting inference.
 
 ## Helpful Resources for Going Deeper
 
-- [STHDA Regression Diagnostics](https://www.sthda.com/english/articles/39-regression-model-diagnostics/) - With code examples and visuals
-- [Practical Statistics for Data Scientists](https://www.oreilly.com/library/view/practical-statistics-for/9781491952955/) - A very accessible book with practical advice
-- [Khan Academy's Regression Course](https://www.khanacademy.org/math/statistics-probability/advanced-regression-inference-transformations) - Free interactive lessons
-- [Perplexity AI](https://www.perplexity.ai/) - For quick answers to your specific questions
+* [STHDA Regression Diagnostics](https://www.sthda.com/english/articles/39-regression-model-diagnostics/) - With code examples and visuals
+* [Practical Statistics for Data Scientists](https://www.oreilly.com/library/view/practical-statistics-for/9781491952955/) - A very accessible book with practical advice
+* [Khan Academy's Regression Course](https://www.khanacademy.org/math/statistics-probability/advanced-regression-inference-transformations) - Free interactive lessons
+* [Perplexity AI](https://www.perplexity.ai/) - For quick answers to your specific questions

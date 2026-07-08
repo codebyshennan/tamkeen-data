@@ -4,7 +4,7 @@
 
 ## Overview
 
-Naive Bayes applies Bayes' theorem with a strong (naive) independence assumption between features, fast, scalable, and surprisingly effective for text. Prerequisites: [5.1 Intro to ML](../../5.1-intro-to-ml/README.md).
+Naive Bayes applies Bayes' theorem with a strong (naive) independence assumption between features, fast, scalable, and surprisingly effective for text. Prerequisites: [5.1 Intro to ML](../../5.1-intro-to-ml/).
 
 ## Lesson Path
 

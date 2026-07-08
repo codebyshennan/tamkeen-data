@@ -6,7 +6,7 @@
 
 ## Overview
 
-**Prerequisites:** [Introduction to Python](../1.2-intro-python/README.md) and [Data foundation with NumPy](../1.4-data-foundation-linear-algebra/README.md).
+**Prerequisites:** [Introduction to Python](../1.2-intro-python/) and [Data foundation with NumPy](../1.4-data-foundation-linear-algebra/).
 
 > **Contributors:** Authoring standards: `docs/meta/DOCUMENTATION_GUIDELINES.md` (`meta/` is excluded from the Jekyll build).
 
@@ -16,11 +16,7 @@ Pandas is your best friend when it comes to working with data in Python! Think o
 
 ### Video: Introduction to Pandas
 
-<div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ZyhVh-qRZPA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-*Corey Schafer, Python pandas tutorial (part 1): getting started with data analysis*
+_Corey Schafer, Python pandas tutorial (part 1): getting started with data analysis_
 
 > **Note:** The name "Pandas" comes from "Panel Data", but don't worry about that - just think of it as your go-to tool for working with tables of data in Python!
 
@@ -28,33 +24,33 @@ Pandas is your best friend when it comes to working with data in Python! Think o
 
 Before starting this module, you should have:
 
-- Completed the "Introduction to Python" module
-- Completed the "Data Foundation with NumPy" module (Pandas is built on NumPy)
-- Basic understanding of Python data structures (lists, dictionaries)
-- Familiarity with working with spreadsheets (Excel, Google Sheets) is helpful
-- Comfortable with basic data analysis concepts
+* Completed the "Introduction to Python" module
+* Completed the "Data Foundation with NumPy" module (Pandas is built on NumPy)
+* Basic understanding of Python data structures (lists, dictionaries)
+* Familiarity with working with spreadsheets (Excel, Google Sheets) is helpful
+* Comfortable with basic data analysis concepts
 
 > **Tip:** If you've used Excel before, you'll find many Pandas operations familiar! Pandas DataFrames work a lot like Excel spreadsheets, but with the power of Python programming.
 
----
+***
 
 ### Understanding the Name
 
 The name "Pandas" comes from "Panel Data", referring to datasets that contain observations over multiple time periods. However, don't let that confuse you - Pandas is great for working with any kind of structured data!
 
----
+***
 
 ### Key Features Explained
 
 Break down what Pandas can do for you:
 
-- **DataFrames**: Like Excel spreadsheets in Python
-- **Data Exploration**: Easily peek into your data
-- **Data Cleaning**: Fix messy data quickly
-- **Data Transformation**: Reshape and modify data
-- **Data Analysis**: Calculate statistics and find patterns
+* **DataFrames**: Like Excel spreadsheets in Python
+* **Data Exploration**: Easily peek into your data
+* **Data Cleaning**: Fix messy data quickly
+* **Data Transformation**: Reshape and modify data
+* **Data Analysis**: Calculate statistics and find patterns
 
----
+***
 
 ### Why Use Pandas?
 
@@ -67,7 +63,7 @@ Break down what Pandas can do for you:
 
 Pandas has two main data structures that you'll use all the time:
 
----
+***
 
 ### Series: The 1D Wonder
 
@@ -99,7 +95,7 @@ Output:
 dtype: int64
 ```
 
----
+***
 
 ### DataFrame: The 2D Powerhouse
 
@@ -135,7 +131,7 @@ Output:
 
 Here's a quick look at some everyday operations you'll perform with Pandas:
 
----
+***
 
 ### Reading Data
 
@@ -147,7 +143,7 @@ df = pd.read_csv('data.csv')
 df = pd.read_excel('data.xlsx')
 ```
 
----
+***
 
 ### Viewing Data
 
@@ -162,7 +158,7 @@ df.info()
 df.describe()
 ```
 
----
+***
 
 ### Basic Analysis
 
@@ -194,13 +190,13 @@ Each section will include practical examples and clear explanations to help you 
 
 By the end of this module, you'll be able to:
 
-- Read data from various file formats (CSV, Excel, JSON, etc.)
-- Explore and understand your data quickly
-- Clean and transform messy data
-- Filter, sort, and group data efficiently
-- Perform calculations and aggregations
-- Combine data from multiple sources
-- Prepare data for analysis and visualization
+* Read data from various file formats (CSV, Excel, JSON, etc.)
+* Explore and understand your data quickly
+* Clean and transform messy data
+* Filter, sort, and group data efficiently
+* Perform calculations and aggregations
+* Combine data from multiple sources
+* Prepare data for analysis and visualization
 
 > **Tip:** Pandas is the most important library for data analysis in Python. Master this, and you'll be able to handle most real-world data analysis tasks!
 

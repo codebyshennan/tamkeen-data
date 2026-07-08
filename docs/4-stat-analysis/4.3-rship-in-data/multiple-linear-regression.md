@@ -1,10 +1,18 @@
 ---
 reading_minutes: 35
 objectives:
-  - Fit multivariate OLS and read each coefficient as a conditional effect with the other predictors held fixed.
-  - Detect multicollinearity with VIF and adjust the predictor set when redundancy hides individual effects.
-  - Compare knowledge-based, statistical, and stepwise feature selection without leaking labels into the choice.
-  - Validate fit through residual diagnostics and a predictor correlation heatmap before reporting coefficients.
+  - >-
+    Fit multivariate OLS and read each coefficient as a conditional effect with
+    the other predictors held fixed.
+  - >-
+    Detect multicollinearity with VIF and adjust the predictor set when
+    redundancy hides individual effects.
+  - >-
+    Compare knowledge-based, statistical, and stepwise feature selection without
+    leaking labels into the choice.
+  - >-
+    Validate fit through residual diagnostics and a predictor correlation
+    heatmap before reporting coefficients.
 ---
 
 # Multiple Linear Regression: Prediction with Multiple Factors
@@ -13,34 +21,30 @@ objectives:
 
 ## Overview
 
-Multiple linear regression extends the simple case to a **linear combination of several predictors**. Each coefficient answers a conditional question: "How does the outcome change with this predictor **holding the others fixed**?" That conditioning is powerful and easy to misread, especially when predictors are correlated, so this lesson pairs intuition with careful wording before [diagnostics](./model-diagnostics.md).
+Multiple linear regression extends the simple case to a **linear combination of several predictors**. Each coefficient answers a conditional question: "How does the outcome change with this predictor **holding the others fixed**?" That conditioning is powerful and easy to misread, especially when predictors are correlated, so this lesson pairs intuition with careful wording before [diagnostics](model-diagnostics.md).
 
 ## Why this matters
 
-- Real outcomes usually depend on **more than one** predictor; MLR separates overlapping effects where the design allows.
-- You will read coefficients **given** the other variables in the model (not the same as raw correlations).
+* Real outcomes usually depend on **more than one** predictor; MLR separates overlapping effects where the design allows.
+* You will read coefficients **given** the other variables in the model (not the same as raw correlations).
 
 ## Prerequisites
 
-- [Simple linear regression](./simple-linear-regression.md).
+* [Simple linear regression](simple-linear-regression.md).
 
 > **Note:** Watch for multicollinearity and omitted-variable bias when adding predictors.
 
 ### Video Tutorial: Introduction to Multiple Regression
 
-<div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/zITIFTsivN8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-*StatQuest: Multiple Regression, Clearly Explained!!! by Josh Starmer*
+_StatQuest: Multiple Regression, Clearly Explained!!! by Josh Starmer_
 
 ## What is Multiple Linear Regression?
 
 In real life, outcomes are rarely influenced by just one factor. Think about it:
 
-- Your exam score isn't just determined by study time, but also by sleep quality, previous knowledge, and stress levels
-- House prices aren't just based on square footage, but also location, number of bedrooms, age of the house, and more
-- A plant's growth isn't just affected by water, but also by sunlight, soil quality, and temperature
+* Your exam score isn't just determined by study time, but also by sleep quality, previous knowledge, and stress levels
+* House prices aren't just based on square footage, but also location, number of bedrooms, age of the house, and more
+* A plant's growth isn't just affected by water, but also by sunlight, soil quality, and temperature
 
 **Multiple linear regression (MLR) is like having a team of predictors instead of a single predictor.** It allows us to use several pieces of information to make more accurate predictions.
 
@@ -50,38 +54,37 @@ Think of simple linear regression like trying to bake cookies with just flour. Y
 
 Multiple linear regression is like using a complete recipe with flour, sugar, butter, eggs, and vanilla. Each ingredient contributes to the final product, and the recipe tells you exactly how much of each to use!
 
-{% include mermaid-diagram.html src="4-stat-analysis/4.3-rship-in-data/diagrams/multiple-linear-regression-1.mmd" %}
-
 ### The Math (Don't Worry, We'll Explain It Simply!)
 
 The formula looks like this:
 
-\\[ y = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \dots + \beta_p x_p + \epsilon \\]
+\\\[ y = \beta\_0 + \beta\_1 x\_1 + \beta\_2 x\_2 + \dots + \beta\_p x\_p + \epsilon \\]
 
 This might look intimidating, but break it down:
 
-- **y** is what we're trying to predict (like exam score)
-- **x₁, x₂, …** are our predictors (like hours studied, hours slept, previous knowledge)
-- **β₀** is our starting point (intercept)
-- **β₁, β₂, …** tell us how much each predictor contributes to our prediction
-- **ε** represents the error (because no prediction is perfect)
+* **y** is what we're trying to predict (like exam score)
+* **x₁, x₂, …** are our predictors (like hours studied, hours slept, previous knowledge)
+* **β₀** is our starting point (intercept)
+* **β₁, β₂, …** tell us how much each predictor contributes to our prediction
+* **ε** represents the error (because no prediction is perfect)
 
 ### Real-World Example: Predicting House Prices
 
 Imagine we want to predict house prices:
-- x₁ might be the house size in square feet
-- x₂ might be the number of bedrooms
-- x₃ might be the house's age
-- y would be the house price
 
-Our equation might look like:
-Price = $50,000 + ($100 × SquareFeet) + ($5,000 × Bedrooms) - ($1,000 × Age)
+* x₁ might be the house size in square feet
+* x₂ might be the number of bedrooms
+* x₃ might be the house's age
+* y would be the house price
+
+Our equation might look like: Price = $50,000 + ($100 × SquareFeet) + ($5,000 × Bedrooms) - ($1,000 × Age)
 
 This tells us:
-- A house with zero square feet, zero bedrooms, and zero years old would cost $50,000 (not realistic, just a starting point!)
-- Each square foot adds $100 to the price
-- Each bedroom adds $5,000 to the price
-- Each year of age reduces the price by $1,000
+
+* A house with zero square feet, zero bedrooms, and zero years old would cost $50,000 (not realistic, just a starting point!)
+* Each square foot adds $100 to the price
+* Each bedroom adds $5,000 to the price
+* Each year of age reduces the price by $1,000
 
 ## Before We Start: Important Assumptions
 
@@ -123,77 +126,12 @@ Walk through a concrete example using Python. Don't worry if the code looks comp
 
 **Multiple regression with coefficients, R², and VIF**
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+\`\`\` Contribution of each factor: study\_hours: 1.82 points prev\_gpa: 2.96 points sleep\_hours: 1.53 points
 
-{% highlight python %}
-import numpy as np
-import pandas as pd
-from sklearn.linear_model import LinearRegression
-import matplotlib.pyplot as plt
-import seaborn as sns
-from statsmodels.stats.outliers_influence import variance_inflation_factor
+Starting point (intercept): 0.09 Model accuracy (R-squared): 0.94
 
-# Create example data for student exam scores
-np.random.seed(42)  # For reproducible results
-n_samples = 100  # 100 students
+Multicollinearity Check (VIF values): Variable VIF 0 study\_hours 1.053354 1 prev\_gpa 1.019570 2 sleep\_hours 1.034520
 
-# Create factors that might affect exam scores
-study_hours = np.random.normal(0, 1, n_samples)  # Hours spent studying
-prev_gpa = np.random.normal(0, 1, n_samples)     # Previous GPA
-sleep_hours = np.random.normal(0, 1, n_samples)  # Hours of sleep before exam
-
-# Create exam scores based on these factors
-# Notice each factor has a different weight (2, 3, and 1.5)
-exam_scores = 2*study_hours + 3*prev_gpa + 1.5*sleep_hours + np.random.normal(0, 1, n_samples)
-
-# Put everything in a nice table (DataFrame)
-student_data = pd.DataFrame({
-    'study_hours': study_hours,
-    'prev_gpa': prev_gpa,
-    'sleep_hours': sleep_hours,
-    'exam_score': exam_scores
-})
-
-# Create and fit our model
-X = student_data[['study_hours', 'prev_gpa', 'sleep_hours']]  # Predictors
-y = student_data['exam_score']  # What we're predicting
-
-model = LinearRegression()
-model.fit(X, y)
-
-# Print results
-print("Contribution of each factor:")
-for name, coef in zip(X.columns, model.coef_):
-    print(f"{name}: {coef:.2f} points")
-print(f"\nStarting point (intercept): {model.intercept_:.2f}")
-print(f"Model accuracy (R-squared): {model.score(X, y):.2f}")
-
-# Check for predictor similarity (multicollinearity)
-def check_predictor_similarity(X):
-    vif_data = pd.DataFrame()
-    vif_data["Variable"] = X.columns
-    vif_data["VIF"] = [variance_inflation_factor(X.values, i)
-                       for i in range(X.shape[1])]
-    return vif_data
-
-print("\nMulticollinearity Check (VIF values):")
-print(check_predictor_similarity(X))
-{% endhighlight %}
-```
-Contribution of each factor:
-study_hours: 1.82 points
-prev_gpa: 2.96 points
-sleep_hours: 1.53 points
-
-Starting point (intercept): 0.09
-Model accuracy (R-squared): 0.94
-
-Multicollinearity Check (VIF values):
-      Variable       VIF
-0  study_hours  1.053354
-1     prev_gpa  1.019570
-2  sleep_hours  1.034520
 ```
 
 
@@ -248,20 +186,14 @@ Multicollinearity Check (VIF values):
 </div>
 
 ```
-Contribution of each factor:
-study_hours: 1.82 points
-prev_gpa: 2.96 points
-sleep_hours: 1.53 points
 
-Starting point (intercept): 0.09
-Model accuracy (R-squared): 0.94
+Contribution of each factor: study\_hours: 1.82 points prev\_gpa: 2.96 points sleep\_hours: 1.53 points
 
-Multicollinearity Check (VIF values):
-      Variable       VIF
-0  study_hours  1.053354
-1     prev_gpa  1.019570
-2  sleep_hours  1.034520
-```
+Starting point (intercept): 0.09 Model accuracy (R-squared): 0.94
+
+Multicollinearity Check (VIF values): Variable VIF 0 study\_hours 1.053354 1 prev\_gpa 1.019570 2 sleep\_hours 1.034520
+
+````
 
 ### Understanding the Results
 
@@ -310,7 +242,7 @@ X_selected = selector.fit_transform(X, y)
 # See which ones were selected
 selected_features = X.columns[selector.get_support()].tolist()
 print("\nStatistically strongest features:", selected_features)
-```
+````
 
 ```
 Statistically strongest features: ['prev_gpa', 'sleep_hours']
@@ -386,52 +318,50 @@ def check_model_validity(model, X, y):
 check_model_validity(model, X, y)
 ```
 
-<figure>
-<img src="assets/multiple-linear-regression_fig_4.png" alt="Residual diagnostic panels and predictor correlation heatmap" />
-<figcaption>Figure 4: Residual panels, residuals vs fitted, Q-Q, scale-location, plus the predictor correlation heatmap</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/multiple-linear-regression_fig_4.png" alt="Residual diagnostic panels and predictor correlation heatmap"><figcaption><p>Figure 4: Residual panels, residuals vs fitted, Q-Q, scale-location, plus the predictor correlation heatmap</p></figcaption></figure>
 
 ### What Good Diagnostic Plots Look Like:
 
 1. **Residuals vs Fitted (top left)**:
-   - Should look like a random cloud of points around the zero line
-   - No patterns or curves should be visible
-
+   * Should look like a random cloud of points around the zero line
+   * No patterns or curves should be visible
 2. **Q-Q Plot (top right)**:
-   - Points should follow the diagonal line closely
-   - Significant deviations suggest non-normal errors
-
+   * Points should follow the diagonal line closely
+   * Significant deviations suggest non-normal errors
 3. **Scale-Location (bottom left)**:
-   - Should show a relatively even spread across all predicted values
-   - A funnel shape suggests the errors aren't consistent
-
+   * Should show a relatively even spread across all predicted values
+   * A funnel shape suggests the errors aren't consistent
 4. **Correlation Matrix (bottom right)**:
-   - Shows the relationships between predictors
-   - Values close to 1 or -1 indicate potential multicollinearity
+   * Shows the relationships between predictors
+   * Values close to 1 or -1 indicate potential multicollinearity
 
 ## Real-World Applications
 
 Multiple linear regression is an incredibly versatile tool used across many fields:
 
 ### Business & Marketing
-- **Sales Forecasting**: Predicting sales based on advertising budget, price, competitor activity, and seasonality
-- **Customer Value**: Estimating lifetime customer value based on demographics, purchase history, and engagement metrics
-- **Pricing Strategy**: Determining optimal pricing by analyzing price sensitivity, competitor prices, and product features
+
+* **Sales Forecasting**: Predicting sales based on advertising budget, price, competitor activity, and seasonality
+* **Customer Value**: Estimating lifetime customer value based on demographics, purchase history, and engagement metrics
+* **Pricing Strategy**: Determining optimal pricing by analyzing price sensitivity, competitor prices, and product features
 
 ### Healthcare
-- **Patient Risk Assessment**: Predicting disease risk based on age, family history, lifestyle factors, and biomarkers
-- **Hospital Resource Planning**: Estimating length of stay based on diagnosis, treatment, age, and comorbidities
-- **Treatment Effectiveness**: Analyzing how different factors affect treatment outcomes
+
+* **Patient Risk Assessment**: Predicting disease risk based on age, family history, lifestyle factors, and biomarkers
+* **Hospital Resource Planning**: Estimating length of stay based on diagnosis, treatment, age, and comorbidities
+* **Treatment Effectiveness**: Analyzing how different factors affect treatment outcomes
 
 ### Real Estate
-- **Property Valuation**: Estimating house prices based on size, location, age, number of rooms, and nearby amenities
-- **Investment Analysis**: Predicting return on investment based on property characteristics, location trends, and economic indicators
-- **Rental Price Optimization**: Setting optimal rent prices based on unit features, location, and market demand
+
+* **Property Valuation**: Estimating house prices based on size, location, age, number of rooms, and nearby amenities
+* **Investment Analysis**: Predicting return on investment based on property characteristics, location trends, and economic indicators
+* **Rental Price Optimization**: Setting optimal rent prices based on unit features, location, and market demand
 
 ### Environmental Science
-- **Climate Modeling**: Understanding how different factors contribute to temperature changes
-- **Pollution Prediction**: Forecasting air quality based on traffic volume, industrial activity, and weather conditions
-- **Resource Management**: Predicting water usage based on population, season, and weather patterns
+
+* **Climate Modeling**: Understanding how different factors contribute to temperature changes
+* **Pollution Prediction**: Forecasting air quality based on traffic volume, industrial activity, and weather conditions
+* **Resource Management**: Predicting water usage based on population, season, and weather patterns
 
 ## Hands-On Practice: Sales Prediction Exercise
 
@@ -476,10 +406,10 @@ data = pd.DataFrame({
 
 ### What You Should Find:
 
-- **Advertising** should have a positive coefficient (more advertising = more sales)
-- **Price** should have a negative coefficient (higher price = fewer sales)
-- **Competition** should have a negative coefficient (more competition = fewer sales)
-- The model should capture these relationships well with an R-squared of around 0.85-0.95
+* **Advertising** should have a positive coefficient (more advertising = more sales)
+* **Price** should have a negative coefficient (higher price = fewer sales)
+* **Competition** should have a negative coefficient (more competition = fewer sales)
+* The model should capture these relationships well with an R-squared of around 0.85-0.95
 
 ## Key Points to Remember
 
@@ -492,21 +422,21 @@ data = pd.DataFrame({
 
 ## Next steps
 
-- Continue to [Model diagnostics](./model-diagnostics.md).
+* Continue to [Model diagnostics](model-diagnostics.md).
 
 ## Gotchas
 
-- **Misreading coefficients when predictors are correlated**: Each MLR coefficient answers "how much does y change with this predictor, *holding all others fixed*?" When predictors are correlated (e.g., square footage and number of rooms), the coefficient can flip sign or shrink dramatically compared to a simple regression, confusing learners who expect it to match a pairwise correlation.
-- **Adding more predictors always raises training R²**: sklearn's `model.score(X, y)` is in-sample R², which can only increase as you add columns. Use adjusted R² or cross-validated R² to check whether extra predictors actually improve generalization.
-- **VIF does not detect nonlinear multicollinearity**: VIF measures linear dependencies between predictors. Two predictors that are related by a square (e.g., age and age²) can produce near-zero pairwise correlation yet still cause coefficient instability; check condition numbers as well.
-- **`SelectKBest` selects features before splitting data, causing data leakage**: Running `SelectKBest.fit_transform(X, y)` on the full dataset and then splitting incorporates label information from the test set into feature selection. Always perform selection inside a pipeline or only on the training fold.
-- **Interpreting the intercept as a meaningful baseline**: When predictor ranges do not include zero (e.g., house age, square footage), the intercept is purely a mathematical anchor and has no physical interpretation. Contextualising it as a "starting price" misleads stakeholders.
-- **Forgetting to encode categorical predictors**: Including a raw categorical column (e.g., neighborhood as a string) will silently fail or coerce to meaningless integers. Use one-hot encoding and drop one dummy level to avoid the dummy variable trap.
+* **Misreading coefficients when predictors are correlated**: Each MLR coefficient answers "how much does y change with this predictor, _holding all others fixed_?" When predictors are correlated (e.g., square footage and number of rooms), the coefficient can flip sign or shrink dramatically compared to a simple regression, confusing learners who expect it to match a pairwise correlation.
+* **Adding more predictors always raises training R²**: sklearn's `model.score(X, y)` is in-sample R², which can only increase as you add columns. Use adjusted R² or cross-validated R² to check whether extra predictors actually improve generalization.
+* **VIF does not detect nonlinear multicollinearity**: VIF measures linear dependencies between predictors. Two predictors that are related by a square (e.g., age and age²) can produce near-zero pairwise correlation yet still cause coefficient instability; check condition numbers as well.
+* **`SelectKBest` selects features before splitting data, causing data leakage**: Running `SelectKBest.fit_transform(X, y)` on the full dataset and then splitting incorporates label information from the test set into feature selection. Always perform selection inside a pipeline or only on the training fold.
+* **Interpreting the intercept as a meaningful baseline**: When predictor ranges do not include zero (e.g., house age, square footage), the intercept is purely a mathematical anchor and has no physical interpretation. Contextualising it as a "starting price" misleads stakeholders.
+* **Forgetting to encode categorical predictors**: Including a raw categorical column (e.g., neighborhood as a string) will silently fail or coerce to meaningless integers. Use one-hot encoding and drop one dummy level to avoid the dummy variable trap.
 
 ## Helpful Resources for Learning More
 
-- [StatQuest Videos](https://www.youtube.com/c/joshstarmer) - Excellent visual explanations of regression concepts
-- [Khan Academy's Multiple Regression Course](https://www.khanacademy.org/math/statistics-probability/advanced-regression-inference-transformations)
-- [An Introduction to Statistical Learning](https://www.statlearning.com/) - Free online textbook with accessible explanations
-- [Scikit-learn Documentation](https://scikit-learn.org/stable/modules/linear_model.html) - For when you're ready to implement more advanced models
-- [Perplexity AI](https://www.perplexity.ai/) - For quick answers to specific questions
+* [StatQuest Videos](https://www.youtube.com/c/joshstarmer) - Excellent visual explanations of regression concepts
+* [Khan Academy's Multiple Regression Course](https://www.khanacademy.org/math/statistics-probability/advanced-regression-inference-transformations)
+* [An Introduction to Statistical Learning](https://www.statlearning.com/) - Free online textbook with accessible explanations
+* [Scikit-learn Documentation](https://scikit-learn.org/stable/modules/linear_model.html) - For when you're ready to implement more advanced models
+* [Perplexity AI](https://www.perplexity.ai/) - For quick answers to specific questions

@@ -1,9 +1,16 @@
 ---
 reading_minutes: 20
 objectives:
-  - "State the regularized loss as `loss + lambda * penalty(weights)` for Ridge (sum of squared weights), Lasso (sum of absolute weights), and Elastic Net (a mix)."
-  - "Explain *why* L1's geometry (corners on the constraint diamond) drives some coefficients exactly to zero while L2 only shrinks them."
-  - "Use cross-validation to pick the regularization strength along the path and recognise the bias-variance trade-off in the resulting curves."
+  - >-
+    State the regularized loss as `loss + lambda * penalty(weights)` for Ridge
+    (sum of squared weights), Lasso (sum of absolute weights), and Elastic Net
+    (a mix).
+  - >-
+    Explain *why* L1's geometry (corners on the constraint diamond) drives some
+    coefficients exactly to zero while L2 only shrinks them.
+  - >-
+    Use cross-validation to pick the regularization strength along the path and
+    recognise the bias-variance trade-off in the resulting curves.
 ---
 
 # Mathematical Foundation of Regularization
@@ -16,7 +23,6 @@ Ridge, Lasso, and Elastic Net penalties on linear models; geometric picture of s
 
 [Introduction](1-introduction.md); ties to [5.1 bias-variance](../../5.1-intro-to-ml/bias-variance.md).
 
-
 ## Loss Function with Regularization
 
 ### General Form
@@ -27,9 +33,9 @@ $$L_{reg}(\beta) = L(\beta) + \lambda R(\beta)$$
 
 where:
 
-- \\(L(\beta)\\) is the original loss function (like your test scores)
-- \\(R(\beta)\\) is the regularization term (like following classroom rules)
-- \\(\lambda\\) is the regularization strength (like how strict the teacher is)
+* \\(L(\beta)\\) is the original loss function (like your test scores)
+* \\(R(\beta)\\) is the regularization term (like following classroom rules)
+* \\(\lambda\\) is the regularization strength (like how strict the teacher is)
 
 ### Why This Matters
 
@@ -37,9 +43,7 @@ Just as a good student balances studying and following rules, a good model balan
 
 ## Types of Regularization Terms
 
-{% include mermaid-diagram.html src="5-ml-fundamentals/5.3-supervised-learning-2/regularization/diagrams/2-math-foundation-1.mmd" %}
-
-*The key geometric intuition: L1's diamond corners sit on the axes, so the optimal solution often lands exactly at zero for some weights, that's sparse. L2's smooth circle never quite reaches the axes.*
+_The key geometric intuition: L1's diamond corners sit on the axes, so the optimal solution often lands exactly at zero for some weights, that's sparse. L2's smooth circle never quite reaches the axes._
 
 ### 1. L1 Regularization (Lasso)
 
@@ -49,9 +53,9 @@ Think of L1 as a strict teacher who wants you to focus on the most important sub
 
 Properties:
 
-- Non-differentiable at zero (like a sharp corner in a path)
-- Promotes sparsity (like having a minimalist wardrobe)
-- Solution path is nonlinear (like a winding road)
+* Non-differentiable at zero (like a sharp corner in a path)
+* Promotes sparsity (like having a minimalist wardrobe)
+* Solution path is nonlinear (like a winding road)
 
 ### 2. L2 Regularization (Ridge)
 
@@ -61,9 +65,9 @@ L2 is like a gentle coach who wants all players to contribute, but prevents any 
 
 Properties:
 
-- Differentiable everywhere (like a smooth road)
-- Shrinks coefficients proportionally (like turning down the volume on all speakers)
-- Has closed-form solution (like having a direct formula to solve a problem)
+* Differentiable everywhere (like a smooth road)
+* Shrinks coefficients proportionally (like turning down the volume on all speakers)
+* Has closed-form solution (like having a direct formula to solve a problem)
 
 ### 3. Elastic Net
 
@@ -73,9 +77,9 @@ Elastic Net is like having both a strict teacher and a gentle coach - it combine
 
 Properties:
 
-- Combines L1 and L2 properties (like having both structure and flexibility)
-- \\(\alpha\\) controls the mix (like adjusting the balance between strict and gentle)
-- More stable than pure L1 (like having multiple safety nets)
+* Combines L1 and L2 properties (like having both structure and flexibility)
+* \\(\alpha\\) controls the mix (like adjusting the balance between strict and gentle)
+* More stable than pure L1 (like having multiple safety nets)
 
 ## Optimization Theory
 
@@ -89,8 +93,8 @@ Think of this as taking small steps down a hill while being pulled back by a gen
 
 where:
 
-- \\(\eta\\) is the learning rate (like how big your steps are)
-- \\(t\\) is the iteration number (like counting your steps)
+* \\(\eta\\) is the learning rate (like how big your steps are)
+* \\(t\\) is the iteration number (like counting your steps)
 
 ### Proximal Gradient for L1
 
@@ -108,21 +112,21 @@ $$\text{prox}_{\lambda}(x) = \text{sign}(x)\max(|x|-\lambda, 0)$$
 
 ### L1 Constraint Region
 
-- Shape: Diamond (in 2D) - like a diamond-shaped fence
-- Promotes sparsity due to corners - like having clear boundaries
-- Intersects axes at \\(\pm\frac{1}{\lambda}\\) - like having specific stopping points
+* Shape: Diamond (in 2D) - like a diamond-shaped fence
+* Promotes sparsity due to corners - like having clear boundaries
+* Intersects axes at \\(\pm\frac{1}{\lambda}\\) - like having specific stopping points
 
 ### L2 Constraint Region
 
-- Shape: Circle (in 2D) - like a circular boundary
-- Smooth boundary - like a gentle curve
-- Radius determined by \\(\frac{1}{\sqrt{\lambda}}\\) - like how far you can go
+* Shape: Circle (in 2D) - like a circular boundary
+* Smooth boundary - like a gentle curve
+* Radius determined by \\(\frac{1}{\sqrt{\lambda\}}\\) - like how far you can go
 
 ### Elastic Net Region
 
-- Shape: Rounded diamond - like a diamond with softened corners
-- Combines properties of L1 and L2 - like having both structure and flexibility
-- Controlled by mixing parameter \\(\alpha\\) - like adjusting the balance
+* Shape: Rounded diamond - like a diamond with softened corners
+* Combines properties of L1 and L2 - like having both structure and flexibility
+* Controlled by mixing parameter \\(\alpha\\) - like adjusting the balance
 
 ## Statistical Properties
 
@@ -134,12 +138,11 @@ $$\text{MSE}(\hat{\beta}) = \text{Bias}(\hat{\beta})^2 + \text{Var}(\hat{\beta})
 
 Think of this as balancing between:
 
-- Being too rigid (high bias)
-- Being too flexible (high variance)
-
-- Regularization increases bias (like having more rules)
-- But reduces variance (like having more stability)
-- Optimal \\(\lambda\\) balances this tradeoff (like finding the right amount of rules)
+* Being too rigid (high bias)
+* Being too flexible (high variance)
+* Regularization increases bias (like having more rules)
+* But reduces variance (like having more stability)
+* Optimal \\(\lambda\\) balances this tradeoff (like finding the right amount of rules)
 
 ### Degrees of Freedom
 
@@ -149,7 +152,7 @@ $$\text{df}(\lambda) = \text{tr}(X(X^TX + \lambda I)^{-1}X^T)$$
 
 This measures how many "free parameters" your model has, like counting how many decisions you can make.
 
-For lasso, degrees of freedom  number of non-zero coefficients (like counting how many features you're actually using)
+For lasso, degrees of freedom number of non-zero coefficients (like counting how many features you're actually using)
 
 ## Theoretical Guarantees
 
@@ -165,9 +168,9 @@ Under certain conditions, Lasso achieves:
 
 For well-behaved problems:
 
-- Ridge: \\(O(1/t)\\) convergence rate (like taking regular steps)
-- Lasso: \\(O(1/\sqrt{t})\\) convergence rate (like taking smaller steps)
-- Elastic Net: Between \\(O(1/t)\\) and \\(O(1/\sqrt{t})\\) (like having a mix of step sizes)
+* Ridge: \\(O(1/t)\\) convergence rate (like taking regular steps)
+* Lasso: \\(O(1/\sqrt{t})\\) convergence rate (like taking smaller steps)
+* Elastic Net: Between \\(O(1/t)\\) and \\(O(1/\sqrt{t})\\) (like having a mix of step sizes)
 
 ## Cross-Validation Theory
 
@@ -179,7 +182,7 @@ $$\text{CV}(\lambda) = \frac{1}{K}\sum_{k=1}^K \text{MSE}_k(\lambda)$$
 
 This is like testing your model on different scenarios to see how well it performs.
 
-where \\(\text{MSE}_k\\) is the error on fold \\(k\\) (like your score on each test)
+where \\(\text{MSE}\_k\\) is the error on fold \\(k\\) (like your score on each test)
 
 ### One Standard Error Rule
 
@@ -193,15 +196,13 @@ This is like choosing the simplest model that still performs well within a reaso
 
 ### Solution Path Equations
 
-For ridge:
-$$\hat{\beta}(\lambda) = (X^TX + \lambda I)^{-1}X^Ty$$
+For ridge: $$\hat{\beta}(\lambda) = (X^TX + \lambda I)^{-1}X^Ty$$
 
-For lasso:
-$$\hat{\beta}(\lambda) = \text{sign}(\hat{\beta}\_{OLS})\max(|\hat{\beta}\_{OLS}| - \lambda, 0)$$
+For lasso: $$\hat{\beta}(\lambda) = \text{sign}(\hat{\beta}\_{OLS})\max(|\hat{\beta}\_{OLS}| - \lambda, 0)$$
 
 These equations show how the model changes as you adjust the regularization strength, like seeing how a student's behavior changes as rules are adjusted.
 
-where \\(\hat{\beta}_{OLS}\\) is the ordinary least squares solution (like the model without any rules)
+where \\(\hat{\beta}\_{OLS}\\) is the ordinary least squares solution (like the model without any rules)
 
 ## Common Mistakes to Avoid
 
@@ -217,15 +218,15 @@ Now that you understand the mathematics behind regularization, move on to [Imple
 
 ## Gotchas
 
-- **The Lasso soft-threshold formula silently assumes features are standardised**: the proximal update `prox_λ(x) = sign(x) * max(|x| - λ, 0)` treats all features with equal penalty; if features have different scales, the threshold λ cuts more aggressively on small-scale features, producing biased sparsity that has nothing to do with actual importance.
-- **Ridge's closed-form solution `(X'X + λI)⁻¹X'y` becomes numerically unstable for very large λ**: while the regularisation term technically makes the matrix invertible, floating-point precision degrades as λ grows; in practice sklearn uses numerically stable SVD decomposition, not direct matrix inversion.
-- **Degrees of freedom for Ridge is not an integer**: `df(λ) = tr(X(X'X + λI)⁻¹X')` is a continuous value that decreases from p (no regularisation) toward 0 (full regularisation); treating it as a count of features overstates model complexity when λ is large.
-- **The Oracle property for Lasso requires very specific conditions**: asymptotic normality and consistent variable selection only hold when the true model is sparse, the design matrix satisfies the Restricted Eigenvalue condition, and λ is scaled as `O(√(log p / n))`; on typical tabular datasets these conditions rarely hold exactly.
-- **Gradient descent with L2 updates the regularisation term differently from the loss term**: in the update rule `β -= η(∇L + 2λβ)`, the factor of 2 comes from differentiating `λΣβ²`; omitting this factor (using `λβ` instead) implements half the intended penalty, leading to under-regularised models.
-- **CV error curves for regularisation can be flat in a wide λ range**: the `CV(λ) = (1/K)Σ MSE_k(λ)` curve often has a broad flat minimum; using the one standard error rule (selecting the largest λ within one SE of the minimum) gives a sparser, more generalisable model than picking the exact minimum.
+* **The Lasso soft-threshold formula silently assumes features are standardised**: the proximal update `prox_λ(x) = sign(x) * max(|x| - λ, 0)` treats all features with equal penalty; if features have different scales, the threshold λ cuts more aggressively on small-scale features, producing biased sparsity that has nothing to do with actual importance.
+* **Ridge's closed-form solution `(X'X + λI)⁻¹X'y` becomes numerically unstable for very large λ**: while the regularisation term technically makes the matrix invertible, floating-point precision degrades as λ grows; in practice sklearn uses numerically stable SVD decomposition, not direct matrix inversion.
+* **Degrees of freedom for Ridge is not an integer**: `df(λ) = tr(X(X'X + λI)⁻¹X')` is a continuous value that decreases from p (no regularisation) toward 0 (full regularisation); treating it as a count of features overstates model complexity when λ is large.
+* **The Oracle property for Lasso requires very specific conditions**: asymptotic normality and consistent variable selection only hold when the true model is sparse, the design matrix satisfies the Restricted Eigenvalue condition, and λ is scaled as `O(√(log p / n))`; on typical tabular datasets these conditions rarely hold exactly.
+* **Gradient descent with L2 updates the regularisation term differently from the loss term**: in the update rule `β -= η(∇L + 2λβ)`, the factor of 2 comes from differentiating `λΣβ²`; omitting this factor (using `λβ` instead) implements half the intended penalty, leading to under-regularised models.
+* **CV error curves for regularisation can be flat in a wide λ range**: the `CV(λ) = (1/K)Σ MSE_k(λ)` curve often has a broad flat minimum; using the one standard error rule (selecting the largest λ within one SE of the minimum) gives a sparser, more generalisable model than picking the exact minimum.
 
 ## Additional Resources
 
-- [Understanding Regularization Mathematically](https://towardsdatascience.com/regularization-in-machine-learning-76441ddcf99a)
-- [Geometric Interpretation of Regularization](https://www.analyticsvidhya.com/blog/2016/01/complete-tutorial-ridge-lasso-regression-python/)
-- [Statistical Properties of Regularization](https://www.statlearning.com/)
+* [Understanding Regularization Mathematically](https://towardsdatascience.com/regularization-in-machine-learning-76441ddcf99a)
+* [Geometric Interpretation of Regularization](https://www.analyticsvidhya.com/blog/2016/01/complete-tutorial-ridge-lasso-regression-python/)
+* [Statistical Properties of Regularization](https://www.statlearning.com/)

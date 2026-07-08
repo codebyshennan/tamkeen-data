@@ -1,22 +1,30 @@
 ---
 reading_minutes: 18
 objectives:
-  - Tell high bias (underfitting) from high variance (overfitting) using a train-vs-validation gap.
-  - Pick the right fix for each side of the tradeoff, more/fewer features, more data, or regularization.
-  - Explain regularization as a penalty on large coefficients, and tell L1 (Lasso, drops features) from L2 (Ridge, shrinks features).
-  - Tune the regularization strength (`alpha`) with a validation curve instead of guessing.
+  - >-
+    Tell high bias (underfitting) from high variance (overfitting) using a
+    train-vs-validation gap.
+  - >-
+    Pick the right fix for each side of the tradeoff, more/fewer features, more
+    data, or regularization.
+  - >-
+    Explain regularization as a penalty on large coefficients, and tell L1
+    (Lasso, drops features) from L2 (Ridge, shrinks features).
+  - >-
+    Tune the regularization strength (`alpha`) with a validation curve instead
+    of guessing.
 ---
 
 # Bias, Variance, and Regularization: the Simple Version
 
-**After this lesson:** you can look at a model's behaviour, name *why* it is wrong (too simple or too sensitive), and reach for the right fix, including the regularization dial that L1 and L2 turn.
+**After this lesson:** you can look at a model's behaviour, name _why_ it is wrong (too simple or too sensitive), and reach for the right fix, including the regularization dial that L1 and L2 turn.
 
 ## Overview
 
 Every model can be wrong in two opposite ways:
 
-- **Bias**: the model is **too simple** and misses the real pattern. This is called **underfitting**.
-- **Variance**: the model is **too sensitive** and chases the noise in this particular dataset. This is called **overfitting**.
+* **Bias**: the model is **too simple** and misses the real pattern. This is called **underfitting**.
+* **Variance**: the model is **too sensitive** and chases the noise in this particular dataset. This is called **overfitting**.
 
 You usually can't remove both at once, pushing one down tends to push the other up. That push-and-pull is the **bias-variance tradeoff**, and **regularization** is one of the cleanest ways to steer it.
 
@@ -24,22 +32,19 @@ You usually can't remove both at once, pushing one down tends to push the other 
 
 ## Why this matters
 
-Almost every modelling decision, adding features, growing a deeper tree, turning regularization up or down, moves bias and variance in opposite directions. If you can *name* which one is hurting you, the fix is usually obvious. If you can't, you end up guessing.
-
+Almost every modelling decision, adding features, growing a deeper tree, turning regularization up or down, moves bias and variance in opposite directions. If you can _name_ which one is hurting you, the fix is usually obvious. If you can't, you end up guessing.
 
 ## The dartboard picture
 
 Imagine throwing darts at a bullseye:
 
-- **High bias**: your darts land tightly together, but in the *wrong* spot. Consistent, but consistently off. (The model is too rigid.)
-- **High variance**: your darts scatter all over the board. Sometimes close, sometimes wild. (The model reacts too much to small changes.)
-- **The goal**: a tight cluster *on* the bullseye: low bias **and** low variance.
-
-{% include mermaid-diagram.html src="5-ml-fundamentals/5.1-intro-to-ml/diagrams/bias-variance-1.mmd" %}
+* **High bias**: your darts land tightly together, but in the _wrong_ spot. Consistent, but consistently off. (The model is too rigid.)
+* **High variance**: your darts scatter all over the board. Sometimes close, sometimes wild. (The model reacts too much to small changes.)
+* **The goal**: a tight cluster _on_ the bullseye: low bias **and** low variance.
 
 ## Seeing it in code
 
-Make a tiny dataset where we *know* the true answer, then watch models of different complexity succeed and fail on it. Every code block below shows its **real output**, so you can see exactly what each change does.
+Make a tiny dataset where we _know_ the true answer, then watch models of different complexity succeed and fail on it. Every code block below shows its **real output**, so you can see exactly what each change does.
 
 First, the data: a smooth wave with some random noise sprinkled on top. In real life we only ever see the noisy dots, never the clean line underneath.
 
@@ -68,15 +73,11 @@ plt.xlabel("x"); plt.ylabel("y"); plt.legend()
 plt.show()
 ```
 
-
-<figure>
-<img src="assets/bias-variance_fig_1.png" alt="bias-variance" />
-<figcaption>Figure 1: A smooth pattern hidden under noise</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/bias-variance_fig_1.png" alt="bias-variance"><figcaption><p>Figure 1: A smooth pattern hidden under noise</p></figcaption></figure>
 
 ### Too simple, just right, too complex
 
-Now fit the same data three times, changing only **one knob**: the polynomial *degree* (how wiggly the model is allowed to be). Degree 1 is a straight line; degree 15 can bend almost anywhere.
+Now fit the same data three times, changing only **one knob**: the polynomial _degree_ (how wiggly the model is allowed to be). Degree 1 is a straight line; degree 15 can bend almost anywhere.
 
 ```python
 from sklearn.preprocessing import PolynomialFeatures
@@ -102,21 +103,17 @@ fig.suptitle("Same data, three levels of model complexity")
 plt.show()
 ```
 
-
-<figure>
-<img src="assets/bias-variance_fig_2.png" alt="bias-variance" />
-<figcaption>Figure 2: Same data, three levels of model complexity</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/bias-variance_fig_2.png" alt="bias-variance"><figcaption><p>Figure 2: Same data, three levels of model complexity</p></figcaption></figure>
 
 Read the three panels left to right:
 
-- **Degree 1 (high bias):** a straight line can't bend to follow a wave, so it's wrong almost everywhere, but it would be wrong in the *same* way on any sample.
-- **Degree 4 (just right):** flexible enough to trace the true wave, not so flexible that it chases every dot.
-- **Degree 15 (high variance):** the curve twists through individual noisy points. It nails *this* data and would look completely different on a fresh sample.
+* **Degree 1 (high bias):** a straight line can't bend to follow a wave, so it's wrong almost everywhere, but it would be wrong in the _same_ way on any sample.
+* **Degree 4 (just right):** flexible enough to trace the true wave, not so flexible that it chases every dot.
+* **Degree 15 (high variance):** the curve twists through individual noisy points. It nails _this_ data and would look completely different on a fresh sample.
 
 ### Putting numbers on it
 
-Eyeballing curves is fine for one feature, but normally you can't plot the data. The reliable signal is the **gap between training error and validation error**. We measure error with RMSE (lower is better) on data the model *trained on* versus data it has *never seen*, using `cross_val_score` to estimate the unseen-data error. (We shuffle the folds because our `X` is sorted.)
+Eyeballing curves is fine for one feature, but normally you can't plot the data. The reliable signal is the **gap between training error and validation error**. We measure error with RMSE (lower is better) on data the model _trained on_ versus data it has _never seen_, using `cross_val_score` to estimate the unseen-data error. (We shuffle the folds because our `X` is sorted.)
 
 ```python
 from sklearn.model_selection import cross_val_score, KFold
@@ -142,33 +139,33 @@ degree | train RMSE | cross-val RMSE
     15 |      0.106 |        390.401
 ```
 
-That little table *is* the whole lesson. Notice the degree-15 model has the **lowest training error** but a cross-validation error in the hundreds, it memorised the noise and falls apart on new data.
+That little table _is_ the whole lesson. Notice the degree-15 model has the **lowest training error** but a cross-validation error in the hundreds, it memorised the noise and falls apart on new data.
 
-| Symptom in the numbers | Diagnosis | What it means |
-| --- | --- | --- |
-| Train **and** validation error both high | **High bias** (underfit) | Model is too simple, it can't even fit the data it has seen. |
+| Symptom in the numbers                            | Diagnosis                   | What it means                                                   |
+| ------------------------------------------------- | --------------------------- | --------------------------------------------------------------- |
+| Train **and** validation error both high          | **High bias** (underfit)    | Model is too simple, it can't even fit the data it has seen.    |
 | Train error low, validation error **much** higher | **High variance** (overfit) | Model memorised the training noise and falls apart on new data. |
-| Both low and **close together** | **Good fit** | This is what you want. |
+| Both low and **close together**                   | **Good fit**                | This is what you want.                                          |
 
-> A small gap alone is **not** good news. Two *high* errors that are close together still means underfitting. Both errors must be low **and** close.
+> A small gap alone is **not** good news. Two _high_ errors that are close together still means underfitting. Both errors must be low **and** close.
 
 ### Would more data help?
 
 A quick rule of thumb for the two failure modes:
 
-- **High variance (overfitting):** collecting **more data helps**. With more examples the model can no longer memorise the noise, so the train/validation gap shrinks. (Plotting error against training-set size, a *learning curve*, shows this gap closing.)
-- **High bias (underfitting):** more data **won't help**. A straight line stays a straight line no matter how many points you feed it. You need a more flexible model or better features instead.
+* **High variance (overfitting):** collecting **more data helps**. With more examples the model can no longer memorise the noise, so the train/validation gap shrinks. (Plotting error against training-set size, a _learning curve_, shows this gap closing.)
+* **High bias (underfitting):** more data **won't help**. A straight line stays a straight line no matter how many points you feed it. You need a more flexible model or better features instead.
 
 ## The fix menu
 
 Once you've named the problem, the fix is short:
 
-| If you have… | High bias (underfit) | High variance (overfit) |
-| --- | --- | --- |
+| If you have…     | High bias (underfit)                         | High variance (overfit)                        |
+| ---------------- | -------------------------------------------- | ---------------------------------------------- |
 | Model complexity | **Increase** it (higher degree, deeper tree) | **Decrease** it (lower degree, prune the tree) |
-| Features | **Add** useful ones | **Remove** irrelevant ones |
-| More data | Won't help much | **Helps** |
-| Regularization | **Less** of it | **More** of it |
+| Features         | **Add** useful ones                          | **Remove** irrelevant ones                     |
+| More data        | Won't help much                              | **Helps**                                      |
+| Regularization   | **Less** of it                               | **More** of it                                 |
 
 That last row is what the rest of this page is about.
 
@@ -176,20 +173,20 @@ That last row is what the rest of this page is about.
 
 Look again at the degree-15 curve, it had to swing violently up and down to thread every noisy point. To swing that hard, it needs **huge coefficients**. That's the tell: **overfit models tend to have large coefficients.**
 
-**Regularization adds a penalty for large coefficients** to what the model is trying to minimise. Now the model balances two goals: *fit the data* **and** *keep coefficients small*. Forced to choose, it gives up the wild swings and settles on a smoother curve, trading a tiny bit of training accuracy for much better generalization.
+**Regularization adds a penalty for large coefficients** to what the model is trying to minimise. Now the model balances two goals: _fit the data_ **and** _keep coefficients small_. Forced to choose, it gives up the wild swings and settles on a smoother curve, trading a tiny bit of training accuracy for much better generalization.
 
 A single knob, **`alpha`** (sometimes written λ), controls how hard you push:
 
-- `alpha = 0` → no penalty, back to the plain overfit model.
-- small `alpha` → a gentle nudge toward simplicity.
-- large `alpha` → a strong push; go too far and you *underfit*.
+* `alpha = 0` → no penalty, back to the plain overfit model.
+* small `alpha` → a gentle nudge toward simplicity.
+* large `alpha` → a strong push; go too far and you _underfit_.
 
 There are two common flavours, and the difference is exactly how they measure "large coefficients."
 
 ### L2 (Ridge) vs L1 (Lasso)
 
-- **L2, Ridge** penalises the **sum of squared** coefficients. Squaring punishes big coefficients hard but never *quite* drives them to zero, so Ridge **shrinks every coefficient toward zero but keeps them all**. Reach for it when you think many features each contribute a little.
-- **L1, Lasso** penalises the **sum of absolute** coefficients. That shape lets it push weak coefficients **exactly to zero**, which effectively **deletes those features**, automatic feature selection. Reach for it when you think only a few features really matter.
+* **L2, Ridge** penalises the **sum of squared** coefficients. Squaring punishes big coefficients hard but never _quite_ drives them to zero, so Ridge **shrinks every coefficient toward zero but keeps them all**. Reach for it when you think many features each contribute a little.
+* **L1, Lasso** penalises the **sum of absolute** coefficients. That shape lets it push weak coefficients **exactly to zero**, which effectively **deletes those features**, automatic feature selection. Reach for it when you think only a few features really matter.
 
 Watch both calm the same wild curve (a light penalty is enough here):
 
@@ -219,13 +216,9 @@ fig.suptitle("Regularization calms the wild degree-15 curve")
 plt.show()
 ```
 
+<figure><img src="../../../.gitbook/assets/bias-variance_fig_3.png" alt="bias-variance"><figcaption><p>Figure 3: Regularization calms the wild degree-15 curve</p></figcaption></figure>
 
-<figure>
-<img src="assets/bias-variance_fig_3.png" alt="bias-variance" />
-<figcaption>Figure 3: Regularization calms the wild degree-15 curve</figcaption>
-</figure>
-
-The left panel is the same overfit mess as before. The middle and right panels, *same degree-15 model*, only a penalty added, recover a smooth, sensible curve.
+The left panel is the same overfit mess as before. The middle and right panels, _same degree-15 model_, only a penalty added, recover a smooth, sensible curve.
 
 Now the headline difference between L1 and L2. Both shrink coefficients; only L1 sets them to **exactly zero**:
 
@@ -248,12 +241,12 @@ Ridge (L2):  0 coefficients set to zero  -> keeps every feature, just smaller
 Lasso (L1): 13 coefficients set to zero  -> drops features automatically
 ```
 
-| | L2, Ridge | L1, Lasso |
-| --- | --- | --- |
-| Penalty | sum of **squared** coefficients | sum of **absolute** coefficients |
-| Effect on coefficients | shrinks all toward zero | pushes weak ones to **exactly zero** |
-| Feature selection? | No, keeps every feature | **Yes**, drops features for free |
-| Best when | many features each matter a bit | only a few features matter |
+|                        | L2, Ridge                       | L1, Lasso                            |
+| ---------------------- | ------------------------------- | ------------------------------------ |
+| Penalty                | sum of **squared** coefficients | sum of **absolute** coefficients     |
+| Effect on coefficients | shrinks all toward zero         | pushes weak ones to **exactly zero** |
+| Feature selection?     | No, keeps every feature         | **Yes**, drops features for free     |
+| Best when              | many features each matter a bit | only a few features matter           |
 
 > **Want both?** **ElasticNet** blends L1 and L2, some shrinkage, some feature-dropping. See the [5.5 deep dive](../5.5-model-eval/regularization.md).
 
@@ -284,29 +277,25 @@ plt.legend()
 plt.show()
 ```
 
-
-<figure>
-<img src="assets/bias-variance_fig_4.png" alt="bias-variance" />
-<figcaption>Figure 4: Validation curve: too much regularization underfits</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/bias-variance_fig_4.png" alt="bias-variance"><figcaption><p>Figure 4: Validation curve: too much regularization underfits</p></figcaption></figure>
 
 Read it like a dial, following the **validation** (red) line:
 
-- **Far right (large `alpha`):** both errors climb, the penalty is so strong the model underfits.
-- **Moving left:** validation error falls, then flattens out. Pick the `alpha` at its lowest point.
-- **Honest note for this data:** it's clean enough that lighter penalties keep helping, so the low point sits at the left edge. On noisier data the validation line would turn back *up* at very small `alpha` (overfitting again), putting the best `alpha` somewhere in the middle. `RidgeCV` and `LassoCV` find that point for you automatically.
+* **Far right (large `alpha`):** both errors climb, the penalty is so strong the model underfits.
+* **Moving left:** validation error falls, then flattens out. Pick the `alpha` at its lowest point.
+* **Honest note for this data:** it's clean enough that lighter penalties keep helping, so the low point sits at the left edge. On noisier data the validation line would turn back _up_ at very small `alpha` (overfitting again), putting the best `alpha` somewhere in the middle. `RidgeCV` and `LassoCV` find that point for you automatically.
 
 ## Gotchas
 
-- **Judging a model by its training score alone**: a perfect training score tells you *nothing* about variance. Always compare training and validation scores side by side before naming the problem.
-- **Reading a small gap as "good fit"**: a small gap is necessary but not sufficient. Both scores must also be *good*. Two poor scores close together is high bias, not success.
-- **Tuning on the test set**: every peek at the test set leaks information and inflates your estimate. Tune with cross-validation; touch the test set once, at the very end.
-- **Forgetting to standardize before regularizing**: without it the penalty is uneven across features, and `alpha` means different things for different columns.
-- **Setting `alpha` too high**: regularization fixes overfitting, but overdo it and you swing all the way to underfitting. Let the validation curve pick the value.
+* **Judging a model by its training score alone**: a perfect training score tells you _nothing_ about variance. Always compare training and validation scores side by side before naming the problem.
+* **Reading a small gap as "good fit"**: a small gap is necessary but not sufficient. Both scores must also be _good_. Two poor scores close together is high bias, not success.
+* **Tuning on the test set**: every peek at the test set leaks information and inflates your estimate. Tune with cross-validation; touch the test set once, at the very end.
+* **Forgetting to standardize before regularizing**: without it the penalty is uneven across features, and `alpha` means different things for different columns.
+* **Setting `alpha` too high**: regularization fixes overfitting, but overdo it and you swing all the way to underfitting. Let the validation curve pick the value.
 
 ## Next steps
 
-- Go deeper on the math, ElasticNet, and `RidgeCV`/`LassoCV` in [5.5 Model evaluation → Regularization](../5.5-model-eval/regularization.md).
-- Try the same degree-sweep on a dataset you care about, and keep a short log of how the train/validation gap moves as you change each knob.
+* Go deeper on the math, ElasticNet, and `RidgeCV`/`LassoCV` in [5.5 Model evaluation → Regularization](../5.5-model-eval/regularization.md).
+* Try the same degree-sweep on a dataset you care about, and keep a short log of how the train/validation gap moves as you change each knob.
 
-Remember: name the failure mode first (bias or variance), *then* pick the fix. Half the battle is reading the symptom correctly.
+Remember: name the failure mode first (bias or variance), _then_ pick the fix. Half the battle is reading the symptom correctly.

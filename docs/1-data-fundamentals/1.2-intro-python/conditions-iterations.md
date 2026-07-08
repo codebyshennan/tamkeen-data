@@ -6,25 +6,19 @@
 
 > **AI Starter:** "Explain if-else statements using real-world decision-making examples"
 
-> **Practice:** Run the examples locally or in [Google Colab](https://colab.research.google.com). This submodule ships notebooks for [basic syntax](./notebooks/01-basic-syntax.ipynb), [data structures](./notebooks/02-data-structures.ipynb), and [functions](./notebooks/03-functions.ipynb); paste loop and branch examples there if you want a notebook environment.
+> **Practice:** Run the examples locally or in [Google Colab](https://colab.research.google.com). This submodule ships notebooks for [basic syntax](notebooks/01-basic-syntax.ipynb), [data structures](notebooks/02-data-structures.ipynb), and [functions](notebooks/03-functions.ipynb); paste loop and branch examples there if you want a notebook environment.
 
 ### Video
 
-<div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/6iF8Xb7Z3wQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-*Corey Schafer, Loops and iteration in Python*
+_Corey Schafer, Loops and iteration in Python_
 
 **How this fits together:** `if` / `elif` / `else` choose what runs once; `for` and `while` repeat work. Data pipelines use both: **validate** a row with branches, **scan** a table with loops, or prefer vectorized NumPy/pandas later. Master the ideas here so you can read any script that filters, iterates, or retries.
 
-{% include mermaid-diagram.html src="1-data-fundamentals/1.2-intro-python/diagrams/conditions-iterations-1.mmd" %}
-
-*`if/elif/else` picks one branch per value; a `for` loop runs the same block for every item in a collection.*
+_`if/elif/else` picks one branch per value; a `for` loop runs the same block for every item in a collection._
 
 ## Making Decisions with Conditions
 
----
+***
 
 ### Understanding If Statements in Data Analysis
 
@@ -53,10 +47,10 @@ def process_value(value):
        return value
 ```
 
- **Remember**: Always validate your data before analysis!
+**Remember**: Always validate your data before analysis!
 
-> **Watch Control Flow:**
-> Paste this into Python Tutor - watch which branch executes!
+> **Watch Control Flow:** Paste this into Python Tutor - watch which branch executes!
+>
 > ```python
 > age = 25
 >
@@ -79,7 +73,7 @@ Adult: 0% discount
 
 > **Experiment:** Ask AI: "Create 5 real-world scenarios that use if-elif-else"
 
----
+***
 
 ### If-Else in Data Processing
 
@@ -120,146 +114,41 @@ def analyze_sales_performance(sales_value, target):
        return 'Below Target'
 ```
 
----
+***
 
 ### Multiple Conditions in Data Analysis
 
 Complex data processing decisions:
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Imports
 
-{% highlight python %}
-import pandas as pd
-import numpy as np
+Both pandas and NumPy are imported at the top since the functions below rely on pandas null checks and NumPy NaN.
 
-def categorize_customer(purchase_amount, frequency, tenure):
-   """Categorize customer based on multiple metrics"""
-   if purchase_amount > 1000 and frequency > 12:
-       if tenure > 2:
-           return 'Premium'
-       else:
-           return 'High Value'
-   elif purchase_amount > 500 or frequency > 6:
-       return 'Regular'
-   else:
-       return 'Standard'
+Customer Segmentation
 
-# Data transformation example
-def transform_value(value, data_type):
-   if pd.isna(value):
-       return np.nan
-   elif data_type == 'numeric':
-       if isinstance(value, str):
-           try:
-               return float(value.replace(',', ''))
-           except ValueError:
-               return np.nan
-       else:
-           return float(value)
-   elif data_type == 'categorical':
-       return str(value).lower().strip()
-   else:
-       return value
-{% endhighlight %}
+Combines `and` / `or` and nested `if` to segment customers into four tiers based on spend, frequency, and tenure.
 
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-2" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Imports</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Both pandas and NumPy are imported at the top since the functions below rely on pandas null checks and NumPy NaN.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="4-15" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Customer Segmentation</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Combines <code>and</code> / <code>or</code> and nested <code>if</code> to segment customers into four tiers based on spend, frequency, and tenure.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="17-31" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Type-Aware Transform</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Guards against null and infinity first, then branches on <code>data_type</code> to coerce numeric strings or normalise categorical strings.</p>
-    </div>
-  </div>
-</aside>
-</div>
+Type-Aware Transform
 
----
+Guards against null and infinity first, then branches on `data_type` to coerce numeric strings or normalise categorical strings.
+
+***
 
 ### Nested Conditions in Feature Engineering
 
 Complex feature creation:
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Nested Age Classifier
 
-{% highlight python %}
-def create_age_features(df):
-   """Create age-related features for analysis"""
+The inner function handles a null guard first, then branches on gender, then on age brackets, three levels of nesting for six distinct labels.
 
-   def categorize_age(age, gender):
-       if pd.isna(age):
-           return 'Unknown'
-       else:
-           if gender == 'F':
-               if age < 25:
-                   return 'Young Adult Female'
-               elif age < 45:
-                   return 'Adult Female'
-               else:
-                   return 'Senior Female'
-           else:  # gender == 'M'
-               if age < 25:
-                   return 'Young Adult Male'
-               elif age < 45:
-                   return 'Adult Male'
-               else:
-                   return 'Senior Male'
+Row-Wise Apply
 
-   df['age_category'] = df.apply(
-       lambda row: categorize_age(row['age'], row['gender']),
-       axis=1
-   )
-   return df
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-21" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Nested Age Classifier</span>
-    </div>
-    <div class="code-callout__body">
-      <p>The inner function handles a null guard first, then branches on gender, then on age brackets, three levels of nesting for six distinct labels.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="23-27" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Row-Wise Apply</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Uses <code>df.apply(..., axis=1)</code> to call the inner function once per row, passing both the <code>age</code> and <code>gender</code> columns as a unit.</p>
-    </div>
-  </div>
-</aside>
-</div>
+Uses `df.apply(..., axis=1)` to call the inner function once per row, passing both the `age` and `gender` columns as a unit.
 
 ## Data Filtering and Comparison
 
----
+***
 
 ### Comparison Operations in Pandas
 
@@ -297,10 +186,10 @@ def filter_outliers(df, columns, n_std=3):
    return df
 ```
 
- **Performance Tip**: Use vectorized operations instead of loops for filtering!
+**Performance Tip**: Use vectorized operations instead of loops for filtering!
 
-> **Speed Comparison:**
-> Run this in Google Colab to see the difference:
+> **Speed Comparison:** Run this in Google Colab to see the difference:
+>
 > ```python
 > import pandas as pd
 > import numpy as np
@@ -335,482 +224,126 @@ Speedup: 18.6x faster!
 
 > **Learn Why:** Ask: "Why are vectorized operations faster than loops in pandas?"
 
----
+***
 
 ### Logical Operations in Data Analysis
 
 Combining multiple conditions:
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Import
 
-{% highlight python %}
-import pandas as pd
+Only pandas is imported here; NumPy is used via `np` from the surrounding module scope.
 
-# Data quality checks
-def check_data_validity(df):
-   """Check various data quality conditions"""
+Validity Check
 
-   conditions = {
-       'missing_values': df.isnull().sum().sum() > 0,
-       'negative_values': (df.select_dtypes(include=[np.number]) < 0).any().any(),
-       'duplicates': df.duplicated().any(),
-       'outliers': detect_outliers(df)
-   }
+Evaluates four quality conditions into a dict, then loops over any that are True to print a labelled report, returns False if any issue is found.
 
-   if any(conditions.values()):
-       print("Data quality issues found:")
-       for issue, exists in conditions.items():
-           if exists:
-               print(f"- {issue.replace('_', ' ').title()}")
-       return False
-   else:
-       print("All data quality checks passed")
-       return True
+Outlier Detection
 
-def detect_outliers(df, threshold=3):
-   """Detect outliers using Z-score method"""
-   numeric_cols = df.select_dtypes(include=[np.number]).columns
-   has_outliers = False
-
-   for col in numeric_cols:
-       z_scores = np.abs((df[col] - df[col].mean()) / df[col].std())
-       if (z_scores > threshold).any():
-           has_outliers = True
-           break
-
-   return has_outliers
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-3" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Import</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Only pandas is imported here; NumPy is used via <code>np</code> from the surrounding module scope.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="4-22" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Validity Check</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Evaluates four quality conditions into a dict, then loops over any that are True to print a labelled report, returns False if any issue is found.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="24-35" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Outlier Detection</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Computes Z-scores per numeric column and short-circuits with <code>break</code> on the first column that exceeds the threshold, avoiding unnecessary work.</p>
-    </div>
-  </div>
-</aside>
-</div>
+Computes Z-scores per numeric column and short-circuits with `break` on the first column that exceeds the threshold, avoiding unnecessary work.
 
 ## Efficient Data Iteration
 
----
+***
 
 ### Vectorized Operations vs. Loops
 
 Understanding performance implications:
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Loop Approach
 
-{% highlight python %}
-import pandas as pd
-import numpy as np
+Iterates row-by-row with `iterrows()`, branching on sign to compute `log` or append NaN, correct but slow for large DataFrames.
 
-# Slow: Using loops
-def slow_calculation(df):
-   results = []
-   for index, row in df.iterrows():
-       value = row['value']
-       if value > 0:
-           results.append(np.log(value))
-       else:
-           results.append(np.nan)
-   return results
+Vectorized Equivalent
 
-# Fast: Using vectorized operations
-def fast_calculation(df):
-   return np.where(
-       df['value'] > 0,
-       np.log(df['value']),
-       np.nan
-   )
+`np.where` applies the same condition across the entire column at once, no Python loop, so typically 10-100x faster.
 
-# Fast: Using pandas methods
-def process_data(df):
-   # Calculate statistics
-   df['z_score'] = (df['value'] - df['value'].mean()) / df['value'].std()
+Multi-Label Select
 
-   # Apply multiple conditions
-   conditions = [
-       (df['z_score'] < -2),
-       (df['z_score'] >= -2) & (df['z_score'] <= 2),
-       (df['z_score'] > 2)
-   ]
-   choices = ['Low', 'Normal', 'High']
+Computes a Z-score column then uses `np.select` with three boolean masks to assign Low / Normal / High labels in a single vectorised pass.
 
-   df['category'] = np.select(conditions, choices, default='Unknown')
-   return df
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-13" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Loop Approach</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Iterates row-by-row with <code>iterrows()</code>, branching on sign to compute <code>log</code> or append NaN, correct but slow for large DataFrames.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="15-21" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Vectorized Equivalent</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>np.where</code> applies the same condition across the entire column at once, no Python loop, so typically 10-100x faster.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="23-37" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Multi-Label Select</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Computes a Z-score column then uses <code>np.select</code> with three boolean masks to assign Low / Normal / High labels in a single vectorised pass.</p>
-    </div>
-  </div>
-</aside>
-</div>
-
----
+***
 
 ### Efficient Iteration When Necessary
 
 Some cases require iteration:
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Imports
 
-{% highlight python %}
-import pandas as pd
-from tqdm import tqdm # Progress bar
+Imports `tqdm` alongside pandas to wrap the chunk loop in a progress bar so long-running jobs show their progress.
 
-def process_large_dataset(df, chunk_size=1000):
-   """Process large dataset in chunks"""
-   results = []
+Chunk Iteration
 
-   # Iterate over chunks
-   for i in tqdm(range(0, len(df), chunk_size)):
-       chunk = df.iloc[i:i + chunk_size].copy()
+Steps through the DataFrame in `chunk_size` slices using `iloc`, processes each chunk separately, then concatenates all results at the end.
 
-       # Process chunk
-       processed_chunk = process_chunk(chunk)
-       results.append(processed_chunk)
+Chunk Processing
 
-   return pd.concat(results)
+Applies a custom calculation per value, then uses `np.where` to log-transform positive results and set zeros for non-positive ones.
 
-def process_chunk(chunk):
-   """Process individual chunk of data"""
-   # Perform calculations
-   chunk['calculated'] = chunk['value'].apply(complex_calculation)
+**Performance Tip**: Use chunking for large datasets that don't fit in memory!
 
-   # Apply transformations
-   chunk['transformed'] = np.where(
-       chunk['calculated'] > 0,
-       np.log(chunk['calculated']),
-       0
-   )
-
-   return chunk
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-2" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Imports</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Imports <code>tqdm</code> alongside pandas to wrap the chunk loop in a progress bar so long-running jobs show their progress.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="4-16" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Chunk Iteration</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Steps through the DataFrame in <code>chunk_size</code> slices using <code>iloc</code>, processes each chunk separately, then concatenates all results at the end.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="18-30" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Chunk Processing</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Applies a custom calculation per value, then uses <code>np.where</code> to log-transform positive results and set zeros for non-positive ones.</p>
-    </div>
-  </div>
-</aside>
-</div>
-
- **Performance Tip**: Use chunking for large datasets that don't fit in memory!
-
----
+***
 
 ### Working with Time Series Data
 
 Efficient time series processing:
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Import
 
-{% highlight python %}
-import pandas as pd
+Only pandas is needed here; NumPy is accessed via the module-level `np` alias for the trend comparison.
 
-def analyze_time_series(df):
-   """Analyze time series data with rolling windows"""
+Rolling Window Analysis
 
-   # Sort by date
-   df = df.sort_values('date')
+Sorts by date, computes 7-day rolling mean and standard deviation, then classifies each point as Upward or Downward by comparing the mean to its previous value.
 
-   # Calculate rolling statistics
-   df['rolling_mean'] = df['value'].rolling(window=7).mean()
-   df['rolling_std'] = df['value'].rolling(window=7).std()
+Group Statistics
 
-   # Detect trends
-   df['trend'] = np.where(
-       df['rolling_mean'] > df['rolling_mean'].shift(1),
-       'Upward',
-       'Downward'
-   )
-
-   return df
-
-def process_by_group(df, group_col, value_col):
-   """Process data by groups efficiently"""
-
-   def group_operation(group):
-       return pd.Series({
-           'mean': group[value_col].mean(),
-           'std': group[value_col].std(),
-           'count': len(group),
-           'has_outliers': detect_outliers(group[value_col])
-       })
-
-   return df.groupby(group_col).apply(group_operation)
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Import</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Only pandas is needed here; NumPy is accessed via the module-level <code>np</code> alias for the trend comparison.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="3-20" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Rolling Window Analysis</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Sorts by date, computes 7-day rolling mean and standard deviation, then classifies each point as Upward or Downward by comparing the mean to its previous value.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="22-33" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Group Statistics</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Applies an inner function to each group that returns a Series of summary stats, mean, std, count, and an outlier flag, via <code>groupby.apply</code>.</p>
-    </div>
-  </div>
-</aside>
-</div>
+Applies an inner function to each group that returns a Series of summary stats, mean, std, count, and an outlier flag, via `groupby.apply`.
 
 ## Common Data Processing Patterns
 
----
+***
 
 ### Pattern: Data Validation
 
 Common validation patterns:
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Validator Init
 
-{% highlight python %}
-import pandas as pd
-import numpy as np
+Stores the DataFrame and an empty list for accumulating issue messages so all checks can be batched before reporting.
 
-class DataValidator:
-   def __init__(self, df):
-       self.df = df
-       self.validation_results = []
+Range Validation
 
-   def validate_numeric_range(self, column, min_val, max_val):
-       """Validate numeric values are within range"""
-       mask = self.df[column].between(min_val, max_val)
-       invalid = self.df[~mask]
-       if len(invalid) > 0:
-           self.validation_results.append(
-               f"Found {len(invalid)} values outside range "
-               f"[{min_val}, {max_val}] in {column}"
-           )
+Uses `between` to create a boolean mask, inverts it to find out-of-range rows, and appends a message only when violations exist.
 
-   def validate_categorical(self, column, valid_categories):
-       """Validate categorical values"""
-       invalid = self.df[~self.df[column].isin(valid_categories)]
-       if len(invalid) > 0:
-           self.validation_results.append(
-               f"Found {len(invalid)} invalid categories in {column}"
-           )
+Category Validation and Report
 
-   def get_validation_report(self):
-       """Generate validation report"""
-       if self.validation_results:
-           return "\n".join(self.validation_results)
-       return "All validations passed"
-{% endhighlight %}
+Checks that all values are in the allowed set using `isin`, then `get_validation_report` joins all collected messages or returns a pass confirmation.
 
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-8" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Validator Init</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Stores the DataFrame and an empty list for accumulating issue messages so all checks can be batched before reporting.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="10-18" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Range Validation</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Uses <code>between</code> to create a boolean mask, inverts it to find out-of-range rows, and appends a message only when violations exist.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="20-30" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Category Validation and Report</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Checks that all values are in the allowed set using <code>isin</code>, then <code>get_validation_report</code> joins all collected messages or returns a pass confirmation.</p>
-    </div>
-  </div>
-</aside>
-</div>
-
----
+***
 
 ### Pattern: Data Cleaning
 
 Standard cleaning operations:
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Safe Copy Init
 
-{% highlight python %}
-class DataCleaner:
-   def __init__(self, df):
-       self.df = df.copy()
+Makes a copy of the DataFrame at construction so the original is never mutated by the cleaning methods.
 
-   def clean_numeric(self, column):
-       """Clean numeric column"""
-       # Replace invalid values with NaN
-       self.df[column] = pd.to_numeric(
-           self.df[column],
-           errors='coerce'
-       )
+Numeric Cleaning
 
-       # Remove outliers
-       z_scores = np.abs(
-           (self.df[column] - self.df[column].mean()) /
-           self.df[column].std()
-       )
-       self.df.loc[z_scores > 3, column] = np.nan
+Coerces non-numeric strings to NaN with `pd.to_numeric`, then nulls out values whose Z-score exceeds 3 standard deviations.
 
-   def clean_categorical(self, column):
-       """Clean categorical column"""
-       # Standardize categories
-       self.df[column] = self.df[column].str.lower().str.strip()
+Categorical Cleaning
 
-       # Replace rare categories
-       value_counts = self.df[column].value_counts()
-       rare_categories = value_counts[value_counts < 10].index
-       self.df.loc[
-           self.df[column].isin(rare_categories),
-           column
-       ] = 'other'
-
-   def get_cleaned_data(self):
-       """Return cleaned dataset"""
-       return self.df
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-3" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Safe Copy Init</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Makes a copy of the DataFrame at construction so the original is never mutated by the cleaning methods.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="5-18" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Numeric Cleaning</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Coerces non-numeric strings to NaN with <code>pd.to_numeric</code>, then nulls out values whose Z-score exceeds 3 standard deviations.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="20-34" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Categorical Cleaning</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Lowercases and strips whitespace for consistency, then collapses infrequent categories (fewer than 10 rows) into <code>'other'</code> to reduce cardinality.</p>
-    </div>
-  </div>
-</aside>
-</div>
+Lowercases and strips whitespace for consistency, then collapses infrequent categories (fewer than 10 rows) into `'other'` to reduce cardinality.
 
 ## Practice Exercises
 
 > **Pro Tip:** Start with simple examples in Python Tutor, then scale up in Colab!
 
 ### Exercise 1: Grade Calculator
+
 ```python
 def assign_grade(score):
    """
@@ -840,10 +373,10 @@ Score 58: Grade None
 Score 91: Grade None
 ```
 
-> **Visualize:** Paste into Python Tutor to see the loop iterate!
-> **Ask:** "What are best practices for grade boundaries in code?"
+> **Visualize:** Paste into Python Tutor to see the loop iterate! **Ask:** "What are best practices for grade boundaries in code?"
 
 ### Exercise 2: Data Validator with Loops
+
 ```python
 def validate_dataset(data):
    """
@@ -874,10 +407,10 @@ print(result)
 {'total': 0, 'valid': 0, 'negative': 0, 'too_high': 0}
 ```
 
-> **Watch Counters:** Python Tutor shows how report values update in the loop!
-> **Improve:** "Suggest ways to make this validation function more reliable"
+> **Watch Counters:** Python Tutor shows how report values update in the loop! **Improve:** "Suggest ways to make this validation function more reliable"
 
 ### Exercise 3: Nested Loops for Matrix Operations
+
 ```python
 def process_matrix(matrix):
    """
@@ -903,10 +436,10 @@ matrix = [
 result = process_matrix(matrix)
 ```
 
-> **Nested Loop Visualization:** Python Tutor makes nested loops crystal clear!
-> **Challenge:** "Show me how to do this with numpy instead of loops"
+> **Nested Loop Visualization:** Python Tutor makes nested loops crystal clear! **Challenge:** "Show me how to do this with numpy instead of loops"
 
 ### Exercise 4: While Loop for Data Processing
+
 ```python
 def process_until_threshold(data, threshold=100):
    """
@@ -924,12 +457,12 @@ used, total, remaining = process_until_threshold(values, threshold=100)
 print(f"Used {used} items, Total: {total}, Remaining: {remaining}")
 ```
 
-> **Safety First:** Python Tutor helps catch infinite loops before they crash!
-> **Learn:** "When should I use while loops vs for loops?"
+> **Safety First:** Python Tutor helps catch infinite loops before they crash! **Learn:** "When should I use while loops vs for loops?"
 
 ## Advanced Challenges
 
 ### Challenge 1: Fizz Buzz (Classic Interview Question!)
+
 ```python
 # Print numbers 1-100, but:
 # - "Fizz" for multiples of 3
@@ -939,16 +472,19 @@ print(f"Used {used} items, Total: {total}, Remaining: {remaining}")
 ```
 
 ### Challenge 2: Pattern Matching
+
 Create a function that finds patterns in data sequences.
 
 ### Challenge 3: Data Grouping
+
 Group data into categories based on multiple conditions.
 
-> **Video Help:** [Video Resources](./video-resources.md) - Loops & Conditions section
+> **Video Help:** [Video Resources](video-resources.md) - Loops & Conditions section
 
 ## Common Mistakes & Debugging
 
 ### Mistake 1: Infinite Loops
+
 ```python
 # Wrong (avoid):
 i = 0
@@ -966,6 +502,7 @@ while i < 5:
 > **Catch It Early:** Python Tutor shows you're stuck before you crash!
 
 ### Mistake 2: Off-by-One Errors
+
 ```python
 # Common mistake
 numbers = [10, 20, 30, 40, 50]
@@ -986,6 +523,7 @@ for number in numbers:
 > **See The Error:** Python Tutor shows exactly where index goes out of bounds!
 
 ### Mistake 3: Modifying List While Iterating
+
 ```python
 # Wrong (avoid):
 numbers = [1, 2, 3, 4, 5]
@@ -1002,22 +540,22 @@ numbers = [num for num in numbers if num % 2 != 0]
 
 Remember:
 
-- Use vectorized operations when possible
-- Consider memory efficiency
-- Handle edge cases
-- Validate results
-- **Visualize loops in Python Tutor to understand flow**
-- **Use AI to debug logical errors**
-- **Test with edge cases (empty lists, single items, etc.)**
+* Use vectorized operations when possible
+* Consider memory efficiency
+* Handle edge cases
+* Validate results
+* **Visualize loops in Python Tutor to understand flow**
+* **Use AI to debug logical errors**
+* **Test with edge cases (empty lists, single items, etc.)**
 
 ## Common pitfalls
 
-- **Off-by-one errors**: Check whether your range includes the last index; **range(len(x))** vs **range(len(x)-1)** trips people up.
-- **Modifying a list while iterating**: Prefer building a new list or iterate over a copy.
-- **Infinite loops**: Ensure the condition can become false (especially with **while**).
+* **Off-by-one errors**: Check whether your range includes the last index; **range(len(x))** vs **range(len(x)-1)** trips people up.
+* **Modifying a list while iterating**: Prefer building a new list or iterate over a copy.
+* **Infinite loops**: Ensure the condition can become false (especially with **while**).
 
 ## Next steps
 
-Continue to [Functions](./functions.md) to package logic into reusable pieces.
+Continue to [Functions](functions.md) to package logic into reusable pieces.
 
 Happy analyzing!

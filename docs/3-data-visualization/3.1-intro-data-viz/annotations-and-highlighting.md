@@ -8,17 +8,15 @@
 
 How to add and position text, labels, and annotations on matplotlib charts using plt.text() and plt.annotate().
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/NBYzSaTbodM" title="Add Text to Matplotlib Figures, Kimberly Fessel" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 ## Why annotation matters
 
 Most readers do not inspect every mark carefully. They scan. Annotation reduces the amount of scanning required.
 
 Good highlighting does three things:
 
-- **Points to the key takeaway**
-- **Adds just enough context**
-- **Reduces the need for narration outside the chart**
+* **Points to the key takeaway**
+* **Adds just enough context**
+* **Reduces the need for narration outside the chart**
 
 Think of annotation as a bridge between the chart and the sentence you want the chart to prove.
 
@@ -26,15 +24,13 @@ Think of annotation as a bridge between the chart and the sentence you want the 
 
 Annotate only when something deserves extra attention:
 
-- the maximum or minimum
-- a sudden change
-- a benchmark or target
-- a before/after event
-- an outlier or exception
+* the maximum or minimum
+* a sudden change
+* a benchmark or target
+* a before/after event
+* an outlier or exception
 
 If everything is highlighted, nothing is highlighted.
-
-{% include mermaid-diagram.html src="3-data-visualization/3.1-intro-data-viz/diagrams/annotations-and-highlighting-1.mmd" %}
 
 ## Core annotation tools
 
@@ -66,11 +62,7 @@ ax.annotate(
 )
 ```
 
-
-<figure>
-<img src="assets/annotations-and-highlighting_fig_1.png" alt="annotations-and-highlighting" />
-<figcaption>Figure 1: Generated visualization</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/annotations-and-highlighting_fig_1.png" alt="annotations-and-highlighting"><figcaption><p>Figure 1: Generated visualization</p></figcaption></figure>
 
 ```
 Annotation(4, 25, 'Campaign launch peak')
@@ -91,15 +83,15 @@ ax.axhline(
 )
 ```
 
-![Direct label, reference line, and shaded range combined](assets/annotations_line_annotated.png)
+![Direct label, reference line, and shaded range combined](../../../.gitbook/assets/annotations_line_annotated.png)
 
 Useful reference lines include:
 
-- average
-- target or quota
-- previous period
-- regulatory limit
-- zero baseline when sign matters
+* average
+* target or quota
+* previous period
+* regulatory limit
+* zero baseline when sign matters
 
 ### 3. Shaded ranges
 
@@ -120,10 +112,10 @@ Rectangle(xy=(0, 19), width=1, height=2, angle=0)
 
 Shaded ranges work well for:
 
-- acceptable KPI bands
-- confidence ranges
-- holiday periods
-- recession windows
+* acceptable KPI bands
+* confidence ranges
+* holiday periods
+* recession windows
 
 ### 4. Selective color emphasis
 
@@ -137,7 +129,7 @@ fig, ax = plt.subplots(figsize=(10, 5))
 ax.bar(x, y, color=colors)
 ```
 
-![Selective color emphasis, one bar highlighted](assets/annotations_selective_color.png)
+![Selective color emphasis, one bar highlighted](../../../.gitbook/assets/annotations_selective_color.png)
 
 This is often stronger than using many bright colors.
 
@@ -145,16 +137,16 @@ This is often stronger than using many bright colors.
 
 ### Weak emphasis
 
-- all bars have equal weight
-- legend explains what could have been labeled directly
-- no note explains why a point matters
+* all bars have equal weight
+* legend explains what could have been labeled directly
+* no note explains why a point matters
 
 ### Strong emphasis
 
-- one bar is highlighted
-- a short label explains why
-- a reference line gives context
-- unnecessary visual noise is removed
+* one bar is highlighted
+* a short label explains why
+* a reference line gives context
+* unnecessary visual noise is removed
 
 ## Practical examples
 
@@ -181,7 +173,7 @@ ax.annotate(
 )
 ```
 
-![Annotated horizontal bar chart](assets/annotations_bar_highlighted.png)
+![Annotated horizontal bar chart](../../../.gitbook/assets/annotations_bar_highlighted.png)
 
 ### Annotating a time series
 
@@ -207,31 +199,31 @@ ax.annotate(
 )
 ```
 
-![Time series with annotated event](assets/annotations_timeseries.png)
+![Time series with annotated event](../../../.gitbook/assets/annotations_timeseries.png)
 
 ## Writing annotation text
 
 Keep annotation text short and interpretive:
 
-- Better: `"Orders increased after free shipping launch"`
-- Worse: `"Value = 176 on June"`
+* Better: `"Orders increased after free shipping launch"`
+* Worse: `"Value = 176 on June"`
 
 The chart already shows the raw value. The annotation should explain why it matters.
 
 ## Common mistakes
 
-- Labeling too many points.
-- Using paragraphs instead of short notes.
-- Highlighting with color only, without shape or label reinforcement.
-- Adding reference lines with no explanation.
-- Placing annotations where they cover marks or axes.
+* Labeling too many points.
+* Using paragraphs instead of short notes.
+* Highlighting with color only, without shape or label reinforcement.
+* Adding reference lines with no explanation.
+* Placing annotations where they cover marks or axes.
 
 ## Accessibility notes
 
-- Do not rely on color alone to indicate emphasis.
-- Use readable text sizes and sufficient contrast.
-- Prefer direct labels when legends create extra scanning.
-- Keep arrows and markers simple and high contrast.
+* Do not rely on color alone to indicate emphasis.
+* Use readable text sizes and sufficient contrast.
+* Prefer direct labels when legends create extra scanning.
+* Keep arrows and markers simple and high contrast.
 
 ## Practice prompts
 
@@ -242,12 +234,12 @@ The chart already shows the raw value. The annotation should explain why it matt
 
 ## Gotchas
 
-- **`ax.annotate` coordinates use data space by default, not pixel space**: `xy=(x[peak_idx], y[peak_idx])` points at the data value, which is what you want; but if you accidentally set `xycoords='axes fraction'` for one argument while leaving `textcoords` at default, the arrow and text will be anchored in different coordinate systems and appear in unexpected positions.
-- **Arrows created with `arrowprops` can cover the data point they point to**: if `xytext` is very close to `xy`, the arrowhead sits on top of the mark; add at least 1-2 data-unit offset in both dimensions or use `shrinkA`/`shrinkB` in `arrowprops` to shorten the arrow away from the endpoints.
-- **`ax.axhline` and `ax.axvline` span the entire axis width/height by default**: this is usually correct for reference lines, but if you only want the line to span part of the chart (e.g. to mark a range), use `ax.hlines(y, xmin, xmax)` or `ax.vlines(x, ymin, ymax)` with explicit start and end coordinates.
-- **Selective color with `colors[peak_idx] = "#e34a33"` breaks if the data changes**: the index of the peak is computed once when `colors` is built; if you rerun the cell with different data, `peak_idx` must be recomputed too, otherwise you highlight the wrong bar without any error or warning.
-- **Annotation text that states a raw value ("Value = 176") is redundant**: the chart already encodes the value visually; annotation text that only repeats the number adds no information; as this lesson notes, the text should explain why the value matters, not what the value is.
-- **`axhspan` alpha stacking can wash out the data underneath**: using `alpha=0.5` for a shaded band over a dense scatter or line chart will lighten the marks that fall inside the band, reducing their contrast against the background; lower alpha (0.2-0.3) or choose a band color that complements the data color rather than competing with it.
+* **`ax.annotate` coordinates use data space by default, not pixel space**: `xy=(x[peak_idx], y[peak_idx])` points at the data value, which is what you want; but if you accidentally set `xycoords='axes fraction'` for one argument while leaving `textcoords` at default, the arrow and text will be anchored in different coordinate systems and appear in unexpected positions.
+* **Arrows created with `arrowprops` can cover the data point they point to**: if `xytext` is very close to `xy`, the arrowhead sits on top of the mark; add at least 1-2 data-unit offset in both dimensions or use `shrinkA`/`shrinkB` in `arrowprops` to shorten the arrow away from the endpoints.
+* **`ax.axhline` and `ax.axvline` span the entire axis width/height by default**: this is usually correct for reference lines, but if you only want the line to span part of the chart (e.g. to mark a range), use `ax.hlines(y, xmin, xmax)` or `ax.vlines(x, ymin, ymax)` with explicit start and end coordinates.
+* **Selective color with `colors[peak_idx] = "#e34a33"` breaks if the data changes**: the index of the peak is computed once when `colors` is built; if you rerun the cell with different data, `peak_idx` must be recomputed too, otherwise you highlight the wrong bar without any error or warning.
+* **Annotation text that states a raw value ("Value = 176") is redundant**: the chart already encodes the value visually; annotation text that only repeats the number adds no information; as this lesson notes, the text should explain why the value matters, not what the value is.
+* **`axhspan` alpha stacking can wash out the data underneath**: using `alpha=0.5` for a shaded band over a dense scatter or line chart will lighten the marks that fall inside the band, reducing their contrast against the background; lower alpha (0.2-0.3) or choose a band color that complements the data color rather than competing with it.
 
 ## Next steps
 

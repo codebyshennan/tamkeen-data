@@ -4,7 +4,7 @@
 
 ## Overview
 
-kNN classifies a point by majority vote (or average) of its k nearest neighbours in feature space, no training step, all cost at inference. Prerequisites: [5.1 Intro to ML](../../5.1-intro-to-ml/README.md).
+kNN classifies a point by majority vote (or average) of its k nearest neighbours in feature space, no training step, all cost at inference. Prerequisites: [5.1 Intro to ML](../../5.1-intro-to-ml/).
 
 ## Lesson Path
 

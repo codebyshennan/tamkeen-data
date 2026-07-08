@@ -10,11 +10,7 @@ Seaborn is your statistical visualization powerhouse, think of it as Matplotlib 
 
 ### Video Tutorial: Seaborn Data Visualization
 
-<div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/6GUZXDef2U0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-*Seaborn Tutorial - Data Visualization in Python*
+_Seaborn Tutorial - Data Visualization in Python_
 
 ```yaml
 Key Advantages:
@@ -27,23 +23,21 @@ Key Advantages:
 └─────────────────────────┘
 ```
 
-{% include mermaid-diagram.html src="3-data-visualization/3.2-adv-data-viz/diagrams/seaborn-guide-1.mmd" %}
-
 ## Which chart for which question?
 
 Pick the right chart before writing any code. The wrong chart can hide the very thing you are trying to show.
 
-| Chart type | Use it when… | Skip it when… |
-|---|---|---|
-| **histplot + KDE** | Showing the shape of one numeric variable | Comparing > 3 groups, bars overlap badly |
-| **boxplot** | Comparing median and spread across 2-10 groups | You need to see the distribution shape (use violin) |
-| **violinplot** | You want full distribution shape per group | Sample size < 30 per group, KDE becomes unreliable |
-| **ecdfplot** | Reading off exact percentiles directly | Presenting to audiences unfamiliar with cumulative charts |
-| **scatterplot / regplot** | Exploring a linear relationship between two variables | > 5,000 points, use hexbin or sample down first |
-| **heatmap** | Correlation matrix or a pivot of two categoricals | More than ~15 variables, cells become unreadable |
-| **clustermap** | Heatmap + revealing which variables cluster together | You need a fixed variable order (clustering reorders rows) |
-| **pairplot** | Quick multivariate overview of ≤ 6 variables | More than 8 variables, too slow and unreadable |
-| **FacetGrid / relplot col=** | Same chart repeated per category | More than ~8 panels, scrolling becomes the story |
+| Chart type                   | Use it when…                                          | Skip it when…                                              |
+| ---------------------------- | ----------------------------------------------------- | ---------------------------------------------------------- |
+| **histplot + KDE**           | Showing the shape of one numeric variable             | Comparing > 3 groups, bars overlap badly                   |
+| **boxplot**                  | Comparing median and spread across 2-10 groups        | You need to see the distribution shape (use violin)        |
+| **violinplot**               | You want full distribution shape per group            | Sample size < 30 per group, KDE becomes unreliable         |
+| **ecdfplot**                 | Reading off exact percentiles directly                | Presenting to audiences unfamiliar with cumulative charts  |
+| **scatterplot / regplot**    | Exploring a linear relationship between two variables | > 5,000 points, use hexbin or sample down first            |
+| **heatmap**                  | Correlation matrix or a pivot of two categoricals     | More than \~15 variables, cells become unreadable          |
+| **clustermap**               | Heatmap + revealing which variables cluster together  | You need a fixed variable order (clustering reorders rows) |
+| **pairplot**                 | Quick multivariate overview of ≤ 6 variables          | More than 8 variables, too slow and unreadable             |
+| **FacetGrid / relplot col=** | Same chart repeated per category                      | More than \~8 panels, scrolling becomes the story          |
 
 ## Getting Started
 
@@ -115,126 +109,29 @@ tips, tips_summary = load_and_inspect_data("tips")
 
 Four views of one numeric column, histogram+KDE, box, violin, and ECDF, on one canvas. Each view reveals different things.
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+<figure><img src="../../../.gitbook/assets/seaborn-guide_fig_1.png" alt="seaborn-guide"><figcaption><p>Figure 1: Distribution of total_bill</p></figcaption></figure>
 
-{% highlight python %}
-def plot_distribution_suite(data, variable):
-    """Create comprehensive distribution analysis"""
-    # Create figure
-    fig = plt.figure(figsize=(15, 10))
-    gs = fig.add_gridspec(2, 2, hspace=0.3, wspace=0.3)
+Figure setup with GridSpec
 
-    # Histogram with KDE
-    ax1 = fig.add_subplot(gs[0, 0])
-    sns.histplot(
-        data=data,
-        x=variable,
-        kde=True,
-        ax=ax1,
-        palette="deep"
-    )
-    ax1.set_title(f'Distribution of {variable}')
+`plt.figure` creates the canvas; `add_gridspec(2, 2)` reserves a 2×2 grid of axes. `hspace`/`wspace` control the gaps between panels, a cleaner approach than `plt.subplot` for multi-panel dashboards. `add_subplot(gs[0, 0])` places the first axes in the top-left cell.
 
-    # Box plot
-    ax2 = fig.add_subplot(gs[0, 1])
-    sns.boxplot(
-        data=data,
-        y=variable,
-        ax=ax2,
-        color='skyblue'
-    )
-    ax2.set_title(f'Box Plot of {variable}')
+histplot with KDE overlay
 
-    # Violin plot
-    ax3 = fig.add_subplot(gs[1, 0])
-    sns.violinplot(
-        data=data,
-        y=variable,
-        ax=ax3,
-        color='lightgreen'
-    )
-    ax3.set_title(f'Violin Plot of {variable}')
+`sns.histplot(kde=True)` draws the histogram _and_ a smoothed kernel density curve in one call. The KDE shows the continuous shape of the distribution, not just binned counts.
 
-    # ECDF
-    ax4 = fig.add_subplot(gs[1, 1])
-    sns.ecdfplot(
-        data=data,
-        x=variable,
-        ax=ax4,
-        color='coral'
-    )
-    ax4.set_title(f'Empirical CDF of {variable}')
+boxplot: 5-number summary
 
-    plt.tight_layout()
-    return fig
+`add_subplot(gs[0, 1])` places the second axes in the top-right cell. A box plot compresses a distribution into median, IQR box, and whiskers (±1.5×IQR). Points beyond the whiskers are outliers. Useful for quick comparisons across many groups.
 
-# Example usage
-dist_fig = plot_distribution_suite(tips, "total_bill")
-{% endhighlight %}
+violinplot + ecdfplot
 
-<figure>
-<img src="assets/seaborn-guide_fig_1.png" alt="seaborn-guide" />
-<figcaption>Figure 1: Distribution of total_bill</figcaption>
-</figure>
+A **violin** mirrors the KDE shape on both sides, you see the full distribution density, not just quartiles. **ECDF** (empirical CDF) shows what fraction of values fall below each x, great for reading off percentiles directly.
 
+Layout and usage
 
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-8" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Figure setup with GridSpec</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>plt.figure</code> creates the canvas; <code>add_gridspec(2, 2)</code> reserves a 2×2 grid of axes. <code>hspace</code>/<code>wspace</code> control the gaps between panels, a cleaner approach than <code>plt.subplot</code> for multi-panel dashboards. <code>add_subplot(gs[0, 0])</code> places the first axes in the top-left cell.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="9-16" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">histplot with KDE overlay</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>sns.histplot(kde=True)</code> draws the histogram <em>and</em> a smoothed kernel density curve in one call. The KDE shows the continuous shape of the distribution, not just binned counts.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="18-26" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">boxplot: 5-number summary</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>add_subplot(gs[0, 1])</code> places the second axes in the top-right cell. A box plot compresses a distribution into median, IQR box, and whiskers (±1.5×IQR). Points beyond the whiskers are outliers. Useful for quick comparisons across many groups.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="28-46" data-tint="4">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">violinplot + ecdfplot</span>
-    </div>
-    <div class="code-callout__body">
-      <p>A <strong>violin</strong> mirrors the KDE shape on both sides, you see the full distribution density, not just quartiles. <strong>ECDF</strong> (empirical CDF) shows what fraction of values fall below each x, great for reading off percentiles directly.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="47-52" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Layout and usage</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>plt.tight_layout()</code> adjusts subplot spacing automatically to prevent overlapping labels. The function returns the figure for saving or further modification. The example call at the bottom shows typical usage with the built-in <code>tips</code> dataset.</p>
-    </div>
-  </div>
-</aside>
-</div>
+`plt.tight_layout()` adjusts subplot spacing automatically to prevent overlapping labels. The function returns the figure for saving or further modification. The example call at the bottom shows typical usage with the built-in `tips` dataset.
 
-
-<figure>
-<img src="assets/seaborn-guide_fig_7.png" alt="seaborn-guide" />
-<figcaption>Figure 7: Distribution of total_bill</figcaption>
-</figure>
-
+<figure><img src="../../../.gitbook/assets/seaborn-guide_fig_7.png" alt="seaborn-guide"><figcaption><p>Figure 7: Distribution of total_bill</p></figcaption></figure>
 
 ### 2. Categorical Distributions
 
@@ -298,12 +195,7 @@ def plot_categorical_analysis(data, cat_var, num_var):
 cat_fig = plot_categorical_analysis(tips, "day", "total_bill")
 ```
 
-
-<figure>
-<img src="assets/seaborn-guide_fig_1.png" alt="seaborn-guide" />
-<figcaption>Figure 1: total_bill by day (Box Plot)</figcaption>
-</figure>
-
+<figure><img src="../../../.gitbook/assets/seaborn-guide_fig_1.png" alt="seaborn-guide"><figcaption><p>Figure 1: total_bill by day (Box Plot)</p></figcaption></figure>
 
 > **Try it**
 >
@@ -384,7 +276,7 @@ def create_scatter_analysis(data, x_var, y_var, hue_var=None):
 scatter_fig = create_scatter_analysis(tips, "total_bill", "tip", "time")
 ```
 
-![seaborn-guide](assets/seaborn_scatter_analysis.png)
+![seaborn-guide](../../../.gitbook/assets/seaborn_scatter_analysis.png)
 
 ### 2. Complex Relationships
 
@@ -429,20 +321,9 @@ pair_g, facet_g = analyze_complex_relationships(
 )
 ```
 
+<figure><img src="../../../.gitbook/assets/seaborn-guide_fig_2.png" alt="seaborn-guide"><figcaption><p>Figure 2: Generated visualization</p></figcaption></figure>
 
-<figure>
-<img src="assets/seaborn-guide_fig_2.png" alt="seaborn-guide" />
-<figcaption>Figure 2: Generated visualization</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/seaborn-guide_fig_3.png" alt="seaborn-guide" />
-<figcaption>Figure 3: day = Thur | time = Lunch</figcaption>
-</figure>
-
-
-
+<figure><img src="../../../.gitbook/assets/seaborn-guide_fig_3.png" alt="seaborn-guide"><figcaption><p>Figure 3: day = Thur | time = Lunch</p></figcaption></figure>
 
 > **Try it**
 >
@@ -498,42 +379,31 @@ def create_correlation_analysis(data, method='pearson'):
 corr_fig = create_correlation_analysis(tips)
 ```
 
+<figure><img src="../../../.gitbook/assets/seaborn-guide_fig_4.png" alt="seaborn-guide"><figcaption><p>Figure 4: Correlation Heatmap</p></figcaption></figure>
 
-<figure>
-<img src="assets/seaborn-guide_fig_4.png" alt="seaborn-guide" />
-<figcaption>Figure 4: Correlation Heatmap</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/seaborn-guide_fig_5.png" alt="seaborn-guide" />
-<figcaption>Figure 5: Generated visualization</figcaption>
-</figure>
-
-
-
+<figure><img src="../../../.gitbook/assets/seaborn-guide_fig_5.png" alt="seaborn-guide"><figcaption><p>Figure 5: Generated visualization</p></figcaption></figure>
 
 ### Additional Visualization Examples
 
 **Bar Plot with Error Bars:**
 
-![seaborn-guide](assets/seaborn_barplot.png)
+![seaborn-guide](../../../.gitbook/assets/seaborn_barplot.png)
 
 **Count Plot:**
 
-![seaborn-guide](assets/seaborn_countplot.png)
+![seaborn-guide](../../../.gitbook/assets/seaborn_countplot.png)
 
 **Joint Plot:**
 
-![seaborn-guide](assets/seaborn_jointplot.png)
+![seaborn-guide](../../../.gitbook/assets/seaborn_jointplot.png)
 
 **Time Series Heatmap:**
 
-![seaborn-guide](assets/seaborn_flights_heatmap.png)
+![seaborn-guide](../../../.gitbook/assets/seaborn_flights_heatmap.png)
 
 **Line Plot:**
 
-![seaborn-guide](assets/seaborn_lineplot.png)
+![seaborn-guide](../../../.gitbook/assets/seaborn_lineplot.png)
 
 > **Try it**
 >
@@ -604,23 +474,23 @@ save_publication_quality(scatter_fig, 'scatter_analysis')
 
 Remember:
 
-- Start with data exploration
-- Choose appropriate visualizations
-- Keep it simple but informative
-- Consider your audience
-- Use consistent styling
-- Save high-quality outputs
+* Start with data exploration
+* Choose appropriate visualizations
+* Keep it simple but informative
+* Consider your audience
+* Use consistent styling
+* Save high-quality outputs
 
 ## Gotchas
 
-- **`sns.set_theme()` applies globally and permanently for the session**: calling it once at the top changes every subsequent Matplotlib figure too, not just Seaborn charts. If a later cell uses plain `plt.subplots`, it will still inherit the Seaborn theme, which can surprise you when mixing libraries.
-- **`clustermap` creates its own figure and ignores the `ax` parameter**: unlike `heatmap`, you cannot embed a `clustermap` into a subplot grid using `ax=`. Trying to do so silently produces a separate floating figure rather than an error.
-- **`violinplot` with very small groups gives misleading KDE shapes**: the kernel density estimator will still produce a smooth, wide violin even with 3-5 data points, implying a distribution that isn't there. The chart header in this lesson warns about groups under 30, but the visual looks confident regardless.
-- **`heatmap(annot=True)` on a DataFrame with object columns throws a formatting error**: `fmt='.2f'` requires all annotated values to be numeric. If your pivot table has NaN cells or mixed types, the call crashes. Pass `annot=True` without `fmt` first, or fill NaNs before calling `heatmap`.
-- **`pairplot` with `hue` drops rows that have NaN in the hue column silently**: you may think your full dataset is plotted when actually a subset is. Always check `.value_counts(dropna=False)` on your hue column before relying on a pairplot for counts.
-- **Saving with `fig.savefig` after a `clustermap` saves the wrong figure**: `sns.clustermap` returns a `ClusterGrid` object, not a `Figure`. Use `g.savefig(...)` on the returned object rather than `plt.savefig` or `fig.savefig` to avoid saving a blank canvas.
+* **`sns.set_theme()` applies globally and permanently for the session**: calling it once at the top changes every subsequent Matplotlib figure too, not just Seaborn charts. If a later cell uses plain `plt.subplots`, it will still inherit the Seaborn theme, which can surprise you when mixing libraries.
+* **`clustermap` creates its own figure and ignores the `ax` parameter**: unlike `heatmap`, you cannot embed a `clustermap` into a subplot grid using `ax=`. Trying to do so silently produces a separate floating figure rather than an error.
+* **`violinplot` with very small groups gives misleading KDE shapes**: the kernel density estimator will still produce a smooth, wide violin even with 3-5 data points, implying a distribution that isn't there. The chart header in this lesson warns about groups under 30, but the visual looks confident regardless.
+* **`heatmap(annot=True)` on a DataFrame with object columns throws a formatting error**: `fmt='.2f'` requires all annotated values to be numeric. If your pivot table has NaN cells or mixed types, the call crashes. Pass `annot=True` without `fmt` first, or fill NaNs before calling `heatmap`.
+* **`pairplot` with `hue` drops rows that have NaN in the hue column silently**: you may think your full dataset is plotted when actually a subset is. Always check `.value_counts(dropna=False)` on your hue column before relying on a pairplot for counts.
+* **Saving with `fig.savefig` after a `clustermap` saves the wrong figure**: `sns.clustermap` returns a `ClusterGrid` object, not a `Figure`. Use `g.savefig(...)` on the returned object rather than `plt.savefig` or `fig.savefig` to avoid saving a blank canvas.
 
 ## Next steps
 
-- Continue with [Interactive visualization with Plotly](plotly-guide.md).
-- Review the [3.2 Advanced data visualization](README.md) overview and the [module assignment](../assignments/module-assignment.md) when assigned.
+* Continue with [Interactive visualization with Plotly](plotly-guide.md).
+* Review the [3.2 Advanced data visualization](./) overview and the [module assignment](../assignments/module-assignment.md) when assigned.

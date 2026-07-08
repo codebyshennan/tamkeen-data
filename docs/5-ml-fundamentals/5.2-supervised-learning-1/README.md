@@ -4,7 +4,7 @@
 
 ## Overview
 
-This submodule introduces four classical **supervised** algorithms: [Naive Bayes](naive-bayes/1-introduction.md), [k-nearest neighbors](knn/1-introduction.md), [support vector machines](svm/1-introduction.md), and [decision trees](decision-trees/1-introduction.md). You will get enough intuition to choose a first model and know where to read next. **Prerequisites:** [5.1 Introduction to ML](../5.1-intro-to-ml/README.md) (workflow, features, bias-variance); comfort with pandas and train/test splits.
+This submodule introduces four classical **supervised** algorithms: [Naive Bayes](naive-bayes/1-introduction.md), [k-nearest neighbors](knn/1-introduction.md), [support vector machines](svm/1-introduction.md), and [decision trees](decision-trees/1-introduction.md). You will get enough intuition to choose a first model and know where to read next. **Prerequisites:** [5.1 Introduction to ML](../5.1-intro-to-ml/) (workflow, features, bias-variance); comfort with pandas and train/test splits.
 
 ## Why this matters
 
@@ -15,8 +15,6 @@ Welcome to the first part of supervised learning! Here we'll explore fundamental
 ## Helpful video
 
 Crash Course AI: supervised learning for classical algorithms.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4qVRBYAdLAo" title="Supervised Learning: Crash Course AI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Learning Objectives
 
@@ -84,7 +82,7 @@ Excellent for:
 
 ## Algorithm Selection Guide
 
-Use the sketch below as a **first guess**, then validate with cross-validation and baselines (logistic regression, linear SVM) as in [5.5 Model evaluation](../5.5-model-eval/).
+Use the sketch below as a **first guess**, then validate with cross-validation and baselines (logistic regression, linear SVM) as in [5.5 Model evaluation](../5.5-model-eval).
 
 ### Classification Tasks
 
@@ -106,12 +104,12 @@ def select_classifier(data_characteristics):
 
 ### Performance Comparison
 
-| Algorithm      | Training speed | Prediction speed | Interpretability | Memory usage |
-| -------------- | -------------- | ---------------- | ---------------- | ------------ |
-| Naive Bayes    | Usually fast   | Fast             | Moderate (coefficients / log-probs) | Low |
-| kNN            | Very fast (often just store data) | Slower as $n$ grows | Low (black-box votes) | High (stores training set) |
-| SVM            | Can be costly on large $n$ | Moderate | Low-moderate | Moderate |
-| Decision Trees | Fast           | Fast             | High (rules)     | Low          |
+| Algorithm      | Training speed                    | Prediction speed    | Interpretability                    | Memory usage               |
+| -------------- | --------------------------------- | ------------------- | ----------------------------------- | -------------------------- |
+| Naive Bayes    | Usually fast                      | Fast                | Moderate (coefficients / log-probs) | Low                        |
+| kNN            | Very fast (often just store data) | Slower as $n$ grows | Low (black-box votes)               | High (stores training set) |
+| SVM            | Can be costly on large $n$        | Moderate            | Low-moderate                        | Moderate                   |
+| Decision Trees | Fast                              | Fast                | High (rules)                        | Low                        |
 
 Values are typical heuristics; always profile and validate on your dataset.
 
@@ -160,8 +158,6 @@ vectorizer = TfidfVectorizer()
 classifier = MultinomialNB()
 ```
 
-
-
 ### 2. Medical Diagnosis
 
 #### Nonlinear SVM with RBF kernel (illustrative)
@@ -172,8 +168,6 @@ from sklearn.svm import SVC
 # Example: Disease Classification
 svm_classifier = SVC(kernel='rbf', C=1.0)
 ```
-
-
 
 ### 3. Credit Risk Assessment
 
@@ -186,8 +180,6 @@ from sklearn.tree import DecisionTreeClassifier
 dt_classifier = DecisionTreeClassifier(max_depth=5)
 ```
 
-
-
 ### 4. Recommendation Systems
 
 #### kNN as a lazy learner for similarity-style classification
@@ -198,8 +190,6 @@ from sklearn.neighbors import KNeighborsClassifier
 # Example: Product Recommendations
 knn_classifier = KNeighborsClassifier(n_neighbors=5)
 ```
-
-
 
 ## Learning Path
 

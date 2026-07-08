@@ -4,34 +4,28 @@
 
 ### Video
 
-<div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/kYB8IZa5AuE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-*3Blue1Brown, Linear transformations and matrices (Essence of linear algebra)*
+_3Blue1Brown, Linear transformations and matrices (Essence of linear algebra)_
 
 ## Overview
 
-**Prerequisites:** [Introduction to NumPy](./intro-numpy.md), [ndarray](./ndarray.md) concept, and [basic array creation and math](./ndarray-basic.md).
+**Prerequisites:** [Introduction to NumPy](intro-numpy.md), [ndarray](ndarray.md) concept, and [basic array creation and math](ndarray-basic.md).
 
 **Why this lesson:** Real pipelines **reshape**, **stack**, **split**, and **aggregate** arrays to match model inputs and plot layouts. Knowing `reshape`, `axis`, and reductions (`sum`, `mean`) prevents silent shape bugs.
 
 ## Reshaping Arrays: The Transformer
 
----
+***
 
 ### What is Reshaping?
 
 Think of reshaping like rearranging chairs in a room - same number of chairs, different arrangement! It's useful when you need to:
 
-{% include mermaid-diagram.html src="1-data-fundamentals/1.4-data-foundation-linear-algebra/diagrams/ndarray-methods-1.mmd" %}
+_`-1` in `reshape` means "infer this dimension". `reshape(1,-1)` is the most common fix when sklearn complains about a 1D input that needs to be 2D._
 
-*`-1` in `reshape` means "infer this dimension". `reshape(1,-1)` is the most common fix when sklearn complains about a 1D input that needs to be 2D.*
-
-- Convert 1D data into a 2D table format
-- Restructure data to match another array's shape
-- Transform image data (e.g., flattening for ML models)
-- Prepare data for plotting or analysis
+* Convert 1D data into a 2D table format
+* Restructure data to match another array's shape
+* Transform image data (e.g., flattening for ML models)
+* Prepare data for plotting or analysis
 
 Key concepts:
 
@@ -91,7 +85,7 @@ Original image shape: (4, 4, 3)
 Flattened shape: (48,)
 ```
 
----
+***
 
 ### Visual Guide to Reshaping
 
@@ -117,7 +111,7 @@ Common shapes:
 
 ## Transposing: The Flip Master
 
----
+***
 
 ### What is Transposing?
 
@@ -145,7 +139,7 @@ Transposed:
  [3 6]]
 ```
 
----
+***
 
 ### Visual Guide to Transposing
 
@@ -160,7 +154,7 @@ Before:        After:
 
 ## Universal Functions: Math Wizardry! ✨
 
----
+***
 
 ### What are Universal Functions?
 
@@ -187,7 +181,7 @@ Exponentials: [1.00000000e+00 2.71828183e+00 7.38905610e+00 2.00855369e+01
  2.98095799e+03 8.10308393e+03]
 ```
 
----
+***
 
 ### One Array vs Two Arrays
 
@@ -207,7 +201,7 @@ Square roots: [1. 2. 3.]
 Maximum values: [11  7 15  6 12]
 ```
 
----
+***
 
 ### Visual Guide to Universal Functions
 
@@ -226,7 +220,7 @@ Output: [11 7  15]
 
 ## Smart choices with `where()`
 
----
+***
 
 ### What is where()?
 
@@ -248,7 +242,7 @@ print("Result:", result)
 Result: [1.1 2.2 1.3 1.4 2.5]
 ```
 
----
+***
 
 ### Visual Guide to where()
 
@@ -263,7 +257,7 @@ Result:    [1.1   2.2   1.3   1.4   2.5 ]
 
 ## Array Statistics: Number Crunching
 
----
+***
 
 ### Basic Statistics
 
@@ -286,7 +280,7 @@ Min: 1
 Max: 9
 ```
 
----
+***
 
 ### Computing Along Axes
 
@@ -317,7 +311,7 @@ axis=0 (down columns)    axis=1 (across rows)
 
 ## Boolean Operations: Truth Seekers
 
----
+***
 
 ### Testing Arrays
 
@@ -337,7 +331,7 @@ Any True? True
 All True? False
 ```
 
----
+***
 
 ### Sorting Arrays
 
@@ -358,18 +352,18 @@ After: [1 1 2 3 4 5 6 9]
 
 **Pro Tips**:
 
-- Use **reshape** when you need to change array dimensions
-- Remember: rows → columns with **transpose** or **.T**
-- Universal functions are super fast, use them
-- **where** is great for conditional operations
-- Think about which axis you want when using statistics
+* Use **reshape** when you need to change array dimensions
+* Remember: rows → columns with **transpose** or **.T**
+* Universal functions are super fast, use them
+* **where** is great for conditional operations
+* Think about which axis you want when using statistics
 
 ## Common pitfalls
 
-- **NaN propagation**: Many reductions return **nan** if any element is **nan**; use **nanmean** and friends when appropriate.
-- **keepdims**: Forgetting **keepdims=True** can break broadcasting in the next step.
-- **In-place vs return**: Some methods modify the array; others return a new one, check the docs for the function you use.
+* **NaN propagation**: Many reductions return **nan** if any element is **nan**; use **nanmean** and friends when appropriate.
+* **keepdims**: Forgetting **keepdims=True** can break broadcasting in the next step.
+* **In-place vs return**: Some methods modify the array; others return a new one, check the docs for the function you use.
 
 ## Next steps
 
-Continue to [Linear algebra](./linear-algebra.md), then [Data analysis with pandas](../1.5-data-analysis-pandas/README.md) starting with [Series](../1.5-data-analysis-pandas/series.md).
+Continue to [Linear algebra](linear-algebra.md), then [Data analysis with pandas](../1.5-data-analysis-pandas/) starting with [Series](../1.5-data-analysis-pandas/series.md).

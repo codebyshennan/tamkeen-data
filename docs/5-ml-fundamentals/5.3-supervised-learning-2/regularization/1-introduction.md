@@ -1,9 +1,15 @@
 ---
 reading_minutes: 15
 objectives:
-  - "Define regularization as a penalty on model complexity that trades a little bias for less variance, tying back to the bias-variance picture from 5.1."
-  - "Distinguish L1 (Lasso, sparsity), L2 (Ridge, shrinkage), and Elastic Net (a mix), and pick which to use for a given problem."
-  - "Recognise other regularizers in everyday use, tree depth limits, early stopping, dropout, as the same idea applied to different model families."
+  - >-
+    Define regularization as a penalty on model complexity that trades a little
+    bias for less variance, tying back to the bias-variance picture from 5.1.
+  - >-
+    Distinguish L1 (Lasso, sparsity), L2 (Ridge, shrinkage), and Elastic Net (a
+    mix), and pick which to use for a given problem.
+  - >-
+    Recognise other regularizers in everyday use, tree depth limits, early
+    stopping, dropout, as the same idea applied to different model families.
 ---
 
 # Introduction to Regularization
@@ -16,9 +22,7 @@ objectives:
 
 Imagine you're learning to ride a bicycle. At first, you might use training wheels to prevent falling over. Regularization in machine learning works similarly - it's like adding training wheels to your model to prevent it from "falling over" (overfitting) when making predictions.
 
-![Regularization Path](assets/regularization_path.png)
-*Figure 1: How regularization affects model coefficients as the regularization strength () changes*
-
+![Regularization Path](../../../../.gitbook/assets/regularization_path.png) _Figure 1: How regularization affects model coefficients as the regularization strength () changes_
 
 ## What is Regularization?
 
@@ -28,8 +32,7 @@ Regularization is a technique that helps prevent overfitting by adding a penalty
 
 Just like Goldilocks wanted her porridge "not too hot, not too cold, but just right," regularization helps find the "just right" level of model complexity - not too simple (underfitting) and not too complex (overfitting).
 
-![Bias-Variance Tradeoff](assets/bias_variance_tradeoff.png)
-*Figure 2: The tradeoff between bias and variance as regularization strength changes*
+![Bias-Variance Tradeoff](../../../../.gitbook/assets/bias_variance_tradeoff.png) _Figure 2: The tradeoff between bias and variance as regularization strength changes_
 
 ## Understanding Regularization
 
@@ -41,21 +44,20 @@ Loss = Error_on_training_data + λ * Complexity_of_model
 
 Where:
 
-- λ (lambda) is the regularization strength - think of it as how strict the rules are
-- Complexity_of_model measures how complicated the model is - like counting how many rules the model is trying to learn
+* λ (lambda) is the regularization strength - think of it as how strict the rules are
+* Complexity\_of\_model measures how complicated the model is - like counting how many rules the model is trying to learn
 
 ### Why This Matters
 
 Without regularization, models can become like students who memorize answers without understanding the concepts. Regularization helps models learn the underlying patterns rather than just memorizing the training data.
 
-![Overfitting Prevention](assets/overfitting_prevention.png)
-*Figure 3: How regularization helps prevent overfitting by controlling the gap between training and testing error*
+![Overfitting Prevention](../../../../.gitbook/assets/overfitting_prevention.png) _Figure 3: How regularization helps prevent overfitting by controlling the gap between training and testing error_
 
 ## Types of Regularization 🔍
 
 ### 1. L1 Regularization (Lasso)
 
-```text
+```
 Loss = MSE + λ * Σ|w|  # Sum of absolute weights
 ```
 
@@ -63,13 +65,13 @@ Think of L1 as a strict teacher who encourages students to focus on the most imp
 
 Features:
 
-- Creates sparse models (like a minimalist wardrobe - only keeping essential items)
-- Can eliminate irrelevant features (like removing unnecessary ingredients from a recipe)
-- Good for feature selection (like picking the most important players for a team)
+* Creates sparse models (like a minimalist wardrobe - only keeping essential items)
+* Can eliminate irrelevant features (like removing unnecessary ingredients from a recipe)
+* Good for feature selection (like picking the most important players for a team)
 
 ### 2. L2 Regularization (Ridge)
 
-```text
+```
 Loss = MSE + λ * Σw²  # Sum of squared weights
 ```
 
@@ -77,43 +79,42 @@ L2 is like a gentle coach who helps all players contribute, but prevents any sin
 
 Features:
 
-- Shrinks weights toward zero (like turning down the volume on all speakers, but keeping them all connected)
-- Handles multicollinearity well (like managing a team where some players have similar skills)
-- Keeps all features (like maintaining a complete toolkit, even if some tools are used less often)
+* Shrinks weights toward zero (like turning down the volume on all speakers, but keeping them all connected)
+* Handles multicollinearity well (like managing a team where some players have similar skills)
+* Keeps all features (like maintaining a complete toolkit, even if some tools are used less often)
 
 ### 3. Elastic Net
 
-```text
+```
 Loss = MSE + λ₁ * Σ|w| + λ₂ * Σw²  # Combination of L1 and L2
 ```
 
 Elastic Net is like having both a strict teacher and a gentle coach - it combines the best of both approaches.
 
-![Feature Selection Comparison](assets/feature_selection.png)
-*Figure 4: Comparison of how different regularization methods affect feature selection*
+![Feature Selection Comparison](../../../../.gitbook/assets/feature_selection.png) _Figure 4: Comparison of how different regularization methods affect feature selection_
 
 Features:
 
-- Combines benefits of L1 and L2 (like having both structure and flexibility)
-- More reliable than pure L1 or L2 (like having multiple safety nets)
-- Good for highly correlated features (like managing a team with overlapping skills)
+* Combines benefits of L1 and L2 (like having both structure and flexibility)
+* More reliable than pure L1 or L2 (like having multiple safety nets)
+* Good for highly correlated features (like managing a team with overlapping skills)
 
 ## When to Use Regularization?
 
 ### Perfect For
 
-- High-dimensional datasets (like analyzing customer behavior with many features)
-- Models showing signs of overfitting (like a student who memorizes but doesn't understand)
-- Feature selection (L1) (like choosing the most important factors for a decision)
-- Handling multicollinearity (L2) (like managing related variables in a dataset)
-- Complex model architectures (like building a sophisticated prediction system)
+* High-dimensional datasets (like analyzing customer behavior with many features)
+* Models showing signs of overfitting (like a student who memorizes but doesn't understand)
+* Feature selection (L1) (like choosing the most important factors for a decision)
+* Handling multicollinearity (L2) (like managing related variables in a dataset)
+* Complex model architectures (like building a sophisticated prediction system)
 
 ### Less Suitable For
 
-- Very small datasets (like trying to learn from just a few examples)
-- Already simple models (like using training wheels on a tricycle)
-- When interpretability is important (like needing to explain decisions to stakeholders)
-- When you need exact zero coefficients (L2) (like needing to completely eliminate certain factors)
+* Very small datasets (like trying to learn from just a few examples)
+* Already simple models (like using training wheels on a tricycle)
+* When interpretability is important (like needing to explain decisions to stakeholders)
+* When you need exact zero coefficients (L2) (like needing to completely eliminate certain factors)
 
 ## Advantages and Limitations
 
@@ -128,7 +129,7 @@ Features:
 ### Limitations
 
 1. Additional hyperparameter to tune () (like finding the right balance of rules)
-2. May underfit if  is too large (like having too many restrictions)
+2. May underfit if is too large (like having too many restrictions)
 3. L1 can be unstable with correlated features (like having conflicting rules)
 4. L2 never produces exact zero coefficients (like having some influence even when small)
 5. Can be computationally intensive (like having more complex calculations)
@@ -157,14 +158,14 @@ Ready to dive deeper? Continue to [Mathematical Foundation](2-math-foundation.md
 
 ## Gotchas
 
-- **L1 and L2 behave very differently when features are correlated**: Lasso tends to arbitrarily pick one of a correlated pair and zero out the rest, which can make results unstable across datasets; Ridge distributes the penalty evenly across correlated features, so if correlated predictors are all meaningful, Ridge is the safer default.
-- **λ in sklearn is inverted: larger `alpha` means stronger regularization**: this matches the math in this lesson; but in sklearn's `LogisticRegression`, the parameter is `C = 1/λ`, so a *larger* `C` means *less* regularization, the opposite direction from `Ridge`, `Lasso`, and `ElasticNet`.
-- **Regularization without feature scaling penalizes unfairly**: the penalty is applied to raw coefficient magnitudes; a feature measured in thousands (e.g., income) will have a naturally smaller coefficient than one measured in single digits (e.g., number of bedrooms), receiving a smaller penalty and effectively being regularized less.
-- **"L1 performs feature selection" is only true at the right λ**: at very small λ, Lasso barely shrinks any coefficient; at very large λ, it zeros out everything; feature selection only happens in the middle range, which requires careful tuning rather than using an arbitrary default.
-- **Elastic Net has two hyperparameters to tune, not one**: both `alpha` (overall penalty strength) and `l1_ratio` (L1/L2 mix) need to be optimised together, making the search space 2D; a grid over only `alpha` while fixing `l1_ratio` may miss the best combination entirely.
+* **L1 and L2 behave very differently when features are correlated**: Lasso tends to arbitrarily pick one of a correlated pair and zero out the rest, which can make results unstable across datasets; Ridge distributes the penalty evenly across correlated features, so if correlated predictors are all meaningful, Ridge is the safer default.
+* **λ in sklearn is inverted: larger `alpha` means stronger regularization**: this matches the math in this lesson; but in sklearn's `LogisticRegression`, the parameter is `C = 1/λ`, so a _larger_ `C` means _less_ regularization, the opposite direction from `Ridge`, `Lasso`, and `ElasticNet`.
+* **Regularization without feature scaling penalizes unfairly**: the penalty is applied to raw coefficient magnitudes; a feature measured in thousands (e.g., income) will have a naturally smaller coefficient than one measured in single digits (e.g., number of bedrooms), receiving a smaller penalty and effectively being regularized less.
+* **"L1 performs feature selection" is only true at the right λ**: at very small λ, Lasso barely shrinks any coefficient; at very large λ, it zeros out everything; feature selection only happens in the middle range, which requires careful tuning rather than using an arbitrary default.
+* **Elastic Net has two hyperparameters to tune, not one**: both `alpha` (overall penalty strength) and `l1_ratio` (L1/L2 mix) need to be optimised together, making the search space 2D; a grid over only `alpha` while fixing `l1_ratio` may miss the best combination entirely.
 
 ## Additional Resources
 
-- [Scikit-learn Regularization Documentation](https://scikit-learn.org/stable/modules/linear_model.html)
-- [Regularization in Machine Learning](https://towardsdatascience.com/regularization-in-machine-learning-76441ddcf99a)
-- [Understanding L1 and L2 Regularization](https://www.analyticsvidhya.com/blog/2016/01/complete-tutorial-ridge-lasso-regression-python/)
+* [Scikit-learn Regularization Documentation](https://scikit-learn.org/stable/modules/linear_model.html)
+* [Regularization in Machine Learning](https://towardsdatascience.com/regularization-in-machine-learning-76441ddcf99a)
+* [Understanding L1 and L2 Regularization](https://www.analyticsvidhya.com/blog/2016/01/complete-tutorial-ridge-lasso-regression-python/)

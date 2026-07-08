@@ -6,8 +6,6 @@
 
 Orientation for the course visualization materials.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/RBSUwFGa6Fk" title="What is Data Science?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 ## What you'll learn
 
 In this quick start guide, you'll learn how to:
@@ -18,8 +16,8 @@ In this quick start guide, you'll learn how to:
 
 ## Prerequisites
 
-- Python with **matplotlib** and **numpy** installed (see [0-prep](../0-prep/README.md) if you need an environment refresher).
-- A notebook or `.py` file where you can run the snippets.
+* Python with **matplotlib** and **numpy** installed (see [0-prep](../0-prep/) if you need an environment refresher).
+* A notebook or `.py` file where you can run the snippets.
 
 > **Time needed:** About **15-30 minutes** for a first pass, longer if you experiment with variants.
 
@@ -41,17 +39,9 @@ months = ['Jan', 'Feb', 'Mar', 'Apr', 'May']
 sales = [100, 120, 140, 130, 150]
 ```
 
+<figure><img src="../../.gitbook/assets/quick-start_fig_1.png" alt="quick-start"><figcaption><p>Figure 1: Generated visualization</p></figcaption></figure>
 
-<figure>
-<img src="assets/quick-start_fig_1.png" alt="quick-start" />
-<figcaption>Figure 1: Generated visualization</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/quick-start_fig_2.png" alt="quick-start" />
-<figcaption>Figure 2: Generated visualization</figcaption>
-</figure>
+<figure><img src="../../.gitbook/assets/quick-start_fig_2.png" alt="quick-start"><figcaption><p>Figure 2: Generated visualization</p></figcaption></figure>
 
 ### Step 2: Create a Simple Line Chart
 
@@ -69,12 +59,7 @@ plt.grid(True, linestyle='--', alpha=0.7)  # Add a grid
 plt.show()  # Display the chart
 ```
 
-
-<figure>
-<img src="assets/quick-start_fig_1.png" alt="quick-start" />
-<figcaption>Figure 1: Monthly Sales</figcaption>
-</figure>
-
+<figure><img src="../../.gitbook/assets/quick-start_fig_1.png" alt="quick-start"><figcaption><p>Figure 1: Monthly Sales</p></figcaption></figure>
 
 ### Step 3: Make it Look Better
 
@@ -92,12 +77,7 @@ plt.grid(True, linestyle='--', alpha=0.7)
 plt.show()
 ```
 
-
-<figure>
-<img src="assets/quick-start_fig_2.png" alt="quick-start" />
-<figcaption>Figure 2: Monthly Sales</figcaption>
-</figure>
-
+<figure><img src="../../.gitbook/assets/quick-start_fig_2.png" alt="quick-start"><figcaption><p>Figure 2: Monthly Sales</p></figcaption></figure>
 
 ## Three Most Common Chart Types
 
@@ -117,12 +97,7 @@ plt.title('Sales Trend')
 plt.show()
 ```
 
-
-<figure>
-<img src="assets/quick-start_fig_3.png" alt="quick-start" />
-<figcaption>Figure 3: Sales Trend</figcaption>
-</figure>
-
+<figure><img src="../../.gitbook/assets/quick-start_fig_3.png" alt="quick-start"><figcaption><p>Figure 3: Sales Trend</p></figcaption></figure>
 
 ### 2. Bar Chart
 
@@ -140,12 +115,7 @@ plt.title('Sales by Month')
 plt.show()
 ```
 
-
-<figure>
-<img src="assets/quick-start_fig_4.png" alt="quick-start" />
-<figcaption>Figure 4: Sales by Month</figcaption>
-</figure>
-
+<figure><img src="../../.gitbook/assets/quick-start_fig_4.png" alt="quick-start"><figcaption><p>Figure 4: Sales by Month</p></figcaption></figure>
 
 ### 3. Pie Chart
 
@@ -163,42 +133,37 @@ plt.title('Sales Distribution')
 plt.show()
 ```
 
-
-<figure>
-<img src="assets/quick-start_fig_5.png" alt="quick-start" />
-<figcaption>Figure 5: Sales Distribution</figcaption>
-</figure>
-
+<figure><img src="../../.gitbook/assets/quick-start_fig_5.png" alt="quick-start"><figcaption><p>Figure 5: Sales Distribution</p></figcaption></figure>
 
 ## Quick Tips for Better Charts
 
 ### 1. Keep it Simple
 
-- One message per chart
-- Remove unnecessary elements
-- Use clear labels
+* One message per chart
+* Remove unnecessary elements
+* Use clear labels
 
 ### 2. Choose Colors Wisely
 
-- Use consistent colors
-- Avoid too many colors
-- Consider colorblind viewers
+* Use consistent colors
+* Avoid too many colors
+* Consider colorblind viewers
 
 ### 3. Label Everything
 
-- Add a clear title
-- Label your axes
-- Include units
+* Add a clear title
+* Label your axes
+* Include units
 
 ## Simple Checklist for Every Chart
 
 Before sharing your visualization, check:
 
-- [ ] Does it have a clear title?
-- [ ] Are all axes labeled?
-- [ ] Is the font size readable?
-- [ ] Are the colors appropriate?
-- [ ] Is the message clear?
+* [ ] Does it have a clear title?
+* [ ] Are all axes labeled?
+* [ ] Is the font size readable?
+* [ ] Are the colors appropriate?
+* [ ] Is the message clear?
 
 ## Next steps
 
@@ -206,7 +171,7 @@ Once you are comfortable with basic charts:
 
 1. Read [Visualization principles](3.1-intro-data-viz/visualization-principles.md) and [Matplotlib basics](3.1-intro-data-viz/matplotlib-basics.md).
 2. Try [Choosing the right visualization](choosing-the-right-visualization.md).
-3. Continue to [3.2 Advanced data visualization](3.2-adv-data-viz/README.md) for Seaborn and Plotly.
+3. Continue to [3.2 Advanced data visualization](3.2-adv-data-viz/) for Seaborn and Plotly.
 
 ## Common Problems and Solutions
 
@@ -244,40 +209,19 @@ plt.title('Sales', fontsize=14, pad=20)
 plt.xticks(rotation=45)  # Rotate labels if needed
 ```
 
+<figure><img src="../../.gitbook/assets/quick-start_fig_1.png" alt="quick-start"><figcaption><p>Figure 1: Generated visualization</p></figcaption></figure>
 
-<figure>
-<img src="assets/quick-start_fig_1.png" alt="quick-start" />
-<figcaption>Figure 1: Generated visualization</figcaption>
-</figure>
+<figure><img src="../../.gitbook/assets/quick-start_fig_2.png" alt="quick-start"><figcaption><p>Figure 2: Generated visualization</p></figcaption></figure>
 
+<figure><img src="../../.gitbook/assets/quick-start_fig_3.png" alt="quick-start"><figcaption><p>Figure 3: Generated visualization</p></figcaption></figure>
 
-<figure>
-<img src="assets/quick-start_fig_2.png" alt="quick-start" />
-<figcaption>Figure 2: Generated visualization</figcaption>
-</figure>
+<figure><img src="../../.gitbook/assets/quick-start_fig_4.png" alt="quick-start"><figcaption><p>Figure 4: Generated visualization</p></figcaption></figure>
 
-
-<figure>
-<img src="assets/quick-start_fig_3.png" alt="quick-start" />
-<figcaption>Figure 3: Generated visualization</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/quick-start_fig_4.png" alt="quick-start" />
-<figcaption>Figure 4: Generated visualization</figcaption>
-</figure>
-
-
-<figure>
-<img src="assets/quick-start_fig_5.png" alt="quick-start" />
-<figcaption>Figure 5: Sales</figcaption>
-</figure>
+<figure><img src="../../.gitbook/assets/quick-start_fig_5.png" alt="quick-start"><figcaption><p>Figure 5: Sales</p></figcaption></figure>
 
 ```
 (array([0. , 0.2, 0.4, 0.6, 0.8, 1. ]), [Text(0.0, 0, '0.0'), Text(0.2, 0, '0.2'), Text(0.4, 0, '0.4'), Text(0.6000000000000001, 0, '0.6'), Text(0.8, 0, '0.8'), Text(1.0, 0, '1.0')])
 ```
-
 
 **Captured output (notebook):** The cell above may print the return value of `plt.xticks(rotation=45)`-a tuple of tick locations and label objects. That repr is normal; the figure shows the rotated labels.
 
@@ -299,41 +243,34 @@ plt.plot(data, color='#2ecc71', alpha=0.7)
 
 ## Gotchas
 
-- **`plt.show()` clears the figure state**: any call to `plt.title`, `plt.ylabel`, or `plt.plot` made after `plt.show()` starts a brand-new blank figure; build the entire chart before calling `show()`.
-- **Pie charts distort perception when slices are close in size**: human eyes judge angles poorly, so values like 22% and 25% look nearly identical in a pie slice; use a bar chart instead when differences are small.
-- **Missing `plt.figure()` causes charts to stack on each other**: if you run multiple cells in a notebook without `plt.figure()` at the start of each, Matplotlib draws new elements onto the previous axes, producing a jumbled multi-series chart you did not intend.
-- **`figsize` is in inches, not pixels**: `figsize=(10, 6)` at 100 DPI produces a 1000×600 pixel image; at 72 DPI it produces 720×432; always pair `figsize` with an explicit `dpi` when pixel dimensions matter (e.g. for web exports).
-- **`plt.xticks(rotation=45)` does not right-align the rotated labels**: the default anchor point leaves labels off-center under their ticks; add `ha='right'` to `plt.xticks(rotation=45, ha='right')` for clean alignment.
-- **Line charts imply continuity between points**: connecting `months` list items with a line implies a meaningful progression between them; if the categories are unordered (e.g. cities, product names) use a bar chart to avoid implying a trend that does not exist.
+* **`plt.show()` clears the figure state**: any call to `plt.title`, `plt.ylabel`, or `plt.plot` made after `plt.show()` starts a brand-new blank figure; build the entire chart before calling `show()`.
+* **Pie charts distort perception when slices are close in size**: human eyes judge angles poorly, so values like 22% and 25% look nearly identical in a pie slice; use a bar chart instead when differences are small.
+* **Missing `plt.figure()` causes charts to stack on each other**: if you run multiple cells in a notebook without `plt.figure()` at the start of each, Matplotlib draws new elements onto the previous axes, producing a jumbled multi-series chart you did not intend.
+* **`figsize` is in inches, not pixels**: `figsize=(10, 6)` at 100 DPI produces a 1000×600 pixel image; at 72 DPI it produces 720×432; always pair `figsize` with an explicit `dpi` when pixel dimensions matter (e.g. for web exports).
+* **`plt.xticks(rotation=45)` does not right-align the rotated labels**: the default anchor point leaves labels off-center under their ticks; add `ha='right'` to `plt.xticks(rotation=45, ha='right')` for clean alignment.
+* **Line charts imply continuity between points**: connecting `months` list items with a line implies a meaningful progression between them; if the categories are unordered (e.g. cities, product names) use a bar chart to avoid implying a trend that does not exist.
 
 ## Practice Exercises
 
 **Note:** These are offline prompts, complete them in your own environment; there is no autograder in this repo.
 
-1. **Basic Line Chart**
-   Create a line chart showing temperature over a week
-
-2. **Simple Bar Chart**
-   Make a bar chart comparing your favorite fruits
-
-3. **Basic Pie Chart**
-   Show how you spend your time in a day
+1. **Basic Line Chart** Create a line chart showing temperature over a week
+2. **Simple Bar Chart** Make a bar chart comparing your favorite fruits
+3. **Basic Pie Chart** Show how you spend your time in a day
 
 ## Resources for Learning More
 
 1. **Official Documentation**
-   - Matplotlib Tutorial
-   - Seaborn Gallery
-   - Plotly Examples
-
+   * Matplotlib Tutorial
+   * Seaborn Gallery
+   * Plotly Examples
 2. **Practice Datasets**
-   - Weather data
-   - Sales figures
-   - Population statistics
-
+   * Weather data
+   * Sales figures
+   * Population statistics
 3. **Online Tools**
-   - Google Colab
-   - Jupyter Notebooks
-   - Observable
+   * Google Colab
+   * Jupyter Notebooks
+   * Observable
 
 Remember: The best way to learn is by doing. Start with simple charts and gradually add more features as you become comfortable!

@@ -1,10 +1,16 @@
 ---
 reading_minutes: 30
 objectives:
-  - Read every result through both statistical and practical-significance lenses (the four-quadrant frame).
+  - >-
+    Read every result through both statistical and practical-significance lenses
+    (the four-quadrant frame).
   - Communicate effect sizes and intervals in the language each audience needs.
-  - Convert a positive result into an expected-value calculation that accounts for implementation cost.
-  - Reject "fail-to-reject H₀" as evidence of no effect when the test was underpowered.
+  - >-
+    Convert a positive result into an expected-value calculation that accounts
+    for implementation cost.
+  - >-
+    Reject "fail-to-reject H₀" as evidence of no effect when the test was
+    underpowered.
 ---
 
 # Results Analysis: From Numbers to Insights
@@ -13,17 +19,17 @@ objectives:
 
 ## Overview
 
-This is the "so what?" lesson. Significance is not a business case: you combine **effect size**, **intervals**, **design limits**, and **costs** into a recommendation someone can defend. It closes the 4.2 sequence after [A/B testing](./ab-testing.md); use it before presenting to non-specialists.
+This is the "so what?" lesson. Significance is not a business case: you combine **effect size**, **intervals**, **design limits**, and **costs** into a recommendation someone can defend. It closes the 4.2 sequence after [A/B testing](ab-testing.md); use it before presenting to non-specialists.
 
 ## Why this matters
 
-- You will move from **p-values** to decisions using effect sizes, intervals, and plain-language stakes.
-- You will communicate what results **do** and **do not** imply for action.
+* You will move from **p-values** to decisions using effect sizes, intervals, and plain-language stakes.
+* You will communicate what results **do** and **do not** imply for action.
 
 ## Prerequisites
 
-- [Statistical tests](./statistical-tests.md) and [A/B testing](./ab-testing.md).
-- [Confidence intervals](../4.1-inferential-stats/confidence-intervals.md) and [p-values](../4.1-inferential-stats/p-values.md) for vocabulary.
+* [Statistical tests](statistical-tests.md) and [A/B testing](ab-testing.md).
+* [Confidence intervals](../4.1-inferential-stats/confidence-intervals.md) and [p-values](../4.1-inferential-stats/p-values.md) for vocabulary.
 
 > **Note:** This lesson closes the 4.2 chain; use it before presenting to non-specialists.
 
@@ -33,17 +39,9 @@ Think of results analysis as being a detective with data - it's about more than 
 
 ### Video Tutorial: Results Analysis and Statistical Significance
 
-<div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/UFhJefdVCjE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
+_StatQuest: P-values, Clearly Explained by Josh Starmer_
 
-*StatQuest: P-values, Clearly Explained by Josh Starmer*
-
-<div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/TqOeMYtOc1w" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-*StatQuest: Confidence Intervals, Clearly Explained!!! by Josh Starmer*
+_StatQuest: Confidence Intervals, Clearly Explained!!! by Josh Starmer_
 
 ## Understanding Test Results
 
@@ -53,123 +51,21 @@ Like a metal detector beeping - it tells you something's there, but you need to 
 
 **`SignificanceAnalyzer`: interpret and visualize a p-value**
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Class definition
 
-{% highlight python %}
-import numpy as np
-import pandas as pd
-from scipy import stats
-import matplotlib.pyplot as plt
-import seaborn as sns
+Define `SignificanceAnalyzer` with a configurable alpha level (default 0.05) to drive all interpretation methods.
 
-class SignificanceAnalyzer:
-    """A comprehensive toolkit for analyzing statistical significance"""
+Interpret p-value
 
-    def __init__(self, alpha=0.05):
-        self.alpha = alpha
+Bundle significance flag, evidence strength label, and a plain-language interpretation into one return dict.
 
-    def interpret_p_value(self, p_value):
-        """Interpret p-value with rich context"""
-        interpretation = {
-            'significant': p_value < self.alpha,
-            'p_value': p_value,
-            'confidence_level': (1 - self.alpha) * 100,
-            'strength': self._get_evidence_strength(p_value),
-            'interpretation': self._get_interpretation(p_value)
-        }
-        return interpretation
+Evidence strength bands
 
-    def _get_evidence_strength(self, p_value):
-        """Determine strength of evidence"""
-        if p_value < 0.001:
-            return "Very Strong"
-        elif p_value < 0.01:
-            return "Strong"
-        elif p_value < 0.05:
-            return "Moderate"
-        elif p_value < 0.1:
-            return "Weak"
-        else:
-            return "No Evidence"
+Categorise p-values into Very Strong / Strong / Moderate / Weak / No Evidence for stakeholder-facing reporting.
 
-    def _get_interpretation(self, p_value):
-        """Get detailed interpretation"""
-        if p_value < self.alpha:
-            return (
-                f"Evidence to reject null hypothesis (p={p_value:.4f})\n"
-                f"This suggests the observed effect is unlikely to be due to chance."
-            )
-        else:
-            return (
-                f"Insufficient evidence to reject null hypothesis (p={p_value:.4f})\n"
-                f"This does not prove there is no effect, just that we couldn't detect one."
-            )
+Significance plot
 
-    def visualize_significance(self, test_statistic, df, observed_value):
-        """Create visual representation of significance"""
-        plt.figure(figsize=(12, 5))
-
-        # Distribution plot
-        x = np.linspace(-4, 4, 1000)
-        plt.plot(x, stats.t.pdf(x, df), 'b-', label='Null Distribution')
-        plt.axvline(observed_value, color='r', linestyle='--',
-                   label='Observed Value')
-
-        # Shade rejection regions
-        critical_value = stats.t.ppf(1 - self.alpha/2, df)
-        x_reject = x[(x <= -critical_value) | (x >= critical_value)]
-        plt.fill_between(x_reject,
-                        stats.t.pdf(x_reject, df),
-                        color='red', alpha=0.2,
-                        label='Rejection Region')
-
-        plt.title('Statistical Significance Visualization')
-        plt.legend()
-        plt.grid(True, alpha=0.3)
-        plt.show()
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="7-10" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Class definition</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Define <code>SignificanceAnalyzer</code> with a configurable alpha level (default 0.05) to drive all interpretation methods.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="12-22" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Interpret p-value</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Bundle significance flag, evidence strength label, and a plain-language interpretation into one return dict.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="24-35" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Evidence strength bands</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Categorise p-values into Very Strong / Strong / Moderate / Weak / No Evidence for stakeholder-facing reporting.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="49-68" data-tint="4">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Significance plot</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Draw the t null density, mark the observed test statistic, and shade two-tailed rejection regions beyond the critical value.</p>
-    </div>
-  </div>
-</aside>
-</div>
+Draw the t null density, mark the observed test statistic, and shade two-tailed rejection regions beyond the critical value.
 
 ### 2. Effect Sizes: The Magnitude Matters
 
@@ -177,159 +73,30 @@ Not just whether there's a difference, but how big it is:
 
 **Cohen's d formula:**
 
-\\[
-d = \frac{\bar x_1 - \bar x_2}{s_p}
-\\]
+\\\[ d = \frac{\bar x\_1 - \bar x\_2}{s\_p} \\]
 
 where:
 
-- \\( \bar x_1, \bar x_2 \\): means of the two groups
-- \\( s_p \\): pooled standard deviation
+* \\( \bar x\_1, \bar x\_2 \\): means of the two groups
+* \\( s\_p \\): pooled standard deviation
 
 **`EffectSizeAnalyzer`: label Cohen-style magnitude**
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Class definition
 
-{% highlight python %}
-class EffectSizeAnalyzer:
-    """Toolkit for analyzing and interpreting effect sizes"""
+Define `EffectSizeAnalyzer` to bundle interpretation and visualization of Cohen's d, r, and eta-squared in one place.
 
-    def interpret_effect_size(self, effect_size, type='cohen'):
-        """
-        Interpret effect size with rich context
+Public entry point
 
-        Parameters:
-        -----------
-        effect_size : float
-            Calculated effect size
-        type : str
-            Type of effect size ('cohen', 'r', 'eta')
-        """
-        interpretation = self._get_interpretation(effect_size, type)
+Call private interpretation and visualization helpers, save the figure, and return a structured interpretation dict.
 
-        # Create visualization
-        plt.figure(figsize=(10, 4))
+Magnitude thresholds
 
-        # Effect size scale
-        plt.subplot(121)
-        self._plot_effect_size_scale(effect_size, type)
+Map numeric effect to "small / medium / large / very large" using literature thresholds for Cohen's d, Pearson r, and eta-squared.
 
-        # Practical impact
-        plt.subplot(122)
-        self._plot_practical_impact(effect_size, type)
+Practical significance
 
-        plt.tight_layout()
-        plt.show()
-
-        return interpretation
-
-    def _get_interpretation(self, effect_size, type):
-        """Get detailed interpretation of effect size"""
-        # Get magnitude
-        magnitude = self._get_magnitude(effect_size, type)
-
-        # Get practical significance
-        practical = self._get_practical_significance(effect_size, type)
-
-        return {
-            'effect_size': effect_size,
-            'magnitude': magnitude,
-            'practical_significance': practical,
-            'interpretation': (
-                f"{magnitude.capitalize()} effect size ({effect_size:.3f})\n"
-                f"Practical Significance: {practical}"
-            )
-        }
-
-    def _get_magnitude(self, effect_size, type):
-        """Determine magnitude of effect size"""
-        if type == 'cohen':
-            thresholds = {0.2: 'small', 0.5: 'medium', 0.8: 'large'}
-        elif type == 'r':
-            thresholds = {0.1: 'small', 0.3: 'medium', 0.5: 'large'}
-        elif type == 'eta':
-            thresholds = {0.01: 'small', 0.06: 'medium', 0.14: 'large'}
-
-        abs_effect = abs(effect_size)
-        for threshold, magnitude in sorted(thresholds.items()):
-            if abs_effect < threshold:
-                return magnitude
-        return 'very large'
-
-    def _get_practical_significance(self, effect_size, type):
-        """Assess practical significance"""
-        magnitude = self._get_magnitude(effect_size, type)
-
-        if magnitude in ['large', 'very large']:
-            return "Likely to have substantial real-world impact"
-        elif magnitude == 'medium':
-            return "May have noticeable real-world impact"
-        else:
-            return "May have limited real-world impact"
-
-    def _plot_effect_size_scale(self, effect_size, type):
-        """Create effect size scale visualization"""
-        if type == 'cohen':
-            thresholds = [0.0, 0.2, 0.5, 0.8, 1.2]
-            labels = ['negligible', 'small', 'medium', 'large', 'very large']
-        else:
-            thresholds = [0.0, 0.1, 0.3, 0.5, 0.7]
-            labels = ['negligible', 'small', 'medium', 'large', 'very large']
-
-        colors = ['#d3d3d3', '#90ee90', '#ffd700', '#ff8c00', '#ff4500']
-        for i in range(len(thresholds) - 1):
-            plt.barh(0, thresholds[i + 1] - thresholds[i],
-                     left=thresholds[i], color=colors[i], alpha=0.6,
-                     label=labels[i])
-        plt.axvline(abs(effect_size), color='black', linewidth=2,
-                    label=f'Your effect ({effect_size:.2f})')
-        plt.yticks([])
-        plt.xlabel('Effect Size')
-        plt.title('Effect Size Scale')
-        plt.legend(loc='upper right', fontsize=8)
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-2" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Class definition</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Define <code>EffectSizeAnalyzer</code> to bundle interpretation and visualization of Cohen's d, r, and eta-squared in one place.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="4-31" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Public entry point</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Call private interpretation and visualization helpers, save the figure, and return a structured interpretation dict.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="53-63" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Magnitude thresholds</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Map numeric effect to "small / medium / large / very large" using literature thresholds for Cohen's d, Pearson r, and eta-squared.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="65-73" data-tint="4">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Practical significance</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Translate magnitude into a stakeholder-facing sentence about real-world impact, separating statistical rarity from practical importance.</p>
-    </div>
-  </div>
-</aside>
-</div>
+Translate magnitude into a stakeholder-facing sentence about real-world impact, separating statistical rarity from practical importance.
 
 ## From Results to Decisions
 
@@ -451,32 +218,32 @@ decision                      : SHIP - statistically and practically significant
 
 Translate statistics into stakes. Different audiences need different framings:
 
-| Audience | What they care about | How to frame it |
-|---|---|---|
-| **Engineers** | Is the result reliable? Will it hold at scale? | CI width, sample size, assumptions met |
-| **Product managers** | Should we ship? What's the business impact? | Relative lift %, CI, decision recommendation |
-| **Executives** | What's the revenue/cost impact? | Expected value calculation, risk if we're wrong |
-| **Analysts** | Can we trust the methodology? | Test selection rationale, assumption checks |
+| Audience             | What they care about                           | How to frame it                                 |
+| -------------------- | ---------------------------------------------- | ----------------------------------------------- |
+| **Engineers**        | Is the result reliable? Will it hold at scale? | CI width, sample size, assumptions met          |
+| **Product managers** | Should we ship? What's the business impact?    | Relative lift %, CI, decision recommendation    |
+| **Executives**       | What's the revenue/cost impact?                | Expected value calculation, risk if we're wrong |
+| **Analysts**         | Can we trust the methodology?                  | Test selection rationale, assumption checks     |
 
 A good one-paragraph summary covers: what changed, how much (with interval), confidence level, and the recommended action. Avoid raw p-values in executive summaries, "we're 95% confident the new checkout reduces cart abandonment by 1.4-2.4 percentage points" is more useful than "p = 0.003".
 
 ## Gotchas
 
-- **Conflating statistical significance with business importance**: the `SignificanceAnalyzer` buckets evidence as "Very Strong / Strong / Moderate" based solely on the p-value; a "Very Strong" result with a Cohen's d of 0.01 may be economically worthless. Always pair the significance label with an effect-size interpretation before making a recommendation.
-- **Applying Cohen's d thresholds (0.2 / 0.5 / 0.8) across all domains**: the `EffectSizeAnalyzer._get_magnitude` thresholds are conventions from psychology; in medicine a d of 0.2 may be clinically irrelevant, while in education research even a d of 0.1 is sometimes considered meaningful. Match the threshold to your domain's accepted standards.
-- **Reporting p-values without confidence intervals**: a p-value tells you direction and rough rarity; an interval tells you the *plausible range* of the true effect. The lesson builds a `SignificanceAnalyzer` that visualizes the null distribution but does not automatically produce a CI; add one before presenting to stakeholders.
-- **Stopping at "fail to reject H₀" without a power check**: a non-significant result in a small study may simply mean the test lacked power to detect the effect. Before concluding "no difference," compute post-hoc power or report the minimum detectable effect at your observed n; otherwise "no evidence of effect" is easily misread as "evidence of no effect."
-- **Using `_get_evidence_strength` thresholds as hard rules for action**: the p < 0.001 "Very Strong" band is a presentation aid; it does not override business context, cost-benefit analysis, or the number of other tests run in the same analysis. Always describe how many comparisons were made when reporting strength.
-- **Not checking assumptions before interpreting results**: the `SignificanceAnalyzer` accepts any p-value and t-statistic without verifying that the underlying test's assumptions (normality, equal variances, independence) were met. A visually clean significance plot built on a violated assumption is still a misleading output.
+* **Conflating statistical significance with business importance**: the `SignificanceAnalyzer` buckets evidence as "Very Strong / Strong / Moderate" based solely on the p-value; a "Very Strong" result with a Cohen's d of 0.01 may be economically worthless. Always pair the significance label with an effect-size interpretation before making a recommendation.
+* **Applying Cohen's d thresholds (0.2 / 0.5 / 0.8) across all domains**: the `EffectSizeAnalyzer._get_magnitude` thresholds are conventions from psychology; in medicine a d of 0.2 may be clinically irrelevant, while in education research even a d of 0.1 is sometimes considered meaningful. Match the threshold to your domain's accepted standards.
+* **Reporting p-values without confidence intervals**: a p-value tells you direction and rough rarity; an interval tells you the _plausible range_ of the true effect. The lesson builds a `SignificanceAnalyzer` that visualizes the null distribution but does not automatically produce a CI; add one before presenting to stakeholders.
+* **Stopping at "fail to reject H₀" without a power check**: a non-significant result in a small study may simply mean the test lacked power to detect the effect. Before concluding "no difference," compute post-hoc power or report the minimum detectable effect at your observed n; otherwise "no evidence of effect" is easily misread as "evidence of no effect."
+* **Using `_get_evidence_strength` thresholds as hard rules for action**: the p < 0.001 "Very Strong" band is a presentation aid; it does not override business context, cost-benefit analysis, or the number of other tests run in the same analysis. Always describe how many comparisons were made when reporting strength.
+* **Not checking assumptions before interpreting results**: the `SignificanceAnalyzer` accepts any p-value and t-statistic without verifying that the underlying test's assumptions (normality, equal variances, independence) were met. A visually clean significance plot built on a violated assumption is still a misleading output.
 
 ## Next steps
 
-- Start [Relationships in data (module 4.3)](../4.3-rship-in-data/README.md) with [Understanding relationships](../4.3-rship-in-data/understanding-relationships.md).
+* Start [Relationships in data (module 4.3)](../4.3-rship-in-data/) with [Understanding relationships](../4.3-rship-in-data/understanding-relationships.md).
 
 ## Additional Resources
 
-- [Effect Size Calculator](https://www.psychometrica.de/effect_size.html)
-- [Decision Making Framework](https://hbr.org/2019/09/the-abcs-of-data-driven-decisions)
-- [Results Communication Guide](https://www.nature.com/articles/s41467-020-17896-w)
+* [Effect Size Calculator](https://www.psychometrica.de/effect_size.html)
+* [Decision Making Framework](https://hbr.org/2019/09/the-abcs-of-data-driven-decisions)
+* [Results Communication Guide](https://www.nature.com/articles/s41467-020-17896-w)
 
 Remember: Good analysis isn't just about finding statistical significance - it's about making informed decisions that create real value!

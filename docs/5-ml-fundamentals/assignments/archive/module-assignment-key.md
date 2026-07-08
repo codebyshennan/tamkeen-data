@@ -4,151 +4,125 @@
 
 ### Section 1: Machine Learning Fundamentals
 
-1. Answer: a. Algorithms that learn from data
-   **Explanation**: Machine learning:
-   - Enables systems to learn patterns from data
-   - Improves performance with experience
-   - Makes predictions on new data
-   - Automates decision-making
-   Key aspects:
-   - Data-driven approach
-   - Pattern recognition
-   - Generalization ability
-   - Minimal human intervention
+1.  Answer: a. Algorithms that learn from data **Explanation**: Machine learning:
 
-   *For more information, see: [What is ML](../5.1-intro-to-ml/what-is-ml.md)*
+    * Enables systems to learn patterns from data
+    * Improves performance with experience
+    * Makes predictions on new data
+    * Automates decision-making Key aspects:
+    * Data-driven approach
+    * Pattern recognition
+    * Generalization ability
+    * Minimal human intervention
 
-2. Answer: a. Creating new features from existing data
-   **Explanation**: Feature engineering involves:
-   - Transforming raw data into useful features
-   - Creating meaningful representations
-   - Incorporating domain knowledge
-   - Improving model performance
-   Common techniques:
-   - Scaling and normalization
-   - One-hot encoding
-   - Binning/discretization
-   - Interaction features
-   - Polynomial features
+    _For more information, see:_ [_What is ML_](../../5.1-intro-to-ml/what-is-ml.md)
+2.  Answer: a. Creating new features from existing data **Explanation**: Feature engineering involves:
 
-   *For more information, see: [Feature Engineering](../5.1-intro-to-ml/feature-engineering.md)*
+    * Transforming raw data into useful features
+    * Creating meaningful representations
+    * Incorporating domain knowledge
+    * Improving model performance Common techniques:
+    * Scaling and normalization
+    * One-hot encoding
+    * Binning/discretization
+    * Interaction features
+    * Polynomial features
 
-3. Answer: a. Balance between model complexity and generalization
-   **Explanation**: The bias-variance tradeoff:
-   - Represents fundamental ML challenge
-   - Balances underfitting vs. overfitting
-   - Affects model generalization
-   - Guides model selection
-   Key concepts:
-   - High bias: Underfitting
-   - High variance: Overfitting
-   - Optimal balance depends on data
-   - Related to model complexity
+    _For more information, see:_ [_Feature Engineering_](../../5.1-intro-to-ml/feature-engineering.md)
+3.  Answer: a. Balance between model complexity and generalization **Explanation**: The bias-variance tradeoff:
 
-   *For more information, see: [Bias-Variance](../5.1-intro-to-ml/bias-variance.md)*
+    * Represents fundamental ML challenge
+    * Balances underfitting vs. overfitting
+    * Affects model generalization
+    * Guides model selection Key concepts:
+    * High bias: Underfitting
+    * High variance: Overfitting
+    * Optimal balance depends on data
+    * Related to model complexity
 
-4. Answer: a. Assessing model performance on unseen data
-   **Explanation**: Cross-validation:
-   - Evaluates model generalization
-   - Provides robust performance estimates
-   - Helps detect overfitting
-   - Guides hyperparameter tuning
-   Implementation involves:
-   - Splitting data multiple times
-   - Training on different subsets
-   - Testing on held-out data
-   - Averaging performance metrics
+    _For more information, see:_ [_Bias-Variance_](../../5.1-intro-to-ml/bias-variance.md)
+4.  Answer: a. Assessing model performance on unseen data **Explanation**: Cross-validation:
 
-   *For more information, see: [ML Workflow](../5.1-intro-to-ml/ml-workflow.md)*
+    * Evaluates model generalization
+    * Provides robust performance estimates
+    * Helps detect overfitting
+    * Guides hyperparameter tuning Implementation involves:
+    * Splitting data multiple times
+    * Training on different subsets
+    * Testing on held-out data
+    * Averaging performance metrics
 
-5. Answer: a. Supervised uses labeled data, unsupervised doesn't
-   **Explanation**: Key differences:
-   - Supervised Learning:
-     * Uses labeled training data
-     * Has defined target variable
-     * Makes predictions
-     * Examples: classification, regression
-   - Unsupervised Learning:
-     * Uses unlabeled data
-     * Finds hidden patterns
-     * No target variable
-     * Examples: clustering, dimensionality reduction
+    _For more information, see:_ [_ML Workflow_](../../5.1-intro-to-ml/ml-workflow.md)
+5.  Answer: a. Supervised uses labeled data, unsupervised doesn't **Explanation**: Key differences:
 
-   *For more information, see: [What is ML](../5.1-intro-to-ml/what-is-ml.md)*
+    * Supervised Learning:
+      * Uses labeled training data
+      * Has defined target variable
+      * Makes predictions
+      * Examples: classification, regression
+    * Unsupervised Learning:
+      * Uses unlabeled data
+      * Finds hidden patterns
+      * No target variable
+      * Examples: clustering, dimensionality reduction
+
+    _For more information, see:_ [_What is ML_](../../5.1-intro-to-ml/what-is-ml.md)
 
 ### Section 2: Supervised Learning
 
-6. Answer: a. Bayes' theorem with independence assumption
-   **Explanation**: Naive Bayes:
-   - Uses Bayes' theorem P(y|X) ∝ P(X|y)P(y)
-   - Assumes feature independence
-   - Efficient for high-dimensional data
-   - Popular in text classification
-
-7. Answer: a. Similar instances belong to same class
-   **Explanation**: k-Nearest Neighbors:
-   - Instance-based learning
-   - Uses distance metrics
-   - Non-parametric method
-   - Local decision making
-
-8. Answer: a. Maximum margin hyperplane
-   **Explanation**: Support Vector Machines:
-   - Finds optimal separating hyperplane
-   - Maximizes margin between classes
-   - Uses support vectors
-   - Kernel trick for non-linearity
-
-9. Answer: a. Ensemble of decision trees
-   **Explanation**: Random Forest:
-   - Combines multiple decision trees
-   - Uses bootstrap sampling
-   - Random feature selection
-   - Reduces overfitting
-
-10. Answer: a. Regularization technique
-    **Explanation**: Dropout:
-    - Randomly deactivates neurons
-    - Prevents co-adaptation
-    - Reduces overfitting
-    - Acts as model averaging
+6. Answer: a. Bayes' theorem with independence assumption **Explanation**: Naive Bayes:
+   * Uses Bayes' theorem P(y|X) ∝ P(X|y)P(y)
+   * Assumes feature independence
+   * Efficient for high-dimensional data
+   * Popular in text classification
+7. Answer: a. Similar instances belong to same class **Explanation**: k-Nearest Neighbors:
+   * Instance-based learning
+   * Uses distance metrics
+   * Non-parametric method
+   * Local decision making
+8. Answer: a. Maximum margin hyperplane **Explanation**: Support Vector Machines:
+   * Finds optimal separating hyperplane
+   * Maximizes margin between classes
+   * Uses support vectors
+   * Kernel trick for non-linearity
+9. Answer: a. Ensemble of decision trees **Explanation**: Random Forest:
+   * Combines multiple decision trees
+   * Uses bootstrap sampling
+   * Random feature selection
+   * Reduces overfitting
+10. Answer: a. Regularization technique **Explanation**: Dropout:
+    * Randomly deactivates neurons
+    * Prevents co-adaptation
+    * Reduces overfitting
+    * Acts as model averaging
 
 ### Section 3: Unsupervised Learning
 
-11. Answer: a. Dimensionality reduction
-    **Explanation**: Principal Component Analysis:
-    - Linear dimensionality reduction
-    - Preserves maximum variance
-    - Creates orthogonal components
-    - Useful for visualization
-
-12. Answer: a. Visualization of high-dimensional data
-    **Explanation**: t-SNE:
-    - Non-linear dimensionality reduction
-    - Preserves local structure
-    - Better for visualization
-    - Handles complex patterns
-
-13. Answer: a. Partitioning data into k groups
-    **Explanation**: k-means clustering:
-    - Iterative algorithm
-    - Minimizes within-cluster variance
-    - Requires number of clusters (k)
-    - Centroid-based method
-
-14. Answer: a. Creating tree of nested clusters
-    **Explanation**: Hierarchical clustering:
-    - Creates cluster hierarchy
-    - No predefined cluster number
-    - Dendrogram visualization
-    - Multiple clustering levels
-
-15. Answer: a. Density-based clustering
-    **Explanation**: DBSCAN:
-    - Finds dense regions
-    - Handles noise points
-    - No predefined clusters
-    - Shape-flexible clustering
+11. Answer: a. Dimensionality reduction **Explanation**: Principal Component Analysis:
+    * Linear dimensionality reduction
+    * Preserves maximum variance
+    * Creates orthogonal components
+    * Useful for visualization
+12. Answer: a. Visualization of high-dimensional data **Explanation**: t-SNE:
+    * Non-linear dimensionality reduction
+    * Preserves local structure
+    * Better for visualization
+    * Handles complex patterns
+13. Answer: a. Partitioning data into k groups **Explanation**: k-means clustering:
+    * Iterative algorithm
+    * Minimizes within-cluster variance
+    * Requires number of clusters (k)
+    * Centroid-based method
+14. Answer: a. Creating tree of nested clusters **Explanation**: Hierarchical clustering:
+    * Creates cluster hierarchy
+    * No predefined cluster number
+    * Dendrogram visualization
+    * Multiple clustering levels
+15. Answer: a. Density-based clustering **Explanation**: DBSCAN:
+    * Finds dense regions
+    * Handles noise points
+    * No predefined clusters
+    * Shape-flexible clustering
 
 ## Part B: Implementation Tasks
 
@@ -418,50 +392,44 @@ class HyperparameterOptimizer:
 ## Implementation Notes
 
 1. The Naive Bayes implementation includes:
-   - Laplace smoothing for zero probabilities
-   - Log probabilities for numerical stability
-   - Vectorized operations for efficiency
-
+   * Laplace smoothing for zero probabilities
+   * Log probabilities for numerical stability
+   * Vectorized operations for efficiency
 2. Customer segmentation pipeline:
-   - Standardization for equal feature scaling
-   - PCA for dimension reduction
-   - Multiple clustering techniques
-   - Visualization for interpretation
-
+   * Standardization for equal feature scaling
+   * PCA for dimension reduction
+   * Multiple clustering techniques
+   * Visualization for interpretation
 3. Model evaluation framework provides:
-   - Comprehensive performance metrics
-   - Visual analysis tools
-   - Cross-validation support
-   - Interpretability features
-
+   * Comprehensive performance metrics
+   * Visual analysis tools
+   * Cross-validation support
+   * Interpretability features
 4. Hyperparameter optimization:
-   - Multiple optimization strategies
-   - Efficient parameter space exploration
-   - Comparative analysis
-   - Visualization of results
+   * Multiple optimization strategies
+   * Efficient parameter space exploration
+   * Comparative analysis
+   * Visualization of results
 
 ## Common Pitfalls and Best Practices
 
 1. Data Preprocessing:
-   - Always scale features for distance-based algorithms
-   - Handle missing values appropriately
-   - Check for data leakage
-   - Validate data quality
-
+   * Always scale features for distance-based algorithms
+   * Handle missing values appropriately
+   * Check for data leakage
+   * Validate data quality
 2. Model Selection:
-   - Consider problem requirements
-   - Balance complexity vs performance
-   - Validate assumptions
-   - Use appropriate metrics
-
+   * Consider problem requirements
+   * Balance complexity vs performance
+   * Validate assumptions
+   * Use appropriate metrics
 3. Evaluation:
-   - Use cross-validation
-   - Consider statistical significance
-   - Check for overfitting
-   - Validate on holdout set
-
+   * Use cross-validation
+   * Consider statistical significance
+   * Check for overfitting
+   * Validate on holdout set
 4. Implementation:
-   - Optimize for efficiency
-   - Include error handling
-   - Document assumptions
-   - Test edge cases
+   * Optimize for efficiency
+   * Include error handling
+   * Document assumptions
+   * Test edge cases

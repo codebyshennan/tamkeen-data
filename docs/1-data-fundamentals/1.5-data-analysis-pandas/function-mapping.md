@@ -4,52 +4,46 @@
 
 ### Video
 
-<div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/DCDe29sIKcE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-*Corey Schafer, Python pandas tutorial (part 5): updating rows and columns (maps, replaces, transforms)*
+_Corey Schafer, Python pandas tutorial (part 5): updating rows and columns (maps, replaces, transforms)_
 
 ## Overview
 
-**Prerequisites:** Python **functions** and [Series](./series.md) / [DataFrame](./dataframe.md) basics.
+**Prerequisites:** Python **functions** and [Series](series.md) / [DataFrame](dataframe.md) basics.
 
-**Why this lesson:** Real tables need row- or column-level rules: normalize strings, parse dates, clip outliers, or compute features. **apply**, **map**, **applymap** (older) / **map** + **assign**, and **transform** are the main ways to plug Python logic into pandas, knowing *when* each is appropriate keeps code fast and readable.
+**Why this lesson:** Real tables need row- or column-level rules: normalize strings, parse dates, clip outliers, or compute features. **apply**, **map**, **applymap** (older) / **map** + **assign**, and **transform** are the main ways to plug Python logic into pandas, knowing _when_ each is appropriate keeps code fast and readable.
 
 ## Understanding Function Application
 
----
+***
 
 ### What is Function Application?
 
 Function application in Pandas means applying a function to your data to transform or analyze it. Think of it like:
 
-{% include mermaid-diagram.html src="1-data-fundamentals/1.5-data-analysis-pandas/diagrams/function-mapping-1.mmd" %}
+_`apply` is flexible but slow on large DataFrames, prefer built-in vectorised methods (`.str`, `.dt`, arithmetic) whenever they exist._
 
-*`apply` is flexible but slow on large DataFrames, prefer built-in vectorised methods (`.str`, `.dt`, arithmetic) whenever they exist.*
-
-- A recipe that you apply to each ingredient
-- A rule that processes each piece of data
-- A transformation that changes values
-- A filter that selects specific data
-- An analysis that extracts insights
+* A recipe that you apply to each ingredient
+* A rule that processes each piece of data
+* A transformation that changes values
+* A filter that selects specific data
+* An analysis that extracts insights
 
 Key benefits:
 
-- Efficient data processing
-- Consistent transformations
-- Complex calculations
-- Custom data manipulation
+* Efficient data processing
+* Consistent transformations
+* Complex calculations
+* Custom data manipulation
 
 Real-world applications:
 
-- Financial calculations (interest, tax)
-- Data cleaning (standardization)
-- Feature engineering (ML preparation)
-- Date/time processing
-- Text analysis and cleaning
+* Financial calculations (interest, tax)
+* Data cleaning (standardization)
+* Feature engineering (ML preparation)
+* Date/time processing
+* Text analysis and cleaning
 
----
+***
 
 ### Basic Function Application
 
@@ -57,61 +51,9 @@ we will look at with practical examples:
 
 **`Series.apply` for grades and cleaning**
 
-- **Purpose:** Map numeric scores to letter buckets with a Python function, then clean currency strings and whitespace on a second table.
-- **Walkthrough:** `df[subject].apply(to_letter_grade)` is per-cell; `clean_price` strips `$` and commas before `float`.
+* **Purpose:** Map numeric scores to letter buckets with a Python function, then clean currency strings and whitespace on a second table.
+* **Walkthrough:** `df[subject].apply(to_letter_grade)` is per-cell; `clean_price` strips `$` and commas before `float`.
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
-
-{% highlight python %}
-import pandas as pd
-import numpy as np
-
-# Example 1: Student Grades Processing
-df = pd.DataFrame({
-    'Name': ['Alice', 'Bob', 'Charlie'],
-    'Math': [85, 76, 92],
-    'Science': [92, 88, 95],
-    'History': [88, 82, 85]
-})
-
-print("Original grades:")
-print(df)
-
-def to_letter_grade(score):
-    if score >= 90: return 'A'
-    elif score >= 80: return 'B'
-    elif score >= 70: return 'C'
-    else: return 'F'
-
-for subject in ['Math', 'Science', 'History']:
-    df[f'{subject}_Grade'] = df[subject].apply(to_letter_grade)
-
-print("\nWith letter grades:")
-print(df)
-
-# Example 2: Data Cleaning and Transformation
-sales_data = pd.DataFrame({
-    'Date': ['2023-01-01', '2023-01-02', '2023-01-03'],
-    'Product': ['Laptop', 'Mouse   ', ' Keyboard'],
-    'Price': ['$1,200', '$25.99', '$89.99'],
-    'Quantity': ['5', '10', '8']
-})
-
-def clean_price(price):
-    return float(price.replace('$', '').replace(',', ''))
-
-def clean_product(product):
-    return product.strip()
-
-sales_data['Price'] = sales_data['Price'].apply(clean_price)
-sales_data['Product'] = sales_data['Product'].apply(clean_product)
-sales_data['Quantity'] = sales_data['Quantity'].astype(int)
-sales_data['Total'] = sales_data['Price'] * sales_data['Quantity']
-
-print("\nCleaned sales data:")
-print(sales_data)
-{% endhighlight %}
 ```
 Original grades:
       Name  Math  Science  History
@@ -132,38 +74,17 @@ Cleaned sales data:
 2  2023-01-03  Keyboard    89.99         8   719.92
 ```
 
+Imports
 
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-3" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Imports</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Imports pandas and NumPy, the only two dependencies for basic function application examples.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="5-25" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Grade Bucketing</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Defines a letter-grade function and applies it to each numeric column with a loop, the simplest per-element apply pattern.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="27-48" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Data Cleaning</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Defines separate clean functions for price strings and product names, then chains <code>apply</code>, <code>astype</code>, and arithmetic to produce a tidy sales total column.</p>
-    </div>
-  </div>
-</aside>
-</div>
+Imports pandas and NumPy, the only two dependencies for basic function application examples.
+
+Grade Bucketing
+
+Defines a letter-grade function and applies it to each numeric column with a loop, the simplest per-element apply pattern.
+
+Data Cleaning
+
+Defines separate clean functions for price strings and product names, then chains `apply`, `astype`, and arithmetic to produce a tidy sales total column.
 
 ```
 Original grades:
@@ -187,7 +108,7 @@ Cleaned sales data:
 
 ## Different Ways to Apply Functions
 
----
+***
 
 ### Using apply()
 
@@ -195,8 +116,8 @@ The `apply()` method is the most versatile way to apply functions:
 
 **Row-wise `apply` with `axis=1`**
 
-- **Purpose:** Compute a value from multiple columns in the same row (revenue = price × quantity).
-- **Walkthrough:** `calculate_revenue(row)` receives a Series for each row when `axis=1`.
+* **Purpose:** Compute a value from multiple columns in the same row (revenue = price × quantity).
+* **Walkthrough:** `calculate_revenue(row)` receives a Series for each row when `axis=1`.
 
 ```python
 # Create a DataFrame with sales data
@@ -226,10 +147,10 @@ Sales with revenue:
 
 The **axis** parameter determines whether the function is applied to:
 
-- rows (**axis=1**)
-- columns (**axis=0** or default)
+* rows (**axis=1**)
+* columns (**axis=0** or default)
 
----
+***
 
 ### Using applymap()
 
@@ -237,8 +158,8 @@ The **axis** parameter determines whether the function is applied to:
 
 **Element-wise formatting (use `map` in modern pandas for a single column)**
 
-- **Purpose:** Transform every cell, here format floats as strings with two decimals for display.
-- **Walkthrough:** `applymap` receives scalar `x` per cell; pandas 2.1+ prefers `DataFrame.map` for the same idea.
+* **Purpose:** Transform every cell, here format floats as strings with two decimals for display.
+* **Walkthrough:** `applymap` receives scalar `x` per cell; pandas 2.1+ prefers `DataFrame.map` for the same idea.
 
 ```python
 # Create a DataFrame with numbers
@@ -256,7 +177,7 @@ print("\nFormatted numbers:")
 print(formatted_df)
 ```
 
----
+***
 
 ### Using map() with Series
 
@@ -264,8 +185,8 @@ For Series objects, use `map()` to transform values:
 
 **Dictionary lookup on a Series**
 
-- **Purpose:** Replace codes with human-readable labels using a dict, faster than nested `if` for large code tables.
-- **Walkthrough:** `products.map(product_names)` aligns index to the original Series.
+* **Purpose:** Replace codes with human-readable labels using a dict, faster than nested `if` for large code tables.
+* **Walkthrough:** `products.map(product_names)` aligns index to the original Series.
 
 ```python
 # Create a Series of product codes
@@ -303,7 +224,7 @@ dtype: str
 
 ## Real-World Examples
 
----
+***
 
 ### Data Cleaning Example
 
@@ -311,8 +232,8 @@ Clean and standardize customer data:
 
 **Title-case names and normalize phones**
 
-- **Purpose:** Show per-column cleaning pipelines, string methods for names, digit extraction for phones.
-- **Walkthrough:** `filter(str.isdigit, phone)` keeps digits before slicing into `XXX-XXX-XXXX`.
+* **Purpose:** Show per-column cleaning pipelines, string methods for names, digit extraction for phones.
+* **Walkthrough:** `filter(str.isdigit, phone)` keeps digits before slicing into `XXX-XXX-XXXX`.
 
 ```python
 # Create a DataFrame with messy customer data
@@ -349,7 +270,7 @@ Cleaned customer data:
 2  Bob Wilson   bob@email.com  555-444-3333
 ```
 
----
+***
 
 ### Data Analysis Example
 
@@ -357,53 +278,13 @@ Calculate statistics for student grades:
 
 **Return a Series per row from `apply`**
 
-- **Purpose:** Aggregate each student's quiz columns into average, min, max, and a boolean trend flag in one pass.
-- **Walkthrough:** `analyze_grades` returns `pd.Series(...)`; `apply(..., axis=1)` stacks those into new columns.
+* **Purpose:** Aggregate each student's quiz columns into average, min, max, and a boolean trend flag in one pass.
+* **Walkthrough:** `analyze_grades` returns `pd.Series(...)`; `apply(..., axis=1)` stacks those into new columns.
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+\`\`\` Original grades: Student Quiz1 Quiz2 Quiz3 0 Alice 95 88 92 1 Bob 80 85 88 2 Charlie 85 90 85 3 David 70 75 80
 
-{% highlight python %}
-# Create grade data
-grades = pd.DataFrame({
-    'Student': ['Alice', 'Bob', 'Charlie', 'David'],
-    'Quiz1': [95, 80, 85, 70],
-    'Quiz2': [88, 85, 90, 75],
-    'Quiz3': [92, 88, 85, 80]
-})
+Grade analysis: Average Highest Lowest Improved 0 91.666667 95 88 False 1 84.333333 88 80 True 2 86.666667 90 85 False 3 75.000000 80 70 True
 
-# Calculate various statistics
-def analyze_grades(row):
-    grades_only = row[['Quiz1', 'Quiz2', 'Quiz3']]
-    return pd.Series({
-        'Average': grades_only.mean(),
-        'Highest': grades_only.max(),
-        'Lowest': grades_only.min(),
-        'Improved': grades_only['Quiz3'] > grades_only['Quiz1']
-    })
-
-# Apply analysis
-analysis = grades.apply(analyze_grades, axis=1)
-
-print("Original grades:")
-print(grades)
-print("\nGrade analysis:")
-print(analysis)
-{% endhighlight %}
-```
-Original grades:
-   Student  Quiz1  Quiz2  Quiz3
-0    Alice     95     88     92
-1      Bob     80     85     88
-2  Charlie     85     90     85
-3    David     70     75     80
-
-Grade analysis:
-     Average  Highest  Lowest  Improved
-0  91.666667       95      88     False
-1  84.333333       88      80      True
-2  86.666667       90      85     False
-3  75.000000       80      70      True
 ```
 
 
@@ -440,20 +321,12 @@ Grade analysis:
 </div>
 
 ```
-Original grades:
-   Student  Quiz1  Quiz2  Quiz3
-0    Alice     95     88     92
-1      Bob     80     85     88
-2  Charlie     85     90     85
-3    David     70     75     80
 
-Grade analysis:
-     Average  Highest  Lowest  Improved
-0  91.666667       95      88     False
-1  84.333333       88      80      True
-2  86.666667       90      85     False
-3  75.000000       80      70      True
-```
+Original grades: Student Quiz1 Quiz2 Quiz3 0 Alice 95 88 92 1 Bob 80 85 88 2 Charlie 85 90 85 3 David 70 75 80
+
+Grade analysis: Average Highest Lowest Improved 0 91.666667 95 88 False 1 84.333333 88 80 True 2 86.666667 90 85 False 3 75.000000 80 70 True
+
+````
 
 ## Best Practices and Tips
 
@@ -469,92 +342,89 @@ Grade analysis:
 
    # Faster: Using vectorized operations
    df['Double'] = df['Value'] * 2
-   ```
+````
 
-2. **Built-in Methods**:
+2.  **Built-in Methods**:
 
-   ```python
-   # Use built-in methods when available
-   # Instead of:
-   df['Sum'] = df[['A', 'B']].apply(lambda x: x['A'] + x['B'], axis=1)
+    ```python
+    # Use built-in methods when available
+    # Instead of:
+    df['Sum'] = df[['A', 'B']].apply(lambda x: x['A'] + x['B'], axis=1)
 
-   # Use:
-   df['Sum'] = df['A'] + df['B']
-   ```
+    # Use:
+    df['Sum'] = df['A'] + df['B']
+    ```
 
----
+***
 
 ### Function Design Tips
 
-1. **Keep Functions Simple**:
+1.  **Keep Functions Simple**:
 
-   ```python
-   # Good: Single responsibility
-   def calculate_tax(amount):
-       return amount * 0.2
+    ```python
+    # Good: Single responsibility
+    def calculate_tax(amount):
+        return amount * 0.2
 
-   # Bad: Too many responsibilities
-   def process_sale(amount):
-       tax = amount * 0.2
-       shipping = 10
-       discount = amount * 0.1
-       return amount + tax + shipping - discount
-   ```
+    # Bad: Too many responsibilities
+    def process_sale(amount):
+        tax = amount * 0.2
+        shipping = 10
+        discount = amount * 0.1
+        return amount + tax + shipping - discount
+    ```
+2.  **Handle Edge Cases**:
 
-2. **Handle Edge Cases**:
+    ```python
+    def safe_division(x):
+        try:
+            return 100 / x
+        except ZeroDivisionError:
+            return np.nan
 
-   ```python
-   def safe_division(x):
-       try:
-           return 100 / x
-       except ZeroDivisionError:
-           return np.nan
-
-   df['Result'] = df['Value'].apply(safe_division)
-   ```
+    df['Result'] = df['Value'].apply(safe_division)
+    ```
 
 ## Common Pitfalls and Solutions
 
-1. **Modifying Data During Apply**:
+1.  **Modifying Data During Apply**:
 
-   ```python
-   # Wrong: Modifying DataFrame during apply
-   def bad_function(row):
-       df.at[row.name, 'NewCol'] = row['Value'] * 2  # Don't do this
-       return row
+    ```python
+    # Wrong: Modifying DataFrame during apply
+    def bad_function(row):
+        df.at[row.name, 'NewCol'] = row['Value'] * 2  # Don't do this
+        return row
 
-   # Right: Return new values
-   def good_function(row):
-       return row['Value'] * 2
-   ```
+    # Right: Return new values
+    def good_function(row):
+        return row['Value'] * 2
+    ```
+2.  **Choosing the Wrong Axis**:
 
-2. **Choosing the Wrong Axis**:
+    ```python
+    # Remember:
+    # axis=0 (default) -> apply function to each column
+    # axis=1 -> apply function to each row
 
-   ```python
-   # Remember:
-   # axis=0 (default) -> apply function to each column
-   # axis=1 -> apply function to each row
+    # For row operations:
+    df.apply(func, axis=1)
 
-   # For row operations:
-   df.apply(func, axis=1)
+    # For column operations:
+    df.apply(func, axis=0)  # or just df.apply(func)
+    ```
+3.  **Performance with Large Datasets**:
 
-   # For column operations:
-   df.apply(func, axis=0)  # or just df.apply(func)
-   ```
+    ```python
+    # If possible, use vectorized operations
+    # Instead of:
+    df['Celsius'] = df['Fahrenheit'].apply(lambda x: (x - 32) * 5/9)
 
-3. **Performance with Large Datasets**:
-
-   ```python
-   # If possible, use vectorized operations
-   # Instead of:
-   df['Celsius'] = df['Fahrenheit'].apply(lambda x: (x - 32) * 5/9)
-
-   # Use:
-   df['Celsius'] = (df['Fahrenheit'] - 32) * 5/9
-   ```
+    # Use:
+    df['Celsius'] = (df['Fahrenheit'] - 32) * 5/9
+    ```
 
 Remember: Choose the right function application method based on your needs, and always consider performance implications when working with large datasets!
 
 ## Next steps
 
-Continue to [Sorting and ranking](./sorting-ranking.md), then [Arithmetic and alignment](./arithmetic-alignment.md).
+Continue to [Sorting and ranking](sorting-ranking.md), then [Arithmetic and alignment](arithmetic-alignment.md).

@@ -4,58 +4,52 @@
 
 ### Video
 
-<div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/zmdjNSmRXF4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-*Corey Schafer, Python pandas tutorial (part 2): DataFrame and Series basics*
+_Corey Schafer, Python pandas tutorial (part 2): DataFrame and Series basics_
 
 ## Overview
 
-**Prerequisites:** [Series](./series.md) and [DataFrame](./dataframe.md) basics.
+**Prerequisites:** [Series](series.md) and [DataFrame](dataframe.md) basics.
 
 **Why this lesson:** Every column has a **dtype**; wrong dtypes break math (strings that look like numbers), waste memory (`int64` where `int8` would do), or hide bugs (`object` columns that should be categorical). The **index** labels rows, misunderstanding it breaks joins and alignment. This page connects dtypes and index to everyday fixes.
 
 ## Data types (dtypes)
 
----
+***
 
 ### What are Data Types?
 
 In Pandas, each column in a DataFrame (or each value in a Series) has a specific data type (dtype). Understanding data types is important for:
 
-- Memory efficiency
-- Better performance
-- Correct calculations
-- Proper data handling
+* Memory efficiency
+* Better performance
+* Correct calculations
+* Proper data handling
 
-{% include mermaid-diagram.html src="1-data-fundamentals/1.5-data-analysis-pandas/diagrams/data-types-index-1.mmd" %}
-
-*After loading a CSV, always call `df.dtypes` and `df.info()`. Columns that should be numeric but show `object` usually contain stray text (e.g. `"$1,200"` or `"N/A"`). Fix those before doing any math.*
+_After loading a CSV, always call `df.dtypes` and `df.info()`. Columns that should be numeric but show `object` usually contain stray text (e.g. `"$1,200"` or `"N/A"`). Fix those before doing any math._
 
 Common data types include:
 
-- **numbers**:
-  - `int64` (whole numbers: age, count)
-  - `float64` (decimal numbers: price, temperature)
-- **text**:
-  - `object` or `string` (names, categories)
-  - Use `string` when possible (more efficient than `object`)
-- **boolean**:
-  - `bool` (True/False: is_active, has_subscription)
-- **dates**:
-  - `datetime64` (timestamps, calendar dates)
-  - `timedelta64` (time differences)
-- **categorical**:
-  - For limited unique values (status, grade)
-  - More memory efficient than strings
+* **numbers**:
+  * `int64` (whole numbers: age, count)
+  * `float64` (decimal numbers: price, temperature)
+* **text**:
+  * `object` or `string` (names, categories)
+  * Use `string` when possible (more efficient than `object`)
+* **boolean**:
+  * `bool` (True/False: is\_active, has\_subscription)
+* **dates**:
+  * `datetime64` (timestamps, calendar dates)
+  * `timedelta64` (time differences)
+* **categorical**:
+  * For limited unique values (status, grade)
+  * More memory efficient than strings
 
 we will look at them in action:
 
 **Mixed dtypes in one DataFrame**
 
-- **Purpose:** Inspect `dtypes`, per-column memory, `describe()`, and `info()` on a toy table mixing numeric, string, bool, datetime, and categorical.
-- **Walkthrough:** `pd.Categorical`, `pd.date_range`, `memory_usage(deep=True)` for object-heavy columns.
+* **Purpose:** Inspect `dtypes`, per-column memory, `describe()`, and `info()` on a toy table mixing numeric, string, bool, datetime, and categorical.
+* **Walkthrough:** `pd.Categorical`, `pd.date_range`, `memory_usage(deep=True)` for object-heavy columns.
 
 ```python
 import pandas as pd
@@ -137,8 +131,8 @@ Real-world example - Sales data:
 
 **Categorical product + vectorized revenue**
 
-- **Purpose:** Use `category` for low-cardinality product names and compute total sales with element-wise `Price * Quantity`.
-- **Walkthrough:** `sales_df['Product'].unique()` respects category order; sum the multiplied Series.
+* **Purpose:** Use `category` for low-cardinality product names and compute total sales with element-wise `Price * Quantity`.
+* **Walkthrough:** `sales_df['Product'].unique()` respects category order; sum the multiplied Series.
 
 ```python
 # Create sales data with appropriate types
@@ -170,7 +164,7 @@ Categories (3, str): ['Keyboard', 'Laptop', 'Mouse']
 Total Sales: 10561.25
 ```
 
----
+***
 
 ### Checking and Converting Data Types
 
@@ -178,8 +172,8 @@ You can check and change data types easily:
 
 **`astype` for numeric Series**
 
-- **Purpose:** Convert string digits to `int64` so you can do math without Python loops.
-- **Walkthrough:** `numbers.astype('int64')` returns a new Series, assign back to replace.
+* **Purpose:** Convert string digits to `int64` so you can do math without Python loops.
+* **Walkthrough:** `numbers.astype('int64')` returns a new Series, assign back to replace.
 
 ```python
 # Create a Series with numbers as strings
@@ -205,8 +199,8 @@ Common type conversions:
 
 **String ↔ float, int ↔ string, parse dates**
 
-- **Purpose:** Remember three frequent casts: decimals as text → float, integers → pandas `string` dtype, ISO-like strings → `datetime64` via `to_datetime`.
-- **Walkthrough:** `pd.to_datetime` is flexible with string Series.
+* **Purpose:** Remember three frequent casts: decimals as text → float, integers → pandas `string` dtype, ISO-like strings → `datetime64` via `to_datetime`.
+* **Walkthrough:** `pd.to_datetime` is flexible with string Series.
 
 ```python
 # String to number
@@ -222,7 +216,7 @@ dates = pd.Series(['2023-01-01', '2023-01-02'])
 dates = pd.to_datetime(dates)
 ```
 
----
+***
 
 ### Selecting Columns by Data Type
 
@@ -230,8 +224,8 @@ You can select columns based on their data type:
 
 **`select_dtypes` for numeric vs text**
 
-- **Purpose:** Pull only **number** columns for modeling or only **object** columns for cleaning, avoids manual column lists.
-- **Walkthrough:** `include=['number']` picks both int and float; `include=['object']` matches this frame's strings.
+* **Purpose:** Pull only **number** columns for modeling or only **object** columns for cleaning, avoids manual column lists.
+* **Walkthrough:** `include=['number']` picks both int and float; `include=['object']` matches this frame's strings.
 
 ```python
 # Create a sample DataFrame
@@ -269,20 +263,20 @@ Text columns:
 
 ## Understanding Index
 
----
+***
 
 ### What is an Index?
 
 Think of an index as the "row labels" in your DataFrame or Series. It's like the row numbers in Excel, but more powerful because:
 
-- It can contain any immutable type (numbers, strings, dates)
-- It helps align data when performing operations
-- It makes accessing data more intuitive
+* It can contain any immutable type (numbers, strings, dates)
+* It helps align data when performing operations
+* It makes accessing data more intuitive
 
 **Series with month labels**
 
-- **Purpose:** Practice label-based lookup (`sales['Feb']`) as the mental model for row alignment later.
-- **Walkthrough:** Index is the first argument to `pd.Series` after values.
+* **Purpose:** Practice label-based lookup (`sales['Feb']`) as the mental model for row alignment later.
+* **Walkthrough:** Index is the first argument to `pd.Series` after values.
 
 ```python
 # Create a Series with a custom index
@@ -306,7 +300,7 @@ dtype: int64
 February sales: 120
 ```
 
----
+***
 
 ### Working with Index
 
@@ -314,8 +308,8 @@ You can perform various operations with index:
 
 **Custom row labels and index metadata**
 
-- **Purpose:** Read `df.index` as row names and check uniqueness before using the index as a join key.
-- **Walkthrough:** `index.is_unique` is quick validation for identifiers.
+* **Purpose:** Read `df.index` as row names and check uniqueness before using the index as a join key.
+* **Walkthrough:** `index.is_unique` is quick validation for identifiers.
 
 ```python
 # Create a DataFrame with custom index
@@ -343,7 +337,7 @@ Index values: ['Day 1', 'Day 2', 'Day 3']
 Is index unique? True
 ```
 
----
+***
 
 ### Setting and Resetting Index
 
@@ -351,8 +345,8 @@ You can change the index of your DataFrame:
 
 **`set_index` and `reset_index`**
 
-- **Purpose:** Move a column into the index for tidy lookup, then flatten back to a default `RangeIndex` when you need a column again.
-- **Walkthrough:** `set_index('City')` drops that column from columns; `reset_index()` promotes it back.
+* **Purpose:** Move a column into the index for tidy lookup, then flatten back to a default `RangeIndex` when you need a column again.
+* **Walkthrough:** `set_index('City')` drops that column from columns; `reset_index()` promotes it back.
 
 ```python
 # Create a DataFrame
@@ -374,42 +368,39 @@ print(df_reset)
 
 ## Best Practices for Data Types and Index
 
----
+***
 
 ### Data Type Best Practices
 
 1. **Choose Appropriate Types**:
-   - Use `int64` for whole numbers
-   - Use `float64` for decimal numbers
-   - Use `string` for text (better than `object`)
-   - Use `datetime64` for dates
-
+   * Use `int64` for whole numbers
+   * Use `float64` for decimal numbers
+   * Use `string` for text (better than `object`)
+   * Use `datetime64` for dates
 2. **Memory Efficiency**:
-   - Use smaller number types when possible (e.g., `int32` instead of `int64`)
-   - Convert object columns to more specific types when possible
-
+   * Use smaller number types when possible (e.g., `int32` instead of `int64`)
+   * Convert object columns to more specific types when possible
 3. **Type Consistency**:
-   - Keep data types consistent within columns
-   - Convert mixed-type columns to appropriate types
+   * Keep data types consistent within columns
+   * Convert mixed-type columns to appropriate types
 
----
+***
 
 ### Index Best Practices
 
 1. **Choose Meaningful Index**:
-   - Use business-relevant identifiers
-   - Ensure index values are unique when needed
-   - Consider using multiple index levels for complex data
-
+   * Use business-relevant identifiers
+   * Ensure index values are unique when needed
+   * Consider using multiple index levels for complex data
 2. **Index Operations**:
-   - Sort index for better performance
-   - Use index for faster data lookup
-   - Reset index when needed for calculations
+   * Sort index for better performance
+   * Use index for faster data lookup
+   * Reset index when needed for calculations
 
 **DateRange index for time series**
 
-- **Purpose:** Use a **DatetimeIndex** when rows are ordered in time, helps resampling and joins later.
-- **Walkthrough:** `pd.date_range('2023-01-01', periods=3)` as `index=` sets daily timestamps.
+* **Purpose:** Use a **DatetimeIndex** when rows are ordered in time, helps resampling and joins later.
+* **Walkthrough:** `pd.date_range('2023-01-01', periods=3)` as `index=` sets daily timestamps.
 
 ```python
 # Good index practice
@@ -432,35 +423,36 @@ Well-structured DataFrame with date index:
 
 ## Common Pitfalls and Solutions
 
-1. **Mixed Data Types**:
-   - Problem: Column contains mix of numbers and strings
-   - Solution: Clean data and convert to appropriate type
-   - **Purpose (snippet):** Coerce messy `Amount` strings to numeric; non-parsable values become `NaN` when using `errors='coerce'`.
+1.  **Mixed Data Types**:
 
-   ```python
-   # Fix mixed types
-   df['Amount'] = pd.to_numeric(df['Amount'], errors='coerce')
-   ```
+    * Problem: Column contains mix of numbers and strings
+    * Solution: Clean data and convert to appropriate type
+    * **Purpose (snippet):** Coerce messy `Amount` strings to numeric; non-parsable values become `NaN` when using `errors='coerce'`.
 
-2. **Wrong Date Format**:
-   - Problem: Dates stored as strings
-   - Solution: Convert to datetime
-   - **Purpose (snippet):** Parse a whole date column to `datetime64` for sorting and time-based logic.
+    ```python
+    # Fix mixed types
+    df['Amount'] = pd.to_numeric(df['Amount'], errors='coerce')
+    ```
+2.  **Wrong Date Format**:
 
-   ```python
-   # Convert to datetime
-   df['Date'] = pd.to_datetime(df['Date'])
-   ```
+    * Problem: Dates stored as strings
+    * Solution: Convert to datetime
+    * **Purpose (snippet):** Parse a whole date column to `datetime64` for sorting and time-based logic.
 
-3. **Duplicate Index Values**:
-   - Problem: Non-unique index causing data access issues
-   - Solution: Ensure index uniqueness or use multi-index
-   - **Purpose (snippet):** Quick boolean check before using the index as a key.
+    ```python
+    # Convert to datetime
+    df['Date'] = pd.to_datetime(df['Date'])
+    ```
+3.  **Duplicate Index Values**:
 
-   ```python
-   # Check for duplicates
-   print("Duplicate index values:", df.index.duplicated().any())
-   ```
+    * Problem: Non-unique index causing data access issues
+    * Solution: Ensure index uniqueness or use multi-index
+    * **Purpose (snippet):** Quick boolean check before using the index as a key.
+
+    ```python
+    # Check for duplicates
+    print("Duplicate index values:", df.index.duplicated().any())
+    ```
 
 ```
 Duplicate index values: False
@@ -470,4 +462,4 @@ Remember: Understanding data types and index is important for efficient data ana
 
 ## Next steps
 
-Continue to [Reindexing and dropping](./reindexing-dropping.md), then [Function mapping](./function-mapping.md) and the remaining lessons in [Data analysis with pandas](./README.md).
+Continue to [Reindexing and dropping](reindexing-dropping.md), then [Function mapping](function-mapping.md) and the remaining lessons in [Data analysis with pandas](./).

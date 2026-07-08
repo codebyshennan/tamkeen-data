@@ -4,15 +4,11 @@
 
 ### Video
 
-<div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/zmdjNSmRXF4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-*Corey Schafer, Python pandas tutorial (part 2): DataFrame and Series basics*
+_Corey Schafer, Python pandas tutorial (part 2): DataFrame and Series basics_
 
 ## Overview
 
-**Prerequisites:** [Introduction to Python](../1.2-intro-python/README.md), [NumPy basics](../1.4-data-foundation-linear-algebra/intro-numpy.md), and ideally [Series](./series.md) (a DataFrame is a collection of aligned Series).
+**Prerequisites:** [Introduction to Python](../1.2-intro-python/), [NumPy basics](../1.4-data-foundation-linear-algebra/intro-numpy.md), and ideally [Series](series.md) (a DataFrame is a collection of aligned Series).
 
 **Why this lesson:** The **DataFrame** is the main table structure you will use for rows and columns. Understanding construction, dtypes, and index early prevents silent bugs when you merge, group, and plot later.
 
@@ -20,22 +16,22 @@
 
 Think of a DataFrame as an Excel spreadsheet in Python! It's a 2-dimensional table with rows and columns, where each column can hold different types of data (numbers, text, dates, etc.). DataFrames are perfect for:
 
-- Analyzing structured data (sales records, customer info)
-- Time series analysis (stock prices, weather data)
-- Data cleaning and preparation
-- Complex data analysis and statistics
+* Analyzing structured data (sales records, customer info)
+* Time series analysis (stock prices, weather data)
+* Data cleaning and preparation
+* Complex data analysis and statistics
 
 Real-world applications:
 
-- Sales analytics
-- Financial reporting
-- Customer demographics analysis
-- Survey data analysis
-- Medical research data
+* Sales analytics
+* Financial reporting
+* Customer demographics analysis
+* Survey data analysis
+* Medical research data
 
-![dataframe](./assets/dataframe.png)
+![dataframe](../../../.gitbook/assets/dataframe.png)
 
----
+***
 
 ### Creating Your First DataFrame
 
@@ -43,8 +39,8 @@ we will look at different ways to create a DataFrame:
 
 **Build from dict, list of dicts, and ndarray**
 
-- **Purpose:** See the three most common constructors: column dict (rows align by position), list of row dicts, and `DataFrame(array, columns=..., index=...)`.
-- **Walkthrough:** `student_data` uses mixed dtypes; `transactions` shows ragged keys; `df_array` wires column names and a string index.
+* **Purpose:** See the three most common constructors: column dict (rows align by position), list of row dicts, and `DataFrame(array, columns=..., index=...)`.
+* **Walkthrough:** `student_data` uses mixed dtypes; `transactions` shows ragged keys; `df_array` wires column names and a string index.
 
 ```python
 import pandas as pd
@@ -117,7 +113,7 @@ Row 3  0.023364  0.401598
 
 Notice how Pandas automatically adds numbered row labels (0, 1, 2) called the index!
 
----
+***
 
 ### Understanding DataFrame Structure
 
@@ -131,8 +127,8 @@ Check these components:
 
 **Inspect columns, index, shape**
 
-- **Purpose:** Name the three structural pieces (`columns`, `index`, `values` layout) using `df` from the previous block.
-- **Walkthrough:** `df.columns.tolist()`, `df.index.tolist()`, `df.shape`.
+* **Purpose:** Name the three structural pieces (`columns`, `index`, `values` layout) using `df` from the previous block.
+* **Walkthrough:** `df.columns.tolist()`, `df.index.tolist()`, `df.shape`.
 
 ```python
 # Column names
@@ -153,7 +149,7 @@ Shape: (3, 4)
 
 ## Basic DataFrame Operations
 
----
+***
 
 ### Viewing Your Data
 
@@ -161,8 +157,8 @@ Pandas provides several ways to peek at your data:
 
 **Head, info, describe**
 
-- **Purpose:** Standard EDA trio, preview rows, schema/missing counts, and numeric summaries.
-- **Walkthrough:** `head(2)`, `info()`, `describe()` (numeric columns by default).
+* **Purpose:** Standard EDA trio, preview rows, schema/missing counts, and numeric summaries.
+* **Walkthrough:** `head(2)`, `info()`, `describe()` (numeric columns by default).
 
 ```python
 # View first few rows
@@ -210,7 +206,7 @@ min    20.0   78.0
 max    22.0   92.0
 ```
 
----
+***
 
 ### Accessing Columns
 
@@ -221,8 +217,8 @@ You can access columns in two ways:
 
 **Bracket vs dot, and multi-column selection**
 
-- **Purpose:** Select one column as a Series (`df['Name']`), use dot syntax when the name is a valid identifier, and pass a **list** for a sub-DataFrame.
-- **Walkthrough:** `df[['Name', 'Grade']]` keeps two columns, note the double brackets.
+* **Purpose:** Select one column as a Series (`df['Name']`), use dot syntax when the name is a valid identifier, and pass a **list** for a sub-DataFrame.
+* **Walkthrough:** `df[['Name', 'Grade']]` keeps two columns, note the double brackets.
 
 ```python
 # Get the 'Name' column
@@ -257,7 +253,7 @@ Multiple columns:
 2  Charlie     78
 ```
 
----
+***
 
 ### Adding and Modifying Data
 
@@ -265,8 +261,8 @@ You can easily add or modify columns:
 
 **Derived column and in-place update**
 
-- **Purpose:** Add a boolean column from a condition and broadcast arithmetic across a column (`df['Age'] + 1`).
-- **Walkthrough:** `df['Pass'] = df['Grade'] >= 80` evaluates element-wise; reassignment replaces the `Age` column.
+* **Purpose:** Add a boolean column from a condition and broadcast arithmetic across a column (`df['Age'] + 1`).
+* **Walkthrough:** `df['Pass'] = df['Grade'] >= 80` evaluates element-wise; reassignment replaces the `Age` column.
 
 ```python
 # Add a new column
@@ -296,7 +292,7 @@ After increasing everyone's age:
 
 ## Working with Rows
 
----
+***
 
 ### Accessing Rows
 
@@ -304,8 +300,8 @@ Use `loc` for label-based indexing or `iloc` for position-based indexing:
 
 **`iloc` vs `loc` on rows**
 
-- **Purpose:** Contrast **integer position** (`iloc[0]`) with **label** (`loc[1]` on the default `RangeIndex`).
-- **Walkthrough:** After prior edits, row `0` is Alice and label `1` is Bob.
+* **Purpose:** Contrast **integer position** (`iloc[0]`) with **label** (`loc[1]` on the default `RangeIndex`).
+* **Walkthrough:** After prior edits, row `0` is Alice and label `1` is Bob.
 
 ```python
 # Get row by position using iloc
@@ -333,7 +329,7 @@ Pass     True
 Name: 1, dtype: object
 ```
 
----
+***
 
 ### Filtering Rows
 
@@ -341,8 +337,8 @@ You can filter rows based on conditions:
 
 **Boolean masks and `&`**
 
-- **Purpose:** Filter with one condition and combine conditions with `&` (parentheses required).
-- **Walkthrough:** `df['Grade'] >= 80` returns a Series of booleans aligned to rows; `(cond1) & (cond2)` intersects masks.
+* **Purpose:** Filter with one condition and combine conditions with `&` (parentheses required).
+* **Walkthrough:** `df['Grade'] >= 80` returns a Series of booleans aligned to rows; `(cond1) & (cond2)` intersects masks.
 
 ```python
 # Get all students who passed
@@ -369,7 +365,7 @@ Young students with good grades:
 
 ## Handling Missing Data
 
----
+***
 
 ### Understanding Missing Values
 
@@ -377,8 +373,8 @@ Real-world data often has missing values (shown as `NaN` in Pandas):
 
 **DataFrame with `None` / NaN cells**
 
-- **Purpose:** See missing values in a table, not just a Series, and how pandas displays them as `NaN`.
-- **Walkthrough:** `None` in `Age`/`Grade` becomes float NaN in the printed frame.
+* **Purpose:** See missing values in a table, not just a Series, and how pandas displays them as `NaN`.
+* **Walkthrough:** `None` in `Age`/`Grade` becomes float NaN in the printed frame.
 
 ```python
 # Create DataFrame with missing data
@@ -397,7 +393,7 @@ print(student_data)
 2  Charlie  21.0    NaN
 ```
 
----
+***
 
 ### Dealing with Missing Values
 
@@ -405,8 +401,8 @@ Pandas provides several ways to handle missing data:
 
 **Column-wise counts, dropna, fillna**
 
-- **Purpose:** Quantify missingness per column, optionally drop incomplete rows, or impute a constant.
-- **Walkthrough:** `isna().sum()` aggregates booleans; `dropna()` removes any row with a NaN; `fillna(0)` is a blunt default, use domain-appropriate fills in practice.
+* **Purpose:** Quantify missingness per column, optionally drop incomplete rows, or impute a constant.
+* **Walkthrough:** `isna().sum()` aggregates booleans; `dropna()` removes any row with a NaN; `fillna(0)` is a blunt default, use domain-appropriate fills in practice.
 
 ```python
 # Check for missing values
@@ -444,15 +440,15 @@ Fill missing values with 0:
 
 1. **Start Simple**: Begin with a small DataFrame while learning
 2. **Check Your Data**:
-   - Use `info()` to see data types and missing values
-   - Use `describe()` for numerical summaries
-   - Use `head()` to preview your data
+   * Use `info()` to see data types and missing values
+   * Use `describe()` for numerical summaries
+   * Use `head()` to preview your data
 3. **Keep Track of Changes**:
-   - Make copies before big changes: `df_backup = df.copy()`
-   - Chain operations thoughtfully
+   * Make copies before big changes: `df_backup = df.copy()`
+   * Chain operations thoughtfully
 4. **Handle Missing Data Early**:
-   - Decide on a strategy (drop or fill)
-   - Document your decisions
+   * Decide on a strategy (drop or fill)
+   * Document your decisions
 
 ## Common Gotchas to Avoid
 
@@ -465,4 +461,4 @@ Remember: DataFrames are powerful tools for data analysis. Take time to experime
 
 ## Next steps
 
-Continue to [Data types and index](./data-types-index.md) to control dtypes and labels, then follow the submodule lessons in [Data analysis with pandas](./README.md).
+Continue to [Data types and index](data-types-index.md) to control dtypes and labels, then follow the submodule lessons in [Data analysis with pandas](./).

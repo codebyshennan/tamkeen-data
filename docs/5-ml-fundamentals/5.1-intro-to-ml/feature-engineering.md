@@ -1,10 +1,18 @@
 ---
 reading_minutes: 30
 objectives:
-  - Identify a feature as numerical (continuous/discrete), categorical (nominal/ordinal), temporal, or text and pick the right preprocessing.
-  - Apply `StandardScaler` and `MinMaxScaler` correctly, fit on training data only, transform both train and test.
-  - One-hot encode nominal categories with `pd.get_dummies` and reserve label encoding for ordinals with a real order.
-  - Avoid the common pitfalls (fitting before splitting, false ordering on nominals, high-cardinality blow-up).
+  - >-
+    Identify a feature as numerical (continuous/discrete), categorical
+    (nominal/ordinal), temporal, or text and pick the right preprocessing.
+  - >-
+    Apply `StandardScaler` and `MinMaxScaler` correctly, fit on training data
+    only, transform both train and test.
+  - >-
+    One-hot encode nominal categories with `pd.get_dummies` and reserve label
+    encoding for ordinals with a real order.
+  - >-
+    Avoid the common pitfalls (fitting before splitting, false ordering on
+    nominals, high-cardinality blow-up).
 ---
 
 # Feature Engineering in Machine Learning: A Beginner's Guide
@@ -13,12 +21,11 @@ objectives:
 
 ## Overview
 
-**Feature engineering** means turning raw columns into inputs that algorithms can use: scaling numbers, encoding categories, and sometimes creating domain-informed combinations. This lesson groups features by type (numeric, categorical, time, text) and walks through scaling and encoding with small pandas and scikit-learn examples. **Prerequisites:** [pandas basics](../../2-data-wrangling/2.2-data-wrangling/) from Module 2 helps; [What is ML?](what-is-ml.md) clarifies how features feed supervised learning.
+**Feature engineering** means turning raw columns into inputs that algorithms can use: scaling numbers, encoding categories, and sometimes creating domain-informed combinations. This lesson groups features by type (numeric, categorical, time, text) and walks through scaling and encoding with small pandas and scikit-learn examples. **Prerequisites:** [pandas basics](../../2-data-wrangling/2.2-data-wrangling) from Module 2 helps; [What is ML?](what-is-ml.md) clarifies how features feed supervised learning.
 
 ## Why this matters
 
-Most real gains come from better inputs and problem framing, not from swapping the latest algorithm. Learning a small toolkit here saves time before you tune more complex models in [5.2](../5.2-supervised-learning-1/) and [5.5](../5.5-model-eval/).
-
+Most real gains come from better inputs and problem framing, not from swapping the latest algorithm. Learning a small toolkit here saves time before you tune more complex models in [5.2](../5.2-supervised-learning-1) and [5.5](../5.5-model-eval).
 
 ## Introduction: What is Feature Engineering?
 
@@ -35,8 +42,6 @@ Think of feature engineering as the secret sauce that can make or break your mac
 3. **Data Understanding**: The process helps you understand your data better
 4. **Problem-Solving**: It can help solve common data problems like missing values or different scales
 
-{% include mermaid-diagram.html src="5-ml-fundamentals/5.1-intro-to-ml/diagrams/feature-engineering-1.mmd" %}
-
 ## Types of Features: Understanding Your Ingredients
 
 Before we start cooking (engineering features), get clear on the different types of ingredients (features) we might work with:
@@ -45,49 +50,45 @@ Before we start cooking (engineering features), get clear on the different types
 
 These are features that represent quantities or measurements. Think of them like recipe measurements:
 
-- **Continuous Values**: Like temperature or weight - they can take any value within a range
-  - Example: A patient's temperature (36.5°C, 37.2°C, etc.)
-  - Real-world analogy: Like a thermometer that can show any temperature within its range
-
-- **Discrete Values**: Like counting items - they can only take specific values
-  - Example: Number of bedrooms in a house (1, 2, 3, etc.)
-  - Real-world analogy: Like counting apples - you can't have half an apple
+* **Continuous Values**: Like temperature or weight - they can take any value within a range
+  * Example: A patient's temperature (36.5°C, 37.2°C, etc.)
+  * Real-world analogy: Like a thermometer that can show any temperature within its range
+* **Discrete Values**: Like counting items - they can only take specific values
+  * Example: Number of bedrooms in a house (1, 2, 3, etc.)
+  * Real-world analogy: Like counting apples - you can't have half an apple
 
 ### 2. Categorical Features: The Labels and Categories
 
 These features represent groups or categories. Think of them like different types of ingredients:
 
-- **Nominal Categories**: Groups with no particular order
-  - Example: Colors (red, blue, green) or brands (Nike, Adidas, Puma)
-  - Real-world analogy: Like different types of fruits - there's no inherent order between apples and oranges
-
-- **Ordinal Categories**: Groups with a meaningful order
-  - Example: Size (S, M, L) or education level (High School, Bachelor's, Master's)
-  - Real-world analogy: Like a race finish - 1st, 2nd, 3rd place have a clear order
+* **Nominal Categories**: Groups with no particular order
+  * Example: Colors (red, blue, green) or brands (Nike, Adidas, Puma)
+  * Real-world analogy: Like different types of fruits - there's no inherent order between apples and oranges
+* **Ordinal Categories**: Groups with a meaningful order
+  * Example: Size (S, M, L) or education level (High School, Bachelor's, Master's)
+  * Real-world analogy: Like a race finish - 1st, 2nd, 3rd place have a clear order
 
 ### 3. Temporal Features: The Time-Based Ingredients
 
 These features represent time-related information. Think of them like cooking timers:
 
-- **Timestamps**: Specific points in time
-  - Example: Transaction time, appointment date
-  - Real-world analogy: Like marking when you started cooking a dish
-
-- **Time Series Data**: Measurements taken over time
-  - Example: Daily temperature readings, stock prices
-  - Real-world analogy: Like monitoring the temperature of your oven over time
+* **Timestamps**: Specific points in time
+  * Example: Transaction time, appointment date
+  * Real-world analogy: Like marking when you started cooking a dish
+* **Time Series Data**: Measurements taken over time
+  * Example: Daily temperature readings, stock prices
+  * Real-world analogy: Like monitoring the temperature of your oven over time
 
 ### 4. Text Features: The Written Ingredients
 
 These features contain written information. Think of them like recipe instructions:
 
-- **Documents**: Full text content
-  - Example: Product descriptions, customer reviews
-  - Real-world analogy: Like reading a recipe book
-
-- **Social Media Posts**: Short-form text
-  - Example: Tweets, comments
-  - Real-world analogy: Like quick cooking tips
+* **Documents**: Full text content
+  * Example: Product descriptions, customer reviews
+  * Real-world analogy: Like reading a recipe book
+* **Social Media Posts**: Short-form text
+  * Example: Tweets, comments
+  * Real-world analogy: Like quick cooking tips
 
 ## Why This Matters
 
@@ -115,120 +116,35 @@ Imagine you're comparing the performance of athletes in different sports. A bask
 
 Think of this like converting temperatures from different scales (Celsius, Fahrenheit) to a standard scale. It centers your data around 0 and makes the spread consistent.
 
-The formula might look complex, but it's actually simple:
-$$z = \frac{x - \mu}{\sigma}$$
+The formula might look complex, but it's actually simple: $$z = \frac{x - \mu}{\sigma}$$
 
 Where:
 
-- $x$ is your original value (like a temperature in Celsius)
-- $\mu$ is the average of all values (mean)
-- $\sigma$ is how spread out the values are (standard deviation)
+* $x$ is your original value (like a temperature in Celsius)
+* $\mu$ is the average of all values (mean)
+* $\sigma$ is how spread out the values are (standard deviation)
 
 **Real-world analogy**: It's like converting everyone's height to "how many standard deviations they are from the average height"
 
 #### Standardize numeric columns with `StandardScaler`
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Imports
 
-{% highlight python %}
-# Before running this code, make sure you have pandas and sklearn installed
-# You can install them using: pip install pandas scikit-learn
+Import pandas, numpy, StandardScaler, and matplotlib for data creation, scaling, and visualization.
 
-import pandas as pd
-import numpy as np
-from sklearn.preprocessing import StandardScaler
-import matplotlib.pyplot as plt
+Sample Data
 
-# Create some example data
-data = {
-    'height_cm': [150, 160, 170, 180, 190],
-    'weight_kg': [45, 55, 65, 75, 85]
-}
-df = pd.DataFrame(data)
+Create a small DataFrame with height and weight columns to demonstrate the effect of scaling on different scales.
 
-# Before scaling
-print("Original Data:")
-print(df)
+Fit and Transform
 
-# Create a scaler
-scaler = StandardScaler()
+`fit_transform` learns mean and standard deviation per column, then applies z-score normalization; the result is wrapped back into a DataFrame with original column names.
 
-# Scale the data
-scaled_data = scaler.fit_transform(df)
-scaled_df = pd.DataFrame(scaled_data, columns=df.columns)
+Side-by-side Plot
 
-# After scaling
-print("\nScaled Data:")
-print(scaled_df)
+Scatter plots before and after scaling show the relationship shape is unchanged, only the axis units shift to standardized values.
 
-# Visualize the effect of scaling
-plt.figure(figsize=(12, 5))
-
-# Before scaling
-plt.subplot(1, 2, 1)
-plt.scatter(df['height_cm'], df['weight_kg'])
-plt.title('Before Scaling')
-plt.xlabel('Height (cm)')
-plt.ylabel('Weight (kg)')
-
-# After scaling
-plt.subplot(1, 2, 2)
-plt.scatter(scaled_df['height_cm'], scaled_df['weight_kg'])
-plt.title('After Scaling')
-plt.xlabel('Height (Standardized)')
-plt.ylabel('Weight (Standardized)')
-
-plt.tight_layout()
-plt.show()
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-7" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Imports</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Import pandas, numpy, StandardScaler, and matplotlib for data creation, scaling, and visualization.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="9-16" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Sample Data</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Create a small DataFrame with height and weight columns to demonstrate the effect of scaling on different scales.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="19-26" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Fit and Transform</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>fit_transform</code> learns mean and standard deviation per column, then applies z-score normalization; the result is wrapped back into a DataFrame with original column names.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="28-43" data-tint="4">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Side-by-side Plot</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Scatter plots before and after scaling show the relationship shape is unchanged, only the axis units shift to standardized values.</p>
-    </div>
-  </div>
-</aside>
-</div>
-
-
-<figure>
-<img src="assets/feature-engineering_fig_1.png" alt="feature-engineering" />
-<figcaption>Figure 1: Before Scaling</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/feature-engineering_fig_1.png" alt="feature-engineering"><figcaption><p>Figure 1: Before Scaling</p></figcaption></figure>
 
 ```
 Original Data:
@@ -252,94 +168,31 @@ Scaled Data:
 
 This is like converting a temperature range to a 0-1 scale. It's useful when you need all values to be between 0 and 1.
 
-The formula is:
-$$x_{norm} = \frac{x - x_{min}}{x_{max} - x_{min}}$$
+The formula is: $$x_{norm} = \frac{x - x_{min}}{x_{max} - x_{min}}$$
 
 Where:
 
-- $x$ is your original value
-- $x_{min}$ is the smallest value in your data
-- $x_{max}$ is the largest value in your data
+* $x$ is your original value
+* $x\_{min}$ is the smallest value in your data
+* $x\_{max}$ is the largest value in your data
 
 **Real-world analogy**: It's like converting a test score to a percentage (0-100%)
 
 #### Map features into the `[0, 1]` range with `MinMaxScaler`
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+MinMaxScaler
 
-{% highlight python %}
-from sklearn.preprocessing import MinMaxScaler
+Import and apply `MinMaxScaler`; `fit_transform` squeezes each column into \[0, 1] based on its observed min and max.
 
-# Create a min-max scaler
-minmax_scaler = MinMaxScaler()
+Print Results
 
-# Scale the data
-minmax_scaled_data = minmax_scaler.fit_transform(df)
-minmax_scaled_df = pd.DataFrame(minmax_scaled_data, columns=df.columns)
+Print the scaled DataFrame to confirm all values fall between 0 and 1 after transformation.
 
-# After min-max scaling
-print("\nMin-Max Scaled Data:")
-print(minmax_scaled_df)
+Comparison Plot
 
-# Visualize the effect of min-max scaling
-plt.figure(figsize=(12, 5))
+Side-by-side scatter plots show the original scale vs the \[0, 1] range, the relationship shape is preserved while units change.
 
-# Before scaling
-plt.subplot(1, 2, 1)
-plt.scatter(df['height_cm'], df['weight_kg'])
-plt.title('Before Min-Max Scaling')
-plt.xlabel('Height (cm)')
-plt.ylabel('Weight (kg)')
-
-# After min-max scaling
-plt.subplot(1, 2, 2)
-plt.scatter(minmax_scaled_df['height_cm'], minmax_scaled_df['weight_kg'])
-plt.title('After Min-Max Scaling')
-plt.xlabel('Height (0-1)')
-plt.ylabel('Weight (0-1)')
-
-plt.tight_layout()
-plt.show()
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-8" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">MinMaxScaler</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Import and apply <code>MinMaxScaler</code>; <code>fit_transform</code> squeezes each column into [0, 1] based on its observed min and max.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="10-12" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Print Results</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Print the scaled DataFrame to confirm all values fall between 0 and 1 after transformation.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="14-31" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Comparison Plot</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Side-by-side scatter plots show the original scale vs the [0, 1] range, the relationship shape is preserved while units change.</p>
-    </div>
-  </div>
-</aside>
-</div>
-
-
-<figure>
-<img src="assets/feature-engineering_fig_2.png" alt="feature-engineering" />
-<figcaption>Figure 2: Before Min-Max Scaling</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/feature-engineering_fig_2.png" alt="feature-engineering"><figcaption><p>Figure 2: Before Min-Max Scaling</p></figcaption></figure>
 
 ```
 
@@ -354,10 +207,10 @@ Min-Max Scaled Data:
 
 ### When to Use Which Scaling Method?
 
-| Method | Best For | Not Good For |
-|--------|----------|--------------|
+| Method           | Best For                                                     | Not Good For                       |
+| ---------------- | ------------------------------------------------------------ | ---------------------------------- |
 | Standard Scaling | Most cases, especially when data follows normal distribution | When you need specific range (0-1) |
-| Min-Max Scaling | When you need values between 0 and 1 | When you have outliers |
+| Min-Max Scaling  | When you need values between 0 and 1                         | When you have outliers             |
 
 ### Common Mistakes to Avoid
 
@@ -385,88 +238,19 @@ Think of this like creating separate sections in your store for each category. I
 
 #### One-hot encode nominal columns with `pd.get_dummies`
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Sample Categorical Data
 
-{% highlight python %}
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
+Create a DataFrame with `product` and `size` columns to demonstrate one-hot encoding on nominal categories.
 
-# Create example data
-data = {
-    'product': ['shirt', 'pants', 'shoes', 'shirt', 'pants'],
-    'size': ['S', 'M', 'L', 'M', 'S']
-}
-df = pd.DataFrame(data)
+One-Hot Encoding
 
-# Before encoding
-print("Original Data:")
-print(df)
+`pd.get_dummies` expands each categorical column into binary indicator columns, one per unique value.
 
-# One-hot encode the data
-encoded_df = pd.get_dummies(df)
+Before/After Plot
 
-# After encoding
-print("\nOne-Hot Encoded Data:")
-print(encoded_df)
+Bar charts compare original category counts to the summed indicator columns, showing the same information in numeric form.
 
-# Visualize the encoding
-plt.figure(figsize=(12, 5))
-
-# Before encoding
-plt.subplot(1, 2, 1)
-sns.countplot(data=df, x='product')
-plt.title('Original Categories')
-plt.xticks(rotation=45)
-
-# After encoding
-plt.subplot(1, 2, 2)
-encoded_df[['product_shirt', 'product_pants', 'product_shoes']].sum().plot(kind='bar')
-plt.title('One-Hot Encoded Categories')
-plt.xticks(rotation=45)
-
-plt.tight_layout()
-plt.show()
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-10" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Sample Categorical Data</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Create a DataFrame with <code>product</code> and <code>size</code> columns to demonstrate one-hot encoding on nominal categories.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="15-21" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">One-Hot Encoding</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>pd.get_dummies</code> expands each categorical column into binary indicator columns, one per unique value.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="23-39" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Before/After Plot</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Bar charts compare original category counts to the summed indicator columns, showing the same information in numeric form.</p>
-    </div>
-  </div>
-</aside>
-</div>
-
-
-<figure>
-<img src="assets/feature-engineering_fig_3.png" alt="feature-engineering" />
-<figcaption>Figure 3: Original Categories</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/feature-engineering_fig_3.png" alt="feature-engineering"><figcaption><p>Figure 3: Original Categories</p></figcaption></figure>
 
 ```
 Original Data:
@@ -494,78 +278,19 @@ This is like giving each category a unique number. It's simpler than one-hot enc
 
 #### Integer codes for categories with `LabelEncoder`
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Separate Encoders
 
-{% highlight python %}
-from sklearn.preprocessing import LabelEncoder
+Create separate `LabelEncoder` instances per column so each encoder tracks its own class-to-integer mapping independently.
 
-# Create label encoders
-product_encoder = LabelEncoder()
-size_encoder = LabelEncoder()
+Fit and Assign
 
-# Encode the data
-df['product_encoded'] = product_encoder.fit_transform(df['product'])
-df['size_encoded'] = size_encoder.fit_transform(df['size'])
+`fit_transform` maps each string category to an integer in alphabetical order; check `.classes_` to interpret the mapping.
 
-# After label encoding
-print("\nLabel Encoded Data:")
-print(df[['product', 'product_encoded', 'size', 'size_encoded']])
+Visual Comparison
 
-# Visualize the encoding
-plt.figure(figsize=(12, 5))
+Count plots before and after encoding show that frequency distributions are preserved, only the axis labels change from strings to integers.
 
-# Before encoding
-plt.subplot(1, 2, 1)
-sns.countplot(data=df, x='size')
-plt.title('Original Sizes')
-
-# After encoding
-plt.subplot(1, 2, 2)
-sns.countplot(data=df, x='size_encoded')
-plt.title('Label Encoded Sizes')
-
-plt.tight_layout()
-plt.show()
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-6" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Separate Encoders</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Create separate <code>LabelEncoder</code> instances per column so each encoder tracks its own class-to-integer mapping independently.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="8-13" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Fit and Assign</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>fit_transform</code> maps each string category to an integer in alphabetical order; check <code>.classes_</code> to interpret the mapping.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="15-29" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Visual Comparison</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Count plots before and after encoding show that frequency distributions are preserved, only the axis labels change from strings to integers.</p>
-    </div>
-  </div>
-</aside>
-</div>
-
-
-<figure>
-<img src="assets/feature-engineering_fig_4.png" alt="feature-engineering" />
-<figcaption>Figure 4: Original Sizes</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/feature-engineering_fig_4.png" alt="feature-engineering"><figcaption><p>Figure 4: Original Sizes</p></figcaption></figure>
 
 ```
 
@@ -580,10 +305,10 @@ Label Encoded Data:
 
 ### When to Use Which Encoding Method?
 
-| Method | Best For | Not Good For |
-|--------|----------|--------------|
-| One-Hot Encoding | Nominal categories (no order) | Many categories (creates many columns) |
-| Label Encoding | Ordinal categories (natural order) | Nominal categories (can imply false order) |
+| Method           | Best For                           | Not Good For                               |
+| ---------------- | ---------------------------------- | ------------------------------------------ |
+| One-Hot Encoding | Nominal categories (no order)      | Many categories (creates many columns)     |
+| Label Encoding   | Ordinal categories (natural order) | Nominal categories (can imply false order) |
 
 ### Common Mistakes to Avoid
 
@@ -601,9 +326,9 @@ Label Encoded Data:
 
 ## Gotchas
 
-- **Fitting the scaler on the full dataset before splitting**: `StandardScaler` and `MinMaxScaler` must be `fit` on training data only, then `transform` applied to both train and test; fitting on all data leaks test statistics into the model and produces optimistic evaluation scores.
-- **Using label encoding for nominal (unordered) categories**: assigning integers 0, 1, 2 to `red`, `blue`, `green` implies an ordering (`green > blue > red`) that doesn't exist; most linear and distance-based models will treat the numbers as meaningful, introducing false relationships.
-- **One-hot encoding high-cardinality columns without capping**: a column with 500 unique city names expands to 500 binary columns, increasing memory use and giving tree-based models many near-zero-importance splits to waste time on; consider target encoding, frequency encoding, or grouping rare values into an "other" bucket.
-- **Forgetting to apply the same transformations to new data at inference time**: the scaler fitted during training must be saved (e.g., with `joblib`) and reused on every new batch; re-fitting on new data changes the reference statistics and breaks calibration.
-- **Creating interaction features that include the target column**: dividing price by square footage is fine when both are features, but deriving a feature that is mathematically dependent on your target variable (`y`) introduces data leakage and produces inflated training scores.
-- **Deriving time-based features without respecting temporal order**: if you compute `day_of_week` or `hour_of_day` without first sorting and splitting on time, future information can appear in training folds and the model will not generalise to truly unseen future dates.
+* **Fitting the scaler on the full dataset before splitting**: `StandardScaler` and `MinMaxScaler` must be `fit` on training data only, then `transform` applied to both train and test; fitting on all data leaks test statistics into the model and produces optimistic evaluation scores.
+* **Using label encoding for nominal (unordered) categories**: assigning integers 0, 1, 2 to `red`, `blue`, `green` implies an ordering (`green > blue > red`) that doesn't exist; most linear and distance-based models will treat the numbers as meaningful, introducing false relationships.
+* **One-hot encoding high-cardinality columns without capping**: a column with 500 unique city names expands to 500 binary columns, increasing memory use and giving tree-based models many near-zero-importance splits to waste time on; consider target encoding, frequency encoding, or grouping rare values into an "other" bucket.
+* **Forgetting to apply the same transformations to new data at inference time**: the scaler fitted during training must be saved (e.g., with `joblib`) and reused on every new batch; re-fitting on new data changes the reference statistics and breaks calibration.
+* **Creating interaction features that include the target column**: dividing price by square footage is fine when both are features, but deriving a feature that is mathematically dependent on your target variable (`y`) introduces data leakage and produces inflated training scores.
+* **Deriving time-based features without respecting temporal order**: if you compute `day_of_week` or `hour_of_day` without first sorting and splitting on time, future information can appear in training folds and the model will not generalise to truly unseen future dates.

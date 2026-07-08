@@ -15,6 +15,7 @@ All commands below must be run from `docs/` unless noted otherwise.
 ## Build Commands
 
 ### Slide Generation
+
 ```bash
 # Default: 0-prep + module 1 (data fundamentals) slide decks only
 make build
@@ -101,11 +102,11 @@ pnpm run notebook-index
 
 Edit curriculum order in `scripts/generate-lesson-nav-order.mjs` (`OVERRIDES` map), then re-run that command. Folders without an override use `README.md` first, then other `.md` files alphabetically by filename. The generator includes **every** `*.md` in each submodule directory (including maintainer notes, TODO, generated outputs, and `slides/` when present). Set `lesson_nav: false` in front matter to hide the bar on a page.
 
-The bar appears on **all** built lesson pages that use the default layout; only the site home (`index.md`) and repo-root `README.md` omit it. If a file is missing from the YAML (e.g. before you re-run the generator), prev/next fall back to **all pages in the same folder**, sorted by path. Pages under `<module>/assignments/` link “Back to module root” to that module’s directory index (`…/`, built from `README.md` as `index.html`). When slides and/or notebooks exist for that submodule, `_includes/lesson-slides-top.html` renders a **resource bar** at the **top** of every page in the submodule (below breadcrumbs) with **Slides** and/or **Notebook** (Google Colab) buttons. Additional per-page resource buttons (datasets, starter code, etc.) can be added via `lesson_resources` front matter — see below. Progress shows **Lesson *n* of *m*** in the bottom bar when ordering is known.
+The bar appears on **all** built lesson pages that use the default layout; only the site home (`index.md`) and repo-root `README.md` omit it. If a file is missing from the YAML (e.g. before you re-run the generator), prev/next fall back to **all pages in the same folder**, sorted by path. Pages under `<module>/assignments/` link “Back to module root” to that module’s directory index (`…/`, built from `README.md` as `index.html`). When slides and/or notebooks exist for that submodule, `_includes/lesson-slides-top.html` renders a **resource bar** at the **top** of every page in the submodule (below breadcrumbs) with **Slides** and/or **Notebook** (Google Colab) buttons. Additional per-page resource buttons (datasets, starter code, etc.) can be added via `lesson_resources` front matter — see below. Progress shows **Lesson&#x20;**_**n**_**&#x20;of&#x20;**_**m**_ in the bottom bar when ordering is known.
 
 **Optional lesson front matter** (YAML in pages that use it): `reading_minutes: 15`, `objectives: [“…”, “…”]`, `lesson_meta: false` to hide the optional meta block. `notebook_url: “https://…”` overrides the auto-generated Colab URL for that page. `lesson_resources` adds extra resource buttons to the top bar:
 
-```yaml
+````yaml
 lesson_resources:
   - label: “Dataset”
     url: “https://example.com/data.csv”
@@ -122,7 +123,7 @@ Runnable `python` fenced blocks should show **stdout** (and matplotlib figures w
 uv sync   # once: creates .venv with numpy/pandas/matplotlib/sklearn/… (see pyproject.toml)
 pnpm run inject-python-outputs
 # or one module: uv run python scripts/inject_python_block_outputs.py 2-data-wrangling/2.2-data-wrangling
-```
+````
 
 The script appends a bare ` ``` ` block after ` ```python ` when execution prints something (and writes `assets/<stem>_fig_*.png` for plots). It skips blocks that already have a following output fence or image, and blocks whose first line is `# no-output` or `# skip-output`. Snippets that need unavailable packages or data files may stay without auto-output until the lesson is adjusted or marked `# no-output`.
 
@@ -135,34 +136,37 @@ The script appends a bare ` ``` ` block after ` ```python ` when execution print
 ## Architecture
 
 ### Directory Structure
-- `0-prep/` through `6-capstone/` - Course modules (numbered for progression)
-- `meta/` - Maintainer-only docs (deploy checklist, writing guidelines); excluded from Jekyll
-- Each module contains:
-  - Markdown content files (tutorials, concepts)
-  - `slides/data.json` - Slide definitions for Reveal.js
-  - `slides/index.html` - Generated presentations (do not edit directly)
-  - `assignments/` - Practical exercises
+
+* `0-prep/` through `6-capstone/` - Course modules (numbered for progression)
+* `meta/` - Maintainer-only docs (deploy checklist, writing guidelines); excluded from Jekyll
+* Each module contains:
+  * Markdown content files (tutorials, concepts)
+  * `slides/data.json` - Slide definitions for Reveal.js
+  * `slides/index.html` - Generated presentations (do not edit directly)
+  * `assignments/` - Practical exercises
 
 ### Slide Generation System
+
 1. Define slides in `<module>/slides/data.json` with type (`title` or `content`)
 2. Run `node slides/build.js <module-path>`
 3. Script reads `slides/template.html` and generates `slides/index.html`
 
 ### Content Patterns
-- Module overviews in `README.md`
-- Concept files follow kebab-case: `concept-name.md`
-- MathJax loaded in the layout for equations (GFM does not emit kramdown’s math spans; raw `$$` usually still works with MathJax)
-- Python is the default syntax highlighting language
+
+* Module overviews in `README.md`
+* Concept files follow kebab-case: `concept-name.md`
+* MathJax loaded in the layout for equations (GFM does not emit kramdown’s math spans; raw `$$` usually still works with MathJax)
+* Python is the default syntax highlighting language
 
 ### Long code blocks with side notes (code explainer)
 
-For long snippets where you want **callouts tied to line ranges** (highlighted bands on the code + sticky notes on the side), wrap the block in a `code-explainer` and use **`{% highlight %}`** for the code so Jekyll/Rouge runs inside the HTML wrapper (fenced ` ``` ` inside raw HTML is not reliable with GFM).
+For long snippets where you want **callouts tied to line ranges** (highlighted bands on the code + sticky notes on the side), wrap the block in a `code-explainer` and use **`<div data-gb-custom-block data-tag="highlight"></div>`** for the code so Jekyll/Rouge runs inside the HTML wrapper (fenced ` ``` ` inside raw HTML is not reliable with GFM).
 
-To **bulk-wrap** fenced `python` / `sql` / `bash` blocks in a module, run from `docs/`: `pnpm run wrap-code-explainers -- <path>` (see `scripts/wrap_code_explainers.py`). **`inject-python-outputs`** also treats `{% highlight python %}…{% endhighlight %}` like `` ```python `` for stdout injection.
+To **bulk-wrap** fenced `python` / `sql` / `bash` blocks in a module, run from `docs/`: `pnpm run wrap-code-explainers -- <path>` (see `scripts/wrap_code_explainers.py`). **`inject-python-outputs`** also treats `{% highlight python %}…{% endhighlight %}` like ` ```python ` for stdout injection.
 
-- **`data-lines`**: `5-12` or `7` (single line). Count lines in the **`{% highlight %}`** body as they will appear in the built `<pre>` (blank lines count). Optional `data-tint="1"` … `4` for accent color (defaults cycle).
-- **Hover** a callout to emphasize its range on the code.
-- **Scripts (`_layouts/default.html`):** load **`code-explainer.js` before `code-blocks.js`**. After wrapping blocks, `code-blocks.js` calls `window.tamkeenInitCodeExplainers()` so the language header, Copy button, and `.code-block__body` exist before line overlays run (`requestAnimationFrame`); line positions update on resize.
+* **`data-lines`**: `5-12` or `7` (single line). Count lines in the **`{% highlight %}`** body as they will appear in the built `<pre>` (blank lines count). Optional `data-tint="1"` … `4` for accent color (defaults cycle).
+* **Hover** a callout to emphasize its range on the code.
+* **Scripts (`_layouts/default.html`):** load **`code-explainer.js` before `code-blocks.js`**. After wrapping blocks, `code-blocks.js` calls `window.tamkeenInitCodeExplainers()` so the language header, Copy button, and `.code-block__body` exist before line overlays run (`requestAnimationFrame`); line positions update on resize.
 
 Example (place in a `.md` file; Liquid is processed by Jekyll):
 
@@ -201,11 +205,11 @@ def load():
 </div>
 ```
 
-Leave `code-callout__lines` empty to auto-fill from `data-lines`. Below ~900px width the layout stacks (callouts under the code).
+Leave `code-callout__lines` empty to auto-fill from `data-lines`. Below \~900px width the layout stacks (callouts under the code).
 
 ## Key Configuration
 
-- **Package manager**: pnpm
-- **Jekyll theme**: primer (remote theme)
-- **Markdown**: GFM (`markdown: GFM`) with Rouge for fenced code blocks
-- **Presentations**: Reveal.js v4.3.1 (CDN-based)
+* **Package manager**: pnpm
+* **Jekyll theme**: primer (remote theme)
+* **Markdown**: GFM (`markdown: GFM`) with Rouge for fenced code blocks
+* **Presentations**: Reveal.js v4.3.1 (CDN-based)

@@ -1,10 +1,17 @@
 ---
 reading_minutes: 25
 objectives:
-  - "Train and predict with `DecisionTreeClassifier` and `DecisionTreeRegressor` on tabular data."
-  - "Visualise a fitted tree with `plot_tree` to walk the decision path for any individual prediction."
-  - "Pick sensible defaults for `max_depth` and `min_samples_leaf` and avoid the \"no scaling needed but unrestricted depth\" trap."
+  - >-
+    Train and predict with `DecisionTreeClassifier` and `DecisionTreeRegressor`
+    on tabular data.
+  - >-
+    Visualise a fitted tree with `plot_tree` to walk the decision path for any
+    individual prediction.
+  - >-
+    Pick sensible defaults for `max_depth` and `min_samples_leaf` and avoid the
+    "no scaling needed but unrestricted depth" trap.
 ---
+
 # Building Your First Decision Tree
 
 **After this lesson:** you can explain Building Your First Decision Tree and try the examples in your own notebook.
@@ -13,8 +20,7 @@ objectives:
 
 Hands-on **scikit-learn**: `DecisionTreeClassifier` / `DecisionTreeRegressor`, fitting, predicting, and the hyperparameters you will tune first (`max_depth`, `min_samples_leaf`, etc.).
 
-Pairs with [tree structure](2-tree-structure.md); context in [5.2 README](../README.md).
-
+Pairs with [tree structure](2-tree-structure.md); context in [5.2 README](../).
 
 ## Getting Started with Scikit-learn
 
@@ -38,61 +44,17 @@ Build a simple system that helps diagnose whether someone might be sick based on
 
 #### Toy patient feature matrix and string labels
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Imports
 
-{% highlight python %}
-import numpy as np
-from sklearn.tree import DecisionTreeClassifier, plot_tree
-import matplotlib.pyplot as plt
+NumPy for the matrix, `DecisionTreeClassifier` and `plot_tree` for fitting and visualization, and matplotlib for rendering.
 
-# Create sample data
-# Each row represents a patient
-# Columns: [temperature, cough, fatigue]
-# Values: 0 = No, 1 = Yes
-X = np.array([
-    [101, 1, 1],  # Patient 1: High temp, cough, fatigue
-    [99, 0, 0],   # Patient 2: Normal temp, no cough, no fatigue
-    [102, 1, 1],  # Patient 3: High temp, cough, fatigue
-    [98, 0, 1],   # Patient 4: Normal temp, no cough, fatigue
-    [100, 1, 0]   # Patient 5: Slightly high temp, cough, no fatigue
-])
+Patient Feature Matrix
 
-# Labels: 'sick' or 'healthy'
-y = ['sick', 'healthy', 'sick', 'healthy', 'healthy']
-{% endhighlight %}
+Each row is a patient; columns are temperature (numeric), cough (0/1), and fatigue (0/1), a small supervised dataset with five examples.
 
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-3" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Imports</span>
-    </div>
-    <div class="code-callout__body">
-      <p>NumPy for the matrix, <code>DecisionTreeClassifier</code> and <code>plot_tree</code> for fitting and visualization, and matplotlib for rendering.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="5-16" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Patient Feature Matrix</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Each row is a patient; columns are temperature (numeric), cough (0/1), and fatigue (0/1), a small supervised dataset with five examples.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="18-19" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">String Labels</span>
-    </div>
-    <div class="code-callout__body">
-      <p>scikit-learn's classifier accepts string targets directly; internally it encodes them numerically.</p>
-    </div>
-  </div>
-</aside>
-</div>
+String Labels
+
+scikit-learn's classifier accepts string targets directly; internally it encodes them numerically.
 
 This code sets up our sample patient data with three features: body temperature, presence of cough, and fatigue level. We also create corresponding labels indicating whether each patient is sick or healthy.
 
@@ -100,71 +62,19 @@ This code sets up our sample patient data with three features: body temperature,
 
 #### Fit `DecisionTreeClassifier` and plot with `plot_tree`
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Hyperparameters
 
-{% highlight python %}
-# Create the model with specific settings
-clf = DecisionTreeClassifier(
-    max_depth=3,          # Don't let the tree get too deep
-    min_samples_split=2,  # Need at least 2 samples to split
-    min_samples_leaf=1    # Each leaf needs at least 1 sample
-)
+`max_depth=3` caps depth to prevent memorization; `min_samples_split` and `min_samples_leaf` control the minimum data required at each node.
 
-# Train the model on our data
-clf.fit(X, y)
+Fit Model
 
-# Visualize the tree to understand how it makes decisions
-plt.figure(figsize=(15, 10))
-plot_tree(
-    clf,
-    feature_names=['temperature', 'cough', 'fatigue'],
-    class_names=['healthy', 'sick'],
-    filled=True,    # Color the nodes
-    rounded=True    # Make it look nice
-)
-plt.title('Disease Diagnosis Decision Tree')
-plt.show()
-{% endhighlight %}
+A single `fit` call finds the best splits using Gini impurity on the five training patients.
 
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-7" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Hyperparameters</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>max_depth=3</code> caps depth to prevent memorization; <code>min_samples_split</code> and <code>min_samples_leaf</code> control the minimum data required at each node.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="9-10" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Fit Model</span>
-    </div>
-    <div class="code-callout__body">
-      <p>A single <code>fit</code> call finds the best splits using Gini impurity on the five training patients.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="12-21" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Plot Tree</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>plot_tree</code> renders each node with the split condition, Gini score, sample count, and class distribution; <code>filled=True</code> colors nodes by majority class.</p>
-    </div>
-  </div>
-</aside>
-</div>
+Plot Tree
 
+`plot_tree` renders each node with the split condition, Gini score, sample count, and class distribution; `filled=True` colors nodes by majority class.
 
-<figure>
-<img src="assets/3-implementation_fig_1.png" alt="3-implementation" />
-<figcaption>Figure 1: Disease Diagnosis Decision Tree</figcaption>
-</figure>
-
+<figure><img src="../../../../.gitbook/assets/3-implementation_fig_1.png" alt="3-implementation"><figcaption><p>Figure 1: Disease Diagnosis Decision Tree</p></figcaption></figure>
 
 In this step, we create a decision tree classifier with specific settings to control its complexity. We then train the model using our patient data and visualize the resulting tree to understand how it makes decisions. The visualization shows which features (temperature, cough, fatigue) the tree uses to classify patients.
 
@@ -204,98 +114,30 @@ Try another example with the famous Iris dataset, which is built into scikit-lea
 
 #### Iris: train/test split, accuracy, and tree plot
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Load Iris Dataset
 
-{% highlight python %}
-from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
+sklearn's built-in Iris dataset provides 150 samples across 3 classes with real feature names and target names for the plot.
 
-# Load the Iris dataset
-iris = load_iris()
-X = iris.data
-y = iris.target
-feature_names = iris.feature_names
-class_names = iris.target_names
+Split and Train
 
-# Split into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.3, random_state=42
-)
+A 70/30 train/test split with a fixed seed ensures reproducibility; the classifier is fit only on training data.
 
-# Create and train the model
-iris_clf = DecisionTreeClassifier(max_depth=3)
-iris_clf.fit(X_train, y_train)
+Evaluate Accuracy
 
-# Evaluate the model
-accuracy = iris_clf.score(X_test, y_test)
-print(f"Accuracy: {accuracy * 100:.1f}%")
+`score` returns mean accuracy on the held-out test set, a quick sanity check before deeper evaluation.
 
-# Visualize the tree
-plt.figure(figsize=(15, 10))
-plot_tree(
-    iris_clf,
-    feature_names=feature_names,
-    class_names=class_names,
-    filled=True,
-    rounded=True
-)
-plt.title('Iris Classification Tree')
-plt.show()
-{% endhighlight %}
+Visualize Tree
 
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-9" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Load Iris Dataset</span>
-    </div>
-    <div class="code-callout__body">
-      <p>sklearn's built-in Iris dataset provides 150 samples across 3 classes with real feature names and target names for the plot.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="11-19" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Split and Train</span>
-    </div>
-    <div class="code-callout__body">
-      <p>A 70/30 train/test split with a fixed seed ensures reproducibility; the classifier is fit only on training data.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="21-23" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Evaluate Accuracy</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>score</code> returns mean accuracy on the held-out test set, a quick sanity check before deeper evaluation.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="25-34" data-tint="4">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Visualize Tree</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Passes real feature names and class names to <code>plot_tree</code> so each split condition and leaf label is human-readable.</p>
-    </div>
-  </div>
-</aside>
-</div>
+Passes real feature names and class names to `plot_tree` so each split condition and leaf label is human-readable.
 
-
-<figure>
-<img src="assets/3-implementation_fig_2.png" alt="3-implementation" />
-<figcaption>Figure 2: Iris Classification Tree</figcaption>
-</figure>
+<figure><img src="../../../../.gitbook/assets/3-implementation_fig_2.png" alt="3-implementation"><figcaption><p>Figure 2: Iris Classification Tree</p></figcaption></figure>
 
 ```
 Accuracy: 100.0%
 ```
 
 This example demonstrates how to work with a real dataset. We:
+
 1. Load the built-in Iris dataset with measurements of different Iris flowers
 2. Split the data into training and testing sets
 3. Train a decision tree classifier on the training data
@@ -308,110 +150,23 @@ Now try a regression problem - predicting house prices:
 
 #### `DecisionTreeRegressor` with R² and feature importances
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+House Data Setup
 
-{% highlight python %}
-from sklearn.tree import DecisionTreeRegressor
-import numpy as np
-import matplotlib.pyplot as plt
+Ten houses described by three numeric features (size, bedrooms, age) with prices in thousands, a minimal regression dataset.
 
-# Sample house data
-# Each row: [size (sqft), bedrooms, age (years)]
-X_houses = np.array([
-    [1400, 3, 10],  # House 1
-    [1600, 3, 8],   # House 2
-    [1700, 4, 15],  # House 3
-    [1875, 4, 5],   # House 4
-    [1100, 2, 20],  # House 5
-    [2000, 4, 2],   # House 6
-    [1800, 3, 1],   # House 7
-    [1250, 2, 12],  # House 8
-    [1350, 3, 3],   # House 9
-    [1500, 3, 7]    # House 10
-])
+Split and Fit
 
-# Prices in thousands of dollars
-y_prices = np.array([250, 280, 300, 350, 200, 380, 340, 220, 260, 270])
+30% held out for testing; `DecisionTreeRegressor` at `max_depth=3` predicts by averaging the target values in each leaf.
 
-# Split data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(
-    X_houses, y_prices, test_size=0.3, random_state=42
-)
+Evaluate and Predict
 
-# Create and train the model
-regressor = DecisionTreeRegressor(max_depth=3)
-regressor.fit(X_train, y_train)
+R² on train vs test reveals overfitting; then a single new house is scored to show the inference API.
 
-# Evaluate the model
-train_score = regressor.score(X_train, y_train)
-test_score = regressor.score(X_test, y_test)
-print(f"Training R² Score: {train_score:.3f}")
-print(f"Testing R² Score: {test_score:.3f}")
+Feature Importances
 
-# Make a prediction for a new house
-new_house = np.array([[1500, 3, 12]])  # 1500 sqft, 3 bedrooms, 12 years old
-predicted_price = regressor.predict(new_house)
-print(f"Predicted price: ${predicted_price[0]:.2f}k")
+`feature_importances_` sums to 1 across features; a bar chart shows which column drove the most impurity reduction during training.
 
-# Visualize feature importance
-feature_importance = regressor.feature_importances_
-features = ['Size (sqft)', 'Bedrooms', 'Age (years)']
-
-plt.figure(figsize=(10, 6))
-plt.bar(features, feature_importance)
-plt.title('Feature Importance for House Price Prediction')
-plt.xlabel('Features')
-plt.ylabel('Importance')
-plt.show()
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-21" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">House Data Setup</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Ten houses described by three numeric features (size, bedrooms, age) with prices in thousands, a minimal regression dataset.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="23-31" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Split and Fit</span>
-    </div>
-    <div class="code-callout__body">
-      <p>30% held out for testing; <code>DecisionTreeRegressor</code> at <code>max_depth=3</code> predicts by averaging the target values in each leaf.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="33-41" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Evaluate and Predict</span>
-    </div>
-    <div class="code-callout__body">
-      <p>R² on train vs test reveals overfitting; then a single new house is scored to show the inference API.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="43-51" data-tint="4">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Feature Importances</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>feature_importances_</code> sums to 1 across features; a bar chart shows which column drove the most impurity reduction during training.</p>
-    </div>
-  </div>
-</aside>
-</div>
-
-
-<figure>
-<img src="assets/3-implementation_fig_3.png" alt="3-implementation" />
-<figcaption>Figure 3: Feature Importance for House Price Prediction</figcaption>
-</figure>
+<figure><img src="../../../../.gitbook/assets/3-implementation_fig_3.png" alt="3-implementation"><figcaption><p>Figure 3: Feature Importance for House Price Prediction</p></figcaption></figure>
 
 ```
 Training R² Score: 1.000
@@ -420,6 +175,7 @@ Predicted price: $220.00k
 ```
 
 This example shows:
+
 1. How to use decision trees for regression (predicting numeric values)
 2. How to create and train a DecisionTreeRegressor
 3. How to evaluate regression models using R² score
@@ -429,103 +185,28 @@ This example shows:
 
 For a better understanding, create a simple 2D visualization of how decision trees create boundaries:
 
-##### Noisy 2D rule + axis-aligned decision regions
+**Noisy 2D rule + axis-aligned decision regions**
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Synthetic Data
 
-{% highlight python %}
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.tree import DecisionTreeClassifier
-from matplotlib.colors import ListedColormap
+100 random 2D points are labeled by the rule `x₀ + x₁ > 1`, then \~10% of labels are flipped to introduce realistic noise.
 
-# Create a simple dataset with two features
-np.random.seed(42)
-X = np.random.rand(100, 2)  # 100 samples, 2 features
-y = (X[:, 0] + X[:, 1] > 1).astype(int)  # Simple rule: x + y > 1
+Fit Classifier
 
-# Add some noise
-noise = np.random.randint(0, 10, size=len(y))
-y = np.where(noise == 0, 1 - y, y)  # Flip about 10% of labels
+A depth-3 tree is trained on the noisy data; it will carve the space into at most 8 rectangular regions.
 
-# Create and train the model
-tree_clf = DecisionTreeClassifier(max_depth=3)
-tree_clf.fit(X, y)
+Meshgrid Predictions
 
-# Create meshgrid for plotting decision boundary
-h = 0.02  # Step size
-x_min, x_max = X[:, 0].min() - 0.1, X[:, 0].max() + 0.1
-y_min, y_max = X[:, 1].min() - 0.1, X[:, 1].max() + 0.1
-xx, yy = np.meshgrid(np.arange(x_min, x_max, h),
-                     np.arange(y_min, y_max, h))
+A fine grid covers the feature space; predicting every grid point reveals the full decision boundary as a 2D surface.
 
-# Make predictions on the meshgrid
-Z = tree_clf.predict(np.c_[xx.ravel(), yy.ravel()])
-Z = Z.reshape(xx.shape)
+Plot Boundaries
 
-# Plot the decision boundary
-plt.figure(figsize=(10, 8))
-cmap_light = ListedColormap(['#FFAAAA', '#AAFFAA'])
-cmap_bold = ListedColormap(['#FF0000', '#00FF00'])
+`contourf` fills the background with the predicted class color; individual training points are overlaid to show where the boundary cuts through the data.
 
-plt.contourf(xx, yy, Z, cmap=cmap_light)
-plt.scatter(X[:, 0], X[:, 1], c=y, cmap=cmap_bold, edgecolor='k', s=20)
-plt.title('Decision Tree Decision Boundary')
-plt.xlabel('Feature 1')
-plt.ylabel('Feature 2')
-plt.show()
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-13" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Synthetic Data</span>
-    </div>
-    <div class="code-callout__body">
-      <p>100 random 2D points are labeled by the rule <code>x₀ + x₁ > 1</code>, then ~10% of labels are flipped to introduce realistic noise.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="15-17" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Fit Classifier</span>
-    </div>
-    <div class="code-callout__body">
-      <p>A depth-3 tree is trained on the noisy data; it will carve the space into at most 8 rectangular regions.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="19-28" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Meshgrid Predictions</span>
-    </div>
-    <div class="code-callout__body">
-      <p>A fine grid covers the feature space; predicting every grid point reveals the full decision boundary as a 2D surface.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="30-40" data-tint="4">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Plot Boundaries</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>contourf</code> fills the background with the predicted class color; individual training points are overlaid to show where the boundary cuts through the data.</p>
-    </div>
-  </div>
-</aside>
-</div>
-
-
-<figure>
-<img src="assets/3-implementation_fig_4.png" alt="3-implementation" />
-<figcaption>Figure 4: Decision Tree Decision Boundary</figcaption>
-</figure>
-
+<figure><img src="../../../../.gitbook/assets/3-implementation_fig_4.png" alt="3-implementation"><figcaption><p>Figure 4: Decision Tree Decision Boundary</p></figcaption></figure>
 
 This visualization shows:
+
 1. How the decision tree divides the feature space into regions
 2. How these regions form a "decision boundary" between different classes
 3. The rectangular nature of decision tree boundaries (unlike curved boundaries in other algorithms)
@@ -558,49 +239,13 @@ Decision trees don't require feature scaling, which is a benefit compared to man
 
 #### Optional `StandardScaler` (trees are scale-invariant)
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Tree Without Scaling
 
-{% highlight python %}
-from sklearn.preprocessing import StandardScaler
+A depth-3 tree is fit directly on unscaled features and scored on the test set, decision trees use threshold comparisons, so feature magnitude doesn't change the splits.
 
-# Decision trees work fine without scaling
-tree_no_scaling = DecisionTreeClassifier(max_depth=3)
-tree_no_scaling.fit(X_train, y_train)
-print(f"Without scaling: {tree_no_scaling.score(X_test, y_test):.3f}")
+Tree With Scaling
 
-# Scaling doesn't hurt, but isn't necessary
-scaler = StandardScaler()
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled = scaler.transform(X_test)
-
-tree_with_scaling = DecisionTreeClassifier(max_depth=3)
-tree_with_scaling.fit(X_train_scaled, y_train)
-print(f"With scaling: {tree_with_scaling.score(X_test_scaled, y_test):.3f}")
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-6" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Tree Without Scaling</span>
-    </div>
-    <div class="code-callout__body">
-      <p>A depth-3 tree is fit directly on unscaled features and scored on the test set, decision trees use threshold comparisons, so feature magnitude doesn't change the splits.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="8-15" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Tree With Scaling</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>StandardScaler</code> is fit on training data only, then applied to both splits; the identical accuracy confirms that axis-aligned tree splits are invariant to affine feature rescaling.</p>
-    </div>
-  </div>
-</aside>
-</div>
+`StandardScaler` is fit on training data only, then applied to both splits; the identical accuracy confirms that axis-aligned tree splits are invariant to affine feature rescaling.
 
 ```
 Without scaling: 0.000
@@ -621,12 +266,12 @@ Try building your own decision tree:
 
 ## Gotchas
 
-- **Trusting 100% training R² as a sign of a good model**: the house regression example prints `Training R² Score: 1.000` with only 7 training rows; a perfect in-sample fit on tiny data almost always means the tree memorised individual values rather than learning a general rule, which the lower `Testing R² Score: 0.782` confirms.
-- **Passing `class_names` in the wrong order to `plot_tree`**: `class_names` must match sklearn's internal label encoding order (alphabetical for string targets, sorted integers for numeric ones), not the order you listed them in the data; a mismatch silently swaps the leaf labels in the visualization without raising an error.
-- **Interpreting 100% test accuracy on the Iris example as realistic**: `iris_clf` achieves 100% on that particular 30% split due to a small test set and a clean separable dataset; re-run with a different `random_state` and you will see the score drop, a reminder that a single split is not a reliable estimate.
-- **Using `clf.score` as the only evaluation for classification**: `score` returns mean accuracy, which is misleading on imbalanced targets; even the small disease-diagnosis example has only 5 rows, making accuracy meaningless; `classification_report` or `predict_proba` give more actionable information.
-- **Forgetting that decision tree boundaries are always axis-aligned rectangles**: the meshgrid visualizations show step-like boundaries, not smooth curves; this means decision trees will need many splits (deep trees, more overfitting risk) to approximate a genuinely diagonal or circular decision boundary.
-- **Reusing `X_train`/`X_test` from a previous cell (Iris) in the regressor cell**: the house-price `DecisionTreeRegressor` example calls `train_test_split` referencing the same variable names; if you run cells out of order, the regressor silently trains on Iris data and produces nonsense predictions.
+* **Trusting 100% training R² as a sign of a good model**: the house regression example prints `Training R² Score: 1.000` with only 7 training rows; a perfect in-sample fit on tiny data almost always means the tree memorised individual values rather than learning a general rule, which the lower `Testing R² Score: 0.782` confirms.
+* **Passing `class_names` in the wrong order to `plot_tree`**: `class_names` must match sklearn's internal label encoding order (alphabetical for string targets, sorted integers for numeric ones), not the order you listed them in the data; a mismatch silently swaps the leaf labels in the visualization without raising an error.
+* **Interpreting 100% test accuracy on the Iris example as realistic**: `iris_clf` achieves 100% on that particular 30% split due to a small test set and a clean separable dataset; re-run with a different `random_state` and you will see the score drop, a reminder that a single split is not a reliable estimate.
+* **Using `clf.score` as the only evaluation for classification**: `score` returns mean accuracy, which is misleading on imbalanced targets; even the small disease-diagnosis example has only 5 rows, making accuracy meaningless; `classification_report` or `predict_proba` give more actionable information.
+* **Forgetting that decision tree boundaries are always axis-aligned rectangles**: the meshgrid visualizations show step-like boundaries, not smooth curves; this means decision trees will need many splits (deep trees, more overfitting risk) to approximate a genuinely diagonal or circular decision boundary.
+* **Reusing `X_train`/`X_test` from a previous cell (Iris) in the regressor cell**: the house-price `DecisionTreeRegressor` example calls `train_test_split` referencing the same variable names; if you run cells out of order, the regressor silently trains on Iris data and produces nonsense predictions.
 
 ## Next Steps
 

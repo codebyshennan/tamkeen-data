@@ -6,22 +6,18 @@
 
 End-to-end context for planning and presenting a capstone project.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/RBSUwFGa6Fk" title="What is Data Science?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 ## Project Overview
 
 This capstone project demonstrates industry-relevant data science and AI skills acquired throughout the course. You will work with real or realistic datasets, make defensible technical choices, and explain what your work means for a practical audience.
 
 **Before you start:** You should be able to load and clean tabular data in **pandas**, build at least one **visualization** with clear intent, and explain **limitations** of a model or summary. The capstone is not the place to learn pandas, visualization, or modeling from scratch. Use earlier modules to refresh, then focus here on **problem framing**, **reproducibility**, and **communication**.
 
-{% include capstone-workflow-diagram.html %}
-
 ## Timeline and Deliverables
 
-- Duration: 2 weeks part-time
-- Main technical artifact: public GitHub repository
-- Main communication artifact: 5-minute video presentation
-- Expected evidence: clear notebooks, visible outputs, charts where they support a claim, model metrics where modeling is used, and a README that explains how to reproduce the project
+* Duration: 2 weeks part-time
+* Main technical artifact: public GitHub repository
+* Main communication artifact: 5-minute video presentation
+* Expected evidence: clear notebooks, visible outputs, charts where they support a claim, model metrics where modeling is used, and a README that explains how to reproduce the project
 
 ## What A Strong Capstone Shows
 
@@ -37,9 +33,9 @@ A strong capstone does not need the most complex model. It needs a coherent chai
 
 When you report model performance, match the metric to the task and explain the formula in plain language.
 
-- For regression, mean absolute error is \\(MAE = \frac{1}{n}\sum_{i=1}^{n}|y_i-\hat{y}_i|\\). It is the average absolute size of the prediction error in the original unit.
-- For classification, accuracy is \\(Accuracy = \frac{TP + TN}{TP + TN + FP + FN}\\). It is only reliable when classes are reasonably balanced.
-- For imbalanced classification, report precision \\(Precision = \frac{TP}{TP + FP}\\), recall \\(Recall = \frac{TP}{TP + FN}\\), or F1 score \\(F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall}\\).
+* For regression, mean absolute error is \\(MAE = \frac{1}{n}\sum\_{i=1}^{n}|y\_i-\hat{y}\_i|\\). It is the average absolute size of the prediction error in the original unit.
+* For classification, accuracy is \\(Accuracy = \frac{TP + TN}{TP + TN + FP + FN}\\). It is only reliable when classes are reasonably balanced.
+* For imbalanced classification, report precision \\(Precision = \frac{TP}{TP + FP}\\), recall \\(Recall = \frac{TP}{TP + FN}\\), or F1 score \\(F1 = 2 \times \frac{Precision \times Recall}{Precision + Recall}\\).
 
 ## Structured Project Options
 
@@ -51,10 +47,10 @@ Choose one of the three structured project briefs below, or propose your own pro
 
 **Learning objectives**
 
-- Integrate data from multiple sources using APIs and direct downloads
-- Apply data preprocessing and feature engineering techniques
-- Create meaningful visualizations for policy insights
-- Build predictive models for SDG progress forecasting when the data supports it
+* Integrate data from multiple sources using APIs and direct downloads
+* Apply data preprocessing and feature engineering techniques
+* Create meaningful visualizations for policy insights
+* Build predictive models for SDG progress forecasting when the data supports it
 
 **Datasets and resources**
 
@@ -65,16 +61,16 @@ Choose one of the three structured project briefs below, or propose your own pro
 
 **Implementation plan**
 
-- Week 1, days 1-2: Select 2-3 focused goals, such as SDG 1 No Poverty or SDG 3 Good Health.
-- Week 1, days 3-4: Extract data using API calls or direct downloads.
-- Week 1, days 5-7: Clean data, standardize country or year fields, and prepare features.
-- Week 2, days 8-10: Create exploratory charts and write interpretation notes.
-- Week 2, days 11-12: Build baseline forecasts or classification models if the question needs them.
-- Week 2, days 13-14: Prepare repository, presentation, and recommendations.
+* Week 1, days 1-2: Select 2-3 focused goals, such as SDG 1 No Poverty or SDG 3 Good Health.
+* Week 1, days 3-4: Extract data using API calls or direct downloads.
+* Week 1, days 5-7: Clean data, standardize country or year fields, and prepare features.
+* Week 2, days 8-10: Create exploratory charts and write interpretation notes.
+* Week 2, days 11-12: Build baseline forecasts or classification models if the question needs them.
+* Week 2, days 13-14: Prepare repository, presentation, and recommendations.
 
 **Suggested `requirements.txt` entries**
 
-```text
+```
 pandas
 numpy
 requests
@@ -87,10 +83,10 @@ jupyter
 
 **Expected outputs**
 
-- A notebook with the complete pipeline and visible outputs after important cells
-- At least three charts that support clear policy or operational insights
-- A short model evaluation section if modeling is used
-- A 5-minute presentation with recommendations and limitations
+* A notebook with the complete pipeline and visible outputs after important cells
+* At least three charts that support clear policy or operational insights
+* A short model evaluation section if modeling is used
+* A 5-minute presentation with recommendations and limitations
 
 ### Example Project B: Bahrain Vision 2030 Economic Development Analysis
 
@@ -98,10 +94,10 @@ jupyter
 
 **Learning objectives**
 
-- Work with government open data portals
-- Analyze economic trends and patterns
-- Create policy-relevant visualizations
-- Build simple forecasting models for economic indicators when the historical data is suitable
+* Work with government open data portals
+* Analyze economic trends and patterns
+* Create policy-relevant visualizations
+* Build simple forecasting models for economic indicators when the historical data is suitable
 
 **Datasets and resources**
 
@@ -113,15 +109,15 @@ jupyter
 
 **Key indicators to analyze**
 
-- GDP growth and composition
-- Private sector contribution
-- Employment rates and sectoral distribution
-- Trade statistics and diversification metrics
-- Infrastructure development indicators
+* GDP growth and composition
+* Private sector contribution
+* Employment rates and sectoral distribution
+* Trade statistics and diversification metrics
+* Infrastructure development indicators
 
 **Suggested `requirements.txt` entries**
 
-```text
+```
 pandas
 numpy
 matplotlib
@@ -133,10 +129,10 @@ jupyter
 
 **Expected outputs**
 
-- Trend charts with clear axis labels and date ranges
-- A data dictionary or source table explaining each indicator
-- A short interpretation of whether the evidence supports the selected Vision 2030 theme
-- A presentation with policy or business implications, not only technical charts
+* Trend charts with clear axis labels and date ranges
+* A data dictionary or source table explaining each indicator
+* A short interpretation of whether the evidence supports the selected Vision 2030 theme
+* A presentation with policy or business implications, not only technical charts
 
 ### Example Project C: Web Scraping To Data Pipeline Implementation
 
@@ -144,17 +140,17 @@ jupyter
 
 **Suggested project choices**
 
-- **Real estate market analysis:** collect public property listings and analyze price drivers.
-- **Financial markets dashboard:** use public financial APIs and compare sector or stock performance.
-- **Weather and climate analysis:** use public weather APIs to analyze patterns and forecasting signals.
+* **Real estate market analysis:** collect public property listings and analyze price drivers.
+* **Financial markets dashboard:** use public financial APIs and compare sector or stock performance.
+* **Weather and climate analysis:** use public weather APIs to analyze patterns and forecasting signals.
 
 **Ethical guidelines**
 
-- Respect `robots.txt`, API limits, and terms of service.
-- Use public data only.
-- Add delays between requests when scraping pages.
-- Store raw data separately from cleaned data.
-- Document failures, missing records, and assumptions.
+* Respect `robots.txt`, API limits, and terms of service.
+* Use public data only.
+* Add delays between requests when scraping pages.
+* Store raw data separately from cleaned data.
+* Document failures, missing records, and assumptions.
 
 **Purpose:** This first example turns a small HTML sample into a structured dataset. It mirrors the early stage of a scraping project while staying reproducible offline for the course page.
 
@@ -274,11 +270,7 @@ plt.title("Predicted vs actual prices")
 plt.show()
 ```
 
-
-<figure>
-<img src="assets/README_fig_1.png" alt="README" />
-<figcaption>Figure 1: Predicted versus actual property prices for a small capstone modeling check.</figcaption>
-</figure>
+<figure><img src="../../.gitbook/assets/README_fig_1 (3).png" alt="README"><figcaption><p>Figure 1: Predicted versus actual property prices for a small capstone modeling check.</p></figcaption></figure>
 
 ```
 Model evaluation summary
@@ -293,133 +285,126 @@ R^2 on holdout: 0.99
 
 **Expected outputs**
 
-- A complete data pipeline with logs or printed checks at collection, cleaning, and modeling stages
-- A model section with at least one appropriate metric and one diagnostic chart
-- A dashboard, notebook, or lightweight web application that demonstrates the insights
+* A complete data pipeline with logs or printed checks at collection, cleaning, and modeling stages
+* A model section with at least one appropriate metric and one diagnostic chart
+* A dashboard, notebook, or lightweight web application that demonstrates the insights
 
 ## General Project Requirements
 
 ### Data Collection And Preparation
 
-- Source and clean one or more datasets.
-- Document the dataset source, license or access constraints, and collection date.
-- Show row counts before and after cleaning.
-- Explain missing values, duplicates, outliers, and any records removed.
+* Source and clean one or more datasets.
+* Document the dataset source, license or access constraints, and collection date.
+* Show row counts before and after cleaning.
+* Explain missing values, duplicates, outliers, and any records removed.
 
 ### Exploratory Data Analysis
 
-- Include descriptive statistics for the most important variables.
-- Create charts that answer specific questions rather than decorating the notebook.
-- Add short interpretation notes after important charts.
-- Use consistent labels, units, and color meaning.
+* Include descriptive statistics for the most important variables.
+* Create charts that answer specific questions rather than decorating the notebook.
+* Add short interpretation notes after important charts.
+* Use consistent labels, units, and color meaning.
 
 ### Modeling And Evaluation
 
-- Start with a simple baseline.
-- Use train/test splits or cross-validation where appropriate.
-- Choose metrics that match the problem type.
-- Include output logs or tables that show model performance.
-- Explain why the final model is useful or why modeling was not appropriate.
+* Start with a simple baseline.
+* Use train/test splits or cross-validation where appropriate.
+* Choose metrics that match the problem type.
+* Include output logs or tables that show model performance.
+* Explain why the final model is useful or why modeling was not appropriate.
 
 ### Results And Recommendations
 
-- Present clear findings and recommendations.
-- Support conclusions with data, charts, and metrics.
-- Discuss limitations and practical implications.
-- Distinguish facts from assumptions.
+* Present clear findings and recommendations.
+* Support conclusions with data, charts, and metrics.
+* Discuss limitations and practical implications.
+* Distinguish facts from assumptions.
 
 ### Technical Implementation
 
-- Use Python, pandas, scikit-learn, and visualization libraries covered in the course unless your instructor approves another stack.
-- Keep notebooks readable with markdown explanations before code blocks.
-- Keep code cells focused: one task per cell is easier to review than long mixed-purpose cells.
-- Store raw and cleaned data separately when possible.
-- Include `requirements.txt` or equivalent dependency documentation.
+* Use Python, pandas, scikit-learn, and visualization libraries covered in the course unless your instructor approves another stack.
+* Keep notebooks readable with markdown explanations before code blocks.
+* Keep code cells focused: one task per cell is easier to review than long mixed-purpose cells.
+* Store raw and cleaned data separately when possible.
+* Include `requirements.txt` or equivalent dependency documentation.
 
 ## Recommended Development Environments
 
 1. **Google Colab**
-   - Free access to common data science libraries
-   - Easy sharing and collaboration
-   - Good for notebook-first capstone projects
-
+   * Free access to common data science libraries
+   * Easy sharing and collaboration
+   * Good for notebook-first capstone projects
 2. **Deepnote**
-   - Real-time collaboration
-   - Integrated version control
-   - Rich markdown support
-
+   * Real-time collaboration
+   * Integrated version control
+   * Rich markdown support
 3. **Local Jupyter environment**
-   - Best when you want full control of files and dependencies
-   - Requires more setup discipline
-   - Good preparation for professional workflows
+   * Best when you want full control of files and dependencies
+   * Requires more setup discipline
+   * Good preparation for professional workflows
 
 ## Recommended Datasets From Kaggle
 
 ### Healthcare And Life Sciences
 
 1. [COVID-19 Dataset](https://www.kaggle.com/datasets/sudalairajkumar/novel-corona-virus-2019-dataset)
-   - Time series analysis
-   - Geographical visualization
-   - Predictive modeling opportunities
-
+   * Time series analysis
+   * Geographical visualization
+   * Predictive modeling opportunities
 2. [Healthcare Diabetes Dataset](https://www.kaggle.com/datasets/mathchi/diabetes-data-set)
-   - Binary classification
-   - Feature importance analysis
-   - Medical diagnostic modeling
+   * Binary classification
+   * Feature importance analysis
+   * Medical diagnostic modeling
 
 ### Business And Finance
 
 1. [E-commerce Customer Behavior](https://www.kaggle.com/datasets/mkechinov/ecommerce-behavior-data-from-multi-category-store)
-   - Customer segmentation
-   - Purchase prediction
-   - Time series analysis
-
+   * Customer segmentation
+   * Purchase prediction
+   * Time series analysis
 2. [Credit Card Fraud Detection](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud)
-   - Anomaly detection
-   - Imbalanced classification
-   - Risk modeling
+   * Anomaly detection
+   * Imbalanced classification
+   * Risk modeling
 
 ### Environmental And Climate
 
 1. [Global Temperature Time Series](https://www.kaggle.com/datasets/berkeleyearth/climate-change-earth-surface-temperature-data)
-   - Time series analysis
-   - Trend prediction
-   - Visualization challenges
-
+   * Time series analysis
+   * Trend prediction
+   * Visualization challenges
 2. [Air Quality Data](https://www.kaggle.com/datasets/fedesoriano/air-quality-data-set)
-   - Multivariate analysis
-   - Sensor data processing
-   - Environmental impact assessment
+   * Multivariate analysis
+   * Sensor data processing
+   * Environmental impact assessment
 
 ### Technology And Social Media
 
 1. [Twitter Sentiment Analysis](https://www.kaggle.com/datasets/kazanova/sentiment140)
-   - Natural language processing
-   - Sentiment classification
-   - Text preprocessing
-
+   * Natural language processing
+   * Sentiment classification
+   * Text preprocessing
 2. [Stack Overflow Questions](https://www.kaggle.com/datasets/stackoverflow/stackoverflow)
-   - Text classification
-   - Tag prediction
-   - Trend analysis
+   * Text classification
+   * Tag prediction
+   * Trend analysis
 
 ### Urban And Transportation
 
 1. [NYC Taxi Trip Duration](https://www.kaggle.com/competitions/nyc-taxi-trip-duration)
-   - Regression analysis
-   - Geospatial visualization
-   - Feature engineering
-
+   * Regression analysis
+   * Geospatial visualization
+   * Feature engineering
 2. [Bike Sharing Demand](https://www.kaggle.com/competitions/bike-sharing-demand)
-   - Demand forecasting
-   - Time series analysis
-   - Weather impact analysis
+   * Demand forecasting
+   * Time series analysis
+   * Weather impact analysis
 
 ## Repository Structure
 
 Use a structure that makes the project easy to run and review.
 
-```text
+```
 capstone-project/
 ├── data/
 │   ├── raw/                 # Original files or download notes
@@ -439,81 +424,73 @@ capstone-project/
 
 Your repository README should include:
 
-- Project title and one-paragraph description
-- Problem statement and stakeholder context
-- Dataset description and source links
-- Methodology overview
-- Key findings and insights
-- Model metrics and limitations if modeling is used
-- Installation or setup instructions
-- Usage instructions for notebooks, scripts, or dashboards
+* Project title and one-paragraph description
+* Problem statement and stakeholder context
+* Dataset description and source links
+* Methodology overview
+* Key findings and insights
+* Model metrics and limitations if modeling is used
+* Installation or setup instructions
+* Usage instructions for notebooks, scripts, or dashboards
 
 ## Video Presentation Structure
 
 1. **Problem introduction, 1 minute**
-   - Context and motivation
-   - Problem statement
-   - Expected impact
-
+   * Context and motivation
+   * Problem statement
+   * Expected impact
 2. **Technical approach, 2 minutes**
-   - Data processing methods
-   - Analysis techniques
-   - Model development if used
-
+   * Data processing methods
+   * Analysis techniques
+   * Model development if used
 3. **Results and insights, 1.5 minutes**
-   - Key findings
-   - Model performance or analysis evidence
-   - Business, policy, or operational recommendations
-
+   * Key findings
+   * Model performance or analysis evidence
+   * Business, policy, or operational recommendations
 4. **Conclusion, 0.5 minutes**
-   - Summary of achievements
-   - Limitations and future improvements
-   - Lessons learned
+   * Summary of achievements
+   * Limitations and future improvements
+   * Lessons learned
 
 ## Submission Process
 
 1. **GitHub repository**
-   - Commit all code and documentation.
-   - Make the repository public unless your instructor gives different guidance.
-   - Submit the repository URL via the course platform.
-
+   * Commit all code and documentation.
+   * Make the repository public unless your instructor gives different guidance.
+   * Submit the repository URL via the course platform.
 2. **Video presentation**
-   - Upload to a video platform such as YouTube, Vimeo, or Loom.
-   - Make the video unlisted or public.
-   - Submit the video URL via the course platform.
-
+   * Upload to a video platform such as YouTube, Vimeo, or Loom.
+   * Make the video unlisted or public.
+   * Submit the video URL via the course platform.
 3. **Final checks**
-   - Repository is public and accessible.
-   - Notebooks run from a clean environment.
-   - Important code cells have printed outputs, tables, or charts.
-   - Documentation is complete and clear.
-   - Video is accessible and plays correctly.
+   * Repository is public and accessible.
+   * Notebooks run from a clean environment.
+   * Important code cells have printed outputs, tables, or charts.
+   * Documentation is complete and clear.
+   * Video is accessible and plays correctly.
 
 ## Common Pitfalls To Avoid
 
 1. **Data issues**
-   - Not exploring data thoroughly before modeling
-   - Ignoring missing values or outliers
-   - Using inappropriate data splits
-   - Creating data leakage during feature engineering
-
+   * Not exploring data thoroughly before modeling
+   * Ignoring missing values or outliers
+   * Using inappropriate data splits
+   * Creating data leakage during feature engineering
 2. **Modeling mistakes**
-   - Not establishing a baseline model
-   - Overfitting without validation
-   - Using metrics that do not match the problem
-   - Reporting model scores without interpretation
-
+   * Not establishing a baseline model
+   * Overfitting without validation
+   * Using metrics that do not match the problem
+   * Reporting model scores without interpretation
 3. **Presentation problems**
-   - Exceeding the time limit
-   - Using too much technical jargon
-   - Showing charts without explaining the decision they support
-   - Not telling a coherent story
-
+   * Exceeding the time limit
+   * Using too much technical jargon
+   * Showing charts without explaining the decision they support
+   * Not telling a coherent story
 4. **Documentation issues**
-   - Missing methodology explanations
-   - Code cells with no outputs or unclear outputs
-   - No discussion of limitations
-   - Unclear repository structure
+   * Missing methodology explanations
+   * Code cells with no outputs or unclear outputs
+   * No discussion of limitations
+   * Unclear repository structure
 
 ## Frequently Asked Questions
 
@@ -557,15 +534,15 @@ Very important. This project should demonstrate your ability to apply data scien
 
 ### During Development
 
-- Use course discussion forums for technical questions.
-- Attend office hours for guidance on scope and methodology.
-- Consult documentation and reputable examples for implementation details.
+* Use course discussion forums for technical questions.
+* Attend office hours for guidance on scope and methodology.
+* Consult documentation and reputable examples for implementation details.
 
 ### Before Submission
 
-- Review the assessment rubric.
-- Test your code in a fresh environment.
-- Ask someone to review your presentation for clarity and timing.
-- Double-check all repository and video submission requirements.
+* Review the assessment rubric.
+* Test your code in a fresh environment.
+* Ask someone to review your presentation for clarity and timing.
+* Double-check all repository and video submission requirements.
 
 The capstone is your opportunity to show both technical competency and business judgment through a well-executed, clearly communicated data science project.

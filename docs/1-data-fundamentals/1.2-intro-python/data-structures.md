@@ -8,15 +8,11 @@ Lists, tuples, dicts, and sets are the **containers** you use before (and alongs
 
 > **Start With AI:** Ask ChatGPT: "Explain Python data structures using everyday containers (boxes, folders, etc.)"
 
-> **Interactive Practice:** [Open in Google Colab](./notebooks/02-data-structures.ipynb)
+> **Interactive Practice:** [Open in Google Colab](notebooks/02-data-structures.ipynb)
 
 ### Video
 
-<div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/W8KRzm-HUcc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-*Corey Schafer, Lists, tuples, and sets*
+_Corey Schafer, Lists, tuples, and sets_
 
 ## Introduction to Data Structures
 
@@ -25,10 +21,11 @@ Lists, tuples, dicts, and sets are the **containers** you use before (and alongs
 **Think of data structures as different types of containers for organizing information.**
 
 Imagine you're organizing your belongings:
-- A **backpack** (list) - You can add items, remove them, and they stay in order
-- A **labeled filing cabinet** (dictionary) - You find things by their label, not by position
-- A **sealed envelope** (tuple) - Once you put things in, you can't change them
-- A **collection box** (set) - You just need to know if something is there or not, order doesn't matter
+
+* A **backpack** (list) - You can add items, remove them, and they stay in order
+* A **labeled filing cabinet** (dictionary) - You find things by their label, not by position
+* A **sealed envelope** (tuple) - Once you put things in, you can't change them
+* A **collection box** (set) - You just need to know if something is there or not, order doesn't matter
 
 In Python, we use different "containers" (data structures) to store and organize our data efficiently. **Choosing the right container makes your code faster, clearer, and easier to work with.**
 
@@ -37,22 +34,22 @@ In Python, we use different "containers" (data structures) to store and organize
 **Short answer:** Different problems need different solutions!
 
 **Example:**
-- If you're keeping track of temperatures over time, you want them in order → Use a **list**
-- If you're storing student names and their grades, you want to look up by name → Use a **dictionary**
-- If you're tracking which products are in stock, you just need unique names → Use a **set**
-- If you have coordinates (x, y) that shouldn't change, make them unchangeable → Use a **tuple**
+
+* If you're keeping track of temperatures over time, you want them in order → Use a **list**
+* If you're storing student names and their grades, you want to look up by name → Use a **dictionary**
+* If you're tracking which products are in stock, you just need unique names → Use a **set**
+* If you have coordinates (x, y) that shouldn't change, make them unchangeable → Use a **tuple**
 
 > **Key Insight:** Using the right data structure is like using the right tool. You can hammer a nail with a shoe, but a hammer works better! Similarly, you can solve problems with any data structure, but the right one makes life easier.
 
----
+***
 
 ### The Four Main Data Structures You'll Use
 
 Start with a simple overview before we dive deep into each one:
 
-{% include mermaid-diagram.html src="1-data-fundamentals/1.2-intro-python/diagrams/data-structures-1.mmd" %}
-
 **1. Lists `[ ]` - Ordered Collections You Can Change**
+
 ```python
 # A list is like a row of numbered boxes
 shopping_list = ["milk", "eggs", "bread"]
@@ -62,6 +59,7 @@ shopping_list = ["milk", "eggs", "bread"]
 ```
 
 **2. Dictionaries `{ }` - Key-Value Pairs (Like a Real Dictionary!)**
+
 ```python
 # A dictionary is like a real dictionary: word → definition
 student = {
@@ -73,6 +71,7 @@ student = {
 ```
 
 **3. Tuples `( )` - Ordered Collections You CANNOT Change**
+
 ```python
 # A tuple is like a sealed envelope with data inside
 coordinates = (10.5, 20.3) # x and y position
@@ -81,6 +80,7 @@ coordinates = (10.5, 20.3) # x and y position
 ```
 
 **4. Sets `{ }` - Unordered Collections of Unique Items**
+
 ```python
 # A set is like a bag of unique items (no duplicates!)
 unique_visitors = {"Alice", "Bob", "Charlie"}
@@ -89,14 +89,15 @@ unique_visitors = {"Alice", "Bob", "Charlie"}
 ```
 
 > **Remember:**
-> - **Lists** `[]` = Ordered, can change, allows duplicates
-> - **Dictionaries** `{}` = Key-value pairs, fast lookup
-> - **Tuples** `()` = Ordered, CANNOT change (immutable)
-> - **Sets** `{}` = Unordered, unique values only
+>
+> * **Lists** `[]` = Ordered, can change, allows duplicates
+> * **Dictionaries** `{}` = Key-value pairs, fast lookup
+> * **Tuples** `()` = Ordered, CANNOT change (immutable)
+> * **Sets** `{}` = Unordered, unique values only
 
 Now we will look at each one in detail!
 
----
+***
 
 ### Real-World Data Science Example
 
@@ -131,14 +132,15 @@ browsed_categories = {"Electronics", "Books", "Clothing", "Electronics"}
 ```
 
 **Why each structure?**
-- **Dictionary**for customer: We look up info by field name ("email", "name")
-- **List**for purchases: Order matters (chronological history)
-- **Tuple**for record: Historical data should never be modified
-- **Set**for categories: We only care about unique values visited
+
+* **Dictionary**for customer: We look up info by field name ("email", "name")
+* **List**for purchases: Order matters (chronological history)
+* **Tuple**for record: Historical data should never be modified
+* **Set**for categories: We only care about unique values visited
 
 This is how data scientists organize real data! Now learn each structure in depth.
 
----
+***
 
 ### Data Structures in Data Science
 
@@ -174,15 +176,15 @@ prices_series = pd.Series(stock_prices,
 
 Each structure optimized for different operations:
 
-- Lists for flexible data collection
-- Tuples for immutable records
-- Sets for unique value operations
-- Dictionaries for key-based lookups
-- NumPy arrays for numerical computations
-- Pandas for labeled data analysis
+* Lists for flexible data collection
+* Tuples for immutable records
+* Sets for unique value operations
+* Dictionaries for key-based lookups
+* NumPy arrays for numerical computations
+* Pandas for labeled data analysis
 
-> **Visualize Data Structures:**
-> Paste this into Python Tutor to see how different structures are stored:
+> **Visualize Data Structures:** Paste this into Python Tutor to see how different structures are stored:
+>
 > ```python
 > # Watch how each structure is created and stored
 > my_list = [1, 2, 3]
@@ -197,86 +199,25 @@ Each structure optimized for different operations:
 > my_dict['d'] = 4
 > ```
 
-> **AI Challenge:**
-> Ask: "Create a table comparing lists, tuples, sets, and dictionaries with their pros/cons"
+> **AI Challenge:** Ask: "Create a table comparing lists, tuples, sets, and dictionaries with their pros/cons"
 
----
+***
 
 ### Performance Considerations
 
 Choose structures based on operation needs:
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Imports
 
-{% highlight python %}
-import time
-import numpy as np
+Imports `time` for wall-clock measurement and NumPy for the vectorized alternative.
 
-# Comparing list vs. numpy array operations
-def compare_performance(size=1000000):
-   # Create data
-   list_data = list(range(size))
-   array_data = np.array(list_data)
+Speed Comparison
 
-   # List operations
-   start = time.time()
-   list_result = [x * 2 for x in list_data]
-   list_time = time.time() - start
+Times a list comprehension against a NumPy vectorized multiply on one million elements, then prints the speedup ratio.
 
-   # NumPy operations
-   start = time.time()
-   array_result = array_data * 2
-   array_time = time.time() - start
+Memory Comparison
 
-   print(f"List time: {list_time:.4f} seconds")
-   print(f"NumPy time: {array_time:.4f} seconds")
-   print(f"NumPy is {list_time/array_time:.1f}x faster")
-
-# Memory usage comparison
-def compare_memory():
-   import sys
-
-   # Create equivalent data structures
-   data = list(range(1000))
-   list_mem = sys.getsizeof(data)
-   array_mem = np.array(data).nbytes
-
-   print(f"List memory: {list_mem} bytes")
-   print(f"NumPy memory: {array_mem} bytes")
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-3" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Imports</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Imports <code>time</code> for wall-clock measurement and NumPy for the vectorized alternative.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="5-23" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Speed Comparison</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Times a list comprehension against a NumPy vectorized multiply on one million elements, then prints the speedup ratio.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="25-35" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Memory Comparison</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Uses <code>sys.getsizeof</code> and <code>.nbytes</code> to show how a Python list uses more memory than an equivalent NumPy array.</p>
-    </div>
-  </div>
-</aside>
-</div>
+Uses `sys.getsizeof` and `.nbytes` to show how a Python list uses more memory than an equivalent NumPy array.
 
 ## Lists in Data Analysis - The Most Versatile Structure
 
@@ -285,11 +226,13 @@ def compare_memory():
 **A list is like a numbered row of containers where you can store anything, in any order, and change it whenever you want.**
 
 Think of it like:
-- A playlist of songs (you can add, remove, reorder)
-- A to-do list (you can check items off, add new tasks)
-- A shopping cart (items stay in order, you can modify it)
+
+* A playlist of songs (you can add, remove, reorder)
+* A to-do list (you can check items off, add new tasks)
+* A shopping cart (items stay in order, you can modify it)
 
 **Key characteristics:**
+
 1. **Ordered** - Items stay in the order you put them
 2. **Mutable** - You can change, add, or remove items
 3. **Allows duplicates** - You can have the same value multiple times
@@ -346,9 +289,10 @@ Last: elderberry
 ```
 
 **Think of it like this:**
-- **fruits[0]** = "Give me the 1st item" (computers count from 0!)
-- **fruits[-1]** = "Give me the last item" (no matter how long the list is)
-- **fruits[2]** = "Give me the 3rd item"
+
+* **fruits\[0]** = "Give me the 1st item" (computers count from 0!)
+* **fruits\[-1]** = "Give me the last item" (no matter how long the list is)
+* **fruits\[2]** = "Give me the 3rd item"
 
 ### Slicing Lists - Getting Multiple Items at Once
 
@@ -376,13 +320,16 @@ reversed_list = numbers[::-1] # [9, 8, 7, ... 0] - reverse order!
 ```
 
 > **Memory Trick for Slicing:**
-> - `[start:stop]` = "Start here, stop before here"
-> - Think of index numbers as **positions between items**, not the items themselves:
->  ```
->  Items:  [ 'a' | 'b' | 'c' | 'd' ]
->  Indices: 0   1   2   3   4
->  ```
-> - `[1:3]` means "from position 1 to position 3" = 'b' and 'c'
+>
+> * `[start:stop]` = "Start here, stop before here"
+> * Think of index numbers as **positions between items**, not the items themselves:
+>
+> ```
+> Items:  [ 'a' | 'b' | 'c' | 'd' ]
+> Indices: 0   1   2   3   4
+> ```
+>
+> * `[1:3]` means "from position 1 to position 3" = 'b' and 'c'
 
 ### Modifying Lists - Making Changes
 
@@ -420,8 +367,10 @@ shopping.extend(more_items) # Add all items from more_items
 ```
 
 > **What's the difference?**
-> - `append(item)` - Adds ONE item (even if it's a list!)
-> - `extend(list)` - Adds ALL items from the list
+>
+> * `append(item)` - Adds ONE item (even if it's a list!)
+> * `extend(list)` - Adds ALL items from the list
+>
 > ```python
 > list1 = [1, 2, 3]
 > list1.append([4, 5])  # Result: [1, 2, 3, [4, 5]] ← list inside list!
@@ -485,80 +434,28 @@ data.clear() # Now data = []
 [5, 2, 8, 1, 9]
 ```
 
----
+***
 
 ### Advanced List Operations for Data Analysis
 
 Now that you understand the basics, look at how data scientists use lists:
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Returns Calculation
 
-{% highlight python %}
-# Time series manipulation
-prices = [100.23, 101.45, 99.78, 102.34, 101.89]
+Builds a price list then computes percentage returns with a list comprehension iterating from index 1 onward.
 
-# Calculate returns
-returns = [
-   ((prices[i] - prices[i-1]) / prices[i-1]) * 100
-   for i in range(1, len(prices))
-]
+Moving Average
 
-# Moving average
-def moving_average(data, window=3):
-   return [
-       sum(data[i:i+window]) / window
-       for i in range(len(data) - window + 1)
-   ]
+Slides a window of fixed size across the data and returns the mean of each window as a new list.
 
-# Data cleaning
-def clean_data(data):
-   """Remove outliers using IQR method"""
-   q1 = np.percentile(data, 25)
-   q3 = np.percentile(data, 75)
-   iqr = q3 - q1
-   lower_bound = q1 - 1.5 * iqr
-   upper_bound = q3 + 1.5 * iqr
+IQR Outlier Removal
 
-   return [x for x in data if lower_bound <= x <= upper_bound]
-{% endhighlight %}
+Computes Q1, Q3, and IQR via NumPy, then filters the list to keep only values within 1.5 × IQR of the quartiles.
 
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-9" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Returns Calculation</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Builds a price list then computes percentage returns with a list comprehension iterating from index 1 onward.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="11-16" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Moving Average</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Slides a window of fixed size across the data and returns the mean of each window as a new list.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="18-27" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">IQR Outlier Removal</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Computes Q1, Q3, and IQR via NumPy, then filters the list to keep only values within 1.5 × IQR of the quartiles.</p>
-    </div>
-  </div>
-</aside>
-</div>
+**Performance Tip**: For numerical computations, prefer NumPy arrays over lists!
 
- **Performance Tip**: For numerical computations, prefer NumPy arrays over lists!
-
-> **Try This Experiment:**
-> Run this in Google Colab to see the speed difference:
+> **Try This Experiment:** Run this in Google Colab to see the speed difference:
+>
 > ```python
 > import numpy as np
 > import time
@@ -579,21 +476,20 @@ List time: 0.0182s
 NumPy time: 0.0007s
 ```
 
-> **Learn More:**
-> Ask: "Why is NumPy faster than Python lists for numerical operations?"
+> **Learn More:** Ask: "Why is NumPy faster than Python lists for numerical operations?"
 
----
+***
 
 ### List Comprehensions - Python's Power Feature
 
-**What is a list comprehension?**
-It's a **shortcut way to create new lists**based on existing lists. Think of it as a "recipe" written in one line instead of multiple lines.
+**What is a list comprehension?** It's a **shortcut way to create new lists**based on existing lists. Think of it as a "recipe" written in one line instead of multiple lines.
 
 **Why use them?**
-- Faster to write (once you learn them!)
-- Easier to read (for experienced Python programmers)
-- Often faster to execute
-- Very common in data science code
+
+* Faster to write (once you learn them!)
+* Easier to read (for experienced Python programmers)
+* Often faster to execute
+* Very common in data science code
 
 ### From Loop to Comprehension - Step by Step
 
@@ -623,6 +519,7 @@ print(squared) # [1, 4, 9, 16, 25] - same result!
 ```
 
 **How to read it:**
+
 ```python
 squared = [num ** 2 for num in numbers]
 #     ↑    ↑
@@ -635,6 +532,7 @@ Think of it like English: "Make a list of **num squared**for each **num in numbe
 ### Breaking Down the Pattern
 
 **The template:**
+
 ```python
 new_list = [expression for item in old_list]
           ↑           ↑         ↑
@@ -670,6 +568,7 @@ with_tax = [price * 1.08 for price in prices]
 You can add `if` conditions to **filter**which items to include:
 
 **Template with condition:**
+
 ```python
 new_list = [expression for item in old_list if condition]
           ↑           ↑                     ↑
@@ -721,6 +620,7 @@ short_upper = [name.upper() for name in names if len(name) <= 3]
 ```
 
 > **How to think about it:**
+>
 > 1. Start with: "for item in list"
 > 2. Add filter (if needed): "if condition"
 > 3. Add transformation: "expression"
@@ -795,9 +695,10 @@ for x in range(10):
 ```
 
 > **Rule of Thumb:**
-> - If your list comprehension fits comfortably on one line → Use it!
-> - If it's getting complex and hard to read → Use a traditional loop
-> - Readability matters more than showing off!
+>
+> * If your list comprehension fits comfortably on one line → Use it!
+> * If it's getting complex and hard to read → Use a traditional loop
+> * Readability matters more than showing off!
 
 ### Practice: Convert Loops to Comprehensions
 
@@ -825,7 +726,8 @@ for num in numbers:
 ```
 
 <details>
-<summary> Answers</summary>
+
+<summary>Answers</summary>
 
 ```python
 # Exercise 1
@@ -834,9 +736,10 @@ lengths = [len(fruit) for fruit in fruits]
 # Exercise 2
 odd_squares = [num ** 2 for num in numbers if num % 2 == 1]
 ```
+
 </details>
 
----
+***
 
 ### List Comprehensions in Data Science
 
@@ -874,7 +777,7 @@ def normalize_features(data):
 
 ## Tuples in Data Analysis
 
----
+***
 
 ### Efficient Data Records
 
@@ -912,7 +815,7 @@ print(records[0].price) # 173.57
 173.57
 ```
 
----
+***
 
 ### Tuple Performance Advantages
 
@@ -962,7 +865,7 @@ List size: 8056 bytes
 
 ## Sets in Data Analysis
 
----
+***
 
 ### Advanced Set Operations
 
@@ -1002,7 +905,7 @@ def find_duplicates(data):
    return duplicates
 ```
 
----
+***
 
 ### Set Operations for Data Cleaning
 
@@ -1054,12 +957,14 @@ class DataCleaner:
 **A dictionary is like a real dictionary or phonebook - you look up a KEY to get its VALUE.**
 
 Think of it like:
-- **A real dictionary**: Look up a WORD (key) to find its DEFINITION (value)
-- **A phonebook**: Look up a NAME (key) to find a PHONE NUMBER (value)
-- **A locker room**: Each LOCKER NUMBER (key) opens a specific LOCKER (value)
-- **A restaurant menu**: Find a DISH NAME (key) to see its PRICE (value)
+
+* **A real dictionary**: Look up a WORD (key) to find its DEFINITION (value)
+* **A phonebook**: Look up a NAME (key) to find a PHONE NUMBER (value)
+* **A locker room**: Each LOCKER NUMBER (key) opens a specific LOCKER (value)
+* **A restaurant menu**: Find a DISH NAME (key) to see its PRICE (value)
 
 **Key characteristics:**
+
 1. **Key-Value pairs** - Every piece of data has a label (key) and content (value)
 2. **Fast lookup** - Finding a value by its key is super fast (even in huge dictionaries!)
 3. **Keys must be unique** - Each key can only appear once (but values can repeat)
@@ -1207,6 +1112,7 @@ invalid_dict = {
 ```
 
 **Keys must be unique:**
+
 ```python
 # What happens with duplicate keys?
 data = {
@@ -1478,7 +1384,7 @@ prices_with_tax = {fruit: price * 1.08 for fruit, price in prices.items()}
 {'apple': 1.2, 'orange': 1.8, 'grape': 2.5}
 ```
 
----
+***
 
 ### Advanced Dictionary Patterns for Data Science
 
@@ -1526,7 +1432,7 @@ class DatasetMetadata:
        return metadata
 ```
 
----
+***
 
 ### Dictionary Comprehensions for Analysis
 
@@ -1568,6 +1474,7 @@ def analyze_correlations(df, threshold=0.7):
 > **Learning Strategy:** Solve in Colab → Visualize in Python Tutor → Review with AI
 
 ### Exercise 1: List Manipulation
+
 ```python
 # Create a list of stock prices
 prices = [100, 102, 98, 105, 103, 107, 110]
@@ -1582,10 +1489,10 @@ prices = [100, 102, 98, 105, 103, 107, 110]
 # Your code...
 ```
 
-> **Visualize:** Use Python Tutor to see how list comprehensions work
-> **Help:** Ask AI: "Explain list comprehensions with simple examples"
+> **Visualize:** Use Python Tutor to see how list comprehensions work **Help:** Ask AI: "Explain list comprehensions with simple examples"
 
 ### Exercise 2: Dictionary for Data Aggregation
+
 ```python
 # Sales data by category
 sales = [
@@ -1604,10 +1511,10 @@ sales = [
 # Your code here...
 ```
 
-> **Visualize This:** See how dictionaries accumulate values in Python Tutor
-> **Prompt:** "Show me 3 ways to aggregate data using Python dictionaries"
+> **Visualize This:** See how dictionaries accumulate values in Python Tutor **Prompt:** "Show me 3 ways to aggregate data using Python dictionaries"
 
 ### Exercise 3: Set Operations for Data Analysis
+
 ```python
 # Customer data from two campaigns
 campaign_a = {'customer1', 'customer2', 'customer3', 'customer4'}
@@ -1622,10 +1529,10 @@ campaign_b = {'customer3', 'customer4', 'customer5', 'customer6'}
 # Your code here...
 ```
 
-> **Experiment:** Watch set operations in Python Tutor - it's beautiful!
-> **Ask:** "Explain Venn diagrams and how they relate to Python sets"
+> **Experiment:** Watch set operations in Python Tutor - it's beautiful! **Ask:** "Explain Venn diagrams and how they relate to Python sets"
 
 ### Exercise 4: Nested Data Structures
+
 ```python
 # Student records
 students = [
@@ -1643,13 +1550,14 @@ students = [
 # Your code here...
 ```
 
-> **Advanced:** Paste this into Python Tutor and step through nested loops
-> **Challenge:** Ask AI: "Create a similar exercise with company sales data"
+> **Advanced:** Paste this into Python Tutor and step through nested loops **Challenge:** Ask AI: "Create a similar exercise with company sales data"
 
 ## Bonus Challenges
 
 ### Challenge 1: Data Structure Olympics
+
 Pick the BEST data structure for each scenario and explain why:
+
 1. Storing unique visitor IDs
 2. Mapping product codes to prices
 3. Storing ordered transaction history
@@ -1658,31 +1566,33 @@ Pick the BEST data structure for each scenario and explain why:
 > **Validate:** Ask AI to review your choices and reasoning
 
 ### Challenge 2: Build a Mini Database
-Create a simple contact management system using dictionaries:
-- Add contacts
-- Search by name
-- Update phone numbers
-- List all contacts
 
-> **Need Help?**Check [Video Resources](./video-resources.md) - Section on Dictionaries
+Create a simple contact management system using dictionaries:
+
+* Add contacts
+* Search by name
+* Update phone numbers
+* List all contacts
+
+> \*\*Need Help?\*\*Check [Video Resources](video-resources.md) - Section on Dictionaries
 
 Remember:
 
-- Choose appropriate data structures for your task
-- Consider performance implications
-- Handle edge cases
-- Document your code
-- **Visualize complex operations in Python Tutor**
-- **Use AI to understand trade-offs between structures**
+* Choose appropriate data structures for your task
+* Consider performance implications
+* Handle edge cases
+* Document your code
+* **Visualize complex operations in Python Tutor**
+* **Use AI to understand trade-offs between structures**
 
 ## Common pitfalls
 
-- **Mutating shared references**: Two variables can point at the same list; appending in one place changes what the other sees.
-- **Using lists as dict keys**: Lists are mutable and not hashable; use tuples or strings as keys instead.
-- **Shallow vs deep copies**: Nested structures may need **copy.deepcopy** when you want a fully independent copy.
+* **Mutating shared references**: Two variables can point at the same list; appending in one place changes what the other sees.
+* **Using lists as dict keys**: Lists are mutable and not hashable; use tuples or strings as keys instead.
+* **Shallow vs deep copies**: Nested structures may need **copy.deepcopy** when you want a fully independent copy.
 
 ## Next steps
 
-Continue to [Conditions and iterations](./conditions-iterations.md) for **if**, loops, and control flow.
+Continue to [Conditions and iterations](conditions-iterations.md) for **if**, loops, and control flow.
 
 Happy analyzing!

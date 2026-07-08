@@ -4,7 +4,7 @@
 
 ## Overview
 
-SVMs find the maximum-margin hyperplane separating classes; kernels project data to higher dimensions where linear separation becomes possible. Prerequisites: [5.1 Intro to ML](../../5.1-intro-to-ml/README.md).
+SVMs find the maximum-margin hyperplane separating classes; kernels project data to higher dimensions where linear separation becomes possible. Prerequisites: [5.1 Intro to ML](../../5.1-intro-to-ml/).
 
 ## Lesson Path
 

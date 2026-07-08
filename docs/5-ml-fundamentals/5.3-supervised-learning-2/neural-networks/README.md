@@ -4,7 +4,7 @@
 
 ## Overview
 
-Neural networks stack layers of weighted sums and non-linearities to learn complex functions, the foundation of modern deep learning. Prerequisites: [5.1 Intro to ML](../../5.1-intro-to-ml/README.md), [Backpropagation](../backpropagation/README.md).
+Neural networks stack layers of weighted sums and non-linearities to learn complex functions, the foundation of modern deep learning. Prerequisites: [5.1 Intro to ML](../../5.1-intro-to-ml/), [Backpropagation](../backpropagation/).
 
 ## Lesson Path
 

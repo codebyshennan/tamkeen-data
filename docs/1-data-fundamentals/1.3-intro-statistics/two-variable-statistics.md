@@ -4,7 +4,7 @@
 
 ## Overview
 
-**Prerequisites:** [One-variable statistics](./one-variable-statistics.md) (means, spreads, plots) and basic Python plotting.
+**Prerequisites:** [One-variable statistics](one-variable-statistics.md) (means, spreads, plots) and basic Python plotting.
 
 **Why this lesson:** Most interesting questions are about **relationships**: does X track with Y? Is the association linear? Could a third factor explain both? This page separates **correlation** (pattern in data) from **causation** (mechanism), then introduces tools you will reuse in modeling.
 
@@ -12,55 +12,48 @@
 
 Have you ever wondered:
 
-- Does more study time lead to better grades?
-- Do taller people weigh more?
-- Does ice cream sales affect sunburn cases?
+* Does more study time lead to better grades?
+* Do taller people weigh more?
+* Does ice cream sales affect sunburn cases?
 
 Learn how to understand relationships between different variables!
 
 ### Video
 
-<div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/xZ_z8KWkhXE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-*StatQuest with Josh Starmer, Correlation and covariance, clearly explained*
+_StatQuest with Josh Starmer, Correlation and covariance, clearly explained_
 
 ## Correlation vs. Causation
 
----
+***
 
 ### What is Correlation?
 
 **Correlation** means "tendency to move together" on average, not proof that one variable causes the other. When two things tend to move together:
 
-- **Positive**: Both increase together
-  Example: Height and Weight
+*   **Positive**: Both increase together Example: Height and Weight
 
-  ```
-  Height: ↑  Weight: ↑
-  Height: ↓  Weight: ↓
-  ```
+    ```
+    Height: ↑  Weight: ↑
+    Height: ↓  Weight: ↓
+    ```
+*   **Negative**: One up, one down Example: Price and Sales
 
-- **Negative**: One up, one down
-  Example: Price and Sales
+    ```
+    Price: ↑   Sales: ↓
+    Price: ↓   Sales: ↑
+    ```
 
-  ```
-  Price: ↑   Sales: ↓
-  Price: ↓   Sales: ↑
-  ```
-
----
+***
 
 ### What is Causation?
 
 When one thing CAUSES the other:
 
-- Rain causes wet ground
-- Studying causes better grades
-- Exercise causes fitness improvement
+* Rain causes wet ground
+* Studying causes better grades
+* Exercise causes fitness improvement
 
----
+***
 
 ### The Big Mistake
 
@@ -82,11 +75,11 @@ But
 Causation → Correlation
 ```
 
-![corr-vs-cause](./assets/correlation-causation.png)
+![corr-vs-cause](../../../.gitbook/assets/correlation-causation.png)
 
 ## Proving Causation: Experiments
 
----
+***
 
 ### Setting Up an Experiment
 
@@ -94,30 +87,30 @@ Like a detective solving a mystery!
 
 1. **Question**: Does this vitamin help plants grow?
 2. **Groups**:
-   - Treatment: Gets vitamin
-   - Control: No vitamin
+   * Treatment: Gets vitamin
+   * Control: No vitamin
 3. **Measure**: Plant height after 2 weeks
 
----
+***
 
 ### Key Components
 
-- **Independent Variable**: What we change (vitamin)
-- **Dependent Variable**: What we measure (height)
-- **Control Group**: No changes (no vitamin)
-- **Treatment Group**: Gets the change (vitamin)
+* **Independent Variable**: What we change (vitamin)
+* **Dependent Variable**: What we measure (height)
+* **Control Group**: No changes (no vitamin)
+* **Treatment Group**: Gets the change (vitamin)
 
----
+***
 
 ### Making it Scientific
 
-- **Blind Test**: Plants don't know if they got vitamin
-- **Double-Blind**: Even researcher doesn't know which is which
-- **Random Assignment**: Fair selection for groups
+* **Blind Test**: Plants don't know if they got vitamin
+* **Double-Blind**: Even researcher doesn't know which is which
+* **Random Assignment**: Fair selection for groups
 
 ### Watch Out For
 
----
+***
 
 ### Confounding Variables
 
@@ -131,7 +124,7 @@ But what about:
 - Teaching quality
 ```
 
----
+***
 
 ### The Placebo Effect
 
@@ -146,7 +139,7 @@ Why? The mind is powerful!
 
 ### Types of Studies
 
----
+***
 
 ### 1. Observational Studies
 
@@ -159,7 +152,7 @@ Example: Do coffee drinkers live longer?
 - Don't change anything
 ```
 
----
+***
 
 ### 2. Retrospective Studies
 
@@ -172,7 +165,7 @@ Example: What caused the success?
 - Learn from history
 ```
 
----
+***
 
 ### 3. Prospective Studies
 
@@ -189,7 +182,7 @@ Example: Will this habit help?
 
 ### Scatter Plots: A Picture of Relationship
 
----
+***
 
 ### What They Show
 
@@ -204,37 +197,38 @@ Each dot = One pair of measurements
    +------------→ x
 ```
 
----
+***
 
 ### Types of Patterns
 
-1. **Positive**: Dots go up
+1.  **Positive**: Dots go up
 
-   ```
-      •
-    •
+    ```
+       •
+     •
+    ```
 
-  •
+•
 
-   ```
+```
 
 2. **Negative**: Dots go down
-   ```
+```
 
-   •
-     •
-       •
+• • •
 
-   ```
+```
 
 3. **No Relationship**: Dots scattered
-   ```
+```
 
-     •  •
-   •    •
-     •    •
+```
+ •  •
+```
 
-   ```
+• • • •
+
+```
 
 ### Measuring Correlation
 
@@ -247,9 +241,7 @@ Each dot = One pair of measurements
 
 ```
 
--1 ←|-------|----------|→ +1
-  Perfect   No       Perfect
-  Negative  Pattern  Positive
+-1 ←|-------|----------|→ +1 Perfect No Perfect Negative Pattern Positive
 
 ```
 
@@ -258,10 +250,7 @@ Each dot = One pair of measurements
 ### Examples
 ```
 
-r = 0.9  → Very strong positive
-r = -0.8 → Strong negative
-r = 0.2  → Weak positive
-r = 0    → No correlation
+r = 0.9 → Very strong positive r = -0.8 → Strong negative r = 0.2 → Weak positive r = 0 → No correlation
 
 ```
 
@@ -278,3 +267,4 @@ r = 0    → No correlation
 ## Next steps
 
 Continue to [Data foundation with NumPy](../1.4-data-foundation-linear-algebra/README.md), starting with [Introduction to NumPy](../1.4-data-foundation-linear-algebra/intro-numpy.md).
+```

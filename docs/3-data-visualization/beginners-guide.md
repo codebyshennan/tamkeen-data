@@ -6,12 +6,10 @@
 
 Orientation for the course visualization materials.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/RBSUwFGa6Fk" title="What is Data Science?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 ## Prerequisites
 
-- You can run short Python snippets or read charts in a slide deck; no advanced statistics required.
-- Optional: [Quick start](quick-start.md) if you want a hands-on Matplotlib warm-up first.
+* You can run short Python snippets or read charts in a slide deck; no advanced statistics required.
+* Optional: [Quick start](quick-start.md) if you want a hands-on Matplotlib warm-up first.
 
 ## What is Data Visualization?
 
@@ -23,10 +21,10 @@ Imagine you're planning a road trip. You could read a list of distances between 
 
 ### Why This Matters
 
-- **Quick Understanding**: Spot patterns in seconds that might take hours to find in spreadsheets
-- **Better Decisions**: Make informed choices by seeing the big picture
-- **Clear Communication**: Share insights with others who might not be comfortable with raw data
-- **Problem Solving**: Identify issues and opportunities more easily
+* **Quick Understanding**: Spot patterns in seconds that might take hours to find in spreadsheets
+* **Better Decisions**: Make informed choices by seeing the big picture
+* **Clear Communication**: Share insights with others who might not be comfortable with raw data
+* **Problem Solving**: Identify issues and opportunities more easily
 
 ## Your First Steps in Data Visualization
 
@@ -34,18 +32,18 @@ Imagine you're planning a road trip. You could read a list of distances between 
 
 Before you start visualizing, ask yourself:
 
-- What story do you want to tell?
-- Who is your audience?
-- What type of data do you have? (numbers, categories, time-based, etc.)
+* What story do you want to tell?
+* Who is your audience?
+* What type of data do you have? (numbers, categories, time-based, etc.)
 
 ### 2. Choosing the Right Chart
 
 Think of charts like different types of maps:
 
-- **Line Charts** are like road maps showing how things change over time
-- **Bar Charts** are like comparing heights of buildings
-- **Pie Charts** are like slicing a pizza to show portions
-- **Scatter Plots** are like plotting stars on a night sky map
+* **Line Charts** are like road maps showing how things change over time
+* **Bar Charts** are like comparing heights of buildings
+* **Pie Charts** are like slicing a pizza to show portions
+* **Scatter Plots** are like plotting stars on a night sky map
 
 ## Basic Chart Types (With Real Examples)
 
@@ -55,77 +53,27 @@ Think of charts like different types of maps:
 
 **Walkthrough:** `plot` with `marker='o'` emphasizes discrete days; grid and title explain units.
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+<figure><img src="../../.gitbook/assets/beginners-guide_fig_2.png" alt="beginners-guide"><figcaption><p>Figure 2: My Daily Steps This Week</p></figcaption></figure>
 
-{% highlight python %}
-# The simplest line chart - like tracking your daily steps
-import matplotlib.pyplot as plt
+Import
 
-# Days of the week
-days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
-# Steps taken each day
-steps = [8000, 7500, 9000, 8200, 8800]
+`matplotlib.pyplot` is the only dependency for this basic chart, no additional libraries needed.
 
-# Create the chart
-plt.figure(figsize=(10, 6))
-plt.plot(days, steps, marker='o', color='#2ecc71', linewidth=2)
-plt.title('My Daily Steps This Week', fontsize=14, pad=20)
-plt.ylabel('Steps', fontsize=12)
-plt.grid(True, linestyle='--', alpha=0.7)
-plt.show()
-{% endhighlight %}
+Data Setup
 
-<figure>
-<img src="assets/beginners-guide_fig_2.png" alt="beginners-guide" />
-<figcaption>Figure 2: My Daily Steps This Week</figcaption>
-</figure>
+Parallel lists for weekday labels and step counts, the simplest way to define x/y data for Matplotlib.
 
+Styled Line Chart
 
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-2" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Import</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>matplotlib.pyplot</code> is the only dependency for this basic chart, no additional libraries needed.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="4-7" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Data Setup</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Parallel lists for weekday labels and step counts, the simplest way to define x/y data for Matplotlib.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="9-15" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Styled Line Chart</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>marker='o'</code> adds dots at each day; hex color and <code>linewidth=2</code> improve readability over the default thin grey line.</p>
-    </div>
-  </div>
-</aside>
-</div>
+`marker='o'` adds dots at each day; hex color and `linewidth=2` improve readability over the default thin grey line.
 
-
-<figure>
-<img src="assets/beginners-guide_fig_3.png" alt="beginners-guide" />
-<figcaption>Figure 3: My Daily Steps This Week</figcaption>
-</figure>
-
+<figure><img src="../../.gitbook/assets/beginners-guide_fig_3.png" alt="beginners-guide"><figcaption><p>Figure 3: My Daily Steps This Week</p></figcaption></figure>
 
 **When to use:**
 
-- Tracking daily activities
-- Monitoring progress over time
-- Comparing trends
+* Tracking daily activities
+* Monitoring progress over time
+* Comparing trends
 
 ### 2. Bar Chart
 
@@ -133,77 +81,27 @@ plt.show()
 
 **Walkthrough:** `bar` takes parallel lists of labels and values; per-bar `color` is optional; `xticks(rotation=45)` avoids label overlap.
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+<figure><img src="../../.gitbook/assets/beginners-guide_fig_3.png" alt="beginners-guide"><figcaption><p>Figure 3: Favorite Ice Cream Flavors</p></figcaption></figure>
 
-{% highlight python %}
-# A simple bar chart - like comparing favorite ice cream flavors
-import matplotlib.pyplot as plt
+Import
 
-# Ice cream flavors
-flavors = ['Chocolate', 'Vanilla', 'Strawberry', 'Mint']
-# Number of people who prefer each flavor
-preferences = [45, 30, 20, 15]
+Only `matplotlib.pyplot` is required for basic categorical bar charts.
 
-# Create the chart
-plt.figure(figsize=(10, 6))
-plt.bar(flavors, preferences, color=['#e74c3c', '#3498db', '#2ecc71', '#9b59b6'])
-plt.title('Favorite Ice Cream Flavors', fontsize=14, pad=20)
-plt.ylabel('Number of People', fontsize=12)
-plt.xticks(rotation=45)
-plt.show()
-{% endhighlight %}
+Category Data
 
-<figure>
-<img src="assets/beginners-guide_fig_3.png" alt="beginners-guide" />
-<figcaption>Figure 3: Favorite Ice Cream Flavors</figcaption>
-</figure>
+Parallel lists of flavor names and preference counts-`plt.bar` maps each name to a bar height.
 
+Colored Bars
 
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-2" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Import</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Only <code>matplotlib.pyplot</code> is required for basic categorical bar charts.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="4-7" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Category Data</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Parallel lists of flavor names and preference counts-<code>plt.bar</code> maps each name to a bar height.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="9-15" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Colored Bars</span>
-    </div>
-    <div class="code-callout__body">
-      <p>A list of hex colors assigns a distinct hue to each bar; <code>xticks(rotation=45)</code> prevents label overlap on narrow charts.</p>
-    </div>
-  </div>
-</aside>
-</div>
+A list of hex colors assigns a distinct hue to each bar; `xticks(rotation=45)` prevents label overlap on narrow charts.
 
-
-<figure>
-<img src="assets/beginners-guide_fig_4.png" alt="beginners-guide" />
-<figcaption>Figure 4: Favorite Ice Cream Flavors</figcaption>
-</figure>
-
+<figure><img src="../../.gitbook/assets/beginners-guide_fig_4.png" alt="beginners-guide"><figcaption><p>Figure 4: Favorite Ice Cream Flavors</p></figcaption></figure>
 
 **When to use:**
 
-- Comparing quantities
-- Showing rankings
-- Displaying survey results
+* Comparing quantities
+* Showing rankings
+* Displaying survey results
 
 ### 3. Pie Chart
 
@@ -227,36 +125,29 @@ plt.title('How I Spend My Day', fontsize=14, pad=20)
 plt.show()
 ```
 
-
-<figure>
-<img src="assets/beginners-guide_fig_1.png" alt="beginners-guide" />
-<figcaption>Figure 1: How I Spend My Day</figcaption>
-</figure>
-
+<figure><img src="../../.gitbook/assets/beginners-guide_fig_1.png" alt="beginners-guide"><figcaption><p>Figure 1: How I Spend My Day</p></figcaption></figure>
 
 **When to use:**
 
-- Showing parts of a whole
-- Displaying percentages
-- Simple comparisons
+* Showing parts of a whole
+* Displaying percentages
+* Simple comparisons
 
 ## Common Mistakes to Avoid
 
 1. **Too Much Information**
-   - Don't try to show everything in one chart
-   - Keep it simple and focused
-   - Like trying to read a map with too many details
-
+   * Don't try to show everything in one chart
+   * Keep it simple and focused
+   * Like trying to read a map with too many details
 2. **Wrong Chart Type**
-   - Don't use a pie chart for trends over time
-   - Don't use a line chart for unrelated categories
-   - Like using a road map when you need a star chart
-
+   * Don't use a pie chart for trends over time
+   * Don't use a line chart for unrelated categories
+   * Like using a road map when you need a star chart
 3. **Missing Labels**
-   - Always label your axes
-   - Include a clear title
-   - Explain what the numbers mean
-   - Like a map without street names
+   * Always label your axes
+   * Include a clear title
+   * Explain what the numbers mean
+   * Like a map without street names
 
 ## Making Your Charts Better
 
@@ -282,11 +173,7 @@ plt.bar(months, expenses, color='skyblue', edgecolor='navy')
 plt.style.use('seaborn-v0_8-whitegrid')  # Uses a pre-made style
 ```
 
-
-<figure>
-<img src="assets/beginners-guide_fig_1.png" alt="beginners-guide" />
-<figcaption>Figure 1: Generated visualization</figcaption>
-</figure>
+<figure><img src="../../.gitbook/assets/beginners-guide_fig_1.png" alt="beginners-guide"><figcaption><p>Figure 1: Generated visualization</p></figcaption></figure>
 
 ### 3. Add Explanations
 
@@ -300,111 +187,96 @@ plt.figtext(0.99, 0.01, 'Data source: My Budget App',
             ha='right', va='bottom', fontsize=8)
 ```
 
-
-<figure>
-<img src="assets/beginners-guide_fig_2.png" alt="beginners-guide" />
-<figcaption>Figure 2: Generated visualization</figcaption>
-</figure>
+<figure><img src="../../.gitbook/assets/beginners-guide_fig_2.png" alt="beginners-guide"><figcaption><p>Figure 2: Generated visualization</p></figcaption></figure>
 
 ```
 Text(0.99, 0.01, 'Data source: My Budget App')
 ```
-
 
 **Captured output (notebook):** The last line may print the `Text` artist returned by `figtext`-that is normal; the annotation still appears on the figure.
 
 ## Tips for Beginners
 
 1. **Start Simple**
-   - Begin with basic charts
-   - Add features one at a time
-   - Practice with small datasets
-   - Like learning to draw before painting
-
+   * Begin with basic charts
+   * Add features one at a time
+   * Practice with small datasets
+   * Like learning to draw before painting
 2. **Use Good Data**
-   - Make sure your numbers are correct
-   - Keep your data organized
-   - Know what your numbers mean
-   - Like using accurate measurements in cooking
-
+   * Make sure your numbers are correct
+   * Keep your data organized
+   * Know what your numbers mean
+   * Like using accurate measurements in cooking
 3. **Tell a Story**
-   - What do you want to show?
-   - Why is it important?
-   - What should people learn?
-   - Like writing a good story with a clear message
-
+   * What do you want to show?
+   * Why is it important?
+   * What should people learn?
+   * Like writing a good story with a clear message
 4. **Get Feedback**
-   - Show your charts to others
-   - Ask if they understand
-   - Make improvements based on feedback
-   - Like testing a recipe before serving
+   * Show your charts to others
+   * Ask if they understand
+   * Make improvements based on feedback
+   * Like testing a recipe before serving
 
 ## Next steps
 
 1. **Practice With Real Data**
-   - Use your own expenses
-   - Track daily activities
-   - Monitor habits or goals
-   - Like keeping a diary of your progress
-
+   * Use your own expenses
+   * Track daily activities
+   * Monitor habits or goals
+   * Like keeping a diary of your progress
 2. **Learn More Tools**
-   - Try different Python libraries
-   - Experiment with interactive charts
-   - Learn about data cleaning
-   - Like learning new cooking techniques
-
+   * Try different Python libraries
+   * Experiment with interactive charts
+   * Learn about data cleaning
+   * Like learning new cooking techniques
 3. **Share Your Work**
-   - Create a portfolio
-   - Help others visualize their data
-   - Join online communities
-   - Like sharing your recipes with friends
+   * Create a portfolio
+   * Help others visualize their data
+   * Join online communities
+   * Like sharing your recipes with friends
 
 ## Resources for Learning
 
 1. **Free Datasets**
-   - Weather data
-   - Sports statistics
-   - Population data
-   - Economic indicators
-
+   * Weather data
+   * Sports statistics
+   * Population data
+   * Economic indicators
 2. **Online Tools**
-   - Google Colab (free Python environment)
-   - Kaggle (for practice datasets)
-   - DataCamp (for interactive learning)
-
+   * Google Colab (free Python environment)
+   * Kaggle (for practice datasets)
+   * DataCamp (for interactive learning)
 3. **Books and Courses**
-   - "Storytelling with Data" by Cole Nussbaumer Knaflic
-   - "The Visual Display of Quantitative Information" by Edward Tufte
-   - Coursera's "Data Visualization and Communication with Tableau"
+   * "Storytelling with Data" by Cole Nussbaumer Knaflic
+   * "The Visual Display of Quantitative Information" by Edward Tufte
+   * Coursera's "Data Visualization and Communication with Tableau"
 
 ## Common Questions
 
 1. **Which chart should I use?**
-   - For trends over time: Line chart
-   - For comparing quantities: Bar chart
-   - For parts of a whole: Pie chart
-   - For relationships: Scatter plot
-
+   * For trends over time: Line chart
+   * For comparing quantities: Bar chart
+   * For parts of a whole: Pie chart
+   * For relationships: Scatter plot
 2. **How do I make my charts look professional?**
-   - Use consistent colors
-   - Add clear labels
-   - Keep it simple
-   - Tell a clear story
-
+   * Use consistent colors
+   * Add clear labels
+   * Keep it simple
+   * Tell a clear story
 3. **What tools should I start with?**
-   - Begin with matplotlib in Python
-   - Try Google Colab for free practice
-   - Move to more advanced tools as you grow
+   * Begin with matplotlib in Python
+   * Try Google Colab for free practice
+   * Move to more advanced tools as you grow
 
 Remember: The best visualization is one that helps your audience understand the data quickly and clearly. Start simple, practice often, and don't be afraid to experiment!
 
 ## Gotchas
 
-- **`plt.style.use('seaborn-v0_8-whitegrid')` must be called before any plotting**: if you call it after `plt.figure()` or `plt.plot()`, the style applies to the next figure, not the one already open; move style calls to the top of your setup cell.
-- **Pie charts with `hours = [8, 8, 5, 3]` hide that slices are unequal even when they look similar**: 8 hours of "Sleep" and 8 hours of "Work" produce identical wedges, making it hard to spot difference; when two categories are close in value, a bar chart communicates the gap far more clearly.
-- **Color lists must match the number of bars exactly**: passing `color=['#e74c3c', '#3498db', '#2ecc71', '#9b59b6']` to `plt.bar` works only when there are exactly 4 bars; adding or removing a category without updating the color list raises a silent mismatch or a `ValueError`.
-- **`plt.figtext` coordinates are figure-relative (0-1), not data or axes coordinates**: a note placed at `(0.99, 0.01)` sits at the bottom-right of the whole figure canvas, not the chart area; if your figure has a large bottom margin, the note may appear far below the chart.
-- **No x-axis label on bar charts creates ambiguity**: the bar chart examples here label only the y-axis (`'Number of People'`) but omit an x-axis label; viewers who see the chart without the title cannot tell what the categories represent.
-- **`marker='o'` on line charts works for small datasets but clutters dense time series**: once you have more than ~20 points on a line, markers overlap and obscure the trend; omit the marker or reduce its size with `markersize=3` for denser data.
-
-- Structured follow-on: [3.1 Intro to data visualization](3.1-intro-data-viz/README.md) and [Choosing the right visualization](choosing-the-right-visualization.md).
+* **`plt.style.use('seaborn-v0_8-whitegrid')` must be called before any plotting**: if you call it after `plt.figure()` or `plt.plot()`, the style applies to the next figure, not the one already open; move style calls to the top of your setup cell.
+* **Pie charts with `hours = [8, 8, 5, 3]` hide that slices are unequal even when they look similar**: 8 hours of "Sleep" and 8 hours of "Work" produce identical wedges, making it hard to spot difference; when two categories are close in value, a bar chart communicates the gap far more clearly.
+* **Color lists must match the number of bars exactly**: passing `color=['#e74c3c', '#3498db', '#2ecc71', '#9b59b6']` to `plt.bar` works only when there are exactly 4 bars; adding or removing a category without updating the color list raises a silent mismatch or a `ValueError`.
+* **`plt.figtext` coordinates are figure-relative (0-1), not data or axes coordinates**: a note placed at `(0.99, 0.01)` sits at the bottom-right of the whole figure canvas, not the chart area; if your figure has a large bottom margin, the note may appear far below the chart.
+* **No x-axis label on bar charts creates ambiguity**: the bar chart examples here label only the y-axis (`'Number of People'`) but omit an x-axis label; viewers who see the chart without the title cannot tell what the categories represent.
+* **`marker='o'` on line charts works for small datasets but clutters dense time series**: once you have more than \~20 points on a line, markers overlap and obscure the trend; omit the marker or reduce its size with `markersize=3` for denser data.
+* Structured follow-on: [3.1 Intro to data visualization](3.1-intro-data-viz/) and [Choosing the right visualization](choosing-the-right-visualization.md).

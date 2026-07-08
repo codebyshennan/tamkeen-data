@@ -4,15 +4,11 @@
 
 ### Video
 
-<div class="video-embed">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/QUT1VHiLmmI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-*freeCodeCamp, Python NumPy tutorial for beginners*
+_freeCodeCamp, Python NumPy tutorial for beginners_
 
 ## Overview
 
-**Prerequisites:** [Introduction to NumPy](./intro-numpy.md) (why arrays exist) and comfort with Python lists.
+**Prerequisites:** [Introduction to NumPy](intro-numpy.md) (why arrays exist) and comfort with Python lists.
 
 **Why this lesson:** The **`ndarray`** is the concrete type behind "NumPy array." Shape, dtype, and vectorized ops are the vocabulary for every numeric cell in this submodule.
 
@@ -20,19 +16,19 @@
 
 Think of a NumPy array (ndarray) as a super-powered list that can work with numbers at lightning speed! It's like having a spreadsheet where every cell can do math instantly. The 'nd' in ndarray stands for 'N-dimensional', meaning it can handle data in multiple dimensions:
 
-- 1D arrays: Like a line of numbers (vector)
-- 2D arrays: Like a table (matrix)
-- 3D arrays: Like a cube of numbers
-- And beyond! (4D, 5D, etc.)
+* 1D arrays: Like a line of numbers (vector)
+* 2D arrays: Like a table (matrix)
+* 3D arrays: Like a cube of numbers
+* And beyond! (4D, 5D, etc.)
 
 Real-world examples:
 
-- 1D: Time series data (stock prices over time)
-- 2D: Spreadsheet data (rows and columns)
-- 3D: Image data (height × width × color channels)
-- 4D: Video data (frames × height × width × color channels)
+* 1D: Time series data (stock prices over time)
+* 2D: Spreadsheet data (rows and columns)
+* 3D: Image data (height × width × color channels)
+* 4D: Video data (frames × height × width × color channels)
 
----
+***
 
 ### Basic Example
 
@@ -68,20 +64,20 @@ Square root: [1.22474487 0.31622777 1.73205081]
 Shape: (2, 3)
 ```
 
----
+***
 
 ### Why It's Cool
 
-- Super fast calculations (100x faster than Python lists)
-- Efficient memory use (contiguous memory blocks)
-- Easy math operations (vectorized operations)
-- Perfect for data science (integrates with pandas, scipy, etc.)
-- Support for complex math (linear algebra, statistics)
-- Broadcasting capabilities (work with arrays of different sizes)
+* Super fast calculations (100x faster than Python lists)
+* Efficient memory use (contiguous memory blocks)
+* Easy math operations (vectorized operations)
+* Perfect for data science (integrates with pandas, scipy, etc.)
+* Support for complex math (linear algebra, statistics)
+* Broadcasting capabilities (work with arrays of different sizes)
 
 ## Understanding Arrays
 
----
+***
 
 ### Array Anatomy
 
@@ -95,10 +91,10 @@ Think of an array like a container:
 
 Key features:
 
-- Fixed size (can't grow/shrink)
-- All elements same type (like all integers or all floats)
+* Fixed size (can't grow/shrink)
+* All elements same type (like all integers or all floats)
 
----
+***
 
 ### Important Properties
 
@@ -110,11 +106,11 @@ print(data.shape)    # (3,) means 1D array with 3 elements
 print(data.dtype)    # float64 means decimal numbers
 ```
 
-![ndarray](./assets/numpy_ndarray.png)
+![ndarray](../../../.gitbook/assets/numpy_ndarray.png)
 
 ## Creating Arrays
 
----
+***
 
 ### 1D Arrays (Like a List)
 
@@ -129,7 +125,7 @@ print(array_1d)  # [6.  7.5  8.  0.  1. ]
 [6.  7.5 8.  0.  1. ]
 ```
 
----
+***
 
 ### 2D Arrays (Like a Table)
 
@@ -157,7 +153,7 @@ Looks like:
 └───────────────┘
 ```
 
----
+***
 
 ### Checking Array Info
 
@@ -175,7 +171,7 @@ int64
 
 ## Quick Array Creation
 
----
+***
 
 ### Special Arrays
 
@@ -196,7 +192,7 @@ print(zeros_2d)
  [0. 0. 0. 0. 0. 0.]]
 ```
 
----
+***
 
 ### Controlling Data Types
 
@@ -217,9 +213,9 @@ print(ints)    # [1 2 3]
 
 **Pro Tips**:
 
-- Use **dtype** when you need specific number types
-- 2D arrays are perfect for tables of data
-- Check **shape** when you're unsure about array size
+* Use **dtype** when you need specific number types
+* 2D arrays are perfect for tables of data
+* Check **shape** when you're unsure about array size
 
 ## Data types
 
@@ -291,10 +287,10 @@ If you write `float` instead of `np.float64`, Numpy will guess the data type for
 
 ## Common pitfalls
 
-- **Silent overflow**: Integer dtypes wrap instead of raising errors; use **float64** or check ranges for big numbers.
-- **astype truncates**: Casting floats to integers drops the fractional part; it does not round unless you do so explicitly.
-- **Object dtype**: Arrays of Python objects lose NumPy speed; only use when you truly need heterogeneous data.
+* **Silent overflow**: Integer dtypes wrap instead of raising errors; use **float64** or check ranges for big numbers.
+* **astype truncates**: Casting floats to integers drops the fractional part; it does not round unless you do so explicitly.
+* **Object dtype**: Arrays of Python objects lose NumPy speed; only use when you truly need heterogeneous data.
 
 ## Next steps
 
-Continue to [ndarray basics: creation and operations](./ndarray-basic.md), then [Boolean indexing](./boolean-indexing.md) in this submodule.
+Continue to [ndarray basics: creation and operations](ndarray-basic.md), then [Boolean indexing](boolean-indexing.md) in this submodule.

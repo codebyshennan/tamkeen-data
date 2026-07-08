@@ -1,10 +1,19 @@
 ---
 reading_minutes: 12
 objectives:
-  - "Distinguish three flavours: **tree built-in** (impurity / Gini), **permutation importance**, and model-agnostic **SHAP** / linear coefficients."
-  - "Compute `feature_importances_` and `permutation_importance` in scikit-learn, then read the ranking with appropriate caution."
-  - "Recognise the pitfalls: tree impurity inflates high-cardinality features, correlated features split the importance, and importance is **not** causal."
-  - "Use feature importance to drive iteration (drop, engineer, investigate) rather than to make ground-truth claims about the world."
+  - >-
+    Distinguish three flavours: **tree built-in** (impurity / Gini),
+    **permutation importance**, and model-agnostic **SHAP** / linear
+    coefficients.
+  - >-
+    Compute `feature_importances_` and `permutation_importance` in scikit-learn,
+    then read the ranking with appropriate caution.
+  - >-
+    Recognise the pitfalls: tree impurity inflates high-cardinality features,
+    correlated features split the importance, and importance is **not** causal.
+  - >-
+    Use feature importance to drive iteration (drop, engineer, investigate)
+    rather than to make ground-truth claims about the world.
 ---
 
 # Feature Importance
@@ -14,7 +23,6 @@ objectives:
 ## Overview
 
 Tree importances, permutation importance, and caveats, correlation and baseline comparisons matter.
-
 
 ## Introduction
 
@@ -31,8 +39,6 @@ Feature importance measures how much each feature contributes to the model's pre
 3. Understand **model behavior**
 4. Challenge or validate **domain knowledge**
 
-{% include model-eval-html-diagram.html diagram="feature-importance" title="Feature importance method comparison diagram" %}
-
 > **Read the diagram:** each method answers a slightly different question. Tree importance asks how the fitted trees split. Permutation importance asks how much score drops when a feature is broken. SHAP asks how features contributed to individual predictions and then summarizes those effects.
 
 ## Types of Feature Importance
@@ -41,83 +47,19 @@ Feature importance measures how much each feature contributes to the model's pre
 
 #### Gini-based `feature_importances_`
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Data and Model
 
-{% highlight python %}
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.datasets import make_classification
+Generate a 10-feature dataset with only 5 truly informative features; the Random Forest should rank those 5 higher than the redundant and noise features.
 
-# Create sample dataset
-X, y = make_classification(n_samples=1000, n_features=10,
-                           n_informative=5, n_redundant=2,
-                           random_state=42)
+Extract and Sort Importances
 
-# Train random forest
-rf = RandomForestClassifier(n_estimators=100, random_state=42)
-rf.fit(X, y)
+`feature_importances_` gives mean impurity-decrease per feature summed to 1; `argsort[::-1]` ranks them highest to lowest for a sorted bar chart.
 
-# Get feature importances
-importances = rf.feature_importances_
-indices = np.argsort(importances)[::-1]
+Bar Plot
 
-# Plot feature importances
-plt.figure(figsize=(10, 6))
-plt.title('Feature Importances')
-bars = plt.bar(range(X.shape[1]), importances[indices])
-plt.xticks(range(X.shape[1]), [f'Feature {i}' for i in indices], rotation=45)
-top_pos = 0
-top_feature = indices[0]
-top_importance = importances[indices][0]
-plt.axhline(0.05, color='gray', linestyle='--', linewidth=1, label='Low-importance guide')
-bars[top_pos].set_color('tab:green')
-plt.annotate(f'top driver: Feature {top_feature}', xy=(top_pos, top_importance),
-             xytext=(top_pos + 1.0, top_importance - 0.03),
-             arrowprops=dict(arrowstyle='->', color='green'), color='darkgreen')
-plt.legend()
-plt.tight_layout()
-plt.show()
-{% endhighlight %}
+Plot bars in sorted order using original feature-index labels; `rotation=45` prevents label overlap for 10 features.
 
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-9" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Data and Model</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Generate a 10-feature dataset with only 5 truly informative features; the Random Forest should rank those 5 higher than the redundant and noise features.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="11-17" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Extract and Sort Importances</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>feature_importances_</code> gives mean impurity-decrease per feature summed to 1; <code>argsort[::-1]</code> ranks them highest to lowest for a sorted bar chart.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="19-25" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Bar Plot</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Plot bars in sorted order using original feature-index labels; <code>rotation=45</code> prevents label overlap for 10 features.</p>
-    </div>
-  </div>
-</aside>
-</div>
-
-
-<figure>
-<img src="assets/feature-importance_fig_2.png" alt="feature-importance" />
-<figcaption>Figure 1: Feature Importances</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/feature-importance_fig_2.png" alt="feature-importance"><figcaption><p>Figure 1: Feature Importances</p></figcaption></figure>
 
 > **Read Figure 1:** the bars are normalized impurity importances from the fitted forest. Taller bars mean the model often used that feature for useful splits, but continuous or high-cardinality features can be favored even when their true signal is not stronger.
 
@@ -163,11 +105,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-
-<figure>
-<img src="assets/feature-importance_fig_1.png" alt="feature-importance" />
-<figcaption>Figure 2: Permutation Importances</figcaption>
-</figure>
+<figure><img src="../../../.gitbook/assets/feature-importance_fig_1.png" alt="feature-importance"><figcaption><p>Figure 2: Permutation Importances</p></figcaption></figure>
 
 > **Read Figure 2:** each box shows the score drop across repeated shuffles of one feature. A large positive drop means the model relies on that feature for held-out performance. A box near zero means shuffling that feature barely changes predictions.
 
@@ -195,41 +133,36 @@ plt.show()
 ## Best Practices
 
 1. **Use Multiple Methods**
-   - Compare impurity-based, permutation, and model-specific explanations because each answers a slightly different question.
-   - Check importance across folds or repeated runs; a feature that ranks first only once may be a sampling accident rather than a reliable driver.
-   - Bring in domain knowledge before acting on the ranking: a high-importance feature can be a proxy, leakage source, or post-outcome variable that should not be used.
-
+   * Compare impurity-based, permutation, and model-specific explanations because each answers a slightly different question.
+   * Check importance across folds or repeated runs; a feature that ranks first only once may be a sampling accident rather than a reliable driver.
+   * Bring in domain knowledge before acting on the ranking: a high-importance feature can be a proxy, leakage source, or post-outcome variable that should not be used.
 2. **Handle Correlated Features**
-   - Group highly correlated features when interpreting importance because the model may split signal across them, making each individual bar look less important.
-   - Prefer permutation tests or grouped permutation when correlation is high; simple tree importances can overstate variables that offer many split points.
-   - Check interactions when the model is non-linear. A feature can matter only in combination with another feature and still look modest in a one-feature ranking.
-
+   * Group highly correlated features when interpreting importance because the model may split signal across them, making each individual bar look less important.
+   * Prefer permutation tests or grouped permutation when correlation is high; simple tree importances can overstate variables that offer many split points.
+   * Check interactions when the model is non-linear. A feature can matter only in combination with another feature and still look modest in a one-feature ranking.
 3. **Validate Results**
-   - Recompute importance on validation folds or a holdout set so the ranking reflects generalisation, not memorisation of training quirks.
-   - Look for stable top features across seeds; unstable rankings are a signal to simplify the model, collect more data, or avoid strong claims.
-   - Compare the ranking with expected causal direction. If "loan approved" predicts "default", for example, the model may be seeing information that would not exist at prediction time.
-
+   * Recompute importance on validation folds or a holdout set so the ranking reflects generalisation, not memorisation of training quirks.
+   * Look for stable top features across seeds; unstable rankings are a signal to simplify the model, collect more data, or avoid strong claims.
+   * Compare the ranking with expected causal direction. If "loan approved" predicts "default", for example, the model may be seeing information that would not exist at prediction time.
 4. **Visualize Effectively**
-   - Sort bars descending and highlight the top feature so the viewer can immediately see the main driver.
-   - Show error bars or repeated-run variation for permutation importance; small differences without uncertainty bands should not be overinterpreted.
-   - Use meaningful feature names instead of column numbers whenever possible, otherwise the chart is not actionable for debugging or stakeholder review.
+   * Sort bars descending and highlight the top feature so the viewer can immediately see the main driver.
+   * Show error bars or repeated-run variation for permutation importance; small differences without uncertainty bands should not be overinterpreted.
+   * Use meaningful feature names instead of column numbers whenever possible, otherwise the chart is not actionable for debugging or stakeholder review.
 
 ## Common Mistakes to Avoid
 
 1. **Ignoring Feature Correlations**
-   - Not considering interactions
-   - Missing important relationships
-   - Overlooking multicollinearity
-
+   * Not considering interactions
+   * Missing important relationships
+   * Overlooking multicollinearity
 2. **Overlooking Scale**
-   - Not normalizing features
-   - Comparing different scales
-   - Misinterpreting results
-
+   * Not normalizing features
+   * Comparing different scales
+   * Misinterpreting results
 3. **Poor Visualization**
-   - Unclear plots
-   - Missing context
-   - Inappropriate scales
+   * Unclear plots
+   * Missing context
+   * Inappropriate scales
 
 ## Practical Example: Credit Risk Prediction
 
@@ -237,121 +170,30 @@ Analyze feature importance in a credit risk prediction task:
 
 #### Pipeline importances + SHAP on the forest
 
-<div class="code-explainer" data-code-explainer>
-<div class="code-explainer__code">
+Synthetic Credit Data
 
-{% highlight python %}
-# no-output
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import shap
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import Pipeline
-from sklearn.ensemble import RandomForestClassifier
+Five financial features with realistic distributions; the binary label is a threshold on credit score, income, and age, meaning those three should dominate importance.
 
-# Create credit risk dataset
-np.random.seed(42)
-n_samples = 1000
+Pipeline Fit
 
-# Generate features
-data = {
-    'age': np.random.normal(35, 10, n_samples),
-    'income': np.random.exponential(50000, n_samples),
-    'credit_score': np.random.normal(700, 100, n_samples),
-    'debt_ratio': np.random.beta(2, 5, n_samples),
-    'employment_length': np.random.exponential(5, n_samples)
-}
+Scale then classify in a single pipeline; access the fitted forest through `pipeline.named_steps['classifier']` to extract importances and build the SHAP explainer.
 
-X = pd.DataFrame(data)
-y = (X['credit_score'] + X['income']/1000 + X['age'] > 800).astype(int)
+Ranked Bar Chart
 
-# Create pipeline
-pipeline = Pipeline([
-    ('scaler', StandardScaler()),
-    ('classifier', RandomForestClassifier(n_estimators=100, random_state=42))
-])
+Extract importances from the classifier step, sort descending, and plot with real column names so stakeholders can read which financial factors drive the model.
 
-# Fit pipeline
-pipeline.fit(X, y)
+SHAP Summary Plot
 
-# Get feature importances
-importances = pipeline.named_steps['classifier'].feature_importances_
-indices = np.argsort(importances)[::-1]
-
-# Plot feature importances
-plt.figure(figsize=(10, 6))
-plt.title('Feature Importances in Credit Risk Prediction')
-plt.bar(range(X.shape[1]), importances[indices])
-plt.xticks(range(X.shape[1]), X.columns[indices], rotation=45)
-plt.tight_layout()
-plt.show()
-
-# Calculate and plot SHAP values.
-# Note: StandardScaler is a no-op for tree ensembles (splits are scale-invariant),
-# so it adds nothing here. It also creates a subtle mismatch: the forest was
-# trained on *scaled* features, so feeding raw `X` to TreeExplainer explains the
-# model in a different space than it sees. SHAP should receive data in the same
-# space the model was fit on (e.g. pipeline[:-1].transform(X)). For a pure tree
-# model, the cleanest fix is to drop the scaler and explain on the raw features.
-explainer = shap.TreeExplainer(pipeline.named_steps['classifier'])
-shap_values = explainer.shap_values(X)
-
-plt.figure(figsize=(10, 6))
-shap.summary_plot(shap_values, X)
-plt.tight_layout()
-plt.show()
-{% endhighlight %}
-
-</div>
-<aside class="code-explainer__callouts" aria-label="Code walkthrough">
-  <div class="code-callout" data-lines="1-22" data-tint="1">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Synthetic Credit Data</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Five financial features with realistic distributions; the binary label is a threshold on credit score, income, and age, meaning those three should dominate importance.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="24-32" data-tint="2">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Pipeline Fit</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Scale then classify in a single pipeline; access the fitted forest through <code>pipeline.named_steps['classifier']</code> to extract importances and build the SHAP explainer.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="34-44" data-tint="3">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">Ranked Bar Chart</span>
-    </div>
-    <div class="code-callout__body">
-      <p>Extract importances from the classifier step, sort descending, and plot with real column names so stakeholders can read which financial factors drive the model.</p>
-    </div>
-  </div>
-  <div class="code-callout" data-lines="46-52" data-tint="4">
-    <div class="code-callout__meta">
-      <span class="code-callout__lines"></span>
-      <span class="code-callout__title">SHAP Summary Plot</span>
-    </div>
-    <div class="code-callout__body">
-      <p><code>TreeExplainer</code> is applied to the inner forest (not the scaler); the summary plot shows both magnitude and direction of each feature's impact on the output.</p>
-    </div>
-  </div>
-</aside>
-</div>
+`TreeExplainer` is applied to the inner forest (not the scaler); the summary plot shows both magnitude and direction of each feature's impact on the output.
 
 ## Gotchas
 
-- **Tree-based impurity importance is biased toward high-cardinality features**: `feature_importances_` from Random Forest sums mean impurity decrease over splits; features with many unique values (e.g., a continuous numeric column) get more split opportunities and can appear more important than they truly are; use permutation importance or SHAP for a less biased view.
-- **Permutation importance computed on training data is misleading**: Shuffling a feature on the training set measures how much the model *relied* on it during training, not how useful it is for new data; always compute permutation importance on a held-out validation or test set to measure true generalisation contribution.
-- **Correlated features split importance between them**: If `income` and `wealth_score` are strongly correlated, the model may use one or the other interchangeably; both features will show lower individual importances than either deserves alone, and removing one may not hurt performance; cluster correlated features before interpreting rankings.
-- **SHAP values require the model, not just predictions**: `shap.TreeExplainer` needs the fitted estimator object; if you only serialised `predict` output without saving the model, you cannot compute SHAP values retrospectively; always save the full fitted model, not just predictions.
-- **Treating feature importance as a ranking for causal inference**: A high-importance feature in a predictive model tells you the model uses that feature, not that it causally drives the outcome; recommending business actions based on feature importances alone (e.g., "increase credit score to get approved") conflates correlation with causation.
-- **Negative permutation importance does not mean the feature hurts**: A small negative value (near zero) for permutation importance usually means the feature adds negligible predictive value and the drop in score is within random noise, not that the feature actively harms the model; check confidence intervals before removing features with slightly negative scores.
+* **Tree-based impurity importance is biased toward high-cardinality features**: `feature_importances_` from Random Forest sums mean impurity decrease over splits; features with many unique values (e.g., a continuous numeric column) get more split opportunities and can appear more important than they truly are; use permutation importance or SHAP for a less biased view.
+* **Permutation importance computed on training data is misleading**: Shuffling a feature on the training set measures how much the model _relied_ on it during training, not how useful it is for new data; always compute permutation importance on a held-out validation or test set to measure true generalisation contribution.
+* **Correlated features split importance between them**: If `income` and `wealth_score` are strongly correlated, the model may use one or the other interchangeably; both features will show lower individual importances than either deserves alone, and removing one may not hurt performance; cluster correlated features before interpreting rankings.
+* **SHAP values require the model, not just predictions**: `shap.TreeExplainer` needs the fitted estimator object; if you only serialised `predict` output without saving the model, you cannot compute SHAP values retrospectively; always save the full fitted model, not just predictions.
+* **Treating feature importance as a ranking for causal inference**: A high-importance feature in a predictive model tells you the model uses that feature, not that it causally drives the outcome; recommending business actions based on feature importances alone (e.g., "increase credit score to get approved") conflates correlation with causation.
+* **Negative permutation importance does not mean the feature hurts**: A small negative value (near zero) for permutation importance usually means the feature adds negligible predictive value and the drop in score is within random noise, not that the feature actively harms the model; check confidence intervals before removing features with slightly negative scores.
 
 ## Additional Resources
 
