@@ -19,8 +19,8 @@ const ALLOWED = new Set(manifest.lessons.map(l => l.key));
 // Default model chosen via the Phase 2 leak-eval (chatbot/eval/FINDINGS.md):
 // Gemini 2.5 Flash matched Haiku 4.5 on guardrail-holding (post prompt-fix) while
 // being ~2.3x faster, ~3.4x cheaper, and slightly more helpful. Override per-env
-// with OPENROUTER_MODEL (e.g. set it back to anthropic/claude-haiku-4.5 to revert).
-const MODEL = process.env.OPENROUTER_MODEL || 'google/gemini-2.5-flash';
+// with OPENROUTER_MODEL when a workload needs a different capability profile.
+const MODEL = process.env.OPENROUTER_MODEL || 'openai/gpt-5.6-luna';
 const MAX_HISTORY_TURNS = 20;
 const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
 
